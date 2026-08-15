@@ -1021,3 +1021,163 @@ in code and in prior documentation as three independent terms.
 
 ---
 
+## 16. Permutation-consistency across the full grid, and a threshold for trusting a relabeling
+
+**Status: Established for the toy corpus. Must be re-derived before the 22k-article run —
+see caveat at the end.**
+
+### What this closes
+
+§14 established that C6/K=4 (production init) has zero genuine cross-relation labelling
+disagreement, and flagged the rest of the grid as untested — in particular whether C1's
+single weak anchor (`M_Parent_Art`, 63 non-zeros) provides enough gauge-fixing pressure to
+keep it clean too. This section runs that test: C1–C6 × K∈{2,4}, production settings
+(`lambda_l1=0.0`, `lambda_z_offdiag=0.05`), via `diagnostic_blocks.fit_or_load()`
+(cached, bit-identical fits — no re-derivation risk from re-fitting).
+
+Scripts: `diagnostic_scripts/permutation_consistency_sweep.py` (the base sweep, produces
+`diagnostic_results/permutation_consistency_sweep.json`) and
+`diagnostic_scripts/permutation_driver_analysis.py` (the confidence/threshold analysis
+below, produces `diagnostic_results/permutation_driver_analysis.json`).
+
+### A bug caught mid-analysis, and the fix it produced
+
+The first version of the sweep flagged a facet as "disagreeing" whenever *any* relation
+touching it reported a non-identity permutation. This over-counts: if the relation's other
+endpoint is a **leaf** (touches no other relation), that leaf absorbs the permutation for
+free — nothing external constrains its labelling, so its choice says nothing about whether
+the *shared* facet is actually inconsistent (this is exactly §14's `fringe_atom` /
+`M_Fringe_Cousin` finding, generalised into an automated check for the first time here).
+
+**Fix:** a relation only counts as informative about a facet's consistency if the facet at
+its *other* end is also non-leaf. Applying this fix changed C6/K=4's own result from
+"disagreeing" (wrongly) back to "clean" — exactly reproducing §14's hand-verified
+conclusion for that cell. The script asserts this as a standing regression check
+(`assert not c6k4["genuine_disagreement_facets"]`) — if this fails after a future edit to
+the method, the fix has regressed.
+
+### Raw result: 5 of 12 cells flagged, 16 facet-instances
+
+| Config | K | Anchors | Converged | Genuine disagreement (post-fix) |
+|---|---|---|---|---|
+| C1 | 2 | 1 | ✅ | none |
+| C1 | 4 | 1 | ✅ | art, auth, core_child_he, parent_he |
+| C2 | 2/4 | 2 | ✅ | none |
+| C3 | 2 | 1 | ✅ | none |
+| C3 | 4 | 1 | ✅ | art, auth, core_child_he, cousin_he |
+| C4 | 2 | 1 | ✅ | none |
+| C4 | 4 | 1 | ❌ ceiling | art, auth, core_child_he, cousin_he (tentative) |
+| C5 | 2 | 2 | ✅ | none |
+| C5 | 4 | 2 | ✅ | art, auth |
+| C6 | 2 | 2 | ✅ | core_child_he, parent_he |
+| C6 | 4 | 2 | ✅ | none (cross-check vs §14: PASS) |
+
+C1 and C3 (both single, weak anchors) are clean at K=2 but break at K=4 — partial support
+for "weak anchor → less gauge-fixing pressure, worse at higher K." Not a clean rule: C5 (two
+anchors, same count as C6) also breaks at K=4, while C2 (also two anchors) stays clean, and
+C6 itself flips between K=2 (breaks) and K=4 (clean) — anchor count alone does not predict
+this; something about each config's specific topology interacts with K non-monotonically.
+Per SESSION_PROTOCOL §C.9, reported and not chased further this session.
+
+### Distinguishing real mislabelling from genuine mixed coupling
+
+The raw disagreement count conflates two different things a non-identity permutation can
+mean, and only one of them should ever be "corrected":
+
+- **Mislabelling** — the relation's own diagonal isn't dominant as stored, but *some*
+  relabelling makes it so. A pure labelling artifact; correcting it recovers real structure.
+- **Genuine mixed coupling** — no relabelling produces a clean diagonal, because the
+  relation's entities really do couple across community boundaries (e.g. articles published
+  in a journal, or using semantic elements, more associated with another community).
+  Nothing to correct here; forcibly diagonalising it would erase real signal.
+
+`structure_score = min(matched) / max(unmatched)`, already computed by the sweep, is exactly
+the discriminator: **> 1** means every within-community entry beats every cross-community
+entry for that relation (case 1, correctable); **< 1** means at least one cross-community
+entry is larger than some within-community entry (case 2, not correctable — do not touch).
+
+Concrete example of each, pulled directly from the cached tensors (C6/K=4):
+
+```
+S_Auth_Affil (C4/K=2), stored:        after relabelling [1,0]:
+[[0.000  0.238]                       [[0.238  0.000]
+ [0.151  0.000]]                       [0.000  0.151]]
+diag_share 0.00 -> 1.00, structure_score ~625,000  -- pure mislabelling, correctable
+
+S_Art_Auth (C6/K=4), best permutation IS the stored one (identity), yet:
+[[0.0032 0.0114 0.0045 0.0149]
+ [0.0039 0.0125 0.0239 0.0006]
+ [0.0100 0.0124 0.1048 0.0000]
+ [0.0045 0.0218 0.0100 0.1468]]
+structure_score = 0.133  -- no relabelling helps; real cross-community coupling
+```
+
+### Threshold derivation and sensitivity
+
+`1.0` is the natural boundary — it's where the metric's own claim changes character (every
+pair separated, vs. at least one pair not). Checked this isn't just a theoretical nicety:
+across all 94 relation-instances in the sweep, scores climb to **0.648** then jump straight
+to **1.098** — a real gap in the data, nothing lands between them.
+
+Full sensitivity sweep (`permutation_driver_analysis.py`), re-classifying the 16
+disagreement-facet-instances at 16 thresholds from 0.05 to 25:
+
+| Threshold | Real conflicts | Facet-instances |
+|---|---|---|
+| 0.05 | 10 | (inflated — includes relations with score as low as 0.02, i.e. clearly mixed, wrongly trusted) |
+| 0.10 | 4 | |
+| 0.30–0.50 | 3 | |
+| **0.65–1.50** | **2** | **C4/K4 `core_child_he`, C5/K4 `art` — stable across this entire span** |
+| 2.00–10.00 | 1 | C4/K4 drops (its own driving scores, 1.6 vs 2.5, straddle this range) |
+| 20.00+ | 0 | even C5/K4 drops (weakest driver `S_Art_Journ`, score 19.8) |
+
+`0.65–1.50` is the widest, flattest plateau in the whole sweep — the chosen threshold (1.0)
+sits centrally in it, not near either edge. The one conflict that *is* threshold-fragile
+(C4/K4) is also the one non-converged cell — non-convergence and threshold-fragility
+pointing the same direction is a second, independent reason to treat it as unreliable rather
+than a real finding. **C5/K4's `art` conflict is the most robust result in the sweep** —
+stable from 0.65 up to just under 20, a ~30× span.
+
+### Net effect: 16 flagged facet-instances → 1 solid real conflict
+
+Applying the confidence filter at the derived threshold: **14 of 16 dissolve** — they were
+flagged only because a genuinely-mixed (structure_score < 1) relation was in the mix, not
+because confidently-labelled relations actually disagree with each other. Only 2 survive,
+and one of those is confounded by non-convergence. **C5/K4's `art` facet is the only fully
+solid real reference conflict found anywhere in the grid**, driven by: both anchors
+(`M_Child_Art`, `M_Cousin_Art`) agreeing with each other at identity (structure scores 16.6,
+55.6) against `S_Art_Journ` (structure score 19.8, non-identity).
+
+**On anchor-preference as a tie-break (raised when discussing ticket 82's correction step):**
+proposed rule — prefer the child-hyperedge anchor over the cousin-hyperedge anchor when the
+two anchors disagree, justified by `core_child_he`'s greater topological centrality (touched
+by 3 relations vs `cousin_he`'s 2 in a 2-anchor config) and the `core_`-prefixed naming
+convention marking it as the primary semantic backbone. **This grid never actually exercises
+that rule** — in every 2-anchor config (C2, C5, C6) and at both K, the two anchors always
+agree with each other whenever both are confidently labelled (structure_score > 1). The one
+solid conflict found is anchor(s)-vs-non-anchor-relation, not anchor-vs-anchor. The rule
+remains reasonable to keep as a documented fallback, but is untested by this data; what the
+data *does* support directly is "trust anchor-touching, high-confidence relations over
+dissenting non-anchor ones, and trust it more when multiple anchors agree."
+
+### Practical implication for ticket 82
+
+The per-relation correction machinery ticket 82's `Z_scaled`-based mass measure needs is
+substantially simpler than the raw 5/12-cells / 16-facet-instance count implied: apply a
+Hungarian relabelling only to relations with `structure_score > 1.0` (or the anchor's own
+relation, as reference, if a genuine anchor-vs-anchor conflict is ever found); leave
+low-structure-score relations untouched, reading their diagonal as-is (real mixed coupling,
+not an error). A general graph-consistency solver is not needed for this grid — a one-hop,
+confidence-gated correction covers every case found.
+
+### Caveat — must be re-derived at 22k-article scale, not assumed
+
+Same category as tickets 73/77/78's toy-corpus calibrations. The 0.648→1.098 gap and the
+5/12 disagreement rate were both measured on this corpus's specific sparsity (anchors as
+thin as 63 non-zeros). A denser 22k-article corpus could fill in that gap, shift where a
+natural threshold sits, or change how often genuine mixed coupling occurs at all — re-run
+`permutation_consistency_sweep.py` and `permutation_driver_analysis.py` against the full
+corpus before reusing `1.0` or trusting the disagreement-rate figures above at scale.
+
+---
+
