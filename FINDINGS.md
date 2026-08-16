@@ -1138,7 +1138,7 @@ pointing the same direction is a second, independent reason to treat it as unrel
 than a real finding. **C5/K4's `art` conflict is the most robust result in the sweep** —
 stable from 0.65 up to just under 20, a ~30× span.
 
-### Net effect: 16 flagged facet-instances → 1 solid real conflict
+### Net effect: 16 flagged facet-instances → 1 solid real conflict — RETRACTED, see below
 
 Applying the confidence filter at the derived threshold: **14 of 16 dissolve** — they were
 flagged only because a genuinely-mixed (structure_score < 1) relation was in the mix, not
@@ -1147,6 +1147,15 @@ and one of those is confounded by non-convergence. **C5/K4's `art` facet is the 
 solid real reference conflict found anywhere in the grid**, driven by: both anchors
 (`M_Child_Art`, `M_Cousin_Art`) agreeing with each other at identity (structure scores 16.6,
 55.6) against `S_Art_Journ` (structure score 19.8, non-identity).
+
+**RETRACTED (later session, same investigation thread).** This claim came from a script
+that re-filtered by confidence without re-applying leaf-exclusion. `S_Art_Journ`'s other
+endpoint is `journ` — a leaf in every config (touched only by `S_Art_Journ`) — so per this
+section's own leaf-exclusion rule, `S_Art_Journ` should never have counted as a legitimate
+dissenting vote against the two anchors regardless of its confidence. Re-run with both
+filters combined correctly: **zero confirmed real conflicts survive anywhere in the C1–C6 ×
+K∈{2,4} grid.** The corrected, combined-filter check is now the implementation used in
+`chunk13v9.py`'s `evaluate_dimensional_collapse` (ticket 82) — see §17.
 
 **On anchor-preference as a tie-break (raised when discussing ticket 82's correction step):**
 proposed rule — prefer the child-hyperedge anchor over the cousin-hyperedge anchor when the
@@ -1178,6 +1187,132 @@ thin as 63 non-zeros). A denser 22k-article corpus could fill in that gap, shift
 natural threshold sits, or change how often genuine mixed coupling occurs at all — re-run
 `permutation_consistency_sweep.py` and `permutation_driver_analysis.py` against the full
 corpus before reusing `1.0` or trusting the disagreement-rate figures above at scale.
+
+---
+
+## 17. Implemented: `evaluate_dimensional_collapse` rewritten on `Z_scaled`, tickets 79/80/82
+
+**Status: Established. Live in `chunk13v9.py`, verified.**
+
+Closes tickets 79 and 80. `evaluate_dimensional_collapse` no longer takes `U_scales_out` —
+it computes community mass from `Z_scaled` (relation-level, permutation-corrected) and
+penalizes on max-share instead of normalized Shannon entropy. Three decisions were
+triangulated externally before implementation; all three are recorded here as the
+evidentiary basis, not just asserted.
+
+### Correction criterion: `structure_score > 1.0`, not `chunk13v3.py`/`v4.py`'s
+`diagonal_mass/hungarian_mass < 0.7`
+
+Both criteria were implemented and run head-to-head across all 94 relation-instances in the
+C1–C6 × K∈{2,4} grid (a fair, apples-to-apples comparison requires asking both tests "is a
+*non-trivial* — non-identity — relabelling warranted?"; an earlier draft of this comparison
+skipped that guard and produced a spurious 64/94 "disagreement" count, corrected before this
+result was recorded). **12 real disagreements.** In 8, `v3`/`v4`'s aggregate-ratio criterion
+would have applied a correction to a relation independently identified elsewhere in this
+document (§2, §14, §16) as genuinely mixed — `S_Art_Auth` (3×), `M_Fringe_Cousin` (3×),
+`S_Auth_Affil` (2×) — because *some* aggregate improvement is available even when the
+corrected result still isn't cleanly separated. `structure_score`'s worst-case criterion
+(every pair must separate, not just the sum) correctly declines these. In the remaining 4,
+`structure_score` catches a clean correction `v3`/`v4`'s fixed threshold narrowly misses —
+`C5/K4 S_Art_Journ` is the clearest case: `structure_score=24.4` (unambiguous separation
+after correction) but `v3v4_ratio=0.715`, just above the 0.7 cutoff, so it wouldn't correct
+despite the fix being available and clean.
+
+### Scope: leaf-unconditional, non-leaf gated on confirmed disagreement — §16's "1 solid
+conflict" retracted (see §16 above)
+
+Combined leaf-exclusion and confidence-filtering, applied correctly together (the bug that
+produced §16's original "1 conflict" claim is documented and retracted there): **zero
+confirmed real non-leaf conflicts survive anywhere in the tested grid.** The implementation
+therefore does not include a cross-relation consistency-resolution algorithm — each relation
+is corrected independently. This is a documented limitation, not an oversight: if a genuine
+non-leaf conflict is found at 22k-article scale, `evaluate_dimensional_collapse` will not
+detect or resolve it, and the anchor-preference tie-break proposed earlier in this document
+remains an inferred-from-zero-confirmed-cases fallback, not a validated rule.
+
+### Mass/share formula: reconstruction-space (`within_k/total`), not diagonal-sum
+
+Both formulations were computed across the full grid. They agree on 11 of 12 cells but
+**flip the verdict on `C6/K=2`** (diagonal-sum: `max_share=0.655`, fires; reconstruction-
+space: `max_share=0.592`, does not). Traced to a structural blind spot in the diagonal-sum
+formula: it always forces the K diagonal entries to sum to 1, regardless of what fraction of
+the relation's real signal they represent. `C6/K=2`'s dominant-looking diagonal entries come
+substantially from `M_Child_Parent`, whose `interference = 1 − Σₖ share_recon(k) = 0.83` —
+83% of what that relation actually reconstructs is genuinely cross-community. Diagonal-sum
+share has no way to see this and gives it a full vote; reconstruction-space share
+down-weights it in proportion to how much of the relation is genuinely off-diagonal, without
+a separate weighting scheme layered on top. This is the basis for adopting
+`within_k/total` as the primary measure rather than treating the two as interchangeable
+conventions — one formula catches something the other structurally cannot.
+
+**Relation-weighting scheme, revisited in light of this:** the earlier equal-weight /
+structure-weight / recon-quality-weight comparison (this section, weighting-experiment work)
+assumed diagonal-sum share and found equal-weight defensible, structure-weight rejected
+(self-contradictory with its own use as correction gate), recon-weight architecturally
+costlier for no demonstrated benefit. Under reconstruction-space share, the interference term
+already performs a version of what that weighting layer was trying to achieve — whether it
+makes explicit relation-weighting fully redundant is untested, not assumed; equal-weight is
+what's implemented, kept for the same reasons as before (no duplicated machinery, no
+correction-gate self-contradiction).
+
+### Implementation and verification
+
+`evaluate_dimensional_collapse(U_final, Z_final, max_share_threshold=0.60,
+structure_threshold=1.0)` — new signature (was `U_scales_out, U_final, entropy_threshold,
+presence_masks`). `evaluate_complete_solution`'s own external signature (3 call sites:
+Optuna objective, §S4 archiver, §S5 stability) was deliberately **not** changed — `U_scales_out`
+and `entropy_threshold` remain accepted parameters there but are no longer forwarded to
+collapse (vestigial, kept only so no call site needed editing, matching the low-risk-patch
+principle CLAUDE.md §3 argues for). The `collapse_score` key in `evaluate_complete_solution`'s
+returned dict is unchanged in name, changed in meaning (`max_share`, not
+`normalized_entropy`).
+
+Two new helpers, `_hungarian_relabel_relation` and `_relation_community_share`, extracted
+as standalone functions per explicit review request (independently testable/auditable, not
+inlined). No `presence_masks`/live-entity normalization needed for this computation — every
+relation's input is already Frobenius-normalized to `‖X‖²=1` before fitting, which is what
+makes relation-level mass comparable across relations without a separate facet-size
+correction (this is *why* ticket 60's fix, still correct and still applied elsewhere, is
+structurally unnecessary for this specific measure).
+
+Verified post-patch: `py_compile` clean. Real `evaluate_complete_solution()`, called on
+cached converged fits across all 12 grid cells, reproduces the independent diagnostic
+reimplementation's `max_share` to within 0.02 on all 11 converged cells (consistent with
+SESSION_PROTOCOL §F's documented cross-process fit variance, not a discrepancy) — the one
+outlier (`C4/K4`, diff 0.109) is explained by that specific cell landing on a different,
+non-converged fit this run (`math_loss=0.765392`, matching the ceiling-hit signature seen
+earlier in this document, not a new failure mode). Optuna `objective()` smoke-tested
+end-to-end (2 trials, `C1`/`K=2`) — both completed, `converged=True`, `user_attrs` populated
+correctly, no exceptions anywhere in the call chain.
+
+### Empirical result on the toy corpus
+
+`collapse_pen` now fires on 2 of 12 cells (`C1/K=2`, `C6/K=2`) under reconstruction-space
+share — both K=2, both barely over the 0.60 line, consistent with earlier collapse-check
+prototyping (see the `collapse_check_zscaled.py` / `collapse_check_weighting_experiment.py`
+diagnostic work this thread is built on). `collapse_pen`/`coherence_pen` were previously
+`0.0` in all 12 cells (ticket 81) — this is the first time either half of
+`sociological_penalty` has fired at all in this pipeline's history.
+
+### Prior art credited
+
+Restores, with a revised criterion and different architectural placement, a mechanism
+(`identify_leaf_nodes`, `diagnose_leaf_Z`, `correct_all_leaf_nodes`) present in
+`chunk13v3.py`/`chunk13v4.py` and absent from every version since — including the exact same
+algorithm (`scipy.optimize.linear_sum_assignment`) applied to the same problem. Unlike the
+earlier version, the correction here is **read-time only**, inside `evaluate_complete_solution`
+(not a physical mutation of `U`/`Z` after fitting) — so the raw fit stays exactly what the
+optimizer produced, recoverable by anyone re-deriving `recon_loss` or auditing the output
+directly, and every consumer of `Z_scaled[k,k]`-based mass is structurally required to pass
+through the corrected version (same mandatory-single-source-of-truth pattern ticket 69
+established for the sociological penalty as a whole) rather than needing to remember to
+apply it.
+
+### Toy-corpus caveat
+
+All numeric findings above — the 12 disagreements, the `C6/K=2` flip, the 2/12 firing rate —
+are toy-corpus-calibrated, same category as tickets 73/77/78/§16's caveats. Re-derive at
+22k-article scale before trusting; do not assume the specific numbers port.
 
 ---
 

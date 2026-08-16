@@ -192,11 +192,20 @@ across K, then normalised Shannon entropy, penalised below `ENTROPY_THRESHOLD = 
    or the non-monotonicity. Not yet implemented — the mass-input problem (point 1) should be
    resolved first, since a corrected threshold applied to an undetermined input gains nothing.
 
-**Empirical consequence, measured across the full grid (ticket 81, see below):**
-`collapse_pen` is **exactly 0.0 in all 12 tested cells** (C1–C6 × K∈{2,4}, production
-settings, `lambda_l1=0`, `lambda_z_offdiag=0.05`) — entropy never drops below 0.808 anywhere
-in the grid, nowhere near the 0.60 floor regardless of which of the two problems above is
-responsible. See ticket 81.
+**IMPLEMENTED (tickets 79/80, FINDINGS §17).** `evaluate_dimensional_collapse` no longer
+takes `U_scales_out` at all — it computes mass from `Z_scaled` (relation-level, corrected
+for label permutation where confidently warranted — see ticket 82) and penalizes on
+`max_share` directly, the max-share reformulation named below as the candidate fix. Both
+points below are historical record of the diagnosis; the code they describe is superseded.
+
+**Empirical consequence, measured across the full grid before this fix (ticket 81, see
+below):** `collapse_pen` was **exactly 0.0 in all 12 tested cells** (C1–C6 × K∈{2,4},
+production settings, `lambda_l1=0`, `lambda_z_offdiag=0.05`) — entropy never dropped below
+0.808 anywhere in the grid, nowhere near the 0.60 floor regardless of which of the two
+problems above was responsible. See ticket 81. **Post-fix (FINDINGS §17): `collapse_pen`
+now fires on 2 of 12 cells** (`C1/K=2`, `C6/K=2`, both barely over the max-share ceiling) —
+the first time either half of `sociological_penalty` has fired at all in this pipeline's
+history.
 
 *Ticket 60 (superseded detail, kept for history):* `N_f` was changed to the **live** entity
 count (`build_presence_masks()`) rather than the raw facet dimension. That fix is still
@@ -476,6 +485,38 @@ using the L1/L2 per-row ratio (not `U_prob` row-max) as the detector.
 
 ---
 
+### 4.20 Permutation correction is read-time, inside `evaluate_complete_solution` —
+not a physical mutation of `U`/`Z` (tickets 79/80/82, FINDINGS §17)
+
+`_hungarian_relabel_relation` and `_relation_community_share` (Module 3 §2) correct a
+relation's diagonal reading for mass-computation purposes only, at evaluation time. They do
+**not** mutate `U_final`/`Z_final` in place.
+
+*Prior art, and why this session diverged from it:* `chunk13v3.py`/`chunk13v4.py` had a
+working mechanism (`identify_leaf_nodes`, `diagnose_leaf_Z`, `correct_all_leaf_nodes`) that
+physically relabeled `U`'s columns and `Z`'s axis right after fitting, so every downstream
+consumer saw the corrected labeling automatically. That approach was considered and rejected
+for two reasons: (1) it alters the saved tensors from what the optimizer actually produced —
+anyone later re-deriving `recon_loss`, or running the FINDINGS §8 reconstruction-space
+coherence metric, or auditing the raw fit for any other reason, would need to separately know
+a correction was silently applied upstream; (2) it was called immediately after fitting,
+straddling §4.1's locked boundary — Hungarian assignment is a discontinuous operation
+required to live in the outer loop (Module 3/4), not inside Module 2's fitting stage.
+
+*The alternative risk — "every future consumer must remember to apply the correction" — is
+closed structurally, not by convention.* `evaluate_complete_solution()` is already, per
+ticket 69, the mandatory single entry point every consumer (Optuna's objective, the §S4
+archiver, the §S5 stability analysis) must call rather than reimplement. The permutation
+correction lives inside it (via `evaluate_dimensional_collapse`), so no caller has a
+legitimate path to `Z_scaled[k,k]`-based mass without passing through the function that
+corrects it first — the same guarantee that already prevents the sociological-penalty
+computation from silently diverging across call sites.
+
+**Do not revert to physical mutation without re-opening this discussion.** If a future need
+arises for every consumer to see corrected labels without calling
+`evaluate_complete_solution` (e.g. a raw diagnostic dump), add a *separate*, explicitly-named
+function for that — do not fold it back into the fitting stage.
+
 ## 5. Namespace Gotcha
 
 **Relation keys and facet names are different namespaces.** This has caused two separate bugs.
@@ -647,10 +688,10 @@ Full evidence for all four is in FINDINGS.md §12–§16.
 
 | # | Location | Issue | Status |
 |---|---|---|---|
-| 79 | M2, `U_scales` construction | **U_scales is an undetermined free direction in the loss, not a mass measure.** Proven algebraically (scale a `U_pos` column by *c*, compensate in the corresponding `Z_pos` rows/cols, and `recon_loss`/`sparsity_loss`/`z_offdiag_loss`/`U_norm`/`Z_scaled` are all unchanged to float precision while `U_scales` changes by exactly *c*) and confirmed empirically (CV up to 1.2 for the same facet/community across differently-initialised runs with near-identical `recon_loss`). Invalidates the "use `U_scales` for mass" guidance in §4.3 (old version), §4.4's collapse formula, and every domain-balance calculation attempted on `U_scales`. See FINDINGS §12. | **Open.** No code change. `|Z_scaled[k,k]|` (relation-level) is the candidate replacement — determined under the same transformation, comparable across relations via Frobenius normalisation. Not yet implemented anywhere. |
-| 80 | M3 §2, `evaluate_dimensional_collapse` | `ENTROPY_THRESHOLD=0.60` does not correspond to the stated target ("no community >0.6 mass"); the correspondence is also K-dependent and non-monotone (two distributions with identical max-share can give very different entropy). See §4.4 above for the numbers. | **Open.** Blocked on ticket 79 — a corrected threshold on an undetermined input gains nothing. Candidate fix: direct max-share formulation, analogous to `MAX_MONOPOLY`. |
-| 81 | M3 §5.1, `evaluate_complete_solution` — aggregation | `collapse_pen` and `coherence_pen` are exactly `0.0` in all 12 tested cells (C1–C6 × K∈{2,4}, production settings). `sociological_penalty == semantic_pen` bit-for-bit throughout. Not because inputs are constant (`normalized_entropy` 0.808–0.995, `weakest_mean` 0.744–1.000) but because both thresholds sit below where any production fit in this grid lands. See §4.17. | **Open.** No code change — diagnostic only, explicitly not acted on per instruction. Redesign options listed in FINDINGS §15. |
-| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-community, differentiable) was lost in the softplus-era rewrite and not restored. See §4.18. | **Open.** Reimplementation blocked on ticket 79 (v8's formula used `U_scales/√N_f`). Anchor double-counting under a naive relation-level port also needs resolving (2-anchor configs credit `art` twice) — anchor-count normalisation (`0.5/n_anchors` per anchor per side) is the current candidate. **Permutation-correction groundwork done (FINDINGS §16):** swept C1–C6×K∈{2,4} for cross-relation label consistency (§14's untested item) — 5/12 cells flagged, but a structure-score confidence filter (threshold=1.0, derived + sensitivity-tested) shows only 1 fully solid real conflict survives (C5/K4 `art`); the rest were genuinely-mixed relations wrongly flagged, not mislabelling. Correction machinery for the `Z_scaled[k,k]` mass measure can therefore be a simple confidence-gated per-relation Hungarian relabelling, not a general graph-consistency solver. **Toy-corpus calibrated — re-derive the threshold at 22k-article scale before reuse, per §16's caveat.** |
+| 79 | M2, `U_scales` construction | **U_scales is an undetermined free direction in the loss, not a mass measure.** Proven algebraically (scale a `U_pos` column by *c*, compensate in the corresponding `Z_pos` rows/cols, and `recon_loss`/`sparsity_loss`/`z_offdiag_loss`/`U_norm`/`Z_scaled` are all unchanged to float precision while `U_scales` changes by exactly *c*) and confirmed empirically (CV up to 1.2 for the same facet/community across differently-initialised runs with near-identical `recon_loss`). Invalidates the "use `U_scales` for mass" guidance in §4.3 (old version), §4.4's collapse formula, and every domain-balance calculation attempted on `U_scales`. See FINDINGS §12. | **Closed.** `evaluate_dimensional_collapse` rewritten to use `|Z_scaled[k, π(k)]|` (relation-level, permutation-corrected) via reconstruction-space share (`within_k/total`, FINDINGS §8) — see FINDINGS §17. `U_scales` no longer passed into collapse at all. |
+| 80 | M3 §2, `evaluate_dimensional_collapse` | `ENTROPY_THRESHOLD=0.60` does not correspond to the stated target ("no community >0.6 mass"); the correspondence is also K-dependent and non-monotone (two distributions with identical max-share can give very different entropy). See §4.4 above for the numbers. | **Closed.** Direct max-share penalty implemented, ceiling-shape ported verbatim from `evaluate_socio_semantic_reality`'s `MAX_MONOPOLY` penalty (this file, Part B), threshold `MAX_SHARE_THRESHOLD=0.60` (same numeric value as `ENTROPY_THRESHOLD`, reused as the pre-existing target, not re-derived). See FINDINGS §17. |
+| 81 | M3 §5.1, `evaluate_complete_solution` — aggregation | `collapse_pen` and `coherence_pen` are exactly `0.0` in all 12 tested cells (C1–C6 × K∈{2,4}, production settings). `sociological_penalty == semantic_pen` bit-for-bit throughout. Not because inputs are constant (`normalized_entropy` 0.808–0.995, `weakest_mean` 0.744–1.000) but because both thresholds sit below where any production fit in this grid lands. See §4.17. | **Partially superseded.** `collapse_pen` now fires on 2/12 cells post-ticket-79/80 fix (FINDINGS §17) — no longer always 0.0. `coherence_pen` is untouched by this session's work and remains exactly 0.0 in all 12 cells; still open. |
+| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-community, differentiable) was lost in the softplus-era rewrite and not restored. See §4.18. | **Open — mass primitive now implemented and live (FINDINGS §17), domain-balance mechanism itself still not built.** Anchor double-counting under a naive relation-level port still needs resolving (2-anchor configs credit `art` twice) — anchor-count normalisation (`0.5/n_anchors` per anchor per side) is the current candidate, not yet implemented. **Permutation-correction groundwork corrected and shipped:** FINDINGS §16's original "1 solid real conflict" (C5/K4 `art`) was itself a bug — the confidence re-filter that produced it forgot to re-apply leaf-exclusion, wrongly counting `S_Art_Journ` (touches the leaf facet `journ`) as a dissenting vote. Corrected: **zero confirmed real non-leaf conflicts anywhere in the grid.** `evaluate_dimensional_collapse` therefore corrects each relation independently and does not implement cross-relation conflict resolution — documented limitation, see FINDINGS §17. Criterion chosen (`structure_score > 1.0`) verified head-to-head against `chunk13v3.py`/`v4.py`'s original `diagonal_mass/hungarian_mass < 0.7` — 12/94 disagreements, 8 of them cases the older criterion would have wrongly "corrected" a genuinely mixed relation. **Toy-corpus calibrated throughout — re-derive at 22k-article scale before reuse.** |
 
 ### Recently closed (verify before trusting)
 
