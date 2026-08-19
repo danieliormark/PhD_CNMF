@@ -1562,5 +1562,43 @@ Diagnostic script: `diagnostic_scripts/domain_skew_s5_alignment_reproducibility.
 the new `diagnostic_blocks.s5_dual_track_alignment`, `BLOCKS_VERSION` 1.8.0); results in
 `diagnostic_results/domain_skew_s5_alignment_reproducibility.json`.
 
+### Calibration: the 38–40% figure is real but overstates severity — continuous consensus is
+moderate, not low
+
+The stability figures above are a **binary sign-flip on a derived, sometimes near-zero
+quantity** (domain-skew) — a flip from `+0.02` to `−0.02` counts identically to a flip from
+`+0.3` to `−0.3`. Extracted the **continuous** similarity scores production's own §S5
+actually computes and uses (`mean_js_sim`, `weighted_cos_sim` per facet — not just the
+alignment permutation), via a new `diagnostic_blocks.s5_dual_track_consensus`
+(`BLOCKS_VERSION` 1.9.0), on the identical fits/pairs.
+
+**Mean global consensus across all 12 cells: 0.667 (Track A) / 0.670 (Track B), range
+0.52–0.78.** This is a real, moderate number — not "communities barely correspond" (near 0)
+and not "essentially the same solution every time" (near 0.9+). The binary metric's alarm
+level was overstated, as suspected; the underlying reproducibility is real but partial.
+
+**The same configs rank the same way under both measures** — reassuring, not contradictory:
+`C1` and `C3/K4` (the latter non-converged, discount accordingly) are weakest under both the
+sign-flip and the continuous measure; `C2`/`C6` (dual-anchor) are strongest under both. The
+two tests disagree only on how alarming to make the headline number, not on which
+configurations are more reproducible.
+
+**New signal, cross-validating an independent §18 finding:** per-facet, `art` and the
+anchor-adjacent semantic facets (`parent_he`, `core_child_he`, `cousin_he`) consistently
+score high (often 0.8–0.99, especially Track B); `fringe_atom` is consistently the weakest
+and most erratic facet in nearly every cell (frequently below 0.5), with `core_atom` and
+`affil` also often weak. **`fringe_atom` is the same facet §18's Tier 1 near-separability
+check independently flagged as its recurring failure** — two unrelated methods converging on
+the same weak point is stronger evidence than either alone.
+
+**Practical implication:** a defensible cross-seed robustness statement for a reported model
+is "~0.65–0.70 average alignment consensus, weaker for `C1` and `fringe_atom` specifically,
+stronger for `C2`/`C6` and anchor-adjacent facets" — moderate and real, not the near-random
+picture the binary figure alone would suggest, but not a clean bill of health either.
+Toy-corpus-calibrated, same caveat as above.
+
+Diagnostic script: `diagnostic_scripts/domain_skew_s5_continuous_consensus.py`; results in
+`diagnostic_results/domain_skew_s5_continuous_consensus.json`.
+
 ---
 
