@@ -1316,3 +1316,140 @@ are toy-corpus-calibrated, same category as tickets 73/77/78/§16's caveats. Re-
 
 ---
 
+## 18. §1's "any invertible W" claim is a bound, not a measured severity — near-separability
+check finds strong evidence the fitted model is not actually exposed
+
+**Status: Supported. Toy-corpus scope. Mechanism (why) not investigated — this measures
+whether, not why.**
+
+### The gap in §1 as originally stated
+
+§1's identity — `(U[f1]·W)·(W⁻¹·Z·W⁻ᵀ)·(U[f2]·W)ᵀ = U[f1]·Z·U[f2]ᵀ` for any invertible
+`W` — is correct, but it is an **unconstrained** linear-algebra fact. It says nothing about
+whether a given non-trivial `W` keeps `U·W` and the transformed `Z` **non-negative**, which
+this model requires everywhere (`clamp_(min=1e-7)`, ticket 74). A generic invertible `W`
+does not preserve non-negativity. §1's "Established" status is correctly scoped to the math;
+it was never checked against whether the freedom is actually *reachable* by a real fitted
+solution here. This section is that check.
+
+### Method: near-separability (Tier 1 of a two-tier test; Tier 2 not yet run)
+
+From the NMF identifiability literature (Donoho & Stodden 2003; Arora et al. 2012; a
+checkable special case of Huang, Sidiropoulos & Swami 2014's "sufficiently scattered"
+condition): if every community has at least one live entity whose membership is nearly pure
+(`U_prob` row-max close to 1) in some facet, that is strong evidence against non-trivial
+blending being reachable — a blending `W` would have to push that entity's near-zero
+entries on other communities negative.
+
+Checked across all 6 configs × K∈{3,4} (12 cells), live entities only
+(`build_presence_masks`), at purity thresholds 0.5/0.7/0.85.
+
+**Known confound, addressed directly rather than assumed away:** `evaluate_socio_semantic_
+reality`'s Part B ("Doxa hoarding," `MAX_MONOPOLY=0.85`, chunk13v9.py:1160-1211) actively
+penalizes `U_prob` row-max > 0.85 for the 4 semantic `target_facets`
+(`core_child_he`/`cousin_he`/`core_atom`/`fringe_atom`) — but only when the entity's
+*structurally propagated* signal (via topology, not `U_prob` itself) is itself spread across
+communities; niche/low-connectivity entities in those facets face no pressure regardless of
+purity, and `auth`/`affil`/`journ`/`art` are not touched by Part B at all. Each purity
+witness's degree (nnz across every active relation touching that facet) was recorded
+alongside its value specifically so an absent witness could be checked against this — a
+missing witness among high-degree entities in the 4 confounded facets is expected and
+uninformative; a missing witness among low-degree entities, or anywhere in the 4
+unconfounded facets, is not explained by Part B and is a real signal.
+
+### Result
+
+| Threshold | Clean facets (`auth`/`affil`/`journ`/`art`) | Confounded facets (4 semantic) |
+|---|---|---|
+| 0.5 | 56/56 (100%) | 46/48 (96%) |
+| 0.7 | 53/56 (95%) | 44/48 (92%) |
+| 0.85 (= `MAX_MONOPOLY` itself) | 49/56 (88%) | 41/48 (85%) |
+
+Even at the strict 0.85 bar — the model's own hoarding threshold — 85–88% of every
+(config, K, facet) combination has a near-pure witness for *every* community, and a large
+share of witnesses hit `max_u_prob = 1.000` exactly. Many witnesses are also high-degree
+relative to their own facet (e.g. `art`, the most-connected facet in the topology, is
+cleanly assigned in nearly every cell with witness degree 60–80) — stronger evidence than a
+low-degree entity being pure by default, since a well-connected entity staying pure despite
+pressure from multiple relations is harder to achieve by coincidence.
+
+**Failures at the 0.85 bar** (7 of ~104 confounded-facet cells; none in the clean facets):
+`fringe_atom` is the recurring facet (`C1/K4`, `C3/K4`, `C4/K4`), 3 of these not explained by
+the Part B/low-degree confound. `C4/K4` did not converge (flag per `SESSION_PROTOCOL` rule
+4) — its failure should not be read as a genuine finding without a converged re-fit.
+
+### What Tier 1 alone does and doesn't establish
+
+Near-separability is a **sufficient, not necessary** condition — its presence is strong
+practical evidence against reachable blending, but its absence in a handful of cells doesn't
+prove blending *is* reachable there, and its presence everywhere else doesn't formally prove
+it *isn't*. A decisive answer requires Tier 2: a direct feasibility search for a non-trivial
+orthogonal `W` (community-mixing rotation, deliberately excluding the already-known/accepted
+rescaling freedom of ticket 79) that preserves non-negativity for a real fitted solution.
+
+### Tier 2: direct rotation-feasibility search
+
+For each fitted `(U_final, Z_final)` (= `U_norm`, `Z_scaled` — valid to test directly per
+§4.2's equivalence, since non-negativity in this representation implies it in `U_pos`/`Z_pos`
+and vice versa, positive column rescaling cannot flip a sign), searched for the largest
+Givens rotation `W(θ)` — mixing exactly two communities `i,j`, applied to `U_final[f]` for
+every active facet and `W(θ)ᵀ·Z_final[rel]·W(θ)` for every active relation simultaneously
+(a shared `W` has to work for every facet/relation at once, since the community axis is
+shared across the whole fit) — before any monitored entry goes negative. Checking every
+community pair one at a time is a **complete local check**, not a shortcut: the `K(K-1)/2`
+pairwise generators span the full tangent space of the orthogonal group at the identity, so
+sweeping all pairs covers every possible small rotation, not a subset of them. Coarse scan
+(0.5°–90°) then bisection per pair per direction; same grid as Tier 1 (6 configs × K∈{3,4}).
+
+**Methodological correction, kept here since it matters for reusing this method later.** The
+first run used an absolute tolerance (reject any monitored entry below −1e-4) and returned
+0.00° margin for all 54 pairs, uniformly — too clean to trust. Diagnosis: many entries sit at
+the model's own zero-floor (`clamp_(min=1e-7)`) next to a large entry in the same row: any
+nonzero rotation angle nudges the floor entry by roughly `angle × (the large entry's size)`,
+crossing −1e-4 at a vanishingly small angle regardless of whether real, meaningfully-supported
+structure is rotatable. The test was re-detecting "this model has structural zeros"
+(expected, uninteresting) rather than answering the intended question. **Fixed**: only
+monitor entries that carried meaningful mass *before* rotating (≥1% of that column's/
+relation's own max value, computed once from the un-rotated `U`/`Z`); entries below that are
+excluded from the feasibility check entirely. Re-run below is the corrected version; the
+original 0.00°-everywhere run is void and not used anywhere in this document.
+
+**Result:** all 54 community pairs, across every cell, have a real, non-zero, but **bounded**
+local margin — roughly 0.5°–3.4°, no pair pinned at 0° and no pair free out to the full 90°
+search range. Practical scale: `sin(3°) ≈ 0.05`, so even the loosest pairs found allow on the
+order of a few percent of mass to be locally redistributed between two communities before
+non-negativity breaks — not a wholesale relabeling-scale swap. Per-cell tightest-pair margin
+ranged `C5/K4` (0.55°, most constrained) to `C6/K4` (0.95°, least constrained); `C3/K4` and
+`C4/K4` did not converge and their numbers (0.60° and 0.65° respectively, within the same
+range as everything else) should be read with that caveat per `SESSION_PROTOCOL` rule 4.
+
+**Scope of what this establishes:** a **local** (first-order/infinitesimal) feasibility
+bound around the fitted solution — it characterizes the immediate neighborhood, not whether
+some large, distant rotation could loop back to a different globally-feasible point; that is
+a harder, different question, not attempted here. Within that scope, it is a direct,
+constructive answer (stronger than Tier 1's indirect evidence): genuine local blending
+freedom exists everywhere tested, but it is small and bounded, not large or unbounded,
+anywhere in the grid.
+
+### Practical implication (Tier 1 + Tier 2 combined)
+
+On this corpus, at production settings (`lambda_l1=0.0`, `lambda_z_offdiag=0.05`), the
+combined evidence is that Layer 1b's blending freedom is real but narrow — not the
+unconstrained "any invertible `W`" freedom the raw linear-algebra identity permits, and
+nowhere near large enough to plausibly explain a full community swap or make the model's
+substantive outputs (`U_prob` community membership, `Z`-based within/between coupling) for
+one specific reported/selected fit untrustworthy at the level of interpretation this project
+needs. The ordinary caveat still applies regardless: cross-fit/cross-seed comparisons still
+require relabeling correction (§14/§16/§17). `fringe_atom` (Tier 1's recurring failure) is
+worth extra scrutiny before relying on its community assignments across different fits.
+Toy-corpus-calibrated like every other finding in this document — re-derive at 22k-article
+scale before trusting; a denser corpus could plausibly tighten or loosen these margins in
+either direction.
+
+Diagnostic scripts: `diagnostic_scripts/near_separability_check.py` and
+`diagnostic_scripts/rotation_feasibility_search.py`; results in
+`diagnostic_results/near_separability_check.json` and
+`diagnostic_results/rotation_feasibility_search.json`.
+
+---
+
