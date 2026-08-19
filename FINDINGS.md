@@ -1425,11 +1425,45 @@ range as everything else) should be read with that caveat per `SESSION_PROTOCOL`
 
 **Scope of what this establishes:** a **local** (first-order/infinitesimal) feasibility
 bound around the fitted solution — it characterizes the immediate neighborhood, not whether
-some large, distant rotation could loop back to a different globally-feasible point; that is
-a harder, different question, not attempted here. Within that scope, it is a direct,
-constructive answer (stronger than Tier 1's indirect evidence): genuine local blending
-freedom exists everywhere tested, but it is small and bounded, not large or unbounded,
-anywhere in the grid.
+some large, distant rotation could loop back to a different globally-feasible point. Within
+that scope, it is a direct, constructive answer (stronger than Tier 1's indirect evidence):
+genuine local blending freedom exists everywhere tested, but it is small and bounded, not
+large or unbounded, anywhere in the grid.
+
+**Distant-rotation extension (same method, answers the "harder, different question" above —
+folded in here rather than filed as a separate finding, since it's a direct follow-up on the
+same search, not a new test).** Worth answering because of a consequence of §1's exact
+identity: any rotation, local or distant, that stays feasible has **exactly** the same
+reconstruction loss as the original fit — unlike a different-seed/different-basin
+disagreement (§1's own Run 2 vs Run 4 example: `recon_loss` 0.7593 vs 0.7591, four decimals
+apart, opposite anchor-coherence structure), which loss *can*, if unreliably, distinguish. A
+distant feasible rotation of the *same* solution would be invisible to any loss-based
+selection, by construction, not merely in practice — worth checking whether one exists before
+treating "pick the lowest loss" as a safeguard against this specific failure mode.
+
+Swept the full relevant range (`W(θ+180°)=−W(θ)`, so ±90° covers everything distinct for a
+single-pair rotation) at fine resolution for all 54 pairs, checking for a *second*,
+disconnected feasible region beyond the local cage. **Methodological self-check applied
+before trusting the result, same discipline as the tolerance correction above:** the first
+pass used a 1° step and came back with zero islands — but several local margins measured
+above are themselves sub-degree, so a 1°-step grid could structurally miss an island of
+comparable width. Re-ran at 0.05° (36× finer); same result, and the recovered cage widths at
+this resolution independently match the bisection-based margins above (e.g. `C5/K4`
+communities `(0,1)`: `−0.65°/+0.75°` here vs `−1.03°/+0.55°` from the separate bisection
+search) — two independently-implemented searches agreeing is real cross-validation, not a
+repeated bug. **Result: 0 of 54 pairs have more than one feasible region, at either
+resolution.** No evidence of a distant, loss-invisible alternate rotation anywhere in the
+grid, within the single-pair-rotation family tested.
+
+Scope limits on this extension specifically: only single-pair rotations were swept, one at a
+time — a joint rotation moving several community pairs simultaneously (a much
+higher-dimensional space) was not searched, so this doesn't rule out a distant feasible point
+reachable only by a combined move. And 0.05° resolution, while 36× finer than the first pass,
+is still a discrete grid — an island narrower than that step could in principle still be
+missed, though something that narrow would carry little practical weight even if found.
+
+Diagnostic script: `diagnostic_scripts/rotation_island_search.py`, results in
+`diagnostic_results/rotation_island_search.json`.
 
 ### Practical implication (Tier 1 + Tier 2 combined)
 
