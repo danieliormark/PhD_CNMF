@@ -1487,3 +1487,80 @@ Diagnostic scripts: `diagnostic_scripts/near_separability_check.py` and
 
 ---
 
+## 19. A community's domain-skew "identity" is not reproducible across independently-trained
+seeds — confirmed with the pipeline's own §S5 alignment, not just a weaker proxy
+
+**Status: Established. Distinct from §18 — this is problem 1a (relabeling across
+independently-trained fits), not 1b (local rotation freedom within one fit); the two should
+not be conflated.**
+
+### Question
+
+Does a community's apparent domain character (soc-leaning vs sem-leaning, read off
+`Z_scaled`) survive across independent re-fits (different random seeds) of the same
+(config, K), or does it reshuffle? Answering this requires *aligning* communities across
+seeds first — community index is only meaningful within one fit (§14).
+
+### First pass — weaker alignment, informal
+
+Initially measured with a single-facet (`art`-only) Hungarian match on column-similarity —
+the simplest alignment available, not the pipeline's own method. Result: ~45% of
+(config, K, community) triples had a sign-consistent domain-skew reading across 5 seeds
+(1000/2000/3000/4000/5000), C1–C6 × K∈{3,4}. A concern was raised in discussion: could this
+weak alignment be *understating* true stability, making the model look less reproducible
+than it really is? Never written up formally — recorded here directly against the corrected
+measurement below, per the practice of stating a correction explicitly rather than leaving a
+superseded number implicit.
+
+### Corrected measurement — the pipeline's own §S5 alignment
+
+Re-ran the identical design, but aligning seeds with `run_dual_track_stability_analysis`'s
+actual method (Module 4 §5): all facets stacked, two independent tracks — Track A (JSD,
+probability-space) and Track B (magnitude-weighted cosine) — each matched via
+`linear_sum_assignment`. Implemented as *faithful reuse*, not reimplementation:
+`diagnostic_blocks.s5_dual_track_alignment` calls `row_normalize`/`col_normalize`/
+`row_wise_cosine_similarity` directly off the loaded `chunk13v9.py` module.
+
+**The concern was refuted in the opposite direction from how it was raised.** Stability did
+not improve under the stronger method — it was slightly *lower*:
+
+| Method | Stability (K∈{3,4} pooled, C1–C6) |
+|---|---|
+| `art`-only alignment (informal first pass) | ~45% (19/42) |
+| §S5 Track A (JSD) | 38% (16/42) |
+| §S5 Track B (weighted cosine) | 40% (17/42) |
+
+**New finding, only visible with two independent tracks:** Track A and Track B — two
+different, both-reasonable alignment criteria — agree with each other on only 42/48 (88%) of
+seed pairs. In 12% of pairs, the pipeline's own best method disagrees with itself about which
+community is which. `C3/K4` is the extreme case (1/4 pairs agree between tracks; one of its 5
+seeds also did not converge — discount accordingly, `SESSION_PROTOCOL` rule 4).
+
+**Per-config (Track A), same qualitative pattern as the informal first pass, not improved by
+the stronger method:** `C1` 0/7 (0%), `C2` 6/7 (86%), `C3`/`C4`/`C5` ~29% each, `C6` 4/7
+(57%). Denser, more anchor-supported topologies (`C2`, `C6`) remain more stable than the
+single-anchor `C1` — consistent with §4.15's independent finding about `C1`'s anchor
+weakness — but the absolute stability level is not rescued by better alignment anywhere.
+
+### Practical implication
+
+The hypothesis that a weak alignment method was the *cause* of apparently low domain-skew
+reproducibility is refuted, not confirmed — if anything, the weaker method appears to have
+*overstated* stability, having fewer ways to detect a genuine relabeling than the real
+9-facet, two-track method does. **A community's domain-skew identity is not a robust,
+reproducible property across independent re-fits of this corpus, even measured by the
+pipeline's own best available tool for the job.** This sharpens, rather than softens, the
+concern originally raised about interpreting domain-skew labels as substantive
+("this community is coauthorship-driven") across anything other than one specific reported
+fit — consistent with, and now measured for, the caveat already stated throughout this
+document that cross-fit/cross-seed comparisons require relabeling correction (§14/§16/§17).
+Toy-corpus-calibrated like everything else here — re-derive at 22k-article scale before
+trusting; a denser corpus, with more entities per community, could plausibly change this in
+either direction.
+
+Diagnostic script: `diagnostic_scripts/domain_skew_s5_alignment_reproducibility.py` (reuses
+the new `diagnostic_blocks.s5_dual_track_alignment`, `BLOCKS_VERSION` 1.8.0); results in
+`diagnostic_results/domain_skew_s5_alignment_reproducibility.json`.
+
+---
+
