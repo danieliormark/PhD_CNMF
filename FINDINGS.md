@@ -1600,5 +1600,75 @@ Toy-corpus-calibrated, same caveat as above.
 Diagnostic script: `diagnostic_scripts/domain_skew_s5_continuous_consensus.py`; results in
 `diagnostic_results/domain_skew_s5_continuous_consensus.json`.
 
+### Does a "stable core / variable periphery" story explain the pattern? Partially, and not
+in the form first proposed
+
+Raised in discussion: the `fringe_atom`/`C1` weakness above suggested a "core entities are
+stable, peripheral entities drift" narrative. Flagged, correctly, as a mere association until
+tested against the alternatives it's not the only story consistent with the same aggregate
+data — a pure facet-level effect, a pure config-level effect, and unstructured noise
+(non-convexity/basin-hopping, already documented directly for this pipeline in §1's Run 2 vs
+Run 4) are all equally consistent with an aggregate number alone. Two analyses, one free (re-
+decomposing already-collected results) and one new (per-entity, reusing the same cached
+fits), were run together to separate them.
+
+**Part A — facet and config effects are both real and additive, not competing.** Decomposing
+the per-(config, facet) consensus means: `fringe_atom` is weak in **every** config, including
+the strongest ones (`C6`: −0.159 below that config's own mean; `C2`: −0.170) — its weakness
+does not get rescued by a good topology. `C1` is weak across 7 of 9 facets, including ones
+strong elsewhere (`core_child_he`: −0.166 below that facet's own mean). A simple additive
+model (grand mean + facet effect + config effect) explains **78%** of the total variance in
+the aggregate numbers — facet identity and config identity are both real, independent, and
+together account for most of the pattern (residual 22%: interaction or noise).
+
+**Part B — per-entity correlation, computed *within* each config×facet cell (isolating
+entity-level effects from facet/config ones by construction), between individual stability
+and two candidate "core-ness" measures:**
+
+| Predictor | Similarity measure | Mean ρ | Cells significant positive | Cells significant negative |
+|---|---|---|---|---|
+| Degree (connectivity) | Track A (JSD) | +0.011 | 23/104 | 14/104 |
+| Degree (connectivity) | Track B (cosine) | +0.053 | 27/104 | 13/104 |
+| `U_prob` purity (confidence) | Track A (JSD) | +0.177 | 54/104 | 24/104 |
+| `U_prob` purity (confidence) | Track B (cosine) | +0.073 | 39/104 | 31/104 |
+
+**Raw connectivity does not predict individual stability** — near-zero mean correlation,
+roughly as many cells significantly negative as positive. The "high-degree entities are more
+stable" version of the hypothesis is refuted directly, not just unsupported. **Confidence of
+assignment (`U_prob` purity) shows a real but partial, inconsistent signal** — a majority of
+cells positive under Track A, but a substantial minority (24/104) significantly negative, and
+the effect is much weaker under Track B (39 positive vs 31 negative — close to a coin flip).
+**Caveat, stated so it isn't over-read:** purity and Track A's similarity measure are both
+derived from the same row-normalized distribution, so part of the purity/Track-A correlation
+may reflect mathematical kinship between related quantities rather than fully independent
+confirmation — the weaker, more independent Track B result is probably the more trustworthy
+read of how strong this effect really is.
+
+**Revised conclusion:** the tempting "central core, drifting periphery" story is not what the
+data supports. What actually drives cross-seed reproducibility is mostly **which facet and
+which config** (additive, 78% of variance) — not an individual entity's centrality. A
+confidence-based (not connectivity-based) partial effect exists but is inconsistent rather
+than a reliable law. The unexplained residual (Part A's 22%, and the substantial share of
+negative per-entity correlations Part B would not predict under a clean core/periphery story)
+is consistent with genuine unstructured noise, though this is not directly provable, only the
+natural remaining explanation once the others are accounted for.
+
+**Scope explicitly not tested — record before revisiting this question.** "Centrality" here
+means exactly two things: raw degree (nnz count across active relations touching a facet) and
+`U_prob` row-max ("purity"/confidence). **No graph-theoretic centrality measure was tried** —
+not eigenvector centrality (or PageRank/Katz, which would capture an entity's connections to
+*well-connected* neighbours, not just raw degree), and not any centrality measure adapted for
+the model's actual hyperedge structure (several facets here are hyperedges —
+`core_child_he`/`parent_he`/`cousin_he` — for which plain node-degree is a weak proxy; hyper-
+graph-specific centrality notions exist and were not tried). Degree and purity were the
+cheapest, most directly available proxies given what was already computed elsewhere in this
+document — not a considered claim that they are the *right* or only reasonable operationalisation
+of "core". A future revisit of this question should try at least eigenvector/Katz centrality
+on the relevant relational graphs before concluding the "core/periphery" story is fully closed
+rather than just closed for the two proxies tested here.
+
+Diagnostic script: `diagnostic_scripts/core_periphery_stability_test.py`; results in
+`diagnostic_results/core_periphery_stability_test.json`.
+
 ---
 
