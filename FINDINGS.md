@@ -1673,10 +1673,13 @@ Diagnostic script: `diagnostic_scripts/core_periphery_stability_test.py`; result
 ---
 
 ## 20. Problem 2 — is `collapse_pen` (Z_scaled-based) gameable in a way that distorts
-model selection? First round: not currently, because it almost never engages
+model selection? T1: almost never engages. T2: engages regularly, and the exploit pattern
+was directly observed
 
-**Status: Partially established (toy corpus, K∈{3,4}, T1 slice only). Scope is narrower
-than it first sounds — see "What this does and does not cover" below before generalising.**
+**Status: Partially established, toy corpus only. `collapse_pen`'s near-total inertness is a
+T1-slice/K=4-specific finding, NOT a general property of the model — the T2 replication
+below corrects this. Scope is still narrower than it first sounds even where it holds — see
+"What this does and does not cover" before generalising.**
 
 ### The concern, precisely
 
@@ -1780,66 +1783,159 @@ the 220 converged trials: Pearson r=0.220 (p=0.0010), Spearman r=0.201 (p=0.0027
 statistically significant given the large n, but numerically weak, consistent with Tests 1–2's
 moderate-not-strong reading.
 
-**Conclusion for Problem 2, this round:** the original worry — a gameable `collapse_pen`
+**Conclusion for Problem 2, T1 only:** the original worry — a gameable `collapse_pen`
 distorting which hyperparameters look best on the Pareto front — has nowhere to operate in
 this regime, because `collapse_pen` essentially never becomes an active constraint for the
-real search to exploit in the first place. This is a scoped finding, not a general
-exoneration: toy corpus, K∈{3,4}, T1 slice only, this lambda range. At 22k articles, with
-different community sizes, the term could engage far more often — re-test at scale before
-trusting this conclusion there. A T2-slice replication of this same test was in progress at
-the time of this write-up (see note below).
+real search to exploit in the first place. Flagged at the time as scoped, not a general
+exoneration — correctly so, per the T2 replication below.
 
-### Incidental finding: `C4/K=4` and `C2/K=4` show config-specific non-convergence at low
-`lambda_z_offdiag`, unrelated to Problem 2 but relevant to the 22k config-selection question
+### Test 4 replication on T2 — correction: `collapse_pen` is not universally inert, and the
+exploit pattern actually occurred
 
-Convergence rates under the real Optuna search (Test 4, T1) varied sharply at K=4:
-`C4/K=4` 9/20 (45%), `C2/K=4` 14/20 (70%), `C3/K=4` 17/20 (85%), `C1/K=4`/`C5/K=4`/`C6/K=4`
-all 20/20. Breaking down *which* `lambda_z_offdiag` values failed (re-analysis of the
-already-collected Test 4 records, no new fits): `C2/K=4`'s 6 failures and 10 of `C4/K=4`'s 11
-failures cluster at `lambda_z_offdiag`≤0.0031 — near the search floor, i.e. almost no
-cross-community-coupling regularisation. `C3/K=4`'s 3 failures are mid-range (0.08–0.29), a
-seemingly different mechanism. Critically, **the identical near-zero lambda draws** (same
-`NSGAIISampler` seed ⇒ same sequence across cells: 0.0001, 0.0002, 0.0004, …) converged
-without issue on `C1/K=4`, `C5/K=4`, `C6/K=4` — so this is not "low `lambda_z_offdiag` is
-generally unstable at K=4," it is `C2`/`C4` specifically struggling when cross-community
-coupling is left almost unconstrained at that K. A genuine, config-dependent fragility, not a
-pipeline bug or an epoch-ceiling artifact (confirmed not epoch-ceiling-driven only after the
-fact — the original Test 4 (T1) run did not capture per-trial `epochs_run`, a gap fixed in the
-T2 replication script but not backfilled here). Worth weighing directly against `C4` when
-deciding which configs to carry into the 22k-article run — this is now the second
-independent piece of evidence against `C4` (alongside its known single-anchor weakness,
-§4.15, though that is `C1`'s issue, not `C4`'s — these are separate, unrelated weaknesses in
-two different configs).
+Identical design (`diagnostic_scripts/collapse_pen_optuna_study_t2.py`), run against the T2
+slice (36 articles, 4,158 total non-zero relational entries, vs. T1's 25/3,323 — §11) instead
+of T1, to check whether T1's small article count was itself a factor. 240 trials, 24.2 min.
 
-### What this does and does not cover — do not over-generalise this section
+**`collapse_pen` fired 25/240 times — not rare, and concentrated in a clear pattern:** all 25
+fires were at **K=3** (zero at K=4, in any config), and almost entirely in two configs —
+`C2/K=3` (12 fires) and `C6/K=3` (10 fires), both clustered at **low** `lambda_z_offdiag`
+(mostly ≤0.0031, near the search floor — mechanically sensible: with almost no
+cross-community-coupling suppression, mass can genuinely concentrate onto one community, and
+`collapse_pen` correctly catches it). `C3/K=3` (1 fire) and `C5/K=3` (2 fires) show a
+different, mid-range-lambda pattern. **T1's "essentially never fires" conclusion does not
+generalise past K=4 or past the T1 slice — it was correct only for the specific regime it
+was measured in.**
 
-`collapse_pen` reads exactly one scalar summary of `Z_scaled` (`max_share`). This section
-establishes that model selection (Optuna's Pareto front) is not currently being distorted
-through that one channel, in this regime. It says **nothing** about whether `Z_scaled`'s raw
-diagonal/off-diagonal *values* — which is what §1 and this document's community-coupling
-interpretation actually depend on for the article — can be reshaped by the same class of
-training-dynamics-driven slack in ways that would mislead that direct reading, independent
-of whether any outer-loop penalty ever notices. That is a different, still-open question,
-closer to §18's territory (which tested a *different* mechanism — static rotational freedom
-within one fit — and found it narrow) than to this section's (training-dynamics-driven
-reshaping under optimizer pressure). Do not read this section as clearing `Z_scaled` for
-direct substantive interpretation; it only clears the specific model-selection risk Problem 2
-was originally scoped around.
+**The exploit pattern itself occurred — 4/240 trials, all in `C5/K=3`, and this is the
+clearest direct evidence across this whole investigation that the originally-hypothesized
+mechanism is real, not just theoretical:**
+
+| `lambda_z_offdiag` | `mass_max` | `mem_max` | `collapse_pen` | converged |
+|---|---|---|---|---|
+| 0.6351 | 0.484 | 0.630 | 0.0000 | True |
+| 0.2915 | 0.496 | 0.613 | 0.0000 | True |
+| 0.7579 | 0.480 | 0.634 | 0.0000 | True |
+| 0.2137 | 0.580 | 0.604 | 0.0000 | True |
+
+All four sit at the **high** end of `lambda_z_offdiag` (0.21–0.76) — the opposite end of the
+range from where `collapse_pen` actually fires in this same config. `collapse_pen` reads a
+clean 0.0000 while the independent, non-`Z_scaled` membership measure says a single community
+holds 60–63% of real entities. This is directly consistent with the mechanism §2 already
+confirmed once for `z_offdiag_loss`: raising `lambda_z_offdiag` can move `Z_scaled`'s readout
+toward "looks balanced" via the community-resizing route rather than genuine
+de-concentration. Narrow — one config, 4/240 trials — but real, and the first time in this
+entire investigation (T1 sweep, T1 mass-vs-membership check, T1 Optuna study) that the exploit
+pattern actually appeared under real search pressure rather than being absent.
+
+Pooled correlation (210 converged trials): Pearson r=0.331 (p<0.0001), Spearman r=0.525
+(p<0.0001) — both higher than T1's (Pearson 0.220, Spearman 0.201), so `mass_max`/`mem_max`
+track each other somewhat *better* on T2 even though `collapse_pen` engages more — the two
+findings (more engagement, more exploit instances, yet also a tighter overall correlation)
+are not in tension: a few real threshold-crossing outliers coexist with an overall tighter
+relationship, they are not the same statistic.
+
+**Revised conclusion:** `collapse_pen`'s inertness was T1/K=4-specific, not a property of the
+model. At K=3 on the larger T2 slice, it is a real, occasionally-active constraint, and the
+specific gaming pattern Problem 2 was worried about has now been observed directly (not just
+inferred from a bound), concentrated at high `lambda_z_offdiag` in one config. This raises
+the priority of Problem 2 relative to the T1-only round — it is not a closed question, and
+the next natural step (not yet run) would be a K=3-focused, `C5`-focused deeper sweep to see
+how far the exploit pattern extends.
+
+### Incidental finding: `C4/K=4` shows the worst convergence on BOTH slices, `C3/K=4` joins
+it on T2 — relevant to the 22k config-selection question, not to Problem 2 itself
+
+**T1** (Test 4): convergence at K=4 varied sharply — `C4/K=4` 9/20 (45%), `C2/K=4` 14/20
+(70%), `C3/K=4` 17/20 (85%), `C1/K=4`/`C5/K=4`/`C6/K=4` all 20/20. Breaking down *which*
+`lambda_z_offdiag` values failed: `C2/K=4`'s 6 failures and 10 of `C4/K=4`'s 11 failures
+cluster at `lambda_z_offdiag`≤0.0031 — near the search floor, almost no cross-community-
+coupling regularisation. **The identical near-zero lambda draws** (same `NSGAIISampler` seed
+⇒ same sequence across cells) converged without issue on `C1/K=4`, `C5/K=4`, `C6/K=4` — so
+this is `C2`/`C4` specifically struggling at low pressure, not a general low-lambda effect.
+
+**T2** (replication, which also fixed the `epochs_run`-capture gap the T1 script had):
+convergence at K=4 is markedly worse overall — `C4/K=4` only **3/20 (15%)**, `C3/K=4` only
+**7/20 (35%)**, both markedly worse than their T1 figures; `C1/K=4`, `C2/K=4`, `C5/K=4`,
+`C6/K=4` all recovered to 20/20. **Every single T2 K=4 failure hit exactly the 2000-epoch
+ceiling** (confirmed directly via the now-captured `epochs_run` field), and failure lambdas
+spread across nearly the *entire* search range (`C3/K=4`: [0.0001, 0.29]; `C4/K=4`: [0.0001,
+0.64]) rather than clustering at the floor as in T1. Combined with T2's much higher average
+epoch counts across every cell (572–1975, vs. T1's implied lower range) this looks like a
+**different mechanism from T1's** — T2's larger, denser data genuinely needs more epochs
+generally and strains the fixed ceiling broadly, not a lambda-specific fragility.
+
+**Combined verdict:** `C4/K=4` is now the weakest cell on *both* slices by a clear margin
+(45%→15% converged, T1→T2) — the single most consistent piece of negative evidence against
+any config in this document, worth weighing directly against `C4` for the 22k-article run.
+`C3/K=4` is weak specifically at scale (T2) but not at T1 — a slice-dependent weakness, not a
+uniform one. These are unrelated to `C1`'s separately-known single-anchor weakness (§4.15) —
+three different configs, three different mechanisms, not one story.
+
+### Follow-up: does `Z_scaled`'s FULL diagonal/off-diagonal pattern (not just `collapse_pen`'s
+one scalar) track independent structure? Partially — and worse for off-diagonal specifically
+
+`collapse_pen` reads exactly one scalar summary of `Z_scaled` (`max_share`). Everything above
+establishes that model selection is (T1) or is not (T2/K=3) currently being distorted through
+that one channel — it says nothing about whether `Z_scaled`'s raw diagonal/off-diagonal
+*values*, which is what §1 and this document's community-coupling interpretation actually
+depend on for the article, can be reshaped by the same training-dynamics-driven slack,
+independent of whether any outer-loop penalty ever notices. Built a direct test for this,
+reusing the 48 already-cached T1 fits from Test 1's sweep (no new training):
+
+An independent, non-`Z_scaled`-derived reading of "how coupled are community k1 and k2 in
+relation r" — `data_reading[k1,k2] = U_prob_f1[:,k1]ᵀ @ X_r @ U_prob_f2[:,k2]`, i.e. how much
+of the relation's *real raw edges* connect an entity plausibly in k1 to one plausibly in k2,
+soft-weighted by membership, never touching `Z` — compared against `Z_scaled`'s own full
+`|Z[k1,k2]|`-based reading, both normalised to sum to 1 over the full K×K grid (diagonal AND
+off-diagonal cells, not just the max).
+
+**Pooled (4,364 K×K cells across every relation/config/K/lambda): Pearson r=0.728, Spearman
+r=0.663** — substantially stronger than the max_share-only comparison (community-level Pearson
+topped out at 0.42–0.51 in Test 2). The full pattern does meaningfully track an independent,
+data-grounded reading — reassuring on its own.
+
+**But split by diagonal vs. off-diagonal, a real asymmetry emerges:**
+- Diagonal (within-community, n=1,232): Pearson r=0.608, **Spearman r=0.660**
+- Off-diagonal (between-community, n=3,132): Pearson r=0.621, **Spearman r=0.422**
+
+Spearman (rank correlation, less dominated by a few large values) shows off-diagonal terms
+tracking the independent reading noticeably worse than diagonal terms. **Practically:
+within-community coupling readings from `Z_scaled` are more trustworthy than between-community
+coupling readings** — worth an explicit caveat wherever the article leans on `Z`'s off-diagonal
+specifically to claim a between-community relationship.
+
+**Under increasing `lambda_z_offdiag` pressure (0.0→2.0), correspondence degrades mildly but
+consistently:** Spearman falls 0.698→0.675→0.645→0.606 as pressure rises (Pearson is flatter:
+0.762→0.730→0.746→0.718). Not dramatic — correlation stays substantial throughout — but a
+real, monotonic trend in the direction the training-dynamics-slack mechanism predicts, and
+consistent with the C5/K=3 exploit-pattern cases above appearing specifically at high lambda.
+
+**Caveat on the pooled r=0.73:** pooling all K×K cells means many true near-zero off-diagonal
+entries in both readings trivially agree they're near zero, inflating the pooled figure
+somewhat beyond the real signal alone — the diagonal/off-diagonal split above is the more
+trustworthy read for that reason. **This test used T1 only** (reusing Test 1's cached fits);
+not yet replicated on T2, where §20's other findings show `collapse_pen`-relevant dynamics
+differ materially — a natural next step if this question needs firming up further.
+
+**Net effect on the open question:** partially, not fully, addressed. `Z_scaled`'s full
+diagonal/off-diagonal pattern is meaningfully grounded in real structure overall, more so than
+`collapse_pen`'s single scalar suggested — but the off-diagonal (between-community) values
+specifically are the weaker link, and do show mild erosion under `lambda_z_offdiag` pressure,
+which is the training-dynamics-driven mechanism this test was built to check for. Still
+distinct from §18's territory (which tested a *different* mechanism — static rotational
+freedom within one fit — and found it narrow); this section's mechanism and §18's are related
+but not the same question, and neither fully substitutes for the other.
 
 Diagnostic scripts: `diagnostic_scripts/collapse_pen_mass_vs_membership_check.py` (Test 2),
 `diagnostic_scripts/collapse_pen_exploitability_sweep.py` (Test 1),
-`diagnostic_scripts/collapse_pen_optuna_study.py` (Test 4, T1). Results in
-`diagnostic_results/collapse_pen_mass_vs_membership_check.json`,
+`diagnostic_scripts/collapse_pen_optuna_study.py` (Test 4, T1),
+`diagnostic_scripts/collapse_pen_optuna_study_t2.py` (Test 4, T2 replication),
+`diagnostic_scripts/z_scaled_diagonal_offdiagonal_gaming_check.py` (diagonal/off-diagonal
+follow-up, T1). Results in `diagnostic_results/collapse_pen_mass_vs_membership_check.json`,
 `diagnostic_results/collapse_pen_exploitability_sweep.json`,
-`diagnostic_results/collapse_pen_optuna_study.json`.
-
-**T2 replication (in progress, not yet included above):** `diagnostic_scripts/collapse_pen_optuna_study_t2.py`
-— identical design to Test 4, run against the T2 slice (36 articles, 4,158 total non-zero
-relational entries, vs. T1's 25/3,323 — CLAUDE.md §11) rather than T1, to check whether T1's
-small article count was itself a factor in `collapse_pen`'s near-total inertness. Also
-captures per-trial `epochs_run` (a gap in the T1 script, noted above). Was still running at
-the time this section was written; update this section with T2's results once available
-rather than opening a new one, per Occam's razor.
+`diagnostic_results/collapse_pen_optuna_study.json`,
+`diagnostic_results/collapse_pen_optuna_study_t2.json`,
+`diagnostic_results/z_scaled_diagonal_offdiagonal_gaming_check.json`.
 
 ---
 
