@@ -1672,3 +1672,174 @@ Diagnostic script: `diagnostic_scripts/core_periphery_stability_test.py`; result
 
 ---
 
+## 20. Problem 2 — is `collapse_pen` (Z_scaled-based) gameable in a way that distorts
+model selection? First round: not currently, because it almost never engages
+
+**Status: Partially established (toy corpus, K∈{3,4}, T1 slice only). Scope is narrower
+than it first sounds — see "What this does and does not cover" below before generalising.**
+
+### The concern, precisely
+
+`collapse_pen` is the only quantity in this pipeline that is (a) derived from `Z_scaled`
+and (b) read by Optuna every trial, feeding directly into `sociological_penalty` — one axis
+of the Pareto front Module 3/4 use to select hyperparameters (§4.17/§4.20; ticket 81). The
+worry is not that `collapse_pen` itself has an independent flaw — it is a straightforward
+threshold check on one scalar (`max_share`, the largest community's reconstructed-mass
+share). The worry is that `Z_scaled` can be reshaped by the optimizer without genuine
+change to the underlying reconstruction (the same class of scale-invariance slack §4.2
+already closed once for `z_offdiag_loss`), and that reshaping would show up as a
+`collapse_pen` improvement that doesn't correspond to real de-concentration of which
+*entities* belong to which community.
+
+### Method: an independent, non-`Z_scaled`-derived cross-check
+
+Built two new `diagnostic_blocks.py` helpers (`BLOCKS_VERSION` 1.9.0→1.10.0):
+- `collapse_mass_share(config_id, U_final, Z_final, K)` — **not a reimplementation**, calls
+  production's own `_relation_community_share` per active relation and averages exactly as
+  `evaluate_dimensional_collapse` does. Self-checked every run: `collapse_mass_share(...).max()`
+  matched `evaluate(...)["collapse_score"]` to `0.00e+00` across every fit in this section —
+  confirmed identical, not approximated.
+- `membership_share_all_facets(config_id, U_final, presence_masks, K)` — pools live-entity
+  mean `U_prob` rows across all 9 facets with equal weight (mirroring `collapse_pen`'s own
+  equal-weight-per-relation convention, at facet granularity). Never touches `Z_scaled`, so
+  it cannot inherit whatever exploit surface lives in the `Z_scaled` pathway.
+
+Both share vectors sum to 1 over K, directly comparable without extra normalisation. `mass_max`
+is literally what `collapse_pen`'s threshold check reads; `mem_max` is the independent ground
+truth.
+
+### Test 2 — mass vs. membership at production lambda, and a methodological correction found
+mid-session
+
+First pass, C1–C6 × **K∈{2,4}** (the grid used elsewhere in this document), production
+settings (`lambda_l1=0`, `lambda_z_offdiag=0.05`): solution-level Pearson r=0.956, Spearman
+r=0.944; 2/12 cells showed the exploit *pattern* (`mass_max`≤0.60 while `mem_max`>0.60:
+`C2/K=2`, `C6/K=2`).
+
+**Correction, requested and applied before drawing conclusions:** K=2 was flagged as too
+low-information to trust — with only 2 communities, both share vectors are mechanically
+forced to sum to 1 with a single free value per cell, pinning `mass_max`/`mem_max` close
+together near 0.5 regardless of whether the two measures are really tracking the same thing.
+Re-run on **K∈{3,4}** (the grid used for the rest of this section): solution-level Pearson
+r=0.506 (**p=0.093, not significant**), Spearman r=0.748 (p=0.0051); community-level Pearson
+r=0.420 (p=0.0056), down from 0.872. **The K=2-inclusive correlation was substantially
+inflated by low degrees of freedom, not by a real tight coupling between the two measures.**
+At K∈{3,4}, mass and membership are positively, genuinely associated but only moderately —
+one is not a safe stand-in for the other, though no gross divergence was found either. 0/12
+cells showed the exploit pattern at K∈{3,4} (max values never approached 0.60 on either
+measure: mass_max≤0.48, mem_max≤0.56).
+
+### Test 1 — hand-picked `lambda_z_offdiag` sweep (0.0 → 2.0, 40× production)
+
+Same C1–C6 × K∈{3,4} grid, `lambda_l1=0` fixed, `lambda_z_offdiag ∈ {0.0, 0.05, 0.5, 2.0}`
+(48 fits; self-check 0.00e+00 throughout). `collapse_pen` fired in only 1/48 fits (barely:
+0.0028, `C1/K=4` at `lz=2.0`), confirming §4.17/ticket 81's standing observation that this
+term is essentially inert at production-adjacent settings. Raising `lambda_z_offdiag` mostly
+*increased* `mass_max` (10/12 cells) rather than decreasing it — mechanically sensible
+(suppressing cross-community `Z` coupling concentrates reconstructed mass onto fewer diagonal
+terms), and the opposite direction from what a "cheap `collapse_pen` improvement" exploit
+would need. The correlation between how much `mass_max` moved and how much `mem_max` moved
+(the two *deltas*, per cell) was weak and not significant: Pearson r=0.478 (p=0.116), Spearman
+r=0.357 (p=0.255) — the two measures are loosely, not tightly, coupled under pressure, echoing
+Test 2's revised reading. One cell (`C3/K=4`) showed the literal exploit shape in its delta
+(`mass_max` −0.070, `mem_max` +0.002) but `collapse_pen` was 0.0 both before and after — a
+directionless move inside the sub-threshold region, not evidence of dodging an active penalty.
+
+Test 3 (a `U_scales`-shrinking signature check, next on the original priority list) was
+**deliberately not run**: `collapse_pen` is built on `Z_scaled` specifically *because* §4.2
+already closes the `U_scales`-inflation/`Z_pos`-shrinkage loophole by construction, and the
+above two tests show little live pressure for that mechanism to matter in practice regardless.
+Low expected value for the effort; skipped by agreement.
+
+### Test 4 — a real Optuna study (the decisive one): `collapse_pen` never fires across the
+actual search space
+
+Tests 1–2 only show the term is inert in fits *we* chose. This test let production's own
+`NSGAIISampler` search `lambda_z_offdiag ~ log-uniform[1e-4, 1.0]` (the real search space,
+`lambda_l1=0` fixed per ticket 78) on its own terms — the literature distinction between "a
+proxy is hackable in principle" vs. "the actual search process finds and exploits it" (see
+this session's Problem-2 literature summary: Skalse, Howe, Krasheninnikov & Krueger, NeurIPS
+2022; van Laarhoven 2017 — citations from memory, flag for verification before formal use).
+
+Design: faithfully mirrors `create_optuna_objective`'s real sequence (`run_inner_solver` →
+`evaluate_complete_solution`, same lambda handling, same `NSGAIISampler(seed=MASTER_SEED)`) —
+called directly against the loaded module, not reimplemented — but written as a parallel
+inline copy (not a call to the production factory function itself) so that `U_final`/`Z_final`
+could additionally be captured per trial for the independent `mem_max` reading, which
+production's real `objective()` never exposes outward. **Module 4 (adaptive grid dispatch,
+Pareto extraction, archiving, §S5 stability) was not exercised at all** — in-memory Optuna
+storage, flat `n_trials=20` per cell (user-agreed as representative for this diagnostic pass,
+not production's `SCOUT_TRIALS=100`). Grid: C1–C6 × K∈{3,4}, T1 slice, 240 trials total,
+23.8 min wall time.
+
+**`collapse_pen` fired zero times across all 240 real search trials** — not merely rare, but
+never once, across the full lambda range Optuna is actually permitted to explore, on any
+config/K combination tested. Consequently the exploit pattern also never occurred (0/240),
+trivially — there was never a threshold-adjacent case to diverge on. Pooled correlation across
+the 220 converged trials: Pearson r=0.220 (p=0.0010), Spearman r=0.201 (p=0.0027) —
+statistically significant given the large n, but numerically weak, consistent with Tests 1–2's
+moderate-not-strong reading.
+
+**Conclusion for Problem 2, this round:** the original worry — a gameable `collapse_pen`
+distorting which hyperparameters look best on the Pareto front — has nowhere to operate in
+this regime, because `collapse_pen` essentially never becomes an active constraint for the
+real search to exploit in the first place. This is a scoped finding, not a general
+exoneration: toy corpus, K∈{3,4}, T1 slice only, this lambda range. At 22k articles, with
+different community sizes, the term could engage far more often — re-test at scale before
+trusting this conclusion there. A T2-slice replication of this same test was in progress at
+the time of this write-up (see note below).
+
+### Incidental finding: `C4/K=4` and `C2/K=4` show config-specific non-convergence at low
+`lambda_z_offdiag`, unrelated to Problem 2 but relevant to the 22k config-selection question
+
+Convergence rates under the real Optuna search (Test 4, T1) varied sharply at K=4:
+`C4/K=4` 9/20 (45%), `C2/K=4` 14/20 (70%), `C3/K=4` 17/20 (85%), `C1/K=4`/`C5/K=4`/`C6/K=4`
+all 20/20. Breaking down *which* `lambda_z_offdiag` values failed (re-analysis of the
+already-collected Test 4 records, no new fits): `C2/K=4`'s 6 failures and 10 of `C4/K=4`'s 11
+failures cluster at `lambda_z_offdiag`≤0.0031 — near the search floor, i.e. almost no
+cross-community-coupling regularisation. `C3/K=4`'s 3 failures are mid-range (0.08–0.29), a
+seemingly different mechanism. Critically, **the identical near-zero lambda draws** (same
+`NSGAIISampler` seed ⇒ same sequence across cells: 0.0001, 0.0002, 0.0004, …) converged
+without issue on `C1/K=4`, `C5/K=4`, `C6/K=4` — so this is not "low `lambda_z_offdiag` is
+generally unstable at K=4," it is `C2`/`C4` specifically struggling when cross-community
+coupling is left almost unconstrained at that K. A genuine, config-dependent fragility, not a
+pipeline bug or an epoch-ceiling artifact (confirmed not epoch-ceiling-driven only after the
+fact — the original Test 4 (T1) run did not capture per-trial `epochs_run`, a gap fixed in the
+T2 replication script but not backfilled here). Worth weighing directly against `C4` when
+deciding which configs to carry into the 22k-article run — this is now the second
+independent piece of evidence against `C4` (alongside its known single-anchor weakness,
+§4.15, though that is `C1`'s issue, not `C4`'s — these are separate, unrelated weaknesses in
+two different configs).
+
+### What this does and does not cover — do not over-generalise this section
+
+`collapse_pen` reads exactly one scalar summary of `Z_scaled` (`max_share`). This section
+establishes that model selection (Optuna's Pareto front) is not currently being distorted
+through that one channel, in this regime. It says **nothing** about whether `Z_scaled`'s raw
+diagonal/off-diagonal *values* — which is what §1 and this document's community-coupling
+interpretation actually depend on for the article — can be reshaped by the same class of
+training-dynamics-driven slack in ways that would mislead that direct reading, independent
+of whether any outer-loop penalty ever notices. That is a different, still-open question,
+closer to §18's territory (which tested a *different* mechanism — static rotational freedom
+within one fit — and found it narrow) than to this section's (training-dynamics-driven
+reshaping under optimizer pressure). Do not read this section as clearing `Z_scaled` for
+direct substantive interpretation; it only clears the specific model-selection risk Problem 2
+was originally scoped around.
+
+Diagnostic scripts: `diagnostic_scripts/collapse_pen_mass_vs_membership_check.py` (Test 2),
+`diagnostic_scripts/collapse_pen_exploitability_sweep.py` (Test 1),
+`diagnostic_scripts/collapse_pen_optuna_study.py` (Test 4, T1). Results in
+`diagnostic_results/collapse_pen_mass_vs_membership_check.json`,
+`diagnostic_results/collapse_pen_exploitability_sweep.json`,
+`diagnostic_results/collapse_pen_optuna_study.json`.
+
+**T2 replication (in progress, not yet included above):** `diagnostic_scripts/collapse_pen_optuna_study_t2.py`
+— identical design to Test 4, run against the T2 slice (36 articles, 4,158 total non-zero
+relational entries, vs. T1's 25/3,323 — CLAUDE.md §11) rather than T1, to check whether T1's
+small article count was itself a factor in `collapse_pen`'s near-total inertness. Also
+captures per-trial `epochs_run` (a gap in the T1 script, noted above). Was still running at
+the time this section was written; update this section with T2's results once available
+rather than opening a new one, per Occam's razor.
+
+---
+
