@@ -1319,8 +1319,12 @@ are toy-corpus-calibrated, same category as tickets 73/77/78/§16's caveats. Re-
 ## 18. §1's "any invertible W" claim is a bound, not a measured severity — near-separability
 check finds strong evidence the fitted model is not actually exposed
 
-**Status: Supported. Toy-corpus scope. Mechanism (why) not investigated — this measures
-whether, not why.**
+**Status: Supported, more strongly than originally reported. Toy-corpus scope. Mechanism
+(why) not investigated — this measures whether, not why. Audited and corrected after initial
+write-up: Tier 1's result table had two factual errors (now fixed, see the correction
+in-place), and Tier 2's original margins (0.5°–3.4°) were an artifact of a flawed monitoring
+mask — corrected re-run finds near-total pinning instead, which strengthens rather than
+weakens this section's conclusion. See in-place corrections below.**
 
 ### The gap in §1 as originally stated
 
@@ -1332,7 +1336,7 @@ does not preserve non-negativity. §1's "Established" status is correctly scoped
 it was never checked against whether the freedom is actually *reachable* by a real fitted
 solution here. This section is that check.
 
-### Method: near-separability (Tier 1 of a two-tier test; Tier 2 not yet run)
+### Method: near-separability (Tier 1 of a two-tier test; Tier 2 below)
 
 From the NMF identifiability literature (Donoho & Stodden 2003; Arora et al. 2012; a
 checkable special case of Huang, Sidiropoulos & Swami 2014's "sufficiently scattered"
@@ -1373,10 +1377,28 @@ cleanly assigned in nearly every cell with witness degree 60–80) — stronger 
 low-degree entity being pure by default, since a well-connected entity staying pure despite
 pressure from multiple relations is harder to achieve by coincidence.
 
-**Failures at the 0.85 bar** (7 of ~104 confounded-facet cells; none in the clean facets):
-`fringe_atom` is the recurring facet (`C1/K4`, `C3/K4`, `C4/K4`), 3 of these not explained by
-the Part B/low-degree confound. `C4/K4` did not converge (flag per `SESSION_PROTOCOL` rule
-4) — its failure should not be read as a genuine finding without a converged re-fit.
+**Correction (caught in a later audit pass, recorded here rather than silently fixed): the
+original text of this subsection stated the 0.85-bar failures were "7 of ~104
+confounded-facet cells; none in the clean facets" and named 3 recurring `fringe_atom` cells.
+Both claims were wrong** — verified directly against `near_separability_check.json`. The
+correct picture:
+
+**Failures at the 0.85 bar: 7 of 48 confounded-facet cells, AND 7 of 56 clean-facet cells
+(14 total, not 7).** The "clean" bucket (`SEMANTIC_CONFOUNDED_FACETS`'s complement in the
+script) is actually 5 facets, not 4 — it includes `parent_he` alongside `auth`/`affil`/
+`journ`/`art`, and **3 of the 7 clean-bucket failures are `parent_he`** (`C2/K3` 0.522,
+`C2/K4` 0.824, `C3/K4` 0.650). This matters substantively, not just as an arithmetic fix:
+`parent_he` is genuinely outside Part B's `target_facets` (whether to add it is CLAUDE.md
+ticket 66, "flagged, not decided") — so by this section's own logic, these are **real,
+unconfounded near-separability failures in a semantic facet**, previously missed. The
+remaining 4 clean-bucket failures are `auth` (`C2/K4`, `C6/K4`) and `journ` (`C4/K4` —
+non-converged, `C6/K3`).
+
+`fringe_atom` is the recurring confounded-bucket facet, but in **4** cells, not 3:
+`C1/K4`, `C3/K4`, `C4/K4`, and **`C5/K4`** (previously omitted). Of the 7 confounded-bucket
+failures, **4** — not 3 — are not fully explained by the Part B/low-degree confound:
+`C1/K4/fringe_atom`, `C3/K4/cousin_he`, `C3/K4/fringe_atom`, `C4/K4/fringe_atom` (the last
+non-converged, flag per `SESSION_PROTOCOL` rule 4 accordingly).
 
 ### What Tier 1 alone does and doesn't establish
 
@@ -1401,34 +1423,61 @@ pairwise generators span the full tangent space of the orthogonal group at the i
 sweeping all pairs covers every possible small rotation, not a subset of them. Coarse scan
 (0.5°–90°) then bisection per pair per direction; same grid as Tier 1 (6 configs × K∈{3,4}).
 
-**Methodological correction, kept here since it matters for reusing this method later.** The
-first run used an absolute tolerance (reject any monitored entry below −1e-4) and returned
-0.00° margin for all 54 pairs, uniformly — too clean to trust. Diagnosis: many entries sit at
-the model's own zero-floor (`clamp_(min=1e-7)`) next to a large entry in the same row: any
-nonzero rotation angle nudges the floor entry by roughly `angle × (the large entry's size)`,
-crossing −1e-4 at a vanishingly small angle regardless of whether real, meaningfully-supported
-structure is rotatable. The test was re-detecting "this model has structural zeros"
-(expected, uninteresting) rather than answering the intended question. **Fixed**: only
-monitor entries that carried meaningful mass *before* rotating (≥1% of that column's/
-relation's own max value, computed once from the un-rotated `U`/`Z`); entries below that are
-excluded from the feasibility check entirely. Re-run below is the corrected version; the
-original 0.00°-everywhere run is void and not used anywhere in this document.
+**Methodological history — two corrections, the second reversing the first's conclusion.**
+The very first run used an absolute tolerance (reject any monitored entry below −1e-4) and
+returned 0.00° margin for all 54 pairs, uniformly — flagged at the time as too clean to
+trust. Diagnosis then: many entries sit at the model's own zero-floor (`clamp_(min=1e-7)`)
+next to a large entry in the same row, so any nonzero rotation angle nudges the floor entry
+past −1e-4 at a vanishingly small angle regardless of whether real structure is rotatable.
+**Fix applied at the time**: only monitor entries carrying ≥1% of their column's/relation's
+own max value before rotating (`MEANINGFUL_FRAC=0.01`); everything below that threshold was
+excluded from the feasibility check. That produced the 0.5°–3.4°-margin result originally
+reported here.
 
-**Result:** all 54 community pairs, across every cell, have a real, non-zero, but **bounded**
-local margin — roughly 0.5°–3.4°, no pair pinned at 0° and no pair free out to the full 90°
-search range. Practical scale: `sin(3°) ≈ 0.05`, so even the loosest pairs found allow on the
-order of a few percent of mass to be locally redistributed between two communities before
-non-negativity breaks — not a wholesale relabeling-scale swap. Per-cell tightest-pair margin
-ranged `C5/K4` (0.55°, most constrained) to `C6/K4` (0.95°, least constrained); `C3/K4` and
-`C4/K4` did not converge and their numbers (0.60° and 0.65° respectively, within the same
-range as everything else) should be read with that caveat per `SESSION_PROTOCOL` rule 4.
+**A later audit pass found the `MEANINGFUL_FRAC` fix itself was flawed, in a way that
+invalidates the 0.5°–3.4° numbers.** Measured directly (`C6/K4`'s `auth` facet): the
+column-relative 1% mask monitored only **18.3%** of entries — averaged across the whole grid,
+78–84% of `U` was excluded from every cell's feasibility check. Critically, the excluded
+entries are not randomly distributed — they are disproportionately the near-zero entries in
+a near-separability witness's *other* communities, which is exactly what a blending rotation
+pushes negative first (that's the entire mechanism Tier 1 relies on). A concrete case
+confirmed this is not hypothetical: one witness row had `U_prob=0.071` in a non-primary
+community (`U_norm=0.00192`, a real, non-floor value, not clamp noise) — excluded from
+monitoring solely because it sat below 1% of *that column's* max. The relative mask was
+silently exempting the constraint-binding entries from the check whose margin it was supposed
+to measure.
 
-**Scope of what this establishes:** a **local** (first-order/infinitesimal) feasibility
-bound around the fitted solution — it characterizes the immediate neighborhood, not whether
-some large, distant rotation could loop back to a different globally-feasible point. Within
-that scope, it is a direct, constructive answer (stronger than Tier 1's indirect evidence):
-genuine local blending freedom exists everywhere tested, but it is small and bounded, not
-large or unbounded, anywhere in the grid.
+**Corrected re-run**: replaced the column-relative mask with an absolute one, calibrated
+directly against the model's own clamp floor rather than an arbitrary fraction. Measured the
+`U_norm` value distribution first rather than guessing a threshold: literal floor-clamped
+entries cluster tightly at ≈1.5e-7 (35% of all entries in the facet checked); a further 44%
+sit in `[1e-6, 1e-4)` — real, non-floor values. Set `FLOOR_EXCLUDE=1e-6` (monitors everything
+above the literal floor cluster) and tightened `TOL` from 1e-4 to 1e-8 accordingly (the old
+1e-4 tolerance was up to 100× larger than many of the now-monitored entries themselves, and
+would have let them go substantially negative undetected).
+
+**Result: 53 of 54 pairs are pinned below 0.05°, most at exactly 0.000° in at least one
+direction** (max margin found anywhere in the grid: 0.57°, `C2/K4` communities `(1,3)`) —
+not the "0.5°–3.4°, bounded but real" freedom previously reported. Checked this isn't a
+numerical-precision artifact before trusting it: only 3/54 pairs are pinned at exactly 0.000°
+in *both* directions; 33/54 have neither direction at exact zero, and 18/54 show real
+directional asymmetry between `+margin` and `−margin` — the pattern is structured, consistent
+with genuine constraint-binding, not a uniform floating-point collapse. **The 0.5°–3.4°
+figures previously in this document are superseded and should not be used** — they measured
+feasibility of a masked subproblem that excluded the entries that actually determine
+feasibility, not feasibility of the real system.
+
+**Scope of what this establishes:** a **local** (first-order/infinitesimal) feasibility bound
+around the fitted solution — it characterizes the immediate neighborhood, not whether some
+large, distant rotation could loop back to a different globally-feasible point (see the
+distant-rotation extension below, itself now in need of a corrected re-run under the same
+absolute-floor mask before its own numbers should be fully trusted — flagged, not yet done).
+Within that scope, the corrected finding **strengthens, not weakens**, §18's practical
+conclusion: genuine local blending freedom is not merely small, it is essentially absent
+almost everywhere tested — a materially cleaner result than "narrow but real," and one that
+now agrees with, rather than contradicts, the very first (pre-`MEANINGFUL_FRAC`) run's
+0.00°-everywhere result, which in retrospect was closer to correct than the "fix" that
+superseded it.
 
 **Distant-rotation extension (same method, answers the "harder, different question" above —
 folded in here rather than filed as a separate finding, since it's a direct follow-up on the
@@ -1462,28 +1511,48 @@ reachable only by a combined move. And 0.05° resolution, while 36× finer than 
 is still a discrete grid — an island narrower than that step could in principle still be
 missed, though something that narrow would carry little practical weight even if found.
 
+**Caveat added on the later audit pass: this extension inherits the same flawed
+`MEANINGFUL_FRAC` mask the bisection search above has since been corrected for, and its
+own cross-check ("recovered cage widths… independently match the bisection-based margins")
+validated against the now-superseded 0.5°–3.4° numbers, not the corrected ≈0° ones.** The
+"0 islands" conclusion is not necessarily wrong — a stricter, more-monitored feasibility
+check can only shrink or preserve a feasible region, not create a new disconnected one out of
+nothing, so this result plausibly survives the fix — but it has not been re-run under the
+corrected absolute-floor mask, and should be before being relied on with the same confidence
+as the corrected bisection result above.
+
 Diagnostic script: `diagnostic_scripts/rotation_island_search.py`, results in
-`diagnostic_results/rotation_island_search.json`.
+`diagnostic_results/rotation_island_search.json`. **Not yet re-run under the corrected mask —
+see caveat above.**
 
 ### Practical implication (Tier 1 + Tier 2 combined)
 
 On this corpus, at production settings (`lambda_l1=0.0`, `lambda_z_offdiag=0.05`), the
-combined evidence is that Layer 1b's blending freedom is real but narrow — not the
-unconstrained "any invertible `W`" freedom the raw linear-algebra identity permits, and
-nowhere near large enough to plausibly explain a full community swap or make the model's
-substantive outputs (`U_prob` community membership, `Z`-based within/between coupling) for
-one specific reported/selected fit untrustworthy at the level of interpretation this project
-needs. The ordinary caveat still applies regardless: cross-fit/cross-seed comparisons still
-require relabeling correction (§14/§16/§17). `fringe_atom` (Tier 1's recurring failure) is
-worth extra scrutiny before relying on its community assignments across different fits.
-Toy-corpus-calibrated like every other finding in this document — re-derive at 22k-article
-scale before trusting; a denser corpus could plausibly tighten or loosen these margins in
-either direction.
+combined evidence is that Layer 1b's blending freedom is **essentially absent locally, not
+merely narrow** — not the unconstrained "any invertible `W`" freedom the raw linear-algebra
+identity permits, and this is now a cleaner, stronger conclusion than the "narrow but real"
+framing this section originally reported (see the corrected Tier 2 result above — the earlier
+0.5°–3.4° margins were an artifact of a flawed monitoring mask, not a real feasibility bound).
+The model's substantive outputs (`U_prob` community membership, `Z`-based within/between
+coupling) for one specific reported/selected fit are, if anything, *more* trustworthy against
+this specific failure mode than previously stated. The ordinary caveat still applies
+regardless: cross-fit/cross-seed comparisons still require relabeling correction
+(§14/§16/§17) — that is a different problem (§19), not addressed by this section either way.
+`fringe_atom` (Tier 1's recurring failure, now confirmed as 4 cells, not 3 — see the Tier 1
+correction above) is worth extra scrutiny before relying on its community assignments across
+different fits, and the previously-overlooked `parent_he` clean-bucket failures deserve the
+same caution despite sitting outside Part B's confound. Toy-corpus-calibrated like every other
+finding in this document — re-derive at 22k-article scale before trusting; a denser corpus
+could plausibly tighten or loosen these margins in either direction.
 
-Diagnostic scripts: `diagnostic_scripts/near_separability_check.py` and
-`diagnostic_scripts/rotation_feasibility_search.py`; results in
-`diagnostic_results/near_separability_check.json` and
-`diagnostic_results/rotation_feasibility_search.json`.
+Diagnostic scripts: `diagnostic_scripts/near_separability_check.py`,
+`diagnostic_scripts/rotation_feasibility_search.py` (**superseded methodology — see the
+corrected Tier 2 result above; kept on disk for the historical record, not for its numbers**),
+and `diagnostic_scripts/rotation_feasibility_search_v2.py` (the corrected, absolute-floor-mask
+version — authoritative for Tier 2's margins). Results in
+`diagnostic_results/near_separability_check.json`,
+`diagnostic_results/rotation_feasibility_search.json` (superseded), and
+`diagnostic_results/rotation_feasibility_search_v2.json` (authoritative).
 
 ---
 
@@ -1549,14 +1618,26 @@ reproducibility is refuted, not confirmed — if anything, the weaker method app
 *overstated* stability, having fewer ways to detect a genuine relabeling than the real
 9-facet, two-track method does. **A community's domain-skew identity is not a robust,
 reproducible property across independent re-fits of this corpus, even measured by the
-pipeline's own best available tool for the job.** This sharpens, rather than softens, the
-concern originally raised about interpreting domain-skew labels as substantive
-("this community is coauthorship-driven") across anything other than one specific reported
-fit — consistent with, and now measured for, the caveat already stated throughout this
-document that cross-fit/cross-seed comparisons require relabeling correction (§14/§16/§17).
-Toy-corpus-calibrated like everything else here — re-derive at 22k-article scale before
-trusting; a denser corpus, with more entities per community, could plausibly change this in
-either direction.
+pipeline's own best available tool for the job.**
+
+**Calibration against chance, added on a later audit pass (worth stating, since the raw 38%/
+40% figures alone don't say how far above "random" that is):** "stable" requires all 5 seeds
+to share the reference seed's sign — under a fair-coin null with no real signal at all, the
+probability of the 4 non-reference seeds all matching by chance is `(1/2)⁴ = 6.25%`. The
+observed 38–40% is **roughly 6× the chance rate**, so domain-skew identity is not
+*non-reproducible* in the sense of carrying no signal — there is real, detectable
+consistency, just far short of reliable. This doesn't overturn the section's conclusion (both
+readings agree the underlying property is not robust enough to lean on across fits), but it
+sharpens how the headline number should be read: "far above chance, far below reliable," not
+"close to random."
+
+This sharpens, rather than softens, the concern originally raised about interpreting
+domain-skew labels as substantive ("this community is coauthorship-driven") across anything
+other than one specific reported fit — consistent with, and now measured for, the caveat
+already stated throughout this document that cross-fit/cross-seed comparisons require
+relabeling correction (§14/§16/§17). Toy-corpus-calibrated like everything else here —
+re-derive at 22k-article scale before trusting; a denser corpus, with more entities per
+community, could plausibly change this in either direction.
 
 Diagnostic script: `diagnostic_scripts/domain_skew_s5_alignment_reproducibility.py` (reuses
 the new `diagnostic_blocks.s5_dual_track_alignment`, `BLOCKS_VERSION` 1.8.0); results in
@@ -1754,8 +1835,9 @@ already closes the `U_scales`-inflation/`Z_pos`-shrinkage loophole by constructi
 above two tests show little live pressure for that mechanism to matter in practice regardless.
 Low expected value for the effort; skipped by agreement.
 
-### Test 4 — a real Optuna study (the decisive one): `collapse_pen` never fires across the
-actual search space
+### Test 4 — a real Optuna study (decisive for the tuned-range question, not fully for the
+search-process question — see caveat below): `collapse_pen` never fires across the actual
+search space
 
 Tests 1–2 only show the term is inert in fits *we* chose. This test let production's own
 `NSGAIISampler` search `lambda_z_offdiag ~ log-uniform[1e-4, 1.0]` (the real search space,
@@ -1774,6 +1856,25 @@ Pareto extraction, archiving, §S5 stability) was not exercised at all** — in-
 storage, flat `n_trials=20` per cell (user-agreed as representative for this diagnostic pass,
 not production's `SCOUT_TRIALS=100`). Grid: C1–C6 × K∈{3,4}, T1 slice, 240 trials total,
 23.8 min wall time.
+
+**Two limits on how "decisive" this test actually is for the search-process half of the
+question, caught on a later audit pass and worth stating plainly rather than dropping:**
+1. `NSGAIISampler`'s default `population_size` is **50** (verified against the installed
+   `optuna==4.9.0`); at `n_trials=20` per cell, the run never completes even one generation.
+   NSGA-II's selection/crossover machinery — the actual "search process" the reward-hacking
+   literature distinction is about — never activates; every trial is effectively drawn from
+   the sampler's initial random-population phase. This test shows the proxy is not hackable
+   *even under pure random search* across the tuned range — a real and useful result — but it
+   does not show whether NSGA-II's optimization pressure specifically would (or wouldn't)
+   seek out and exploit a gap, which is the stronger claim "the decisive one" implies.
+2. Because a fresh `NSGAIISampler(seed=MASTER_SEED)` is constructed once per cell, all 12
+   cells draw the **identical 20 `lambda_z_offdiag` values** (confirmed directly from the
+   stored records). The 240 trials are 20 distinct lambda draws × 12 cells, not 240
+   independent samples — the pooled correlation's reported p-values below (and in the T2
+   replication) should be read as optimistic on that account, though the point estimates
+   themselves are unaffected. This pairing is actually useful for the T1-vs-T2 comparison
+   specifically (identical lambdas, different data — a clean paired design), just not for
+   treating n=220 as 220 independent observations.
 
 **`collapse_pen` fired zero times across all 240 real search trials** — not merely rare, but
 never once, across the full lambda range Optuna is actually permitted to explore, on any
@@ -1826,6 +1927,29 @@ toward "looks balanced" via the community-resizing route rather than genuine
 de-concentration. Narrow — one config, 4/240 trials — but real, and the first time in this
 entire investigation (T1 sweep, T1 mass-vs-membership check, T1 Optuna study) that the exploit
 pattern actually appeared under real search pressure rather than being absent.
+
+**Stronger than "4/240" alone suggests, checked on a later audit pass:** each cell drew 20
+trials from only 19 *distinct* `lambda_z_offdiag` values (one repeat; see the pseudo-
+replication caveat above), and the 4 flagged trials sit at exactly the **4 highest** of those
+19 draws in `C5/K=3` — verified directly (`[0.2137, 0.2915, 0.6351, 0.7579]`, the top 4 of the
+sorted set, exact match to the exploit-flagged lambdas) — i.e. this is **4 of 4** high-lambda
+draws showing the pattern, not 4 scattered flukes among 240 trials. That makes the effect look
+deterministic within the sampled range, not incidental — a materially stronger claim than the
+raw count conveys. The flip side, in the same direction as caveat #2 above: only 4 of the 19
+draws exceed `lambda_z_offdiag=0.2`, so the high-lambda regime itself is thinly sampled — this
+strengthens the *pattern* (it's not noise) without yet establishing how far into the
+high-lambda range it extends.
+
+**Naming caveat, also worth stating explicitly:** "exploit pattern" implies a shared target —
+that `mass_max` and `mem_max` are two readings of the same underlying quantity, one gamed and
+one honest. They are not: `mass_max` is a relation-mass-weighted, permutation-corrected share;
+`mem_max` is an unweighted, equal-per-facet entity fraction (§20's own "Method" section above).
+Some divergence between them is expected by construction, not only under gaming pressure —
+there is no tested baseline for how much they'd diverge on a fit with *no* lambda-driven
+distortion at all. The pattern above (concentrated at the 4 highest lambda draws, absent
+elsewhere) is still the right signal to flag, but "divergence pattern, concentrated at high
+lambda" is a more precise description than "exploit pattern" until a no-pressure baseline is
+established.
 
 Pooled correlation (210 converged trials): Pearson r=0.331 (p<0.0001), Spearman r=0.525
 (p<0.0001) — both higher than T1's (Pearson 0.220, Spearman 0.201), so `mass_max`/`mem_max`
