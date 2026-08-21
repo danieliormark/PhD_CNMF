@@ -1872,31 +1872,57 @@ uniform one. These are unrelated to `C1`'s separately-known single-anchor weakne
 three different configs, three different mechanisms, not one story.
 
 ### Follow-up: does `Z_scaled`'s FULL diagonal/off-diagonal pattern (not just `collapse_pen`'s
-one scalar) track independent structure? Partially — and worse for off-diagonal specifically
+one scalar) track independent structure? Yes, moderately — worse for off-diagonal, and the
+decline under `lambda_z_offdiag` pressure is confirmed real, not noise
 
 `collapse_pen` reads exactly one scalar summary of `Z_scaled` (`max_share`). Everything above
 establishes that model selection is (T1) or is not (T2/K=3) currently being distorted through
 that one channel — it says nothing about whether `Z_scaled`'s raw diagonal/off-diagonal
 *values*, which is what §1 and this document's community-coupling interpretation actually
 depend on for the article, can be reshaped by the same training-dynamics-driven slack,
-independent of whether any outer-loop penalty ever notices. Built a direct test for this,
-reusing the 48 already-cached T1 fits from Test 1's sweep (no new training):
+independent of whether any outer-loop penalty ever notices.
 
-An independent, non-`Z_scaled`-derived reading of "how coupled are community k1 and k2 in
-relation r" — `data_reading[k1,k2] = U_prob_f1[:,k1]ᵀ @ X_r @ U_prob_f2[:,k2]`, i.e. how much
-of the relation's *real raw edges* connect an entity plausibly in k1 to one plausibly in k2,
-soft-weighted by membership, never touching `Z` — compared against `Z_scaled`'s own full
-`|Z[k1,k2]|`-based reading, both normalised to sum to 1 over the full K×K grid (diagonal AND
-off-diagonal cells, not just the max).
+**Method:** an independent, non-`Z_scaled`-derived reading of "how coupled are community k1
+and k2 in relation r" — `data_reading[k1,k2] = U_prob_f1[:,k1]ᵀ @ X_r @ U_prob_f2[:,k2]`, i.e.
+how much of the relation's *real raw edges* connect an entity plausibly in k1 to one plausibly
+in k2, soft-weighted by membership, never touching `Z` — compared against `Z_scaled`'s own
+full K×K reading, both normalised to sum to 1 over the grid (diagonal AND off-diagonal, not
+just the max).
 
-**Pooled (4,364 K×K cells across every relation/config/K/lambda): Pearson r=0.728, Spearman
-r=0.663** — substantially stronger than the max_share-only comparison (community-level Pearson
-topped out at 0.42–0.51 in Test 2). The full pattern does meaningfully track an independent,
-data-grounded reading — reassuring on its own.
+**A methodological correction happened mid-investigation, worth recording in full since it
+overturned the first instinct rather than just refining a number.** The first version of this
+test read `Z_scaled` as raw `|Z[k1,k2]|` shares, with no Hungarian permutation correction —
+flagged afterward as a possible flaw, since FINDINGS §14 documents that a relation's raw
+diagonal can be legitimately scrambled (community index *i* on one facet paired with a
+*different* index on the other) even when real within-community coupling is intact. The fix
+seemed obvious: extend production's own permutation-correction machinery
+(`_hungarian_relabel_relation`) from the diagonal-only reading `_relation_community_share`
+already uses to the full K×K matrix (`diagnostic_blocks.relation_share_matrix`, self-checked
+bit-for-bit against production's diagonal, 0.00e+00 diff).
 
-**But split by diagonal vs. off-diagonal, a real asymmetry emerges:**
-- Diagonal (within-community, n=1,232): Pearson r=0.608, **Spearman r=0.660**
-- Off-diagonal (between-community, n=3,132): Pearson r=0.621, **Spearman r=0.422**
+**Applying that "fix" made every correlation weaker, not stronger** (pooled Spearman
+0.663→0.599; diagonal 0.660→0.562; off-diagonal 0.422→0.343). Working through *why* revealed
+the fix was based on a wrong diagnosis: `Z[k1,k2]` is, by the literal construction of the
+tri-factorisation (`U1 @ Z @ U2ᵀ`), *already* indexed by `U_prob_f1`'s own column k1 and
+`U_prob_f2`'s own column k2 — there is no representational ambiguity to correct for in a
+comparison against `data_share`, which uses that exact same native indexing. What
+`_hungarian_relabel_relation` actually corrects is a *different* problem: two facets'
+community *index numbers* can be arbitrarily offset from each other, which matters for
+`collapse_pen`'s aggregate, permutation-invariant within/between-mass accounting (where "these
+two clusters are really the same community, just numbered differently" should count as
+within), but applying that same relabelling here **breaks** alignment with `data_share`'s
+native, unpermuted indexing rather than fixing it. The tool is correct for its designed
+purpose (§4.20) and wrong for this comparison. **Conclusion: the original raw (uncorrected)
+method was the methodologically appropriate one — reverted to it as the primary reading.**
+Recorded here in full, not silently dropped, per this project's standing practice for
+self-corrections (§9's spirit, §18/§19's precedent this session).
+
+**Primary result (raw method, confirmed consistent across two independent runs on the same 48
+cached T1 fits): pooled Pearson r=0.733, Spearman r=0.660** (n=4,588) — meaningfully stronger
+than the max_share-only comparison (community-level Pearson topped out at 0.42–0.51 in Test
+2). Split by diagonal vs. off-diagonal:
+- Diagonal (within-community, n=1,288): Pearson r=0.613, **Spearman r=0.656**
+- Off-diagonal (between-community, n=3,300): Pearson r=0.630, **Spearman r=0.416**
 
 Spearman (rank correlation, less dominated by a few large values) shows off-diagonal terms
 tracking the independent reading noticeably worse than diagonal terms. **Practically:
@@ -1904,38 +1930,50 @@ within-community coupling readings from `Z_scaled` are more trustworthy than bet
 coupling readings** — worth an explicit caveat wherever the article leans on `Z`'s off-diagonal
 specifically to claim a between-community relationship.
 
-**Under increasing `lambda_z_offdiag` pressure (0.0→2.0), correspondence degrades mildly but
-consistently:** Spearman falls 0.698→0.675→0.645→0.606 as pressure rises (Pearson is flatter:
-0.762→0.730→0.746→0.718). Not dramatic — correlation stays substantial throughout — but a
-real, monotonic trend in the direction the training-dynamics-slack mechanism predicts, and
-consistent with the C5/K=3 exploit-pattern cases above appearing specifically at high lambda.
+**Under increasing `lambda_z_offdiag` pressure (0.0→2.0), correspondence declines mildly but
+consistently:** Spearman falls 0.693→0.677→0.638→0.595 (Pearson: 0.765→0.737→0.747→0.723) — a
+decline of 0.098.
 
-**Caveat on the pooled r=0.73:** pooling all K×K cells means many true near-zero off-diagonal
-entries in both readings trivially agree they're near zero, inflating the pooled figure
-somewhat beyond the real signal alone — the diagonal/off-diagonal split above is the more
-trustworthy read for that reason. **This test used T1 only** (reusing Test 1's cached fits);
-not yet replicated on T2, where §20's other findings show `collapse_pen`-relevant dynamics
-differ materially — a natural next step if this question needs firming up further.
+**Calibration check (the piece that turns "a trend" into "a confirmed effect"):** is that
+decline bigger than ordinary fit-to-fit noise, or could two random re-fits at the *same*
+lambda show a swing that large anyway? Tested directly by re-running the identical
+correlation across 5 independent seeds (1000/2000/3000/4000/5000, reusing FINDINGS §19's seed
+list) at **fixed** production `lambda_z_offdiag=0.05`, same C1–C6 × K∈{3,4} grid (60 fits, one
+non-converged and excluded — `C3/K=4`/seed=2000, consistent with §20's convergence findings
+above). Seed-to-seed Spearman spread at fixed lambda: **0.035** (range [0.682, 0.717]).
+**The lambda-driven decline (0.098) is 2.8× the seed-to-seed baseline spread (0.035).** The
+erosion under `lambda_z_offdiag` pressure is a real, lambda-driven effect, not something
+ordinary seed variability would produce on its own.
 
-**Net effect on the open question:** partially, not fully, addressed. `Z_scaled`'s full
-diagonal/off-diagonal pattern is meaningfully grounded in real structure overall, more so than
-`collapse_pen`'s single scalar suggested — but the off-diagonal (between-community) values
-specifically are the weaker link, and do show mild erosion under `lambda_z_offdiag` pressure,
-which is the training-dynamics-driven mechanism this test was built to check for. Still
-distinct from §18's territory (which tested a *different* mechanism — static rotational
-freedom within one fit — and found it narrow); this section's mechanism and §18's are related
-but not the same question, and neither fully substitutes for the other.
+**Net effect on the open question:** `Z_scaled`'s full diagonal/off-diagonal pattern is
+meaningfully grounded in real structure overall — more so than `collapse_pen`'s single scalar
+suggested — but the off-diagonal (between-community) values specifically are the weaker link,
+and their correspondence to independent structure erodes under `lambda_z_offdiag` pressure by
+a margin now confirmed to exceed ordinary noise. This is exactly the training-dynamics-driven
+mechanism this test was built to check for, now with a calibrated baseline behind it rather
+than an uncalibrated trend. Still distinct from §18's territory (which tested a *different*
+mechanism — static rotational freedom within one fit — and found it narrow); this section's
+mechanism and §18's are related but not the same question, and neither fully substitutes for
+the other. **This test used T1 only**; not yet replicated on T2, where §20's other findings
+show `collapse_pen`-relevant dynamics differ materially — a natural next step if firmer
+grounding is needed before leaning on this in the article.
 
 Diagnostic scripts: `diagnostic_scripts/collapse_pen_mass_vs_membership_check.py` (Test 2),
 `diagnostic_scripts/collapse_pen_exploitability_sweep.py` (Test 1),
 `diagnostic_scripts/collapse_pen_optuna_study.py` (Test 4, T1),
 `diagnostic_scripts/collapse_pen_optuna_study_t2.py` (Test 4, T2 replication),
-`diagnostic_scripts/z_scaled_diagonal_offdiagonal_gaming_check.py` (diagonal/off-diagonal
-follow-up, T1). Results in `diagnostic_results/collapse_pen_mass_vs_membership_check.json`,
+`diagnostic_scripts/z_scaled_diagonal_offdiagonal_gaming_check.py` (diagonal/off-diagonal,
+first pass, raw method, T1), `diagnostic_scripts/z_scaled_offdiag_calibration_test.py`
+(permutation-corrected re-run + seed-baseline, corrected method),
+`diagnostic_scripts/z_scaled_offdiag_calibration_test_raw.py` (seed-baseline re-run on the
+raw method, the primary reading). Results in
+`diagnostic_results/collapse_pen_mass_vs_membership_check.json`,
 `diagnostic_results/collapse_pen_exploitability_sweep.json`,
 `diagnostic_results/collapse_pen_optuna_study.json`,
 `diagnostic_results/collapse_pen_optuna_study_t2.json`,
-`diagnostic_results/z_scaled_diagonal_offdiagonal_gaming_check.json`.
+`diagnostic_results/z_scaled_diagonal_offdiagonal_gaming_check.json`,
+`diagnostic_results/z_scaled_offdiag_calibration_test.json`,
+`diagnostic_results/z_scaled_offdiag_calibration_test_raw.json`.
 
 ---
 
