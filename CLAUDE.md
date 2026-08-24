@@ -810,6 +810,58 @@ distance.
 identifies live-vs-padded entities per slice; any T1↔T2 alignment or comparison must restrict
 to entities live in *both* slices, not just live in one.
 
+### Model-quality evaluation for the main (22k-article) corpus
+
+Currently the only model-quality signals are `math_loss` (reconstruction fit) and the three
+`sociological_penalty` terms (`collapse_pen`, `coherence_pen`, `semantic_pen` — reality
+checks the model is penalised against, Module 3). Both are already in use; neither tests
+whether the discovered structure *generalises* or is *repeatable* across runs, which are
+different questions from "does it fit" or "does it pass the reality checks." Proposed for
+the full corpus, not the toy corpus — diagnostic-only, no production wiring implied by
+listing it here:
+
+1. **Held-out link prediction / cross-validation.** Mask a subset of observed (nonzero)
+   entries per relation, fit on the rest, evaluate reconstruction on what was held out.
+   Standard in the matrix-factorisation/recommender-systems literature; the only measure of
+   the three considered that tests generalisation rather than in-sample fit. **Caveat to
+   resolve before implementing, not after:** naive uniform-fraction masking is unsafe on
+   sparse relations — `M_Parent_Art`'s 63 non-zeros (T1, §11) is the concrete toy-corpus
+   example of a relation too sparse to mask without risking destabilising the fit entirely.
+   Masking design must be relation-aware (skip or use a much smaller fraction on sparse
+   relations) rather than a blanket k-fold. Re-check relation-level sparsity at 22k-article
+   scale before fixing a masking fraction — density may differ substantially from the toy
+   corpus's.
+
+2. **Stability / consensus across seeds (cophenetic correlation or a simpler pairwise
+   co-membership agreement).** Standard in the NMF-for-clustering literature (Brunet et al.
+   2004 popularised cophenetic correlation specifically for NMF rank/K selection) — refit the
+   same (config, K) cell across multiple seeds and measure how consistently entities get
+   assigned to the same community, rather than how well any single fit reconstructs the data.
+   Tests a different question than either loss or the reality checks: whether the *same*
+   structure is found repeatably, not just a well-fitting one. Directly buildable with
+   existing diagnostic tooling (`fit_or_load(..., seed=...)` already supports this) — no new
+   fitting machinery required, only the consensus/agreement computation on top of it. This is
+   also the belated implementation of "Test c: co-membership consensus," named early in this
+   project's Problem-2 diagnostic agenda and never built.
+
+**Considered and rejected: an R²/explained-variance analog.** Since every relation is already
+Frobenius-normalised to `‖X‖²=1` (§4.2), a per-relation "fraction of variance explained"
+number is almost free to compute (`relation_recon`, already computed per-relation inside
+`run_inner_solver` before being summed into pooled `math_loss` — not currently exposed
+per-relation, but derivable diagnostically without touching production). Rejected as a
+*model-quality* metric (as opposed to a harmless relabelling) for three reasons: (a) no
+K-adjustment — raw reconstruction loss decreases monotonically with K "for capacity reasons
+alone" (§4.6), which is exactly why K-comparison already goes through hypervolume rather than
+raw loss; an R² number would silently reintroduce that trap if ever used across K without the
+same guard. (b) No calibrated baseline exists for what residual level counts as "good" on
+sparse (~98% zero) binary relational data under a non-negative rank-K constraint — importing
+continuous-regression R² intuitions (0.3 "decent," 0.7 "strong") would likely misread a
+reasonable low-rank fit as a poor one. (c) It adds no information beyond what `math_loss`
+already provides — it is a rescaling, not a new signal, unlike (1) and (2) above.
+
+**Status: proposal only, not scheduled, not built.** No code exists for either (1) or (2).
+Revisit when model-quality evaluation for the 22k-article run is actually being planned.
+
 ---
 
 ## 11. chunk12 Facts (upstream data generator)

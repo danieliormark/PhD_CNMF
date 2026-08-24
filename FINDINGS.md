@@ -1470,9 +1470,9 @@ feasibility, not feasibility of the real system.
 **Scope of what this establishes:** a **local** (first-order/infinitesimal) feasibility bound
 around the fitted solution — it characterizes the immediate neighborhood, not whether some
 large, distant rotation could loop back to a different globally-feasible point (see the
-distant-rotation extension below, itself now in need of a corrected re-run under the same
-absolute-floor mask before its own numbers should be fully trusted — flagged, not yet done).
-Within that scope, the corrected finding **strengthens, not weakens**, §18's practical
+distant-rotation extension below — re-run under the same corrected mask, confirming no such
+point exists anywhere tested). Within that scope, the corrected finding **strengthens, not
+weakens**, §18's practical
 conclusion: genuine local blending freedom is not merely small, it is essentially absent
 almost everywhere tested — a materially cleaner result than "narrow but real," and one that
 now agrees with, rather than contradicts, the very first (pre-`MEANINGFUL_FRAC`) run's
@@ -1511,19 +1511,31 @@ reachable only by a combined move. And 0.05° resolution, while 36× finer than 
 is still a discrete grid — an island narrower than that step could in principle still be
 missed, though something that narrow would carry little practical weight even if found.
 
-**Caveat added on the later audit pass: this extension inherits the same flawed
-`MEANINGFUL_FRAC` mask the bisection search above has since been corrected for, and its
-own cross-check ("recovered cage widths… independently match the bisection-based margins")
-validated against the now-superseded 0.5°–3.4° numbers, not the corrected ≈0° ones.** The
-"0 islands" conclusion is not necessarily wrong — a stricter, more-monitored feasibility
-check can only shrink or preserve a feasible region, not create a new disconnected one out of
-nothing, so this result plausibly survives the fix — but it has not been re-run under the
-corrected absolute-floor mask, and should be before being relied on with the same confidence
-as the corrected bisection result above.
+**Caveat raised on the audit pass, now resolved by a corrected re-run:** this extension
+originally inherited the same flawed `MEANINGFUL_FRAC` mask the bisection search above has
+since been corrected for, and its own cross-check ("recovered cage widths… independently
+match the bisection-based margins") had only been validated against the now-superseded
+0.5°–3.4° numbers, not the corrected ≈0° ones. The caveat predicted the "0 islands" verdict
+would plausibly survive the fix anyway, since a stricter, more-monitored feasibility check can
+only shrink or preserve a feasible region, not create a new disconnected one out of nothing.
 
-Diagnostic script: `diagnostic_scripts/rotation_island_search.py`, results in
-`diagnostic_results/rotation_island_search.json`. **Not yet re-run under the corrected mask —
-see caveat above.**
+**Re-run under the identical corrected mask (`FLOOR_EXCLUDE=1e-6`, `TOL=1e-8`) confirms the
+prediction.** Same design otherwise — 0.05°-step sweep across the full ±90° range, all 54
+pairs, all 12 cells. **Result: 0 of 54 pairs show more than one feasible region — every pair
+has exactly one contiguous feasible run.** No distant, loss-invisible alternate rotation
+exists anywhere in the tested grid, now checked under the same monitoring standard as the
+local test above. The run boundaries are, as expected, tighter than the original (superseded)
+run reported — mostly within a few hundredths to ~0.15° of zero on the open side, several
+pinned at machine precision on both sides — consistent with, and a more precise version of,
+the corrected bisection margins above. Scope limits from the original design are unchanged:
+only single-pair rotations were swept (a joint multi-pair rotation was not searched), and
+0.05° remains a discrete grid resolution.
+
+Diagnostic scripts: `diagnostic_scripts/rotation_island_search.py` (**superseded methodology
+— kept on disk for the historical record, not for its numbers**) and
+`diagnostic_scripts/rotation_island_search_v2.py` (the corrected, absolute-floor-mask
+version — authoritative). Results in `diagnostic_results/rotation_island_search.json`
+(superseded) and `diagnostic_results/rotation_island_search_v2.json` (authoritative).
 
 ### Practical implication (Tier 1 + Tier 2 combined)
 
@@ -1533,6 +1545,10 @@ merely narrow** — not the unconstrained "any invertible `W`" freedom the raw l
 identity permits, and this is now a cleaner, stronger conclusion than the "narrow but real"
 framing this section originally reported (see the corrected Tier 2 result above — the earlier
 0.5°–3.4° margins were an artifact of a flawed monitoring mask, not a real feasibility bound).
+The distant-rotation extension, re-run under the same corrected mask, closes the remaining
+gap in this conclusion: the absence of freedom is not merely a property of the small local
+window checked by the bisection search — no disconnected, loss-invisible alternate rotation
+was found anywhere in the full ±90° range either, across all 54 pairs.
 The model's substantive outputs (`U_prob` community membership, `Z`-based within/between
 coupling) for one specific reported/selected fit are, if anything, *more* trustworthy against
 this specific failure mode than previously stated. The ordinary caveat still applies
