@@ -93,6 +93,20 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
    current one. Surface it, let the user decide whether it becomes the next
    session's subject.
 
+10. **Define new terms/entities at first use; mind Occam's razor.** Any process
+    noun introduced into a plan or explanation that isn't already standard in
+    this codebase or the literature (e.g. "gate", "damping" as informal slang,
+    a named phase or stage) must be defined in one plain sentence the first
+    time it's used — not left for the reader to infer from context. Before
+    proposing a new mechanism, parameter, or pipeline stage, check whether an
+    existing one already does the job (ticket 84's design pass found this
+    twice: the §9 justification and the `S_Art_Journ` "low risk" claim both
+    turned out to name work an existing mechanism already did, or didn't do,
+    contrary to the initial framing). Prefer the smaller addition — reusing an
+    existing formula/function over inventing a new one, a config flag over a
+    new file, no new tunable over a tuned one — unless the simpler option is
+    checked and found genuinely insufficient, not just assumed to be.
+
 ---
 
 ## D. Persistence
