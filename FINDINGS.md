@@ -2290,3 +2290,248 @@ raw method, the primary reading). Results in
 
 ---
 
+## 21. Domain-balance noise floor (ticket 82, `TOL` decided), and evidence for extending
+chunk12's relation weighting (ticket 84, not started)
+
+**Status: `TOL` (D3) decided at `0.15` for the toy corpus, informed by a genuine measured
+noise floor, not a guess. A separate, larger finding fell out of measuring that floor: the
+5 currently-unweighted "grammar" relations in chunk12 show degree concentration comparable
+to or worse than the one relation (`S_Art_Auth`) that already got hub-damping for exactly
+this reason — proposed as ticket 84, design not started.**
+
+### D2's entity-weighted spread inflation, made exact (not just observed)
+
+FINDINGS §13's "Update" subsection measured that `dev_k`'s spread grows substantially under
+entity weighting (mean `dev_k` ≈0.08 equal-weighted → ≈0.13 entity-weighted) and flagged that
+part of this might be a mechanical consequence of `auth` dominating the social-domain
+average, not "more real imbalance." That mechanism is now derived exactly, not just
+suspected.
+
+`soc_k = Σ_f w_f · p_f[k]`, `Σw_f = 1`. Model each facet's contribution to `soc_k` as a
+shared community-level signal plus an idiosyncratic per-facet deviation, roughly uncorrelated
+across facets with comparable variance. The idiosyncratic-noise contribution to `Var(soc_k)`
+is then `σ_e² · Σ_f w_f²` — and `Σ_f w_f²` (the Herfindahl concentration index of the weight
+vector; `1/Σw_f²` is Kish's "effective sample size" in survey statistics) is minimized by
+equal weights and grows as weight concentrates on one facet, a pure convexity fact with no
+free parameters:
+
+| | equal `Σw²` (`n_eff`) | entity `Σw²` (`n_eff`) | predicted SD ratio `√(entity/equal)` |
+|---|---|---|---|
+| Social, T1 | 0.250 (4.0) | 0.588 (1.70) | 1.53× |
+| Social, T2 | 0.250 (4.0) | 0.577 (1.73) | 1.52× |
+| Semantic, T1 | 0.200 (5.0) | 0.238 (4.21) | 1.09× |
+| Semantic, T2 | 0.200 (5.0) | 0.237 (4.23) | 1.09× |
+
+Social collapses from an effective 4 facets to ~1.7 (`auth`'s ~75% share); semantic barely
+moves (no facet exceeds ~32%) — an asymmetry predictable from facet headcounts alone, before
+looking at any `r_k` outcome. Checked directly against the actual `sd(r_k)`:
+
+| | equal | entity | observed ratio | predicted ratio |
+|---|---|---|---|---|
+| T1 | 0.0967 | 0.1519 | 1.571× | 1.533× |
+| T2 | 0.0977 | 0.1417 | 1.450× | 1.519× |
+
+A parameter-free prediction from facet headcounts alone lands within 2-5% of the observed
+spread increase — essentially all of the *width* increase is this mechanical effect, not new
+information about the corpus.
+
+### The mean/median shift toward semantic is the same mechanism, not a second mystery
+
+FINDINGS §13's update also reported `mean(r_k)` dropping from ≈0.494 to ≈0.465 under entity
+weighting (both slices) and flagged this as unexplained — a hypothesis that `auth` is simply
+*less decisively assigned* (lower `U_prob` row-max) than the small social facets was tested
+and **refuted**: `auth`'s median row-max (0.999) is if anything higher than `journ`'s (0.934)
+or `affil`'s (0.920), not lower.
+
+The actual mechanism: `Σ_k soc_k = Σ_f w_f Σ_k p_f[k] = Σ_f w_f = 1` for *any* weighting
+scheme (each facet's own profile sums to 1 over communities, and the weights sum to 1), so
+`mean_k(soc_k) = 1/K` is an algebraic invariant, identical under equal and entity weighting
+— confirmed directly: `mean(soc_k)` = 0.2857 (T1) / 0.2941 (T2) under *both* weightings,
+while `var(soc_k)` roughly doubles (0.0140→0.0336 T1, 2.39×; 0.0158→0.0408 T2, 2.58×) and a
+real fraction of communities are pushed under 0.10 under entity weighting only (14.3% T1,
+5.9% T2, vs. 0% under equal weighting).
+
+`r_k = soc_k/(soc_k+sem_k)` is concave and increasing in `soc_k` for fixed `sem_k` (Jensen's
+inequality territory): a variable with the *same mean* but *higher variance*, passed through
+a concave function, has a *lower* expected output. Pushing `soc_k` toward zero drives `r_k`
+sharply toward zero (denominator stays ≈`sem_k`); pushing `soc_k` up by the same amount only
+nudges `r_k` toward 1 with diminishing returns (bounded above). So spreading `soc_k` out more
+widely around the same mean — exactly what entity weighting's Herfindahl effect does —
+mechanically lowers `mean(r_k)`, with no separate cause needed. The earlier "unexplained,
+needs its own investigation" framing is withdrawn; this is the same mechanism as the spread
+increase above, read through one additional, well-known nonlinearity.
+
+### Absolute noise floor — multi-seed reproducibility of `r_k`
+
+The spread/mean analysis above compares two *weighting schemes* against each other; it says
+nothing about how reliable a *single fit's* `r_k` reading is in absolute terms — the question
+needed to set `TOL` so it exceeds genuine noise rather than firing on communities that are
+not actually imbalanced, just unluckily seeded.
+
+**Method** (`diagnostic_scripts/domain_balance_seed_noise.py`): for each (config, K, slice)
+cell, refit at 5 seeds (`MASTER_SEED` + 4 offsets) — same data, same hyperparameters
+(`lambda_l1=0`, `lambda_z_offdiag=0.05`), only the RNG differs, which perturbs the NNDSVDar
+init noise (ticket 74) and which of the model's many local optima (§9) the optimizer lands
+in. Community labels are not consistent across independent fits (label-switching), so each
+non-reference seed is realigned onto the reference seed's labeling via
+`s5_dual_track_alignment`'s Track A (JSD/probability-space Hungarian assignment — the same
+space `u_prob`'s domain-balance reading uses) — **faithful reuse of production's own §S5
+stability-analysis alignment code**, not a new alignment invented for this test. `r_k`
+(entity-weighted, `u_prob` space — D2's decided primary reading) is recomputed under each
+seed's aligned labeling; the across-seed standard deviation per community is the noise floor.
+Smoke-tested first: `C1` (documented weakest, §4.15, single-anchor) showed much larger
+seed-to-seed swings than `C6` (dual-anchor, strong) in a 2-seed pilot, confirming the
+alignment step is doing real work, not producing arbitrary label-mismatch noise.
+
+**Full grid (C1-C6 × K∈{3,4} × T1/T2, 5 seeds each; 76 usable community-cells, 2 cells
+skipped for reference-seed non-convergence — `T2/C3/K4`, `T2/C4/K4`, consistent with the
+non-convergence already known for those cells):**
+
+| | mean | median | p90 | max |
+|---|---|---|---|---|
+| noise SD(`r_k`) | 0.134 | **0.144** | 0.192 | 0.229 |
+
+Paired directly against each community's own `dev_k` (from FINDINGS §13's entity-weighted
+E1 numbers, same reference seed): only **46%** of communities have `dev_k` exceeding their
+own noise SD at all; only **21%** exceed 1.5×; only **13%** exceed 2×. The noise floor's
+median (0.144) is larger than the signal's median (`dev_k`=0.112) — on this toy corpus, a
+typical community's apparent domain imbalance is not clearly distinguishable from what a
+different random seed alone would produce. Strongest genuine cases: `T1/C1/K4` community 1
+(`dev_k`=0.108, noise SD=0.024, ratio 4.5×), `T2/C2/K4` community 2 (`dev_k`=0.322, noise
+SD=0.141, ratio 2.3×). Weakest: `T1/C3/K3` community 2 (`dev_k`=0.009, noise SD=0.140, ratio
+0.06 — indistinguishable from noise).
+
+**Per-configuration breakdown** (pooling K and slice per config):
+
+| Config | mean | median | max |
+|---|---|---|---|
+| C1 | 0.114 | 0.137 | 0.193 |
+| C2 | 0.135 | 0.135 | 0.193 |
+| C3 | 0.105 | 0.113 | 0.159 |
+| C4 | 0.156 | 0.163 | 0.178 |
+| C5 | 0.151 | 0.164 | 0.229 |
+| C6 | 0.144 | 0.148 | 0.216 |
+
+No config is an outlier severe enough to justify exclusion — the spread (0.105-0.156 mean)
+is real but modest. Notably, `C1` (documented weakest overall, §4.15) is the **second-lowest**
+noise config here, not the highest; dual-anchor configs (C2/C5/C6, mean 0.143/median 0.152)
+are if anything slightly noisier than single-anchor ones (C1/C3/C4, mean 0.123/median 0.140)
+— the opposite of what §4.15's known weakness would predict. Whatever drives domain-balance
+noise specifically is evidently a different, more cell-specific property than the
+hypervolume/semantic-axis weakness already documented for C1, not simply "config strength."
+
+**Decision: `TOL = 0.15` for the toy corpus** (D3, closes the open item in §4.18/ticket 82),
+sitting just above the overall noise median. Caveat: several cells (`C4`/`C5` T1 medians run
+0.16-0.17) have their own local noise floor at or slightly above 0.15, so some false-positive
+risk remains concentrated there specifically — expected given noise is not uniform across the
+grid, not a reason to reconsider the choice. **Explicitly a toy-corpus value, flagged for
+re-estimation on the 22k-article corpus**, matching the pattern already used for `lambda_l1`'s
+bounds (ticket 77).
+
+**Single-fit vs. multi-fit reliability — why more seeds don't just fix this for the in-loop
+term.** Averaging several aligned seeds' `r_k` readings would give a materially more reliable
+*point estimate* (standard averaging reduces error with more independent readings) — exactly
+the "stability/consensus across seeds" idea already named as a candidate model-quality check
+in §10. But the in-loop penalty must compute `r_k` from the model's *current* parameters at
+every training epoch to produce a gradient; there is only one parameter set being trained at
+any moment, so "average over 5 seeds" is inherently a post-hoc, multi-run operation that
+cannot be the signal an in-loop term trains against. Multi-seed averaging remains available
+for the *outer-loop* audit (a more reliable final `r_k` for a chosen config, after Optuna has
+already picked it) but does not solve the in-loop term's reliability problem. A further
+limit: averaging only recovers a truer answer if the different seeds are noisy variations
+around one underlying structure; if instead they are landing in substantively different,
+comparably-good local optima (§9's non-convexity), more seeds sharpen the *estimate of that
+uncertainty* rather than eliminating it.
+
+### chunk12 relation weighting: a correction, and evidence for extending it (ticket 84)
+
+**Correction to this session's own earlier characterization.** Not all `M_*` relations are
+"unweighted binary" — verified directly against `chunk12.py`, not from memory. The 5
+*grammar* relations (`M_Atom_Child`, `M_Child_Parent`, `M_Fringe_Cousin`, `M_Cousin_Parent`,
+`M_Cousin_Child`) are genuinely unweighted (`build_grammar_csr`, weight ≡ 1). The 3 *anchor*
+relations (`M_Parent_Art`, `M_Child_Art`, `M_Cousin_Art`) carry real tf-idf weighting
+(`build_anchor_csr`: `weight = log1p(tf) · idf[hyperedge]`, `idf = log(N_articles/doc_freq)+1`
+computed per semantic hyperedge from global article-reference frequency — chunk12.py:258,
+315-321). This weighting is not merely an initialization nudge: the idf-weighted matrix *is*
+the training target at every epoch (Frobenius normalization only rescales overall magnitude,
+not the relative idf pattern within the matrix), so it shapes `U_final`/`U_prob` continuously
+through training, not just at the SVD-init stage. Scope is narrow, though — only 4 of 9
+facets (`parent_he`, `core_child_he`, `cousin_he`, `art`) ever touch an idf-weighted
+relation; the other 5 facets have zero direct idf influence. This is directly related to,
+but a narrower question than, the existing "UDSR" register entry's Test 2 (idf-vs-row-max
+correlation, found weak/inconsistent) — that test checked concentration only, not whether
+idf shapes the loadings themselves.
+
+**Degree-concentration evidence** (row/col `max÷mean` ratio, both slices, checked directly
+against the raw relation matrices, not asserted):
+
+| Relation | row max÷mean (T1/T2) |
+|---|---|
+| `S_Art_Auth` (**already damped**, the reference case) | 7.5× / 2.8× |
+| `M_Atom_Child` | **13.0× / 16.6×** |
+| `M_Child_Parent` | 7.1× / 11.2× |
+| `M_Fringe_Cousin` | 6.4× / 7.4× |
+| `M_Cousin_Parent` | 7.9× / 5.1× |
+| `M_Cousin_Child` | 5.3× / 5.2× (row); 5.3× / 12.2× (col) |
+| `S_Art_Journ` | 1.0× / 1.0× (row, trivial — one journal per article); **5.8× / 6.5×** (col) |
+
+All 5 grammar relations show degree concentration comparable to or worse than `S_Art_Auth`'s
+own already-damped case — `M_Atom_Child` is the worst in the entire topology, more skewed
+than the relation that motivated hub-damping in the first place, and currently receives none.
+`S_Art_Journ`'s column skew (journals) is literally a document-frequency phenomenon — the
+same thing the anchor idf formula already measures, just for a different facet. This connects
+directly to §9's already-documented, currently-unresolved limitation: *"Ubiquitous semantic
+elements that should load ~1/K across all communities are structurally disfavoured... NMF's
+winner-takes-all tendency plus the `z_offdiag` penalty... both push against it."* Extending
+weighting to these relations is a concrete, evidence-backed candidate fix for that named
+problem, not a new idea introduced without basis.
+
+**What the existing `S_Art_Auth` log-damping actually does, verified exactly against the real
+(already-damped) matrix — two different effects, not one:**
+
+```python
+damped_mass = log2(1 + degree)
+weight(r, c) = count(r, c) * damped_mass / degree
+```
+
+Confirmed to match the real matrix to 4 decimal places (`article 17`, degree=65,
+`actual_mass=6.0444` = `predicted=log2(66)=6.0444`, exactly). Two readings of "higher-degree
+still more emphasized, but the gap shrinks," which behave *oppositely*:
+
+- **Total row mass** (an article's overall presence/influence): matches that description
+  exactly. Degree 65 vs. degree 6: raw ratio 10.8×, post-damping mass ratio **2.15×** — still
+  monotonically more for the higher-degree article, but the gap compresses hard (log vs.
+  linear).
+- **Per-tie weight** (what one specific author's own connection to that article is worth):
+  **reverses**, does not just compress. Degree-65 article's per-tie weight: 0.093. Degree-6
+  article's: 0.468 — each tie in the smaller article counts **5×** more individually. The
+  mega-collaboration's *total* presence is still elevated, but each of its 65 co-authors is
+  pulled toward that article's community far more weakly than a co-author on a small paper
+  would be.
+
+**This per-tie redistribution — not just the total-mass compression — is the actual
+mechanism relevant to the stated design goal (avoiding mono-article communities built around
+one high-author-count article):** without it, one 65-author mega-collaboration could pull all
+65 co-authors strongly toward a single community based on that one paper; the damping
+specifically prevents that by weakening each individual tie inside a high-degree article,
+not merely by capping the article's aggregate footprint. Any extension of this mechanism to
+the grammar relations should preserve this property deliberately, not just replicate the
+total-mass compression.
+
+**Recommendation, not yet implemented:** extend the existing anchor idf formula to
+`S_Art_Journ` (same document-frequency logic, low risk, no new mechanism). Extend
+`S_Art_Auth`-style degree log-damping to the 5 grammar relations, `M_Atom_Child` first as the
+clearest case. **Real cost, not to be underestimated:** `chunk12.py` is the data-generation
+layer underneath this entire session's cached fits and every empirical number recorded above
+and in §13/§17 — changing it invalidates that cache and requires re-deriving those numbers,
+a substantially larger blast radius than any `chunk13v9.py`-level change made this session.
+Proposed as **ticket 84** (§8), design not started — see CLAUDE.md §4.21 for the scoped
+briefing.
+
+Diagnostic scripts (no `chunk13v9.py` or `chunk12.py` changes made):
+`diagnostic_scripts/domain_balance_seed_noise.py`. Results:
+`diagnostic_results/domain_balance_seed_noise.json`,
+`diagnostic_results/domain_balance_seed_noise.log`.
+
+---
+

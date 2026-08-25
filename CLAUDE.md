@@ -515,10 +515,17 @@ vs 17 social-leaning of 45 skewed, pooled). Traced to composition, not noise alo
 raw profile to within mean `0.08`/max `0.16`), while no single semantic facet exceeds ~32% —
 entity weighting collapses the social-side reading from an average of 4 facets down to
 effectively 1, which mechanically raises variance on top of whatever real skew exists.
-**`TOL` (D3) is therefore still open, not resolved by the re-tabulation** — a band naively
-read off these numbers would flag a majority of communities, which conflates real imbalance
-with the variance lost by dropping from 4-facet to ~1-facet averaging; see FINDINGS §13 for
-the full reasoning before setting it.
+**`TOL` (D3) is now decided: `0.15` for the toy corpus.** Set from a genuine measured noise
+floor, not the entity-weighted spread directly (which conflates real imbalance with the
+variance-loss effect above, as flagged). A multi-seed reproducibility test (refit the same
+cell 5× varying only the seed, Hungarian-align communities across seeds via production's own
+§S5 alignment code, measure how much `r_k` moves for the *same* community) found the noise
+floor's median across the full grid is `0.144` — comparable to or larger than the `dev_k`
+signal itself (median `0.112`); paired community-by-community, only 46% of communities have
+`dev_k` exceeding their own noise SD at all, only 13% exceed 2×. `TOL=0.15` sits just above
+that median. **Explicitly a toy-corpus value, flagged for re-estimation at 22k-article
+scale.** Full derivation, the noise-floor methodology, and the per-config breakdown: FINDINGS
+§21.
 
 ### 4.19 Sparsity term (`lambda_l1`) fixed to 0.0 for the toy corpus (ticket 78)
 
@@ -564,6 +571,75 @@ computation from silently diverging across call sites.
 arises for every consumer to see corrected labels without calling
 `evaluate_complete_solution` (e.g. a raw diagnostic dump), add a *separate*, explicitly-named
 function for that — do not fold it back into the fitting stage.
+
+### 4.21 chunk12 relation-weighting extension — scoped briefing for design work (ticket 84,
+not started)
+
+**This section exists specifically to be read before starting design work on ticket 84** —
+whether to extend chunk12's relation weighting beyond `S_Art_Auth` (log-damped) and the 3
+anchor relations (`M_Parent_Art`/`M_Child_Art`/`M_Cousin_Art`, tf-idf weighted) to the
+currently-unweighted `S_Art_Journ` and the 5 grammar relations. **Read in this order before
+proposing a design:**
+
+1. **This section**, for the decisions already settled below.
+2. **§11** ("chunk12 Facts") for the upstream data-generator context this all sits inside —
+   global-vs-slice-specific indexing, why `art` differs in dimension across T1/T2, and the
+   existing mega-hub-damping precedent (ticket 63) this proposal extends.
+3. **FINDINGS §21**'s "chunk12 relation weighting" subsection (the bottom third) — the full
+   evidentiary record: the degree-concentration table, the exact log-damping formula verified
+   against real data (and the total-mass-vs-per-tie distinction, which matters for the design
+   goal below), and the tf-idf correction (only the 3 anchor relations are idf-weighted, not
+   all `M_*` relations — a mistake made and corrected earlier in that same session, worth not
+   repeating).
+4. **`chunk12.py`**, the `compile_slice`/`build_*_csr` functions directly (roughly lines
+   270-345 as of this writing) — read the actual code, not just the summary, since any new
+   formula needs to slot into this same function family.
+
+**Motivating design goal, stated directly by the user, driving the formula choice:** avoid
+communities built around a single high-degree entity (concretely: a many-author article
+should not, on the strength of that one article, pull all of its co-authors strongly into one
+community). This is **already** what `S_Art_Auth`'s log-damping does, and it does it
+specifically through the **per-tie weight reduction** (a co-author's individual tie to a
+65-author article is weighted ~5× less than a co-author's tie to a 6-author article; see
+FINDINGS §21 for the exact numbers) — not primarily through the total-row-mass compression,
+which is a secondary effect. **Any new weighting formula for the grammar relations must be
+checked for this same per-tie property, not just for "does the total degree-skew shrink."**
+A formula that only compresses total mass while leaving per-tie weight roughly flat would not
+actually serve the stated goal.
+
+**Two different mechanisms for two different relation groups, already distinguished in
+FINDINGS §21 — do not default to applying the same formula to both:**
+- `S_Art_Journ`: extend the *existing* anchor tf-idf formula (`log1p(tf)·idf`) — its column
+  skew (some journals carry far more of the corpus than others) is literally the same
+  document-frequency phenomenon the anchor formula already measures, just for a different
+  facet. Low risk, no new mechanism.
+- The 5 grammar relations (`M_Atom_Child`, `M_Child_Parent`, `M_Fringe_Cousin`,
+  `M_Cousin_Parent`, `M_Cousin_Child`): tf-idf does not transfer cleanly — there is no
+  document/article concept inside a pure semantic-hierarchy edge. The natural analog is
+  `S_Art_Auth`'s own degree-based log-damping, not idf. `M_Atom_Child` is the priority case
+  (worst measured skew in the whole topology, FINDINGS §21's table).
+
+**Explicitly NOT yet decided, and the actual work of this ticket:** the exact damping
+constant/exponent for the grammar relations (log2 as-is, or a different base/shape — pick
+by evidence, the way `lambda_l1`'s range was derived from a measured quantity, ticket 77, not
+guessed); whether all 5 grammar relations need it or only the worst 1-2 (`M_Atom_Child` first,
+per the table); how a changed input matrix interacts with the joint-anchor SVD (ticket 64)
+and the Frobenius-normalization step (§4.2) for the facets it touches; and an explicit
+before/after validation against §9's named "ubiquitous semantic elements... structurally
+disfavoured" limitation, since that is the problem this proposal is meant to address, not an
+assumption that it will.
+
+**Cost, stated plainly so it is weighed, not discovered mid-implementation:** `chunk12.py` is
+the data-generation layer beneath every cached fit and empirical number in this file and
+FINDINGS.md — E1's domain-balance numbers, the noise floor just measured, the interference
+decomposition, all of it. Changing relation weighting here invalidates that cache and
+requires re-deriving those numbers on the new data. This is a substantially larger blast
+radius than any `chunk13v9.py`-level change made so far this project — closer to a
+corpus-level decision than a tuning change. **Recommended split, matching how ticket 82 was
+run: this design/scoping phase with Opus (the interacting choices above, and the re-derivation
+cost, need architectural judgment before code is written); implementation + re-running the
+existing FINDINGS test battery against the new data with Sonnet (high effort) once the design
+is settled.**
 
 ## 5. Namespace Gotcha
 
@@ -740,7 +816,8 @@ Full evidence for all four is in FINDINGS.md §12–§16.
 | 79 | M2, `U_scales` construction | **U_scales is an undetermined free direction in the loss, not a mass measure.** Proven algebraically (scale a `U_pos` column by *c*, compensate in the corresponding `Z_pos` rows/cols, and `recon_loss`/`sparsity_loss`/`z_offdiag_loss`/`U_norm`/`Z_scaled` are all unchanged to float precision while `U_scales` changes by exactly *c*) and confirmed empirically (CV up to 1.2 for the same facet/community across differently-initialised runs with near-identical `recon_loss`). Invalidates the "use `U_scales` for mass" guidance in §4.3 (old version), §4.4's collapse formula, and every domain-balance calculation attempted on `U_scales`. See FINDINGS §12. | **Closed.** `evaluate_dimensional_collapse` rewritten to use `|Z_scaled[k, π(k)]|` (relation-level, permutation-corrected) via reconstruction-space share (`within_k/total`, FINDINGS §8) — see FINDINGS §17. `U_scales` no longer passed into collapse at all. |
 | 80 | M3 §2, `evaluate_dimensional_collapse` | `ENTROPY_THRESHOLD=0.60` does not correspond to the stated target ("no community >0.6 mass"); the correspondence is also K-dependent and non-monotone (two distributions with identical max-share can give very different entropy). See §4.4 above for the numbers. | **Closed.** Direct max-share penalty implemented, ceiling-shape ported verbatim from `evaluate_socio_semantic_reality`'s `MAX_MONOPOLY` penalty (this file, Part B), threshold `MAX_SHARE_THRESHOLD=0.60` (same numeric value as `ENTROPY_THRESHOLD`, reused as the pre-existing target, not re-derived). See FINDINGS §17. |
 | 81 | M3 §5.1, `evaluate_complete_solution` — aggregation | `collapse_pen` and `coherence_pen` are exactly `0.0` in all 12 tested cells (C1–C6 × K∈{2,4}, production settings). `sociological_penalty == semantic_pen` bit-for-bit throughout. Not because inputs are constant (`normalized_entropy` 0.808–0.995, `weakest_mean` 0.744–1.000) but because both thresholds sit below where any production fit in this grid lands. See §4.17. | **Partially superseded.** `collapse_pen` now fires on 2/12 cells post-ticket-79/80 fix (FINDINGS §17) — no longer always 0.0. `coherence_pen` is untouched by this session's work and remains exactly 0.0 in all 12 cells; still open. |
-| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-community, differentiable) was lost in the softplus-era rewrite and not restored. See §4.18. | **Open — design settled (facet-level, entity-weighted, dual in-loop/outer-loop; §4.18), implementation not yet started.** The relation-level anchor-double-counting problem this row previously described is **superseded**, not solved in place — a facet-level formulation (domain is a facet property, not a relation property) makes it not arise: verified `art` has exactly 2 non-anchor relations in every config regardless of anchor count, so no anchor-count correction is needed. E1 (`domain_balance_measurement.py`) answers the prior "currently unanswerable" question in §4.18 below: real per-community imbalance exists on a determined basis. **D2 (weighting) re-tabulated under entity weighting as primary** (FINDINGS §13): materially larger and now directionally skewed toward semantic-leaning communities vs. the equal-weighted pilot, traced to `auth`'s ~75% share of the entity-weighted social pool collapsing the social-side reading's effective averaging from 4 facets to ~1. **D3 (`TOL`) remains open** — the entity-weighted numbers should not be read naively into a band, since part of the larger spread is a variance artifact of that reduced averaging, not purely more real imbalance; next actual step on this ticket. **Permutation-correction groundwork corrected and shipped:** FINDINGS §16's original "1 solid real conflict" (C5/K4 `art`) was itself a bug — the confidence re-filter that produced it forgot to re-apply leaf-exclusion, wrongly counting `S_Art_Journ` (touches the leaf facet `journ`) as a dissenting vote. Corrected: **zero confirmed real non-leaf conflicts anywhere in the grid.** `evaluate_dimensional_collapse` therefore corrects each relation independently and does not implement cross-relation conflict resolution — documented limitation, see FINDINGS §17. Criterion chosen (`structure_score > 1.0`) verified head-to-head against `chunk13v3.py`/`v4.py`'s original `diagonal_mass/hungarian_mass < 0.7` — 12/94 disagreements, 8 of them cases the older criterion would have wrongly "corrected" a genuinely mixed relation. **Toy-corpus calibrated throughout — re-derive at 22k-article scale before reuse.** |
+| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-community, differentiable) was lost in the softplus-era rewrite and not restored. See §4.18. | **Open — design settled, D1-D3 decided, implementation not yet started.** The relation-level anchor-double-counting problem this row previously described is **superseded**, not solved in place — a facet-level formulation (domain is a facet property, not a relation property) makes it not arise: verified `art` has exactly 2 non-anchor relations in every config regardless of anchor count, so no anchor-count correction is needed. E1 answers the prior "currently unanswerable" question in §4.18 below: real per-community imbalance exists on a determined basis. **D2 (weighting): entity, re-tabulated** — materially larger and directionally skewed toward semantic-leaning vs. the equal-weighted pilot, traced exactly (not just suspected) to `auth`'s ~75% share collapsing the social-side averaging from 4 facets to ~1.7 (Herfindahl/Kish derivation, FINDINGS §21, near-exact match to observed spread). **D3 (`TOL`): decided at `0.15` for the toy corpus**, set from a measured multi-seed noise floor (median 0.144, comparable to the `dev_k` signal's own median 0.112) rather than the entity-weighted spread directly — FINDINGS §21; flagged for re-estimation at 22k-article scale. Next: E2 (in-loop implementation + sweep). **Permutation-correction groundwork corrected and shipped:** FINDINGS §16's original "1 solid real conflict" (C5/K4 `art`) was itself a bug — the confidence re-filter that produced it forgot to re-apply leaf-exclusion, wrongly counting `S_Art_Journ` (touches the leaf facet `journ`) as a dissenting vote. Corrected: **zero confirmed real non-leaf conflicts anywhere in the grid.** `evaluate_dimensional_collapse` therefore corrects each relation independently and does not implement cross-relation conflict resolution — documented limitation, see FINDINGS §17. Criterion chosen (`structure_score > 1.0`) verified head-to-head against `chunk13v3.py`/`v4.py`'s original `diagonal_mass/hungarian_mass < 0.7` — 12/94 disagreements, 8 of them cases the older criterion would have wrongly "corrected" a genuinely mixed relation. **Toy-corpus calibrated throughout — re-derive at 22k-article scale before reuse.** |
+| 84 | chunk12.py, `compile_slice`/`build_*_csr` (upstream data generator, not `chunk13v9.py`) | `S_Art_Journ` and the 5 grammar relations (`M_Atom_Child` etc.) currently get no frequency/degree weighting at all, unlike `S_Art_Auth` (log-damped, ticket 63) and the 3 anchor relations (tf-idf weighted). Measured degree concentration in all 5 grammar relations is comparable to or worse than `S_Art_Auth`'s already-damped case — `M_Atom_Child` (13.0×/16.6× row max÷mean, T1/T2) is the worst in the whole topology, currently unaddressed. Connects to §9's already-documented, unresolved "ubiquitous semantic elements... structurally disfavoured" limitation. | **Open — proposed, design not started.** See §4.21 for the scoped briefing (read before starting design work) and FINDINGS §21 for the full evidentiary record (degree-concentration table, the exact log-damping formula verified against real data, the total-mass-vs-per-tie distinction that matters for the stated design goal of avoiding mono-article/high-degree-entity-dominated communities, and the tf-idf-scope correction to this session's own earlier claim that all `M_*` relations were unweighted). **Real cost:** changes the data-generation layer beneath every cached fit and number in this file and FINDINGS.md — larger blast radius than any `chunk13v9.py`-level change made so far. Recommended: Opus for design/scoping, Sonnet (high) for implementation + re-running the existing test battery once designed. |
 
 ### Recently closed (verify before trusting)
 
