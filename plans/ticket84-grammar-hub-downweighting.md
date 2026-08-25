@@ -114,8 +114,94 @@ until that evidence passes.
 | D4 | `S_Art_Journ` | **Defer — §4.21 is wrong that this is "low risk, no new mechanism."** Verified: it needs (a) **new** df collection (no `dfreq_global['journ']` write exists) and (b) a **column-keyed** idf variant (`build_anchor_csr` keys `idf_dict.get(r)` on the *row*; journals are the column axis). Additionally every row has degree exactly 1, so after Frobenius normalisation column-idf is arithmetically equivalent to reweighting whole *articles* by their journal's rarity — a substantive modelling claim ("articles in rare journals matter more") unrelated to this ticket's goal. Correct §4.21's text. |
 | D5 | §9 justification | **Strike it.** `U_prob` is L1 row-normalised (`chunk13v9.py:711-734`), discarding a row's scale — so down-weighting a hub changes its influence on *other* entities but **not its own loading shape**, which is what §9 is about. Less gradient pressure on a hub row also leaves it determined *more* by init noise, arguably mildly *against* §9. And §9's effect has never been demonstrated (Test 2: weak, sign-inconsistent, mostly non-significant). Do not justify a data-layer change by an undemonstrated limitation the mechanism would not fix. **User decision pending — see Open Question below.** |
 | D6 | Axis | **Row only**, matching precedent. Document that `M_Cousin_Child` has column skew in T2 (12.2×) left unaddressed. |
-| D7 | Slice basis | **Per-slice degree** (user decision). Recorded tradeoff: grammar-relation rows are *global* entities present in both slices, so the same atom can carry different weights in T1 vs T2. `S_Art_Auth`'s precedent does **not** cover this — its rows are articles, which exist in exactly one slice, so no article ever has two degrees. This introduces a T1/T2 asymmetry into matrices that were previously pure structure. **Flag as a documented limitation to revisit when the T1→T2 temporal extension (§10) is built**, since weighting drift could there be mistaken for structural drift. |
-| D8 | Scope | **All 5 grammar relations, with Tier-0 metrics reported per relation.** They encode the same kind of thing (ontological containment); treating them differently on toy-corpus skew would be the special-casing §4.15 warns against and would need re-deriving at 22k regardless. Per-relation reporting keeps anomalies visible — notably `M_Cousin_Child`, which uniquely has **no degree-1 rows**, so it is affected everywhere rather than only in the tail. |
+| D7 | Slice basis | **Per-slice degree** (user decision). Recorded tradeoff: grammar-relation rows are *global* entities present in both slices — confirmed directly at `chunk12.py:77-95` (`get_idx` assigns one permanent integer per string the first time it's seen, across T1 and T2 together; only `art` gets slice-local indices via a separate `get_art_idx`) — so the same atom/hyperedge string can carry different weights in T1 vs T2. `S_Art_Auth`'s precedent does **not** cover this — its rows are articles, which exist in exactly one slice, so no article ever has two degrees. This introduces a T1/T2 asymmetry into matrices that were previously pure structure. **Flag as a documented limitation to revisit when the T1→T2 temporal extension (§10) is built**, since weighting drift could there be mistaken for structural drift. |
+| D8 | Scope | **Not uniform — split by what the row entity *is*, revised from the original "all 5 uniformly."** See "Scope split" subsection immediately below for the full argument and data. |
+
+### D8 revised: scope split by row-entity type, not "all 5 uniformly"
+
+The original D8 treated all 5 relations as encoding "the same kind of thing" (ontological
+containment) and applied one formula uniformly to avoid special-casing. Discussion with the
+user surfaced a real structural distinction the original framing missed: the row entity
+differs by *type* across these relations, and that type difference tracks a real difference
+in what "high degree" means substantively — not just numerically.
+
+| Group | Relations | Row entity | Decision |
+|---|---|---|---|
+| A — atom-rooted | `M_Atom_Child`, `M_Fringe_Cousin` | lexical atom (a term/word) | **Apply** `log2(1+d)/d` — same argument as D1-D3: degree here is a direct ubiquity signal, structurally identical to co-authorship's hub effect. Strongest measured hub signature after `S_Art_Auth`: max/median ratio 5.17×/6.34× (`M_Atom_Child`, T1/T2) and 2.89×/2.89× (`M_Fringe_Cousin`), against the precedent's own 5.03×/1.95×. |
+| B — hyperedge-rooted, untouched | `M_Child_Parent`, `M_Cousin_Parent` | already-composed child/cousin hyperedge | **Leave undamped.** Row entity is a composed unit, not a raw lexical item — recurrence across 2-14 parents (only 11-15% of rows even reach degree 2) plausibly reflects genuine cross-cutting synthesis (the same sub-claim feeding multiple larger arguments), not noise. Weaker measured signature too (2.71×/3.58×, 2.89×/2.14×) — near or below the precedent, not clearly a hub problem. This is the user's point 3: several co-authors ≠ several shared words, and by the same logic, several shared child-hyperedges ≠ automatic ubiquity noise. |
+| — | `M_Cousin_Child` | cousin hyperedge (same type as Group B) but with a **distinct, bespoke justification** | **Apply**, same formula, but NOT for the Group-A "ubiquity" reason — see below. |
+
+#### `M_Cousin_Child`: a different, substantively-grounded justification
+
+`M_Cousin_Child`'s row entity (`cousin_he`) is the same *type* as Group B's, so it doesn't
+automatically inherit Group A's ubiquity argument. It gets its own, checked against real data:
+
+The interpretation stage (per the user, who works with colleagues on this) focuses on
+**focal/child hyperedges**; cousin hyperedges exist only to **clarify the context** a child
+hyperedge was used in. Row degree in `M_Cousin_Child` (how many distinct child hyperedges a
+given cousin has been observed alongside, corpus-wide) is therefore not a ubiquity proxy —
+it is a **direct measurement of context genericness**: a cousin recurring across 24 different
+children is doing essentially no disambiguating work for any one of them; one recurring
+across only 2 is doing real, specific work.
+
+Checked against both slices (live rows, i.e. degree ≥1; `M_Cousin_Child`'s degree floor is 2,
+not 1 — no monodegree rows exist here):
+
+| | lowest-degree cousins (deg=2, "specific") | highest-degree cousins (deg=20-24, "generic") |
+|---|---|---|
+| T1 | `effectiveness`; `art dataset method`; `capability generalization ... pretrain`; `experiment` | `train`, `propose`, `show`, `name`, `learn`, `develop` |
+| T2 | `benchmark dataset first proteinlmbench`; `manually`; `choice multiple question`; `944` | `present`, `use`, `study`, `predict`, `can`, `enable` |
+
+The high-degree tail is boilerplate reporting verbs ("we train/propose/show/present..."); the
+low-degree end is specific technical content (dataset names, numeric quantities, domain
+terms). This is structural, not incidental: **`dummy_cousin`** (the predicate-headed
+periphery type, as opposed to **`cousin_he`**, the noun/modifier-phrase periphery type — see
+the `7.5postprocessing_4hbased_correct.py` verification below) is 29-31% of all live cousins
+overall, but **52-60% of the top decile by degree**, both slices.
+
+Consequences for the design, given this is a different mechanism than Group A's:
+- **Row-only (D6) is now substantively justified for this relation**, not just by
+  consistency: the column axis (`core_child_he`) is where interpretation happens and should
+  keep receiving whatever context volume it gets; the ticket's job is only to discount the
+  *tellers* that aren't discriminating, not the *listeners*.
+- The degree-floor-of-2 (no monodegree rows) makes the "still distinguishable from
+  monodegree entities" property (the user's condition 4) non-binding by construction, but the
+  same monotonicity holds: mass(2)=log2(3)=1.585, mass(24)=log2(25)=4.64 — total mass still
+  strictly favors high-degree rows, while **per-tie weight inverts by ~4.1×** (0.79 vs 0.19),
+  so a specific cousin's individual tie counts roughly 4× a generic cousin's.
+- **New Phase-1 diagnostic, specific to this relation**: report the `dummy_cousin` vs
+  `cousin_he` split of the down-weighted mass, before/after. The effect will land
+  disproportionately on predicate-type cousins by construction (the 52-60% figure above) —
+  a predictable, named consequence, not something to discover as a surprise later.
+
+#### Structural verification of the row/facet semantics (not just the weighting argument)
+
+Traced `7.5postprocessing_4hbased_correct.py`'s `extract_dual_matrices`/`sweep_periphery`
+against one real sampled sentence (article `W2911489562`, BERT/language-model context) with
+the destructive purge-on-import and the spaCy lemmatizer removed/stubbed (surface-form
+passthrough only — does not change which atoms land in which structure). Confirms the user's
+description exactly: a `parent_he` circuit = `dummy_sibling` (governing predicate) +
+`focal_he` (target-anchored) + `sibling_he` (co-arguments, same parent) — all folded
+indiscriminately into `core_child_he` (`chunk12.py:199-203`, `link[2][1:]`). `cousin_he` /
+`dummy_cousin` come from `sweep_periphery`, walking branches outside the core parent→focal
+spine but under a shared higher ancestor — "same grandparent, different branch," per the
+user's description, not "same immediate parent."
+
+#### Why the group split does not distort relative influence between relations
+
+Checked directly against `chunk13v9.py`, prompted by the question of whether a relation with
+higher typical row degree (like `M_Cousin_Child`) would out-compete lower-degree relations in
+the fit purely by virtue of degree: **no**. Two mechanisms already neutralize this before any
+per-relation weighting choice: **Frobenius normalization** (`:543-544`) rescales *every*
+relation to unit Frobenius norm regardless of density/degree, and **`w_sem`** (`:558`) splits
+a fixed 0.5 budget equally across whichever semantic relations are active in a config
+(`chunk13v9.py:112-136`, 4-6 relations depending on config) — `M_Cousin_Child` gets exactly
+the same per-relation vote as any other. Higher degree only redistributes influence *within*
+a relation's own fixed vote (the effect this ticket targets), not *between* relations. The one
+genuine cross-relation channel — `core_child_he` is a shared facet (column of `M_Atom_Child`,
+row of `M_Child_Parent`, column of `M_Cousin_Child`) with one shared column-scale gauge
+(`:597-606`) — is the same pre-existing column-skew limitation D6 already documents, not
+something this decision changes.
 
 ### The honest scope limit, stated up front
 
@@ -135,11 +221,21 @@ anything**, decoupling it from the blast radius entirely.
 
 ### Phase 1 — Tier 0, read-only, no writes anywhere (**GATE**)
 
+**Scope, per the D8 revision above: only `M_Atom_Child`, `M_Fringe_Cousin`, `M_Cousin_Child`
+get the transform.** `M_Child_Parent`/`M_Cousin_Parent` are reported for context (current-state
+stats only, no "after" — they are not modified).
+
 New `diagnostic_scripts/grammar_damping_tier0.py`. Loads existing T1/T2 pickles via
 `diagnostic_blocks.load_slice`, applies the transform **in memory**, computes:
 
-1. **Per-tie weight ratio** at degree p90 vs p10, per relation, both slices. Bar: **≥3×**
-   (reference: `S_Art_Auth`'s measured 5×). This is the property §4.21 explicitly requires.
+1. **Per-tie weight ratio, corrected definition.** The original draft of this metric said
+   "p90 vs p10" with a "≥3×" bar derived from `S_Art_Auth`'s **max-vs-median** ratio (5.03×
+   T1 / 1.95× T2) — two different quantities, caught before Phase 1 was written. Corrected
+   metric: **max-vs-median per-tie ratio**, matching how the bar was actually derived. Before
+   damping this ratio is trivially 1.0× for these matrices (all grammar ties are binary
+   counts, so every tie is worth the same regardless of degree); after damping it's
+   `w(median)/w(max)`. Bar: **at or above the precedent's own weaker slice (1.95×)** — not a
+   fixed "3×", since the precedent itself doesn't clear that in both slices.
 2. **Share of `‖X‖²_F` held by (a) top-1% rows by degree, (b) all degree-1 rows**, before/after.
    Gate on (b) as the fragmentation guard — ceiling set after first measurement, not guessed.
 3. **Row max÷mean concentration** — FINDINGS §21's table, recomputed before/after.
@@ -152,6 +248,9 @@ New `diagnostic_scripts/grammar_damping_tier0.py`. Loads existing T1/T2 pickles 
    fragmentation mechanism made numeric.
 5. **Bit-identity assertion**: the 3 anchor and 3 social matrices must be byte-identical
    before/after. Cheapest, strongest regression test available.
+6. **`M_Cousin_Child`-specific: `dummy_cousin` vs `cousin_he` share of down-weighted mass**,
+   before/after — see the D8 revision above. Named in advance as a predictable, structural
+   consequence of this relation's bespoke justification, not a side effect to discover later.
 
 **If Tier 0 fails, the ticket ends here with nothing regenerated and nothing to revert.**
 
