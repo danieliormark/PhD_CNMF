@@ -1,18 +1,18 @@
 # Ticket 84 — hub down-weighting for grammar relations (chunk12 relation weighting)
 
 > **STATUS: UNAPPROVED WORKING PLAN — NOT A SETTLED RECORD.** Written by Opus in a design
-> pass; published here for triangulation/review before any implementation. Nothing in it has
-> been executed: no `chunk12.py` change, no cache change, no diagnostic script written, no
-> data regenerated. Unlike `CLAUDE.md` and `FINDINGS.md` in this repo — which are durable
-> records of what has actually been measured and decided — this document becomes obsolete
-> once executed or rejected. **Do not cite it as established.**
+> pass, then independently triangulated by Sonnet (see the "Sonnet triangulation" section
+> near the end) — both passes' claims were checked against code/data, not just written down.
+> Nothing in it has been executed: no `chunk12.py` change, no cache change, no diagnostic
+> script written, no data regenerated. Unlike `CLAUDE.md` and `FINDINGS.md` — durable records
+> of what has actually been measured and decided — this document becomes obsolete once
+> executed or rejected. **Do not cite it as established** until D5 is confirmed and the
+> corresponding `CLAUDE.md §4.21`/`FINDINGS.md §21` corrections are made.
 >
-> **Reviewer orientation.** The relevant durable context is CLAUDE.md §4.21 (the original
-> briefing this plan responds to — and which this plan argues is *wrong* on two points, D4
-> and D5), CLAUDE.md §9 / §11, and FINDINGS.md §21. Claims marked "verified" in this plan
-> were checked against code or data during the design pass; claims in §4.21 were not
-> necessarily. Ticket 82's separate in-flight work (E2, the in-loop domain-balance term) is
-> unaffected by this plan.
+> Supersedes this file's previous contents (the ticket-82 domain-balance plan), whose
+> settled design, D1–D3 decisions and results are now recorded permanently in
+> CLAUDE.md §4.18 / §8 ticket 82 and FINDINGS.md §13 + §21. Ticket 82's remaining work
+> (E2, the in-loop term) is unaffected by this plan.
 
 ## Terminology
 
@@ -38,14 +38,42 @@ The design pass asked a prior question first: **is this already handled by the p
 existing normalisations?** Measured answer — it is handled in one place and not in another,
 and that split is what this ticket is actually about.
 
-**Already handled — at initialisation.** `chunk13v9.py:435-439` row-normalises each matrix
-during multi-hop propagation, with the literal comment *"Row-Normalize M to prevent Hub
-Dominance"*. This **exactly annihilates** any per-row rescaling: `diags(1/(s·orig))·(s·M) =
-diags(1/orig)·M`. Verified: for `M_Atom_Child` — the worst-skew relation — the `f1` branch is
-taken in **all six configs** (`core_atom` is always initialised *from* `core_child_he`), so
-hub down-weighting would have **literally zero effect on initialisation** there. It survives
-init only in the `f2` branch (column-normalised, line 455-458): `M_Child_Parent` in C3, and
-`M_Child_Parent`/`M_Cousin_Parent` in C6.
+**Already handled — at initialisation, more precisely at the propagation stage that follows
+it.** `initialize_tucker_adapted_nndsvd_and_propagate` (chunk13v9.py:312) has two distinct
+stages, worth naming precisely rather than lumping under "initialisation": **Step 2** runs a
+real NNDSVD (proper truncated SVD) on **anchor relations only** — this is the actual
+initialisation, and it is where the whole facet tree is rooted; **Step 3** then radiates
+outward from those anchor-seeded facets via the *grammar* relations, using a cheaper
+row/col-normalise-and-project step (a "Degree-Corrected Multi-Hop Phase 2 Propagation" per
+the function's own docstring), not a second SVD. The row-normalisation issue below lives
+entirely in Step 3, not in the anchor SVD itself.
+
+`chunk13v9.py:435-439` row-normalises each matrix during that Step-3 propagation, with the
+literal comment *"Row-Normalize M to prevent Hub Dominance"*. This **exactly annihilates**
+any per-row rescaling: `diags(1/(s·orig))·(s·M) = diags(1/orig)·M`.
+
+**Verified independently by a second model (Sonnet), not just asserted by the first (Opus)**
+— traced the actual control flow of Step 3's propagation loop for all six configs (which
+branch, `f1`/row-normalised/cancelled vs. `f2`/column-normalised/survives, each grammar
+relation takes, given each config's real anchor set and active relation list):
+
+| Relation | Cancelled (`f1`) | Survives (`f2`) |
+|---|---|---|
+| `M_Atom_Child` — worst-skew relation | **C1, C2, C3, C4, C5, C6 — all six** | never |
+| `M_Fringe_Cousin` | **C1, C2, C3, C4, C5, C6 — all six** | never |
+| `M_Child_Parent` | C1 | **C2, C3** |
+| `M_Cousin_Parent` | C1 | **C6** |
+| `M_Cousin_Child` | C3, C4 | never |
+
+`M_Atom_Child`'s "cancelled in all six configs" claim holds exactly. Two corrections to an
+earlier pass of this table: `M_Child_Parent` survives via `f2` in **both** C2 and C3 (not
+C3 alone), and does **not** survive in C6 — in C6 it is not used for initialisation at all
+(both its facets are already initialised via `M_Cousin_Parent` by the time it's reached);
+only `M_Cousin_Parent` survives there. Also newly noted: `M_Fringe_Cousin` is cancelled in
+**all six** configs too, not just `M_Atom_Child` — strengthening, not weakening, the
+"acts almost entirely through the loss, not init" scope limit already stated below. Neither
+correction changes any of the decisions D1–D8 or the execution phases — they were
+illustrative context, not load-bearing.
 
 **Not handled — in the training loss.** Frobenius normalisation (`chunk13v9.py:543-551`) is a
 single global scalar per matrix; it does not equalise rows. Measured share of squared row mass
@@ -210,9 +238,36 @@ protocol validated in FINDINGS §21), `facet_membership_profile`, `compute_proba
 
 ---
 
+## Sonnet triangulation (independent second-model review)
+
+Requested by the user specifically to cross-check this plan before any implementation. Method:
+independently re-verified the load-bearing claims against code and data rather than reviewing
+the prose alone — traced the actual initialisation/propagation control flow for all 6 configs
+(see the corrected table under Context above), re-derived the `dfreq_global`/anchor-idf
+row-vs-column-keying facts behind D4, and re-checked the `U_prob` L1-row-normalisation
+argument behind D5.
+
+**Verdict: the central mechanical claim holds** (`M_Atom_Child` cancelled at init in all six
+configs — confirmed, not just trusted), **with two factual corrections applied above**
+(`M_Child_Parent`'s C2/C3/C6 survival pattern; `M_Fringe_Cousin` also fully cancelled). D1–D4,
+D6, D8 independently re-confirmed as stated. **D5 — recommend striking §9 as a justification**
+(the L1-row-normalisation argument is correct: scaling a row doesn't change its direction, and
+`U_prob` discards exactly that scale, so this mechanism cannot produce a §9-style effect).
+Sequencing (read-only Tier 0 before touching `chunk12.py`) endorsed as the right order given
+the missing cache-hash coverage, absent backups, and unverified `graphbrain` determinism found
+during the design pass.
+
+**Net recommendation: proceed to Phase 1 (the read-only Tier-0 script).** It costs nothing to
+run, commits to nothing, and the gate is set before any data is touched — the open D5 question
+below does not need to block starting it, since Tier 0's metrics don't depend on the §9
+question either way.
+
+---
+
 ## Open question for the user before implementation
 
-**D5 (§9)** is the one decision still genuinely open — the earlier round asked it and the reply
-was to elaborate first, which this plan now does. The evidence says §9 should be struck as a
-justification. Confirming that also means correcting §4.21 and FINDINGS §21, where the link to
-§9 is currently asserted.
+**D5 (§9)** — two independent design/review passes (Opus's plan, Sonnet's triangulation) now
+agree the evidence says to strike §9 as a justification for this ticket. Recorded as a
+recommendation, not yet a user-confirmed decision. Confirming it also means correcting §4.21
+and FINDINGS §21 in `CLAUDE.md`/`FINDINGS.md`, where the link to §9 is currently asserted as
+fact — not yet done, since this plan has not been approved for implementation.
