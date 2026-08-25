@@ -906,32 +906,90 @@ cross-cutting structure rather than a defect. **This matters more, not less, und
 weighting**: since `auth` now dominates the social-domain reading (vs. getting 1 vote of 4
 under equal weighting), whatever interference level lives specifically in `auth`'s own
 relations (`S_Art_Auth`, `S_Auth_Affil`) now propagates into the whole social-side reading
-almost directly, rather than being diluted by three other equally-weighted facets. Not yet
-checked: whether the dominant facet on each domain side (`auth` for social, likely
-`core_atom` for semantic — the largest facet at 642) shows comparable interference levels to
-each other; a systematic difference there would bias the entity-weighted comparison in a
-predictable direction, not just add noise.
+almost directly, rather than being diluted by three other equally-weighted facets.
 
-**E1 measurement (diagnostic-only, no `chunk13v9.py` changes;
-`diagnostic_scripts/domain_balance_measurement.py`, `diagnostic_blocks.py` 1.12.0) answers
-this section's own open question — GO.** Measured on the `u_prob`, equal-weighted basis
-(entity-weighted, now the decided primary basis, not yet re-tabulated as of this writing):
-mean `dev_k` (deviation of `r_k` from 0.5) ≈0.08 in both T1 and T2, median ≈0.07 — most
-communities sit within a generous band, consistent with some imbalance being expected from
-topology and facet-size asymmetry alone, not evidence of a defect by itself. **No consistent
-direction** — 26 communities skew social, 25 semantic, 25 balanced, pooled T1+T2 — unlike the
-pre-fix `U_scales`-based numbers, which disagreed in direction only because both were
-measuring an undetermined quantity, not because the true balance is genuinely mixed. But a
-real, non-trivial tail: ~31-32% of communities exceed a 40/60 band, ~12-14% exceed 35/65, up
-to `r=0.745` (`T2/C2/K4` community 2, 75% social) and `r=0.304` (`T1/C3/K4` community 0, 70%
-semantic-leaning). The equal-weighted pilot of entity weighting (computed alongside, not the
-primary reading) showed materially larger deviations (mean ≈0.13) — expected given `auth`'s
-dominance — meaning `TOL` should not be set from the equal-weighted numbers above; E1's grid
-needs re-tabulating with entity weighting as primary before that decision.
+**Checked (this update): how closely the entity-weighted `soc_k` tracks `auth` alone.**
+Recomputed `soc_k` (entity-weighted, `u_prob` space) against `auth`'s own raw per-community
+profile directly, across all 22 converged E1 cells: `max_k |soc_k - auth_k|` averages `0.082`
+(median `0.085`), topping out at `0.164` (`T2/C2/K3`). `auth` is not literally standing in for
+the whole social domain — `art`/`affil`/`journ` (25% of the entity-weighted social pool
+combined) still move the reading by a real, bounded amount — but it is close enough that
+`auth`'s own community assignment is the dominant driver of the social-domain signal under
+this weighting, not one contributor among several. `core_atom` (the largest semantic facet,
+642 entities) does **not** play a comparable role on the semantic side — see composition
+below; the asymmetry is in facet-size concentration, not (yet, separately) tested for
+interference-level differences between the two dominant facets.
+
+### D2 re-tabulation under entity weighting (this update, supersedes the equal-weighted pilot as the basis for `TOL`)
+
+Re-ran E1's full grid (`domain_balance_measurement.json`, same 22 converged cells,
+`diagnostic_blocks` 1.12.0 — no new fitting, entity weighting was already computed alongside
+equal weighting in the original run, this is a re-tabulation of existing output) with entity
+weighting as the primary reading, per the plan's D2/D3 gate.
+
+**Domain composition under entity weighting, first — this shapes everything below.** Social
+domain: `auth` is 75.2% (T1) / 74.2% (T2) of the entity-weighted pool; `art`/`affil`/`journ`
+split the rest. Semantic domain has no comparable concentration: `core_atom` 28.7%/31.6%,
+`fringe_atom` 29.3%/26.4%, `cousin_he` 20.1%/17.6%, `core_child_he` 15.9%/17.9%, `parent_he`
+6.0%/6.6% (T1/T2) — the two largest semantic facets are close to tied, and no single one
+dominates the way `auth` dominates social. This is exactly the risk the original plan named
+("`auth` is ~75% of the social domain, so 'social' effectively becomes 'authors'") — now
+measured, not hypothetical, and asymmetric between domains rather than a matched effect.
+
+**`dev_k` distribution, entity-weighted, `u_prob` space (the in-loop-relevant reading):**
+
+| | T1 (n=42) | T2 (n=34) |
+|---|---|---|
+| mean | 0.133 | 0.126 |
+| median | 0.113 | 0.112 |
+| p90 | 0.241 | 0.249 |
+| max | 0.295 | 0.322 |
+| % exceeding 40/60 band (TOL=0.10) | 57.1% | 61.8% |
+| % exceeding 35/65 band (TOL=0.15) | 42.9% | 26.5% |
+| % exceeding 30/70 band (TOL=0.20) | 26.2% | 14.7% |
+
+`z_scaled` (outer-loop) space shows the same pattern more strongly, and diverges between
+slices: mean `dev_k` 0.177 (T1) / 0.261 (T2) under V1 (anchors included), similarly under V2.
+T2's `z_scaled` reading is markedly worse than its `u_prob` reading (0.261 vs 0.126 mean) —
+a two-space disagreement of a kind not yet explained; flagged for E3 rather than resolved here.
+
+**This is materially larger than the equal-weighted pilot (mean ≈0.08, both slices) —
+confirmed, not just anticipated.** Two readings of why, both partially true, stated so `TOL`
+isn't set on a misread of the mechanism:
+1. **Some of this is a real measurement-fidelity gain.** Equal weighting's mean is an average
+   over 4 (social) and 5 (semantic) roughly-independent facet-level signals; averaging across
+   independent-ish quantities mechanically shrinks variance regardless of whether the
+   underlying imbalance is real. Entity weighting removes that averaging on the social side
+   specifically (§ above: `auth` alone drives ~92% of `soc_k`'s movement), so at least part of
+   the larger spread is the natural consequence of collapsing from ~4 informative facets to
+   ~1 — not evidence that communities are "actually" more imbalanced than the equal-weighted
+   numbers suggested.
+2. **Some of it is not an artifact.** The direction is no longer symmetric the way the
+   equal-weighted pilot's was: under entity weighting (`u_prob`, TOL=0.10, T1+T2 pooled, 76
+   communities total), 28 skew semantic, only 17 skew social, 31 sit inside the band — a
+   ~1.6:1 lean toward semantic-dominant communities that the equal-weighted reading (26/25/25,
+   effectively even) did not show. That directional shift is a genuine consequence of
+   reweighting, not just added noise, and is worth carrying forward as a finding in its own
+   right: under a true population-mass reading, communities lean semantic more often than they
+   lean social on this corpus.
+
+**Concrete cases** (entity-weighted, `u_prob`): most skewed social-leaning is `T2/C2/K4`
+community 2 (`r=0.822`, `dev=0.322`); most skewed semantic-leaning is `T1/C2/K3` community 1
+(`r=0.222`, `dev=0.278`). Both considerably more extreme than the equal-weighted pilot's top
+cases (`r=0.745`/`r=0.304`).
+
+**Practical consequence for `TOL` (D3):** a `TOL=0.10` band, read naively off these numbers,
+would flag a majority of communities in both slices (57-62%) — too strict to be a useful
+in-loop pressure term if applied unmodified, given point 1 above. A `TOL` in the `0.20-0.25`
+range keeps the flagged fraction in the same rough neighbourhood (~15-26%) as the
+equal-weighted pilot's `TOL=0.10` reading, but that match is a calibration choice, not a
+principled derivation — **`TOL` under entity weighting should be set with point 1's
+variance-loss effect explicitly in mind, not by porting a band-width tuned on the
+equal-weighted numbers.** Left as the next open call (D3), not resolved by this re-tabulation.
 
 **Design and measurement recorded here; implementation not started.** No code changes to
 `chunk13v9.py` for this mechanism exist yet — the in-loop/outer-loop split above, the entity
-weighting decision, and E1's GO verdict are the design and evidence to build from, not a
+weighting decision, and this re-tabulation are the design and evidence to build from, not a
 description of shipped behaviour. See CLAUDE.md §4.18/ticket 82 for the current status line.
 
 ---
