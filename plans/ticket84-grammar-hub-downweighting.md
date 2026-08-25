@@ -254,6 +254,49 @@ New `diagnostic_scripts/grammar_damping_tier0.py`. Loads existing T1/T2 pickles 
 
 **If Tier 0 fails, the ticket ends here with nothing regenerated and nothing to revert.**
 
+#### Phase 1 — EXECUTED. Gate: PASS.
+
+Run: `chunk13_execution/diagnostic_scripts/grammar_damping_tier0.py`, both slices, no
+`chunk12.py` change, no cache write, no fit run. Full output:
+`diagnostic_results/grammar_damping_tier0.json`.
+
+- **Metric 1 (corrected):** all 3 damped relations clear the bar (≥1.95×) both slices —
+  `M_Atom_Child` 5.17×/6.34×, `M_Fringe_Cousin` 2.89×/2.89×, `M_Cousin_Child` 3.45×/3.04×.
+- **Metric 2:** top-1% mass share compresses as expected (e.g. `M_Atom_Child` 12.0%→0.9%
+  T1). **Fragmentation-guard ceiling (deferred in the original plan to "after first
+  measurement") is now set from this run**: post-damping, degree-1 rows' mass share is
+  consistently **91-96% of their own population share** (`M_Atom_Child` T1 70.3% of rows →
+  64.9% of mass, ratio 0.923; T2 ratio 0.915; `M_Fringe_Cousin` T1 ratio 0.936, T2 ratio
+  0.956) — i.e. damping brings them toward, but not past, proportional representation in all
+  4 measured cells. **Proposed ceiling: mass share ≤ population share (ratio ≤ 1.0)**,
+  measured with headroom in every case so far.
+- **Metric 3:** row max/mean concentration falls sharply for all 3 (e.g. `M_Atom_Child`
+  13.04→3.53 T1, 16.57→3.76 T2).
+- **Metric 4:** the original spectral sub-metric was degenerate as first written — the
+  `core_child_he` projection under `M_Atom_Child` is **already disconnected into 3 (T1) / 4
+  (T2) components before any transform**, which forces a normalized-Laplacian Fiedler value
+  of exactly 0 regardless of damping (a disconnected graph's 2nd-smallest eigenvalue is 0 by
+  construction) — caught before reporting a false pass. Fixed: restricted to the largest
+  component (110/114 T1, 200/208 T2 — the disconnection itself is minor). Within it: Fiedler
+  value falls in both slices (0.175→0.156 T1, 0.180→0.138 T2 — damping loosens connectivity
+  slightly, as expected: hub atoms were literally the shared connective tissue). Conductance
+  **disagrees in direction between slices** (T1: 0.131→0.199, better-mixed; T2: 0.272→0.218,
+  more separable) — per SESSION_PROTOCOL rule 8, reported as-is, not reconciled; sample is 2
+  slices, not enough to call a trend either way. **The direct mechanism metric is the one
+  that matters and it's unambiguous**: mean shared-atom mass fraction per child hyperedge
+  falls in both slices (0.531→0.480 T1, 0.630→0.575 T2) — i.e. unique-atom share rises ~5
+  points both times, the fragmentation mechanism confirmed numerically, consistent direction.
+- **Metric 5:** all 6 anchor/social matrices byte-identical before/after, both slices.
+- **Metric 6:** confirms the prediction made when `M_Cousin_Child`'s justification was
+  written, not just re-derives it — `dummy_cousin` mass share falls after damping in both
+  slices (37.2%→31.4% T1, 37.7%→33.7% T2), i.e. the transform measurably shifts
+  `M_Cousin_Child`'s mass toward `cousin_he` (noun/modifier-phrase) structures and away from
+  `dummy_cousin` (generic predicate) structures, as the substantive argument predicted.
+
+**Gate verdict: PASS.** Proceeding to Phase 2 (cache namespacing) is next — not yet done,
+since it touches `diagnostic_blocks.py`, shared infrastructure used by other diagnostics, and
+warrants a check-in before editing rather than being folded into this same read-only pass.
+
 ### Phase 2 — cache namespacing (prerequisite for any fitting)
 
 `diagnostic_blocks.py:418-433` `_cache_key` hashes `chunk13v9.py` source but **not the input
