@@ -454,23 +454,69 @@ This was lost in the rewrite that introduced softplus (§4.8) and was not restor
 the other regressions from that rewrite (Frobenius normalisation, alpha weighting,
 initialisation). **v9 currently has no per-community domain-balance mechanism at all.**
 
-**Reimplementation is blocked on §4.3/FINDINGS §12–13**, because v8's formula (and the naive
-port of it) uses `U_scales / √N_f` — exactly the undetermined quantity. A relation-level
-reformulation using `|Z_scaled[k,k]|` per relation, summed by domain, is the current
-candidate — see FINDINGS §13 for the anchor-handling problem this raises (anchor relations
-touch both `art`, a hub, and a domain-exclusive facet; with 2 anchors in a config, naive
-domain-summing double-credits the hub) and the proposed anchor-count normalisation fix
-(`0.5/n_anchors` contribution per anchor to each side, rather than a flat `0.5`).
+**No longer blocked — unblocked by recognizing domain as a FACET property, not a relation
+property (design session, not yet implemented in code; full reasoning in FINDINGS §13's
+update).** v8's relation-level framing (and the naive `U_scales/√N_f` port of it) forced an
+ill-posed question for anchor relations: is `M_Child_Art` "social" or "semantic"? It touches
+`art` (a bibliographic entity) and `core_child_he` (a semantic hyperedge) simultaneously.
+**There is no such thing as a mixed facet, though** — `art` is unambiguously social (same
+kind of entity as `auth`/`journ`/`affil`); it only *looks* ambiguous because it participates
+in both `S_` and `M_` relations. A facet-level formulation never has to answer the ill-posed
+relation-level question, and **supersedes the `0.5/n_anchors` candidate fix** — verified
+directly (all 6 configs, `RELATION_MAP`): `art` has exactly 2 non-anchor relations
+(`S_Art_Auth`, `S_Art_Journ`) in *every* config regardless of anchor count, so a facet-level
+profile is structurally comparable across single- and dual-anchor configs without any
+anchor-count correction at all.
 
-**Empirical status:** measured (with the *known-flawed* `U_scales/√live` formula, before this
-finding) across all 6 configs at K=4 — every one of 24 (config, community) values showed
-social-leaning imbalance, several at 0.85–0.93. Re-measured with `U_scales × ‖U_norm‖₁`
-(direct L1) on C6 — the *same* model showed **semantic**-leaning imbalance instead
-(0.28–0.35). The two measurements disagree in direction, not just magnitude, which is
-consistent with §4.3's finding that the input quantity is not determined. **Whether real
-per-community domain imbalance exists in this model is currently unanswerable** until mass
-is measured on a determined basis (relation-level `Z_scaled`). Do not conclude either
-direction from the numbers on record.
+**Design settled, both mechanisms following the existing `z_offdiag_loss`(in-loop)/
+`collapse_pen`(outer-loop) architectural pattern:**
+- **In-loop (differentiable):** per community `k`, `soc_k`/`sem_k` = weighted mean over active
+  facets in that domain of `U_prob[f][:,k]`'s mean over LIVE entities (ticket 60 masking
+  required — dead entities sit at the clamp floor and normalize to ≈uniform `1/K`, diluting
+  every community toward the null); `r_k = soc_k/(soc_k+sem_k+eps)`; penalty
+  `mean_k(max(0, |r_k-0.5| - TOL)²)`. **Verified trap, not a hypothetical:** `U_norm`'s columns
+  have unit L2 norm by construction (`U_scales[f] = ‖col‖₂`, `U_norm = u/U_scales`, chunk13v9.py
+  ~589-591) — porting v8's `‖U[:,r]‖₂` formula onto `U_norm` directly would be gauge-safe and
+  differentiable, but **identically constant (≡1)**, penalizing nothing. `U_prob` (which varies
+  per row) is the correct substitute, not `U_norm` column norms.
+- **Outer-loop (`Z_scaled`-based, mirrors `collapse_pen`'s construction):** per relation,
+  production's own `_relation_community_share` (§17); each relation's share vector credited to
+  *both* facets it touches (a true statement, not double-counting); anchor relations are
+  **included** (reverses an earlier draft of this design) — excluding them would make the
+  measure blind to exactly the social↔semantic binding a heterogeneous community shows up
+  through, and would violate §4.15's "do not special-case for anchor count" rule. Anchor
+  sensitivity (reading with vs. without anchors) is measured, not assumed away — see below.
+
+**Weighting decision (equal-per-facet vs. live-entity-count) — resolved in favor of
+entity-count weighting**, reversing an initial lean toward the codebase's equal-weighting
+convention. Two independent arguments converged: (1) only entity weighting is mathematically
+a true population-mass share — it is algebraically identical to pooling every live entity in
+the domain and taking one grand mean of `U_prob[:,k]`, whereas equal-per-facet weighting
+discards absolute headcount by construction (an average of per-facet-type proportions, not a
+sum-comparable mass); this is the standard "proportional vs. equal allocation" distinction
+from stratified sampling, and the mechanism's target (domain-level balance) is the
+population-level question proportional allocation answers. (2) **Decisive for the in-loop term
+specifically:** the gradient of `soc_k` w.r.t. one entity's `U_prob` row is `1/N_f` under equal
+weighting (facet-size-dependent — in T1, an `auth` entity's leverage is ~1/23rd a `journ`
+entity's) but a uniform `1/N_domain` under entity weighting, regardless of facet. Equal
+weighting would let the optimizer satisfy the penalty cheaply by reshuffling small facets while
+leaving `auth` (the dominant facet by population) essentially untouched — a self-inflicted
+version of the Problem 2 gaming lesson, not a hypothetical.
+
+**E1 measurement (diagnostic-only, `diagnostic_scripts/domain_balance_measurement.py`,
+`diagnostic_blocks.py` 1.12.0) answers the "unanswerable" question below — GO.** On the
+determined basis (`u_prob`, equal-weighted as measured — entity-weighted reruns not yet
+re-tabulated post-decision): mean `dev_k` (deviation from `r_k=0.5`) ≈0.08 in both T1 and T2,
+median ≈0.07 — most communities sit within a generous band, consistent with some imbalance
+being expected from topology alone. But **no consistent direction** (T1/T2 combined: 26
+communities skew social, 25 semantic, 25 balanced — unlike the pre-fix numbers below, which
+disagreed in direction only because they were both measuring an undetermined quantity) and a
+genuine tail: ~31-32% of communities exceed a 40/60 band, ~12-14% exceed 35/65, with concrete
+cases up to `r=0.745` (`T2/C2/K4` community 2). Entity weighting (not yet re-run as primary)
+showed materially larger deviations in the equal-weighted pilot (mean ≈0.13 vs 0.08) —
+expected, given `auth`'s dominance under that weighting; the correct next step is re-running
+E1's full grid under entity weighting as primary before setting `TOL`, not reusing the
+equal-weighted numbers above.
 
 ### 4.19 Sparsity term (`lambda_l1`) fixed to 0.0 for the toy corpus (ticket 78)
 
@@ -636,6 +682,7 @@ for the full derivation.
 | 67 | M3 §5.2, `objective()` | Never passed `K` to `run_inner_solver` — only buried `'K': K_fixed` inside the `params` dict, which the function doesn't read. `TypeError: missing 1 required positional argument: 'K'` on every trial. Found via the post-Batch-C smoke test, not previously registered. | **Closed.** `K=K_fixed` passed explicitly. |
 | 68 | M3 §2/§3/§4 evaluator returns | `evaluate_dimensional_collapse`, `evaluate_topological_coherence`, `evaluate_socio_semantic_reality` returned numpy scalars; `trial.set_user_attr(...)` → stdlib `json.dumps` → `TypeError: Object of type float32 is not JSON serializable` on every trial. Found via smoke test. | **Closed.** Cast to native `float` at each function's own `return`, not just in the aggregator — see §6 JSON note. |
 | 69 | M3 §5.2, `objective()` | Reimplemented §5.1's evaluation sequence inline instead of calling `evaluate_complete_solution()`, on raw (non-numpy) tensors. Root cause of ticket 68 being reachable and of the original 5-value-unpack regression (see ticket 31/32 history). | **Closed.** `objective()` now calls `evaluate_complete_solution()` directly (§4.13, §3). |
+| 83 | M2, `run_inner_solver` | `lambda_l1 = params['lambda_l1']` (line 522) is a hard `[]` lookup. Ticket 78 fixed `lambda_l1` at `0.0` and removed it from `trial.suggest_float` — it is recorded only via `trial.set_user_attr`, which does **not** enter `trial.params`. The Optuna objective itself never hits this (it builds its own `hyperparams` dict with `'lambda_l1'` explicit, §5.2), but §S4's archiver (`params=trial.params`) and §S5's stability loop (`params=metadata["hyperparameters"]`, itself a serialization of `trial.params`) both pass it straight through — both raise `KeyError` on every call. A production run would complete the full ~4-5h Optuna search (§6, ticket 76) and only crash at the archiving stage. Found while mapping the file for the ticket 82 domain-balance design work, unrelated to it. | **Closed.** `params.get('lambda_l1', 0.0)`, matching the existing `lambda_z_offdiag` readout on the next line. Verified directly: reproduced the exact `params` shape `trial.params` has post-ticket-78 (`{'lambda_z_offdiag': ...}`, no `'lambda_l1'` key) and confirmed `run_inner_solver` no longer raises. |
 
 ### Silent incorrect computation
 
@@ -691,7 +738,7 @@ Full evidence for all four is in FINDINGS.md §12–§16.
 | 79 | M2, `U_scales` construction | **U_scales is an undetermined free direction in the loss, not a mass measure.** Proven algebraically (scale a `U_pos` column by *c*, compensate in the corresponding `Z_pos` rows/cols, and `recon_loss`/`sparsity_loss`/`z_offdiag_loss`/`U_norm`/`Z_scaled` are all unchanged to float precision while `U_scales` changes by exactly *c*) and confirmed empirically (CV up to 1.2 for the same facet/community across differently-initialised runs with near-identical `recon_loss`). Invalidates the "use `U_scales` for mass" guidance in §4.3 (old version), §4.4's collapse formula, and every domain-balance calculation attempted on `U_scales`. See FINDINGS §12. | **Closed.** `evaluate_dimensional_collapse` rewritten to use `|Z_scaled[k, π(k)]|` (relation-level, permutation-corrected) via reconstruction-space share (`within_k/total`, FINDINGS §8) — see FINDINGS §17. `U_scales` no longer passed into collapse at all. |
 | 80 | M3 §2, `evaluate_dimensional_collapse` | `ENTROPY_THRESHOLD=0.60` does not correspond to the stated target ("no community >0.6 mass"); the correspondence is also K-dependent and non-monotone (two distributions with identical max-share can give very different entropy). See §4.4 above for the numbers. | **Closed.** Direct max-share penalty implemented, ceiling-shape ported verbatim from `evaluate_socio_semantic_reality`'s `MAX_MONOPOLY` penalty (this file, Part B), threshold `MAX_SHARE_THRESHOLD=0.60` (same numeric value as `ENTROPY_THRESHOLD`, reused as the pre-existing target, not re-derived). See FINDINGS §17. |
 | 81 | M3 §5.1, `evaluate_complete_solution` — aggregation | `collapse_pen` and `coherence_pen` are exactly `0.0` in all 12 tested cells (C1–C6 × K∈{2,4}, production settings). `sociological_penalty == semantic_pen` bit-for-bit throughout. Not because inputs are constant (`normalized_entropy` 0.808–0.995, `weakest_mean` 0.744–1.000) but because both thresholds sit below where any production fit in this grid lands. See §4.17. | **Partially superseded.** `collapse_pen` now fires on 2/12 cells post-ticket-79/80 fix (FINDINGS §17) — no longer always 0.0. `coherence_pen` is untouched by this session's work and remains exactly 0.0 in all 12 cells; still open. |
-| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-community, differentiable) was lost in the softplus-era rewrite and not restored. See §4.18. | **Open — mass primitive now implemented and live (FINDINGS §17), domain-balance mechanism itself still not built.** Anchor double-counting under a naive relation-level port still needs resolving (2-anchor configs credit `art` twice) — anchor-count normalisation (`0.5/n_anchors` per anchor per side) is the current candidate, not yet implemented. **Permutation-correction groundwork corrected and shipped:** FINDINGS §16's original "1 solid real conflict" (C5/K4 `art`) was itself a bug — the confidence re-filter that produced it forgot to re-apply leaf-exclusion, wrongly counting `S_Art_Journ` (touches the leaf facet `journ`) as a dissenting vote. Corrected: **zero confirmed real non-leaf conflicts anywhere in the grid.** `evaluate_dimensional_collapse` therefore corrects each relation independently and does not implement cross-relation conflict resolution — documented limitation, see FINDINGS §17. Criterion chosen (`structure_score > 1.0`) verified head-to-head against `chunk13v3.py`/`v4.py`'s original `diagonal_mass/hungarian_mass < 0.7` — 12/94 disagreements, 8 of them cases the older criterion would have wrongly "corrected" a genuinely mixed relation. **Toy-corpus calibrated throughout — re-derive at 22k-article scale before reuse.** |
+| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-community, differentiable) was lost in the softplus-era rewrite and not restored. See §4.18. | **Open — design settled (facet-level, entity-weighted, dual in-loop/outer-loop; §4.18), implementation not yet started.** The relation-level anchor-double-counting problem this row previously described is **superseded**, not solved in place — a facet-level formulation (domain is a facet property, not a relation property) makes it not arise: verified `art` has exactly 2 non-anchor relations in every config regardless of anchor count, so no anchor-count correction is needed. E1 (`domain_balance_measurement.py`) answers the prior "currently unanswerable" question in §4.18 below: real per-community imbalance exists on a determined basis, no consistent direction, moderate typical magnitude with a genuine tail (~31% of communities outside a 40/60 band). Not yet implemented in `chunk13v9.py`; E1 needs re-tabulating under entity weighting (the now-decided primary basis) before `TOL`/thresholds are set (E1's own D2/D3). **Permutation-correction groundwork corrected and shipped:** FINDINGS §16's original "1 solid real conflict" (C5/K4 `art`) was itself a bug — the confidence re-filter that produced it forgot to re-apply leaf-exclusion, wrongly counting `S_Art_Journ` (touches the leaf facet `journ`) as a dissenting vote. Corrected: **zero confirmed real non-leaf conflicts anywhere in the grid.** `evaluate_dimensional_collapse` therefore corrects each relation independently and does not implement cross-relation conflict resolution — documented limitation, see FINDINGS §17. Criterion chosen (`structure_score > 1.0`) verified head-to-head against `chunk13v3.py`/`v4.py`'s original `diagonal_mass/hungarian_mass < 0.7` — 12/94 disagreements, 8 of them cases the older criterion would have wrongly "corrected" a genuinely mixed relation. **Toy-corpus calibrated throughout — re-derive at 22k-article scale before reuse.** |
 
 ### Recently closed (verify before trusting)
 

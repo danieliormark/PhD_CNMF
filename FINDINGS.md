@@ -739,7 +739,9 @@ in absolute terms via `U_scales`.
 
 ## 13. What replaces `U_scales` for mass, and the anchor-handling problem
 
-**Status: Open. Candidate identified, not yet implemented.**
+**Status: Open. The anchor-handling problem below is superseded by a facet-level
+reformulation (see the update at the end of this section) — kept here as historical record of
+why the relation-level framing was abandoned, not as the current design.**
 
 ### Why `Z_scaled[k,k]` is determined where `U_scales` is not
 
@@ -818,6 +820,119 @@ balance in either direction. See CLAUDE.md §4.18 for the practical
 consequence (imbalance direction flipped between social-dominant and
 semantic-dominant depending on normalisation, on the *same* fitted model —
 consistent with, and now explained by, this section's finding).
+
+### Update: facet-level reformulation supersedes the anchor-handling problem above
+
+The anchor double-counting problem above assumes domain is a property of *relations* — under
+that framing, an anchor relation (`M_Child_Art`, touching both `art` and `core_child_he`)
+genuinely is ambiguous, and the `0.5/n_anchors` fix was the best available patch. **Domain is
+a property of facets, not relations, and there is no such thing as a mixed facet.** `art` is
+a bibliographic entity — the same kind of thing as `auth`/`journ`/`affil` — and is
+unambiguously social; it only looks mixed because it happens to participate in both `S_` and
+`M_` relations. A facet-level formulation never has to answer "is `M_Child_Art` social or
+semantic," which is the question that forced the anchor problem in the first place. Verified
+directly against `RELATION_MAP` for all 6 configs: `art` has exactly 2 non-anchor relations
+(`S_Art_Auth`, `S_Art_Journ`) regardless of anchor count, so a facet-level profile is
+structurally comparable across single- and dual-anchor configs without any anchor-count
+correction — the `0.5/n_anchors` candidate above is **superseded**, not implemented.
+
+**The mechanism, as designed (not yet implemented in `chunk13v9.py`):** two components,
+following the pipeline's own established pattern of an in-loop differentiable pressure term
+paired with an outer-loop reality check (`z_offdiag_loss`/`collapse_pen`).
+
+- **In-loop, `U_prob`-based.** Per community `k`: `soc_k`/`sem_k` = a weighted mean, over
+  active facets in that domain, of `U_prob[f][:,k]`'s mean across facet `f`'s LIVE entities
+  (ticket 60 masking is required — dead entities sit at the clamp floor and normalise to
+  ≈uniform `1/K`, which would drag every community toward false balance). `r_k =
+  soc_k/(soc_k+sem_k+eps)`, `0.5` = balanced; penalty `mean_k(max(0, |r_k-0.5|-TOL)²)`, `TOL`
+  a flexibility band (e.g. `0.10` accepts 40/60–60/40) rather than a strict 50/50 target — this
+  is a per-community measure, not a global one: a model with one purely-social and one
+  purely-semantic community scores maximal penalty on *both*, even though the two would
+  average out to a perfectly balanced *model*.
+  **A concrete trap caught before it could be built wrong:** `U_norm`'s columns have unit L2
+  norm by construction (`U_scales[f] = ‖col‖₂`, `U_norm = u/U_scales`) — porting v8's
+  `binding_penalty` formula (`‖U[:,r]‖₂/√N_f`) onto `U_norm` directly would be differentiable
+  and gauge-invariant, and **identically constant**, penalising nothing. `U_prob` (which
+  varies per row, unlike a column norm) is the correct substitute.
+- **Outer-loop, `Z_scaled`-based**, deliberately a *different* space from the in-loop term —
+  an audit sharing the in-loop term's own pathway cannot detect that pathway being satisfied
+  degenerately (the Problem 2 lesson, §20). Per relation, production's own
+  `_relation_community_share` (§17, `within_k/total`); each relation's share vector is
+  credited to *both* facets it touches — a true statement ("this relation contributes to both
+  endpoint facets' profile"), not double-counting. **Anchor relations are included**
+  (considered and reversed from an initial draft that excluded them): excluding them would
+  make the measure blind to exactly the social↔semantic binding a genuinely heterogeneous
+  community shows up through, and would violate §4.15's rule against special-casing for
+  anchor count. Measured (not assumed) how much this choice matters: mean "anchor
+  sensitivity" (reading with vs. without anchors, per community) is modest — T1 0.052, T2
+  0.061 — but with a real per-cell outlier at `T1/C5/K4` (0.21), worth a caveat rather than a
+  reason to switch.
+
+**Weighting (equal-per-facet vs. live-entity-count) — resolved in favour of entity-count
+weighting, reversing an initial lean toward the codebase's equal-weighting convention
+(`collapse_mass_share`, `membership_share_all_facets`).** Two arguments, one about
+measurement semantics and one about optimisation dynamics:
+1. Algebraically, entity weighting is the *only* one of the two that is a true,
+   sum-comparable population-mass share — it reduces exactly to pooling every live entity in
+   the domain and taking one grand mean of `U_prob[:,k]`, independent of facet boundaries.
+   Equal weighting is a different construct: an average of per-facet-*type* proportions,
+   which by design discards absolute headcount (a facet with 14 live entities counts as much
+   as one with 461). This is the standard proportional-vs-equal-allocation distinction from
+   stratified sampling, and the mechanism's actual target — domain-level balance, not
+   facet-type representativeness — is the population-level question proportional
+   (entity-weighted) allocation is designed to answer.
+2. **Decisive for the in-loop term specifically.** The gradient of `soc_k` with respect to one
+   entity's `U_prob` row is `1/(|S|·N_f)` under equal weighting — facet-size-dependent, so in
+   T1 an individual `auth` entity's leverage over the penalty is roughly 1/23rd an individual
+   `journ` entity's — versus a uniform `1/N_domain` for every entity under entity weighting,
+   regardless of facet. Under equal weighting, gradient descent would find it cheapest to
+   satisfy the penalty by reshuffling small facets (`journ`, `affil`) while leaving `auth`
+   (the domain's actual dominant population) essentially untouched — a self-inflicted version
+   of the Problem 2 gaming lesson, built into the mechanism's own construction rather than
+   discovered by an adversarial search.
+
+**Interference — how much of a relation's reconstructed mass isn't attributable to any single
+community — is worth interpreting, not just tracked as noise, and it interacts with the
+weighting decision above.** Decomposed exactly for one example (`S_Art_Auth`,
+`T1/C6/K4`, verified numerically against the cached fit, not derived): total reconstructed
+mass `0.035271` (confirmed equal to `‖U1·Z·U2ᵀ‖²_F` computed directly, not just via the trace
+identity); diagonal-squared sum `0.032030`; the gap (`0.003241`, i.e. `Σ share_k = 0.908`,
+9.2% interference) splits into raw `Z` off-diagonal magnitude (`0.001906` — genuine
+cross-community relational coupling, e.g. authors nominally in one community co-authoring
+with another's articles at a real rate) and a remainder (`0.001335`) attributable purely to
+`c_u=U_normᵀU_norm` not being the identity — i.e. community-loading collinearity, the same
+phenomenon [[chunk13-collinearity-legitimacy]] already treats as potentially legitimate
+cross-cutting structure rather than a defect. **This matters more, not less, under entity
+weighting**: since `auth` now dominates the social-domain reading (vs. getting 1 vote of 4
+under equal weighting), whatever interference level lives specifically in `auth`'s own
+relations (`S_Art_Auth`, `S_Auth_Affil`) now propagates into the whole social-side reading
+almost directly, rather than being diluted by three other equally-weighted facets. Not yet
+checked: whether the dominant facet on each domain side (`auth` for social, likely
+`core_atom` for semantic — the largest facet at 642) shows comparable interference levels to
+each other; a systematic difference there would bias the entity-weighted comparison in a
+predictable direction, not just add noise.
+
+**E1 measurement (diagnostic-only, no `chunk13v9.py` changes;
+`diagnostic_scripts/domain_balance_measurement.py`, `diagnostic_blocks.py` 1.12.0) answers
+this section's own open question — GO.** Measured on the `u_prob`, equal-weighted basis
+(entity-weighted, now the decided primary basis, not yet re-tabulated as of this writing):
+mean `dev_k` (deviation of `r_k` from 0.5) ≈0.08 in both T1 and T2, median ≈0.07 — most
+communities sit within a generous band, consistent with some imbalance being expected from
+topology and facet-size asymmetry alone, not evidence of a defect by itself. **No consistent
+direction** — 26 communities skew social, 25 semantic, 25 balanced, pooled T1+T2 — unlike the
+pre-fix `U_scales`-based numbers, which disagreed in direction only because both were
+measuring an undetermined quantity, not because the true balance is genuinely mixed. But a
+real, non-trivial tail: ~31-32% of communities exceed a 40/60 band, ~12-14% exceed 35/65, up
+to `r=0.745` (`T2/C2/K4` community 2, 75% social) and `r=0.304` (`T1/C3/K4` community 0, 70%
+semantic-leaning). The equal-weighted pilot of entity weighting (computed alongside, not the
+primary reading) showed materially larger deviations (mean ≈0.13) — expected given `auth`'s
+dominance — meaning `TOL` should not be set from the equal-weighted numbers above; E1's grid
+needs re-tabulating with entity weighting as primary before that decision.
+
+**Design and measurement recorded here; implementation not started.** No code changes to
+`chunk13v9.py` for this mechanism exist yet — the in-loop/outer-loop split above, the entity
+weighting decision, and E1's GO verdict are the design and evidence to build from, not a
+description of shipped behaviour. See CLAUDE.md §4.18/ticket 82 for the current status line.
 
 ---
 
