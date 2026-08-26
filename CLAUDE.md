@@ -573,7 +573,10 @@ arises for every consumer to see corrected labels without calling
 function for that — do not fold it back into the fitting stage.
 
 ### 4.21 chunk12 relation-weighting extension — scoped briefing for design work (ticket 84,
-not started)
+**Phases 1-4 executed on the toy corpus — see §8 ticket 84 for the full result.** The
+section below is kept as the historical design briefing, with two factual corrections
+inline where the original briefing turned out to be wrong once checked against code — not
+rewritten, so the record of what was corrected and why stays visible.)
 
 **This section exists specifically to be read before starting design work on ticket 84** —
 whether to extend chunk12's relation weighting beyond `S_Art_Auth` (log-damped) and the 3
@@ -612,22 +615,35 @@ FINDINGS §21 — do not default to applying the same formula to both:**
 - `S_Art_Journ`: extend the *existing* anchor tf-idf formula (`log1p(tf)·idf`) — its column
   skew (some journals carry far more of the corpus than others) is literally the same
   document-frequency phenomenon the anchor formula already measures, just for a different
-  facet. Low risk, no new mechanism.
+  facet. ~~Low risk, no new mechanism.~~ **[CORRECTED, ticket 84 design pass — this claim
+  was checked and found wrong]:** the existing anchor formula keys idf on the *row*
+  (`build_anchor_csr`, `idf_dict.get(r)`), but `S_Art_Journ`'s journal is the *column* — a
+  column-keyed variant, and it needs `dfreq_global['journ']`, which is never collected today.
+  **Deferred out of this ticket's scope entirely** (D4), not implemented.
 - The 5 grammar relations (`M_Atom_Child`, `M_Child_Parent`, `M_Fringe_Cousin`,
   `M_Cousin_Parent`, `M_Cousin_Child`): tf-idf does not transfer cleanly — there is no
   document/article concept inside a pure semantic-hierarchy edge. The natural analog is
   `S_Art_Auth`'s own degree-based log-damping, not idf. `M_Atom_Child` is the priority case
-  (worst measured skew in the whole topology, FINDINGS §21's table).
+  (worst measured skew in the whole topology, FINDINGS §21's table). **[UPDATE, ticket 84
+  D8]: not all 5 got it.** Split by what the row entity *is*: `M_Atom_Child`/`M_Fringe_Cousin`
+  (atom-rooted — degree there is a direct ubiquity signal, the same structural argument as
+  `S_Art_Auth`) damped; `M_Child_Parent`/`M_Cousin_Parent` (hyperedge-rooted — recurrence
+  there plausibly reflects genuine cross-cutting synthesis, not noise) left untouched;
+  `M_Cousin_Child` damped on a separate, bespoke justification (row degree there measures
+  *context genericness* for the interpretation layer, checked directly against real
+  `dummy_cousin`/`cousin_he` data, not the ubiquity argument the other two use).
 
-**Explicitly NOT yet decided, and the actual work of this ticket:** the exact damping
-constant/exponent for the grammar relations (log2 as-is, or a different base/shape — pick
-by evidence, the way `lambda_l1`'s range was derived from a measured quantity, ticket 77, not
-guessed); whether all 5 grammar relations need it or only the worst 1-2 (`M_Atom_Child` first,
-per the table); how a changed input matrix interacts with the joint-anchor SVD (ticket 64)
-and the Frobenius-normalization step (§4.2) for the facets it touches; and an explicit
-before/after validation against §9's named "ubiquitous semantic elements... structurally
-disfavoured" limitation, since that is the problem this proposal is meant to address, not an
-assumption that it will.
+**Now decided (was "explicitly NOT yet decided" in the original briefing):** damping
+constant is `log2` verbatim, not tuned — the corpus's idf resolution (2-17 distinct values)
+and its own measured noise floor (FINDINGS §21) rule out adjudicating an exponent on this
+data (D3). Scope is the 3-relation split above, not "worst 1-2" (D8). The
+joint-anchor-SVD/Frobenius-normalization interaction was traced exactly: `M_Atom_Child`'s
+row-rescaling is annihilated by Step 3's row-normalization in all 6 configs (verified by
+tracing control flow, not assumed), so this change acts almost entirely through the training
+loss, not initialization. **§9 validation: NOT performed as originally framed** — see D5
+below; both design passes concluded the mechanism (a row-scale change) cannot address §9 (a
+row-*shape* limitation), and §9 remains open, unresolved, in §9 below regardless of this
+ticket's outcome.
 
 **Cost, stated plainly so it is weighed, not discovered mid-implementation:** `chunk12.py` is
 the data-generation layer beneath every cached fit and empirical number in this file and
@@ -639,7 +655,8 @@ corpus-level decision than a tuning change. **Recommended split, matching how ti
 run: this design/scoping phase with Opus (the interacting choices above, and the re-derivation
 cost, need architectural judgment before code is written); implementation + re-running the
 existing FINDINGS test battery against the new data with Sonnet (high effort) once the design
-is settled.**
+is settled.** **Followed as recommended** — Opus ran the design pass (D1-D8), Sonnet ran
+Phases 1-4. See §8 ticket 84 for the executed result.
 
 ## 5. Namespace Gotcha
 
@@ -817,7 +834,7 @@ Full evidence for all four is in FINDINGS.md §12–§16.
 | 80 | M3 §2, `evaluate_dimensional_collapse` | `ENTROPY_THRESHOLD=0.60` does not correspond to the stated target ("no community >0.6 mass"); the correspondence is also K-dependent and non-monotone (two distributions with identical max-share can give very different entropy). See §4.4 above for the numbers. | **Closed.** Direct max-share penalty implemented, ceiling-shape ported verbatim from `evaluate_socio_semantic_reality`'s `MAX_MONOPOLY` penalty (this file, Part B), threshold `MAX_SHARE_THRESHOLD=0.60` (same numeric value as `ENTROPY_THRESHOLD`, reused as the pre-existing target, not re-derived). See FINDINGS §17. |
 | 81 | M3 §5.1, `evaluate_complete_solution` — aggregation | `collapse_pen` and `coherence_pen` are exactly `0.0` in all 12 tested cells (C1–C6 × K∈{2,4}, production settings). `sociological_penalty == semantic_pen` bit-for-bit throughout. Not because inputs are constant (`normalized_entropy` 0.808–0.995, `weakest_mean` 0.744–1.000) but because both thresholds sit below where any production fit in this grid lands. See §4.17. | **Partially superseded.** `collapse_pen` now fires on 2/12 cells post-ticket-79/80 fix (FINDINGS §17) — no longer always 0.0. `coherence_pen` is untouched by this session's work and remains exactly 0.0 in all 12 cells; still open. |
 | 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-community, differentiable) was lost in the softplus-era rewrite and not restored. See §4.18. | **Open — design settled, D1-D3 decided, implementation not yet started.** The relation-level anchor-double-counting problem this row previously described is **superseded**, not solved in place — a facet-level formulation (domain is a facet property, not a relation property) makes it not arise: verified `art` has exactly 2 non-anchor relations in every config regardless of anchor count, so no anchor-count correction is needed. E1 answers the prior "currently unanswerable" question in §4.18 below: real per-community imbalance exists on a determined basis. **D2 (weighting): entity, re-tabulated** — materially larger and directionally skewed toward semantic-leaning vs. the equal-weighted pilot, traced exactly (not just suspected) to `auth`'s ~75% share collapsing the social-side averaging from 4 facets to ~1.7 (Herfindahl/Kish derivation, FINDINGS §21, near-exact match to observed spread). **D3 (`TOL`): decided at `0.15` for the toy corpus**, set from a measured multi-seed noise floor (median 0.144, comparable to the `dev_k` signal's own median 0.112) rather than the entity-weighted spread directly — FINDINGS §21; flagged for re-estimation at 22k-article scale. Next: E2 (in-loop implementation + sweep). **Permutation-correction groundwork corrected and shipped:** FINDINGS §16's original "1 solid real conflict" (C5/K4 `art`) was itself a bug — the confidence re-filter that produced it forgot to re-apply leaf-exclusion, wrongly counting `S_Art_Journ` (touches the leaf facet `journ`) as a dissenting vote. Corrected: **zero confirmed real non-leaf conflicts anywhere in the grid.** `evaluate_dimensional_collapse` therefore corrects each relation independently and does not implement cross-relation conflict resolution — documented limitation, see FINDINGS §17. Criterion chosen (`structure_score > 1.0`) verified head-to-head against `chunk13v3.py`/`v4.py`'s original `diagonal_mass/hungarian_mass < 0.7` — 12/94 disagreements, 8 of them cases the older criterion would have wrongly "corrected" a genuinely mixed relation. **Toy-corpus calibrated throughout — re-derive at 22k-article scale before reuse.** |
-| 84 | chunk12.py, `compile_slice`/`build_*_csr` (upstream data generator, not `chunk13v9.py`) | `S_Art_Journ` and the 5 grammar relations (`M_Atom_Child` etc.) currently get no frequency/degree weighting at all, unlike `S_Art_Auth` (log-damped, ticket 63) and the 3 anchor relations (tf-idf weighted). Measured degree concentration in all 5 grammar relations is comparable to or worse than `S_Art_Auth`'s already-damped case — `M_Atom_Child` (13.0×/16.6× row max÷mean, T1/T2) is the worst in the whole topology, currently unaddressed. Connects to §9's already-documented, unresolved "ubiquitous semantic elements... structurally disfavoured" limitation. | **Open — proposed, design not started.** See §4.21 for the scoped briefing (read before starting design work) and FINDINGS §21 for the full evidentiary record (degree-concentration table, the exact log-damping formula verified against real data, the total-mass-vs-per-tie distinction that matters for the stated design goal of avoiding mono-article/high-degree-entity-dominated communities, and the tf-idf-scope correction to this session's own earlier claim that all `M_*` relations were unweighted). **Real cost:** changes the data-generation layer beneath every cached fit and number in this file and FINDINGS.md — larger blast radius than any `chunk13v9.py`-level change made so far. Recommended: Opus for design/scoping, Sonnet (high) for implementation + re-running the existing test battery once designed. |
+| 84 | chunk12.py, `compile_slice`/`build_*_csr` (upstream data generator, not `chunk13v9.py`) | `S_Art_Journ` and the 5 grammar relations (`M_Atom_Child` etc.) currently get no frequency/degree weighting at all, unlike `S_Art_Auth` (log-damped, ticket 63) and the 3 anchor relations (tf-idf weighted). Measured degree concentration in all 5 grammar relations is comparable to or worse than `S_Art_Auth`'s already-damped case — `M_Atom_Child` (13.0×/16.6× row max÷mean, T1/T2) is the worst in the whole topology, currently unaddressed. Connects to §9's already-documented, unresolved "ubiquitous semantic elements... structurally disfavoured" limitation. | **Phases 1-4 executed on the toy corpus; new versioned data exists but is NOT the production default.** Full record: `PhD_CNMF/plans/ticket84-grammar-hub-downweighting.md`. Design (Opus) then independent triangulation (Sonnet) settled D1-D8: **damping formula** — reuse `build_log_damped_row_csr` verbatim (Counter-of-1s), zero new formula; **scope (D8, revises the original "all 5" framing)** — only `M_Atom_Child`/`M_Fringe_Cousin` (atom-rooted, same ubiquity argument as `S_Art_Auth`) and `M_Cousin_Child` (bespoke justification — row degree there measures *context genericness* for interpretation, not ubiquity; verified `dummy_cousin` predicate structures are 2× overrepresented in the high-degree tail) damped; `M_Child_Parent`/`M_Cousin_Parent` left untouched (recurrence there plausibly reflects genuine synthesis, not noise); **`S_Art_Journ` deferred entirely** (D4 — needs new `dfreq_global['journ']` collection + a column-keyed idf variant, contra the original briefing's "low risk" claim, corrected in §4.21 above). **D5 (§9 link): both passes recommend striking it** — `U_prob`'s L1 row-normalization discards row scale, so a row-rescaling mechanism cannot address a row-*shape* limitation — **but this remains a recommendation, not a user-confirmed decision**; §9 in §9 below is unchanged. Phase 1 (Tier-0, read-only): **PASS**, all 6 metrics, degree-1 fragmentation-guard ceiling set from measurement (91-96% of population share, not guessed). Phase 2: `diagnostic_blocks.py` `_cache_key` now includes an input-data content hash, namespaced not invalidating (379 pre-existing cached fits untouched). Phase 3 (paired-seed fit validation, 240+ fits, corrected for a real cross-config-pooling bug found mid-session — see the plan file): **genuinely mixed** — 3 of 6 target (facet, slice) cells moved the predicted direction, 3 didn't; 2 of 6 clear the seed-noise floor with statistical confidence, one in each direction. **Held, not chased further on this corpus** (user decision) — 2 of 3 wrong-direction cells don't clear the noise floor (plausibly just noise); the one exception is small; the noise floor itself is comparable to the effect size throughout (consistent with FINDINGS §21). Phase 4: `chunk12v2.py` created (copy of `chunk12.py`, `chunk12.py` itself untouched — verified nothing references it by filename), writes to new `_v2`-suffixed pickles (production pickles never touched), null-rebuild verified clean (maps identical, all untouched relations byte-identical, all 3 damped relations match the validated transform exactly, both slices). `diagnostic_blocks.SLICE_PATHS` gained additive `'T1_v2'`/`'T2_v2'` entries — **not** the default `'T1'`/`'T2'`. **Whether `_v2` data ever becomes production is a separate, later, not-yet-made decision.** One named open item for the 22k-scale rebuild: `fringe_atom`/T2's wrong-direction result isn't explained by T1-being-thinner alone (it's the *better*-resourced slice) — flagged for a specific re-check, not just a re-run of the aggregate test. |
 
 ### Recently closed (verify before trusting)
 
@@ -1075,3 +1092,9 @@ row-stochastic normalization (`build_row_stochastic_csr`); grammar relations
 (`M_Atom_Child` etc.) are unweighted binary. **13v9 must not reimplement hub damping** —
 the article-author weights it receives are already log-damped by the time they reach
 `load_and_validate_data`.
+
+**Update (ticket 84, §8):** `chunk12v2.py` now exists alongside `chunk12.py` (untouched),
+extending this same damping to `M_Atom_Child`/`M_Fringe_Cousin`/`M_Cousin_Child`. Its output
+(`Star_extended_matrices_t1_v2.pkl`/`_t2_v2.pkl`) has **identical shape and nnz** to the
+table above — damping only reweights existing ties, never adds/removes one — registered
+additively as `SLICE_PATHS['T1_v2'/'T2_v2']`, not the default `'T1'`/`'T2'`.

@@ -2518,15 +2518,36 @@ not merely by capping the article's aggregate footprint. Any extension of this m
 the grammar relations should preserve this property deliberately, not just replicate the
 total-mass compression.
 
-**Recommendation, not yet implemented:** extend the existing anchor idf formula to
-`S_Art_Journ` (same document-frequency logic, low risk, no new mechanism). Extend
-`S_Art_Auth`-style degree log-damping to the 5 grammar relations, `M_Atom_Child` first as the
-clearest case. **Real cost, not to be underestimated:** `chunk12.py` is the data-generation
-layer underneath this entire session's cached fits and every empirical number recorded above
-and in §13/§17 — changing it invalidates that cache and requires re-deriving those numbers,
-a substantially larger blast radius than any `chunk13v9.py`-level change made this session.
-Proposed as **ticket 84** (§8), design not started — see CLAUDE.md §4.21 for the scoped
-briefing.
+**Recommendation as originally written (superseded by execution, kept for history):** extend
+the existing anchor idf formula to `S_Art_Journ` (same document-frequency logic, low risk, no
+new mechanism). Extend `S_Art_Auth`-style degree log-damping to the 5 grammar relations,
+`M_Atom_Child` first as the clearest case. **Real cost, not to be underestimated:**
+`chunk12.py` is the data-generation layer underneath this entire session's cached fits and
+every empirical number recorded above and in §13/§17 — changing it invalidates that cache and
+requires re-deriving those numbers, a substantially larger blast radius than any
+`chunk13v9.py`-level change made this session.
+
+**EXECUTED (ticket 84, CLAUDE.md §8) — both recommendations above were checked against code
+and found to need correction before implementation, not simply followed.** `S_Art_Journ`
+was **deferred entirely** — the anchor idf formula keys on the row, journals are the column,
+and the required `dfreq_global['journ']` was never collected; "low risk, no new mechanism"
+was wrong. Scope for the grammar relations was **not** "all 5" — split by row-entity type
+(D8): `M_Atom_Child`/`M_Fringe_Cousin` damped on this section's ubiquity argument;
+`M_Child_Parent`/`M_Cousin_Parent` left untouched (recurrence there plausibly reflects
+genuine synthesis, not noise); `M_Cousin_Child` damped on a separate, bespoke justification
+(context genericness for interpretation, not ubiquity — checked against real
+`dummy_cousin`/`cousin_he` data). Phase 1 (read-only gate): pass, all metrics. Phase 3
+(paired-seed fit validation, real model fits, not just static-matrix checks): **genuinely
+mixed** — 3 of 6 target cells moved the predicted direction, 3 didn't, 2 of 6 clear the seed
+noise floor with confidence (one each direction) — consistent with this section's and §21's
+own standing finding that the noise floor here is comparable to the effect size, not evidence
+the mechanism is wrong. Phase 4: a new versioned file `chunk12v2.py` (not an in-place edit —
+`chunk12.py` untouched) produces this data; null-rebuild verified clean against `chunk12.py`'s
+existing output (maps identical, untouched relations byte-identical, damped relations match
+the transform exactly). **Not promoted to production** — held pending the 22k-article corpus,
+where the noise floor is expected to shrink enough to actually adjudicate the mixed Phase-3
+result. Full record: `PhD_CNMF/plans/ticket84-grammar-hub-downweighting.md`; CLAUDE.md §8
+ticket 84 and §4.21 carry the condensed version.
 
 Diagnostic scripts (no `chunk13v9.py` or `chunk12.py` changes made):
 `diagnostic_scripts/domain_balance_seed_noise.py`. Results:
