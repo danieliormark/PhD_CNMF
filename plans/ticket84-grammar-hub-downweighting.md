@@ -311,6 +311,26 @@ pickle bytes (pickle is not guaranteed byte-stable).
 Write the transformed matrices to a **new** pickle path; point the loader at it. chunk12 is
 still untouched.
 
+#### Phase 2 — EXECUTED.
+
+`diagnostic_blocks.py` `_cache_key` now includes `_raw_data_hash(slice_name)` — a content
+hash over each relation's canonical `(indices, indptr, data)`, sorted by relation key, **not**
+pickle bytes (unstable across versions) and **not** the file path (unchanged when a file is
+regenerated with new content). Made visible in the filename itself
+(`{config}_K{K}_{slice}_{path}_data{10-char hash}_{12-char digest}`), not just buried in the
+opaque digest, per the plan's own "namespace... and legible" instruction. `BLOCKS_VERSION`
+bumped `1.12.0`→`1.13.0`.
+
+**Verified additive, not destructive:** all 379 pre-existing cache files
+(`diagnostic_results/tensors/*.npz`) remain on disk, byte-untouched, under their original
+names — none match the new `_data<hash>_` pattern. A fit request against unchanged data now
+computes a *different* filename than before this change (the naming scheme itself changed),
+so it will `[cache miss]` once and regenerate under the new scheme — a one-time cost, not
+invalidation of the old files, which stay available under their original names for Phase 3's
+paired before/after comparison. Smoke-tested: `_raw_data_hash('T1')` ≠ `_raw_data_hash('T2')`
+(distinct matrices), deterministic across repeated calls (memoized), and present verbatim in
+a sample `_cache_key()` output.
+
 **Mandatory: pair the seeds.** Fit old and new data at the *same* 5 seeds and compare paired
 differences. Much of FINDINGS §21's 0.144 SD is which local optimum a seed lands in — a common
 component pairing removes. This is the single largest lever against the noise floor.
