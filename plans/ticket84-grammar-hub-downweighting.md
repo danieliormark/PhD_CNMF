@@ -1,19 +1,19 @@
 # Ticket 84 — hub down-weighting for grammar relations (chunk12 relation weighting)
 
-> **STATUS: PHASES 1-3 EXECUTED ON THE TOY CORPUS. HELD — NOT PROCEEDING TO PHASE 4
-> (`chunk12.py`) until 22k-scale data is available.** Written by Opus in a design pass,
-> triangulated by Sonnet, then Phases 1 (Tier-0 gate, PASS), 2 (cache namespacing), and 3
-> (paired-seed fit validation, MIXED — 3/6 correct direction, 3/6 wrong, one confirmed
-> non-noise anomaly in each direction) were executed this session — see those sections
-> below for full results. **User decision (this session): hold here, do not chase further
-> precision on the toy corpus, revisit at 22k scale** — the toy-corpus noise floor is
-> comparable to the effect size being tested (consistent with FINDINGS §21's standing
-> finding), and no evidence suggests the mechanism is actively harmful, only that it isn't
-> cleanly demonstrable at this scale. `chunk12.py` remains untouched; nothing here has been
-> made irreversible. D5 (§9 justification) also remains open, separately, from before Phase
-> 1 — not a blocker for this hold decision either way. **Do not cite this as a settled
-> result** — it is an honestly-reported mixed outcome on an admittedly small, noisy corpus,
-> not a validated finding.
+> **STATUS: PHASES 1-4 EXECUTED ON THE TOY CORPUS. `chunk12v2.py` exists, verified clean,
+> but is NOT the production default** (`chunk12.py`/`'T1'`/`'T2'` untouched and unchanged;
+> `chunk12v2.py`/`'T1_v2'`/`'T2_v2'` are new, additive artifacts). Written by Opus in a
+> design pass, triangulated by Sonnet, then Phases 1 (Tier-0 gate, PASS), 2 (cache
+> namespacing), 3 (paired-seed fit validation, MIXED — 3/6 correct direction, 3/6 wrong, one
+> confirmed non-noise anomaly in each direction, corrected mid-session for a real
+> cross-config-pooling bug), and 4 (`chunk12v2.py` created, null-rebuild verified clean) were
+> all executed this session. **D5 (§9 justification): RESOLVED, user-confirmed — struck.**
+> See its own section below. **User decision on Phase 3's mixed result: held, not chased
+> further on the toy corpus, revisit at 22k scale** — the noise floor is comparable to the
+> effect size throughout (consistent with FINDINGS §21's standing finding); no evidence the
+> mechanism is actively harmful, only that it isn't cleanly demonstrable at this scale. **Do
+> not cite the Phase 3 result as settled** — it is an honestly-reported mixed outcome on an
+> admittedly small, noisy corpus, not a validated finding either way.
 >
 > Supersedes this file's previous contents (the ticket-82 domain-balance plan), whose
 > settled design, D1–D3 decisions and results are now recorded permanently in
@@ -118,7 +118,7 @@ until that evidence passes.
 | D2 | idf vs degree | **Degree. Reject idf**, despite idf being available for all 5 grammar row axes (`dfreq_global` covers all 5 semantic facets; `core_atom`/`fringe_atom` idf is computed and currently never used). Reasons: degree and idf are strongly **negatively** correlated (Spearman −0.39 to −0.73, all p<1e-6) — they measure the same ubiquity on inverted scales, so applying both double-discounts it; idf resolution here is very coarse (2–17 distinct values per facet); the per-tie property the goal requires is a degree property. |
 | D3 | Damping strength | **`log2` verbatim, not tuned.** §4.21 asked for the constant to be "picked by evidence" — but with idf resolution of 2–17 values and a noise floor exceeding the signal (FINDINGS §21), **this corpus cannot adjudicate a damping exponent.** That is the argument for zero new tunables, stronger than "matches precedent". Flag for re-derivation at 22k, as `TOL` and `lambda_l1` bounds already are. |
 | D4 | `S_Art_Journ` | **Defer — §4.21 is wrong that this is "low risk, no new mechanism."** Verified: it needs (a) **new** df collection (no `dfreq_global['journ']` write exists) and (b) a **column-keyed** idf variant (`build_anchor_csr` keys `idf_dict.get(r)` on the *row*; journals are the column axis). Additionally every row has degree exactly 1, so after Frobenius normalisation column-idf is arithmetically equivalent to reweighting whole *articles* by their journal's rarity — a substantive modelling claim ("articles in rare journals matter more") unrelated to this ticket's goal. Correct §4.21's text. |
-| D5 | §9 justification | **Strike it.** `U_prob` is L1 row-normalised (`chunk13v9.py:711-734`), discarding a row's scale — so down-weighting a hub changes its influence on *other* entities but **not its own loading shape**, which is what §9 is about. Less gradient pressure on a hub row also leaves it determined *more* by init noise, arguably mildly *against* §9. And §9's effect has never been demonstrated (Test 2: weak, sign-inconsistent, mostly non-significant). Do not justify a data-layer change by an undemonstrated limitation the mechanism would not fix. **User decision pending — see Open Question below.** |
+| D5 | §9 justification | **Struck — RESOLVED, user-confirmed.** `U_prob` is L1 row-normalised (`chunk13v9.py:711-734`), discarding a row's scale — so down-weighting a hub changes its influence on *other* entities but **not its own loading shape**, which is what §9 is about. Less gradient pressure on a hub row also leaves it determined *more* by init noise, arguably mildly *against* §9. And §9's effect has never been demonstrated (Test 2: weak, sign-inconsistent, mostly non-significant). Do not justify a data-layer change by an undemonstrated limitation the mechanism would not fix. §9 itself remains open/unresolved as its own pipeline limitation — only the *link* to this ticket is removed. |
 | D6 | Axis | **Row only**, matching precedent. Document that `M_Cousin_Child` has column skew in T2 (12.2×) left unaddressed. |
 | D7 | Slice basis | **Per-slice degree** (user decision). Recorded tradeoff: grammar-relation rows are *global* entities present in both slices — confirmed directly at `chunk12.py:77-95` (`get_idx` assigns one permanent integer per string the first time it's seen, across T1 and T2 together; only `art` gets slice-local indices via a separate `get_art_idx`) — so the same atom/hyperedge string can carry different weights in T1 vs T2. `S_Art_Auth`'s precedent does **not** cover this — its rows are articles, which exist in exactly one slice, so no article ever has two degrees. This introduces a T1/T2 asymmetry into matrices that were previously pure structure. **Flag as a documented limitation to revisit when the T1→T2 temporal extension (§10) is built**, since weighting drift could there be mistaken for structural drift. |
 | D8 | Scope | **Not uniform — split by what the row entity *is*, revised from the original "all 5 uniformly."** See "Scope split" subsection immediately below for the full argument and data. |
@@ -653,10 +653,54 @@ question either way.
 
 ---
 
-## Open question for the user before implementation
+## D5 — RESOLVED (user confirmed): §9 struck as a justification
 
-**D5 (§9)** — two independent design/review passes (Opus's plan, Sonnet's triangulation) now
-agree the evidence says to strike §9 as a justification for this ticket. Recorded as a
-recommendation, not yet a user-confirmed decision. Confirming it also means correcting §4.21
-and FINDINGS §21 in `CLAUDE.md`/`FINDINGS.md`, where the link to §9 is currently asserted as
-fact — not yet done, since this plan has not been approved for implementation.
+**Settled.** User: "You can work with this justification as you deem pertinent. If the
+consensus is to remove, then remove it." Both independent passes (Opus's design, Sonnet's
+triangulation) agreed on removal; no dissent. `CLAUDE.md §4.21`/`§8` and `FINDINGS.md §21`
+corrected accordingly — the §9 *link* is removed from this ticket's justification. **§9
+itself is untouched and remains open** in `CLAUDE.md §9` (Known Limitations) — this only
+removes the claim that ticket 84 addresses or was validated against it; §9 stands as its own,
+separately unresolved pipeline limitation, independent of this ticket's outcome.
+
+---
+
+## Deferred work items — pick up here after context compaction
+
+Not started, not scheduled for this session — recorded here as one list, rather than
+scattered across D3/D4/D6/D7's individual mentions, specifically so a future session doesn't
+have to hunt for them. None of these block anything currently in progress.
+
+1. **`S_Art_Journ` (D4).** Deferred entirely, zero implementation work done. Needs, in
+   `chunk12.py`/`chunk12v2.py`: (a) new `dfreq_global['journ']` collection — does not exist
+   today; (b) a **column-keyed** variant of the anchor idf formula (`build_anchor_csr` keys
+   `idf_dict.get(r)` on the row; journals are the column axis here, so the existing formula
+   does not transfer as-is).
+2. **`M_Cousin_Child`'s column skew (D6).** 12.2× in T2, documented as a known limitation of
+   the row-only damping design (matching precedent). Never addressed — row-only was a
+   deliberate scope choice, not an oversight, but the asymmetry is real and undocumented
+   beyond this note.
+3. **Damping strength re-derivation (D3), and the infrastructure gap behind it.** `log2` is
+   fixed, not tuned — this toy corpus's idf resolution (2-17 values) and noise floor
+   (FINDINGS §21) rule out adjudicating an exponent. Re-derive at 22k scale. **Prerequisite
+   gap, not previously stated this plainly:** legitimately tuning this parameter needs a
+   held-out validation criterion (per the tuning-vs-p-hacking discussion this session —
+   tuning against `recon_loss` is degenerate here, since more damping mechanically makes the
+   matrix easier to reconstruct; tuning against a domain-balance-style metric would be
+   p-hacking given the noise floor). `CLAUDE.md §10` lists held-out link prediction as
+   "proposal only, not scheduled, not built." That gap needs closing before D3 can move past
+   "fixed by default," independent of corpus scale.
+4. **Per-slice degree basis (D7).** The same global entity can carry two different damping
+   weights in T1 vs. T2 (grammar-relation rows are global entities, unlike `S_Art_Auth`'s
+   articles, which exist in exactly one slice). Flagged to revisit specifically when the
+   T1→T2 temporal extension (`CLAUDE.md §10`) is built, since weighting drift could then be
+   mistaken for genuine structural drift between slices.
+5. **`chunk12v2.py` has no real version-control protection.** Checked directly: the `.git`
+   root covering `tensor_data_staging` is actually `/mnt/hum01-home01/p91688di` — the whole
+   home directory, not a repo scoped to this project — with ~198,000 pending file changes
+   already staged (including unrelated files like cached OAuth credentials), never
+   committed. `chunk12v2.py` shows as untracked in it. Not touched this session — that
+   `.git` state is not safe to commit into casually. If addressed later: likely a clean,
+   narrowly-scoped new repo for just the relevant subdirectory, not a commit into the
+   existing one, and should not be attempted without explicit user go-ahead given what else
+   is sitting in that index.

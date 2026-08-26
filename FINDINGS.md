@@ -2541,7 +2541,15 @@ genuine synthesis, not noise); `M_Cousin_Child` damped on a separate, bespoke ju
 mixed** — 3 of 6 target cells moved the predicted direction, 3 didn't, 2 of 6 clear the seed
 noise floor with confidence (one each direction) — consistent with this section's and §21's
 own standing finding that the noise floor here is comparable to the effect size, not evidence
-the mechanism is wrong. Phase 4: a new versioned file `chunk12v2.py` (not an in-place edit —
+the mechanism is wrong. **One open item, named rather than left implicit:** `fringe_atom`/T2
+is the single wrong-direction cell that clears the noise floor with confidence, and it is
+*not* explained by "T1 has fewer live entities" (checked directly — T1 does have fewer
+entities and more wrong-direction cells overall, but this specific confident anomaly sits in
+T2, the *better*-resourced slice). Flagged for a targeted re-check at 22k scale, not just a
+re-run of the aggregate test. **D5 (§9 justification): user-confirmed, struck** — the
+`U_prob` L1-row-normalization argument above holds; this only removes the claim that ticket
+84 addresses §9, which remains its own separately unresolved limitation. Phase 4: a new
+versioned file `chunk12v2.py` (not an in-place edit —
 `chunk12.py` untouched) produces this data; null-rebuild verified clean against `chunk12.py`'s
 existing output (maps identical, untouched relations byte-identical, damped relations match
 the transform exactly). **Not promoted to production** — held pending the 22k-article corpus,
