@@ -411,6 +411,39 @@ is sufficient evidence to proceed to Phase 4, or whether it should hold the tick
 inconclusive on this corpus" pending the 22k-scale re-derivation already flagged throughout
 this plan (D3, D7, D8).
 
+#### Phase 3 re-analysis (user-prompted methodology check; no re-fitting — same 230 cached
+fits, re-read at finer granularity) — one real bug found, headline verdict otherwise holds.
+
+User questions surfaced a genuine flaw, not just a theoretical risk: `cousin_he`'s pooled
+number silently averaged across all 6 configs, but `M_Cousin_Child` (the relation actually
+damped) is only active in 2 of them (C3, C4) — the other 4 have **no causal path** for the
+transform to affect that facet at all. Restricting to C3/C4 only: T1 stays wrong-direction
+(+0.033 pooled → +0.017 restricted, both weak), **T2's correct-direction result gets larger,
+not smaller** (−0.070 pooled → −0.224 restricted) but now rests on only 3-4 config/K cells,
+not 11 — a more fragile estimate, cutting both ways. `core_atom`/`fringe_atom` don't have
+this problem (`M_Atom_Child`/`M_Fringe_Cousin` are active in all 6 configs) — checked
+directly: same-sign in 10-12 of 12 config/K cells for both, so pooling was reasonably sound
+there specifically, not merely assumed.
+
+Second measure checked (N_eff, `1/Σp²`, reused verbatim from `toy_large.ipynb` Chunk 14D's
+`calc_neff` — not invented): agrees with row-max as a near-exact mirror image in 22-23 of 23
+cells. **Choice of concentration measure does not change the conclusion on this corpus** —
+row-max was an adequate proxy here, though N_eff remains the more theoretically complete
+choice (uses the full loading vector, not just the top entry) for future work.
+
+Label-switching: confirmed empirically, not just argued — a fixed entity's argmax community
+index genuinely changes across seeds (1→0→2...), while row-max (which never reads community
+identity, only the largest value) needs no alignment to remain comparable, by construction.
+
+**Net effect on the verdict: unchanged.** The original "mixed, not a clean pass" call holds
+up under the deeper check — `cousin_he`'s evidence is, if anything, more clearly fragile now
+(small-n, direction unstable across slices) rather than resolved either way; `core_atom`/
+`fringe_atom`'s direction-consistency was real, not assumed, but their magnitude is highly
+config-dependent, reinforcing (not just repeating) the plan's standing point that direction,
+not magnitude, is what this corpus can support. Scripts: `grammar_damping_phase3_reanalysis.py`
+(no new fits — reused the cache from the prior run). Full output:
+`diagnostic_results/grammar_damping_phase3_reanalysis.json`.
+
 ### Phase 4 — port into chunk12, last
 
 Only once the answer is known. Back up **all four** output pickles first — `_t1.pkl`,
