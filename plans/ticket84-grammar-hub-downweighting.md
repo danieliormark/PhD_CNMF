@@ -435,14 +435,40 @@ Label-switching: confirmed empirically, not just argued — a fixed entity's arg
 index genuinely changes across seeds (1→0→2...), while row-max (which never reads community
 identity, only the largest value) needs no alignment to remain comparable, by construction.
 
-**Net effect on the verdict: unchanged.** The original "mixed, not a clean pass" call holds
-up under the deeper check — `cousin_he`'s evidence is, if anything, more clearly fragile now
-(small-n, direction unstable across slices) rather than resolved either way; `core_atom`/
-`fringe_atom`'s direction-consistency was real, not assumed, but their magnitude is highly
-config-dependent, reinforcing (not just repeating) the plan's standing point that direction,
-not magnitude, is what this corpus can support. Scripts: `grammar_damping_phase3_reanalysis.py`
-(no new fits — reused the cache from the prior run). Full output:
-`diagnostic_results/grammar_damping_phase3_reanalysis.json`.
+**Net effect on the verdict: unchanged in headline count, sharper in substance.** Scripts:
+`grammar_damping_phase3_reanalysis.py` (no new fits — reused the cache from the prior run).
+Full output: `diagnostic_results/grammar_damping_phase3_reanalysis.json`.
+
+#### Corrected table (SUPERSEDES the Phase 3 table above) — same aggregation method as
+originally reported (average row-max per entity across configs within a seed, then
+correlate, then mean/SD across the 5 seeds), each row now restricted to the configs where
+that facet's own relation is actually active — no re-fitting, same 230 cached fits, re-read.
+
+| Facet | Slice | baseline ρ | damped ρ | Δρ | Direction | Configs used |
+|---|---|---|---|---|---|---|
+| `core_atom` | T1 | −0.367 | −0.302 | +0.066 | wrong | all 6 (unchanged — always was) |
+| `fringe_atom` | T1 | −0.307 | −0.332 | −0.025 | correct | all 6 (unchanged — always was) |
+| `cousin_he` | T1 | **+0.117** | **+0.161** | **+0.045** | wrong, more clearly | C3, C4 only (`M_Cousin_Child` active) |
+| `core_child_he` (control) | T1 | −0.124 | −0.101 | +0.023 | negligible, ≈predicted | C1, C2, C3, C6 (`M_Child_Parent` active) |
+| `core_atom` | T2 | −0.336 | −0.438 | −0.102 | correct | all 6 |
+| `fringe_atom` | T2 | −0.289 | −0.239 | +0.051 | wrong — exceeds 2×SD | all 6 |
+| `cousin_he` | T2 | **+0.136** | **−0.110** | **−0.245** | correct — **now also exceeds 2×SD** | C3, C4 only |
+| `core_child_he` (control) | T2 | −0.138 | −0.156 | −0.018 | negligible, ≈predicted | C1, C2, C3, C6 |
+
+`core_atom`/`fringe_atom` are byte-for-byte the numbers already reported — they were always
+computed over all 6 configs (`M_Atom_Child`/`M_Fringe_Cousin` are active everywhere), so the
+bug never touched them; confirmed by rerunning, not assumed. `core_child_he` (control) shifts
+modestly but stays small, consistent with "no shift expected." `cousin_he` changes
+substantially: **T2's baseline correlation flips sign** (−0.138 pooled → **+0.136**
+restricted-to-causally-relevant-configs) — in the 2 configs that actually use the damped
+relation, high-degree cousins genuinely were more concentrated before damping (matching the
+ticket's original hypothesis), and damping reverses that, now clearing the noise floor.
+
+**Bar tally under the corrected table: still 3/6 correct direction (unchanged), but now 2/6
+exceed 2×SD (was 1/6) — one in each direction** (`fringe_atom`/T2 confidently wrong,
+`cousin_he`/T2 confidently correct). Not a resolution toward "pass" — a sharper demonstration
+that this corpus produces genuinely conflicting, not merely noisy, signal. The original
+"mixed, not a clean pass, left for the user" verdict stands, on firmer ground than before.
 
 ### Phase 4 — port into chunk12, last
 
