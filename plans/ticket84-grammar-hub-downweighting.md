@@ -348,6 +348,69 @@ component pairing removes. This is the single largest lever against the noise fl
   tautology. Keep both as health checks (did it converge, same order of magnitude) only.
 - **Pre-registered:** no domain-balance improvement is required, per D5's mechanism argument.
 
+#### Phase 3 — EXECUTED. Verdict: MIXED / NOT A CLEAN PASS — flagged, not rounded up.
+
+Run: `grammar_damping_phase3_seed_pairs.py`, 240 fits (6 configs × K∈{3,4} × 2 slices × 5
+seeds × {baseline, damped}), 230/240 converged (T1 3/120 skipped, T2 7/120 skipped — not
+gated, per plan, but recorded). Side pickle, additive `SLICE_PATHS` entries, `chunk12.py`
+untouched. Full output: `diagnostic_results/grammar_damping_phase3_seed_pairs.json`.
+
+**Correction to the primary metric's scope, made before running (disclosed, not silent):**
+the original bar ("≥4 of 5 facets") predates the D8 scope split. Re-derived which facets can
+show real evidence at all: `core_atom`/`fringe_atom`/`cousin_he` (their own row-degree was
+actually changed by this ticket) as positive-evidence targets; `core_child_he` (row-degree in
+the untouched `M_Child_Parent`) as a **negative control**, expected to show no shift;
+`parent_he` **excluded** — verified it is never a row entity in any active relation, so no
+row-degree exists for it to test. Revised bar: correct direction in ≥2 of 6 (facet, slice)
+target cells, |Δρ| > 2×seed-SD in ≥1. Also: alignment machinery (`s5_dual_track_alignment`)
+was **not needed** for this metric and deliberately not used — `U_prob` row-max is provably
+invariant to which column index a community gets relabelled to, unlike `r_k`.
+
+**Measured (ρ = degree vs. `U_prob` row-max, mean across configs/K within each seed, then
+mean/SD across 5 seeds):**
+
+| Facet | Slice | baseline ρ | damped ρ | Δρ | direction | vs. 2×SD |
+|---|---|---|---|---|---|---|
+| `core_atom` | T1 | −0.367 | −0.302 | +0.066 | **wrong** | — |
+| `fringe_atom` | T1 | −0.307 | −0.332 | −0.025 | correct | — |
+| `cousin_he` | T1 | +0.014 | +0.035 | +0.021 | **wrong** | — |
+| `core_child_he` (control) | T1 | −0.114 | −0.110 | +0.004 | n/a | negligible, as predicted |
+| `core_atom` | T2 | −0.336 | −0.438 | −0.102 | correct | — |
+| `fringe_atom` | T2 | −0.289 | −0.239 | +0.051 | **wrong** | **exceeds 2×SD** |
+| `cousin_he` | T2 | −0.138 | −0.278 | −0.140 | correct | — |
+| `core_child_he` (control) | T2 | −0.162 | −0.158 | +0.004 | n/a | negligible, as predicted |
+
+**Mechanical bar result: 3/6 correct direction (≥2 required), 1/6 exceeds 2×SD (≥1
+required) → PASS by the letter of the threshold.** Not reported as a clean pass regardless,
+for three reasons, per SESSION_PROTOCOL rule 7/8 (report what was measured, don't resolve
+ambiguity, don't reconcile disagreement):
+
+1. **3/6 is a coin flip, not the direction consistency the plan itself said was "the real
+   test" on this corpus.** A bar built to require barely more than chance is a weak bar —
+   worth naming as a limitation of my own threshold design, not just of the data.
+2. **The one cell that clears the noise floor with statistical confidence moved the wrong
+   way**: `fringe_atom`/T2 exceeds 2×SD in the direction opposite the prediction. That is a
+   more informative fact than the 3-2 headline split — it says the one place this corpus can
+   actually distinguish signal from noise, it disagrees with the hypothesis.
+3. **Baseline ρ for `core_atom`/`fringe_atom` is already substantially negative in both
+   slices (−0.29 to −0.37) before any damping.** The ticket's original framing assumed
+   high-degree entities get pulled *toward* one dominant community (a positive ρ to correct).
+   That is not what baseline shows here — if anything the reverse tendency already holds.
+   Pushing an already-negative ρ further negative (as happened in 3 of the 4 `core_atom`/
+   `fringe_atom` cells) is a real, measured effect, but whether it is a *correction* or an
+   *overcorrection* relative to the ticket's original goal is not obvious from this number
+   alone, and is a substantive question, not a statistical one.
+
+**What is clean:** the negative control behaved exactly as predicted in both slices
+(Δρ ≈ 0.004, negligible) — the transform is not producing spurious shifts in facets it never
+touched, which is the specificity check this control existed for.
+
+**Not decided here — left for the user.** Per SESSION_PROTOCOL rule 7, this is reported, not
+resolved: whether a 50/50 direction split with the one confident move pointing the wrong way
+is sufficient evidence to proceed to Phase 4, or whether it should hold the ticket at "mixed,
+inconclusive on this corpus" pending the 22k-scale re-derivation already flagged throughout
+this plan (D3, D7, D8).
+
 ### Phase 4 — port into chunk12, last
 
 Only once the answer is known. Back up **all four** output pickles first — `_t1.pkl`,
