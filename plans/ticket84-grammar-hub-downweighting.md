@@ -514,19 +514,51 @@ for OOM/disk causes, found none; likely an HPC login-node resource policy invisi
 user, not a script bug. **Not relaunched** — consistent with the decision to stop chasing
 precision on the toy corpus rather than pursue it further right now.
 
-### Phase 4 — port into chunk12, last
+### Phase 4 — new versioned file, not an in-place edit (REVISED — user proposal, safer than
+the original "edit + backup" design, adopted)
 
-Only once the answer is known. Back up **all four** output pickles first — `_t1.pkl`,
-`_t2.pkl`, **and `Star_epistemic_decoders_global.pkl`** (chunk12.py:352-364; contains `maps`,
-`maps_t1_art`, `maps_t2_art`, `idf_global`). There are **no backups and no git history** for
-any of them (`tensor_data_staging` is a git repo with zero commits). ~280 KB total.
+**`chunk12.py` is left completely untouched — not even renamed.** Verified directly: nothing
+in this codebase imports `chunk12.py` or references its filename in any live code path (only
+two hits outside comments, both dead commented-out lines in old `chunk13v2.py`/
+`chunk13_metafac.py`). Everything downstream — `diagnostic_blocks.SLICE_PATHS`,
+`chunk13v9.py` — consumes chunk12's *output pickles* by path, never the source file itself.
+So there is nothing to gain from renaming it and a (small but nonzero) chance of a mistake in
+doing so — leaving it alone is strictly safer than a symbolic "legacy" rename.
 
-Then edit `compile_slice` (chunk12.py:333-337) to route the 5 grammar relations through
-`build_log_damped_row_csr` with a Counter-of-1s, and **null-rebuild**: re-run chunk12 and
-verify output matches the Phase-3 transformed pickles. **Compare `maps` FIRST, then matrices** —
-chunk12's entity indices depend on `graphbrain hg.search()` iteration order, never verified
-stable; a pure index permutation yields "different" matrices that are equivalent, while
-identical matrices under different maps would be a silent catastrophe.
+**New file: `chunk12v2.py`** — a copy of `chunk12.py`, matching this codebase's own existing
+convention (`chunk13v2.py` through `chunk13v9.py` already coexist side by side; this isn't a
+new pattern). `compile_slice` is edited in the copy only, routing the 3 target relations
+(D8: `M_Atom_Child`, `M_Fringe_Cousin`, `M_Cousin_Child` — **not** `M_Child_Parent`/
+`M_Cousin_Parent`, Group B, left as `build_grammar_csr`) through `build_log_damped_row_csr`
+with a Counter-of-1s.
+
+**`chunk12v2.py` writes to NEW, distinctly-named output pickles** —
+`Star_extended_matrices_t1_v2.pkl`, `_t2_v2.pkl`, `Star_epistemic_decoders_global_v2.pkl`,
+same `outputs/` directory, `_v2` suffix — **not** overwriting the current production files.
+This is a stronger guarantee than "backed up before overwriting": the production pickles are
+never touched at all, not even transiently, so there is nothing to restore if anything goes
+wrong. Making the new data usable is a small, purely additive config change — new
+`diagnostic_blocks.SLICE_PATHS` entries (`'T1_v2'`/`'T2_v2'`) — the exact same pattern already
+proven out in Phases 1-3 for the side-pickle `_damped` entries, now backed by a real,
+versioned, git-trackable source file instead of a diagnostic script's transform. Whether
+`chunk12v2`'s output ever becomes the new default (`'T1'`/`'T2'` repointed to it) is a
+**separate, later, deliberate decision** — explicitly not forced by this step.
+
+**What does NOT change under this revision**: running `chunk12v2.py` still means re-deriving
+*everything* from the curated `graphbrain` database from scratch — articles, authors, all
+coordinate extraction — not just patching 3 matrices in an existing pickle; that is how
+`chunk12.py` has always worked (source-derived, never cached). So the **null-rebuild
+verification is unchanged and still essential**: compare `maps` FIRST between `chunk12v2`'s
+fresh output and `chunk12`'s existing output (`graphbrain hg.search()` iteration-order
+stability has never been verified — a pure index permutation would make "different" matrices
+actually equivalent, while identical matrices under different maps would be a silent
+catastrophe), THEN compare matrices — `M_Child_Parent`/`M_Cousin_Parent` and every social/
+anchor relation should be byte-identical to `chunk12.py`'s output; the 3 target relations
+should match `log_damp_row(chunk12's output)` exactly, the same transform already validated
+in Phases 1 and 3. This is, if anything, a *more* rigorous test than the original in-place
+plan — it validates the whole pipeline end-to-end, not a post-hoc patch of an existing pickle.
+
+**Not yet executed — awaiting explicit go-ahead before starting.**
 
 ---
 
@@ -535,8 +567,10 @@ identical matrices under different maps would be a silent catastrophe.
 - **New:** `chunk13_execution/diagnostic_scripts/grammar_damping_tier0.py` (Phase 1, read-only)
 - **New:** a Phase-3 paired-comparison script, reusing `domain_balance_seed_noise.py`'s 5-seed +
   `s5_dual_track_alignment` Track-A protocol verbatim
-- `chunk13_execution/diagnostic_blocks.py` — `_cache_key` namespacing (Phase 2)
-- `tensor_data_staging/toy_large/chunk12.py` — `compile_slice` only (Phase 4)
+- `chunk13_execution/diagnostic_blocks.py` — `_cache_key` namespacing (Phase 2, done); new
+  `'T1_v2'`/`'T2_v2'` `SLICE_PATHS` entries (Phase 4, additive)
+- **New:** `tensor_data_staging/toy_large/chunk12v2.py` (Phase 4) — copy of `chunk12.py`,
+  `compile_slice` edited only. `chunk12.py` itself is untouched, not renamed.
 - `PhD_CNMF/CLAUDE.md` — §4.21 (correct the `S_Art_Journ` and §9 claims), §8 ticket 84,
   §11 if any nnz figures move; `FINDINGS.md` — new subsection under §21
 
