@@ -695,7 +695,24 @@ have to hunt for them. None of these block anything currently in progress.
    articles, which exist in exactly one slice). Flagged to revisit specifically when the
    T1→T2 temporal extension (`CLAUDE.md §10`) is built, since weighting drift could then be
    mistaken for genuine structural drift between slices.
-5. **`chunk12v2.py` has no real version-control protection.** Checked directly: the `.git`
+5. **Overall v1-(`chunk12.py`)-vs-v2-(`chunk12v2.py`) model-quality comparison — deferred by
+   explicit user decision, do NOT rush this.** Phase 3 only tested the narrow mechanism
+   claim (degree-vs-row-max correlation); the user separately wants a broader "which overall
+   gives better results" comparison, and flagged correctly that it likely isn't
+   one-dimensional — v2 could plausibly be better on one axis (e.g. domain balance) and worse
+   on another (e.g. coherence), and that needs to be *reported* as a genuine multi-axis
+   result, not collapsed into one verdict. A draft script exists as a starting point —
+   `diagnostic_scripts/grammar_damping_v1_vs_v2_quality.py` (written, NOT run, not even
+   smoke-tested yet) — reusing `evaluate()`/`domain_balance_r_k()` to compare
+   `collapse_pen`/`coherence_pen`/`semantic_pen`/`sociological_penalty` and entity-weighted
+   `dev_k`, with `recon_loss`/convergence explicitly reported as health-checks only (not a
+   comparison signal — damping mechanically makes the target matrix easier to reconstruct,
+   so a lower `recon_loss` on v2 would be a tautology, not evidence of better structure).
+   **Before running it:** design pass first — decide what "better" means across possibly
+   conflicting axes, and check per-config consistency before trusting any pooled number
+   (exactly the aggregation pitfall the Phase 3 reanalysis caught this session — don't skip
+   that check a second time by rushing this one).
+6. **`chunk12v2.py` has no real version-control protection.** Checked directly: the `.git`
    root covering `tensor_data_staging` is actually `/mnt/hum01-home01/p91688di` — the whole
    home directory, not a repo scoped to this project — with ~198,000 pending file changes
    already staged (including unrelated files like cached OAuth credentials), never
