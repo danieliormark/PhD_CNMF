@@ -558,7 +558,34 @@ should match `log_damp_row(chunk12's output)` exactly, the same transform alread
 in Phases 1 and 3. This is, if anything, a *more* rigorous test than the original in-place
 plan — it validates the whole pipeline end-to-end, not a post-hoc patch of an existing pickle.
 
-**Not yet executed — awaiting explicit go-ahead before starting.**
+**EXECUTED.** `chunk12v2.py` created (copy of `chunk12.py`, only `compile_slice` and the 3
+output paths changed — full diff is exactly the intended minimal change, checked before
+running). Ran in **16.7s** (`real 0m16.712s`) — a data pipeline over `graphbrain` SQLite, not
+a model fit, much faster than the up-to-2-minute estimate given beforehand. Dimensions
+matched production exactly on first run (`art=25/36, auth=461, affil=66, journ=20,
+parent_he=160, core_child_he=405, core_atom=642, cousin_he=435, fringe_atom=577`).
+
+**Null-rebuild verification — both stages pass:**
+- **Maps (checked first, as required):** every one of the 8 `maps` domains, `maps_t1_art`,
+  `maps_t2_art`, and `idf_global` — **byte-identical** between `chunk12.py`'s existing output
+  and `chunk12v2.py`'s fresh run. `graphbrain`'s `hg.search()` iteration-order risk (flagged
+  as never-verified throughout this plan) did **not** materialize in this comparison.
+- **Matrices, both slices:** all 8 untouched relations (`S_Art_Journ`, `S_Art_Auth`,
+  `S_Auth_Affil`, `M_Child_Parent`, `M_Cousin_Parent`, `M_Parent_Art`, `M_Child_Art`,
+  `M_Cousin_Art`) **byte-identical**, confirming Group B and all social/anchor relations were
+  genuinely untouched. All 3 damped relations (`M_Atom_Child`, `M_Fringe_Cousin`,
+  `M_Cousin_Child`) match `log_damp_row(chunk12's original)` exactly — same topology, same
+  transformed values — in both slices.
+
+**Production pickles (`Star_extended_matrices_t1.pkl`/`_t2.pkl`,
+`Star_epistemic_decoders_global.pkl`) were never touched.** New files only:
+`chunk12v2.py`, `Star_extended_matrices_t1_v2.pkl`/`_t2_v2.pkl`,
+`Star_epistemic_decoders_global_v2.pkl`.
+
+**Not yet done**: registering `'T1_v2'`/`'T2_v2'` in `diagnostic_blocks.SLICE_PATHS` (needed
+to actually fit anything against this data), and the `CLAUDE.md`/`FINDINGS.md` documentation
+updates the "Files" list names. Both are small, additive, low-risk next steps — not started
+without a separate go-ahead, consistent with this session's pacing.
 
 ---
 
