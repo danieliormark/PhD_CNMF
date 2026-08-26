@@ -1,13 +1,19 @@
 # Ticket 84 — hub down-weighting for grammar relations (chunk12 relation weighting)
 
-> **STATUS: UNAPPROVED WORKING PLAN — NOT A SETTLED RECORD.** Written by Opus in a design
-> pass, then independently triangulated by Sonnet (see the "Sonnet triangulation" section
-> near the end) — both passes' claims were checked against code/data, not just written down.
-> Nothing in it has been executed: no `chunk12.py` change, no cache change, no diagnostic
-> script written, no data regenerated. Unlike `CLAUDE.md` and `FINDINGS.md` — durable records
-> of what has actually been measured and decided — this document becomes obsolete once
-> executed or rejected. **Do not cite it as established** until D5 is confirmed and the
-> corresponding `CLAUDE.md §4.21`/`FINDINGS.md §21` corrections are made.
+> **STATUS: PHASES 1-3 EXECUTED ON THE TOY CORPUS. HELD — NOT PROCEEDING TO PHASE 4
+> (`chunk12.py`) until 22k-scale data is available.** Written by Opus in a design pass,
+> triangulated by Sonnet, then Phases 1 (Tier-0 gate, PASS), 2 (cache namespacing), and 3
+> (paired-seed fit validation, MIXED — 3/6 correct direction, 3/6 wrong, one confirmed
+> non-noise anomaly in each direction) were executed this session — see those sections
+> below for full results. **User decision (this session): hold here, do not chase further
+> precision on the toy corpus, revisit at 22k scale** — the toy-corpus noise floor is
+> comparable to the effect size being tested (consistent with FINDINGS §21's standing
+> finding), and no evidence suggests the mechanism is actively harmful, only that it isn't
+> cleanly demonstrable at this scale. `chunk12.py` remains untouched; nothing here has been
+> made irreversible. D5 (§9 justification) also remains open, separately, from before Phase
+> 1 — not a blocker for this hold decision either way. **Do not cite this as a settled
+> result** — it is an honestly-reported mixed outcome on an admittedly small, noisy corpus,
+> not a validated finding.
 >
 > Supersedes this file's previous contents (the ticket-82 domain-balance plan), whose
 > settled design, D1–D3 decisions and results are now recorded permanently in
@@ -469,6 +475,44 @@ exceed 2×SD (was 1/6) — one in each direction** (`fringe_atom`/T2 confidently
 `cousin_he`/T2 confidently correct). Not a resolution toward "pass" — a sharper demonstration
 that this corpus produces genuinely conflicting, not merely noisy, signal. The original
 "mixed, not a clean pass, left for the user" verdict stands, on firmer ground than before.
+
+Per-slice tally, precisely (differs from an even split — worth stating exactly, not loosely):
+T1 = 1 correct / 2 wrong / 1 negligible-control; T2 = 2 correct / 1 wrong / 1
+negligible-control. Pooled: 3 correct / 3 wrong across the 6 target cells — an exact tie.
+
+#### DISPOSITION (user decision, this session): hold Phase 4, do not chase further on the
+toy corpus. Revisit with 22k-scale data. One named open item, not swept under the rug.
+
+Considered and rejected as not essential right now: tracing individual wrong-direction
+entities' training trajectories to distinguish between candidate mechanisms (baseline-premise
+mismatch, reduced-gradient-pressure/init-determined placement, small-corpus noise). Useful for
+eventual mechanistic understanding, not required for this decision.
+
+**"T1 is undersampled" — checked, holds partially, not completely.** T1 has measurably fewer
+live entities than T2 across every relevant facet (already-documented asymmetry, not new:
+`core_atom` 300 vs 465, `core_child_he` 166 vs 263, `fringe_atom` 307 vs 388, `cousin_he` 210
+vs 259 — 63-84% of T2's counts), and T1 does show more wrong-direction cells (2 vs T2's 1),
+consistent with the sparser slice being noisier. **But it does not fully explain the pattern**:
+the one wrong-direction result that actually clears the noise floor (`fringe_atom`/T2,
+exceeds 2×SD) sits in T2 — the *better-resourced* slice, not the thin one. If undersampling
+were the whole story, T2 should be the cleaner slice; it isn't, quite. Flagged as the one open
+item to specifically re-check at 22k scale, not just re-run the same aggregate test.
+
+**Not disastrous, checked against the noise floor rather than asserted:** of the 3
+wrong-direction cells, 2 (`core_atom`/T1 +0.066, `cousin_he`/T1 +0.045) do **not** clear 2×SD
+— statistically indistinguishable from ordinary seed noise, plausibly just noise. Only
+`fringe_atom`/T2 is a confirmed, non-noise anomaly, and it's small in absolute size. No
+evidence the mechanism is actively backfiring — evidence it isn't cleanly demonstrable on
+this corpus, which is a different (and expected, per FINDINGS §21's standing noise-floor
+finding) conclusion.
+
+**A targeted attempt to shrink `cousin_he`'s noise floor specifically (extending its 5 seeds
+to 15, C3/C4 only — the thinnest sample in the whole test) was launched but died silently
+mid-run** (`grammar_damping_cousin_he_more_seeds.py`) — completed T1/baseline (15/15 seeds)
+then stopped with no error, no traceback, right at the start of the damped-data pass. Checked
+for OOM/disk causes, found none; likely an HPC login-node resource policy invisible to this
+user, not a script bug. **Not relaunched** — consistent with the decision to stop chasing
+precision on the toy corpus rather than pursue it further right now.
 
 ### Phase 4 — port into chunk12, last
 
