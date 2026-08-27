@@ -715,10 +715,37 @@ have to hunt for them. None of these block anything currently in progress.
    - **Not addressed by this fix, left as-is:** the idf/anchor-formula route from the
      original D4 framing was never built and is now moot — the resolution+exclusion
      mechanism replaces it, not extends it.
-2. **`M_Cousin_Child`'s column skew (D6).** 12.2× in T2, documented as a known limitation of
-   the row-only damping design (matching precedent). Never addressed — row-only was a
-   deliberate scope choice, not an oversight, but the asymmetry is real and undocumented
-   beyond this note.
+2. **`M_Cousin_Child`'s column skew (D6) — INVESTIGATED, decided: leave undamped.**
+   Two-part investigation (user-driven, post-compaction), both confirmed against real data
+   rather than assumed:
+   - **Is the concentration a parsing artifact?** No — verified directly. The T2 outlier
+     (`(focal_he llms/C/en)`, column-degree 84 vs. a median of 5) sits correctly in
+     `maps['core_child_he']` (the child facet); zero occurrences of "llms" exist in
+     `maps['cousin_he']`, ruling out a `sweep_periphery` misclassification. Per the user:
+     the corpus was deliberately built by selecting sentences *because* they contain focal
+     words (llm, bert, etc.), so this facet's degree concentration is a designed property of
+     the sampling, not an artifact — the earlier idf-based "generic anchor term" reading was
+     a misattribution, corrected once this context was supplied.
+   - **Does that (real, deliberate) concentration distort the fit anyway?** Tested directly —
+     `cousin_child_column_test.py`, paired baseline (`chunk12v2`, column undamped) vs.
+     treatment (column additionally damped on top of the existing row damping), C3/C4 only
+     (the only configs where `M_Cousin_Child` is active), K∈{3,4}, both slices, 5 seeds.
+     Target: ρ(`core_child_he` column-degree in `M_Cousin_Child`, `U_prob` row-max). Result:
+     weak positive baseline correlation both slices (0.13–0.16, SD 50–75% of the point
+     estimate); treatment shift did not clear 2×SD in either slice (T1 moved the predicted
+     direction but short of the bar; T2 moved the opposite direction, also short). Negative
+     control (`core_child_he` row-degree in the untouched `M_Child_Parent`) stayed near zero
+     both ways, confirming the weak target signal is specific to this relation, not a
+     facet-wide artifact. Entity-level spot check on "llms" itself (T2, all 4 config/K
+     cells): already strongly concentrated at baseline (row-max 0.60–0.77 of 1.0) regardless
+     of treatment; post-damping direction inconsistent across cells (2 up, 2 down).
+   - **Decision (user): leave `M_Cousin_Child`'s column axis undamped.** No demonstrated
+     fitting distortion clears this corpus's noise floor, and the underlying concentration is
+     real, deliberately-constructed structure — matching Group B's own standard (leave real
+     structure alone absent clear evidence of harm), and avoiding added model complexity the
+     evidence doesn't call for. Same "held, not chased further on this corpus, revisit at
+     22k scale" posture already applied elsewhere in this ticket, for the same reason (noise
+     floor comparable to or exceeding the candidate signal).
 3. **Damping strength re-derivation (D3), and the infrastructure gap behind it.** `log2` is
    fixed, not tuned — this toy corpus's idf resolution (2-17 values) and noise floor
    (FINDINGS §21) rule out adjudicating an exponent. Re-derive at 22k scale. **Prerequisite
