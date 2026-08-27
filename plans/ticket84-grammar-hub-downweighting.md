@@ -671,11 +671,50 @@ Not started, not scheduled for this session — recorded here as one list, rathe
 scattered across D3/D4/D6/D7's individual mentions, specifically so a future session doesn't
 have to hunt for them. None of these block anything currently in progress.
 
-1. **`S_Art_Journ` (D4).** Deferred entirely, zero implementation work done. Needs, in
-   `chunk12.py`/`chunk12v2.py`: (a) new `dfreq_global['journ']` collection — does not exist
-   today; (b) a **column-keyed** variant of the anchor idf formula (`build_anchor_csr` keys
-   `idf_dict.get(r)` on the row; journals are the column axis here, so the existing formula
-   does not transfer as-is).
+1. **`S_Art_Journ` (D4) — RESOLVED, but not via the idf route originally proposed.**
+   User-driven investigation (post-compaction) found the real problem wasn't degree-skew
+   needing an idf/damping formula at all: row degree (articles per journal-tie) is
+   structurally capped at 1 by construction (article→journal is many-to-one), so a
+   row-keyed formula would be mathematically inert; the actual skew was **column**-side
+   (journal degree) and traced to exactly two non-selective preprint repositories
+   (arXiv, bioRxiv), later widened to four (+ChemRxiv, +Research Square) once found already
+   present in this same data. Verified empirically: removing just those IDs flattens the
+   remaining degree distribution to ~uniform in this toy corpus (no residual power-law tail),
+   ruling out smooth damping as the right tool (nothing to damp along) in favor of resolution
+   + exclusion. **Implemented:**
+   - `toy_large.ipynb` cell 9 (ingestion): each repository-hosted article is now resolved
+     against OpenAlex (same-record `locations` → cached `related_works` → live title search,
+     in that cost order) to its real venue where one exists; `journal_id`/`journal_name` are
+     overwritten if resolved, left as the repository label otherwise (never blanked — the
+     raw per-article record stays the accurate historical fact). Disambiguation on a
+     multi-candidate title match uses ORCID first, then normalized author-name overlap —
+     explicitly never OpenAlex's own internal `author.id` (user instruction — not assumed
+     stable across how the two sides of a match were sourced).
+   - `chunk12.py`/`chunk12v2.py` (`compile_slice`): whatever is *still* a repository ID after
+     that resolution attempt has its `S_Art_Journ` tie dropped entirely (structural zero, not
+     damped) — "unknown true venue" is treated the same as "no venue recorded," matching the
+     pipeline's pre-existing missing-journal convention. Caught and fixed a real latent bug
+     surfaced by this change: `get_art_idx`'s first-seen index allocation was gated on the
+     journal tie being recorded, so widening the skip condition reshuffled unrelated
+     articles' indices as a side effect — fixed by calling `get_art_idx` unconditionally,
+     gating only the coordinate itself.
+   - Live resolution run (authenticated OpenAlex tier — `mailto`+`api_key`, university
+     credentials, env-var only, never committed): of 59 originally repository-hosted
+     articles in the 121-row source corpus, **10 resolved** to a real venue (e.g. ELECTRA→
+     ICLR via the free same-record path; Nucleotide Transformer→Nature Methods,
+     GENA-LM/RNA-alignment paper→Nucleic Acids Research, etc. via live search), **49
+     confirmed no non-repository venue exists** (mostly still-unpublished/unlinked preprints
+     — ALBERT, PaLM, LLaMA, InstructGPT). Result reproduced identically across two runs
+     (anonymous-pool attempt before hitting a 429, then the authenticated re-run) — same 10
+     resolved, same 49 unresolved both times, so the split is a real property of OpenAlex's
+     data, not an artifact of rate-limiting.
+   - Verified end-to-end: `journ` dimension 20→20 net (4 repositories dropped, 5 distinct
+     real venues added, 2 reused existing indices); every non-`S_Art_Journ` relation and
+     every non-`journ` map byte-identical to pre-change; `chunk12.py`/`chunk12v2.py` remain
+     idempotent and mutually consistent (null-rebuild discipline held) after the change.
+   - **Not addressed by this fix, left as-is:** the idf/anchor-formula route from the
+     original D4 framing was never built and is now moot — the resolution+exclusion
+     mechanism replaces it, not extends it.
 2. **`M_Cousin_Child`'s column skew (D6).** 12.2× in T2, documented as a known limitation of
    the row-only damping design (matching precedent). Never addressed — row-only was a
    deliberate scope choice, not an oversight, but the asymmetry is real and undocumented
