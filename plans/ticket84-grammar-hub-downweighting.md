@@ -795,32 +795,46 @@ have to hunt for them. None of these block anything currently in progress.
      just "more data") vs. an exogenous denominator like article count.
    - Still correctly gated on the T1→T2 temporal extension (`CLAUDE.md §10`) actually being
      built — nothing to implement or test today.
-5. **Overall v1-(`chunk12.py`)-vs-v2-(`chunk12v2.py`) model-quality comparison — deferred by
-   explicit user decision, do NOT rush this.** Phase 3 only tested the narrow mechanism
-   claim (degree-vs-row-max correlation); the user separately wants a broader "which overall
-   gives better results" comparison, and flagged correctly that it likely isn't
-   one-dimensional — v2 could plausibly be better on one axis (e.g. domain balance) and worse
-   on another (e.g. coherence), and that needs to be *reported* as a genuine multi-axis
-   result, not collapsed into one verdict. A draft script exists as a starting point —
-   `diagnostic_scripts/grammar_damping_v1_vs_v2_quality.py` (written, NOT run, not even
-   smoke-tested yet) — reusing `evaluate()`/`domain_balance_r_k()` to compare
-   `collapse_pen`/`coherence_pen`/`semantic_pen`/`sociological_penalty` and entity-weighted
-   `dev_k`, with `recon_loss`/convergence explicitly reported as health-checks only (not a
-   comparison signal — damping mechanically makes the target matrix easier to reconstruct,
-   so a lower `recon_loss` on v2 would be a tautology, not evidence of better structure).
-   **Before running it:** design pass first — decide what "better" means across possibly
-   conflicting axes, and check per-config consistency before trusting any pooled number
-   (exactly the aggregation pitfall the Phase 3 reanalysis caught this session — don't skip
-   that check a second time by rushing this one).
-6. **`chunk12v2.py` has no real version-control protection.** Checked directly: the `.git`
-   root covering `tensor_data_staging` is actually `/mnt/hum01-home01/p91688di` — the whole
-   home directory, not a repo scoped to this project — with ~198,000 pending file changes
-   already staged (including unrelated files like cached OAuth credentials), never
-   committed. `chunk12v2.py` shows as untracked in it. Not touched this session — that
-   `.git` state is not safe to commit into casually. If addressed later: likely a clean,
-   narrowly-scoped new repo for just the relevant subdirectory, not a commit into the
-   existing one, and should not be attempted without explicit user go-ahead given what else
-   is sitting in that index.
+5. **Overall v1-(`chunk12.py`)-vs-v2-(`chunk12v2.py`) model-quality comparison — RE-SEQUENCED
+   by explicit user decision: do not start until the rest of the pipeline's own open
+   tickets are resolved first.** Phase 3 only tested the narrow mechanism claim
+   (degree-vs-row-max correlation); this is the broader "which overall gives better results"
+   question, likely multi-axis (v2 could win on one axis, lose on another) — that part of
+   the reasoning is unchanged. **New:** the user wants ticket 82 (per-community domain
+   balance — design settled, E2 in-loop implementation not yet built, `CLAUDE.md §4.18/§8`)
+   and the `lambda_l1`/"ghost communities" issue (user's term; most likely referring to
+   ticket 77/78's finding that `lambda_l1` evacuates row mass rather than concentrating it —
+   not yet independently confirmed as the same thing, clarify scope before treating it as
+   settled) resolved *first*, since comparing v1 vs v2 on top of a pipeline that's still
+   missing its own balance mechanism and has an unresolved sparsity-term question risks
+   comparing damping's effect against a moving, not-yet-representative baseline. Likely more
+   such prerequisite tickets exist beyond these two named ones ("etc.") — this item stays
+   blocked until that set is actually enumerated and closed, not just these two.
+   Once unblocked: design pass first (what "better" means across possibly conflicting axes;
+   per-config consistency check before trusting pooled numbers — the exact aggregation
+   pitfall the Phase 3 reanalysis caught). Draft script
+   `diagnostic_scripts/grammar_damping_v1_vs_v2_quality.py` exists as a starting point
+   (written, not run), with `recon_loss`/convergence already correctly scoped as health-checks
+   only, not a comparison signal.
+6. **`chunk12v2.py` version-control protection — RECHECKED: already reasonably protected,
+   urgency downgraded.** Original framing ("no protection") was incomplete — it only checked
+   for git history and never checked what the underlying storage provides. Verified directly
+   (pulled `chunk12v2.py` out of three separate snapshot generations and confirmed the
+   content): Manchester's NAS (`nas.isilonr.manchester.ac.uk`, mounted on `incline35`) takes
+   automatic hourly snapshots (24h retention) and daily snapshots (~28-day retention), plus
+   SyncIQ-replication-triggered snapshots implying a second physical copy exists. This
+   already covers the actual disaster-recovery concern this item was created for.
+   **What git/GitHub would still add, for the record, is workflow quality, not safety**:
+   named/deliberate checkpoints vs. anonymous timestamps, easy diffing between versions, and
+   no 28-day retention ceiling. Not urgent. **If ever pursued: local-only git, not GitHub** —
+   `PhD_CNMF` (this project's existing, working GitHub repo) is confirmed **public**
+   (checked via GitHub's API), so pushing research code/data there or to a new repo without
+   deliberately setting it private would expose it publicly; a local repo gets the workflow
+   benefits with none of that exposure. The messy home-directory `.git` (~198,000 pending
+   items, >99% of which are unrelated environment/tool files — `miniconda3/`,
+   `.vscode-server/`, `.gemini/` — not project content; includes at least one real
+   credential, a private SSH key at `.ssh/id_github`) remains correctly untouched and unsafe
+   to commit into broadly regardless of the above.
 7. **Degree-vs-frequency for grammar relations — investigated, decision: leave as-is for
    now.** Grammar relations record ties via a Python `set` (`chunk12.py:114`, `.add(...)`
    at each population site) — the *fact* of an association, not how many times it recurred;
