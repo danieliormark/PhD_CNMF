@@ -774,11 +774,16 @@ have to hunt for them. None of these block anything currently in progress.
      scalar multiple of raw degree within a fixed slice, and `log2(1+d)/d` is strictly
      monotonically decreasing for `d>0` — so within-slice rank order is guaranteed preserved
      by construction. Cross-slice rank changes remain intentional (the whole point).
-   - A candidate refinement (normalizing by a log/sqrt function of vocabulary size, to
-     account for Heaps'-law-style vocabulary growth separately from raw edge-volume growth)
-     was raised and is worth keeping in mind, but **the specific functional form is deferred
-     to 22k-scale data** — same reasoning as D3: this corpus's vocabulary (300-642 entities
-     per facet) can't distinguish log vs. sqrt vs. no transform.
+   - A separate, NOT-cross-slice-dependent proposal (normalize degree by a log/sqrt function
+     of facet vocabulary size) was raised alongside this one and could be conflated with it —
+     **split out to item 8**, since it applies to a single slice too and isn't gated on §10
+     the way this item is. **Proven, not assumed: this item (volume-relative-by-edge-share)
+     is a mathematical no-op with only one slice** — `d_eff = (d/D_slice) x D_ref` reduces to
+     exactly `d` when the only sensible reference is the slice's own volume (`D_ref=D_slice`,
+     since there is nothing else to normalize against with one slice) — confirmed
+     numerically, not just algebraically. That is the actual reason this is correctly gated
+     on the temporal extension: there is nothing to implement or test before a second slice
+     with a different total volume exists to be comparable against.
    - **Open design question for whenever this is built, not yet decided:** what the
      reference volume (`D_ref`) should be. Arbitrary-but-harmless with 2 slices (e.g. "use
      T1"); becomes a real methodological choice once the main corpus's planned 3 time slices
@@ -837,3 +842,18 @@ have to hunt for them. None of these block anything currently in progress.
    repeated-claim signal (structurally invisible in a 91%+-singleton toy corpus) could look
    materially different — re-run the same "check what's actually driving high-repeat pairs
    before assuming either direction" method, not just re-measure the singleton rate.
+8. **Vocabulary-size (log/sqrt) degree normalization — distinct from item 4/D7, applies to a
+   single slice too, not gated on the temporal extension.** The current `log2(1+d)/d`
+   formula has no notion of how large the entity population it's operating over is — degree
+   20 is treated identically whether the facet has 50 members or 10,000. Whether a degree of
+   20 should count as "high" plausibly depends on facet size (Heaps'-law-style reasoning:
+   vocabulary size grows sub-linearly with corpus/data size, so a fixed facet-size-blind
+   degree threshold means "what counts as high" implicitly drifts as facets grow). Candidate:
+   normalize degree by `log(n_entities)` or `sqrt(n_entities)` for that facet before damping.
+   **Deferred to 22k scale for a data-availability reason, not a conceptual one** (unlike
+   item 4): this corpus's facets (300-642 entities) are too small and too few in number to
+   distinguish `log` from `sqrt` from no transform at all — the same reasoning D3 already
+   used for the damping exponent itself. Could in principle be combined with item 4's
+   volume-relative mechanism once both are live (they answer different questions — "how much
+   total activity happened" vs. "how many entities exist to share it") rather than being
+   alternatives.
