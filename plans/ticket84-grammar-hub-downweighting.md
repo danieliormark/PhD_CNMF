@@ -120,7 +120,7 @@ until that evidence passes.
 | D4 | `S_Art_Journ` | **Defer — §4.21 is wrong that this is "low risk, no new mechanism."** Verified: it needs (a) **new** df collection (no `dfreq_global['journ']` write exists) and (b) a **column-keyed** idf variant (`build_anchor_csr` keys `idf_dict.get(r)` on the *row*; journals are the column axis). Additionally every row has degree exactly 1, so after Frobenius normalisation column-idf is arithmetically equivalent to reweighting whole *articles* by their journal's rarity — a substantive modelling claim ("articles in rare journals matter more") unrelated to this ticket's goal. Correct §4.21's text. |
 | D5 | §9 justification | **Struck — RESOLVED, user-confirmed.** `U_prob` is L1 row-normalised (`chunk13v9.py:711-734`), discarding a row's scale — so down-weighting a hub changes its influence on *other* entities but **not its own loading shape**, which is what §9 is about. Less gradient pressure on a hub row also leaves it determined *more* by init noise, arguably mildly *against* §9. And §9's effect has never been demonstrated (Test 2: weak, sign-inconsistent, mostly non-significant). Do not justify a data-layer change by an undemonstrated limitation the mechanism would not fix. §9 itself remains open/unresolved as its own pipeline limitation — only the *link* to this ticket is removed. |
 | D6 | Axis | **Row only**, matching precedent. Document that `M_Cousin_Child` has column skew in T2 (12.2×) left unaddressed. |
-| D7 | Slice basis | **Per-slice degree** (user decision). Recorded tradeoff: grammar-relation rows are *global* entities present in both slices — confirmed directly at `chunk12.py:77-95` (`get_idx` assigns one permanent integer per string the first time it's seen, across T1 and T2 together; only `art` gets slice-local indices via a separate `get_art_idx`) — so the same atom/hyperedge string can carry different weights in T1 vs T2. `S_Art_Auth`'s precedent does **not** cover this — its rows are articles, which exist in exactly one slice, so no article ever has two degrees. This introduces a T1/T2 asymmetry into matrices that were previously pure structure. **Flag as a documented limitation to revisit when the T1→T2 temporal extension (§10) is built**, since weighting drift could there be mistaken for structural drift. |
+| D7 | Slice basis | **Per-slice degree** (user decision). Grammar-relation rows are *global* entities present in both slices, so the same string can carry different weights in T1 vs T2 (measured: mean per-tie weight ratio 1.23-1.67x, max 3.45x for the same entity) — `S_Art_Auth`'s precedent doesn't cover this (its rows, articles, exist in exactly one slice). **Design direction developed post-compaction, not yet implemented — see deferred item 4**: volume-relative damping (rescale degree by slice-share before the existing formula) favored over cumulative cross-slice pooling (rejected — dilutes real decline/rise signal). Still gated on the T1→T2 temporal extension (§10) being built. |
 | D8 | Scope | **Not uniform — split by what the row entity *is*, revised from the original "all 5 uniformly."** See "Scope split" subsection immediately below for the full argument and data. |
 
 ### D8 revised: scope split by row-entity type, not "all 5 uniformly"
@@ -746,21 +746,50 @@ have to hunt for them. None of these block anything currently in progress.
      evidence doesn't call for. Same "held, not chased further on this corpus, revisit at
      22k scale" posture already applied elsewhere in this ticket, for the same reason (noise
      floor comparable to or exceeding the candidate signal).
-3. **Damping strength re-derivation (D3), and the infrastructure gap behind it.** `log2` is
-   fixed, not tuned — this toy corpus's idf resolution (2-17 values) and noise floor
-   (FINDINGS §21) rule out adjudicating an exponent. Re-derive at 22k scale. **Prerequisite
-   gap, not previously stated this plainly:** legitimately tuning this parameter needs a
-   held-out validation criterion (per the tuning-vs-p-hacking discussion this session —
-   tuning against `recon_loss` is degenerate here, since more damping mechanically makes the
-   matrix easier to reconstruct; tuning against a domain-balance-style metric would be
-   p-hacking given the noise floor). `CLAUDE.md §10` lists held-out link prediction as
-   "proposal only, not scheduled, not built." That gap needs closing before D3 can move past
-   "fixed by default," independent of corpus scale.
-4. **Per-slice degree basis (D7).** The same global entity can carry two different damping
-   weights in T1 vs. T2 (grammar-relation rows are global entities, unlike `S_Art_Auth`'s
-   articles, which exist in exactly one slice). Flagged to revisit specifically when the
-   T1→T2 temporal extension (`CLAUDE.md §10`) is built, since weighting drift could then be
-   mistaken for genuine structural drift between slices.
+3. **Damping strength re-derivation (D3), and the infrastructure gap behind it — RE-CONFIRMED,
+   explicit user decision to leave as-is.** `log2` stays fixed, not tuned, for now; revisit
+   only if a concrete need arises. Underlying gap unchanged: this toy corpus's idf resolution
+   (2-17 values) and noise floor (FINDINGS §21) rule out adjudicating an exponent, and
+   legitimately tuning it would need held-out validation infrastructure that doesn't exist
+   yet (`CLAUDE.md §10` — proposal only). Re-derive at 22k scale if/when this becomes live.
+4. **Per-slice degree basis (D7) — design direction developed, not yet implemented.**
+   Core problem unchanged: the same global grammar-relation entity can carry two different
+   damping weights in T1 vs. T2 (measured: mean per-tie weight ratio for the same entity
+   1.23-1.67x across the 3 damped relations, max 3.45x — real, not hypothetical).
+   **Resolved by discussion (user + Opus/Sonnet), not yet coded:**
+   - Cross-slice degree differences are **real signal to preserve**, not an artifact to
+     neutralize (user's correction to the original framing) — a term's degree genuinely
+     shifting across periods reflects real valence/prominence change.
+   - Candidate mechanism: **volume-relative damping** — rescale each entity's raw degree by
+     its *share* of that slice's total relevant edge volume before applying the existing
+     `log2(1+d)/d` formula (no new formula, D1's discipline preserved), rather than **pooling
+     degree cumulatively across slices** (considered and rejected — dilutes real decline/rise
+     signal by blending a term's current standing with its historical peak, working against
+     the "preserve real signal" goal above).
+   - Scope: only the 3 already-damped relations' row axes (`M_Atom_Child`, `M_Fringe_Cousin`,
+     `M_Cousin_Child`) — `S_Art_Auth`'s rows are slice-local (articles), so this problem is
+     structurally impossible there; Group B and `S_Art_Journ` use different mechanisms
+     entirely, not degree-damping.
+   - **Rank preservation proven, not just claimed:** volume-relative rescaling is a positive
+     scalar multiple of raw degree within a fixed slice, and `log2(1+d)/d` is strictly
+     monotonically decreasing for `d>0` — so within-slice rank order is guaranteed preserved
+     by construction. Cross-slice rank changes remain intentional (the whole point).
+   - A candidate refinement (normalizing by a log/sqrt function of vocabulary size, to
+     account for Heaps'-law-style vocabulary growth separately from raw edge-volume growth)
+     was raised and is worth keeping in mind, but **the specific functional form is deferred
+     to 22k-scale data** — same reasoning as D3: this corpus's vocabulary (300-642 entities
+     per facet) can't distinguish log vs. sqrt vs. no transform.
+   - **Open design question for whenever this is built, not yet decided:** what the
+     reference volume (`D_ref`) should be. Arbitrary-but-harmless with 2 slices (e.g. "use
+     T1"); becomes a real methodological choice once the main corpus's planned 3 time slices
+     are in play — worth deciding deliberately rather than defaulting to "first slice."
+     Separately, `§10`'s own T1→T2→T3 prior/inertia architecture (chain vs. cumulative
+     history conditioning) is a related but distinct design surface, not part of D7. Also
+     flagged: whether the per-slice denominator should be a relation's own edge total
+     (available now, but risks circularity — it can itself shift from vocabulary growth, not
+     just "more data") vs. an exogenous denominator like article count.
+   - Still correctly gated on the T1→T2 temporal extension (`CLAUDE.md §10`) actually being
+     built — nothing to implement or test today.
 5. **Overall v1-(`chunk12.py`)-vs-v2-(`chunk12v2.py`) model-quality comparison — deferred by
    explicit user decision, do NOT rush this.** Phase 3 only tested the narrow mechanism
    claim (degree-vs-row-max correlation); the user separately wants a broader "which overall
@@ -787,3 +816,24 @@ have to hunt for them. None of these block anything currently in progress.
    narrowly-scoped new repo for just the relevant subdirectory, not a commit into the
    existing one, and should not be attempted without explicit user go-ahead given what else
    is sitting in that index.
+7. **Degree-vs-frequency for grammar relations — investigated, decision: leave as-is for
+   now.** Grammar relations record ties via a Python `set` (`chunk12.py:114`, `.add(...)`
+   at each population site) — the *fact* of an association, not how many times it recurred;
+   that information is discarded before the matrix is even built and isn't recoverable from
+   production pickles. This is not how the whole pipeline works: the 3 anchor relations
+   already preserve frequency via a real counter and weight by `log1p(tf) * idf`
+   (`chunk12.py:218`, `build_anchor_csr`) — an asymmetry never deliberately examined during
+   D1-D8. Measured directly (re-ran `M_Atom_Child`'s graphbrain traversal with a counter
+   alongside the existing set, read-only): 91-93% of (atom, child) pairs occur exactly once
+   in this corpus (T1: 504/552, T2: 833/898) — a set and a frequency count are the same
+   number for the overwhelming majority of ties. The pairs that do repeat are dominated by a
+   degenerate case (the atom *is* the entire content of its own single-word wrapper
+   hyperedge — `pretrain`, `language_model`, `llms`, `bert`), the same ubiquity pattern
+   already identified for `M_Cousin_Child`'s column axis, not evidence of a specific claim
+   being corroborated across articles. **Decision: leave binary (set-based) as-is** — little
+   information is actually lost on this corpus, and what's lost looks like the same
+   genericness signal degree-damping already discounts, not a distinct reliability signal
+   worth separately preserving. **Flagged for revisit at 22k scale**, where genuine
+   repeated-claim signal (structurally invisible in a 91%+-singleton toy corpus) could look
+   materially different — re-run the same "check what's actually driving high-repeat pairs
+   before assuming either direction" method, not just re-measure the singleton rate.
