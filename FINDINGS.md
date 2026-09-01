@@ -2564,3 +2564,648 @@ Diagnostic scripts (no `chunk13v9.py` or `chunk12.py` changes made):
 
 ---
 
+## 22. Ticket 82 E2 — domain-balance mechanism implemented (in-loop + outer-loop),
+weight fixed at 0.0 for the toy corpus
+
+**Status: E2 is DONE — both halves of the settled design (§18/§21) are now real code in
+`chunk13v9.py`, not diagnostic-only.** The in-loop weight (`lambda_domain_balance`) is fixed
+at `0.0`, matching `lambda_l1`'s own resolution (ticket 78) — mechanism fully wired and
+observable, not stubbed out, but not actively steering training on this corpus. This section
+records why, with the evidence that led there.
+
+### Why the outer-loop element exists, and why it is `U_prob`-based
+
+D1-D3's original design (§18/§21) specified an in-loop, differentiable penalty only, with an
+outer-loop mirror left as a "maybe" for a later decision. That decision was forced by a
+concrete question: since the penalty's weight is structurally a hyperparameter (like
+`lambda_z_offdiag`), if it is ever made Optuna-tunable, Optuna needs an independent signal to
+judge whether a given weight actually achieved balance — the same role `collapse_pen`/
+`coherence_pen`/`semantic_pen` already play for other properties Module 2's loss doesn't
+directly enforce. That signal is the outer-loop element.
+
+**It must not be built the way an earlier, separate exploratory script in this codebase
+built a structurally similar idea.** Independently of this ticket, `diagnostic_blocks.py`
+already contained `make_domain_balance_penalty_torch` and a `domain_penalty_exploitability_*`
+test family (undated, not previously written into CLAUDE.md/FINDINGS.md) probing whether a
+`Z_scaled`-based domain-balance term is exploitable via the same undetermined free scaling
+direction `U_scales` that already forced `collapse_pen`'s rewrite (tickets 79/80). It is:
+measured directly (`domain_penalty_exploitability_grid.json`, 12-cell grid, weight 0 vs 10),
+the term's own optimized proxy (`mass_tvd`, built from raw `Z_scaled` diagonals) "improved"
+30-40x in every cell, while the real membership-based imbalance (`mem_tvd`, `U_prob`-based)
+got **worse** in 3 of 12 cells (C3/K4: mass_tvd −0.390 but mem_tvd **+0.298**; C6/K2: mass_tvd
+−0.133, mem_tvd **+0.268**; C2/K2: mass_tvd −0.009, mem_tvd **+0.188**) — the optimizer was
+gaming the `Z_scaled`-based proxy, not fixing real imbalance. Root cause: `Z_scaled = Z_pos ×
+U_scales_f1 × U_scales_f2`, and ticket 79 already proved `U_scales` is an undetermined free
+gauge direction (scaling a `U_pos` column by any `c`, compensated in `Z_pos`, leaves
+`recon_loss`/`U_norm`/`Z_scaled` unchanged) — pooling raw `Z_scaled` diagonals **across
+different facets**, as any `Z_scaled`-based domain-balance sum must, lets the optimizer
+manipulate each relation's independently-gameable `U_scales` product without touching which
+entities actually belong to which community.
+
+`U_norm` (and `U_prob`, a pure function of it) is **proven algebraically immune** to that
+exact transformation — confirmed, not just argued: `evaluate_domain_balance`'s output was
+cross-checked against the already-validated diagnostic pipeline
+(`facet_membership_profile`+`domain_balance_r_k`) on a real fit and matched to ~8 significant
+figures. This is why both the in-loop and outer-loop elements of E2 are built on `U_prob`,
+not `Z_scaled` — the design choice §18 already leaned toward, now with a concrete,
+measured reason rather than a general preference.
+
+### The in-loop weight: measured, not guessed, and found not to clear this corpus's noise
+
+Before fixing the weight, its natural scale was measured on real baseline (weight=0) fits —
+`mean_k(max(0, |r_k-0.5|-TOL)²)`, TOL=0.15 (D3) — the same first step ticket 77 used for
+`lambda_l1` (measure `mean_sparsity` on a real fit before back-solving a range). It does not
+transfer as cleanly: because the formula is a dead-band (zero below TOL, not a smoothly
+positive quantity like `mean_sparsity`), **5 of 12 baseline fits landed with an EXACT 0.0**
+raw penalty (already balanced within the ±0.15 band), and the largest measured value was
+small (≈0.0043) — a `lambda_l1`-style range derivation (dividing by the smallest measured
+value) is undefined here (division by zero) and, even anchored on the largest value, would
+have suggested weights far more aggressive than what training could actually tolerate:
+`weight=5` implies only ≈2.7% of `math_loss`'s own scale for even the worst baseline case
+measured, yet caused real non-convergence (`diagnostic_scripts/domain_balance_inloop_sweep.py`,
+`_seedcheck.py`/`_seedcheck_v2.py`) — down to 1 of 5 seeds converging in one v2 cell. Unlike
+`lambda_l1` (ticket 77: monotonic loss cost, zero convergence failures across its full tested
+range), this term's failure mode is convergence instability itself, at a magnitude a
+loss-scale-only derivation would not have flagged as risky.
+
+**Full evidence, both `chunk12` and `chunk12v2` data (this session's explicit requirement —
+domain-balance testing must not be v1-only), C3/K4 and C6/K4 pilot cells throughout:**
+
+- **Single-seed pilot** (`domain_balance_inloop_sweep.py`, weight ∈ {0,1,5,20,50}): looked
+  promising on C6/K4 (clean, roughly monotonic `mean_dev_k` reduction) — **this did not
+  replicate under multi-seed testing** and is flagged here specifically as a caution against
+  trusting single-seed diagnostic results, consistent with this project's standing practice
+  (ticket 84 Phase 3's "pair the seeds" rule).
+- **5-seed paired check at weight=5** (`domain_balance_inloop_seedcheck.py` [v1, T1] /
+  `_v2.py` [v2, T1_v2+T2_v2]), 6 (cell × data) combinations: **0 of 6 cleared 2×the paired
+  seed-noise SD.** 4 improved (small), 2 worsened (small) — direction split, no confident
+  signal either way. Convergence reliability at weight=5 ranged from 5/5 down to **1/5** (v2,
+  `T2_v2/C6/K4`).
+- **Smaller-weight + higher-exponent follow-up**
+  (`domain_balance_inloop_power_and_weight_sweep.py`, 3 seeds, weight ∈ {0.5,1,2} at power=2
+  and weight ∈ {200,400} at power=4 — the power=4 weights rescaled so their push matches
+  power=2's at a typical small excess, per the worked gradient comparison below), 20 (cell ×
+  setting) combinations across 4 (cell × data) conditions: **1 of 20 cleared 2×SD**
+  (`T1_v2/C3/K4`, power=2/weight=2 and power=4/weight=200, both improving). **One cell
+  (`T1/C3/K4`) worsened at every one of its 5 tested settings** — small each time, but
+  consistent in direction, not noise-cancelling. Convergence was much better than weight=5's
+  near-collapse but still imperfect (occasional 2/3 seeds converging).
+- **Exponent (power) comparison, worked exactly, not assumed:** the derivative of
+  `excess^p` is `p·excess^(p-1)`; within this problem's actual range (`excess` ≤ 0.35, since
+  `r_k∈[0,1]` and TOL=0.15), a higher power (4) gives a **smaller** gradient than power=2 at
+  every point in range at a FIXED weight (crossover would need excess>0.71, impossible here)
+  — "higher power = stronger penalty" is false in this range unless the weight is also
+  rescaled up. A lower power (1.5) does the reverse — **stronger** than power=2 everywhere,
+  and disproportionately so at small `excess` (≈3.4× stronger at excess=0.05, vs ≈1.4×
+  stronger at excess=0.30) — reasoned through but not empirically tested this session (the
+  measured excess values in this corpus are small, so a lower power was expected, on this
+  reasoning, to worsen rather than fix the convergence problem — not verified).
+
+**Decision: `lambda_domain_balance` defaults to `0.0`** (read via `params.get(...)`, same
+pattern as `lambda_l1`), **not added to Optuna's search space**. The mechanism is fully
+implemented and its raw (unweighted) value is exposed in diagnostics
+(`raw_domain_balance_penalty`) for observability, exactly mirroring `raw_sparsity_loss`'s
+role after ticket 78. Explicitly a toy-corpus decision — revisit at 22k scale, where a larger
+corpus may finally let a weight (and possibly a non-default TOL or exponent) be adjudicated
+rather than guessed or abandoned for lack of resolution, the same standing caveat already
+attached to `TOL`, `log2`, and `lambda_l1`'s own bounds.
+
+### The outer-loop element is active now, independent of the in-loop weight
+
+`evaluate_domain_balance` (Module 3) is called from `evaluate_complete_solution` and its
+output (`domain_balance_pen`) is summed into `sociological_penalty` **unconditionally** —
+this is a real, immediate change to Optuna's second Pareto axis, not gated behind
+`lambda_domain_balance`. This mirrors `collapse_pen`/`coherence_pen`, neither of which has an
+in-loop counterpart either: a pure outer-loop reality check can meaningfully differentiate
+trials on a property even when nothing in the training loss is pushing toward it directly —
+trials whose architecture/hyperparameters happen to produce more balanced communities will
+now score better on this axis, before any decision is made about whether to also add active
+in-loop pressure.
+
+### A separate, pre-existing bug found during verification (unrelated to this ticket)
+
+While bit-exact-verifying the in-loop addition (confirming `lambda_domain_balance=0.0`
+produces identical training to before), repeated runs of the *unmodified-by-this-ticket*
+`fit_production` path gave different `math_loss` values **across separate process launches**
+(same seed, same code) — though bit-identical **within** one process. Traced to
+`initialize_tucker_adapted_nndsvd_and_propagate` (chunk13v9.py, unrelated to this ticket)
+iterating `active_facets` — a raw Python `set()` — directly (lines ~351, ~524), which
+CLAUDE.md §4.9 already names as exactly this hazard ("Never iterate a raw `set()`... Module 4
+Section 5... unordered iteration produces non-deterministic tensor geometry") for a different
+function. Confirmed the cause precisely: fixing `PYTHONHASHSEED` across separate process
+launches makes results bit-identical again. **Not fixed here** — pre-existing, outside this
+ticket's scope, flagged in CLAUDE.md's defect register (ticket 85) for a separate decision.
+
+### Files
+
+- `chunk13v9.py`: `FACET_DOMAIN`, `DOMAIN_BALANCE_TOL` (Module 1); `lambda_domain_balance`
+  read-in, static presence-mask/facet setup, per-epoch differentiable term, `total_loss`
+  wiring, `raw_domain_balance_penalty` diagnostic (Module 2, `run_inner_solver`);
+  `evaluate_domain_balance` (new, Module 3) wired into `evaluate_complete_solution`.
+- `diagnostic_blocks.py`: `make_inloop_domain_balance_penalty_torch` (the validated
+  `U_prob`-based candidate, ported into production above), `fit_instrumented`'s
+  `extra_loss_fn` extended to accept `U_norm` (BLOCKS_VERSION 1.14.0).
+- New diagnostic scripts (all in `chunk13_execution/diagnostic_scripts/`):
+  `domain_balance_raw_penalty_measure.py`, `domain_balance_inloop_sweep.py`,
+  `domain_balance_inloop_seedcheck.py` / `_v2.py`,
+  `domain_balance_inloop_power_and_weight_sweep.py`, plus the earlier
+  `domain_balance_measurement_v2.py` / `domain_balance_v1_v2_noise_compare.py` /
+  `domain_balance_seed_noise_v2.py` used to establish `chunk12v2` needed covering at all.
+  Results in `diagnostic_results/` under matching names.
+
+---
+
+## 23. Ticket 86 — "ghost communities": low-mass communities are real, measured, and mostly
+traced to a structural limit in `S_Art_Auth`, not to a single universal cause
+
+**Status: Measurement phase. Definition settled (user, external discussion), validity of the
+measurement basis established, phenomenon confirmed present and structural, one root-cause
+candidate (author-facet collinearity) confirmed in some configs and ruled out in others,
+another (a mega-author-count "PALM-style" paper driving it) tested and not supported, a
+partial remedy (excluding affiliations) piloted with a config-dependent result. No mechanism
+designed or implemented — this ticket is diagnostic-only so far, deliberately, matching the
+sequencing already used for tickets 82/84 (measure before designing).**
+
+### Definition (user's, from a discussion external to this project's own record)
+
+A community is a candidate "ghost" primarily by **very low share of the model's total
+reconstructed mass** — the defining property. Domain skew (mono-domain) and facet
+concentration (mono-/oligo-facet) are **secondary, descriptive properties of a low-mass
+community, not part of the definition itself** — a community can be low-mass while still
+spanning both domains and several facets, and this session's own measurements below show
+that happens more often than not on this corpus.
+
+### Choosing and validating the mass measure
+
+The natural candidate, `community_share` — each community's share of the model's total
+reconstruction-space mass — already exists as an unexposed intermediate inside
+`evaluate_dimensional_collapse` (§4.4/§17): it is the full length-K vector `collapse_pen`'s
+`max_share` is drawn from, built by averaging `_relation_community_share`'s per-relation share
+vector across every active relation, then renormalising to sum to 1. Two validity questions
+were checked directly, not assumed, before trusting it:
+
+**Gauge-invariance (ticket 79's transformation).** `community_share` is a function only of
+`U_norm` and `Z_scaled`, both already proven exactly invariant under ticket 79's one confirmed
+gauge freedom (rescale one `U_pos` community-column by `c`, divide the matching `Z_pos`
+row/column by `c` in every relation touching that facet). Verified empirically, not just
+inherited from the proof: reconstructed `U_pos`/`Z_pos` from cached `U_norm`/`Z_scaled`/
+`U_scales` (round-trip exact to float32 precision, max diff 3e-8–1.2e-7), then ran a
+three-way comparison — baseline, an **uncompensated** version (scale `U_pos` only, don't
+touch `Z_pos` — a deliberately broken control) and the real **compensated** version — on 4
+(facet, community, scaling-constant) cases across `C3/K6` and `C6/K4`, `T1`. Uncompensated
+moved `community_share` by 0.06–0.24 (confirming the test has real teeth); compensated moved
+it by at most 4.5e-8 — the same order as the round-trip's own floating-point noise, i.e.
+**exactly invariant, not merely close.** Script: `ghost_test1_gauge_invariance.py`.
+
+**Dead-entity contamination.** `_relation_community_share`'s Gram-matrix step
+(`c_u = U_norm.T @ U_norm`) sums over every row of a facet, live and dead (chunk12's
+global-indexing artifact, §11 — up to 39–61% of a facet's rows in T1). Checked directly on
+4 cells (`C3`/`C6` × `T1`/`T2`, K=4): zeroing dead rows via `build_presence_masks` before
+recomputing `community_share` changed it by **exactly 0.0** in all 4 cells, explained by
+magnitude, not merely observed — dead-row `U_norm` values average `4e-8`–`7.5e-6` across
+every facet tested, versus live-row means of `0.014`–`0.12` (5+ orders of magnitude apart;
+dead rows never receive gradient under `lambda_l1=lambda_domain_balance=0`, so they stay
+pinned near the init clamp floor). Script: `ghost_test2_dead_entity_check.py`.
+
+**Conclusion: `community_share` is safe to use as the mass measure**, for these two specific
+concerns. Two older, separately-documented limitations of anything built on `Z_scaled` are
+**not** closed by this and remain exactly as open as before: general rotational
+indeterminacy (§1, partially addressed by §18 below but not at every K tested here) and
+per-relation permutation beyond what the Hungarian correction trusts (§14, same scope gap).
+
+### Main grid measurement (Test 3)
+
+C1–C6 × K∈{2,3,4,5,6} × T1/T2 (single seed, production settings `lambda_l1=0`,
+`lambda_z_offdiag=0.05`, `lambda_domain_balance=0`) — 60 cells, 53/60 converged (7 hit the
+epoch ceiling, all at K≥4, disclosed not discarded). Repeated on `chunk12v2` data
+(T1_v2/T2_v2, same grid) per this session's standing requirement that domain/community-
+structure testing not be v1-only — 60 more cells, 51/60 converged. Reported against 4
+thresholds: flat 1%, flat 2% (the user's own original candidate), and two `K`-relative
+alternatives, `0.25/K` and `0.5/K` (a quarter/half of a community's "fair share" `1/K`).
+
+**The flat-percentage threshold never fires, at any K, in either data version — 0 of 300
+community-slots (v1) below 1% or 2%.** The `K`-relative thresholds do fire, and rise with K:
+at `0.5/K`, 0/12 cells flagged at K=2, rising to 7/12 at K=6 (v1); `0.25/K` only fires at
+K=5/6. **Multiple ghosts in the same cell, confirmed:** 3 cells (v1) have 2 communities
+simultaneously below `0.5/K` — `T1/C1/K6` (0.063, 0.068 — plus 4 others 0.167–0.321),
+`T1/C3/K6` (0.044, 0.078), `T2/C3/K6` (0.046, 0.073) — a single `min_share` reading would
+have hidden the second ghost in each. v2 reproduced `C1/K6` and `C3/K6` at nearly identical
+magnitudes (`T1_v2/C1/K6`: 0.073, 0.074; `T1_v2/C3/K6`: 0.067, 0.078) and surfaced one new
+multi-ghost cell v1 didn't have (`T2_v2/C4/K5`: 0.052, 0.100). Not purely a non-convergence
+artifact: 12 of the 15 v1 cells flagged at `0.5/K` converged normally.
+Scripts: `ghost_test3_share_distribution.py`, `ghost_test3v2_share_distribution.py`.
+
+### Deep dive on the 3 originally-flagged cells — per-community, not aggregated
+
+For each cell's 2 lowest-share communities: `Z_scaled` diagonal per relation (the
+gauge-safe, permutation-corrected within-community reconstruction strength), entity-weighted
+domain balance (`r_k`, ticket 82's own machinery), and facet dominance (entity-count-scaled
+share of the community's membership mass, by facet).
+
+**Domain balance:** 5 of the 6 communities examined sit within the existing ±0.15 tolerance
+band (`TOL`, ticket 82 D3) — `dev_k` 0.027–0.135. One exception: `T2/C3/K6`'s second ghost
+(`dev_k=0.160`) is the only one of the six to actually exceed `TOL`, and both of that cell's
+ghosts lean semantic (`r_k` 0.34–0.37).
+
+**Facet dominance:** in the two `T1` cells, both flagged communities draw from 4+ facets
+spanning both domains, none exceeding ~28–34% of the community's mass — **not mono-facet**.
+`T2/C3/K6` is more concentrated (fringe_atom+core_atom+core_child_he+cousin_he = 82–89% of
+each ghost's mass, social facets combined only 9–12%) — the one cell where the secondary,
+descriptive properties (domain skew, facet concentration) actually coincide with low mass;
+the other two show low mass **without** either secondary property, directly illustrating why
+the user's definition treats them as secondary, not defining.
+Script: `ghost_suspicious_cells_investigation.py`.
+
+### `S_Art_Auth` structural concentration — universal, not ghost-specific, present at every K
+
+The diagonal of `S_Art_Auth`'s `Z_scaled` (the within-community reconstruction strength for
+article-author ties) concentrates on far fewer than K communities, **in every one of the 6
+configs, at every K from 2 to 6, in both slices, in both data versions** — not a property of
+the 3 originally-flagged cells specifically. Measured as top-N share of the diagonal against
+its fair share `N/K` (mean across all 24 (config × slice) cells per K, v1):
+
+| K | top-1 (fair) | top-2 (fair) | top-3 (fair) |
+|---|---|---|---|
+| 2 | 0.83 (0.50) | 1.00 (1.00) | 1.00 (1.00) |
+| 3 | 0.70 (0.33) | 0.97 (0.67) | 1.00 (1.00) |
+| 4 | 0.64 (0.25) | 0.89 (0.50) | 0.99 (0.75) |
+| 5 | 0.56 (0.20) | 0.83 (0.40) | 0.94 (0.60) |
+| 6 | 0.52 (0.17) | 0.77 (0.33) | 0.93 (0.50) |
+
+Not an artifact of choosing N=2 (the value used earlier in this investigation before it was
+challenged and rechecked at N=1 and N=3) — the pattern holds at every N tested. `v2` matches
+`v1` closely at every K (K=6: top-1/2/3 = 0.49/0.75/0.90 vs v1's 0.52/0.77/0.93), expected
+since `chunk12v2` never touches `S_Art_Auth`, and a useful stability check on the measurement
+itself. Per-config spread at K=6 is real: `C2`/`C6` reach top-1=0.97 (one community holds
+nearly the whole relation's diagonal mass); `C4`/`C5` are comparatively less extreme (top-1
+0.31–0.34) but still 2–3× their fair share (0.167).
+
+**Working explanation, not yet a proven mechanism:** `S_Art_Auth` has only 218 (T1) / 258 (T2)
+non-zero ties total (§11), spread across up to 6 communities — genuinely little data per
+community to differentiate 6 separate author-article patterns from. This is offered as the
+most likely cause of the structural ceiling, not as a demonstrated one; no direct test of
+"more data would fix this" was run (would require a differently-sized corpus).
+Script: `ghost_article_degree_vs_winner_loading.py`'s companion concentration pass is folded
+into `ghost_auth_collinearity_and_concentration.py`.
+
+### `auth`/`affil` collinearity, extended past FINDINGS §4's original K≤4 ceiling — confirms
+one config, rules out another, reproduces identically across data versions
+
+FINDINGS §4 established `auth`/`affil` community-profile collinearity (`c_u` off-diagonal
+cosine-similarity) emerges sharply at K≥4, previously only trustworthy up to K=4 (one K=6
+example there hit the epoch ceiling). Extended cleanly to K=5/6 here (all cells below
+converged) and checked directly against the flagged ghost pairs, both data versions:
+
+| Cell | `cu_auth[k1,k2]` | Mutual best match? | Verdict |
+|---|---|---|---|
+| `T1/C1/K6` | 0.699 | Yes (k1↔k2) | Collinearity **confirmed** |
+| `T1_v2/C1/K6` | 0.820 | Yes (k1↔k2) | Collinearity **confirmed**, same config/K, v2 |
+| `T1/C3/K6` | 0.011 | No | Collinearity **ruled out** |
+| `T1_v2/C3/K6` | 0.009 | No | Collinearity **ruled out**, reproduces v1 |
+| `T2/C3/K6` | 0.006 | No | Collinearity **ruled out** |
+| `T2_v2/C4/K5` (new v2 ghost) | 0.011 | No | Collinearity **ruled out** |
+
+**Config-specific, not universal, and reproduces identically between v1 and v2** — the same
+config (`C1`) shows strong, mutual collinearity in both data versions at nearly the same
+magnitude; the same config (`C3`) shows none in either. This means the same overall symptom
+(low share) has at least two distinct underlying causes across configs, not one universal
+explanation. Script: `ghost_auth_collinearity_and_concentration.py`.
+
+### Article-side reading — ghosts are not content-starved; the deficit is specifically on
+the author side
+
+Checked directly (not inferred) whether the article (`art` facet) embedding is thin for
+flagged ghosts, given `S_Art_Journ` (sharing the same `art` embedding) was often strong for
+the same communities where `S_Art_Auth` was weak. Measured each flagged community's article-
+side membership sum, ranked against the other communities in the same cell, across all 6
+flagged cells (3 v1 + 3 v2):
+
+In 4 of 6 cells, at least one flagged community's article-side sum is in the top 2 of the
+whole fit (often the single highest) — `T1/C1/K6` idx4, `T1/C3/K6` idx3 (highest of all 6,
+5 of 25 live articles >0.5 membership), `T2/C3/K6` idx5, `T1_v2/C1/K6` idx4 (highest of all
+6). One cell inverts (`T2_v2/C4/K5`: one ghost strong, rank 2 of 5; the other the single
+weakest article-side community in that fit). One cell (`T1_v2/C3/K6`) shows both merely
+middling. **General conclusion, corrected from an earlier over-generalisation based on only
+3 cells: low overall share does not reliably mean low article-side content — most flagged
+communities are genuinely well-anchored to real articles — but this is not a universal rule
+across all 6.** Script: `ghost_article_side_reading.py`.
+
+### Article degree vs. winning-community loading — the "mega-author paper" hypothesis tested,
+not supported
+
+Hypothesis: articles with unusually many co-authors ("PALM-style" papers) disproportionately
+determine which 2 communities dominate `S_Art_Auth`'s diagonal (the "winners"). Tested by
+correlating each live article's raw co-author count (row `nnz` in the **undamped-sparsity-
+pattern** `S_Art_Auth` matrix — damping changes tie weight, not which ties exist, so this is
+degree-independent of ticket 63's log-damping) against its combined `U_prob` membership on
+the 2 winning communities, all 6 configs, K=6, both slices (12 cells).
+
+**Not supported.** 10 of 12 Spearman correlations are weak and not significant (`p>0.05`).
+The one significant result (`T2/C3/K6`, ρ=−0.446, p=0.006) runs **opposite** to the
+hypothesis — higher-degree articles have *lower* winner-community membership there, not
+higher. The single highest-degree article per slice (65 co-authors, T1; 20, T2) behaves
+inconsistently across configs — winner-pair membership ranges from 0.000 (`T2/C2/K6`,
+`T2/C3/K6`) to 1.000 (`T2/C5/K6`) depending purely on which config's topology it sits in.
+No general "mega-author papers drive the winners" pattern found.
+Script: `ghost_article_degree_vs_winner_loading.py`.
+
+### Affiliation-removal pilot — config-dependent, matching the collinearity split exactly
+
+User proposal: since affiliations could in principle be re-attached at a post-hoc analysis
+stage rather than fit jointly, does excluding `S_Auth_Affil` (hence the `affil` facet)
+entirely from the fit change the picture? Piloted (not a full grid) via a local `soc_keys`
+filter — `fit_instrumented`'s body copied verbatim with one line changed
+(`soc_keys = [k for k in soc_keys if k != 'S_Auth_Affil']`), no change to `chunk13v9.py` —
+on `C1/K6/T1` and `C3/K6/T1`, single seed:
+
+| Cell | Metric | With `affil` | Without `affil` |
+|---|---|---|---|
+| C1/K6 | `cu_auth` max off-diagonal | 0.699 | **0.505** |
+| C1/K6 | `S_Art_Auth` top-2 share | 0.818 | **0.519** (4 of 6 communities now get real diagonal mass, was 2) |
+| C1/K6 | lowest community share | 0.063 | 0.059 |
+| C3/K6 | `S_Art_Auth` top-2 share | 0.963 | 0.975 (no improvement) |
+| C3/K6 | lowest community share | 0.044 (community index 3) | 0.039 (**same index, 3**) |
+
+**Removing affiliations measurably helps `C1` and does essentially nothing for `C3`** — the
+same config split the collinearity check found, now reproduced by an independent
+intervention (removing a whole relation, not just measuring). `C3`'s ghost persists at
+nearly the same magnitude, in the same community index, despite the architectural change —
+evidence something intrinsic to that community (or a limitation not related to `affil`) is
+responsible there. Single-seed pilot on 2 cells, not yet a full grid; user has requested the
+full C1–C6 × K∈{2..6} × both data versions grid as a follow-up, not yet run.
+Script: `ghost_no_affil_ablation.py`.
+
+### Loss-weight sensitivity — outer-loop penalties structurally cannot confound; `lambda_z_offdiag` does, materially
+
+Checked whether any of this investigation's findings could be an artifact of the specific
+loss weights used throughout (`lambda_l1=0`, `lambda_z_offdiag=0.05`,
+`lambda_domain_balance=0`), rather than a property of the topology/data.
+
+**Outer-loop penalties (`collapse_pen`, `coherence_pen`, `semantic_pen`,
+`domain_balance_pen`) cannot be a confound, by construction, not just probably** — per §4.1's
+Epistemic Boundary, they are computed strictly post-hoc in Module 3 and never appear inside
+`run_inner_solver`'s loss; there is no code path by which they could have shaped the fitted
+`U`/`Z` values this investigation measured.
+
+**`lambda_z_offdiag` does matter, materially, for the collinearity finding specifically.**
+Refit `C1/K6` and `C3/K6` (T1, single seed) at `λz∈{0.0, 0.05 (used throughout), 0.5}`:
+
+| Cell | λz | `S_Art_Auth` top1/2/3 | `cu_auth` max off-diag | lowest community share |
+|---|---|---|---|---|
+| C1/K6 | 0.0 | 0.49/0.96/0.98 | **0.263** | 0.079 |
+| C1/K6 | 0.05 | 0.41/0.82/0.97 | 0.699 | 0.063 |
+| C1/K6 | 0.5 | 0.46/0.91/0.95 | 0.865 | 0.032 |
+| C3/K6 | 0.0 | 0.53/0.92/1.00 (not converged) | **0.055** | 0.077 |
+| C3/K6 | 0.05 | 0.87/0.96/0.98 | 0.973 | 0.044 |
+| C3/K6 | 0.5 | 0.81/0.93/0.97 | 0.796 | 0.055 |
+
+**Two separate conclusions, not one.** The `S_Art_Auth` concentration itself (top-1/2/3
+share) stays elevated well above fair share at every tested `λz` in both cells — that part of
+the finding is not a `λz` artifact. But `auth`-facet collinearity rises sharply with `λz` in
+both cells — at `λz=0` it drops to 0.263 (C1) and 0.055 (C3), both far below the
+production-setting values reported above as "confirmed"/"ruled out." **The qualitative
+ordering survives at every tested `λz`** (C1 more collinear than C3 throughout) but **the
+magnitude reported earlier in this section is inflated by the off-diagonal penalty itself,
+not purely a topology-intrinsic property** — worth this explicit correction rather than
+letting the earlier, uncaveated numbers stand as the full picture. Single-seed, 2-cell check,
+not a full sweep; `C3`'s `λz=0` run did not converge, weakening confidence in that one data
+point specifically. Script: `ghost_lambda_z_sensitivity.py`.
+
+### Connection to already-existing rotational/permutation work — real scope gaps, not yet closed
+
+FINDINGS §18 already established, via a two-tier test (near-separability + a direct local-
+**and-distant** rotation-feasibility search, both re-run once under a corrected monitoring
+mask), that genuine community-blending freedom is essentially absent — not merely narrow —
+for this model. **That evidence covers K∈{3,4}, T1 only.** This session's grid (K∈{2,3,4,5,6},
+T1/T2, both data versions) is materially wider. Not yet extended; a real, named gap, not an
+oversight to gloss over. Similarly, FINDINGS §14's permutation-conflict audit (zero genuine
+cross-relation conflicts found) covers the same K∈{2,4} scope and has not been re-run at
+K=5/6, where more communities mean more possible permutations and a higher chance of a
+genuine conflict — the exact boundary condition FINDINGS §14 itself already flagged as
+untested.
+
+### What remains open, not yet done
+
+- Full affiliation-removal grid (C1–C6 × K∈{2..6} × T1/T2/T1_v2/T2_v2) — user-requested,
+  scoped (~120 fits, cheap individually), not yet run.
+- Rotation-feasibility (§18) and permutation-conflict (§14) checks, both scoped to K∈{3,4}/
+  T1 only — not yet extended to this ticket's wider K/slice/data-version grid.
+- Seed-noise floor for `community_share`/`min_share` (the planned "Test 4") — not started;
+  needed before any specific cell's "ghost" verdict can be checked against ordinary
+  seed-to-seed variation, the same discipline already applied to `TOL` (ticket 82 D3).
+- No mechanism (in-loop or outer-loop) has been designed or proposed — this ticket remains
+  diagnostic-only throughout, matching the sequencing the user set at its start ("we need to
+  measure first").
+- `lambda_z_offdiag` sensitivity checked on only 2 cells, single seed — the qualitative
+  C1-vs-C3 split held up, but the magnitudes at production settings should be read with the
+  inflation above in mind until a wider sweep exists.
+
+### Files
+
+- New diagnostic scripts (all `chunk13_execution/diagnostic_scripts/`):
+  `ghost_test1_gauge_invariance.py`, `ghost_test2_dead_entity_check.py`,
+  `ghost_test3_share_distribution.py`, `ghost_test3v2_share_distribution.py`,
+  `ghost_suspicious_cells_investigation.py`, `ghost_auth_collinearity_and_concentration.py`,
+  `ghost_article_side_reading.py`, `ghost_article_degree_vs_winner_loading.py`,
+  `ghost_no_affil_ablation.py`, `ghost_lambda_z_sensitivity.py`. Results in
+  `diagnostic_results/` under matching names.
+- No changes to `chunk13v9.py` or `diagnostic_blocks.py` — every measurement above reused
+  existing, already-validated functions (`_relation_community_share`,
+  `_hungarian_relabel_relation`, `facet_membership_profile`, `domain_balance_r_k`,
+  `build_presence_masks`, `fit_or_load`/`fit_instrumented`) or, for the affiliation and
+  `lambda_z_offdiag` pilots, a local fork of `fit_instrumented`'s body confined to the
+  diagnostic script itself.
+
+---
+
+## 24. Ticket 84 follow-up — journal-venue resolution false negatives found and mostly
+fixed; the fix reaches no article in this toy corpus's fitted data; root cause of that
+traced through the full ingestion pipeline; one process-safety incident, fully recovered
+
+**Status: journal-resolution logic corrected and re-run; `chunk12.py`/`chunk12v2.py`
+rebuilt; verified byte-identical to before — the correction reaches no article that is
+actually part of this toy corpus's 61-article valid cross-section. Root cause traced to
+postprocessing, not to text availability or graphbrain parsing. One destructive incident
+during this investigation, recovered from a NAS snapshot, no data lost.**
+
+### False negatives found in the original D4 resolution (ticket 84, `journal_repo_resolution.py`/`_v2.py`)
+
+D4 (CLAUDE.md §4.21) resolved 10 of 59 originally repository-hosted articles to a real
+venue via a live OpenAlex title search, leaving 49 "UNRESOLVED, confirmed no non-repository
+candidate." Six well-known machine-learning papers among those 49 were checked directly
+against the literature and against OpenAlex's own data: ALBERT (ICLR 2020), T5 (JMLR), PaLM
+(JMLR), InstructGPT (NeurIPS 2022), BLIP-2 (ICML 2023), and "Judging LLM-as-a-Judge" /
+MT-Bench (NeurIPS 2023 Datasets & Benchmarks track). **All six have a real, non-repository
+venue.** Only LLaMA, checked as a control, is a genuine true negative — arXiv-only, no
+peer-reviewed venue exists for it.
+
+**Root cause, confirmed against a specific record, not inferred:** the original resolver's
+live-search step checked only a candidate work's `primary_location.type`, never its full
+`locations` array. T5's own OpenAlex record (`W2981852735`) lists four locations — three
+arXiv entries and one `Journal of Machine Learning Research` entry — but `primary_location`
+happens to be arXiv, so the resolver discarded a candidate whose correct venue was present,
+unchecked, in the same record.
+
+### Fix built and its actual yield
+
+`journal_repo_resolution_v3.py` (new): a `select_best_location()` function inspects a
+candidate's full `locations` list and ranks by a source-type hierarchy — `journal` >
+`conference` > `book series` > `ebook platform` > anything else non-repository, `repository`
+excluded unconditionally — applied the same way across all three resolution paths
+(same-record locations, cached related-works, live title search; the original code had three
+separate, inconsistent pieces of this check, and the bug above was confirmed in only one).
+
+**Yield: 1 of the 49 originally-unresolved articles was actually fixable this way — T5, now
+resolved to JMLR.** The other five checked papers (ALBERT, PaLM, InstructGPT, BLIP-2,
+MT-Bench) remain correctly unresolved: their own OpenAlex records were checked directly and
+genuinely list only arXiv, with no non-repository location merged in — a gap in OpenAlex's
+own data for these specific records, not something a script fix can close.
+
+**Two further defects found and fixed during implementation, both caught before reaching
+production data:**
+1. The repository-exclusion check originally recognized only the 4 IDs named in D4 (arXiv,
+   bioRxiv, ChemRxiv, Research Square). Two more sources already present in this corpus's
+   own `journal_id` values — PubMed and DROPS (Schloss Dagstuhl's open archive) — are also
+   OpenAlex `type == "repository"` sources, never excluded since neither is one of the 4
+   named IDs. Fixed: excludes anything OpenAlex classifies as `type == "repository"`, not
+   only the 4 named IDs.
+2. One title in `articles.csv` (the T5 article) contains a literal two-character sequence —
+   a backslash followed by the letter "n" — where the source text should have a space or
+   line break, not an actual newline character. This caused the first attempt at the fix to
+   still report T5 unresolved: the live search treated the literal `\n` as text to match,
+   and no genuine title contains it. Confirmed directly via `repr()` inspection; also
+   confirmed this is the only title in the 121-row corpus with this specific corruption
+   (a full regex scan found no others). Fixed by stripping literal backslash-escape
+   sequences before constructing any search query or similarity comparison.
+
+### `venue_type` enrichment (user-requested)
+
+`articles.csv` gained a `venue_type` column for all 121 rows, populated via one OpenAlex
+Sources lookup per unique `journal_id` (46 unique journals, not per article) — resolves to
+`journal` (54 rows), `repository` (48, after the fix), `conference` (7), `book series` (1),
+or nothing (9 rows with no journal recorded). The two newly-found repository sources
+(PubMed, DROPS) were found this way, incidentally, on articles that were never part of the
+original 59-article trigger set.
+
+A persisted reference, `toy_large/known_repository_sources.json`, records the 6 confirmed
+repository sources found so far (id, display name, first-seen context) — checked first by
+`journal_repo_resolution_v3.py` before any live Sources lookup (confirmed directly: zero
+network calls for anything already listed), and appended to automatically whenever a new
+`type == "repository"` source is encountered. Purpose: avoid re-discovering the same
+repositories via the API a second time at the 22k-article corpus. **Explicitly scoped to
+what this toy corpus has encountered, not a claim about the complete universe of OpenAlex
+repository-type sources** — an early presentation of this list risked being read as the
+latter and was corrected directly when the user asked.
+
+**Raised by the user, not investigated:** whether OpenAlex's `type` field itself has false
+negatives — specifically, whether something that functions as a repository in practice (a
+reference-management or citation-aggregation tool was named as the motivating example) could
+be classified `type == "other"`/`"metadata"` rather than `"repository"`, which the current
+hierarchy would currently accept as a valid low-priority venue rather than exclude. Checked
+for the one specific named example — not present anywhere in this corpus's data, and no
+record of it having been raised earlier in this investigation either. The general concern is
+real and not addressed by the current design; left open.
+
+### `chunk12.py`/`chunk12v2.py` updated and rebuilt — no effect on the fitted data
+
+Both files' `REPO_JOURNAL_IDS` (previously a hardcoded 4-ID literal, identical in both
+files) now load from `known_repository_sources.json` at runtime instead — one shared,
+growing source of truth, matching how D4's original fix already touched both files
+identically.
+
+Both regenerated. **Full null-rebuild verification: every relation matrix, every entity
+map, and `journal_meta` came out byte-identical to the pre-update pickles, in both the
+regular and `_v2` versions, both slices.** This was initially reported as an unexpected
+result — the working assumption going in was that `S_Art_Journ`'s tie count would move (T5
+gaining a tie, the PubMed/DROPS-hosted articles losing theirs) — and the expectation was
+corrected, not the finding: none of the three affected articles are part of this corpus's
+61-article valid cross-section (`meta_set ∩ edge_set ∩ sqlite_set`, `chunk12.py`'s own
+validity filter) — each fails the `sqlite_set` membership check specifically (absent from
+`corpus_curated.sqlite`), independent of journal. The fixes are real and correctly in
+place; they simply have nothing to reach in this corpus today.
+
+### Why these three articles are absent from `corpus_curated.sqlite` — traced through the full pipeline
+
+User-requested follow-up: check abstract availability for T5, the DROPS-hosted article
+("HISTORIAE..."), and the PubMed-hosted article ("Understanding the Natural Language of
+DNA...").
+
+| Stage | File | Result |
+|---|---|---|
+| Raw abstract text | `corpus_text.csv` | Present for all 3 — 1028 / 955 / 1182 characters |
+| Graphbrain parsing | `corpus_raw.sqlite` | Successfully parsed, all 3 — real `source`-typed sentence edges (6 / 7 / 4 sentences respectively) |
+| Parse error log | `parse_errors.log` | No entries for any of the 3 |
+| Postprocessing / curation | `corpus_curated.sqlite` | Absent, all 3 |
+
+Traced the exact mechanism, not just the outcome: re-ran `postprocessing_4h.py`'s own
+`extract_dual_matrices()` against every one of the 17 raw parsed sentences belonging to
+these 3 articles (isolated the function definitions from the file's execution code, spaCy
+lemmatizer stubbed to surface-form passthrough — the same technique already used earlier
+this project on the sibling `7.5postprocessing_4hbased_correct.py`; does not change which
+atoms land in which structure). **Every one of the 17 sentences returned `None` — no
+sentence in any of the three abstracts contains the predicate-argument structure
+`extract_dual_matrices` requires before it will write anything to the curated database.**
+Not a parsing failure and not a text-availability gap — a structural filter that these
+three abstracts' sentences uniformly fail to clear.
+
+**Version mismatch found, not yet acted on:** `corpus_curated.sqlite` (mtime Jun 15 23:02)
+was built by `postprocessing_4h.py` (mtime Jun 15 22:19, ~43 min earlier). A corrected
+version of the same extraction logic, `7.5postprocessing_4hbased_correct.py` — previously
+used only for isolated verification on a single sampled sentence (the D8/`M_Cousin_Child`
+structural-verification note in the ticket84 plan file) — is dated Jun 16 22:51, roughly a
+day *after* the curated database was built. **The corrected logic has never been used to
+rebuild the production curated database.** Whether its corrections would change the outcome
+for these 3 articles, or for others, has not been tested — flagged for whoever decides
+which pipeline stages to re-run.
+
+### Process-safety incident (2026-09-01) — data destroyed and fully recovered, no loss
+
+While isolating `postprocessing_4h.py`'s function definitions for the test above, the
+file's source was `exec()`'d up to its `# EXECUTION` marker on the assumption that
+everything before that marker was side-effect-free function/constant definitions. **It is
+not** — a module-level operation before that marker purges `corpus_curated.sqlite` (visible
+from its own printed message, "Previous curated matrix purged," missed at the time). The
+61.9MB curated database was destroyed; a subsequent verification call against the
+now-missing path silently recreated an empty 20KB file at the same path via
+`graphbrain.hgraph()`'s auto-create behaviour, compounding the loss until it was noticed
+directly.
+
+**Fully recovered, verified byte-for-byte, no data lost.**
+`/mnt/hum01-home01/p91688di/tensor_data_staging/` sits on a NAS mount with hourly (24h) and
+daily (28-day) Isilon snapshots (already documented as available, ticket84 plan item 6, for
+a different file). The daily snapshot `Reynolds_HUM_NFS_28days_2026-08-04_00-30-00` held the
+exact pre-incident file (61,935,616 bytes, matching to the byte). Restored via a plain `cp`
+from the read-only `.snapshot/` path (run by the user directly, after the harness's own
+permission classifier declined to run the copy from this session). Verified post-restore:
+177 `source_core` edges, 66 distinct articles — matching the pre-incident state exactly, and
+the three target articles confirmed still absent, consistent with the finding above and
+undisturbed by the incident.
+
+**Standing precaution added as a result** (`SESSION_PROTOCOL.md` §E): read a script's
+entire file for side effects before executing any part of it, specifically naming both
+postprocessing scripts.
+
+### Files
+
+- **New:** `chunk13_execution/diagnostic_scripts/journal_repo_resolution_v3.py` (fix +
+  `venue_type` enrichment).
+- **New:** `toy_large/known_repository_sources.json` (persisted repository-source cache, 6
+  entries).
+- **Modified:** `toy_large/chunk12.py`, `toy_large/chunk12v2.py` (`REPO_JOURNAL_IDS` now
+  loaded from the JSON file, both identically); `tensor_data_staging/articles.csv` (T5's
+  `journal_id`/`journal_name` corrected; `venue_type` column added for all 121 rows).
+- **Regenerated:** all 6 production pickles (`Star_extended_matrices_t1/t2[.pkl]`,
+  `Star_epistemic_decoders_global[.pkl]`, and their `_v2` counterparts) — verified
+  byte-identical to their pre-update state; pre-update copies kept at
+  `outputs/pre_v3_backup/` pending confirmation they can be removed.
+- **Recovered, unmodified in content:** `toy_large/corpus_curated.sqlite` (restored from a
+  NAS snapshot after the incident above; its content is unrelated to, and unaffected by,
+  any of this session's other changes).
+- **Not yet done:** whether/how to re-run preprocessing or postprocessing to recover these 3
+  (or other, unsurveyed) articles is left to the user's decision; whether
+  `7.5postprocessing_4hbased_correct.py`'s corrections would change today's postprocessing
+  outcome for any article has not been tested; the broader `type=="other"` false-negative
+  concern above has not been investigated beyond the one named example.
+
+---
+

@@ -107,6 +107,18 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
     new file, no new tunable over a tuned one — unless the simpler option is
     checked and found genuinely insufficient, not just assumed to be.
 
+11. **Plain, precise language over metaphor or slang — extends rule 10 from
+    naming to prose generally.** Explain a mechanism by saying exactly what it
+    does, with the actual numbers, rather than reaching for a figurative label.
+    Concrete precedent: "resolving-power ceiling" was used to describe why
+    `S_Art_Auth`'s diagonal concentrates on few communities, flagged as
+    obscure, and corrected to a literal description — what the diagonal
+    values mean, what "resolving" a community concretely means, tied to the
+    actual tie counts (218–258) driving it. When a plain-language explanation
+    and a named-concept explanation would convey the same thing, use the
+    plain one; do not introduce a new label for something a sentence can
+    already say directly.
+
 ---
 
 ## D. Persistence
@@ -170,6 +182,19 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
 - Any fast path (trace identities, masked computations) must be checked against
   a dense or hand-computed equivalent on at least one case — report the
   agreement.
+- **Read a script's entire file for side effects before executing any part of
+  it — not just the section intended to use.** A module-level operation can
+  run before, or independent of, a `# EXECUTION`-style marker or an
+  `if __name__ == "__main__":` guard; slicing a file at a comment boundary and
+  assuming everything above it is side-effect-free is not verification.
+  Concrete precedent: `toy_large/postprocessing_4h.py` and
+  `toy_large/7.5postprocessing_4hbased_correct.py` (upstream of `chunk12.py`)
+  both purge `corpus_curated.sqlite` as a module-level side effect, before
+  their own `# EXECUTION` marker — executing only the portion believed to be
+  "just function definitions" destroyed the curated database (2026-09-01,
+  recovered from a NAS snapshot, no data lost). Do not execute any part of
+  either file again without first reading it in full; the same caution
+  applies to any script not already known to be side-effect-free.
 
 ---
 
