@@ -1743,6 +1743,40 @@ version — authoritative for Tier 2's margins). Results in
 `diagnostic_results/rotation_feasibility_search.json` (superseded), and
 `diagnostic_results/rotation_feasibility_search_v2.json` (authoritative).
 
+### Re-derivation on post-08-27-fix data (tickets 86/87 Stage 0e) — verdict held, if anything tighter
+
+All three scripts above (`near_separability_check.py`, `rotation_feasibility_search_v2.py`,
+`rotation_island_search_v2.py`) were re-run unmodified on the current post-fix pickles and
+compared against the pre-fix (2026-08-19–21) results the numbers above were derived from:
+
+| | old (with-repository) | new (post-fix) |
+|---|---|---|
+| Tier 1, 0.85-bar failures, clean facets | 7/56 | 3/56 |
+| Tier 1, 0.85-bar failures, confounded facets | 7/48 | 7/48 |
+| Tier 1, 0.85-bar failures, total | 14 | **10** |
+| Tier 2 local, pairs pinned below 0.05° | 53/54 | 53/54 |
+| Tier 2 local, max single-directional margin anywhere | 0.57° (`C2/K4`, pair (1,3)) | **0.325°** (`C5/K3`, pair (0,2)) |
+| Tier 2 distant, pairs with a second feasible region | 0/54 | 0/54 |
+
+Every number moved the same direction as, or held exactly at, the standing conclusion: Tier
+1's purity-witness coverage at the strict bar *improved* (14→10 total failures — more cells
+now have a near-pure witness for every community, not fewer); Tier 2's worst-case local
+rotation margin *shrank* further (0.57°→0.325° — the already-small blending freedom got
+smaller, not larger); Tier 2's distant search still finds zero disconnected feasible regions
+anywhere. **Nothing here changes §18's conclusion — this is a confirmation, not a
+correction.**
+
+One non-content change worth naming: which single grid cell fails to converge shifted —
+old flagged `C4/K4` (Tier 1) / `C3/K4`+`C4/K4` (Tier 2 local); new flags only `C3/K4` in
+both. Consistent with this project's already-documented single-seed fit sensitivity (ticket
+85), not a new instability — retained in the results, not dropped, per `SESSION_PROTOCOL`
+§C.4.
+
+Scripts unchanged (re-run as-is, no code modified). Results:
+`diagnostic_results/near_separability_check.json`,
+`diagnostic_results/rotation_feasibility_search_v2.json`,
+`diagnostic_results/rotation_island_search_v2.json`.
+
 ---
 
 ## 19. A community's domain-skew "identity" is not reproducible across independently-trained
@@ -2428,6 +2462,59 @@ grid, not a reason to reconsider the choice. **Explicitly a toy-corpus value, fl
 re-estimation on the 22k-article corpus**, matching the pattern already used for `lambda_l1`'s
 bounds (ticket 77).
 
+### Re-derivation on post-08-27-fix data (tickets 86/87 Stage 0e) — verdict held, `TOL` kept at `0.15`
+
+The measurement above used with-repository data (regenerated 2026-08-25/26, before the
+journal-resolution repository-exclusion fix — `plans/ticket86-87-ghosts-and-relation-concentration.md`
+Context section). Both `domain_balance_seed_noise.py` and `domain_balance_measurement.py`
+were re-run unmodified on the current post-fix pickles and re-paired community-by-community
+(same method as above, same 24-cell grid, now fully converged — 84/84 community-cells usable
+vs. 76/84 before, the two previously-non-convergent cells, `T2/C3/K4` and `T2/C4/K4`, now
+fitting cleanly):
+
+| | old (with-repository) | new (post-fix) |
+|---|---|---|
+| noise SD(`r_k`): mean / median / p90 / max | 0.134 / 0.144 / 0.192 / 0.229 | 0.119 / 0.120 / 0.172 / 0.234 |
+| `dev_k` (entity-weighted `u_prob`): median | 0.112 | 0.093 |
+| % communities with `dev_k` > 1× own noise SD | 46% | 36% (30/84) |
+| % exceeding 1.5× | 21% | 15.5% (13/84) |
+| % exceeding 2× | 13% | 4.8% (4/84) |
+| % with `dev_k` > `TOL`(0.15) outright | — | 19% (16/84) |
+
+Both the noise floor and the signal shrank by comparable proportions on the post-fix data,
+so the qualitative relationship is unchanged — median noise SD (0.120) still exceeds median
+`dev_k` (0.093) — but the fraction of communities whose apparent imbalance survives its own
+seed-noise floor dropped at every multiple tested (46%→36% at 1×, 21%→15.5% at 1.5×,
+13%→4.8% at 2×). If the repository-exclusion fix moved this story at all, it moved it toward
+"more of the apparent domain-balance signal is noise," not less — reinforcing, not
+undermining, the original caution against reading `dev_k` at face value.
+
+Per-config means (pooled across K/slice, for comparison against the original per-config
+table above) stayed in the same relative order — C3/C5 lowest (`dev_mean` 0.068/0.087 vs.
+`noiseSD_mean` 0.110/0.104), C1/C6 closest to their own noise floor (0.117/0.125,
+0.120/0.138) — no config changed which side of the noise floor it sits on.
+
+**Decision: `TOL = 0.15` kept, not re-tuned.** The margin between `TOL` and the noise median
+widened (old ratio `0.15/0.144` ≈1.04×, new ratio `0.15/0.120` ≈1.25×) purely because the
+noise floor fell while `TOL` stayed fixed — nothing in this re-run argues for lowering it.
+Raising it toward the new p90 (≈0.17) was considered and rejected: D3's own rule was "set
+`TOL` just above the noise *median*," and switching to a stricter percentile now, immediately
+after a data refresh happened to move the estimate, would be fitting the threshold to this
+particular measurement rather than applying the standing rule consistently — exactly the
+"chasing noise" pattern the seed-noise-floor discipline exists to prevent. The term this
+threshold gates is also currently inert in production (`lambda_domain_balance` frozen at
+`0.0`, not in Optuna's search space, §4.18/FINDINGS §22), so there is no live training
+consequence to a marginal retune. **Would revisit if** a future re-measurement showed the
+noise median climbing *above* `0.15` (a real erasure of the margin), not merely moving
+around below it. Re-derivation with a larger, statistically confident sample remains
+reserved for the 22k-article rebuild, per the original caveat above.
+
+Script/results unchanged (re-run as-is, no code modified):
+`diagnostic_scripts/domain_balance_seed_noise.py`,
+`diagnostic_scripts/domain_balance_measurement.py`. Results:
+`diagnostic_results/domain_balance_seed_noise.json`,
+`diagnostic_results/domain_balance_measurement.json`.
+
 **Single-fit vs. multi-fit reliability — why more seeds don't just fix this for the in-loop
 term.** Averaging several aligned seeds' `r_k` readings would give a materially more reliable
 *point estimate* (standard averaging reduces error with more independent readings) — exactly
@@ -2556,6 +2643,38 @@ the transform exactly). **Not promoted to production** — held pending the 22k-
 where the noise floor is expected to shrink enough to actually adjudicate the mixed Phase-3
 result. Full record: `PhD_CNMF/plans/ticket84-grammar-hub-downweighting.md`; CLAUDE.md §8
 ticket 84 and §4.21 carry the condensed version.
+
+### `cousin_he`/T2's precision follow-up, resolved (tickets 86/87 Stage 0e)
+
+Of the "2 of 6 clear the seed noise floor with confidence" above, `cousin_he`/T2's
+confirmation was the weaker of the two: it rested on only the original 5-seed noise
+estimate, on the thinnest sample in the whole test (`M_Cousin_Child` is active in only 2 of
+6 configs). `grammar_damping_cousin_he_more_seeds.py` exists to extend that specifically
+(5→15 seeds, C3/C4 only, same aggregation method, no new metric) — the plan file recorded
+it as having "died silently mid-run... not relaunched," which turns out to be stale: a
+completed run was already sitting in the pre-fix cache (dated 2026-08-26, never folded back
+into the plan text — a documentation gap, not a live problem).
+
+Re-run on current (post-08-27-fix) data and compared against that pre-fix completed run:
+
+| | T1 Δρ | T1 exceeds 2×SD (15 seeds)? | T2 Δρ | T2 exceeds 2×SD (15 seeds)? |
+|---|---|---|---|---|
+| old (pre-fix, 5-seed SD said "yes") | +0.030 | No | −0.218 | **No** (15-seed SD widened to 0.128, ratio fell to 1.7×) |
+| new (post-fix) | +0.028 | No | −0.242 | **Yes** (15-seed SD 0.113, ratio ≈2.15×) |
+
+`T1` is unchanged — small, wrong-direction, well inside noise either way (ratio ≈0.27), same
+conclusion as before. `T2` is where the extension mattered: on the old data, going from 5 to
+15 seeds actually pulled the result *below* the 2×SD bar (the "confirmed" status in the
+corrected table rested on an optimistically small 5-seed SD estimate). On the post-fix data,
+the 15-seed SD is tighter, not wider, and the effect itself is slightly larger, so it clears
+2×SD comfortably. **Net: the Phase 3 headline tally is unchanged (still 3/6 correct
+direction, 2/6 confirmed, one each direction), but `cousin_he`/T2's confirmation is now the
+best-supported result in the grid rather than the most fragile one** — the specific
+precision gap this script was built to close is closed. Does not change the standing
+disposition (hold Phase 4, don't chase further on the toy corpus, revisit at 22k scale).
+
+Script unchanged (re-run as-is): `diagnostic_scripts/grammar_damping_cousin_he_more_seeds.py`.
+Result: `diagnostic_results/grammar_damping_cousin_he_more_seeds.json`.
 
 Diagnostic scripts (no `chunk13v9.py` or `chunk12.py` changes made):
 `diagnostic_scripts/domain_balance_seed_noise.py`. Results:
