@@ -163,15 +163,43 @@ and 3 need **zero new fits** (all 120 grid cells are cached under current data h
 
 ### Stage 0 — repairs, before any new interpretation
 
-**0a. Centralize the mass measure.** Move `community_share_vector` into `diagnostic_blocks.py` beside
-the existing `collapse_mass_share` (line ~1191), and have every `ghost_*` script import it. Six
-verbatim copies currently exist and all agree; the risk is structural drift, which
-`diagnostic_blocks.py`'s own header (lines 8–17) exists to prevent.
+**0a. Centralize the mass measure — DONE.** Moved `community_share_vector` into `diagnostic_blocks.py`
+beside `collapse_mass_share` (kept as a separate function, not merged — the two differ in call
+signature and near-zero-total fallback; merging was judged a larger, separately-scoped change, see
+the new function's docstring). 7 near-verbatim sites found (5 as a locally-defined function of this
+exact name — diffed byte-for-byte identical before the move; 2 inlined directly in a loop in
+`ghost_test3_share_distribution.py`/`_v2.py`, left as-is since their computation is entangled with
+an adjacent per-relation diagnostic loop those two scripts also need — pulling it out would add a
+second, redundant call rather than simplify). The 5 function-def sites now import it.
+**`BLOCKS_VERSION` NOT bumped for this item** — deviates from this plan's original text ("bump
+once, at the start") because the moved function is post-hoc analysis only, never called from
+`fit_instrumented`/`run_inner_solver`, so it cannot change any cached fit's numbers; bumping would
+have orphaned ~200+ existing cached fits for zero reason. (0c below, which does edit
+`fit_instrumented`, is the bump that was actually needed — see there.)
 
-**0b. Fix the raw-diagonal reads.** In the four scripts named above, replace `np.diag(Z)` with the
-permutation-corrected `Z[k, π(k)]` obtained from `chunk13v9._hungarian_relabel_relation`, and record
-`trusted`/`structure_score` alongside every reported value. Re-run and diff against the stored JSON —
-report which conclusions move and which don't, rather than silently regenerating.
+**0b. Fix the raw-diagonal reads — DONE.** All 4 named scripts now read
+`diagnostic_blocks.relation_community_mass` (an existing function, not a new one — already used
+elsewhere for exactly this correction) instead of raw `np.diag(Z)`, and record `trusted`/
+`structure_score` alongside every value. Raw values kept too (renamed `_raw`), not discarded.
+Re-ran all 7 touched scripts and diffed against pre-fix JSON (backed up to
+`diagnostic_results/stage0_pre_fix_backup/`):
+- 2 scripts (`ghost_test2_dead_entity_check.py`, `ghost_test1_gauge_invariance.py`) — 0a-only,
+  zero output change, confirms the centralization is behavior-preserving.
+- `ghost_lambda_z_sensitivity.py` — correction never fires in its 6 tested cells (C1/C3 × K6 × 3
+  λz values, all `trusted=False`); `top1/2/3` unchanged to the last decimal.
+- `ghost_article_degree_vs_winner_loading.py` — correction never fires in its 12 tested cells
+  (T2 × C1–C6 × K6, all `trusted=False`); `winners`/`spearman_rho` unchanged.
+- `ghost_suspicious_cells_investigation.py` — correction fires for a few relations in the 3 target
+  cells (`S_Art_Journ`, `M_Parent_Art`, `M_Child_Art`), but in every fired case the Hungarian
+  permutation equals the identity, so the reported `k1`/`k2` values are numerically unchanged; only
+  a few *other* (non-target) communities' diagonal entries in the full per-relation list moved.
+- `ghost_auth_collinearity_and_concentration.py` — correction fires (changes a value) in **5/60 v1
+  and 6/60 v2 cells for `S_Art_Auth`'s Herfindahl/top-2 share** — matching this plan's own
+  pre-registered estimate in the Context section above exactly. Per-K summary (mean Herfindahl/
+  top-2 share) shifted by 0.02–0.07 at K=2–4, unchanged at K=5–6 (no fired cell there). **No
+  headline §4.22 claim moved**: the C1-vs-C3 collinearity numbers themselves come from `c_u`
+  (unaffected by this fix — no permutation ambiguity in a Gram matrix), and the shifted
+  Herfindahl/top-2 numbers stay well inside the ranges already quoted in `CLAUDE.md` §4.22.
 
 **0f. Validate `c_u` against dead-row contamination — DONE, result: not contaminated.**
 `community_share`'s dead-row robustness was checked directly (ghost_test2_dead_entity_check.py);
@@ -198,14 +226,40 @@ separately at Stage 1 (`n_eff` computed on `_relation_community_share`'s reconst
 `share_k`, not the raw or corrected diagonal alone, with `interference` reported alongside so a
 mixed relation isn't misread as a clean duopoly).
 
-**0c. Re-run the affiliation ablation without the confound.** Three arms, same seed, same K, same
-slice, `PYTHONHASHSEED` fixed (open ticket 85 makes this fit non-reproducible across process launches
-otherwise): (i) baseline computed *in-script*, not diffed by hand against another JSON; (ii) affil
-removed **with `w_soc` pinned at `0.5/3`** so `S_Art_Auth`'s loss weight is unchanged; (iii) affil
-kept but `S_Art_Auth`'s weight multiplied by 1.5 — the control that isolates the confound. If (iii)
-reproduces (ii)'s improvement, the affiliation story collapses and `CLAUDE.md` §4.22 needs correcting.
-Prefer adding a `soc_keys_override` parameter to `fit_instrumented` over the current fourth hand-copy
-of the training loop.
+**0c. Re-run the affiliation ablation without the confound — DONE, result: confound ruled out for
+C1, the config the claim is actually made about.** Added `soc_keys_override` and
+`relation_weight_multiplier` params to `diagnostic_blocks.fit_instrumented` (not a new hand-copy of
+the loop) — both default to their prior behavior exactly (verified: `verify_agreement()` re-run
+post-edit, bit-identical, `VERDICT: AGREE`). **`BLOCKS_VERSION` bumped 1.14.0→1.15.0** (this edit
+does touch the solver-path function, per `SESSION_PROTOCOL` §E's rule — every existing cached fit
+is now orphaned for future re-access, though no already-written result file is affected; this is
+the cost the plan's original "bump once, at the start" line anticipated, landing here instead of
+at 0a since 0a never touched this function).
+
+Same two pilot cells and seed as the original `ghost_no_affil_ablation.py` (C1/K6/T1, C3/K6/T1,
+`MASTER_SEED`). Arm (ii)'s "`w_soc` pinned at 0.5/3" achieved via `relation_weight_multiplier`
+applied on top of the naturally-elevated weight (multiplier = `(0.5/3)/(0.5/n_remaining)`), not a
+new weight-override parameter — reuses the same mechanism arm (iii) needs anyway.
+`diagnostic_scripts/stage0c_affil_ablation_confound_test.py` →
+`diagnostic_results/stage0c_affil_ablation_confound_test.json`.
+
+| Cell | Metric | (i) baseline | (ii) no-affil, weight pinned | (iii) affil kept, weight ×1.5 only |
+|---|---|---|---|---|
+| C1/K6/T1 | `cu_auth_max_offdiag` | 0.898 | 0.265 (Δ−0.633) | 0.801 (Δ−0.097) |
+| C1/K6/T1 | `S_Art_Auth` Herfindahl | 0.360 | 0.250 (Δ−0.109) | 0.375 (Δ+0.016) |
+| C3/K6/T1 | `cu_auth_max_offdiag` | 0.977 | 0.969 (Δ−0.008) | 0.163 (Δ−0.813, **non-converged**) |
+| C3/K6/T1 | `S_Art_Auth` Herfindahl | 0.683 | 0.464 (Δ−0.219) | 0.741 (Δ+0.059, **non-converged**) |
+
+**C1 (the config §4.22's claim is actually made about): arm (iii) does not reproduce arm (ii).**
+Weight-matching `S_Art_Auth` alone moves collinearity by only −0.097 and Herfindahl by +0.016 (the
+wrong direction) against arm (ii)'s −0.633/−0.109 — an order of magnitude smaller and, for
+Herfindahl, the opposite sign. **The affiliation-removal finding for C1 survives the confound
+check**; `CLAUDE.md` §4.22 does not need correcting on this account. C3's arm (iii) hit the
+2000-epoch ceiling (flagged, not excluded, per `SESSION_PROTOCOL` §C.4) — its numbers are not
+treated as comparable; C3's arm (ii) shows `cu_auth` essentially unmoved (−0.008, consistent with
+"auth-collinearity ruled out in C3") while Herfindahl and `min_community_share` move slightly, both
+consistent with the existing "C3's ghost stays nearly unchanged" reading. **Single-seed, matching
+the original pilot's scope — not a multi-seed claim.**
 
 **0d. Correct `CLAUDE.md` §11's nnz table** for `S_Art_Journ` (24→13 T1, 35→13 T2) and note the
 articles-without-journal counts.
