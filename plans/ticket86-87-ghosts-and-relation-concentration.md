@@ -119,12 +119,13 @@ not stylistic; each one weakens a conclusion currently written into `CLAUDE.md` 
    two simultaneous ghosts", "7/12 cells at K=6") are currently unprotected against ordinary run-to-run
    variation.
 
-Lesser but real: `c_u` collinearity is computed over all rows including ~54% dead `auth` rows in T1,
-and dead-row contamination was validated for `community_share`, not for `c_u`; the `S_Art_Auth`
-Herfindahl metric renormalizes the K diagonal entries to sum to 1, reintroducing precisely the blind
-spot §17 rejected diagonal-sum share for; `community_share_vector` is redefined verbatim in six
-scripts; the flagged-ghost cell indices are hardcoded in two hand-maintained copies with three v2
-entries no script in the set produces.
+Lesser but real: `c_u` collinearity is computed over all rows including ~54% dead `auth` rows in T1
+— **checked at Stage 0f below: not contaminated** (max shift 6.0e-8 across 16 facet-cell
+measurements, explained by dead-row magnitudes sitting 4-6 orders below live-row values); the
+`S_Art_Auth` Herfindahl metric renormalizes the K diagonal entries to sum to 1, reintroducing
+precisely the blind spot §17 rejected diagonal-sum share for; `community_share_vector` is
+redefined verbatim in six scripts; the flagged-ghost cell indices are hardcoded in two
+hand-maintained copies with three v2 entries no script in the set produces.
 
 ### Data-provenance finding (user-confirmed as needing action)
 
@@ -171,6 +172,31 @@ verbatim copies currently exist and all agree; the risk is structural drift, whi
 permutation-corrected `Z[k, π(k)]` obtained from `chunk13v9._hungarian_relabel_relation`, and record
 `trusted`/`structure_score` alongside every reported value. Re-run and diff against the stored JSON —
 report which conclusions move and which don't, rather than silently regenerating.
+
+**0f. Validate `c_u` against dead-row contamination — DONE, result: not contaminated.**
+`community_share`'s dead-row robustness was checked directly (ghost_test2_dead_entity_check.py);
+`c_u` (`U_norm_facet.T @ U_norm_facet`, the Gram matrix `ghost_auth_collinearity_and_
+concentration.py` uses for the C1-specific auth/affil collinearity claim CLAUDE.md §4.22 rests
+on) is a different computation and had never been put through the same test. Scoped to the
+specific claim under test rather than the full grid: C1 and C3 (the two configs §4.22
+contrasts), K=6 (the K that story was extended to), both slices, both data versions — 8 cells,
+16 facet-cell measurements, all from cached fits, no new fitting.
+`diagnostic_scripts/stage0f_cu_dead_entity_check.py` → `diagnostic_results/stage0f_cu_dead_entity_check.json`.
+**Result: `c_u` is not contaminated.** Zeroing dead rows before the Gram-matrix step moved
+`c_u`'s off-diagonal entries by at most 6.0e-8 in every one of the 16 measurements — the same
+order as float32 round-off, and the same order `community_share`'s own compensated-case check
+found (§4.22: "at most 4.5e-8"). Explained by magnitude, not just observed as small: dead-row
+`|U_norm|` values sit 4-6 orders of magnitude below live-row values in every cell (e.g. `auth`,
+C1/K6/T1: mean live 1.65e-2 vs mean dead 3.4e-6; `affil`, C1/K6/T1: mean live 4.81e-2 vs mean
+dead 1.1e-7). Two of the 8 cells did not converge (C1/T2, C1/T2_v2, C3/T2_v2 — 3 of 8, flagged
+per `SESSION_PROTOCOL` §C.4, not excluded) — the robustness result held in the non-converged
+cells too, so it isn't an artifact of only checking converged fits.
+**Conclusion: the §4.22 C1-vs-C3 auth/affil collinearity claim does not need correcting on
+this account.** The "lesser but real" item above is closed for `c_u` specifically; the sibling
+Herfindahl-renormalization issue in the same note is unaffected by this check and is handled
+separately at Stage 1 (`n_eff` computed on `_relation_community_share`'s reconstruction-space
+`share_k`, not the raw or corrected diagonal alone, with `interference` reported alongside so a
+mixed relation isn't misread as a clean duopoly).
 
 **0c. Re-run the affiliation ablation without the confound.** Three arms, same seed, same K, same
 slice, `PYTHONHASHSEED` fixed (open ticket 85 makes this fit non-reproducible across process launches
