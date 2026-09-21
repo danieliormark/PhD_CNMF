@@ -148,7 +148,8 @@ with-repository data:
 | `grammar_damping_{tier0,phase3_seed_pairs,phase3_reanalysis,cousin_he_more_seeds}.json` (08-26) | **All of ticket 84's Phase 1/3 verdict** |
 | `near_separability_check.json`, `rotation_feasibility_search_v2.json`, `rotation_island_search_v2.json` (08-19…24) | **FINDINGS §18** (rotational indeterminacy, both tiers) |
 | `collapse_pen_*`, `z_scaled_*` (08-20/21) | FINDINGS §20 gameability |
-| `domain_balance_measurement.json` (08-24), `mass_mem_argmax_decomposition.json` (08-23) | FINDINGS §13 E1 |
+| `domain_balance_measurement.json` (08-24) | FINDINGS §13 E1 |
+| `mass_mem_argmax_decomposition.json` (08-23) | FINDINGS §20 (Problem 2, `collapse_pen` gameability) — **corrected 2026-09-21**: this row was originally filed under §13 E1, but the script's own header states it is a follow-up to `collapse_pen_optuna_study_v2.py`'s per-cell `mass_max`/`mem_max` correlation, which is §20 material, not domain balance |
 | `relation_singular_spectrum.json` (08-19) | FINDINGS §4's spectrum evidence |
 
 All 10 `ghost_*` results (08-29) and the 08-27/08-28 `domain_balance_*` work used **post-fix** data

@@ -2305,6 +2305,83 @@ the other. **This test used T1 only**; not yet replicated on T2, where §20's ot
 show `collapse_pen`-relevant dynamics differ materially — a natural next step if firmer
 grounding is needed before leaning on this in the article.
 
+### Follow-up: do `mass_max` and `mem_max` refer to the same community? (identity check;
+tickets 86/87 Stage 0e — first write-up of this script, not a re-derivation of an earlier number)
+
+**Why this check exists.** `mass_max` (the quantity `collapse_pen` reads) and `mem_max` (the
+independent membership-based reading used throughout this section) are each the *largest
+entry* of a length-K vector. `mass_share` averages, across the active relations, each
+relation's share of reconstructed mass held by community *k* (from `Z_scaled`, via
+`_relation_community_share`); `mem_share` averages, across the active facets, the mean
+`U_prob` membership of that facet's live entities in community *k*. A trial-to-trial
+correlation between the two *maximum values* compares like with like only if the two maxima
+usually belong to the *same* community. If `argmax(mass_share)` and `argmax(mem_share)` often
+name different communities, the correlation is partly comparing one community's share against
+a different community's share, which can look unstable or even negative without either measure
+being individually wrong. The prompt for this check was a per-cell observation from
+`collapse_pen_optuna_study_v2.py` — the pooled `mass_max`/`mem_max` correlation changes sign
+between cells (mostly negative at K=3, mostly positive at K=4, `C1` the exception). **That
+sign-change observation is recorded only in this script's header and in that study's own
+result file, which was computed on pre-fix data; that study is being re-run on post-fix data
+at the time of writing (18 of its 24 cells finished in the first run, the remaining 6 are
+running as a resumed run), so the sign pattern is not asserted here.**
+
+**Method** (`diagnostic_scripts/mass_mem_argmax_decomposition.py`): a controlled sweep, not
+an Optuna search — `C1`/`C2`/`C3` × K∈{3,4}, T1 only, `lambda_z_offdiag` fixed at 7
+log-spaced values from 1e-4 to 1.0 (cached single fits, production settings). Per fit it
+records both argmax communities, whether they match ("identity match"), and — separately —
+how many of the individual sources feeding each aggregate (8 relations for `mass_share`, 9
+facets for `mem_share`, in all three configs) individually pick the same community as the
+aggregate ("internal agreement").
+
+**Result 1 — identity match rate (`argmax(mass) == argmax(mem)`), matches / converged fits:**
+
+| Cell | pre-fix data | post-fix data |
+|---|---|---|
+| `C1/K=3` | 7/7 | 7/7 |
+| `C1/K=4` | 3/7 | 4/7 |
+| `C2/K=3` | 4/7 | 7/7 |
+| `C2/K=4` | 2/5 | 4/7 |
+| `C3/K=3` | 1/7 | 3/7 |
+| `C3/K=4` | 3/5 | 1/6 |
+| **all cells** | **20/38 (53%)** | **26/41 (63%)** |
+| K=3 cells / K=4 cells | 12/21 (57%) / 8/17 (47%) | 17/21 (81%) / 9/20 (45%) |
+
+Mismatch is common, not rare: in roughly 4 fits out of 10 post-fix (about half pre-fix) the
+largest reconstructed-mass share and the largest membership share belong to different
+communities. On post-fix data the match rate at K=3 is at least as high as at K=4 in all
+three configurations (100≥57, 100≥57, 43≥17 percent); on pre-fix data there was no such
+ordering (`C3` matched 1/7 at K=3 but 3/5 at K=4). With 6 cells, one seed per fit, and T1
+only, that ordering is suggestive, not established.
+
+**Result 2 — internal agreement at the production value `lambda_z_offdiag=0.05`.** Number of
+individual sources whose own argmax equals the aggregate's argmax: `mass_share`, 1–4 of 8
+relations in every one of the six cells (pre-fix 2–4 of 8; post-fix 1–4 of 8); `mem_share`,
+4–7 of 9 facets post-fix (2–7 of 9 pre-fix). So the aggregate `mass_share` winner is
+regularly the first choice of a minority of the relations that produce it, while the
+`mem_share` winner is usually a majority pick. Worked example, `C3/K=4`, post-fix, `λ=0.05`
+(a mismatch case): `mass_share = [0.279, 0.298, 0.223, 0.199]` names community 1;
+`mem_share = [0.200, 0.260, 0.177, 0.364]` names community 3. The eight relations' individual
+first choices are community 0 for four of them (`S_Auth_Affil`, `S_Art_Journ`,
+`M_Atom_Child`, `M_Child_Art`), community 1 for two (`M_Fringe_Cousin`, `M_Cousin_Child`),
+community 2 for `S_Art_Auth`, community 3 for `M_Child_Parent`. Community 0 is the plurality
+choice, yet the average names community 1, because `M_Cousin_Child` places 0.639 of its
+reconstructed mass on community 1 while community 0's four supporters each place only about
+0.31–0.42 on it. For `mem_share`, 7 of the 9 facets individually pick community 3.
+
+**What this does and does not establish.** It establishes a *precondition*, not a failure:
+`collapse_pen` reacts to the largest reconstructed-mass share of whichever community
+currently holds it, so if that community differs from the one holding the largest membership
+share, the penalty could stay quiet about concentration that sits elsewhere. It does not show
+that this happens in any particular fit, because the script does not record how close first
+and second place are — a near-tie between two similar shares would produce a mismatch with no
+substantive meaning. It also does not measure how much the argmax itself varies from seed to
+seed. It qualifies how the pooled `mass_max`/`mem_max` correlation reported earlier in this
+section should be read; it does not change §20's conclusions about gameability.
+
+**Filing note.** The Stage 0e list in `plans/ticket86-87-ghosts-and-relation-concentration.md`
+had originally filed this script under §13 E1; it belongs here, and the plan was corrected.
+
 Diagnostic scripts: `diagnostic_scripts/collapse_pen_mass_vs_membership_check.py` (Test 2),
 `diagnostic_scripts/collapse_pen_exploitability_sweep.py` (Test 1),
 `diagnostic_scripts/collapse_pen_optuna_study.py` (Test 4, T1),
@@ -2320,7 +2397,9 @@ raw method, the primary reading). Results in
 `diagnostic_results/collapse_pen_optuna_study_t2.json`,
 `diagnostic_results/z_scaled_diagonal_offdiagonal_gaming_check.json`,
 `diagnostic_results/z_scaled_offdiag_calibration_test.json`,
-`diagnostic_results/z_scaled_offdiag_calibration_test_raw.json`.
+`diagnostic_results/z_scaled_offdiag_calibration_test_raw.json`. Identity check (last
+subsection above): `diagnostic_scripts/mass_mem_argmax_decomposition.py`, result
+`diagnostic_results/mass_mem_argmax_decomposition.json`.
 
 ---
 
