@@ -991,6 +991,55 @@ equal-weighted numbers.** Left as the next open call (D3), not resolved by this 
 `chunk13v9.py` for this mechanism exist yet — the in-loop/outer-loop split above, the entity
 weighting decision, and this re-tabulation are the design and evidence to build from, not a
 description of shipped behaviour. See CLAUDE.md §4.18/ticket 82 for the current status line.
+**[STALE as of ticket 82 E2 — corrected here rather than silently: both mechanisms were
+subsequently implemented in `chunk13v9.py` (in-loop weight fixed at 0.0, outer-loop
+`evaluate_domain_balance` summed into `sociological_penalty` unconditionally). See §22.]**
+
+### E1 re-derived on post-08-27-fix data (tickets 86/87 Stage 0e) — numbers held, two cells recovered
+
+`domain_balance_measurement.py` re-run unmodified on the corrected pickles. **Two previously
+non-convergent T2 cells (`C3/K=4`, `C4/K=4`) now converge**, so T2's distribution rests on
+the full 12 of 12 cells (n=42 community-cells) rather than 10 (n=34) — a genuine
+completeness gain, and the reason the T2 columns are not exactly like-for-like.
+
+| entity-weighted `dev_k`, mean | old (with-repository) | new (post-fix) |
+|---|---|---|
+| T1, `u_prob` | 0.133 | **0.098** |
+| T2, `u_prob` | 0.126 | **0.099** |
+| T1, `z_scaled_v1` | 0.177 | **0.119** |
+| T2, `z_scaled_v1` | 0.261 | 0.245 |
+
+The parameter-space (`u_prob`) reading fell 22-27% in both slices, consistent with §21's
+`TOL` re-derivation drawn from the same file. Domain composition is unchanged (`auth` 75.2%
+-> 76.0% of the entity-weighted social pool in T1, 74.2% -> 74.2% in T2; the only material
+move is `journ`, 5.0% -> 3.9% in T1, as expected from the journal-resolution fix). Anchor
+sensitivity fell on T1 (mean 0.052 -> 0.033, max 0.210 -> 0.126) and is unchanged on T2
+(0.061 -> 0.060), so the V1/V2 anchor-inclusion choice matters slightly less than before.
+
+**The T1/T2 two-space disagreement flagged above is NOT resolved and did not narrow.** T1's
+two readings converged (gap 0.028 -> 0.016); T2's did not (0.137 -> 0.153). T2's
+reconstruction-space reading remains roughly 2.5x its parameter-space reading (0.245 vs
+0.099). This was flagged for "E3" when first recorded and remains open.
+
+**Mean vs worst community — the statistic matters and was not previously reported.** The
+distribution summaries above (and the penalty formula itself, `mean_k(...)`) average over
+communities. Read instead as "does this fit contain *any* badly-skewed community", post-fix:
+
+| fits whose worst community exceeds `dev_k`=0.15 | `u_prob` | `z_scaled_v1` |
+|---|---|---|
+| T1 | 7 of 12 | 5 of 12 |
+| T2 | 6 of 12 | **12 of 12** |
+
+In T2's reconstruction-space reading, 11 of 12 fits contain two or more such communities. The
+mean of the per-fit worst deviations runs roughly 1.5-1.8x the mean of the per-fit means, so
+the choice between the two statistics materially changes the picture.
+
+**Superseded in interpretation, not in numbers, by §25.** A planted-structure test run
+afterwards shows `dev_k` does not track true domain balance on this corpus at all — a world
+with exactly balanced communities reports ~0.10, the same as a world containing a 90/10
+mono-domain community. The measurements in this section stand as measurements; what they were
+taken to indicate about real per-community imbalance does not. Read §25 before building on
+any number here.
 
 ---
 
@@ -2189,6 +2238,54 @@ the priority of Problem 2 relative to the T1-only round — it is not a closed q
 the next natural step (not yet run) would be a K=3-focused, `C5`-focused deeper sweep to see
 how far the exploit pattern extends.
 
+### CORRECTION (tickets 86/87 Stage 0e): on post-08-27-fix data the observed exploit pattern
+does not reproduce — the directly-observed gaming evidence above is withdrawn
+
+`collapse_pen_optuna_study_v2.py` (the 100-trials-per-cell study, 24 cells, 2,400 trials) was
+re-run on the corrected data. **The paragraph above should no longer be read as "the gaming
+pattern has been observed directly."** Same design, same cells, same trial budget:
+
+| | pre-fix data | post-fix data |
+|---|---|---|
+| T2 trials where `collapse_pen` fired | 118 of 1,200 | **6 of 1,200** |
+| T2 trials showing the exploit pattern | **18** | **0** |
+| T1 fired / exploit pattern | 0 / 0 | 0 / 0 |
+| T1 pooled correlation, Pearson / Spearman | 0.381 / 0.375 | 0.564 / 0.576 |
+| T2 pooled correlation, Pearson / Spearman | 0.360 / 0.547 | 0.435 / 0.439 |
+
+Per cell, all 18 pre-fix exploit instances sat in `T2/C5/K=3`, and are now absent. Firing
+moved `T2/C2/K=3` 53->0, `T2/C3/K=3` 3->0, `T2/C5/K=3` 24->0, `T2/C6/K=3` 38->6; every one of
+those four cells converged 100/100 in both runs, so this is not a convergence artifact.
+
+**Mechanism, visible in the distributions:** pre-fix T2 had 11.0% of converged trials with
+`mass_max` above the 0.60 threshold, reaching 0.772; post-fix only 0.5% do, reaching 0.655.
+`mem_max` above 0.60 fell from 1.7% (max 0.640) to none (max 0.521). The extreme
+concentration that triggered both the penalty and the exploit pattern is simply no longer
+produced.
+
+**Most plausible cause, stated as a hypothesis because it could not be verified directly:**
+before the journal-resolution fix, repositories (arXiv and similar) were treated as journals,
+so a single `journ` node connected many articles — a hub that would pull articles into one
+community and inflate `mass_max`. `S_Art_Journ` fell from 35 to 13 ties in T2 when those were
+removed (§11, §4.23). This could not be confirmed against the pre-fix matrices because those
+pickles were regenerated in place and no longer exist.
+
+**What survives and what does not.** The *structural* argument for Problem 2 — that
+`collapse_pen` reads one `Z_scaled`-derived scalar and that `Z_scaled` carries the ticket-79
+gauge freedom — is untouched, as is Test 1's exploitability sweep and the §22 evidence that a
+`Z_scaled`-based domain-balance candidate was gamed 30-40x. What does not survive is the
+claim that the exploit pattern has been *observed occurring* in a realistic Optuna search:
+on corrected data, across 2,400 trials, it occurs zero times. Problem 2 returns to "a
+structurally real risk that has not been observed in practice on this corpus."
+
+Convergence in this run (recorded, not dropped, per `SESSION_PROTOCOL` §C.4): T1 1,126/1,200
+and T2 1,130/1,200 trials converged; the weakest cells are `T1/C4/K=4` (45/100) and
+`T2/C5/K=4` (33/100), consistent with the incidental finding below. Run note: this study was
+executed in two parts — 18 cells in an initial run and the remaining 6 under the script's
+resume mode after a wall-clock limit — so the two parts differ in `PYTHONHASHSEED` (open
+ticket 85). Cells are independent studies, so the per-slice pooled statistics are unaffected;
+the split is recorded in the result file's `resume_events`.
+
 ### Incidental finding: `C4/K=4` shows the worst convergence on BOTH slices, `C3/K=4` joins
 it on T2 — relevant to the 22k config-selection question, not to Problem 2 itself
 
@@ -2399,7 +2496,12 @@ raw method, the primary reading). Results in
 `diagnostic_results/z_scaled_offdiag_calibration_test.json`,
 `diagnostic_results/z_scaled_offdiag_calibration_test_raw.json`. Identity check (last
 subsection above): `diagnostic_scripts/mass_mem_argmax_decomposition.py`, result
-`diagnostic_results/mass_mem_argmax_decomposition.json`.
+`diagnostic_results/mass_mem_argmax_decomposition.json`. Post-fix re-run of the
+100-trial study (the CORRECTION above):
+`diagnostic_scripts/collapse_pen_optuna_study_v2.py`, result
+`diagnostic_results/collapse_pen_optuna_study_v2.json`; the pre-fix version it is compared
+against is preserved at
+`diagnostic_results/stage0e_backups/19655280/collapse_pen_optuna_study_v2.json`.
 
 ---
 
@@ -3407,3 +3509,162 @@ postprocessing scripts.
 
 ---
 
+## 25. The per-community domain-balance measure does not track true domain balance on this
+corpus — planted-structure test (ticket 82, tickets 86/87 Stage 0e follow-up)
+
+**Status: negative result, established by a generative test rather than inferred. `dev_k =
+|r_k - 0.5|`, the quantity both of ticket 82's E2 mechanisms are built on, is flat with
+respect to the true domain balance of the communities that generated the data: a world whose
+communities are exactly balanced and a world containing a 90/10 mono-domain community are
+reported almost identically. Scoped to this toy corpus and to the generative model described
+below; the mechanism behind the failure (degree sparsity) is a property of the real data, so
+it is not an artifact of the simulation alone.**
+
+### Why this was run
+
+The user's question (2026-09-21): the mechanism exists to prevent mono-domain communities,
+but a *healthy* community might show substantial `r_k != 0.5` simply because social and
+semantic entities differ in how sharply they commit to one community, and in how many of
+them there are. If so, the measure would be penalising a property of the corpus rather than a
+defect of the solution. This restates, in generative terms, the standing position already
+recorded in this project that exact 50/50 balance is not a well-justified target given
+relation-type and facet-size asymmetry.
+
+### Stage 1 — the sharpness hypothesis, tested directly and REFUTED
+
+`diagnostic_scripts/domain_balance_null_baseline.py` (no refits; reads the same cached fits
+as `domain_balance_measurement.py`). Every live entity keeps its own membership profile, so
+each domain keeps its own sharpness and headcount, but which community holds an entity's
+largest value is drawn from one community-size vector shared by both domains — a truth that
+is exactly proportionally balanced by construction. 2,000 draws per fit, 24 fits.
+
+| | T1 | T2 |
+|---|---|---|
+| mean `U_prob` row-max, social vs semantic | 0.797 vs 0.814 | 0.814 vs 0.794 |
+| observed mean `dev_k` | 0.097 | 0.098 |
+| expected under balanced truth, each domain's own sharpness | 0.018 | 0.017 |
+| expected with sharpness equalised between domains | 0.017 | 0.015 |
+
+Sharpness is near-identical between the domains, differs in opposite directions in the two
+slices, and equalising it changes the expectation by at most 0.002. Across the 24 fits the
+Spearman correlation between the per-fit sharpness gap and the observed imbalance is
+**-0.06** (p=0.77). Even the most favourable cell (`T2/C3/K=3`, gap 0.935 vs 0.787) has its
+expectation raised only from 0.014 to 0.031 against an observed 0.121. **The sharpness
+hypothesis as stated does not explain the observed imbalance.**
+
+The observed values sit 5.5x (T1) and 5.8x (T2) above this null, and 61 of 84 communities
+exceed their own 95th percentile. That is *not* evidence the imbalance is real: this null
+assigns entities independently, while real entities are clumped (one many-author article
+moves all its authors together), so it understates chance variation by construction — stated
+in the script's own header before the numbers were read. Stage 2 supplies the test that does
+not have this weakness.
+
+### Stage 2 — planted structure through the full pipeline: the measure carries no signal
+
+`diagnostic_scripts/domain_balance_planted_null.py`. Synthetic data, real fits (production
+`run_inner_solver`, `lambda_l1=0`, `lambda_z_offdiag=0.05`, `MASTER_SEED`, no cache).
+C1/C3/C6 (weakest single-anchor, mid, strongest dual-anchor) x K in {3,4} x T1/T2 x 3
+replicates; 180 fits, ~25 min.
+
+**Generative model.** Every live entity of every facet is assigned a planted community. In
+the BALANCED arm the same categorical is used for social and semantic facets, so true
+`r_k = 0.5` for every k by construction. In the POWER arms the two differ so that one
+community has true `r_j = 0.70` or `0.90`. Ties are rewired preserving each live row's exact
+degree, drawing column endpoints proportional to their real column degree (so hubs stay hubs)
+with a boost for columns sharing the row's planted community, the boost solved per row so the
+expected within-community tie fraction hits a target. The real matrix's own nonzero values
+are shuffled onto the new ties, preserving the weight distribution (log-damping, tf-idf,
+row-stochastic) while decoupling it from the planted structure.
+
+**Generator validated, not assumed:** achieved within-community tie fractions were 0.57 /
+0.75 / 0.90 against targets 0.60 / 0.80 / 0.95, recorded per fit. Planted truth confirmed
+present: true mean `dev_k` 0.023 (balanced), 0.117 (70/30), 0.236 (90/10).
+
+**Headline — reported vs true, pooled over both slices at within-fraction 0.8:**
+
+| planted truth | true mean `dev_k` | **reported** mean `dev_k` | **reported** max `dev_k` |
+|---|---|---|---|
+| exactly balanced | 0.023 | **0.103** | 0.158 |
+| one community at 70/30 | 0.117 | **0.096** | 0.163 |
+| one community at 90/10 | 0.236 | **0.101** | 0.159 |
+
+The reported value is ~0.10 regardless of the truth. Detection rate, taking the balanced
+arm's own 95th percentile of max `dev_k` as the threshold: **11% / 22% (T1) and 11% / 6%
+(T2)** for the 70/30 and 90/10 worlds respectively — at or barely above the 5%
+false-positive rate the threshold defines. The distributions overlap almost completely: T1
+balanced max `dev_k` spans [0.077, 0.292] with median 0.183, T1 90/10 spans [0.049, 0.304]
+with median 0.167 — a *lower* median for the more imbalanced truth.
+
+**Balanced arm against the real data** (same three configs, so like-for-like): real per-fit
+mean `dev_k` is 0.095 (T1) and 0.107 (T2); the balanced synthetic world reports 0.106-0.127
+(T1) and 0.072-0.088 (T2) depending on structure strength. **56-67% of perfectly balanced
+T1 worlds report more imbalance than the real T1 data does**; for T2 the figure is 17-33%.
+The observed imbalance lies inside the range exact balance produces.
+
+### Mechanism: the communities themselves are not recovered
+
+Accuracy of the fitted argmax community against the planted one (Hungarian-matched on the
+pooled contingency table), balanced arm:
+
+| | social entities | semantic entities | chance (1/K) |
+|---|---|---|---|
+| K=3 | 0.38 | 0.45 | 0.33 |
+| K=4 | 0.31 | 0.39 | 0.25 |
+
+Even at the strongest planted structure (90% of ties within-community) social recovery
+reaches only 0.37-0.41. When fitted communities do not correspond to true ones, imbalance
+planted in a true community is smeared across the fitted ones, and `dev_k` reads how the fit
+happened to divide the two populations rather than anything about the generating structure.
+
+**The driver is degree sparsity, which is a property of the real data, not of the
+simulation** (the degree sequence is taken from the real matrices): live-entity total degree
+across all active relations has median 2 and mean 5.0, and **44-45% of live entities have
+total degree <= 1**. A single-tie entity cannot be placed more reliably than its one
+neighbour.
+
+**The sharpness finding, revisited and sharpened.** Fitted sharpness in these synthetic fits
+is 0.81 (social) and 0.82 (semantic) — near-identical, matching the real fits, *while
+assignment accuracy is near chance*. The model is equally and spuriously confident in both
+domains. That is why Stage 1's post-hoc null found nothing: sharpness is equal, but equally
+uninformative.
+
+This is consistent with, and supplies a mechanism for, two findings already in this document:
+§19 (a community's domain-skew identity is not reproducible across independently-trained
+models) and §21 (the seed-noise floor is comparable to or larger than the `dev_k` signal).
+
+### What this does and does not establish
+
+- It does **not** show the real corpus has no domain structure. It shows that under a
+  planted-partition model carrying this corpus's exact degree sequence and weight
+  distribution, `dev_k` does not track true balance.
+- Ties are degree-preserving but **not motif-preserving**: real co-authorship cliques and
+  nested hyperedge structure are not reproduced. If real structure is substantially more
+  recoverable than a planted partition of the same degree sequence, real recovery could be
+  better than measured here. That is not established either way, and is the single largest
+  limitation.
+- The synthetic live population is 0.8% smaller than the real one (10-13 `auth` entities
+  orphaned by rewiring, every other facet matching exactly); the loss is random, not
+  systematic.
+- One model seed throughout (so seed-to-seed fit variance, §21's separate measurement, is
+  excluded by design); three configs, not six; K in {3,4} only.
+
+### Consequences (not acted on in code — these are decisions, not fixes)
+
+1. **Ticket 82's outer-loop term is live on this signal today.** `evaluate_domain_balance` is
+   summed into `sociological_penalty` unconditionally (§22, CLAUDE.md §4.18), so it shapes
+   Optuna's second Pareto axis regardless of the in-loop weight being 0.0. On this evidence
+   it is contributing a quantity that does not track what it names.
+2. **An outer-loop veto on "obviously broken" communities cannot be built on `dev_k`.** A
+   genuinely 90/10 community is caught 6-22% of the time. The parallel candidate — vetoing a
+   community holding an overwhelming share of *mass* — reads `max_share`, a different
+   quantity, untested here and not covered by this result.
+3. **The natural place to re-derive is the 22k-article corpus**, where the degree sparsity
+   driving the failure should ease substantially. Every threshold and verdict in this section
+   is toy-corpus calibrated.
+
+Diagnostic scripts: `diagnostic_scripts/domain_balance_null_baseline.py` (Stage 1,
+post-hoc), `diagnostic_scripts/domain_balance_planted_null.py` (Stage 2, generative).
+Results: `diagnostic_results/domain_balance_null_baseline.json`,
+`diagnostic_results/domain_balance_planted_null.json`.
+
+---

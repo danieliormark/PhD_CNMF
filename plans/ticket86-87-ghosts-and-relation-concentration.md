@@ -270,6 +270,53 @@ downstream decisions rest on them: `domain_balance_seed_noise.py` (TOL=0.15's ba
 Phase 1/3 → FINDINGS §18's two tiers. Scripts all exist and are re-runnable as-is; only the data
 underneath changed. Report each as "re-derived on post-fix data: verdict held / verdict moved."
 
+**0e — DONE (2026-09-01 … 2026-09-21).** All 16 scripts re-run as a SLURM job array
+(`stage0e_dispatch.py` + `submit_stage0e_array.sh`). Two infrastructure problems were found and
+fixed en route, both recorded because they affect trust in the cache generally: a **concurrent-write
+race in `fit_or_load`** (`np.savez` wrote directly to the final cache path; two array tasks
+requesting the same key corrupted the archive) — fixed with a temp-file + `os.replace` atomic write,
+8 corrupted `.npz` files quarantined to `diagnostic_results/tensors/corrupted_backup_20260901/`,
+full deep re-verification clean; and `collapse_pen_optuna_study_v2.py` hitting the 4-hour wall clock
+after 18 of 24 cells, which added an opt-in resume mode to that script
+(`COLLAPSE_PEN_V2_RESUME=1`, refuses on any version/trial-count/record-count mismatch).
+
+| Result | Verdict |
+|---|---|
+| `domain_balance_seed_noise` (TOL) | **held** — noise floor and signal both shrank (median 0.144→0.120, `dev_k` 0.112→0.093); `TOL=0.15` kept, deliberately not re-tuned. FINDINGS §21 |
+| `grammar_damping_cousin_he_more_seeds` (ticket 84 Phase 3) | **held, and sharpened** — `cousin_he`/T2 now clears 2×SD on the 15-seed sample (Δρ=−0.242, ratio 2.15×) where the same extension on pre-fix data had pulled it *below* the bar. FINDINGS §21 |
+| `near_separability_check`, `rotation_feasibility_search_v2`, `rotation_island_search_v2` (§18) | **held, slightly tighter** — Tier-1 failures 14→10, worst local rotation margin 0.57°→0.325°, still zero distant islands. FINDINGS §18 |
+| `domain_balance_measurement` (§13 E1) | **held in numbers** (`u_prob` `dev_k` fell 22-27%; two T2 cells recovered, 22→24 converged) but **superseded in interpretation by §25** (below). T2's two-space disagreement did not narrow. FINDINGS §13 |
+| `mass_mem_argmax_decomposition` | written up under **§20**, not §13 E1 — the row above was mis-filed and is corrected. First write-up of this script. |
+| `collapse_pen_optuna_study_v2` (§20) | **MOVED** — the directly-observed exploit pattern does not reproduce: 18 instances → **0**, `collapse_pen` firing 118 → 6 of 1,200 T2 trials. Problem 2 returns to "structurally real, not observed in practice on this corpus." FINDINGS §20 CORRECTION |
+| remaining `collapse_pen_*` / `z_scaled_*` / `relation_singular_spectrum` | re-run, results on disk, **not yet interpreted or written up** |
+
+**0g (unplanned, user-initiated 2026-09-21) — domain-balance measure validity: NEGATIVE
+RESULT, the most consequential outcome of Stage 0.** The user asked whether a *healthy*
+community could show substantial `r_k ≠ 0.5` merely because social and semantic entities
+differ in sharpness and headcount. Two tests: a post-hoc null
+(`domain_balance_null_baseline.py`) **refuted the sharpness hypothesis specifically**
+(domains' row-max 0.80 vs 0.81; equalising changes the expectation by ≤0.002; correlation
+between the per-fit sharpness gap and observed imbalance −0.06); and a planted-structure test
+(`domain_balance_planted_null.py`, 180 real fits on synthetic data carrying the corpus's exact
+degree sequence and weight distribution) found **`dev_k` flat against the truth**: exactly
+balanced → reported 0.103, a 70/30 community → 0.096, a **90/10** community → 0.101, with
+detection at 6-22%. Cause: fitted communities do not correspond to planted ones (recovery 0.31
+social / 0.39 semantic at K=4 vs 0.25 chance), driven by 44-45% of live entities having total
+degree ≤1. Full record, including limits (no motif structure, one seed, 3 configs): FINDINGS
+§25; status line CLAUDE.md §4.18 E3.
+
+**Proposed, NOT run — recorded so they are not rediscovered later:**
+1. **The same planted test for `max_share`/`collapse_pen`.** `dev_k` cannot support an
+   outer-loop veto on obviously-broken communities; whether *mass* concentration can is a
+   different quantity and untested. This is the direct next step for the user's
+   "reject solutions with a community holding 90% of mass" proposal.
+2. **A motif-preserving generator** (co-authorship cliques, nested hyperedges) to bound the
+   single largest limitation of §25 — whether real structure is more recoverable than a
+   degree-matched planted partition.
+3. **Recovery on real data, indirectly**, via seed-stability of community assignment (§10's
+   proposed consensus/cophenetic measure). If real assignments are as unstable across seeds as
+   §19/§21 suggest, that corroborates §25 without needing synthetic data at all.
+
 ### Stage 1 — incidence, properly measured (no new fits)
 
 **New script `diagnostic_scripts/relation_mass_decomposition.py`.** For all 120 cached cells
