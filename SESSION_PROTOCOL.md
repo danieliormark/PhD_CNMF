@@ -165,6 +165,20 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
   never be silently returned against changed code. Prefer `fit_or_load()` to
   re-fitting: it makes re-analysing the *same* fits under a different measure
   cheap, which is what keeps competing measures comparable to each other.
+- **`chunk13v9.py` and `diagnostic_blocks.py` are mirrored into the `PhD_CNMF`
+  GitHub repo**, at `chunk13_execution/chunk13v9.py` and
+  `chunk13_execution/diagnostic_blocks.py` (added 2026-09-22, so a session
+  without the `tensor_data_staging` mount — or a remote/cloud agent — can still
+  read current production code without VS Code access). **The mount at
+  `tensor_data_staging/toy_large/chunk13_execution/` remains the one working
+  copy; the GitHub copy is a mirror, not a second source of truth.** Whenever
+  either file changes on the mount, re-copy both into `PhD_CNMF/chunk13_execution/`
+  and commit in the same session that made the change — don't let the mirror
+  silently drift. Before trusting the GitHub copy for anything (reading it from
+  a session with no mount access), diff its content hash against the working
+  copy if both are reachable; if only the mirror is reachable, say plainly that
+  its currency as of the mount's last edit can't be verified from that session,
+  rather than presenting it as guaranteed-current.
 
 ---
 
