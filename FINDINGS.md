@@ -3517,8 +3517,18 @@ corpus — planted-structure test (ticket 82, tickets 86/87 Stage 0e follow-up)
 respect to the true domain balance of the communities that generated the data: a world whose
 communities are exactly balanced and a world containing a 90/10 mono-domain community are
 reported almost identically. Scoped to this toy corpus and to the generative model described
-below; the mechanism behind the failure (degree sparsity) is a property of the real data, so
-it is not an artifact of the simulation alone.**
+below.**
+
+**WHERE THE FAULT LIES — read this before the rest of the section.** This is a black-box
+result: it measures what the pipeline reports, not how it computes it. A subsequent
+line-by-line audit of the implementations (see "Attribution" below) found **the formula is
+correct and faithful**; all three copies of it agree to 7.5e-10 on a real fit. The failure is
+therefore **not in the arithmetic of `evaluate_domain_balance` or its in-loop counterpart**.
+It is in the *input*: the fitted community assignments those functions read do not correspond
+to the communities that generated the data, so a faithful reading of them carries no
+information about true balance. Phrasings like "the measure is invalid" or "the measure is
+incorrect" are wrong and should not be used; "a faithful reading of an input that does not
+identify the communities" is accurate.
 
 ### Why this was run
 
@@ -3616,11 +3626,22 @@ reaches only 0.37-0.41. When fitted communities do not correspond to true ones, 
 planted in a true community is smeared across the fitted ones, and `dev_k` reads how the fit
 happened to divide the two populations rather than anything about the generating structure.
 
-**The driver is degree sparsity, which is a property of the real data, not of the
-simulation** (the degree sequence is taken from the real matrices): live-entity total degree
-across all active relations has median 2 and mean 5.0, and **44-45% of live entities have
-total degree <= 1**. A single-tie entity cannot be placed more reliably than its one
-neighbour.
+**Degree sparsity is a property of the real data, not of the simulation** (the degree
+sequence is taken from the real matrices): live-entity total degree across all active
+relations has median 2, mean 5.0, and **44-45% of live entities have a total degree of
+exactly 1** — verified directly; the minimum over live entities is 1 and degree 0 never
+occurs, since `build_presence_masks` defines "live" as having at least one non-zero entry.
+Among **social** entities specifically the single-tie share is 50% (T1) / 55% (T2), with
+median degree 1. A single-tie entity contributes one observation against the K free
+parameters of its own `U` row, so most of its placement is fixed by initialisation, the
+shared `Z` and the regulariser rather than by evidence about that entity.
+
+**Stated as a caveat rather than a mechanism:** degree alone does not cleanly predict
+recovery, and this section does not claim it does. Recovery measured by degree bucket is not
+monotone and reverses between cells, and the recovery metric itself is argmax-based, which is
+a crude instrument against this model's soft partition — a multi-community entity is not
+necessarily a misassigned one. What is consistent across cells is the *domain* asymmetry
+above, not a degree law.
 
 **The sharpness finding, revisited and sharpened.** Fitted sharpness in these synthetic fits
 is 0.81 (social) and 0.82 (semantic) — near-identical, matching the real fits, *while
@@ -3631,6 +3652,80 @@ uninformative.
 This is consistent with, and supplies a mechanism for, two findings already in this document:
 §19 (a community's domain-skew identity is not reproducible across independently-trained
 models) and §21 (the seed-noise floor is comparable to or larger than the `dev_k` signal).
+
+### Attribution — audited against the code, after the fact
+
+The result above is behavioural. The implementations were read afterwards, and the audit
+places the fault precisely:
+
+- **`chunk13v9.evaluate_domain_balance` (outer loop) and the in-loop term in
+  `run_inner_solver`: correct.** Both compute, per community, the live-entity-count-weighted
+  mean `U_prob` over that domain's facets, then `r_k = soc/(soc+sem)`, then
+  `mean_k(max(0, |r_k-0.5| - TOL)^2)`. That is what they are documented to compute.
+- **The three copies agree**, so there is no drift between the production and diagnostic
+  paths: on `C6/K=4/T1` the penalty is `0.0040234267` (in-loop torch), `0.0040234285`
+  (outer-loop numpy) and `0.0040234278` (`diagnostic_blocks`) — a spread of 7.5e-10,
+  consistent with float32 rounding.
+- **The measure is gauge-invariant as designed.** Under ticket 79's transformation (scale one
+  `U` column by *c*, compensate in every touching `Z`), which leaves the reconstruction
+  unchanged, `mean_dev_k` moves by exactly 0.00e+00.
+- **What is defective is the input, and it originates upstream of `chunk13v9.py` entirely** —
+  in the corpus's sparsity, which no arithmetic in the evaluator can repair. The one genuine
+  `chunk13v9.py` issue is a *wiring* decision, not a formula: `domain_balance_pen` is summed
+  into `sociological_penalty` unconditionally (line ~1521), so this signal shapes Optuna's
+  second objective today.
+
+### A separate, genuinely defective measure exists in the notebook — `toy_large.ipynb` cell 58 ("CHUNK 14c STAR PROFILER")
+
+Found while auditing the above, and **unrelated to it**: the failure in §25 proper is an
+input problem with a correct formula, whereas this is the opposite — a formula defect,
+independent of any corpus property.
+
+**Provenance, traced by the cell's own paths — it is NOT part of the v9 pipeline.** It reads
+models from `chunk13_execution/outputs/grid_search_c_class/metagraph_Config{C}_K{KK}.npz`, a
+directory written by `chunk13v5/v6/v7/v8/v8.1` and **never referenced by `chunk13v9.py`**
+(zero matches; v9 writes to `results/<PIPELINE_VERSION>/`). Its input data is
+`outputs/Star_extended_matrices.pkl` — the **pre-temporal-slice** pickle dated 2026-06-24,
+superseded by the `_t1`/`_t2` files chunk12 produces now. Its output,
+`bipartite_diagnostic_suite.csv`, was last written 2026-07-10. So it is a v5–v8.1-era
+profiler on June-2026 data, upstream in time of the entire v9 line and of ticket 82.
+
+**What it computes** (`calculate_global_domain_capital`, reported in that CSV as
+`Absolute Domain Imbalance (Dev)`), where `U_raw` is loaded from the `U_raw_*` keys of the
+`.npz` — the *unnormalised* positive factor, not `U_norm` and not `U_prob`:
+
+```
+M_f      = Σ_k ‖U_raw[f][:,k]‖₂ / √N_f            (per facet)
+DCR_sem  = Σ_semantic M_f / (Σ_semantic M_f + Σ_social M_f)
+Dev      = |DCR_sem − 0.5|
+```
+
+**Defect 1 — gauge-dependent.** Column L2 norms of `U_raw` are exactly `U_scales`, ticket
+79's undetermined free direction. Verified on a real fit by applying ticket 79's
+transformation (scale `auth` community 0 by 3, compensate in every `Z` touching `auth`):
+
+| | before | after |
+|---|---|---|
+| model reconstruction `U1·Z·U2ᵀ` | — | unchanged, max abs diff 7.45e-9 |
+| `DCR_sem` | 0.3029 | 0.2948 |
+| `Absolute Domain Imbalance (Dev)` | 0.1971 | **0.2052** |
+| current `chunk13v9` `mean_dev_k`, same transform | 0.149086 | **0.149086 (change exactly 0)** |
+
+The reported imbalance moves while the model is provably identical. This is precisely the
+defect `evaluate_domain_balance` was built on `U_prob` to avoid; the notebook measure
+predates that reasoning.
+
+**Defect 2 — global, not per-community.** It returns one number per model, so it cannot
+express the failure mode ticket 82 exists to prevent. Verified with a constructed case: all
+social entities in community 0, all semantic entities in community 1 — zero heterogeneous
+communities — scores `DCR_sem = 0.5000`, `Dev = 0.0000`, a perfect result. This is the same
+blind spot §4.18 already identifies in the global 50/50 `alpha` weighting.
+
+**Scope of the claim.** As a reading of *global* domain dominance ("is this model overall
+semantic-heavy?") the measure answers a legitimate and different question — but defect 1
+means even that answer can be moved without changing the model, and defect 2 means it cannot
+substitute for a per-community reading. **Nothing was changed in the notebook**; it is
+recorded here because the CSV it produced may have been used to compare models.
 
 ### What this does and does not establish
 
