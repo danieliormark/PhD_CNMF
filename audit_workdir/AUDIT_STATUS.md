@@ -125,9 +125,30 @@ exist anywhere" guarantee is specifically wanted later.
    honest note that a few exclusions were made on limited context and that the list has not
    yet been checked for silent implementation since being written.
 
+## Done, round 2 (2026-09-22, same session)
+
+3. **1b refresh check performed.** All 15 items in `unimplemented_recommendations.md` verified
+   directly against current code — none were silently implemented. Evidence per item recorded
+   in that file's new "Refresh check" section. One nuance found: item 8 (recovery-on-real-data
+   via seed-stability) has an adjacent-but-distinct tool already (`domain_skew_seed_reproducibility.py`
+   tests domain-*character* reproducibility, not recovery) — worth knowing if this item is
+   picked up later.
+4. **The 4 duplicate top-level constants — consolidated, not just noted.** Delegated to an
+   Opus agent per the user's explicit choice ("this check and editing is better to delegate to
+   opus"). Outcome: re-derived the duplicate set independently (didn't trust `triage.py`'s
+   claim blindly — the right call, since a structurally similar prior finding, ticket 57, had
+   turned out stale), confirmed all four (`DEVICE`, `MASTER_SEED`, `TARGET_COHERENCE`,
+   `ENTROPY_THRESHOLD`) are genuinely one constant re-declared twice with identical values and
+   no code path reading them inconsistently (checked import-time vs. call-time resolution
+   explicitly, not assumed) — so no disambiguation confusion existed. Deleted all four later
+   copies per `CLAUDE.md` §7's own rule, verified via `py_compile` + a live module-import smoke
+   test, recorded as **ticket 88** in `CLAUDE.md` §8, mirror re-synced, committed and pushed
+   (`85daa96`). **Correctly flagged, not touched:** this session's own uncommitted edit to
+   `unimplemented_recommendations.md` — left alone as out of scope, committed separately below.
+
 ## Pending decisions / next actions
 
-3. **The semantic adjudication layer** (real LLM cost, not yet scoped or started): the
+5. **The semantic adjudication layer** (real LLM cost, not yet scoped or started): the
    mechanical triage above catches structural/pattern-level drift, not "does this specific
    claim in §4.18/§25 actually match what the planted-null test found." The 2-stage
    ledger-then-adjudicate design from the crashed session is retired per the redesign above —
@@ -135,14 +156,13 @@ exist anywhere" guarantee is specifically wanted later.
    describes + the result JSON it cites, report mismatches" calls, Sonnet-pinned, escalating to
    Opus-medium only for genuinely cross-source judgment calls. **Not yet scoped — needs a
    decision on which section(s) to start with and whether to proceed now or later.**
-4. **The 4 duplicate top-level constants** — decide whether to note in CLAUDE.md §8 or actually
-   delete the redundant later copies in `chunk13v9.py` (the user's call, since this is
-   production code, not diagnostic tooling).
-5. **Whether to re-run the two `ghost_test3*.py` scripts' full 60-cell grids** to refresh their
-   stored JSON against current `chunk13v9.py` (see point 1's note above) — not done, a cost
-   decision.
-6. **Whether to check the 1b list (item 2 above) for silent implementation** — its own stated
-   next step, not yet done.
+6. **Grid re-run in progress** (started 2026-09-22 22:11): both `ghost_test3_share_distribution.py`
+   and `ghost_test3v2_share_distribution.py`, full 60-cell grids, `PYTHONHASHSEED=0` +
+   single-threaded per ticket 76/85. Old result JSONs backed up to `/tmp/ghost_test3*.OLD.json`
+   before starting. One real (not code-related) finding already surfaced mid-run:
+   `T1_v2/C3/K=6` hit the 2000-epoch ceiling without converging. Once complete: diff old vs.
+   new numbers, then update wherever `CLAUDE.md`/`FINDINGS.md` cite this script's figures
+   (primarily `CLAUDE.md` §4.22 and `FINDINGS.md` §23 — confirm exact citations before editing).
 
 ## Files in this directory
 
