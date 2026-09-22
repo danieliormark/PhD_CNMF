@@ -1,0 +1,195 @@
+[
+  {
+    "fact_id": "F-SCRIPT-ghost_article_degree_vs_winner_loading",
+    "script": "ghost_article_degree_vs_winner_loading.py",
+    "purpose_one_line": "Tests whether an article's raw co-author count (row nnz in the undamped-sparsity-pattern S_Art_Auth) predicts its U_prob loading summed over the 2 highest-S_Art_Auth-diagonal ('winning') communities, via per-cell Spearman correlation, across C1-C6 x K=6 x T1/T2 (12 cells), reusing Test 3/auth-collinearity cached fits.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "hungarian_diagonal_match", "load_module", "presence_masks", "relation_community_mass"],
+    "local_reimplementations": [
+      "'winner' community selection: winners = np.argsort(relation_community_mass(...))[-2:] then U_prob['art'][:, winners].sum(axis=1) -- a local use of the centralized relation_community_mass, not a reimplementation of it",
+      "own raw co-author degree: degree_all = np.asarray(S.getnnz(axis=1)).flatten() on raw_data['S_Art_Auth'] (undamped sparsity pattern), independent of anything in diagnostic_blocks"
+    ],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No raw np.diag(Z) call anywhere in the file. Comment at line 51 ('...permutation-corrected diagonal (identical to np.diag when this relation's structure_score doesn't clear the threshold)') only references np.diag descriptively to explain relation_community_mass's fallback behavior -- it is not a call site. Diagonal values are obtained exclusively via relation_community_mass(Z, K, threshold=...) at line 55. Comment lines 47-52 explicitly frame this as a 'Stage 0b fix (tickets 86/87)' replacing a prior raw-diagonal-based winner selection."},
+    "output_json_file": "ghost_article_degree_vs_winner_loading.json",
+    "key_config_or_constants": {"CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K": 6, "SLICES": ["T1","T2"], "lambda_l1": 0.0, "lambda_z_offdiag": 0.05},
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Explicitly documents (lines 47-52) that this script itself was patched under 'Stage 0b fix (tickets 86/87)' to stop selecting winners via the raw diagonal and use relation_community_mass's permutation-corrected diagonal instead, since winner selection is a real downstream consequence (indexes U_prob), not cosmetic.",
+      "Tests a 'mega-author-paper drives winning communities' hypothesis; per CLAUDE.md §4.22 this hypothesis was 'tested directly ... and not supported' using this script's output.",
+      "Uses scipy.stats.spearmanr; requires >=3 live articles and nonzero std to compute a correlation, else reports None."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_article_side_reading",
+    "script": "ghost_article_side_reading.py",
+    "purpose_one_line": "Direct article-side ('art' facet) U_prob reading (max/sum/mean membership, counts above 0.5 and 0.3 thresholds, plus all-K context) for specific flagged ghost-community index pairs in specific (slice, config, K) cells, to test the 'article embedding is thin' hypothesis directly rather than inferring it from S_Art_Journ.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "load_module", "presence_masks"],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No np.diag or Z_scaled access anywhere in this file -- it reads only U_prob['art'] via compute_probability_distributions and presence_masks; no diagonal-mass logic at all."},
+    "output_json_file": "ghost_article_side_reading.json",
+    "key_config_or_constants": {
+      "CELLS": {
+        "(T1,C1,6)": [4,2], "(T1,C3,6)": [3,2], "(T2,C3,6)": [5,3],
+        "(T1_v2,C1,6)": [2,4], "(T1_v2,C3,6)": [3,2], "(T2_v2,C4,5)": [2,3]
+      }
+    },
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Hardcoded CELLS dict mixes v1 (chunk12: T1/T2) and v2 (chunk12v2: T1_v2/T2_v2) slice names and different flagged community-index pairs per cell, sourced from ghost_suspicious_cells_investigation.py's output for v1 and (per its own comment) from ghost_test3v2_share_distribution.py's flagged cells for v2.",
+      "Does not fit anything new -- calls fit_or_load with production lambda_l1=0.0, lambda_z_offdiag=0.05 (hardcoded in fit_or_load call) for cache reuse."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_auth_collinearity_and_concentration",
+    "script": "ghost_auth_collinearity_and_concentration.py",
+    "purpose_one_line": "Measures (A) auth/affil U_norm collinearity (Gram-matrix max off-diagonal, c_u = U_norm.T @ U_norm) extended to K in {2..6}, and (B) S_Art_Auth diagonal concentration (Herfindahl index and top-2 share) across the full C1-C6 x K in {2..6} x T1/T2/T1_v2/T2_v2 grid, plus targeted flagged-pair collinearity readings for the 3 (v1) + 3 (v2) originally-flagged ghost cells.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "hungarian_diagonal_match", "load_module", "relation_community_mass"],
+    "local_reimplementations": [
+      "herfindahl(x) -- local helper, sum((x_i/total)^2), not present in diagnostic_blocks under this name",
+      "top2_share(x) -- local helper, top-2 sum / total",
+      "cu_offdiag_stats(U_norm_facet) -- local helper computing c_u = U_norm.T @ U_norm and its max off-diagonal value"
+    ],
+    "uses_raw_diagonal": {
+      "present": true,
+      "lines": [101],
+      "context": "Line 101: result['s_art_auth_diagonal_raw'] = np.diag(Z).tolist() -- immediately followed (line 100, computed just before, and line 102) by the corrected reading: diag = relation_community_mass(Z, K, threshold=mod.STRUCTURE_SCORE_THRESHOLD) stored as result['s_art_auth_diagonal']. Comment block lines 94-97 explicitly labels this a 'Stage 0b fix (tickets 86/87)': 'Herfindahl/top2 previously read the raw diagonal; now reads relation_community_mass's permutation-corrected diagonal ... Herfindahl and top2_share (lines 105-106) are computed from the CORRECTED diag, not the raw one. The raw diagonal is retained in the output purely as a labeled, paired diagnostic baseline, not used for the actual Herfindahl/top2-share statistics."
+    },
+    "output_json_file": "ghost_auth_collinearity_and_concentration.json",
+    "key_config_or_constants": {"CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [2,3,4,5,6], "DATA_VERSIONS": {"v1": ["T1","T2"], "v2": ["T1_v2","T2_v2"]}, "lambda_l1": 0.0, "lambda_z_offdiag": 0.05},
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Deliberate raw-vs-corrected pairing: 's_art_auth_diagonal_raw' (np.diag(Z)) and 's_art_auth_diagonal' (relation_community_mass, permutation-corrected) both written to output JSON side by side -- this is an intentionally-labeled baseline, not an unintentional bypass.",
+      "FLAGGED_V1 dict hardcodes the same flagged (k1,k2) pairs as ghost_auth_... itself was flagged from ghost_suspicious_cells_investigation.py (v1) and presumably ghost_test3v2 (v2).",
+      "Confirms per CLAUDE.md §4.22: auth/affil collinearity explains the ghost pattern in C1 but not C3."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_lambda_z_sensitivity",
+    "script": "ghost_lambda_z_sensitivity.py",
+    "purpose_one_line": "Refits C1/K6/T1 and C3/K6/T1 at lambda_z_offdiag in {0.0, 0.05 (production), 0.5} to test whether the S_Art_Auth concentration / auth-collinearity ghost-community finding is a confound of the one in-loop penalty active in every prior fit.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "community_share_vector", "fit_or_load", "hungarian_diagonal_match", "load_module", "relation_community_mass"],
+    "local_reimplementations": ["topn_share(diag, n) -- local helper, top-n sum / total, distinct from top2_share() in ghost_auth_collinearity_and_concentration.py but computing the same kind of statistic"],
+    "uses_raw_diagonal": {
+      "present": true,
+      "lines": [64],
+      "context": "Line 64: 's_art_auth_diagonal_raw': np.diag(Z).tolist() -- paired immediately at line 65 with 's_art_auth_diagonal_corrected': diag.tolist(), where diag = relation_community_mass(Z, K, threshold=structure_threshold) (line 55). Comment lines 50-53 explicitly frames this as 'Stage 0b fix (tickets 86/87): top-N share previously read the raw diagonal; now reads relation_community_mass's permutation-corrected diagonal (falls back to the raw diagonal itself when this relation's structure_score does not clear the threshold -- identical to before in that case).' topn_share() (used for top1/top2/top3 in the returned dict) is called on the CORRECTED diag, not the raw one -- the raw diagonal is a labeled, paired baseline only."
+    },
+    "output_json_file": "ghost_lambda_z_sensitivity.json",
+    "key_config_or_constants": {"CELLS": [["C1",6,"T1"],["C3",6,"T1"]], "LAMBDA_Z_VALUES": [0.0, 0.05, 0.5], "lambda_l1": 0.0},
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Uses community_share_vector imported directly from diagnostic_blocks (line 30, called line 59) -- one of only 4 scripts (this one, ghost_no_affil_ablation.py, ghost_suspicious_cells_investigation.py, ghost_test1/2) that imports rather than inlines it.",
+      "Finds/relies on FINDINGS §2 precedent that lambda_z_offdiag=1.0 measurably shifts community mass shares vs 0.05."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_no_affil_ablation",
+    "script": "ghost_no_affil_ablation.py",
+    "purpose_one_line": "Pilot ablation: refits C1/K6/T1 and C3/K6/T1 with S_Auth_Affil (and hence the affil facet) dropped from soc_keys entirely -- a line-for-line local copy of fit_instrumented's training loop with exactly one line changed -- to test whether affiliation participation in the joint fit drives the ghost-community pattern.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "build_active_matrices", "community_share_vector", "get_init", "load_module", "load_slice"],
+    "local_reimplementations": [
+      "fit_no_affil() -- a full local reimplementation of diagnostic_blocks' fit_instrumented/fit_production training loop (init, clamp, Adam loop, forward-pass normalization, recon/sparsity/z_offdiag loss, convergence check), documented in its own docstring as 'Line-for-line copy of fit_instrumented's body ... with ONE change'"
+    ],
+    "uses_raw_diagonal": {
+      "present": true,
+      "lines": [143],
+      "context": "Line 143: diag = np.diag(Z_final['S_Art_Auth']) -- used directly and UNPAIRED: Herfindahl (line 145) and top2_share (line 146) are computed from this raw diagonal, and the raw diagonal itself (not any corrected version) is what gets written to the output JSON as 's_art_auth_diagonal' (line 154), alongside 's_art_auth_herfindahl'/'s_art_auth_top2_share' both derived from it. This file imports neither hungarian_diagonal_match nor relation_community_mass at all (confirmed: not in its diagnostic_blocks import list), so there is no permutation-corrected reading anywhere in the file to pair it with. Unlike the other 3 flagged files, this script was NOT updated with the Stage 0b (tickets 86/87) fix -- it looks like an unintentional gap left behind, not a deliberate raw baseline, since (a) it has no corrected counterpart in-file and (b) its sibling scripts on the same S_Art_Auth-concentration investigation (ghost_auth_collinearity_and_concentration.py, ghost_lambda_z_sensitivity.py, ghost_suspicious_cells_investigation.py) all got the fix while this one didn't."
+    },
+    "output_json_file": "ghost_no_affil_ablation.json",
+    "key_config_or_constants": {"CELLS": [["C1",6,"T1"],["C3",6,"T1"]], "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05},
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Does its own fresh fitting (not fit_or_load/cache reuse) because it needs a genuinely different active-facet set (soc_keys minus S_Auth_Affil); explicitly NOT wired into production chunk13v9.py.",
+      "Confirms per CLAUDE.md §4.22 that affiliation removal improved C1's resolution/collinearity but left C3's ghost community nearly unchanged.",
+      "This is the one of the four flagged raw-diagonal files whose np.diag(Z) usage bypasses the Hungarian/permutation correction with no paired corrected value anywhere in the file -- the other three (auth_collinearity, lambda_z_sensitivity, suspicious_cells) all pair raw with corrected."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_suspicious_cells_investigation",
+    "script": "ghost_suspicious_cells_investigation.py",
+    "purpose_one_line": "For the 3 most-uneven Test-3 cells (T1/C1/K6, T1/C3/K6, T2/C3/K6), identifies the exact community indices behind the 2 lowest community_share values and reports per-relation Z_scaled diagonal, entity-weighted domain balance (r_k), and facet-mass dominance for those 2 communities specifically.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "community_share_vector", "domain_balance_r_k", "facet_membership_profile", "fit_or_load", "hungarian_diagonal_match", "load_module", "presence_masks", "relation_community_mass"],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {
+      "present": true,
+      "lines": [67],
+      "context": "Line 67: 'diagonal_all_k_raw': np.diag(Z).tolist() -- inside a per-relation loop that also computes 'diagonal_all_k_corrected': corrected_diag.tolist() (line 68, corrected_diag = relation_community_mass(...) from line 65) and per-community diag_k1/diag_k2 (lines 69) drawn from the CORRECTED diagonal, not the raw one. Comment lines 54-61 explicitly documents this as a 'Stage 0b fix (tickets 86/87)': 'community SELECTION above already goes through community_share_vector, which is permutation-corrected -- but this report's VALUES previously read the raw np.diag(Z), a mismatch with what was selected. Now reads relation_community_mass's corrected diagonal ... Records whether the correction actually fired (trusted/is_identity/structure_score).' This is exactly the case the prior survey described: a previously-unlabeled bug (selection corrected, values not) now fixed by pairing a labeled raw baseline with the corrected value and a trust flag."
+    },
+    "output_json_file": "ghost_suspicious_cells_investigation.json",
+    "key_config_or_constants": {"CELLS": [["T1","C1",6],["T1","C3",6],["T2","C3",6]], "lambda_l1": 0.0, "lambda_z_offdiag": 0.05},
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Uses community_share_vector (imported, not inlined) to select the two lowest-share community indices (k1,k2) per cell -- this selection step was already permutation-corrected even before Stage 0b; only the per-relation diagonal VALUES reported alongside the selection had the raw/corrected mismatch that Stage 0b fixed.",
+      "Also reports 'trusted'/'is_identity'/'structure_score' per relation so it's visible whether the correction actually fired versus fell back to the raw diagonal identically."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_test1_gauge_invariance",
+    "script": "ghost_test1_gauge_invariance.py",
+    "purpose_one_line": "Empirically verifies that community_share_vector is exactly gauge-invariant under ticket 79's proven U_scales rescaling freedom, via a three-way (baseline / uncompensated / compensated) comparison on 4 hand-picked (config,K,slice,facet,community,c) test cases, reconstructing U_pos/Z_pos from cached U_norm/Z_scaled/U_scales and re-deriving the forward pass in numpy.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "community_share_vector", "fit_or_load", "load_module"],
+    "local_reimplementations": [
+      "reconstruct_pos() -- inverts chunk13v9.py's forward-pass normalization to recover U_pos/Z_pos from cached U_norm/Z_scaled/U_scales; a numpy re-derivation, not imported from diagnostic_blocks",
+      "forward_pass() -- numpy re-implementation of chunk13v9.py's forward-pass normalization (col-norm scaling of U, corresponding Z_scaled construction), explicitly documented as mirroring chunk13v9.py lines 678-687",
+      "apply_transform() -- local helper applying/withholding the ticket-79 compensating rescale to U_pos/Z_pos"
+    ],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No np.diag(Z) call anywhere in the file. Community_share_vector is called on baseline/uncompensated/compensated U_norm+Z_scaled dicts each time (lines 120,125,130), always through the centralized import, never via a raw diagonal."},
+    "output_json_file": "ghost_test1_gauge_invariance.json",
+    "key_config_or_constants": {
+      "TEST_CASES": [["C3",4,"T1","core_child_he",0,3.7],["C3",4,"T1","core_child_he",2,0.15],["C6",4,"T1","auth",1,5.0],["C6",4,"T1","auth",3,0.08]]
+    },
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Includes an internal 'CHECK 0' verifying the U_pos/Z_pos reconstruction from cached values is exact (float precision) before trusting anything downstream -- a self-validating design.",
+      "Explicitly a three-way test designed not to pass vacuously: the uncompensated case MUST change community_share, the compensated case MUST reproduce baseline exactly."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_test2_dead_entity_check",
+    "script": "ghost_test2_dead_entity_check.py",
+    "purpose_one_line": "Tests whether community_share is contaminated by dead (cross-slice-padding) rows in U_norm's Gram-matrix computation, by zeroing dead rows per facet (via presence_masks) and comparing recomputed community_share against the real, unmasked value, across 4 cells (C3/C6 x K4 x T1/T2).",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "community_share_vector", "fit_or_load", "load_module", "presence_masks"],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No np.diag(Z) call anywhere in the file -- it operates entirely on U_norm (masking dead rows) and calls community_share_vector (imported) on both the real and dead-row-zeroed U_norm dicts, holding Z_final fixed."},
+    "output_json_file": "ghost_test2_dead_entity_check.json",
+    "key_config_or_constants": {"CELLS": [["C3",4,"T1"],["C6",4,"T1"],["C3",4,"T2"],["C6",4,"T2"]], "lambda_l1": 0.0, "lambda_z_offdiag": 0.05},
+    "ticket_relevance": 86,
+    "notable_facts": [
+      "Reports per-facet mean/max |U_norm| for live vs dead rows, so a null contamination result is explainable (dead rows numerically tiny) rather than just asserted.",
+      "Confirms CLAUDE.md §4.22's claim that community_share is 'unaffected by dead-entity contamination... exactly 0.0 change in every cell tested.'"
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_test3_share_distribution",
+    "script": "ghost_test3_share_distribution.py",
+    "purpose_one_line": "Main ghost-community measurement: computes the full community_share distribution (not just its min) for every cell in the C1-C6 x K in {2..6} x T1/T2 production grid (chunk12 data only), reporting counts of communities below flat 1%/2% and K-relative 0.25/K, 0.5/K thresholds plus per-relation structure_score/trust diagnostics.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "load_module"],
+    "local_reimplementations": [
+      "Inlines the exact loop that diagnostic_blocks.community_share_vector's docstring says it was centralized FROM -- lines 58-64 (approx.) build 'shares' per relation via mod._hungarian_relabel_relation(Z, structure_threshold) and mod._relation_community_share(Z, U_final[f1], U_final[f2], structure_threshold), append to a list, then at lines 75-77 compute community_share = np.mean(shares, axis=0), normalize by total (with the same near-zero-total raw-vector fallback as the centralized function), and sort it. This file does NOT import or call community_share_vector at all -- grep confirms zero occurrences of the string 'community_share_vector' in the file. It calls mod._hungarian_relabel_relation and mod._relation_community_share directly (both are production module functions, not diagnostic_blocks helpers) and reimplements the averaging/normalization wrapper locally instead of importing the centralized wrapper."
+    ],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No np.diag(Z) call anywhere in this file -- Z diagonal/off-diagonal handling here is via absZ = np.abs(Z) plus a matched/unmatched mask keyed by the Hungarian permutation (for structure_score), not via np.diag."},
+    "output_json_file": "ghost_test3_share_distribution.json",
+    "key_config_or_constants": {"CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [2,3,4,5,6], "SLICES": ["T1","T2"], "lambda_l1": 0.0, "lambda_z_offdiag": 0.05, "THRESHOLDS": ["flat_1pct=0.01","flat_2pct=0.02","k_rel_0.25=0.25/K","k_rel_0.50=0.50/K"]},
+    "ticket_relevance": 87,
+    "notable_facts": [
+      "DIRECTLY VERIFIES the prior survey's flag: this file imports only BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module from diagnostic_blocks (line 40) -- community_share_vector is NOT among them, and is not referenced anywhere in the file. The near-verbatim inlined loop (mod._hungarian_relabel_relation + mod._relation_community_share + np.mean + normalize) is exactly what diagnostic_blocks.py's community_share_vector docstring (lines 1266-1290) describes as one of '2 inlined directly in a loop' sites the centralization was supposed to replace but did not, for this file.",
+      "Per its own header comment, this is the FIRST time K=5/K=6 have ever been fit in this project (K=2/3/4 mostly cache hits)."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-ghost_test3v2_share_distribution",
+    "script": "ghost_test3v2_share_distribution.py",
+    "purpose_one_line": "v2-data (chunk12v2, ticket 84 grammar-relation damping) counterpart to ghost_test3_share_distribution.py -- identical method, pointed at T1_v2/T2_v2 slices instead of T1/T2, to extend the ghost-community share-distribution measurement to both data versions.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "load_module"],
+    "local_reimplementations": [
+      "Identical inlined community_share computation to ghost_test3_share_distribution.py -- lines ~41-47 build 'shares' via mod._hungarian_relabel_relation and mod._relation_community_share per relation, and lines 58-60 do np.mean(shares, axis=0) + total-normalize with the same near-zero fallback. Also does NOT import or call community_share_vector -- grep confirms zero occurrences of the string in the file. The two files' relevant blocks are effectively byte-for-byte the same logic (confirmed by direct comparison of the two files' run_one() bodies), differing only in the SLICES constant."
+    ],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No np.diag(Z) call anywhere in this file -- same absZ/permutation-mask approach as ghost_test3_share_distribution.py for structure_score, no raw-diagonal call site."},
+    "output_json_file": "ghost_test3v2_share_distribution.json",
+    "key_config_or_constants": {"CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [2,3,4,5,6], "SLICES": ["T1_v2","T2_v2"], "lambda_l1": 0.0, "lambda_z_offdiag": 0.05, "THRESHOLDS": ["flat_1pct=0.01","flat_2pct=0.02","k_rel_0.25=0.25/K","k_rel_0.50=0.50/K"]},
+    "ticket_relevance": 87,
+    "notable_facts": [
+      "DIRECTLY VERIFIES the prior survey's flag: same finding as ghost_test3_share_distribution.py -- imports only BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module; community_share_vector is neither imported nor referenced. This is the second of the '2 inlined directly in a loop' sites diagnostic_blocks.py's docstring (lines 1266-1290) names as still containing the old inlined version rather than the centralized import, and direct inspection confirms the docstring's claim is accurate for this file.",
+      "Per its own header comment, K=2/5/6 on v2 data had never been fit before this script (36 new fits); K=3/4 were cache hits from ticket 84's earlier work."
+    ]
+  }
+]

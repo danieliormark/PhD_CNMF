@@ -1,0 +1,531 @@
+{
+ "entries": [
+  {
+   "claim_id": "C-CLAUDE-82-03",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.18 (reader's-guide note)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "25",
+   "resolves": true,
+   "claim_text": "Cross-reference to FINDINGS \u00a725 for the claim that the domain-balance quantity carries no signal about true domain balance on this corpus."
+  },
+  {
+   "claim_id": "C-CLAUDE-82-05",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.18",
+   "target_doc": "CLAUDE.md",
+   "target_section": "1",
+   "resolves": true,
+   "claim_text": "Cross-reference: the global 50/50 alpha weighting not constraining individual communities contradicts \u00a71's stated research goal."
+  },
+  {
+   "claim_id": "C-CLAUDE-82-07",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.18",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.8",
+   "resolves": true,
+   "claim_text": "This [v8's binding_penalty] was lost in the rewrite that introduced softplus (\u00a74.8) and was not restored alongside the other regressions from that rewrite (Frobenius normalisation, alpha weighting, initialisation)."
+  },
+  {
+   "claim_id": "C-CLAUDE-82-17",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.18",
+   "target_doc": "FINDINGS.md",
+   "target_section": "17",
+   "resolves": true,
+   "claim_text": "Cross-references within the outer-loop bullet: \u00a717 (_relation_community_share) and \u00a74.15 ('do not special-case for anchor count' rule)."
+  },
+  {
+   "claim_id": "C-CLAUDE-82-17",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.18",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.15",
+   "resolves": true,
+   "claim_text": "Cross-references within the outer-loop bullet: \u00a717 (_relation_community_share) and \u00a74.15 ('do not special-case for anchor count' rule)."
+  },
+  {
+   "claim_id": "C-CLAUDE-78-01",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.19 header",
+   "target_doc": "FINDINGS.md",
+   "target_section": "8",
+   "resolves": true,
+   "claim_text": "Sparsity term (lambda_l1) fixed to 0.0 for the toy corpus (ticket 78). See ticket 78 in \u00a78 and FINDINGS \u00a76 for the full evidence."
+  },
+  {
+   "claim_id": "C-CLAUDE-78-01",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.19 header",
+   "target_doc": "FINDINGS.md",
+   "target_section": "6",
+   "resolves": true,
+   "claim_text": "Sparsity term (lambda_l1) fixed to 0.0 for the toy corpus (ticket 78). See ticket 78 in \u00a78 and FINDINGS \u00a76 for the full evidence."
+  },
+  {
+   "claim_id": "C-CLAUDE-84-03",
+   "source_doc": "CLAUDE.md",
+   "source_location": "\u00a74.23",
+   "target_doc": "FINDINGS.md",
+   "target_section": "24",
+   "resolves": true,
+   "claim_text": "Full evidence, every table, every script: FINDINGS \u00a724."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-04",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "8",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a78 (Gemini's reconstruction-space proposal)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-06",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "1",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a71 (general rotational indeterminacy)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-07",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a714 (per-relation permutation)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-08",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "Second bare cross-reference to \u00a714 within the same paragraph (permutation correction must be applied first)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-10",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "4",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a74 (collinearity findings)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-13",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a714 (permutation correction must precede off-diagonal attribution)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-17",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.18",
+   "resolves": true,
+   "claim_text": "Cross-reference to CLAUDE.md \u00a74.18 for the practical consequence (imbalance direction flipped between social-dominant and semantic-dominant depending on normalisation, on the same fitted model)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-25",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "20",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a720 (the Problem 2 lesson about an audit sharing the in-loop term's own pathway)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-26",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "17",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a717 (production's own _relation_community_share, within_k/total)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-28",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.15",
+   "resolves": true,
+   "claim_text": "Cross-reference to CLAUDE.md \u00a74.15 (rule against special-casing for anchor count)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-43",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.18",
+   "resolves": true,
+   "claim_text": "Cross-reference to CLAUDE.md \u00a74.18/ticket 82 for the current status line."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-45",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "22",
+   "resolves": true,
+   "claim_text": "Cross-reference to \u00a722 (E2 implementation evidence)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-49",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "21",
+   "resolves": true,
+   "claim_text": "Cross-reference to \u00a721 (TOL re-derivation drawn from the same file)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-53",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "25",
+   "resolves": true,
+   "claim_text": "Cross-reference to \u00a725 (must be read before building on any number in \u00a713)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-53",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a713 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "13",
+   "resolves": true,
+   "claim_text": "Cross-reference to \u00a725 (must be read before building on any number in \u00a713)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-57",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a717 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "2",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a72 (genuinely-mixed relation identification)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-58",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a717 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a714 (genuinely-mixed relation identification)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-59",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a717 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "16",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a716 (genuinely-mixed relation identification)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-62",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a717 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "16",
+   "resolves": true,
+   "claim_text": "Cross-reference to \u00a716 (the bug that produced \u00a716's original '1 conflict' claim is documented and retracted there)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-62",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a717 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "16",
+   "resolves": true,
+   "claim_text": "Cross-reference to \u00a716 (the bug that produced \u00a716's original '1 conflict' claim is documented and retracted there)."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-68",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a717 (cross-ref)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "16",
+   "resolves": true,
+   "claim_text": "Bare cross-reference to \u00a716 (same toy-corpus-calibration caveat category)."
+  },
+  {
+   "claim_id": "C-FINDINGS-18-16",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a718 (cross-ref \u00a71)",
+   "target_doc": "ambiguous",
+   "target_section": "1",
+   "resolves": true,
+   "claim_text": "Motivation for the distant-rotation extension: any rotation, local or distant, that stays feasible has exactly the same reconstruction loss as the original fit (per \u00a71's exact identity) \u2014 unlike a different-seed/different-basin disagreement (\u00a71's Run 2 vs Run 4: recon_loss 0.7593 vs 0.7591, opposite anchor-coherence structure), which loss can distinguish. A distant feasible rotation would be invisible to loss-based selection by construction."
+  },
+  {
+   "claim_id": "C-FINDINGS-18-16",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a718 (cross-ref \u00a71)",
+   "target_doc": "ambiguous",
+   "target_section": "1",
+   "resolves": true,
+   "claim_text": "Motivation for the distant-rotation extension: any rotation, local or distant, that stays feasible has exactly the same reconstruction loss as the original fit (per \u00a71's exact identity) \u2014 unlike a different-seed/different-basin disagreement (\u00a71's Run 2 vs Run 4: recon_loss 0.7593 vs 0.7591, opposite anchor-coherence structure), which loss can distinguish. A distant feasible rotation would be invisible to loss-based selection by construction."
+  },
+  {
+   "claim_id": "C-FINDINGS-19-1",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a719 (cross-ref \u00a718)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "18",
+   "resolves": true,
+   "claim_text": "A community's domain-skew identity is not reproducible across independently-trained seeds \u2014 confirmed with the pipeline's own \u00a7S5 alignment, not just a weaker proxy. Distinct from \u00a718 (this is problem 1a, relabeling across independently-trained fits, not 1b, local rotation freedom within one fit) \u2014 the two should not be conflated."
+  },
+  {
+   "claim_id": "C-FINDINGS-19-2",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a719 (cross-ref \u00a714)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "Question: does a community's apparent domain character survive across independent re-fits of the same (config,K), or does it reshuffle? Answering requires aligning communities across seeds first \u2014 community index is only meaningful within one fit (\u00a714)."
+  },
+  {
+   "claim_id": "C-FINDINGS-19-10",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a719 (cross-ref \u00a714/\u00a716/\u00a717)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "This sharpens the concern about interpreting domain-skew labels as substantive across anything other than one specific reported fit, consistent with the caveat throughout this document that cross-fit/cross-seed comparisons require relabeling correction (\u00a714/\u00a716/\u00a717). Toy-corpus-calibrated \u2014 re-derive at 22k-article scale; a denser corpus could change this either way."
+  },
+  {
+   "claim_id": "C-FINDINGS-19-10",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a719 (cross-ref \u00a714/\u00a716/\u00a717)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "16",
+   "resolves": true,
+   "claim_text": "This sharpens the concern about interpreting domain-skew labels as substantive across anything other than one specific reported fit, consistent with the caveat throughout this document that cross-fit/cross-seed comparisons require relabeling correction (\u00a714/\u00a716/\u00a717). Toy-corpus-calibrated \u2014 re-derive at 22k-article scale; a denser corpus could change this either way."
+  },
+  {
+   "claim_id": "C-FINDINGS-19-10",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a719 (cross-ref \u00a714/\u00a716/\u00a717)",
+   "target_doc": "FINDINGS.md",
+   "target_section": "17",
+   "resolves": true,
+   "claim_text": "This sharpens the concern about interpreting domain-skew labels as substantive across anything other than one specific reported fit, consistent with the caveat throughout this document that cross-fit/cross-seed comparisons require relabeling correction (\u00a714/\u00a716/\u00a717). Toy-corpus-calibrated \u2014 re-derive at 22k-article scale; a denser corpus could change this either way."
+  },
+  {
+   "claim_id": "C-FINDINGS-20-2",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a720 (cross-ref \u00a74.17/\u00a74.20/\u00a74.2)",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.17",
+   "resolves": true,
+   "claim_text": "The concern precisely: collapse_pen is the only quantity that is (a) derived from Z_scaled and (b) read by Optuna every trial, feeding sociological_penalty (\u00a74.17/\u00a74.20; ticket 81). Worry: Z_scaled can be reshaped by the optimizer without genuine reconstruction change (the same scale-invariance slack \u00a74.2 already closed once for z_offdiag_loss), showing up as a collapse_pen improvement not corresponding to real de-concentration of entities."
+  },
+  {
+   "claim_id": "C-FINDINGS-20-2",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a720 (cross-ref \u00a74.17/\u00a74.20/\u00a74.2)",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.20",
+   "resolves": true,
+   "claim_text": "The concern precisely: collapse_pen is the only quantity that is (a) derived from Z_scaled and (b) read by Optuna every trial, feeding sociological_penalty (\u00a74.17/\u00a74.20; ticket 81). Worry: Z_scaled can be reshaped by the optimizer without genuine reconstruction change (the same scale-invariance slack \u00a74.2 already closed once for z_offdiag_loss), showing up as a collapse_pen improvement not corresponding to real de-concentration of entities."
+  },
+  {
+   "claim_id": "C-FINDINGS-20-2",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a720 (cross-ref \u00a74.17/\u00a74.20/\u00a74.2)",
+   "target_doc": "CLAUDE.md",
+   "target_section": "4.2",
+   "resolves": true,
+   "claim_text": "The concern precisely: collapse_pen is the only quantity that is (a) derived from Z_scaled and (b) read by Optuna every trial, feeding sociological_penalty (\u00a74.17/\u00a74.20; ticket 81). Worry: Z_scaled can be reshaped by the optimizer without genuine reconstruction change (the same scale-invariance slack \u00a74.2 already closed once for z_offdiag_loss), showing up as a collapse_pen improvement not corresponding to real de-concentration of entities."
+  },
+  {
+   "claim_id": "C-FINDINGS-20-15b",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a720 (cross-ref \u00a72/\u00a74.2)",
+   "target_doc": "ambiguous",
+   "target_section": "2",
+   "resolves": true,
+   "claim_text": "This is directly consistent with the mechanism \u00a72 already confirmed once for z_offdiag_loss: raising lambda_z_offdiag can move Z_scaled's readout toward 'looks balanced' via the community-resizing route rather than genuine de-concentration."
+  },
+  {
+   "claim_id": "C-FINDINGS-20-29",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a720 (cross-ref \u00a71)",
+   "target_doc": "ambiguous",
+   "target_section": "1",
+   "resolves": true,
+   "claim_text": "Follow-up question: does Z_scaled's full diagonal/off-diagonal pattern (not just collapse_pen's one scalar) track independent structure? Answer: yes, moderately, and the decline under lambda_z_offdiag pressure is confirmed real, not noise. collapse_pen reads only max_share; this says nothing about whether the raw diagonal/off-diagonal values \u00a71 and this document's community-coupling interpretation depend on can be reshaped by the same training-dynamics-driven slack."
+  },
+  {
+   "claim_id": "C-FINDINGS-82-003",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a722 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "18",
+   "resolves": true,
+   "claim_text": "References \u00a718/\u00a721 as the location of the settled design this ticket implements"
+  },
+  {
+   "claim_id": "C-FINDINGS-82-003",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a722 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "21",
+   "resolves": true,
+   "claim_text": "References \u00a718/\u00a721 as the location of the settled design this ticket implements"
+  },
+  {
+   "claim_id": "C-FINDINGS-86-030",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a723 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "18",
+   "resolves": true,
+   "claim_text": "Bare reference: \u00a718 (partial address of rotational indeterminacy)"
+  },
+  {
+   "claim_id": "C-FINDINGS-86-031",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a723 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "Bare reference: \u00a714 (per-relation permutation, Hungarian correction trust scope gap)"
+  },
+  {
+   "claim_id": "C-FINDINGS-86-035",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a723 cross-reference",
+   "target_doc": "ambiguous",
+   "target_section": "11",
+   "resolves": true,
+   "claim_text": "Cross-reference to \u00a711 for S_Art_Auth non-zero tie counts"
+  },
+  {
+   "claim_id": "C-FINDINGS-86-037",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a723 cross-reference",
+   "target_doc": "ambiguous",
+   "target_section": "4",
+   "resolves": true,
+   "claim_text": "Cross-reference to FINDINGS \u00a74 for the original auth/affil community-profile collinearity finding, previously trustworthy only up to K=4"
+  },
+  {
+   "claim_id": "C-FINDINGS-86-045",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a723 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "18",
+   "resolves": true,
+   "claim_text": "Cross-reference to FINDINGS \u00a718 (near-separability + rotation-feasibility search)"
+  },
+  {
+   "claim_id": "C-FINDINGS-86-046",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a723 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "14",
+   "resolves": true,
+   "claim_text": "Cross-reference to FINDINGS \u00a714 (permutation-conflict audit, zero genuine cross-relation conflicts found, K\u2208{2,4} scope)"
+  },
+  {
+   "claim_id": "C-FINDINGS-25-062",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a725 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "19",
+   "resolves": true,
+   "claim_text": "Cross-reference to FINDINGS \u00a719 (a community's domain-skew identity is not reproducible across independently-trained models)"
+  },
+  {
+   "claim_id": "C-FINDINGS-25-063",
+   "source_doc": "FINDINGS.md",
+   "source_location": "\u00a725 cross-reference",
+   "target_doc": "FINDINGS.md",
+   "target_section": "21",
+   "resolves": true,
+   "claim_text": "Cross-reference to FINDINGS \u00a721 (the seed-noise floor is comparable to or larger than the dev_k signal)"
+  }
+ ],
+ "n_entries": 51,
+ "n_broken": 0,
+ "broken": [],
+ "n_unresolved_target_doc": 0,
+ "claude_headings_found": [
+  "1",
+  "2",
+  "3",
+  "4",
+  "4.1",
+  "4.2",
+  "4.3",
+  "4.4",
+  "4.5",
+  "4.6",
+  "4.7",
+  "4.8",
+  "4.9",
+  "4.10",
+  "4.11",
+  "4.12",
+  "4.13",
+  "4.14",
+  "4.15",
+  "4.16",
+  "4.17",
+  "4.18",
+  "4.19",
+  "4.20",
+  "4.21",
+  "4.22",
+  "4.23",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11"
+ ],
+ "findings_headings_found": [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+  "25"
+ ]
+}

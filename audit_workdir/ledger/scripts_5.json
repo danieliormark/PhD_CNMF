@@ -1,0 +1,219 @@
+[
+  {
+    "fact_id": "F-SCRIPT-rotation_feasibility_search",
+    "script": "rotation_feasibility_search.py",
+    "purpose_one_line": "Tier-2 identifiability check (FINDINGS §1/§18): searches per-community-pair Givens rotations for the largest feasible angle that keeps U/Z non-negative, to test whether a non-trivial orthogonal blending rotation W is reachable without violating non-negativity.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_instrumented", "load_module"],
+    "local_reimplementations": ["givens(K,i,j,theta)", "meaningful_mask_u(U) -- column-relative 1% mask (later found flawed)", "meaningful_mask_z(Z)", "feasible(theta,...)", "max_feasible_angle(...) coarse+bisection search"],
+    "uses_raw_diagonal": {"present": false, "note": "grep for np.diag(/diagonal found nothing in this file"},
+    "output_json_file": "rotation_feasibility_search.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "CONFIGS": "C1-C6", "K_LIST": [3, 4],
+      "TOL": "1e-4", "MEANINGFUL_FRAC": 0.01, "COARSE_ANGLES_DEG": "[0.5,1,2,5,10,20,30,45,60,90]",
+      "BISECTION_ITERS": 6
+    },
+    "ticket_relevance": 85,
+    "notable_facts": [
+      "This is the ORIGINAL version later found (by an Opus-model audit) to have a flawed MEANINGFUL_FRAC=0.01 column-relative mask that excluded ~78-84% of U's entries from monitoring, disproportionately excluding the entries that actually bind non-negativity. Superseded by rotation_feasibility_search_v2.py, which fixes this with an absolute floor exclusion.",
+      "Header explicitly frames this as the direct Tier-2 test of FINDINGS §1's 'any invertible W' claim, deliberately excluding pure rescaling (the already-accepted U_scales freedom, ticket 79) to isolate genuine community-mixing blending.",
+      "Result reported in file's own SUMMARY print as 0.00 deg for all 54 pairs under the original (flawed) mask -- i.e. this run re-detected structural zeros, not a real answer; this is exactly why v2 exists."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-rotation_feasibility_search_v2",
+    "script": "rotation_feasibility_search_v2.py",
+    "purpose_one_line": "Corrected re-run of rotation_feasibility_search.py using an absolute clamp-floor-relative mask (FLOOR_EXCLUDE=1e-6) instead of the flawed column-relative 1% mask, with tightened TOL=1e-8, to properly test rotation-blending feasibility.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_instrumented", "load_module"],
+    "local_reimplementations": ["givens(K,i,j,theta)", "meaningful_mask(A) -- absolute floor version", "feasible(theta,...)", "max_feasible_angle(...) coarse+bisection"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "rotation_feasibility_search_v2.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "CONFIGS": "C1-C6", "K_LIST": [3, 4],
+      "FLOOR_EXCLUDE": "1e-6 (~6x measured clamp floor ~1.5e-7, ticket 74)", "TOL": "1e-8",
+      "COARSE_ANGLES_DEG": "[0.05,0.1,0.2,0.5,1,2,5,10,20,30,45,60,90]", "BISECTION_ITERS": 8
+    },
+    "ticket_relevance": 90,
+    "notable_facts": [
+      "Header quotes the exact diagnosis: for C6/K4's auth facet, only 18.3% of entries were monitored under the old mask, and a genuine non-floor small entry (U_prob=0.071, U_norm=0.00192) was wrongly excluded because it sat below 1% of its own column's max.",
+      "This is the currently-authoritative version of the Tier-2 rotation feasibility test; rotation_feasibility_search.py (v1) is superseded by it.",
+      "Reuses fit_instrumented directly (not cached via fit_or_load) matching the original script's own fitting call."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-rotation_island_search",
+    "script": "rotation_island_search.py",
+    "purpose_one_line": "Extends the rotation feasibility check to a full [-90,90] degree fine sweep per community pair to detect a 'distant rotation island' -- a disconnected feasible rotation region invisible to loss-based model selection.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_instrumented", "load_module"],
+    "local_reimplementations": ["givens(K,i,j,theta)", "meaningful_mask_u(U) -- same flawed column-relative 1% mask as rotation_feasibility_search.py v1", "meaningful_mask_z(Z)", "feasible(theta,...)", "contiguous_runs(flags, angles)"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "rotation_island_search.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "CONFIGS": "C1-C6", "K_LIST": [3, 4],
+      "TOL": "1e-4", "MEANINGFUL_FRAC": 0.01, "STEP_DEG": 0.05, "ANGLES_DEG": "np.arange(-90,90+0.05,0.05)"
+    },
+    "ticket_relevance": 80,
+    "notable_facts": [
+      "Inherits the SAME flawed MEANINGFUL_FRAC=0.01 mask and TOL=1e-4 from the original (uncorrected) rotation_feasibility_search.py -- was never updated when that bug was found/fixed elsewhere. Its own successor script (rotation_island_search_v2.py) explicitly states 'FINDINGS §18 currently flags this script's own numbers as resting on the superseded mask'.",
+      "Header notes the original script's own header comment claimed '1 degree steps' while the code actually used STEP_DEG=0.05 -- a stale-comment mismatch flagged (and corrected in the header) by v2, not a behavior bug in this file's code itself."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-rotation_island_search_v2",
+    "script": "rotation_island_search_v2.py",
+    "purpose_one_line": "Corrected re-run of rotation_island_search.py using the same absolute-floor mask fix as rotation_feasibility_search_v2.py (FLOOR_EXCLUDE=1e-6, TOL=1e-8), searching the full [-90,90] degree range for disconnected feasible rotation islands.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_instrumented", "load_module"],
+    "local_reimplementations": ["givens(K,i,j,theta)", "meaningful_mask(A) -- absolute floor version, identical to rotation_feasibility_search_v2.py's", "feasible(theta,...)", "contiguous_runs(flags, angles)"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "rotation_island_search_v2.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "CONFIGS": "C1-C6", "K_LIST": [3, 4],
+      "FLOOR_EXCLUDE": "1e-6", "TOL": "1e-8", "STEP_DEG": 0.05, "ANGLES_DEG": "np.arange(-90,90+0.05,0.05)"
+    },
+    "ticket_relevance": 85,
+    "notable_facts": [
+      "This is the currently-authoritative version of the distant-rotation-island test; supersedes rotation_island_search.py.",
+      "Header explicitly states the fine-sweep grid (STEP_DEG=0.05, full [-90,90]) is UNCHANGED from the original -- only the mask/tolerance are corrected -- and this is not a re-derivation, it references rotation_feasibility_search_v2.py's fix as the source of the correction ('identical to rotation_feasibility_search_v2.py, not re-derived here')."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-mass_mem_argmax_decomposition",
+    "script": "mass_mem_argmax_decomposition.py",
+    "purpose_one_line": "Investigates why pooled mass_max/mem_max correlation flips sign across cells (negative at K=3, mostly positive at K=4) by checking whether argmax(mass_share) and argmax(mem_share) usually land on the same community index (identity check), plus a per-relation/per-facet source decomposition and a K-dependence sweep.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "load_module", "presence_masks"],
+    "local_reimplementations": ["relation_shares() -- thin wrapper around mod._relation_community_share, kept unaggregated", "facet_shares() -- thin wrapper around mod.compute_probability_distributions, live-masked", "aggregate()", "per_source_argmax_agreement()", "run_cell()"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "mass_mem_argmax_decomposition.json",
+    "key_config_or_constants": {
+      "SLICE_NAME": "T1", "CELLS": "[(C1,3),(C1,4),(C2,3),(C2,4),(C3,3),(C3,4)]",
+      "LAMBDA_SWEEP": "[1e-4,1e-3,1e-2,0.05,0.1,0.3,1.0]", "REPRESENTATIVE_LAMBDA": 0.05
+    },
+    "ticket_relevance": 70,
+    "notable_facts": [
+      "GROUND TRUTH for adjudication: this script measures an IDENTITY-MATCH check between argmax(mass_share) (from Z_scaled-based relation shares, via mod._relation_community_share) and argmax(mem_share) (from U_prob-based facet means) -- reported per-cell as 'identity_match': mass_argmax == mem_argmax, plus internal agreement rates (how many individual relations/facets argmax to the same community as their own aggregate). It is explicitly a follow-up/mechanism probe on collapse_pen_optuna_study_v2.py's finding, NOT itself a domain-balance or collapse-pen measurement script.",
+      "This is the script whose results were reportedly mis-filed in FINDINGS.md under §13 E1 when they in fact belong under §20 (per this session's prior finding, not re-verified here) -- adjudication stage should treat 'is this an identity-match/argmax-agreement measurement' as the defining fact about what this script actually produces.",
+      "Uses fit_or_load (cached) rather than fit_instrumented, and sweeps lambda_z_offdiag on a fixed grid specifically to isolate the mass/mem argmax mechanism from Optuna's own uncontrolled sampling dynamics."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-mass_vs_membership_balance_check",
+    "script": "mass_vs_membership_balance_check.py",
+    "purpose_one_line": "Tests whether Z_scaled-based domain-mass imbalance and U_prob-based membership imbalance track each other (community-level and solution-level correlation), to decide whether mass is a safe proxy for a binding_penalty or risks being gamed independently of real membership composition.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "domain_community_volumes", "domain_membership_distributions", "domain_share_vectors", "fit_or_load", "presence_masks", "total_variation_distance"],
+    "local_reimplementations": ["cell_data() -- thin orchestration wrapper, no reimplemented math"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "mass_vs_membership_balance_check.json",
+    "key_config_or_constants": {
+      "CONFIGS": "C1-C6", "K_LIST": [2, 4], "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "cross_domain_handling": "split"
+    },
+    "ticket_relevance": 75,
+    "notable_facts": [
+      "This is the predecessor investigation that motivated CLAUDE.md's E2/ticket 82 finding that a Z_scaled-based domain-balance proxy is exploitable via U_scales's undetermined gauge freedom (ticket 79) -- CLAUDE.md §4.18 explicitly cites 'a separate, pre-existing exploratory script already in diagnostic_blocks.py (make_domain_balance_penalty_torch)' as the exploitability finding source, which is distinct from this script; this script instead computes Pearson/Spearman correlation between mass_diff/mem_diff (community level) and mass_tvd/mem_tvd (solution level, total-variation distance) using scipy.stats.",
+      "Reports both a community-level analysis (all 36 (config,K,k) points across the K in {2,4} grid) and a solution-level analysis (12 (config,K) cells) as the user explicitly requested both granularities.",
+      "Uses the 'split' cross-domain handling convention for anchor relations via domain_community_volumes -- described in the header as 'the anchor-handling convention settled on this session'."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-uscales_determinacy",
+    "script": "uscales_determinacy.py",
+    "purpose_one_line": "Tests whether U_scales is data-determined or a free gauge direction: Test 1 does an algebraic column-rescaling-and-compensation identity check on saved Run1 tensors (no fitting); Test 2 measures empirical U_scales drift/CV across Runs 1/3/4 via Hungarian-aligned re-fits.",
+    "imports_from_diagnostic_blocks": ["NONE -- does not import diagnostic_blocks.py at all"],
+    "local_reimplementations": [
+      "RELATION_MAP (hardcoded local dict, duplicating chunk13v9.py's topology)",
+      "build_active_matrices() -- local re-derivation of active sparse matrices/Frobenius normalization, NOT imported from diagnostic_blocks",
+      "get_init(mode, ...) -- local wrapper choosing 'production' vs 'random_anchor_z' init, calling mod.initialize_tucker_adapted_nndsvd_and_propagate directly",
+      "run_fit(mode, lambda_z_offdiag, seed) -- a full standalone re-implementation of the inner solver training loop (Adam, clamp positivity, U_norm/Z_scaled/U_scales computation, recon/sparsity/z_offdiag loss, convergence check) rather than calling diagnostic_blocks.fit_instrumented/fit_or_load",
+      "forward(), recon_norms(), sparsity_loss_of(), z_offdiag_loss_of(), recon_loss_of() -- local numpy re-derivations for the algebraic Test 1"
+    ],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "uscales_determinacy.json",
+    "key_config_or_constants": {
+      "K": 4, "LAMBDA_L1": 0.01, "config": "C6", "slice": "T1",
+      "runs": "Run1 (production, lz=0.05), Run3 (random_anchor_z, lz=0.05), Run4 (random_anchor_z, lz=0.0)"
+    },
+    "ticket_relevance": 95,
+    "notable_facts": [
+      "VERIFIED CLAIM (per explicit instruction to check): the prior survey's claim is CONFIRMED TRUE by direct reading of the code. The script's only diagnostic_blocks-adjacent import is `from diagnostic_run_metadata import build_run_metadata` (line 30) -- it does NOT import anything from diagnostic_blocks.py. Instead, at lines 45-48 it loads chunk13v9.py directly via importlib.util.spec_from_file_location, and defines its own local `build_active_matrices()` (lines 57-71) and `get_init()` (lines 74-87), plus a full standalone `run_fit()` (lines 90-166) that reimplements the entire inner-solver training loop end to end (Adam optimizer, per-epoch U_norm/U_scales/Z_scaled computation, recon_loss/sparsity_loss/z_offdiag_loss, convergence check) rather than calling fit_instrumented/fit_or_load from diagnostic_blocks.py.",
+      "Header note dates this script to 2026-08-13, explicitly 'pre-diagnostic_blocks' -- i.e. it predates diagnostic_blocks.py's existence, which explains why it has its own local reimplementations rather than importing the shared module. This is a chronological/provenance fact, not a currently-live inconsistency to fix.",
+      "Header also flags an 'UNEXPECTED' finding: Run1/3/4's previously saved tensors (run{1,3,4}_tensors.npz) did not include U_scales -- only U_norm and Z_scaled were saved by whatever earlier session produced them -- so this script re-fits all three runs from scratch and re-saves complete .npz files including U_scales.",
+      "This is the direct evidentiary source underlying CLAUDE.md §4.3's 'U_scales is undetermined' finding (ticket 79) -- Test 1's algebraic rescaling identity and Test 2's measured CV (up to 1.2) are the numbers cited there."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-near_separability_check",
+    "script": "near_separability_check.py",
+    "purpose_one_line": "Tier-1 identifiability check (precursor to rotation_feasibility_search.py's Tier-2): tests whether every community, in every facet, has at least one live entity nearly-purely assigned to it (U_prob row-max near 1) -- a near-separability witness -- as indirect evidence against reachable blending.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_instrumented", "load_module", "load_slice", "presence_masks (aliased presence_masks_fn)"],
+    "local_reimplementations": ["facet_degrees() -- computes per-entity nnz degree across active relations touching a facet, from raw_data directly"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "near_separability_check.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "CONFIGS": "C1-C6", "K_LIST": [3, 4],
+      "PURITY_THRESHOLDS": "[0.5, 0.7, 0.85]", "SEMANTIC_CONFOUNDED_FACETS": "{core_child_he, cousin_he, core_atom, fringe_atom}"
+    },
+    "ticket_relevance": 80,
+    "notable_facts": [
+      "Explicitly addresses a KNOWN CONFOUND up front: Part B of evaluate_socio_semantic_reality ('Doxa hoarding', MAX_MONOPOLY=0.85) penalizes U_prob row-max > 0.85 for the 4 semantic target_facets only when structural signal is itself spread (high entropy) -- so absence of purity witnesses among HIGH-degree entities in those 4 facets is confounded/uninformative, while absence among LOW-degree entities there, or anywhere in the 4 unconfounded facets (auth/affil/journ/art), is the real signal. The script reports witness degree specifically so this distinction can be read off directly.",
+      "This is the cited Tier-1 evidence that FINDINGS §18/rotation_feasibility_search.py's header describes as 'strong indirect evidence against reachable blending' motivating the Tier-2 direct test.",
+      "Cites the NMF identifiability literature directly in its header comment (Donoho & Stodden 2003; Arora et al. 2012; Huang, Sidiropoulos & Swami 2014's 'sufficiently scattered' condition)."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-collapse_check_review_followups",
+    "script": "collapse_check_review_followups.py",
+    "purpose_one_line": "Follow-up to a review of collapse_check_zscaled.py: reports the full max_share table for all 12 cells (not just the 2 that fired), which relations sit nearest the structure-score gap boundary, and whether density-weighted (nnz-weighted) vs equal-weight voting flips any collapse-pen verdict.",
+    "imports_from_diagnostic_blocks": ["load_module", "load_slice", "fit_or_load", "relation_community_mass", "OUT_DIR"],
+    "local_reimplementations": ["density-weighted community_share aggregation computed inline in the main loop (not a diagnostic_blocks function) -- community_share_density[k] = sum_r(nnz(r)*relation_share(r,k)) / sum_r(nnz(r))"],
+    "uses_raw_diagonal": {"present": false, "note": "the word 'diagonal' does not appear in this file at all; grep for np.diag(/diagonal returned nothing"},
+    "output_json_file": "collapse_check_review_followups.json",
+    "key_config_or_constants": {
+      "CONFIGS": "C1-C6", "KS": [2, 4], "SLICE": "T1", "STRUCTURE_THRESHOLD": 1.0, "MAX_SHARE_THRESHOLD": 0.60
+    },
+    "ticket_relevance": 65,
+    "notable_facts": [
+      "All fits here are cache hits from collapse_check_zscaled.py / permutation_consistency_sweep.py's earlier runs via fit_or_load -- no new training performed by this script itself.",
+      "The nnz-density-weighting idea tested here is explicitly RETIRED in the next script, collapse_check_weighting_experiment.py, which argues nnz-weighting at the aggregation step 'revives the scaling problem Frobenius normalisation was built to remove' -- so this script's own (1)/(4) result is described in the successor script as 'a demonstration of the problem, not a serious alternative', with its earlier result (1 flip, C3/K2) kept only as that demonstration.",
+      "Part (3) reads directly from a pre-existing diagnostic_results/permutation_consistency_sweep.json artifact to rank relations by structure_score proximity to the 1.0 gap boundary -- this script does not recompute structure_score itself for that part."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-collapse_check_weighting_experiment",
+    "script": "collapse_check_weighting_experiment.py",
+    "purpose_one_line": "Tests two principled fit-derived weighting alternatives to equal-weight voting for community_share (structure_score-weighted and reconstruction-quality-weighted), retiring nnz-weighting, and checks whether the SET of configs that fire max_share>0.60 is stable across all three schemes.",
+    "imports_from_diagnostic_blocks": ["load_module", "load_slice", "fit_or_load", "build_active_matrices", "hungarian_diagonal_match", "relation_community_mass", "OUT_DIR"],
+    "local_reimplementations": [
+      "structure_score_weight(s) -- saturating transform s/(s+1), 1.0 if inf",
+      "compute_per_relation_recon() -- standalone forward-pass reimplementation of chunk13v9.py's per-relation reconstruction term (run_inner_solver lines ~568-597), run on already-fitted U_final/Z_final; explicitly validated against real diagnostics['math_loss'] via a SESSION_PROTOCOL §E agreement check rather than trusted blindly"
+    ],
+    "uses_raw_diagonal": {"present": false, "note": "'diagonal' appears only in prose/comments describing hungarian_diagonal_match (an imported diagnostic_blocks function) and in the header explaining structure_score; no raw np.diag()/matrix-diagonal extraction in this file"},
+    "output_json_file": "collapse_check_weighting_experiment.json",
+    "key_config_or_constants": {
+      "CONFIGS": "C1-C6", "KS": [2, 4], "SLICE": "T1", "STRUCTURE_THRESHOLD": 1.0, "MAX_SHARE_THRESHOLD": 0.60
+    },
+    "ticket_relevance": 65,
+    "notable_facts": [
+      "Explicitly states WHY nnz was retired (not just downweighted): Frobenius-normalisation already puts every relation's input matrix at ||X||^2=1 before fitting specifically to prevent raw density/size from dominating; weighting the aggregation step by nnz reintroduces that same density confound one step downstream.",
+      "Both new weights (structure_score-based, reconstruction-quality-based) are explicitly framed as 'properties of the CONVERGED FIT' rather than of the raw input data, drawing an explicit parallel to FINDINGS §12's Z_scaled-(fit-determined, trustworthy)-vs-U_scales-(input-adjacent, undetermined) distinction.",
+      "Includes a self-check (SESSION_PROTOCOL §E): asserts its own reimplemented per-relation reconstruction sum matches the real diagnostics['math_loss'] to 1e-4 per cell, and explicitly flags any cell where this fails as making the recon-weighted result untrustworthy for that cell -- this is a genuine internal correctness gate, not just an assertion of trust."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-collapse_check_zscaled",
+    "script": "collapse_check_zscaled.py",
+    "purpose_one_line": "PROTOTYPE (not a patch) of tickets 79/80's fix: replaces the U_scales-based collapse mass with a Z_scaled-diagonal-based community_share, and separately tests switching the collapse formula from normalized-entropy to a direct max-share ceiling penalty -- reports whether collapse_pen ever fires under either or both fixes.",
+    "imports_from_diagnostic_blocks": ["load_module", "fit_or_load", "relation_community_mass", "presence_masks (aliased get_presence_masks)", "BLOCKS_VERSION", "OUT_DIR"],
+    "local_reimplementations": ["old_entropy_and_pen() -- thin wrapper that calls the REAL mod.evaluate_dimensional_collapse directly (per SESSION_PROTOCOL §E, explicitly to avoid reimplementing what can be called -- header notes an earlier draft hand-rolled the entropy formula and silently omitted the /sqrt(N_f_live) live-entity normalisation, caught before being reported)"],
+    "uses_raw_diagonal": {"present": false, "note": "'diagonal' used throughout prose to describe Z_scaled's community diagonal / Hungarian-corrected diagonal reading via relation_community_mass (a diagnostic_blocks function); no raw np.diag() calls in this file"},
+    "output_json_file": "collapse_check_zscaled.json",
+    "key_config_or_constants": {
+      "CONFIGS": "C1-C6", "KS": [2, 4], "SLICE": "T1", "STRUCTURE_THRESHOLD": 1.0,
+      "MAX_SHARE_THRESHOLD": 0.60, "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05
+    },
+    "ticket_relevance": 92,
+    "notable_facts": [
+      "This is the direct predecessor/evidentiary source for the fix CLAUDE.md §4.4/§4.17 describes as 'IMPLEMENTED (tickets 79/80, FINDINGS §17)' -- the two new entities it defines (relation_share(r,k) and community_share(k)) and the mass_plus_formula_collapse_pen ceiling-penalty shape (ported verbatim from MAX_MONOPOLY's formula) match what CLAUDE.md documents as the shipped fix.",
+      "Explicitly separates two independently-testable changes per CLAUDE.md §4.4's own 'two independent problems' framing: MASS-ONLY (new Z_scaled-based mass fed into the OLD entropy formula) vs MASS+FORMULA (new mass AND new max-share ceiling formula) -- both reported alongside the old U_scales+entropy baseline for direct three-way comparison per cell.",
+      "Flags its own equal-weighting of relations into community_share as 'A DESIGN CHOICE, not a derivation' -- the natural alternative (weighting by relation mass or facet size) was explicitly not implemented/tested in this script itself (that gap is what motivates collapse_check_review_followups.py and collapse_check_weighting_experiment.py as direct successors)."
+    ]
+  }
+]

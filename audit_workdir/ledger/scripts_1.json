@@ -1,0 +1,198 @@
+[
+  {
+    "fact_id": "F-SCRIPT-domain_balance_corrected_check",
+    "script": "domain_balance_corrected_check.py",
+    "purpose_one_line": "Tests whether the cross-domain (anchor) matrix crediting choice (naive/excluded/split) materially changes the per-community social/semantic imbalance numbers previously reported by domain_balance_no_correction_check.py, across the same C1-C6 x K in {2,4} grid using cached fits.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "domain_community_volumes", "fit_or_load"],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {
+      "present": false,
+      "lines": [],
+      "context": "This script does not call np.diag itself -- it delegates mass computation to diagnostic_blocks.domain_community_volumes(cross_domain_handling=...). NOTE (found while reading diagnostic_blocks.py for cross-reference): domain_community_volumes itself is documented as RAW ('no permutation correction applied here, that's a separate, orthogonal question') and internally does np.abs(np.diag(Z_final[r])) at diagnostic_blocks.py lines ~735/746/750. So despite the script's name '_corrected_check', the 'correction' it tests is only the anchor/cross-domain crediting formula (naive vs excluded vs split), NOT a Hungarian/permutation correction of the diagonal reading. This is explicit and intentional per both docstrings, not a hidden bug, but the naming invites misreading -- worth flagging for adjudication."
+    },
+    "output_json_file": "domain_balance_corrected_check.json",
+    "key_config_or_constants": {
+      "CONFIGS": ["C1","C2","C3","C4","C5","C6"],
+      "K_LIST": [2, 4],
+      "LAMBDA_L1": 0.0,
+      "LAMBDA_Z_OFFDIAG": 0.05,
+      "TREATMENTS": ["naive", "excluded", "split"]
+    },
+    "ticket_relevance": 88,
+    "notable_facts": [
+      "Docstring explicitly ties this script to CLAUDE.md §4.18's double-counting concern about crediting cross-domain (anchor) matrices wholesale into sem_vol.",
+      "Asserts (via domain_community_volumes) that facet-level 'cross-domain' relations equal chunk13v9's own anchor_keys on every call -- a sanity check, not a silent assumption.",
+      "The script's own name and framing ('corrected') is about anchor-crediting, not about Hungarian permutation correction -- both this script and domain_balance_no_correction_check.py operate on the raw (uncorrected-for-permutation) Z_scaled diagonal. CLAUDE.md §4.18/E2 explains the outer-loop mechanism that was eventually shipped uses U_prob, not Z_scaled, partly because of exploitability found with a Z_scaled-based approach -- this script family predates/informs that finding.",
+      "Does not modify chunk13v9.py; purely reads cached fits via fit_or_load."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_inloop_power_and_weight_sweep",
+    "script": "domain_balance_inloop_power_and_weight_sweep.py",
+    "purpose_one_line": "Follow-up sweep of the in-loop domain-balance penalty testing smaller weights (0.5/1/2, below the weight=5 that caused non-convergence elsewhere) and a rescaled power=4 variant, on 2 pilot cells (C3/K4, C6/K4) across both T1/T1_v2 data, 3 seeds each.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "facet_membership_profile", "domain_balance_r_k",
+      "fit_instrumented", "load_module", "make_inloop_domain_balance_penalty_torch", "presence_masks"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No np.diag/diagonal usage -- operates entirely in U_prob/facet-membership space via facet_membership_profile and domain_balance_r_k, plus the in-loop torch penalty function. Consistent with CLAUDE.md's stated reason for using U_prob (gauge-safety) rather than Z_scaled for this mechanism."},
+    "output_json_file": "domain_balance_inloop_power_and_weight_sweep.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "TOL": 0.15,
+      "CELLS": [["C3",4],["C6",4]], "SLICES": ["T1","T1_v2"], "N_SEEDS": 3,
+      "CONDITIONS": [[2,0.0],[2,0.5],[2,1.0],[2,2.0],[4,200.0],[4,400.0]]
+    },
+    "ticket_relevance": 85,
+    "notable_facts": [
+      "Explicitly self-describes as coarser/lower-confidence than the seedcheck scripts ('3 seeds, not 5 -- treat this as a coarser signal, not a final confirmation').",
+      "The power=4 weight rescaling (weight_4 ~ weight_2*200) is derived algebraically in the docstring from matching derivative push at excess=0.05; this matches CLAUDE.md §4.18's statement that E2's weight was chosen from real measurement, not a guess -- this script is part of that measurement trail.",
+      "Uses a 'clears 2x SD' significance heuristic (delta vs 2x max(seed SD, baseline SD)) consistent with the paired-seed discipline referenced across the domain_balance_inloop_* family."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_inloop_seedcheck",
+    "script": "domain_balance_inloop_seedcheck.py",
+    "purpose_one_line": "Paired-seed (5 seeds) test of the in-loop domain-balance penalty at weight=0 vs weight=5 on 2 pilot cells (C3/K4, C6/K4, T1/v1 data) to disambiguate a real penalty effect from seed noise, since a prior single-seed pilot (domain_balance_inloop_sweep.py) gave a noisy, non-monotonic result on C3/K4.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "facet_membership_profile", "domain_balance_r_k",
+      "fit_instrumented", "load_module", "make_inloop_domain_balance_penalty_torch", "presence_masks"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "None -- U_prob/facet-membership space only, same as the rest of the inloop_* family."},
+    "output_json_file": "domain_balance_inloop_seedcheck.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CELLS": [["C3",4],["C6",4]], "WEIGHTS": [0.0, 5.0], "TOL": 0.15, "N_SEEDS": 5
+    },
+    "ticket_relevance": 88,
+    "notable_facts": [
+      "Docstring explains C3/K4's baseline (weight=0) hit the 2000-epoch non-convergence ceiling and its baseline mean_dev_k (0.041) already sits well inside TOL=0.15, so the penalty's hinge is fully clipped there -- a single seed can't distinguish 'penalty hurt' from 'seed-sensitive non-convex trajectory'. This is exactly the kind of caveat that should carry through to any downstream claim about C3/K4's penalty effect.",
+      "Frames itself as following 'ticket 84 Phase 3' paired-seed discipline ('pair the seeds... the single largest lever against the noise floor') -- cross-references another ticket's methodology, worth checking that cross-reference for consistency in adjudication.",
+      "This is the v1/T1-only counterpart to domain_balance_inloop_seedcheck_v2.py."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_inloop_seedcheck_v2",
+    "script": "domain_balance_inloop_seedcheck_v2.py",
+    "purpose_one_line": "v2 (chunk12v2/ticket-84 grammar-damped data) counterpart to domain_balance_inloop_seedcheck.py -- same paired-seed (5 seeds) weight=0 vs weight=5 test on C3/K4 and C6/K4, but run against both T1_v2 and T2_v2 slices instead of only T1.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "facet_membership_profile", "domain_balance_r_k",
+      "fit_instrumented", "load_module", "make_inloop_domain_balance_penalty_torch", "presence_masks"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "None -- identical methodology to domain_balance_inloop_seedcheck.py, U_prob/facet-membership space only."},
+    "output_json_file": "domain_balance_inloop_seedcheck_v2.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "SLICES": ["T1_v2","T2_v2"], "CELLS": [["C3",4],["C6",4]], "WEIGHTS": [0.0,5.0], "TOL": 0.15, "N_SEEDS": 5
+    },
+    "ticket_relevance": 85,
+    "notable_facts": [
+      "Docstring says this covers 'E1's own never pool slices discipline' by testing T1_v2 AND T2_v2 separately, and states this run is 'directly comparable to domain_balance_inloop_seedcheck.json (v1, T1 only)' -- a specific cross-file comparability claim worth checking in adjudication (do the two JSONs actually share a comparable schema/units?).",
+      "Nearly line-for-line structurally identical to domain_balance_inloop_seedcheck.py (not a code smell here -- explicitly a parametrized re-run, same pattern as domain_balance_measurement_v2.py, though this one duplicates code rather than importing run_one from v1)."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_inloop_sweep",
+    "script": "domain_balance_inloop_sweep.py",
+    "purpose_one_line": "Single-seed pilot sweep of the in-loop domain-balance penalty (make_inloop_domain_balance_penalty_torch) across weights {0,1,5,20,50} on C3/K4 and C6/K4, checking (1) whether r_k moves toward 0.5 as weight increases, (2) gauge-safety via u_scales_cv, and (3) whether an independent Z_scaled-based outer-loop reading (mass_tvd) tracks the real U_prob-based improvement.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "domain_community_volumes", "domain_share_vectors",
+      "facet_membership_profile", "domain_balance_r_k", "fit_instrumented", "load_module",
+      "make_inloop_domain_balance_penalty_torch", "presence_masks", "total_variation_distance"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {
+      "present": false,
+      "lines": [],
+      "context": "No direct np.diag call in this script -- it calls diagnostic_blocks.domain_community_volumes(cross_domain_handling='split') to get mass_tvd_zscaled as an independent OUTER-LOOP comparison metric. As noted for domain_balance_corrected_check.py, domain_community_volumes internally uses the raw (unpermutation-corrected) Z_scaled diagonal -- appropriate here since the script's explicit purpose (point 3 in its docstring) is to check whether this raw-ish outer-loop Z_scaled proxy tracks the real, gauge-safe U_prob-based r_k improvement, i.e. the rawness is the point of the comparison, not an oversight."
+    },
+    "output_json_file": "domain_balance_inloop_sweep.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CELLS": [["C3",4],["C6",4]], "WEIGHTS": [0.0,1.0,5.0,20.0,50.0], "TOL": 0.15
+    },
+    "ticket_relevance": 90,
+    "notable_facts": [
+      "This is the earliest/single-seed pilot in the inloop_* family; its own docstring says its C3/K4 result was noisy/non-monotonic, which directly motivated domain_balance_inloop_seedcheck.py's paired-seed follow-up -- a clear provenance chain worth preserving in the audit narrative.",
+      "Docstring explicitly frames point 3 as 'THE POINT 8 QUESTION' (ticket 82 point 8) and states the expectation from the algebraic proof is 'no visible effect' on u_scales_cv if the penalty is truly gauge-safe -- CLAUDE.md's E2 section reports this in-loop mechanism was built on U_prob specifically because a Z_scaled-based candidate (elsewhere, make_domain_balance_penalty_torch, not this script) was found exploitable. This script is testing the gauge-safety of the U_prob-based penalty, not the exploitable Z_scaled one -- worth not conflating the two in adjudication.",
+      "CLAUDE.md §4.18 cites 'only 1 of 20 (weight/power/cell) combinations tested produced a shift exceeding its own paired seed-noise floor' and 'weight=5 caused real non-convergence' -- the weight=5 non-convergence claim traces partly to this script and to domain_balance_inloop_seedcheck.py; worth checking in Stage B whether the specific numbers in this script's JSON output support that CLAUDE.md claim."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_measurement",
+    "script": "domain_balance_measurement.py",
+    "purpose_one_line": "E1 (ticket 82 / CLAUDE.md §4.18) measurement: does per-community domain imbalance exist on a DETERMINED basis? Measures r_k = soc_k/(soc_k+sem_k) in two independent spaces (facet/U_prob, facet/Z_scaled) under two weightings (equal, entity) and two anchor-handling variants (V1 include, V2 exclude), across C1-C6 x K in {3,4}, T1 and T2 reported separately.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "FACET_DOMAIN", "domain_balance_r_k",
+      "facet_membership_profile", "facet_relation_profile", "fit_or_load", "load_module", "presence_masks"
+    ],
+    "local_reimplementations": [
+      "self_check_facet_relation_profile: not a reimplementation of an existing diagnostic_blocks function, but a locally-defined validation/spot-check that calls mod._relation_community_share directly (a production-module 'private' function) to independently verify facet_relation_profile's aggregation matches the unaggregated per-relation computation exactly on a single-relation facet. Explicitly framed in its own docstring as a spot-check, not a parallel implementation meant for production use.",
+      "live_counts_for: trivial one-line helper ({f: int(mask.sum()) for f, mask in pm.items()}), not a meaningful duplication of any diagnostic_blocks function.",
+      "run_cell / summarize_dev_distribution: orchestration functions specific to this script's grid, later explicitly reused verbatim (imported) by domain_balance_measurement_v2.py -- so these are shared infrastructure, not drifted duplicates."
+    ],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "None -- this script deliberately avoids raw diagonals; it uses facet_relation_profile (Z_scaled space) and facet_membership_profile (U_prob space), both of which route through _relation_community_share (permutation-aware) rather than a bare np.diag read."},
+    "output_json_file": "domain_balance_measurement.json",
+    "key_config_or_constants": {
+      "SLICES": ["T1","T2"], "CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [3,4],
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "WEIGHTINGS": ["equal","entity"],
+      "CANDIDATE_TOLS": [0.05, 0.10, 0.15, 0.20, 0.25]
+    },
+    "ticket_relevance": 95,
+    "notable_facts": [
+      "Docstring explicitly states this uses diagnostic_blocks functions 'added this session, BLOCKS_VERSION 1.12.0' and that they 'reuse production's own compute_probability_distributions and _relation_community_share, not reimplementations' -- i.e. the script itself asserts non-duplication as a design point; the self_check function is the mechanism that actually verifies this claim rather than just asserting it.",
+      "This is the script CLAUDE.md §4.18 credits with E1's headline numbers (equal-weighted mean dev_k ~0.08, entity-weighted mean dev_k 0.13 T1/0.13 T2, 57-62% exceeding a 40/60 band) -- Stage B should verify those specific numbers against this script's actual JSON output, not just trust the docstring's restatement of them.",
+      "CANDIDATE_TOLS = [0.05,0.10,0.15,0.20,0.25] is a sweep of candidate TOL values for the D3 decision that CLAUDE.md says was ultimately settled at 0.15 via a separate noise-floor methodology (not this script) -- this script's own summarize_dev_distribution only reports fraction_exceeding_tol for each candidate, it does not itself perform the noise-floor estimation CLAUDE.md attributes to 'a multi-seed reproducibility test' elsewhere; worth checking whether that noise-floor test lives in a different script not in this batch (e.g. domain_balance_seed_noise.py, not read here).",
+      "Anchor sensitivity (V1 minus V2, per CLAUDE.md's 'anchor sensitivity' framing in §4.18) is computed only under 'equal' weighting per the code (result['anchor_sensitivity'] built from result['z_scaled_v1']['equal'] and ['z_scaled_v2']['equal']) -- not under entity weighting, even though entity weighting is stated elsewhere as the primary/decided weighting. Worth flagging: is anchor-sensitivity-under-entity-weighting simply never measured by this script?"
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_measurement_v2",
+    "script": "domain_balance_measurement_v2.py",
+    "purpose_one_line": "Re-runs domain_balance_measurement.py's exact E1 methodology (zero logic changes) against chunk12v2.py's ticket-84 grammar-damped data (T1_v2/T2_v2) to check whether that relation-reweighting shifted per-community domain balance.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "FACET_DOMAIN", "domain_balance_r_k",
+      "facet_membership_profile", "facet_relation_profile", "fit_or_load", "load_module", "presence_masks"
+    ],
+    "local_reimplementations": [
+      "None. Explicitly imports run_cell, summarize_dev_distribution, CONFIGS, K_LIST, LAMBDA_L1, LAMBDA_Z_OFFDIAG, WEIGHTINGS, CANDIDATE_TOLS directly from domain_balance_measurement (sys.path trick inserting the script's own directory), with an explicit comment: 'Reuse run_cell/summarize_dev_distribution/self_check verbatim -- no reason to duplicate them, they are slice_name-parametrized already.' This is a clean reuse pattern, not a duplication risk."
+    ],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "None -- inherits domain_balance_measurement.py's Z_scaled/U_prob-via-_relation_community_share approach entirely; no new diagonal-reading code in this file."},
+    "output_json_file": "domain_balance_measurement_v2.json",
+    "key_config_or_constants": {
+      "SLICES": ["T1_v2","T2_v2"],
+      "note_in_output": "chunk12v2.py data (ticket 84 grammar damping) -- compare against domain_balance_measurement.json (chunk12.py / v1)"
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Relies on fit_or_load's cache key including slice_name AND an input-data content hash (per its own docstring, added in ticket 84 Phase 2) to guarantee T1_v2/T2_v2 fits never silently reuse a T1/T2 cached fit -- a specific, checkable claim about cache correctness that Stage B could spot-check against diagnostic_blocks.py's actual _cache_key implementation.",
+      "Good example of DRY reuse across script versions (v1/v2 pair) -- contrasts with domain_balance_inloop_seedcheck_v2.py, which duplicates its v1 counterpart's code rather than importing it. Worth noting the inconsistency in reuse discipline across the domain_balance_* script family for the adjudication stage, though neither approach is incorrect."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_no_correction_check",
+    "script": "domain_balance_no_correction_check.py",
+    "purpose_one_line": "Before building any ticket-82 binding_penalty mechanism, checks whether per-community social/semantic balance is already roughly even on production fits using the Z_scaled mass basis with NO Hungarian/permutation correction applied (raw diagonal), matching what a Module-2 differentiable in-loop term would actually see -- across C1-C6 x K in {2,4}, two normalization variants (v8-style absolute, within-domain share).",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "load_module"],
+    "local_reimplementations": [
+      "domain_balance_for_cell: computes soc_vol/sem_vol by directly summing np.abs(np.diag(Z_final[r])) over active relations, rather than calling diagnostic_blocks.domain_community_volumes (which did not yet exist at this script's original write time, per the later domain_balance_corrected_check.py's docstring calling this script's formula 'the naive formula'/'the first ... test'). This is the SOURCE of the naive/raw baseline that domain_balance_corrected_check.py later re-tests via domain_community_volumes's 'naive' treatment -- so it is a duplication in the sense that domain_community_volumes(cross_domain_handling='naive') now reproduces this script's formula inside diagnostic_blocks, but that consolidation happened AFTER this script, and this script's own docstring is explicit that its formula is 'provisional... NOT the final ticket-82 design.' Not a silent drift; an acknowledged historical precursor."
+    ],
+    "uses_raw_diagonal": {
+      "present": true,
+      "lines": [52, 55],
+      "context": "np.abs(np.diag(Z_final[r])) for both soc_vol and sem_vol accumulation (lines 52 and 55). This IS the raw, uncorrected reading -- but it is explicitly and deliberately so: the module docstring states 'with NO permutation correction applied (raw diagonal, matching what a Module-2 differentiable term would actually see)' and frames the raw choice as the deliberate point of the test (a would-be in-loop penalty could only ever see the raw diagonal, since Hungarian assignment is a discontinuous op restricted to the outer loop per CLAUDE.md §4.1). This is an intentional raw baseline, clearly labeled as such in-file, not a bug or an oversight -- it is NOT compared against a corrected reading within this same file (no Hungarian-corrected variant computed here), only against a different *normalization* of the same raw quantity (formula (a) vs (b)). The corrected-vs-raw comparison happens in a later, separate script/mechanism (facet_relation_profile / domain_community_volumes), not inside this file."
+    },
+    "output_json_file": "domain_balance_no_correction_check.json",
+    "key_config_or_constants": {
+      "CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [2,4],
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05
+    },
+    "ticket_relevance": 80,
+    "notable_facts": [
+      "Docstring explicitly says results 'match FINDINGS §15/16/17's grid' (C1-C6 x K in {2,4}, production settings) -- a specific cross-reference Stage B/adjudication could verify against FINDINGS.md.",
+      "Explicitly does NOT resolve which normalization ((a) v8-style absolute vs (b) within-domain-share) is 'the' right one -- states both variants inherit the anchor double-counting concern equally so the naive-vs-corrected comparison (handled by the later domain_balance_corrected_check.py) isn't confounded by normalization choice. A deliberately scoped, single-variable test.",
+      "This is chronologically the earliest of the two anchor-handling scripts (domain_balance_corrected_check.py is the explicit follow-up), and the 'no correction' in its filename refers to the Hungarian-permutation dimension, not the anchor-crediting dimension that domain_balance_corrected_check.py addresses -- two different scripts are each 'correcting' a different, independent axis of the same underlying formula, which is worth being precise about in any downstream write-up that cites both by name."
+    ]
+  }
+]

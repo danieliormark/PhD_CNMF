@@ -1,0 +1,239 @@
+[
+  {
+    "fact_id": "F-DIAGBLOCKS-01",
+    "symbol": "BLOCKS_VERSION",
+    "kind": "constant",
+    "file": "diagnostic_blocks.py",
+    "lines": [87, 87],
+    "current_signature_or_value": "BLOCKS_VERSION = \"1.15.0\"",
+    "current_docstring_summary": "Module-level version string. Module docstring (lines 49-54) says it is 'stamped into every results file via diagnostic_run_metadata.build_run_metadata()' and should be bumped on any change that could alter numbers; the fit cache additionally keys on a content hash of chunk13v9.py so editing the solver auto-invalidates cached fits independent of this string.",
+    "notable_facts": [
+      "Grepped all of diagnostic_scripts/*.py (61 files reference BLOCKS_VERSION at all): only ONE file, collapse_pen_optuna_study_v2.py (lines 129-130), actually GATES on it -- `if prior.get(\"blocks_version\") != BLOCKS_VERSION: problems.append(...)` inside a resume-checkpoint compatibility check (`load_resume_state`), which raises SystemExit if mismatched along with n_trials_per_cell/max_share_threshold checks.",
+      "The other 60 files that reference BLOCKS_VERSION do so only to RECORD it (stamp it into an output JSON's metadata block, or mention the version in a comment/docstring like 'diagnostic_blocks.py 1.12.0' as a historical marker of when a helper was added) -- they do not compare it against anything or gate behavior on it.",
+      "So: BLOCKS_VERSION is overwhelmingly a provenance-recording convention, not an enforced compatibility gate. Any doc claim that scripts 'check' or 'require' a minimum BLOCKS_VERSION would be true for exactly one script (collapse_pen_optuna_study_v2.py's resume path) and false as a general statement about the diagnostic_scripts ecosystem.",
+      "Bumping BLOCKS_VERSION on every relevant change (as the module docstring instructs) has no automatic enforcement mechanism outside that one resume-checkpoint check -- nothing else in the codebase would fail loudly if the bump were forgotten."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-02",
+    "symbol": "presence_masks",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [637, 642],
+    "current_signature_or_value": "def presence_masks(config_id, slice_name=\"T1\"):",
+    "current_docstring_summary": "One-line docstring: 'Live-entity masks per facet (ticket 60). SESSION_PROTOCOL §C.5.' Loads the module and the raw slice data, gets the config's active facets via get_active_facets, and delegates directly to chunk13v9.build_presence_masks(raw_data, soc_keys, sem_keys) -- a thin wrapper, no independent logic of its own.",
+    "notable_facts": [
+      "Thin pass-through to production's own build_presence_masks -- correctness of the mask logic itself lives entirely in chunk13v9.py, not here.",
+      "Called by make_inloop_domain_balance_penalty_torch (line 1129) to build live_counts/mask_t for the in-loop domain-balance penalty -- a real, non-diagnostic-only consumer inside this same file."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-03",
+    "symbol": "align_seed_permutation",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [874, 895],
+    "current_signature_or_value": "def align_seed_permutation(U_ref_facet, U_seed_facet):",
+    "current_docstring_summary": "Docstring explains community indices are only consistent within one fit; before comparing two independently-seeded fits of the same (config_id, K) community-by-community, they must be aligned via Hungarian matching over cosine similarity of one shared facet's U_norm columns (docstring suggests 'art' as the natural choice, present in every config). Returns col_ind, a length-K permutation to apply via apply_seed_permutation.",
+    "notable_facts": [
+      "This is explicitly described (in the docstring of its successor, s5_dual_track_alignment) as 'the earlier, weaker art-only single-facet Hungarian match' -- i.e. this function is now considered superseded/weaker relative to s5_dual_track_alignment, though it has not been removed and is presumably still importable/usable.",
+      "Uses only cosine similarity on ONE facet's columns; s5_dual_track_alignment uses the full vstacked multi-facet JSD/magnitude-weighted-cosine approach mirroring production's own §S5 code -- a doc claim that this function is 'the' seed-alignment mechanism in diagnostic_blocks would be stale/incomplete given the newer function coexists."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-04",
+    "symbol": "apply_seed_permutation",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [898, 905],
+    "current_signature_or_value": "def apply_seed_permutation(U_final, Z_final, col_ind):",
+    "current_docstring_summary": "Relabels every facet's U columns and every relation's Z_scaled (both axes) by the given permutation col_ind, since a relation's row/col community indices share the same K-space. Returns new dicts; inputs are left untouched (non-mutating).",
+    "notable_facts": [
+      "Generic consumer of a col_ind permutation -- works with the output of either align_seed_permutation OR s5_dual_track_alignment's col_ind_A/col_ind_B, despite the docstring only explicitly mentioning align_seed_permutation's output by name ('Apply via apply_seed_permutation' appears in align_seed_permutation's own docstring). s5_dual_track_alignment's docstring also explicitly says 'Apply either via apply_seed_permutation, same as align_seed_permutation's col_ind' -- so the two producers are documented as interchangeable inputs to this one consumer.",
+      "Non-mutating (returns new dicts) -- consistent with CLAUDE.md §4.20's stated design that permutation correction is read-time / non-physical elsewhere in the pipeline, though this function's np.ix_ relabeling on Z_final is a genuine relabeling of the returned copy, not merely a 'reading' operation."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-05",
+    "symbol": "s5_dual_track_alignment",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [908, 945],
+    "current_signature_or_value": "def s5_dual_track_alignment(U_ref, U_seed, all_facets):",
+    "current_docstring_summary": "Docstring states this is a 'faithful reuse' (not a reimplementation) of chunk13v9.py's own §S5 stability-analysis alignment (run_dual_track_stability_analysis, Phase 2) -- calls the real mod.col_normalize/mod.row_wise_cosine_similarity (row_wise_cosine_similarity is used in the SIBLING function s5_dual_track_consensus, not directly here) off the loaded module. Computes Track A (JSD/probability-space, via mod.col_normalize + jensenshannon) and Track B (magnitude-weighted cosine, computed inline, not via a mod function) column alignments via two independent Hungarian assignments. all_facets must be a deterministic ordering (get_required_facets), per §4.9's stacking guardrail.",
+    "notable_facts": [
+      "Docstring says it calls 'the real row_normalize/col_normalize/row_wise_cosine_similarity functions off the loaded module' -- but reading the body, only mod.col_normalize is actually called here; Track B's cosine similarity (cost_B) is computed inline with raw np.dot/np.linalg.norm, NOT via mod.row_wise_cosine_similarity. mod.row_wise_cosine_similarity IS used, but in the separate sibling function s5_dual_track_consensus (line 995), not in this function. The docstring's claim of calling all three named functions 'off the loaded module' is therefore not accurate for THIS function taken in isolation -- it is accurate for the pair of functions together.",
+      "Depends on caller passing all_facets in the SAME deterministic order on both sides -- the docstring explicitly flags that an unordered set would silently reproduce ticket 85's/§4.9's known hazard; this function does not itself enforce or sort the ordering, it only warns about it."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-06",
+    "symbol": "s5_dual_track_consensus",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [948, 1007],
+    "current_signature_or_value": "def s5_dual_track_consensus(U_ref, U_seed, all_facets):",
+    "current_docstring_summary": "Extends s5_dual_track_alignment: also computes continuous per-facet similarity scores (mean_js_sim via Track A's JSD alignment, weighted_cos_sim via Track B's cosine alignment) mirroring production's own Phase 2 continuous scoring, motivated by distinguishing 'communities broadly agree, one small quantity crossed zero' from genuine disagreement. Returns a dict with col_ind_A/col_ind_B, per-facet mean_js_sim/weighted_cos_sim dicts, and pair_global_A/pair_global_B (means across facets, matching production's 'Ontological Parity' pair-level aggregate).",
+    "notable_facts": [
+      "Duplicates the entire cost_A/cost_B/Hungarian-assignment computation from s5_dual_track_alignment inline (lines 968-983) rather than calling s5_dual_track_alignment internally -- so the alignment logic is NOT centralized between these two sibling functions; a future edit to one's cost formula could silently diverge from the other unless both are kept in sync manually. The module's own stated raison d'etre (top-of-file docstring, 'Copies drift... One definition now') does not currently extend to this pair.",
+      "mean_js_sim uses np.nanmean over per-row JS distances -- silently drops rows that produced nan (e.g. all-zero rows) rather than erroring or flagging; not mentioned in the docstring.",
+      "Genuinely uses mod.row_wise_cosine_similarity and mod.row_normalize (both off the loaded module) for Track B/Track A per-facet continuous scoring respectively -- this is where the 'faithful reuse of the real per-facet evaluation loop' claim is substantiated."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-07",
+    "symbol": "make_domain_balance_penalty_torch",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1019, 1069],
+    "current_signature_or_value": "def make_domain_balance_penalty_torch(config_id, K, weight, exclude_relations=frozenset()):",
+    "current_docstring_summary": "Explicitly labeled EXPERIMENTAL. A torch-differentiable Z_scaled-based domain-balance closure, built to TEST whether such a term is exploitable via the same U_scales-shrinking gauge freedom FINDINGS §2 documented for lambda_z_offdiag -- a deliberate probe, not a candidate for production use. Returns fn(Z_scaled, U_scales, U_norm, epoch) -> weighted torch scalar; U_norm is accepted only for signature-compatibility with fit_instrumented's extra_loss_fn contract and is unused inside fn.",
+    "notable_facts": [
+      "CLAUDE.md §4.18/E2 and this file's own sibling function (make_inloop_domain_balance_penalty_torch, docstring lines 1078-1089) both state this exact function's exploit was FOUND: mass_tvd improved 30-40x while real U_prob-based membership imbalance (mem_tvd) got WORSE in 3 of 12 cells (C3/K4: +0.298, C6/K2: +0.268, C2/K2: +0.188). The function's own docstring here only says it is being used to TEST for this ('testing whether... is exploitable... before deciding'), not that the test already concluded exploitable -- a reader of ONLY this function's docstring (not its sibling's) would not know the exploit was already found and confirmed. This is exactly the kind of claim the audit should flag: the negative result lives in the sibling's docstring and CLAUDE.md, not here.",
+      "Kept deliberately unfixed ('kept as-is (not fixed) so its already-measured exploitability record stays reproducible') -- this is intentional negative-control code, not dead code to be cleaned up."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-08",
+    "symbol": "make_inloop_domain_balance_penalty_torch",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1072, 1165],
+    "current_signature_or_value": "def make_inloop_domain_balance_penalty_torch(config_id, K, weight, tol=0.15, slice_name=\"T1\", power=2):",
+    "current_docstring_summary": "Torch-differentiable version of CLAUDE.md §4.18/ticket 82 E2's settled in-loop domain-balance design, built on U_prob (not Z_scaled). Explains why U_prob was chosen over the Z_scaled candidate (make_domain_balance_penalty_torch): that candidate was found exploitable (3/12 cells worse real imbalance while its own proxy improved 30-40x), traced to U_scales being an undetermined gauge direction (ticket 79) that pools ungameable-in-U_prob but gameable-in-Z_scaled quantities across facets. Matches E1's methodology (facet_membership_profile + domain_balance_r_k(weighting='entity')). weight/tol are fixed constants, not Optuna-tunable. power (default 2) is an added knob, with algebra in the docstring showing higher power is NOT simply 'stronger' at a fixed weight in this problem's actual excess range.",
+    "notable_facts": [
+      "Body (lines 1133-1134) references the module-level global FACET_DOMAIN (values 'social'/'semantic'), which is a DIFFERENT dict from FACET_DOMAINS (values 'soc'/'sem', defined earlier at line 670 for relation_domain_kind's use). FACET_DOMAIN is defined later in the file at line 1377 -- AFTER this function's def statement (line 1072) but the function body only executes when CALLED, by which time the whole module (including line 1377) has finished loading, so this is not a runtime bug, but it is a documentation/maintenance trap: two similarly-named globals (FACET_DOMAINS vs FACET_DOMAIN) with DIFFERENT value vocabularies ('soc'/'sem' vs 'social'/'semantic') coexist in this file and are easy to confuse when reading or grepping.",
+      "Internal _domain_share helper reads U_norm (not U_prob) and manually L1-row-normalizes over live rows only (row_sums = sum(abs(live), dim=1) + eps) to build a differentiable U_prob-equivalent inline, rather than calling a shared U_prob-computation helper -- consistent with staying purely torch/differentiable (mod.compute_probability_distributions, used elsewhere in this file e.g. facet_membership_profile, likely isn't torch-autograd-safe / is the numpy post-hoc version), but means the 'matches E1's own methodology exactly' claim rests on this inline reimplementation being numerically equivalent to facet_membership_profile's numpy path -- not verified inside this function itself (the docstring says it 'matches E1's own methodology exactly' as an assertion, without a cross-check call site visible in this function)."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-09",
+    "symbol": "hungarian_diagonal_match",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1172, 1209],
+    "current_signature_or_value": "def hungarian_diagonal_match(Z, K):",
+    "current_docstring_summary": "Given one relation's KxK Z_scaled matrix, finds the column permutation maximizing matched (within-community) mass via Hungarian assignment on -|Z|. Returns permutation, is_identity, structure_score (min(matched)/max(unmatched); >1 means clean correctable mislabelling, <1 means genuine mixed coupling per FINDINGS §16), and diag_share_raw/diag_share_permuted (diagonal's share of total |Z| mass before/after permutation).",
+    "notable_facts": [
+      "structure_score is float('inf') when max_unmatched <= 1e-15 (i.e. the off-diagonal, after masking out the matched cells, is essentially all zero) -- an edge case not mentioned in the docstring; callers comparing structure_score against a numeric threshold (e.g. relation_community_mass's threshold=1.0) will treat inf as always exceeding the threshold, i.e. always 'confidently correctable', which seems intended but is worth flagging as implicit behavior.",
+      "Module docstring (lines 58-62) attributes this function's centralization to 'previously copy-pasted across permutation_test.py and permutation_consistency_sweep.py' -- but per this audit's separate grep check, permutation_test.py in diagnostic_scripts/ still has its OWN local build_active_matrices/get_init (unrelated to this specific function) and was never confirmed here to actually import hungarian_diagonal_match either; this fact-file does not itself verify whether permutation_test.py currently imports hungarian_diagonal_match or still has its own copy of the matching logic -- flagging as a claim needing a targeted grep by whichever stage covers permutation_test.py specifically."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-10",
+    "symbol": "relation_community_mass",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1212, 1235],
+    "current_signature_or_value": "def relation_community_mass(Z, K, threshold=1.0):",
+    "current_docstring_summary": "FINDINGS §16's confidence-gated mass reading for one relation, replacing the undetermined U_scales (ticket 79). Returns a length-K array: if the relation's own structure_score (via hungarian_diagonal_match) exceeds threshold, reads the corrected (permuted) diagonal |Z[k,perm[k]]|; otherwise reads the raw diagonal |Z[k,k]| unmodified. threshold=1.0 is stated as FINDINGS §16's derived default (a natural gap at 0.648->1.098, stable across [0.65,1.5]) -- explicitly flagged as TOY-CORPUS CALIBRATED, to be re-derived at 22k-article scale.",
+    "notable_facts": [
+      "Directly implements the module docstring's (lines 64-71) description of the 'confidence-gated mass reading' verbatim -- docstring and code agree here.",
+      "The threshold=1.0 default is a genuine open re-derivation item per CLAUDE.md's ticket 82 entry ('Toy-corpus calibrated throughout -- re-derive at 22k-article scale before reuse') -- any doc claim that this threshold is validated at production scale would be false; it is explicitly toy-scoped by the surrounding project's own conventions."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-11",
+    "symbol": "collapse_mass_share",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1238, 1263],
+    "current_signature_or_value": "def collapse_mass_share(config_id, U_final, Z_final, K):",
+    "current_docstring_summary": "Z_scaled-based per-community share, computed the IDENTICAL way evaluate_dimensional_collapse does: calls production's own mod._relation_community_share per active relation (reconstruction-space share, not diagonal-sum share) and averages with equal weight across relations, then renormalizes to sum to 1. Docstring states this is literally the same function object collapse_pen is built on, so collapse_mass_share(...).max() must equal evaluate(...)['collapse_score'] -- described as used as a live self-check in collapse_pen_mass_vs_membership_check.py, not merely assumed. Returns length-K array summing to 1, or uniform 1/K if total reconstructed mass is ~0 (matching production's fallback).",
+    "notable_facts": [
+      "Near-duplicate in purpose to community_share_vector (below) -- both call mod._relation_community_share per relation and mean/renormalize -- but they differ in (a) input signature (config_id+K here vs mod+structure_threshold passed directly there, to avoid a redundant get_active_facets call) and (b) near-zero-total fallback: THIS function falls back to uniform 1/K, while community_share_vector falls back to the raw (near-zero) unnormalized vector unchanged. community_share_vector's own docstring explicitly explains why these two were NOT merged despite the overlap (collapse_pen_mass_vs_membership_check.py depends on collapse_mass_share's specific uniform fallback) -- so this divergence is documented as deliberate, not an oversight, but any doc claim that there is 'one' mass-share function in diagnostic_blocks.py would be wrong -- there are at least two (plus relation_share_matrix's per-relation KxK generalization, and membership_share_all_facets's independent U_prob-based analog)."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-12",
+    "symbol": "community_share_vector",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1266, 1297],
+    "current_signature_or_value": "def community_share_vector(mod, U_norm, Z_scaled, structure_threshold):",
+    "current_docstring_summary": "Docstring states this was centralized (tickets 86/87 Stage 0a) from '7 near-verbatim copies (5 as a locally-defined function of this exact name, 2 inlined directly in a loop -- ghost_test3_share_distribution.py / _v2.py) across the ghost_* diagnostic scripts, all confirmed identical before this move (diffed byte-for-byte)'. Computes the same per-relation-averaged, permutation-corrected reconstruction-space share as collapse_mass_share, but takes mod/structure_threshold directly (avoiding a redundant get_active_facets call) and, on near-zero total mass, returns the RAW unnormalized (near-zero) vector rather than a uniform 1/K fallback -- explicitly documented as differing from collapse_mass_share for this reason.",
+    "notable_facts": [
+      "FLAGGED PER TASK INSTRUCTIONS AS A CLAIM TO BE CHECKED, NOT VERIFIED HERE: the docstring's claim that migration from '7 near-verbatim copies... all confirmed identical' is COMPLETE is a factual claim about the state of the ghost_* diagnostic scripts (whether they now import this function rather than redefining it locally) that this extraction pass does not itself verify -- a downstream stage covering diagnostic_scripts/ghost_*.py should grep those files for a local `def community_share_vector` definition or inline duplication to confirm the migration actually happened everywhere the docstring claims, not just that 7 copies were once found and diffed identical before the move.",
+      "Fallback behavior differs from collapse_mass_share (raw near-zero vector vs uniform 1/K) -- see F-DIAGBLOCKS-11's notable_facts for the cross-reference; this is the deliberate, documented reason the two were not merged."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-13",
+    "symbol": "relation_share_matrix",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1300, 1334],
+    "current_signature_or_value": "def relation_share_matrix(mod, Z, U_f1, U_f2, structure_threshold, K):",
+    "current_docstring_summary": "Generalizes production's own mod._relation_community_share (diagonal-only, length-K) to the full KxK permutation-corrected reconstruction-space share matrix for one relation, so off-diagonal (between-community) cells can be read on the same corrected basis as the diagonal. Uses production's own mod._hungarian_relabel_relation for the permutation/trust decision (same structure_score > structure_threshold gate) and the identical trace-based total-mass normalization. Self-checked elsewhere (z_scaled_offdiag_calibration_test.py) that this matrix's diagonal matches _relation_community_share exactly.",
+    "notable_facts": [
+      "Docstring explicitly states a caveat rather than hiding it: total = trace(Z^T c_u Z c_v) is NOT in general equal to sum(Z_permuted**2) unless c_u/c_v are exactly identity (perfectly orthogonal unit-norm columns, not just unit-L2-norm) -- so THIS matrix's cells do not necessarily sum to exactly 1.0 the way the diagonal-only vector (_relation_community_share) is documented to. This is a genuine, self-disclosed limitation worth surfacing in any doc audit of what 'share' means for this function specifically vs. its diagonal-only sibling.",
+      "Depends on mod._hungarian_relabel_relation existing with the exact (perm, trusted) 2-tuple return contract this code assumes -- not independently re-verified in this extraction pass (out of scope, chunk13v9.py itself is covered by a different agent per the task's framing)."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-14",
+    "symbol": "facet_membership_profile",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1384, 1404],
+    "current_signature_or_value": "def facet_membership_profile(config_id, U_final, presence_masks_dict):",
+    "current_docstring_summary": "Per-facet U_prob profile, unaggregated: for each active facet, the mean U_prob row (L1-normalized over K) across that facet's LIVE entities only, using mod.compute_probability_distributions(U_final). Exposed as the identical per-facet step membership_share_all_facets performs internally, BEFORE that function's own equal-weight pooling across all 9 facets -- so domain_balance_r_k can instead pool by domain. Facets with zero live entities are OMITTED from the returned dict, not nan-filled.",
+    "notable_facts": [
+      "The 'omitted, not nan-filled' behavior for zero-live-entity facets is a real design choice with a downstream consequence: domain_balance_r_k (which consumes this function's output) will simply not see that facet in soc_facets/sem_facets at all, silently changing which facets contribute to a domain's weighted mean for that config -- there is no warning or flag surfaced when a facet drops out this way; a doc claim that 'all 9 facets contribute to domain balance in every config' would be inaccurate for any config/slice where a facet has zero live entities."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-15",
+    "symbol": "facet_relation_profile",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1407, 1452],
+    "current_signature_or_value": "def facet_relation_profile(config_id, Z_final, U_final, K, structure_threshold, exclude_anchors=False):",
+    "current_docstring_summary": "The outer-loop/Z_scaled-reconstruction-space analog of facet_membership_profile. For each active facet, averages the per-relation share_r (production's mod._relation_community_share, permutation-corrected) over every relation touching that facet, then renormalizes to sum to 1. Each relation credits BOTH endpoint facets with its own share_r vector (documented as legitimate double-crediting, not double-counting, since it states a true fact about each). exclude_anchors=True gives a 'V2 sensitivity-floor variant' skipping anchor relations, to measure how anchor-carried a facet's profile is (V1 minus V2 = anchor sensitivity); V1 (anchors included, default) is stated as primary.",
+    "notable_facts": [
+      "Fallback for a facet whose relation-share mean sums to ~0 is np.full(K, 1.0/K) (uniform) -- matching collapse_mass_share's uniform-fallback convention, NOT community_share_vector's raw-vector convention. Adds a third distinct fallback convention across this file's several share-computation functions (see F-DIAGBLOCKS-11/12's cross-reference) -- worth noting for anyone auditing consistency of near-zero-mass handling across the module.",
+      "exclude_anchors is a caller-supplied boolean with no default cross-check inside this function that V1 minus V2 is actually being computed correctly by any given caller -- the 'V1 primary, not V2' framing lives entirely in the docstring/plan reference, not enforced in code."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-16",
+    "symbol": "domain_balance_r_k",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1455, 1506],
+    "current_signature_or_value": "def domain_balance_r_k(facet_profiles, K, live_counts=None, weighting='equal'):",
+    "current_docstring_summary": "Groups a dict[facet -> length-K profile] (from facet_membership_profile or facet_relation_profile) into social vs semantic sums via the module-level FACET_DOMAIN dict, then computes r_k = soc_k/(soc_k+sem_k+eps) and dev_k=|r_k-0.5| per community. weighting='equal' (every active facet in a domain contributes equally, described as matching collapse_mass_share/membership_share_all_facets's convention) or weighting='entity' (facet weighted by live entity count, requires live_counts). Returns a dict including which facets fed each domain, so an empty domain is visible rather than silently nan; returns all-None fields if either domain has zero contributing facets.",
+    "notable_facts": [
+      "weighting='entity' requires live_counts to be passed and indexable by every facet name present in facet_profiles -- if live_counts is missing a facet that facet_profiles has, this raises a plain KeyError (np.array([live_counts[f] for f in facets])) with no more specific error message; a caller mismatch between the two dicts fails ungracefully.",
+      "CLAUDE.md's own §4.18 (E2/D2) records that the project settled on entity weighting as primary/decided, reversing an initial equal-weighting lean -- so while this function's docstring frames weighting='equal' as 'the codebase's established default,' the PROJECT-level decided default per CLAUDE.md is actually weighting='entity' for the domain-balance question specifically. This function's OWN default parameter value is weighting='equal', which is a real, checkable divergence between this function's default and the documented project decision -- exactly the kind of claim a later audit stage should verify against actual call sites (e.g. make_inloop_domain_balance_penalty_torch explicitly calls this pattern with entity weighting per its own docstring's 'D2' reference, but does NOT appear to call domain_balance_r_k directly at all -- it reimplements the weighted mean inline). Any doc claim of the form 'domain_balance_r_k defaults to the project's decided weighting' should be checked against this default='equal' fact.",
+      "This function is the one place in diagnostic_blocks.py that reads the module-level FACET_DOMAIN global (besides make_inloop_domain_balance_penalty_torch's own use of the differently-named/valued FACET_DOMAINS-vs-FACET_DOMAIN pair, see F-DIAGBLOCKS-08) -- confirms FACET_DOMAIN (social/semantic) is used by at least two functions, both domain-balance related."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-17",
+    "symbol": "verify_agreement",
+    "kind": "function",
+    "file": "diagnostic_blocks.py",
+    "lines": [1513, 1568],
+    "current_signature_or_value": "def verify_agreement(config_id=\"C6\", K=4, lambda_l1=0.0, lambda_z_offdiag=0.05, slice_name=\"T1\", write=True):",
+    "current_docstring_summary": "Runs fit_production(init_mode='production') vs the real run_inner_solver reimplementation (fit_instrumented) on an identical config, reports agreement in epochs and math_loss, plus max absolute elementwise difference over U_final/Z_final/U_scales. Verdict is 'AGREE' if epochs match, math_loss absdiff < 1e-9, and both U_final/Z_final max absdiff < 1e-9; writes result to diagnostic_results/blocks_agreement_check.json when write=True. This is the module's own SESSION_PROTOCOL §E discharge mechanism, invoked via `python diagnostic_blocks.py --verify`.",
+    "notable_facts": [
+      "The AGREE/DISAGREE verdict computation (line 1557-1558) checks epochs_match, math_loss_absdiff, max_absdiff_U_final, and max_absdiff_Z_final, but NOT max_absdiff_U_scales (computed at line 1546 and printed, but not included in the `ok` boolean) -- so a run where U_final/Z_final/math_loss/epochs all agree but U_scales diverges would still report VERDICT: AGREE. Given CLAUDE.md §4.3's finding that U_scales is an undetermined free gauge direction (small differences in U_scales are EXPECTED and not indicative of a real disagreement), excluding it from the verdict gate appears to be the deliberate, correct choice given that context -- but the module's own docstring/CLAUDE.md's ticket 79 finding is the only place that context lives; verify_agreement's own docstring here does not explain why U_scales is computed/printed but excluded from the pass/fail gate.",
+      "module docstring (lines 36-40) instructs 'Re-run after ANY edit to fit_instrumented or to run_inner_solver' -- this is a manual/human process requirement, not automatically enforced (no CI hook, pre-commit check, or version-bump gate visible anywhere in this file or in the BLOCKS_VERSION gating survey above) -- so the check being stale after an uncaught edit is a real possible failure mode with no automatic detection.",
+      "maxdiff() helper (lines 1527-1532) returns nan if sorted(a) != sorted(b) (mismatched key sets between production/instrumented output dicts) -- and nan compares as False in `< 1e-9`, so a KEY MISMATCH between the two fit paths' output dicts would silently produce VERDICT: DISAGREE (since nan < 1e-9 is False, ok becomes False) rather than a distinguishable 'key mismatch' error -- the printed reason would just say 'fit_instrumented has drifted' without indicating the specific failure mode was a missing/extra key rather than a numeric drift."
+    ]
+  },
+  {
+    "fact_id": "F-DIAGBLOCKS-18",
+    "symbol": "build_active_matrices / get_init (migration status check)",
+    "kind": "function",
+    "file": "diagnostic_scripts/permutation_test.py, diagnostic_scripts/uscales_determinacy.py",
+    "lines": [41, 74],
+    "current_signature_or_value": "permutation_test.py: def build_active_matrices(): (line 41), def get_init(mode, active_matrices, active_facets): (line 58). uscales_determinacy.py: def build_active_matrices(): (line 57), def get_init(mode, active_matrices, active_facets): (line 74).",
+    "current_docstring_summary": "Not diagnostic_blocks.py symbols -- included per task's explicit request to confirm a prior survey's claim. Both scripts still define their OWN local build_active_matrices()/get_init() at the line numbers above, and grep for 'diagnostic_blocks' in either file finds ZERO import statements or references -- the only hit in each file is a header comment stating the script 'ran 2026-08-12/2026-08-13, pre-diagnostic_blocks', i.e. both scripts explicitly predate diagnostic_blocks.py's existence and were never subsequently migrated to import from it.",
+    "notable_facts": [
+      "CONFIRMED YES: the prior survey's claim holds. permutation_test.py has local build_active_matrices() at line 41 and local get_init() at line 58. uscales_determinacy.py has local build_active_matrices() at line 57 and local get_init() at line 74. Neither file imports diagnostic_blocks at all (zero matches for the string 'diagnostic_blocks' beyond the explanatory header comment in each).",
+      "This means any doc claim that 'diagnostic_blocks.py's centralization eliminated the drift risk across all diagnostic scripts' (e.g. the module docstring's framing at lines 8-17, 'Every diagnostic script so far... re-typed the same ~150 lines... Copies drift... One definition, imported. Not a template to copy.') is CONTRADICTED by these two specific, still-uncentralized scripts -- they are explicitly grandfathered/pre-dated rather than migrated, and nothing in diagnostic_blocks.py's own docstring flags this as a known exception."
+    ]
+  }
+]

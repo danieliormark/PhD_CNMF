@@ -1,0 +1,193 @@
+[
+  {
+    "fact_id": "F-SCRIPT-domain_balance_null_baseline",
+    "script": "domain_balance_null_baseline.py",
+    "purpose_one_line": "Post-hoc resampling null for the per-community domain-balance measure: asks how large |r_k-0.5| a model reports from sharpness (mean U_prob row-max) and headcount differences between social/semantic entities alone, with truth constructed to be exactly proportionally balanced (community-size vector p shared by both domains), i.e. no genuinely mono-domain community exists in the null by construction.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "FACET_DOMAIN", "domain_balance_r_k", "facet_membership_profile", "fit_or_load", "load_module", "presence_masks"],
+    "local_reimplementations": [
+      "domain_rows() - pools live U_prob rows by domain from cached fit (thin wrapper, not duplicating diagnostic_blocks logic per se)",
+      "sharpness() - local helper computing rowmax stats, not present in diagnostic_blocks",
+      "dev_from_shares(), draw_shares(), sort_desc(), inject() - the resampling null-generator machinery itself, entirely local (no equivalent in diagnostic_blocks)",
+      "Self-check block explicitly asserts its own pooled-row reading against diagnostic_blocks.domain_balance_r_k (tolerance 1e-5, float32 vs float64 rounding) -- i.e. script deliberately duplicates the reading path and verifies agreement rather than blindly trusting either"
+    ],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_balance_null_baseline.json",
+    "key_config_or_constants": {
+      "SLICES": ["T1", "T2"], "CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [3,4],
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "B_NULL": 2000, "B_POWER": 300,
+      "DELTAS": [0.05,0.10,0.15,0.20,0.30], "RNG_SEED": 20260921
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Uses CACHED fits only (fit_or_load, no refit) -- reads the same fits domain_balance_measurement.py used.",
+      "Two nulls: N0 ('balanced truth, own sharpness and size' -- each entity keeps its own sorted membership profile but which community holds its top value is drawn from one common pooled community-size vector p) and N1 ('sharpness equalised' -- both domains draw entity profiles from the SAME pooled profile set). N0 minus N1 isolates the sharpness contribution specifically.",
+      "Statistics computed: per-fit mean and max of |r_k-0.5| over communities; observed value compared to its null distribution via one-sided p=(1+#null>=obs)/(B+1); 95th percentile of N0's max-dev used as the detection threshold for the positive-control power analysis.",
+      "Positive-control/power block: injects a known-size delta into one community's true community-size vector (function inject()) and records detection rate against the N0 95th-percentile threshold -- i.e. measures the SMALLEST true imbalance this measure can detect given this corpus's sharpness/size, on a POST-HOC RESAMPLING null, not a full-pipeline refit.",
+      "Explicitly states in its own header what it does NOT cover: entities are assigned independently in this null (real entities are clumped -- e.g. a many-author article pulls all its authors into one community -- which is a structural, not domain-specific, cause of imbalance the null does not capture), and it is a different quantity from FINDINGS §21's seed-to-seed reproducibility noise.",
+      "Script-level conclusion is NOT stated as a single verdict in the file; it prints per-cell observed vs null mean/max dev and p-values for the user to read. It is explicitly framed (in its header) as a precursor/narrower test than domain_balance_planted_null.py, which the header for the latter says supersedes it (this script 'resampled MEMBERSHIPS post-hoc and so could not capture what the optimizer itself contributes')."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_planted_null",
+    "script": "domain_balance_planted_null.py",
+    "purpose_one_line": "Full-pipeline planted-structure test: builds synthetic relation matrices with an EXACTLY known ground-truth community assignment per live entity (balanced arm: true r_k=0.5 for every k; imbalanced arm: one community's true r_j = 0.5+/-delta), preserving the real corpus's degree sequence and weight distribution, refits with the real run_inner_solver (no cache), then asks whether the production domain_balance_r_k readout on the FITTED communities reports the true planted balance/imbalance -- this is the decisive negative-result test.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "FACET_DOMAIN", "domain_balance_r_k", "facet_membership_profile", "load_module", "load_slice"],
+    "local_reimplementations": [
+      "cell_rng() - deterministic per-cell RNG seeding via sha256 hash of job-key parts (local utility, not in diagnostic_blocks)",
+      "plant_assignments() - draws ground-truth community z per entity per facet from a categorical distribution; local, no diagnostic_blocks equivalent",
+      "synth_relation() - degree-preserving, Chung-Lu-style community-biased rewiring of one sparse relation matrix (solves boost factor b per row so expected within-community tie fraction equals WITHIN_FRAC exactly), plus orphan-column repair; entirely local synthetic-data generator, no equivalent elsewhere",
+      "build_synthetic() - assembles the full synthetic raw_data dict across RELATION_MAP relations",
+      "recovery() - Hungarian-matched (scipy linear_sum_assignment) accuracy of fitted argmax community vs planted community, overall and per domain; local, not in diagnostic_blocks",
+      "planted_true_dev() - computes |r_k-0.5| of the PLANTED truth itself as a finite-size sanity check; local re-derivation of the domain_balance_r_k formula applied to ground truth rather than fitted output"
+    ],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_balance_planted_null.json",
+    "key_config_or_constants": {
+      "SLICES": ["T1","T2"], "CONFIGS": ["C1","C3","C6"], "K_LIST": [3,4],
+      "WITHIN_FRACS": [0.6,0.8,0.95], "POWER_WITHIN_FRAC": 0.8,
+      "DELTAS_POWER": [0.20,0.40], "N_REP": 3,
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "total_planned_fits_full_grid": "2 slices x 3 configs x 2 K x (3 within_fracs x 3 reps + 2 deltas x 3 reps) = 180 fits (matches FINDINGS §25's '180 fits')"
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Real refits via mod.run_inner_solver at MASTER_SEED (mod.set_seeds(mod.MASTER_SEED)) -- the ONLY variation across replicates is the synthetic-data draw, not the model seed; explicitly states seed-to-seed fit noise is a separate, uncovered quantity (FINDINGS §21).",
+      "Readout uses the PRODUCTION measure itself: facet_membership_profile -> domain_balance_r_k(weighting='entity'), identical call to domain_balance_measurement.py's primary reading -- i.e. this script does not build a new metric, it feeds known-truth data through the existing pipeline+metric.",
+      "Per-fit output records reported_dev_per_community/mean/max (what the metric reports), planted_true_dev_mean/max (what the ground truth actually is), and recovery accuracy (overall/social/semantic) -- all three needed together to interpret any single row.",
+      "Script's own inline comment states the finding directly: 'the measure reads only 40-58% of a planted imbalance' from an earlier run, which is WHY DELTAS_POWER's second level (0.40) was added -- the detection threshold needed measuring rather than extrapolating.",
+      "Also records: achieved_within_frac (generator validation -- did the synthetic data actually hit its target within-community tie fraction), orphan_repairs count, live_population_identical_to_real flag (bool matching real slice's live-entity population exactly), fitted_rowmax_by_domain (sharpness), elapsed_sec.",
+      "No single hardcoded 'conclusion' print in the script itself beyond per-fit progress lines (reported dev mean/max, planted true mean, recovery, achieved_f, livematch, conv, elapsed) -- the decisive interpretation (mean dev~0.103 balanced vs ~0.101 for a planted 90/10 community, detection 6-22%, recovery 0.31 social/0.39 semantic at K=4) is drawn in FINDINGS §25 / CLAUDE.md §4.18 E3 from aggregating this script's per-row JSON output, not printed by the script itself as a single verdict.",
+      "Header explicitly frames this as answering: 'if the true community structure is EXACTLY domain-balanced, what does the full pipeline REPORT as |r_k-0.5|? If it reports what the real fits report (~0.10), the measure cannot distinguish a healthy community from a mono-domain one on this corpus.' This IS the §25 question -- confirms §25's framing matches the script's own stated purpose.",
+      "Limitations stated in header: model-seed variation not covered (fixed MASTER_SEED); tie generation is degree- and weight-preserving but NOT motif-preserving (real co-authorship cliques not reproduced) -- explicitly flagged as understating real clumping.",
+      "--only-missing and --pilot CLI flags support incremental/partial runs; output JSON is checkpointed after every job (os.replace atomic write)."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_raw_penalty_measure",
+    "script": "domain_balance_raw_penalty_measure.py",
+    "purpose_one_line": "Measures the raw (weight=1, unweighted) magnitude of the domain-balance penalty formula (mean_k(max(0,|r_k-0.5|-TOL)^2)) on real unpenalized (weight=0) baseline converged fits, to back-solve a plausible LAMBDA_DOMAIN_BALANCE search range analogous to how ticket 77 derived a lambda_l1 range from mean_sparsity.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "facet_membership_profile", "domain_balance_r_k", "fit_instrumented", "load_module", "presence_masks"],
+    "local_reimplementations": [
+      "raw_penalty() - local implementation of mean_k(max(0,dev-tol)^2) applied to the dev array from domain_balance_r_k; explicitly justified in the header as necessary (not approximable from mean_dev_k alone) because the hinge+square operations don't commute with taking a mean first"
+    ],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_balance_raw_penalty_measure.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "TOL": 0.15,
+      "CELLS": [["C3",4],["C6",4]], "SLICES": ["T1","T1_v2"], "N_SEEDS": 3
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Small deliberately-scoped grid (2 cells x 2 data conditions x 3 seeds = 12 fits) -- explicitly called 'small and fast, just enough to get a defensible order-of-magnitude anchor, not a full grid.'",
+      "Uses fit_instrumented (real refit with instrumentation hooks) not fit_or_load cache -- consistent with wanting a fresh, unpenalized (extra_loss_fn=None) baseline reading.",
+      "Back-solves a derived LAMBDA_DOMAIN_BALANCE range using lo = 0.01*mean(math_loss)/max(raw_penalty) and hi = 1.00*mean(math_loss)/min(raw_penalty), printed and written to output but this exact range does not appear used verbatim elsewhere in read files (CLAUDE.md records the weight-sweep test set {0.5,1,2,5,20,50,200,400} separately, in ticket 82 E2)."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_seed_noise",
+    "script": "domain_balance_seed_noise.py",
+    "purpose_one_line": "Measures the absolute seed-to-seed reproducibility noise floor of per-community r_k: refits each (config,K,slice) cell at 5 seeds, Hungarian-aligns each non-reference seed's communities onto the reference seed's labeling via production's own s5_dual_track_alignment machinery, then reports the across-seed SD/range of r_k per community -- this is ticket 82 D3's noise-floor study that set TOL=0.15.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "domain_balance_r_k", "facet_membership_profile", "fit_or_load", "load_module", "presence_masks", "s5_dual_track_alignment", "apply_seed_permutation"],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_balance_seed_noise.json",
+    "key_config_or_constants": {
+      "SLICES": ["T1","T2"], "CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [3,4],
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "N_SEED_OFFSETS": 4
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Explicitly states it reuses production's own row_normalize/col_normalize/Hungarian machinery via s5_dual_track_alignment/apply_seed_permutation -- calls this 'NOT a reimplementation.'",
+      "Cell skipped entirely if the reference seed (MASTER_SEED) itself didn't converge; a cell is marked 'insufficient' if fewer than 2 of 5 seeds converged (no SD computable).",
+      "Uses ddof=1 (sample SD) for per_community_sd.",
+      "Full C1-C6 x K{3,4} x T1/T2 grid, explicitly per SESSION_PROTOCOL discipline ('no cherry-picking cells')."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_seed_noise_v2",
+    "script": "domain_balance_seed_noise_v2.py",
+    "purpose_one_line": "Re-runs domain_balance_seed_noise.py's methodology against chunk12v2.py's re-weighted data (T1_v2/T2_v2), and additionally computes a second, alignment-free noise statistic -- the across-seed SD of mean_dev_per_cell (order-invariant mean of |r_k-0.5| over communities within one fit) -- needed to judge whether the measured v1-vs-v2 domain-balance improvement exceeds pure seed noise for that specific statistic.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "domain_balance_r_k", "facet_membership_profile", "fit_or_load", "load_module", "presence_masks", "s5_dual_track_alignment", "apply_seed_permutation"],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_balance_seed_noise_v2.json",
+    "key_config_or_constants": {
+      "SLICES": ["T1_v2","T2_v2"], "CONFIGS": ["C1","C2","C3","C4","C5","C6"], "K_LIST": [3,4],
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "N_SEED_OFFSETS": 4
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Explicitly notes the mean-over-communities statistic is order/permutation-invariant and thus computed directly from EACH seed's UNALIGNED r_k vector (no Hungarian step needed for that statistic specifically), while the per-community SD statistic still requires the Hungarian alignment step (kept for direct comparability with v1's original noise-floor numbers, FINDINGS §21).",
+      "Reuses every function from domain_balance_seed_noise.py unmodified per its own header; no new fitting machinery.",
+      "Notes fit_or_load's cache key already includes slice_name plus Phase-2's input-data content hash, so T1_v2/T2_v2 fits land in fresh, non-colliding cache entries relative to T1/T2."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_tol_and_power_check",
+    "script": "domain_balance_tol_and_power_check.py",
+    "purpose_one_line": "User-requested follow-up to an earlier in-loop weight/power sweep: tests two specific alternative explanations for why only 1/20 prior (power,weight) combinations cleared 2xSD -- Check A tightens TOL from 0.15 to 0.10 on the one combination that did clear noise (power=2, weight=2), Check B tries a fractional power=1.5 with weight rescaled to match power=2/weight=2's gradient push at |r_k-0.5|=0.05.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "facet_membership_profile", "domain_balance_r_k", "fit_instrumented", "load_module", "make_inloop_domain_balance_penalty_torch", "presence_masks"],
+    "local_reimplementations": ["load_prior_baseline() - reads and aggregates weight=0 rows from a prior sweep's own JSON output rather than refitting (explicitly justified: weight=0 makes the penalty function None regardless of tol/power, so baseline is identical either way)"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_balance_tol_and_power_check.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CELLS": [["C3",4],["C6",4]], "SLICES": ["T1","T1_v2"], "N_SEEDS": 3,
+      "CHECKS": [["A_tol0.10_pow2_w2", 2, 2.0, 0.10], ["B_pow1.5_w0.6_tol0.15", 1.5, 0.6, 0.15]],
+      "PRIOR_SWEEP_PATH": "domain_balance_inloop_power_and_weight_sweep.json"
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Depends on a NINTH file not in this extraction batch (domain_balance_inloop_power_and_weight_sweep.py / its JSON output) for baseline reuse -- flagging as a dependency outside the assigned 8 files.",
+      "Header contains explicit math justification for why power=1.5 is well-defined (excess>=0 by construction, no domain issue for fractional exponent; gradient 1.5*excess^0.5 is continuous down to 0) and the exact weight back-solve arithmetic (weight_1.5 = 0.2/(1.5*0.2236) = 0.597, rounded to 0.6).",
+      "'Clears 2xSD' criterion: abs(delta) > 2 * max(treated_sd, baseline_sd) -- baseline_sd and treated_sd both computed with ddof=1 across N_SEEDS=3 seeds only (small sample for an SD estimate).",
+      "Same small 2-cell x 2-dataset x 3-seed pilot scale as domain_balance_raw_penalty_measure.py, described as matching the prior sweep script's own 'brief' scale per user request."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_balance_v1_v2_noise_compare",
+    "script": "domain_balance_v1_v2_noise_compare.py",
+    "purpose_one_line": "Pure aggregation/comparison script (no new fitting): combines domain_balance_seed_noise.json (v1), domain_balance_seed_noise_v2.json (v2), and the single-seed domain_balance_measurement.json/_v2.json paired comparison to test whether the observed v1->v2 mean_dev_per_cell delta exceeds 2x the larger of the two datasets' own seed-noise SD, per cell.",
+    "imports_from_diagnostic_blocks": [],
+    "local_reimplementations": [
+      "mean_dev_sd_from_r_matrix() - derives the mean_dev_per_seed SD from v1's r_matrix (Hungarian-aligned already, but explicitly noted that alignment doesn't change a row mean, so this is a safe post-hoc derivation, not a re-fit or duplicate of any diagnostic_blocks function)",
+      "cell_mean_dev() - extracts mean(dev) from a measurement JSON's u_prob/entity/dev field"
+    ],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_balance_v1_v2_noise_compare.json",
+    "key_config_or_constants": {
+      "OUT_DIR": "hardcoded absolute path (not imported from diagnostic_blocks -- this script does NOT import diagnostic_blocks at all, unlike the other 7 files)",
+      "noise_bar_formula": "2 * max(seed_noise_sd_v1, seed_noise_sd_v2)"
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "This is the ONLY one of the 8 scripts that does not sys.path.insert + import diagnostic_blocks at all -- it operates purely on already-produced JSON files, reading four separate result files by hand.",
+      "Notes explicitly that v1's noise file predates the mean_dev_sd field the v2 script added, and works around this by deriving it directly from v1's stored r_matrix rather than re-running anything.",
+      "Bar/convention explicitly stated to mirror ticket 84 Phase 3's convention (2x seed-noise SD as the clearance bar).",
+      "Prints and stores per-cell clears_noise_floor boolean plus a pooled summary (n_clear_improved, n_clear_worsened, n_improved_raw_direction) distinguishing raw-direction improvement from noise-floor-cleared improvement -- i.e. this script is the one that actually adjudicates whether the reported '15/22 cells improved, mean delta -0.028' v1->v2 domain-balance result (CLAUDE.md ticket 84) is statistically distinguishable from seed noise, cell by cell."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_penalty_exclude_affil_test",
+    "script": "domain_penalty_exclude_affil_test.py",
+    "purpose_one_line": "Tests whether excluding S_Auth_Affil from the (Z_scaled-based, exploratory/rejected-design) domain-balance penalty's own relation set closes the exploitability gap found in domain_penalty_exploitability_grid.py, comparing baseline (weight=0), full-penalty (weight=10, all relations), and excl_affil (weight=10, S_Auth_Affil dropped from the penalty formula) on 3 'gaming' cells and 3 'improving' cells.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "domain_community_volumes", "domain_membership_distributions", "domain_share_vectors", "fit_instrumented", "make_domain_balance_penalty_torch", "presence_masks", "total_variation_distance"],
+    "local_reimplementations": ["run_condition() - orchestration wrapper only; the mass_tvd/mem_tvd computations themselves call diagnostic_blocks functions directly (domain_community_volumes, domain_share_vectors, domain_membership_distributions, total_variation_distance), not reimplemented"],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "domain_penalty_exclude_affil_test.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "GAMING_CELLS": [["C3",4],["C6",2],["C2",2]],
+      "IMPROVING_CELLS": [["C3",2],["C5",2],["C4",2]],
+      "EXCLUDE": ["S_Auth_Affil"],
+      "weight_tested": 10.0
+    },
+    "ticket_relevance": 82,
+    "notable_facts": [
+      "Uses make_domain_balance_penalty_torch, the Z_scaled-based EXPLORATORY/REJECTED design candidate (per CLAUDE.md §4.18: 'found EXPLOITABLE via ticket 79's gauge freedom ... rejected, kept so the rejection is legible') -- NOT the shipped in-loop/outer-loop U_prob-based mechanism (that one uses make_inloop_domain_balance_penalty_torch, seen imported in domain_balance_tol_and_power_check.py). This script investigates the REJECTED Z_scaled candidate's gaming behavior specifically, testing a targeted mitigation (excluding one relation) for it -- it does not test or bear on E2/E3's shipped mechanism.",
+      "Measurement is always over the FULL relation set regardless of which relations the penalty itself was restricted to -- comment explicitly states 'we want to know the real outcome, not just what the (possibly narrowed) penalty saw.'",
+      "'GAMING' cells are those where mem_tvd (real U_prob-based membership imbalance) got WORSE under the full Z_scaled penalty even though its own optimized proxy (mass_tvd) improved -- this is the exploitability finding referenced in CLAUDE.md §4.18/E2 ('its own optimized proxy improved 30-40x while real membership imbalance worsened in 3 of 12 cells').",
+      "Summary table classifies each cell as excl_affil being 'better'/'SAME'/'WORSE' than full_penalty relative to baseline mem_tvd, based on whether |mem_tvd delta| shrinks."
+    ]
+  }
+]

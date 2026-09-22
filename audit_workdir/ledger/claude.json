@@ -1,0 +1,1387 @@
+[
+ {
+  "claim_id": "C-CLAUDE-82-01",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 header",
+  "source_lines": [
+   460,
+   461
+  ],
+  "claim_text": "Per-community domain balance \u2014 mechanism IMPLEMENTED (E2), its input now in question (E3); ticket 82",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "evaluate_domain_balance",
+   "lambda_domain_balance"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep evaluate_domain_balance / lambda_domain_balance",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-02",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 'HOW TO READ THIS SECTION' note",
+  "source_lines": [
+   463,
+   473
+  ],
+  "claim_text": "It was written as a design document when nothing was implemented, and the IMPLEMENTED blocks (E2, then E3) were appended beneath without revising the original text. Three claims in the design narrative below are historical, not current, and each is flagged in place. The current state is: both mechanisms exist in chunk13v9.py; the in-loop weight is 0.0; the outer-loop evaluate_domain_balance is U_prob-based (NOT Z_scaled) and is summed into sociological_penalty unconditionally; and per FINDINGS \u00a725 the quantity it reads carries no signal about true domain balance on this corpus, though the formula itself is correct.",
+  "claim_type": "already-tagged",
+  "referenced_symbols": [
+   "evaluate_domain_balance",
+   "lambda_domain_balance",
+   "sociological_penalty"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep evaluate_domain_balance (~line 1342), lambda_domain_balance (~line 572); FINDINGS.md \u00a725",
+  "prose_correction_flag": true
+ },
+ {
+  "claim_id": "C-CLAUDE-82-03",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (reader's-guide note)",
+  "source_lines": [
+   463,
+   473
+  ],
+  "claim_text": "Cross-reference to FINDINGS \u00a725 for the claim that the domain-balance quantity carries no signal about true domain balance on this corpus.",
+  "claim_type": "cross-reference",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a725",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-04",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   475,
+   479
+  ],
+  "claim_text": "The 50/50 alpha weighting in Module 2 (\u00a7 recon_loss construction) balances the global contribution of the social and semantic domains to reconstruction loss. It does not constrain any individual community \u2014 a solution where community 1 is entirely semantic and community 2 entirely social satisfies the global 50/50 split perfectly while producing communities that are not heterogeneous at all, which contradicts \u00a71's stated research goal.",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "alpha_weight",
+   "recon_loss"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep alpha_weight / recon_loss construction in run_inner_solver",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-05",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   479,
+   479
+  ],
+  "claim_text": "Cross-reference: the global 50/50 alpha weighting not constraining individual communities contradicts \u00a71's stated research goal.",
+  "claim_type": "cross-reference",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "CLAUDE.md"
+  ],
+  "ground_truth_hint": "CLAUDE.md \u00a71",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-06",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   481,
+   487
+  ],
+  "claim_text": "v8 had a per-community mechanism, binding_penalty, computed inside Module 2 (differentiable, not an outer-loop score): soc_vol = sum(\u2016U[f][:,r]\u2016\u2082 / \u221aN_f for f in exclusive_soc); sem_vol = sum(\u2016U[f][:,r]\u2016\u2082 / \u221aN_f for f in exclusive_sem); binding_penalty += (soc_vol/num_soc - sem_vol/num_sem) ** 2.",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "binding_penalty"
+  ],
+  "referenced_files": [
+   "chunk13v8.py"
+  ],
+  "ground_truth_hint": "chunk13v8.py: binding_penalty defined/used lines ~225,262,282,287 \u2014 variable names there are soc_avg/sem_avg, not soc_vol/sem_vol as quoted",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-07",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   488,
+   489
+  ],
+  "claim_text": "This [v8's binding_penalty] was lost in the rewrite that introduced softplus (\u00a74.8) and was not restored alongside the other regressions from that rewrite (Frobenius normalisation, alpha weighting, initialisation).",
+  "claim_type": "cross-reference",
+  "referenced_symbols": [
+   "binding_penalty"
+  ],
+  "referenced_files": [
+   "CLAUDE.md",
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "CLAUDE.md \u00a74.8",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-08",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   490,
+   493
+  ],
+  "claim_text": "'v9 currently has no per-community domain-balance mechanism at all.' [HISTORICAL \u2014 false since ticket 82 E2. v9 has two: an in-loop differentiable term in run_inner_solver (weight lambda_domain_balance, default 0.0) and the outer-loop evaluate_domain_balance. Kept as the record of the state this design responded to.]",
+  "claim_type": "already-tagged",
+  "referenced_symbols": [
+   "run_inner_solver",
+   "lambda_domain_balance",
+   "evaluate_domain_balance"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: lambda_domain_balance = params.get('lambda_domain_balance', 0.0) (line 572); evaluate_domain_balance def (line 1342)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-09",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   495,
+   497
+  ],
+  "claim_text": "'No longer blocked \u2014 unblocked by recognizing domain as a FACET property, not a relation property (design session, not yet implemented in code; full reasoning in FINDINGS \u00a713's update).' [HISTORICAL \u2014 'not yet implemented in code' was true when written; both halves are implemented, see E2 below.]",
+  "claim_type": "already-tagged",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a713",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-10",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   498,
+   504
+  ],
+  "claim_text": "v8's relation-level framing (and the naive U_scales/\u221aN_f port of it) forced an ill-posed question for anchor relations: is M_Child_Art 'social' or 'semantic'? There is no such thing as a mixed facet \u2014 art is unambiguously social; it only looks ambiguous because it participates in both S_ and M_ relations. A facet-level formulation never has to answer the ill-posed relation-level question, and supersedes the 0.5/n_anchors candidate fix.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [
+   "U_scales"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep U_scales, RELATION_MAP",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-11",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   504,
+   508
+  ],
+  "claim_text": "Verified directly (all 6 configs, RELATION_MAP): art has exactly 2 non-anchor relations (S_Art_Auth, S_Art_Journ) in every config regardless of anchor count, so a facet-level profile is structurally comparable across single- and dual-anchor configs without any anchor-count correction at all.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "RELATION_MAP"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep RELATION_MAP dict entries for 'art'",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-12",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   510,
+   511
+  ],
+  "claim_text": "Design settled, both mechanisms following the existing z_offdiag_loss (in-loop)/collapse_pen (outer-loop) architectural pattern.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [
+   "z_offdiag_loss",
+   "collapse_pen"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep z_offdiag_loss, collapse_pen",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-13",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (In-loop bullet)",
+  "source_lines": [
+   512,
+   516
+  ],
+  "claim_text": "In-loop (differentiable): per community k, soc_k/sem_k = weighted mean over active facets in that domain of U_prob[f][:,k]'s mean over LIVE entities (ticket 60 masking required); r_k = soc_k/(soc_k+sem_k+eps); penalty mean_k(max(0, |r_k-0.5| - TOL)\u00b2).",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "U_prob",
+   "DOMAIN_BALANCE_TOL"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: run_inner_solver in-loop domain-balance block (~lines 680-750), DOMAIN_BALANCE_TOL=0.15 (line 79)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-14",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   516,
+   520
+  ],
+  "claim_text": "Verified trap, not a hypothetical: U_norm's columns have unit L2 norm by construction (U_scales[f] = \u2016col\u2016\u2082, U_norm = u/U_scales, chunk13v9.py ~589-591) \u2014 porting v8's \u2016U[:,r]\u2016\u2082 formula onto U_norm directly would be gauge-safe and differentiable, but identically constant (\u22611), penalizing nothing. U_prob (which varies per row) is the correct substitute, not U_norm column norms.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "U_norm",
+   "U_scales",
+   "U_prob"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: actual U_norm/U_scales assignment found at lines 658-677, not ~589-591 as the text states \u2014 line citation mismatch to verify",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-15",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (Outer-loop bullet)",
+  "source_lines": [
+   521,
+   527
+  ],
+  "claim_text": "[SUPERSEDED \u2014 DO NOT BUILD THIS. The shipped evaluate_domain_balance is U_prob-based, not Z_scaled-based; its signature is evaluate_domain_balance(U_prob, presence_masks, tol). A Z_scaled version of exactly this idea was tested and found EXPLOITABLE via ticket 79's gauge freedom \u2014 its proxy improved 30-40\u00d7 while real membership imbalance worsened in 3 of 12 cells (see E2 below and FINDINGS \u00a722). This bullet is the rejected draft, kept so the rejection is legible.]",
+  "claim_type": "already-tagged",
+  "referenced_symbols": [
+   "evaluate_domain_balance"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "chunk13v9.py:1342 def evaluate_domain_balance(U_prob, presence_masks, tol=DOMAIN_BALANCE_TOL) \u2014 signature matches; FINDINGS.md \u00a722",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-16",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (Outer-loop bullet, rejected draft content)",
+  "source_lines": [
+   527,
+   533
+  ],
+  "claim_text": "per relation, production's own _relation_community_share (\u00a717); each relation's share vector credited to both facets it touches (a true statement, not double-counting); anchor relations are included (reverses an earlier draft of this design) \u2014 excluding them would make the measure blind to exactly the social\u2194semantic binding a heterogeneous community shows up through, and would violate \u00a74.15's 'do not special-case for anchor count' rule. Anchor sensitivity (reading with vs. without anchors) is measured, not assumed away.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [
+   "_relation_community_share"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py:894 def _relation_community_share(...) \u2014 production, not diagnostic-only",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-17",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18",
+  "source_lines": [
+   527,
+   533
+  ],
+  "claim_text": "Cross-references within the outer-loop bullet: \u00a717 (_relation_community_share) and \u00a74.15 ('do not special-case for anchor count' rule).",
+  "claim_type": "cross-reference",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a717, CLAUDE.md \u00a74.15",
+  "prose_correction_flag": false,
+  "_merge_time_fix": "referenced_files corrected from [CLAUDE.md] to [FINDINGS.md]; bare \u00a717 cannot be a CLAUDE.md section (tops out at \u00a711) and matches FINDINGS \u00a717 exactly"
+ },
+ {
+  "claim_id": "C-CLAUDE-82-18",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (Weighting decision)",
+  "source_lines": [
+   535,
+   544
+  ],
+  "claim_text": "Weighting decision (equal-per-facet vs. live-entity-count) \u2014 resolved in favor of entity-count weighting, reversing an initial lean toward the codebase's equal-weighting convention. Only entity weighting is mathematically a true population-mass share \u2014 algebraically identical to pooling every live entity in the domain and taking one grand mean of U_prob[:,k], whereas equal-per-facet weighting discards absolute headcount by construction; this is the standard 'proportional vs. equal allocation' distinction from stratified sampling.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [
+   "U_prob"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: in-loop domain balance weighting block",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-19",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (Weighting decision)",
+  "source_lines": [
+   544,
+   549
+  ],
+  "claim_text": "Decisive for the in-loop term specifically: the gradient of soc_k w.r.t. one entity's U_prob row is 1/N_f under equal weighting (facet-size-dependent \u2014 in T1, an auth entity's leverage is ~1/23rd a journ entity's) but a uniform 1/N_domain under entity weighting, regardless of facet. Equal weighting would let the optimizer satisfy the penalty cheaply by reshuffling small facets while leaving auth (the dominant facet by population) essentially untouched.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "U_prob"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "derive from facet sizes N_f for auth vs journ in T1 (\u00a711 facet counts)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-20",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E1 measurement)",
+  "source_lines": [
+   551,
+   554
+  ],
+  "claim_text": "E1 measurement (diagnostic-only, diagnostic_scripts/domain_balance_measurement.py, diagnostic_blocks.py 1.12.0) answers the 'unanswerable' question below \u2014 GO. Equal-weighted pilot: mean dev_k (deviation from r_k=0.5) \u22480.08 both slices, no consistent direction (26/25/25 social/semantic/balanced split), ~31-32% of communities exceed a 40/60 band.",
+  "claim_type": "empirical",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "diagnostic_scripts/domain_balance_measurement.py",
+   "diagnostic_blocks.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/domain_balance_measurement.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-21",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E1 measurement, entity re-tabulation)",
+  "source_lines": [
+   555,
+   562
+  ],
+  "claim_text": "Now re-tabulated with entity weighting as primary (FINDINGS \u00a713's D2 update) \u2014 materially larger and directionally skewed: mean dev_k 0.13 (T1) / 0.13 (T2) in u_prob space, 57-62% of communities exceed a 40/60 band, and the direction is no longer even (28 semantic-leaning vs 17 social-leaning of 45 skewed, pooled). Traced to composition: auth is ~75% of the entity-weighted social pool in both slices (soc_k tracks auth's own raw profile to within mean 0.08/max 0.16), while no single semantic facet exceeds ~32%.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "U_prob"
+  ],
+  "referenced_files": [
+   "diagnostic_blocks.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/domain_balance_measurement_v2.json; FINDINGS.md \u00a713",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-22",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (TOL decision, D3)",
+  "source_lines": [
+   563,
+   572
+  ],
+  "claim_text": "TOL (D3) is now decided: 0.15 for the toy corpus. Set from a genuine measured noise floor, not the entity-weighted spread directly. A multi-seed reproducibility test (refit the same cell 5\u00d7, Hungarian-align communities across seeds via production's own \u00a7S5 alignment code, measure how much r_k moves for the same community) found the noise floor's median across the full grid is 0.144 \u2014 comparable to or larger than the dev_k signal itself (median 0.112); only 46% of communities have dev_k exceeding their own noise SD at all, only 13% exceed 2\u00d7. TOL=0.15 sits just above that median. Explicitly a toy-corpus value, flagged for re-estimation at 22k-article scale.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [
+   "DOMAIN_BALANCE_TOL"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/domain_balance_seed_noise.json, domain_balance_tol_and_power_check.json; FINDINGS.md \u00a721; chunk13v9.py DOMAIN_BALANCE_TOL=0.15 (line 79)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-23",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (TOL re-derivation)",
+  "source_lines": [
+   572,
+   580
+  ],
+  "claim_text": "Re-derived on post-08-27-fix data (tickets 86/87 Stage 0e): verdict held, TOL kept at 0.15. Both the noise floor and the dev_k signal shrank on the post-fix data (noise median 0.144\u21920.120, dev_k median 0.112\u21920.093) \u2014 the margin between TOL and the noise median widened, not narrowed, and the fraction of communities whose imbalance clears their own noise floor dropped at every multiple tested (46%\u219236% at 1\u00d7, 13%\u21924.8% at 2\u00d7). Deliberately not re-tuned upward toward the new p90 either \u2014 see FINDINGS \u00a721 for why. Re-run scripts, no code changed.",
+  "claim_type": "empirical",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "diagnostic_blocks.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/domain_balance_seed_noise_v2.json or domain_balance_v1_v2_noise_compare.json (post-08-27-fix TOL re-derivation, Stage 0e); FINDINGS.md \u00a721 \u2014 this is one of only two places in assigned material where ticket 87 appears, always jointly labeled 'tickets 86/87 Stage 0e', never as its own standalone item",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-24",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E2)",
+  "source_lines": [
+   582,
+   584
+  ],
+  "claim_text": "E2 \u2014 IMPLEMENTED (both in-loop and outer-loop; 'Path B'), weight fixed at 0.0 for the toy corpus. Full evidence: FINDINGS \u00a722.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [
+   "lambda_domain_balance"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a722",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-25",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E2, In-loop)",
+  "source_lines": [
+   586,
+   591
+  ],
+  "claim_text": "In-loop (run_inner_solver): lambda_domain_balance = params.get('lambda_domain_balance', 0.0) \u2014 read the same way lambda_l1 is post-ticket-78, not in Optuna's search space. The differentiable term itself (FACET_DOMAIN-grouped, entity-weighted, live-masked U_prob means \u2192 r_k \u2192 squared dead-band past DOMAIN_BALANCE_TOL=0.15) is computed every epoch regardless and exposed unweighted as diagnostics['raw_domain_balance_penalty'] (mirrors raw_sparsity_loss).",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "lambda_domain_balance",
+   "run_inner_solver",
+   "DOMAIN_BALANCE_TOL",
+   "raw_domain_balance_penalty",
+   "raw_sparsity_loss"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:572 lambda_domain_balance = params.get('lambda_domain_balance', 0.0); line 79 DOMAIN_BALANCE_TOL=0.15; line 795 raw_domain_balance_penalty",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-26",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E2, Outer-loop)",
+  "source_lines": [
+   592,
+   596
+  ],
+  "claim_text": "Outer-loop (evaluate_complete_solution, Module 3): a new function, evaluate_domain_balance, computes the same formula post-hoc on the final U_prob and is summed into sociological_penalty unconditionally \u2014 this already changes Optuna's second Pareto axis today, independent of the in-loop weight, the same architecture collapse_pen/coherence_pen already use (neither has an in-loop counterpart either).",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "evaluate_domain_balance",
+   "evaluate_complete_solution",
+   "sociological_penalty",
+   "collapse_pen",
+   "coherence_pen"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:1342 def evaluate_domain_balance; called at line 1516 inside evaluate_complete_solution",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-27",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (Why U_prob, not Z_scaled)",
+  "source_lines": [
+   598,
+   607
+  ],
+  "claim_text": "A separate, pre-existing exploratory script already in diagnostic_blocks.py (make_domain_balance_penalty_torch, undated, found this session while building E2) tested a Z_scaled-based version of this same idea and found it exploitable: its own optimized proxy (mass_tvd) improved 30-40\u00d7 in every one of 12 tested cells while the real U_prob-based membership imbalance (mem_tvd) got worse in 3 of 12 \u2014 the optimizer was gaming Z_scaled's undetermined U_scales gauge freedom (ticket 79), not fixing real imbalance. U_prob is proven immune to that exact freedom, and this was reconfirmed directly: the new evaluate_domain_balance's output matched the independently-built diagnostic pipeline to ~8 significant figures on a real fit.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "make_domain_balance_penalty_torch",
+   "evaluate_domain_balance",
+   "U_scales"
+  ],
+  "referenced_files": [
+   "diagnostic_blocks.py",
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: make_domain_balance_penalty_torch resolves in diagnostic_blocks.py:1019 (diagnostic-only, not chunk13v9.py); diagnostic_results/domain_penalty_exploitability_test.json, domain_penalty_exploitability_grid.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-28",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (Why the weight is 0.0)",
+  "source_lines": [
+   609,
+   619
+  ],
+  "claim_text": "The formula's raw magnitude was measured on real baseline fits first (the same first step ticket 77 used for lambda_l1) \u2014 it does not transfer cleanly: 5 of 12 baseline fits gave an exact 0.0, making a lambda_l1-style range derivation ill-defined. Testing across weight \u2208 {0.5,1,2,5,20,50,200,400} (including a rescaled higher-exponent variant), both chunk12 and chunk12v2 data, multiple pilot cells, multi-seed: only 1 of 20 (weight/power/cell) combinations tested produced a shift exceeding its own paired seed-noise floor, and weight=5 caused real non-convergence (down to 1/5 seeds converging in one cell) at a loss-magnitude fraction (~2.7% of math_loss) a naive derivation would not have flagged as risky. Full numbers, all tables: FINDINGS \u00a722.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "lambda_l1",
+   "math_loss"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/domain_balance_inloop_power_and_weight_sweep.json; FINDINGS.md \u00a722",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-29",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E3)",
+  "source_lines": [
+   621,
+   629
+  ],
+  "claim_text": "E3 \u2014 dev_k CARRIES NO SIGNAL ABOUT TRUE DOMAIN BALANCE ON THIS CORPUS (negative result, FINDINGS \u00a725). THE FORMULA IS NOT AT FAULT \u2014 the input is. An audit of all three implementations found them correct and mutually consistent (in-loop torch / outer-loop numpy / diagnostic_blocks agree to 7.5e-10 on C6/K=4/T1), and gauge-invariant as designed (mean_dev_k moves by exactly 0.00e+00 under ticket 79's transformation). The fault is that the fitted community assignments these functions read do not identify the communities that generated the data, which originates in corpus sparsity, upstream of chunk13v9.py altogether.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "evaluate_domain_balance"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "diagnostic_blocks.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a725; diagnostic_results/domain_balance_corrected_check.json",
+  "prose_correction_flag": true
+ },
+ {
+  "claim_id": "C-CLAUDE-82-30",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E3, planted-structure test)",
+  "source_lines": [
+   631,
+   639
+  ],
+  "claim_text": "A planted-structure test (synthetic data carrying this corpus's exact degree sequence and weight distribution, passed through the real run_inner_solver; 180 fits) finds dev_k flat with respect to the truth it is meant to measure: a world whose communities are exactly balanced by construction reports mean dev_k \u22480.103, a world containing a 70/30 community reports \u22480.096, and a world containing a 90/10 community reports \u22480.101. Detection of a genuinely mono-domain community, against the balanced arm's own 95th percentile, is 6\u201322% \u2014 at or barely above the 5% false-positive rate. On T1, 56\u201367% of perfectly balanced synthetic worlds report more imbalance than the real T1 data does.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "run_inner_solver"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/domain_balance_planted_null.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-31",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E3, mechanism)",
+  "source_lines": [
+   641,
+   654
+  ],
+  "claim_text": "Mechanism: the fitted communities do not correspond to the planted ones. Hungarian-matched recovery accuracy is 0.31 (social) / 0.39 (semantic) at K=4 against a 0.25 chance level, and 0.38 / 0.45 at K=3 against 0.33 \u2014 even when 90% of generated ties are within-community. Degree sparsity is the background condition: live-entity total degree has median 2, and 44\u201345% of live entities have a total degree of exactly 1 (degree 0 cannot occur, since 'live' is defined as having at least one non-zero entry), rising to 50\u201355% among social entities. Fitted sharpness is 0.81 (social) / 0.82 (semantic) \u2014 the model is equally and spuriously confident in both domains, which is also why an earlier post-hoc null (sharpness-based, the user's original hypothesis) found nothing.",
+  "claim_type": "empirical",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/domain_balance_planted_null.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-32",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E3, degree caveat)",
+  "source_lines": [
+   647,
+   650
+  ],
+  "claim_text": "Degree alone is not claimed as the mechanism: recovery by degree bucket is non-monotone and reverses between cells, and the recovery metric is argmax-based, a crude instrument against this model's soft partition. The consistent signal is the domain asymmetry, not a degree law.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "diagnostic_results/domain_balance_planted_null.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-33",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E3, consequences)",
+  "source_lines": [
+   656,
+   662
+  ],
+  "claim_text": "Direct consequences, not yet acted on in code: (1) evaluate_domain_balance is summed into sociological_penalty unconditionally and therefore shapes Optuna's second Pareto axis today, on a quantity this test says does not track what it names \u2014 the in-loop weight being 0.0 does not protect against that; (2) an outer-loop veto on 'obviously broken' communities cannot be built on dev_k (a 90/10 community is caught 6\u201322% of the time); the parallel candidate reading community mass (max_share) is a different quantity and is untested \u2014 a planted test for it is proposed, not run.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "evaluate_domain_balance",
+   "sociological_penalty",
+   "max_share"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "no diagnostic_results file exists yet for a max_share planted test \u2014 confirms 'proposed, not run'",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-34",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.18 (E3, limitations)",
+  "source_lines": [
+   662,
+   665
+  ],
+  "claim_text": "Limitations, stated because they bound the claim: ties are degree- and weight-preserving but not motif-preserving (real co-authorship cliques are not reproduced), one model seed, three configs, K\u2208{3,4}. Re-derive at 22k-article scale, where the degree sparsity driving the failure should ease substantially.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "n/a \u2014 scoping caveat, re-derivation not yet done",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-78-01",
+  "ticket": 78,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.19 header",
+  "source_lines": [
+   667,
+   669
+  ],
+  "claim_text": "Sparsity term (lambda_l1) fixed to 0.0 for the toy corpus (ticket 78). See ticket 78 in \u00a78 and FINDINGS \u00a76 for the full evidence.",
+  "claim_type": "cross-reference",
+  "referenced_symbols": [
+   "lambda_l1"
+  ],
+  "referenced_files": [
+   "CLAUDE.md",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "CLAUDE.md \u00a78 ticket 78 row; FINDINGS.md \u00a76",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-78-02",
+  "ticket": 78,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.19",
+  "source_lines": [
+   669,
+   676
+  ],
+  "claim_text": "Summary: the term as implemented penalises column concentration (few entities per community) rather than row concentration (few communities per entity, the actual 'hairball' concern), and at every tested weight in its (now-superseded) widened range it evacuated row mass rather than concentrating it, while the hairball it exists to prevent does not occur at lambda_l1=0 on this corpus. Fixed at 0.0, removed from Optuna's search space, sparsity_loss itself still computed and exposed in diagnostics for observability. Explicitly a toy-corpus decision \u2014 re-test at 22k articles using the L1/L2 per-row ratio (not U_prob row-max) as the detector.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "lambda_l1",
+   "sparsity_loss"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:558 lambda_l1 = params.get('lambda_l1', 0.0)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-01",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 header",
+  "source_lines": [
+   798,
+   799
+  ],
+  "claim_text": "'Ghost communities' (ticket 86) \u2014 a low-mass community definition, validated as measurable, phenomenon confirmed real and structural, no mechanism yet (diagnostic-only).",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "no in-loop or outer-loop ghost-community mechanism exists in chunk13v9.py \u2014 confirm via grep for a ghost-related penalty function (none expected)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-02",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (Definition)",
+  "source_lines": [
+   801,
+   805
+  ],
+  "claim_text": "Definition (user's, from a discussion external to this project's own record): a community is a candidate 'ghost' primarily by very low share of the model's total reconstructed mass. Domain skew and facet concentration are secondary, descriptive properties of a low-mass community, not part of the definition \u2014 measured below to often be absent even when a community is low-mass, which is exactly why the user's own framing keeps them secondary.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "n/a \u2014 definitional decision",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-03",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (Mass measure)",
+  "source_lines": [
+   807,
+   809
+  ],
+  "claim_text": "Mass measure: community_share, already computed (unexposed) inside evaluate_dimensional_collapse \u2014 the full length-K vector max_share/collapse_pen are drawn from, per-relation shares (_relation_community_share) averaged and renormalised.",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "community_share",
+   "evaluate_dimensional_collapse",
+   "max_share",
+   "collapse_pen",
+   "_relation_community_share"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:1013-1017 community_share computed inside evaluate_dimensional_collapse (def at line 931); _relation_community_share def at line 894",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-04",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (Mass measure validation)",
+  "source_lines": [
+   810,
+   815
+  ],
+  "claim_text": "Validated directly for the two specific risks this design is exposed to: exactly gauge-invariant under ticket 79's transformation (compensated case moved it by at most 4.5e-8, the same order as ordinary float32 round-off; an uncompensated control moved it by 0.06\u20130.24, confirming the test has real teeth) and unaffected by dead-entity contamination (zeroing dead rows changed it by exactly 0.0 in every cell tested, explained by dead-row magnitudes sitting 5+ orders of magnitude below live-row values).",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "community_share"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/ghost_test1_gauge_invariance.json, ghost_test2_dead_entity_check.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-05",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (open limitations)",
+  "source_lines": [
+   815,
+   821
+  ],
+  "claim_text": "Two older, separate limitations of anything built on Z_scaled are not closed by this: general rotational indeterminacy (\u00a71) and per-relation permutation beyond the Hungarian correction's trust (FINDINGS \u00a714) \u2014 both remain open, and FINDINGS \u00a718's existing evidence that blending freedom is essentially absent covers only K\u2208{3,4}, T1 \u2014 this ticket's grid is wider (K\u2208{2..6}, T1/T2, both chunk12/chunk12v2 data) and that check has not yet been extended to match.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a714, \u00a718; CLAUDE.md \u00a71 \u2014 rotation/permutation checks not yet extended to K\u2208{2..6}, T2, chunk12v2",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-06",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (2% threshold measurement)",
+  "source_lines": [
+   823,
+   826
+  ],
+  "claim_text": "Measured: a flat percentage-of-total-mass threshold (the user's own original candidate, 2%) never fires anywhere \u2014 0 of 300 community-slots across the full C1\u2013C6 \u00d7 K\u2208{2..6} \u00d7 T1/T2 grid, either data version.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "community_share"
+  ],
+  "referenced_files": [],
+  "ground_truth_hint": "diagnostic_results/ghost_test3_share_distribution.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-07",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (K-relative threshold measurement)",
+  "source_lines": [
+   826,
+   830
+  ],
+  "claim_text": "A K-relative threshold (share below 0.5\u00d7 or 0.25\u00d7 the 'fair share' 1/K) does fire, rising with K (0/12 cells at K=2 to 7/12 at K=6, 0.5/K threshold) \u2014 and 3 cells show two simultaneous low-mass communities, confirming multiple ghosts per cell are real, not hypothetical. Reproduces closely under chunk12v2 data at matching configs/K.",
+  "claim_type": "empirical",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "diagnostic_results/ghost_test3v2_share_distribution.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-08",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (root cause: S_Art_Auth)",
+  "source_lines": [
+   832,
+   840
+  ],
+  "claim_text": "S_Art_Auth's within-community diagonal mass concentrates on far fewer than K communities in every one of the 6 configs, at every K from 2 to 6, both slices, both data versions \u2014 top-2 share averages 0.77\u20131.00 against a fair share of 0.33\u20131.00 depending on K. Not ghost-specific; a general property of this relation, most likely (not yet proven) because it has only 218\u2013258 total non-zero ties (\u00a711) \u2014 too little data to differentiate more than ~2 communities' worth of author-article pattern.",
+  "claim_type": "empirical",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/ghost_auth_collinearity_and_concentration.json; CLAUDE.md \u00a711 (S_Art_Auth tie counts)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-09",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (auth/affil collinearity)",
+  "source_lines": [
+   841,
+   848
+  ],
+  "claim_text": "auth/affil collinearity (FINDINGS \u00a74, now extended past its previous K\u22644 ceiling to K=6) explains this in C1 specifically (mutual collinearity 0.70\u20130.82, both data versions) but not in C3 (collinearity \u22640.011 in every version tested) \u2014 the same overall symptom (low share) has at least two distinct causes across configs, confirmed by an independent affiliation-removal pilot: excluding S_Auth_Affil from the fit entirely measurably improved C1's S_Art_Auth resolution and lowered its collinearity, but left C3's ghost community at nearly the same share, same community index, essentially unchanged.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "S_Auth_Affil"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "diagnostic_results/ghost_no_affil_ablation.json; FINDINGS.md \u00a74",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-10",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (mega-author hypothesis)",
+  "source_lines": [
+   849,
+   852
+  ],
+  "claim_text": "A 'mega-author-count paper drives the winning communities' hypothesis was tested directly (article degree vs. winner-community loading, all 6 configs, K=6, both slices) and not supported \u2014 correlations mostly weak/non-significant, the one significant result runs opposite to the hypothesis.",
+  "claim_type": "empirical",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "diagnostic_results/ghost_article_degree_vs_winner_loading.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-11",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (article-side content check)",
+  "source_lines": [
+   853,
+   857
+  ],
+  "claim_text": "Flagged communities are usually not content-starved on the article side \u2014 in 4 of 6 cells checked, at least one flagged community has a top-2 (often the single strongest) article-side membership in the whole fit; the deficit is specifically that this doesn't translate into S_Art_Auth diagonal mass, pointing at the author side, not the article side.",
+  "claim_type": "empirical",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "diagnostic_results/ghost_article_side_reading.json",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-12",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (loss-weight sensitivity)",
+  "source_lines": [
+   858,
+   862
+  ],
+  "claim_text": "Loss-weight sensitivity checked, not assumed: outer-loop penalties cannot confound this (structurally excluded from training, \u00a74.1). lambda_z_offdiag does \u2014 collinearity magnitude is materially inflated by it (C1: 0.263 at \u03bbz=0 \u2192 0.699 at 0.05 \u2192 0.865 at 0.5), though the qualitative C1-vs-C3 ordering and the S_Art_Auth concentration finding itself both survive at every tested \u03bbz. Single-seed, 2-cell check \u2014 not a full sweep.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "lambda_z_offdiag"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "diagnostic_results/ghost_lambda_z_sensitivity.json; CLAUDE.md \u00a74.1",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-13",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (no mechanism)",
+  "source_lines": [
+   864,
+   865
+  ],
+  "claim_text": "No mechanism (in-loop or outer-loop) has been designed. This ticket is diagnostic-only throughout, deliberately, matching how tickets 82/84 were sequenced.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "no ghost-community penalty function exists in chunk13v9.py",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-14",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.22 (not yet done)",
+  "source_lines": [
+   865,
+   872
+  ],
+  "claim_text": "Not yet done: the full affiliation-removal grid (user-requested, all 6 configs \u00d7 K\u2208{2..6} \u00d7 both data versions, only a 2-cell pilot exists); extending the rotation-feasibility (\u00a718) and permutation-conflict (FINDINGS \u00a714) checks to this ticket's wider K/slice/data-version grid (both currently stop at K\u2208{3,4}/K\u2208{2,4}, T1 only); a seed-noise floor for community_share (needed before any single cell's 'ghost' verdict can be trusted against ordinary run-to-run variation, the same discipline TOL went through, ticket 82 D3). Full evidence, every table, every script: FINDINGS \u00a723.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "community_share"
+  ],
+  "referenced_files": [
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a723; CLAUDE.md \u00a718, FINDINGS.md \u00a714; cross-refs ticket 82 D3 (TOL noise-floor precedent)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-84-01",
+  "ticket": 84,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.23 header",
+  "source_lines": [
+   874,
+   875
+  ],
+  "claim_text": "Ticket 84 D4 follow-up \u2014 journal-resolution false negatives found and mostly fixed; zero effect on this toy corpus's fitted data; a process-safety incident.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "out of primary scope for this ledger (not ticket 82/86/87) \u2014 skimmed only per assignment",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-84-02",
+  "ticket": 84,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.23",
+  "source_lines": [
+   918,
+   919
+  ],
+  "claim_text": "New standing rule added, SESSION_PROTOCOL.md \u00a7E \u2014 see there.",
+  "claim_type": "cross-reference",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "SESSION_PROTOCOL.md"
+  ],
+  "ground_truth_hint": "SESSION_PROTOCOL.md \u00a7E",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-84-03",
+  "ticket": 84,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a74.23",
+  "source_lines": [
+   921,
+   921
+  ],
+  "claim_text": "Full evidence, every table, every script: FINDINGS \u00a724.",
+  "claim_type": "cross-reference",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a724",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-83-01",
+  "ticket": 83,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 83 row)",
+  "source_lines": [
+   1042,
+   1042
+  ],
+  "claim_text": "lambda_l1 = params['lambda_l1'] (line 522) is a hard [] lookup. Ticket 78 fixed lambda_l1 at 0.0 and removed it from trial.suggest_float \u2014 it is recorded only via trial.set_user_attr, which does not enter trial.params. \u00a7S4's archiver (params=trial.params) and \u00a7S5's stability loop both pass it straight through \u2014 both raise KeyError on every call. Found while mapping the file for the ticket 82 domain-balance design work, unrelated to it. Closed: params.get('lambda_l1', 0.0), matching the existing lambda_z_offdiag readout on the next line. Verified directly: reproduced the exact params shape trial.params has post-ticket-78 and confirmed run_inner_solver no longer raises.",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "lambda_l1",
+   "run_inner_solver",
+   "lambda_z_offdiag"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:558 lambda_l1 = params.get('lambda_l1', 0.0) \u2014 matches Closed status; row mentions ticket 82 only as incidental context (found while mapping ticket-82 work), not itself ticket 82",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-85-01",
+  "ticket": 85,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 85 row)",
+  "source_lines": [
+   1064,
+   1064
+  ],
+  "claim_text": "New \u2014 found this session while bit-exact-verifying ticket 82's E2 addition, unrelated to it. initialize_tucker_adapted_nndsvd_and_propagate (lines ~351, ~524) iterates active_facets \u2014 a raw Python set() \u2014 directly, which \u00a74.9 already names as exactly this hazard for a different function. Confirmed: fit_production('C6', 4, ...) at the same seed gave different math_loss across separate process launches; fixing PYTHONHASHSEED across launches made results bit-identical again. Open, not fixed. Out of scope for ticket 82; flagged rather than silently worked around.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "active_facets",
+   "initialize_tucker_adapted_nndsvd_and_propagate",
+   "get_required_facets"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep active_facets iteration in initialize_tucker_adapted_nndsvd_and_propagate (~lines 351, 524); CLAUDE.md \u00a74.9; row mentions ticket 82 only as incidental context, not itself ticket 82",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-35",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 82 row, status-line note)",
+  "source_lines": [
+   1099,
+   1099
+  ],
+  "claim_text": "(Status line corrected 2026-09-22: this cell previously opened 'implementation not yet started' while also containing 'E2: IMPLEMENTED' further down \u2014 self-contradictory. Implemented is correct; the D1-D3 design record that follows is kept unchanged.)",
+  "claim_type": "design-decision",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "explicit 'status line corrected' language \u2014 a prose correction without a formal SUPERSEDED/HISTORICAL bracket tag",
+  "prose_correction_flag": true
+ },
+ {
+  "claim_id": "C-CLAUDE-82-36",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 82 row, D1-D3/E1 restatement)",
+  "source_lines": [
+   1099,
+   1099
+  ],
+  "claim_text": "D1-D3 decided. The relation-level anchor-double-counting problem this row previously described is superseded, not solved in place \u2014 verified art has exactly 2 non-anchor relations in every config regardless of anchor count, so no anchor-count correction is needed. E1 answers the prior 'currently unanswerable' question in \u00a74.18: real per-community imbalance exists on a determined basis. D2 (weighting): entity, re-tabulated \u2014 traced exactly (not just suspected) to auth's ~75% share collapsing the social-side averaging from 4 facets to ~1.7 (Herfindahl/Kish derivation, FINDINGS \u00a721, near-exact match to observed spread). D3 (TOL): decided at 0.15 for the toy corpus, set from a measured multi-seed noise floor (median 0.144, comparable to the dev_k signal's own median 0.112).",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "RELATION_MAP"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a721 (Herfindahl/Kish derivation of ~1.7 effective facets) \u2014 restates \u00a74.18 content in table form; this ~1.7 effective-facet figure is more specific than the prose in \u00a74.18",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-37",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 82 row, permutation correction)",
+  "source_lines": [
+   1099,
+   1099
+  ],
+  "claim_text": "Permutation-correction groundwork corrected and shipped: FINDINGS \u00a716's original '1 solid real conflict' (C5/K4 art) was itself a bug \u2014 the confidence re-filter that produced it forgot to re-apply leaf-exclusion, wrongly counting S_Art_Journ (touches the leaf facet journ) as a dissenting vote. Corrected: zero confirmed real non-leaf conflicts anywhere in the grid. evaluate_dimensional_collapse therefore corrects each relation independently and does not implement cross-relation conflict resolution \u2014 documented limitation, see FINDINGS \u00a717.",
+  "claim_type": "already-tagged",
+  "referenced_symbols": [
+   "evaluate_dimensional_collapse"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a716, \u00a717; chunk13v9.py evaluate_dimensional_collapse (line 931)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-82-38",
+  "ticket": 82,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 82 row, criterion verification)",
+  "source_lines": [
+   1099,
+   1099
+  ],
+  "claim_text": "Criterion chosen (structure_score > 1.0) verified head-to-head against chunk13v3.py/v4.py's original diagonal_mass/hungarian_mass < 0.7 \u2014 12/94 disagreements, 8 of them cases the older criterion would have wrongly 'corrected' a genuinely mixed relation. Toy-corpus calibrated throughout \u2014 re-derive at 22k-article scale before reuse.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "structure_score"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "chunk13v3.py",
+   "chunk13v4.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:889 structure_score = matched.min() / max_unmatched; threshold comparison at line 891",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-86-15",
+  "ticket": 86,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 86 row)",
+  "source_lines": [
+   1100,
+   1100
+  ],
+  "claim_text": "No mechanism exists to detect or address a community holding very low share of the model's total reconstructed mass \u2014 the third major open issue this session, alongside tickets 82 (domain balance, frozen at weight 0) and 78 (lambda_l1, frozen at 0), both pending 22k-scale re-derivation. Open \u2014 measurement phase only, no mechanism proposed. See \u00a74.22 and FINDINGS \u00a723 for the full evidence.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "lambda_domain_balance",
+   "lambda_l1"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "FINDINGS.md \u00a723; cross-links tickets 82 and 78 as the other two 'frozen at 0' open issues",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-87-01",
+  "ticket": 87,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a78 Open Defect Register (ticket 84 row, tickets 86/87 Stage 0e follow-up)",
+  "source_lines": [
+   1101,
+   1101
+  ],
+  "claim_text": "cousin_he/T2 precision follow-up (tickets 86/87 Stage 0e): resolved. Its 'confirmed' status was the more fragile of the two, resting on a 5-seed SD estimate on the thinnest sample (M_Cousin_Child active in only 2/6 configs). Extended to 15 seeds and re-run on post-08-27-fix data: \u0394\u03c1 = \u22120.242, SD tightened to 0.113 (not widened), now clears 2\u00d7SD comfortably (\u22482.15\u00d7) \u2014 on the old pre-fix data the same extension had instead pulled it below the bar (ratio fell to 1.7\u00d7), so this specifically closes that fragility rather than just re-confirming it. Headline Phase 3 tally unchanged (3/6 correct direction, 2/6 confirmed). Full numbers: FINDINGS \u00a721.",
+  "claim_type": "empirical",
+  "referenced_symbols": [
+   "M_Cousin_Child"
+  ],
+  "referenced_files": [
+   "chunk13v9.py",
+   "FINDINGS.md"
+  ],
+  "ground_truth_hint": "diagnostic_results/grammar_damping_cousin_he_more_seeds.json; FINDINGS.md \u00a721 \u2014 this is the ONLY dedicated content in the assigned material for ticket 87; it has no standalone row/section anywhere in the assigned ranges and appears exclusively bundled as 'tickets 86/87 Stage 0e' (here, and twice more inside ticket 82's own row/\u00a74.18)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-01",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 header",
+  "source_lines": [
+   1190,
+   1194
+  ],
+  "claim_text": "Planned Extensions (not yet implemented). Recorded as intent, not as contracts. Current code does not implement any of this \u2014 PIPELINE_VERSION marks this as time_slice_1 only. T2 data (Star_extended_matrices_t2.pkl) exists on disk (\u00a711) but nothing in the pipeline currently loads it.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "PIPELINE_VERSION"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep PIPELINE_VERSION (expect 'v9.1.time_slice_1' per ticket 57's row)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-02",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (Temporal slices)",
+  "source_lines": [
+   1196,
+   1206
+  ],
+  "claim_text": "When the chronological loop is built, the output of slice T1 will be passed into the T2 solver as U_prior, and the temporal term will be a differentiable distance metric against that prior, moderated by a tunable inertia parameter. Rationale: a soft prior, not a hard constraint \u2014 forcing structural immutability between slices would prevent detection of field emergence and dissolution. This matches the treatment of every other constraint in this pipeline (soft penalties, never projections).",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "U_prior"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep U_prior \u2014 expected not found (feature not built)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-03",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (Alignment caveat)",
+  "source_lines": [
+   1208,
+   1214
+  ],
+  "claim_text": "Alignment caveat \u2014 resolve before implementing. Community k in T1 and community k in T2 are not the same community unless explicitly matched. A temporal penalty computed against an unaligned U_prior would penalise arbitrary label permutations rather than genuine structural drift, producing a meaningless inertia signal. Module 4 Section 5 already contains Hungarian alignment (scipy.optimize.linear_sum_assignment over JSD and cosine cost matrices); reuse that machinery to align T1 \u2192 T2 before computing any temporal distance.",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "linear_sum_assignment"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:845 'from scipy.optimize import linear_sum_assignment', used at line 880 inside Module 4 \u00a75 Hungarian alignment code",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-04",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (Presence masks)",
+  "source_lines": [
+   1216,
+   1218
+  ],
+  "claim_text": "Presence masks are already in place for this. build_presence_masks() (\u00a711, ticket 60) identifies live-vs-padded entities per slice; any T1\u2194T2 alignment or comparison must restrict to entities live in both slices, not just live in one.",
+  "claim_type": "production-mechanism",
+  "referenced_symbols": [
+   "build_presence_masks"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:271 def build_presence_masks(matrices, soc_keys, sem_keys)",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-05",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (Model-quality evaluation intro)",
+  "source_lines": [
+   1220,
+   1228
+  ],
+  "claim_text": "Currently the only model-quality signals are math_loss (reconstruction fit) and the three sociological_penalty terms (collapse_pen, coherence_pen, semantic_pen \u2014 reality checks the model is penalised against, Module 3). Both are already in use; neither tests whether the discovered structure generalises or is repeatable across runs. Proposed for the full corpus, not the toy corpus \u2014 diagnostic-only, no production wiring implied by listing it here.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "math_loss",
+   "sociological_penalty",
+   "collapse_pen",
+   "coherence_pen",
+   "semantic_pen"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "chunk13v9.py: grep math_loss, sociological_penalty, collapse_pen, coherence_pen, semantic_pen \u2014 all expected present as production signals",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-06",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (Item 1: held-out link prediction)",
+  "source_lines": [
+   1230,
+   1240
+  ],
+  "claim_text": "Held-out link prediction / cross-validation. Mask a subset of observed (nonzero) entries per relation, fit on the rest, evaluate reconstruction on what was held out. Standard in the matrix-factorisation/recommender-systems literature; the only measure of the three considered that tests generalisation rather than in-sample fit. Caveat to resolve before implementing, not after: naive uniform-fraction masking is unsafe on sparse relations \u2014 M_Parent_Art's 63 non-zeros (T1, \u00a711) is the concrete toy-corpus example of a relation too sparse to mask without risking destabilising the fit entirely. Masking design must be relation-aware rather than a blanket k-fold. Re-check relation-level sparsity at 22k-article scale before fixing a masking fraction.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "no held-out link prediction code exists in chunk13v9.py; CLAUDE.md \u00a711 for M_Parent_Art's 63 non-zero count",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-07",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (Item 2: stability/consensus across seeds)",
+  "source_lines": [
+   1242,
+   1252
+  ],
+  "claim_text": "Stability / consensus across seeds (cophenetic correlation or a simpler pairwise co-membership agreement). Standard in the NMF-for-clustering literature (Brunet et al. 2004 popularised cophenetic correlation specifically for NMF rank/K selection) \u2014 refit the same (config, K) cell across multiple seeds and measure how consistently entities get assigned to the same community. Directly buildable with existing diagnostic tooling (fit_or_load(..., seed=...) already supports this) \u2014 no new fitting machinery required, only the consensus/agreement computation on top of it. This is also the belated implementation of 'Test c: co-membership consensus,' named early in this project's Problem-2 diagnostic agenda and never built.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [
+   "fit_or_load"
+  ],
+  "referenced_files": [
+   "diagnostic_blocks.py"
+  ],
+  "ground_truth_hint": "VERIFIED: fit_or_load resolves in diagnostic_blocks.py:529 (diagnostic-only, supports seed= param); no co-membership consensus computation currently exists \u2014 'never built' confirmed by absence of such a function in chunk13v9.py or diagnostic_blocks.py",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-08",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (Considered and rejected: R\u00b2/explained-variance analog)",
+  "source_lines": [
+   1254,
+   1267
+  ],
+  "claim_text": "Considered and rejected: an R\u00b2/explained-variance analog. Since every relation is already Frobenius-normalised to \u2016X\u2016\u00b2=1 (\u00a74.2), a per-relation 'fraction of variance explained' number is almost free to compute (relation_recon, already computed per-relation inside run_inner_solver before being summed into pooled math_loss \u2014 not currently exposed per-relation, but derivable diagnostically without touching production). Rejected as a model-quality metric for three reasons: (a) no K-adjustment \u2014 raw reconstruction loss decreases monotonically with K 'for capacity reasons alone' (\u00a74.6); (b) no calibrated baseline exists for sparse (~98% zero) binary relational data under a non-negative rank-K constraint; (c) it adds no information beyond what math_loss already provides.",
+  "claim_type": "design-decision",
+  "referenced_symbols": [
+   "relation_recon",
+   "math_loss",
+   "run_inner_solver"
+  ],
+  "referenced_files": [
+   "chunk13v9.py"
+  ],
+  "ground_truth_hint": "VERIFIED: chunk13v9.py:725 relation_recon computed inside run_inner_solver, summed into recon_loss at line 726; CLAUDE.md \u00a74.2, \u00a74.6",
+  "prose_correction_flag": false
+ },
+ {
+  "claim_id": "C-CLAUDE-EXT-09",
+  "ticket": null,
+  "source_doc": "CLAUDE.md",
+  "source_location": "\u00a710 (closing status)",
+  "source_lines": [
+   1269,
+   1270
+  ],
+  "claim_text": "Status: proposal only, not scheduled, not built. No code exists for either (1) or (2). Revisit when model-quality evaluation for the 22k-article run is actually being planned.",
+  "claim_type": "planned-not-implemented",
+  "referenced_symbols": [],
+  "referenced_files": [],
+  "ground_truth_hint": "n/a \u2014 explicit no-code-exists statement",
+  "prose_correction_flag": false
+ }
+]

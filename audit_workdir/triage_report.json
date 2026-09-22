@@ -1,0 +1,3945 @@
+{
+ "chunk13v9_symbols": {
+  "path": "/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/chunk13_execution/chunk13v9.py",
+  "symbols": [
+   {
+    "name": "DEVICE",
+    "kind": "constant",
+    "lineno": 15,
+    "end_lineno": 15,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "INNER_EPOCHS",
+    "kind": "constant",
+    "lineno": 28,
+    "end_lineno": 28,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "2000"
+   },
+   {
+    "name": "LEARNING_RATE",
+    "kind": "constant",
+    "lineno": 29,
+    "end_lineno": 29,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.01"
+   },
+   {
+    "name": "ENTROPY_THRESHOLD",
+    "kind": "constant",
+    "lineno": 44,
+    "end_lineno": 44,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.6"
+   },
+   {
+    "name": "MAX_SHARE_THRESHOLD",
+    "kind": "constant",
+    "lineno": 56,
+    "end_lineno": 56,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.6"
+   },
+   {
+    "name": "STRUCTURE_SCORE_THRESHOLD",
+    "kind": "constant",
+    "lineno": 67,
+    "end_lineno": 67,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "1.0"
+   },
+   {
+    "name": "TARGET_COHERENCE",
+    "kind": "constant",
+    "lineno": 70,
+    "end_lineno": 70,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.5"
+   },
+   {
+    "name": "DOMAIN_BALANCE_TOL",
+    "kind": "constant",
+    "lineno": 79,
+    "end_lineno": 79,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.15"
+   },
+   {
+    "name": "LAMBDA_COLLAPSE",
+    "kind": "constant",
+    "lineno": 85,
+    "end_lineno": 85,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "1.0"
+   },
+   {
+    "name": "LAMBDA_COH",
+    "kind": "constant",
+    "lineno": 86,
+    "end_lineno": 86,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "1.0"
+   },
+   {
+    "name": "LAMBDA_SEM",
+    "kind": "constant",
+    "lineno": 87,
+    "end_lineno": 87,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "1.0"
+   },
+   {
+    "name": "MASTER_SEED",
+    "kind": "constant",
+    "lineno": 90,
+    "end_lineno": 90,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "42"
+   },
+   {
+    "name": "PIPELINE_VERSION",
+    "kind": "constant",
+    "lineno": 91,
+    "end_lineno": 91,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "'v9.1.time_slice_1'"
+   },
+   {
+    "name": "USER_ID",
+    "kind": "constant",
+    "lineno": 100,
+    "end_lineno": 100,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "'p91688di'"
+   },
+   {
+    "name": "SCRATCH_DIR",
+    "kind": "constant",
+    "lineno": 103,
+    "end_lineno": 103,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "OPTUNA_JOURNAL_PATH",
+    "kind": "constant",
+    "lineno": 104,
+    "end_lineno": 104,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "RDS_DIR",
+    "kind": "constant",
+    "lineno": 108,
+    "end_lineno": 108,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "get_active_facets",
+    "kind": "function",
+    "lineno": 113,
+    "end_lineno": 151,
+    "docstring_first_line": "Defines the active metagraph topology for the given configuration.",
+    "parent": null
+   },
+   {
+    "name": "RELATION_MAP",
+    "kind": "constant",
+    "lineno": 158,
+    "end_lineno": 173,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{'S_Art_Auth': ('art', 'auth'), 'S_Auth_Affil': ('auth', 'affil'), 'S_Art_Journ': ('art', 'journ'), 'M_Atom_Child': ('core_atom', 'core_child_he'), 'M_Child_Parent': ('core_child_he', 'parent_he'), 'M_Parent_Art': ('parent_he', 'art'), 'M_Child_Art': ('core_child_he', 'art'), 'M_Fringe_Cousin': ('fringe_atom', 'cousin_he'), 'M_Cousin_Parent': ('cousin_he', 'parent_he'), 'M_Cousin_Child': ('cousin_he', 'core_child_he'), 'M_Cousin_Art': ('cousin_he', 'art')}"
+   },
+   {
+    "name": "FACET_DOMAIN",
+    "kind": "constant",
+    "lineno": 187,
+    "end_lineno": 191,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{'art': 'social', 'auth': 'social', 'journ': 'social', 'affil': 'social', 'core_atom': 'semantic', 'core_child_he': 'semantic', 'parent_he': 'semantic', 'cousin_he': 'semantic', 'fringe_atom': 'semantic'}"
+   },
+   {
+    "name": "get_required_facets",
+    "kind": "function",
+    "lineno": 196,
+    "end_lineno": 214,
+    "docstring_first_line": "Derives the deterministic, alphabetically sorted list of facet names ",
+    "parent": null
+   },
+   {
+    "name": "load_and_validate_data",
+    "kind": "function",
+    "lineno": 219,
+    "end_lineno": 266,
+    "docstring_first_line": "Loads raw SciPy sparse matrices from Chunk 12 and dynamically infers ",
+    "parent": null
+   },
+   {
+    "name": "build_presence_masks",
+    "kind": "function",
+    "lineno": 271,
+    "end_lineno": 304,
+    "docstring_first_line": "Ticket 60. Entity index maps for auth/affil/journ and all semantic facets",
+    "parent": null
+   },
+   {
+    "name": "scipy_to_torch_sparse",
+    "kind": "function",
+    "lineno": 323,
+    "end_lineno": 332,
+    "docstring_first_line": "Converts a scipy sparse matrix to a PyTorch sparse tensor.",
+    "parent": null
+   },
+   {
+    "name": "inverse_softplus_np",
+    "kind": "function",
+    "lineno": 334,
+    "end_lineno": 337,
+    "docstring_first_line": "Numerically stable inverse softplus in pure numpy to preserve PyTorch leaf tensors.",
+    "parent": null
+   },
+   {
+    "name": "initialize_tucker_adapted_nndsvd_and_propagate",
+    "kind": "function",
+    "lineno": 339,
+    "end_lineno": 527,
+    "docstring_first_line": "Executes Tucker-adapted Canonical NNDSVD, followed by multi-hop",
+    "parent": null
+   },
+   {
+    "name": "run_inner_solver",
+    "kind": "function",
+    "lineno": 532,
+    "end_lineno": 802,
+    "docstring_first_line": null,
+    "parent": null
+   },
+   {
+    "name": "_db_domain_share",
+    "kind": "nested_function",
+    "lineno": 618,
+    "end_lineno": 639,
+    "docstring_first_line": "Entity-count-weighted mean, over `facets`, of each facet's own",
+    "parent": "run_inner_solver"
+   },
+   {
+    "name": "compute_probability_distributions",
+    "kind": "function",
+    "lineno": 812,
+    "end_lineno": 835,
+    "docstring_first_line": "Converts L2-normalized factor matrices into L1 row-normalized probability distributions.",
+    "parent": null
+   },
+   {
+    "name": "_hungarian_relabel_relation",
+    "kind": "function",
+    "lineno": 847,
+    "end_lineno": 891,
+    "docstring_first_line": "Per-relation permutation-correction test (ticket 82, FINDINGS \u00a716).",
+    "parent": null
+   },
+   {
+    "name": "_relation_community_share",
+    "kind": "function",
+    "lineno": 894,
+    "end_lineno": 928,
+    "docstring_first_line": "Reconstruction-space per-community share for one relation (FINDINGS \u00a78,",
+    "parent": null
+   },
+   {
+    "name": "evaluate_dimensional_collapse",
+    "kind": "function",
+    "lineno": 931,
+    "end_lineno": 1023,
+    "docstring_first_line": "REVISED (tickets 79/80/82; FINDINGS \u00a712/13/16). Calculates community mass",
+    "parent": null
+   },
+   {
+    "name": "evaluate_topological_coherence",
+    "kind": "function",
+    "lineno": 1027,
+    "end_lineno": 1105,
+    "docstring_first_line": "Evaluates the structural cohesion of communities by examining the interaction ",
+    "parent": null
+   },
+   {
+    "name": "evaluate_socio_semantic_reality",
+    "kind": "function",
+    "lineno": 1113,
+    "end_lineno": 1333,
+    "docstring_first_line": "Evaluates the continuous socio-semantic reality (Part A) and uniquity smoothing (Part B).",
+    "parent": null
+   },
+   {
+    "name": "evaluate_domain_balance",
+    "kind": "function",
+    "lineno": 1342,
+    "end_lineno": 1436,
+    "docstring_first_line": "Outer-loop, U_prob-based domain-balance check (ticket 82 E2, D1-D3",
+    "parent": null
+   },
+   {
+    "name": "_weighted_share",
+    "kind": "nested_function",
+    "lineno": 1408,
+    "end_lineno": 1421,
+    "docstring_first_line": null,
+    "parent": "evaluate_domain_balance"
+   },
+   {
+    "name": "evaluate_complete_solution",
+    "kind": "function",
+    "lineno": 1445,
+    "end_lineno": 1532,
+    "docstring_first_line": "Computes every outer-loop sociological metric from a solved model.",
+    "parent": null
+   },
+   {
+    "name": "create_optuna_objective",
+    "kind": "function",
+    "lineno": 1538,
+    "end_lineno": 1658,
+    "docstring_first_line": "Factory function that builds the Optuna objective.",
+    "parent": null
+   },
+   {
+    "name": "objective",
+    "kind": "nested_function",
+    "lineno": 1543,
+    "end_lineno": 1656,
+    "docstring_first_line": null,
+    "parent": "create_optuna_objective"
+   },
+   {
+    "name": "DEVICE",
+    "kind": "constant",
+    "lineno": 1686,
+    "end_lineno": 1686,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "CONFIG_IDS",
+    "kind": "constant",
+    "lineno": 1690,
+    "end_lineno": 1690,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "['C1', 'C2', 'C3', 'C4', 'C5', 'C6']"
+   },
+   {
+    "name": "MASTER_SEED",
+    "kind": "constant",
+    "lineno": 1691,
+    "end_lineno": 1691,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "42"
+   },
+   {
+    "name": "MAX_MONOPOLY",
+    "kind": "constant",
+    "lineno": 1694,
+    "end_lineno": 1694,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.85"
+   },
+   {
+    "name": "ENTROPY_THRESHOLD",
+    "kind": "constant",
+    "lineno": 1695,
+    "end_lineno": 1695,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.6"
+   },
+   {
+    "name": "TARGET_COHERENCE",
+    "kind": "constant",
+    "lineno": 1696,
+    "end_lineno": 1696,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.5"
+   },
+   {
+    "name": "K_LIST",
+    "kind": "constant",
+    "lineno": 1703,
+    "end_lineno": 1703,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "[2, 3, 4, 5, 6]"
+   },
+   {
+    "name": "N_TRIALS",
+    "kind": "constant",
+    "lineno": 1704,
+    "end_lineno": 1704,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "200"
+   },
+   {
+    "name": "BASE_RESULTS_DIR",
+    "kind": "constant",
+    "lineno": 1707,
+    "end_lineno": 1707,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "set_seeds",
+    "kind": "function",
+    "lineno": 1713,
+    "end_lineno": 1740,
+    "docstring_first_line": "Locks the stochastic environment across all underlying libraries.",
+    "parent": null
+   },
+   {
+    "name": "get_environment_info",
+    "kind": "function",
+    "lineno": 1744,
+    "end_lineno": 1754,
+    "docstring_first_line": "Captures library versions and global constants for long-term reproducibility.",
+    "parent": null
+   },
+   {
+    "name": "env_path",
+    "kind": "constant",
+    "lineno": 1757,
+    "end_lineno": 1757,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "EXPECTED_OPTUNA_VERSION",
+    "kind": "constant",
+    "lineno": 1782,
+    "end_lineno": 1782,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "'4.1.0'"
+   },
+   {
+    "name": "SCOUT_TRIALS",
+    "kind": "constant",
+    "lineno": 1788,
+    "end_lineno": 1788,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "100"
+   },
+   {
+    "name": "DEEP_DIVE_TRIALS",
+    "kind": "constant",
+    "lineno": 1789,
+    "end_lineno": 1789,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "100"
+   },
+   {
+    "name": "HV_MARGIN",
+    "kind": "constant",
+    "lineno": 1790,
+    "end_lineno": 1790,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "0.1"
+   },
+   {
+    "name": "build_objective",
+    "kind": "function",
+    "lineno": 1795,
+    "end_lineno": 1807,
+    "docstring_first_line": null,
+    "parent": null
+   },
+   {
+    "name": "run_adaptive_grid",
+    "kind": "function",
+    "lineno": 1812,
+    "end_lineno": 2016,
+    "docstring_first_line": null,
+    "parent": null
+   },
+   {
+    "name": "NumpyEncoder",
+    "kind": "class",
+    "lineno": 2037,
+    "end_lineno": 2044,
+    "docstring_first_line": null,
+    "parent": null
+   },
+   {
+    "name": "default",
+    "kind": "nested_function",
+    "lineno": 2038,
+    "end_lineno": 2044,
+    "docstring_first_line": null,
+    "parent": "NumpyEncoder"
+   },
+   {
+    "name": "extract_and_archive_pareto_front",
+    "kind": "function",
+    "lineno": 2046,
+    "end_lineno": 2270,
+    "docstring_first_line": null,
+    "parent": null
+   },
+   {
+    "name": "N_STABILITY_SEEDS",
+    "kind": "constant",
+    "lineno": 2293,
+    "end_lineno": 2293,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "10"
+   },
+   {
+    "name": "STABILITY_SEEDS",
+    "kind": "constant",
+    "lineno": 2294,
+    "end_lineno": 2294,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "row_normalize",
+    "kind": "function",
+    "lineno": 2304,
+    "end_lineno": 2319,
+    "docstring_first_line": "Converts raw interactions into node-level probability distributions.",
+    "parent": null
+   },
+   {
+    "name": "col_normalize",
+    "kind": "function",
+    "lineno": 2321,
+    "end_lineno": 2325,
+    "docstring_first_line": "Converts raw interactions into community-level emission profiles.",
+    "parent": null
+   },
+   {
+    "name": "row_wise_cosine_similarity",
+    "kind": "function",
+    "lineno": 2327,
+    "end_lineno": 2334,
+    "docstring_first_line": "Fast, vectorized row-wise Cosine Similarity calculation.",
+    "parent": null
+   },
+   {
+    "name": "run_dual_track_stability_analysis",
+    "kind": "function",
+    "lineno": 2339,
+    "end_lineno": 2622,
+    "docstring_first_line": null,
+    "parent": null
+   },
+   {
+    "name": "DATA_FILEPATH",
+    "kind": "constant",
+    "lineno": 2625,
+    "end_lineno": 2625,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "'/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t1.pkl'"
+   }
+  ],
+  "duplicate_top_level_names": {
+   "DEVICE": [
+    15,
+    1686
+   ],
+   "ENTROPY_THRESHOLD": [
+    44,
+    1695
+   ],
+   "TARGET_COHERENCE": [
+    70,
+    1696
+   ],
+   "MASTER_SEED": [
+    90,
+    1691
+   ]
+  },
+  "commented_out_assignments": [
+   {
+    "name": "MAX_MONOPOLY",
+    "lineno": 82,
+    "commented_value": "0.60            # Maximum allowable mass concentration for elite entities in a single community deprecated in favour of more flexible 0.85"
+   }
+  ]
+ },
+ "diagnostic_blocks_symbols": {
+  "path": "/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/chunk13_execution/diagnostic_blocks.py",
+  "symbols": [
+   {
+    "name": "BLOCKS_VERSION",
+    "kind": "constant",
+    "lineno": 87,
+    "end_lineno": 87,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "'1.15.0'"
+   },
+   {
+    "name": "BASE_DIR",
+    "kind": "constant",
+    "lineno": 89,
+    "end_lineno": 89,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "'/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/chunk13_execution'"
+   },
+   {
+    "name": "MODULE_PATH",
+    "kind": "constant",
+    "lineno": 90,
+    "end_lineno": 90,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "OUT_DIR",
+    "kind": "constant",
+    "lineno": 91,
+    "end_lineno": 91,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "CACHE_DIR",
+    "kind": "constant",
+    "lineno": 92,
+    "end_lineno": 92,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": null
+   },
+   {
+    "name": "SLICE_PATHS",
+    "kind": "constant",
+    "lineno": 94,
+    "end_lineno": 104,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{'T1': '/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t1.pkl', 'T2': '/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t2.pkl', 'T1_v2': '/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t1_v2.pkl', 'T2_v2': '/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t2_v2.pkl'}"
+   },
+   {
+    "name": "_MODULE",
+    "kind": "constant",
+    "lineno": 106,
+    "end_lineno": 106,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "None"
+   },
+   {
+    "name": "_DATA_CACHE",
+    "kind": "constant",
+    "lineno": 107,
+    "end_lineno": 107,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{}"
+   },
+   {
+    "name": "load_module",
+    "kind": "function",
+    "lineno": 114,
+    "end_lineno": 127,
+    "docstring_first_line": "Import chunk13v9.py by path, once per process. Returns the module object.",
+    "parent": null
+   },
+   {
+    "name": "load_slice",
+    "kind": "function",
+    "lineno": 130,
+    "end_lineno": 141,
+    "docstring_first_line": "Returns (raw_data, dimensions) for a named slice, memoized per process.",
+    "parent": null
+   },
+   {
+    "name": "chunk13v9_hash",
+    "kind": "function",
+    "lineno": 144,
+    "end_lineno": 147,
+    "docstring_first_line": "Content hash of the solver source -- the fit cache keys on this.",
+    "parent": null
+   },
+   {
+    "name": "build_active_matrices",
+    "kind": "function",
+    "lineno": 154,
+    "end_lineno": 179,
+    "docstring_first_line": "Frobenius-normalized sparse matrices for the active relations, plus the set",
+    "parent": null
+   },
+   {
+    "name": "get_init",
+    "kind": "function",
+    "lineno": 182,
+    "end_lineno": 220,
+    "docstring_first_line": "The three initialization modes used across the diagnostic history:",
+    "parent": null
+   },
+   {
+    "name": "_to_numpy",
+    "kind": "function",
+    "lineno": 223,
+    "end_lineno": 224,
+    "docstring_first_line": null,
+    "parent": null
+   },
+   {
+    "name": "fit_production",
+    "kind": "function",
+    "lineno": 231,
+    "end_lineno": 266,
+    "docstring_first_line": "Delegates to chunk13v9.run_inner_solver. Use this for anything that just",
+    "parent": null
+   },
+   {
+    "name": "fit_instrumented",
+    "kind": "function",
+    "lineno": 273,
+    "end_lineno": 456,
+    "docstring_first_line": "Line-for-line reimplementation of run_inner_solver's loop, exposing:",
+    "parent": null
+   },
+   {
+    "name": "_RAW_DATA_HASH_CACHE",
+    "kind": "constant",
+    "lineno": 463,
+    "end_lineno": 463,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{}"
+   },
+   {
+    "name": "_raw_data_hash",
+    "kind": "function",
+    "lineno": 466,
+    "end_lineno": 498,
+    "docstring_first_line": "Content hash of the actual matrices `load_slice(slice_name)` returns --",
+    "parent": null
+   },
+   {
+    "name": "_cache_key",
+    "kind": "function",
+    "lineno": 501,
+    "end_lineno": 526,
+    "docstring_first_line": "Identity of a fit = everything that can change its numbers, INCLUDING the",
+    "parent": null
+   },
+   {
+    "name": "fit_or_load",
+    "kind": "function",
+    "lineno": 529,
+    "end_lineno": 614,
+    "docstring_first_line": "Fit once, reuse forever. Cache hit -> load .npz; miss -> fit, save, return.",
+    "parent": null
+   },
+   {
+    "name": "evaluate",
+    "kind": "function",
+    "lineno": 621,
+    "end_lineno": 634,
+    "docstring_first_line": "Thin wrapper on evaluate_complete_solution -- the single source of truth for",
+    "parent": null
+   },
+   {
+    "name": "presence_masks",
+    "kind": "function",
+    "lineno": 637,
+    "end_lineno": 642,
+    "docstring_first_line": "Live-entity masks per facet (ticket 60). SESSION_PROTOCOL \u00a7C.5.",
+    "parent": null
+   },
+   {
+    "name": "FACET_DOMAINS",
+    "kind": "constant",
+    "lineno": 670,
+    "end_lineno": 674,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{'art': 'soc', 'auth': 'soc', 'affil': 'soc', 'journ': 'soc', 'core_atom': 'sem', 'core_child_he': 'sem', 'parent_he': 'sem', 'fringe_atom': 'sem', 'cousin_he': 'sem'}"
+   },
+   {
+    "name": "relation_domain_kind",
+    "kind": "function",
+    "lineno": 677,
+    "end_lineno": 686,
+    "docstring_first_line": "'same_soc' / 'same_sem' / 'cross' for one relational matrix, via RELATION_MAP.",
+    "parent": null
+   },
+   {
+    "name": "domain_community_volumes",
+    "kind": "function",
+    "lineno": 689,
+    "end_lineno": 765,
+    "docstring_first_line": "Per-community soc_vol[k] / sem_vol[k], relation-level (|Z_scaled[k,k]|, RAW --",
+    "parent": null
+   },
+   {
+    "name": "SOC_EXCLUSIVE_FACETS",
+    "kind": "constant",
+    "lineno": 768,
+    "end_lineno": 768,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{'journ', 'affil', 'auth'}"
+   },
+   {
+    "name": "SEM_EXCLUSIVE_FACETS",
+    "kind": "constant",
+    "lineno": 769,
+    "end_lineno": 769,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{'core_child_he', 'parent_he', 'fringe_atom', 'core_atom', 'cousin_he'}"
+   },
+   {
+    "name": "domain_membership_distributions",
+    "kind": "function",
+    "lineno": 780,
+    "end_lineno": 812,
+    "docstring_first_line": "U_prob-based per-community MEMBERSHIP distribution for each domain, pooling",
+    "parent": null
+   },
+   {
+    "name": "pooled",
+    "kind": "nested_function",
+    "lineno": 797,
+    "end_lineno": 810,
+    "docstring_first_line": null,
+    "parent": "domain_membership_distributions"
+   },
+   {
+    "name": "domain_share_vectors",
+    "kind": "function",
+    "lineno": 815,
+    "end_lineno": 825,
+    "docstring_first_line": "Convert domain_community_volumes()'s raw soc_vol/sem_vol into WITHIN-domain",
+    "parent": null
+   },
+   {
+    "name": "total_variation_distance",
+    "kind": "function",
+    "lineno": 828,
+    "end_lineno": 830,
+    "docstring_first_line": "0.5 * sum|p-q| for two same-length probability vectors. 0=identical, 1=disjoint.",
+    "parent": null
+   },
+   {
+    "name": "facet_hop_distances",
+    "kind": "function",
+    "lineno": 833,
+    "end_lineno": 871,
+    "docstring_first_line": "BFS hop-distance from the anchor-pinned reference frame (FINDINGS \u00a714), per",
+    "parent": null
+   },
+   {
+    "name": "align_seed_permutation",
+    "kind": "function",
+    "lineno": 874,
+    "end_lineno": 895,
+    "docstring_first_line": "Community index is only consistent WITHIN one fit -- an independent re-fit",
+    "parent": null
+   },
+   {
+    "name": "apply_seed_permutation",
+    "kind": "function",
+    "lineno": 898,
+    "end_lineno": 905,
+    "docstring_first_line": "Relabel every facet's columns and every relation's Z_scaled (both axes,",
+    "parent": null
+   },
+   {
+    "name": "s5_dual_track_alignment",
+    "kind": "function",
+    "lineno": 908,
+    "end_lineno": 945,
+    "docstring_first_line": "Faithful reuse of chunk13v9.py's own \u00a7S5 stability-analysis alignment",
+    "parent": null
+   },
+   {
+    "name": "s5_dual_track_consensus",
+    "kind": "function",
+    "lineno": 948,
+    "end_lineno": 1007,
+    "docstring_first_line": "Extends s5_dual_track_alignment: also computes the CONTINUOUS per-facet",
+    "parent": null
+   },
+   {
+    "name": "relation_hop_distance",
+    "kind": "function",
+    "lineno": 1010,
+    "end_lineno": 1016,
+    "docstring_first_line": "(hop_min, hop_max) of a relation's two facets -- see facet_hop_distances.",
+    "parent": null
+   },
+   {
+    "name": "make_domain_balance_penalty_torch",
+    "kind": "function",
+    "lineno": 1019,
+    "end_lineno": 1069,
+    "docstring_first_line": "EXPERIMENTAL, torch-differentiable mirror of domain_community_volumes(...,",
+    "parent": null
+   },
+   {
+    "name": "fn",
+    "kind": "nested_function",
+    "lineno": 1042,
+    "end_lineno": 1067,
+    "docstring_first_line": null,
+    "parent": "make_domain_balance_penalty_torch"
+   },
+   {
+    "name": "make_inloop_domain_balance_penalty_torch",
+    "kind": "function",
+    "lineno": 1072,
+    "end_lineno": 1165,
+    "docstring_first_line": "Torch-differentiable version of CLAUDE.md \u00a74.18's SETTLED in-loop",
+    "parent": null
+   },
+   {
+    "name": "_domain_share",
+    "kind": "nested_function",
+    "lineno": 1139,
+    "end_lineno": 1154,
+    "docstring_first_line": null,
+    "parent": "make_inloop_domain_balance_penalty_torch"
+   },
+   {
+    "name": "fn",
+    "kind": "nested_function",
+    "lineno": 1156,
+    "end_lineno": 1163,
+    "docstring_first_line": null,
+    "parent": "make_inloop_domain_balance_penalty_torch"
+   },
+   {
+    "name": "hungarian_diagonal_match",
+    "kind": "function",
+    "lineno": 1172,
+    "end_lineno": 1209,
+    "docstring_first_line": "Given one relation's K x K Z_scaled matrix, find the column permutation",
+    "parent": null
+   },
+   {
+    "name": "relation_community_mass",
+    "kind": "function",
+    "lineno": 1212,
+    "end_lineno": 1235,
+    "docstring_first_line": "FINDINGS \u00a716's confidence-gated mass reading for one relation, replacing",
+    "parent": null
+   },
+   {
+    "name": "collapse_mass_share",
+    "kind": "function",
+    "lineno": 1238,
+    "end_lineno": 1263,
+    "docstring_first_line": "Z_scaled-based per-community share, computed the IDENTICAL way",
+    "parent": null
+   },
+   {
+    "name": "community_share_vector",
+    "kind": "function",
+    "lineno": 1266,
+    "end_lineno": 1297,
+    "docstring_first_line": "Tickets 86/87 Stage 0a: centralized here from 7 near-verbatim copies",
+    "parent": null
+   },
+   {
+    "name": "relation_share_matrix",
+    "kind": "function",
+    "lineno": 1300,
+    "end_lineno": 1334,
+    "docstring_first_line": "Full K x K permutation-corrected reconstruction-space share for ONE",
+    "parent": null
+   },
+   {
+    "name": "membership_share_all_facets",
+    "kind": "function",
+    "lineno": 1337,
+    "end_lineno": 1364,
+    "docstring_first_line": "Independent, U_prob-based analog of collapse_mass_share -- NOT derived",
+    "parent": null
+   },
+   {
+    "name": "FACET_DOMAIN",
+    "kind": "constant",
+    "lineno": 1377,
+    "end_lineno": 1381,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "{'art': 'social', 'auth': 'social', 'journ': 'social', 'affil': 'social', 'core_atom': 'semantic', 'core_child_he': 'semantic', 'parent_he': 'semantic', 'cousin_he': 'semantic', 'fringe_atom': 'semantic'}"
+   },
+   {
+    "name": "facet_membership_profile",
+    "kind": "function",
+    "lineno": 1384,
+    "end_lineno": 1404,
+    "docstring_first_line": "Per-facet U_prob profile, unaggregated: for each active facet, the mean",
+    "parent": null
+   },
+   {
+    "name": "facet_relation_profile",
+    "kind": "function",
+    "lineno": 1407,
+    "end_lineno": 1452,
+    "docstring_first_line": "Per-facet Z_scaled-based profile -- the outer-loop / reconstruction-space",
+    "parent": null
+   },
+   {
+    "name": "domain_balance_r_k",
+    "kind": "function",
+    "lineno": 1455,
+    "end_lineno": 1506,
+    "docstring_first_line": "Groups a dict[facet -> length-K profile] (from facet_membership_profile",
+    "parent": null
+   },
+   {
+    "name": "_weighted_mean",
+    "kind": "nested_function",
+    "lineno": 1483,
+    "end_lineno": 1494,
+    "docstring_first_line": null,
+    "parent": "domain_balance_r_k"
+   },
+   {
+    "name": "verify_agreement",
+    "kind": "function",
+    "lineno": 1513,
+    "end_lineno": 1568,
+    "docstring_first_line": "fit_instrumented(init_mode='production') vs the real run_inner_solver, on an",
+    "parent": null
+   },
+   {
+    "name": "maxdiff",
+    "kind": "nested_function",
+    "lineno": 1527,
+    "end_lineno": 1532,
+    "docstring_first_line": null,
+    "parent": "verify_agreement"
+   }
+  ],
+  "duplicate_top_level_names": {},
+  "commented_out_assignments": []
+ },
+ "citation_graph": {
+  "n_entries": 324,
+  "broken": []
+ },
+ "numeric_constant_mismatches": [],
+ "script_facts": [
+  {
+   "script": "collapse_check_review_followups.py",
+   "module_docstring_first_line": "DIAGNOSTIC session. Does NOT modify chunk13v9.py. All fits are cache hits from",
+   "top_level_defs": [],
+   "imports_from_diagnostic_blocks": [
+    "load_module",
+    "load_slice",
+    "fit_or_load",
+    "relation_community_mass",
+    "OUT_DIR"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 10,
+     "line": "(diagnostic_blocks.fit_or_load with the same config/K/lambda/seed/BLOCKS_VERSION",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "collapse_check_review_followups.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "collapse_check_weighting_experiment.py",
+   "module_docstring_first_line": "DIAGNOSTIC session. Does NOT modify chunk13v9.py. All fits are cache hits.",
+   "top_level_defs": [
+    "structure_score_weight",
+    "compute_per_relation_recon"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "load_module",
+    "load_slice",
+    "fit_or_load",
+    "build_active_matrices"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "collapse_check_weighting_experiment.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "collapse_check_zscaled.py",
+   "module_docstring_first_line": "DIAGNOSTIC session. Does NOT modify chunk13v9.py -- this is a prototype to",
+   "top_level_defs": [
+    "old_entropy_and_pen"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "load_module",
+    "fit_or_load",
+    "relation_community_mass"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 91,
+     "line": "presence_masks as get_presence_masks, BLOCKS_VERSION, OUT_DIR)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "collapse_check_zscaled.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "collapse_pen_exploitability_sweep.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "point",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 40,
+     "line": "BLOCKS_VERSION, OUT_DIR, collapse_mass_share, evaluate, fit_or_load, load_module,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 136,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"max_share_threshold\": threshold,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "collapse_pen_exploitability_sweep.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "collapse_pen_mass_vs_membership_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "cell_data",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 54,
+     "line": "BLOCKS_VERSION, OUT_DIR, collapse_mass_share, evaluate, fit_or_load, load_module,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 163,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"max_share_threshold\": threshold,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "collapse_pen_mass_vs_membership_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "collapse_pen_optuna_study.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "build_objective",
+    "run_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 43,
+     "line": "BLOCKS_VERSION, OUT_DIR, collapse_mass_share, load_module, load_slice,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 163,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"n_trials_per_cell\": N_TRIALS,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "collapse_pen_optuna_study.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "collapse_pen_optuna_study_t2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "build_objective",
+    "run_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 34,
+     "line": "BLOCKS_VERSION, OUT_DIR, collapse_mass_share, load_module, load_slice,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 166,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"slice_name\": SLICE_NAME,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "collapse_pen_optuna_study_t2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "collapse_pen_optuna_study_v2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "cell_sampler_seed",
+    "load_resume_state",
+    "build_objective",
+    "run_cell",
+    "pooled_correlation",
+    "checkpoint",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 63,
+     "line": "# current BLOCKS_VERSION / N_TRIALS / MAX_SHARE_THRESHOLD and every completed",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 92,
+     "line": "BLOCKS_VERSION, OUT_DIR, collapse_mass_share, load_module, load_slice,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 129,
+     "line": "if prior.get(\"blocks_version\") != BLOCKS_VERSION:",
+     "looks_like_gate": true
+    },
+    {
+     "lineno": 130,
+     "line": "problems.append(f\"blocks_version {prior.get('blocks_version')} != current {BLOCKS_VERSION}\")",
+     "looks_like_gate": true
+    },
+    {
+     "lineno": 240,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"n_trials_per_cell\": N_TRIALS,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "collapse_pen_optuna_study_v2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "core_periphery_stability_test.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "part_a_decomposition",
+    "facet_degrees",
+    "fit_seed",
+    "part_b_per_entity",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "(",
+    "load_slice"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 46,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_instrumented, load_module, presence_masks, s5_dual_track_alignment,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 232,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"part_a\": part_a, \"part_b\": part_b}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "core_periphery_stability_test.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "cousin_child_column_test.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "col_damp",
+    "build_treatment_pickle",
+    "col_degree",
+    "row_degree",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": true,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 80,
+     "line": "BLOCKS_VERSION, OUT_DIR, load_module, load_slice, fit_or_load, presence_masks,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 268,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"seeds\": seeds, \"n_fits\": n_fits,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "cousin_child_column_test.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_corrected_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "imbalance_for_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "domain_community_volumes",
+    "fit_or_load"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 25,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, domain_community_volumes, fit_or_load",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 84,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"all_results\": all_results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_corrected_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_inloop_power_and_weight_sweep.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 31,
+     "line": "BLOCKS_VERSION, OUT_DIR, facet_membership_profile, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 114,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"tol\": TOL, \"n_seeds\": N_SEEDS,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_inloop_power_and_weight_sweep.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_inloop_seedcheck.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 25,
+     "line": "BLOCKS_VERSION, OUT_DIR, facet_membership_profile, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 98,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_inloop_seedcheck.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_inloop_seedcheck_v2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 21,
+     "line": "BLOCKS_VERSION, OUT_DIR, facet_membership_profile, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 103,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_inloop_seedcheck_v2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_inloop_sweep.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "cell_summary",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 45,
+     "line": "BLOCKS_VERSION, OUT_DIR, domain_community_volumes, domain_share_vectors,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 112,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_inloop_sweep.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_measurement.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "self_check_facet_relation_profile",
+    "live_counts_for",
+    "run_cell",
+    "summarize_dev_distribution",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 19,
+     "line": "# domain_balance_r_k (added this session, BLOCKS_VERSION 1.12.0) -- these",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 38,
+     "line": "BLOCKS_VERSION, OUT_DIR, FACET_DOMAIN, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 198,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_measurement.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_measurement_v2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 30,
+     "line": "BLOCKS_VERSION, OUT_DIR, FACET_DOMAIN, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 96,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_measurement_v2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_no_correction_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "domain_balance_for_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_or_load",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 52,
+     "line": "soc_vol += np.abs(np.diag(Z_final[r]))",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    },
+    {
+     "lineno": 55,
+     "line": "sem_vol += np.abs(np.diag(Z_final[r]))",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 34,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 111,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_no_correction_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_null_baseline.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "domain_rows",
+    "sharpness",
+    "dev_from_shares",
+    "draw_shares",
+    "sort_desc",
+    "inject",
+    "run_fit",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 51,
+     "line": "BLOCKS_VERSION, OUT_DIR, FACET_DOMAIN, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 215,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1, \"lambda_z_offdiag\": LAMBDA_Z_OFFDIAG,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_null_baseline.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_planted_null.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "cell_rng",
+    "plant_assignments",
+    "synth_relation",
+    "build_synthetic",
+    "recovery",
+    "planted_true_dev",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 72,
+     "line": "BLOCKS_VERSION, OUT_DIR, FACET_DOMAIN, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 356,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"within_fracs\": WITHIN_FRACS,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_planted_null.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_raw_penalty_measure.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "raw_penalty",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 28,
+     "line": "BLOCKS_VERSION, OUT_DIR, facet_membership_profile, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 95,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"tol\": TOL, \"results\": results,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_raw_penalty_measure.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_seed_noise.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 39,
+     "line": "BLOCKS_VERSION, OUT_DIR, domain_balance_r_k, facet_membership_profile,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 154,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_seed_noise.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_seed_noise_v2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 42,
+     "line": "BLOCKS_VERSION, OUT_DIR, domain_balance_r_k, facet_membership_profile,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 191,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_seed_noise_v2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_tol_and_power_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "load_prior_baseline",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 46,
+     "line": "BLOCKS_VERSION, OUT_DIR, facet_membership_profile, domain_balance_r_k,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 156,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"checks\": CHECKS, \"n_seeds\": N_SEEDS,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_tol_and_power_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_balance_v1_v2_noise_compare.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "load",
+    "mean_dev_sd_from_r_matrix",
+    "cell_mean_dev",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_balance_v1_v2_noise_compare.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_penalty_exclude_affil_test.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_condition",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 23,
+     "line": "BLOCKS_VERSION, OUT_DIR, domain_community_volumes, domain_membership_distributions,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 88,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_penalty_exclude_affil_test.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_penalty_exploit_hop_nnz_interaction.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "relation_hop_distance"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 22,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, relation_hop_distance",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 74,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"rows\": rows}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_penalty_exploit_hop_nnz_interaction.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_penalty_exploit_relation_trace.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "trace_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 44,
+     "line": "mass0 = float(np.sum(np.abs(np.diag(Z0[r]))))",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    },
+    {
+     "lineno": 45,
+     "line": "mass10 = float(np.sum(np.abs(np.diag(Z10[r]))))",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 22,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_instrumented, hungarian_diagonal_match,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 81,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"rows\": all_rows}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_penalty_exploit_relation_trace.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_penalty_exploitability_grid.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "cell_summary",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 85,
+     "line": "mass0 = float(np.sum(np.abs(np.diag(Z0[r]))))",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    },
+    {
+     "lineno": 86,
+     "line": "mass10 = float(np.sum(np.abs(np.diag(Z10[r]))))",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 25,
+     "line": "BLOCKS_VERSION, OUT_DIR, domain_community_volumes, domain_membership_distributions,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 117,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cell_rows\": cell_rows,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "domain_penalty_exploitability_grid.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_penalty_exploitability_test.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "u_scales_cv",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 37,
+     "line": "BLOCKS_VERSION, OUT_DIR, domain_community_volumes, domain_membership_distributions,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 110,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_penalty_exploitability_test.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_skew_s5_alignment_reproducibility.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "fit_seed",
+    "cell_reproducibility",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 32,
+     "line": "BLOCKS_VERSION, OUT_DIR, apply_seed_permutation, domain_community_volumes,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 129,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"seeds\": SEEDS, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_skew_s5_alignment_reproducibility.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_skew_s5_continuous_consensus.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "fit_seed",
+    "cell_consensus",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 27,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_instrumented, load_module, s5_dual_track_consensus,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 99,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"seeds\": SEEDS, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_skew_s5_continuous_consensus.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "domain_skew_seed_reproducibility.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "fit_seed",
+    "cell_reproducibility",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 38,
+     "line": "BLOCKS_VERSION, OUT_DIR, align_seed_permutation, apply_seed_permutation,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 119,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"seeds\": SEEDS, \"results\": results},",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "domain_skew_seed_reproducibility.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_article_degree_vs_winner_loading.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": true,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 28,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_or_load, hungarian_diagonal_match, load_module, presence_masks,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 107,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"configs\": CONFIGS, \"K\": K, \"slices\": SLICES,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_article_degree_vs_winner_loading.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_article_side_reading.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_or_load",
+    "load_module",
+    "presence_masks"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 28,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module, presence_masks",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 89,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cells\": {f\"{s}/{c}/K{k}\": v for (s, c, k), v in CELLS.items()},",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_article_side_reading.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_auth_collinearity_and_concentration.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "herfindahl",
+    "top2_share",
+    "cu_offdiag_stats",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 101,
+     "line": "result[\"s_art_auth_diagonal_raw\"] = np.diag(Z).tolist()",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": true,
+     "looks_paired_or_self_labeled": true
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 32,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_or_load, hungarian_diagonal_match, load_module,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 176,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"configs\": CONFIGS, \"k_list\": K_LIST,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_auth_collinearity_and_concentration.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_lambda_z_sensitivity.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "topn_share",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 64,
+     "line": "\"s_art_auth_diagonal_raw\": np.diag(Z).tolist(),",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": true,
+     "looks_paired_or_self_labeled": true
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 30,
+     "line": "BLOCKS_VERSION, OUT_DIR, community_share_vector, fit_or_load, hungarian_diagonal_match,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 88,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cells\": CELLS, \"lambda_z_values\": LAMBDA_Z_VALUES,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_lambda_z_sensitivity.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_no_affil_ablation.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "fit_no_affil",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 143,
+     "line": "diag = np.diag(Z_final[\"S_Art_Auth\"])",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 29,
+     "line": "BLOCKS_VERSION, OUT_DIR, build_active_matrices, community_share_vector, get_init,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 159,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cells\": CELLS, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_no_affil_ablation.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_suspicious_cells_investigation.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 67,
+     "line": "\"diagonal_all_k_raw\": np.diag(Z).tolist(),",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": true,
+     "looks_paired_or_self_labeled": true
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 35,
+     "line": "BLOCKS_VERSION, OUT_DIR, community_share_vector, domain_balance_r_k, facet_membership_profile,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 138,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cells\": CELLS, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_suspicious_cells_investigation.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_test1_gauge_invariance.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "reconstruct_pos",
+    "forward_pass",
+    "apply_transform",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "community_share_vector",
+    "fit_or_load",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 37,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, community_share_vector, fit_or_load, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 177,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"test_cases\": TEST_CASES, \"results\": results},",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_test1_gauge_invariance.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_test2_dead_entity_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 34,
+     "line": "BLOCKS_VERSION, OUT_DIR, community_share_vector, fit_or_load, load_module, presence_masks,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 104,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cells\": CELLS, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_test2_dead_entity_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_test3_share_distribution.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_or_load",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 40,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 117,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"configs\": CONFIGS, \"k_list\": K_LIST,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_test3_share_distribution.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "ghost_test3v2_share_distribution.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_or_load",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 23,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 101,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"configs\": CONFIGS, \"k_list\": K_LIST,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "ghost_test3v2_share_distribution.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "grammar_damping_cousin_he_more_seeds.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "load_module",
+    "load_slice",
+    "fit_or_load",
+    "presence_masks"
+   ],
+   "imports_diagnostic_blocks_module": true,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 31,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, load_module, load_slice, fit_or_load, presence_masks",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 106,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"seeds\": seeds, \"results\": results}, fh, indent=2, default=str)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "grammar_damping_cousin_he_more_seeds.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "grammar_damping_phase3_reanalysis.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "n_eff",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "load_module",
+    "load_slice",
+    "fit_or_load",
+    "presence_masks"
+   ],
+   "imports_diagnostic_blocks_module": true,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 56,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, load_module, load_slice, fit_or_load, presence_masks",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 209,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"seeds\": seeds,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "grammar_damping_phase3_reanalysis.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "grammar_damping_phase3_seed_pairs.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "build_damped_pickle",
+    "row_degree",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": true,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 81,
+     "line": "BLOCKS_VERSION, OUT_DIR, load_module, load_slice, fit_or_load, presence_masks,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 259,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"lambda_l1\": LAMBDA_L1,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "grammar_damping_phase3_seed_pairs.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "grammar_damping_tier0.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "log_damp_row",
+    "row_degrees",
+    "metric1_per_tie_ratio",
+    "metric2_mass_share",
+    "metric3_concentration",
+    "metric4_connectivity",
+    "metric5_bit_identity",
+    "metric6_dummy_cousin_split",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "OUT_DIR",
+    "load_slice"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "grammar_damping_tier0.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "grammar_damping_v1_vs_v2_quality.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 47,
+     "line": "BLOCKS_VERSION, OUT_DIR, load_module, fit_or_load, presence_masks,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 155,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"seeds\": seeds, \"n_fits\": n_fits,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "grammar_damping_v1_vs_v2_quality.json",
+   "output_json_exists": false,
+   "parse_error": false
+  },
+  {
+   "script": "journal_repo_resolution.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "norm_title",
+    "is_repo_source",
+    "author_identities",
+    "candidates_agree_on_author",
+    "fetch_openalex_title_search",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "journal_repo_resolution.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "journal_repo_resolution_v2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "norm_title",
+    "is_repo_source",
+    "author_identities",
+    "agree_on_author",
+    "openalex_title_search",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "journal_repo_resolution_v2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "journal_repo_resolution_v3.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "_load_known_repo_sources",
+    "_save_known_repo_sources",
+    "_auth_params",
+    "_polite_request",
+    "clean_query_title",
+    "norm_title",
+    "is_repo_source",
+    "location_rank",
+    "select_best_location",
+    "author_identities",
+    "candidates_agree_on_author",
+    "fetch_openalex_title_search",
+    "fetch_source_type",
+    "resolve_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "journal_repo_resolution_v3.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "labeling_criteria_and_share_comparison.py",
+   "module_docstring_first_line": "DIAGNOSTIC session. Does NOT modify chunk13v9.py. All fits are cache hits.",
+   "top_level_defs": [
+    "facet_leaf_status",
+    "reconstruction_space_shares"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "load_module",
+    "fit_or_load",
+    "hungarian_diagonal_match"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 158,
+     "line": "diag_raw = np.diag(np.abs(Zr))",
+     "self_labeled_raw": true,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": true
+    }
+   ],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "labeling_criteria_and_share_comparison.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "mass_mem_argmax_decomposition.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "relation_shares",
+    "facet_shares",
+    "aggregate",
+    "per_source_argmax_agreement",
+    "run_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_or_load",
+    "load_module",
+    "presence_masks"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 46,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module, presence_masks",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 175,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"slice_name\": SLICE_NAME,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "mass_mem_argmax_decomposition.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "mass_vs_membership_balance_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "cell_data",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 30,
+     "line": "BLOCKS_VERSION, OUT_DIR, domain_community_volumes, domain_membership_distributions,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 110,
+     "line": "\"blocks_version\": BLOCKS_VERSION,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "mass_vs_membership_balance_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "near_separability_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "facet_degrees",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 43,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_instrumented, load_module, load_slice,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 167,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "near_separability_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "parent_he_degree_distribution_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "column_degree_stats",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "OUT_DIR",
+    "load_slice"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": false,
+   "has_out_header": false,
+   "output_json_guess": "parent_he_degree_distribution_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "partB_term_variance.py",
+   "module_docstring_first_line": "DIAGNOSTIC (PART B). Is sociological_penalty effectively one term? For every",
+   "top_level_defs": [],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "partB_term_variance.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "permutation_consistency_sweep.py",
+   "module_docstring_first_line": "DIAGNOSTIC session. Does NOT modify chunk13v9.py.",
+   "top_level_defs": [
+    "analyze_relation",
+    "to_jsonable"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "load_module",
+    "fit_or_load",
+    "BLOCKS_VERSION",
+    "OUT_DIR"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 69,
+     "line": "diag_share_raw = float(np.sum(np.diag(absZ)) / total_mass) if total_mass > 0 else float(\"nan\")",
+     "self_labeled_raw": true,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": true
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 54,
+     "line": "from diagnostic_blocks import load_module, fit_or_load, BLOCKS_VERSION, OUT_DIR",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "permutation_consistency_sweep.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "permutation_driver_analysis.py",
+   "module_docstring_first_line": "DIAGNOSTIC session. Does NOT modify chunk13v9.py. Reads",
+   "top_level_defs": [
+    "real_conflicts_at"
+   ],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "permutation_driver_analysis.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "permutation_epoch_trajectory.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_cell",
+    "summarize",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 39,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_instrumented, hungarian_diagonal_match, load_module,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 137,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"log_every\": LOG_EVERY,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "permutation_epoch_trajectory.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "permutation_epoch_trajectory_grid.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "run_cell",
+    "classify_relation",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 30,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_instrumented, hungarian_diagonal_match, load_module,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 165,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"log_every\": LOG_EVERY,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "permutation_epoch_trajectory_grid.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "permutation_test.py",
+   "module_docstring_first_line": "Diagnostic-only. Tests whether \"off-diagonal Z mass\" is genuine cross-community",
+   "top_level_defs": [
+    "build_active_matrices",
+    "get_init",
+    "run_fit",
+    "load_npz_run",
+    "analyze_relation",
+    "to_jsonable"
+   ],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 215,
+     "line": "diag_share_raw = float(np.sum(np.diag(absZ)) / total_mass) if total_mass > 0 else float(\"nan\")",
+     "self_labeled_raw": true,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": true
+    }
+   ],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "permutation_test.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "relation_singular_spectrum.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "spectrum_stats",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "load_slice"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 31,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, load_slice",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 115,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "relation_singular_spectrum.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "rotation_feasibility_search.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "givens",
+    "meaningful_mask_u",
+    "meaningful_mask_z",
+    "feasible",
+    "max_feasible_angle",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_instrumented",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 42,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_instrumented, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 178,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"tol\": TOL, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "rotation_feasibility_search.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "rotation_feasibility_search_v2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "givens",
+    "meaningful_mask",
+    "feasible",
+    "max_feasible_angle",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_instrumented",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 40,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_instrumented, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 162,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"tol\": TOL, \"floor_exclude\": FLOOR_EXCLUDE,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "rotation_feasibility_search_v2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "rotation_island_search.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "givens",
+    "meaningful_mask_u",
+    "meaningful_mask_z",
+    "feasible",
+    "contiguous_runs",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_instrumented",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 36,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_instrumented, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 136,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"tol\": TOL, \"step_deg\": STEP_DEG, \"results\": results}, fh, indent=2)",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "rotation_island_search.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "rotation_island_search_v2.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "givens",
+    "meaningful_mask",
+    "feasible",
+    "contiguous_runs",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_instrumented",
+    "load_module"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 43,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_instrumented, load_module",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 148,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"tol\": TOL, \"floor_exclude\": FLOOR_EXCLUDE,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "rotation_island_search_v2.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "stage0c_affil_ablation_confound_test.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "herfindahl",
+    "top2_share",
+    "measure",
+    "run_cell",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 38,
+     "line": "BLOCKS_VERSION, OUT_DIR, community_share_vector, fit_instrumented,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 154,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cells\": CELLS,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "stage0c_affil_ablation_confound_test.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "stage0f_cu_dead_entity_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "cu_offdiag_stats",
+    "run_one",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_or_load",
+    "presence_masks"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 30,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, presence_masks",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 122,
+     "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"cells\": CELLS, \"facets\": FACETS,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "stage0f_cu_dead_entity_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "uscales_determinacy.py",
+   "module_docstring_first_line": "DIAGNOSTIC. Is U_scales a free gauge direction or data-determined?",
+   "top_level_defs": [
+    "build_active_matrices",
+    "get_init",
+    "run_fit",
+    "forward",
+    "recon_norms",
+    "sparsity_loss_of",
+    "z_offdiag_loss_of",
+    "recon_loss_of",
+    "stacked_U"
+   ],
+   "imports_from_diagnostic_blocks": [],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [],
+   "has_what_header": true,
+   "has_out_header": true,
+   "output_json_guess": "uscales_determinacy.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "z_scaled_diagonal_offdiagonal_gaming_check.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "relation_readings",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 46,
+     "line": "BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module, load_slice,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 134,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"lambda_z_list\": LAMBDA_Z_LIST,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "z_scaled_diagonal_offdiagonal_gaming_check.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "z_scaled_offdiag_calibration_test.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "relation_readings_corrected",
+    "self_check",
+    "part_a",
+    "part_b",
+    "corr",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "("
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [
+    {
+     "lineno": 82,
+     "line": "diag = np.diag(matrix)",
+     "self_labeled_raw": false,
+     "looks_paired_with_corrected": false,
+     "looks_paired_or_self_labeled": false
+    }
+   ],
+   "blocks_version_usage": [
+    {
+     "lineno": 43,
+     "line": "BLOCKS_VERSION, OUT_DIR, collapse_mass_share, fit_or_load, load_module, load_slice,",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 221,
+     "line": "\"blocks_version\": BLOCKS_VERSION,",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "z_scaled_offdiag_calibration_test.json",
+   "output_json_exists": true,
+   "parse_error": false
+  },
+  {
+   "script": "z_scaled_offdiag_calibration_test_raw.py",
+   "module_docstring_first_line": null,
+   "top_level_defs": [
+    "raw_readings",
+    "part_a",
+    "part_b",
+    "corr",
+    "main"
+   ],
+   "imports_from_diagnostic_blocks": [
+    "BLOCKS_VERSION",
+    "OUT_DIR",
+    "fit_or_load",
+    "load_module",
+    "load_slice"
+   ],
+   "imports_diagnostic_blocks_module": false,
+   "raw_diagonal_usage": [],
+   "blocks_version_usage": [
+    {
+     "lineno": 28,
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module, load_slice",
+     "looks_like_gate": false
+    },
+    {
+     "lineno": 161,
+     "line": "\"blocks_version\": BLOCKS_VERSION, \"method\": \"raw_uncorrected\",",
+     "looks_like_gate": false
+    }
+   ],
+   "has_what_header": true,
+   "has_out_header": false,
+   "output_json_guess": "z_scaled_offdiag_calibration_test_raw.json",
+   "output_json_exists": true,
+   "parse_error": false
+  }
+ ],
+ "unresolved_backtick_symbols": [
+  "ALL_POSSIBLE_ANCHORS",
+  "CONFIG_SWITCHBOARD",
+  "CORE_THRESHOLD",
+  "DCR_sem",
+  "DECODER_PATH",
+  "FLOOR_EXCLUDE",
+  "MEANINGFUL_FRAC",
+  "NSGAIISampler",
+  "PYTHONHASHSEED",
+  "Penalty_A",
+  "REPO_JOURNAL_IDS",
+  "Reynolds_HUM_NFS_28days_2026",
+  "SEMANTIC_CONFOUNDED_FACETS",
+  "Star_epistemic_decoders_global",
+  "Star_extended_matrices_t1",
+  "Star_extended_matrices_t1_v2",
+  "Star_extended_matrices_t2",
+  "T1_v2",
+  "T2_v2",
+  "U_final",
+  "U_norm",
+  "U_np",
+  "U_pos",
+  "U_prior",
+  "U_prob",
+  "U_prob_f1",
+  "U_prob_f2",
+  "U_raw",
+  "U_raw_",
+  "U_scales",
+  "U_scales_out",
+  "W_art",
+  "Z_final",
+  "Z_pos",
+  "Z_raw",
+  "Z_scaled",
+  "_seedcheck",
+  "_seedcheck_v2",
+  "_t2_v2",
+  "active_facets",
+  "actual_mass",
+  "anchor_keys",
+  "binding_penalty",
+  "bipartite_diagnostic_suite",
+  "build_",
+  "build_anchor_csr",
+  "build_grammar_csr",
+  "build_log_damped_row_csr",
+  "build_row_stochastic_csr",
+  "build_temporal_metagraph",
+  "calculate_global_domain_capital",
+  "clamp_",
+  "clean_data",
+  "coherence_k",
+  "coherence_pen",
+  "collapse_check_weighting_experiment",
+  "collapse_check_zscaled",
+  "collapse_pen",
+  "collapse_pen_optuna_study_v2",
+  "collapse_score",
+  "community_share",
+  "compile_slice",
+  "compute_hypervolume",
+  "converged_trials",
+  "core_",
+  "core_atom",
+  "core_child_he",
+  "corpus_curated",
+  "corpus_raw",
+  "corpus_text",
+  "correct_all_leaf_nodes",
+  "cousin_he",
+  "cu_auth",
+  "data_reading",
+  "data_share",
+  "dev_k",
+  "dev_mean",
+  "dfreq_global",
+  "diagnose_leaf_Z",
+  "diagonal_mass",
+  "domain_balance_inloop_power_and_weight_sweep",
+  "domain_balance_inloop_seedcheck",
+  "domain_balance_inloop_sweep",
+  "domain_balance_measurement",
+  "domain_balance_measurement_v2",
+  "domain_balance_pen",
+  "domain_balance_raw_penalty_measure",
+  "domain_balance_seed_noise",
+  "domain_balance_seed_noise_v2",
+  "domain_balance_v1_v2_noise_compare",
+  "domain_penalty_exploitability_",
+  "domain_penalty_exploitability_grid",
+  "dummy_cousin",
+  "entropy_threshold",
+  "epochs_run",
+  "evaluate_socio_semantic_",
+  "extra_loss_fn",
+  "extract_dual_matrices",
+  "fringe_atom",
+  "fro_norm",
+  "get_art_idx",
+  "get_idx",
+  "ghost_article_degree_vs_winner_loading",
+  "ghost_article_side_reading",
+  "ghost_auth_collinearity_and_concentration",
+  "ghost_lambda_z_sensitivity",
+  "ghost_no_affil_ablation",
+  "ghost_suspicious_cells_investigation",
+  "ghost_test1_gauge_invariance",
+  "ghost_test2_dead_entity_check",
+  "ghost_test3_share_distribution",
+  "ghost_test3v2_share_distribution",
+  "grammar_damping_cousin_he_more_seeds",
+  "identify_leaf_nodes",
+  "idf_dict",
+  "idf_global",
+  "inner_epochs",
+  "involvement_k",
+  "journal_id",
+  "journal_meta",
+  "journal_name",
+  "journal_repo_resolution",
+  "journal_repo_resolution_v3",
+  "k_svd",
+  "known_repository_sources",
+  "l1_penalty",
+  "lambda_domain_balance",
+  "lambda_l1",
+  "lambda_z_offdiag",
+  "linear_sum_assignment",
+  "mass_max",
+  "mass_share",
+  "mass_tvd",
+  "master_dual_track_stability_report",
+  "math_loss",
+  "max_k",
+  "max_monopoly",
+  "max_share",
+  "max_u_prob",
+  "mean_dev_k",
+  "mean_js_sim",
+  "mean_k",
+  "mean_sparsity",
+  "mem_max",
+  "mem_share",
+  "mem_tvd",
+  "meta_set",
+  "methodology_report",
+  "min_share",
+  "model_metadata",
+  "n_trials",
+  "near_separability_check",
+  "noiseSD_mean",
+  "normalized_entropy",
+  "num_entries",
+  "parent_he",
+  "pareto_trials",
+  "parse_errors",
+  "permutation_consistency_sweep",
+  "permutation_driver_analysis",
+  "population_size",
+  "postprocessing_4h",
+  "primary_location",
+  "pure_recon_loss",
+  "py_compile",
+  "raw_data",
+  "raw_domain_balance_penalty",
+  "raw_sparsity_loss",
+  "recon_loss",
+  "rel_change",
+  "relation_recon",
+  "resume_events",
+  "rotation_feasibility_search_v2",
+  "rotation_island_search_v2",
+  "scale_matrix",
+  "scout_methodology_report",
+  "sem_k",
+  "sem_keys",
+  "semantic_pen",
+  "set_num_threads",
+  "share_k",
+  "share_sum",
+  "soc_k",
+  "soc_keys",
+  "sociological_penalty",
+  "source_core",
+  "sparsity_loss",
+  "sqlite_set",
+  "structure_score",
+  "submit_chunk13v9",
+  "suggest_float",
+  "target_facets",
+  "target_norm_sq",
+  "top_k_to_keep",
+  "total_loss",
+  "total_sum",
+  "u_prob",
+  "use_deterministic_algorithms",
+  "user_attrs",
+  "v3v4_ratio",
+  "valid_pts",
+  "venue_type",
+  "warn_only",
+  "weakest_mean",
+  "weighted_cos_sim",
+  "within_k",
+  "z_offdiag",
+  "z_offdiag_loss",
+  "z_scaled",
+  "z_scaled_v1"
+ ],
+ "unresolved_backtick_symbols_note": "First-pass, low-precision signal: this bucket still mixes genuine gaps (a symbol the docs describe as belonging to chunk13v9.py/diagnostic_blocks.py that isn't there) with local variable names (never captured as top-level symbols, not a real gap), and names correctly attributed elsewhere (chunk12.py, old chunk13v3/v4.py, toy_large.ipynb -- out of this script's scan scope, not missing). Needs a sharper filter (e.g. requiring '(' immediately after the name, or cross-referencing against chunk12.py/the notebook too) before being treated as an escalation list on its own.",
+ "escalate_ambiguous_raw_diagonal": [
+  {
+   "script": "domain_balance_no_correction_check.py",
+   "lineno": 52,
+   "line": "soc_vol += np.abs(np.diag(Z_final[r]))",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  },
+  {
+   "script": "domain_balance_no_correction_check.py",
+   "lineno": 55,
+   "line": "sem_vol += np.abs(np.diag(Z_final[r]))",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  },
+  {
+   "script": "domain_penalty_exploit_relation_trace.py",
+   "lineno": 44,
+   "line": "mass0 = float(np.sum(np.abs(np.diag(Z0[r]))))",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  },
+  {
+   "script": "domain_penalty_exploit_relation_trace.py",
+   "lineno": 45,
+   "line": "mass10 = float(np.sum(np.abs(np.diag(Z10[r]))))",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  },
+  {
+   "script": "domain_penalty_exploitability_grid.py",
+   "lineno": 85,
+   "line": "mass0 = float(np.sum(np.abs(np.diag(Z0[r]))))",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  },
+  {
+   "script": "domain_penalty_exploitability_grid.py",
+   "lineno": 86,
+   "line": "mass10 = float(np.sum(np.abs(np.diag(Z10[r]))))",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  },
+  {
+   "script": "ghost_no_affil_ablation.py",
+   "lineno": 143,
+   "line": "diag = np.diag(Z_final[\"S_Art_Auth\"])",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  },
+  {
+   "script": "z_scaled_offdiag_calibration_test.py",
+   "lineno": 82,
+   "line": "diag = np.diag(matrix)",
+   "self_labeled_raw": false,
+   "looks_paired_with_corrected": false,
+   "looks_paired_or_self_labeled": false
+  }
+ ],
+ "scripts_not_importing_diagnostic_blocks": [
+  "domain_balance_v1_v2_noise_compare.py",
+  "journal_repo_resolution.py",
+  "journal_repo_resolution_v2.py",
+  "journal_repo_resolution_v3.py",
+  "partB_term_variance.py",
+  "permutation_driver_analysis.py",
+  "permutation_test.py",
+  "uscales_determinacy.py"
+ ],
+ "scripts_missing_session_protocol_headers": [
+  "collapse_pen_exploitability_sweep.py",
+  "collapse_pen_mass_vs_membership_check.py",
+  "collapse_pen_optuna_study.py",
+  "collapse_pen_optuna_study_t2.py",
+  "collapse_pen_optuna_study_v2.py",
+  "core_periphery_stability_test.py",
+  "cousin_child_column_test.py",
+  "domain_balance_corrected_check.py",
+  "domain_balance_inloop_power_and_weight_sweep.py",
+  "domain_balance_inloop_seedcheck.py",
+  "domain_balance_inloop_seedcheck_v2.py",
+  "domain_balance_inloop_sweep.py",
+  "domain_balance_measurement.py",
+  "domain_balance_measurement_v2.py",
+  "domain_balance_no_correction_check.py",
+  "domain_balance_null_baseline.py",
+  "domain_balance_planted_null.py",
+  "domain_balance_raw_penalty_measure.py",
+  "domain_balance_seed_noise.py",
+  "domain_balance_seed_noise_v2.py",
+  "domain_balance_tol_and_power_check.py",
+  "domain_balance_v1_v2_noise_compare.py",
+  "domain_penalty_exclude_affil_test.py",
+  "domain_penalty_exploit_hop_nnz_interaction.py",
+  "domain_penalty_exploit_relation_trace.py",
+  "domain_penalty_exploitability_grid.py",
+  "domain_penalty_exploitability_test.py",
+  "domain_skew_s5_alignment_reproducibility.py",
+  "domain_skew_s5_continuous_consensus.py",
+  "domain_skew_seed_reproducibility.py",
+  "ghost_article_degree_vs_winner_loading.py",
+  "ghost_article_side_reading.py",
+  "ghost_auth_collinearity_and_concentration.py",
+  "ghost_lambda_z_sensitivity.py",
+  "ghost_no_affil_ablation.py",
+  "ghost_suspicious_cells_investigation.py",
+  "ghost_test1_gauge_invariance.py",
+  "ghost_test2_dead_entity_check.py",
+  "ghost_test3_share_distribution.py",
+  "ghost_test3v2_share_distribution.py",
+  "grammar_damping_cousin_he_more_seeds.py",
+  "grammar_damping_phase3_reanalysis.py",
+  "grammar_damping_phase3_seed_pairs.py",
+  "grammar_damping_tier0.py",
+  "grammar_damping_v1_vs_v2_quality.py",
+  "journal_repo_resolution.py",
+  "journal_repo_resolution_v2.py",
+  "journal_repo_resolution_v3.py",
+  "mass_mem_argmax_decomposition.py",
+  "mass_vs_membership_balance_check.py",
+  "near_separability_check.py",
+  "parent_he_degree_distribution_check.py",
+  "permutation_epoch_trajectory.py",
+  "permutation_epoch_trajectory_grid.py",
+  "relation_singular_spectrum.py",
+  "rotation_feasibility_search.py",
+  "rotation_feasibility_search_v2.py",
+  "rotation_island_search.py",
+  "rotation_island_search_v2.py",
+  "stage0c_affil_ablation_confound_test.py",
+  "stage0f_cu_dead_entity_check.py",
+  "z_scaled_diagonal_offdiagonal_gaming_check.py",
+  "z_scaled_offdiag_calibration_test.py",
+  "z_scaled_offdiag_calibration_test_raw.py"
+ ],
+ "scripts_with_no_result_json": [
+  "grammar_damping_v1_vs_v2_quality.py"
+ ],
+ "ticket_mentions_count": {
+  "CLAUDE.md": 97,
+  "FINDINGS.md": 57
+ },
+ "tag_mentions_count": {
+  "CLAUDE.md": 10,
+  "FINDINGS.md": 10
+ },
+ "planned_not_implemented_mentions": {
+  "CLAUDE.md": [
+   {
+    "phrase": "not yet implemented",
+    "lineno": 204,
+    "line": "or the non-monotonicity. Not yet implemented \u2014 the mass-input problem (point 1) should be"
+   },
+   {
+    "phrase": "not yet acted on",
+    "lineno": 455,
+    "line": "**Not yet acted on.** Redesigning this is a decision, not a bug fix \u2014 see FINDINGS \u00a715 for"
+   },
+   {
+    "phrase": "not yet implemented",
+    "lineno": 466,
+    "line": "> \"v9 currently has no per-community domain-balance mechanism at all\", \"not yet implemented"
+   },
+   {
+    "phrase": "not yet implemented",
+    "lineno": 496,
+    "line": "property (design session, not yet implemented in code; full reasoning in FINDINGS \u00a713's"
+   },
+   {
+    "phrase": "not yet implemented",
+    "lineno": 497,
+    "line": "update).** **[HISTORICAL \u2014 \"not yet implemented in code\" was true when written; both halves"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 551,
+    "line": "**E1 measurement (diagnostic-only, `diagnostic_scripts/domain_balance_measurement.py`,"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 584,
+    "line": "`chunk13v9.py`, not diagnostic-only:"
+   },
+   {
+    "phrase": "not yet acted on",
+    "lineno": 656,
+    "line": "**Direct consequences, not yet acted on in code:** (1) `evaluate_domain_balance` is summed"
+   },
+   {
+    "phrase": "proposed, not run",
+    "lineno": 662,
+    "line": "planted test for it is proposed, not run. **Limitations, stated because they bound the"
+   },
+   {
+    "phrase": "considered and rejected",
+    "lineno": 690,
+    "line": "consumer saw the corrected labeling automatically. That approach was considered and rejected"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 799,
+    "line": "measurable, phenomenon confirmed real and structural, no mechanism yet (diagnostic-only)"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 864,
+    "line": "**No mechanism (in-loop or outer-loop) has been designed.** This ticket is diagnostic-only"
+   },
+   {
+    "phrase": "not yet done",
+    "lineno": 865,
+    "line": "throughout, deliberately, matching how tickets 82/84 were sequenced. **Not yet done:** the"
+   },
+   {
+    "phrase": "not yet started",
+    "lineno": 1099,
+    "line": "| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-communit"
+   },
+   {
+    "phrase": "no mechanism",
+    "lineno": 1100,
+    "line": "| 86 | M2/M3, per-community mass (\"ghost communities\") | No mechanism exists to detect or address a community holding very low share of the model's total reconstructed mass \u2014 the third major open issue this session, alon"
+   },
+   {
+    "phrase": "not yet implemented",
+    "lineno": 1190,
+    "line": "## 10. Planned Extensions (not yet implemented)"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 1227,
+    "line": "the full corpus, not the toy corpus \u2014 diagnostic-only, no production wiring implied by"
+   },
+   {
+    "phrase": "considered and rejected",
+    "lineno": 1254,
+    "line": "**Considered and rejected: an R\u00b2/explained-variance analog.** Since every relation is already"
+   },
+   {
+    "phrase": "status: proposal only",
+    "lineno": 1269,
+    "line": "**Status: proposal only, not scheduled, not built.** No code exists for either (1) or (2)."
+   }
+  ],
+  "FINDINGS.md": [
+   {
+    "phrase": "not yet implemented",
+    "lineno": 839,
+    "line": "**The mechanism, as designed (not yet implemented in `chunk13v9.py`):** two components,"
+   },
+   {
+    "phrase": "not yet run",
+    "lineno": 1174,
+    "line": "gauge-fixing pressure. Not yet run."
+   },
+   {
+    "phrase": "not yet done",
+    "lineno": 1241,
+    "line": "separately \u2014 not yet done; unknown whether the 0.054\u20130.132 range is really"
+   },
+   {
+    "phrase": "not yet run",
+    "lineno": 2238,
+    "line": "the next natural step (not yet run) would be a K=3-focused, `C5`-focused deeper sweep to see"
+   },
+   {
+    "phrase": "considered and rejected",
+    "lineno": 2681,
+    "line": "Raising it toward the new p90 (\u22480.17) was considered and rejected: D3's own rule was \"set"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 2871,
+    "line": "`chunk13v9.py`, not diagnostic-only.** The in-loop weight (`lambda_domain_balance`) is fixed"
+   },
+   {
+    "phrase": "no mechanism",
+    "lineno": 3025,
+    "line": "partial remedy (excluding affiliations) piloted with a config-dependent result. No mechanism"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 3026,
+    "line": "designed or implemented \u2014 this ticket is diagnostic-only so far, deliberately, matching the"
+   },
+   {
+    "phrase": "not yet run",
+    "lineno": 3235,
+    "line": "full C1\u2013C6 \u00d7 K\u2208{2..6} \u00d7 both data versions grid as a follow-up, not yet run."
+   },
+   {
+    "phrase": "not yet done",
+    "lineno": 3287,
+    "line": "### What remains open, not yet done"
+   },
+   {
+    "phrase": "not yet run",
+    "lineno": 3290,
+    "line": "scoped (~120 fits, cheap individually), not yet run."
+   },
+   {
+    "phrase": "no mechanism",
+    "lineno": 3296,
+    "line": "- No mechanism (in-loop or outer-loop) has been designed or proposed \u2014 this ticket remains"
+   },
+   {
+    "phrase": "diagnostic-only",
+    "lineno": 3297,
+    "line": "diagnostic-only throughout, matching the sequencing the user set at its start (\"we need to"
+   },
+   {
+    "phrase": "not yet acted on",
+    "lineno": 3451,
+    "line": "**Version mismatch found, not yet acted on:** `corpus_curated.sqlite` (mtime Jun 15 23:02)"
+   },
+   {
+    "phrase": "not yet done",
+    "lineno": 3504,
+    "line": "- **Not yet done:** whether/how to re-run preprocessing or postprocessing to recover these 3"
+   }
+  ]
+ }
+}

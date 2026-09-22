@@ -1,0 +1,266 @@
+[
+  {
+    "fact_id": "F-CHUNK13V9-01",
+    "symbol": "evaluate_domain_balance",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [1342, 1436],
+    "current_signature_or_value": "def evaluate_domain_balance(U_prob, presence_masks, tol=DOMAIN_BALANCE_TOL):",
+    "current_docstring_summary": "Outer-loop, U_prob-based (NOT Z_scaled-based) per-community domain-balance check. Builds soc_facets/sem_facets lists restricted to facets present in presence_masks with sum()>0 and present in U_prob, using FACET_DOMAIN to classify each facet as social/semantic. For each domain, computes an entity-count-weighted mean U_prob row over live entities only (nested _weighted_share, line 1408) across that domain's live facets. r_k = soc_share/(soc_share+sem_share+eps) per community k; dev_k = |r_k-0.5|; penalty = mean_k(max(0, dev_k - tol)^2). Returns a 2-tuple (domain_balance_pen: float, mean_dev_k: float), both already native Python float (no separate float() cast needed at call site since np.mean(...) results are cast inline).",
+    "notable_facts": [
+      "Returns (0.0, 0.0) if either soc_facets or sem_facets end up empty, or if either _weighted_share() returns None (total live-entity weight 0) — i.e. it silently no-ops to zero penalty rather than raising, in configs where one domain has no live facets.",
+      "tol default is DOMAIN_BALANCE_TOL=0.15; per CLAUDE.md this is explicitly NOT in Optuna's search space (never passed a non-default tol anywhere in the file — grep confirms only one call site, evaluate_complete_solution line 1516-1519, uses the default).",
+      "Called exactly once in the whole file: inside evaluate_complete_solution (line 1516), reusing U_prob and presence_masks already computed there for Section 4 (evaluate_socio_semantic_reality) rather than recomputing them.",
+      "domain_balance_pen is summed UNCONDITIONALLY into sociological_penalty at line 1521, regardless of the separate in-loop lambda_domain_balance weight (which defaults to 0.0 and is architecturally independent of this outer-loop function).",
+      "Units: r_k and dev_k are dimensionless probability-mass shares (entity-count-weighted mean of L1 row-normalized U_prob rows), not raw counts.",
+      "Per CLAUDE.md's own ticket 82/E3 record (not this agent's judgment, just noting the doc's own claim for cross-reference): a planted-structure test found this formula's output (dev_k) does not track true planted domain imbalance on this corpus — but the code of evaluate_domain_balance itself, read in isolation, is internally consistent with its docstring's stated formula."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-02",
+    "symbol": "_weighted_share",
+    "kind": "nested_function",
+    "file": "chunk13v9.py",
+    "lines": [1408, 1421],
+    "current_signature_or_value": "def _weighted_share(facets): (nested inside evaluate_domain_balance)",
+    "current_docstring_summary": "No docstring (anonymous nested helper). Computes total_w = sum of live-entity counts across the given facets (presence_masks[f].sum()); for each facet, takes the live-entity subset of U_prob[f], computes its column-wise mean (mean over rows/entities, per community k), weights that per-facet mean by the facet's live-entity count, sums across facets, and divides by total_w. Returns None if total_w is 0 or if no facet contributed (acc stays None); otherwise returns a length-K ndarray of the entity-count-weighted mean U_prob profile for that set of facets.",
+    "notable_facts": [
+      "This is entity-count weighting (D2 in CLAUDE.md ticket 82), not equal-per-facet weighting — a facet with more live entities dominates the domain-level average more, algebraically equivalent to pooling all live entities in the domain and taking one grand mean.",
+      "Only used inside evaluate_domain_balance (called twice per invocation: once for soc_facets, once for sem_facets). Not reused elsewhere in the file — the differentiable in-loop analog (_db_domain_share, ~line 618) is a separately written torch version, not a call to this function (by design, per the file's own comments, to keep Module 2/Module 3 separate)."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-03",
+    "symbol": "evaluate_complete_solution",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [1445, 1532],
+    "current_signature_or_value": "def evaluate_complete_solution(U_final, Z_final, U_scales_out, raw_data, soc_keys, sem_keys, anchor_keys, max_monopoly, entropy_threshold, target_coherence):",
+    "current_docstring_summary": "Single-line docstring only (\"Computes every outer-loop sociological metric from a solved model. This function is the single source of truth for sociological evaluation.\"). Body: converts U_final/Z_final tensors to numpy if needed; builds active_matrices set; rebuilds presence_masks fresh via build_presence_masks(raw_data, soc_keys, sem_keys); computes U_prob via compute_probability_distributions(U_numpy); calls evaluate_dimensional_collapse(U_final=U_numpy, Z_final=Z_numpy) — NOTE: called with only 2 args, using its own defaults for max_share_threshold/structure_threshold, NOT this function's own entropy_threshold parameter; calls evaluate_topological_coherence(Z_numpy, target_coherence, frozenset(anchor_keys)); calls evaluate_socio_semantic_reality(U_prob, raw_data, active_matrices_set, max_monopoly, presence_masks); calls evaluate_domain_balance(U_prob, presence_masks) reusing U_prob/presence_masks already computed. sociological_penalty = collapse_pen + coherence_pen + socio_semantic_pen + domain_balance_pen (line 1521) — FOUR terms, unweighted (no lambda multipliers), summed unconditionally. Returns a dict with exactly 8 keys: collapse_pen, collapse_score, coherence_pen, weakest_coherence, semantic_pen, domain_balance_pen, mean_dev_k, sociological_penalty.",
+    "notable_facts": [
+      "sociological_penalty is composed of 4 unweighted terms (collapse_pen + coherence_pen + socio_semantic_pen(returned under dict key 'semantic_pen') + domain_balance_pen), confirmed directly at line 1521. Any doc claiming 3 terms is describing a pre-ticket-82-E2 state.",
+      "The function's own parameters U_scales_out and entropy_threshold are VESTIGIAL for this call (per an explicit in-code comment at ~line 1484-1491) — kept only so the external signature doesn't change across its 3 call sites (CLAUDE.md §3 policy), but neither value is actually forwarded into evaluate_dimensional_collapse anymore (that function uses its own MAX_SHARE_THRESHOLD/STRUCTURE_SCORE_THRESHOLD module defaults, not entropy_threshold).",
+      "max_monopoly and target_coherence, by contrast, ARE actively used (forwarded to evaluate_socio_semantic_reality and evaluate_topological_coherence respectively).",
+      "All 8 dict values are already native Python floats by the time they reach this dict, since each sub-function (evaluate_dimensional_collapse, evaluate_topological_coherence, evaluate_socio_semantic_reality, evaluate_domain_balance) casts to float at its own return."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-04",
+    "symbol": "evaluate_dimensional_collapse",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [931, 1023],
+    "current_signature_or_value": "def evaluate_dimensional_collapse(U_final, Z_final, max_share_threshold=MAX_SHARE_THRESHOLD, structure_threshold=STRUCTURE_SCORE_THRESHOLD):",
+    "current_docstring_summary": "Computes community mass from Z_scaled (relation-level, permutation-corrected via _hungarian_relabel_relation/_relation_community_share), NOT from U_scales (U_scales is an undetermined free gauge direction, per the docstring's own citation of ticket 79). For each relation in Z_final, gets a per-community reconstruction-space share vector via _relation_community_share; averages these vectors across all active relations with EQUAL weight (no nnz-weighting, no structure_score-weighting, no recon-quality-weighting — all three were tested and rejected per the docstring); renormalizes the K-length averaged vector to sum to 1 (falling back to uniform 1/K if total_share <= 1e-15). max_share = the max of this normalized vector. collapse_pen = squared ceiling penalty: (max(0, max_share - max_share_threshold) / (1 - max_share_threshold))^2. Returns (collapse_pen: float, max_share: float) — the second return value is documented as reusing the dict key name 'collapse_score' downstream even though its MEANING changed (was normalized_entropy, now max_share).",
+    "notable_facts": [
+      "Does NOT take U_scales_out as an argument at all (unlike its historical/older version implied by some docs) — signature is only (U_final, Z_final, max_share_threshold, structure_threshold).",
+      "Called from evaluate_complete_solution with ONLY 2 positional/keyword args (U_final=U_numpy, Z_final=Z_numpy) — max_share_threshold and structure_threshold use their module-constant defaults every time in production; nothing in the file overrides them at the call site.",
+      "The local variable named `community_share` inside this function (line 1013) is NOT a standalone function — it is a local ndarray variable, the mean-then-renormalized per-community share vector. Any doc reference to a function/symbol literally named `community_share_vector` does not correspond to this variable (see F-CHUNK13V9-NOTFOUND-01 — that exact name has zero hits anywhere in this file).",
+      "Guards K<2 and empty Z_final by returning (0.0, 1.0) immediately — no penalty, max_share pinned to 1.0 (this is a degenerate/trivial-case return, not a real measurement).",
+      "Cross-relation conflicts are NOT resolved: each relation is corrected independently via _hungarian_relabel_relation; the docstring explicitly states this function does not detect or resolve disagreement between multiple relations sharing a non-leaf facet."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-05",
+    "symbol": "_hungarian_relabel_relation",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [847, 891],
+    "current_signature_or_value": "def _hungarian_relabel_relation(Z, structure_threshold):",
+    "current_docstring_summary": "Given a K x K relation core matrix Z, uses scipy.optimize.linear_sum_assignment on -abs(Z) to find the diagonal-maximizing permutation (Hungarian algorithm). structure_score = min(matched diagonal-under-permutation entries) / max(unmatched entries). Returns (perm: list[int], trusted: bool) where trusted = structure_score > structure_threshold. If total_mass of abs(Z) is <=1e-15, short-circuits to (list(range(K)), False) (identity perm, not trusted). If max_unmatched is ~0 (no off-diagonal mass), structure_score is set to float('inf') (always trusted in that case).",
+    "notable_facts": [
+      "trusted=True (structure_score > threshold) means a confidently clean relabelling exists and IS applied by callers; trusted=False means genuine mixed coupling and the raw identity permutation is used as-is — this is the interpretation stated directly in the docstring, consistent with STRUCTURE_SCORE_THRESHOLD's own comment.",
+      "structure_threshold has no default in this function's own signature — every caller must supply it explicitly. Its only caller in the file, _relation_community_share, passes through its own structure_threshold parameter, which in turn is only ever supplied the module constant STRUCTURE_SCORE_THRESHOLD by evaluate_dimensional_collapse's default.",
+      "Called only from _relation_community_share (line 920) in this file — not called directly from evaluate_complete_solution or anywhere else."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-06",
+    "symbol": "_relation_community_share",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [894, 928],
+    "current_signature_or_value": "def _relation_community_share(Z, U_final_f1, U_final_f2, structure_threshold):",
+    "current_docstring_summary": "Computes a reconstruction-space per-community share vector for one relation. Gets (perm, trusted) from _hungarian_relabel_relation; uses the corrected permutation p if trusted, else identity. Computes c_u = U_final_f1.T @ U_final_f1, c_v = U_final_f2.T @ U_final_f2, and total = trace(Z.T @ c_u @ Z @ c_v) — the relation's entire reconstructed Frobenius mass (diagonal AND off-diagonal, i.e. including cross-community interference). within[k] = Z[k, p[k]]^2 for each community k (this reduces algebraically to the within-community reconstructed mass because U_norm's columns are unit-L2 by construction). Returns within/total elementwise, or a uniform 1/K vector if total <= 1e-15.",
+    "notable_facts": [
+      "This is the function CLAUDE.md's own §4.18 design section names as production's own mass mechanism for the (superseded, rejected) Z_scaled-based domain-balance draft — it is used by evaluate_dimensional_collapse (via a loop over Z_final.items()), NOT by evaluate_domain_balance (which is U_prob-based and does not call this function at all).",
+      "Chosen over a simpler diagonal-sum share specifically because it is sensitive to cross-community interference (a relation whose mass is mostly off-diagonal contributes correspondingly little share to any community, rather than being forced to sum diagonal entries to 1).",
+      "Only caller in the file: evaluate_dimensional_collapse (one call per relation in Z_final, line 1010)."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-07",
+    "symbol": "_db_domain_share",
+    "kind": "nested_function",
+    "file": "chunk13v9.py",
+    "lines": [618, 639],
+    "current_signature_or_value": "def _db_domain_share(U_norm_dict, facets, w_total): (nested inside run_inner_solver)",
+    "current_docstring_summary": "The differentiable, in-loop (torch) analog of evaluate_domain_balance's outer-loop _weighted_share. Given U_norm_dict (differentiable torch tensors, NOT U_prob), a list of facets, and a precomputed total live-entity weight w_total: for each facet, masks to live entities via the closed-over db_mask_t[f] torch bool tensor, L1-row-normalizes inline (row_sums = sum(abs(live), dim=1) + 1e-12; u_prob_live = live/row_sums — i.e. it computes an on-the-fly U_prob equivalent from U_norm rather than calling compute_probability_distributions, which is numpy-only and would break autograd), weights the facet's live-row mean by db_live_counts[f] (live-entity count), sums across facets, and divides by w_total. Returns None if facets is empty, w_total==0, or no facet contributed data.",
+    "notable_facts": [
+      "This is the DIFFERENTIABLE counterpart used to build domain_balance_loss inside run_inner_solver's training loop (per-epoch), gated by lambda_domain_balance (default 0.0, read via params.get('lambda_domain_balance', 0.0) at line 572) — NOT the same code path as the outer-loop evaluate_domain_balance/_weighted_share, by explicit design (kept separate per the file's own comment at lines 604-607, to preserve the Module 2/Module 3 separation-of-concerns boundary).",
+      "Called twice per training epoch (once for db_soc_facets, once for db_sem_facets, at lines 692-693) inside the epoch loop of run_inner_solver.",
+      "The static topology it depends on (db_presence_masks, db_live_counts, db_mask_t, db_soc_facets, db_sem_facets, db_soc_total, db_sem_total) is computed ONCE before the epoch loop starts (lines 608-616), not recomputed per epoch — only the U_norm-dependent mean is recomputed each epoch.",
+      "The resulting domain_balance_loss (mean of squared dead-band excess past DOMAIN_BALANCE_TOL) is exposed unweighted in diagnostics as 'raw_domain_balance_penalty' (line 795-796) even when lambda_domain_balance=0 zeroes its contribution to total_loss/internal_soc_loss."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-08",
+    "symbol": "evaluate_socio_semantic_reality",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [1113, 1333],
+    "current_signature_or_value": "def evaluate_socio_semantic_reality(U_prob, raw_data, active_matrices, max_monopoly, presence_masks=None):",
+    "current_docstring_summary": "Computes a combined socio-semantic reality penalty in two parts. Part A: for each community k, propagates article-level weight W_art = U_prob['art'][:,k] outward through the active M_* relations (parent/child/cousin/atom/fringe, following the actual topology), and for each of 4 target semantic facets (core_child_he, cousin_he, core_atom, fringe_atom) compares a weighted average of the model's own U_prob loading (weighted by the propagated empirical weight) against a live-entity-masked baseline mean loading; squared-ceiling penalty when weighted_avg falls short of baseline. Part B: using the same propagated per-community weights captured as empirical_mass_capture, computes a normalized Shannon entropy per entity (how 'universal'/doxa-like a semantic node's empirical usage is) and multiplies a squared max_monopoly-ceiling penalty (on the model's own max learned U_prob loading) by that entropy — i.e. only penalizes hoarding of high-entropy/universal terms, not niche ones. Final: socio_semantic_pen = (Penalty_A + Penalty_B) / 2.0.",
+    "notable_facts": [
+      "DOCSTRING/BEHAVIOR MISMATCH: the function's docstring explicitly states 'Returns: socio_semantic_pen (float)... Penalty_A (float)... Penalty_B (float)' (three named return values), but every actual return statement in the body returns a SINGLE value: `return 1.0` (the K<2 early-exit guard, line ~1144) and `return float(socio_semantic_pen)` (the normal path, line 1333). Penalty_A and Penalty_B are computed internally but never returned. The single call site (evaluate_complete_solution, line 1506) correctly assigns the return to a single variable `socio_semantic_pen = evaluate_socio_semantic_reality(...)`, i.e. the call site's usage matches the actual 1-value behavior, not the docstring's stated 3-value behavior.",
+      "The K<2 early-return path returns the bare Python literal `1.0`, not `float(1.0)` explicitly, but this is already a native float so no JSON-serializability issue.",
+      "presence_masks is optional (defaults to None) — when None, Part A's baseline and Part B's valid_mask fall back to using ALL rows (dead entities included), not just live ones. In production it is always passed (evaluate_complete_solution always supplies presence_masks), so the None-fallback path is a defined-but-effectively-unused branch in the current call graph — worth noting for anyone editing based on 'presence_masks is optional' language.",
+      "target_facets is hardcoded to exactly 4 facets: ['core_child_he', 'cousin_he', 'core_atom', 'fringe_atom'] — parent_he is NOT included (this matches the open, undecided ticket 66 in CLAUDE.md about whether to add it)."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-09",
+    "symbol": "evaluate_topological_coherence",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [1027, 1105],
+    "current_signature_or_value": "def evaluate_topological_coherence(Z_final, target_coherence, semantic_anchors):",
+    "current_docstring_summary": "For each active anchor relation (an anchor being any relation key present in both Z_final and the semantic_anchors frozenset), and for each community k, computes a symmetric cohesion ratio: diagonal_val / (0.5*(row_sum+col_sum)+eps), clipped to [0,1]. Averages this ratio across all active anchors for each community (the 'Mean Anchor Rule', allowing polycentric communities that are crisp at one semantic resolution but noisier at another). weakest_mean = the minimum such mean cohesion score across all K communities. coherence_pen = squared ceiling: (max(0, target_coherence - weakest_mean) / target_coherence)^2. Returns (coherence_pen: float, weakest_mean: float).",
+    "notable_facts": [
+      "Returns (0.0, np.nan) immediately if no anchors from semantic_anchors are active in Z_final — this nan is only ever logged via trial.set_user_attr, and coherence_pen (0.0, not nan) is what actually feeds sociological_penalty, per the file's own resolved ticket 22 register entry.",
+      "Raises ValueError if any active anchor's Z_final entry is not shape (K,K) — a hard failure, not a soft penalty.",
+      "Per CLAUDE.md's own ticket 81 measurement (not verified independently by this extraction task, just noted for cross-reference): coherence_pen has reportedly been exactly 0.0 in every tested production cell so far, though this is a claim about historical measured behavior on specific data, not something derivable from the code alone."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-10",
+    "symbol": "build_presence_masks",
+    "kind": "function",
+    "file": "chunk13v9.py",
+    "lines": [271, 304],
+    "current_signature_or_value": "def build_presence_masks(matrices, soc_keys, sem_keys):",
+    "current_docstring_summary": "For each relation key in (soc_keys + sem_keys) present in `matrices`, looks up its two facets via RELATION_MAP, computes row_live (any nonzero entry per row, via mat.getnnz(axis=1)>0) and col_live (mat.getnnz(axis=0)>0) boolean vectors, and OR-unions these into a running per-facet mask dict across ALL relations touching that facet (not just one relation — a facet's mask is the union across every active relation that touches it). Returns dict[facet -> bool ndarray].",
+    "notable_facts": [
+      "Must be called fresh per config/slice from the matrices actually loaded — it is called in exactly two places: inside run_inner_solver (once, before the epoch loop, feeding the in-loop domain-balance term) and inside evaluate_complete_solution (once, feeding presence_masks used by evaluate_socio_semantic_reality and evaluate_domain_balance). Not cached or memoized anywhere.",
+      "Silently skips any key in (soc_keys+sem_keys) not present in `matrices` (continue), rather than raising."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-11",
+    "symbol": "MAX_SHARE_THRESHOLD",
+    "kind": "constant",
+    "file": "chunk13v9.py",
+    "lines": [56],
+    "current_signature_or_value": "MAX_SHARE_THRESHOLD = 0.60   (line 56)",
+    "current_docstring_summary": "Ceiling used directly by evaluate_dimensional_collapse's max-share penalty (the direct max-share reformulation that replaced the old entropy-based collapse check per tickets 79/80).",
+    "notable_facts": [
+      "Only ever referenced as evaluate_dimensional_collapse's default value for its max_share_threshold parameter; no other reference in the file.",
+      "Numerically equal to the (also still-present, still-defined) ENTROPY_THRESHOLD=0.60 — deliberately, per the in-code comment, reusing the same pre-existing 0.60 design target rather than re-deriving it."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-12",
+    "symbol": "STRUCTURE_SCORE_THRESHOLD",
+    "kind": "constant",
+    "file": "chunk13v9.py",
+    "lines": [67],
+    "current_signature_or_value": "STRUCTURE_SCORE_THRESHOLD = 1.0   (line 67)",
+    "current_docstring_summary": "The permutation-correction confidence gate used by _hungarian_relabel_relation via _relation_community_share via evaluate_dimensional_collapse's default structure_threshold parameter.",
+    "notable_facts": [
+      "structure_score > 1.0 means a confidently clean Hungarian relabelling is trusted/applied; <=1.0 means genuine mixed coupling and the identity permutation is used as-is.",
+      "Only reachable in production via evaluate_dimensional_collapse's default parameter value (evaluate_complete_solution's call to evaluate_dimensional_collapse passes no structure_threshold override)."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-13",
+    "symbol": "TARGET_COHERENCE",
+    "kind": "constant",
+    "file": "chunk13v9.py",
+    "lines": [70, 1696],
+    "current_signature_or_value": "TARGET_COHERENCE = 0.50   (defined at line 70, and RE-defined identically at line 1696)",
+    "current_docstring_summary": "Minimum required mean anchor diagonal dominance ratio; passed as target_coherence into evaluate_topological_coherence via evaluate_complete_solution.",
+    "notable_facts": [
+      "DEFINED TWICE in the file: line 70 (Module 1, value 0.50, with an inline comment) and again at line 1696 (Module 4's 'PHASE 1A: HARDWARE & MLOPS CONSTANTS' block, also value 0.50, no distinguishing comment beyond a section header 'Domain Constants (Outer-Loop Sociology)'). Both assignments use the identical literal 0.50, so this redefinition is functionally harmless (the later assignment just overwrites the earlier one with the same value) — but it violates the file's own stated convention (§7 Conventions: 'If a constant or topology definition appears twice, delete the later copy') and is a live duplicate, not merely a stale doc claim. Worth flagging since ticket 57 in CLAUDE.md's defect register specifically investigated a *different* duplicate-constant claim (PIPELINE_VERSION) and found it stale/false — this ENTROPY_THRESHOLD/TARGET_COHERENCE duplication is real and was not addressed by that ticket."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-14",
+    "symbol": "DOMAIN_BALANCE_TOL",
+    "kind": "constant",
+    "file": "chunk13v9.py",
+    "lines": [79],
+    "current_signature_or_value": "DOMAIN_BALANCE_TOL = 0.15   (line 79)",
+    "current_docstring_summary": "The dead-band half-width around r_k=0.5 used by both evaluate_domain_balance (outer-loop, default tol parameter) and the in-loop domain_balance_loss computation inside run_inner_solver (referenced directly, not via a parameter, at line 696: `torch.clamp(torch.abs(db_r_k - 0.5) - DOMAIN_BALANCE_TOL, min=0.0)`).",
+    "notable_facts": [
+      "Used in exactly two places: evaluate_domain_balance's default tol parameter (line 1342) and directly by name inside run_inner_solver's epoch loop (line 696) — not passed as a parameter there, referenced as the module-level global directly.",
+      "Defined once, no duplicate."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-15",
+    "symbol": "MAX_MONOPOLY",
+    "kind": "constant",
+    "file": "chunk13v9.py",
+    "lines": [82, 1694],
+    "current_signature_or_value": "Line 82: `#MAX_MONOPOLY = 0.60 ... deprecated in favour of more flexible 0.85` — COMMENTED OUT, dead. Line 1694 (Module 4, 'PHASE 1A' block): `MAX_MONOPOLY = 0.85` — this is the single LIVE definition actually used at runtime.",
+    "current_docstring_summary": "The maximum-mass-concentration ceiling for elite/hub entities, used by evaluate_socio_semantic_reality's Part B hoarding-penalty formula (max_learned_loading - max_monopoly) / (1 - max_monopoly), passed in via evaluate_complete_solution's max_monopoly parameter, which is itself passed in by the 3 external call sites (Optuna objective, §S4 archiver, §S5 stability loop), each of which reads it from the live MAX_MONOPOLY=0.85 constant (or from create_optuna_objective's own default parameter max_monopoly=0.85, line 1538, which matches).",
+    "notable_facts": [
+      "The task description's framing ('note the commented-out ~0.60 at ~42') is confirmed exactly: line 82 has `#MAX_MONOPOLY = 0.60` fully commented out with an inline note that it was 'deprecated in favour of more flexible 0.85'. The ACTUAL live value used everywhere at runtime is 0.85, defined at line 1694, not 0.60 and not commented.",
+      "MAX_MONOPOLY is referenced at 3 call sites in Module 4 (lines ~1803, ~2180, ~2425 per grep) as max_monopoly=MAX_MONOPOLY keyword arguments, plus create_optuna_objective's own default parameter (0.85) at line 1538 — all consistently 0.85.",
+      "Any documentation claiming MAX_MONOPOLY is 0.60 in the currently-running code would be describing the dead/commented-out historical value, not the live one."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-16",
+    "symbol": "LAMBDA_COLLAPSE / LAMBDA_COH / LAMBDA_SEM",
+    "kind": "constant",
+    "file": "chunk13v9.py",
+    "lines": [85, 86, 87],
+    "current_signature_or_value": "LAMBDA_COLLAPSE = 1.0 (line 85); LAMBDA_COH = 1.0 (line 86); LAMBDA_SEM = 1.0 (line 87)",
+    "current_docstring_summary": "Inline comments describe these as 'penalty weight for dimensional collapse / topological coherence violations / socio-semantic semantic reality deviations' respectively — i.e. named as if they weight the three penalty terms before summing into sociological_penalty.",
+    "notable_facts": [
+      "CONFIRMED VESTIGIAL / DEAD: grepped the entire file for LAMBDA_COLLAPSE, LAMBDA_COH, and LAMBDA_SEM — each name appears EXACTLY ONCE, at its own definition line (85/86/87). None is referenced anywhere else in the file (not in evaluate_complete_solution, not in sociological_penalty's construction at line 1521, not in run_inner_solver).",
+      "sociological_penalty (line 1521) sums collapse_pen + coherence_pen + socio_semantic_pen + domain_balance_pen with NO multiplicative weights at all — all four terms enter unweighted. Any doc describing these lambdas as actively weighting the sociological penalty aggregation is describing dead code / a stale plan, not current behavior.",
+      "This matches the file's own historical record (§4.12 in CLAUDE.md, self-described, not verified independently by this task beyond the grep) that lambda weights were deliberately removed from the aggregation in favor of unweighted summation feeding a 2D Pareto objective."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-NOTFOUND-01",
+    "symbol": "community_share_vector",
+    "kind": "not_found_in_this_file",
+    "file": "chunk13v9.py",
+    "lines": [],
+    "current_signature_or_value": null,
+    "current_docstring_summary": "Not a function, variable, or any other named symbol anywhere in chunk13v9.py.",
+    "notable_facts": [
+      "Grepped the entire 2627-line file for the exact string 'community_share_vector': zero matches.",
+      "The closest real symbol is a LOCAL variable literally named `community_share` (not `community_share_vector`) defined inside evaluate_dimensional_collapse at line 1013 (`community_share = np.mean(relation_shares, axis=0)`, then renormalized on line 1015) — this is a local variable scoped to that function's body, not a standalone/importable/callable symbol, and its name does not include '_vector'. Any documentation referencing a function or module-level symbol called `community_share_vector` does not correspond to anything in this file; confirms the prior survey's finding."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-NOTFOUND-02",
+    "symbol": "s5_dual_track_alignment",
+    "kind": "not_found_in_this_file",
+    "file": "chunk13v9.py",
+    "lines": [],
+    "current_signature_or_value": null,
+    "current_docstring_summary": "Not a function, variable, or any other named symbol anywhere in chunk13v9.py.",
+    "notable_facts": [
+      "Grepped the entire 2627-line file for the exact string 's5_dual_track_alignment': zero matches.",
+      "The file does contain a Module 4 'Section 5' / '§S5' stability-analysis phase (referenced extensively by section-header comments and in CLAUDE.md as 'M4 §S5'), and does contain Hungarian alignment logic (scipy.optimize.linear_sum_assignment used for JSD/cosine cost-matrix alignment per CLAUDE.md §10's description) somewhere in that phase, but no function, variable, class, or string literal in this file is named `s5_dual_track_alignment` — confirms the prior survey's finding. A doc using this exact name is referring to something that does not exist under this name in chunk13v9.py, whatever underlying mechanism it may be pointing at descriptively."
+    ]
+  },
+  {
+    "fact_id": "F-CHUNK13V9-NOTFOUND-03",
+    "symbol": "apply_seed_permutation",
+    "kind": "not_found_in_this_file",
+    "file": "chunk13v9.py",
+    "lines": [],
+    "current_signature_or_value": null,
+    "current_docstring_summary": "Not a function, variable, or any other named symbol anywhere in chunk13v9.py.",
+    "notable_facts": [
+      "Grepped the entire 2627-line file for the exact string 'apply_seed_permutation': zero matches.",
+      "The file's actual permutation-correction machinery is named _hungarian_relabel_relation (line 847) and _relation_community_share (line 894) — these operate on a relation's Z matrix at evaluation (read) time inside evaluate_dimensional_collapse, and explicitly do NOT mutate U_final/Z_final in place (per the file's own design, distinct from a hypothetical 'apply_seed_permutation' that the name would suggest mutates something). No symbol by this exact name exists — confirms the prior survey's finding."
+    ]
+  }
+]

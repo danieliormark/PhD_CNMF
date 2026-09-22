@@ -1,0 +1,168 @@
+[
+  {
+    "fact_id": "F-SCRIPT-collapse_pen_exploitability_sweep",
+    "script": "collapse_pen_exploitability_sweep.py",
+    "purpose_one_line": "Problem 2 Test 1: sweeps lambda_z_offdiag in {0.0, 0.05, 0.5, 2.0} (lambda_l1 fixed 0.0) across C1-C6 x K in {3,4} to test whether an optimizer applying pressure on lambda_z_offdiag can drive collapse_pen's mass_max down without genuinely de-concentrating entity-level membership (mem_max), i.e. whether collapse_pen is exploitable via that term.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "collapse_mass_share", "evaluate", "fit_or_load",
+      "load_module", "membership_share_all_facets", "presence_masks"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "collapse_pen_exploitability_sweep.json",
+    "key_config_or_constants": {
+      "CONFIGS": ["C1","C2","C3","C4","C5","C6"],
+      "K_LIST": [3, 4],
+      "LAMBDA_L1": 0.0,
+      "LAMBDA_Z_LIST": [0.0, 0.05, 0.5, 2.0],
+      "MEANINGFUL_FRAC_exploit_floor": 0.02,
+      "max_share_threshold": "read from loaded module's MAX_SHARE_THRESHOLD (production, 0.60), not hardcoded"
+    },
+    "ticket_relevance": 79,
+    "resume_support": {"present": false, "mechanism": "none; single pass, uses fit_or_load's own cache (lambda_z=0.05 cells hit cache from collapse_pen_mass_vs_membership_check.py's prior run) but the script itself has no checkpoint/resume logic"},
+    "notable_facts": [
+      "Uses fit_or_load (cached), not run_inner_solver directly -- does not replicate the real Optuna objective, just fits at fixed hyperparameter points.",
+      "Self-checks mass_max against production's own evaluate(...)[\"collapse_score\"] every point (must match exactly since collapse_mass_share calls the same _relation_community_share function).",
+      "Defines an explicit EXPLOIT signature per cell: d_mass_max < -0.02 AND d_mem_max > d_mass_max/2.0 (mass falls meaningfully while membership doesn't fall proportionally).",
+      "Computes Pearson and Spearman correlation of d_mass_max vs d_mem_max across the 12 cells as the headline statistic.",
+      "Does NOT modify chunk13v9.py (stated explicitly in header comment).",
+      "BLOCKS_VERSION is only written into the output JSON for the record -- no comparison/gating logic in this file."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-collapse_pen_mass_vs_membership_check",
+    "script": "collapse_pen_mass_vs_membership_check.py",
+    "purpose_one_line": "Problem 2's highest-priority test: cross-checks collapse_pen's Z_scaled-based mass_max (via collapse_mass_share) against an independent U_prob-based mem_max (via membership_share_all_facets, never touches Z_scaled) at production settings (lambda_l1=0.0, lambda_z_offdiag=0.05) across C1-C6 x K in {3,4}, at both community level and solution level, flagging the specific exploit pattern mass_max<=threshold AND mem_max>threshold.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "collapse_mass_share", "evaluate", "fit_or_load",
+      "load_module", "membership_share_all_facets", "presence_masks", "total_variation_distance"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "collapse_pen_mass_vs_membership_check.json",
+    "key_config_or_constants": {
+      "CONFIGS": ["C1","C2","C3","C4","C5","C6"],
+      "K_LIST": [3, 4],
+      "LAMBDA_L1": 0.0,
+      "LAMBDA_Z_OFFDIAG": 0.05,
+      "max_share_threshold": "read from loaded module's MAX_SHARE_THRESHOLD (production, 0.60)"
+    },
+    "ticket_relevance": 79,
+    "resume_support": {"present": false, "mechanism": "none; relies on fit_or_load's own cache, no script-level checkpoint/resume"},
+    "notable_facts": [
+      "K=2 explicitly dropped per user request ('too specific... not necessarily sufficiently informative') -- only K in {3,4} tested.",
+      "Two analysis levels: community level (one point per config,K,community k -- 42 points at K in {3,4}) and solution level (one point per config,K cell -- 12 points, using each vector's own max share).",
+      "Self-checks mass_max against production's evaluate(...)[\"collapse_score\"] every cell.",
+      "Skips a cell entirely (prints a warning) if mem_max is NaN (no live entities in any facet).",
+      "Reports mass_mem_tvd (total_variation_distance between mass_share and mem_share vectors) per solution row, in addition to the exploit_flag.",
+      "Does NOT modify chunk13v9.py.",
+      "BLOCKS_VERSION only written to output JSON for the record -- no gating/comparison logic."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-collapse_pen_optuna_study",
+    "script": "collapse_pen_optuna_study.py",
+    "purpose_one_line": "Problem 2 Test 4 (T1 only): runs the real production Optuna objective sequence (run_inner_solver -> evaluate_complete_solution, NSGAIISampler, lambda_z_offdiag ~ log-uniform[1e-4,1.0], lambda_l1=0.0 fixed) for 20 trials per (config,K) cell across C1-C6 x K in {3,4} on the T1 slice, additionally capturing the independent U_prob-based mem_max per trial (which production's own objective never computes) to see whether Optuna's own search process actually finds and exploits collapse_pen's gameability, not just whether it is hackable in principle.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "collapse_mass_share", "load_module", "load_slice",
+      "membership_share_all_facets", "presence_masks"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "collapse_pen_optuna_study.json",
+    "key_config_or_constants": {
+      "CONFIGS": ["C1","C2","C3","C4","C5","C6"],
+      "K_LIST": [3, 4],
+      "N_TRIALS": 20,
+      "lambda_l1_fixed": 0.0,
+      "lambda_z_offdiag_search_space": "log-uniform[1e-4, 1.0]",
+      "sampler": "NSGAIISampler(seed=mod.MASTER_SEED), same seed reused fresh per cell",
+      "storage": "in-memory Optuna storage (no .db artifacts)",
+      "slice": "T1 only"
+    },
+    "ticket_relevance": 79,
+    "resume_support": {"present": false, "mechanism": "none; writes output once at the very end of main(), no per-cell checkpointing"},
+    "notable_facts": [
+      "Explicitly NOT reimplemented -- calls mod.run_inner_solver and mod.evaluate_complete_solution directly on the loaded chunk13v9 module (faithful replication of create_optuna_objective()'s call chain), the only addition being the independent mass_max/mem_max capture per trial.",
+      "20 trials per cell is described in the header as a diagnostic-pass number 'user-agreed as representative', explicitly NOT production's SCOUT_TRIALS=100.",
+      "Later found (documented in collapse_pen_optuna_study_v2.py's own header) to have a rigor gap: with NSGAIISampler's default population_size=50 and only 20 trials/cell, no generation of real NSGA-II selection pressure was ever exercised -- effectively random search. This script itself contains no awareness of that gap; it is only diagnosed in the v2 script that followed it.",
+      "Also found later (per v2 header) that all 12 T1 cells here used the identical NSGAIISampler(seed=mod.MASTER_SEED) with no cell-specific seed offset, matching a pattern also present in actual production (chunk13v9.py) -- so cells drew near-identical raw hyperparameter sequences (pseudo-replication), not fixed in this script.",
+      "Catches (RuntimeError, FloatingPointError, ValueError) per trial and calls optuna.TrialPruned() rather than crashing the whole study.",
+      "Does NOT modify chunk13v9.py.",
+      "BLOCKS_VERSION only written to output JSON, no comparison/gating."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-collapse_pen_optuna_study_t2",
+    "script": "collapse_pen_optuna_study_t2.py",
+    "purpose_one_line": "T2-slice replication of collapse_pen_optuna_study.py -- identical real-Optuna-objective design (20 trials/cell, C1-C6 x K in {3,4}, NSGAIISampler(seed=MASTER_SEED), lambda_z_offdiag log-uniform[1e-4,1.0]) run on load_slice('T2') / presence_masks(config_id,'T2') instead of T1, to check whether T1's smaller article count was itself a factor in collapse_pen's near-total inertness observed in the T1 run.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "collapse_mass_share", "load_module", "load_slice",
+      "membership_share_all_facets", "presence_masks"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "collapse_pen_optuna_study_t2.json",
+    "key_config_or_constants": {
+      "SLICE_NAME": "T2",
+      "CONFIGS": ["C1","C2","C3","C4","C5","C6"],
+      "K_LIST": [3, 4],
+      "N_TRIALS": 20,
+      "lambda_l1_fixed": 0.0,
+      "lambda_z_offdiag_search_space": "log-uniform[1e-4, 1.0]",
+      "sampler": "NSGAIISampler(seed=mod.MASTER_SEED), same seed reused fresh per cell (same pseudo-replication pattern as the T1 script)"
+    },
+    "ticket_relevance": 79,
+    "resume_support": {"present": false, "mechanism": "none; writes output once at the end of main(), no checkpointing"},
+    "notable_facts": [
+      "One addition beyond the T1 script: captures diagnostics['epochs_run'] (via len(loss_history)) per trial, and reports a non-convergence breakdown (lambda_z_offdiag range and epochs_run range among non-converged trials) -- explicitly flagged in the header as a gap in the original T1 run that this script fixes going forward but does NOT backfill into the T1 JSON.",
+      "Otherwise structurally identical to collapse_pen_optuna_study.py (same build_objective/run_cell/main structure, same exploit-pattern definition mass_max<=threshold and mem_max>threshold).",
+      "T2 comparison figures given in the header: 36 articles / 4158 total nnz vs T1's 25 articles / 3323 nnz (note: CLAUDE.md's own §11 table gives T1 TOTAL as 3,312 and mentions S_Art_Journ nnz corrections -- this script's header figures (3323/4158) are slightly off from the current CLAUDE.md table, likely reflecting the nnz counts as measured before the ticket-84 D4 journal-resolution correction).",
+      "Does NOT modify chunk13v9.py.",
+      "BLOCKS_VERSION only written to output JSON, no comparison/gating."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-collapse_pen_optuna_study_v2",
+    "script": "collapse_pen_optuna_study_v2.py",
+    "purpose_one_line": "Problem 2 Test 4 rerun fixing two rigor gaps found by an Opus-model audit of the original T1/T2 Optuna-study scripts: N_TRIALS raised 20->100 per cell (so NSGA-II gets ~2 real generations of selection pressure given population_size=50) and each (slice,config,K) cell now gets its own deterministic sampler seed (sha256-derived) instead of reusing mod.MASTER_SEED everywhere; runs BOTH T1 and T2 slices in one script (replacing the separate _t2.py file), with checkpointing after every completed cell and an opt-in resume mechanism.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "collapse_mass_share", "load_module", "load_slice",
+      "membership_share_all_facets", "presence_masks"
+    ],
+    "local_reimplementations": [
+      "cell_sampler_seed(slice_name, config_id, K) -- new local function, sha256(f\"{slice}:{config}:{K}\") derived deterministic per-cell NSGA-II sampler seed, deliberately deviating from production's shared-MASTER_SEED-per-cell pattern (which the header notes chunk13v9.py itself also uses, at both Scout chunk13v9.py:1639 and Deep Dive chunk13v9.py:1754) to test whether the gameability finding is an RNG-trajectory artifact.",
+      "load_resume_state(threshold) -- new local function implementing the resume/checkpoint-compatibility check.",
+      "checkpoint(...) -- new local function implementing atomic (tmp-file + os.replace) checkpoint writes with per-slice-only aggregate statistics (T1 and T2 deliberately never pooled)."
+    ],
+    "uses_raw_diagonal": {"present": false},
+    "output_json_file": "collapse_pen_optuna_study_v2.json",
+    "key_config_or_constants": {
+      "SLICES": ["T1", "T2"],
+      "CONFIGS": ["C1","C2","C3","C4","C5","C6"],
+      "K_LIST": [3, 4],
+      "N_TRIALS": 100,
+      "POPULATION_SIZE": 50,
+      "note_on_N_TRIALS": "matches chunk13v9.py's own SCOUT_TRIALS/DEEP_DIVE_TRIALS constant (CLAUDE.md ticket 76), not an arbitrary bump",
+      "OUT_PATH": "diagnostic_results/collapse_pen_optuna_study_v2.json",
+      "RESUME_env_var": "COLLAPSE_PEN_V2_RESUME (== '1' to enable)",
+      "lambda_l1_fixed": 0.0,
+      "lambda_z_offdiag_search_space": "log-uniform[1e-4, 1.0]",
+      "n_cells_total": "24 (6 configs x 2 K values x 2 slices)"
+    },
+    "ticket_relevance": 79,
+    "resume_support": {
+      "present": true,
+      "mechanism": "Off by default; setting env var COLLAPSE_PEN_V2_RESUME=1 makes main() call load_resume_state(threshold), which reads the existing checkpoint JSON at OUT_PATH and raises SystemExit (refuses) unless: the checkpoint exists, its 'done' field is not already True, its 'blocks_version' equals the current BLOCKS_VERSION, its 'n_trials_per_cell' equals current N_TRIALS, its 'max_share_threshold' matches within 1e-12, there are no duplicate (slice,config,K) entries in cell_summaries, and every completed cell's record count in 'records' matches its own 'n_trials' in cell_summaries. On success it keeps every already-completed (slice,config,K) cell exactly as recorded and the main loop skips those cells, running only the missing ones; every completed cell (not just at the very end) triggers checkpoint() with an atomic write (tmp file + os.replace) so a mid-run kill cannot leave a truncated file; each resume appends one entry (timestamp, cells_already_complete count, prior_elapsed_sec, PYTHONHASHSEED, SLURM_JOB_ID) to the output's 'resume_events' list; elapsed_sec_so_far stays cumulative across resumes."
+        },
+    "notable_facts": [
+      "CONFIRMED: this is the one script (of the 5, and per the task's note the one of ~40 in the wider cluster) that GATES/refuses on a BLOCKS_VERSION mismatch rather than merely recording it. Exact check, load_resume_state(): `if prior.get(\"blocks_version\") != BLOCKS_VERSION: problems.append(f\"blocks_version {prior.get('blocks_version')} != current {BLOCKS_VERSION}\")` followed by `if problems: raise SystemExit(\"[resume] checkpoint incompatible with this run: \" + \"; \".join(problems))`. This gate only fires on a RESUME=1 run against an existing checkpoint -- a normal (non-resume) run never compares BLOCKS_VERSION against anything, it just writes the current value into new output.",
+      "Header explicitly documents that production itself (chunk13v9.py, both Scout line ~1639 and Deep Dive line ~1754) constructs NSGAIISampler(seed=MASTER_SEED) fresh per grid cell with no cell-specific offset -- the same pseudo-replication pattern this diagnostic deliberately deviates from -- and flags this as a candidate NEW production ticket, explicitly left for the user's decision, not auto-fixed here.",
+      "Header records a real interrupted run: SLURM job 19655280 task 9 hit its 4-hour wall-clock limit after 18 of 24 cells, leaving the checkpoint at done=False -- the stated motivating case for building the resume mechanism (dated 2026-09-21 in the header).",
+      "Header explicitly flags a caveat under open ticket 85 (CLAUDE.md §8, the raw Python set() iteration-order hazard): fits are bit-identical only within one process launch, so a resumed cell is a statistically equivalent, not bit-identical, draw versus an uninterrupted run -- stated as not biasing per-slice pooled statistics since cells are independent studies, and given as the reason resume_events records PYTHONHASHSEED.",
+      "checkpoint() deliberately produces NO top-level 'all cells' aggregate combining T1 and T2 -- per-slice statistics only (per_slice_so_far dict), with an explicit in-code comment explaining why pooling the two slices would be misleading (they differ in article count, live-entity fraction, and total nnz per CLAUDE.md §11).",
+      "pooled_correlation() returns None (rather than computing Pearson/Spearman) whenever fewer than 3 converged trials exist for a slice -- a safety guard not present in the earlier study.py/study_t2.py scripts.",
+      "Does NOT modify chunk13v9.py."
+    ]
+  }
+]

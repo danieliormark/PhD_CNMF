@@ -1,0 +1,228 @@
+[
+  {
+    "fact_id": "F-SCRIPT-domain_penalty_exploitability_grid",
+    "script": "domain_penalty_exploitability_grid.py",
+    "purpose_one_line": "Grid test (all 6 configs x K in {2,4}, weight 0 vs 10) checking whether the domain-balance-penalty exploit found on C3/K=4 and C6/K=4 generalizes across the full grid, and which relations are the top movers of diagonal mass under the penalty.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "domain_community_volumes", "domain_membership_distributions",
+      "domain_share_vectors", "fit_instrumented", "hungarian_diagonal_match", "load_module",
+      "load_slice", "make_domain_balance_penalty_torch", "presence_masks", "relation_domain_kind",
+      "relation_hop_distance", "total_variation_distance"
+    ],
+    "local_reimplementations": [
+      "cell_summary() -- thin per-cell orchestration wrapper (fit + mass_tvd + mem_tvd), not a duplicate of an existing block",
+      "Counter-based top-mover tally over relation_rows (imported inline: 'from collections import Counter')"
+    ],
+    "uses_raw_diagonal": {
+      "present": true,
+      "lines": [85, 86],
+      "context": "mass0 = float(np.sum(np.abs(np.diag(Z0[r])))); mass10 = float(np.sum(np.abs(np.diag(Z10[r])))) -- unconditional RAW diagonal sum used for 'abs_delta' (mass moved between weight=0 and weight=10). The script DOES compute hungarian_diagonal_match(Z0[r], K) on the same line (m0) and records its structure_score as 'baseline_structure_score', but never gates the mass reading on that score the way the later relation_community_mass() helper does (confidence-gated: corrected diagonal if structure_score>threshold, else raw). Output field is 'abs_delta', not '*_raw' -- no explicit acknowledgement in this script that the reading is uncorrected, though diagnostic_blocks.domain_community_volumes' own docstring (used elsewhere in this same script for mass_tvd) independently documents that |Z_scaled[k,k]| is deliberately RAW/uncorrected as 'a separate, orthogonal question'. Likely an intentional simplicity choice for a first-pass grid sweep rather than a bug, but not labeled as such in-script."
+    },
+    "output_json_file": "domain_penalty_exploitability_grid.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CONFIGS": "C1-C6", "K_LIST": [2, 4], "WEIGHTS": [0.0, 10.0]
+    },
+    "ticket_relevance": 90,
+    "notable_facts": [
+      "Directly the diagnostic evidence trail behind CLAUDE.md ticket 82 E2's finding that a Z_scaled-based domain-balance penalty is exploitable via the U_scales gauge freedom (ticket 79) -- this script is the 'does it replicate beyond the original 2-cell pilot' extension.",
+      "Explicitly states in its header comment it does NOT modify chunk13v9.py.",
+      "Writes both per-cell summary rows and per-relation rows to one JSON; downstream script domain_penalty_exploit_hop_nnz_interaction.py consumes a *different* file (domain_penalty_exploit_relation_trace.json), not this one, despite similar structure -- the two grid/trace scripts are siblings, not a producer/consumer pair."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_penalty_exploitability_test",
+    "script": "domain_penalty_exploitability_test.py",
+    "purpose_one_line": "Direct 2-cell (C3/K=4, C6/K=4) test of whether the Z_scaled-based domain-balance penalty is satisfied by U_scales gaming (mass_tvd improves, mem_tvd flat/worse, U_scales CV rises) rather than genuine rebalancing, at weight in {0.0, 1.0, 10.0}.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "domain_community_volumes", "domain_membership_distributions",
+      "domain_share_vectors", "fit_instrumented", "make_domain_balance_penalty_torch",
+      "presence_masks", "total_variation_distance"
+    ],
+    "local_reimplementations": [
+      "u_scales_cv() -- local helper computing mean-across-facets coefficient-of-variation of U_scales across K communities; not present in diagnostic_blocks, genuinely local (not a duplicate of an existing block, but a bespoke metric for this test's specific 'FINDINGS §2 smoking gun' signature)"
+    ],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No np.diag/diagonal usage in this file -- mass comes from domain_community_volumes/domain_share_vectors (which internally reads |Z_scaled[k,k]| RAW per their own docstring) rather than a direct np.diag call in this script."},
+    "output_json_file": "domain_penalty_exploitability_test.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CELLS": [["C3", 4], ["C6", 4]], "WEIGHTS": [0.0, 1.0, 10.0]
+    },
+    "ticket_relevance": 92,
+    "notable_facts": [
+      "This is the script that produced the specific evidence CLAUDE.md §4.18/E2 cites: 'its own optimized proxy (mass_tvd) improved 30-40x ... while real membership imbalance ... worsened in 3 of 12 cells' -- though that '12 cells' figure comes from domain_penalty_exploitability_grid.py's wider sweep, not this 2-cell script; this script is the original/narrower pilot referenced as 'per browser chat's request'.",
+      "Header comment explicitly frames this as testing the SAME failure mode as FINDINGS §2's lambda_z_offdiag exploit (U_scales shrinking a community's footprint), applied now to the domain-balance penalty specifically.",
+      "Confirms extra_loss_fn defaults to None everywhere else in production and this diagnostic doesn't touch chunk13v9.py."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_penalty_exploit_hop_nnz_interaction",
+    "script": "domain_penalty_exploit_hop_nnz_interaction.py",
+    "purpose_one_line": "Tests whether hop-distance-from-anchor AND nnz JOINTLY (interaction, not either alone) predict which relations get exploited by the domain-balance penalty, reusing relation_trace.json's already-fit data with no new fitting.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "relation_hop_distance"],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No direct np.diag/diagonal call -- this script does not fit anything; it re-reads domain_penalty_exploit_relation_trace.json (which itself was built from raw np.diag readings, see that script's entry) and adds hop_min/hop_max plus an interaction proxy (hop_max/log(nnz+1)) and Spearman correlations against |abs_delta|. The raw-diagonal provenance is inherited, not introduced here."},
+    "output_json_file": "domain_penalty_exploit_hop_nnz_interaction.json",
+    "key_config_or_constants": {
+      "TRACE_PATH": "diagnostic_results/domain_penalty_exploit_relation_trace.json (input, not re-derived)"
+    },
+    "ticket_relevance": 78,
+    "notable_facts": [
+      "Uses scipy.stats.spearmanr, not present in the other 8 scripts' import lists as heavily.",
+      "Explicitly a follow-up to domain_penalty_exploit_relation_trace.py testing browser-chat's anchor-pinning-gradient hypothesis (FINDINGS §14) combined with nnz sparsity, framed as neither variable alone having 'predicted it cleanly'.",
+      "Does no fitting at all -- pure re-analysis of an existing JSON, so it inherits (does not introduce) the raw-diagonal question flagged in relation_trace.py."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_penalty_exploit_relation_trace",
+    "script": "domain_penalty_exploit_relation_trace.py",
+    "purpose_one_line": "For C3/K=4 and C6/K=4 (weight 10), identifies which specific relation(s) moved diagonal mass to satisfy the domain-balance penalty and whether they are the sparsest/lowest-confidence relations (testing the 'exploiting data-sparse relations' slack' mechanism, as opposed to the already-ruled-out U_scales route).",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "fit_instrumented", "hungarian_diagonal_match",
+      "load_module", "load_slice", "make_domain_balance_penalty_torch", "relation_domain_kind"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {
+      "present": true,
+      "lines": [44, 45],
+      "context": "mass0 = float(np.sum(np.abs(np.diag(Z0[r])))); mass10 = float(np.sum(np.abs(np.diag(Z10[r])))) -- same pattern as domain_penalty_exploitability_grid.py: hungarian_diagonal_match is computed on the same relation (m0, line 43) and its structure_score is recorded as 'baseline_structure_score' for context/interpretation, but the actual mass used for 'abs_delta'/'rel_delta' is the unconditional RAW diagonal sum, not gated on structure_score the way relation_community_mass() (introduced later, used by stage0c_affil_ablation_confound_test.py) does. Output fields ('mass_weight0', 'mass_weight10', 'abs_delta', 'rel_delta') carry no '_raw' suffix and no in-script caveat about this being an uncorrected reading."
+    },
+    "output_json_file": "domain_penalty_exploit_relation_trace.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05, "CELLS": [["C3", 4], ["C6", 4]]
+    },
+    "ticket_relevance": 88,
+    "notable_facts": [
+      "Header explicitly frames this as ruling in/out browser chat's proposed mechanism versus the FINDINGS §2 U_scales route ('already ruled out by the CV evidence' -- referring to domain_penalty_exploitability_test.py's u_scales_cv result).",
+      "This is the script stage0c_affil_ablation_confound_test.py's own header implicitly contrasts against when it says 'S_Art_Auth diagonal now read via relation_community_mass ... not the raw diagonal' -- i.e. stage0c is a later, methodologically improved sibling of this exact raw-diagonal pattern.",
+      "Computes Spearman(nnz, |abs_delta|) directly in-script (only when len(rows)>=4) in addition to writing the row-level data hop_nnz_interaction.py later re-analyzes."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_skew_s5_alignment_reproducibility",
+    "script": "domain_skew_s5_alignment_reproducibility.py",
+    "purpose_one_line": "Re-runs the domain-skew seed-reproducibility test using production's own §S5 dual-track alignment (JSD/probability-space Track A and magnitude-weighted-cosine Track B, via s5_dual_track_alignment) instead of the earlier weaker art-only Hungarian match, across all 6 configs x K in {3,4}, unpenalized baseline (weight=0).",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "apply_seed_permutation", "domain_community_volumes",
+      "domain_share_vectors", "fit_instrumented", "load_module", "s5_dual_track_alignment"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {
+      "present": false, "lines": [],
+      "context": "No direct np.diag call; header comment explicitly flags (line 18) that domain_community_volumes(..., 'split') is 'RAW diagonal, no within-relation permutation correction applied' and that this is a known, separately-flagged gap ('not attempted here either -- this test isolates the CROSS-SEED alignment question only'). This is an explicit, self-documented limitation, not a silent one."
+    },
+    "output_json_file": "domain_skew_s5_alignment_reproducibility.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CONFIGS": "C1-C6", "K_LIST": [3, 4], "SEEDS": [1000, 2000, 3000, 4000, 5000]
+    },
+    "ticket_relevance": 65,
+    "notable_facts": [
+      "Predecessor test (domain_skew_seed_reproducibility.py) found 38-40% sign-stability using a weaker art-only alignment; this script is explicitly the fix for that alignment weakness ('conceded in chat as a real gap ... this is test a from the pending list').",
+      "Reports BOTH S5 tracks (A: JSD, B: weighted cosine) separately plus how often the two tracks agree with each other on the alignment itself, matching production's own behavior of not collapsing to one track.",
+      "This unpenalized-baseline reproducibility question feeds directly into ticket 82 E3's concern about whether dev_k/domain-skew readings are trustworthy signal vs. noise -- relevant to the user's memory note on domain-balance not being naively 50/50-justified."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_skew_s5_continuous_consensus",
+    "script": "domain_skew_s5_continuous_consensus.py",
+    "purpose_one_line": "Follow-up to the s5_alignment_reproducibility test: extracts the CONTINUOUS similarity scores (mean_js_sim, weighted_cos_sim per facet, via s5_dual_track_consensus) for the identical fits/seed-pairs, checking whether communities broadly correspond even where the binary sign-flip metric called them 'unstable' -- addressing the concern that a +0.02->-0.02 flip and a +0.3->-0.3 flip were both counted as 'FLIPS' under the earlier binary test.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "fit_instrumented", "load_module", "s5_dual_track_consensus"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {"present": false, "lines": [], "context": "No diagonal usage at all -- this script works entirely on U (membership) via s5_dual_track_consensus, not on Z_scaled mass."},
+    "output_json_file": "domain_skew_s5_continuous_consensus.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CONFIGS": "C1-C6", "K_LIST": [3, 4], "SEEDS": [1000, 2000, 3000, 4000, 5000]
+    },
+    "ticket_relevance": 58,
+    "notable_facts": [
+      "Explicitly designed to hit diagnostic_blocks' fit_or_load cache from the prior alignment-reproducibility script's identical (config, K, lambda, seed) keys -- 'should hit the cache and run fast, no new training'.",
+      "Reports per-facet A/B consensus scores plus a 'global' pair consensus per seed-pair, and a grid-wide summary sorted by lowest consensus cell -- oriented toward whether low-consensus cells correspond to the earlier test's 'FLIPS' cells."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-domain_skew_seed_reproducibility",
+    "script": "domain_skew_seed_reproducibility.py",
+    "purpose_one_line": "Tests whether a community's domain 'character' (soc-leaning vs sem-leaning sign, read off Z_scaled RAW diagonal) is reproducible across 5 independent re-fits of the same (config, K), aligned via art-facet-only Hungarian matching; contrasts K=4 (expected unstable, auth/affil ~99% collinear per FINDINGS §4) against K=3 (expected more stable) as a direct test rather than assuming either outcome.",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "align_seed_permutation", "apply_seed_permutation",
+      "domain_community_volumes", "domain_share_vectors", "fit_instrumented"
+    ],
+    "local_reimplementations": [],
+    "uses_raw_diagonal": {
+      "present": false, "lines": [],
+      "context": "No direct np.diag call in-script; header (lines 18-22) explicitly documents that domain_community_volumes(...,'split') gives 'RAW diagonal, no within-relation permutation correction applied ... not attempted here either -- this test isolates the CROSS-SEED alignment question only'. Same self-documented limitation as domain_skew_s5_alignment_reproducibility.py, and this script is that one's direct predecessor (weaker art-only alignment, later superseded by the S5-dual-track version)."
+    },
+    "output_json_file": "domain_skew_seed_reproducibility.json",
+    "key_config_or_constants": {
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "CONFIGS": "C1-C6", "K_LIST": [3, 4], "SEEDS": [1000, 2000, 3000, 4000, 5000]
+    },
+    "ticket_relevance": 62,
+    "notable_facts": [
+      "Directly cites FINDINGS §4's auth/affil collinearity numbers (affil 0.007, auth 0.033 at K=3 vs ~99% collinear at K=4) as its own working hypothesis for why K=3 should be more stable than K=4 -- ties directly to the user's memory note 'Collinearity legitimacy' (auth/affil community collinearity may reflect real cross-cutting structure, not a defect).",
+      "This is the original/weaker version later superseded by domain_skew_s5_alignment_reproducibility.py's dual-track S5 alignment -- the header of that later script explicitly frames itself as fixing a gap conceded in this one.",
+      "Alignment method here is single-facet ('art' only) Hungarian cosine match via align_seed_permutation, materially weaker than production's own multi-facet S5 method -- flagged by the later script, not by this one."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-stage0c_affil_ablation_confound_test",
+    "script": "stage0c_affil_ablation_confound_test.py",
+    "purpose_one_line": "Re-runs the ghost_no_affil_ablation.py pilot as 3 arms (baseline; affil removed with S_Art_Auth weight pinned; affil kept with S_Art_Auth weight upweighted 1.5x to match) to isolate whether the original pilot's 'removing affiliation improves S_Art_Auth resolution/lowers collinearity' finding was actually just a relation-count-driven loss-weight confound (0.5/n_soc rising from 0.1667 to 0.25 when affil is dropped).",
+    "imports_from_diagnostic_blocks": [
+      "BLOCKS_VERSION", "OUT_DIR", "community_share_vector", "fit_instrumented",
+      "hungarian_diagonal_match", "load_module", "relation_community_mass"
+    ],
+    "local_reimplementations": [
+      "herfindahl(x) -- local Herfindahl-index helper (sum of squared shares), not imported from diagnostic_blocks",
+      "top2_share(x) -- local top-2-share-of-total helper, not imported from diagnostic_blocks",
+      "Both are small, generic statistics not tied to this codebase's specific gauge-freedom concerns, so 'reimplementation' risk is low, but they are not centralized in diagnostic_blocks.py the way relation_community_mass/hungarian_diagonal_match are."
+    ],
+    "uses_raw_diagonal": {
+      "present": false, "lines": [25, 26],
+      "context": "This script explicitly does NOT use raw np.diag -- header comment states directly: 'S_Art_Auth diagonal now read via relation_community_mass (Stage 0b's fix), not the raw diagonal.' relation_community_mass() is the confidence-gated helper (corrected diagonal when structure_score>threshold, else raw) -- this is the methodologically improved successor to the pattern seen in domain_penalty_exploitability_grid.py and domain_penalty_exploit_relation_trace.py."
+    },
+    "output_json_file": "stage0c_affil_ablation_confound_test.json",
+    "key_config_or_constants": {
+      "CELLS": [["C1", 6, "T1"], ["C3", 6, "T1"]],
+      "LAMBDA_L1": 0.0, "LAMBDA_Z_OFFDIAG": 0.05,
+      "arm_ii_pin_multiplier": "target_w / natural_w = (0.5/n_soc_full) / (0.5/n_remaining)",
+      "arm_iii_weight_multiplier": {"S_Art_Auth": 1.5}
+    },
+    "ticket_relevance": 90,
+    "notable_facts": [
+      "Directly targets the specific mechanism CLAUDE.md §4.22 attributes to C1 (auth/affil collinearity explaining the ghost community) vs C3 (collinearity ruled out) -- this script is explicit confound-control work behind that claim, checking whether the earlier ablation pilot's result was really about affiliation or just an artifact of relation-count-driven reweighting.",
+      "Uses fit_instrumented's soc_keys_override / relation_weight_multiplier parameters (Stage 0a additions per the header) rather than a fourth hand-copied fitting loop -- an explicit anti-duplication design choice named in-script.",
+      "Seed is pinned to mod.MASTER_SEED (not a swept list) -- single-seed test, unlike the domain_skew_* scripts' 5-seed design; this is a targeted confound isolation, not a reproducibility sweep.",
+      "Part of the tickets 86/87 plan (per header), 'Stage 0c' -- sits alongside stage0f_cu_dead_entity_check.py (Stage 0f) in the same investigation sequence into ghost communities / auth-affil collinearity."
+    ]
+  },
+  {
+    "fact_id": "F-SCRIPT-stage0f_cu_dead_entity_check",
+    "script": "stage0f_cu_dead_entity_check.py",
+    "purpose_one_line": "Checks whether the auth/affil collinearity Gram matrix c_u = U_norm.T @ U_norm (cited in CLAUDE.md §4.22 as the specific evidence for C1's ghost community being caused by auth/affil collinearity) is contaminated by dead (padded, cross-slice) rows the same way community_share was previously checked and found NOT contaminated -- a distinct quantity from that earlier check, never separately tested until now.",
+    "imports_from_diagnostic_blocks": ["BLOCKS_VERSION", "OUT_DIR", "fit_or_load", "presence_masks"],
+    "local_reimplementations": [
+      "cu_offdiag_stats() -- computes c_u = U_norm_facet.T @ U_norm_facet and its max off-diagonal; this is the same Gram-matrix pattern the script's own header says lives in ghost_auth_collinearity_and_concentration.py, reimplemented locally here rather than imported -- a genuine local duplication of an existing pattern (acknowledged in-script as reusing the same idea, not centralized via diagnostic_blocks)."
+    ],
+    "uses_raw_diagonal": {
+      "present": false, "lines": [],
+      "context": "Not applicable -- this script's subject is the U_norm Gram matrix (c_u), not Z_scaled's diagonal at all. No np.diag/diagonal usage found."
+    },
+    "output_json_file": "stage0f_cu_dead_entity_check.json",
+    "key_config_or_constants": {
+      "CELLS": [["C1",6,"T1"],["C1",6,"T2"],["C1",6,"T1_v2"],["C1",6,"T2_v2"],
+                ["C3",6,"T1"],["C3",6,"T2"],["C3",6,"T1_v2"],["C3",6,"T2_v2"]],
+      "FACETS": ["auth", "affil"]
+    },
+    "ticket_relevance": 85,
+    "notable_facts": [
+      "Explicitly scoped to only C1 and C3 at K=6 (the two configs and the K that CLAUDE.md §4.22's collinearity story contrasts, and where the flagged pairs live per FLAGGED_V1 in ghost_auth_collinearity_and_concentration.py) across all 8 slice/data-version combinations -- not a full grid, a targeted validation of one specific claim.",
+      "Added on 'explicit user request, not in the plan's original text' per the header -- an ad hoc addition to the tickets 86/87 sequence.",
+      "All 8 cells use fit_or_load (cache-hit expected, 'no new fitting') -- purely a re-analysis/validation pass over already-fitted tensors, zeroing dead rows in U_norm before recomputing c_u and comparing max-offdiag/full-matrix diffs against the unmasked baseline, plus reporting raw magnitude of dead vs live |U_norm| entries so a null result is explained rather than merely asserted."
+    ]
+  }
+]
