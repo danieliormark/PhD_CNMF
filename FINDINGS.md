@@ -451,6 +451,27 @@ chunk12's `build_anchor_csr` weights anchor entries by `log1p(tf) × idf`. That
 reduces a ubiquitous term's pull on reconstruction but does not shape how its
 loadings distribute across communities.
 
+### CORRECTION (2026-09-22)
+
+This section's **History** paragraph above — that UDSR existed in code, had an
+inverted-discount-direction bug found and fixed, then vanished in the
+softplus-era rewrite — does not match what is on disk and is **superseded** by a
+direct, repeatable check. CLAUDE.md's own end-of-§8 "UDSR" investigation (this
+session) grepped every `chunk13*.py` version (v2 through v9, v8.1, `chunk13soc1.py`,
+`chunk13_metafac.py`) for `UDSR`, `ubiquity`/`discount`, and `idf`, and found no
+version — including v8.1 — ever implements an idf-weighted or
+ubiquity-discounted L1 term; the only near-hit is an unreferenced path constant.
+Independently reconfirmed here: `grep -ril -i 'UDSR|ubiquity|discount'` across
+every `chunk13*.py` file on disk turns up nothing in any pre-v9 version, and
+`chunk13v9.py`'s sole hit is an unrelated docstring phrase ("Ubiquity smoothing
+penalty", `evaluate_socio_semantic_reality` Part B — not UDSR). **This was
+planned and stubbed (`chunk12.py:360`'s "Doxa Tax Exemption" comment confirms
+upstream intent), not built and later removed.** The rest of this section's
+reasoning — why a ubiquity-keyed discount would be the wrong axis regardless
+(the `parent_he` idf-collapse example, the breadth-vs-ubiquity distinction, what
+already addresses breadth) is unaffected by this correction and stands on its
+own merits independent of whether UDSR was ever actually built.
+
 ---
 
 ## 8. Reconstruction-space coherence metric — proposed, not validated
@@ -567,6 +588,26 @@ separate interpreter launches gave 925 vs 976 epochs, `recon_loss` differing by
 ~3e-4. Losses track closely, so trajectories are not diverging — it is the
 early-stopping trigger firing at slightly different points. Relevant for Module 4
 §S5, which compares across separate fits.
+
+### CORRECTION (2026-09-22)
+
+A later investigation (CLAUDE.md §8, ticket 85, found this session) identified a
+concrete, verified mechanism for cross-process divergence at a fixed seed that this
+section's "early-stopping trigger" explanation did not consider and that was not yet
+known when this section was written: `initialize_tucker_adapted_nndsvd_and_propagate`
+iterates `active_facets` — a raw Python `set()` — at two call sites
+(`chunk13v9.py` ~lines 351, 524). Python's `set()` iteration order is
+hash-randomized per process (`PYTHONHASHSEED`), so two separate interpreter
+launches at the identical `MASTER_SEED` can build `U`/`Z`'s initial tensors in a
+different order — a different, not merely later-diverging, initialization.
+Confirmed directly: pinning `PYTHONHASHSEED` across launches made `fit_production`
+results bit-identical again. This does not necessarily account for the specific
+925-vs-976-epoch figures above (that measurement was not re-run under this
+hypothesis), but it is a confirmed alternative/additional cause for the same class
+of symptom this "Residual caveat" describes, and ticket 85 remains **open, not
+fixed** — see CLAUDE.md §4.9 and §8's ticket-85 row for the recommended fix
+(route `active_facets` through `get_required_facets()` or `sorted(active_facets)`
+at both call sites).
 
 ---
 

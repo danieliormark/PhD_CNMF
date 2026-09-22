@@ -1,7 +1,7 @@
 # Script-first triage report (mechanical, zero LLM tokens)
 - chunk13v9.py: 63 symbols; duplicate top-level names: none; commented-out assignments: 1
 - diagnostic_blocks.py: 55 symbols; duplicate top-level names: none
-- Citation graph: 342 §N references checked, **0 broken**
+- Citation graph: 346 §N references checked, **0 broken**
 - Numeric constant mismatches: **0**
 - Scripts: 73 total
   - Not importing diagnostic_blocks at all: 8 ['domain_balance_v1_v2_noise_compare.py', 'journal_repo_resolution.py', 'journal_repo_resolution_v2.py', 'journal_repo_resolution_v3.py', 'partB_term_variance.py', 'permutation_driver_analysis.py', 'permutation_test.py', 'uscales_determinacy.py']
@@ -18,8 +18,8 @@
   - No matching result JSON on disk: 1 ['grammar_damping_v1_vs_v2_quality.py']
 - Unresolved backtick-quoted symbols (named in docs, not found in chunk13v9.py, diagnostic_blocks.py, or any script's top-level defs): 211
   ['ALL_POSSIBLE_ANCHORS', 'CONFIG_SWITCHBOARD', 'CORE_THRESHOLD', 'DCR_sem', 'DECODER_PATH', 'FLOOR_EXCLUDE', 'False', 'MEANINGFUL_FRAC', 'NSGAIISampler', 'PYTHONHASHSEED', 'Penalty_A', 'REPO_JOURNAL_IDS', 'Reynolds_HUM_NFS_28days_2026', 'SEMANTIC_CONFOUNDED_FACETS', 'Star_epistemic_decoders_global', 'Star_extended_matrices_t1', 'Star_extended_matrices_t1_v2', 'Star_extended_matrices_t2', 'T1_v2', 'T2_v2', 'U_final', 'U_norm', 'U_np', 'U_pos', 'U_prior', 'U_prob', 'U_prob_f1', 'U_prob_f2', 'U_raw', 'U_raw_', 'U_scales', 'U_scales_out', 'W_art', 'Z_final', 'Z_pos', 'Z_raw', 'Z_scaled', '_seedcheck', '_seedcheck_v2', '_t2_v2', 'active_facets', 'actual_mass', 'anchor_keys', 'binding_penalty', 'bipartite_diagnostic_suite', 'build_', 'build_anchor_csr', 'build_grammar_csr', 'build_log_damped_row_csr', 'build_row_stochastic_csr', 'build_temporal_metagraph', 'calculate_global_domain_capital', 'clamp_', 'clean_data', 'coherence_k', 'coherence_pen', 'collapse_check_weighting_experiment', 'collapse_check_zscaled', 'collapse_pen', 'collapse_pen_optuna_study_v2', 'collapse_score', 'community_share', 'compile_slice', 'compute_hypervolume', 'converged_trials', 'core_', 'core_atom', 'core_child_he', 'corpus_curated', 'corpus_raw', 'corpus_text', 'correct_all_leaf_nodes', 'cousin_he', 'cu_auth', 'data_reading', 'data_share', 'dev_k', 'dev_mean', 'dfreq_global', 'diagnose_leaf_Z', 'diagonal_mass', 'domain_balance_inloop_power_and_weight_sweep', 'domain_balance_inloop_seedcheck', 'domain_balance_inloop_sweep', 'domain_balance_measurement', 'domain_balance_measurement_v2', 'domain_balance_pen', 'domain_balance_raw_penalty_measure', 'domain_balance_seed_noise', 'domain_balance_seed_noise_v2', 'domain_balance_v1_v2_noise_compare', 'domain_penalty_exploitability_', 'domain_penalty_exploitability_grid', 'dummy_cousin', 'entropy_threshold', 'epochs_run', 'evaluate_socio_semantic_', 'extra_loss_fn', 'extract_dual_matrices', 'fringe_atom', 'fro_norm', 'get_art_idx', 'get_idx', 'ghost_article_degree_vs_winner_loading', 'ghost_article_side_reading', 'ghost_auth_collinearity_and_concentration', 'ghost_lambda_z_sensitivity', 'ghost_no_affil_ablation', 'ghost_suspicious_cells_investigation', 'ghost_test1_gauge_invariance', 'ghost_test2_dead_entity_check', 'ghost_test3_share_distribution', 'ghost_test3v2_share_distribution', 'grammar_damping_cousin_he_more_seeds', 'identify_leaf_nodes', 'idf_dict', 'idf_global', 'inner_epochs', 'involvement_k', 'journal_id', 'journal_meta', 'journal_name', 'journal_repo_resolution', 'journal_repo_resolution_v3', 'k_svd', 'known_repository_sources', 'l1_penalty', 'lambda_domain_balance', 'lambda_l1', 'lambda_z_offdiag', 'linear_sum_assignment', 'mass_max', 'mass_share', 'mass_tvd', 'master_dual_track_stability_report', 'math_loss', 'max_k', 'max_monopoly', 'max_share', 'max_u_prob', 'mean_dev_k', 'mean_js_sim', 'mean_k', 'mean_sparsity', 'mem_max', 'mem_share', 'mem_tvd', 'meta_set', 'methodology_report', 'min_share', 'model_metadata', 'n_trials', 'near_separability_check', 'noiseSD_mean', 'normalized_entropy', 'num_entries', 'parent_he', 'pareto_trials', 'parse_errors', 'permutation_consistency_sweep', 'permutation_driver_analysis', 'population_size', 'postprocessing_4h', 'primary_location', 'pure_recon_loss', 'py_compile', 'raw_data', 'raw_domain_balance_penalty', 'raw_sparsity_loss', 'recon_loss', 'rel_change', 'relation_recon', 'resume_events', 'rotation_feasibility_search_v2', 'rotation_island_search_v2', 'scale_matrix', 'scout_methodology_report', 'sem_k', 'sem_keys', 'semantic_pen', 'set_num_threads', 'share_k', 'share_sum', 'soc_k', 'soc_keys', 'sociological_penalty', 'source_core', 'sparsity_loss', 'sqlite_set', 'structure_score', 'submit_chunk13v9', 'suggest_float', 'target_facets', 'target_norm_sq', 'top_k_to_keep', 'total_loss', 'total_sum', 'u_prob', 'use_deterministic_algorithms', 'user_attrs', 'v3v4_ratio', 'valid_pts', 'venue_type', 'warn_only', 'weakest_mean', 'weighted_cos_sim', 'within_k', 'z_offdiag', 'z_offdiag_loss', 'z_scaled', 'z_scaled_v1']
-- Ticket mentions: CLAUDE.md=102, FINDINGS.md=59
-- Correction-tag mentions: CLAUDE.md=12, FINDINGS.md=11
+- Ticket mentions: CLAUDE.md=102, FINDINGS.md=61
+- Correction-tag mentions: CLAUDE.md=12, FINDINGS.md=13
 - "Planned/not-implemented" status-language hits (raw material for the 1b deliverable): CLAUDE.md=20, FINDINGS.md=15
     - CLAUDE.md:204 ["not yet implemented"] `or the non-monotonicity. Not yet implemented — the mass-input problem (point 1) should be`
     - CLAUDE.md:454 ["not yet acted on"] `> current live behavior. Read the "Practical consequence" and "Not yet acted on" paragraphs`
@@ -41,18 +41,18 @@
     - CLAUDE.md:1254 ["diagnostic-only"] `the full corpus, not the toy corpus — diagnostic-only, no production wiring implied by`
     - CLAUDE.md:1281 ["considered and rejected"] `**Considered and rejected: an R²/explained-variance analog.** Since every relation is already`
     - CLAUDE.md:1296 ["status: proposal only"] `**Status: proposal only, not scheduled, not built.** No code exists for either (1) or (2).`
-    - FINDINGS.md:839 ["not yet implemented"] `**The mechanism, as designed (not yet implemented in `chunk13v9.py`):** two components,`
-    - FINDINGS.md:1174 ["not yet run"] `gauge-fixing pressure. Not yet run.`
-    - FINDINGS.md:1241 ["not yet done"] `separately — not yet done; unknown whether the 0.054–0.132 range is really`
-    - FINDINGS.md:2257 ["not yet run"] `the next natural step (not yet run) would be a K=3-focused, `C5`-focused deeper sweep to see`
-    - FINDINGS.md:2700 ["considered and rejected"] `Raising it toward the new p90 (≈0.17) was considered and rejected: D3's own rule was "set`
-    - FINDINGS.md:2890 ["diagnostic-only"] ``chunk13v9.py`, not diagnostic-only.** The in-loop weight (`lambda_domain_balance`) is fixed`
-    - FINDINGS.md:3044 ["no mechanism"] `partial remedy (excluding affiliations) piloted with a config-dependent result. No mechanism`
-    - FINDINGS.md:3045 ["diagnostic-only"] `designed or implemented — this ticket is diagnostic-only so far, deliberately, matching the`
-    - FINDINGS.md:3277 ["not yet run"] `full C1–C6 × K∈{2..6} × both data versions grid as a follow-up, not yet run.`
-    - FINDINGS.md:3329 ["not yet done"] `### What remains open, not yet done`
-    - FINDINGS.md:3332 ["not yet run"] `scoped (~120 fits, cheap individually), not yet run.`
-    - FINDINGS.md:3338 ["no mechanism"] `- No mechanism (in-loop or outer-loop) has been designed or proposed — this ticket remains`
-    - FINDINGS.md:3339 ["diagnostic-only"] `diagnostic-only throughout, matching the sequencing the user set at its start ("we need to`
-    - FINDINGS.md:3493 ["not yet acted on"] `**Version mismatch found, not yet acted on:** `corpus_curated.sqlite` (mtime Jun 15 23:02)`
-    - FINDINGS.md:3546 ["not yet done"] `- **Not yet done:** whether/how to re-run preprocessing or postprocessing to recover these 3`
+    - FINDINGS.md:880 ["not yet implemented"] `**The mechanism, as designed (not yet implemented in `chunk13v9.py`):** two components,`
+    - FINDINGS.md:1215 ["not yet run"] `gauge-fixing pressure. Not yet run.`
+    - FINDINGS.md:1282 ["not yet done"] `separately — not yet done; unknown whether the 0.054–0.132 range is really`
+    - FINDINGS.md:2298 ["not yet run"] `the next natural step (not yet run) would be a K=3-focused, `C5`-focused deeper sweep to see`
+    - FINDINGS.md:2741 ["considered and rejected"] `Raising it toward the new p90 (≈0.17) was considered and rejected: D3's own rule was "set`
+    - FINDINGS.md:2931 ["diagnostic-only"] ``chunk13v9.py`, not diagnostic-only.** The in-loop weight (`lambda_domain_balance`) is fixed`
+    - FINDINGS.md:3085 ["no mechanism"] `partial remedy (excluding affiliations) piloted with a config-dependent result. No mechanism`
+    - FINDINGS.md:3086 ["diagnostic-only"] `designed or implemented — this ticket is diagnostic-only so far, deliberately, matching the`
+    - FINDINGS.md:3318 ["not yet run"] `full C1–C6 × K∈{2..6} × both data versions grid as a follow-up, not yet run.`
+    - FINDINGS.md:3370 ["not yet done"] `### What remains open, not yet done`
+    - FINDINGS.md:3373 ["not yet run"] `scoped (~120 fits, cheap individually), not yet run.`
+    - FINDINGS.md:3379 ["no mechanism"] `- No mechanism (in-loop or outer-loop) has been designed or proposed — this ticket remains`
+    - FINDINGS.md:3380 ["diagnostic-only"] `diagnostic-only throughout, matching the sequencing the user set at its start ("we need to`
+    - FINDINGS.md:3534 ["not yet acted on"] `**Version mismatch found, not yet acted on:** `corpus_curated.sqlite` (mtime Jun 15 23:02)`
+    - FINDINGS.md:3587 ["not yet done"] `- **Not yet done:** whether/how to re-run preprocessing or postprocessing to recover these 3`

@@ -768,7 +768,7 @@
     "end_lineno": 768,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'auth', 'journ', 'affil'}"
+    "value": "{'affil', 'journ', 'auth'}"
    },
    {
     "name": "SEM_EXCLUSIVE_FACETS",
@@ -777,7 +777,7 @@
     "end_lineno": 769,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'cousin_he', 'parent_he', 'core_child_he', 'fringe_atom', 'core_atom'}"
+    "value": "{'core_child_he', 'fringe_atom', 'parent_he', 'cousin_he', 'core_atom'}"
    },
    {
     "name": "domain_membership_distributions",
@@ -1009,7 +1009,7 @@
   "commented_out_assignments": []
  },
  "citation_graph": {
-  "n_entries": 342,
+  "n_entries": 346,
   "broken": []
  },
  "numeric_constant_mismatches": [],
@@ -3710,11 +3710,11 @@
  ],
  "ticket_mentions_count": {
   "CLAUDE.md": 102,
-  "FINDINGS.md": 59
+  "FINDINGS.md": 61
  },
  "tag_mentions_count": {
   "CLAUDE.md": 12,
-  "FINDINGS.md": 11
+  "FINDINGS.md": 13
  },
  "planned_not_implemented_mentions": {
   "CLAUDE.md": [
@@ -3822,77 +3822,77 @@
   "FINDINGS.md": [
    {
     "phrase": "not yet implemented",
-    "lineno": 839,
+    "lineno": 880,
     "line": "**The mechanism, as designed (not yet implemented in `chunk13v9.py`):** two components,"
    },
    {
     "phrase": "not yet run",
-    "lineno": 1174,
+    "lineno": 1215,
     "line": "gauge-fixing pressure. Not yet run."
    },
    {
     "phrase": "not yet done",
-    "lineno": 1241,
+    "lineno": 1282,
     "line": "separately \u2014 not yet done; unknown whether the 0.054\u20130.132 range is really"
    },
    {
     "phrase": "not yet run",
-    "lineno": 2257,
+    "lineno": 2298,
     "line": "the next natural step (not yet run) would be a K=3-focused, `C5`-focused deeper sweep to see"
    },
    {
     "phrase": "considered and rejected",
-    "lineno": 2700,
+    "lineno": 2741,
     "line": "Raising it toward the new p90 (\u22480.17) was considered and rejected: D3's own rule was \"set"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 2890,
+    "lineno": 2931,
     "line": "`chunk13v9.py`, not diagnostic-only.** The in-loop weight (`lambda_domain_balance`) is fixed"
    },
    {
     "phrase": "no mechanism",
-    "lineno": 3044,
+    "lineno": 3085,
     "line": "partial remedy (excluding affiliations) piloted with a config-dependent result. No mechanism"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 3045,
+    "lineno": 3086,
     "line": "designed or implemented \u2014 this ticket is diagnostic-only so far, deliberately, matching the"
    },
    {
     "phrase": "not yet run",
-    "lineno": 3277,
+    "lineno": 3318,
     "line": "full C1\u2013C6 \u00d7 K\u2208{2..6} \u00d7 both data versions grid as a follow-up, not yet run."
    },
    {
     "phrase": "not yet done",
-    "lineno": 3329,
+    "lineno": 3370,
     "line": "### What remains open, not yet done"
    },
    {
     "phrase": "not yet run",
-    "lineno": 3332,
+    "lineno": 3373,
     "line": "scoped (~120 fits, cheap individually), not yet run."
    },
    {
     "phrase": "no mechanism",
-    "lineno": 3338,
+    "lineno": 3379,
     "line": "- No mechanism (in-loop or outer-loop) has been designed or proposed \u2014 this ticket remains"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 3339,
+    "lineno": 3380,
     "line": "diagnostic-only throughout, matching the sequencing the user set at its start (\"we need to"
    },
    {
     "phrase": "not yet acted on",
-    "lineno": 3493,
+    "lineno": 3534,
     "line": "**Version mismatch found, not yet acted on:** `corpus_curated.sqlite` (mtime Jun 15 23:02)"
    },
    {
     "phrase": "not yet done",
-    "lineno": 3546,
+    "lineno": 3587,
     "line": "- **Not yet done:** whether/how to re-run preprocessing or postprocessing to recover these 3"
    }
   ]

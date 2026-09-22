@@ -1,0 +1,114 @@
+[
+  {
+    "item_id": "B1-01",
+    "ticket": 43,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1714-1735 (set_seeds()): torch.set_num_threads(1) is the first statement in the function body; torch.use_deterministic_algorithms(True) is called with no warn_only argument, inside an inline comment citing ticket 43 and CLAUDE.md §4.16 directly",
+    "claim_text": "| 43 | M4 §S1 | `torch.use_deterministic_algorithms(True, warn_only=True)` — determinism not guaranteed on GPU | **Closed.** Tested `torch.use_deterministic_algorithms(True)` (no `warn_only`) against a real C6/K=4/50-epoch fit — completed with no exception. `warn_only` removed from `set_seeds()`. **Caveat:** ... only the CPU path is verified; GPU determinism on a compute node with actual CUDA ops is still unconfirmed.",
+    "detail": "Read set_seeds() directly in chunk13v9.py: line 1735 calls torch.use_deterministic_algorithms(True) with no warn_only kwarg anywhere in the function, and the function's own inline comment independently states the same CPU-only caveat as CLAUDE.md §4.16/§8 ticket 43 ('CUDA is unavailable in this environment... only the CPU path is confirmed; GPU determinism on a compute node is unverified'). Matches the register row and §4.16 exactly. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-02",
+    "ticket": 76,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1714-1725 (set_seeds(), torch.set_num_threads(1) as first statement, with an inline comment naming ticket 76 and the every-call-site rationale); diagnostic_results/fix2_timing_single_thread.json (K=2/3/4: 4.571s/5.270s/5.267s, 867/994/988 epochs, all converged=true)",
+    "claim_text": "`set_seeds()` now calls `torch.set_num_threads(1)` before anything else... timed C6/K=2,3,4 directly (worst-case topology, dual-anchor) — 4.57s/5.27s/5.27s per full trial (solver+eval) at 867/994/988 epochs to convergence... 3000 trials total × ~5.03s avg ≈ **4.2 hours**",
+    "detail": "Both the mechanism claim and the specific numbers check out exactly. torch.set_num_threads(1) is literally the first line inside set_seeds(), reasserted on every call as claimed. fix2_timing_single_thread.json contains exactly three entries (K=2,3,4) with total times 4.571/5.270/5.267s and epochs 867/994/988, all converged=true — matches CLAUDE.md's cited '4.57s/5.27s/5.27s' and '867/994/988 epochs' to the stated precision. Average of the three totals is 5.036s, and 3000 x 5.036s = 15,109s = 4.20 hours, matching the '~5.03s avg ~4.2 hours' arithmetic. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-03",
+    "ticket": 64,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L339-447 (initialize_tucker_adapted_nndsvd_and_propagate, the joint-anchor SVD block: active_anchor_keys collection, sp.vstack(anchor_scipy_mats), single svds call, per-anchor row-offset slicing back into U_np[f1], single U_np[f2_shared] = V_new assignment)",
+    "claim_text": "**Closed.** Restored the v7 approach: all active anchors vstacked into one joint SVD (valid since they share the column space), left singular vectors sliced back per anchor by row offset, shared right singular vectors assigned to `'art'` once.",
+    "detail": "Read the full joint-anchor SVD block directly. It vstacks every active anchor's scipy matrix (sp.vstack(anchor_scipy_mats)), runs exactly one svds call on the joint matrix, applies the canonical NNDSVD sign-splitting per component, then slices U_new back out per anchor using row_offsets and assigns V_new to f2_shared (the shared column facet, e.g. 'art') exactly once, outside the per-anchor loop. This is precisely the fix CLAUDE.md's ticket 64 register row and §4.8's 'Kept, verified independent' note describe. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-04",
+    "ticket": 74,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L339-345 (docstring: 'v8-style direct positivity (ticket 74) - the caller clamps them to min=1e-7'), L403-411 (NNDSVDar noise restoration block, explicit ticket-74 comment), L524 (U_raw built directly from U_np, no inverse_softplus_np call), run_inner_solver clamp_ calls at L647/649 and L758/760",
+    "claim_text": "**Current implementation:** `initialize_tucker_adapted_nndsvd_and_propagate` returns positive-valued leaf tensors directly (no `inverse_softplus_np` conversion). `run_inner_solver` sets `U_pos = U_raw`, `Z_pos = Z_raw` (identity - no `F.softplus`), and clamps every `U_raw`/`Z_raw` tensor to `min=1e-7` in-place, both immediately after init and after every `optimizer.step()`.",
+    "detail": "Confirmed directly: the init function's docstring and inline comments name ticket 74 and describe exactly this scheme; U_raw/Z_raw are built as plain torch.tensor(...) wraps of the positive numpy arrays with no inverse-softplus step; run_inner_solver clamps every u/z tensor to min=1e-7 at two points (once right after construction, once after every optimizer.step()), matching 'immediately after init and after every optimizer.step()' verbatim. The restored NNDSVDar-style stabilization noise block (init function, right before the leaf-tensor conversion) also carries its own ticket-74 comment matching CLAUDE.md's description exactly ('lifts every entity off that floor by an amount scaled to its own facet's mean'). The specific historical decisive-test numbers in CLAUDE.md §4.8's table (recon_loss 0.96 plateaued vs 0.80 descending, etc.) describe a comparison against the old softplus code path, which no longer exists on disk and has no surviving diagnostic_results/*.json (checked: no softplus/clamp/positivity-named file exists) - those specific historical numbers are not independently re-derivable from current artifacts, but the mechanism claim itself (what code is live today) is fully verified. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-05",
+    "ticket": 77,
+    "verdict": "consistent",
+    "ground_truth_checked": "diagnostic_results/test1_lambda_l1_sweep.json: lambda_l1_{0.0,0.75,5.0,25.0,74.6} entries' mean_sparsity and recon_loss fields; per_facet_rowmax.{fringe_atom,affil,parent_he}.mean_rowmax_live at lambda=0.0/5.0/74.6",
+    "claim_text": "**Test 1** ... the new range is **not inert** — `mean_sparsity` falls monotonically (0.0135→0.0098→0.0064→0.0041→0.0034) and `recon_loss` degrades monotonically (0.7746→0.7797→0.8060→0.8968→0.9282) ... `fringe_atom` mean row-max: 0.83 at λ=0 → 0.44 at λ=5, staying low through λ=74.6; `affil` 0.69→0.42; `parent_he` 0.85→0.53",
+    "detail": "Recomputed directly from the JSON: mean_sparsity = [0.013485, 0.009814, 0.006365, 0.004119, 0.003437] and recon_loss = [0.774581, 0.779680, 0.805991, 0.896751, 0.928181] across lambda_l1 in {0, 0.75, 5, 25, 74.6} — matches the cited sequences exactly at 4-decimal rounding, and all 5 entries have converged=true, matching 'all 5 converged, no ceiling hits'. per_facet_rowmax.mean_rowmax_live: fringe_atom 0.8344 (λ=0) → 0.4430 (λ=5) → 0.4824 (λ=74.6, 'staying low'); affil 0.6947 (λ=0) → 0.4204 (λ=74.6); parent_he 0.8466 (λ=0) → 0.5285 (λ=74.6) — all match the cited 0.83→0.44, 0.69→0.42, 0.85→0.53 figures exactly (affil/parent_he compare the λ=0 and λ=74.6 endpoints, fringe_atom the λ=0 and λ=5 points, consistent with how the sentence is phrased). No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-06",
+    "ticket": 78,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L558 (lambda_l1 = params.get('lambda_l1', 0.0)), L1549-1579 (create_optuna_objective: lambda_l1 = 0.0 hardcoded, trial.set_user_attr('lambda_l1_fixed', True), no trial.suggest_float('lambda_l1', ...) call anywhere in the function), L786-792 (diagnostics['raw_sparsity_loss'] exposed unweighted)",
+    "claim_text": "**Closed.** `lambda_l1` fixed at `0.0`, `suggest_float` call removed from `objective()`. `sparsity_loss` itself is still computed in `run_inner_solver` (unchanged) — only its weight in `total_loss` is now always zero. Added `diagnostics[\"raw_sparsity_loss\"]` (unweighted)...",
+    "detail": "Confirmed: create_optuna_objective sets lambda_l1 = 0.0 directly and calls trial.set_user_attr('lambda_l1_fixed', True) — grepped the whole function body for 'suggest_float' and only lambda_z_offdiag has one. run_inner_solver still computes sparsity_loss unconditionally and multiplies by lambda_l1 in total_loss (so a nonzero lambda_l1 passed via params would still work — the toy-corpus default is what's fixed, not the mechanism), and diagnostics['raw_sparsity_loss'] is populated unweighted. Matches CLAUDE.md ticket 78's closed status and §4.19 exactly. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-07",
+    "ticket": 79,
+    "verdict": "consistent",
+    "ground_truth_checked": "diagnostic_results/uscales_determinacy.json (test1_algebraic: sanity_max_diff_Unorm=5.96e-8, sanity_max_diff_Zscaled=1.49e-8; test2_empirical.uscales_aligned, all 36 (facet,k) cells' CV values computed directly: mean=0.3601, median=0.2639, min=0.0258, max=1.1998, 44.4% below 0.2); chunk13v9.py L931-1006 (evaluate_dimensional_collapse, current implementation)",
+    "claim_text": "Empirically, `U_scales` for the same facet/community varies by a coefficient of variation up to 1.2 across differently-initialised runs with near-identical `recon_loss`.' (§4.3) / 'CV of `U_scales[f][k]` across the three runs, over all 36 (facet, ref_k) cells: mean 0.360, median 0.264, min 0.026, max 1.200, 44% of cells below 0.2.' (FINDINGS §12)",
+    "detail": "Recomputed the CV statistics directly from uscales_determinacy.json's 36 (facet, community) cells: mean 0.3601, median 0.2639, min 0.0258, max 1.1998, 44.4% below 0.2 — matches FINDINGS §12's table exactly at stated rounding, and matches CLAUDE.md §4.3's 'up to 1.2' summary. The algebraic Test 1 sanity diffs (Unorm 5.96e-8, Zscaled 1.49e-8) are consistent with 'unchanged to float precision'. Separately confirmed evaluate_dimensional_collapse's current code: no U_scales_out parameter, computes community_share from Z_final via _relation_community_share, applies the squared max_share_threshold ceiling — matches CLAUDE.md's 'IMPLEMENTED (tickets 79/80)' description in §4.4 exactly. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-08",
+    "ticket": 85,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L351 ('for facet in active_facets:' inside initialize_tucker_adapted_nndsvd_and_propagate, active_facets is the raw set() built at L575 in run_inner_solver), L524 ('for f in active_facets' inside a dict comprehension building U_raw); contrasted with get_required_facets() at L196-211, which does return sorted(list(...))",
+    "claim_text": "**New — MULTI-ANCHOR OVERWRITE...** Iterates `active_facets` — a raw Python `set()` — directly... | **Open, not fixed.**",
+    "detail": "Both cited call sites still iterate the raw set() directly today: line 351's 'for facet in active_facets:' and line 524's dict-comprehension 'for f in active_facets'. Confirmed active_facets is built as a genuine Python set() (run_inner_solver line 575, populated via .update([f1,f2]) calls) rather than routed through get_required_facets() (which does correctly return sorted(list(...)), per §4.9 — verified directly, still true). The register's 'Open, not fixed' status and the two cited line numbers ('~351, ~524') both check out exactly against the current file. No action needed on this row itself; see B1-09 for a related but distinct proposed addition to FINDINGS §9.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-09",
+    "ticket": 85,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "CLAUDE.md §8 ticket-85 row (cross-process math_loss divergence traced to hash-randomized active_facets set() iteration, fixed by pinning PYTHONHASHSEED); FINDINGS.md §9 'Residual caveat' paragraph, which predates that finding and offers a different, untested explanation for the same class of symptom",
+    "claim_text": "**Residual caveat:** cross-process reproducibility is approximate. Same seed, separate interpreter launches gave 925 vs 976 epochs, `recon_loss` differing by ~3e-4. Losses track closely, so trajectories are not diverging — it is the early-stopping trigger firing at slightly different points. Relevant for Module 4 §S5, which compares across separate fits.",
+    "detail": "FINDINGS §9 documents the same observable symptom ticket 85 later diagnosed — same-seed runs disagreeing across separate process launches while being bit-identical within one process — but offers only a speculative, untested explanation ('the early-stopping trigger firing at slightly different points'). Ticket 85 (CLAUDE.md §8, found this session, still open/not fixed per B1-08) confirms a concrete, verified root cause for cross-launch divergence: initialize_tucker_adapted_nndsvd_and_propagate iterates active_facets (a raw Python set()) at two call sites, so its iteration order depends on Python's per-process hash randomization; pinning PYTHONHASHSEED across launches made results bit-identical again, confirming this as 'the exact cause.' This doesn't necessarily fully explain the specific 925-vs-976-epoch numbers already on record in §9 (that measurement predates ticket 85 and wasn't re-run with this hypothesis in mind), but it is directly relevant context FINDINGS §9 currently lacks: the caveat's own candidate explanation is now superseded by a confirmed alternative mechanism for the same class of symptom, and the two should be read together. Per the harmonization rule, this is an addition/refinement, not a hard contradiction, so it's addressed via a dated correction subsection rather than rewriting the original paragraph.",
+    "proposed_edit": {
+      "file": "FINDINGS.md",
+      "location": "§9 (end of section, before the '---' separator preceding §10)",
+      "action": "dated-correction-subsection",
+      "old_text_anchor": "**Residual caveat:** cross-process reproducibility is approximate. Same seed,\nseparate interpreter launches gave 925 vs 976 epochs, `recon_loss` differing by\n~3e-4. Losses track closely, so trajectories are not diverging — it is the\nearly-stopping trigger firing at slightly different points. Relevant for Module 4\n§S5, which compares across separate fits.",
+      "new_text": "**Residual caveat:** cross-process reproducibility is approximate. Same seed,\nseparate interpreter launches gave 925 vs 976 epochs, `recon_loss` differing by\n~3e-4. Losses track closely, so trajectories are not diverging — it is the\nearly-stopping trigger firing at slightly different points. Relevant for Module 4\n§S5, which compares across separate fits.\n\n### CORRECTION (2026-09-22)\n\nA later investigation (CLAUDE.md §8, ticket 85, found this session) identified a\nconcrete, verified mechanism for cross-process divergence at a fixed seed that this\nsection's 'early-stopping trigger' explanation did not consider and that was not yet\nknown when this section was written: `initialize_tucker_adapted_nndsvd_and_propagate`\niterates `active_facets` — a raw Python `set()` — at two call sites\n(`chunk13v9.py` ~lines 351, 524). Python's `set()` iteration order is\nhash-randomized per process (`PYTHONHASHSEED`), so two separate interpreter\nlaunches at the identical `MASTER_SEED` can build `U`/`Z`'s initial tensors in a\ndifferent order — a different, not merely later-diverging, initialization.\nConfirmed directly: pinning `PYTHONHASHSEED` across launches made `fit_production`\nresults bit-identical again. This does not necessarily account for the specific\n925-vs-976-epoch figures above (that measurement was not re-run under this\nhypothesis), but it is a confirmed alternative/additional cause for the same class\nof symptom this 'Residual caveat' describes, and ticket 85 remains **open, not\nfixed** — see CLAUDE.md §4.9 and §8's ticket-85 row for the recommended fix\n(route `active_facets` through `get_required_facets()` or `sorted(active_facets)`\nat both call sites)."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B1-10",
+    "ticket": null,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "grep -ril -i 'UDSR|ubiquity|discount' across every chunk13*.py version on disk in tensor_data_staging/toy_large/chunk13_execution/ (chunk13v2.py through chunk13v9.py, chunk13.v8.1.py, chunk13soc1.py, chunk13_metafac.py): only chunk13v9.py matches, and its sole hit is an unrelated docstring line ('Ubiquity smoothing penalty' for Penalty_B) — zero occurrences of UDSR/discount-style code in any historical version",
+    "claim_text": "FINDINGS.md §7: '**History.** An early review found the discount direction **inverted** (multiplying by ubiquity rather than dividing) — fixed. It then vanished entirely in the rewrite that introduced softplus, joint-anchor SVD, and scale-invariance, alongside other regressions that were restored.' vs. CLAUDE.md's own 'UDSR' investigation (end of §8): 'Grepped every `chunk13*.py` version...for `UDSR`, `ubiquity`/`discount`, and `idf`...no version of chunk13 — including v8.1 itself — ever implements an idf-weighted or ubiquity-discounted L1 term. **This was planned and stubbed, not built and removed.**'",
+    "detail": "This is not one of my 8 ticket numbers (UDSR carries no ticket tag in either doc), but the prompt's own scope list named FINDINGS §7 explicitly, and it directly contradicts a claim CLAUDE.md itself already investigated and settled this same session. I independently re-ran the equivalent check: grep -ril -i for UDSR/ubiquity/discount across every chunk13*.py file on disk (v2 through v9, v8.1, soc1, metafac) turns up nothing in any pre-v9 version, and chunk13v9.py's only hit is an unrelated docstring phrase ('Ubiquity smoothing penalty', Penalty_B/Part B of evaluate_socio_semantic_reality — not UDSR-related code). This directly confirms CLAUDE.md's finding and directly contradicts FINDINGS §7's 'History' claim that UDSR existed in code, had a real bug (inverted discount direction) found and fixed, and then vanished in the softplus-era rewrite — there is no trace of any such implementation, in any version, anywhere on disk. CLAUDE.md's version is the one independently reverified here (twice now, once by that session's own grep, once by mine); FINDINGS §7 predates that check and should be corrected to match, per the harmonization rule's 'one doc claim is clearly superseded' branch. Not escalating despite this being a code-history question, since it is directly, unambiguously checkable by grep and both checks agree — there is no genuine ambiguity to put to the user.",
+    "proposed_edit": {
+      "file": "FINDINGS.md",
+      "location": "§7 (end of section, before the '---' separator preceding §8)",
+      "action": "dated-correction-subsection",
+      "old_text_anchor": "**Also noted:** IDF *is* still applied, in the data rather than the model —\nchunk12's `build_anchor_csr` weights anchor entries by `log1p(tf) × idf`. That\nreduces a ubiquitous term's pull on reconstruction but does not shape how its\nloadings distribute across communities.",
+      "new_text": "**Also noted:** IDF *is* still applied, in the data rather than the model —\nchunk12's `build_anchor_csr` weights anchor entries by `log1p(tf) × idf`. That\nreduces a ubiquitous term's pull on reconstruction but does not shape how its\nloadings distribute across communities.\n\n### CORRECTION (2026-09-22)\n\nThis section's **History** paragraph above — that UDSR existed in code, had an\ninverted-discount-direction bug found and fixed, then vanished in the\nsoftplus-era rewrite — does not match what is on disk and is **superseded** by a\ndirect, repeatable check. CLAUDE.md's own end-of-§8 'UDSR' investigation (this\nsession) grepped every `chunk13*.py` version (v2 through v9, v8.1, `chunk13soc1.py`,\n`chunk13_metafac.py`) for `UDSR`, `ubiquity`/`discount`, and `idf`, and found no\nversion — including v8.1 — ever implements an idf-weighted or\nubiquity-discounted L1 term; the only near-hit is an unreferenced path constant.\nIndependently reconfirmed here: `grep -ril -i 'UDSR|ubiquity|discount'` across\nevery `chunk13*.py` file on disk turns up nothing in any pre-v9 version, and\n`chunk13v9.py`'s sole hit is an unrelated docstring phrase ('Ubiquity smoothing\npenalty', `evaluate_socio_semantic_reality` Part B — not UDSR). **This was\nplanned and stubbed (`chunk12.py:360`'s 'Doxa Tax Exemption' comment confirms\nupstream intent), not built and later removed.** The rest of this section's\nreasoning — why a ubiquity-keyed discount would be the wrong axis regardless\n(the `parent_he` idf-collapse example, the breadth-vs-ubiquity distinction, what\nalready addresses breadth) is unaffected by this correction and stands on its\nown merits independent of whether UDSR was ever actually built."
+    },
+    "escalation_reason": null
+  }
+]
