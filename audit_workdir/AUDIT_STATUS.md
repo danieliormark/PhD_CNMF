@@ -93,18 +93,41 @@ of which this script scans). **User declined to invest in sharpening this furthe
 surfaced the real findings. Revisit only if a "does the doc reference anything that doesn't
 exist anywhere" guarantee is specifically wanted later.
 
-## Pending decisions / next actions (none started yet)
+## Done (2026-09-22, this session)
 
-1. **Diagnostic-script cleanup** (delegated to Claude per point 4 above, not yet executed):
-   - `ghost_test3_share_distribution.py` and `ghost_test3v2_share_distribution.py` still inline
-     the old per-community-share loop instead of importing `community_share_vector` from
-     `diagnostic_blocks.py`, despite that function's own docstring claiming the migration from
-     all 7 original copies is complete. Fix: switch both to import it, verify numerically
-     identical output on at least one cached fit before treating the fix as safe (mirrors the
-     "confirmed identical before this move" verification the other 5 already got).
-   - Review the 5 unverified non-importing scripts above; decide keep-as-is (legacy/deliberate)
-     vs. delete (redundant with something centralized) vs. migrate.
-2. **The semantic adjudication layer** (real LLM cost, not yet scoped or started): the
+1. **Diagnostic-script cleanup** (delegated to Claude per point 4 above — executed):
+   - `ghost_test3_share_distribution.py` and `ghost_test3v2_share_distribution.py` now import
+     `community_share_vector` from `diagnostic_blocks.py` instead of inlining it. **Verified
+     as an exact no-op**: reconstructed the old inlined logic, ran it against the same current
+     `chunk13v9.py` and the same cached fit as the new centralized call — `0.0` max abs diff,
+     arrays identical, on two cells (`C1/K4/T1`, `C3/K4/T1_v2`). Both scripts' `run_one()` still
+     runs end-to-end. Note: comparing the NEW code against the *old stored*
+     `ghost_test3_share_distribution.json` shows a small diff (~0.0012) and a differing
+     `relation_diagnostics` — traced to `chunk13v9.py`'s own `_hungarian_relabel_relation`
+     having changed since that JSON was last generated (the FINDINGS §16/§17 leaf-exclusion
+     fix, unrelated to this edit), **not** a bug in this fix. The stored JSON is stale relative
+     to current `chunk13v9.py`; re-running the full grid to refresh it was not done (a real cost
+     decision, not taken here).
+   - The 5 previously-unverified non-importing scripts are now all accounted for, none need
+     action: `journal_repo_resolution.py`/`_v2`/`_v3` are network/OpenAlex-API scripts (v1→v2
+     superseded by rate-limiting, v2→v3 superseded by a false-negative bug fix — all three kept
+     as the evidentiary trail CLAUDE.md §4.23 already cites, matching the project's
+     mark-don't-delete convention); `partB_term_variance.py` predates `diagnostic_blocks.py`
+     entirely (2026-08-12) and its one finding is already fully absorbed into CLAUDE.md §4.17/§8
+     ticket 81; `permutation_driver_analysis.py` is pure JSON-to-JSON post-processing (reads
+     `permutation_consistency_sweep.json`, fits nothing) with no need for the fitting
+     infrastructure. Combined with the 3 already-known cases (`uscales_determinacy.py`,
+     `permutation_test.py` — legacy, pre-date `diagnostic_blocks.py`; `domain_balance_v1_v2_noise_compare.py`
+     — pure JSON aggregation by design), **all 8 non-importing scripts are now explained; none
+     represent drift or neglect.**
+2. **1b deliverable assembled**: `audit_workdir/unimplemented_recommendations.md` — 15 open
+   items (organized by ticket), 3 explicitly-rejected items kept for completeness, and an
+   honest note that a few exclusions were made on limited context and that the list has not
+   yet been checked for silent implementation since being written.
+
+## Pending decisions / next actions
+
+3. **The semantic adjudication layer** (real LLM cost, not yet scoped or started): the
    mechanical triage above catches structural/pattern-level drift, not "does this specific
    claim in §4.18/§25 actually match what the planted-null test found." The 2-stage
    ledger-then-adjudicate design from the crashed session is retired per the redesign above —
@@ -112,9 +135,14 @@ exist anywhere" guarantee is specifically wanted later.
    describes + the result JSON it cites, report mismatches" calls, Sonnet-pinned, escalating to
    Opus-medium only for genuinely cross-source judgment calls. **Not yet scoped — needs a
    decision on which section(s) to start with and whether to proceed now or later.**
-3. **The 4 duplicate top-level constants** — decide whether to note in CLAUDE.md §8 or actually
+4. **The 4 duplicate top-level constants** — decide whether to note in CLAUDE.md §8 or actually
    delete the redundant later copies in `chunk13v9.py` (the user's call, since this is
    production code, not diagnostic tooling).
+5. **Whether to re-run the two `ghost_test3*.py` scripts' full 60-cell grids** to refresh their
+   stored JSON against current `chunk13v9.py` (see point 1's note above) — not done, a cost
+   decision.
+6. **Whether to check the 1b list (item 2 above) for silent implementation** — its own stated
+   next step, not yet done.
 
 ## Files in this directory
 
