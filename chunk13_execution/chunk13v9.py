@@ -1683,17 +1683,18 @@ import optuna
 # =============================================================================
 # PHASE 1A: HARDWARE & MLOPS CONSTANTS
 # =============================================================================
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Ticket 88: DEVICE, MASTER_SEED, ENTROPY_THRESHOLD and TARGET_COHERENCE were
+# each re-declared here with values identical to Module 1's (§1.1/§1.2). Deleted
+# per CLAUDE.md §7 ("Module 1 owns all constants... delete the later copy") —
+# Module 1's declarations are the single source of truth and remain in scope for
+# everything textually below them.
 print(f"[*] Initializing Module 4 on DEVICE: {DEVICE}")
 
 # Pipeline Meta-Data
 CONFIG_IDS = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6']
-MASTER_SEED = 42
 
 # Domain Constants (Outer-Loop Sociology)
 MAX_MONOPOLY = 0.85
-ENTROPY_THRESHOLD = 0.60  
-TARGET_COHERENCE = 0.50
 
 # Search Grid Definition
 # Ticket 59: T1 has ~2,300 non-zero observations total; K=15 gave ~43,900 free
