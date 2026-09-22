@@ -821,13 +821,18 @@ freedom is essentially absent covers only K∈{3,4}, T1 — this ticket's grid i
 to match.
 
 **Measured: a flat percentage-of-total-mass threshold (the user's own original candidate,
-2%) never fires anywhere — 0 of 300 community-slots across the full C1–C6 × K∈{2..6} × T1/T2
+2%) never fires anywhere — 0 of 240 community-slots across the full C1–C6 × K∈{2..6} × T1/T2
 grid, either data version.** A `K`-relative threshold (share below `0.5×` or `0.25×` the
 "fair share" `1/K`) does fire, rising with K (0/12 cells at K=2 to 7/12 at K=6, `0.5/K`
 threshold) — and 3 cells show **two** simultaneous low-mass communities, confirming multiple
 ghosts per cell are real, not hypothetical. Reproduces closely under `chunk12v2` data at
 matching configs/K (not surprising for the ones examined in depth, since v2 only reweights 3
-grammar relations that don't touch the facets driving this).
+grammar relations that don't touch the facets driving this). **Re-derived 2026-09-22 (ticket
+88 forced a full cache invalidation): verdict held on every count above.** The denominator
+was itself wrong before this correction — 240, not 300, though the flat-threshold fire count
+was already exactly 0 either way; the 0/12→7/12 progression and the 3-cell multi-ghost finding
+both hold on the refreshed grid, same cells, values shifted ≤0.017 absolute (within §21's
+established noise floor). One convergence flip disclosed, not consequential: FINDINGS §23.
 
 **Root-cause investigation found a structural, universal property of `S_Art_Auth`
 (article-author ties), plus a config-specific, non-universal secondary cause:**

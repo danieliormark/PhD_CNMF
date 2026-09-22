@@ -146,23 +146,45 @@ exist anywhere" guarantee is specifically wanted later.
    (`85daa96`). **Correctly flagged, not touched:** this session's own uncommitted edit to
    `unimplemented_recommendations.md` — left alone as out of scope, committed separately below.
 
+## Done, round 3 (2026-09-22, same session)
+
+5. **Grid re-run complete, docs updated.** Both `ghost_test3_share_distribution.py` and
+   `ghost_test3v2_share_distribution.py` re-run full 60-cell grids, `PYTHONHASHSEED=0` +
+   single-threaded per ticket 76/85. Old result JSONs backed up to `/tmp/ghost_test3*.OLD.json`.
+   **Verdict: held on every substantive claim**, plus one real pre-existing citation error
+   found and fixed. Diffed old vs. new directly rather than trusting a summary:
+   - The flat-threshold "never fires" claim: still exactly 0 fires, both data versions — but
+     its cited denominator ("300 community-slots") was wrong; the actual grid is 240
+     (6 configs × Σ K{2..6}=20 × 2 slices). Fixed in both `CLAUDE.md` §4.22 and `FINDINGS.md` §23.
+   - The 0/12→7/12 (K=2→K=6) progression and the "3 cells with 2 simultaneous ghosts" both
+     hold exactly — checked by identity, not just by count: the same specific cells
+     (`T1/C1/K6`, `T1/C3/K6`, `T2/C3/K6`, `T1_v2/C1/K6`, `T1_v2/C3/K6`, `T2_v2/C4/K5`) are
+     still the ones flagged, with per-community shares moving by at most ~0.017 absolute
+     (largest: `T2_v2/C4/K5`) — within §21's established noise floor.
+   - One convergence flip disclosed: `T1_v2/C3/K6` (cited as reproducing `T1/C3/K6` closely)
+     now hits the epoch ceiling; its actual `community_share` values barely moved despite this.
+   - Both files updated with a dated "Re-derived 2026-09-22" note appended in place, per this
+     project's own convention (original numbers kept, not overwritten).
+   - **Methodological note, not a correctness issue:** the constants-consolidation agent's
+     commit (`85daa96`, landed 22:14:48) fell in the middle of this grid run's ~10-minute
+     window, so early cells were fit against pre-ticket-88 `chunk13v9.py` and later cells
+     against post-ticket-88 — confirmed no single `(config, K, slice)` cell was computed
+     twice under different hashes within the run (checked directly), and the two code
+     versions are behaviorally identical per the agent's own verification, so this doesn't
+     affect any reported number. Flagging for the record since a mid-run code change is
+     exactly the kind of thing that *could* have mattered had the versions actually differed.
+
 ## Pending decisions / next actions
 
-5. **The semantic adjudication layer** (real LLM cost, not yet scoped or started): the
+6. **The semantic adjudication layer** (real LLM cost, not yet scoped or started): the
    mechanical triage above catches structural/pattern-level drift, not "does this specific
    claim in §4.18/§25 actually match what the planted-null test found." The 2-stage
    ledger-then-adjudicate design from the crashed session is retired per the redesign above —
    any future pass here should be a small number of direct "read the section + the code it
    describes + the result JSON it cites, report mismatches" calls, Sonnet-pinned, escalating to
    Opus-medium only for genuinely cross-source judgment calls. **Not yet scoped — needs a
-   decision on which section(s) to start with and whether to proceed now or later.**
-6. **Grid re-run in progress** (started 2026-09-22 22:11): both `ghost_test3_share_distribution.py`
-   and `ghost_test3v2_share_distribution.py`, full 60-cell grids, `PYTHONHASHSEED=0` +
-   single-threaded per ticket 76/85. Old result JSONs backed up to `/tmp/ghost_test3*.OLD.json`
-   before starting. One real (not code-related) finding already surfaced mid-run:
-   `T1_v2/C3/K=6` hit the 2000-epoch ceiling without converging. Once complete: diff old vs.
-   new numbers, then update wherever `CLAUDE.md`/`FINDINGS.md` cite this script's figures
-   (primarily `CLAUDE.md` §4.22 and `FINDINGS.md` §23 — confirm exact citations before editing).
+   decision on which section(s) to start with and whether to proceed now or later.** This is
+   now the only open item from the original three-part audit request.
 
 ## Files in this directory
 

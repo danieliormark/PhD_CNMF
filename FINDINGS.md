@@ -3095,6 +3095,29 @@ multi-ghost cell v1 didn't have (`T2_v2/C4/K5`: 0.052, 0.100). Not purely a non-
 artifact: 12 of the 15 v1 cells flagged at `0.5/K` converged normally.
 Scripts: `ghost_test3_share_distribution.py`, `ghost_test3v2_share_distribution.py`.
 
+**Re-run 2026-09-22** (forced by ticket 88's constant-consolidation edit to `chunk13v9.py`,
+which changes the file's content hash and therefore invalidates every `fit_or_load()` cache
+entry — `SESSION_PROTOCOL.md` §D). Verdict held on every claim above; two things moved:
+
+- **The "0 of 300" denominator was itself wrong — corrected to 240.** 6 configs × 2 slices ×
+  Σ(K=2..6)=20 = 240 community-slots per data version, not 300. Pre-dates this re-run; only
+  caught because recomputing it directly surfaced the mismatch. The flat-threshold fire count
+  is still exactly **0** against the correct denominator, both data versions.
+- **Convergence**: v1 now 55/60 (was 53/60); v2 now 50/60 (was 51/60) — ordinary run-to-run
+  flicker at K≥5, no directional trend. One specific flip worth disclosing per this file's own
+  non-convergence discipline: `T1_v2/C3/K6` (cited above as reproducing `T1/C3/K6` closely)
+  now hits the 2000-epoch ceiling without converging, where it had converged in the run these
+  numbers were originally measured from. Its `community_share` values barely moved despite
+  the status change (0.0668→0.0660, 0.0777→0.0778 for the two flagged communities), so the
+  "reproduces closely" reading isn't undermined — disclosed, not discarded.
+
+**The 3 v1 / 3 v2 multi-ghost cells are the same cells, identically flagged, on the new
+run** — no cell gained or lost ghost status. Per-community share values moved by at most
+~0.017 absolute (largest single shift: `T2_v2/C4/K5`'s two flagged communities, 0.052→0.062
+and 0.099→0.069) — within §21's already-established noise-floor range for this quantity, not
+a new finding. Current numbers: `diagnostic_results/ghost_test3_share_distribution.json` /
+`ghost_test3v2_share_distribution.json`.
+
 ### Deep dive on the 3 originally-flagged cells — per-community, not aggregated
 
 For each cell's 2 lowest-share communities: `Z_scaled` diagonal per relation (the
