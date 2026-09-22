@@ -345,6 +345,15 @@ The objective returns `(pure_recon_loss, sociological_penalty)` as a 2-tuple, op
 `NSGAIISampler`. Lambda weights (`LAMBDA_COLLAPSE` etc.) were removed from the aggregation —
 the three penalties sum unweighted into `sociological_penalty`. See open ticket 35.
 
+> **[SUPERSEDED IN PART — corrected 2026-09-22 against the code, not rewritten.] The sum has
+> FOUR terms, not three, as of ticket 82 E2.** `domain_balance_pen` was added and is summed in
+> unconditionally: `sociological_penalty = collapse_pen + coherence_pen + socio_semantic_pen +
+> domain_balance_pen` (`chunk13v9.py` ~line 1521, verified directly). See §4.17 for the full
+> analysis, including why the fourth term does not simply restore three independent axes
+> (FINDINGS §25: `domain_balance_pen`'s input carries no signal about true domain balance on
+> this corpus). Ticket 35 itself — whether lambda weights should be reintroduced into the
+> aggregation — is unaffected by this correction and remains open and deliberate.
+
 ### 4.13 Post-hoc sociological recomputation (the reproducibility Δ)
 
 Module 4's extraction (S4) and stability (S5) sections must **recompute** the sociological
@@ -432,6 +441,18 @@ assumed safe.
 > `domain_balance_pen`'s input carries no signal about true domain balance on this corpus, so
 > the axis is now `semantic_pen` plus a term whose informativeness is itself in question. The
 > measurements below (all-12-cells zeros, the stated ranges) remain accurate as measurements.
+>
+> **[SUPERSEDED IN PART, ADDITIONALLY — corrected 2026-09-22 against FINDINGS §17 and this
+> file's own §8 ticket-81 register row.] `collapse_pen` is no longer always 0.0 either.**
+> Tickets 79/80 (§4.4, FINDINGS §17) rewrote `evaluate_dimensional_collapse` on
+> `Z_scaled`/max-share; post-fix, `collapse_pen` fires on 2 of the same 12 cells (`C1/K=2`,
+> `C6/K=2`, both barely over the 0.60 max-share ceiling) — no longer always 0.0. §8's own
+> register row for ticket 81 already records this as "Partially superseded." `coherence_pen`
+> is untouched by that fix and remains exactly 0.0 in all 12 cells — still open. So "remain
+> accurate as measurements" (previous sentence) applies to the historical pre-79/80-fix
+> numbers quoted below, and to `coherence_pen`'s current behavior — not to `collapse_pen`'s
+> current live behavior. Read the "Practical consequence" and "Not yet acted on" paragraphs
+> below with that in mind; they predate this fix.**
 
 `sociological_penalty = collapse_pen + coherence_pen + semantic_pen`. Measured across the
 full grid (C1–C6 × K∈{2,4}, production settings): `collapse_pen` and `coherence_pen` are

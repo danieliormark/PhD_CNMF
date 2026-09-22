@@ -1241,6 +1241,25 @@ in code and in prior documentation as three independent terms.
    separately — not yet done; unknown whether the 0.054–0.132 range is really
    Part A doing all the work.
 
+### CORRECTION (2026-09-22)
+
+This section's headline formula and 12-cell table (above) were measured **before** two later
+fixes, both now live in `chunk13v9.py`:
+
+1. **Ticket 82 E2 added a fourth term.** `sociological_penalty` is now `collapse_pen +
+   coherence_pen + semantic_pen + domain_balance_pen` (`chunk13v9.py` ~line 1521, verified
+   directly) — see CLAUDE.md §4.17's own correction. This does not restore three independent
+   axes: §25 below finds `domain_balance_pen`'s input carries no signal about true domain
+   balance on this corpus.
+2. **Tickets 79/80 rewrote `evaluate_dimensional_collapse`** (§17 above) on `Z_scaled`/
+   max-share instead of `U_scales`/entropy. Post-fix, `collapse_pen` fires on 2 of the same
+   12 cells (`C1/K=2`, `C6/K=2`) — it is **no longer always 0.0**, contrary to this section's
+   headline claim. `coherence_pen` is untouched by either fix and remains exactly 0.0 in all
+   12 cells (still open — see CLAUDE.md §8 ticket-81 register row, "Partially superseded").
+
+The table above is kept as the historical record of what the pre-fix formula measured; it is
+not the current live behavior of `sociological_penalty`.
+
 ---
 
 ## 16. Permutation-consistency across the full grid, and a threshold for trusting a relabeling

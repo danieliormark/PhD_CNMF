@@ -334,64 +334,28 @@
     "parent": "create_optuna_objective"
    },
    {
-    "name": "DEVICE",
-    "kind": "constant",
-    "lineno": 1686,
-    "end_lineno": 1686,
-    "docstring_first_line": null,
-    "parent": null,
-    "value": null
-   },
-   {
     "name": "CONFIG_IDS",
-    "kind": "constant",
-    "lineno": 1690,
-    "end_lineno": 1690,
-    "docstring_first_line": null,
-    "parent": null,
-    "value": "['C1', 'C2', 'C3', 'C4', 'C5', 'C6']"
-   },
-   {
-    "name": "MASTER_SEED",
-    "kind": "constant",
-    "lineno": 1691,
-    "end_lineno": 1691,
-    "docstring_first_line": null,
-    "parent": null,
-    "value": "42"
-   },
-   {
-    "name": "MAX_MONOPOLY",
     "kind": "constant",
     "lineno": 1694,
     "end_lineno": 1694,
     "docstring_first_line": null,
     "parent": null,
+    "value": "['C1', 'C2', 'C3', 'C4', 'C5', 'C6']"
+   },
+   {
+    "name": "MAX_MONOPOLY",
+    "kind": "constant",
+    "lineno": 1697,
+    "end_lineno": 1697,
+    "docstring_first_line": null,
+    "parent": null,
     "value": "0.85"
-   },
-   {
-    "name": "ENTROPY_THRESHOLD",
-    "kind": "constant",
-    "lineno": 1695,
-    "end_lineno": 1695,
-    "docstring_first_line": null,
-    "parent": null,
-    "value": "0.6"
-   },
-   {
-    "name": "TARGET_COHERENCE",
-    "kind": "constant",
-    "lineno": 1696,
-    "end_lineno": 1696,
-    "docstring_first_line": null,
-    "parent": null,
-    "value": "0.5"
    },
    {
     "name": "K_LIST",
     "kind": "constant",
-    "lineno": 1703,
-    "end_lineno": 1703,
+    "lineno": 1704,
+    "end_lineno": 1704,
     "docstring_first_line": null,
     "parent": null,
     "value": "[2, 3, 4, 5, 6]"
@@ -399,8 +363,8 @@
    {
     "name": "N_TRIALS",
     "kind": "constant",
-    "lineno": 1704,
-    "end_lineno": 1704,
+    "lineno": 1705,
+    "end_lineno": 1705,
     "docstring_first_line": null,
     "parent": null,
     "value": "200"
@@ -408,8 +372,8 @@
    {
     "name": "BASE_RESULTS_DIR",
     "kind": "constant",
-    "lineno": 1707,
-    "end_lineno": 1707,
+    "lineno": 1708,
+    "end_lineno": 1708,
     "docstring_first_line": null,
     "parent": null,
     "value": null
@@ -417,24 +381,24 @@
    {
     "name": "set_seeds",
     "kind": "function",
-    "lineno": 1713,
-    "end_lineno": 1740,
+    "lineno": 1714,
+    "end_lineno": 1741,
     "docstring_first_line": "Locks the stochastic environment across all underlying libraries.",
     "parent": null
    },
    {
     "name": "get_environment_info",
     "kind": "function",
-    "lineno": 1744,
-    "end_lineno": 1754,
+    "lineno": 1745,
+    "end_lineno": 1755,
     "docstring_first_line": "Captures library versions and global constants for long-term reproducibility.",
     "parent": null
    },
    {
     "name": "env_path",
     "kind": "constant",
-    "lineno": 1757,
-    "end_lineno": 1757,
+    "lineno": 1758,
+    "end_lineno": 1758,
     "docstring_first_line": null,
     "parent": null,
     "value": null
@@ -442,23 +406,14 @@
    {
     "name": "EXPECTED_OPTUNA_VERSION",
     "kind": "constant",
-    "lineno": 1782,
-    "end_lineno": 1782,
+    "lineno": 1783,
+    "end_lineno": 1783,
     "docstring_first_line": null,
     "parent": null,
     "value": "'4.1.0'"
    },
    {
     "name": "SCOUT_TRIALS",
-    "kind": "constant",
-    "lineno": 1788,
-    "end_lineno": 1788,
-    "docstring_first_line": null,
-    "parent": null,
-    "value": "100"
-   },
-   {
-    "name": "DEEP_DIVE_TRIALS",
     "kind": "constant",
     "lineno": 1789,
     "end_lineno": 1789,
@@ -467,10 +422,19 @@
     "value": "100"
    },
    {
-    "name": "HV_MARGIN",
+    "name": "DEEP_DIVE_TRIALS",
     "kind": "constant",
     "lineno": 1790,
     "end_lineno": 1790,
+    "docstring_first_line": null,
+    "parent": null,
+    "value": "100"
+   },
+   {
+    "name": "HV_MARGIN",
+    "kind": "constant",
+    "lineno": 1791,
+    "end_lineno": 1791,
     "docstring_first_line": null,
     "parent": null,
     "value": "0.1"
@@ -478,48 +442,48 @@
    {
     "name": "build_objective",
     "kind": "function",
-    "lineno": 1795,
-    "end_lineno": 1807,
+    "lineno": 1796,
+    "end_lineno": 1808,
     "docstring_first_line": null,
     "parent": null
    },
    {
     "name": "run_adaptive_grid",
     "kind": "function",
-    "lineno": 1812,
-    "end_lineno": 2016,
+    "lineno": 1813,
+    "end_lineno": 2017,
     "docstring_first_line": null,
     "parent": null
    },
    {
     "name": "NumpyEncoder",
     "kind": "class",
-    "lineno": 2037,
-    "end_lineno": 2044,
+    "lineno": 2038,
+    "end_lineno": 2045,
     "docstring_first_line": null,
     "parent": null
    },
    {
     "name": "default",
     "kind": "nested_function",
-    "lineno": 2038,
-    "end_lineno": 2044,
+    "lineno": 2039,
+    "end_lineno": 2045,
     "docstring_first_line": null,
     "parent": "NumpyEncoder"
    },
    {
     "name": "extract_and_archive_pareto_front",
     "kind": "function",
-    "lineno": 2046,
-    "end_lineno": 2270,
+    "lineno": 2047,
+    "end_lineno": 2271,
     "docstring_first_line": null,
     "parent": null
    },
    {
     "name": "N_STABILITY_SEEDS",
     "kind": "constant",
-    "lineno": 2293,
-    "end_lineno": 2293,
+    "lineno": 2294,
+    "end_lineno": 2294,
     "docstring_first_line": null,
     "parent": null,
     "value": "10"
@@ -527,8 +491,8 @@
    {
     "name": "STABILITY_SEEDS",
     "kind": "constant",
-    "lineno": 2294,
-    "end_lineno": 2294,
+    "lineno": 2295,
+    "end_lineno": 2295,
     "docstring_first_line": null,
     "parent": null,
     "value": null
@@ -536,63 +500,46 @@
    {
     "name": "row_normalize",
     "kind": "function",
-    "lineno": 2304,
-    "end_lineno": 2319,
+    "lineno": 2305,
+    "end_lineno": 2320,
     "docstring_first_line": "Converts raw interactions into node-level probability distributions.",
     "parent": null
    },
    {
     "name": "col_normalize",
     "kind": "function",
-    "lineno": 2321,
-    "end_lineno": 2325,
+    "lineno": 2322,
+    "end_lineno": 2326,
     "docstring_first_line": "Converts raw interactions into community-level emission profiles.",
     "parent": null
    },
    {
     "name": "row_wise_cosine_similarity",
     "kind": "function",
-    "lineno": 2327,
-    "end_lineno": 2334,
+    "lineno": 2328,
+    "end_lineno": 2335,
     "docstring_first_line": "Fast, vectorized row-wise Cosine Similarity calculation.",
     "parent": null
    },
    {
     "name": "run_dual_track_stability_analysis",
     "kind": "function",
-    "lineno": 2339,
-    "end_lineno": 2622,
+    "lineno": 2340,
+    "end_lineno": 2623,
     "docstring_first_line": null,
     "parent": null
    },
    {
     "name": "DATA_FILEPATH",
     "kind": "constant",
-    "lineno": 2625,
-    "end_lineno": 2625,
+    "lineno": 2626,
+    "end_lineno": 2626,
     "docstring_first_line": null,
     "parent": null,
     "value": "'/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t1.pkl'"
    }
   ],
-  "duplicate_top_level_names": {
-   "DEVICE": [
-    15,
-    1686
-   ],
-   "ENTROPY_THRESHOLD": [
-    44,
-    1695
-   ],
-   "TARGET_COHERENCE": [
-    70,
-    1696
-   ],
-   "MASTER_SEED": [
-    90,
-    1691
-   ]
-  },
+  "duplicate_top_level_names": {},
   "commented_out_assignments": [
    {
     "name": "MAX_MONOPOLY",
@@ -821,7 +768,7 @@
     "end_lineno": 768,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'journ', 'affil', 'auth'}"
+    "value": "{'auth', 'journ', 'affil'}"
    },
    {
     "name": "SEM_EXCLUSIVE_FACETS",
@@ -830,7 +777,7 @@
     "end_lineno": 769,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'core_child_he', 'parent_he', 'fringe_atom', 'core_atom', 'cousin_he'}"
+    "value": "{'cousin_he', 'parent_he', 'core_child_he', 'fringe_atom', 'core_atom'}"
    },
    {
     "name": "domain_membership_distributions",
@@ -1062,7 +1009,7 @@
   "commented_out_assignments": []
  },
  "citation_graph": {
-  "n_entries": 324,
+  "n_entries": 342,
   "broken": []
  },
  "numeric_constant_mismatches": [],
@@ -2433,6 +2380,7 @@
    "imports_from_diagnostic_blocks": [
     "BLOCKS_VERSION",
     "OUT_DIR",
+    "community_share_vector",
     "fit_or_load",
     "load_module"
    ],
@@ -2441,11 +2389,11 @@
    "blocks_version_usage": [
     {
      "lineno": 40,
-     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module",
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, community_share_vector, fit_or_load, load_module",
      "looks_like_gate": false
     },
     {
-     "lineno": 117,
+     "lineno": 119,
      "line": "json.dump({\"blocks_version\": BLOCKS_VERSION, \"configs\": CONFIGS, \"k_list\": K_LIST,",
      "looks_like_gate": false
     }
@@ -2466,6 +2414,7 @@
    "imports_from_diagnostic_blocks": [
     "BLOCKS_VERSION",
     "OUT_DIR",
+    "community_share_vector",
     "fit_or_load",
     "load_module"
    ],
@@ -2474,7 +2423,7 @@
    "blocks_version_usage": [
     {
      "lineno": 23,
-     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, fit_or_load, load_module",
+     "line": "from diagnostic_blocks import BLOCKS_VERSION, OUT_DIR, community_share_vector, fit_or_load, load_module",
      "looks_like_gate": false
     },
     {
@@ -3407,6 +3356,7 @@
   "DCR_sem",
   "DECODER_PATH",
   "FLOOR_EXCLUDE",
+  "False",
   "MEANINGFUL_FRAC",
   "NSGAIISampler",
   "PYTHONHASHSEED",
@@ -3759,12 +3709,12 @@
   "grammar_damping_v1_vs_v2_quality.py"
  ],
  "ticket_mentions_count": {
-  "CLAUDE.md": 97,
-  "FINDINGS.md": 57
+  "CLAUDE.md": 102,
+  "FINDINGS.md": 59
  },
  "tag_mentions_count": {
-  "CLAUDE.md": 10,
-  "FINDINGS.md": 10
+  "CLAUDE.md": 12,
+  "FINDINGS.md": 11
  },
  "planned_not_implemented_mentions": {
   "CLAUDE.md": [
@@ -3775,92 +3725,97 @@
    },
    {
     "phrase": "not yet acted on",
-    "lineno": 455,
+    "lineno": 454,
+    "line": "> current live behavior. Read the \"Practical consequence\" and \"Not yet acted on\" paragraphs"
+   },
+   {
+    "phrase": "not yet acted on",
+    "lineno": 476,
     "line": "**Not yet acted on.** Redesigning this is a decision, not a bug fix \u2014 see FINDINGS \u00a715 for"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 466,
+    "lineno": 487,
     "line": "> \"v9 currently has no per-community domain-balance mechanism at all\", \"not yet implemented"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 496,
+    "lineno": 517,
     "line": "property (design session, not yet implemented in code; full reasoning in FINDINGS \u00a713's"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 497,
+    "lineno": 518,
     "line": "update).** **[HISTORICAL \u2014 \"not yet implemented in code\" was true when written; both halves"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 551,
+    "lineno": 572,
     "line": "**E1 measurement (diagnostic-only, `diagnostic_scripts/domain_balance_measurement.py`,"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 584,
+    "lineno": 605,
     "line": "`chunk13v9.py`, not diagnostic-only:"
    },
    {
     "phrase": "not yet acted on",
-    "lineno": 656,
+    "lineno": 677,
     "line": "**Direct consequences, not yet acted on in code:** (1) `evaluate_domain_balance` is summed"
    },
    {
     "phrase": "proposed, not run",
-    "lineno": 662,
+    "lineno": 683,
     "line": "planted test for it is proposed, not run. **Limitations, stated because they bound the"
    },
    {
     "phrase": "considered and rejected",
-    "lineno": 690,
+    "lineno": 711,
     "line": "consumer saw the corrected labeling automatically. That approach was considered and rejected"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 799,
+    "lineno": 820,
     "line": "measurable, phenomenon confirmed real and structural, no mechanism yet (diagnostic-only)"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 864,
+    "lineno": 890,
     "line": "**No mechanism (in-loop or outer-loop) has been designed.** This ticket is diagnostic-only"
    },
    {
     "phrase": "not yet done",
-    "lineno": 865,
+    "lineno": 891,
     "line": "throughout, deliberately, matching how tickets 82/84 were sequenced. **Not yet done:** the"
    },
    {
     "phrase": "not yet started",
-    "lineno": 1099,
+    "lineno": 1126,
     "line": "| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-communit"
    },
    {
     "phrase": "no mechanism",
-    "lineno": 1100,
+    "lineno": 1127,
     "line": "| 86 | M2/M3, per-community mass (\"ghost communities\") | No mechanism exists to detect or address a community holding very low share of the model's total reconstructed mass \u2014 the third major open issue this session, alon"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 1190,
+    "lineno": 1217,
     "line": "## 10. Planned Extensions (not yet implemented)"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 1227,
+    "lineno": 1254,
     "line": "the full corpus, not the toy corpus \u2014 diagnostic-only, no production wiring implied by"
    },
    {
     "phrase": "considered and rejected",
-    "lineno": 1254,
+    "lineno": 1281,
     "line": "**Considered and rejected: an R\u00b2/explained-variance analog.** Since every relation is already"
    },
    {
     "phrase": "status: proposal only",
-    "lineno": 1269,
+    "lineno": 1296,
     "line": "**Status: proposal only, not scheduled, not built.** No code exists for either (1) or (2)."
    }
   ],
@@ -3882,62 +3837,62 @@
    },
    {
     "phrase": "not yet run",
-    "lineno": 2238,
+    "lineno": 2257,
     "line": "the next natural step (not yet run) would be a K=3-focused, `C5`-focused deeper sweep to see"
    },
    {
     "phrase": "considered and rejected",
-    "lineno": 2681,
+    "lineno": 2700,
     "line": "Raising it toward the new p90 (\u22480.17) was considered and rejected: D3's own rule was \"set"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 2871,
+    "lineno": 2890,
     "line": "`chunk13v9.py`, not diagnostic-only.** The in-loop weight (`lambda_domain_balance`) is fixed"
    },
    {
     "phrase": "no mechanism",
-    "lineno": 3025,
+    "lineno": 3044,
     "line": "partial remedy (excluding affiliations) piloted with a config-dependent result. No mechanism"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 3026,
+    "lineno": 3045,
     "line": "designed or implemented \u2014 this ticket is diagnostic-only so far, deliberately, matching the"
    },
    {
     "phrase": "not yet run",
-    "lineno": 3235,
+    "lineno": 3277,
     "line": "full C1\u2013C6 \u00d7 K\u2208{2..6} \u00d7 both data versions grid as a follow-up, not yet run."
    },
    {
     "phrase": "not yet done",
-    "lineno": 3287,
+    "lineno": 3329,
     "line": "### What remains open, not yet done"
    },
    {
     "phrase": "not yet run",
-    "lineno": 3290,
+    "lineno": 3332,
     "line": "scoped (~120 fits, cheap individually), not yet run."
    },
    {
     "phrase": "no mechanism",
-    "lineno": 3296,
+    "lineno": 3338,
     "line": "- No mechanism (in-loop or outer-loop) has been designed or proposed \u2014 this ticket remains"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 3297,
+    "lineno": 3339,
     "line": "diagnostic-only throughout, matching the sequencing the user set at its start (\"we need to"
    },
    {
     "phrase": "not yet acted on",
-    "lineno": 3451,
+    "lineno": 3493,
     "line": "**Version mismatch found, not yet acted on:** `corpus_curated.sqlite` (mtime Jun 15 23:02)"
    },
    {
     "phrase": "not yet done",
-    "lineno": 3504,
+    "lineno": 3546,
     "line": "- **Not yet done:** whether/how to re-run preprocessing or postprocessing to recover these 3"
    }
   ]

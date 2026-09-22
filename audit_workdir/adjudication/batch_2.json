@@ -1,0 +1,130 @@
+[
+  {
+    "item_id": "B2-01",
+    "ticket": 23,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py: grep '^import|^from' across whole file (lines 6-9, 313-318, 810, 845, 1107-1108, 1335-1337, 1670-1681, 1769-1776, 2026-2033, 2280-2289)",
+    "claim_text": "| 23 | M3 | `import` statements at the bottom of sections rather than file top | **Open — deliberate, do not touch.** |",
+    "detail": "Grepped every import statement in chunk13v9.py. Only 4 imports (os, torch, pickle, numpy) sit at the true file top (lines 6-9); many more repeat imports (torch, numpy, scipy, optuna, os, json, etc.) recur throughout the file at the start of later sections/modules (lines 313, 810, 845, 1107, 1335, 1670-1681, 1769-1776, 2026-2033, 2280-2289). This matches the register's description exactly and the status ('deliberate, do not touch') is unaffected by any of tonight's ticket-88 constant-consolidation work. No change needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-02",
+    "ticket": 36,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py: grep 'import optuna' (lines 1335, 1681, 1774, 2031); top-of-file imports (lines 6-9) contain no optuna",
+    "claim_text": "| 36 | M3 §S5 | `optuna` not imported at top of Module 3 | **Open — deliberate, do not touch.** |",
+    "detail": "Confirmed `optuna` is never imported at the top of the file or at the start of Module 3 proper — it is imported locally inside multiple sections/functions (lines 1335, 1681, 1774, 2031). Matches the register claim. No change needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-03",
+    "ticket": 35,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk13v9.py L1521 (grep 'sociological_penalty', current as of this check): `sociological_penalty = collapse_pen + coherence_pen + socio_semantic_pen + domain_balance_pen`",
+    "claim_text": "Lambda weights (`LAMBDA_COLLAPSE` etc.) were removed from the aggregation — the three penalties sum unweighted into `sociological_penalty`. See open ticket 35.",
+    "detail": "CLAUDE.md §4.12 still says 'the three penalties sum unweighted'. Ticket 82 E2 added a fourth term, `domain_balance_pen`, summed in unconditionally at chunk13v9.py L1521 — verified directly, and already documented via a SUPERSEDED bracket note in §4.17 two sections later in the same file. §4.12's own text was never given the matching correction, so it currently contradicts §4.17 (and the code) on the same fact within the same document. The core substance of ticket 35 itself (whether lambda weights should be reintroduced) is untouched by this — still an open, deliberate decision. Proposing a bracket note mirroring the one already applied at §4.17, for consistency.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§4.12",
+      "action": "bracket-note",
+      "old_text_anchor": "the three penalties sum unweighted into `sociological_penalty`. See open ticket 35.",
+      "new_text": "the three penalties sum unweighted into `sociological_penalty`. See open ticket 35.\n\n> **[SUPERSEDED IN PART — corrected 2026-09-22 against the code, not rewritten.] The sum has FOUR terms, not three, as of ticket 82 E2.** `domain_balance_pen` was added and is summed in unconditionally: `sociological_penalty = collapse_pen + coherence_pen + socio_semantic_pen + domain_balance_pen` (`chunk13v9.py` ~line 1521, verified directly). See §4.17 for the full analysis, including why the fourth term does not simply restore three independent axes (FINDINGS §25: `domain_balance_pen`'s input carries no signal about true domain balance on this corpus). Ticket 35 itself — whether lambda weights should be reintroduced into the aggregation — is unaffected by this correction and remains open and deliberate."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-04",
+    "ticket": 52,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L2418-2432 (grep 'evaluate_complete_solution' / 'seed_soc_penalties')",
+    "claim_text": "**Closed (ticket 52):** S5 now captures `Z_final` (was discarded as `_`) and calls `evaluate_complete_solution()` per seed, reading `evaluation[\"sociological_penalty\"]`.",
+    "detail": "Confirmed directly in the §S5 stability loop: line 2418 calls `evaluate_complete_solution(...)`, line 2432 does `seed_soc_penalties.append(evaluation[\"sociological_penalty\"])`. Matches the CLAUDE.md §4.13 closed-note and the Open Defect Register row 52 verbatim. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-05",
+    "ticket": 66,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1135 (grep 'target_facets'): `target_facets = ['core_child_he', 'cousin_he', 'core_atom', 'fringe_atom']`",
+    "claim_text": "| 66 | M3 §S4 target_facets | Whether to add `parent_he` to `target_facets` | **Flagged, not decided. Do not touch.** |",
+    "detail": "Confirmed `parent_he` is not present in the current `target_facets` list inside `evaluate_socio_semantic_reality` (Part B). Matches both the CLAUDE.md register row and FINDINGS.md's cross-reference at line 1613-1614 ('parent_he is genuinely outside Part B's target_facets ... CLAUDE.md ticket 66, flagged, not decided'). Both docs and the code agree. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-06",
+    "ticket": 68,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py: evaluate_dimensional_collapse return (float(collapse_pen), float(max_share)); evaluate_topological_coherence return (float(coherence_pen), float(weakest_mean)); evaluate_socio_semantic_reality return float(socio_semantic_pen); evaluate_domain_balance return (domain_balance_pen, mean_dev_k), both already float() at computation",
+    "claim_text": "**JSON / numpy-scalar note (ticket 68):** `evaluate_dimensional_collapse`, `evaluate_topological_coherence`, and `evaluate_socio_semantic_reality` now explicitly cast their return values to native Python `float` at their own `return` statements",
+    "detail": "Verified all three named functions cast to native float at their return statements. `evaluate_complete_solution`'s returned dict (8 keys) is built entirely from these already-cast values plus `evaluate_domain_balance`'s output, which independently casts to float with its own comment citing ticket 68 ('Cast to native Python float — see ticket 68's JSON-serializability note'), confirming the pattern was extended consistently even though the doc note text only names the original 3 functions (evaluate_domain_balance was added later by ticket 82 and simply follows the established convention — not a contradiction, just a note that predates that function's existence). No correction needed; the doc's claim is accurate for what it names and the newer function follows the same rule anyway.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-07",
+    "ticket": 73,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L739-743 (grep 'sparsity_loss', 'num_sparsity_entries'): sparsity_loss accumulated via torch.sum(u_mat) then divided by num_sparsity_entries (mean over ALL U_norm entries, not masked to live entities)",
+    "claim_text": "**Scaling** — `sparsity_loss` was a raw sum (~150–172)... | **Fixed** (ticket 73). Now a mean, ≈0.0134. ... `sparsity_loss` averages over **all** entries including dead ones. ~50% of the term pushes floor values on entities with no data toward zero — pointless work that dilutes the live signal. If a sparsity term is ever reintroduced, mask it to live entities.",
+    "detail": "Confirmed current code: `sparsity_loss = sparsity_loss / num_sparsity_entries` where `num_sparsity_entries` accumulates `u_mat.numel()` for every facet's full U_norm tensor — i.e. it is a mean over all entries, not masked to live entities, exactly matching both the 'fixed: now a mean' claim and the separate 'also noted, untested' caveat about dead-entity dilution (which the doc correctly does NOT claim is fixed). Internally consistent with the code as it stands today.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-08",
+    "ticket": 80,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L931-1023 (evaluate_dimensional_collapse): uses max_share_threshold=MAX_SHARE_THRESHOLD (0.60) and computes collapse_pen = (max(0, max_share - max_share_threshold)/(1-max_share_threshold))**2 — no entropy anywhere in this function",
+    "claim_text": "| 80 | M3 §2, `evaluate_dimensional_collapse` | ... | **Closed.** Direct max-share penalty implemented, ceiling-shape ported verbatim from `evaluate_socio_semantic_reality`'s `MAX_MONOPOLY` penalty ... threshold `MAX_SHARE_THRESHOLD=0.60` ... See FINDINGS §17.",
+    "detail": "Confirmed: the live evaluate_dimensional_collapse function has been fully rewritten on Z_scaled/max_share as described, matches CLAUDE.md §4.4's 'IMPLEMENTED (tickets 79/80)' note and FINDINGS §17's implementation writeup. No entropy-based logic remains in this function. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-09",
+    "ticket": 81,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1521 (grep 'sociological_penalty')",
+    "claim_text": "> **[SUPERSEDED IN PART — corrected 2026-09-22...] The sum has FOUR terms, not three.** Ticket 82 E2 added `domain_balance_pen`, summed in unconditionally: `sociological_penalty = collapse_pen + coherence_pen + socio_semantic_pen + domain_balance_pen` (`chunk13v9.py` ~line 1521, verified directly).",
+    "detail": "This bracket note (already present in CLAUDE.md §4.17, presumably added during tonight's earlier ticket-82 pilot work) is itself accurate: line 1521 of chunk13v9.py today reads exactly `sociological_penalty = collapse_pen + coherence_pen + socio_semantic_pen + domain_balance_pen`. Verified as a correct, already-applied correction — no further action on this specific sentence.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-10",
+    "ticket": 81,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk13v9.py L931-1023 (evaluate_dimensional_collapse, current max-share implementation); FINDINGS.md §17 ('collapse_pen now fires on 2 of 12 cells'); CLAUDE.md §8 Open Defect Register row 81 ('Partially superseded... collapse_pen now fires on 2/12 cells post-ticket-79/80 fix... coherence_pen... remains exactly 0.0... still open')",
+    "claim_text": "the axis is now `semantic_pen` plus a term whose informativeness is itself in question. The measurements below (all-12-cells zeros, the stated ranges) remain accurate as measurements.",
+    "detail": "CLAUDE.md §4.17's existing SUPERSEDED bracket note only corrects the three-vs-four-term issue (domain_balance_pen). It does not mention that `collapse_pen` itself is also partially superseded: tickets 79/80 (§4.4, FINDINGS §17) rewrote evaluate_dimensional_collapse on Z_scaled/max-share, and post-fix collapse_pen now fires on 2 of the same 12 cells (C1/K=2, C6/K=2) rather than being always 0.0. This exact fact is already recorded two sections later in the same file, in CLAUDE.md's own §8 Open Defect Register row for ticket 81 ('Partially superseded... collapse_pen now fires on 2/12 cells... coherence_pen... still open'). So §4.17's blanket statement that 'the measurements below ... remain accurate as measurements' is misleading as written — a reader of §4.17 alone would conclude collapse_pen is still always 0.0, contradicting §8's own row for the same ticket in the same document. The body text's 'Practical consequence' and 'Not yet acted on' paragraphs (which still say collapse_pen is undetermined/silent) also predate this fix and should be flagged as historical. coherence_pen is correctly still described as always-0/open. This is a doc-internal inconsistency (§4.17 vs §8), not a code bug — auto-correctable by extending the existing bracket note, not overwriting it.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§4.17",
+      "action": "bracket-note",
+      "old_text_anchor": "the axis is now `semantic_pen` plus a term whose informativeness is itself in question. The\n> measurements below (all-12-cells zeros, the stated ranges) remain accurate as measurements.",
+      "new_text": "the axis is now `semantic_pen` plus a term whose informativeness is itself in question. The\n> measurements below (all-12-cells zeros, the stated ranges) remain accurate as measurements.\n>\n> **[SUPERSEDED IN PART, ADDITIONALLY — corrected 2026-09-22 against FINDINGS §17 and this\n> file's own §8 ticket-81 register row.] `collapse_pen` is no longer always 0.0 either.**\n> Tickets 79/80 (§4.4, FINDINGS §17) rewrote `evaluate_dimensional_collapse` on\n> `Z_scaled`/max-share; post-fix, `collapse_pen` fires on 2 of the same 12 cells (`C1/K=2`,\n> `C6/K=2`, both barely over the 0.60 max-share ceiling) — no longer always 0.0. §8's own\n> register row for ticket 81 already records this as \"Partially superseded.\" `coherence_pen`\n> is untouched by that fix and remains exactly 0.0 in all 12 cells — still open. So \"remain\n> accurate as measurements\" (previous sentence) applies to the historical pre-79/80-fix\n> numbers quoted below, and to `coherence_pen`'s current behavior — not to `collapse_pen`'s\n> current live behavior. Read the \"Practical consequence\" and \"Not yet acted on\" paragraphs\n> below with that in mind; they predate this fix.**"
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B2-11",
+    "ticket": 81,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk13v9.py L1521; FINDINGS.md §17 ('collapse_pen now fires on 2 of 12 cells'); FINDINGS.md §25 (domain_balance_pen no-signal finding)",
+    "claim_text": "`sociological_penalty = collapse_pen + coherence_pen + semantic_pen`. Measured across the full grid (C1–C6 × K∈{2,4}, production settings): `collapse_pen` and `coherence_pen` are **exactly 0.0 in all 12 cells**. `sociological_penalty == semantic_pen` bit-for-bit everywhere tested.",
+    "detail": "FINDINGS.md §15's headline formula and table are the same pre-fix, 3-term/all-zero measurement that CLAUDE.md §4.17 already carries a SUPERSEDED bracket note for. FINDINGS.md has no equivalent correction yet, so a reader of FINDINGS §15 alone (without cross-referencing CLAUDE.md §4.17 or FINDINGS §17 later in the same document) would believe `sociological_penalty` currently has only 3 terms and that `collapse_pen` is currently always 0.0 — both now false per chunk13v9.py L1521 (4 terms) and FINDINGS §17 (collapse_pen fires 2/12 cells post ticket-79/80 fix). Per the harmonization rule, FINDINGS.md corrections are appended as a dated subsection below the original claim, never overwriting it in place.",
+    "proposed_edit": {
+      "file": "FINDINGS.md",
+      "location": "§15 (end of section, before the '---' separator preceding §16)",
+      "action": "dated-correction-subsection",
+      "old_text_anchor": "3. Split `semantic_pen` into Part A and Part B and report/weight them\n   separately — not yet done; unknown whether the 0.054–0.132 range is really\n   Part A doing all the work.",
+      "new_text": "3. Split `semantic_pen` into Part A and Part B and report/weight them\n   separately — not yet done; unknown whether the 0.054–0.132 range is really\n   Part A doing all the work.\n\n### CORRECTION (2026-09-22)\n\nThis section's headline formula and 12-cell table (above) were measured **before** two later\nfixes, both now live in `chunk13v9.py`:\n\n1. **Ticket 82 E2 added a fourth term.** `sociological_penalty` is now `collapse_pen +\n   coherence_pen + semantic_pen + domain_balance_pen` (`chunk13v9.py` ~line 1521, verified\n   directly) — see CLAUDE.md §4.17's own correction. This does not restore three independent\n   axes: §25 below finds `domain_balance_pen`'s input carries no signal about true domain\n   balance on this corpus.\n2. **Tickets 79/80 rewrote `evaluate_dimensional_collapse`** (§17 above) on `Z_scaled`/\n   max-share instead of `U_scales`/entropy. Post-fix, `collapse_pen` fires on 2 of the same\n   12 cells (`C1/K=2`, `C6/K=2`) — it is **no longer always 0.0**, contrary to this section's\n   headline claim. `coherence_pen` is untouched by either fix and remains exactly 0.0 in all\n   12 cells (still open — see CLAUDE.md §8 ticket-81 register row, \"Partially superseded\").\n\nThe table above is kept as the historical record of what the pre-fix formula measured; it is\nnot the current live behavior of `sociological_penalty`."
+    },
+    "escalation_reason": null
+  }
+]
