@@ -234,8 +234,52 @@ further for Batches 4/5.
 
 Citation-graph re-check post-edit: 346 references, 0 broken.
 
-### Batch 4 — pending (dispatched next)
-### Batch 5 — pending
+### Batch 4 — DONE (upstream data / topology / chunk12; tickets 60, 63, 84)
+
+Sonnet-pinned agent re-verified this batch's dense numeric tables directly against the actual
+production pickles (loaded via scipy in `tensor_env`, not eyeballed) and `chunk12.py`/
+`chunk12v2.py` directly. Result: 11 consistent, 7 auto-correctable, **0 escalations**. All 7
+corrections applied (anchors re-verified against the live file first; one, B4-04, needed a
+manual fix after a scripted apply produced a duplicated sentence — caught and corrected before
+committing).
+
+Root cause behind 5 of the 7: the ticket-84-D4 `REPO_JOURNAL_IDS`/`known_repository_sources.json`
+refactor inserted ~33 lines into `chunk12.py`, shifting every line number `CLAUDE.md` §11/§8 had
+cited for `compile_slice`, `build_log_damped_row_csr`, the `S_Art_Auth` call site, `idf_global`,
+and `build_anchor_csr` — mechanisms all still correct, only the citations were stale (2 bracket
+notes in `CLAUDE.md` §11, 1 in §8's ticket-63 row, plus the same shift noted inside `FINDINGS.md`
+§21's correction below).
+
+Two independent stale numbers, both traced to the same upstream fix (`S_Art_Journ`'s T1 nnz
+dropping 24→13 in ticket 84 D4) never being propagated to derived figures elsewhere:
+- `CLAUDE.md` §11's live-entity-fraction table: `journ`/T1 was 14/20 (70.0%), recomputed
+  directly from the pickle it's now **11/20 (55.0%)** — also revises the summary range
+  39–70% → **39.4–55.0%** (`journ` is no longer T1's maximum).
+- `FINDINGS.md` §21's degree-concentration table: `S_Art_Journ` column-skew was cited as
+  5.8×/6.5×, recomputed it's **1.7×/1.9×** — doesn't change ticket 84's decision, but weakens
+  rather than supports the evidentiary case for eventually weighting that relation.
+
+Two more, unrelated: `CLAUDE.md` §8's ticket-60 row still claimed `build_presence_masks` is
+"threaded into `evaluate_dimensional_collapse`" — true when written, false since tickets 79/80
+rewrote that function on `Z_scaled` (its own docstring now says explicitly no live-entity
+normalization is needed there); `FINDINGS.md` §24's `venue_type` breakdown had a counting error
+(`repository` stated as 48, actually 50 — the original arithmetic didn't reconcile to the
+corpus's own stated 121-row total, the corrected one does exactly).
+
+Positive verifications worth recording: the §11 nnz table matches the pickles exactly across
+all 11 relations and both totals; the `M_Atom_Child` 13.0×/16.6× "worst in topology" claim and
+the full `S_Art_Auth` log-damping worked example reproduce to 4 decimal places; the
+`chunk12v2.py` null-rebuild claim verified exactly via direct pickle diff; the `cousin_he`/T2
+15-seed extension numbers match the diagnostic JSON exactly.
+
+**Not chased, disclosed rather than guessed:** the agent left FINDINGS §24's "177 source_core
+edges / 66 articles" NAS-recovery figure unverified — reproducing graphbrain's exact edge-typing
+from `postprocessing_4h.py`'s schema was judged disproportionate effort for a secondary
+process-safety anecdote. Worth a look later if that specific figure ever matters.
+
+Citation-graph re-check post-edit: 357 references, 0 broken.
+
+### Batch 5 — pending (dispatched next)
 
 ## Pending decisions / next actions
 

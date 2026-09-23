@@ -1,0 +1,224 @@
+[
+  {
+    "item_id": "B4-01",
+    "ticket": 63,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L219-262 (load_and_validate_data): dimensions = raw_data.get('dimensions', None), followed by an unconditional 'if dimensions is None:' auto-discovery block with no other code path that ever populates dimensions from the payload",
+    "claim_text": "*Ticket 63 confirmation:* this is not a fallback — it is the **only** live code path. chunk12's output pickles never contain a `'dimensions'` key at all (see §11). Do not add logic that assumes the key might be present; do not \"simplify\" by removing the auto-discovery branch.",
+    "detail": "Read load_and_validate_data directly: dimensions is always looked up via raw_data.get('dimensions', None), and since chunk12.py's compile_slice()/pickle.dump() calls never write a 'dimensions' key (confirmed for both files, see B4-02/B4-03), this lookup is always None, so the 'if dimensions is None' auto-discovery branch is unconditionally taken on every real run -- there is no other branch that could populate dimensions instead. Matches the claim exactly. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-02",
+    "ticket": 63,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk12.py: grep 'def compile_slice' (now line 355, body 355-376) and 'pickle.dump' (now lines 395/405/409); the ticket-84-D4 REPO_JOURNAL_IDS refactor (a ~33-line comment+load block inserted at chunk12.py:129-153) is the traced cause of the shift",
+    "claim_text": "`compile_slice()` (chunk12.py:322-343) returns a plain `dict[relation_key -> scipy_sparse]` with no `'dimensions'` entry, and neither pickle-dump call (chunk12.py:366, 370) adds one after the fact.",
+    "detail": "compile_slice() is now defined at chunk12.py:355 (body 355-376, still exactly 22 lines, same content) and the two matrix-payload pickle.dump() calls (compile_slice(coords_t1,...)/compile_slice(coords_t2,...)) are now at lines 405 and 409, not 322-343/366/370. Traced the cause directly: the ticket-84-D4 fix (CLAUDE.md §4.23/FINDINGS §24) inserted a large explanatory comment plus the REPO_JOURNAL_IDS-from-JSON load block at chunk12.py:129-153, a ~33-line insertion that sits above every citation in this subsection and shifts everything below it by the same amount (verified: compile_slice's def-line moved 322→355 = +33; build_log_damped_row_csr moved 291→324 = +33 -- see B4-03). The substantive claim (no 'dimensions' key is ever written) is still true and re-verified directly against current chunk12.py -- only the line numbers are stale.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§11 \"No `'dimensions'` key in the pickles\"",
+      "action": "bracket-note",
+      "old_text_anchor": "`compile_slice()` (chunk12.py:322-343) returns a plain `dict[relation_key -> scipy_sparse]`\nwith no `'dimensions'` entry, and neither pickle-dump call (chunk12.py:366, 370) adds one\nafter the fact.",
+      "new_text": "**[SUPERSEDED — line numbers drifted, 2026-09-23]:** the ticket 84 D4 `REPO_JOURNAL_IDS`/`known_repository_sources.json` refactor (§4.23) inserted ~33 new lines into `chunk12.py` above this point in the file. As of this correction, `compile_slice()` is at chunk12.py:355-376 and the two matrix-payload `pickle.dump()` calls are at chunk12.py:405 and 409. The described behavior (no `'dimensions'` key is ever written to the payload) is unchanged and re-verified directly against the current file -- only the cited line numbers moved."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-03",
+    "ticket": 63,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk12.py: build_log_damped_row_csr now at lines 324-340 (was cited as 291-307); the S_Art_Auth call site and its '# [!] UPDATED' comment now at lines 360-361 (was cited as 328); formula and application re-verified byte-for-byte against Star_extended_matrices_t1.pkl (article row 17, degree 65: mass=6.0444=log2(66) exactly, per-tie weight 0.09299)",
+    "claim_text": "chunk12's `build_log_damped_row_csr()` (chunk12.py:291-307) caps total row mass at `log2(1 + degree)` instead of letting it scale linearly with degree, and is applied specifically to `S_Art_Auth` (chunk12.py:328, `# [!] UPDATED: Apply logarithmic dampening to Article-Author ties`)",
+    "detail": "Same root cause and same +33-line shift as B4-02 (the ticket 84 D4 REPO_JOURNAL_IDS insertion sits above both citations). build_log_damped_row_csr is now defined at chunk12.py:324-340 (17 lines, identical body to what was previously at 291-307), and its S_Art_Auth call site plus the '# [!] UPDATED' comment are now at chunk12.py:360-361, not 328. The mechanism itself (log2(1+degree) row-mass cap, applied only to S_Art_Auth, not S_Auth_Affil or the grammar relations) was independently re-verified against the live pickle data and matches exactly -- only the line numbers are stale. The identical citations (chunk12.py:291-307 / :328) also appear in §8's ticket 63 register row -- see B4-04 for that location.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§11 \"Mega-hub damping lives upstream, not in 13v9 (ticket 63)\"",
+      "action": "bracket-note",
+      "old_text_anchor": "chunk12's `build_log_damped_row_csr()` (chunk12.py:291-307) caps total row mass at\n`log2(1 + degree)` instead of letting it scale linearly with degree, and is applied\nspecifically to `S_Art_Auth` (chunk12.py:328, `# [!] UPDATED: Apply logarithmic dampening to\nArticle-Author ties`)",
+      "new_text": "**[SUPERSEDED — line numbers drifted, 2026-09-23]:** same ~33-line shift as §11's \"No `'dimensions'` key\" note above (ticket 84 D4's `REPO_JOURNAL_IDS` refactor, §4.23). `build_log_damped_row_csr()` is now at chunk12.py:324-340; the `S_Art_Auth` call site and its `# [!] UPDATED` comment are now at chunk12.py:360-361. The formula and its S_Art_Auth-only application are unchanged and re-verified directly against the current file and the live production pickles -- only the cited line numbers are stale."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-04",
+    "ticket": 63,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "same as B4-03: chunk12.py:324-340 (build_log_damped_row_csr) and chunk12.py:360-361 (S_Art_Auth call), not 291-307/328",
+    "claim_text": "| 63 | Confirmed (not a code change): mega-hub damping for article-author ties lives upstream in chunk12's `build_log_damped_row_csr` (chunk12.py:291-307), applied to `S_Art_Auth` specifically (chunk12.py:328). 13v9 does not need its own damping logic. See §11. |",
+    "detail": "§8's \"Recently closed\" register row for ticket 63 repeats the identical stale line citations already found in §11 (B4-03) -- same root cause, same fix. Flagging separately since it is a different table cell in a different section that would otherwise stay stale after §11 is corrected.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§8 Open Defect Register, \"Recently closed\", ticket 63 row",
+      "action": "bracket-note",
+      "old_text_anchor": "Confirmed (not a code change): mega-hub damping for article-author ties lives upstream in chunk12's `build_log_damped_row_csr` (chunk12.py:291-307), applied to `S_Art_Auth` specifically (chunk12.py:328). 13v9 does not need its own damping logic. See §11.",
+      "new_text": "Confirmed (not a code change): mega-hub damping for article-author ties lives upstream in chunk12's `build_log_damped_row_csr` (chunk12.py:291-307 — **[SUPERSEDED, 2026-09-23: now chunk12.py:324-340 after ticket 84 D4's REPO_JOURNAL_IDS refactor, §4.23; mechanism unchanged, see §11]**), applied to `S_Art_Auth` specifically (chunk12.py:328, now line 360-361). 13v9 does not need its own damping logic. See §11."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-05",
+    "ticket": 60,
+    "verdict": "consistent",
+    "ground_truth_checked": "direct pickle inspection: Star_extended_matrices_t1.pkl / _t2.pkl, all 11 RELATION_MAP relations, nnz and shape read via scipy.sparse (conda env tensor_env)",
+    "claim_text": "### Measured non-zero counts (both slices) [table: S_Art_Journ 13/13, S_Art_Auth 218/258, S_Auth_Affil 95/97, M_Atom_Child 552/898, M_Child_Parent 211/330, M_Fringe_Cousin 481/521, M_Cousin_Parent 267/304, M_Cousin_Child 958/1003, M_Parent_Art 63/98, M_Child_Art 193/313, M_Cousin_Art 261/301, TOTAL 3,312/4,136]",
+    "detail": "Loaded both production pickles directly and read .shape/.nnz for every one of the 11 relations. Every single value in the table matches exactly, including both slice totals (3,312 and 4,136). This table is fully consistent with the actual production data as of this check.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-06",
+    "ticket": 60,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "direct pickle inspection + chunk13v9.py's build_presence_masks() logic (union of row/col getnnz>0 across all 11 RELATION_MAP relations), applied to Star_extended_matrices_t1.pkl/_t2.pkl: computed journ live = 11/20 (55.0%) T1, 12/20 (60.0%) T2 -- all other 8 facet rows matched the table exactly",
+    "claim_text": "| Facet | T1 live / total | T1 % | T2 live / total | T2 % | ... | `journ` | 14/20 | 70.0% | 12/20 | 60.0% | ... T1 is consistently sparser (later time window, T2, has had more corpus growth) — every non-`art` facet is 39–70% live in T1 vs 55–72% live in T2.",
+    "detail": "Reimplemented build_presence_masks' exact logic (union of nonzero rows/cols across all 11 relations in RELATION_MAP) directly against the current production pickles. 8 of 9 facet rows match the table exactly (affil, art, auth, core_atom, core_child_he, cousin_he, fringe_atom, parent_he all reproduce to the stated precision). `journ` does not: computed T1 value is 11/20 = 55.0%, not 14/20 = 70.0% (T2's 12/20=60.0% is correct and unaffected). Root cause: journ is touched by only one relation, S_Art_Journ, whose T1 nnz dropped from 24 to 13 as part of the ticket 84 D4 journal-repository-resolution fix (§4.21/§4.23/§11's nnz table, which was itself explicitly updated to 13/13) -- the number of distinct live journal columns dropped along with it, but this table's journ row was never recomputed to match. Because 70.0% was the T1 maximum driving the summary sentence's upper bound, the '39–70% live in T1' range is also now wrong -- the corrected T1 range is 39.4–55.0% (parent_he to journ), with fringe_atom (53.2%) now the next-highest instead.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§11 \"Measured live-entity fractions (union across active relations, ticket 60)\"",
+      "action": "bracket-note",
+      "old_text_anchor": "T1 is consistently sparser (later time window, T2, has had more corpus growth) — every\nnon-`art` facet is 39–70% live in T1 vs 55–72% live in T2. This is the concrete magnitude\nbehind ticket 60's fix and CLAUDE.md's earlier claim (\"at most 47% of authors and 39% of\nparent hyperedges are live\" in T1 — now measured exactly: 46.0% and 39.4% respectively).",
+      "new_text": "**[SUPERSEDED — 2026-09-23, re-verified directly against the production pickles]:** the `journ` row in the table above (14/20, 70.0% live in T1) is stale — it predates the ticket 84 D4 journal-repository-resolution fix (§4.23), which dropped `S_Art_Journ`'s T1 nnz from 24 to 13 and, with it, the number of distinct live journals. Recomputed directly from `Star_extended_matrices_t1.pkl`: **11/20 live journals in T1 (55.0%)**, not 14/20 — T2's figure (12/20, 60.0%) was already correct. This also revises the summary range above: T1's live fractions now span **39.4–55.0%** (`parent_he` to `journ`), not 39–70% — `journ` is no longer T1's maximum; `fringe_atom` (53.2%) is next highest."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-07",
+    "ticket": 60,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk13v9.py L931-955 (evaluate_dimensional_collapse docstring, verbatim): 'No presence_masks / live-entity normalisation needed here (contrast the old U_scales-based version) — every relation's input is already Frobenius-normalised...'; cross-checked against CLAUDE.md's own text near line 222 (§4.4-adjacent), which already narrates this as historical/superseded",
+    "claim_text": "| 60 | ... | **Closed.** `build_presence_masks()` added (M1 §1.8); threaded into `evaluate_dimensional_collapse` (live-count normalization) and `evaluate_socio_semantic_reality` Parts A/B (baseline + monopoly scan restricted to live rows). |",
+    "detail": "Current chunk13v9.py directly contradicts this row for the evaluate_dimensional_collapse half of the claim: that function was rewritten on Z_scaled (tickets 79/80, FINDINGS §17) and its own docstring states plainly that presence_masks/live-entity normalization is no longer needed there. CLAUDE.md itself already documents this supersession in prose elsewhere ('Ticket 60 (superseded detail, kept for history): ... it is a correction to a formula whose core input (U_scales) has since been shown to be undetermined regardless. Kept in place; superseded as \"the fix\" by the larger finding above' — near line 222) — but §8's own register row for ticket 60 was never updated to match, so it still asserts the stale mechanism as current, closed fact. The evaluate_socio_semantic_reality Parts A/B half of the same row remains accurate and current (verified directly: chunk13v9.py L1256-1289 still gate the baseline mean and the monopoly/valid_mask scan on presence_masks).",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§8 Open Defect Register, \"Silent incorrect computation\", ticket 60 row",
+      "action": "bracket-note",
+      "old_text_anchor": "threaded into `evaluate_dimensional_collapse` (live-count normalization) and `evaluate_socio_semantic_reality` Parts A/B (baseline + monopoly scan restricted to live rows).",
+      "new_text": "threaded into `evaluate_dimensional_collapse` (live-count normalization) and `evaluate_socio_semantic_reality` Parts A/B (baseline + monopoly scan restricted to live rows). **[SUPERSEDED — 2026-09-23]** the `evaluate_dimensional_collapse` half is no longer accurate: that function was rewritten on `Z_scaled` (tickets 79/80, FINDINGS §17) and its own docstring now says directly \"No presence_masks / live-entity normalisation needed here... every relation's input is already Frobenius-normalised\" — matching this file's own historical note near §4.4 (\"kept in place; superseded as 'the fix' by the larger finding\"), which this register row was never updated to reflect. The `evaluate_socio_semantic_reality` Parts A/B half is unaffected and still current (verified, chunk13v9.py L1256-1289)."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-08",
+    "ticket": 60,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1342-1420 (evaluate_domain_balance): soc_facets/sem_facets filtered to presence_masks[f].sum()>0, _weighted_share() computes U_prob[f][mask].mean(axis=0) weighted by int(mask.sum()) per facet, exactly 'entity-count-weighted mean ... of each facet's own live-entity-masked (ticket 60) mean U_prob row' per its own docstring",
+    "claim_text": "per community `k`, `soc_k`/`sem_k` = weighted mean over active facets in that domain of `U_prob[f][:,k]`'s mean over LIVE entities (ticket 60 masking required — dead entities sit at the clamp floor and normalize to ≈uniform `1/K`, diluting every community toward the null)",
+    "detail": "Read evaluate_domain_balance directly: soc_facets/sem_facets are restricted to facets with presence_masks[f].sum()>0, and _weighted_share() computes exactly an entity-count-weighted mean of U_prob[f][presence_masks[f]].mean(axis=0) across those facets -- i.e. per-facet mean over live rows only, weighted by live-entity count, matching the CLAUDE.md §4.18 mechanism description word-for-word (its own docstring even echoes 'live-entity-masked (ticket 60) mean U_prob row'). No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-09",
+    "ticket": 84,
+    "verdict": "consistent",
+    "ground_truth_checked": "direct pickle inspection (row getnnz(axis=1) max/mean over live rows only) on Star_extended_matrices_t1.pkl/_t2.pkl: S_Art_Auth 7.45x/2.79x, M_Atom_Child 13.04x/16.57x, M_Child_Parent 7.08x/11.16x, M_Fringe_Cousin 6.38x/7.45x, M_Cousin_Parent 7.87x/5.11x, M_Cousin_Child 5.26x/5.16x (row) and 5.30x/12.23x (col); S_Art_Journ row 1.00x/1.00x, col 1.69x/1.85x — all rounding to FINDINGS §21's table except S_Art_Journ's col figure (see B4-11)",
+    "claim_text": "Measured degree concentration in all 5 grammar relations is comparable to or worse than `S_Art_Auth`'s already-damped case — `M_Atom_Child` (13.0×/16.6× row max÷mean, T1/T2) is the worst in the whole topology, currently unaddressed.",
+    "detail": "Recomputed row max÷mean directly from the production pickles for every relation in FINDINGS §21's degree-concentration table. M_Atom_Child: 13.04x/16.57x, rounding exactly to the cited 13.0x/16.6x, and is indeed the single highest ratio among all relations checked (next highest is M_Cousin_Parent T1 7.87x and M_Child_Parent T2 11.16x, both below M_Atom_Child in at least one slice). S_Art_Auth's own already-damped ratio (7.45x/2.79x) is comparable in order of magnitude to the grammar relations' range (5.16x-16.57x), matching the qualitative 'comparable to or worse than' framing. Also independently corroborated against plans/ticket84-grammar-hub-downweighting.md's Phase 1 Tier-0 result, which reports the identical pre-damping figures (M_Atom_Child 13.04x/16.57x) as its own baseline before the log-damping transform. Consistent, no action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-10",
+    "ticket": 84,
+    "verdict": "consistent",
+    "ground_truth_checked": "direct pickle inspection of S_Art_Auth (article row 17, degree=65): total row mass 6.0443974 = log2(66)=6.044394 exactly; per-tie weight 0.09299068; degree-6 rows (idx 1,23): total mass 2.807355, per-tie weight 0.4678925. Ratios: raw 65/6=10.83x, damped-mass 6.0444/2.8074=2.153x, per-tie 0.4679/0.09299=5.03x",
+    "claim_text": "Confirmed to match the real matrix to 4 decimal places (`article 17`, degree=65, `actual_mass=6.0444` = `predicted=log2(66)=6.0444`, exactly)... raw ratio 10.8×, post-damping mass ratio **2.15×**... Degree-65 article's per-tie weight: 0.093. Degree-6 article's: 0.468 — each tie in the smaller article counts **5×** more individually.",
+    "detail": "Every number in this FINDINGS §21 worked example was reproduced to the stated precision directly against the live S_Art_Auth matrix in Star_extended_matrices_t1.pkl: article-row 17 has degree 65, total mass 6.0443974 (log2(66)=6.044394, matches to 4 decimals), per-tie weight 0.09299068 (matches 0.093); a degree-6 row has total mass 2.807355 and per-tie weight 0.4678925 (matches 0.468). Raw degree ratio 65/6=10.83x (matches '10.8x'), post-damping mass ratio 2.153x (matches '2.15x'), per-tie ratio 0.4679/0.09299=5.03x (matches 'each tie... counts 5x more'). Fully consistent, no action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-11",
+    "ticket": 84,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "direct pickle inspection: S_Art_Journ column getnnz(axis=0) max/mean on Star_extended_matrices_t1.pkl/_t2.pkl (post ticket-84-D4 fix, nnz=13/13) = 1.69x/1.85x, not 5.8x/6.5x; also chunk12.py line drift for idf_global (now line 291, was cited 258) and build_anchor_csr (now lines 348-353, was cited 315-321) — same +33 shift traced in B4-02/B4-03",
+    "claim_text": "| `S_Art_Journ` | 1.0× / 1.0× (row, trivial — one journal per article); **5.8× / 6.5×** (col) |  ... carry real tf-idf weighting (`build_anchor_csr`: `weight = log1p(tf) · idf[hyperedge]`, `idf = log(N_articles/doc_freq)+1` computed per semantic hyperedge from global article-reference frequency — chunk12.py:258, 315-321).",
+    "detail": "Two separate stale-data issues in the same FINDINGS §21 subsection. (1) S_Art_Journ's column max/mean skew is stated as 5.8x/6.5x, but recomputed directly against the current production pickles it is 1.69x/1.85x (rounds to 1.7x/1.9x) — this table predates the ticket 84 D4 journal-repository-resolution fix (§4.21/§4.23), which dropped S_Art_Journ's nnz from 24/35 to 13/13 (documented elsewhere in the same doc set), flattening the column-degree distribution; the row figure (1.0x/1.0x, trivial) is unaffected. This doesn't change the D4 decision itself (S_Art_Journ weighting was already deferred for the row-vs-column idf-keying reason stated separately, not because of this skew number) but the evidentiary skew figure is now wrong and, if anything, weaker support for eventually revisiting S_Art_Journ than the section implies. (2) The chunk12.py line citations (258, 315-321) for idf_global/build_anchor_csr have the same +33-line drift found in B4-02/B4-03 (root cause: the ticket-84-D4 REPO_JOURNAL_IDS insertion) — idf_global is now at line 291, build_anchor_csr at lines 348-353.",
+    "proposed_edit": {
+      "file": "FINDINGS.md",
+      "location": "§21 \"chunk12 relation weighting: a correction, and evidence for extending it (ticket 84)\", immediately before the `cousin_he`/T2 precision follow-up subsection",
+      "action": "dated-correction-subsection",
+      "old_text_anchor": "Full record: `PhD_CNMF/plans/ticket84-grammar-hub-downweighting.md`; CLAUDE.md §8\nticket 84 and §4.21 carry the condensed version.",
+      "new_text": "### CORRECTION (2026-09-23)\n\nTwo items in this subsection are stale, re-verified directly against current data/code. **(1)** The degree-concentration table's `S_Art_Journ` column-skew figure (5.8× / 6.5×) predates the ticket 84 D4 journal-repository-resolution fix (§4.21/§4.23, FINDINGS §24), which dropped `S_Art_Journ`'s nnz from 24/35 (T1/T2) to 13/13. Recomputed directly against the current production pickles: column max÷mean is now **1.7× / 1.9×**, not 5.8×/6.5× — the row figure (1.0×/1.0×, trivial) is unaffected and still correct. This does not change ticket 84's D4 decision (`S_Art_Journ` weighting was deferred for the row-vs-column idf-keying reason stated above, independent of this number), but the post-fix skew is now close to trivial rather than comparable to the grammar relations, which weakens rather than strengthens the case for eventually extending weighting there. **(2)** The `chunk12.py:258, 315-321` citation for `idf_global`/`build_anchor_csr` has drifted: the ticket 84 D4 `REPO_JOURNAL_IDS` refactor inserted ~33 lines above this point in `chunk12.py`; `idf_global`'s computation is now at line 291 and `build_anchor_csr` is now at lines 348-353. The formula itself is unchanged and re-verified against the current file."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-12",
+    "ticket": 84,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "articles.csv (121 rows): venue_type value_counts = journal 54, repository 50, conference 7, book series 1, NaN 9 (sums to 121); known_repository_sources.json confirmed 6 entries",
+    "claim_text": "resolves to `journal` (54 rows), `repository` (48, after the fix), `conference` (7), `book series` (1), or nothing (9 rows with no journal recorded).",
+    "detail": "Read articles.csv's venue_type column directly (121 rows total, matching the stated corpus size). journal=54, conference=7, book series=1, and no-journal=9 all match exactly. repository does not: the actual count is 50, not 48. Confirmed by arithmetic too -- the doc's own numbers (54+48+7+1+9=119) don't sum to 121 as the section itself states elsewhere, while 54+50+7+1+9=121 reconciles exactly, corroborating that 50 (not 48) is correct.",
+    "proposed_edit": {
+      "file": "FINDINGS.md",
+      "location": "§24 \"`venue_type` enrichment (user-requested)\"",
+      "action": "dated-correction-subsection",
+      "old_text_anchor": "resolves to\n`journal` (54 rows), `repository` (48, after the fix), `conference` (7), `book series` (1),\nor nothing (9 rows with no journal recorded).",
+      "new_text": "### CORRECTION (2026-09-23)\n\nRe-verified directly against `articles.csv`'s current `venue_type` column: `repository` is **50** rows, not 48 — the original figure left the total 2 short of the stated 121-row corpus (54+48+7+1+9=119). 54 (`journal`) + 50 (`repository`) + 7 (`conference`) + 1 (`book series`) + 9 (no journal) = 121, matching exactly. The `journal`/`conference`/`book series`/no-journal counts were all independently confirmed correct as originally stated."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-13",
+    "ticket": 84,
+    "verdict": "consistent",
+    "ground_truth_checked": "known_repository_sources.json (6 keys: S4306400194, S4306402567, S4393918830, S4306525896, S4306525036, S4377196569)",
+    "claim_text": "a persisted, growing reference (`toy_large/known_repository_sources.json`, 6 entries) now backs `chunk12.py`'s/`chunk12v2.py`'s `REPO_JOURNAL_IDS`",
+    "detail": "Read the JSON file directly: exactly 6 source entries (arXiv, bioRxiv, ChemRxiv, Research Square, PubMed, DROPS), matching the claim exactly. chunk12.py itself was confirmed (grep) to load REPO_JOURNAL_IDS from this exact file path at runtime rather than a hardcoded literal. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-14",
+    "ticket": 84,
+    "verdict": "consistent",
+    "ground_truth_checked": "direct comparison of Star_extended_matrices_{t1,t2}.pkl vs their _v2 counterparts (11 relations each): S_Art_Journ/S_Art_Auth/S_Auth_Affil/M_Child_Parent/M_Cousin_Parent/M_Parent_Art/M_Child_Art/M_Cousin_Art byte-identical (np.allclose on dense arrays) both slices; M_Atom_Child/M_Fringe_Cousin/M_Cousin_Child differ in values but identical nnz/shape; spot-checked M_Atom_Child's highest-degree row (row 2, degree 24) transforms exactly per weight = log2(1+24)/24 = 0.193494 per tie, matching build_log_damped_row_csr's formula",
+    "claim_text": "Phase 4: `chunk12v2.py` created (copy of `chunk12.py`, `chunk12.py` itself untouched — verified nothing references it by filename), writes to new `_v2`-suffixed pickles (production pickles never touched), null-rebuild verified clean (maps identical, all untouched relations byte-identical, all 3 damped relations match the validated transform exactly, both slices).",
+    "detail": "Directly diffed both slices' v1 vs v2 pickles across all 11 relations. Exactly the 3 claimed relations (M_Atom_Child, M_Fringe_Cousin, M_Cousin_Child) differ in values while every other relation (S_Art_Journ, S_Art_Auth, S_Auth_Affil, M_Child_Parent, M_Cousin_Parent, M_Parent_Art, M_Child_Art, M_Cousin_Art) is byte-identical, and nnz/shape are identical everywhere (damping reweights, never adds/removes ties, matching the §11 'identical shape and nnz' claim too). Spot-checked M_Atom_Child's max-degree row (degree 24) in T1: v1 has all-1.0 entries, v2 has all entries = 0.193494 = log2(25)/24, matching build_log_damped_row_csr's formula exactly. Fully consistent, no action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-15",
+    "ticket": 84,
+    "verdict": "consistent",
+    "ground_truth_checked": "plans/ticket84-grammar-hub-downweighting.md lines ~155-165 (M_Cousin_Child bespoke-justification section): dummy_cousin is '29-31% of all live cousins overall, but 52-60% of the top decile by degree, both slices'",
+    "claim_text": "`M_Cousin_Child` (bespoke justification — row degree there measures *context genericness* for interpretation, not ubiquity; verified `dummy_cousin` predicate structures are 2× overrepresented in the high-degree tail) damped",
+    "detail": "The plan file (the designated ground truth for ticket 84 detail beyond the two main docs) states the underlying measurement directly: dummy_cousin is 29-31% of all live cousins overall but 52-60% of the top-degree decile, both slices -- a ratio of roughly 1.7x-2.1x, which '2x overrepresented' fairly summarizes. Consistent, no action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-16",
+    "ticket": 84,
+    "verdict": "consistent",
+    "ground_truth_checked": "diagnostic_results/grammar_damping_cousin_he_more_seeds.json, T2 entry: delta=-0.24202, sd_extended_15seeds=0.11279, exceeds_2sd_extended_15=true, ratio=|delta|/sd=2.146",
+    "claim_text": "Extended to 15 seeds and re-run on post-08-27-fix data: Δρ = −0.242, SD tightened to 0.113 (not widened), now clears 2×SD comfortably (≈2.15×)",
+    "detail": "Read the diagnostic result JSON directly: T2's delta is -0.24201925 (rounds to -0.242), sd_extended_15seeds is 0.1127930576 (rounds to 0.113), and |delta|/sd = 2.1457 (rounds to 2.15x), with exceeds_2sd_extended_15=true. Every figure in this CLAUDE.md §8/§4.21 and FINDINGS §21 claim matches the JSON exactly. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-17",
+    "ticket": 84,
+    "verdict": "consistent",
+    "ground_truth_checked": "diagnostic_blocks.py L501-524 (_cache_key docstring and body): raw_data_hash included via _raw_data_hash(slice_name), docstring states 'NAMESPACED, NOT INVALIDATING (ticket 84, Phase 2): old cache files under the pre-existing naming scheme are left on disk untouched'",
+    "claim_text": "Phase 2: `diagnostic_blocks.py` `_cache_key` now includes an input-data content hash, namespaced not invalidating (379 pre-existing cached fits untouched).",
+    "detail": "Read _cache_key directly: it computes data_hash via _raw_data_hash(slice_name) and folds it into the JSON payload that gets hashed into the cache filename, and its own docstring explicitly describes this as additive/namespaced rather than invalidating, matching the claim's mechanism exactly. The specific count '379 pre-existing cached fits' is a point-in-time snapshot from when Phase 2 ran and has necessarily grown since (many more fits were run in Phase 3/4 and in tickets 86/87's work) -- not meaningfully re-verifiable now as a live count, so only the mechanism (not that specific historical number) was checked.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B4-18",
+    "ticket": 63,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk12.py:78 ('# Persistent domains are GLOBAL; Transient domain (art) is SLICE-SPECIFIC', inside a 3-line '====' comment block at lines 76-78); get_idx() (line 88) assigns permanent global integers into a shared maps dict; get_art_idx() (line 98) assigns slice-local sequential indices separately for T1/T2",
+    "claim_text": "chunk12 builds T1 and T2 from **one corpus** with two disjoint article-year windows... Per its own comment (chunk12.py:76-78): > Persistent domains are GLOBAL; Transient domain (art) is SLICE-SPECIFIC. Concretely: `get_idx(domain, key)` assigns permanent global integer IDs shared across both slices... `get_art_idx(art_id, is_t1)` assigns slice-local sequential IDs separately for T1 and T2 articles.",
+    "detail": "This part of chunk12.py sits above the ticket-84-D4 insertion point (~line 129), so it is unaffected by the line drift found elsewhere in this batch (B4-02/B4-03/B4-11). The comment block is at lines 76-78 exactly as cited, get_idx (line 88) writes into the shared 'maps' dict keyed by domain (global across slices), and get_art_idx (line 98) is confirmed separate for T1/T2 via the is_t1 branch. Fully consistent, no action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  }
+]

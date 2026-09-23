@@ -2885,6 +2885,10 @@ where the noise floor is expected to shrink enough to actually adjudicate the mi
 result. Full record: `PhD_CNMF/plans/ticket84-grammar-hub-downweighting.md`; CLAUDE.md §8
 ticket 84 and §4.21 carry the condensed version.
 
+### CORRECTION (2026-09-23)
+
+Two items in this subsection are stale, re-verified directly against current data/code. **(1)** The degree-concentration table's `S_Art_Journ` column-skew figure (5.8× / 6.5×) predates the ticket 84 D4 journal-repository-resolution fix (§4.21/§4.23, FINDINGS §24), which dropped `S_Art_Journ`'s nnz from 24/35 (T1/T2) to 13/13. Recomputed directly against the current production pickles: column max÷mean is now **1.7× / 1.9×**, not 5.8×/6.5× — the row figure (1.0×/1.0×, trivial) is unaffected and still correct. This does not change ticket 84's D4 decision (`S_Art_Journ` weighting was deferred for the row-vs-column idf-keying reason stated above, independent of this number), but the post-fix skew is now close to trivial rather than comparable to the grammar relations, which weakens rather than strengthens the case for eventually extending weighting there. **(2)** The `chunk12.py:258, 315-321` citation for `idf_global`/`build_anchor_csr` has drifted: the ticket 84 D4 `REPO_JOURNAL_IDS` refactor inserted ~33 lines above this point in `chunk12.py`; `idf_global`'s computation is now at line 291 and `build_anchor_csr` is now at lines 348-353. The formula itself is unchanged and re-verified against the current file.
+
 ### `cousin_he`/T2's precision follow-up, resolved (tickets 86/87 Stage 0e)
 
 Of the "2 of 6 clear the seed noise floor with confidence" above, `cousin_he`/T2's
@@ -3466,7 +3470,11 @@ production data:**
 `articles.csv` gained a `venue_type` column for all 121 rows, populated via one OpenAlex
 Sources lookup per unique `journal_id` (46 unique journals, not per article) — resolves to
 `journal` (54 rows), `repository` (48, after the fix), `conference` (7), `book series` (1),
-or nothing (9 rows with no journal recorded). The two newly-found repository sources
+or nothing (9 rows with no journal recorded).
+
+### CORRECTION (2026-09-23)
+
+Re-verified directly against `articles.csv`'s current `venue_type` column: `repository` is **50** rows, not 48 — the original figure left the total 2 short of the stated 121-row corpus (54+48+7+1+9=119). 54 (`journal`) + 50 (`repository`) + 7 (`conference`) + 1 (`book series`) + 9 (no journal) = 121, matching exactly. The `journal`/`conference`/`book series`/no-journal counts were all independently confirmed correct as originally stated. The two newly-found repository sources
 (PubMed, DROPS) were found this way, incidentally, on articles that were never part of the
 original 59-article trigger set.
 
