@@ -106,6 +106,17 @@ evaluate_complete_solution(...)
     don't reimplement its
     sequence at a new call site (see ticket 69).
 
+    **[SUPERSEDED IN PART — 2026-09-23]** This threading list is stale for
+    `evaluate_dimensional_collapse`: current code calls it as
+    `evaluate_dimensional_collapse(U_final=U_numpy, Z_final=Z_numpy)` with no
+    `presence_masks` argument, and its own inline comment states
+    `presence_masks` is VESTIGIAL there ("Frobenius normalisation already
+    makes relation-level mass comparable") since the ticket-79/80 rewrite onto
+    `Z_scaled`. `presence_masks` is still threaded into
+    `evaluate_socio_semantic_reality` and `evaluate_domain_balance` exactly as
+    stated. Same fact already corrected at §8's ticket-60 row -- this is that
+    same staleness surfacing a second time, here in §3, not yet corrected.
+
 create_optuna_objective(...) -> objective(trial)
     objective returns TUPLE (pure_recon_loss, sociological_penalty)
     Study MUST be created with directions=["minimize", "minimize"]
@@ -383,6 +394,14 @@ is now structurally impossible, not just policed by convention.
 Current implementation uses `optuna._hypervolume.compute_hypervolume(pts, ref_point)`, fed
 from `study.best_trials` — which is already Optuna's Pareto front, so filtering is satisfied
 by construction and no action is needed today.
+
+**[SUPERSEDED IN PART — 2026-09-23, ticket 75]** `pts` is no longer fed directly from
+`study.best_trials`: `run_adaptive_grid`'s Scout/Deep-Dive hypervolume calc (M4 §S2/S3) now
+first filters to `converged_trials = [t for t in study.best_trials if
+t.user_attrs.get("converged", False)]` (ticket 75) and builds `pts` from that filtered list.
+This doesn't change the conclusion above -- a converged-only subset of a Pareto front is
+still mutually non-dominated, so "filtering is satisfied by construction" still holds --
+only the described data-flow detail (unfiltered `study.best_trials`) is stale.
 
 **Conditional guard:** if the hypervolume routine is ever replaced with a hand-rolled
 sweep-line (e.g. to escape the private-API dependency), that implementation **must** perform

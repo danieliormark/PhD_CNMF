@@ -279,12 +279,62 @@ process-safety anecdote. Worth a look later if that specific figure ever matters
 
 Citation-graph re-check post-edit: 357 references, 0 broken.
 
-### Batch 5 — pending (dispatched next)
+### Batch 5 — DONE (orchestration, Optuna, Pareto/stability, housekeeping; tickets 2,31,32,46,47,69,71,75)
+
+Sonnet-pinned agent re-verified ticket 47's hypervolume signature live against the installed
+`optuna==4.9.0` package (`inspect.signature`), and checked every clause of ticket 75's long
+register row against the code directly (user_attrs, all three downstream filter points
+including the exact `RuntimeError` string in §S5, the budget-loop caps). Result: 7 consistent,
+2 auto-correctable, **1 escalation**. Both corrections applied (anchors re-verified first):
+
+1. `CLAUDE.md` §3 Function Contracts — the `evaluate_complete_solution` entry still listed
+   `presence_masks` as threading into `evaluate_dimensional_collapse`; stale since tickets
+   79/80 (same fact Batch 4 already fixed at §8's ticket-60 row — that correction never
+   propagated to this separate §3 mention of the same fact).
+2. `CLAUDE.md` §4.14 — still described hypervolume's `pts` as fed directly from
+   `study.best_trials`; ticket 75 (this same batch) inserted a converged-trial filter in
+   between. Doesn't change the section's conclusion, just the stale data-flow detail.
+
+**Batch-spanning check performed** (flagged by this batch's own agent, worth doing once all
+batches were in): grepped every remaining `presence_masks` mention across both files after
+applying the two corrections above. Result: clean — `FINDINGS.md` was already accurate on
+this fact throughout (its §17 "Implementation and verification" subsection already states
+"No `presence_masks`/live-entity normalization needed" for the post-79/80
+`evaluate_dimensional_collapse`); the staleness was fully contained to the two now-fixed
+`CLAUDE.md` locations. No third instance found.
+
+**1 escalation** — written to `audit_workdir/escalation_batch.md`, not applied to either doc:
+ticket 75's register row cites three supporting demonstrations ("Run 8 at K=6", "Run 11",
+"Part M's K=6 sweep"); only "Run 11" resolves against anything on disk. The fix's actual
+mechanism (item B5-07) is independently and fully verified regardless — this is purely about
+whether two citation labels are traceable. See that file for the full detail and three options.
+
+Citation-graph re-check post-edit: 359 references, 0 broken.
+
+## Semantic adjudication layer — COMPLETE (all 4 batches done, overnight 2026-09-22/23)
+
+All four batches (2, 1, 4, 5, run in that consequence-first order per the plan) are done,
+committed, and pushed. Totals across the run: **34 substantive claims re-verified directly
+against `chunk13v9.py`/`chunk12.py`/diagnostic result files** (not just re-stated), 34
+consistent, 14 auto-corrected (applied and committed, one per batch), **1 escalation**
+(`escalation_batch.md`, awaiting review — nothing else is pending on it).
+
+This closes the original three-part audit request: (1) consistency verified across
+`CLAUDE.md`/`FINDINGS.md`/`chunk13v9.py`/diagnostic infrastructure, both mechanically
+(the triage layer) and semantically (these 4 batches); (1a) every found inconsistency was
+either auto-corrected in place or queued for review, nothing left silently unresolved;
+(1b) the unimplemented-recommendations deliverable is assembled and refresh-checked.
+**The one thing genuinely left for the user: review `escalation_batch.md` (1 item) whenever
+they're back.** Compression (the original request's second half) was not started this run —
+not scoped, not requested for tonight.
 
 ## Pending decisions / next actions
 
-None beyond finishing the remaining batches above — this is the only open item from the
-original three-part audit request, now actively running.
+1. **Review `audit_workdir/escalation_batch.md`** (1 item, ticket 75's citation gap) — the only
+   thing awaiting the user.
+2. **Compression pass** (CLAUDE.md/FINDINGS.md, the original request's second half) — not
+   started, not scoped for this run. Revisit only if/when the user wants it.
+
 
 ## Files in this directory
 

@@ -768,7 +768,7 @@
     "end_lineno": 768,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'journ', 'auth', 'affil'}"
+    "value": "{'auth', 'journ', 'affil'}"
    },
    {
     "name": "SEM_EXCLUSIVE_FACETS",
@@ -777,7 +777,7 @@
     "end_lineno": 769,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'cousin_he', 'core_atom', 'fringe_atom', 'parent_he', 'core_child_he'}"
+    "value": "{'core_atom', 'cousin_he', 'core_child_he', 'parent_he', 'fringe_atom'}"
    },
    {
     "name": "domain_membership_distributions",
@@ -1009,7 +1009,7 @@
   "commented_out_assignments": []
  },
  "citation_graph": {
-  "n_entries": 357,
+  "n_entries": 359,
   "broken": []
  },
  "numeric_constant_mismatches": [],
@@ -3709,113 +3709,113 @@
   "grammar_damping_v1_vs_v2_quality.py"
  ],
  "ticket_mentions_count": {
-  "CLAUDE.md": 106,
+  "CLAUDE.md": 108,
   "FINDINGS.md": 64
  },
  "tag_mentions_count": {
-  "CLAUDE.md": 17,
+  "CLAUDE.md": 19,
   "FINDINGS.md": 15
  },
  "planned_not_implemented_mentions": {
   "CLAUDE.md": [
    {
     "phrase": "not yet implemented",
-    "lineno": 204,
+    "lineno": 215,
     "line": "or the non-monotonicity. Not yet implemented \u2014 the mass-input problem (point 1) should be"
    },
    {
     "phrase": "not yet acted on",
-    "lineno": 454,
+    "lineno": 473,
     "line": "> current live behavior. Read the \"Practical consequence\" and \"Not yet acted on\" paragraphs"
    },
    {
     "phrase": "not yet acted on",
-    "lineno": 476,
+    "lineno": 495,
     "line": "**Not yet acted on.** Redesigning this is a decision, not a bug fix \u2014 see FINDINGS \u00a715 for"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 487,
+    "lineno": 506,
     "line": "> \"v9 currently has no per-community domain-balance mechanism at all\", \"not yet implemented"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 517,
+    "lineno": 536,
     "line": "property (design session, not yet implemented in code; full reasoning in FINDINGS \u00a713's"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 518,
+    "lineno": 537,
     "line": "update).** **[HISTORICAL \u2014 \"not yet implemented in code\" was true when written; both halves"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 572,
+    "lineno": 591,
     "line": "**E1 measurement (diagnostic-only, `diagnostic_scripts/domain_balance_measurement.py`,"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 605,
+    "lineno": 624,
     "line": "`chunk13v9.py`, not diagnostic-only:"
    },
    {
     "phrase": "not yet acted on",
-    "lineno": 677,
+    "lineno": 696,
     "line": "**Direct consequences, not yet acted on in code:** (1) `evaluate_domain_balance` is summed"
    },
    {
     "phrase": "proposed, not run",
-    "lineno": 683,
+    "lineno": 702,
     "line": "planted test for it is proposed, not run. **Limitations, stated because they bound the"
    },
    {
     "phrase": "considered and rejected",
-    "lineno": 711,
+    "lineno": 730,
     "line": "consumer saw the corrected labeling automatically. That approach was considered and rejected"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 820,
+    "lineno": 839,
     "line": "measurable, phenomenon confirmed real and structural, no mechanism yet (diagnostic-only)"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 890,
+    "lineno": 909,
     "line": "**No mechanism (in-loop or outer-loop) has been designed.** This ticket is diagnostic-only"
    },
    {
     "phrase": "not yet done",
-    "lineno": 891,
+    "lineno": 910,
     "line": "throughout, deliberately, matching how tickets 82/84 were sequenced. **Not yet done:** the"
    },
    {
     "phrase": "not yet started",
-    "lineno": 1126,
+    "lineno": 1145,
     "line": "| 82 | M2, per-community domain balance | No mechanism currently constrains any individual community's semantic/social mix; only the global 50/50 reconstruction-loss weighting exists. v8's `binding_penalty` (per-communit"
    },
    {
     "phrase": "no mechanism",
-    "lineno": 1127,
+    "lineno": 1146,
     "line": "| 86 | M2/M3, per-community mass (\"ghost communities\") | No mechanism exists to detect or address a community holding very low share of the model's total reconstructed mass \u2014 the third major open issue this session, alon"
    },
    {
     "phrase": "not yet implemented",
-    "lineno": 1217,
+    "lineno": 1236,
     "line": "## 10. Planned Extensions (not yet implemented)"
    },
    {
     "phrase": "diagnostic-only",
-    "lineno": 1254,
+    "lineno": 1273,
     "line": "the full corpus, not the toy corpus \u2014 diagnostic-only, no production wiring implied by"
    },
    {
     "phrase": "considered and rejected",
-    "lineno": 1281,
+    "lineno": 1300,
     "line": "**Considered and rejected: an R\u00b2/explained-variance analog.** Since every relation is already"
    },
    {
     "phrase": "status: proposal only",
-    "lineno": 1296,
+    "lineno": 1315,
     "line": "**Status: proposal only, not scheduled, not built.** No code exists for either (1) or (2)."
    }
   ],

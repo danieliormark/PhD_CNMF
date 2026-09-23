@@ -1,0 +1,114 @@
+[
+  {
+    "item_id": "B5-01",
+    "ticket": 2,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py full import list (grepped every `^import`/`^from` line across the file, lines 6-2031): no `sympy` import and no `from ...chunk13v8 import U_prob` anywhere in the file",
+    "claim_text": "| 2 | `from sympy import python` — **had regressed** (was still present, `sympy` confirmed not installed → `ModuleNotFoundError`). Now actually deleted. Also removed the separate `from ...chunk13v8 import U_prob` (dead: `U_prob` is always computed locally via `compute_probability_distributions()`); this was a distinct import from ticket 2's, tolerated during earlier fix passes but now removed entirely since nothing needs it. |",
+    "detail": "Grepped every import statement in chunk13v9.py (all `^import`/`^from` lines across the whole file, ~25 hits) and confirmed neither `sympy` nor any `chunk13v8` import exists anywhere. `compute_probability_distributions()` is present and is what `U_prob` is built from locally inside `evaluate_complete_solution` (confirmed at chunk13v9.py L1466). Matches the 'Recently closed' row exactly. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-02",
+    "ticket": 31,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1611-1625 (create_optuna_objective's objective(), the evaluate_complete_solution() call site): `evaluation = evaluate_complete_solution(...)` followed only by dict-key accesses (`evaluation[\"sociological_penalty\"]`, `evaluation[\"collapse_pen\"]`, etc.) -- no tuple-unpack of the call's return value anywhere in the function",
+    "claim_text": "| 30/31/32/51 | Completed `evaluate_complete_solution` body; deleted orphaned module-level call blocks in M3 S5 and M4 S5; corrected `params=` keyword and 3-value unpack. **Ticket 31/32's unpack bug had regressed a second time** at the §5.2 `objective()` call site (5-value unpack of a 3-value return) — subsumed by ticket 69's consolidation, which removes the unpack entirely. |",
+    "detail": "Confirmed directly: `objective()`'s call site assigns the whole return value to a single name (`evaluation = evaluate_complete_solution(...)`) and reads every field back out by dict key -- there is no `a, b, c = evaluate_complete_solution(...)`-style unpack anywhere in the function, at any arity. This matches the row's claim that ticket 69's consolidation (calling the function directly instead of reimplementing its sequence inline) removed the unpack bug's entire class of failure, not just this one instance. Also cross-checked against ticket 69's own row (CLAUDE.md L1067, L1136) and §4.13's ticket-69 closure note (L373-379), both of which are consistent with this. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-03",
+    "ticket": 46,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1893-1911 (Scout phase budget loop) and L2023-2038 (Deep Dive budget loop) inside run_adaptive_grid",
+    "claim_text": "| 46 | M4 §S3 | `len(study.trials)` counts pruned and failed trials — Deep Dive phase may under-run | **Closed, subsumed by ticket 75.** Both Scout and Deep Dive now loop on a COMPLETED-AND-CONVERGED count (`t.state == TrialState.COMPLETE and t.user_attrs.get(\"converged\", False)`) rather than raw `len(study.trials)`, with a `target*3` safety-valve attempt cap that prints a warning instead of looping forever. |",
+    "detail": "Both loops read exactly as described: Scout's `while True:` computes `n_usable = len([t for t in study.trials if t.state == TrialState.COMPLETE and t.user_attrs.get(\"converged\", False)])`, breaks once `n_usable >= SCOUT_TRIALS`, and breaks with a printed warning once `len(study.trials) >= SCOUT_TRIALS * 3`. Deep Dive is structurally identical against `total_target = SCOUT_TRIALS + DEEP_DIVE_TRIALS` and `max_attempts = total_target * 3`. `len(study.trials)` is still used, but only for the safety-valve cap (which is supposed to count every attempt, converged or not) -- the target check itself is on the converged-and-complete count, exactly as claimed. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-04",
+    "ticket": 47,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1776 (`from optuna._hypervolume import compute_hypervolume`), L2013 (`hv = compute_hypervolume(pts, ref_point) if len(pts) > 0 else 0.0`); re-verified directly against the installed package: `source .../conda.sh && conda activate tensor_env && python3 -c \"import optuna, inspect; print(optuna.__version__); print(inspect.signature(optuna._hypervolume.compute_hypervolume))\"` -> `4.9.0` / `(loss_vals: 'np.ndarray', reference_point: 'np.ndarray', assume_pareto: 'bool' = False) -> 'float'`",
+    "claim_text": "**Closed (ticket 47 regression):** the call site had regressed to the pre-4.9 `WFG` class pattern — `compute_hypervolume().compute(pts, ref_point)` — which calls the function with zero arguments before chaining `.compute(...)` on the result. `compute_hypervolume` is a plain function (verified via `inspect.signature` against the installed `optuna==4.9.0`: `compute_hypervolume(loss_vals, reference_point, assume_pareto=False) -> float`). Fixed to the direct call shown above, matching this section.",
+    "detail": "Independently re-ran the exact verification CLAUDE.md describes (not just trusted its prior result): installed optuna is genuinely 4.9.0, and `inspect.signature(compute_hypervolume)` returns exactly `(loss_vals: 'np.ndarray', reference_point: 'np.ndarray', assume_pareto: 'bool' = False) -> 'float'`, matching the doc's cited signature to the character. The live call site (`run_adaptive_grid`, L2013) calls it as a direct two-argument function call, not the old `WFG`-style `.compute()` chain -- no `optuna._hypervolume.WFG` reference exists anywhere in the file. §6's Environment table also lists `optuna: 4.9.0`, matching. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-05",
+    "ticket": 69,
+    "verdict": "consistent",
+    "ground_truth_checked": "All three consumers of evaluate_complete_solution(), confirmed by direct read: create_optuna_objective's objective() at chunk13v9.py L1611; extract_and_archive_pareto_front's per-trial re-run at L2178; run_dual_track_stability_analysis's per-seed loop at L2417 -- all three call `evaluate_complete_solution(U_final=..., Z_final=..., U_scales_out=diagnostics[\"U_scales\"], raw_data=..., soc_keys=..., sem_keys=..., anchor_keys=..., max_monopoly=..., entropy_threshold=..., target_coherence=...)` with an identical kwarg signature, none inlining the evaluation sequence",
+    "claim_text": "`create_optuna_objective`'s `objective(trial)` (Module 3 §5.2) calls `evaluate_complete_solution()` (Module 3 §5.1) directly rather than re-running the evaluation sequence inline — this is the *only* place Module 4's archiver (§S4) and stability analysis (§S5) and the Optuna loop all compute the sociological penalty, closing the loop required by §4.13. (§2) / **Closed.** `objective()` now calls `evaluate_complete_solution()` directly (§4.13, §3). (§8 ticket-69 row)",
+    "detail": "Read all three call sites directly rather than trusting the earlier §4.13 closure note alone. Optuna's objective() (L1611), the §S4 archiver's per-trial deterministic re-run (L2178), and the §S5 stability loop's per-seed re-run (L2417) all call `evaluate_complete_solution()` with the identical kwarg set and none of the three re-implements any part of the evaluation sequence inline -- confirming §2's 'only place ... all compute the sociological penalty' claim and §8's ticket-69/§4.13 closure claim simultaneously, across both document sections in my scope. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-06",
+    "ticket": 71,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1783-1786 (`EXPECTED_OPTUNA_VERSION = \"4.1.0\"` followed by `if optuna.__version__ != EXPECTED_OPTUNA_VERSION: print(...)` -- print-only, no raise/exit); audit_workdir/triage_report.json's symbol table confirms the same constant/value at lineno 1783; installed optuna confirmed 4.9.0 (see B5-04)",
+    "claim_text": "| 71 | M4 §S2/3 | `EXPECTED_OPTUNA_VERSION` hardcoded to `\"4.1.0\"`, prints a spurious mismatch warning every run against the real `4.9.0` environment | **Open, cosmetic only.** New this session; not fixed. |",
+    "detail": "Confirmed the constant is still literally `\"4.1.0\"` and the version check is a pure print-and-continue (no `sys.exit`, no `raise`) -- genuinely cosmetic, matching 'Open, cosmetic only.' The §6 Environment section's matching note (L978-980, 'Cosmetic only — left open, see ticket 71') and §3's Function Contracts area are consistent with this row; no cross-section contradiction. No action needed.",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-07",
+    "ticket": 75,
+    "verdict": "consistent",
+    "ground_truth_checked": "chunk13v9.py L1588-1600 (objective()'s converged/epochs_run user_attrs, exact wording of the non-convergence print), L1897-1905 & L1907-1913 (Scout's converged_trials filter + empty-front warning), L2091-2097 (§S4 archiver's converged_front filter + warning), L2410-2412 (§S5's `if not diagnostics.get(\"converged\", True): raise RuntimeError(\"Silent optimizer failure: Convergence not reached.\")`), L1893-1911 & L2020-2038 (Scout/Deep-Dive target*3 budget loops), methodology_report dict literal at ~L1943 (`\"trials_converged\"`/`\"trials_not_converged\"` keys present)",
+    "claim_text": "| 75 | ... **New — the standing \"converged flag unread\" item, now fixed.** ... | **Closed.** Design: **flag, don't prune** ... `objective()` now sets `trial.set_user_attr(\"converged\", ...)` and `\"epochs_run\"` ... Filtered at all three downstream consumers: (i) M4 §S2/S3's `valid_pts`/hypervolume calc ... (ii) M4 §S4's `pareto_trials` ... (iii) M4 §S5's stability loop was verified consistent, not touched — it already raises `RuntimeError(\"Silent optimizer failure...\")` per seed ... Trial budget top-up (also closes ticket 46) ... `methodology_report[config_id][K]` gained `\"trials_converged\"` / `\"trials_not_converged\"` fields.",
+    "detail": "Checked every clause of this long row against the live code individually rather than sampling: `objective()` sets both user_attrs right after `run_inner_solver` returns and prints `[!] Trial {n} did not converge ({epochs} epochs, K={K}) — flagged.` exactly as the row's mechanism implies; Scout's hypervolume-feeding `converged_trials` list and its 'ZERO are converged' warning both exist verbatim; §S4's `converged_front`/`pareto_trials` filter-then-sort is identical in structure; §S5's stability loop raises `RuntimeError(\"Silent optimizer failure: Convergence not reached.\")` on `not diagnostics.get(\"converged\", True)` -- matching the row's paraphrase 'raises RuntimeError(\"Silent optimizer failure...\")' as a verified verbatim prefix, not just a plausible-sounding one; the budget loops (also covered in B5-03/ticket 46) match; and `methodology_report[config_id][K]` literally contains both `\"trials_converged\": n_converged` and `\"trials_not_converged\": n_not_converged`. Every mechanism claim in this row is fully and precisely borne out by the current code. (The row's own cited empirical evidence -- 'Run 8 at K=6' and \"Part M's K=6 sweep\" -- is a separate, unverifiable sub-claim; see B5-08.)",
+    "proposed_edit": null,
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-08",
+    "ticket": 75,
+    "verdict": "escalate",
+    "ground_truth_checked": "FINDINGS.md: grepped every `Run [0-9]+` occurrence in the whole file (yields Run 1,2,3,4,9,11,13,15,16,17,18 -- no 'Run 8') and every `Part M` occurrence (zero hits); also grepped diagnostic_scripts/*.py and diagnostic_results/*.json for both 'Part M' and 'Run 8' (zero hits in either directory). 'Run 11' is independently confirmed in FINDINGS.md L1138 (unconverged, ceiling-hit, math_loss 4.0849) and L534 (math_loss ~4.21, 'unconverged') -- so 2 of the row's 3 cited pieces of evidence cannot be located anywhere on disk, while the third checks out.",
+    "claim_text": "Demonstrated three times in the diagnostic investigation (Run 8 at K=6, Run 11, and Part M's K=6 sweep).",
+    "detail": "This is the evidentiary basis CLAUDE.md's ticket-75 row gives for the pre-fix bug being real (a trial hitting the epoch ceiling entering the Pareto front indistinguishably from a converged one). 'Run 11' is genuinely documented in FINDINGS.md (§1's Test-A table and §14's permutation table both show Run 11 as a fully-random-init fit that hit the ceiling, math_loss ~4.08-4.21) and independently corroborates the claim. But 'Run 8' and \"Part M's K=6 sweep\" do not appear under those names anywhere in FINDINGS.md, diagnostic_scripts/, or diagnostic_results/ -- FINDINGS.md's own Run-numbering has gaps at 5,6,7,8,10,12,14 (consistent with a much larger private run history existing outside the document, of which only a curated subset got tabulated), so 'Run 8' plausibly refers to a real, un-tabulated run from that broader investigation rather than a fabricated citation; 'Part M' has no analogue anywhere in this doc's own section-numbering (0-25) or the M1-M4 module-naming convention, which is more concerning. I can't independently confirm or refute either citation from anything on disk, and the row's core mechanism claim (B5-07) is separately and fully verified regardless of whether this specific evidence trail resolves -- so this doesn't call the fix itself into question, only the traceability of two of its three supporting citations. Escalating rather than auto-correcting because there's no way to determine from available sources whether 'Run 8'/'Part M' are (a) real but simply undocumented, (b) a typo for something else (e.g. FINDINGS §21's K=6-inclusive grid sweep, which does report epoch-ceiling hits at K>=4), or (c) citations that should be removed -- any of the three would need the user's/original session's own memory of the investigation, not a code/JSON fact this session can check.",
+    "proposed_edit": null,
+    "escalation_reason": "Candidate Open Defect Register note (not a code bug): ticket 75's register row cites 'Run 8 at K=6' and \"Part M's K=6 sweep\" as two of the three empirical demonstrations justifying the fix; neither label resolves against FINDINGS.md, diagnostic_scripts/, or diagnostic_results/ (only 'Run 11' does). Recommend either locating/formalizing that evidence in FINDINGS.md, or softening the row's citation to name only what's traceable -- the underlying fix and its mechanism are independently verified against the live code (B5-07) and not in question."
+  },
+  {
+    "item_id": "B5-09",
+    "ticket": null,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk13v9.py L1445-1526 (evaluate_complete_solution): the call to evaluate_dimensional_collapse at L1486-1489 passes only `U_final=U_numpy, Z_final=Z_numpy` -- no `presence_masks` argument -- with an inline comment at L1478-1485 stating presence_masks is 'VESTIGIAL for this call... kept only so this function's own external signature... doesn't need to change'; contrasted with the calls to evaluate_socio_semantic_reality (L1502-1508) and evaluate_domain_balance (L1514-1517), both of which do receive `presence_masks=presence_masks`",
+    "claim_text": "Builds presence_masks internally via build_presence_masks() and threads them into evaluate_dimensional_collapse / evaluate_socio_semantic_reality / evaluate_domain_balance. This is the single source of truth — call it, don't reimplement its sequence at a new call site (see ticket 69).",
+    "detail": "This is CLAUDE.md §3's Function Contracts entry for evaluate_complete_solution, explicitly in this batch's scope. It's stale for one of its three named callees: current code (verified directly, with the function's own inline comment confirming it's deliberate, not a bug) no longer threads presence_masks into evaluate_dimensional_collapse -- only into evaluate_socio_semantic_reality and evaluate_domain_balance -- because that function was rewritten onto Z_scaled (tickets 79/80) and Frobenius-normalization already makes relation-level mass comparable without it. This exact fact is already documented and corrected elsewhere in the same file: CLAUDE.md §8's ticket-60 row (L1077) carries a '[SUPERSEDED — 2026-09-23]' note stating precisely this -- 'the evaluate_dimensional_collapse half is no longer accurate... its own docstring now says directly \"No presence_masks / live-entity normalisation needed here\"'. That correction (presumably from an earlier batch tonight covering tickets 60/79/80, outside this batch's ticket list) never propagated to this separate §3 mention of the same fact, which is why it's still stale here. Not a code bug and not ambiguous -- both the code and an existing same-session correction elsewhere in this file agree, so this is auto-correctable, not an escalation.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§3 Function Contracts, evaluate_complete_solution entry, inside the ```python fenced block, immediately after the sentence ending \"(see ticket 69).\"",
+      "action": "bracket-note",
+      "old_text_anchor": "    Builds presence_masks internally via build_presence_masks() and threads\n    them into evaluate_dimensional_collapse / evaluate_socio_semantic_reality\n    / evaluate_domain_balance. This is the single source of truth — call it,\n    don't reimplement its\n    sequence at a new call site (see ticket 69).",
+      "new_text": "\n    **[SUPERSEDED IN PART — 2026-09-23]** This threading list is stale for\n    `evaluate_dimensional_collapse`: current code calls it as\n    `evaluate_dimensional_collapse(U_final=U_numpy, Z_final=Z_numpy)` with no\n    `presence_masks` argument, and its own inline comment states\n    `presence_masks` is VESTIGIAL there (\"Frobenius normalisation already\n    makes relation-level mass comparable\") since the ticket-79/80 rewrite onto\n    `Z_scaled`. `presence_masks` is still threaded into\n    `evaluate_socio_semantic_reality` and `evaluate_domain_balance` exactly as\n    stated. Same fact already corrected at §8's ticket-60 row -- this is that\n    same staleness surfacing a second time, here in §3, not yet corrected."
+    },
+    "escalation_reason": null
+  },
+  {
+    "item_id": "B5-10",
+    "ticket": 47,
+    "verdict": "auto-correctable",
+    "ground_truth_checked": "chunk13v9.py L1897-1905 (Scout's `converged_trials = [t for t in study.best_trials if t.user_attrs.get(\"converged\", False)]`, then `pts_array` built from `converged_trials`, then `hv = compute_hypervolume(pts, ref_point)` where `pts = pareto_fronts[K]['pts']` -- i.e. the already-converged-filtered array, not raw `study.best_trials`)",
+    "claim_text": "Current implementation uses `optuna._hypervolume.compute_hypervolume(pts, ref_point)`, fed from `study.best_trials` — which is already Optuna's Pareto front, so filtering is satisfied by construction and no action is needed today.",
+    "detail": "§4.14 (the section devoted to ticket 47's hypervolume fix) describes `pts` as fed directly from `study.best_trials`. That was accurate for the code ticket 47 itself fixed, but ticket 75 (also in this batch, added 'this session' per its own register row) inserted a converged-trial filter between `study.best_trials` and the array actually passed to `compute_hypervolume`: `pts` is now built from `converged_trials` (a filtered subset of `study.best_trials`), not `study.best_trials` itself. This doesn't overturn §4.14's actual conclusion -- a converged-only subset of a Pareto front is still mutually non-dominated, so 'filtering is satisfied by construction' still holds -- it only makes the described data-flow detail (unfiltered `study.best_trials`) stale. Auto-correctable: unambiguous, checkable directly against the code, and the fix is a pure addition that doesn't touch the section's conclusion.",
+    "proposed_edit": {
+      "file": "CLAUDE.md",
+      "location": "§4.14 'Hypervolume must operate on a Pareto-filtered front', first paragraph",
+      "action": "bracket-note",
+      "old_text_anchor": "Current implementation uses `optuna._hypervolume.compute_hypervolume(pts, ref_point)`, fed\nfrom `study.best_trials` — which is already Optuna's Pareto front, so filtering is satisfied\nby construction and no action is needed today.",
+      "new_text": "\n\n**[SUPERSEDED IN PART — 2026-09-23, ticket 75]** `pts` is no longer fed directly from\n`study.best_trials`: `run_adaptive_grid`'s Scout/Deep-Dive hypervolume calc (M4 §S2/S3) now\nfirst filters to `converged_trials = [t for t in study.best_trials if\nt.user_attrs.get(\"converged\", False)]` (ticket 75) and builds `pts` from that filtered list.\nThis doesn't change the conclusion above -- a converged-only subset of a Pareto front is\nstill mutually non-dominated, so \"filtering is satisfied by construction\" still holds --\nonly the described data-flow detail (unfiltered `study.best_trials`) is stale."
+    },
+    "escalation_reason": null
+  }
+]
