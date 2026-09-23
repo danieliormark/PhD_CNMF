@@ -1,7 +1,6 @@
 # Escalation batch — semantic adjudication layer, 2026-09-22/23 overnight run
 
-One item across all four batches. Nothing in this file has been applied to `CLAUDE.md` or
-`FINDINGS.md` — review and decide, then either ask for it to be applied or say to drop it.
+One item across all four batches. **RESOLVED 2026-09-23** — user reviewed E-1, did not recall what "Run 8"/"Part M" referred to, and chose option 2 (soften the citation). Applied to `CLAUDE.md`'s ticket-75 row directly. Kept below for the record.
 
 ---
 
@@ -30,7 +29,9 @@ exhaustively for "Run 8" and "Part M" under those exact names.
   from. `FINDINGS.md` §21 does report an epoch-ceiling hit at K≥4 in a wider grid, which is a
   plausible-but-unconfirmed candidate for what "Part M" might be pointing at.
 
-**Options:**
+**Resolution applied (2026-09-23):** option 2 — trimmed to name only "Run 11," with a dated bracket note in place explaining what was removed and why (original wording preserved in git history). See `CLAUDE.md` §8's ticket-75 row.
+
+**Options (as originally presented):**
 1. **Locate/formalize the missing evidence** — if "Run 8" and "Part M" refer to real
    investigation you remember, add a short note to `FINDINGS.md` naming what they actually are,
    so the citation resolves for a future reader. *(Recommended if you recall what they were.)*

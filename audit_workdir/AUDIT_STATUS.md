@@ -330,10 +330,13 @@ not scoped, not requested for tonight.
 
 ## Pending decisions / next actions
 
-1. **Review `audit_workdir/escalation_batch.md`** (1 item, ticket 75's citation gap) — the only
-   thing awaiting the user.
+1. ~~Review `audit_workdir/escalation_batch.md`~~ — **DONE, 2026-09-23.** User didn't recall
+   "Run 8"/"Part M", chose to trim the citation to only "Run 11" (the one that resolves).
+   Applied directly to `CLAUDE.md`'s ticket-75 row with a dated bracket note explaining the
+   removal; original wording preserved in git history. `escalation_batch.md` is now empty of
+   open items.
 2. **Compression pass** (CLAUDE.md/FINDINGS.md, the original request's second half) — not
-   started, not scoped for this run. Revisit only if/when the user wants it.
+   started, not scoped yet. The only thing left from the original audit request.
 
 
 ## Files in this directory

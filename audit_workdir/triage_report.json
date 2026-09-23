@@ -768,7 +768,7 @@
     "end_lineno": 768,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'auth', 'journ', 'affil'}"
+    "value": "{'affil', 'auth', 'journ'}"
    },
    {
     "name": "SEM_EXCLUSIVE_FACETS",
@@ -777,7 +777,7 @@
     "end_lineno": 769,
     "docstring_first_line": null,
     "parent": null,
-    "value": "{'core_atom', 'cousin_he', 'core_child_he', 'parent_he', 'fringe_atom'}"
+    "value": "{'parent_he', 'core_atom', 'core_child_he', 'cousin_he', 'fringe_atom'}"
    },
    {
     "name": "domain_membership_distributions",
