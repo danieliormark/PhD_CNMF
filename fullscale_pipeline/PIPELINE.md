@@ -148,16 +148,8 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 ## 6. Known gaps and staleness (read before trusting any downstream number)
 
 1. **P0 has no generating code.** Only consumers (`P1`, `P2d`, `verify_boundaries.py`,
-   `fetch_article_types.py`) reference `sequence_metadata_relaxed.csv`. Searched 2026-09-24 (RL-024)
-   and not found: RDS scripts, home notebooks, shell history, earlier Claude transcripts. What the
-   data still show `[DERIVED]`: `content_start_line` is the 0-indexed line of the third row of
-   `=` signs in the text file (the divider closing the metadata block), in 4,000 of 4,000 sampled
-   rows. `content_end_line` is the 0-indexed line of the first heading of the back-matter block
-   that precedes References (Author Contributions, Acknowledgments, Supplementary Information,
-   Data availability statement, Ethical Considerations and similar), with a blank line before it in
-   99.7% of the 28,284 rows. The exact back-matter vocabulary is not recoverable from code; 4,797
-   distinct end-line texts occur. Follow-up: regenerate P0 with a preserved script and compare it
-   with the existing CSV row by row.
+   `fetch_article_types.py`) reference `sequence_metadata_relaxed.csv`. Follow-up: rebuild it with a
+   preserved script; the content-end rule is to be redefined first.
 2. **Everything from P1 onward has run only on the May-era subset.** The ~11.5k newly fetched texts
    and the 2026-09 list have never been through P0–G3.
 3. **G3 predates its input.** All 50 curated databases (2026-05-30) are older than the raw v2

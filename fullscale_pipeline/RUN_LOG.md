@@ -12,6 +12,9 @@ afterwards; a correction is a new entry that cites the old one.
 not been changed since, is taken to be the version that ran (sha256 in PIPELINE.md, Appendix C).
 Where a script was edited after the run, the run-time version is stated as *not recoverable*.
 
+Exploratory diagnostics (searches, trials, sample scans) are not logged here; they go to a
+separate diagnostics log (SESSION_PROTOCOL.md §J).
+
 Paths use the abbreviations of PIPELINE.md (`R`, `LCS`, `PP`, `PG`).
 
 ---
@@ -125,17 +128,6 @@ was modified. Scratch files only in `/tmp`.
 Read-only: 50 shards (22,795 lines), 50 raw v2 and 50 curated databases; every curated database is
 older than its raw database (50 of 50); v3 has 22,795 unique PMCIDs of which 223 are flagged
 `restored_from_v2`; 22,756 of them are in the current 46,241 list. Recorded in PIPELINE.md §3, §6.
-
-**RL-024 · 2026-09-24 · P0 · AUDIT · LIVE**
-Read-only search for the code that generated `PP/sequence_metadata_relaxed.csv` (31,511 rows; 28,284
-with both boundaries, 3,227 with none). Searched: all `*.py/*.sh/*.ipynb/*.md/*.log` under `R`, the
-home notebooks, `~/.bash_history`, earlier Claude transcripts. Not found. Also found in `PP/`
-(not previously listed as P0 products): `full_sequence_mapping.txt`, `missing_reference_sequences.txt`
-and `reference_aliases_full.txt` are the printed output of an "Exact Topological N-Gram Diagnostics"
-script (scans the bottom 30% of 34,751 documents; 31,226 mapped) that is also absent.
-Boundary rules inferred from the data: start = third `=` divider line (4,000 of 4,000 sampled);
-end = first back-matter heading before References (blank line before it in 99.7% of rows).
-No file under `R` was modified.
 
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

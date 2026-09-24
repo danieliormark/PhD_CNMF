@@ -297,6 +297,11 @@ the full-scale pipeline only. The pipeline is expected to change, so the record 
   `[INFERENCE]`. Never present an inference as log evidence.
 - **Before re-running a stage, back up or rename its outputs.** Most stages delete and rewrite
   fixed file names (PIPELINE.md §6, item 4).
+- **Keep the main record pure.** `PIPELINE.md` and `RUN_LOG.md` hold only stages that are part of the
+  pipeline and runs of them. Exploratory diagnostics (searches for lost code, sample scans, trial
+  rules) go to `fullscale_pipeline/diagnostics/DIAGNOSTICS_LOG.md`. That folder is kept out of git
+  (`.git/info/exclude`) until the user says a diagnostic has become relevant. When one does, promote
+  its outcome into PIPELINE.md as a stage or deviation.
 - **Touching the RDS directory:** say what is touched, to what extent and why, before doing it.
 - Update PIPELINE.md and RUN_LOG.md in the same commit as the change they describe; commit
   messages name the stage IDs. Never write credentials (API keys, passwords) into either file.
