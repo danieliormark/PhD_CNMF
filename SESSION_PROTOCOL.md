@@ -275,3 +275,28 @@ something in this territory without being asked to.
   Found still unset in `query_pmc_entrez.py`'s `EMAIL` constant (`"your.email@manchester.ac.uk"`,
   literally the placeholder) as of 2026-09-23 — flag this kind of thing rather than running
   past it silently.
+
+---
+
+## J. Full-scale pipeline: keep a reproducible record (standing rule, added 2026-09-24)
+
+The full-scale corpus is documented for reviewers in `fullscale_pipeline/PIPELINE.md` (stages,
+scripts, inputs and outputs, order) and `fullscale_pipeline/RUN_LOG.md` (append-only). It covers
+the full-scale pipeline only. The pipeline is expected to change, so the record must change with it.
+
+- **Every action that touches full-scale data or code** — a query, download, preprocessing step,
+  graphbrain run, matrix build, solver run, or an edit to any script or word list under
+  `/mnt/hum01-rds/Basov/p91688di/` — **names its stage ID** (R1, P1, G2, …) and gets a
+  `RUN_LOG.md` entry: date and time, exact command, host (`incline` or CSF3), SLURM job ID,
+  sha256 of each script used, inputs and outputs with counts, outcome. Write it when the action
+  happens, not afterwards from memory.
+- **Editing or replacing a script is a deviation.** Add a row to PIPELINE.md §5 (what, why, date,
+  affected stages), update the stage row in §1, and mark every downstream stage `DONE-stale` until
+  it is re-run. Stage IDs do not change when a script is replaced; the script column does.
+- **Mark the provenance of every fact**: `[LOG]`, `[CODE]`, `[MTIME]`, `[DERIVED]` or
+  `[INFERENCE]`. Never present an inference as log evidence.
+- **Before re-running a stage, back up or rename its outputs.** Most stages delete and rewrite
+  fixed file names (PIPELINE.md §6, item 4).
+- **Touching the RDS directory:** say what is touched, to what extent and why, before doing it.
+- Update PIPELINE.md and RUN_LOG.md in the same commit as the change they describe; commit
+  messages name the stage IDs. Never write credentials (API keys, passwords) into either file.
