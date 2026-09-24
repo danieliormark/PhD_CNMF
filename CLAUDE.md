@@ -1315,6 +1315,38 @@ already provides — it is a rescaling, not a new signal, unlike (1) and (2) abo
 **Status: proposal only, not scheduled, not built.** No code exists for either (1) or (2).
 Revisit when model-quality evaluation for the 22k-article run is actually being planned.
 
+### Evaluation tools to consider borrowing from Tang et al. 2025 (added 2026-09-24)
+
+Source: Tang, Wang, Zhao & Wang (2025), "Detecting memberships in multiplex networks via
+nonnegative matrix factorization and tensor decomposition", *New J. Phys.* 27, 013007
+(open access, DOI `10.1088/1367-2630/ada573`). Reviewed against this pipeline 2026-09-24;
+their model (shared mixed memberships Θ + per-layer link matrices B⁽ˡ⁾) is structurally close
+to ours (shared `U` per facet + per-relation `Z_r`), but their data is multiplex (one node
+set, square binary layers), so most of their *fitting* techniques do not transfer. These
+three *evaluation* pieces do:
+
+1. **ℓ2,∞ membership error — consider adopting.** After optimally matching estimated to true
+   communities (permutation), the largest row-wise Euclidean error between estimated and true
+   membership vectors: `max_i ‖Θ_i − Θ̂_i Q‖`. Measures soft-membership recovery directly —
+   the gap §4.18 E3 already flags ("the argmax-based recovery metric is crude against a soft
+   partition"). Use in planted-structure tests. **Report alongside a mean row error**, since
+   with 44–45% of live entities at degree 1 the maximum will be dominated by them.
+2. **Matched cosine similarity between membership matrices — consider adopting.** Match
+   communities between two solutions, then average per-community cosine similarity of the
+   membership columns. Directly usable for (2) above (seed-stability/consensus) and for
+   comparing toy vs. 22k, or `chunk12` vs. `chunk12v2`, solutions.
+3. **Dirichlet(α) mixed-membership synthetic generator — consider partially adopting.**
+   Entity membership vectors drawn from Dirichlet(α); α controls how mixed entities are, giving
+   planted tests a tunable overlap level that matches this model's soft partition. **Partial
+   only:** their generator has no degree heterogeneity (they list this as a limitation), so
+   combine its membership draw with the existing degree/weight-preserving planted generator
+   (FINDINGS §25) rather than replacing it.
+
+**Status: proposal only, not scheduled, not built.** Not adopted (considered and judged
+unsuitable here): their first/second-order binarized proximity matrix — conflicts with
+`S_Art_Auth`'s log-damping (ticket 63) by turning many-author articles into co-author cliques,
+and discards relation weights.
+
 ---
 
 ## 11. chunk12 Facts (upstream data generator)

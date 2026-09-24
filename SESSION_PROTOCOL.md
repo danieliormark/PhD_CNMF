@@ -255,3 +255,23 @@ something in this territory without being asked to.
   **refuted** hypotheses — §11 exists so that failed ideas are not retried.
 - If a finding contradicts something already recorded, say so explicitly rather
   than adding a second, conflicting entry.
+
+---
+
+## I. External API / bulk data-fetching scripts (PMC/Entrez, S3, etc.)
+
+- **Before running or modifying a script that queries an external API in bulk**, check
+  whether an API key or registered-identity path exists and would materially change
+  feasibility or runtime — request/register one if the unauthenticated rate limit would make
+  the run slow or risk throttling. Concrete precedent (2026-09-23): `query_pmc_entrez.py`
+  (`/mnt/hum01-rds/Basov/p91688di/`) self-throttles to ~2.86 req/s to stay under NCBI
+  Entrez's anonymous 3 req/s cap; a registered NCBI API key raises that to 10 req/s, cutting
+  runtime roughly 3x. Not needed for a single one-off run at that script's query breadth, but
+  worth having before repeated or much larger runs (e.g. later `efetch`/`esummary` calls at
+  full 22k-corpus scale).
+- **Also check that identifying fields actually contain real values, not template
+  placeholders** — an `email`/`tool` parameter (or equivalent) left as a literal placeholder
+  defeats the purpose (it's how the API provider reaches you before blocking, not after).
+  Found still unset in `query_pmc_entrez.py`'s `EMAIL` constant (`"your.email@manchester.ac.uk"`,
+  literally the placeholder) as of 2026-09-23 — flag this kind of thing rather than running
+  past it silently.

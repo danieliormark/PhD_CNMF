@@ -59,6 +59,13 @@ traces to a specific citation.
 15. Whether the narrow 0.054–0.132 `semantic_pen` range across the grid is a real ceiling or
     an artifact of something else — flagged as unknown, not separately investigated.
 
+### Borrowed from literature review (added 2026-09-24, Tang et al. 2025 NJP 27 013007)
+16. ℓ2,∞ membership error (+ mean row error) for planted-structure tests. *(CLAUDE.md §10)*
+17. Matched cosine similarity between membership matrices, for seed-stability and cross-data
+    comparisons. *(CLAUDE.md §10)*
+18. Partial adoption of a Dirichlet(α) mixed-membership draw inside the existing
+    degree-preserving planted generator. *(CLAUDE.md §10)*
+
 ## Explicitly rejected (kept for completeness — not pending action)
 - Physical mutation of `U`/`Z` for permutation correction, in favor of read-time correction.
   *(CLAUDE.md §4.20)*
