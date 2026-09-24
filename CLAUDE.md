@@ -835,6 +835,31 @@ existing FINDINGS test battery against the new data with Sonnet (high effort) on
 is settled.** **Followed as recommended** — Opus ran the design pass (D1-D8), Sonnet ran
 Phases 1-4. See §8 ticket 84 for the executed result.
 
+**Open design question for the 22k rebuild of chunk12 — idf vs. shared meaning (added
+2026-09-24, flagged by the user for revisiting when the 22k analogue of `chunk12v2.py` is
+built; a theory decision, not resolved).** The three anchor relations (`M_Parent_Art`,
+`M_Child_Art`, `M_Cousin_Art`) are weighted `log1p(tf) · idf`, with
+`idf = ln(N/(df+1)) + 1` (`chunk12.py`, `idf_global` and `build_anchor_csr`) — sublinear tf
+times a smoothed idf that differs from sklearn's `smooth_idf` by ~1/N. **On the toy corpus it
+is nearly inert**: N=61; df=1 for 99% / 88% / 86% of parent / child / cousin hyperedges;
+tf=1 for 92–99% of anchor ties (measured from the decoders pickle and the T1/T2 matrices).
+**At 22k it becomes a strong lever**: idf spans ≈1 to ≈10.3, and because it scales a whole
+row and the loss is squared error, a row's influence goes as idf² — a df≈N row keeps ~0.9%
+of a df=1 row's loss weight, a df=10,000 row 3.0% (classic idf: 0%, 0.6%). Frobenius
+normalization removes only the global scale, not this relative pattern.
+
+**The tension.** (a) idf discounts widely shared semantic elements, but under the
+sociosemantic framework in use (Roth/Basov, extended to heterogeneous communities) widely
+shared associations are candidates for *shared meaning*. (b) It stacks on the §9 "Shared
+semantics" limitation, where NMF's winner-takes-all tendency plus the `z_offdiag` penalty
+already disfavour ubiquitous elements. (c) It conflicts with the hub-avoidance goal of this
+ticket (above, and D8), which pushes the other way. (d) Separately, classic idf is maximal for
+df=1 elements, which appear in one article and cannot link two articles. **Which side wins is
+a theory decision, not a technical one.** Candidate variants, none tested: no idf; the
+current form; a df floor or a bell-shaped weight. Test with the seed-stability harness
+(§10, model-quality item 2). Illustration: `audit_workdir/tfidf_comparison.png` (script beside
+it).
+
 ### 4.22 "Ghost communities" (ticket 86) — a low-mass community definition, validated as
 measurable, phenomenon confirmed real and structural, no mechanism yet (diagnostic-only)
 
@@ -1225,7 +1250,10 @@ per-facet numbers (20 most ubiquitous / 20 most niche, no aggregation) in
 - **Shared semantics.** Ubiquitous semantic elements that should load ~1/K across all
   communities are structurally disfavoured — NMF's winner-takes-all tendency plus the
   `z_offdiag` penalty (which suppresses the cross-community coupling that would naturally
-  carry shared-element signal) both push against it. Unresolved.
+  carry shared-element signal) both push against it. Unresolved. **[Added 2026-09-24]** chunk12's
+  idf weighting on the three anchor relations is a third push in the same direction, and is
+  flagged for a theory decision before the 22k rebuild — see §4.21, "Open design question for
+  the 22k rebuild".
 - **Config C1** has a single anchor (`M_Parent_Art`, 63 non-zeros — see §11), so its entire
   semantic initialisation tree roots at one weak SVD. Expect weaker initialisation quality
   and weaker scout-phase hypervolume than C2/C5/C6 (all dual-anchor). **This is the point of

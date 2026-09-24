@@ -59,15 +59,25 @@ traces to a specific citation.
 15. Whether the narrow 0.054–0.132 `semantic_pen` range across the grid is a real ceiling or
     an artifact of something else — flagged as unknown, not separately investigated.
 
+*(Items 16 onward were added after the 2026-09-22 refresh check below and are not covered by it.)*
+
 ### Borrowed from literature review (added 2026-09-24, Tang et al. 2025 NJP 27 013007)
 16. ℓ2,∞ membership error (+ mean row error) for planted-structure tests. *(CLAUDE.md §10)*
 17. Matched cosine similarity between membership matrices, for seed-stability and cross-data
     comparisons. *(CLAUDE.md §10)*
+18. Partial adoption of a Dirichlet(α) mixed-membership draw inside the existing
+    degree-preserving planted generator. *(CLAUDE.md §10)*
 19. SPA (corner-finding) as an alternative initializer, article-hub-only, not pooled across
     facets — pooled version rejected as theoretically unsound for heterogeneous communities;
     realistically a 22k-scale question given toy-corpus article counts. *(CLAUDE.md §10)*
-18. Partial adoption of a Dirichlet(α) mixed-membership draw inside the existing
-    degree-preserving planted generator. *(CLAUDE.md §10)*
+
+### Flagged for the 22k rebuild of chunk12 (added 2026-09-24, user-flagged)
+20. **Theory decision, unresolved: does idf on the anchor relations fit "shared meaning"?**
+    idf discounts widely shared semantic elements, which the sociosemantic framework treats
+    as candidates for shared meaning; it stacks on §9's "Shared semantics" limitation and
+    conflicts with ticket 84's hub-avoidance goal. Decide before building the 22k analogue of
+    `chunk12v2.py`. *(CLAUDE.md §4.21 "Open design question for the 22k rebuild", §9;
+    figure `audit_workdir/tfidf_comparison.png`)*
 
 ## Explicitly rejected (kept for completeness — not pending action)
 - Physical mutation of `U`/`Z` for permutation correction, in favor of read-time correction.
