@@ -129,5 +129,17 @@ Read-only: 50 shards (22,795 lines), 50 raw v2 and 50 curated databases; every c
 older than its raw database (50 of 50); v3 has 22,795 unique PMCIDs of which 223 are flagged
 `restored_from_v2`; 22,756 of them are in the current 46,241 list. Recorded in PIPELINE.md §3, §6.
 
+**RL-024 · 2026-09-24 21:56 · P0 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/build_content_regions.py` (sha256 `16b485d1f3ea`) replaces the lost May generator.
+Rules and reasons: PIPELINE.md D8. Created in the RDS directory: this script and, by RL-025, one
+output file. `sequence_metadata_relaxed.csv` was not touched. Deviation D8.
+
+**RL-025 · 2026-09-24 21:56–21:58 · P0 · RUN · LIVE**
+`python3 build_content_regions.py` on `incline32`, no SLURM, 1 min 43 s. Inputs: `LCS/target_pmcids.txt`
+(46,241; 46,177 have a text) and `LCS/pure_text_corpus/`. Output `PP/content_regions_v2.csv`, 46,177 rows:
+`ok` 41,243, `no_closing_heading` 2,796, `headingless` 1,635, `no_end_marker` 503; start rule
+Introduction 38,179, divider 7,998; 9,807 articles with at least one extra region (Supplementary 3,216,
+Ethics 7,269). Downstream stages P1–G3 not re-run. Deviation D8.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

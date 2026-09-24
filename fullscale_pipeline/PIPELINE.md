@@ -37,8 +37,8 @@ found · `NOT-BUILT` / `NOT-RUN` not yet done.
 | R1 | PMC ID query (Entrez esearch by month, then esummary) | `python3 -u query_pmc_entrez.py` (no SLURM; run under `nohup`) | NCBI Entrez, `db=pmc`, filter `open access` | `LCS/target_pmcids.txt`, `LCS/target_metadata.json` | 2026-09-23 (46,241 IDs); earlier 2026-05-13 (34,800) | DONE-current |
 | R2 | Full-text fetch, first pass | `python3 fetch_s3_pmc.sh` — **a Python file despite the `.sh` name**; running it with `bash` fails | `LCS/target_pmcids.txt`; `s3://pmc-oa-opendata/<PMCID>.<v>/<PMCID>.<v>.txt`, v in 1..4 | `LCS/pure_text_corpus/<PMCID>.txt` | 2026-05-09 (34,398 of 34,453) | DONE-stale (bucket versions outside 1–4 are missed, §5 D4) |
 | R3 | Delta fetch: set difference, then fetch only missing | `python3 isolate_delta.py`, then `sbatch submit_delta_fetch.sh` (runs `fetch_delta_pmc.py`) | `LCS/target_pmcids.txt`, `LCS/pure_text_corpus/` | `LCS/delta_pmcids.txt`, `LCS/pure_text_corpus/` | 2026-05-14 (402 IDs); 2026-09-24 job 21295326 (11,555 IDs, 11,491 fetched) | DONE-current (64 targets still missing) |
-| P0 | Section-sequence and content-boundary analysis | **script not found** | presumably `LCS/pure_text_corpus/` | `PP/sequence_metadata_relaxed.csv` (31,511 data rows), plus `sequence_metadata.csv`, `full_sequence_mapping.txt`, `missing_reference_sequences.txt`, `reference_aliases_full.txt` | 2026-05-14/15 [MTIME] | **GAP** |
-| P1 | Citation masking (regex; citations become `__CITE_<pmcid>_NNN__`) inside the content boundaries only | `nohup python3 citation_standartization_soft_masking.py` (an sbatch wrapper `.sh` exists but no SLURM output from it exists) | `PP/sequence_metadata_relaxed.csv`, `LCS/pure_text_corpus/` | `LCS/masked_corpus_v1/` (28,284 files), `PP/citation_vault_light_masking_v1.jsonl` | 2026-05-16 | DONE-stale |
+| P0 | Content regions: which lines of each text are analysed (start, end, extra whitelisted regions) | `python3 pmc_preprocessing/build_content_regions.py` (rebuilt 2026-09-24, D8) | `LCS/target_pmcids.txt`, `LCS/pure_text_corpus/` | `PP/content_regions_v2.csv` (46,177 rows; 41,243 with `include`=1). Earlier May generator lost; its outputs `PP/sequence_metadata_relaxed.csv` (31,511 rows), `sequence_metadata.csv`, `full_sequence_mapping.txt`, `missing_reference_sequences.txt`, `reference_aliases_full.txt` remain on disk | 2026-09-24 21:56 [LOG] | DONE-current (P1 onward still read the May CSV) |
+| P1 | Citation masking (regex; citations become `__CITE_<pmcid>_NNN__`) inside the content boundaries only | `nohup python3 citation_standartization_soft_masking.py` (an sbatch wrapper `.sh` exists but no SLURM output from it exists) | `PP/sequence_metadata_relaxed.csv` (to be switched to `PP/content_regions_v2.csv`, `include`=1), `LCS/pure_text_corpus/` | `LCS/masked_corpus_v1/` (28,284 files), `PP/citation_vault_light_masking_v1.jsonl` | 2026-05-16 | DONE-stale |
 | P2 | Sentence split (sciSpaCy `en_core_sci_sm`), focal-word regex, keep hit sentence ±1 | `nohup python3 focal_window_extraction.py` | `LCS/masked_corpus_v1/` | `LCS/focal_extractions_v1.jsonl` (22,795 documents) | 2026-05-16; **script edited 2026-09-23, not re-run** | DONE-stale |
 | P2d | Diagnostic: why documents produced no focal window | `python3 exclusion_diagnostics.py` | P0 csv, `LCS/pure_text_corpus/`, `LCS/focal_extractions_v1.jsonl` | `PP/exclusion_report.csv` (5,489 rows) | 2026-05-17 | DONE (diagnostic, not a chain input; uses an outdated hardcoded word list) |
 | P3 | Inventory of citation tokens found inside the extracted windows | `python3 citation_resolution_1_inventory.py` | `LCS/focal_extractions_v1.jsonl`, `PP/citation_vault_light_masking_v1.jsonl` | `PP/api_inventory_target.json` (13,271 documents) | 2026-05-18 | DONE-stale |
@@ -86,6 +86,7 @@ R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
 | Full texts on disk | 46,242 | 46,177 of the current targets, plus 65 files not in the current list; 34,751 before the 2026-09-24 delta |
 | Current targets without a text | 64 | 22 exist in the bucket under version numbers outside 1–4; 42 have no folder in the bucket [checked with `aws s3 ls`] |
 | Rows in P0 csv | 31,511 | covers only the May-era texts |
+| Rows in `content_regions_v2.csv` (P0, 2026-09-24) | 46,177 | `include`=1: 41,243; no closing heading 2,796; headingless 1,635; no end marker 503 |
 | Documents masked (P1) | 28,284 | rows with both content boundaries |
 | Lost between texts and P1 | 6,467 | 34,751 − 28,284 `[DERIVED]`: 3,240 without a P0 row plus 3,227 without boundaries |
 | Documents with focal windows (P2) | 22,795 | 5,489 without = exactly the rows of `exclusion_report.csv` |
@@ -144,12 +145,12 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 | D5 | 2026-09-24 | New SLURM wrapper `submit_delta_fetch.sh` for the delta fetch; the older wrapper `run_extraction.sh` runs a different, crashed prototype and must not be used. | R3 |
 | D6 | 2026-05-23 (historical) | Graphbrain parse changed from v1 (no provenance) to v2 (`('source', pmcid, main_edge)`). | G2 |
 | D7 | 2026-05-20 (historical) | Coreference filter drops documents whose focal word vanished; patched by restoring them (P7). | P6, P7 |
+| D8 | 2026-09-24 | P0 rebuilt as `build_content_regions.py` (new output `content_regions_v2.csv`; May CSV kept). Start = first Introduction heading, else the `U+009F`-framed `=` divider. End = first back-matter heading after the last body-type heading, else References, else end of file. Window 2+ = whitelisted Supplementary Information (prose only) and Ethics statements, same PMCID. Reason: the May end rule cut articles short (Supplementary Information inside the abstract block; Ethical Considerations inside Methods). | P0; P1 onward stale |
 
 ## 6. Known gaps and staleness (read before trusting any downstream number)
 
-1. **P0 has no generating code.** Only consumers (`P1`, `P2d`, `verify_boundaries.py`,
-   `fetch_article_types.py`) reference `sequence_metadata_relaxed.csv`. Follow-up: rebuild it with a
-   preserved script; the content-end rule is to be redefined first.
+1. **The May P0 generator was lost** (only consumers reference `sequence_metadata_relaxed.csv`). P0 was
+   rebuilt on 2026-09-24 (D8). The May CSV and everything built from it (P1 onward) remain in place.
 2. **Everything from P1 onward has run only on the May-era subset.** The ~11.5k newly fetched texts
    and the 2026-09 list have never been through P0–G3.
 3. **G3 predates its input.** All 50 curated databases (2026-05-30) are older than the raw v2
@@ -168,10 +169,9 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 9. **Figure and table lines must be removed in preprocessing (planned, flagged 2026-09-24).**
    Captions and labels such as `Fig. 1`, `Table 2` and table cell fragments occur as heading-like
    lines in the texts. No stage removes them yet; add the step to P1/P2 before the next full run.
-10. **The May content-end rule cuts many articles short `[DERIVED]`.** It places the end at the first
-    back-matter-like heading, which for journals that put Supplementary Information in the abstract
-    block or Ethical Considerations inside Methods falls before the real body ends. The rule is to be
-    redefined together with P0 (item 1).
+10. **The May content-end rule cut many articles short `[DERIVED]`;** fixed in the rebuilt P0 (D8), but
+    P1 onward still use the May boundaries and must be re-run from P1 on `content_regions_v2.csv`
+    (`include`=1).
 
 ## 7. Environment
 
@@ -205,7 +205,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | R1 | `export NCBI_API_KEY=<key>; nohup python3 -u query_pmc_entrez.py > <log> 2>&1 &` | `[LOG]` `pmc_metadata_log.txt` (May); session log 2026-09-23 |
 | R2 | `nohup python3 fetch_s3_pmc.sh > LCS/modern_download.log 2>&1 &` | `[LOG]` |
 | R3 | `python3 isolate_delta.py` then `sbatch submit_delta_fetch.sh` | `[LOG]` `slurm-21295326.out` |
-| P0 | unknown | gap |
+| P0 | `python3 pmc_preprocessing/build_content_regions.py` (writes `PP/content_regions_v2.csv`; refuses to overwrite) | `[LOG]` RL-025 |
 | P1 | `nohup python3 pmc_preprocessing/citation_standartization_soft_masking.py > PP/masking_execution.log 2>&1 &` | `[LOG]` |
 | P2 | `nohup python3 pmc_preprocessing/focal_window_extraction.py > PP/extraction.log 2>&1 &` | `[LOG]` |
 | P2d | `python3 pmc_preprocessing/exclusion_diagnostics.py` | `[MTIME]` |
@@ -224,6 +224,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `isolate_delta.py` | 8b3877541844 | 2026-05-14 01:39 |
 | `fetch_delta_pmc.py` | b620c1b961d8 | 2026-05-14 15:38 |
 | `submit_delta_fetch.sh` | 69545e630577 | 2026-09-24 13:15 |
+| `pmc_preprocessing/build_content_regions.py` | 16b485d1f3ea | 2026-09-24 21:56 |
 | `pmc_preprocessing/citation_standartization_soft_masking.py` | 7acf961258e6 | 2026-05-16 01:03 |
 | `pmc_preprocessing/citation_standartization_soft_masking.sh` | dfb1035f90b0 | 2026-05-16 01:05 |
 | `pmc_preprocessing/focal_window_extraction.py` | a8b50a542e10 | 2026-09-23 13:31 |
