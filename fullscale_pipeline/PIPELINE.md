@@ -165,6 +165,13 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
    the May–June runs may have used other versions.
 8. **Time-dependent inputs:** the PMC query result changes over time (65 earlier articles disappeared
    from the re-run); P4 depends on live NCBI records.
+9. **Figure and table lines must be removed in preprocessing (planned, flagged 2026-09-24).**
+   Captions and labels such as `Fig. 1`, `Table 2` and table cell fragments occur as heading-like
+   lines in the texts. No stage removes them yet; add the step to P1/P2 before the next full run.
+10. **The May content-end rule cuts many articles short `[DERIVED]`.** It places the end at the first
+    back-matter-like heading, which for journals that put Supplementary Information in the abstract
+    block or Ethical Considerations inside Methods falls before the real body ends. The rule is to be
+    redefined together with P0 (item 1).
 
 ## 7. Environment
 
