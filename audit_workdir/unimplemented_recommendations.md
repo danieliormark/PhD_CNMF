@@ -63,6 +63,9 @@ traces to a specific citation.
 16. ℓ2,∞ membership error (+ mean row error) for planted-structure tests. *(CLAUDE.md §10)*
 17. Matched cosine similarity between membership matrices, for seed-stability and cross-data
     comparisons. *(CLAUDE.md §10)*
+19. SPA (corner-finding) as an alternative initializer, article-hub-only, not pooled across
+    facets — pooled version rejected as theoretically unsound for heterogeneous communities;
+    realistically a 22k-scale question given toy-corpus article counts. *(CLAUDE.md §10)*
 18. Partial adoption of a Dirichlet(α) mixed-membership draw inside the existing
     degree-preserving planted generator. *(CLAUDE.md §10)*
 

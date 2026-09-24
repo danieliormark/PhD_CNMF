@@ -1347,6 +1347,19 @@ unsuitable here): their first/second-order binarized proximity matrix — confli
 `S_Art_Auth`'s log-damping (ticket 63) by turning many-author articles into co-author cliques,
 and discards relation weights.
 
+**Initialization idea (not an evaluation tool — kept in this subsection for provenance) — SPA
+(Successive Projection Algorithm, corner-finding) as an alternative to NNDSVD, article-hub-only.**
+Discussed 2026-09-24: running SPA across all facets pooled together is **rejected** — there is
+no single meaningful cross-type distance in this heterogeneous model (a word and a university
+meet only through shared community profile, via multiple distinct relation-chains — e.g.
+word→article→journal←authors→university vs. word→article→author→university — never through
+one directly comparable geometric distance). The only form considered viable: run SPA on the
+`art` facet alone (the one facet every relation already routes through), to pick the starting
+communities' pure *articles*, then initialize every other facet as now, by propagation along
+real ties — not by SPA. Even that is speculative and untested; on the toy corpus, T1's 25
+articles for up to K=6 makes it barely testable, so this is realistically a 22k-scale question.
+**Status: proposal only, not built, not scheduled.**
+
 ---
 
 ## 11. chunk12 Facts (upstream data generator)
