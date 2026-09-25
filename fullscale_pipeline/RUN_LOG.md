@@ -227,5 +227,31 @@ API key. Backup first: `LCS/article_blacklist.before_duplicates_v2_20260925.csv`
 authors 31, same authors 22, no PubMed record 15). List now 2,598 rows, all distinct articles. Decisions file:
 `LCS/title_screen/duplicate_decisions_v2.csv`. No later stage reads the blacklist yet.
 
+**RL-040 · 2026-09-25 18:24–18:34 · F1/F2 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/article_blacklist.py` applies every blacklist rule in one command (R1 preprints, R2 paper
+types, R3 no usable type, R4 duplicate screen and pair decisions, R5 comment-like titles) and replaces the six
+scripts of RL-026 to RL-039 and the heading screen. Rules: PIPELINE.md, stage rows F1 and F2. Differences from the
+incremental build, all agreed with the project owner: a preprint is recognised by the header status alone; comment-like
+titles are blacklisted with or without a partner; same or overlapping-author pairs are blacklisted only as definite
+copies (50% shared phrases), the rest are left pending for a test on the focal windows; PubMed types now come from one
+fresh esummary lookup of every article, cached. First version (sha256 `e5d422ede9c3`, 18:24): its output was discarded
+because a generic PubMed "Journal Article" beat a specific Subjects label, contrary to the stated rule (79 type reasons
+differed from the previous list). Corrected version sha256 `27f6f58fec51` (18:34).
+
+**RL-041 · 2026-09-25 18:24–18:36 · F1/F2 · RUN · LIVE**
+`python3 article_blacklist.py --out ../llm_corpus_staging/article_blacklist_consolidated.csv --compare
+../llm_corpus_staging/article_blacklist.csv --workers 8` on `incline`, no SLURM, with the API key. The first run
+built the PubMed cache (45,398 esummary records, about 9 minutes, and 951 efetch records); the corrected run took 92 s
+from the cache. 46,177 articles, 824 title pairs at 0.30 or less, 2,683 blacklisted, 43,494 remaining. By reason:
+preprint 1,475; case report 447; no PubMed record 256 (article level) and 57 (in pairs); comment or reply 194 (in
+pairs) and 83 (unpaired); correction/erratum/retraction 112; guideline/consensus 39; definite copies 13; similar
+introduction 4; retracted-republished 2; address 1. Against the previous list (2,598): 94 only in the old one (90
+same or overlapping-author articles now pending, 4 PubMed changes), 179 only in the new one (83 unpaired comments, 72
+case reports and 20 guideline/consensus items found through the Subjects line, 4 with no PubMed record). 49
+same or overlapping-author pairs are `pending_window_check`. The output was then renamed to
+`LCS/article_blacklist.csv`; the previous list is kept as `LCS/article_blacklist.previous_incremental_20260925.csv`.
+Other outputs: `LCS/blacklist_decisions.csv`, `LCS/blacklist_summary.json`, `LCS/blacklist_diff.csv`,
+`LCS/blacklist_cache/`. No later stage reads the blacklist yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
