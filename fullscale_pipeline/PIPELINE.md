@@ -209,13 +209,18 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     id: of 63,473 hashed tokens in the May dictionary, 49,716 (78%) share a hash id with another article (`(1)` is shared
     by 1,271 articles). In the factorisation this would create shared cited works that do not exist. P1 and P4 must be
     rebuilt and tested before the whitelisted corpus goes through them.
+17. **The environment cannot run graphbrain or spaCy as it stands `[DERIVED]`.** `tensor_env` has numpy 2.2.x, installed on
+    2026-07-11, while spaCy 3.4.4 and thinc 8.1.12 (installed 2026-05-16, before the graphbrain runs G2 and G3) need
+    numpy 1.x; importing spaCy fails with a binary incompatibility. The May runs therefore used a different numpy. G2 and
+    G3 cannot be rerun in this environment without pinning numpy below 2 (a separate environment is safer). A test on
+    2026-09-25 used numpy 1.26.4 from a temporary folder, without changing `tensor_env`.
 
 ## 7. Environment
 
 Conda environment `tensor_env` (`/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env`), read
 2026-09-24: Python 3.10.20; graphbrain 0.7.0; spaCy 3.4.4 with `en_core_web_trf` 3.4.0 (G2),
 `en_core_web_sm` 3.4.1 (G3), `en_core_sci_sm` 0.5.1 and scispacy 0.5.1 (P2); fastcoref 2.1.6 (P6);
-torch 2.11.0; transformers 4.25.1; numpy 2.2.6; scipy 1.15.3; pandas 2.3.3; rapidfuzz 3.14.5 (added 2026-09-25 with `pip install --no-deps`, F2); awscli 1.44.78 (R2/R3;
+torch 2.11.0; transformers 4.25.1; numpy 2.2.5 (a leftover 2.2.6 record also exists; see §6 item 17); scipy 1.15.3; pandas 2.3.3; rapidfuzz 3.14.5 (added 2026-09-25 with `pip install --no-deps`, F2); awscli 1.44.78 (R2/R3;
 `boto3` is not installed). Cluster: CSF3, partitions `serial` (one core only) and `multicore`; short
 network-only commands (R1, isolate_delta) were run directly on the `incline` login host, which has no
 `sbatch`.
