@@ -325,5 +325,18 @@ Removed: 1,088,039 numeric brackets, 188,086 numeric parentheses, 283,362 parent
 articles cite by superscript); 213,485 narrative citations became tokens. Old P1 outputs and P3 to P5 are untouched. P2 does not read
 the new files yet.
 
+**RL-053 · 2026-09-25 21:15–21:23 · P1 · CODE-CHANGE · LIVE**
+`citation_masking_v2.py` (sha256 now `2d378caabeb6`; RL-051 version `cee75d17e1d4`): a token that touches a letter or digit in the raw text
+gets a space, so it no longer fuses with the next word ("a9761198r25A new", "a13245614r71and"). Found by a line-by-line alignment test of the
+RL-052 outputs (293 of 9.2 million lines were not the raw line with deletions only; 143 articles). Self-test 119 of 119.
+
+**RL-054 · 2026-09-25 21:23–21:29 · P1 · RUN · LIVE**
+`python3 citation_masking_v2.py --workers 8`, 370 s, on `incline`. Same counts as RL-052 (39,299 articles, 47,619 region files, 412,616 cited works;
+deletions and tokens unchanged). The RL-052 outputs were renamed to `*.run2103`; the first run's outputs remain as `*.previous`. Alignment test of
+every masked region against its raw region (read-only): line counts equal in all 47,619; no region ends after its reference heading; the first line
+is identical in all 47,619 regions; the last line is identical in 47,610 and differs by deletions only in 9; of the last non-empty lines 44,111 are
+identical and 3,508 differ by deletions only; 46 of 9.2 million lines are not deletions-only, all of them inserted commas (47) or one curly possessive,
+from tokens joined for a citation with several years. This run supersedes RL-052.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
