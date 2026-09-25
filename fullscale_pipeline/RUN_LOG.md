@@ -151,5 +151,17 @@ chosen by the project owner: correction/erratum/retraction, case report, unclass
 blacklisted (unclassified 1,259, case report 337, correction/erratum/retraction 97, guideline/consensus 21).
 Output `LCS/article_blacklist.csv` (pmcid, title, reason, basis, added). No later stage reads it yet.
 
+**RL-028 · 2026-09-25 13:57 · F1 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/append_blacklist_preprints.py` (sha256 `0b2adc269c48`). Rule: an article is a preprint
+only if its header says `Article version: preprint` AND its journal is a preprint server. Reasons: avoids
+duplicates of published papers; preprint repositories are excluded by agreement with colleagues.
+
+**RL-029 · 2026-09-25 13:57 · F1 · RUN · LIVE**
+`python3 append_blacklist_preprints.py` on `incline`, no SLURM, 35 s. Backup first:
+`LCS/article_blacklist.before_preprints_20260925.csv`. Appended 1,475 rows with reason `preprint` (bioRxiv 657,
+medRxiv 408, ArXiv 222, Research Square 188); none was already on the list. The header status, the journal
+and (for the 1,144 articles with a May lookup) PubMed's Preprint type agree with no exceptions. List now
+3,189 rows, 3,189 distinct articles. No later stage reads it yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

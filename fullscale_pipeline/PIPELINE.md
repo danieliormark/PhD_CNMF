@@ -38,7 +38,7 @@ found · `NOT-BUILT` / `NOT-RUN` not yet done.
 | R2 | Full-text fetch, first pass | `python3 fetch_s3_pmc.sh` — **a Python file despite the `.sh` name**; running it with `bash` fails | `LCS/target_pmcids.txt`; `s3://pmc-oa-opendata/<PMCID>.<v>/<PMCID>.<v>.txt`, v in 1..4 | `LCS/pure_text_corpus/<PMCID>.txt` | 2026-05-09 (34,398 of 34,453) | DONE-stale (bucket versions outside 1–4 are missed, §5 D4) |
 | R3 | Delta fetch: set difference, then fetch only missing | `python3 isolate_delta.py`, then `sbatch submit_delta_fetch.sh` (runs `fetch_delta_pmc.py`) | `LCS/target_pmcids.txt`, `LCS/pure_text_corpus/` | `LCS/delta_pmcids.txt`, `LCS/pure_text_corpus/` | 2026-05-14 (402 IDs); 2026-09-24 job 21295326 (11,555 IDs, 11,491 fetched) | DONE-current (64 targets still missing) |
 | P0 | Content regions: which lines of each text are analysed (start, end, extra whitelisted regions) | `python3 pmc_preprocessing/build_content_regions.py` (rebuilt 2026-09-24, D8) | `LCS/target_pmcids.txt`, `LCS/pure_text_corpus/` | `PP/content_regions_v2.csv` (46,177 rows; 41,243 with `include`=1). Earlier May generator lost; its outputs `PP/sequence_metadata_relaxed.csv` (31,511 rows), `sequence_metadata.csv`, `full_sequence_mapping.txt`, `missing_reference_sequences.txt`, `reference_aliases_full.txt` remain on disk | 2026-09-24 21:56 [LOG] | DONE-current (P1 onward still read the May CSV) |
-| F1 | Article blacklist: articles removed from the analysis, one row each with reason (batch 1: paper type; later batches: duplicates, manual) | `python3 pmc_preprocessing/build_article_blacklist.py` (refuses to overwrite; later batches append rows with their own reason) | `LCS/target_pmcids.txt`, `LCS/target_metadata.json`, `LCS/pure_text_corpus/` (Subjects line), `PP/sequence_metadata_typed_v2.csv` (May PubMed types) | `LCS/article_blacklist.csv` (1,714 rows: unclassified 1,259, case report 337, correction/erratum/retraction 97, guideline/consensus 21) | 2026-09-25 13:46 [LOG] | DONE-current (batch 1; not yet applied by any later stage) |
+| F1 | Article blacklist: articles removed from the analysis, one row per article and reason (batch 1: paper type; batch 2: preprints; later batches: duplicates, manual) | `python3 pmc_preprocessing/build_article_blacklist.py` (batch 1, refuses to overwrite), then `python3 pmc_preprocessing/append_blacklist_preprints.py` (batch 2, backs up and appends) | `LCS/target_pmcids.txt`, `LCS/target_metadata.json`, `LCS/pure_text_corpus/` (Subjects line, Article version line), `PP/sequence_metadata_typed_v2.csv` (May PubMed types) | `LCS/article_blacklist.csv` (3,189 rows: preprint 1,475, unclassified 1,259, case report 337, correction/erratum/retraction 97, guideline/consensus 21); backup of batch 1 `LCS/article_blacklist.before_preprints_20260925.csv` | 2026-09-25 13:46 and 13:57 [LOG] | DONE-current (not yet applied by any later stage) |
 | P1 | Citation masking (regex; citations become `__CITE_<pmcid>_NNN__`) inside the content boundaries only | `nohup python3 citation_standartization_soft_masking.py` (an sbatch wrapper `.sh` exists but no SLURM output from it exists) | `PP/sequence_metadata_relaxed.csv` (to be switched to `PP/content_regions_v2.csv`, `include`=1), `LCS/pure_text_corpus/` | `LCS/masked_corpus_v1/` (28,284 files), `PP/citation_vault_light_masking_v1.jsonl` | 2026-05-16 | DONE-stale |
 | P2 | Sentence split (sciSpaCy `en_core_sci_sm`), focal-word regex, keep hit sentence ±1 | `nohup python3 focal_window_extraction.py` | `LCS/masked_corpus_v1/` | `LCS/focal_extractions_v1.jsonl` (22,795 documents) | 2026-05-16; **script edited 2026-09-23, not re-run** | DONE-stale |
 | P2d | Diagnostic: why documents produced no focal window | `python3 exclusion_diagnostics.py` | P0 csv, `LCS/pure_text_corpus/`, `LCS/focal_extractions_v1.jsonl` | `PP/exclusion_report.csv` (5,489 rows) | 2026-05-17 | DONE (diagnostic, not a chain input; uses an outdated hardcoded word list) |
@@ -87,7 +87,7 @@ R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
 | Full texts on disk | 46,242 | 46,177 of the current targets, plus 65 files not in the current list; 34,751 before the 2026-09-24 delta |
 | Current targets without a text | 64 | 22 exist in the bucket under version numbers outside 1–4; 42 have no folder in the bucket [checked with `aws s3 ls`] |
 | Rows in P0 csv | 31,511 | covers only the May-era texts |
-| Blacklisted by paper type (F1, 2026-09-25) | 1,714 | of 46,177 texts; the list is meant to grow |
+| Blacklisted (F1, 2026-09-25) | 3,189 | of 46,177 texts: paper type 1,714, preprints 1,475; the list is meant to grow |
 | Rows in `content_regions_v2.csv` (P0, 2026-09-24) | 46,177 | `include`=1: 41,243; no closing heading 2,796; headingless 1,635; no end marker 503 |
 | Documents masked (P1) | 28,284 | rows with both content boundaries |
 | Lost between texts and P1 | 6,467 | 34,751 − 28,284 `[DERIVED]`: 3,240 without a P0 row plus 3,227 without boundaries |
@@ -211,7 +211,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | R1 | `export NCBI_API_KEY=<key>; nohup python3 -u query_pmc_entrez.py > <log> 2>&1 &` | `[LOG]` `pmc_metadata_log.txt` (May); session log 2026-09-23 |
 | R2 | `nohup python3 fetch_s3_pmc.sh > LCS/modern_download.log 2>&1 &` | `[LOG]` |
 | R3 | `python3 isolate_delta.py` then `sbatch submit_delta_fetch.sh` | `[LOG]` `slurm-21295326.out` |
-| F1 | `python3 pmc_preprocessing/build_article_blacklist.py` | `[LOG]` RL-027 |
+| F1 | `python3 pmc_preprocessing/build_article_blacklist.py`, then `python3 pmc_preprocessing/append_blacklist_preprints.py` | `[LOG]` RL-027, RL-029 |
 | P0 | `python3 pmc_preprocessing/build_content_regions.py` (writes `PP/content_regions_v2.csv`; refuses to overwrite) | `[LOG]` RL-025 |
 | P1 | `nohup python3 pmc_preprocessing/citation_standartization_soft_masking.py > PP/masking_execution.log 2>&1 &` | `[LOG]` |
 | P2 | `nohup python3 pmc_preprocessing/focal_window_extraction.py > PP/extraction.log 2>&1 &` | `[LOG]` |
@@ -231,6 +231,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `isolate_delta.py` | 8b3877541844 | 2026-05-14 01:39 |
 | `fetch_delta_pmc.py` | b620c1b961d8 | 2026-05-14 15:38 |
 | `submit_delta_fetch.sh` | 69545e630577 | 2026-09-24 13:15 |
+| `pmc_preprocessing/append_blacklist_preprints.py` | 0b2adc269c48 | 2026-09-25 13:57 |
 | `pmc_preprocessing/build_article_blacklist.py` | b6b7ccc67a19 | 2026-09-25 13:46 |
 | `pmc_preprocessing/build_content_regions.py` | 16b485d1f3ea | 2026-09-24 21:56 |
 | `pmc_preprocessing/citation_standartization_soft_masking.py` | 7acf961258e6 | 2026-05-16 01:03 |
