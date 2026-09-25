@@ -197,5 +197,23 @@ blacklist, 43,921 with a usable title. 825 pairs at normalised distance 0.30 or 
 0.05: 83; up to 0.10: 134; up to 0.15: 235; up to 0.20: 319; up to 0.25: 476). 101 clusters (219 articles) at 0.10
 or less. Random pairs: median distance 0.76, lowest 1% at 0.66. No article was blacklisted from this result.
 
+**RL-036 · 2026-09-25 14:36 · F2 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/resolve_duplicate_pairs.py` (sha256 `06b6bc5a0975`). Rules by the project owner: keep
+originals and blacklist comments and replies; blacklist both members when authors are the same or partly
+overlapping; blacklist articles with no PubMed record; erratum and retracted-and-republished links blacklisted;
+for different authors, compare the openings and blacklist both members at low distance. "Blacklist" and
+"remove" mean the same. Two dry runs preceded the apply run; they changed the rules once (a PubMed type alone
+counts as a comment signal only when the titles are within 0.15) and added title patterns.
+
+**RL-037 · 2026-09-25 14:37 · F2 · RUN · LIVE**
+`python3 resolve_duplicate_pairs.py --apply --intro-threshold 0.5` on `incline`, no SLURM, 18 s, with the API key
+(PubMed efetch, 6 requests). Backup first: `LCS/article_blacklist.before_duplicates_20260925.csv`. 825 pairs from
+the title screen: comment or reply 232, no PubMed record 29, different authors 25, same authors 16, overlapping
+authors 11, retracted-republished 1, no signal 511 (series and shared templates, left alone). Different-author
+opening distances: 0.40, 0.41, then 0.70 and above; threshold 0.5 blacklisted two pairs (conference-abstract
+editions). Appended 293 rows: comment_or_reply 194, no_pubmed_record 42, same_authors 29, overlapping_authors 22,
+similar_introduction 4, retracted_republished_or_reprint 2. List now 2,530 rows, all distinct articles.
+Decisions file: `LCS/title_screen/duplicate_decisions_v1.csv`. No later stage reads the blacklist yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
