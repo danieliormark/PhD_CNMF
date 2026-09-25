@@ -215,6 +215,10 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     numpy 1.x; importing spaCy fails with a binary incompatibility. The May runs therefore used a different numpy. G2 and
     G3 cannot be rerun in this environment without pinning numpy below 2 (a separate environment is safer). A test on
     2026-09-25 used numpy 1.26.4 from a temporary folder, without changing `tensor_env`.
+18. **Superscript citations are not yet handled in P1 (tested 2026-09-25, not built in).** In the texts they are digits glued
+    to a word ("development1", "models1,2"); graphbrain keeps them as separate atoms (`development1/Cc.s`), so they must be
+    removed before parsing. An experimental rule (outside the pipeline) scored 31 of 33 hard cases with no false deletion,
+    and 40 of 40 random deletions in real prose were true citations; it awaits the project owner's decision.
 
 ## 7. Environment
 
@@ -276,7 +280,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `pmc_preprocessing/article_blacklist.py` | 27f6f58fec51 | 2026-09-25 18:34 |
 | `pmc_preprocessing/author_rules_expansion.py` | 54ac879abe13 | 2026-09-25 18:57 |
 | `pmc_preprocessing/build_exclusion_list.py` | fb8362059530 | 2026-09-25 19:06 |
-| `pmc_preprocessing/citation_masking_v2.py` | 4b1914d65aa6 | 2026-09-25 20:04 |
+| `pmc_preprocessing/citation_masking_v2.py` | 8e468a30f3ea | 2026-09-25 20:25 |
 | `pmc_preprocessing/build_content_regions.py` | 16b485d1f3ea | 2026-09-24 21:56 |
 | `pmc_preprocessing/citation_standartization_soft_masking.py` | 7acf961258e6 | 2026-05-16 01:03 |
 | `pmc_preprocessing/citation_standartization_soft_masking.sh` | dfb1035f90b0 | 2026-05-16 01:05 |

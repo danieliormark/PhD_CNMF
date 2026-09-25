@@ -291,5 +291,12 @@ author-year groups; 575 narrative citations became tokens; 1,710 cited works in 
 the visible reference list (17 of the 200 articles have no visible list); 250 matches ambiguous. Not run on the
 whole whitelist.
 
+**RL-048 · 2026-09-25 20:25 · P1 · CODE-CHANGE · LIVE**
+`citation_masking_v2.py` edited (sha256 now `8e468a30f3ea`; RL-046 version `4b1914d65aa6`). New narrative forms become one
+token: an author followed by a journal and a year ("Dong et al. (Eur J Radiol, 2026)", only when a journal-like word is
+present), and "et al." or multi-author names followed by a reference number ("Dong et al. [12]", number = position in
+the reference list). Self-test 81 of 81. A rerun on the same 200-article sample in a scratch folder gave 1,222 narrative
+tokens (575 before), of which 477 cited works came from the "Author [n]" form. Still not run on the whole whitelist.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
