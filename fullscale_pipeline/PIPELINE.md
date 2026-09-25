@@ -124,6 +124,13 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
   eight download threads are I/O-bound.
 - **P1.** Masks numeric brackets, numeric parentheses, verbal parentheses and active author–year
   forms, only between `content_start_line` and `content_end_line`; deletes and rewrites the vault.
+- **P1 v2 (2026-09-25).** One masked file per region of each whitelisted article: `<PMCID>.txt` is the main window and
+  `<PMCID>.r2.txt`, `.r3.txt` ... are the extra windows (supplementary information with prose, ethics statements). 39,299
+  articles give 47,619 files: 7,839 articles have an `r2` window, 473 an `r3`, 5 an `r4` and 3 an `r5`. Every file of an article
+  belongs to that article: the PMCID in the name is the link, and the citation numbers `a<PMCID digits>r<n>` are shared across
+  its windows. **The focal-window stage has to read the extra windows together with the main file and tag every extracted piece
+  with its region.** Masked files keep one line per raw line (checked line by line), but tabs are collapsed to spaces, so table
+  rows can no longer be recognised in them; a later step must look for tab-separated cells in the raw text at the same line.
 - **P2.** Deletes and rewrites `focal_extractions_v1.jsonl` (fixed name). Word list is hardcoded.
 - **P4.** Numeric citations are resolved by position in the article's `<ref>` list; author–year
   citations by the first reference with the same year (a crude proxy). No NCBI key is used.
