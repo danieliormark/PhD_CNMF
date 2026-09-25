@@ -179,6 +179,15 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     included articles contain a References heading, and 411 extra windows in articles without a
     References heading run to end of file. Fix pending in `build_content_regions.py` (cut each region at the
     first References heading; end extra windows at the next heading); P0 is to be re-run afterwards.
+12. **Non-prose text must be removed before graphbrain (planned, decided 2026-09-25).** Table rows (lines with
+    tab characters), LaTeX or formula code (for example `\documentclass` preambles) and number-only phrases
+    (equations) cannot be read by graphbrain. No stage removes them yet; add the step to P1/P2 before the next full
+    run. The removal rules are still to be written.
+13. **Text-overlap test for the article blacklist moves to the focal windows (planned, decided 2026-09-25).**
+    Pairs with same or partly overlapping authors and titles within 0.30, other than clear copies, are to be compared
+    on the context windows around the focal terms (after P2). Both articles are then blacklisted if more than 10% of
+    the shorter window's 8-word phrases are shared; shared text unrelated to LLMs does not count. Until then these
+    pairs (43 today) stay in the corpus.
 
 ## 7. Environment
 
