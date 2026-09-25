@@ -163,5 +163,28 @@ medRxiv 408, ArXiv 222, Research Square 188); none was already on the list. The 
 and (for the 1,144 articles with a May lookup) PubMed's Preprint type agree with no exceptions. List now
 3,189 rows, 3,189 distinct articles. No later stage reads it yet.
 
+**RL-030 · 2026-09-25 14:02 · F1 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/fetch_pubmed_types_unclassified.py` (sha256 `140dd1cccd80`): reads the PMID from each
+text header and queries PubMed esummary for publication types. Key read from `NCBI_API_KEY`, not stored.
+No contact e-mail is sent; only a tool name.
+
+**RL-031 · 2026-09-25 14:02:41–14:02:52 · F1 · RUN · LIVE**
+`python3 fetch_pubmed_types_unclassified.py` on `incline`, no SLURM, with the API key, 6 requests of 200.
+Input: the 1,098 blacklisted "unclassified" articles never looked up in May. 1,006 had a PMID in the header and
+all returned publication types; 92 had no PMID. Output `PP/pubmed_types_unclassified_20260925.csv`.
+
+**RL-032 · 2026-09-25 14:03 · F1 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/refine_blacklist_unclassified.py` (sha256 `6c4defcb9e3e`). Rules by the project owner:
+no PubMed record or type Address stay on the list; blacklisted categories stay with an updated reason; any other
+type is admissible and is removed.
+
+**RL-033 · 2026-09-25 14:03 · F1 · RUN · LIVE**
+`python3 refine_blacklist_unclassified.py` on `incline`, 2 s. Backup first:
+`LCS/article_blacklist.before_unclassified_refine_20260925.csv`. Of 1,259 unclassified: 952 admissible and removed
+(research article 721, review 172, editorial 28, letter 13, systematic review 11, perspective/news 6, protocol 1;
+written to `LCS/article_blacklist_removed_20260925.csv`); 252 stay as `no_pubmed_record` (160 from the May
+lookup plus 92 with no PMID in the header); 40 stay as `case_report`; 14 as `correction_erratum_retraction`;
+1 as `address`. List now 2,237 rows, all distinct articles. No later stage reads it yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
