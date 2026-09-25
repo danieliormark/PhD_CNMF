@@ -42,7 +42,7 @@ found · `NOT-BUILT` / `NOT-RUN` not yet done.
 | F2 | Duplicate screen (rule R4), run inside the same command as F1: title Levenshtein distance of 0.30 or less among the articles not blacklisted by R1 to R3; per pair, in order: comment or reply, erratum or republication link, no PubMed record, authors (same or partly overlapping: definite copy if at least 50% of the shorter text's 8-word phrases are shared; different authors within title distance 0.15: opening-text distance of 0.5 or less). Both members are blacklisted except in the comment, erratum and no-record cases | same command as F1 | as F1, plus PubMed efetch for the 951 articles in pairs | 824 pairs in `LCS/blacklist_decisions.csv`; 49 same or overlapping-author pairs marked `pending_window_check` (§6 item 13) | 2026-09-25 18:34 [LOG] | DONE-current |
 | F3 | Author-based blacklist expansion, run after F1/F2 and appended to the same list (to be folded into `article_blacklist.py` later; re-running that script rebuilds the list without these rows, so F3 must then be run again). Our theory concerns scientists as authors, so blacklisted: book chapters whose author block lists the volume editors (header Journal ID is an ISBN), articles for which PubMed lists no authors, articles whose PubMed authors are only group or consortium names, and articles with no PubMed record and no author line in the header. One-author articles are kept | `python3 pmc_preprocessing/author_rules_expansion.py` (dry run) then `... --apply` (backs up and appends; PubMed cache in `LCS/blacklist_cache/pubmed_esummary_authors.json`, key from `NCBI_API_KEY`) | `LCS/article_blacklist.csv`, `LCS/target_metadata.json`, `LCS/pure_text_corpus/` (Journal ID, PMID, author lines), PubMed esummary | 116 rows appended to `LCS/article_blacklist.csv` (no authors in PubMed 50, volume-editor book chapters 33, group-only 21, no author line in the header 12); `LCS/author_rules_decisions.csv`; backup `LCS/article_blacklist.before_author_rules_20260925.csv` | 2026-09-25 18:58 [LOG] | DONE-current |
 | F4 | Final exclusion list and whitelist: combines the article blacklist (F1 to F3) with the structural status of P0 (headingless, no Results/Discussion/Conclusion heading, no end marker) into one product; rerun after any change to the blacklist or to P0. The structural policy for articles with headings but no closing section is still open and currently excludes them (`STRUCTURAL` in the script) | `python3 pmc_preprocessing/build_exclusion_list.py` (`--replace` to rebuild; the old files are kept as `.previous`) | `LCS/article_blacklist.csv`, `PP/content_regions_v2.csv`, `LCS/target_metadata.json` | `LCS/article_exclusions.csv` (6,878 rows: blacklist 2,799, structure 4,079), `LCS/article_whitelist.txt` (39,299 PMCIDs) | 2026-09-25 19:07 [LOG] | DONE-current; P1 onward to read the whitelist |
-| P1 | Citation masking (regex; citations become `__CITE_<pmcid>_NNN__`) inside the content boundaries only **Rebuilt 2026-09-25 as `citation_masking_v2.py` (D9); tested on 200 articles, not yet run at scale.** | `nohup python3 citation_standartization_soft_masking.py` (an sbatch wrapper `.sh` exists but no SLURM output from it exists) | `PP/sequence_metadata_relaxed.csv` (to be switched to the boundaries of `PP/content_regions_v2.csv` and the articles of `LCS/article_whitelist.txt`), `LCS/pure_text_corpus/` | `LCS/masked_corpus_v1/` (28,284 files), `PP/citation_vault_light_masking_v1.jsonl` | 2026-05-16 | DONE-stale |
+| P1 | Citation masking (regex; citations become `__CITE_<pmcid>_NNN__`) inside the content boundaries only **Rebuilt 2026-09-25 as `citation_masking_v2.py` (D9) and run on the whole whitelist (RL-052): 39,299 articles, `LCS/masked_corpus_v2/` (47,619 region files, line counts unchanged), `LCS/citation_dictionary_v2.jsonl` (412,616 cited works, 90% matched to the visible reference list), `citation_marks_v2.jsonl`, `superscript_residuals_v2.jsonl`.** | `nohup python3 citation_standartization_soft_masking.py` (an sbatch wrapper `.sh` exists but no SLURM output from it exists) | `PP/sequence_metadata_relaxed.csv` (to be switched to the boundaries of `PP/content_regions_v2.csv` and the articles of `LCS/article_whitelist.txt`), `LCS/pure_text_corpus/` | `LCS/masked_corpus_v1/` (28,284 files), `PP/citation_vault_light_masking_v1.jsonl` | 2026-05-16 | DONE-current (v2) |
 | P2 | Sentence split (sciSpaCy `en_core_sci_sm`), focal-word regex, keep hit sentence ±1 | `nohup python3 focal_window_extraction.py` | `LCS/masked_corpus_v1/` | `LCS/focal_extractions_v1.jsonl` (22,795 documents) | 2026-05-16; **script edited 2026-09-23, not re-run** | DONE-stale |
 | P2d | Diagnostic: why documents produced no focal window | `python3 exclusion_diagnostics.py` | P0 csv, `LCS/pure_text_corpus/`, `LCS/focal_extractions_v1.jsonl` | `PP/exclusion_report.csv` (5,489 rows) | 2026-05-17 | DONE (diagnostic, not a chain input; uses an outdated hardcoded word list) |
 | P3 | Inventory of citation tokens found inside the extracted windows **Superseded by the dictionary of cited works written by P1 v2 (D9).** | `python3 citation_resolution_1_inventory.py` | `LCS/focal_extractions_v1.jsonl`, `PP/citation_vault_light_masking_v1.jsonl` | `PP/api_inventory_target.json` (13,271 documents) | 2026-05-18 | DONE-stale |
@@ -92,6 +92,7 @@ R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
 | Rows in P0 csv | 31,511 | covers only the May-era texts |
 | Blacklisted (F1 to F3, 2026-09-25) | 2,799 | of 46,177 texts, leaving 43,378: F1/F2 2,683 and F3 116 (author rules); reasons in the F1 and F3 rows; the list is meant to grow |
 | Whitelist after F4 (2026-09-25) | 39,299 | 46,177 minus 2,799 blacklisted minus 4,079 excluded by P0 structure (no closing heading 2,484, headingless 1,234, no end marker 361); file `LCS/article_whitelist.txt` |
+| Masked by P1 v2 (2026-09-25) | 39,299 articles, 47,619 regions | one masked file per region of every whitelisted article; `LCS/masked_corpus_v2/` |
 | Rows in `content_regions_v2.csv` (P0, 2026-09-24) | 46,177 | `include`=1: 41,243; no closing heading 2,796; headingless 1,635; no end marker 503 |
 | Documents masked (P1) | 28,284 | rows with both content boundaries |
 | Lost between texts and P1 | 6,467 | 34,751 − 28,284 `[DERIVED]`: 3,240 without a P0 row plus 3,227 without boundaries |
@@ -153,6 +154,7 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 | D7 | 2026-05-20 (historical) | Coreference filter drops documents whose focal word vanished; patched by restoring them (P7). | P6, P7 |
 | D8 | 2026-09-24 | P0 rebuilt as `build_content_regions.py` (new output `content_regions_v2.csv`; May CSV kept). Start = first Introduction heading, else the `U+009F`-framed `=` divider. End = first back-matter heading after the last body-type heading, else References, else end of file. Window 2+ = whitelisted Supplementary Information (prose only) and Ethics statements, same PMCID. Reason: the May end rule cut articles short (Supplementary Information inside the abstract block; Ethical Considerations inside Methods). | P0; P1 onward stale |
 | D9 | 2026-09-25 | P1 rebuilt as `citation_masking_v2.py`. Numeric citations and parenthetical author-year citations are deleted from the text; narrative author-year citations become `a<PMCID digits>r<n>`, with the same n for the same work in an article (its position in the article's reference list when it can be matched, otherwise numbered on from the size of the list); a dictionary of cited works with aliases, mention counts, matched reference text and DOI is written; line breaks are kept. P3 to P5 (citation resolution) are superseded. Reasons: the old masks broke graphbrain parses and over-masked (§6 items 15 and 16), and numeric citations cannot be resolved when the reference list is not visible. Sequel: P2 must read `masked_corpus_v2` and its region files. | P1 to P7 |
+| D10 | 2026-09-25 | P0: extra windows (supplementary, ethics) end at the next heading of any kind, 60 lines after their heading, or the References heading, whichever comes first. Before, they ended only at the next back-matter heading, so an ethics window could run for hundreds of lines (longest 8,679; 973 windows over 60 lines) and, without a References heading, to the end of the file. Main windows, statuses and the whitelist are unchanged (checked for all 46,177 articles); extra windows fell from 10,485 to 9,120. | P0, P1 |
 
 ## 6. Known gaps and staleness (read before trusting any downstream number)
 
@@ -179,10 +181,9 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 10. **The May content-end rule cut many articles short `[DERIVED]`;** fixed in the rebuilt P0 (D8), but
     P1 onward still use the May boundaries and must be re-run from P1 on `content_regions_v2.csv`
     on `content_regions_v2.csv` and the whitelist of F4.
-11. **Reference lists inside rebuilt P0 regions `[DERIVED]`.** In `content_regions_v2.csv`, 93 regions of
-    included articles contain a References heading, and 411 extra windows in articles without a
-    References heading run to end of file. Fix pending in `build_content_regions.py` (cut each region at the
-    first References heading; end extra windows at the next heading); P0 is to be re-run afterwards.
+11. **Windows that ran on past their section (found 2026-09-25, fixed in D10).** Extra supplementary and ethics windows ran on for
+    hundreds of lines and, without a References heading, to the end of the file. Capped in P0 (D10). Most of the "reference lists
+    inside windows" first reported were section titles such as "3.1.2 References" inside the article, not reference lists.
 12. **Non-prose text must be removed before graphbrain (planned, decided 2026-09-25).** Table rows (lines with
     tab characters), LaTeX or formula code (for example `\documentclass` preambles) and number-only phrases
     (equations) cannot be read by graphbrain. No stage removes them yet; add the step to P1/P2 before the next full
@@ -196,14 +197,14 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     authors are only group names, because our theory concerns scientists as authors. Some are relevant to LLM research
     (the three CHART chatbot-reporting papers, the NLLB Team translation paper, the expert-level academic questions
     benchmark). The rows carry the reason `authors:group_only`, so the decision can be reversed by removing them.
-15. **P1 masks many strings that are not citations `[DERIVED]`.** Checked on 47 artificial cases and on the May vault
+15. **P1 masks many strings that are not citations `[DERIVED]`; fixed in the rebuilt P1 (D9), run 2026-09-25.** Checked on 47 artificial cases and on the May vault
     (1,062,412 masks): equation labels and enumerations such as `(1)`, `(2)` (219,600 masks are a single small number in
     parentheses), intervals such as `[0, 1]` (2,353), and parentheses with a year that is a date, a quantity or a sample
     size (32,529 have no author-like name before the year). Superscript numeric citations and `[Author, year]` brackets
     are not masked. A parenthesis holding several citations becomes one token. Numbers in parentheses are a real citation
     style in some articles (for example PMC13121147), so they cannot simply be excluded; the citation style has to be
     detected per article. P1 also collapses all line breaks.
-16. **P4 resolves numeric citations by the wrong index and creates false shared references `[DERIVED]`.**
+16. **P4 resolves numeric citations by the wrong index and creates false shared references `[DERIVED]`; P3 to P5 are superseded by the P1 v2 dictionary (D9).**
     `citation_resolution_2_api.py` takes the running counter in the token (`..._019__`) as the reference number instead of
     the number inside the brackets; among 460,547 tokens of the form `[n]` in the May vault the two agree in 9.8%. Citations
     it cannot resolve get a hash of the raw string, so `(1)` or `[18]` from different articles receive the same reference
@@ -215,10 +216,15 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     numpy 1.x; importing spaCy fails with a binary incompatibility. The May runs therefore used a different numpy. G2 and
     G3 cannot be rerun in this environment without pinning numpy below 2 (a separate environment is safer). A test on
     2026-09-25 used numpy 1.26.4 from a temporary folder, without changing `tensor_env`.
-18. **Superscript citations are not yet handled in P1 (tested 2026-09-25, not built in).** In the texts they are digits glued
-    to a word ("development1", "models1,2"); graphbrain keeps them as separate atoms (`development1/Cc.s`), so they must be
-    removed before parsing. An experimental rule (outside the pipeline) scored 31 of 33 hard cases with no false deletion,
-    and 40 of 40 random deletions in real prose were true citations; it awaits the project owner's decision.
+18. **Superscript citations: handled in P1 v2, weak cases left for post-processing (flagged 2026-09-25).** P1 v2 removes a
+    superscript number glued to a word ("development1", "models1,2", "et al.43") when the evidence is strong (numbers within the
+    reference count, no veto, and an ordinary word in an article that cites by superscript, or "et al.N", or a lower-case word with
+    a period or list before the number); 320,707 removed in 11,956 superscript-style articles. **Not removed, to be handled in
+    post-processing:** weak cases such as "systems3" (an ordinary word plus one number in an article not recognised as
+    superscript-style) and surname plus number ("Hinton25"): 22,625 candidates, the first 20 per article listed in
+    `LCS/superscript_residuals_v2.jsonl` (17,570 rows). Some of them are variables or equation fragments ("equation5", "pred2"), so a
+    review is needed before deleting. Model names (GPT5, Llama3, gpt2) are protected by a name list built from articles that do not
+    cite by superscript.
 
 ## 7. Environment
 
@@ -243,6 +249,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `PP/fetch_article_types.py`, `PP/sequence_metadata_typed*.csv`, `PP/api_fetch*.log` | Side branch (article types); no later stage reads it |
 | `PP/verify_boundaries.py` | Ad hoc check of P0 boundaries |
 | `PP/build_article_blacklist.py`, `append_blacklist_preprints.py`, `fetch_pubmed_types_unclassified.py`, `refine_blacklist_unclassified.py`, `title_levenshtein_duplicates.py`, `resolve_duplicate_pairs.py`, `heading_levenshtein_duplicates.py`; `LCS/article_blacklist.previous_incremental_20260925.csv` with its `.before_*` backups, `article_blacklist_removed_20260925.csv`, `LCS/title_screen/`, `LCS/heading_screen/`, `PP/pubmed_types_unclassified_20260925.csv` | The incremental blacklist build of 2026-09-25 (RL-026 to RL-039) and the heading screen, superseded by the single script `article_blacklist.py` (RL-040, RL-041); kept until their deletion is approved |
+| `LCS/masked_corpus_v2.previous/` and `LCS/citation_*_v2.jsonl.previous`, `superscript_residuals_v2.jsonl.previous`, `citation_masking_v2_summary.json.previous` | The first full run of P1 v2 (20:54), superseded by the run of 21:03 (RL-052) that adds the empty-parenthesis cleanup; kept until deletion is approved |
 | `PG/scripts/02_transformer_node.py`, `submit_array.sh`, `PG/output_sqlite/` | v1 parse (75 GB), superseded by v2 |
 | `PG/scripts/trial_run_v2.py`, `verify_provenance.py`, `verify_v2_provenance.py`, `trial_postprocess.py`, `trial_generational.py`, `PG/curated_sqlite_v2/` | Trial and diagnostic scripts and their outputs |
 
@@ -259,7 +266,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | F1 | `python3 pmc_preprocessing/article_blacklist.py --workers 8` (first run also `--out` and `--compare` to test; refuses to overwrite its output) | `[LOG]` RL-041 |
 | P0 | `python3 pmc_preprocessing/build_content_regions.py` (writes `PP/content_regions_v2.csv`; refuses to overwrite) | `[LOG]` RL-025 |
 | P1 | `nohup python3 pmc_preprocessing/citation_standartization_soft_masking.py > PP/masking_execution.log 2>&1 &` | `[LOG]` |
-| P1 (v2) | `python3 pmc_preprocessing/citation_masking_v2.py --selftest`, then `python3 pmc_preprocessing/citation_masking_v2.py` (needs the P0 fix and the non-prose cleaning first, §6 items 11 and 12) | `[LOG]` RL-047 (test on 200 articles only) |
+| P1 (v2) | `python3 pmc_preprocessing/citation_masking_v2.py --build-lexicon` (once), `--selftest`, then `python3 pmc_preprocessing/citation_masking_v2.py --workers 8` (6 minutes on `incline`; refuses to overwrite its outputs) | `[LOG]` RL-051, RL-052 |
 | P2 | `nohup python3 pmc_preprocessing/focal_window_extraction.py > PP/extraction.log 2>&1 &` | `[LOG]` |
 | P2d | `python3 pmc_preprocessing/exclusion_diagnostics.py` | `[MTIME]` |
 | P3–P5 | `python3 pmc_preprocessing/citation_resolution_{1_inventory,2_api,3_translate}.py` in order | `[LOG]` `phase2.log`, `phase3.log` (P4, P5) |
@@ -280,8 +287,9 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `pmc_preprocessing/article_blacklist.py` | 27f6f58fec51 | 2026-09-25 18:34 |
 | `pmc_preprocessing/author_rules_expansion.py` | 54ac879abe13 | 2026-09-25 18:57 |
 | `pmc_preprocessing/build_exclusion_list.py` | fb8362059530 | 2026-09-25 19:06 |
-| `pmc_preprocessing/citation_masking_v2.py` | 8e468a30f3ea | 2026-09-25 20:25 |
-| `pmc_preprocessing/build_content_regions.py` | 16b485d1f3ea | 2026-09-24 21:56 |
+| `pmc_preprocessing/citation_masking_v2.py` | cee75d17e1d4 | 2026-09-25 21:02 |
+| `pmc_preprocessing/citation_lexicon_v1.json` (input of P1 v2: 15,487 ordinary words, 2,729 names; built by `--build-lexicon`) | da5024dfdaa3 | 2026-09-25 20:37 |
+| `pmc_preprocessing/build_content_regions.py` | 64e959d673a0 | 2026-09-25 20:33 |
 | `pmc_preprocessing/citation_standartization_soft_masking.py` | 7acf961258e6 | 2026-05-16 01:03 |
 | `pmc_preprocessing/citation_standartization_soft_masking.sh` | dfb1035f90b0 | 2026-05-16 01:05 |
 | `pmc_preprocessing/focal_window_extraction.py` | a8b50a542e10 | 2026-09-23 13:31 |

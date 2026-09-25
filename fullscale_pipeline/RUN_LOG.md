@@ -298,5 +298,32 @@ present), and "et al." or multi-author names followed by a reference number ("Do
 the reference list). Self-test 81 of 81. A rerun on the same 200-article sample in a scratch folder gave 1,222 narrative
 tokens (575 before), of which 477 cited works came from the "Author [n]" form. Still not run on the whole whitelist.
 
+**RL-049 · 2026-09-25 20:33 · P0 · CODE-CHANGE · LIVE**
+`build_content_regions.py` (sha256 now `64e959d673a0`; RL-024 version `16b485d1f3ea`): extra windows are capped (next heading of any
+kind, 60 lines after their heading, or the References heading). Reason and effect: PIPELINE.md D10.
+
+**RL-050 · 2026-09-25 20:33–20:36 · P0 · RUN · LIVE**
+`python3 build_content_regions.py` on `incline`, 2 min 22 s. The previous output was first renamed to
+`PP/content_regions_v2.before_region_cap.csv`. 46,177 rows; every column except `regions_json` is identical, so main windows, statuses and
+the whitelist are unchanged (F4 not rerun). `regions_json` changed for 2,637 articles; extra windows 10,485 to 9,120; longest 61 lines.
+
+**RL-051 · 2026-09-25 20:36–21:02 · P1 · CODE-CHANGE · LIVE**
+`citation_masking_v2.py` (sha256 now `cee75d17e1d4`; RL-048 version `8e468a30f3ea`): superscript rule (evidence and vetoes in the
+script's docstring), deletions that keep line breaks (before, 20 of 495 regions lost up to 8 lines), heading lines skipped by the
+superscript rule, removal of empty parentheses left by deleted citations, and a fix for author names starting with letters outside
+Latin-1 (the first full run crashed on "Šaltenis" after 4 seconds; its partial outputs were deleted with the project owner's approval).
+Self-test 116 of 116. New input file `PP/citation_lexicon_v1.json` (sha256 `da5024dfdaa3`, built by `--build-lexicon` in 33 s).
+
+**RL-052 · 2026-09-25 21:03–21:09 · P1 · RUN · LIVE**
+`python3 citation_masking_v2.py --workers 8` on `incline`, no SLURM, 373 s. The previous complete run (20:54–21:00, script sha256
+`81a6ccf60932`, without the empty-parenthesis cleanup) was renamed to `*.previous` and is kept until its deletion is approved. Input:
+`LCS/article_whitelist.txt` (39,299) with `PP/content_regions_v2.csv`. Output in `LCS/`: `masked_corpus_v2/` (47,619 region files, exactly the
+regions P0 defines; 0 regions changed their line count), `citation_dictionary_v2.jsonl` (412,616 cited works; 355,911 of 397,650 matched to the
+visible reference list in articles that have one, 90%; 3,295 articles have no visible list), `citation_marks_v2.jsonl` (283,362 deleted
+parenthetical citations), `superscript_residuals_v2.jsonl` (17,570 weak superscripts for post-processing), `citation_masking_v2_summary.json`.
+Removed: 1,088,039 numeric brackets, 188,086 numeric parentheses, 283,362 parenthetical author-year groups, 320,707 superscripts (11,956
+articles cite by superscript); 213,485 narrative citations became tokens. Old P1 outputs and P3 to P5 are untouched. P2 does not read
+the new files yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
