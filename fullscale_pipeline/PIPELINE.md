@@ -195,6 +195,20 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     authors are only group names, because our theory concerns scientists as authors. Some are relevant to LLM research
     (the three CHART chatbot-reporting papers, the NLLB Team translation paper, the expert-level academic questions
     benchmark). The rows carry the reason `authors:group_only`, so the decision can be reversed by removing them.
+15. **P1 masks many strings that are not citations `[DERIVED]`.** Checked on 47 artificial cases and on the May vault
+    (1,062,412 masks): equation labels and enumerations such as `(1)`, `(2)` (219,600 masks are a single small number in
+    parentheses), intervals such as `[0, 1]` (2,353), and parentheses with a year that is a date, a quantity or a sample
+    size (32,529 have no author-like name before the year). Superscript numeric citations and `[Author, year]` brackets
+    are not masked. A parenthesis holding several citations becomes one token. Numbers in parentheses are a real citation
+    style in some articles (for example PMC13121147), so they cannot simply be excluded; the citation style has to be
+    detected per article. P1 also collapses all line breaks.
+16. **P4 resolves numeric citations by the wrong index and creates false shared references `[DERIVED]`.**
+    `citation_resolution_2_api.py` takes the running counter in the token (`..._019__`) as the reference number instead of
+    the number inside the brackets; among 460,547 tokens of the form `[n]` in the May vault the two agree in 9.8%. Citations
+    it cannot resolve get a hash of the raw string, so `(1)` or `[18]` from different articles receive the same reference
+    id: of 63,473 hashed tokens in the May dictionary, 49,716 (78%) share a hash id with another article (`(1)` is shared
+    by 1,271 articles). In the factorisation this would create shared cited works that do not exist. P1 and P4 must be
+    rebuilt and tested before the whitelisted corpus goes through them.
 
 ## 7. Environment
 
