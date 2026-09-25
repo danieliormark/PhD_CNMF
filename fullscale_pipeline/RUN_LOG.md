@@ -278,5 +278,18 @@ existed only as the `status` and `include` columns of `content_regions_v2.csv`, 
 structure 4,079: no closing heading 2,484, headingless 1,234, no end marker 361); whitelist 39,299. Outputs
 `LCS/article_exclusions.csv` and `LCS/article_whitelist.txt`. Nothing later reads them yet.
 
+**RL-046 · 2026-09-25 20:04 · P1 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/citation_masking_v2.py` (sha256 `4b1914d65aa6`), with a built-in self-test of 68 cases. Rules and
+reasons: PIPELINE.md D9. It replaces `citation_standartization_soft_masking.py` and the citation resolution of P3 to P5
+in the chain; the old scripts and their outputs are untouched.
+
+**RL-047 · 2026-09-25 20:04 · P1 · RUN · LIVE (test only)**
+`python3 citation_masking_v2.py --selftest`: 68 of 68 passed. `python3 citation_masking_v2.py --limit 200 --workers 8
+--outdir <scratch folder>` on `incline`, no SLURM. 200 random whitelist articles; all outputs went to a scratch folder
+outside the RDS directory. Deleted: 5,540 numeric brackets, 1,115 numeric parentheses, 1,419 parenthetical
+author-year groups; 575 narrative citations became tokens; 1,710 cited works in the dictionary, 82% of them matched to
+the visible reference list (17 of the 200 articles have no visible list); 250 matches ambiguous. Not run on the
+whole whitelist.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
