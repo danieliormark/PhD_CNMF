@@ -344,5 +344,18 @@ Deleted, with the project owner's approval, the two superseded complete runs of 
 `citation_dictionary_v2.jsonl`, `citation_marks_v2.jsonl`, `superscript_residuals_v2.jsonl` and `citation_masking_v2_summary.json`. They were replaced
 by the run of RL-054 (21:23) and had no diagnostic value. The final outputs are intact (47,619 masked files). The sizes named earlier in the session were wrong.
 
+**RL-056 · 2026-09-25 21:40–22:14 · P1b · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/nonprose_removal_v1.py` (sha256 `098d19ecbfde`). Rules and reasons: the script's docstring and PIPELINE.md stage row P1b.
+Built from a survey of 500 articles (16% of the main-window lines are table rows) and a small graphbrain probe (a parenthetical such as "(p < 0.05)"
+adds a junk argument to the main relation; "L = a + b" pollutes the subject; a bare "≥" becomes an atom while "at least" parses cleanly).
+Four audit rounds on scratch samples changed the rules: equation-like lines need a real operator ("2-13b-chat" and "Run 2/3" had been blanked),
+scale legends such as "(1=extremely likely)" and "(correct=1)" are kept, decimals without a leading zero ("p < .001") and fit indices (CFI, TLI,
+CMIN/DF, chi-square with degrees of freedom) are removed, and space-free tokens with a Unicode math operator are removed. Self-test 85 of 85.
+
+**RL-057 · 2026-09-25 22:11–22:16 · P1b · RUN · LIVE (tests only)**
+Runs on random samples of the whitelist (300 articles, then three of 600), all outputs in a scratch folder outside the RDS directory. Last sample:
+726 files, 137,439 lines; no line count changed; 0 cleaned lines that are not the masked line with removals only; 17.7% of the lines that mention
+ChatGPT, GPT-4, LLM or BERT changed (mostly table rows and statistics). Not run on the corpus.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
