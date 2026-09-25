@@ -338,5 +338,11 @@ is identical in all 47,619 regions; the last line is identical in 47,610 and dif
 identical and 3,508 differ by deletions only; 46 of 9.2 million lines are not deletions-only, all of them inserted commas (47) or one curly possessive,
 from tokens joined for a citation with several years. This run supersedes RL-052.
 
+**RL-055 · 2026-09-25 · P1 · CLEANUP · LIVE**
+Deleted, with the project owner's approval, the two superseded complete runs of P1 v2 outputs: `LCS/masked_corpus_v2.previous/` (the 20:54 run) and
+`LCS/masked_corpus_v2.run2103/` (the 21:03 run), about 11 GB each, together with the matching `.previous` and `.run2103` copies of
+`citation_dictionary_v2.jsonl`, `citation_marks_v2.jsonl`, `superscript_residuals_v2.jsonl` and `citation_masking_v2_summary.json`. They were replaced
+by the run of RL-054 (21:23) and had no diagnostic value. The final outputs are intact (47,619 masked files). The sizes named earlier in the session were wrong.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
