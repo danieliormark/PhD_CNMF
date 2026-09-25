@@ -141,7 +141,7 @@ output file. `sequence_metadata_relaxed.csv` was not touched. Deviation D8.
 Introduction 38,179, divider 7,998; 9,807 articles with at least one extra region (Supplementary 3,216,
 Ethics 7,269). Downstream stages P1–G3 not re-run. Deviation D8.
 
-**RL-026 · 2026-09-25 13:44 · F1 · CODE-CHANGE · LIVE**
+**RL-026 · 2026-09-25 13:46 · F1 · CODE-CHANGE · LIVE**
 New `pmc_preprocessing/build_article_blacklist.py` (sha256 `b6b7ccc67a19`). Created in the RDS directory:
 this script and, by RL-027, `llm_corpus_staging/article_blacklist.csv`. Batch 1 removes four paper types
 chosen by the project owner: correction/erratum/retraction, case report, unclassified, guideline/consensus.
