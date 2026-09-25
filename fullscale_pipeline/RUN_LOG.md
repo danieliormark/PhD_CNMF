@@ -367,5 +367,14 @@ for plain statements; hexadecimal codes deleted. Order fixed so equation lines a
 Fresh random samples of 700 articles into scratch folders outside the RDS directory. Last: 849 files, 163,001 lines, no line count changed, no line that is not the masked
 line with removals and inserted words; symbols left: "=" in 36 lines (inside web addresses); 268 "equals" conversions (539 before the last tightening). Not run on the corpus.
 
+**RL-060 · 2026-09-25 22:49–22:51 · P1b · RUN · LIVE**
+`python3 pmc_preprocessing/nonprose_removal_v1.py --selftest` (107 of 107), then `python3 pmc_preprocessing/nonprose_removal_v1.py --workers 8` (host incline, about 2 minutes;
+console log `PP/nonprose_removal_v1_run.log`). Script sha256 `282bc1d24475`. Input: `LCS/masked_corpus_v2/` (47,619 files, 39,299 articles), raw texts, `PP/content_regions_v2.csv`.
+Outputs: `LCS/clean_corpus_v1/` (47,619 files), `LCS/nonprose_removal_v1_summary.json`, `LCS/nonprose_examples_v1.jsonl`.
+Checked afterwards: 0 files with a changed line count against the masked file, no missing file. Words 255,410,914 -> 231,282,656 (9.4% removed).
+Removals by rule: T1 table rows 1,308,321; T2b captions 152,676; T2 label-only lines 5,296; T3 LaTeX 251,168; T4 dollar math 77; T5 math-symbol tokens 56,303, sub/superscripts and commands 12,053,
+unspaced formulas 72,223; T6 statistics 395,487; T7 comparison words 27,518; T8 enumeration lines 32,154, equation-like lines 17,194, number lines 229; T9 symbols 195,160.
+URLs and DOIs were kept (open decision, PIPELINE.md §6 item 21).
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
