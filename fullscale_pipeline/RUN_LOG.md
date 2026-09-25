@@ -268,5 +268,15 @@ author cache (43,053 records from an esummary lookup made earlier the same day) 
 PubMed 50, volume-editor book chapters 33, group-only 21, no author line in the header 12. List now 2,799 rows, all
 distinct articles; 43,378 remain. Decisions file `LCS/author_rules_decisions.csv`. No later stage reads the blacklist yet.
 
+**RL-044 · 2026-09-25 19:06 · F4 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/build_exclusion_list.py` (sha256 `fb8362059530`). It combines the article blacklist with the P0
+structural status into one exclusion list and a whitelist, so later stages read one file. Reason: the structural rule
+existed only as the `status` and `include` columns of `content_regions_v2.csv`, which no other script read.
+
+**RL-045 · 2026-09-25 19:07 · F4 · RUN · LIVE**
+`python3 build_exclusion_list.py` on `incline`, no SLURM, 4 s. 46,177 articles: 6,878 excluded (blacklist 2,799; P0
+structure 4,079: no closing heading 2,484, headingless 1,234, no end marker 361); whitelist 39,299. Outputs
+`LCS/article_exclusions.csv` and `LCS/article_whitelist.txt`. Nothing later reads them yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
