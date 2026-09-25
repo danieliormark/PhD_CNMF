@@ -90,6 +90,7 @@ R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
 | Current targets without a text | 64 | 22 exist in the bucket under version numbers outside 1–4; 42 have no folder in the bucket [checked with `aws s3 ls`] |
 | Rows in P0 csv | 31,511 | covers only the May-era texts |
 | Blacklisted (F1 to F3, 2026-09-25) | 2,799 | of 46,177 texts, leaving 43,378: F1/F2 2,683 and F3 116 (author rules); reasons in the F1 and F3 rows; the list is meant to grow |
+| Not blacklisted and `include`=1 in P0 (derived 2026-09-25) | 39,299 | 43,378 not blacklisted; of these 4,079 have `include`=0 (no closing heading 2,484, headingless 1,234, no end marker 361) `[DERIVED]` |
 | Rows in `content_regions_v2.csv` (P0, 2026-09-24) | 46,177 | `include`=1: 41,243; no closing heading 2,796; headingless 1,635; no end marker 503 |
 | Documents masked (P1) | 28,284 | rows with both content boundaries |
 | Lost between texts and P1 | 6,467 | 34,751 − 28,284 `[DERIVED]`: 3,240 without a P0 row plus 3,227 without boundaries |
@@ -189,6 +190,10 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     on the context windows around the focal terms (after P2). Both articles are then blacklisted if more than 10% of
     the shorter window's 8-word phrases are shared; shared text unrelated to LLMs does not count. Until then these
     pairs (49 today) stay in the corpus.
+14. **Group and consortium authors: decision to revisit (flagged 2026-09-25).** F3 blacklists the 21 articles whose PubMed
+    authors are only group names, because our theory concerns scientists as authors. Some are relevant to LLM research
+    (the three CHART chatbot-reporting papers, the NLLB Team translation paper, the expert-level academic questions
+    benchmark). The rows carry the reason `authors:group_only`, so the decision can be reversed by removing them.
 
 ## 7. Environment
 
