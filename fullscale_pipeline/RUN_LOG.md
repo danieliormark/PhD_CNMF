@@ -186,5 +186,16 @@ written to `LCS/article_blacklist_removed_20260925.csv`); 252 stay as `no_pubmed
 lookup plus 92 with no PMID in the header); 40 stay as `case_report`; 14 as `correction_erratum_retraction`;
 1 as `address`. List now 2,237 rows, all distinct articles. No later stage reads it yet.
 
+**RL-034 · 2026-09-25 14:12 · F2 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/title_levenshtein_duplicates.py` (sha256 `a4bcd509b52c`); new package `rapidfuzz` 3.14.5
+installed into `tensor_env` (`pip install --no-deps`). Created in the RDS directory: the script and the folder
+`llm_corpus_staging/title_screen/`.
+
+**RL-035 · 2026-09-25 14:13–14:14 · F2 · RUN · LIVE**
+`python3 title_levenshtein_duplicates.py --workers 8` on `incline`, no SLURM, 63 s. 43,940 articles not on the
+blacklist, 43,921 with a usable title. 825 pairs at normalised distance 0.30 or less (distance 0: 46; up to
+0.05: 83; up to 0.10: 134; up to 0.15: 235; up to 0.20: 319; up to 0.25: 476). 101 clusters (219 articles) at 0.10
+or less. Random pairs: median distance 0.76, lowest 1% at 0.66. No article was blacklisted from this result.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

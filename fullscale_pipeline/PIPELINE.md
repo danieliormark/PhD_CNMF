@@ -39,6 +39,7 @@ found · `NOT-BUILT` / `NOT-RUN` not yet done.
 | R3 | Delta fetch: set difference, then fetch only missing | `python3 isolate_delta.py`, then `sbatch submit_delta_fetch.sh` (runs `fetch_delta_pmc.py`) | `LCS/target_pmcids.txt`, `LCS/pure_text_corpus/` | `LCS/delta_pmcids.txt`, `LCS/pure_text_corpus/` | 2026-05-14 (402 IDs); 2026-09-24 job 21295326 (11,555 IDs, 11,491 fetched) | DONE-current (64 targets still missing) |
 | P0 | Content regions: which lines of each text are analysed (start, end, extra whitelisted regions) | `python3 pmc_preprocessing/build_content_regions.py` (rebuilt 2026-09-24, D8) | `LCS/target_pmcids.txt`, `LCS/pure_text_corpus/` | `PP/content_regions_v2.csv` (46,177 rows; 41,243 with `include`=1). Earlier May generator lost; its outputs `PP/sequence_metadata_relaxed.csv` (31,511 rows), `sequence_metadata.csv`, `full_sequence_mapping.txt`, `missing_reference_sequences.txt`, `reference_aliases_full.txt` remain on disk | 2026-09-24 21:56 [LOG] | DONE-current (P1 onward still read the May CSV) |
 | F1 | Article blacklist: articles removed from the analysis, one row per article and reason (batch 1: paper type; batch 2: preprints; batch 3: PubMed lookup for the unclassified; later batches: duplicates, manual) | `python3 pmc_preprocessing/build_article_blacklist.py` (batch 1, refuses to overwrite); `python3 pmc_preprocessing/append_blacklist_preprints.py` (batch 2, backs up and appends); `python3 pmc_preprocessing/fetch_pubmed_types_unclassified.py` (network, key from `NCBI_API_KEY`), then `python3 pmc_preprocessing/refine_blacklist_unclassified.py` (batch 3, backs up and rewrites) | `LCS/target_pmcids.txt`, `LCS/target_metadata.json`, `LCS/pure_text_corpus/` (Subjects, PMID and Article version lines), `PP/sequence_metadata_typed_v2.csv` (May PubMed types), PubMed esummary | `LCS/article_blacklist.csv` (2,237 rows: preprint 1,475, case report 377, no PubMed record 252, correction/erratum/retraction 111, guideline/consensus 21, address 1); `PP/pubmed_types_unclassified_20260925.csv`; `LCS/article_blacklist_removed_20260925.csv` (952 articles found admissible and removed); backups `LCS/article_blacklist.before_preprints_20260925.csv`, `LCS/article_blacklist.before_unclassified_refine_20260925.csv` | 2026-09-25 13:46 to 14:03 [LOG] | DONE-current (not yet applied by any later stage) |
+| F2 | Duplicate screen: character-level Levenshtein distance between article titles (normalised: lower case, letters and digits only; divided by the longer title) for all articles not on the blacklist | `python3 pmc_preprocessing/title_levenshtein_duplicates.py --workers 8` (about 1 min) | `LCS/target_pmcids.txt`, `LCS/target_metadata.json`, `LCS/article_blacklist.csv`, `PP/content_regions_v2.csv` (window size, as an aid) | `LCS/title_screen/title_pairs_v1.csv` (825 pairs at distance 0.30 or less), `title_clusters_v1.csv` (101 clusters, 219 articles, at 0.10 or less), `title_screen_summary.json` | 2026-09-25 14:13 [LOG] | DONE-current (review only; no article blacklisted from it yet) |
 | P1 | Citation masking (regex; citations become `__CITE_<pmcid>_NNN__`) inside the content boundaries only | `nohup python3 citation_standartization_soft_masking.py` (an sbatch wrapper `.sh` exists but no SLURM output from it exists) | `PP/sequence_metadata_relaxed.csv` (to be switched to `PP/content_regions_v2.csv`, `include`=1), `LCS/pure_text_corpus/` | `LCS/masked_corpus_v1/` (28,284 files), `PP/citation_vault_light_masking_v1.jsonl` | 2026-05-16 | DONE-stale |
 | P2 | Sentence split (sciSpaCy `en_core_sci_sm`), focal-word regex, keep hit sentence ±1 | `nohup python3 focal_window_extraction.py` | `LCS/masked_corpus_v1/` | `LCS/focal_extractions_v1.jsonl` (22,795 documents) | 2026-05-16; **script edited 2026-09-23, not re-run** | DONE-stale |
 | P2d | Diagnostic: why documents produced no focal window | `python3 exclusion_diagnostics.py` | P0 csv, `LCS/pure_text_corpus/`, `LCS/focal_extractions_v1.jsonl` | `PP/exclusion_report.csv` (5,489 rows) | 2026-05-17 | DONE (diagnostic, not a chain input; uses an outdated hardcoded word list) |
@@ -184,7 +185,7 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 Conda environment `tensor_env` (`/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env`), read
 2026-09-24: Python 3.10.20; graphbrain 0.7.0; spaCy 3.4.4 with `en_core_web_trf` 3.4.0 (G2),
 `en_core_web_sm` 3.4.1 (G3), `en_core_sci_sm` 0.5.1 and scispacy 0.5.1 (P2); fastcoref 2.1.6 (P6);
-torch 2.11.0; transformers 4.25.1; numpy 2.2.6; scipy 1.15.3; pandas 2.3.3; awscli 1.44.78 (R2/R3;
+torch 2.11.0; transformers 4.25.1; numpy 2.2.6; scipy 1.15.3; pandas 2.3.3; rapidfuzz 3.14.5 (added 2026-09-25 with `pip install --no-deps`, F2); awscli 1.44.78 (R2/R3;
 `boto3` is not installed). Cluster: CSF3, partitions `serial` (one core only) and `multicore`; short
 network-only commands (R1, isolate_delta) were run directly on the `incline` login host, which has no
 `sbatch`.
@@ -201,6 +202,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `R/estimate_arxiv_corpus.py`, `R/arxiv_estimation_log.txt` | arXiv count, unrelated |
 | `PP/fetch_article_types.py`, `PP/sequence_metadata_typed*.csv`, `PP/api_fetch*.log` | Side branch (article types); no later stage reads it |
 | `PP/verify_boundaries.py` | Ad hoc check of P0 boundaries |
+| `PP/heading_levenshtein_duplicates.py`, `LCS/heading_screen/` | Duplicate screen on section-heading sequences, run 2026-09-25 and superseded by the title screen (F2); diagnostic only |
 | `PG/scripts/02_transformer_node.py`, `submit_array.sh`, `PG/output_sqlite/` | v1 parse (75 GB), superseded by v2 |
 | `PG/scripts/trial_run_v2.py`, `verify_provenance.py`, `verify_v2_provenance.py`, `trial_postprocess.py`, `trial_generational.py`, `PG/curated_sqlite_v2/` | Trial and diagnostic scripts and their outputs |
 
@@ -211,6 +213,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | R1 | `export NCBI_API_KEY=<key>; nohup python3 -u query_pmc_entrez.py > <log> 2>&1 &` | `[LOG]` `pmc_metadata_log.txt` (May); session log 2026-09-23 |
 | R2 | `nohup python3 fetch_s3_pmc.sh > LCS/modern_download.log 2>&1 &` | `[LOG]` |
 | R3 | `python3 isolate_delta.py` then `sbatch submit_delta_fetch.sh` | `[LOG]` `slurm-21295326.out` |
+| F2 | `python3 pmc_preprocessing/title_levenshtein_duplicates.py --workers 8` | `[LOG]` RL-035 |
 | F1 | `python3 pmc_preprocessing/build_article_blacklist.py`; `python3 pmc_preprocessing/append_blacklist_preprints.py`; `python3 pmc_preprocessing/fetch_pubmed_types_unclassified.py`; `python3 pmc_preprocessing/refine_blacklist_unclassified.py` | `[LOG]` RL-027, RL-029, RL-031, RL-033 |
 | P0 | `python3 pmc_preprocessing/build_content_regions.py` (writes `PP/content_regions_v2.csv`; refuses to overwrite) | `[LOG]` RL-025 |
 | P1 | `nohup python3 pmc_preprocessing/citation_standartization_soft_masking.py > PP/masking_execution.log 2>&1 &` | `[LOG]` |
@@ -231,6 +234,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `isolate_delta.py` | 8b3877541844 | 2026-05-14 01:39 |
 | `fetch_delta_pmc.py` | b620c1b961d8 | 2026-05-14 15:38 |
 | `submit_delta_fetch.sh` | 69545e630577 | 2026-09-24 13:15 |
+| `pmc_preprocessing/title_levenshtein_duplicates.py` | a4bcd509b52c | 2026-09-25 14:12 |
 | `pmc_preprocessing/append_blacklist_preprints.py` | 0b2adc269c48 | 2026-09-25 13:57 |
 | `pmc_preprocessing/fetch_pubmed_types_unclassified.py` | 140dd1cccd80 | 2026-09-25 14:02 |
 | `pmc_preprocessing/refine_blacklist_unclassified.py` | 6c4defcb9e3e | 2026-09-25 14:03 |
