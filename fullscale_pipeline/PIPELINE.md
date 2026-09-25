@@ -183,9 +183,9 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
    the May–June runs may have used other versions.
 8. **Time-dependent inputs:** the PMC query result changes over time (65 earlier articles disappeared
    from the re-run); P4 depends on live NCBI records.
-9. **Figure and table lines must be removed in preprocessing (planned, flagged 2026-09-24).**
-   Captions and labels such as `Fig. 1`, `Table 2` and table cell fragments occur as heading-like
-   lines in the texts. No stage removes them yet; add the step to P1/P2 before the next full run.
+9. **Figure and table lines (flagged 2026-09-24; handled in P1b, built 2026-09-25, not yet run on the corpus).** Table rows, bare
+   labels such as `Fig. 1` and `Table 2`, and caption lines ("Table 3" or "Fig. 1" followed by a capitalised word) are removed by the
+   non-prose script (item 12). Running sentences that mention a table or figure ("Table 5 shows ...") stay.
 10. **The May content-end rule cut many articles short `[DERIVED]`;** fixed in the rebuilt P0 (D8), but
     P1 onward still use the May boundaries and must be re-run from P1 on `content_regions_v2.csv`
     on `content_regions_v2.csv` and the whitelist of F4.
@@ -239,6 +239,24 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     `LCS/superscript_residuals_v2.jsonl` (17,570 rows). Some of them are variables or equation fragments ("equation5", "pred2"), so a
     review is needed before deleting. Model names (GPT5, Llama3, gpt2) are protected by a name list built from articles that do not
     cite by superscript.
+19. **Open decision: articles with headings but no Results, Discussion or Conclusion heading (2,484).** Stage F4 excludes them for now
+    (`STRUCTURAL` in `build_exclusion_list.py`); the project owner has not decided whether they should be included. Headingless articles
+    (1,234) and articles without an end marker (361) are excluded by the owner's rule that articles without headings are not analysed.
+20. **Fold the author rules (F3) into `article_blacklist.py` (planned).** Until then, rerunning `article_blacklist.py` rebuilds the list
+    without the 116 F3 rows, so the order is F1/F2, then F3, then F4. After the fold, the pending window-based text test (item 13) joins the same script.
+21. **Stages still to be built or rerun on the whitelist (planned).** The non-prose script (P1b) has to be run first. P2 must then read
+    `LCS/clean_corpus_v1/` including the extra windows (`.r2` and later), tag each extracted piece with its region, and use one focal-word
+    list (D3). P6, G2 and G3 must be rerun on the new windows and the matrix builder M1 written; everything downstream of P1 in the May
+    run is stale (item 2). A decision is also open on removing URLs and DOIs from the text (about 500 lines in 600 articles contain one).
+22. **The fetch loop keeps the oldest version (raised 2026-09-25, not yet checked).** `fetch_delta_pmc.py` and `fetch_s3_pmc.sh` try
+    versions 1 to 4 in order and stop at the first that exists, so an article that has several versions in the bucket would be fetched in its
+    earliest one. How often this happens is unknown; the bucket folder `PMC10462176.1` was empty although that article's text is on disk,
+    so older versions can disappear. Related to D4.
+23. **Known limits of the article blacklist.** About 90% of the comment flags rest on a title pattern (23 on a PubMed type alone); paper
+    types come from keyword rules and PubMed's labels, which can be wrong (a paper on a dermatology examination is typed "Case Reports");
+    PubMed answers are live queries cached on 2026-09-25, and a refresh changed 79 type reasons in a test; duplicates are only found where titles
+    are within a Levenshtein distance of 0.30; for copies both members are removed, so no version of a copied paper stays; a preprint whose
+    published version is not in the corpus is lost entirely; group-author articles are removed (item 14).
 
 ## 7. Environment
 

@@ -305,3 +305,13 @@ the full-scale pipeline only. The pipeline is expected to change, so the record 
 - **Touching the RDS directory:** say what is touched, to what extent and why, before doing it.
 - Update PIPELINE.md and RUN_LOG.md in the same commit as the change they describe; commit
   messages name the stage IDs. Never write credentials (API keys, passwords) into either file.
+
+## K. Working conventions stated by the project owner (added 2026-09-25)
+
+- **"Add to GitHub" means commit and push.** If the owner does not want a commit or push, they say so directly.
+- **Report what you are working on.** During long or multi-step work, say in a line what is running and what the current barrier is, so the
+  owner can tell when help or a more powerful model is needed. Silence during long steps is not acceptable.
+- **Experiments and tests may be done freely** in the scratch folder or in a separate experiments folder (`fullscale_pipeline/diagnostics/`, not in git)
+  without asking, as long as nothing in the main pipeline changes. Changes to pipeline files or outputs are announced first (section J).
+- **In this pipeline "blacklist" and "remove" mean the same.** Exploratory diagnostics do not go into the main pipeline record (section J).
+
