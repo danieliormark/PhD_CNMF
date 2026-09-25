@@ -357,5 +357,15 @@ Runs on random samples of the whitelist (300 articles, then three of 600), all o
 726 files, 137,439 lines; no line count changed; 0 cleaned lines that are not the masked line with removals only; 17.7% of the lines that mention
 ChatGPT, GPT-4, LLM or BERT changed (mostly table rows and statistics). Not run on the corpus.
 
+**RL-058 · 2026-09-25 22:20–22:50 · P1b · CODE-CHANGE · LIVE**
+`nonprose_removal_v1.py` edited (sha256 now `282bc1d24475`; RL-056 version `098d19ecbfde`), after the project owner asked why symbols and captions were kept. Added: caption lines
+("Table 3", "Fig. 1", "Figure 2" followed by a capitalised word) are blanked while running sentences ("Table 5 shows ...") stay (in 600 articles 2,800 caption-like lines and
+519 running sentences); symbols become words or disappear (degrees, micro-units, squared, cubed, times; "±" deleted); "=" deleted inside formula fragments and "equals" only
+for plain statements; hexadecimal codes deleted. Order fixed so equation lines are recognised before symbols are rewritten; web addresses are protected. Self-test 107 of 107.
+
+**RL-059 · 2026-09-25 22:40–22:50 · P1b · RUN · LIVE (tests only)**
+Fresh random samples of 700 articles into scratch folders outside the RDS directory. Last: 849 files, 163,001 lines, no line count changed, no line that is not the masked
+line with removals and inserted words; symbols left: "=" in 36 lines (inside web addresses); 268 "equals" conversions (539 before the last tightening). Not run on the corpus.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
