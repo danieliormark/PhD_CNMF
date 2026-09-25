@@ -253,5 +253,20 @@ same or overlapping-author pairs are `pending_window_check`. The output was then
 Other outputs: `LCS/blacklist_decisions.csv`, `LCS/blacklist_summary.json`, `LCS/blacklist_diff.csv`,
 `LCS/blacklist_cache/`. No later stage reads the blacklist yet.
 
+**RL-042 · 2026-09-25 18:57 · F3 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/author_rules_expansion.py` (sha256 `54ac879abe13`): author-based rules appended to the existing
+blacklist so that `article_blacklist.py` need not be rerun now. Rules by the project owner: articles with no authors in
+PubMed, with only group or consortium authors, and Springer conference chapters whose author block lists the volume
+editors are blacklisted; one-author articles are kept. Two additions of mine, both small: articles with no PubMed record
+and no author line in the header (12), and the editor detector (header Journal ID is an ISBN, 33 articles). The PubMed
+author cache (43,053 records from an esummary lookup made earlier the same day) was copied to
+`LCS/blacklist_cache/pubmed_esummary_authors.json`.
+
+**RL-043 · 2026-09-25 18:58 · F3 · RUN · LIVE**
+`python3 author_rules_expansion.py` (dry run) then `--apply` on `incline`, no SLURM, 6 s, one PubMed request. Backup first:
+`LCS/article_blacklist.before_author_rules_20260925.csv`. 43,494 whitelist articles; 116 blacklisted: no authors in
+PubMed 50, volume-editor book chapters 33, group-only 21, no author line in the header 12. List now 2,799 rows, all
+distinct articles; 43,378 remain. Decisions file `LCS/author_rules_decisions.csv`. No later stage reads the blacklist yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
