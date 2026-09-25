@@ -215,5 +215,17 @@ editions). Appended 293 rows: comment_or_reply 194, no_pubmed_record 42, same_au
 similar_introduction 4, retracted_republished_or_reprint 2. List now 2,530 rows, all distinct articles.
 Decisions file: `LCS/title_screen/duplicate_decisions_v1.csv`. No later stage reads the blacklist yet.
 
+**RL-038 · 2026-09-25 14:46 · F2 · CODE-CHANGE · LIVE**
+`resolve_duplicate_pairs.py` edited (sha256 now `5a53f637e7eb`; RL-036 version `06b6bc5a0975`). The PubMed-link, no-record
+and author rules now reach title distance 0.30 (before: 0.15); the introduction check and the PubMed-type comment
+signal stay at 0.15; new `--tag` option for output names. Reason: the project owner asked for the 32 same or partly
+overlapping-author pairs and the 15 no-record pairs in the 0.15 to 0.30 band to be blacklisted as well.
+
+**RL-039 · 2026-09-25 14:48 · F2 · RUN · LIVE**
+`python3 resolve_duplicate_pairs.py --apply --tag v2 --intro-threshold 0.5` on `incline`, no SLURM, 13 s, with the
+API key. Backup first: `LCS/article_blacklist.before_duplicates_v2_20260925.csv`. Appended 68 rows (overlapping
+authors 31, same authors 22, no PubMed record 15). List now 2,598 rows, all distinct articles. Decisions file:
+`LCS/title_screen/duplicate_decisions_v2.csv`. No later stage reads the blacklist yet.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
