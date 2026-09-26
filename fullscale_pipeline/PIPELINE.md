@@ -45,7 +45,7 @@ found · `NOT-BUILT` / `NOT-RUN` not yet done.
 | P1 | Citation masking (regex; citations become `__CITE_<pmcid>_NNN__`) inside the content boundaries only **Rebuilt 2026-09-25 as `citation_masking_v2.py` (D9) and run on the whole whitelist (RL-054, final): 39,299 articles, `LCS/masked_corpus_v2/` (47,619 region files, line counts unchanged), `LCS/citation_dictionary_v2.jsonl` (412,616 cited works, 90% matched to the visible reference list), `citation_marks_v2.jsonl`, `superscript_residuals_v2.jsonl`.** | `nohup python3 citation_standartization_soft_masking.py` (an sbatch wrapper `.sh` exists but no SLURM output from it exists) | `PP/sequence_metadata_relaxed.csv` (to be switched to the boundaries of `PP/content_regions_v2.csv` and the articles of `LCS/article_whitelist.txt`), `LCS/pure_text_corpus/` | `LCS/masked_corpus_v1/` (28,284 files), `PP/citation_vault_light_masking_v1.jsonl` | 2026-05-16 | DONE-current (v2) |
 | P1b | Non-prose removal: tables, LaTeX, formulas and statistics are removed from the masked text so that graphbrain reads only prose. One output line per input line (removed lines become empty), so alignment with the raw text is kept. Rules T1 to T9 (tables, captions, LaTeX, formulas, statistics, symbols, hexadecimal codes) are listed in the script's docstring | `python3 pmc_preprocessing/nonprose_removal_v1.py --selftest`, then `python3 pmc_preprocessing/nonprose_removal_v1.py --workers 8` (about 1 minute; refuses to overwrite its output) | `LCS/masked_corpus_v2/`, `PP/content_regions_v2.csv`, `LCS/pure_text_corpus/` (tab-separated cells of the raw lines, because the masked files have lost their tabs) | `LCS/clean_corpus_v1/` (same file names), `LCS/nonprose_removal_v1_summary.json`, `LCS/nonprose_examples_v1.jsonl` | run 2026-09-25 on the whole whitelist (39,299 articles, 47,619 files; 9.4% of the words removed; no line moved), RL-060 | DONE-current |
 | P1c | Three more non-prose rules on top of the P1b output (a complement, P1b stays as it was): T10 abbreviation lists ("ABBR: meaning; ...", also "Abbreviations:" lines), T11 "Alt text:" figure descriptions, T12 table footnotes (lines that follow a table block and start like a footnote: "Note:", "Data are presented as ...", "X indicates ...", a footnote sign). One output line per input line | `python3 pmc_preprocessing/nonprose_extra_rules_v1.py --selftest`, then `python3 pmc_preprocessing/nonprose_extra_rules_v1.py --workers 8` (about 5 minutes; refuses to overwrite its output) | `LCS/clean_corpus_v1/`, `LCS/pure_text_corpus/` (raw table rows), `PP/content_regions_v2.csv` | `LCS/clean_corpus_v2/` (same file names), `LCS/nonprose_extra_v1_summary.json`, `LCS/nonprose_extra_examples_v1.jsonl` | 2026-09-26 on the whole whitelist (39,299 articles, 47,619 files; 23,228 lines blanked, 0.21% of the words), RL-062 | DONE-current |
-| P2 | Sentence split (sciSpaCy `en_core_sci_sm`), focal-word regex, keep hit sentence ±1 | `nohup python3 focal_window_extraction.py` | `LCS/masked_corpus_v1/` | `LCS/focal_extractions_v1.jsonl` (22,795 documents) | 2026-05-16; **script edited 2026-09-23, not re-run** | DONE-stale |
+| P2 | **v2 (2026-09-26).** Focal sentences with the sentence before and after, from the cleaned region files. Sentences are split line by line (sciSpaCy `en_core_sci_sm`); heading lines are never sentences and stop a window; touching selected sentences form one block, so no sentence is emitted twice; every sentence has an id `PMCID.rN.L<raw line>.S<k>` and a 12-character hash of id and text (rN = region window, r1 the main window). Word list and guard rules (exact capitalisation, homonym patterns, article evidence for ambiguous names) are in `focal_terms.py`; every article gets a status row and errors are written to their own file. Supersedes `focal_window_extraction.py` (v1) | `python3 pmc_preprocessing/focal_terms.py --selftest`, then `python3 pmc_preprocessing/focal_extraction_v2.py --workers 8` (about 14 minutes; refuses to overwrite its output; needs the scratch numpy 1.x, item 17) | `LCS/clean_corpus_v2/`, `LCS/article_whitelist.txt`, `PP/content_regions_v2.csv`, `PP/focal_terms.py` | `LCS/focal_extractions_v2.jsonl` (34,662 articles, 268,532 blocks, 1,297,393 sentences), `LCS/focal_status_v2.csv`, `LCS/focal_errors_v2.jsonl` (empty), `LCS/focal_extraction_v2_summary.json` | 2026-09-26 on the whole whitelist, RL-064 | DONE-current |
 | P2d | Diagnostic: why documents produced no focal window | `python3 exclusion_diagnostics.py` | P0 csv, `LCS/pure_text_corpus/`, `LCS/focal_extractions_v1.jsonl` | `PP/exclusion_report.csv` (5,489 rows) | 2026-05-17 | DONE (diagnostic, not a chain input; uses an outdated hardcoded word list) |
 | P3 | Inventory of citation tokens found inside the extracted windows **Superseded by the dictionary of cited works written by P1 v2 (D9).** | `python3 citation_resolution_1_inventory.py` | `LCS/focal_extractions_v1.jsonl`, `PP/citation_vault_light_masking_v1.jsonl` | `PP/api_inventory_target.json` (13,271 documents) | 2026-05-18 | DONE-stale |
 | P4 | Resolve tokens through Entrez `efetch` (batches of 200, 0.35 s apart, no API key); positional index for numeric citations, year match for author-year; unresolved tokens get `__REF_HASH_<sha256[:10]>__` **Superseded by the dictionary of cited works written by P1 v2 (D9).** | `python3 citation_resolution_2_api.py` | `PP/api_inventory_target.json`, NCBI Entrez | `PP/global_translation_dictionary.json` (105,389 tokens), optional `PP/phase2_api_errors.log` | 2026-05-18 | DONE-stale |
@@ -58,8 +58,8 @@ found · `NOT-BUILT` / `NOT-RUN` not yet done.
 | M1 | Matrix builder for the full corpus: turns the curated links into relation matrices. Needs article metadata and authorship edges, which do not yet exist at full scale | — | `PG/postprocessed_output/` | — | — | NOT-BUILT |
 | A1 | Solver and evaluation on the full-scale matrices | — | M1 output | — | — | NOT-RUN |
 
-Where several stages read `PP/focal_words.txt`: **only P6 and G3 do.** P2 and P2d carry their own
-hardcoded lists (§5 D3).
+Where several stages read `PP/focal_words.txt`: **only P6 and G3 do** (since 2026-09-26 the file is generated from `focal_terms.py`, which P2 v2 uses;
+P2d still has its own old list, §5 D3).
 
 ## 2. Data flow
 
@@ -98,7 +98,9 @@ R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
 | Rows in `content_regions_v2.csv` (P0, 2026-09-24) | 46,177 | `include`=1: 41,243; no closing heading 2,796; headingless 1,635; no end marker 503 |
 | Documents masked (P1) | 28,284 | rows with both content boundaries |
 | Lost between texts and P1 | 6,467 | 34,751 − 28,284 `[DERIVED]`: 3,240 without a P0 row plus 3,227 without boundaries |
-| Documents with focal windows (P2) | 22,795 | 5,489 without = exactly the rows of `exclusion_report.csv` |
+| Cleaned by P1b then P1c (2026-09-25/26) | 39,299 articles, 47,619 regions | `LCS/clean_corpus_v1/`, then `LCS/clean_corpus_v2/`; P1c blanked 23,228 lines |
+| Articles with focal sentences, P2 v2 (2026-09-26) | 34,662 | of 39,299; 4,637 without (item 24); 268,532 blocks, 1,297,393 sentences (684,366 focal); file `LCS/focal_extractions_v2.jsonl` |
+| Documents with focal windows (P2 v1, May) | 22,795 | superseded; 5,489 without = exactly the rows of `exclusion_report.csv` |
 | Documents in v3 (P6+P7) | 22,795 | 22,572 kept + 223 restored |
 | Shards / raw DBs / curated DBs | 50 / 50 / 50 | |
 
@@ -156,7 +158,7 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 |---|---|---|---|
 | D1 | 2026-09-23 | Query and word lists expanded by 33 general LLM/chatbot names in `query_pmc_entrez.py`, `focal_window_extraction.py` and `focal_words.txt` (exact-phrase policy; reasons in R1 note). List grew 34,800 → 46,241. P2 has **not** been re-run with the new list. | R1 (re-run), P2 (script only), P6/G3 read `focal_words.txt` |
 | D2 | 2026-09-23 | NCBI API-key support (environment variable) and adaptive request interval added to R1. P4 has no key support. | R1, P4 |
-| D3 | open | Focal-word list has three unsynchronised sources: hardcoded in `focal_window_extraction.py` and `exclusion_diagnostics.py`, file `focal_words.txt` for P6/G3. Should become one file read by all. | P2, P2d, P6, G3 |
+| D3 | 2026-09-26 (was open) | The focal-word list had three unsynchronised sources. Now `pmc_preprocessing/focal_terms.py` is the source for P2 v2, and `focal_words.txt` (read by P6 and G3) is generated from it with `python3 focal_terms.py --write-flat-list`. `exclusion_diagnostics.py` (P2d) still carries its own old list. The flat file is looser than P2 (P6 and G3 match it case-insensitively without the guard rules, item 24). | P2, P6, G3 |
 | D4 | open (found 2026-09-24) | Fetch loops try versions 1–4 only. 22 current targets exist under other versions (`.319` ×15, `.358` ×2, `.5` ×4, `.7`, `.8`). | R2, R3 |
 | D5 | 2026-09-24 | New SLURM wrapper `submit_delta_fetch.sh` for the delta fetch; the older wrapper `run_extraction.sh` runs a different, crashed prototype and must not be used. | R3 |
 | D6 | 2026-05-23 (historical) | Graphbrain parse changed from v1 (no provenance) to v2 (`('source', pmcid, main_edge)`). | G2 |
@@ -165,6 +167,7 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 | D9 | 2026-09-25 | P1 rebuilt as `citation_masking_v2.py`. Numeric citations and parenthetical author-year citations are deleted from the text; narrative author-year citations become `a<PMCID digits>r<n>`, with the same n for the same work in an article (its position in the article's reference list when it can be matched, otherwise numbered on from the size of the list); a dictionary of cited works with aliases, mention counts, matched reference text and DOI is written; line breaks are kept. P3 to P5 (citation resolution) are superseded. Reasons: the old masks broke graphbrain parses and over-masked (§6 items 15 and 16), and numeric citations cannot be resolved when the reference list is not visible. Sequel: P2 must read `masked_corpus_v2` and its region files. | P1 to P7 |
 | D10 | 2026-09-25 | P0: extra windows (supplementary, ethics) end at the next heading of any kind, 60 lines after their heading, or the References heading, whichever comes first. Before, they ended only at the next back-matter heading, so an ethics window could run for hundreds of lines (longest 8,679; 973 windows over 60 lines) and, without a References heading, to the end of the file. Main windows, statuses and the whitelist are unchanged (checked for all 46,177 articles); extra windows fell from 10,485 to 9,120. | P0, P1 |
 | D11 | 2026-09-26 | Non-prose removal is two layers: P1b (unchanged, output `clean_corpus_v1/`) and P1c (`nonprose_extra_rules_v1.py`, reads `clean_corpus_v1/`, writes `clean_corpus_v2/`). P1c was added after a check of the cleaned corpus found lines with no rule to remove them: about 2,400 abbreviation lists, about 1,500 table footnotes and 246 "Alt text:" descriptions. Later stages read `clean_corpus_v2/`. P1c changes lines only to empty, so line alignment with the raw text is unchanged. | P1c, P2 |
+| D12 | 2026-09-26 | P2 rewritten as `focal_extraction_v2.py` + `focal_terms.py` (the v1 script `focal_window_extraction.py` is kept and not used). Changes: reads the cleaned region files instead of the whole masked text; line-by-line sentence splitting; headings excluded; sentence ids and hashes; per-article status and an error file instead of silent skips; no overwrite of earlier output. Word list (owner decisions 2026-09-26): added bare BERT, RoBERTa, GPT, Gemini, Bard, Llama/LLaMA (any hyphen or spelling), Mistral, PaLM, Gemma, "language model(s)", GPT-2, GPT4, "Chat GPT"; not added: transformer, foundation models, chatbots, Copilot (bare), generative AI. Ambiguous names (Claude, Grok, RITA, GPN, KeAP, GROVER, Galactica, KPGT and other short model acronyms) and the bare names GPT, Gemini, Bard, Llama, Mistral, PaLM, Gemma count only with exact capitalisation, no homonym pattern nearby (Claude Bernard, Grover's quantum search, the liver enzyme GPT, ...) and article evidence (the article has an unambiguous LLM or model term); no nearby-word shortcut (strict version). No cap on block length. `focal_words.txt` regenerated (185 to 208 terms; old file kept as `focal_words.before_v2_20260926.txt`). | P2, P6, G3 |
 
 ## 6. Known gaps and staleness (read before trusting any downstream number)
 
@@ -179,7 +182,7 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 4. **Outputs have fixed names and are overwritten in place** (P1 vault, P2, P3, P4, P5, P6 delete and
    rewrite; G3 recreates). A re-run would destroy the artifacts G1–G3 were built on. Back up or
    rename first.
-5. **P2 outputs used the older word list** (chatbot names absent) `[INFERENCE from the list history]`.
+5. **P2 outputs used the older word list** (chatbot names absent) `[INFERENCE from the list history]`. Superseded by P2 v2 (D12), which uses the new list.
 6. **64 targets without a text and 65 orphan files** (in the old list, not in the new). Left in place.
 7. **No environment lockfile.** Versions below were read from the installed packages on 2026-09-24;
    the May–June runs may have used other versions.
@@ -250,10 +253,10 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     (1,234) and articles without an end marker (361) are excluded by the owner's rule that articles without headings are not analysed.
 20. **Fold the author rules (F3) into `article_blacklist.py` (planned).** Until then, rerunning `article_blacklist.py` rebuilds the list
     without the 116 F3 rows, so the order is F1/F2, then F3, then F4. After the fold, the pending window-based text test (item 13) joins the same script.
-21. **Stages still to be built or rerun on the whitelist (planned).** The non-prose script (P1b) has been run (RL-060). P2 must now read
-    `LCS/clean_corpus_v1/` including the extra windows (`.r2` and later), tag each extracted piece with its region, and use one focal-word
-    list (D3). P6, G2 and G3 must be rerun on the new windows and the matrix builder M1 written; everything downstream of P1 in the May
-    run is stale (item 2). A decision is also open on removing URLs and DOIs from the text (about 500 lines in 600 articles contain one).
+21. **Stages still to be built or rerun on the whitelist (planned).** P1b, P1c and P2 v2 have been run (RL-060, RL-062, RL-064). Next: P6 (coreference)
+    must read `LCS/focal_extractions_v2.jsonl` (blocks with sentence ids) instead of the v2_resolved file, then G2, G3 and the matrix builder M1; everything downstream of P2
+    in the May run is stale (item 2). P3 to P5 are superseded by the P1 v2 dictionary. A decision is also open on removing URLs and DOIs from the text (about 500 lines in
+    600 articles contain one).
 22. **The fetch loop keeps the oldest version (raised 2026-09-25, not yet checked).** `fetch_delta_pmc.py` and `fetch_s3_pmc.sh` try
     versions 1 to 4 in order and stop at the first that exists, so an article that has several versions in the bucket would be fetched in its
     earliest one. How often this happens is unknown; the bucket folder `PMC10462176.1` was empty although that article's text is on disk,
@@ -263,6 +266,16 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     PubMed answers are live queries cached on 2026-09-25, and a refresh changed 79 type reasons in a test; duplicates are only found where titles
     are within a Levenshtein distance of 0.30; for copies both members are removed, so no version of a copied paper stays; a preprint whose
     published version is not in the corpus is lost entirely; group-author articles are removed (item 14).
+
+24. **Known limits of P2 v2 (2026-09-26, RL-064).** (a) The flat `focal_words.txt` that P6 and G3 read is looser than P2: it holds bare GPT, BERT, Claude, RITA and the other
+    guarded names and is matched case-insensitively without the guard rules, so a block P2 selected can be re-checked by P6 against a term P2 would have rejected in another place; P6
+    and G3 should read the matched terms recorded per sentence in `focal_extractions_v2.jsonl` instead. (b) The guard rules were checked by reading samples, not against labelled data; the
+    rejected hits are counted per article in `focal_status_v2.csv` (10,050 in all) and can be audited. (c) 4,637 whitelisted articles yield no focal sentence: 3,925 have no accepted hit
+    (mostly AI-use disclosures and acknowledgements after the closing section, 316 with no focal word anywhere), 412 had only rejected hits, 68 only hits inside headings, and a
+    few could not be placed in a sentence. They leave the corpus at this stage. (d) Evidence for ambiguous names is at article level, so a homonym inside an article about LLMs
+    is caught only by its homonym pattern. (e) "Transformer model(s)" stays in the list as before but does not count as article evidence; 41% of its occurrences are in articles with
+    no other LLM term. (f) Context sentences do not cross headings and do cross paragraph breaks inside a section.
+25. **Known limits of P1c.** About 670 lines that look like abbreviation lists remain (mostly prose with inline glosses) and about 530 footnote-like lines that do not follow a table.
 
 ## 7. Environment
 
@@ -306,7 +319,8 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | P1 (v2) | `python3 pmc_preprocessing/citation_masking_v2.py --build-lexicon` (once), `--selftest`, then `python3 pmc_preprocessing/citation_masking_v2.py --workers 8` (6 minutes on `incline`; refuses to overwrite its outputs) | `[LOG]` RL-051, RL-053, RL-054 |
 | P1b | `python3 pmc_preprocessing/nonprose_removal_v1.py --selftest`, then `python3 pmc_preprocessing/nonprose_removal_v1.py --workers 8` | `[LOG]` RL-056 to RL-060 |
 | P1c | `python3 pmc_preprocessing/nonprose_extra_rules_v1.py --selftest`, then `python3 pmc_preprocessing/nonprose_extra_rules_v1.py --workers 8` | `[LOG]` RL-061, RL-062 |
-| P2 | `nohup python3 pmc_preprocessing/focal_window_extraction.py > PP/extraction.log 2>&1 &` | `[LOG]` |
+| P2 (v1) | `nohup python3 pmc_preprocessing/focal_window_extraction.py > PP/extraction.log 2>&1 &` | `[LOG]` (superseded, D12) |
+| P2 (v2) | `python3 pmc_preprocessing/focal_terms.py --selftest`, `python3 pmc_preprocessing/focal_terms.py --write-flat-list`, then `PYTHONPATH=<scratch numpy 1.26> python pmc_preprocessing/focal_extraction_v2.py --workers 8` | `[LOG]` RL-063, RL-064 |
 | P2d | `python3 pmc_preprocessing/exclusion_diagnostics.py` | `[MTIME]` |
 | P3–P5 | `python3 pmc_preprocessing/citation_resolution_{1_inventory,2_api,3_translate}.py` in order | `[LOG]` `phase2.log`, `phase3.log` (P4, P5) |
 | P6, P7 | `python3 pmc_preprocessing/citation_resolution_4_coref.py`, then `..._4b_restore.py` | `[LOG]` `phase4.log`; P7 `[MTIME]` |
@@ -340,7 +354,10 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `pmc_preprocessing/citation_resolution_3_translate.py` | 84f9c722ad25 | 2026-05-18 19:35 |
 | `pmc_preprocessing/citation_resolution_4_coref.py` | da9d09307d8f | 2026-05-19 20:01 |
 | `pmc_preprocessing/citation_resolution_4b_restore.py` | 861b71001a65 | 2026-05-20 21:58 |
-| `pmc_preprocessing/focal_words.txt` | 5a163624bf28 | 2026-09-23 13:31 |
+| `pmc_preprocessing/focal_words.txt` (generated from `focal_terms.py`, 208 terms) | 87abdc416191 | 2026-09-26 |
+| `pmc_preprocessing/focal_words.before_v2_20260926.txt` (the 185-term list of 2026-09-23) | 5a163624bf28 | 2026-09-23 13:31 |
+| `pmc_preprocessing/focal_terms.py` | ae5962450379 | 2026-09-26 |
+| `pmc_preprocessing/focal_extraction_v2.py` | 78e3e9e5599e | 2026-09-26 |
 | `phase5_graphbrain/scripts/01_matrix_partition.py` | 89be16b155f0 | 2026-05-21 00:35 |
 | `phase5_graphbrain/scripts/02_transformer_node.py` | cf8c8b02e28b | 2026-05-21 00:37 |
 | `phase5_graphbrain/scripts/submit_array.sh` | 55b80cddd73e | 2026-05-21 00:51 |

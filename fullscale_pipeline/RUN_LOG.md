@@ -389,5 +389,19 @@ Input `LCS/clean_corpus_v1/` (47,619 files). Outputs `LCS/clean_corpus_v2/` (47,
 Removed: T10 5,655, T11 246, T12 17,327 lines. Checked afterwards: 0 files with a changed line count, no missing file, every changed line became empty (23,228 lines),
 words 231,282,656 to 230,803,527 (0.21%). Lines still matching the survey patterns: abbreviation lists 2,425 to 670, table-footnote-like 1,541 to 529.
 
+**RL-063 · 2026-09-26 · P2 · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/focal_terms.py` (sha256 `ae5962450379`; word list and guard rules; self-test 18 of 18) and `pmc_preprocessing/focal_extraction_v2.py` (sha256 `78e3e9e5599e`; sentence extraction), D12.
+`focal_words.txt` regenerated from `focal_terms.py --write-flat-list`: 185 to 208 terms, sha256 `5a163624bf28` to `87abdc416191`; the old list is kept as `focal_words.before_v2_20260926.txt`.
+This is a deviation from the list that P6 and G3 read. Built after a review of the original P2 script and list (findings in the local diagnostics log): no traceability, whole-text splitting that glued headings to sentences, blocks up to
+8,996 words, silent skips, the wrong input text, and a list without bare BERT, GPT, Gemini, Llama and "language model". Test runs on 300 and 600 random articles in scratch folders outside the RDS directory (0 errors, 0 duplicate sentence
+ids, 97 to 98% of sampled sentences found on their raw line by text, the rest edited by masking or cleaning).
+
+**RL-064 · 2026-09-26 · P2 · RUN · LIVE**
+`PYTHONPATH=<scratch numpy 1.26.4> python pmc_preprocessing/focal_extraction_v2.py --workers 8` (host incline, 19:08 to 19:22, 803 s; env `tensor_env` with numpy 1.26 from a scratch folder, item 17; console log `PP/focal_extraction_v2_run.log`).
+Input `LCS/clean_corpus_v2/` (47,619 files, 39,299 articles). Outputs `LCS/focal_extractions_v2.jsonl` (34,662 articles, 268,532 blocks, 1,297,393 sentences of which 684,366 focal; 637 MB), `LCS/focal_status_v2.csv`, `LCS/focal_errors_v2.jsonl` (empty),
+`LCS/focal_extraction_v2_summary.json`. Outcome: 34,662 ok, 4,637 without a focal sentence, 0 errors, 0 duplicate sentence ids. Blocks: median 83 words, 95% under 302, longest 2,009; 5.1% over 300 words; median 3 sentences, longest 98; 267,151 blocks in
+main windows and 1,386 in extra windows. Hits inside headings skipped: 20,614; hits rejected by the guard rules: 10,050. Afterwards, on a 1% sample (360 articles): 5,810 of 5,899 sentences found on their raw line by text (98.5%), all 32 extra-window
+sentences, and all 5,899 hashes verify. Most frequent terms: ChatGPT 177,079, LLMs 166,953, LLM 133,156, BERT 57,413, GPT-4 37,039, "language model" 35,795, Gemini 28,801, GPT 26,760.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
