@@ -403,5 +403,16 @@ Input `LCS/clean_corpus_v2/` (47,619 files, 39,299 articles). Outputs `LCS/focal
 main windows and 1,381 in extra windows. Hits inside headings skipped: 20,614; hits rejected by the guard rules: 10,050. Afterwards, on a 1% sample (360 articles): 5,810 of 5,899 sentences found on their raw line by text (98.5%), all 32 extra-window
 sentences, and all 5,899 hashes verify. Most frequent terms: ChatGPT 177,079, LLMs 166,953, LLM 133,156, BERT 57,413, GPT-4 37,039, "language model" 35,795, Gemini 28,801, GPT 26,760.
 
+**RL-065 · 2026-09-26 · P6 · CODE-CHANGE · LIVE (not yet run on the corpus)**
+New `pmc_preprocessing/coref_resolution_v2.py` (sha256 `5a1e21746d2b`) and `pmc_preprocessing/submit_coref_v2.sh` (sha256 `77ef164cc5ee`, CSF array job of 100 shards); new folder
+`pmc_preprocessing/logs_coref_v2/`. Rules and reasons in D13. Built from a review of P6 v1 and scratch experiments recorded in the local diagnostics log (D-027 to D-031): spaCy and LingMess
+agree on 94 of 97 pronoun resolutions in 143 blocks; the apposition handling comes from the dependency parse and gives identical results with either model's clusters on 15 hard sentences.
+Tests with scratch outputs outside the RDS directory: self-test 10 of 10 (including the owner's ChatGPT apposition example, a pronoun chain over four sentences, an antecedent found only in
+the context, a partitive, two entities, a demonstrative, a noun phrase); 30 articles in 2 shards and merged: 0 errors, ids, hashes, raw lines and text identical to P2, every resolved sentence
+equal to its original plus the listed replacements (no context text in the output), 175 of 243 pronouns replaced, 38 rejected (models disagree 16, no noun antecedent 11, number 10,
+LingMess not clustered 1); 6 articles to test resume and the merge checks (missing shard refused, rerun without --resume refused, resume skipped finished articles, merge passed).
+Context changed afterwards from two preceding paragraphs to two preceding sentences (owner decision); self-test rerun, not re-run on a sample. Environment check on a CSF compute
+node (job 21401159, node1223): all models load and run with `PYTHONPATH=$HOME/np1_for_spacy` (item 17).
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
