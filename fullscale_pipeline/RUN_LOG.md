@@ -414,5 +414,14 @@ LingMess not clustered 1); 6 articles to test resume and the merge checks (missi
 Context changed afterwards from two preceding paragraphs to two preceding sentences (owner decision); self-test rerun, not re-run on a sample. Environment check on a CSF compute
 node (job 21401159, node1223): all models load and run with `PYTHONPATH=$HOME/np1_for_spacy` (item 17).
 
+**RL-066 · 2026-09-27 · P6 · RUN (trial) · LIVE**
+CSF trial of the array job: `sbatch --array=0-1 --export=ALL,NSHARDS=2,LIMIT=20,SAMPLE=1,OUTDIR=LCS/coref_v2_trial pmc_preprocessing/submit_coref_v2.sh` (job 21401371, node1235, 4 cores per task, CPU,
+script sha256 `5a1e21746d2b`). Both tasks exited 0 (10 articles each, 180 s and 509 s). Merge: `python pmc_preprocessing/coref_resolution_v2.py --merge --nshards 2 --limit 20 --sample 1 --outdir LCS/coref_v2_trial`,
+passed (20 articles, all present once, no errors). Outputs in `LCS/coref_v2_trial/` (3.9 MB; a test folder, not the run's output folder). 160 blocks, 730 sentences: 83 of 120 pronouns replaced
+(6 with an antecedent in the context sentences), 26 rejected (models disagree 11, number 10, LingMess not clustered 3, no noun antecedent 2), 206 noun-phrase links, 5 demonstratives in clusters.
+Verified against the P2 records: for all 730 sentences sid, hash, raw line, text, focal flag and terms are identical, hash_resolved verifies, and every text_resolved equals the original text plus the
+listed replacements. Speed on CSF: 686 s for 20 articles (median 11 s, longest 214 s per article), about 34 s per article per 4-core task; the full run is therefore expected to take roughly 3 to 4 hours
+per shard with 100 shards.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
