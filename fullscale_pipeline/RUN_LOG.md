@@ -400,7 +400,7 @@ ids, 97 to 98% of sampled sentences found on their raw line by text, the rest ed
 `PYTHONPATH=<scratch numpy 1.26.4> python pmc_preprocessing/focal_extraction_v2.py --workers 8` (host incline, 19:08 to 19:22, 803 s; env `tensor_env` with numpy 1.26 from a scratch folder, item 17; console log `PP/focal_extraction_v2_run.log`).
 Input `LCS/clean_corpus_v2/` (47,619 files, 39,299 articles). Outputs `LCS/focal_extractions_v2.jsonl` (34,662 articles, 268,532 blocks, 1,297,393 sentences of which 684,366 focal; 637 MB), `LCS/focal_status_v2.csv`, `LCS/focal_errors_v2.jsonl` (empty),
 `LCS/focal_extraction_v2_summary.json`. Outcome: 34,662 ok, 4,637 without a focal sentence, 0 errors, 0 duplicate sentence ids. Blocks: median 83 words, 95% under 302, longest 2,009; 5.1% over 300 words; median 3 sentences, longest 98; 267,151 blocks in
-main windows and 1,386 in extra windows. Hits inside headings skipped: 20,614; hits rejected by the guard rules: 10,050. Afterwards, on a 1% sample (360 articles): 5,810 of 5,899 sentences found on their raw line by text (98.5%), all 32 extra-window
+main windows and 1,381 in extra windows. Hits inside headings skipped: 20,614; hits rejected by the guard rules: 10,050. Afterwards, on a 1% sample (360 articles): 5,810 of 5,899 sentences found on their raw line by text (98.5%), all 32 extra-window
 sentences, and all 5,899 hashes verify. Most frequent terms: ChatGPT 177,079, LLMs 166,953, LLM 133,156, BERT 57,413, GPT-4 37,039, "language model" 35,795, Gemini 28,801, GPT 26,760.
 
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
