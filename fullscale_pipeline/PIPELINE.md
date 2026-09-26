@@ -239,6 +239,9 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     numpy 1.x; importing spaCy fails with a binary incompatibility. The May runs therefore used a different numpy. G2 and
     G3 cannot be rerun in this environment without pinning numpy below 2 (a separate environment is safer). A test on
     2026-09-25 used numpy 1.26.4 from a temporary folder, without changing `tensor_env`.
+    **The P2 v2 run (2026-09-26, RL-064) also used numpy 1.26.4 from a temporary scratch folder (`PYTHONPATH`).** That folder is not a lasting part of the
+    environment: the session's scratch space was wiped once during the work and the copy had to be reinstalled (`pip install --no-deps --target <folder> numpy==1.26.4`).
+    Until a separate environment with numpy below 2 exists, any rerun of P2, P6 or G2/G3 needs this workaround.
 18. **Superscript citations: handled in P1 v2, weak cases left for post-processing (flagged 2026-09-25).** P1 v2 removes a
     superscript number glued to a word ("development1", "models1,2", "et al.43") when the evidence is strong (numbers within the
     reference count, no veto, and an ordinary word in an article that cites by superscript, or "et al.N", or a lower-case word with
