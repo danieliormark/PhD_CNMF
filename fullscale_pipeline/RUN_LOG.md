@@ -376,5 +376,18 @@ Removals by rule: T1 table rows 1,308,321; T2b captions 152,676; T2 label-only l
 unspaced formulas 72,223; T6 statistics 395,487; T7 comparison words 27,518; T8 enumeration lines 32,154, equation-like lines 17,194, number lines 229; T9 symbols 195,160.
 URLs and DOIs were kept (open decision, PIPELINE.md §6 item 21).
 
+**RL-061 · 2026-09-26 · P1c · CODE-CHANGE · LIVE**
+New `pmc_preprocessing/nonprose_extra_rules_v1.py` (sha256 `d34e1c6f9d81`), stage P1c, a complement to P1b (D11). Written after a survey of the cleaned corpus found
+about 2,425 abbreviation-list lines, about 1,541 table-footnote-like lines and 246 "Alt text:" lines with no removal rule; most footnote lines sit directly after a table
+block (839 of 1,171 "Note/Abbreviations" lines in 6,000 articles). Rules T10, T11, T12 are in the script's docstring. Self-test 18 of 18, including the cases that must stay
+(an inline gloss "(C: hypercalcemia; R: renal failure)", "Category 1: mild; Category 2: moderate", the same footnote sentence away from a table).
+
+**RL-062 · 2026-09-26 · P1c · RUN · LIVE**
+Test first: 700 random articles into a scratch folder outside the RDS directory (97 abbreviation lists, 10 alt-text lines, 257 footnotes; the removed lines were read, one
+mixed footnote paragraph was flagged and judged correct). Then `python3 pmc_preprocessing/nonprose_extra_rules_v1.py --workers 8` (host incline, 19:01 to 19:06, 4.5 minutes).
+Input `LCS/clean_corpus_v1/` (47,619 files). Outputs `LCS/clean_corpus_v2/` (47,619 files), `LCS/nonprose_extra_v1_summary.json`, `LCS/nonprose_extra_examples_v1.jsonl`.
+Removed: T10 5,655, T11 246, T12 17,327 lines. Checked afterwards: 0 files with a changed line count, no missing file, every changed line became empty (23,228 lines),
+words 231,282,656 to 230,803,527 (0.21%). Lines still matching the survey patterns: abbreviation lists 2,425 to 670, table-footnote-like 1,541 to 529.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
