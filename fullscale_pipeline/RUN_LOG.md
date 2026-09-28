@@ -438,5 +438,16 @@ without changing the text.
 Verified afterwards: a 1% random sample (355 articles, 13,685 sentences) checked against the P2 records — sid, hash, raw_line, text, focal flag and terms identical; hash_resolved verifies;
 every text_resolved equals the original text plus the listed replacements (no context text in the output) — 0 problems found.
 
+**RL-068 · 2026-09-28 · P7 · CODE-CHANGE + RUN · LIVE**
+New `pmc_preprocessing/focal_citations_v2.py` (sha256 `49e9a3a64c5b`), stage P7 v2, D14. Built after a check that P1 v2's `doi` field is empty (malformed DOI pattern, item 27) and that only 12,644 citation tokens occur in
+focal sentences. Tests before the run (scratch outputs outside the RDS directory, local diagnostics log D-032): self-test 21 of 21; audit of 15 random works with two or more DOIs (all one paper each);
+three defects found and fixed (truncated DOIs merging unrelated papers, DOIs glued to PMIDs or to their own repeat, BERT split into two works by a same-year rule).
+Run: `python3 pmc_preprocessing/focal_citations_v2.py` (host incline, 2026-09-28 19:22 to 19:23, 29 s; console log `PP/focal_citations_v2_run.log`). Inputs `LCS/coref_v2/coref_resolved_v2.jsonl`,
+`LCS/citation_dictionary_v2.jsonl` (not modified), raw texts, `PP/content_regions_v2.csv`. Outputs `LCS/focal_sentences_v2.jsonl` (610 MB), `LCS/citation_works_v2.jsonl` (5.7 MB),
+`LCS/focal_citations_v2_summary.json`. 34,662 articles; 702,948 of 1,297,393 sentences kept (18,582 only through a coreference replacement); 14,154 citation occurrences of 12,644 tokens; 10,350 works
+(5,498 identified by DOI or PMCID, 2,637 by reference text only, 2,215 unresolved and given an id of their own), 1,008 cited in two or more articles; 510 title links joined 202 works; 23 truncated DOIs
+not used for linking. Verified afterwards on all 702,948 sentences against P6: sid, hash, raw line, text and resolved text identical; hash_final verifies; text_final equals the resolved text with each
+token replaced by its work's id; no per-article token left; every id exists in the works file; every kept sentence has a focal term. 0 problems found.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
