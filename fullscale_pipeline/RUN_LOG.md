@@ -449,5 +449,18 @@ Run: `python3 pmc_preprocessing/focal_citations_v2.py` (host incline, 2026-09-28
 not used for linking. Verified afterwards on all 702,948 sentences against P6: sid, hash, raw line, text and resolved text identical; hash_final verifies; text_final equals the resolved text with each
 token replaced by its work's id; no per-article token left; every id exists in the works file; every kept sentence has a focal term. 0 problems found.
 
+**RL-069 · 2026-09-28 · P7 · CODE-CHANGE + RERUN · LIVE (supersedes RL-068)**
+Validation of the RL-068 output (local diagnostics log D-033) found a bug in `focal_citations_v2.py`: the DOI cleaner cut a final ".NNNNNNN" from every DOI to remove PMIDs glued onto DOIs, but IEEE, ACM, Frontiers and
+Taylor & Francis DOIs end that way themselves, so 963 of 12,644 tokens (670 works) had a proceedings- or issue-level DOI shared by unrelated papers and different papers were merged (for example six CHI papers in one
+id). Fix: only a PMID glued to a bioRxiv/medRxiv DOI (10.1101/YYYY.MM.DD.NNNNNN) is cut. New script sha256 `e9fd4bf14862` (self-test 23 of 23, including ACM and IEEE DOIs); the version of RL-068 (`49e9a3a64c5b`)
+is kept as `pmc_preprocessing/focal_citations_v2.before_doi_fix_20260928.py`. The three outputs and the console log of RL-068 were renamed with the suffix `.before_doi_fix_20260928` (no file deleted) and the script was rerun:
+`python3 pmc_preprocessing/focal_citations_v2.py` (2026-09-28 19:40, 29 s). Outputs `LCS/focal_sentences_v2.jsonl`, `LCS/citation_works_v2.jsonl`, `LCS/focal_citations_v2_summary.json`. Same 702,948 sentences and 12,644 tokens as
+before; 10,555 works (was 10,350: 5,696 identified by DOI or PMCID, 2,644 by reference text only, 2,215 unresolved), 964 cited in two or more articles (was 1,008, the difference being false merges), 563 title links
+joining 226 works, 167 truncated DOIs not used for linking (was 23).
+Checks repeated on the real output: all 702,948 sentences against P6 (ids, hashes, raw lines, text; text_final rebuilt from the resolved text; no per-article token left; every id in the works file; every kept
+sentence has a focal term): 0 problems; output byte-identical to the scratch run on which the labelled samples were drawn; detector for "identifier shared by clearly different papers" (title-word Jaccard < 0.15
+and different first author) with the old cleaner on the old output 43 works / 415 pairs, with the fixed cleaner on the new output 1 work / 3 pairs; structural checks (226 works joined by title across identifier groups,
+21 least-similar works read, threshold sensitivity) and labelled samples as recorded in PIPELINE.md item 28.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
