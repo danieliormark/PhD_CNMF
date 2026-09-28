@@ -423,5 +423,20 @@ Verified against the P2 records: for all 730 sentences sid, hash, raw line, text
 listed replacements. Speed on CSF: 686 s for 20 articles (median 11 s, longest 214 s per article), about 34 s per article per 4-core task; the full run is therefore expected to take roughly 3 to 4 hours
 per shard with 100 shards.
 
+**RL-067 · 2026-09-27/28 · P6 · RUN · LIVE**
+Full CSF array run: `sbatch pmc_preprocessing/submit_coref_v2.sh` (job 21401638, 100 tasks, 4 cores, 16 GB, 12 h, script sha256 `5a1e21746d2b`), started 2026-09-27 00:38, all 100 tasks exited by
+2026-09-27 ~04:20. 99 of 100 exited 0; task 86 was OOM-killed (exit 137) partway through (125 of 346 articles done) on `PMC12211737`, whose largest block is 2,009 words (the largest in the corpus;
+measured peak memory 17.5 GB on incline, of which 6.5 GB is the four loaded models). Resubmitted `sbatch --array=86 --mem=32G pmc_preprocessing/submit_coref_v2.sh` (job 21489427, 2026-09-28
+13:57 to 15:56, 8,628 s), `--resume` skipped the 125 done articles and completed the remaining 221; exit 0.
+
+Merge: `python pmc_preprocessing/coref_resolution_v2.py --merge --nshards 100 --outdir LCS/coref_v2` (2026-09-28), passed: 34,662 articles, all present once, no errors. Outputs in `LCS/coref_v2/`
+(3.3 GB): `coref_resolved_v2.jsonl`, `coref_np_links_v2.jsonl` (340,271 rows), `coref_rejected_v2.jsonl` (48,906 rows), `coref_status_v2.jsonl`, `coref_errors_v2.jsonl` (empty),
+`coref_v2_summary.json`. 268,532 blocks, 1,297,393 sentences; of 285,941 personal pronouns in blocks, 203,493 replaced (11,445 with an antecedent in the two context sentences), 48,906 rejected
+(models disagree 20,182, number mismatch 18,002, no noun antecedent 7,694, LingMess did not cluster 3,028); 34,025 demonstratives left unresolved in clusters; 340,271 noun-phrase mentions linked
+without changing the text.
+
+Verified afterwards: a 1% random sample (355 articles, 13,685 sentences) checked against the P2 records — sid, hash, raw_line, text, focal flag and terms identical; hash_resolved verifies;
+every text_resolved equals the original text plus the listed replacements (no context text in the output) — 0 problems found.
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
