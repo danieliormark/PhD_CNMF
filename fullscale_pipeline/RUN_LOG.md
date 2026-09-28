@@ -448,6 +448,7 @@ Run: `python3 pmc_preprocessing/focal_citations_v2.py` (host incline, 2026-09-28
 (5,498 identified by DOI or PMCID, 2,637 by reference text only, 2,215 unresolved and given an id of their own), 1,008 cited in two or more articles; 510 title links joined 202 works; 23 truncated DOIs
 not used for linking. Verified afterwards on all 702,948 sentences against P6: sid, hash, raw line, text and resolved text identical; hash_final verifies; text_final equals the resolved text with each
 token replaced by its work's id; no per-article token left; every id exists in the works file; every kept sentence has a focal term. 0 problems found.
+*[Superseded by RL-069: the figures in this entry (10,350 works, 1,008 cited in two or more articles, script `49e9a3a64c5b`) come from a run with a DOI-cleaning bug; its outputs are kept as `*.before_doi_fix_20260928` and must not be used.]*
 
 **RL-069 · 2026-09-28 · P7 · CODE-CHANGE + RERUN · LIVE (supersedes RL-068)**
 Validation of the RL-068 output (local diagnostics log D-033) found a bug in `focal_citations_v2.py`: the DOI cleaner cut a final ".NNNNNNN" from every DOI to remove PMIDs glued onto DOIs, but IEEE, ACM, Frontiers and

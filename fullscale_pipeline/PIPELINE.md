@@ -65,24 +65,34 @@ P2d still has its own old list, §5 D3).
 
 ## 2. Data flow
 
+Current chain (whitelisted articles only; each arrow is a stage of §1, all run 2026-09-25 to 2026-09-28):
+
 ```
-R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
-                                │
-        P0 sequence_metadata_relaxed.csv (GAP) ──┐
-                                ▼                ▼
-                       P1 masked_corpus_v1/ + citation vault
-                                ▼
-                       P2 focal_extractions_v1.jsonl ──► P2d exclusion_report.csv
-                                ▼                       (side branch)
-        P3 api_inventory_target.json ──► P4 global_translation_dictionary.json
-                                ▼
-                       P5 focal_extractions_v2_resolved.jsonl
-                                ▼
-                       P6 (+P7) focal_extractions_v3_graphbrain_ready.jsonl
-                                ▼
-                       G1 input_shards/  ──► G2 output_sqlite_v2/ ──► G3 postprocessed_output/
-                                                                          ▼
-                                                             M1 (not built) ──► A1
+R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/ (46,242 files)
+        │
+        ├─► P0 content_regions_v2.csv ─┐          F1/F2 article_blacklist.csv ◄─ PubMed types, titles, authors (F3 appended)
+        │                              ▼                          │
+        │                       F4 article_exclusions.csv + article_whitelist.txt (39,299 articles)
+        ▼                              │
+P1 v2  masked_corpus_v2/  (47,619 region files) + citation_dictionary_v2.jsonl
+        ▼
+P1b    clean_corpus_v1/ ──► P1c clean_corpus_v2/            (tables, formulas, statistics, abbreviation lists, footnotes removed)
+        ▼
+P2 v2  focal_extractions_v2.jsonl (34,662 articles, 268,532 blocks; sentence ids and hashes)   ◄─ focal_terms.py
+        ▼
+P6 v2  coref_v2/coref_resolved_v2.jsonl (+ noun-phrase links, rejected replacements)           ◄─ 2 context sentences from clean_corpus_v2
+        ▼
+P7 v2  focal_sentences_v2.jsonl (702,948 focal sentences, text_final) + citation_works_v2.jsonl (10,555 works)
+        ▼
+G2 graphbrain parse (next, not run) ──► G3 curation ──► M1 (not built) ──► A1
+```
+
+Legacy May chain (superseded, kept for the record; its outputs describe the old 22k corpus and are stale, §6 item 2):
+
+```
+R1 ──► R2/R3 ──► P0 sequence_metadata_relaxed.csv (GAP) ──► P1 masked_corpus_v1/ ──► P2 focal_extractions_v1.jsonl ──► P2d exclusion_report.csv
+   P3 api_inventory_target.json ──► P4 global_translation_dictionary.json ──► P5 focal_extractions_v2_resolved.jsonl
+   ──► P6 (+P7) focal_extractions_v3_graphbrain_ready.jsonl ──► G1 input_shards/ ──► G2 output_sqlite_v2/ ──► G3 postprocessed_output/
 ```
 
 ## 3. Corpus funnel (counts re-derived 2026-09-24)
@@ -93,7 +103,7 @@ R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
 | Target list, 2026-09-23 | 46,241 | current |
 | Full texts on disk | 46,242 | 46,177 of the current targets, plus 65 files not in the current list; 34,751 before the 2026-09-24 delta |
 | Current targets without a text | 64 | 22 exist in the bucket under version numbers outside 1–4; 42 have no folder in the bucket [checked with `aws s3 ls`] |
-| Rows in P0 csv | 31,511 | covers only the May-era texts |
+| Rows in P0 csv, May version | 31,511 | superseded by the rebuilt P0 (row below); covered only the May-era texts |
 | Blacklisted (F1 to F3, 2026-09-25) | 2,799 | of 46,177 texts, leaving 43,378: F1/F2 2,683 and F3 116 (author rules); reasons in the F1 and F3 rows; the list is meant to grow |
 | Whitelist after F4 (2026-09-25) | 39,299 | 46,177 minus 2,799 blacklisted minus 4,079 excluded by P0 structure (no closing heading 2,484, headingless 1,234, no end marker 361); file `LCS/article_whitelist.txt` |
 | Masked by P1 v2 (2026-09-25) | 39,299 articles, 47,619 regions | one masked file per region of every whitelisted article; `LCS/masked_corpus_v2/` |
@@ -102,6 +112,8 @@ R1 target_pmcids.txt ──► R2/R3 pure_text_corpus/  (46,242 files)
 | Lost between texts and P1 | 6,467 | 34,751 − 28,284 `[DERIVED]`: 3,240 without a P0 row plus 3,227 without boundaries |
 | Cleaned by P1b then P1c (2026-09-25/26) | 39,299 articles, 47,619 regions | `LCS/clean_corpus_v1/`, then `LCS/clean_corpus_v2/`; P1c blanked 23,228 lines |
 | Articles with focal sentences, P2 v2 (2026-09-26) | 34,662 | of 39,299; 4,637 without (item 24); 268,532 blocks, 1,297,393 sentences (684,366 focal); file `LCS/focal_extractions_v2.jsonl` |
+| Articles with a resolved record, P6 v2 (2026-09-27/28) | 34,662 | same articles as P2 v2; 203,493 of 285,941 personal pronouns replaced (11,445 with an antecedent in the context sentences), 48,906 rejected, 34,025 demonstratives left, 340,271 noun-phrase links; `LCS/coref_v2/` |
+| Focal sentences after P7 v2 (2026-09-28) | 702,948 | of 1,297,393; 34,662 articles; 12,644 citation tokens in 14,154 places became 10,555 works (5,696 identified by DOI or PMCID, 2,644 by reference text only, 2,215 unresolved), 964 cited in two or more articles; `LCS/focal_sentences_v2.jsonl`, `LCS/citation_works_v2.jsonl` (after the DOI fix of RL-069) |
 | Documents with focal windows (P2 v1, May) | 22,795 | superseded; 5,489 without = exactly the rows of `exclusion_report.csv` |
 | Documents in v3 (P6+P7) | 22,795 | 22,572 kept + 223 restored |
 | Shards / raw DBs / curated DBs | 50 / 50 / 50 | |
@@ -140,8 +152,14 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
 - **P2.** Deletes and rewrites `focal_extractions_v1.jsonl` (fixed name). Word list is hardcoded.
 - **P4.** Numeric citations are resolved by position in the article's `<ref>` list; author–year
   citations by the first reference with the same year (a crude proxy). No NCBI key is used.
-- **P6/P7.** P6 re-filters after coreference; 223 documents lost their focal word and were
+- **P6/P7 (v1, superseded).** P6 re-filtered after coreference; 223 documents lost their focal word and were
   restored by P7 without mutation. The `restored_from_v2` flag identifies them.
+- **P6 v2 (CSF).** One array task per shard (`submit_coref_v2.sh`, 100 shards, 4 cores, 12 h), every task with `--resume`; a task that fails is resubmitted alone with
+  `sbatch --array=<id> ...`. **Memory:** the largest article (a block of 2,009 words) needs about 17.5 GB, the default 16 GB is too little for it: shard 86 was killed and rerun with
+  `--mem=32G` (RL-067); give tasks that die with exit 137 `--mem=32G`. The merge (`--merge --nshards 100`) refuses unless every article is present once with status ok, and the per-shard
+  files can be deleted after a byte comparison with the merged files (done, RL-067 follow-up).
+- **P7 v2.** Runs on incline in about 30 s, no models. It refuses to overwrite its outputs; to rerun, rename the three outputs first (as done for RL-069). The DOI fix of RL-069 is
+  in the script; the outputs of RL-068 are kept as `*.before_doi_fix_20260928` and must not be used.
 - **G2.** The v1 parse (`02_transformer_node.py`, `submit_array.sh`, `PG/output_sqlite/`, job
   15138115, 2026-05-21/22, 50 databases) stored bare edges with no link to the article and is
   superseded. Resumable through `PG/scripts/logs_v2/progress_v2_NN.log`; clear these to force a
@@ -287,11 +305,11 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     no other LLM term. (f) Context sentences do not cross headings and do cross paragraph breaks inside a section.
 25. **Known limits of P1c.** About 670 lines that look like abbreviation lists remain (mostly prose with inline glosses) and about 530 footnote-like lines that do not follow a table.
 
-26. **Known limits of P6 v2 (built 2026-09-26, not yet run).** (a) Precision was judged by reading samples (15 hard sentences, 143 and 30 real blocks), not against
+26. **Known limits of P6 v2 (built 2026-09-26, run 2026-09-27/28).** (a) Precision was judged by reading samples (15 hard sentences, 143 and 30 real blocks), not against
     labelled data. (b) A pronoun whose antecedent is more than two sentences before the block, or in an earlier section, stays unresolved; a block that opens its
     section has no context. (c) "The former" / "the latter" are not handled. (d) A participle name ("the model ..., called MedLLM") gives "the model". (e)
     Requiring both models to agree removes about 9% of the replacements spaCy alone would make. (f) Source defects pass through (for example a typo with a leftover
-    superscript, "Tranformers1's", item 18). (g) CPU speed: about 76 s per article per process on incline and about 34 s per article on CSF (4-core task, RL-066); the full run is estimated at 3 to 4 hours per shard with 100 shards.
+    superscript, "Tranformers1's", item 18). (g) CPU speed: about 76 s per article per process on incline and about 34 s per article on CSF (4-core task, RL-066); the full run took about 4 hours with 100 shards (RL-067). (h) Memory: the largest blocks need more than 16 GB (17.5 GB measured for a 2,009-word block); a task that is killed is rerun with `--mem=32G`.
 
 27. **Cited works are not identified across articles by P1 v2 (found 2026-09-28; solved for the kept sentences by P7 v2, D14).** The old P3 to P5 gave the same cited paper the same global reference id in every article (Entrez lookups;
     numeric citations resolved by their position in the reference list). P1 v2 replaces them, but its tokens (`a<PMCID digits>r<n>`) are per article, so one paper cited in two
@@ -339,6 +357,11 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `PP/fetch_article_types.py`, `PP/sequence_metadata_typed*.csv`, `PP/api_fetch*.log` | Side branch (article types); no later stage reads it |
 | `PP/verify_boundaries.py` | Ad hoc check of P0 boundaries |
 | `PP/build_article_blacklist.py`, `append_blacklist_preprints.py`, `fetch_pubmed_types_unclassified.py`, `refine_blacklist_unclassified.py`, `title_levenshtein_duplicates.py`, `resolve_duplicate_pairs.py`, `heading_levenshtein_duplicates.py`; `LCS/article_blacklist.previous_incremental_20260925.csv` with its `.before_*` backups, `article_blacklist_removed_20260925.csv`, `LCS/title_screen/`, `LCS/heading_screen/`, `PP/pubmed_types_unclassified_20260925.csv` | The incremental blacklist build of 2026-09-25 (RL-026 to RL-039) and the heading screen, superseded by the single script `article_blacklist.py` (RL-040, RL-041); kept until their deletion is approved |
+| `PP/focal_window_extraction.py`, `PP/exclusion_diagnostics.py`, `LCS/focal_extractions_v1.jsonl`, `PP/exclusion_report.csv` | P2 v1 and its diagnostic, superseded by P2 v2 (D12) |
+| `PP/citation_resolution_1_inventory.py`, `_2_api.py`, `_3_translate.py`, `_4_coref.py`, `_4b_restore.py`, `PP/api_inventory_target.json`, `PP/global_translation_dictionary.json`, `LCS/focal_extractions_v2_resolved.jsonl`, `LCS/focal_extractions_v3_graphbrain_ready.jsonl` | May citation resolution (P3 to P5) and coreference (P6/P7 v1), superseded by P1 v2, P6 v2 and P7 v2 (D9, D13, D14) |
+| `PP/citation_standartization_soft_masking.py`, `PP/citation_vault_light_masking_v1.jsonl`, `LCS/masked_corpus_v1/` | P1 v1 masking, superseded by P1 v2 (D9) |
+| `LCS/coref_v2_trial/` | Output of the CSF trial of P6 v2 (RL-066, 20 articles); not part of the run |
+| `PP/focal_citations_v2.before_doi_fix_20260928.py`, `LCS/*.before_doi_fix_20260928`, `PP/focal_words.before_v2_20260926.txt` | Versions replaced by a fix or a rewrite (RL-069, RL-063), kept for the record; do not use |
 | `PG/scripts/02_transformer_node.py`, `submit_array.sh`, `PG/output_sqlite/` | v1 parse (75 GB), superseded by v2 |
 | `PG/scripts/trial_run_v2.py`, `verify_provenance.py`, `verify_v2_provenance.py`, `trial_postprocess.py`, `trial_generational.py`, `PG/curated_sqlite_v2/` | Trial and diagnostic scripts and their outputs |
 
