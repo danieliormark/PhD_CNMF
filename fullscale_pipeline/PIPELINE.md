@@ -386,8 +386,8 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | P2d | `python3 pmc_preprocessing/exclusion_diagnostics.py` | `[MTIME]` |
 | P3–P5 | `python3 pmc_preprocessing/citation_resolution_{1_inventory,2_api,3_translate}.py` in order | `[LOG]` `phase2.log`, `phase3.log` (P4, P5) |
 | P6, P7 (v1) | `python3 pmc_preprocessing/citation_resolution_4_coref.py`, then `..._4b_restore.py` | `[LOG]` `phase4.log`; P7 `[MTIME]` (superseded, D13) |
-| P6 (v2) | `PYTHONPATH=$HOME/np1_for_spacy python pmc_preprocessing/coref_resolution_v2.py --selftest`; on CSF `sbatch pmc_preprocessing/submit_coref_v2.sh`; then `PYTHONPATH=$HOME/np1_for_spacy python pmc_preprocessing/coref_resolution_v2.py --merge --nshards 100` | `[LOG]` RL-065 |
-| P7 (v2) | `python3 pmc_preprocessing/focal_citations_v2.py --selftest`, then `python3 pmc_preprocessing/focal_citations_v2.py` | `[LOG]` RL-068 |
+| P6 (v2) | `PYTHONPATH=$HOME/np1_for_spacy python pmc_preprocessing/coref_resolution_v2.py --selftest`; on CSF `sbatch pmc_preprocessing/submit_coref_v2.sh`; then `PYTHONPATH=$HOME/np1_for_spacy python pmc_preprocessing/coref_resolution_v2.py --merge --nshards 100` | `[LOG]` RL-065 to RL-067 |
+| P7 (v2) | `python3 pmc_preprocessing/focal_citations_v2.py --selftest`, then `python3 pmc_preprocessing/focal_citations_v2.py` | `[LOG]` RL-068 (superseded), RL-069 |
 | G1 | `python3 phase5_graphbrain/scripts/01_matrix_partition.py` | `[MTIME]` |
 | G2 | `sbatch phase5_graphbrain/scripts/submit_v2.sh` | `[LOG]` `PG/scripts/logs_v2/node_15772611_*` |
 | G3 | `sbatch phase5_graphbrain/scripts/submit_4h.sh` | `[LOG]` `PG/logs/cluster_*.log` |
