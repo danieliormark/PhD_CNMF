@@ -387,12 +387,11 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     speech. Glued-citation detector: 59 of 60 sampled cuts correct before a fix for section numbers ("A.3"). Self-test 25/25. Against the G2 v2 output:
     1,131 of 1,147 random sentences give byte-identical edges (the other 16 are false cuts removed); in 300 split sentences 207 cuts are kept and 171
     dropped; all 300 sampled glued-citation sentences change as intended; 0 parse failures, 0 exceptions, every edge restored from its string, every preset
-    boundary respected, maximum depth 20; no extra time for sentences graphbrain does not split (about 0.07 s per sentence on incline). **Next (needs the
-    owner's go-ahead):** integrate into the G2 script as `graphbrain_parse_v3.py` with output in `PG/g2_v3/` (G2 v2 kept), rerun on CSF with the same job
-    layout, merge and check. Units keep their sentence's sid and hash; removed citation numbers are recorded per sentence. A unit may lack a focal term after
-    a cut; G3 filters edges by focal terms anyway.
-    **Scope agreed with the owner (2026-09-29) and built as `PG/scripts/graphbrain_parse_v3.py` (RL-074; CSF test `check_csf_g2v3.sh`,
-    full run `submit_g2_v3.sh`, output `PG/g2_v3/`):** unit ids `<sid>.U<k>` with hash sha1("<uid>|<parsed text>")[:12]; glued-citation
+    boundary respected, maximum depth 20; no extra time for sentences graphbrain does not split (about 0.07 s per sentence on incline). Units keep their
+    sentence's sid and hash; removed citation numbers are recorded per sentence. A unit may lack a focal term after a cut; G3 filters edges by focal terms anyway.
+    **Scope agreed with the owner (2026-09-29) and built as `PG/scripts/graphbrain_parse_v3.py` (RL-074, RL-075; CSF test `check_csf_g2v3.sh`,
+    full run `submit_g2_v3.sh`, output `PG/g2_v3/`; merging is a separate script, `merge_g2_v3.py`, RL-076 — parsing needs graphbrain and spaCy, merging
+    needs neither):** unit ids `<sid>.U<k>` with hash sha1("<uid>|<parsed text>")[:12]; glued-citation
     removal; the sentence-end rule; removal of non-prose (all captions including focal ones, captions behind a DOI or figure id, caption
     bodies whose label P2 left on the previous sentence, captions glued after a sentence end, lone labels, reference-list lines, headings
     of at most 4 words ending with a colon, units without letters); URLs and DOIs replaced by tokens URL + 8 digits from a hash of the
@@ -460,6 +459,7 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | P6 (v2) | `PYTHONPATH=$HOME/np1_for_spacy python pmc_preprocessing/coref_resolution_v2.py --selftest`; on CSF `sbatch pmc_preprocessing/submit_coref_v2.sh`; then `PYTHONPATH=$HOME/np1_for_spacy python pmc_preprocessing/coref_resolution_v2.py --merge --nshards 100` | `[LOG]` RL-065 to RL-067 |
 | P7 (v2) | `python3 pmc_preprocessing/focal_citations_v2.py --selftest`, then `python3 pmc_preprocessing/focal_citations_v2.py` | `[LOG]` RL-068 (superseded), RL-069 |
 | G1 | `python3 phase5_graphbrain/scripts/01_matrix_partition.py` | `[MTIME]` |
+| G2 (v3) | `sbatch phase5_graphbrain/scripts/check_csf_g2v3.sh`; `sbatch phase5_graphbrain/scripts/submit_g2_v3.sh`; then `python3 phase5_graphbrain/scripts/merge_g2_v3.py --nshards 50` (merging needs neither graphbrain nor spaCy, so no `PYTHONPATH`) | `[LOG]` RL-074, RL-075 (script, CSF test), RL-076 (merge script) |
 | G2 (v2) | `sbatch phase5_graphbrain/scripts/check_csf_g2.sh`; `sbatch phase5_graphbrain/scripts/submit_g2_v2.sh`; then `PYTHONPATH=$HOME/np1_for_spacy python phase5_graphbrain/scripts/graphbrain_parse_v2.py --merge --nshards 50` | `[LOG]` RL-070, RL-071 (tests), RL-072 (full run + merge) |
 | G2 (May) | `sbatch phase5_graphbrain/scripts/submit_v2.sh` | `[LOG]` `PG/scripts/logs_v2/node_15772611_*` |
 | G3 | `sbatch phase5_graphbrain/scripts/submit_4h.sh` | `[LOG]` `PG/logs/cluster_*.log` |
@@ -492,6 +492,10 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `pmc_preprocessing/coref_resolution_v2.py` | 5a1e21746d2b | 2026-09-26 |
 | `pmc_preprocessing/submit_coref_v2.sh` | 77ef164cc5ee | 2026-09-26 |
 | `pmc_preprocessing/focal_citations_v2.py` | e9fd4bf14862 | 2026-09-28 |
+| `phase5_graphbrain/scripts/graphbrain_parse_v3.py` | a3d7f986d292 | 2026-09-29 |
+| `phase5_graphbrain/scripts/merge_g2_v3.py` | 7cb4b1d7f1c9 | 2026-09-29 |
+| `phase5_graphbrain/scripts/submit_g2_v3.sh` | a6ac2ec80db2 | 2026-09-29 |
+| `phase5_graphbrain/scripts/check_csf_g2v3.sh` | 85838f5aa8e8 | 2026-09-29 |
 | `phase5_graphbrain/scripts/graphbrain_parse_v2.py` | 3eec8b0b256c | 2026-09-28 |
 | `phase5_graphbrain/scripts/submit_g2_v2.sh` | c279b391f6cf | 2026-09-28 |
 | `phase5_graphbrain/scripts/check_csf_g2.sh` | 0523eec595e8 | 2026-09-28 |
