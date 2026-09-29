@@ -361,7 +361,11 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     the edge and keep the verb atom (the assistant's recommendation). (j) **Comparison with the toy-corpus version (pending):**
     `tensor_data_staging/toy_large/7.5postprocessing_4hbased_correct.py` is a corrected version of the toy postprocessing that was never used for the toy
     rebuild (CLAUDE.md §4.23); compare it with `chunk_4h_hpc.py` before revising. (k) Superscript citations that P1 v2 left inside words ("systems3",
-    item 18) are still for post-processing; the glued numbers at sentence ends are handled in G2 (item 30).
+    item 18) are still for post-processing; the glued numbers at sentence ends are handled in G2 (item 30). (l) **Hyphen-joined atoms
+    (from G2 v3):** G2 v3 joins hyphenated words ("llm_based", "ad_llm", "bert_base"); in a 1,266-sentence trial 118 of 888 joins contain a
+    focal term, so G3's focal matching must treat a joined atom as focal when any "_"-separated part is a focal term (the joined words are
+    also listed per sentence). (m) **Leftover symbols:** atoms made only of symbols or formula debris ("[", "]", "∈") are dropped in G3;
+    "%" is kept (it is the atom "%", shown encoded as `%25`, not the word "percent").
 30. **G2 sentence units: graphbrain's own re-splitting and glued citation numbers (found 2026-09-29; fix designed and tested, not yet run).** Each P7
     sentence is parsed by one graphbrain call, but graphbrain splits it again with its own model: 22,091 of 702,948 sentences (3.1%) became several units
     in G2 v2. In two samples of 120 cuts labelled by hand (the assistant's reading of each context), 72/120 and 68/120 cuts were real sentence boundaries that
@@ -386,6 +390,18 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     owner's go-ahead):** integrate into the G2 script as `graphbrain_parse_v3.py` with output in `PG/g2_v3/` (G2 v2 kept), rerun on CSF with the same job
     layout, merge and check. Units keep their sentence's sid and hash; removed citation numbers are recorded per sentence. A unit may lack a focal term after
     a cut; G3 filters edges by focal terms anyway.
+    **Scope agreed with the owner (2026-09-29) and built as `PG/scripts/graphbrain_parse_v3.py` (RL-074; CSF test `check_csf_g2v3.sh`,
+    full run `submit_g2_v3.sh`, output `PG/g2_v3/`):** unit ids `<sid>.U<k>` with hash sha1("<uid>|<parsed text>")[:12]; glued-citation
+    removal; the sentence-end rule; removal of non-prose (all captions including focal ones, captions behind a DOI or figure id, caption
+    bodies whose label P2 left on the previous sentence, captions glued after a sentence end, lone labels, reference-list lines, headings
+    of at most 4 words ending with a colon, units without letters); URLs and DOIs replaced by tokens URL + 8 digits from a hash of the
+    normalised address (same address, same token in every article; graphbrain otherwise makes each URL one escaped, never-repeated atom);
+    "∼", "≈", "≥", "≤" and arrows turned into words; hyphenated words joined with "_" (parsed with the hyphen, verbs and objects are lost:
+    "was pre-trained on PubMed abstracts" gave the predicate "-"). Auxiliary verbs, modal verbs and leftover symbol atoms stay in G3.
+    Precision of the sentence-level non-prose rules (25 random hits each, read by the assistant): captions 24/25 (the miss, "Table 2 (See
+    App. B) shows ...", is now excluded), caption bodies 25/25, DOI captions 25/25, reference lines 25/25, headings 19/25 at up to 6 words
+    (the six misses were clauses introducing a list; the rule now takes at most 4 words). Corpus-wide candidates: 3,889 captions, 1,398
+    DOI captions, 694 caption bodies, 1,546 captions glued after a sentence end, 574 reference lines. Recall was not measured.
 
 ## 7. Environment
 
