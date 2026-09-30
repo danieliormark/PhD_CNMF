@@ -384,9 +384,11 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     (c) focal terms found in the unit text by P2's own matcher (`focal_terms.py`, guard rules included) and every atom of a mention
     replaced by one canonical atom `<canon>/Cp/focal`; merged: plural/singular, spelling variants (Chat GPT, Chat-GPT, ChatGPT; GPT4,
     GPT 4, GPT-4, GPT-4.0), abbreviation and expansion (LLM, large language model(s); BERT, Bidirectional encoder representations from
-    transformers), brand prefixes (Google Gemini, Mistral AI); kept apart: `llm`, `language_model` and `transformer_model`, every model
-    version (`gpt_4`, `gpt_4o`, `gpt_3_5`), the bare family name (`gpt`), `chatgpt_4` from `gpt_4`, sizes and dates (`mistral_7b`,
-    `gpt_4o_2024`); (e) e.g., i.e., vs., cf., etc., viz., et al. dropped; (f) atoms without letters dropped (numbers, signs, brackets),
+    transformers), brand prefixes (Google Gemini, Mistral AI), and (owner decision 2026-09-30, RL-079) ChatGPT-<version> into
+    GPT-<version> (`chatgpt_4` -> `gpt_4`; bare `chatgpt` stays), model sizes and snapshot dates dropped (`mistral_7b` -> `mistral`,
+    `gpt_4o_2024` -> `gpt_4o`; ESM-1b keeps its "1b"); kept apart: `llm`, `language_model` and `transformer_model`, every model version
+    (`gpt_4`, `gpt_4o`, `gpt_3_5`), the bare family name (`gpt`); a version is a one-digit major ("GPT-44" is GPT-4 plus a glued
+    citation and is read as `gpt`); (e) e.g., i.e., vs., cf., etc., viz., et al. dropped; (f) atoms without letters dropped (numbers, signs, brackets),
     "%" becomes the atom `percent/C/en`; (g) be/have/do dropped only as `Mv`, kept as main verbs; the stop list is not applied to main-verb
     be/have/do (the RDS list `PG/nltk_abridged_stopwords_list.txt` holds "been" and "am", the toy list holds "be"; the two lists differ only
     in be/also); modal verbs (`Mm`) recorded as `modality` on their verb group and dropped from the atoms (option `--modals tag`; `drop`
@@ -394,8 +396,8 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     and chunk_4h); type `Cm` (noun used as a modifier, "cancer research") kept, dropped by 7.5 and chunk_4h; provenance: ids and hashes
     `sha1("<id>|<edge>")[:12]` for parents `<uid>.P<k>`, children `.D`/`.F`/`.S<j>`, cousins `<uid>.K<j>` with the parents they belong to
     (the unit is the grandparent edge), every output atom traced to its source atoms, words and token positions. Output JSONL per unit,
-    optional database in chunk12's form (`pmcid::uid::hash`). **Open decisions:** merge `chatgpt_4` into `gpt_4`? drop sizes and snapshot
-    dates? keep "on" (a phrasal particle exempt from the stop list, typed `M`)? modal option. **Found upstream:** "LLM" is a PLAIN focal term
+    optional database in chunk12's form (`pmcid::uid::hash`). **Open decisions:** stop-list additions (RL-079 evidence: "our", discourse adverbs, number
+    words, "well"); leftover phrasal particles ("on/M"); modal option (tag recommended). **Found upstream:** "LLM" is a PLAIN focal term
     with no homonym guard; PMC8815195 uses it for lipid-lowering medication ("not on LLM (89.5%)") and passed P2.
 30. **G2 sentence units: graphbrain's own re-splitting and glued citation numbers (found 2026-09-29; fix designed, tested, and run on the whole corpus as G2 v3, RL-077).** Each P7
     sentence is parsed by one graphbrain call, but graphbrain splits it again with its own model: 22,091 of 702,948 sentences (3.1%) became several units
@@ -549,6 +551,6 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `phase5_graphbrain/scripts/parse_stage_v2.py` | 086a5d4237af | 2026-05-31 18:29 |
 | `phase5_graphbrain/scripts/submit_v2.sh` | f8021d0db570 | 2026-05-23 20:27 |
 | `phase5_graphbrain/scripts/chunk_4h_hpc.py` | dfc6cc5e9662 | 2026-05-29 23:36 |
-| `phase5_graphbrain/scripts/g3_curation_test.py` | 2ba55f6100dc | 2026-09-30 |
+| `phase5_graphbrain/scripts/g3_curation_test.py` | bf53c0404fb7 | 2026-09-30 |
 | `phase5_graphbrain/scripts/submit_4h.sh` | cc13dba06e28 | 2026-05-30 19:19 |
 | `phase5_graphbrain/nltk_abridged_stopwords_list.txt` | 2b6c7d9fdae9 | 2026-06-29 21:42 |
