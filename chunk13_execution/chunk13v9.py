@@ -88,7 +88,7 @@ LAMBDA_SEM = 1.0               # Penalty weight for socio-semantic semantic real
 
 # 5. Seed and version control for reproducibility
 MASTER_SEED = 42
-PIPELINE_VERSION = "v9.1.time_slice_1"
+PIPELINE_VERSION = "v9.2.t1_v2"
 
 # (Note: CORE_THRESHOLD = 0.75 has been intentionally retired and removed 
 #  as Section 4A now uses continuous probabilistic message passing instead 
@@ -348,7 +348,12 @@ def initialize_tucker_adapted_nndsvd_and_propagate(active_matrices, anchor_keys,
     Z_np = {}
 
     # 1. Base Latent Space (Pure random)
-    for facet in active_facets:
+    # Ticket 85: sorted, never the raw set. The draw order of np.random.rand
+    # decides which facet gets which random numbers, and U_np's key order
+    # (set here) also drives the noise draw in step 3.5. Set order depends
+    # on PYTHONHASHSEED, so iterating the raw set gave a different fit per
+    # process launch at the same MASTER_SEED.
+    for facet in sorted(active_facets):
         U_np[facet] = np.random.rand(dimensions[facet], K).astype(np.float32) + 1e-4
     for rel in active_matrices.keys():
         Z_np[rel] = np.random.rand(K, K).astype(np.float32) + 1e-4
@@ -521,7 +526,7 @@ def initialize_tucker_adapted_nndsvd_and_propagate(active_matrices, anchor_keys,
     # noise. Parameters now live directly in the positive space they
     # represent; run_inner_solver clamps them to min=1e-7 after every
     # optimizer.step(), matching v7/v8.
-    U_raw = {f: torch.tensor(U_np[f], device=device, dtype=torch.float32, requires_grad=True) for f in active_facets}
+    U_raw = {f: torch.tensor(U_np[f], device=device, dtype=torch.float32, requires_grad=True) for f in sorted(active_facets)}
     Z_raw = {rel: torch.tensor(Z_np[rel], device=device, dtype=torch.float32, requires_grad=True) for rel in active_matrices.keys()}
 
     return U_raw, Z_raw
@@ -774,7 +779,7 @@ def run_inner_solver(
     # Safely detach and move final matrices to CPU
     # Wait to cast to numpy until returned, or keep as torch tensors based on your pipeline 
     # (Module 4 accepts torch tensors and saves them via torch.save)
-    U_final = {f: U_norm[f].detach() for f in active_facets}
+    U_final = {f: U_norm[f].detach() for f in sorted(active_facets)}  # ticket 85
     Z_final = {rel: Z_scaled[rel].detach() for rel in Z_scaled.keys()}
     
     # Safely format and export the scale masses for the Collapse Check
@@ -1442,6 +1447,16 @@ def evaluate_domain_balance(U_prob, presence_masks, tol=DOMAIN_BALANCE_TOL):
 # -----------------------------------------------------------------------------
 # 5.1 UNIFIED SOCIOLOGICAL EVALUATION PIPELINE
 # -----------------------------------------------------------------------------
+# Weights on two outer-loop terms, set to 0.0 by owner decision (2026-09-30).
+# Both terms are still computed and logged unweighted; only their
+# contribution to sociological_penalty is switched off, so either can be
+# re-enabled by changing its weight. coherence_pen: never fired on the toy
+# grid and reads a gauge-dependent input (CLAUDE.md §4.17). domain_balance_pen:
+# its input dev_k carries no signal about true domain balance on this corpus
+# (FINDINGS §25). Re-evaluate both at 22k scale.
+COHERENCE_PEN_WEIGHT = 0.0
+DOMAIN_BALANCE_PEN_WEIGHT = 0.0
+
 def evaluate_complete_solution(
     U_final,
     Z_final,
@@ -1518,7 +1533,10 @@ def evaluate_complete_solution(
         presence_masks=presence_masks,
     )
 
-    sociological_penalty = collapse_pen + coherence_pen + socio_semantic_pen + domain_balance_pen
+    sociological_penalty = (collapse_pen
+                            + COHERENCE_PEN_WEIGHT * coherence_pen
+                            + socio_semantic_pen
+                            + DOMAIN_BALANCE_PEN_WEIGHT * domain_balance_pen)
 
     return {
         "collapse_pen":         collapse_pen,
@@ -1637,6 +1655,10 @@ def create_optuna_objective(raw_data, soc_keys, sem_keys, anchor_keys, dimension
             trial.set_user_attr("collapse_pen", evaluation["collapse_pen"])
             trial.set_user_attr("coherence_pen", evaluation["coherence_pen"])
             trial.set_user_attr("semantic_pen", evaluation["semantic_pen"])
+            trial.set_user_attr("domain_balance_pen", evaluation["domain_balance_pen"])
+            trial.set_user_attr("mean_dev_k", evaluation["mean_dev_k"])
+            trial.set_user_attr("coherence_pen_weight", COHERENCE_PEN_WEIGHT)
+            trial.set_user_attr("domain_balance_pen_weight", DOMAIN_BALANCE_PEN_WEIGHT)
             trial.set_user_attr("collapse_score_raw", evaluation["collapse_score"])
             trial.set_user_attr("weakest_coherence_raw", evaluation["weakest_coherence"])
             trial.set_user_attr("sociological_penalty", sociological_penalty)
@@ -1706,6 +1728,9 @@ N_TRIALS = 200
 
 # Global Base Output Directory 
 BASE_RESULTS_DIR = os.path.join("results", PIPELINE_VERSION)
+# Set to "_<config>" by --config so parallel per-config tasks write separate
+# report files; merge_chunk13_reports.py combines them.
+REPORT_SUFFIX = ""
 os.makedirs(BASE_RESULTS_DIR, exist_ok=True)
 
 # =============================================================================
@@ -1751,7 +1776,9 @@ def get_environment_info():
         "torch": torch.__version__,
         "numpy": np.__version__,
         "optuna": optuna.__version__,
-        "device": str(DEVICE)
+        "device": str(DEVICE),
+        "coherence_pen_weight": COHERENCE_PEN_WEIGHT,
+        "domain_balance_pen_weight": DOMAIN_BALANCE_PEN_WEIGHT,
     }
 
 # -> FIXED: Save environment metadata to disk immediately upon initialization
@@ -2011,7 +2038,7 @@ def run_adaptive_grid(filepath):
             if torch.cuda.is_available(): torch.cuda.empty_cache()
 
     # Save the methodology defense report to disk
-    report_path = os.path.join(BASE_RESULTS_DIR, "scout_methodology_report.json")
+    report_path = os.path.join(BASE_RESULTS_DIR, f"scout_methodology_report{REPORT_SUFFIX}.json")
     with open(report_path, "w") as f:
         json.dump(methodology_report, f, indent=4)
     print(f"\n[***] PIPELINE ROUTING COMPLETE. Methodology Report saved to: {report_path}")
@@ -2055,7 +2082,7 @@ def extract_and_archive_pareto_front(filepath, report_path=None, max_models_per_
         raise KeyError("CRITICAL ERROR: 'dimensions' metadata missing from raw_data payload.")
 
     if report_path is None:
-        report_path = os.path.join(BASE_RESULTS_DIR, "scout_methodology_report.json")
+        report_path = os.path.join(BASE_RESULTS_DIR, f"scout_methodology_report{REPORT_SUFFIX}.json")
     
     if not os.path.exists(report_path):
         raise FileNotFoundError(f"Methodology report not found at {report_path}.")
@@ -2404,7 +2431,11 @@ def run_dual_track_stability_analysis(filepath):
                             U_final, Z_final, diagnostics = run_inner_solver(
                                 raw_data=raw_data, soc_keys=soc_keys, sem_keys=sem_keys,
                                 anchor_keys=anchor_keys, K=K, dimensions=dimensions,
-                                params=params, device=DEVICE, seed_function=set_seeds
+                                params=params, device=DEVICE,
+                                # Bound to seed_val: run_inner_solver calls seed_function()
+                                # with no argument, so passing set_seeds itself reset every
+                                # stability run to MASTER_SEED and all seeds gave one fit.
+                                seed_function=lambda s=seed_val: set_seeds(s)
                             )
 
                             if torch.cuda.is_available(): torch.cuda.synchronize()
@@ -2614,7 +2645,7 @@ def run_dual_track_stability_analysis(filepath):
                     if os.path.exists(temp_tensor_dir):
                         shutil.rmtree(temp_tensor_dir)
 
-    report_path = os.path.join(BASE_RESULTS_DIR, "master_dual_track_stability_report.json")
+    report_path = os.path.join(BASE_RESULTS_DIR, f"master_dual_track_stability_report{REPORT_SUFFIX}.json")
     with open(report_path, "w") as f:
         json.dump(master_stability_report, f, indent=4, cls=NumpyEncoder)
         
@@ -2623,7 +2654,29 @@ def run_dual_track_stability_analysis(filepath):
     print(f"{'='*75}")
 
 if __name__ == "__main__":
-    DATA_FILEPATH = "/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t1.pkl"
+    import argparse, hashlib
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--config", choices=CONFIG_IDS, default=None,
+                    help="run one config only (for a SLURM array); default: all")
+    # chunk12v2 data (ticket 84 grammar damping), chosen by the owner 2026-09-30.
+    ap.add_argument("--data", default="/mnt/hum01-home01/p91688di/tensor_data_staging/toy_large/outputs/Star_extended_matrices_t1_v2.pkl")
+    args = ap.parse_args()
+    DATA_FILEPATH = args.data
+    if args.config is not None:
+        CONFIG_IDS = [args.config]
+        REPORT_SUFFIX = f"_{args.config}"
+    with open(DATA_FILEPATH, "rb") as f:
+        data_sha256 = hashlib.sha256(f.read()).hexdigest()
+    with open(__file__, "rb") as f:
+        script_sha256 = hashlib.sha256(f.read()).hexdigest()
+    run_manifest = dict(get_environment_info(), configs=CONFIG_IDS, data_path=DATA_FILEPATH,
+                        data_sha256=data_sha256, script_sha256=script_sha256,
+                        slurm_job_id=os.environ.get("SLURM_JOB_ID"),
+                        slurm_array_job_id=os.environ.get("SLURM_ARRAY_JOB_ID"),
+                        slurm_array_task_id=os.environ.get("SLURM_ARRAY_TASK_ID"))
+    with open(os.path.join(BASE_RESULTS_DIR, f"run_manifest{REPORT_SUFFIX}.json"), "w") as f:
+        json.dump(run_manifest, f, indent=4)
+    print(f"[*] Configs: {CONFIG_IDS} | data: {DATA_FILEPATH} (sha256 {data_sha256[:12]})")
     run_adaptive_grid(DATA_FILEPATH)
     extract_and_archive_pareto_front(DATA_FILEPATH)
     run_dual_track_stability_analysis(DATA_FILEPATH)

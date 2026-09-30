@@ -3854,3 +3854,53 @@ Results: `diagnostic_results/domain_balance_null_baseline.json`,
 `diagnostic_results/domain_balance_planted_null.json`.
 
 ---
+
+## 26. Fits depended on the process launch (ticket 85), and the stability phase ignored its seeds (ticket 89) — both fixed 2026-09-30
+
+**Ticket 85.** `initialize_tucker_adapted_nndsvd_and_propagate` drew its random starting
+values by iterating a Python `set` of facet names. Set order depends on `PYTHONHASHSEED`,
+which Python randomises per process, so which facet received which random numbers (and the
+order of the later noise draw) changed with every launch, even at a fixed `MASTER_SEED`.
+Within one process results were identical, which is why multi-seed checks run inside one
+process never showed it.
+
+Test: every config at K=4, `lambda_l1=0`, `lambda_z_offdiag=1.0`, full 2000-epoch fits,
+`t1_v2` data, one fit per config per launch, launches with `PYTHONHASHSEED` 1, 2, 3.
+
+| Config | `math_loss` range, 3 launches, before | epochs run, before | `math_loss`, after (all 4 launches) | epochs, after |
+|---|---|---|---|---|
+| C1 | 0.8125–0.8128 | 1531, 1642, 1603 | 0.8127 | 1562 |
+| C2 | 0.8023–0.8025 | 1426, 1427, 1548 | 0.8025 | 1635 |
+| C3 | 0.8256–0.8469 | 2000, 1324, 1390 | 0.8468 | 1327 |
+| C4 | 0.8401–0.8423 | 2000, 2000, 2000 | 0.8372 | 2000 |
+| C5 | 0.7994–0.7997 | 1604, 1641, 1669 | 0.7997 | 1617 |
+| C6 | 0.8078–0.8081 | 1427, 1337, 1415 | 0.8079 | 1373 |
+
+Before the fix no config produced the same fit twice. The loss differences are small for
+most configs but not for C3 (0.826 vs 0.847), and convergence itself varied: C3 ran to the
+2000-epoch ceiling unconverged in one launch and converged in about 1,330 epochs in the others.
+Separately, C4 hit the 2000-epoch ceiling unconverged in every launch, before and after the
+fix, at this `lambda_z_offdiag=1.0` setting; ticket 75's top-up loop will retry such trials
+in production, so C4 may be the slowest array task.
+After the fix (`sorted(active_facets)` at the three sites), four launches — hash seeds 1, 2, 3
+and a random one — gave byte-identical U and Z in all six configs. An end-to-end run of the
+whole Module 4 chain for C6 (reduced trial counts), launched twice with different hash
+seeds, produced identical scout and stability reports and 10 of 10 byte-identical archived
+tensor files.
+
+**Consequence for earlier results.** Diagnostic fits made before the fix carry a
+launch-dependent initialisation: they are valid fits, but a rerun in a new process will not
+reproduce them exactly. Comparisons made inside one process (the multi-seed noise floors,
+paired-seed tests) are internally consistent. `diagnostic_blocks.py`'s cache key includes the
+solver's source hash, so old cached fits are not served for the fixed code.
+
+**Ticket 89.** The §S5 stability loop reseeded with `set_seeds(seed_val)` and then passed
+`seed_function=set_seeds` to `run_inner_solver`, which calls it with no argument and so reset
+the seed to `MASTER_SEED`. All ten stability seeds reproduced one fit, and the consensus
+scores were 1.0000 ± 0.0000 by construction. No full production run had reached this phase,
+so no reported result is affected. After binding the seed
+(`seed_function=lambda s=seed_val: set_seeds(s)`), consensus on the smoke-test models
+(C6, K=2/3, 3 seeds) is 0.68–0.80 (Track A) and 0.72–0.82 (Track B), SDs 0.04–0.15.
+
+Test scripts and raw outputs were scratch work (session scratchpad), not kept; the test
+itself is described fully above and takes about 2 minutes to repeat.

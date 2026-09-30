@@ -179,6 +179,9 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
   copy if both are reachable; if only the mirror is reachable, say plainly that
   its currency as of the mount's last edit can't be verified from that session,
   rather than presenting it as guaranteed-current.
+  Since 2026-09-30 the mirror also holds `submit_chunk13v9.sh` and
+  `merge_chunk13_reports.py` (the production launcher and report merge); the
+  same rule applies to them.
 
 ---
 
