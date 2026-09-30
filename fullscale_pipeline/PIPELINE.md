@@ -337,7 +337,7 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     (b) 2,215 tokens (P1 v2 could not match them to the reference list) keep an id of their own and are never shared. (c) One source-data error is known: a reference line whose PMC metadata names the
     PMCID of another paper of the same journal issue (REF000928 holds one wrong member). (d) DOIs ending in a glued 8-digit PMID (326 distinct strings, 157 with the stem also present elsewhere) stay in the
     identifier list as separate strings; they are linked through the PMCID when there is one. (e) Threshold sensitivity: title threshold 0.5 adds 526 grouped token pairs, 0.4 adds 1,085, 0.7 removes 1,750.
-29. **G3 upgrade: agreed changes and open decisions (owner discussion 2026-09-29; nothing implemented yet).** The May `chunk_4h_hpc.py` is revised
+29. **G3 upgrade: agreed changes and open decisions (owner discussion 2026-09-29; test script built 2026-09-30, RL-078, see the last paragraph of this item).** The May `chunk_4h_hpc.py` is revised
     before G3 is run on the G2 output; it is not rerun as it is. (a) **Recursion crash (agreed):** raise the recursion limit and put the loop over
     `hg_raw.search(('source', '*', '*'))` under error handling, so one deep edge cannot end a task (the May G3 kept 359 of 22,601 parsed articles, RL-071).
     (b) **New input (needed):** read the G2 databases — now `PG/g2_v3/shards/db_provenance_NNN.sqlite` (item 30 complete as of RL-077, 2026-09-29;
@@ -371,6 +371,32 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     listed per sentence (`hyphens_kept_focal`; 118 of 886 hyphenated words in a 1,266-sentence trial). All other hyphenated words are
     joined with "_" ("pre_trained", "transformer_based"); G3 can split them on "_" if needed. (m) **Leftover symbols:** atoms made only of symbols or formula debris ("[", "]", "∈") are dropped in G3;
     "%" is kept (it is the atom "%", shown encoded as `%25`, not the word "percent").
+    **Comparison (j), done 2026-09-30.** `chunk_4h_hpc.py` (2026-05-29) is the same code as the toy `postprocessing_4h.py`
+    (2026-06-15, which built the toy `corpus_curated.sqlite`); `7.5postprocessing_4hbased_correct.py` (2026-06-16) corrects it and was never
+    applied to any data. Differences: chunk_4h starts the search for a focal term's predicate one level too high (`len(path)-3`), so the
+    simplest clause ("LLMs outperform X") yields nothing; it writes a fringe pool (`source_fringe`) that chunk12 never reads (chunk12 takes
+    fringe atoms from the cousins); it strips trailing digits from every atom (`gpt2` -> `gpt`, undoing P1's protection of model names); it
+    prunes appositions around the focal term; it lemmatises single words out of context with `en_core_web_sm`. Owner decision (2026-09-30):
+    G3 is built on 7.5, with the fixes below. **Test script `PG/scripts/g3_curation_test.py` (RL-078)** — (a) input read line by line,
+    recursion limit 20,000, every unit in its own try block; (b) input is the G2 v3 shard JSONL `g2_parsed_NNN.jsonl`, not the database
+    (same content, one record per unit with uid, unit hash, sid, hash_final, lemma edges and atom-to-word positions; the database keeps
+    one source edge per article and distinct edge); lemmas are G2's own `en_core_web_trf` lemma edges, so G3 no longer loads spaCy;
+    (c) focal terms found in the unit text by P2's own matcher (`focal_terms.py`, guard rules included) and every atom of a mention
+    replaced by one canonical atom `<canon>/Cp/focal`; merged: plural/singular, spelling variants (Chat GPT, Chat-GPT, ChatGPT; GPT4,
+    GPT 4, GPT-4, GPT-4.0), abbreviation and expansion (LLM, large language model(s); BERT, Bidirectional encoder representations from
+    transformers), brand prefixes (Google Gemini, Mistral AI); kept apart: `llm`, `language_model` and `transformer_model`, every model
+    version (`gpt_4`, `gpt_4o`, `gpt_3_5`), the bare family name (`gpt`), `chatgpt_4` from `gpt_4`, sizes and dates (`mistral_7b`,
+    `gpt_4o_2024`); (e) e.g., i.e., vs., cf., etc., viz., et al. dropped; (f) atoms without letters dropped (numbers, signs, brackets),
+    "%" becomes the atom `percent/C/en`; (g) be/have/do dropped only as `Mv`, kept as main verbs; the stop list is not applied to main-verb
+    be/have/do (the RDS list `PG/nltk_abridged_stopwords_list.txt` holds "been" and "am", the toy list holds "be"; the two lists differ only
+    in be/also); modal verbs (`Mm`) recorded as `modality` on their verb group and dropped from the atoms (option `--modals tag`; `drop`
+    and `keep` also available); (h) negation kept whenever it is a modifier, now including "no" as a determiner (`no/Md`, dropped by 7.5
+    and chunk_4h); type `Cm` (noun used as a modifier, "cancer research") kept, dropped by 7.5 and chunk_4h; provenance: ids and hashes
+    `sha1("<id>|<edge>")[:12]` for parents `<uid>.P<k>`, children `.D`/`.F`/`.S<j>`, cousins `<uid>.K<j>` with the parents they belong to
+    (the unit is the grandparent edge), every output atom traced to its source atoms, words and token positions. Output JSONL per unit,
+    optional database in chunk12's form (`pmcid::uid::hash`). **Open decisions:** merge `chatgpt_4` into `gpt_4`? drop sizes and snapshot
+    dates? keep "on" (a phrasal particle exempt from the stop list, typed `M`)? modal option. **Found upstream:** "LLM" is a PLAIN focal term
+    with no homonym guard; PMC8815195 uses it for lipid-lowering medication ("not on LLM (89.5%)") and passed P2.
 30. **G2 sentence units: graphbrain's own re-splitting and glued citation numbers (found 2026-09-29; fix designed, tested, and run on the whole corpus as G2 v3, RL-077).** Each P7
     sentence is parsed by one graphbrain call, but graphbrain splits it again with its own model: 22,091 of 702,948 sentences (3.1%) became several units
     in G2 v2. In two samples of 120 cuts labelled by hand (the assistant's reading of each context), 72/120 and 68/120 cuts were real sentence boundaries that
@@ -523,5 +549,6 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `phase5_graphbrain/scripts/parse_stage_v2.py` | 086a5d4237af | 2026-05-31 18:29 |
 | `phase5_graphbrain/scripts/submit_v2.sh` | f8021d0db570 | 2026-05-23 20:27 |
 | `phase5_graphbrain/scripts/chunk_4h_hpc.py` | dfc6cc5e9662 | 2026-05-29 23:36 |
+| `phase5_graphbrain/scripts/g3_curation_test.py` | 2ba55f6100dc | 2026-09-30 |
 | `phase5_graphbrain/scripts/submit_4h.sh` | cc13dba06e28 | 2026-05-30 19:19 |
 | `phase5_graphbrain/nltk_abridged_stopwords_list.txt` | 2b6c7d9fdae9 | 2026-06-29 21:42 |
