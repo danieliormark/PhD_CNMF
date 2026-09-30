@@ -391,13 +391,18 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     citation and is read as `gpt`); (e) e.g., i.e., vs., cf., etc., viz., et al. dropped; (f) atoms without letters dropped (numbers, signs, brackets),
     "%" becomes the atom `percent/C/en`; (g) be/have/do dropped only as `Mv`, kept as main verbs; the stop list is not applied to main-verb
     be/have/do (the RDS list `PG/nltk_abridged_stopwords_list.txt` holds "been" and "am", the toy list holds "be"; the two lists differ only
-    in be/also); modal verbs (`Mm`) recorded as `modality` on their verb group and dropped from the atoms (option `--modals tag`; `drop`
-    and `keep` also available); (h) negation kept whenever it is a modifier, now including "no" as a determiner (`no/Md`, dropped by 7.5
+    in be/also); modal verbs (owner decision 2026-09-30, RL-080): an atom of the compound verb group in `dummy_sibling` and `dummy_cousin`
+    ("should be approached" -> `(dummy_sibling approach/P/en should/M/en)`), type `Mm` or a modal word typed as another modifier ("can/M",
+    "ca" from "can't"); verbs such as allow and enable stay independent predicates; a modal of a clause embedded in an argument stays
+    with that clause's verb in the argument hyperedge (as 7.5 does for all embedded verbs); `--modals tag` and `drop` remain for comparison; (h) negation kept whenever it is a modifier, now including "no" as a determiner (`no/Md`, dropped by 7.5
     and chunk_4h); type `Cm` (noun used as a modifier, "cancer research") kept, dropped by 7.5 and chunk_4h; provenance: ids and hashes
     `sha1("<id>|<edge>")[:12]` for parents `<uid>.P<k>`, children `.D`/`.F`/`.S<j>`, cousins `<uid>.K<j>` with the parents they belong to
     (the unit is the grandparent edge), every output atom traced to its source atoms, words and token positions. Output JSONL per unit,
     optional database in chunk12's form (`pmcid::uid::hash`). **Open decisions:** stop-list additions (RL-079 evidence: "our", discourse adverbs, number
-    words, "well"); leftover phrasal particles ("on/M"); modal option (tag recommended). **Found upstream:** "LLM" is a PLAIN focal term
+    words, "well"); leftover phrasal particles ("on/M"); homonym guard for "LLM" in P2 (both deferred by the owner).
+    **Provenance of repeated words:** atom-to-hyperedge attribution comes from the edge structure and is exact for every occurrence (a word
+    used twice in a sentence appears in each hyperedge whose branch holds it); only the token index is ambiguous when the same word occurs
+    more than once in the unit (10.7% of atom records list several positions), which does not affect the matrices. **Found upstream:** "LLM" is a PLAIN focal term
     with no homonym guard; PMC8815195 uses it for lipid-lowering medication ("not on LLM (89.5%)") and passed P2.
 30. **G2 sentence units: graphbrain's own re-splitting and glued citation numbers (found 2026-09-29; fix designed, tested, and run on the whole corpus as G2 v3, RL-077).** Each P7
     sentence is parsed by one graphbrain call, but graphbrain splits it again with its own model: 22,091 of 702,948 sentences (3.1%) became several units
@@ -551,6 +556,6 @@ network-only commands (R1, isolate_delta) were run directly on the `incline` log
 | `phase5_graphbrain/scripts/parse_stage_v2.py` | 086a5d4237af | 2026-05-31 18:29 |
 | `phase5_graphbrain/scripts/submit_v2.sh` | f8021d0db570 | 2026-05-23 20:27 |
 | `phase5_graphbrain/scripts/chunk_4h_hpc.py` | dfc6cc5e9662 | 2026-05-29 23:36 |
-| `phase5_graphbrain/scripts/g3_curation_test.py` | bf53c0404fb7 | 2026-09-30 |
+| `phase5_graphbrain/scripts/g3_curation_test.py` | 2a5e01342bf4 | 2026-09-30 |
 | `phase5_graphbrain/scripts/submit_4h.sh` | cc13dba06e28 | 2026-05-30 19:19 |
 | `phase5_graphbrain/nltk_abridged_stopwords_list.txt` | 2b6c7d9fdae9 | 2026-06-29 21:42 |
