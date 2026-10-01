@@ -3904,3 +3904,46 @@ so no reported result is affected. After binding the seed
 
 Test scripts and raw outputs were scratch work (session scratchpad), not kept; the test
 itself is described fully above and takes about 2 minutes to repeat.
+
+## 27. First full production run of the toy corpus (2026-09-30, job 21613637) — results and what they do not yet show
+
+**Run.** `submit_chunk13v9.sh`, SLURM array 21613637 (6 tasks, one per config), `chunk13v9.py`
+`PIPELINE_VERSION v9.2.t1_v2`, data `Star_extended_matrices_t1_v2.pkl` (chunk12v2),
+`coherence` and `domain_balance` weights 0.0 (CLAUDE.md ticket 90). All tasks exited 0;
+`merge_chunk13_reports.py` found all six configs and no disagreement in script, data or
+weights. Wall times: C1 2h47m, C5 3h33m, C6 3h37m, C4 4h46m, C3 5h10m, C2 6h18m.
+Outputs: `toy_large/chunk13_execution/results/v9.2.t1_v2/`.
+
+**Convergence falls with K.** At K=6 the scout phase reached its 100 converged trials only in
+C1; elsewhere it stopped at the 300-attempt cap with 0 (C6), 8 (C2), 37 (C3), 39 (C4) and 53
+(C5) converged. Two cells have an empty converged front: C6 K=6 (nothing converged) and C2
+K=5 (100 converged trials, all dominated by non-converged ones). Non-converged trials often
+reach a slightly lower `math_loss` than converged ones at the same K — they were still
+improving at the 2000-epoch ceiling — so the converged-only filter (ticket 75) removes
+some of the best-fitting points.
+
+**Stability check.** 70 of 202 archived models have no stability score: at least one of the
+10 refit seeds did not converge, and the check aborts on the first failure. Failures rise
+with K. In C3 and C4 every archived model at K=5 and K=6 failed, and these are the K values
+with the highest hypervolume. Where scores exist, Track A ranges about 0.52-0.75. Track A
+is 1 minus the mean Jensen-Shannon distance computed with natural logs, whose maximum is
+√ln2 ≈ 0.83, so Track A cannot fall below about 0.17; Track B (cosine on non-negative
+vectors) spans 0-1.
+
+**Scales of the two objectives.** `math_loss` is a weighted mean of per-relation
+`‖X−R‖²` on Frobenius-normalised relations: 1.0 is the null model (R=0), 0.0 is perfect
+reconstruction. Observed range 0.70-0.89. `sociological_penalty` is currently
+`collapse_pen + semantic_pen`, each bounded [0,1]; observed range about 0.02-0.17.
+
+**Hypervolume.** Increases with K in 4 of 6 configs (C1, C3, C4 pick K=6; C2 and C6 pick K=4,
+C5 K=5). It inherits the capacity effect of `math_loss` (CLAUDE.md §4.6) rather than
+removing it, and a front of one point can win (C3 K=6, one distinct model). Its reference
+point is set per config, so values are not comparable across configs.
+
+**Duplicate trials.** 1,865 of 6,130 completed trials (30.4%) repeated a `lambda_z_offdiag`
+value already tried in the same study. With one tuned parameter and a fixed seed, a repeat
+reproduces the earlier fit exactly (CLAUDE.md ticket 92).
+
+**Not yet done.** No preferred model has been chosen; an informal pick was withdrawn
+(CLAUDE.md ticket 91). Ghost-community counts (ticket 86) have not been computed for the
+archived models.
