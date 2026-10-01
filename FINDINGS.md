@@ -4018,3 +4018,57 @@ stability-verified (8/8, 9/9) and have the two highest Penalty_B values in the e
 (0.244, 0.252) — the clearest trustworthy monopolisation signal available. C5/K=6 has a ghost
 in every one of its 10 archived models but 0/10 are stability-verified — illustrates the
 failure mode at its most extreme but is not itself a trustworthy model to analyse further.
+
+## 29. Full per-community recomputation of all four sociological-penalty components, every archived model (2026-10-01)
+
+Only scalar aggregates (`collapse_score`=max_share, `weakest_coherence_raw`, `mean_dev_k`,
+`semantic_pen`) are saved per trial — `semantic_pen`'s own two sub-scores (Penalty_A,
+item-to-community attribution; Penalty_B, ubiquity hoarding) are averaged together before
+saving and never logged separately, and the full per-community vectors behind
+`collapse_pen`/`coherence_pen`/`domain_balance_pen` are computed internally but discarded.
+`deep_diagnostic_audit.py` (execution dir) recovers all of this by reloading the actual
+saved `U_matrices.pt`/`Z_core.pt` for every one of the 202 archived models and recomputing
+each function's internals directly — no refitting. Verified exact (float32 precision) against
+every already-saved scalar before trusting any new number.
+
+**Domain balance (`dev_k`)**: mean 0.101 across all 202 models, range 0.002-0.252. Not
+informative on its own — FINDINGS §25 already showed this measure doesn't track true domain
+balance on this corpus; recorded here only as a descriptive number, not a quality signal.
+
+**Item-to-community attribution (Penalty_A)**: mean 0.047, range 0.000-0.164. Rises with K
+even restricted to stability-verified models only (0.023 at K=2 to 0.142 at K=6, n=48 down to
+n=3) — attribution quality genuinely degrades at higher K, not merely because unstable fits
+cluster there.
+
+**Monopolisation, two distinct levels, opposite trend with K:**
+- Relation-level mass collapse (`max_share`): mean 0.376, only 4/202 models exceed the 0.60
+  ceiling. Falls with K (more communities to spread mass across).
+- Entity-level ubiquity hoarding (Penalty_B): mean 0.105, every single model (202/202) has
+  some nonzero hoarding. Falls sharply with K among stability-verified models: 0.164 (K=2) to
+  0.049 (K=6) — low K forces shared/ubiquitous terms into one of few communities; high K gives
+  room to spread them out.
+
+**Within- vs between-community coherence**: weakest-community cohesion mean 0.983 (min
+0.749) — uniformly high. Not informative either way since this term is weighted 0 and its
+own gauge-dependence (§4.17) means a high reading here isn't yet trustworthy.
+
+**Ghost communities** (`community_share < 0.5 × fair_share`, ticket 86's own threshold):
+29/202 models (14%) have at least one. Rises sharply with K, and the rise survives
+restricting to stability-verified models only: 0/48 (K=2), 0/44 (K=3), 3/28 (K=4), 0/9 (K=5),
+3/3 (K=6) — every stability-verified K=6 model has a ghost (n=3, thin). By config: C5 worst
+(27% of its models), C2 and C6 essentially ghost-free (0% and 4%).
+
+**Net picture**: low K avoids ghosts but hoards shared terms; high K avoids hoarding but
+produces ghosts and worse item-attribution — no K in this grid avoids all three. The most
+dramatic single-cell readings (C5/K=6: 10/10 models have a ghost) coincide exactly with 0/10
+stability-verified — the clearest-looking failure-mode examples are disproportionately the
+least trustworthy fits, which is itself a pattern to remember before citing an extreme
+reading from a thin, unstable cell as evidence of anything structural.
+
+**Recommended cells for a closer qualitative look** (stability-verified coverage required):
+- Healthy baseline, nothing flagged: **C1/K=3** (8/8 verified) or **C5/K=3** (8/8 verified).
+- Clearest reliable hoarding example: **C3/K=2** (9/9 verified, Penalty_B=0.252, the grid's
+  highest, max_share=0.571, just under the 0.60 ceiling).
+- Clearest reliable ghost example: **C3/K=4** (5/6 verified, 2/6 models show a ghost).
+- Not recommended despite the most dramatic numbers: C5/K=6 (ghosts in all 10 archived
+  models) — 0/10 pass stability, so this reading cannot be trusted on its own.
