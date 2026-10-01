@@ -3818,6 +3818,19 @@ means even that answer can be moved without changing the model, and defect 2 mea
 substitute for a per-community reading. **Nothing was changed in the notebook**; it is
 recorded here because the CSV it produced may have been used to compare models.
 
+### Replacement for the notebook's STAR PROFILER built (2026-10-01)
+
+`chunk13_execution/chunk14_star_profiler.py` replaces the defective cell above, not just
+updates it: it reads v9's actual archived output (`U_matrices.pt`/`Z_core.pt`, not the old
+`grid_search_c_class/*.npz` path), uses only `chunk13v9.py`'s own current, gauge-invariant
+functions (verified exact against saved scalars, §29) rather than `U_raw`'s column norms,
+and is per-community throughout rather than one global number. It also adds something no
+prior script in this project produced: for each community, the actual top-loading entities
+per facet (article titles, author names, journal names; the semantic facets' own map keys
+are themselves readable hyperedge text, e.g. `'language_model/C/en'`), so a community's
+contents can be read directly rather than only scored. Run on the recommended healthy
+baseline (C1/K=3, `trial_0052`); output at `chunk13_execution/profiles/`.
+
 ### What this does and does not establish
 
 - It does **not** show the real corpus has no domain structure. It shows that under a
