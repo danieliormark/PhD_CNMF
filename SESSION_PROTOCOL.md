@@ -182,6 +182,8 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
   Since 2026-09-30 the mirror also holds `submit_chunk13v9.sh` and
   `merge_chunk13_reports.py` (the production launcher and report merge); the
   same rule applies to them.
+  Since 2026-10-01 also `select_models.py`, `cross_machine_fit.py`,
+  `check_cross_machine.sh` and `chunk14_star_profiler.py`.
 
 ---
 

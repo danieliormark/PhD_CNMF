@@ -26,6 +26,13 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # actual per-run length, and different configs/anchors may converge at
 # different epoch counts. Runs that converge early cost nothing.
 INNER_EPOCHS = 2000
+# Ticket 96: ceiling for (a) a trial that hits INNER_EPOCHS unconverged while
+# non-dominated by every converged trial in its study, and (b) stability
+# refits. The cap only bounds the loop (no schedule depends on it), so a
+# refit with this cap reproduces the first INNER_EPOCHS epochs exactly and
+# continues. Tested 2026-10-01: such trials converged by 2,025-2,472 epochs;
+# stability seeds of models that had failed at 2,000 converged 10/10 by 2,876.
+EXTENDED_EPOCHS = 8000
 LEARNING_RATE = 0.01  # Standard starting point for Adam in NMF
 
 # =============================================================================
@@ -88,7 +95,7 @@ LAMBDA_SEM = 1.0               # Penalty weight for socio-semantic semantic real
 
 # 5. Seed and version control for reproducibility
 MASTER_SEED = 42
-PIPELINE_VERSION = "v9.2.t1_v2"
+PIPELINE_VERSION = "v9.3.t1_v2"
 
 # (Note: CORE_THRESHOLD = 0.75 has been intentionally retired and removed 
 #  as Section 4A now uses continuous probabilistic message passing instead 
@@ -933,6 +940,20 @@ def _relation_community_share(Z, U_final_f1, U_final_f2, structure_threshold):
     return within / total if total > 1e-15 else np.full(K, 1.0 / K)
 
 
+def community_share_vector(U_final, Z_final, structure_threshold=STRUCTURE_SCORE_THRESHOLD):
+    """Length-K relation-level mass share per community (ticket 86's ghost
+    measure). Equal-weight mean over relations of _relation_community_share,
+    renormalised. Used by evaluate_dimensional_collapse and describe_solution."""
+    K = next(iter(Z_final.values())).shape[0]
+    relation_shares = []
+    for rel_key, Z in Z_final.items():
+        f1, f2 = RELATION_MAP[rel_key]
+        relation_shares.append(_relation_community_share(Z, U_final[f1], U_final[f2], structure_threshold))
+    community_share = np.mean(relation_shares, axis=0)
+    total_share = community_share.sum()
+    return community_share / total_share if total_share > 1e-15 else np.full(K, 1.0 / K)
+
+
 def evaluate_dimensional_collapse(U_final, Z_final, max_share_threshold=MAX_SHARE_THRESHOLD,
                                    structure_threshold=STRUCTURE_SCORE_THRESHOLD):
     """
@@ -1009,15 +1030,7 @@ def evaluate_dimensional_collapse(U_final, Z_final, max_share_threshold=MAX_SHAR
     if K < 2:
         return 0.0, 1.0
 
-    relation_shares = []
-    for rel_key, Z in Z_final.items():
-        f1, f2 = RELATION_MAP[rel_key]
-        share = _relation_community_share(Z, U_final[f1], U_final[f2], structure_threshold)
-        relation_shares.append(share)
-
-    community_share = np.mean(relation_shares, axis=0)
-    total_share = community_share.sum()
-    community_share = community_share / total_share if total_share > 1e-15 else np.full(K, 1.0 / K)
+    community_share = community_share_vector(U_final, Z_final, structure_threshold)
 
     max_share = float(community_share.max())
     collapse_pen = (max(0.0, max_share - max_share_threshold) / (1.0 - max_share_threshold)) ** 2
@@ -1029,29 +1042,15 @@ def evaluate_dimensional_collapse(U_final, Z_final, max_share_threshold=MAX_SHAR
 # -----------------------------------------------------------------------------
 # SECTION 3: Topological Coherence Diagnostic (The Mean Anchor Rule)
 # -----------------------------------------------------------------------------
-def evaluate_topological_coherence(Z_final, target_coherence, semantic_anchors):
-    """
-    Evaluates the structural cohesion of communities by examining the interaction 
-    density (main diagonal) of the core tensor Z for semantic-article anchors.
-    
-    Modeling Choice: Uses the "Mean Anchor Rule" to allow for polycentric 
-    communities that might be crisp at one semantic resolution (e.g., M_Child_Art) 
-    but noisier at another (e.g., M_Cousin_Art).
-    
-    Args:
-        Z_final (dict): The scale-absorbed core matrices from Module 2.
-        target_coherence (float): Domain constant (e.g., 0.50).
-        
-    Returns:
-        coherence_pen (float): Normalized penalty [0.0 - 1.0].
-        weakest_mean (float): The lowest community mean cohesion (for logging).
-    """
+def coherence_vector(Z_final, semantic_anchors):
+    """Per-community anchor cohesion (mean over active anchors of
+    Z[k,k] / (0.5*(row_sum+col_sum))). None if no anchor is active."""
     # Filter to evaluate ONLY the anchors active in this specific config
     active_anchors = [rel for rel in Z_final.keys() if rel in semantic_anchors]
     
     # Honest Telemetry Guard (Returns np.nan if no semantic anchors are active)
     if not active_anchors:
-        return 0.0, np.nan 
+        return None 
 
     # Extract K dynamically from the first available anchor matrix
     first_anchor = active_anchors[0]
@@ -1096,7 +1095,30 @@ def evaluate_topological_coherence(Z_final, target_coherence, semantic_anchors):
         # Mean Cohesion Score across available anchors for Community k
         mean_cohesion_k = np.mean(k_anchor_ratios)
         community_mean_scores.append(mean_cohesion_k)
+    return np.array(community_mean_scores)
+
+
+def evaluate_topological_coherence(Z_final, target_coherence, semantic_anchors):
+    """
+    Evaluates the structural cohesion of communities by examining the interaction 
+    density (main diagonal) of the core tensor Z for semantic-article anchors.
+    
+    Modeling Choice: Uses the "Mean Anchor Rule" to allow for polycentric 
+    communities that might be crisp at one semantic resolution (e.g., M_Child_Art) 
+    but noisier at another (e.g., M_Cousin_Art).
+    
+    Args:
+        Z_final (dict): The scale-absorbed core matrices from Module 2.
+        target_coherence (float): Domain constant (e.g., 0.50).
         
+    Returns:
+        coherence_pen (float): Normalized penalty [0.0 - 1.0].
+        weakest_mean (float): The lowest community mean cohesion (for logging).
+    """
+    community_mean_scores = coherence_vector(Z_final, semantic_anchors)
+    if community_mean_scores is None:
+        return 0.0, np.nan
+
     # Weakest Community Bottleneck
     weakest_mean = np.min(community_mean_scores)
     
@@ -1115,8 +1137,11 @@ import scipy.sparse as sp
 # -----------------------------------------------------------------------------
 # SECTION 4: Unified Socio-Semantic Reality Check
 # -----------------------------------------------------------------------------
-def evaluate_socio_semantic_reality(U_prob, raw_data, active_matrices, max_monopoly, presence_masks=None):
-    """
+def socio_semantic_parts(U_prob, raw_data, active_matrices, max_monopoly, presence_masks=None):
+    """Returns (Penalty_A, Penalty_B); evaluate_socio_semantic_reality averages them.
+    Penalty_A = item-to-community attribution given the higher-order item.
+    Penalty_B = shared-term concentration (formerly called 'hoarding').
+
     Evaluates the continuous socio-semantic reality (Part A) and uniquity smoothing (Part B).
 
     Args:
@@ -1146,7 +1171,7 @@ def evaluate_socio_semantic_reality(U_prob, raw_data, active_matrices, max_monop
     K = U_prob['art'].shape[1]
     # Guard against division by zero in entropy calculations if only 1 community exists
     if K < 2:
-        return 1.0
+        return 1.0, 1.0
     part_a_scores = []
     
     # =========================================================================
@@ -1329,13 +1354,18 @@ def evaluate_socio_semantic_reality(U_prob, raw_data, active_matrices, max_monop
     # FINAL METRIC
     # =========================================================================
     Penalty_A = np.mean(part_a_scores) if part_a_scores else 1.0
-    socio_semantic_pen = (Penalty_A + Penalty_B) / 2.0
 
     # Cast to native Python float — Penalty_A/Penalty_B are np.mean(...)
     # results (numpy float64) whenever their source lists are non-empty, and
     # numpy scalars aren't JSON-serializable via stdlib json (Optuna's
     # trial.set_user_attr(...)).
-    return float(socio_semantic_pen)
+    return float(Penalty_A), float(Penalty_B)
+
+
+def evaluate_socio_semantic_reality(U_prob, raw_data, active_matrices, max_monopoly, presence_masks=None):
+    """Mean of socio_semantic_parts' two penalties, in [0.0, 1.0]."""
+    penalty_a, penalty_b = socio_semantic_parts(U_prob, raw_data, active_matrices, max_monopoly, presence_masks)
+    return float((penalty_a + penalty_b) / 2.0)
 
 import optuna
 import torch
@@ -1344,6 +1374,43 @@ import numpy as np
 # -----------------------------------------------------------------------------
 # SECTION 4B: Per-Community Domain-Balance Diagnostic (ticket 82, E2 -- Path B)
 # -----------------------------------------------------------------------------
+def domain_balance_rk(U_prob, presence_masks):
+    """Per-community social share r_k = soc/(soc+sem), entity-count-weighted
+    over live facets (ticket 82 D2). None if a domain has no live facet."""
+    soc_facets = sorted(f for f in presence_masks
+                         if FACET_DOMAIN.get(f) == 'social' and f in U_prob
+                         and presence_masks[f].sum() > 0)
+    sem_facets = sorted(f for f in presence_masks
+                         if FACET_DOMAIN.get(f) == 'semantic' and f in U_prob
+                         and presence_masks[f].sum() > 0)
+    if not soc_facets or not sem_facets:
+        return None
+
+    def _weighted_share(facets):
+        total_w = sum(int(presence_masks[f].sum()) for f in facets)
+        if total_w == 0:
+            return None
+        acc = None
+        for f in facets:
+            mask = presence_masks[f]
+            live = U_prob[f][mask]
+            if live.shape[0] == 0:
+                continue
+            w = int(mask.sum())
+            term = w * live.mean(axis=0)
+            acc = term if acc is None else acc + term
+        return None if acc is None else acc / total_w
+
+    soc_share = _weighted_share(soc_facets)
+    sem_share = _weighted_share(sem_facets)
+    if soc_share is None or sem_share is None:
+        return None
+
+    eps = 1e-12
+    r_k = soc_share / (soc_share + sem_share + eps)
+    return r_k
+
+
 def evaluate_domain_balance(U_prob, presence_masks, tol=DOMAIN_BALANCE_TOL):
     """
     Outer-loop, U_prob-based domain-balance check (ticket 82 E2, D1-D3
@@ -1401,37 +1468,9 @@ def evaluate_domain_balance(U_prob, presence_masks, tol=DOMAIN_BALANCE_TOL):
             logging/observability -- mirrors collapse_score/
             weakest_coherence's role for the other two checks.
     """
-    soc_facets = sorted(f for f in presence_masks
-                         if FACET_DOMAIN.get(f) == 'social' and f in U_prob
-                         and presence_masks[f].sum() > 0)
-    sem_facets = sorted(f for f in presence_masks
-                         if FACET_DOMAIN.get(f) == 'semantic' and f in U_prob
-                         and presence_masks[f].sum() > 0)
-    if not soc_facets or not sem_facets:
+    r_k = domain_balance_rk(U_prob, presence_masks)
+    if r_k is None:
         return 0.0, 0.0
-
-    def _weighted_share(facets):
-        total_w = sum(int(presence_masks[f].sum()) for f in facets)
-        if total_w == 0:
-            return None
-        acc = None
-        for f in facets:
-            mask = presence_masks[f]
-            live = U_prob[f][mask]
-            if live.shape[0] == 0:
-                continue
-            w = int(mask.sum())
-            term = w * live.mean(axis=0)
-            acc = term if acc is None else acc + term
-        return None if acc is None else acc / total_w
-
-    soc_share = _weighted_share(soc_facets)
-    sem_share = _weighted_share(sem_facets)
-    if soc_share is None or sem_share is None:
-        return 0.0, 0.0
-
-    eps = 1e-12
-    r_k = soc_share / (soc_share + sem_share + eps)
     dev_k = np.abs(r_k - 0.5)
     excess = np.clip(dev_k - tol, a_min=0.0, a_max=None)
     domain_balance_pen = float(np.mean(excess ** 2))
@@ -1553,6 +1592,83 @@ def evaluate_complete_solution(
 # 5.2 optuna objective 
 #==============================================================================
 
+def compute_weighted_membership(U_final, Z_final, presence_masks=None, engaged_rel=1e-3):
+    """Reconstruction-weighted membership (ticket 100, diagnostic only).
+
+    U_prob row-normalises U_norm, whose columns all have unit L2 norm whether or
+    not the community is used. If a facet's community column carries no
+    reconstruction mass (e.g. C1/K=3/trial_0052: atom community 0 has an
+    all-zero row in Z['M_Atom_Child'], C1's only atom relation), an entity
+    with nothing on the used columns gets U_prob ~ 1.0 on the unused one.
+    Here column k of facet f is weighted by the reconstruction mass it carries
+    across every relation touching f (gauge-invariant: built from U_norm and
+    Z_scaled); columns below 1e-3 of the facet's largest weight get 0. An
+    entity is 'engaged' if its weighted mass is >= engaged_rel x the facet's
+    median weighted mass over live entities (presence_masks; padded rows of
+    the other time slice would otherwise drag the median down); unengaged
+    entities get an all-zero row.
+    Returns (P, engaged)."""
+    P, engaged = {}, {}
+    for f, Uf in U_final.items():
+        w = np.zeros(Uf.shape[1])
+        for rel, Z in Z_final.items():
+            f1, f2 = RELATION_MAP[rel]
+            if f1 == f:
+                w += np.linalg.norm(Z @ U_final[f2].T, axis=1) ** 2
+            if f2 == f:
+                w += np.linalg.norm(U_final[f1] @ Z, axis=0) ** 2
+        w = np.sqrt(w)
+        w = np.where(w < 1e-3 * w.max(), 0.0, w) if w.max() > 0 else w
+        X = Uf * w
+        mass = X.sum(axis=1)
+        ref = mass[presence_masks[f]] if presence_masks is not None and f in presence_masks else mass
+        pos = ref[ref > 0]
+        engaged[f] = mass >= engaged_rel * np.median(pos) if pos.size else np.zeros(len(mass), bool)
+        P[f] = np.where(engaged[f][:, None], X / np.where(mass > 0, mass, 1.0)[:, None], 0.0)
+    return P, engaged
+
+
+def describe_solution(U_final, Z_final, raw_data, soc_keys, sem_keys, anchor_keys, max_monopoly):
+    """Per-community detail behind sociological_penalty, logged per trial and
+    per archived model (ticket 94). Logging only: nothing here enters the
+    objective. *_weighted keys use compute_weighted_membership instead of U_prob."""
+    to_np = lambda d: {k: (v.detach().cpu().numpy() if hasattr(v, "detach") else np.asarray(v)) for k, v in d.items()}
+    U, Z = to_np(U_final), to_np(Z_final)
+    pm = build_presence_masks(raw_data, soc_keys, sem_keys)
+    act = {k for k in (soc_keys + sem_keys) if k in raw_data}
+    U_prob = compute_probability_distributions(U)
+    pa, pb = socio_semantic_parts(U_prob, raw_data, act, max_monopoly, pm)
+    P_w, engaged = compute_weighted_membership(U, Z, pm)
+    pm_w = {f: pm[f] & engaged[f] for f in pm if f in engaged}
+    pa_w, pb_w = socio_semantic_parts(P_w, raw_data, act, max_monopoly, pm_w)
+    coh = coherence_vector(Z, frozenset(anchor_keys))
+    rk = domain_balance_rk(U_prob, pm)
+    rk_w = domain_balance_rk(P_w, pm_w)
+    as_list = lambda x: None if x is None else [float(v) for v in x]
+    return {
+        "item_attribution_pen": float(pa),
+        "shared_term_concentration_pen": float(pb),
+        "item_attribution_pen_weighted": float(pa_w),
+        "shared_term_concentration_pen_weighted": float(pb_w),
+        "community_share": as_list(community_share_vector(U, Z)),
+        "coherence_by_community": as_list(coh),
+        "domain_rk": as_list(rk),
+        "domain_rk_weighted": as_list(rk_w),
+        "unengaged_live_entities": {f: int((pm[f] & ~engaged[f]).sum()) for f in pm if f in engaged},
+    }
+
+
+def _non_dominated_by_converged(study, values):
+    """True if no converged COMPLETE trial in the study dominates `values`."""
+    for t in study.get_trials(deepcopy=False, states=(optuna.trial.TrialState.COMPLETE,)):
+        if not t.user_attrs.get("converged", False) or t.values is None:
+            continue
+        a, b = t.values
+        if a <= values[0] and b <= values[1] and (a < values[0] or b < values[1]):
+            return False
+    return True
+
+
 def create_optuna_objective(raw_data, soc_keys, sem_keys, anchor_keys, dimensions, K_fixed, max_monopoly=0.85, device="cpu", seed=42, seed_function=None):
     """
     Factory function that builds the Optuna objective.
@@ -1597,55 +1713,59 @@ def create_optuna_objective(raw_data, soc_keys, sem_keys, anchor_keys, dimension
                 'lambda_z_offdiag': lambda_z_offdiag
             }
             
-            # 1. Inner Solver (Mathematical Fit)
-            U_final, Z_final, diagnostics = run_inner_solver(
-                raw_data=raw_data,
-                soc_keys=soc_keys,
-                sem_keys=sem_keys,
-                anchor_keys=anchor_keys,
-                K=K_fixed,
-                params=hyperparams,
-                dimensions=dimensions,
-                device=device
-            )
+            # Ticket 92: one tuned parameter and a fixed seed, so a repeated
+            # lambda_z_offdiag reproduces an earlier fit exactly. Reuse that
+            # trial's result without refitting; tagged duplicate_of so the
+            # usable-trial counters and the archiver skip it.
+            for prev in trial.study.get_trials(deepcopy=False, states=(optuna.trial.TrialState.COMPLETE,)):
+                if (prev.params.get("lambda_z_offdiag") == lambda_z_offdiag
+                        and "duplicate_of" not in prev.user_attrs and prev.values is not None):
+                    for key, val in prev.user_attrs.items():
+                        trial.set_user_attr(key, val)
+                    trial.set_user_attr("duplicate_of", prev.number)
+                    return tuple(prev.values)
 
-            # Ticket 75: flag (do not prune) non-converged trials. A trial that
-            # hits the epoch ceiling still returns a plausible-looking
-            # recon_loss and would otherwise enter the Pareto front
-            # indistinguishable from a converged one (demonstrated Runs 8/11/12
-            # in the diagnostic investigation). Flagging, not pruning, because
-            # NSGAIISampler learns from returned values — a pruned trial
-            # teaches it nothing and it keeps resampling the same bad region.
-            # Downstream consumers (§S2/S3 hypervolume, §S4 archiver) filter on
-            # this attr; §S5 already raises on non-convergence per seed.
+            def _fit_and_evaluate(cap):
+                # Re-seed immediately before the fit, so the objective's fit and
+                # the archiver's re-run (which re-seeds inside run_inner_solver)
+                # start from the same random state.
+                set_seeds(seed)
+                U_f, Z_f, diag = run_inner_solver(
+                    raw_data=raw_data, soc_keys=soc_keys, sem_keys=sem_keys,
+                    anchor_keys=anchor_keys, K=K_fixed, params=hyperparams,
+                    dimensions=dimensions, device=device, inner_epochs=cap)
+                ev = evaluate_complete_solution(
+                    U_final=U_f, Z_final=Z_f, U_scales_out=diag["U_scales"],
+                    raw_data=raw_data, soc_keys=soc_keys, sem_keys=sem_keys,
+                    anchor_keys=anchor_keys, max_monopoly=max_monopoly,
+                    entropy_threshold=ENTROPY_THRESHOLD, target_coherence=TARGET_COHERENCE)
+                return U_f, Z_f, diag, ev
+
+            # 1-2. Fit, then evaluate (Per CLAUDE.md §4.13, evaluate_complete_solution
+            # is the single source of truth for the sociological penalty).
+            U_final, Z_final, diagnostics, evaluation = _fit_and_evaluate(INNER_EPOCHS)
+            epoch_cap = INNER_EPOCHS
+
+            # Ticket 96: a trial that hits INNER_EPOCHS unconverged but is not
+            # dominated by any converged trial so far is refitted with
+            # EXTENDED_EPOCHS (an exact continuation). Others keep the
+            # INNER_EPOCHS cap, so extra cost goes only to trials that could
+            # reach the front.
+            if (not diagnostics.get("converged", False) and _non_dominated_by_converged(
+                    trial.study, (diagnostics["math_loss"], evaluation["sociological_penalty"]))):
+                U_final, Z_final, diagnostics, evaluation = _fit_and_evaluate(EXTENDED_EPOCHS)
+                epoch_cap = EXTENDED_EPOCHS
+
+            # Ticket 75: flag (do not prune) non-converged trials. Downstream
+            # consumers (§S2/S3 hypervolume, §S4 archiver) filter on this attr.
             converged = bool(diagnostics.get("converged", False))
             epochs_run = len(diagnostics.get("loss_history", []))
             trial.set_user_attr("converged", converged)
             trial.set_user_attr("epochs_run", epochs_run)
+            trial.set_user_attr("epoch_cap", epoch_cap)
             if not converged:
                 print(f"[!] Trial {trial.number} did not converge "
-                      f"({epochs_run} epochs, K={K_fixed}) — flagged.")
-
-            # 2. Outer Evaluators (Sociological Reality)
-            # Per CLAUDE.md §4.13: the sociological penalty must be recomputed
-            # identically everywhere it's needed (Optuna loop, §S4 archiver,
-            # §S5 stability analysis) via evaluate_complete_solution — the
-            # single source of truth — rather than reimplemented per call
-            # site. §5.1 and §5.2 used to run the same evaluation sequence
-            # written out twice, which is how they drifted (this function was
-            # still passing raw torch tensors into numpy-only evaluators).
-            evaluation = evaluate_complete_solution(
-                U_final=U_final,
-                Z_final=Z_final,
-                U_scales_out=diagnostics["U_scales"],
-                raw_data=raw_data,
-                soc_keys=soc_keys,
-                sem_keys=sem_keys,
-                anchor_keys=anchor_keys,
-                max_monopoly=max_monopoly,
-                entropy_threshold=ENTROPY_THRESHOLD,  # Assuming imported globally
-                target_coherence=TARGET_COHERENCE     # Assuming imported globally
-            )
+                      f"({epochs_run} epochs, cap {epoch_cap}, K={K_fixed}) — flagged.")
 
             pure_recon_loss_val = diagnostics["math_loss"]
             sociological_penalty = evaluation["sociological_penalty"]
@@ -1662,6 +1782,10 @@ def create_optuna_objective(raw_data, soc_keys, sem_keys, anchor_keys, dimension
             trial.set_user_attr("collapse_score_raw", evaluation["collapse_score"])
             trial.set_user_attr("weakest_coherence_raw", evaluation["weakest_coherence"])
             trial.set_user_attr("sociological_penalty", sociological_penalty)
+            # Ticket 94: per-community detail (logging only, not in the objective).
+            for key, val in describe_solution(U_final, Z_final, raw_data, soc_keys, sem_keys,
+                                              anchor_keys, max_monopoly).items():
+                trial.set_user_attr(key, val)
 
             # 3. Multi-Objective Return
             # Dimension 1: Adam's Math Loss | Dimension 2: Bourdieusian Reality
@@ -1723,7 +1847,7 @@ MAX_MONOPOLY = 0.85
 # parameters (19/observation), and C1's sole anchor M_Parent_Art (160x25, 63
 # non-zeros) asked svds for k_svd=min(15,24)=15 components — more than the
 # matrix's rank supports, and equal to K so the padding branch never triggers.
-K_LIST = [2, 3, 4, 5, 6]
+K_LIST = [2, 3, 4, 5]  # ticket 99: K=6 dropped (converged in only 1 of 6 configs, 2026-09-30 run)
 N_TRIALS = 200
 
 # Global Base Output Directory 
@@ -1816,6 +1940,8 @@ if optuna.__version__ != EXPECTED_OPTUNA_VERSION:
 SCOUT_TRIALS = 100       
 DEEP_DIVE_TRIALS = 100   
 HV_MARGIN = 0.10         
+# Ticket 98: an archived front with fewer distinct models than this is flagged thin.
+THIN_FRONT_SIZE = 3
 
 # -----------------------------------------------------------------------------
 # HELPER: Objective Factory Wrapper
@@ -1903,10 +2029,12 @@ def run_adaptive_grid(filepath):
             while True:
                 n_usable = len([t for t in study.trials
                                 if t.state == TrialState.COMPLETE
-                                and t.user_attrs.get("converged", False)])
+                                and t.user_attrs.get("converged", False)
+                                and "duplicate_of" not in t.user_attrs])
+                n_fitted = len([t for t in study.trials if "duplicate_of" not in t.user_attrs])
                 if n_usable >= SCOUT_TRIALS:
                     break
-                if len(study.trials) >= max_attempts:
+                if n_fitted >= max_attempts or len(study.trials) >= 10 * max_attempts:
                     print(f"[!] {config_id} K={K}: stopped Scout at {len(study.trials)} "
                           f"attempts with only {n_usable}/{SCOUT_TRIALS} converged usable "
                           f"trials. Non-convergence may be systematic here.")
@@ -1945,6 +2073,8 @@ def run_adaptive_grid(filepath):
                                 if t.state == TrialState.COMPLETE
                                 and t.user_attrs.get("converged", False)])
             n_not_converged = n_complete - n_converged
+            n_duplicates = len([t for t in study.trials if "duplicate_of" in t.user_attrs])
+            n_extended = len([t for t in study.trials if t.user_attrs.get("epoch_cap", INNER_EPOCHS) > INNER_EPOCHS])
 
             methodology_report[config_id][K] = {
                 "pareto_size": len(pts_array),
@@ -1953,6 +2083,8 @@ def run_adaptive_grid(filepath):
                 "trials_failed": n_failed,
                 "trials_converged": n_converged,
                 "trials_not_converged": n_not_converged,
+                "trials_duplicate": n_duplicates,
+                "trials_epoch_extended": n_extended,
                 "runtime_seconds": runtime_sec,
                 "best_math_loss": float(np.min(pts_array[:, 0])) if len(pts_array) > 0 else None,
                 "best_soc_penalty": float(np.min(pts_array[:, 1])) if len(pts_array) > 0 else None
@@ -1973,12 +2105,16 @@ def run_adaptive_grid(filepath):
         max_math = float(np.max(all_points[:, 0]))
         max_soc = float(np.max(all_points[:, 1]))
         
+        # Ticket 93: this reference point is built from THIS config's fronts
+        # only, so hypervolumes are comparable across K within one config and
+        # never across configs (configs reconstruct different relation sets).
         ref_point = np.array([max_math * (1.0 + HV_MARGIN), max_soc * (1.0 + HV_MARGIN)])
         
         # Save exact ref coordinates for reproducibility
         methodology_report[config_id]["_reference_point"] = {
             "math": float(ref_point[0]),
-            "soc": float(ref_point[1])
+            "soc": float(ref_point[1]),
+            "scope": "within_config_only"
         }
         
         k_hypervolumes = {}
@@ -1990,6 +2126,9 @@ def run_adaptive_grid(filepath):
             
         surviving_Ks = sorted(k_hypervolumes, key=k_hypervolumes.get, reverse=True)[:top_k_to_keep]
         print(f"\n[***] SCOUT COMPLETE FOR {config_id} | SURVIVING K: {surviving_Ks} [***]")
+        for K_rep in K_LIST:
+            if K_rep in methodology_report[config_id]:
+                methodology_report[config_id][K_rep]["deep_dived"] = K_rep in surviving_Ks
 
         # =====================================================================
         # PHASE 3: THE DEEP DIVE (Narrow & Deep)
@@ -2012,10 +2151,12 @@ def run_adaptive_grid(filepath):
             while True:
                 n_usable = len([t for t in study.trials
                                 if t.state == TrialState.COMPLETE
-                                and t.user_attrs.get("converged", False)])
+                                and t.user_attrs.get("converged", False)
+                                and "duplicate_of" not in t.user_attrs])
+                n_fitted = len([t for t in study.trials if "duplicate_of" not in t.user_attrs])
                 if n_usable >= total_target:
                     break
-                if len(study.trials) >= max_attempts:
+                if n_fitted >= max_attempts or len(study.trials) >= 10 * max_attempts:
                     print(f"[!] {config_id} K={K}: stopped Deep Dive at {len(study.trials)} "
                           f"attempts with only {n_usable}/{total_target} converged usable "
                           f"trials. Non-convergence may be systematic here.")
@@ -2119,8 +2260,14 @@ def extract_and_archive_pareto_front(filepath, report_path=None, max_models_per_
             # the most important of the three filter points — a non-converged
             # model archived here gets stability-tested (§S5) and reported as
             # a result, not just left as a transient Optuna Pareto point.
-            converged_front = [t for t in study.best_trials
-                                if t.user_attrs.get("converged", False)]
+            converged_front = []
+            seen_lambdas = set()
+            for t in sorted(study.best_trials, key=lambda t: t.number):
+                lam = t.params.get("lambda_z_offdiag")
+                if (t.user_attrs.get("converged", False) and "duplicate_of" not in t.user_attrs
+                        and lam not in seen_lambdas):
+                    seen_lambdas.add(lam)
+                    converged_front.append(t)
             if not converged_front and study.best_trials:
                 print(f"[!] {config_id} K={K}: {len(study.best_trials)} Pareto trial(s) "
                       f"on record but ZERO are converged — nothing to archive for this K.")
@@ -2164,6 +2311,8 @@ def extract_and_archive_pareto_front(filepath, report_path=None, max_models_per_
                 "config_id": config_id,
                 "K": K,
                 "total_pareto_models": len(pareto_trials),
+                "deep_dived": methodology_report[config_id][K_str].get("deep_dived"),
+                "thin_front": len(pareto_trials) < THIN_FRONT_SIZE,
                 "archived_models": [],
                 "environment_info": env_info
             }
@@ -2190,7 +2339,8 @@ def extract_and_archive_pareto_front(filepath, report_path=None, max_models_per_
                         dimensions=dimensions,
                         params=trial.params,
                         device=DEVICE,
-                        seed_function=set_seeds  
+                        seed_function=set_seeds,
+                        inner_epochs=trial.user_attrs.get("epoch_cap", INNER_EPOCHS)
                     )
 
                     
@@ -2248,6 +2398,8 @@ def extract_and_archive_pareto_front(filepath, report_path=None, max_models_per_
                         "optuna_math_loss": trial.values[0],
                         "optuna_soc_penalty": trial.values[1],
                         "fresh_diagnostics": diagnostics,
+                        "solution_detail": describe_solution(U_final, Z_final, raw_data, soc_keys,
+                                                             sem_keys, anchor_keys, MAX_MONOPOLY),
                         "hyperparameters": trial.params,
                         "user_attrs": trial.user_attrs,
                         "system_attrs": trial.system_attrs,
@@ -2364,38 +2516,75 @@ def row_wise_cosine_similarity(A, B):
 # -----------------------------------------------------------------------------
 # THE CONSENSUS ENGINE
 # -----------------------------------------------------------------------------
+def _pair_tracks(U1, U2, facets, K):
+    """Track A/B agreement between two fits (dicts facet -> (N, K) U_norm).
+    Communities are matched once on the vertically stacked facets (Hungarian),
+    then per facet:
+      Track A = 1 - mean over entities of the Jensen-Shannon distance between
+                the two row-normalised membership vectors (every live or dead
+                entity counts equally, so barely engaged entities add noise);
+      Track B = magnitude-weighted mean over entities of the cosine between the
+                two raw membership rows (weights = the entity's row sum in U1,
+                so strongly engaged entities dominate).
+    Both are entity-level; returns (A, B, per-facet A dict, per-facet B dict)."""
+    S1_raw = np.vstack([U1[f] for f in facets])
+    S2_raw = np.vstack([U2[f] for f in facets])
+    S1_col_prob, S2_col_prob = col_normalize(S1_raw), col_normalize(S2_raw)
+    cost_A = np.zeros((K, K)); cost_B = np.zeros((K, K))
+    for k1 in range(K):
+        for k2 in range(K):
+            cost_A[k1, k2] = jensenshannon(S1_col_prob[:, k1], S2_col_prob[:, k2])
+            cost_B[k1, k2] = 1.0 - (np.dot(S1_raw[:, k1], S2_raw[:, k2]) /
+                                    (np.linalg.norm(S1_raw[:, k1]) * np.linalg.norm(S2_raw[:, k2]) + 1e-9))
+    _, col_ind_A = linear_sum_assignment(cost_A)
+    _, col_ind_B = linear_sum_assignment(cost_B)
+    fa, fb = {}, {}
+    for f in facets:
+        js = jensenshannon(row_normalize(U1[f]), row_normalize(U2[f])[:, col_ind_A], axis=1)
+        fa[f] = 1.0 - np.nanmean(js)
+        cos = row_wise_cosine_similarity(U1[f], U2[f][:, col_ind_B])
+        w = U1[f].sum(axis=1)
+        fb[f] = float(np.mean(cos)) if w.sum() == 0 else float(np.average(cos, weights=w))
+    return float(np.mean(list(fa.values()))), float(np.mean(list(fb.values()))), fa, fb
+
+
 def run_dual_track_stability_analysis(filepath):
+    """Section 5. Refits every archived model at N_STABILITY_SEEDS seeds with the
+    EXTENDED_EPOCHS cap (ticket 96), records how many seeds converged
+    (ticket 95: a failed seed no longer aborts the model, it is counted), and
+    compares every pair of converged seeds on Track A/B. For the same pairs it
+    also computes a chance level: the second fit's entity rows are shuffled
+    within each facet, which keeps every facet's membership distribution but
+    breaks entity correspondence (2026-10-01 measurement: chance level is
+    0.47-0.67 for Track A and 0.40-0.66 for Track B depending on K, far above
+    the 0.17 theoretical minimum). A model 'qualifies' (ticket 91, applied by
+    select_models.py) only if every seed converged and both tracks exceed the
+    largest chance-level pair score."""
     print(f"\n{'='*75}")
     print(f"[***] INITIATING SECTION 5: DUAL-TRACK CONSENSUS ({N_STABILITY_SEEDS} SEEDS) [***]")
     print(f"{'='*75}")
 
     raw_data = load_and_validate_data(filepath)
     dimensions = raw_data.get('dimensions', None)
-    
     master_stability_report = {}
 
     for config_id in CONFIG_IDS:
         soc_keys, sem_keys, anchor_keys = get_active_facets(config_id)
-        
-        # MLOps FIX: True Facet Extraction. Derive deterministic nodes from Relations 29.07.2026 20:59
-        # This guarantees we stack "art", "auth", etc., NOT "S_Art_Auth"
         ALL_FACETS = get_required_facets(soc_keys, sem_keys, anchor_keys)
-        
         config_dir = os.path.join(BASE_RESULTS_DIR, config_id)
-        if not os.path.exists(config_dir): continue
-            
+        if not os.path.exists(config_dir):
+            continue
         master_stability_report[config_id] = {}
 
-        for k_folder in os.listdir(config_dir):
-            if not k_folder.startswith("K_"): continue
-            
+        for k_folder in sorted(os.listdir(config_dir)):
+            if not k_folder.startswith("K_"):
+                continue
             K = int(k_folder.split("_")[1])
             manifest_path = os.path.join(config_dir, k_folder, "pareto_models", "experiment_manifest.json")
-            if not os.path.exists(manifest_path): continue
-                
+            if not os.path.exists(manifest_path):
+                continue
             with open(manifest_path, "r") as f:
                 manifest = json.load(f)
-                
             print(f"\n[*] Evaluating Stability for {config_id} | K={K} ({len(manifest['archived_models'])} models)")
             master_stability_report[config_id][K] = {}
 
@@ -2403,252 +2592,104 @@ def run_dual_track_stability_analysis(filepath):
                 trial_name = model_info["folder_name"]
                 trial_dir = os.path.join(config_dir, k_folder, "pareto_models", trial_name)
                 metadata_path = os.path.join(trial_dir, "model_metadata.json")
-                
                 with open(metadata_path, "r") as f:
                     metadata = json.load(f)
-                    
                 params = metadata["hyperparameters"]
                 optuna_math_loss = metadata.get("optuna_math_loss", 0.0)
                 optuna_soc_penalty = metadata.get("optuna_soc_penalty", 0.0)
-                
                 print(f"    -> Stress-testing {trial_name}...")
-                
-                temp_tensor_dir = os.path.join(trial_dir, "temp_stability_tensors")
-                os.makedirs(temp_tensor_dir, exist_ok=True)
-                
-                seed_math_losses = []
-                seed_soc_penalties = []
-                failed_seeds_log = []
-                
+
                 try:
-                    # ---------------------------------------------------------
-                    # PHASE 1: GENERATE & DISK-STREAM THE RANDOM SEEDS
-                    # ---------------------------------------------------------
-                    for seed_idx, seed_val in enumerate(STABILITY_SEEDS):
-                        try:
-                            set_seeds(seed_val)
-                            
-                            U_final, Z_final, diagnostics = run_inner_solver(
-                                raw_data=raw_data, soc_keys=soc_keys, sem_keys=sem_keys,
-                                anchor_keys=anchor_keys, K=K, dimensions=dimensions,
-                                params=params, device=DEVICE,
-                                # Bound to seed_val: run_inner_solver calls seed_function()
-                                # with no argument, so passing set_seeds itself reset every
-                                # stability run to MASTER_SEED and all seeds gave one fit.
-                                seed_function=lambda s=seed_val: set_seeds(s)
-                            )
+                    fits, seed_log = [], []
+                    for seed_val in STABILITY_SEEDS:
+                        set_seeds(seed_val)
+                        U_final, Z_final, diagnostics = run_inner_solver(
+                            raw_data=raw_data, soc_keys=soc_keys, sem_keys=sem_keys,
+                            anchor_keys=anchor_keys, K=K, dimensions=dimensions,
+                            params=params, device=DEVICE,
+                            # Bound to seed_val (ticket 89): run_inner_solver calls
+                            # seed_function() with no argument.
+                            seed_function=lambda s=seed_val: set_seeds(s),
+                            inner_epochs=EXTENDED_EPOCHS)
+                        conv = bool(diagnostics.get("converged", False))
+                        seed_log.append({"seed": seed_val, "converged": conv,
+                                         "epochs_run": len(diagnostics["loss_history"])})
+                        if not conv:
+                            continue
+                        # Per §4.13: recompute the penalty per seed, never reuse Optuna's.
+                        evaluation = evaluate_complete_solution(
+                            U_final=U_final, Z_final=Z_final, U_scales_out=diagnostics["U_scales"],
+                            raw_data=raw_data, soc_keys=soc_keys, sem_keys=sem_keys,
+                            anchor_keys=anchor_keys, max_monopoly=MAX_MONOPOLY,
+                            entropy_threshold=ENTROPY_THRESHOLD, target_coherence=TARGET_COHERENCE)
+                        fits.append({"U": {f: u.detach().cpu().numpy() for f, u in U_final.items()},
+                                     "math": diagnostics["math_loss"],
+                                     "soc": evaluation["sociological_penalty"]})
+                        del U_final, Z_final
+                        gc.collect()
 
-                            if torch.cuda.is_available(): torch.cuda.synchronize()
-
-                            if not diagnostics.get("converged", True):
-                                raise RuntimeError("Silent optimizer failure: Convergence not reached.")
-
-                            # Per §4.13: Module 2 computes no sociological metrics, so the
-                            # sociological penalty must be recomputed per seed, never read
-                            # back from the archived Optuna trial.
-                            evaluation = evaluate_complete_solution(
-                                U_final=U_final,
-                                Z_final=Z_final,
-                                U_scales_out=diagnostics["U_scales"],
-                                raw_data=raw_data,
-                                soc_keys=soc_keys,
-                                sem_keys=sem_keys,
-                                anchor_keys=anchor_keys,
-                                max_monopoly=MAX_MONOPOLY,
-                                entropy_threshold=ENTROPY_THRESHOLD,
-                                target_coherence=TARGET_COHERENCE
-                            )
-
-                            seed_math_losses.append(diagnostics.get("math_loss", 0.0))
-                            seed_soc_penalties.append(evaluation["sociological_penalty"])
-                                
-                            U_np = {f: u.detach().cpu().numpy() for f, u in U_final.items()}
-                            np.savez(os.path.join(temp_tensor_dir, f"seed_{seed_idx}.npz"), **U_np)
-                                
-                            del U_final, U_np
-                            gc.collect()
-                            if torch.cuda.is_available(): torch.cuda.empty_cache()
-                            
-                        except Exception as e:
-                            failed_seeds_log.append({
-                                "seed_index": seed_idx,
-                                "seed_value": seed_val,
-                                "error": str(e),
-                                "traceback": traceback.format_exc()
-                            })
-                            break # Abort generating further seeds for this model
-
-                    if failed_seeds_log:
-                        metadata["failed_stability_seeds"] = failed_seeds_log
-                        with open(metadata_path, "w") as f:
-                            json.dump(metadata, f, indent=4, cls=NumpyEncoder)
-                        print(f"       [!] Stability test aborted for {trial_name}. See metadata for traceback.")
-                        continue
-
-                    # Calculate Reproducibility Delta & Objective Variance (ddof=1)
-                    math_mean = float(np.mean(seed_math_losses))
-                    soc_mean = float(np.mean(seed_soc_penalties))
-                    
-                    obj_variance = {
-                        "math_loss_mean": math_mean,
-                        "math_loss_sd": float(np.std(seed_math_losses, ddof=1)) if len(seed_math_losses) > 1 else 0.0,
-                        "soc_penalty_mean": soc_mean,
-                        "soc_penalty_std": float(np.std(seed_soc_penalties, ddof=1)) if len(seed_soc_penalties) > 1 else 0.0
-                    }
-                    
-                    reproducibility_delta = {
-                        "delta_math_loss": abs(optuna_math_loss - math_mean),
-                        "delta_soc_penalty": abs(optuna_soc_penalty - soc_mean)
-                    }
-
-                    # ---------------------------------------------------------
-                    # PHASE 2: PAIRWISE DUAL-TRACK CONSENSUS
-                    # ---------------------------------------------------------
-                    track_A_unweighted_jsd = {f: [] for f in ALL_FACETS}
-                    track_B_weighted_cosine = {f: [] for f in ALL_FACETS}
-                    
-                    # Track global scores per pair to calculate accurate Standard Deviation 
-                    # while preserving Ontological Parity (Mean of Means)
-                    pair_global_scores_A = []
-                    pair_global_scores_B = []
-                    
-                    seed_pairs = list(itertools.combinations(range(N_STABILITY_SEEDS), 2))
-                    
-                    for (s1, s2) in seed_pairs:
-                        # MLOps FIX: Context Managers to prevent File Descriptor exhaustion
-                        with np.load(os.path.join(temp_tensor_dir, f"seed_{s1}.npz")) as data1, \
-                             np.load(os.path.join(temp_tensor_dir, f"seed_{s2}.npz")) as data2:
-                            
-                            # I/O Integrity check
-                            missing_facets = (set(ALL_FACETS) - set(data1.files)) | (set(ALL_FACETS) - set(data2.files))
-                            if missing_facets:
-                                raise IOError(f"Corrupted Disk Save: Missing facets {missing_facets}")
-                                
-                            # Matrix Shape Verification (Catching Dimensionality Collapses)
-                            for f in ALL_FACETS:
-                                assert data1[f].shape[1] == K, f"Collapse Seed {s1}: Facet {f} cols != {K}"
-                                assert data2[f].shape[1] == K, f"Collapse Seed {s2}: Facet {f} cols != {K}"
-                            
-                            S1_raw = np.vstack([data1[f] for f in ALL_FACETS]) 
-                            S2_raw = np.vstack([data2[f] for f in ALL_FACETS])
-                            
-                            # --- TRACK A ALIGNMENT (JSD / Probability Space) ---
-                            S1_col_prob = col_normalize(S1_raw)
-                            S2_col_prob = col_normalize(S2_raw)
-                            cost_A = np.zeros((K, K))
-                            
-                            # --- TRACK B ALIGNMENT (Cosine / Magnitude Space) ---
-                            cost_B = np.zeros((K, K))
-                            
-                            for k1 in range(K):
-                                for k2 in range(K):
-                                    cost_A[k1, k2] = jensenshannon(S1_col_prob[:, k1], S2_col_prob[:, k2])
-                                    cost_B[k1, k2] = 1.0 - (np.dot(S1_raw[:, k1], S2_raw[:, k2]) / 
-                                                     (np.linalg.norm(S1_raw[:, k1]) * np.linalg.norm(S2_raw[:, k2]) + 1e-9))
-                                    
-                            _, col_ind_A = linear_sum_assignment(cost_A)
-                            _, col_ind_B = linear_sum_assignment(cost_B)
-
-                            # --- FACET-LEVEL EVALUATION ---
-                            current_pair_A_facets = []
-                            current_pair_B_facets = []
-                            
-                            for f in ALL_FACETS:
-                                U1_raw = data1[f]
-                                U2_raw = data2[f]
-                                
-                                # Track A Evaluation: Unweighted JSD
-                                U1_prob = row_normalize(U1_raw)
-                                U2_prob_aligned = row_normalize(U2_raw)[:, col_ind_A]
-                                js_distances = jensenshannon(U1_prob, U2_prob_aligned, axis=1)
-                                
-                                mean_js_sim = 1.0 - np.nanmean(js_distances)
-                                track_A_unweighted_jsd[f].append(mean_js_sim)
-                                current_pair_A_facets.append(mean_js_sim)
-                                
-                                # Track B Evaluation: Magnitude-Weighted Cosine
-                                U2_raw_aligned = U2_raw[:, col_ind_B]
-                                cos_similarities = row_wise_cosine_similarity(U1_raw, U2_raw_aligned)
-                                
-                                magnitude_weights = U1_raw.sum(axis=1) 
-                                
-                                if magnitude_weights.sum() == 0:
-                                    weighted_cos_sim = float(np.mean(cos_similarities))
-                                else:
-                                    weighted_cos_sim = float(np.average(cos_similarities, weights=magnitude_weights))
-                                    
-                                track_B_weighted_cosine[f].append(weighted_cos_sim)
-                                current_pair_B_facets.append(weighted_cos_sim)
-                                
-                            # Preserve Ontological Parity for the Global SD Calculation
-                            pair_global_scores_A.append(np.mean(current_pair_A_facets))
-                            pair_global_scores_B.append(np.mean(current_pair_B_facets))
-                            
-                    # ---------------------------------------------------------
-                    # PHASE 3: AGGREGATION & REPORTING
-                    # ---------------------------------------------------------
-                    # Global Means and SDs (Ontological Parity Preserved via pair_global_scores)
-                    global_A_mean = float(np.mean(pair_global_scores_A))
-                    global_A_sd = float(np.std(pair_global_scores_A, ddof=1)) if len(pair_global_scores_A) > 1 else 0.0
-                    
-                    global_B_mean = float(np.mean(pair_global_scores_B))
-                    global_B_sd = float(np.std(pair_global_scores_B, ddof=1)) if len(pair_global_scores_B) > 1 else 0.0
-                    
-                    # Individual Facet Stats
-                    facet_A_stats = {
-                        f: {
-                            "mean": float(np.mean(scores)),
-                            "sd": float(np.std(scores, ddof=1)) if len(scores) > 1 else 0.0
-                        } for f, scores in track_A_unweighted_jsd.items()
-                    }
-                    
-                    facet_B_stats = {
-                        f: {
-                            "mean": float(np.mean(scores)),
-                            "sd": float(np.std(scores, ddof=1)) if len(scores) > 1 else 0.0
-                        } for f, scores in track_B_weighted_cosine.items()
-                    }
-                    
-                    # Update local metadata with all explicit reproducibility trackers
+                    n_conv = len(fits)
                     metadata["stability_test_seeds_used"] = STABILITY_SEEDS
-                    metadata["reproducibility_delta"] = reproducibility_delta
-                    metadata["objective_variance"] = obj_variance
-                    metadata["consensus_track_A_unweighted"] = {
-                        "global_js_similarity_mean": global_A_mean,
-                        "global_js_similarity_sd": global_A_sd,
-                        "facet_stats": facet_A_stats
-                    }
-                    metadata["consensus_track_B_magnitude_weighted"] = {
-                        "global_cosine_similarity_mean": global_B_mean,
-                        "global_cosine_similarity_sd": global_B_sd,
-                        "facet_stats": facet_B_stats
-                    }
-                    
+                    metadata["stability_seed_log"] = seed_log
+                    metadata["stability_seeds_converged"] = n_conv
+                    result = {"n_seeds": len(STABILITY_SEEDS), "n_converged": n_conv}
+
+                    if n_conv >= 2:
+                        math_l = [x["math"] for x in fits]; soc_l = [x["soc"] for x in fits]
+                        metadata["objective_variance"] = {
+                            "math_loss_mean": float(np.mean(math_l)), "math_loss_sd": float(np.std(math_l, ddof=1)),
+                            "soc_penalty_mean": float(np.mean(soc_l)), "soc_penalty_std": float(np.std(soc_l, ddof=1))}
+                        metadata["reproducibility_delta"] = {
+                            "delta_math_loss": abs(optuna_math_loss - float(np.mean(math_l))),
+                            "delta_soc_penalty": abs(optuna_soc_penalty - float(np.mean(soc_l)))}
+                        rng = np.random.default_rng(STABILITY_SEEDS[0])
+                        A, B, nA, nB = [], [], [], []
+                        fa_all = {f: [] for f in ALL_FACETS}; fb_all = {f: [] for f in ALL_FACETS}
+                        for i, j in itertools.combinations(range(n_conv), 2):
+                            a, b, fa, fb = _pair_tracks(fits[i]["U"], fits[j]["U"], ALL_FACETS, K)
+                            A.append(a); B.append(b)
+                            for f in ALL_FACETS:
+                                fa_all[f].append(fa[f]); fb_all[f].append(fb[f])
+                            shuffled = {f: fits[j]["U"][f][rng.permutation(fits[j]["U"][f].shape[0])] for f in ALL_FACETS}
+                            a0, b0, _, _ = _pair_tracks(fits[i]["U"], shuffled, ALL_FACETS, K)
+                            nA.append(a0); nB.append(b0)
+                        sd = lambda x: float(np.std(x, ddof=1)) if len(x) > 1 else 0.0
+                        metadata["consensus_track_A_unweighted"] = {
+                            "global_js_similarity_mean": float(np.mean(A)), "global_js_similarity_sd": sd(A),
+                            "chance_mean": float(np.mean(nA)), "chance_max": float(np.max(nA)),
+                            "facet_stats": {f: {"mean": float(np.mean(v)), "sd": sd(v)} for f, v in fa_all.items()}}
+                        metadata["consensus_track_B_magnitude_weighted"] = {
+                            "global_cosine_similarity_mean": float(np.mean(B)), "global_cosine_similarity_sd": sd(B),
+                            "chance_mean": float(np.mean(nB)), "chance_max": float(np.max(nB)),
+                            "facet_stats": {f: {"mean": float(np.mean(v)), "sd": sd(v)} for f, v in fb_all.items()}}
+                        qualifies = (n_conv == len(STABILITY_SEEDS)
+                                     and float(np.mean(A)) > float(np.max(nA))
+                                     and float(np.mean(B)) > float(np.max(nB)))
+                        result.update({
+                            "Track_A_Unweighted_Mean": float(np.mean(A)), "Track_A_Unweighted_SD": sd(A),
+                            "Track_A_Chance_Mean": float(np.mean(nA)), "Track_A_Chance_Max": float(np.max(nA)),
+                            "Track_B_Weighted_Mean": float(np.mean(B)), "Track_B_Weighted_SD": sd(B),
+                            "Track_B_Chance_Mean": float(np.mean(nB)), "Track_B_Chance_Max": float(np.max(nB)),
+                            "qualifies": bool(qualifies)})
+                        print(f"       [+] {n_conv}/{len(STABILITY_SEEDS)} seeds converged | "
+                              f"Track A {np.mean(A):.4f} (chance max {np.max(nA):.4f}) | "
+                              f"Track B {np.mean(B):.4f} (chance max {np.max(nB):.4f}) | qualifies={qualifies}")
+                    else:
+                        result["qualifies"] = False
+                        print(f"       [!] only {n_conv}/{len(STABILITY_SEEDS)} seeds converged — no consensus computed")
+                    metadata["stability_qualifies"] = result["qualifies"]
                     with open(metadata_path, "w") as f:
                         json.dump(metadata, f, indent=4, cls=NumpyEncoder)
-                        
-                    master_stability_report[config_id][K][trial_name] = {
-                        "Track_A_Unweighted_Mean": global_A_mean,
-                        "Track_A_Unweighted_SD": global_A_sd,
-                        "Track_B_Weighted_Mean": global_B_mean,
-                        "Track_B_Weighted_SD": global_B_sd
-                    }
-                    print(f"       [+] Track A: {global_A_mean:.4f} (±{global_A_sd:.4f}) | Track B: {global_B_mean:.4f} (±{global_B_sd:.4f})")
-                    
-                except Exception as e:
-                    err_path = os.path.join(trial_dir, "stability_error.log")
-                    with open(err_path, "w") as f:
+                    master_stability_report[config_id][K][trial_name] = result
+
+                except Exception:
+                    with open(os.path.join(trial_dir, "stability_error.log"), "w") as f:
                         f.write(traceback.format_exc())
                     print(f"       [!] Stability test failed for {trial_name}. See logs.")
-                    
-                finally:
-                    if os.path.exists(temp_tensor_dir):
-                        shutil.rmtree(temp_tensor_dir)
 
     report_path = os.path.join(BASE_RESULTS_DIR, f"master_dual_track_stability_report{REPORT_SUFFIX}.json")
     with open(report_path, "w") as f:
         json.dump(master_stability_report, f, indent=4, cls=NumpyEncoder)
-        
     print(f"\n{'='*75}")
     print(f"[***] SECTION 5 COMPLETE. Stability Report saved to: {report_path} [***]")
     print(f"{'='*75}")
@@ -2673,7 +2714,15 @@ if __name__ == "__main__":
                         data_sha256=data_sha256, script_sha256=script_sha256,
                         slurm_job_id=os.environ.get("SLURM_JOB_ID"),
                         slurm_array_job_id=os.environ.get("SLURM_ARRAY_JOB_ID"),
-                        slurm_array_task_id=os.environ.get("SLURM_ARRAY_TASK_ID"))
+                        slurm_array_task_id=os.environ.get("SLURM_ARRAY_TASK_ID"),
+                        # Ticket 101: fits are deterministic on one machine but differ across
+                        # CPU types; record the arithmetic path so runs can be compared.
+                        hostname=os.uname().nodename,
+                        cpu_model=next((l.split(":", 1)[1].strip() for l in open("/proc/cpuinfo")
+                                        if l.startswith("model name")), None),
+                        torch_cpu_capability=torch.backends.cpu.get_cpu_capability(),
+                        ATEN_CPU_CAPABILITY=os.environ.get("ATEN_CPU_CAPABILITY"),
+                        MKL_CBWR=os.environ.get("MKL_CBWR"))
     with open(os.path.join(BASE_RESULTS_DIR, f"run_manifest{REPORT_SUFFIX}.json"), "w") as f:
         json.dump(run_manifest, f, indent=4)
     print(f"[*] Configs: {CONFIG_IDS} | data: {DATA_FILEPATH} (sha256 {data_sha256[:12]})")

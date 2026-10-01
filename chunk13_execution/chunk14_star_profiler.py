@@ -67,6 +67,11 @@ meta = json.load(open(os.path.join(trial_dir, "model_metadata.json")))
 U = {f: np.array(t) for f, t in torch.load(os.path.join(trial_dir, "U_matrices.pt"), weights_only=False).items()}
 Z = {r: np.array(t) for r, t in torch.load(os.path.join(trial_dir, "Z_core.pt"), weights_only=False).items()}
 U_prob = m.compute_probability_distributions(U)
+# Rankings use reconstruction-weighted membership (ticket 100): plain U_prob
+# shows an entity with nothing on the used community columns as ~1.0 on an
+# unused column (C1/K=3/trial_0052: 160 of 300 live atoms). Unengaged
+# entities are excluded from the lists and counted separately.
+P_w, engaged = m.compute_weighted_membership(U, Z, presence_masks)
 K = args.K
 
 
@@ -96,11 +101,11 @@ _rev_maps["art"] = {v: k for k, v in decoders["maps_t1_art"].items()}  # this ru
 def top_entities(facet, k, n=TOP_N):
     if facet not in U_prob or facet not in presence_masks:
         return []
-    live = presence_masks[facet]
-    col = U_prob[facet][:, k]
+    live = presence_masks[facet] & engaged[facet]
+    col = P_w[facet][:, k]
     idxs = np.where(live)[0]
     idxs = idxs[np.argsort(-col[idxs])][:n]
-    return [(label_for(facet, int(i)), float(col[i])) for i in idxs]
+    return [(label_for(facet, int(i)), float(col[i])) for i in idxs if col[i] > 0]
 
 
 # --- recompute the four diagnostics' full per-community detail (verified
@@ -151,7 +156,7 @@ def domain_balance_vector():
 
 community_share = collapse_shares()
 coherence = coherence_vector()
-r_k = domain_balance_vector()
+r_k = m.domain_balance_rk(P_w, {f: presence_masks[f] & engaged[f] for f in presence_masks})
 ghost_threshold = 0.5 * (1.0 / K)
 
 lines = []
@@ -159,6 +164,12 @@ lines.append(f"# Star profile: {args.config} / K={K} / {args.trial}\n")
 lines.append(f"Replaces `toy_large.ipynb` cell 58 (\"CHUNK 14c STAR PROFILER\") -- see "
              f"`chunk14_star_profiler.py`'s module docstring for why the old version's "
              f"core measure was retired, not just updated.\n")
+lines.append("Memberships are reconstruction-weighted (each community column weighted by the "
+             "reconstruction mass it carries); entities with no weight on any used column are "
+             "listed as unassigned instead of ranked.\n")
+unassigned = {f: int((presence_masks[f] & ~engaged[f]).sum()) for f in presence_masks}
+lines.append("Unassigned live entities per facet: " + ", ".join(f"{f} {n}" for f, n in unassigned.items() if n) + "\n"
+             if any(unassigned.values()) else "Unassigned live entities: none\n")
 lines.append(f"`math_loss`={meta['optuna_math_loss']:.4f}  `sociological_penalty`={meta['optuna_soc_penalty']:.4f}  "
              f"community_share (relation-level mass) sums to {community_share.sum():.3f}\n")
 
@@ -182,7 +193,7 @@ for k in range(K):
         top = top_entities(facet, k)
         if not top:
             continue
-        lines.append(f"\n**{heading} (by U_prob loading on this community):**\n")
+        lines.append(f"\n**{heading} (by weighted membership in this community):**\n")
         for label, p in top:
             label_str = label if len(label) < 160 else label[:157] + "..."
             lines.append(f"- {p:.3f} -- {label_str}")

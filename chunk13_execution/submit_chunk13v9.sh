@@ -39,6 +39,13 @@ export MKL_NUM_THREADS=1
 export VECLIB_MAXIMUM_THREADS=1
 export NUMEXPR_NUM_THREADS=1
 
+# Ticket 101: identical code and seed give slightly different fits on
+# different CPU types (incline vs CSF nodes differed in the 4th decimal of
+# math_loss). Force the portable arithmetic paths so results can match across
+# machines; check_cross_machine.sh verifies this.
+export ATEN_CPU_CAPABILITY=default
+export MKL_CBWR=COMPATIBLE
+
 echo "Task $SLURM_ARRAY_TASK_ID: config $CONFIG on $(hostname), $(date -Is)"
-python chunk13v9.py --config "$CONFIG"
+python -u chunk13v9.py --config "$CONFIG"   # -u: unbuffered, so logs show progress live (ticket 97)
 echo "Task $SLURM_ARRAY_TASK_ID finished with exit code $? at $(date -Is)"

@@ -3943,6 +3943,12 @@ is 1 minus the mean Jensen-Shannon distance computed with natural logs, whose ma
 √ln2 ≈ 0.83, so Track A cannot fall below about 0.17; Track B (cosine on non-negative
 vectors) spans 0-1.
 
+> **[CORRECTED 2026-10-01, §30]** 0.17 is only the theoretical minimum. The level Track A
+> reaches by chance on these models (entity correspondence destroyed by shuffling) is
+> 0.47-0.67 depending on K, and Track B's is 0.40-0.66. Scores of 0.52-0.75 are therefore
+> close to chance, and thresholds must be K-specific. Track B is also entity-level (row
+> cosine, magnitude-weighted), not a per-community comparison as described in conversation.
+
 **Scales of the two objectives.** `math_loss` is a weighted mean of per-relation
 `‖X−R‖²` on Frobenius-normalised relations: 1.0 is the null model (R=0), 0.0 is perfect
 reconstruction. Observed range 0.70-0.89. `sociological_penalty` is currently
@@ -3969,7 +3975,10 @@ SD(B−A) = 0.053, and the largest divergences reach +0.137 (C3 K=2 trial_0011: 
 B=0.820) — a model can look clearly more stable on one track than the other. Every one of
 the 8 largest divergences has B above A; the smallest-divergence models (|B−A|<0.01) show
 near-perfect agreement, so the two tracks mostly agree but disagree sharply on a real
-subset, not as uniform noise. Possible partial explanation for the B>A skew, not verified
+subset, not as uniform noise. **[CORRECTED 2026-10-01, §30]** Both tracks compare entities, not communities: Track A averages the
+Jensen-Shannon similarity of row-normalised memberships over all entities equally, Track B the
+cosine of raw membership rows weighted by each entity's row sum. B therefore discounts barely
+engaged entities whose memberships are noise, a more direct explanation of B > A. Original text: Possible partial explanation for the B>A skew, not verified
 here: cosine similarity on non-negative vectors has a baseline above 0 even for unrelated
 vectors (unlike Track A's JSD, whose floor at ≈0.17 is an exact property of the natural-log
 convention — §27), so Track B may have its own smaller, data-dependent floor that inflates
@@ -4085,3 +4094,75 @@ reading from a thin, unstable cell as evidence of anything structural.
 - Clearest reliable ghost example: **C3/K=4** (5/6 verified, 2/6 models show a ghost).
 - Not recommended despite the most dramatic numbers: C5/K=6 (ghosts in all 10 archived
   models) — 0/10 pass stability, so this reading cannot be trusted on its own.
+
+
+## 30. What the patched v9.3 run rests on: unused columns, shared-term concentration, chance-level stability, epoch extension, cross-machine differences (2026-10-01)
+
+All numbers from the 2026-09-30 run's archived models (`results/v9.2.t1_v2/`) or from refits
+on incline. Scripts and raw outputs were scratch work; each test is described fully here.
+
+**Unused community columns distort `U_prob`.** In C1/K=3/trial_0052 the atom facet's
+community 0 has an all-zero row in `Z['M_Atom_Child']` (C1's only atom relation) and carries
+exactly zero reconstruction mass. Because `U_norm` columns have unit norm regardless, an
+atom with nothing on the used columns ("computational": U row [0.0048, 3e-7, 3e-6]) reads
+0.999 in community 0 after row normalisation; 160 of 300 live atoms looked like that. This,
+not over-concentration, explains "computational"/"bioinformatic" at 0.999 with no supporting
+article. Across all 202 models such columns are rare: 2 models for core atoms, 4 for fringe
+atoms, 6 for affiliations, none elsewhere. Reconstruction-weighted membership (CLAUDE.md
+ticket 100) removes them.
+
+**Over-concentration of shared terms is real after that fix.** For every engaged semantic
+entity, structural support = share of its propagated mass (raw relations, article
+memberships) coming from each community. Of 61,757 structurally shared entities (no community
+supplies over 60% of support), 21.4% are assigned above 0.9 to one community (24% at K=2, 28%
+K=3, 19% K=4, 23% K=5); 14.3% of all engaged semantic entities are above 0.9 in a community
+supplying under half their support. `lambda_z_offdiag` is no consistent lever: within a
+config/K, Spearman(lambda, shared-but-exclusive fraction) has median 0.12, range -0.95 to
++0.93 (25 cells); the fraction varies by a median 0.11 along a front. Within cells, current
+Penalty_B tracks it weakly (median Spearman 0.15, 26 cells); Penalty_B on weighted membership
+tracks it better (median 0.56). Implications for the options considered: more weight on
+Penalty_B can only choose among front models and cannot move what `lambda_z_offdiag` does not
+move; switching Penalty_B to weighted membership makes that choice better aimed (owner
+decision, ticket 100); reducing the effect itself needs an in-training mechanism (open). A
+worst-case aggregation of Penalty_B was not tested separately.
+
+**Stability is close to chance, and chance depends on K.** One stability-verified archived
+model per config/K (20 cells, K=2-5), refitted at seeds 1000-1009 (all 200 refits converged).
+Chance level = the same Track A/B pipeline on pairs where the second fit's entity rows are
+shuffled within each facet:
+
+| K | Track A chance mean (max) | Track B chance mean (max) | community_share SD across seeds (median) |
+|---|---|---|---|
+| 2 | 0.674 (0.735) | 0.655 (0.767) | 0.030 |
+| 3 | 0.575 (0.637) | 0.527 (0.619) | 0.053 |
+| 4 | 0.519 (0.577) | 0.441 (0.533) | 0.052 |
+| 5 | 0.470 (0.520) | 0.399 (0.465) | 0.055 |
+
+Real scores exceed chance by 0.04-0.18 (Track A) and 0.08-0.35 (Track B); C1/K=2's real Track
+A (0.705) is below its chance maximum (0.723). Section 5 now computes this per model (ticket
+95) and the selection rule requires both tracks above that model's chance maximum (ticket 91).
+
+**Ghost verdicts need several seeds.** A community's share moves by about 0.05 between seeds,
+half the K=5 ghost threshold (0.10). In these 20 models no community fell below the threshold
+in more than 2 of 10 seeds, so the single-fit ghost counts in §29 near the threshold are not
+reliable on their own.
+
+**Epoch extension.** The cap only bounds the loop, so a refit with a higher cap continues the
+same trajectory. Cap 8,000: C2/K=5's 8 distinct non-converged front trials converged at
+2,025-2,039 epochs (loss 0.73741 -> 0.73727-0.73732); C4/K=5's at 2,395-2,472 (some converged
+before 2,000 on incline though recorded as unconverged on CSF, see next paragraph);
+stability seeds of 3 C3/K=5 and 3 C4/K=5 models that had failed at 2,000 converged 10/10 by
+2,876 epochs. Implemented as ticket 96; unit test reproduced 0.7715404629707336 at 2,472 epochs.
+
+**Cross-machine differences.** Fits are deterministic on one machine (§26) but not across CPU
+types. Three CSF-archived models refitted on incline: C1/K=3/trial_0052 0.84493 (1,432 epochs)
+vs 0.84480 (1,450); C5/K=3/trial_0009 0.82331 (624) vs 0.82326 (630); C4/K=5/trial_0006
+0.75305 (1,814) vs 0.75318 (1,785). On incline the instruction path alone changes the result
+(AVX-512 0.8448045, AVX2 0.8447879, default 0.8447862). Ticket 101 forces the portable path
+and records the machine; whether CSF nodes then match is checked by `check_cross_machine.sh`.
+
+**v9.3 end-to-end test** (C1 and C6, K 2-3, 3 scout / 2 deep-dive trials, 3 stability seeds):
+no archiver reproducibility warning (the objective now re-seeds immediately before fitting, as
+the archiver does), stability counts and chance levels recorded, two C1/K=2 models correctly
+fail the rule at chance level, merge and selection run, and two launches with different hash
+seeds gave identical reports.
