@@ -3962,3 +3962,59 @@ vectors (unlike Track A's JSD, whose floor at ≈0.17 is an exact property of th
 convention — §27), so Track B may have its own smaller, data-dependent floor that inflates
 it on weakly-stable models. Flagged for a planted-null check (compare Track B's score
 between two genuinely unrelated random U matrices) before trusting a high Track B alone.
+
+## 29. Full per-community detail behind sociological_penalty, recomputed from saved tensors (2026-10-01)
+
+The saved JSON results only keep scalar aggregates per model (`max_share`, `weakest_coherence`,
+`mean_dev_k`, the single combined `semantic_pen`). `deep_diagnostic_audit.py` recomputes the
+full per-community vectors behind all four checks directly from each archived model's saved
+`U_matrices.pt`/`Z_core.pt` (no refitting), across all 202 archived models. Recomputed scalars
+matched the saved ones exactly (float32 precision) on a spot-check, confirming correctness.
+
+**Domain balance (`dev_k`):** mean 0.101 across all 202 models (range 0.002-0.252). Per FINDINGS
+§25, this measure does not track true domain balance on this corpus — the level itself is not
+informative beyond confirming the earlier finding at the full run's scale.
+
+**Item-community attribution given higher-order structure (semantic Penalty_A, not separable
+from the saved `semantic_pen` before this script existed):** mean 0.047, generally low
+(max 0.164) — propagated structural signal and the model's own community loadings agree
+reasonably well almost everywhere. Lowest in C6 (0.013) and C2 (0.027); highest in C4 (0.063)
+and C1 (0.061). Rises mildly with K in most configs (e.g. C1: 0.043 at K=2 to 0.112 at K=6) —
+each community has proportionately less of its own article mass to anchor the propagation
+against as K grows.
+
+**Monopolisation — two distinct levels, both measured:**
+- Relation-level mass collapse (`max_share`, collapse_pen's input): mean 0.376, only 4/202
+  models exceed the 0.60 ceiling that triggers `collapse_pen`.
+- Entity-level ubiquity hoarding (semantic Penalty_B, likewise not previously separable): mean
+  0.105, present at some level in every single model (202/202 > 0). **Both measures fall
+  sharply and monotonically as K rises in every config** (e.g. C3's Penalty_B: 0.252 at K=2 →
+  0.058 at K=6; C1's `max_share`: 0.556 at K=2 → 0.305 at K=6) — mechanical: fewer communities
+  leaves less room to split credit for a shared term, so low K structurally produces more
+  apparent hoarding regardless of whether the model is doing anything wrong.
+
+**Within- vs between-community relations (full coherence vector, not just the weakest
+community):** weakest-community coherence mean 0.983 (range 0.749-1.000); the spread between a
+model's best and worst community is small (mean 0.015, max 0.201). This confirms, now across
+the full 202-model grid rather than the original 12-cell check, that `coherence_pen`'s target
+(0.50) is never approached — reinforcing rather than revising CLAUDE.md §4.17's existing
+finding.
+
+**Ghost communities (ticket 86's `0.5×fair-share` threshold, applied to the actual
+`community_share` vector, not just `max_share`):** 29/202 models (14%) have at least one ghost;
+35 ghost-community instances total. Sharply concentrated by K: 0% at K=2/3, 11% at K=4, 20% at
+K=5, **56% at K=6**. By config: C5 worst (27%), C1 and C3 tied (18%), C6 best (4%), C2 has
+none in this grid (0%). The same three independent signals — convergence rate (FINDINGS §27),
+stability (FINDINGS §27), and ghost prevalence — all point the same direction: K=5/6 is where
+this corpus runs out of real structure to support that many communities.
+
+**Per-config/K cell table (stability-verified count / total archived, mean Penalty_A, mean
+Penalty_B, mean max_share, ghost count / total, mean dev_k)** is in
+`deep_diagnostic_audit_results.json` (execution dir) — not reproduced here in full; the
+clearest cells for further inspection: C1/K=4 is the only cell that is both fully
+stability-verified (7/7) and has a confirmed ghost (1/7) — the single most defensible "real
+ghost in a trustworthy fit" case in the grid. C1/K=2 and C3/K=2 are both fully
+stability-verified (8/8, 9/9) and have the two highest Penalty_B values in the entire grid
+(0.244, 0.252) — the clearest trustworthy monopolisation signal available. C5/K=6 has a ghost
+in every one of its 10 archived models but 0/10 are stability-verified — illustrates the
+failure mode at its most extreme but is not itself a trustworthy model to analyse further.
