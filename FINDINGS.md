@@ -3947,3 +3947,18 @@ reproduces the earlier fit exactly (CLAUDE.md ticket 92).
 **Not yet done.** No preferred model has been chosen; an informal pick was withdrawn
 (CLAUDE.md ticket 91). Ghost-community counts (ticket 86) have not been computed for the
 archived models.
+
+## 28. Track A and Track B diverge in a real, not negligible, fraction of models (2026-10-01)
+
+Across all 132 archived models with a stability score: Pearson r(Track A, Track B) = 0.750
+— correlated, not interchangeable. Mean(B−A) ≈ 0.001 (no systematic bias on average), but
+SD(B−A) = 0.053, and the largest divergences reach +0.137 (C3 K=2 trial_0011: A=0.683,
+B=0.820) — a model can look clearly more stable on one track than the other. Every one of
+the 8 largest divergences has B above A; the smallest-divergence models (|B−A|<0.01) show
+near-perfect agreement, so the two tracks mostly agree but disagree sharply on a real
+subset, not as uniform noise. Possible partial explanation for the B>A skew, not verified
+here: cosine similarity on non-negative vectors has a baseline above 0 even for unrelated
+vectors (unlike Track A's JSD, whose floor at ≈0.17 is an exact property of the natural-log
+convention — §27), so Track B may have its own smaller, data-dependent floor that inflates
+it on weakly-stable models. Flagged for a planted-null check (compare Track B's score
+between two genuinely unrelated random U matrices) before trusting a high Track B alone.
