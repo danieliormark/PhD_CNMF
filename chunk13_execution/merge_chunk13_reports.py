@@ -2,7 +2,7 @@
 import argparse, glob, json, os, sys
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--results", default="results/v9.3.t1_v2")
+ap.add_argument("--results", default="results/v9.4.t1_v2")
 ap.add_argument("--configs", default="C1,C2,C3,C4,C5,C6")
 args = ap.parse_args()
 configs = args.configs.split(",")

@@ -184,6 +184,8 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
   same rule applies to them.
   Since 2026-10-01 also `select_models.py`, `cross_machine_fit.py`,
   `check_cross_machine.sh` and `chunk14_star_profiler.py`.
+  Since 2026-10-02 also `ticket102_calibration/` (the concentration-term
+  calibration and text-check scripts, FINDINGS §31; record only, not run by the pipeline).
 
 ---
 

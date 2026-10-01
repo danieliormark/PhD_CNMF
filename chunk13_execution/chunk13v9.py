@@ -4,6 +4,12 @@
 # =============================================================================
 
 import os
+import math
+# torch must be imported before numpy: importing numpy first changes fits
+# (2026-10-02, C1/K=3 seed 42: math_loss 0.8446383 / 1476 epochs instead of
+# 0.8447862 / 1452), presumably because the two ship different BLAS/OpenMP
+# runtimes and the first one loaded is used by both. Scripts that load this
+# module must not import numpy before it to reproduce pipeline fits exactly.
 import torch
 import pickle
 import numpy as np
@@ -85,6 +91,26 @@ TARGET_COHERENCE = 0.50        # Minimum required mean anchor diagonal dominance
 # 0.0.
 DOMAIN_BALANCE_TOL = 0.15
 
+# 2c. In-loop shared-entity concentration floor (ticket 102, v9.4). For each
+# live entity of the four lower semantic facets, s_i = normalised entropy of
+# the community distribution it inherits from the articles that use it
+# (article weighted membership pushed down the raw relations, the same
+# propagation as Penalty_B), computed once at epoch CONC_WARMUP and then held
+# fixed. Loss: mean_i max(0, CONC_GAMMA * s_i - H(p_i))^2, p_i = the entity's
+# reconstruction-weighted membership (ticket 100). One-sided: an entity is
+# only pushed when its spread across communities is below the floor its usage
+# implies. Weight NOT Optuna-tunable (the lambda_domain_balance precedent).
+# Calibrated 2026-10-02 (FINDINGS §31): 20 config/K cells x 5 seeds x 15
+# settings, plus an independent check against the abstracts' text. At
+# 0.1/0.8/300: shared-but-exclusive entities 25% -> 3% (graph measure) and
+# 49% -> 19% (text measure); niche-in-text words wrongly spread 10% -> 16%
+# (ticket 103, open); recon cost +0.5% mean. Set LAMBDA_CONC = 0.0 to run
+# without it (exactly v9.3's trajectory).
+LAMBDA_CONC = 0.1
+CONC_GAMMA = 0.8
+CONC_WARMUP = 300
+CONC_FACETS = ['core_child_he', 'cousin_he', 'core_atom', 'fringe_atom']
+
 # 3. Doxa / Elite Capture Rule
 #MAX_MONOPOLY = 0.60            # Maximum allowable mass concentration for elite entities in a single community deprecated in favour of more flexible 0.85
 
@@ -95,7 +121,7 @@ LAMBDA_SEM = 1.0               # Penalty weight for socio-semantic semantic real
 
 # 5. Seed and version control for reproducibility
 MASTER_SEED = 42
-PIPELINE_VERSION = "v9.3.t1_v2"
+PIPELINE_VERSION = "v9.4.t1_v2"
 
 # (Note: CORE_THRESHOLD = 0.75 has been intentionally retired and removed 
 #  as Section 4A now uses continuous probabilistic message passing instead 
@@ -582,6 +608,10 @@ def run_inner_solver(
     # stubbed) so it is ready to reactivate if 22k-scale evidence supports a
     # nonzero value, exactly the lambda_l1/ticket-78 pattern.
     lambda_domain_balance = params.get('lambda_domain_balance', 0.0)
+    # Ticket 102: shared-entity concentration floor, see LAMBDA_CONC above.
+    lambda_conc = params.get('lambda_conc', LAMBDA_CONC)
+    conc_gamma = params.get('conc_gamma', CONC_GAMMA)
+    conc_warmup = int(params.get('conc_warmup', CONC_WARMUP))
 
     active_matrices = {}
     active_facets = set()
@@ -627,28 +657,107 @@ def run_inner_solver(
     db_soc_total = sum(db_live_counts[f] for f in db_soc_facets)
     db_sem_total = sum(db_live_counts[f] for f in db_sem_facets)
 
-    def _db_domain_share(U_norm_dict, facets, w_total):
+    def _column_weights(Un, Zs, f):
+        """Torch version of compute_weighted_membership's column weights:
+        w_k^2 = sum over relations touching f of the squared Frobenius norm of
+        the slice of U_f Z U_g^T that passes through column k (equal to
+        diag(Z (U_g^T U_g) Z^T)_k, computed via K x K Gram matrices). Columns
+        below 1e-3 of the largest weight get 0. Detached: the weights only
+        decide which columns count, no gradient flows through them."""
+        with torch.no_grad():
+            w = torch.zeros(K, device=device, dtype=Un[f].dtype)
+            for r, z in Zs.items():
+                a, b = RELATION_MAP[r]
+                if a == f:
+                    w = w + torch.diagonal(z @ (Un[b].t() @ Un[b]) @ z.t())
+                if b == f:
+                    w = w + torch.diagonal(z.t() @ (Un[a].t() @ Un[a]) @ z)
+            w = torch.sqrt(torch.clamp(w, min=0.0))
+            return torch.where(w < 1e-3 * w.max(), torch.zeros_like(w), w)
+
+    def _db_domain_share(U_norm_dict, Zs, facets, w_total):
         """Entity-count-weighted mean, over `facets`, of each facet's own
-        live-entity-masked mean U_prob row -- computed here from U_norm
-        directly (L1 row-normalize inline) rather than calling
-        compute_probability_distributions, which only accepts numpy and
-        would break autograd. Matches E1's own methodology
-        (facet_membership_profile + domain_balance_r_k(weighting='entity'))
-        exactly, just differentiable."""
+        live-entity-masked mean membership row, differentiable. Ticket 100
+        (v9.4): membership is reconstruction-weighted (columns weighted by
+        _column_weights, unengaged entities -- weighted mass below 1e-3 x the
+        live median -- dropped), matching evaluate_domain_balance, which now
+        reads compute_weighted_membership's output. Weight is 0.0 by default
+        (ticket 82), so this only feeds raw_domain_balance_penalty."""
         if not facets or w_total == 0:
             return None
         acc = None
         for f in facets:
             if f not in U_norm_dict:
                 continue
-            live = U_norm_dict[f][db_mask_t[f]]
+            live = U_norm_dict[f][db_mask_t[f]] * _column_weights(U_norm_dict, Zs, f)
             if live.shape[0] == 0:
                 continue
-            row_sums = torch.sum(torch.abs(live), dim=1, keepdim=True) + 1e-12
-            u_prob_live = live / row_sums
+            row_sums = torch.sum(torch.abs(live), dim=1, keepdim=True)
+            with torch.no_grad():
+                pos = row_sums[row_sums > 0]
+                eng = (row_sums >= 1e-3 * torch.median(pos)) if pos.numel() else torch.zeros_like(row_sums, dtype=torch.bool)
+            u_prob_live = torch.where(eng, live / (row_sums + 1e-12), torch.zeros_like(live))
             term = db_live_counts[f] * u_prob_live.mean(dim=0)
             acc = term if acc is None else acc + term
         return None if acc is None else acc / w_total
+
+    # Ticket 102: shared-entity concentration floor. conc_state is filled once,
+    # at epoch conc_warmup: facet -> (live-entity index tensor, frozen s_i).
+    conc_state = {}
+
+    def _conc_freeze(Un, Zs):
+        """s_i = normalised entropy of the community distribution entity i
+        inherits from the articles that use it: the articles' weighted
+        membership (unengaged articles zeroed) pushed down the raw relations
+        along the same paths as socio_semantic_parts' Penalty_B. Computed once
+        from detached values and then held fixed, so the term has a fixed
+        target and passes no gradient into the article memberships."""
+        with torch.no_grad():
+            Xa = (Un['art'] * _column_weights(Un, Zs, 'art')).cpu().numpy().astype(np.float64)
+        ma = Xa.sum(1)
+        live_a = db_presence_masks.get('art', np.ones(len(ma), bool))
+        pos = ma[live_a & (ma > 0)]
+        eng = ma >= 1e-3 * np.median(pos) if pos.size else np.zeros(len(ma), bool)
+        P_art = np.where(eng[:, None], Xa / np.where(ma > 0, ma, 1.0)[:, None], 0.0)
+        act = set(active_matrices)
+        E = {f: np.zeros((Un[f].shape[0], K)) for f in CONC_FACETS if f in Un}
+        for k in range(K):
+            W = P_art[:, k]
+            pw = {}
+            if 'M_Parent_Art' in act:
+                pw['parent_he'] = raw_data['M_Parent_Art'].dot(W)
+            cp = []
+            if 'M_Child_Art' in act:
+                cp.append(raw_data['M_Child_Art'].dot(W))
+            if 'M_Child_Parent' in act and 'parent_he' in pw:
+                cp.append(raw_data['M_Child_Parent'].dot(pw['parent_he']))
+            if cp:
+                pw['core_child_he'] = sum(cp)
+            cu = []
+            if 'M_Cousin_Art' in act:
+                cu.append(raw_data['M_Cousin_Art'].dot(W))
+            if 'M_Cousin_Parent' in act and 'parent_he' in pw:
+                cu.append(raw_data['M_Cousin_Parent'].dot(pw['parent_he']))
+            if 'M_Cousin_Child' in act and 'core_child_he' in pw:
+                cu.append(raw_data['M_Cousin_Child'].dot(pw['core_child_he']))
+            if cu:
+                pw['cousin_he'] = sum(cu)
+            if 'M_Atom_Child' in act and 'core_child_he' in pw:
+                pw['core_atom'] = raw_data['M_Atom_Child'].dot(pw['core_child_he'])
+            if 'M_Fringe_Cousin' in act and 'cousin_he' in pw:
+                pw['fringe_atom'] = raw_data['M_Fringe_Cousin'].dot(pw['cousin_he'])
+            for f in E:
+                if f in pw:
+                    E[f][:, k] = np.asarray(pw[f]).ravel()
+        for f, Ef in E.items():
+            tot = Ef.sum(1)
+            keep = (tot > 1e-12) & db_presence_masks.get(f, np.ones(len(tot), bool))
+            if not keep.any():
+                continue
+            Pe = Ef[keep] / tot[keep, None]
+            s = -(Pe * np.log(Pe + 1e-12)).sum(1) / np.log(K)
+            conc_state[f] = (torch.from_numpy(np.where(keep)[0]).to(device),
+                             torch.from_numpy(s).to(device=device, dtype=Un[f].dtype))
 
     U_raw, Z_raw = initialize_tucker_adapted_nndsvd_and_propagate(active_matrices, anchor_keys, dimensions, active_facets, K, device)
 
@@ -662,7 +771,8 @@ def run_inner_solver(
 
     optimizer = torch.optim.Adam(list(U_raw.values()) + list(Z_raw.values()), lr=learning_rate)
     loss_history = []
-    
+    recon_history = []  # ticket 102: second stopping criterion
+
     eye_K = torch.eye(K, device=device)
     
     # Initialize variables to prevent UnboundLocalError
@@ -701,14 +811,28 @@ def run_inner_solver(
         # Ticket 82 E2 -- in-loop domain-balance term, computed from U_norm
         # (differentiable) every epoch. weight (lambda_domain_balance)
         # defaults to 0.0 -- see the comment at its read-in above.
-        db_soc_share = _db_domain_share(U_norm, db_soc_facets, db_soc_total)
-        db_sem_share = _db_domain_share(U_norm, db_sem_facets, db_sem_total)
+        db_soc_share = _db_domain_share(U_norm, Z_scaled, db_soc_facets, db_soc_total)
+        db_sem_share = _db_domain_share(U_norm, Z_scaled, db_sem_facets, db_sem_total)
         if db_soc_share is not None and db_sem_share is not None:
             db_r_k = db_soc_share / (db_soc_share + db_sem_share + 1e-12)
             db_excess = torch.clamp(torch.abs(db_r_k - 0.5) - DOMAIN_BALANCE_TOL, min=0.0)
             domain_balance_loss = torch.mean(db_excess ** 2)
         else:
             domain_balance_loss = torch.tensor(0.0, device=device)
+
+        # Ticket 102: concentration floor, active from epoch conc_warmup on.
+        conc_loss = None
+        if lambda_conc > 0 and epoch >= conc_warmup:
+            if not conc_state:
+                _conc_freeze(U_norm, Z_scaled)
+            terms = []
+            for f, (idx, s) in conc_state.items():
+                X = U_norm[f][idx] * _column_weights(U_norm, Z_scaled, f)
+                p = X / (X.sum(1, keepdim=True) + 1e-12)
+                H = -(p * torch.log(p + 1e-12)).sum(1) / math.log(K)
+                terms.append(torch.clamp(conc_gamma * s - H, min=0.0) ** 2)
+            if terms:
+                conc_loss = torch.cat(terms).mean()
 
         recon_loss = 0.0
         sparsity_loss = 0.0
@@ -760,6 +884,8 @@ def run_inner_solver(
         # Current Loss Aggregation
         total_loss = (recon_loss + (lambda_l1 * sparsity_loss) + (lambda_z_offdiag * z_offdiag_loss)
                       + (lambda_domain_balance * domain_balance_loss))
+        if conc_loss is not None:
+            total_loss = total_loss + lambda_conc * conc_loss
         total_loss.backward()
         
         optimizer.step()
@@ -773,12 +899,24 @@ def run_inner_solver(
 
         loss_value = total_loss.item()
         loss_history.append(loss_value)
-        
+        recon_history.append(pure_recon_loss_val)
+
         # C. RELATIVE EARLY STOPPING CONVERGENCE CHECK
-        if epoch >= 20:
+        # Ticket 102: with the concentration term on, (a) no stop until 20
+        # epochs after it switches on, and (b) reconstruction must also have
+        # stopped changing. Without (b), reconstruction rising while the term
+        # falls can look flat in the total: in the 2026-10-02 grid 48% of fits
+        # stopped before their baseline at +1.4% mean recon cost; with (b),
+        # +0.5% (FINDINGS §31). Without the term the check is unchanged.
+        conc_on = lambda_conc > 0
+        if epoch >= 20 and not (conc_on and epoch < conc_warmup + 21):
             prev_loss = loss_history[-21]
             if prev_loss > 0:
                 rel_change = abs(loss_history[-1] - prev_loss) / prev_loss
+                if conc_on:
+                    r_prev = recon_history[-21]
+                    if r_prev > 0:
+                        rel_change = max(rel_change, abs(recon_history[-1] - r_prev) / r_prev)
                 if rel_change < 1e-4:
                     converged = True
                     break
@@ -796,7 +934,13 @@ def run_inner_solver(
     diagnostics = {
         "math_loss": pure_recon_loss_val,
         "internal_soc_loss": float((lambda_l1 * sparsity_loss) + (lambda_z_offdiag * z_offdiag_loss)
-                                    + (lambda_domain_balance * domain_balance_loss)),
+                                    + (lambda_domain_balance * domain_balance_loss)
+                                    + (lambda_conc * conc_loss if conc_loss is not None else 0.0)),
+        # Ticket 102: raw, unweighted concentration-floor loss at the last
+        # epoch (None if the term never switched on), and its settings.
+        "raw_conc_loss": float(conc_loss.item()) if conc_loss is not None else None,
+        "conc_settings": {"lambda_conc": lambda_conc, "conc_gamma": conc_gamma, "conc_warmup": conc_warmup,
+                          "n_entities": int(sum(len(v[0]) for v in conc_state.values()))},
         # Ticket 78: raw, UNWEIGHTED sparsity_loss, kept observable even when
         # lambda_l1=0 zeroes its contribution to internal_soc_loss above.
         "raw_sparsity_loss": float(sparsity_loss.item() if hasattr(sparsity_loss, "item") else sparsity_loss),
@@ -1415,7 +1559,10 @@ def evaluate_domain_balance(U_prob, presence_masks, tol=DOMAIN_BALANCE_TOL):
     """
     Outer-loop, U_prob-based domain-balance check (ticket 82 E2, D1-D3
     design; CLAUDE.md §4.18 update / FINDINGS §22 has the full derivation
-    and evidence).
+    and evidence). Since v9.4 (ticket 100) evaluate_complete_solution passes
+    compute_weighted_membership's output in place of U_prob, with unengaged
+    entities masked out; it is built from U_norm and Z_scaled, both unchanged
+    by the ticket-79 transformation described below.
 
     WHY U_prob, not Z_scaled: a Z_scaled-based version of this same idea was
     tested separately this session and found exploitable -- an unconstrained
@@ -1533,7 +1680,15 @@ def evaluate_complete_solution(
     # config/slice — see build_presence_masks (§1.8).
     presence_masks = build_presence_masks(raw_data, soc_keys, sem_keys)
 
-    U_prob = compute_probability_distributions(U_numpy)
+    # Ticket 100 (v9.4): the semantic and domain-balance penalties read
+    # reconstruction-weighted membership, not U_prob. U_prob row-normalises
+    # U_norm, whose columns have unit norm whether or not the community does
+    # any reconstruction for that facet, so an entity with nothing on the used
+    # columns read as ~1.0 on an unused one (FINDINGS §30). Unengaged entities
+    # (no weight on any used column) are left out of both penalties: they are
+    # excluded, not measured (CLAUDE.md ticket 100's residual limitation).
+    P_w, engaged = compute_weighted_membership(U_numpy, Z_numpy, presence_masks)
+    pm_w = {f: presence_masks[f] & engaged[f] for f in presence_masks if f in engaged}
 
     # Section 2 — REVISED (tickets 79/80/82): Z_scaled-based, not U_scales-
     # based (U_scales is an undetermined free gauge direction, ticket 79).
@@ -1558,18 +1713,18 @@ def evaluate_complete_solution(
     # Section 4
     active_matrices_set = {k for k in (soc_keys + sem_keys) if k in raw_data}
     socio_semantic_pen = evaluate_socio_semantic_reality(
-        U_prob=U_prob,
+        U_prob=P_w,
         raw_data=raw_data,
         active_matrices=active_matrices_set,
         max_monopoly=max_monopoly,
-        presence_masks=presence_masks
+        presence_masks=pm_w
     )
 
-    # Section 4B (ticket 82, E2 -- Path B). U_prob and presence_masks are
-    # already computed above for Section 4 -- reused, not recomputed.
+    # Section 4B (ticket 82, E2 -- Path B). Weighted membership and its masks
+    # are already computed above for Section 4 -- reused, not recomputed.
     domain_balance_pen, mean_dev_k = evaluate_domain_balance(
-        U_prob=U_prob,
-        presence_masks=presence_masks,
+        U_prob=P_w,
+        presence_masks=pm_w,
     )
 
     sociological_penalty = (collapse_pen
@@ -1593,7 +1748,9 @@ def evaluate_complete_solution(
 #==============================================================================
 
 def compute_weighted_membership(U_final, Z_final, presence_masks=None, engaged_rel=1e-3):
-    """Reconstruction-weighted membership (ticket 100, diagnostic only).
+    """Reconstruction-weighted membership (ticket 100). Since v9.4 this is
+    what evaluate_complete_solution's semantic and domain-balance penalties
+    read (owner decision 2026-10-02), not only a diagnostic.
 
     U_prob row-normalises U_norm, whose columns all have unit L2 norm whether or
     not the community is used. If a facet's community column carries no
@@ -1631,7 +1788,9 @@ def compute_weighted_membership(U_final, Z_final, presence_masks=None, engaged_r
 def describe_solution(U_final, Z_final, raw_data, soc_keys, sem_keys, anchor_keys, max_monopoly):
     """Per-community detail behind sociological_penalty, logged per trial and
     per archived model (ticket 94). Logging only: nothing here enters the
-    objective. *_weighted keys use compute_weighted_membership instead of U_prob."""
+    objective. *_weighted keys use compute_weighted_membership; since v9.4
+    (ticket 100) they are the values the objective uses. The unsuffixed keys
+    are the old U_prob readings, kept for comparison with v9.2/v9.3 runs."""
     to_np = lambda d: {k: (v.detach().cpu().numpy() if hasattr(v, "detach") else np.asarray(v)) for k, v in d.items()}
     U, Z = to_np(U_final), to_np(Z_final)
     pm = build_presence_masks(raw_data, soc_keys, sem_keys)
@@ -1763,6 +1922,8 @@ def create_optuna_objective(raw_data, soc_keys, sem_keys, anchor_keys, dimension
             trial.set_user_attr("converged", converged)
             trial.set_user_attr("epochs_run", epochs_run)
             trial.set_user_attr("epoch_cap", epoch_cap)
+            trial.set_user_attr("conc_settings", diagnostics.get("conc_settings"))  # ticket 102
+            trial.set_user_attr("raw_conc_loss", diagnostics.get("raw_conc_loss"))
             if not converged:
                 print(f"[!] Trial {trial.number} did not converge "
                       f"({epochs_run} epochs, cap {epoch_cap}, K={K_fixed}) — flagged.")
@@ -1903,6 +2064,10 @@ def get_environment_info():
         "device": str(DEVICE),
         "coherence_pen_weight": COHERENCE_PEN_WEIGHT,
         "domain_balance_pen_weight": DOMAIN_BALANCE_PEN_WEIGHT,
+        "penalty_membership": "reconstruction_weighted",  # ticket 100, v9.4
+        "lambda_conc": LAMBDA_CONC,                       # ticket 102, v9.4
+        "conc_gamma": CONC_GAMMA,
+        "conc_warmup": CONC_WARMUP,
     }
 
 # -> FIXED: Save environment metadata to disk immediately upon initialization

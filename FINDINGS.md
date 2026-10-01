@@ -4166,3 +4166,143 @@ no archiver reproducibility warning (the objective now re-seeds immediately befo
 the archiver does), stability counts and chance levels recorded, two C1/K=2 models correctly
 fail the rule at chance level, merge and selection run, and two launches with different hash
 seeds gave identical reports.
+
+---
+
+## 31. In-loop concentration floor (ticket 102) and weighted membership in the objective (ticket 100): calibration, independent text check, v9.4 (2026-10-02)
+
+**Status: built into `chunk13v9.py` as v9.4 (`results/v9.4.t1_v2/`), not yet run on CSF.**
+Settings `LAMBDA_CONC = 0.1`, `CONC_GAMMA = 0.8`, `CONC_WARMUP = 300`. Scripts used below are
+kept in `chunk13_execution/ticket102_calibration/` (paths inside point at the session
+scratchpad; outputs were not kept).
+
+### The term
+
+`L_conc = mean_i max(0, γ·s_i − H(p_i))²`, added to the inner loss with weight λ.
+- `p_i`: entity i's reconstruction-weighted membership (ticket 100). Column weight
+  w_k² = Σ over relations touching the facet of ‖Z[k,:] U_gᵀ‖² (the size of the part of the
+  reconstruction passing through community k for that facet); unused columns get 0, so
+  spreading onto them cannot satisfy the term. Weights detached.
+- `H`: entropy of `p_i` divided by log K (0 = one community, 1 = even).
+- `s_i`: the same normalised entropy for the community distribution the entity inherits from
+  the articles that use it (articles' weighted membership pushed down the raw relations, the
+  propagation Penalty_B uses). It depends on the model's article memberships, so it is computed
+  once at epoch W from detached values and then frozen (no moving target, no gradient into the
+  articles).
+- One-sided floor: `max(0, ·)` leaves entities alone once their spread reaches γ·s_i; niche
+  entities (s_i near 0) are never pushed. Entity set = live entities of the four lower semantic
+  facets with nonzero propagated mass, fixed at the freeze, not gated by model mass.
+
+### Calibration grid
+
+Scratch copy of the solver (λ = 0 reproduced production exactly: 0.8447861671447754, 1,452
+epochs). 20 config/K cells (C1-C6, K = 2-5; C2/C3/C4/C6 K=5 dropped, no stability-verified
+model), `lambda_z_offdiag` per cell = the median-`math_loss` stability-verified v9.2 archived
+model, seeds 1000-1004, cap 8,000. Settings: baseline, λ ∈ {0.03, 0.1, 0.3, 1, 3, 10, 30} ×
+γ ∈ {0.5, 0.8}, W = 300 (1,500 fits); W ∈ {100, 600} at λ=0.3, γ=0.5 (200 fits); the
+production setting with the corrected stopping rule (100 fits). All 1,800 converged. Every
+setting is compared with the baseline fit of the same cell and seed.
+
+"Over-concentrated" = share of structurally shared entities (no community supplies over 60% of
+the propagated support, recomputed from each fit's final article memberships) with weighted
+membership above 0.9 in one community (the §30 measure).
+
+| Setting | Over-concentrated | Cells with significant drop (>2 SE) | Recon cost | Articles reassigned | Entities losing >90% of weighted mass | Stability margin over chance, A / B |
+|---|---|---|---|---|---|---|
+| baseline | 25.4% | — | — | — | — | 0.094 / 0.121 |
+| 0.03 / 0.5 | 9.1% | 17/20 | +2.7% | 24.1% | 0.8% | 0.078 / 0.092 |
+| 0.1 / 0.8 | 3.4% | 19/20 | +1.4% | 23.7% | 0.9% | 0.077 / 0.101 |
+| 0.3 / 0.5 | 5.8% | 15/20 | +0.8% | 22.9% | 1.0% | 0.079 / 0.096 |
+| 1 / 0.5 | 5.7% | 17/20 | +1.0% | 26.7% | 1.0% | 0.073 / 0.089 |
+| 3 / 0.8 | 3.1% | 17/20 | +1.4% | 31.1% | 2.4% | 0.054 / 0.078 |
+| 10 / 0.8 | 2.4% | 18/20 | +1.9% | 35.3% | 2.9% | 0.043 / 0.064 |
+| 30 / 0.8 | 3.3% | 17/20 | +2.7% | 37.4% | 4.7% | 0.037 / 0.055 |
+| **0.1 / 0.8, corrected stopping (production)** | **2.6%** | — | **+0.5%** | — | — | **0.077 / 0.106** |
+| *two baseline seeds compared* | *±9 points* | | | *24.4%* | *2.3%* | |
+
+Readings:
+- The effect is large and does not need a large weight. Cells without a significant drop are
+  those with little to remove (C5/K=5 6.5%, C6/K=4 7.2%, C2/K=2 12.3%); where the baseline is
+  high (C1, C3, C4: 27-55%) most of it goes.
+- No draining (the `lambda_l1` failure, tickets 77/78) up to λ≈1: entities losing over 90% of
+  their weighted mass stay below the seed-to-seed rate (2.3%); unengaged semantic entities
+  fall by 7-13 per fit. Above λ≈3 mass loss exceeds the seed reference.
+- Article communities move no more than under a seed change up to λ≈1 (23-27% vs 24%);
+  at λ ≥ 3 the term reorganises the article communities themselves (30-37%).
+- Stability: raw Track A/B rise but the chance level rises faster (spread memberships look
+  alike even when shuffled); the margin shrinks by about a fifth at moderate weights and halves
+  at λ ≥ 10. Cells beating chance: 19-20/20 (A), 16-19/20 (B), as in the baseline.
+- Warm-up 100 is worse (+4.6% recon, 523 epochs mean); 300 and 600 give near-identical results.
+
+### Early stopping had to change with the term
+
+With the term on, fits often stopped earlier than their baseline and lost reconstruction: at
+λ=0.03, 76% stopped early with +3.6% recon; those that ran at least as long lost about 0%.
+Probable mechanism: reconstruction rising while the term falls makes the total loss look flat
+to the relative-change test. Fix (now in v9.4): while the term is on, no stop before W + 21
+epochs, and the test must pass for reconstruction as well as for the total. At 0.1/0.8: mean
+recon cost +1.39% → +0.53%, 90th percentile +3.5% → +1.6%, all 100 fits converged, mean epochs
+1,007 (baseline 1,002); concentration and text measures slightly better.
+
+### Independent check against the abstracts' text
+
+The graph measures above share their construction with the term (both propagate article
+memberships through the hyperedge graph), so a drop is partly "the model obeys the term". The
+text check does not use the graph: for every core and fringe atom, which of the 25 T1
+abstracts (`toy_large/corpus_text.csv`) literally contain it (NLTK Porter-stem match;
+multi-word atoms as consecutive stems). 475/642 core and 438/577 fringe atoms occur in at
+least one abstract (about 575 engaged and matched per fit). Text distribution = sum of the
+containing abstracts' weighted community memberships (each fit's own), normalised.
+
+| Setting | Text-shared (≥2 abstracts, no community >60%) put >0.9 in one community | Text-niche (≥90% in one community) spread below 0.6 | Put >0.9 in a community supplying <50% of its text | JS distance model vs text |
+|---|---|---|---|---|
+| baseline | 48.7% | 9.9% | 30.0% | 0.506 |
+| 0.1 / 0.8 | 19.8% (better in 19/20 cells) | 16.5% (worse in 9/20) | 12.8% | 0.438 |
+| **0.1 / 0.8, corrected stopping** | **18.9%** | **15.6%** | **11.9%** | **0.432** |
+| 0.3 / 0.5 | 20.1% (20/20) | 18.3% (8/20) | 12.4% | 0.431 |
+| 1 / 0.5 | 18.1% | 25.3% (15/20) | 11.0% | 0.420 |
+| 30 / 0.8 | 11.6% | 43.3% (17/20) | 6.1% | 0.373 |
+| *two baseline seeds compared* | *±12 points* | *±10 points* | *±11 points* | *±0.05* |
+
+- The main effect holds against the text: words that occur across several communities'
+  abstracts stop being monopolised, well beyond seed variation, and overall agreement with the
+  text improves.
+- **Cost (ticket 103, open):** genuinely niche words (about 67 per fit) get spread more often.
+  Small and near seed noise at the production setting (+6 points, significant in 9 cells),
+  steep at higher weights. Probable cause, not tested: `s_i` comes from the hyperedge graph,
+  where a word inside a phrase recurring across many articles inherits that phrase's spread.
+  This is why the production weight is at the low end. Candidate fix: `s_i` over shorter paths
+  (atom → child hyperedge → article).
+- Limits: 25 abstracts; atoms only; 24-26% of atoms unmatched (parser leftovers such as `-`,
+  lemma forms the stemmer misses); the text distribution still uses each fit's article
+  memberships.
+
+### Weighted membership in the objective (ticket 100)
+
+`evaluate_complete_solution` now computes `compute_weighted_membership` once and passes it,
+with presence masks restricted to engaged entities, to the semantic penalty (Penalty_A/B) and
+domain balance; the dormant in-loop domain-balance term uses the same weighting. On 20 random
+v9.2 archived models: `semantic_pen` = mean of the weighted parts exactly, collapse/coherence
+unchanged, `semantic_pen` differs from v9.3 in 20/20 (intended). Unengaged entities are left
+out, not measured (ticket 100's residual limitation).
+
+### Verification of the v9.4 code
+
+- `lambda_conc = 0` reproduces v9.3 exactly (0.8447861671447754, 1,452 epochs).
+- Default settings reproduce the scratch corrected-stopping fits bit-for-bit (4 cells; same
+  loss and epochs, max |ΔU| = 0).
+- End-to-end smoke run (C1 and C6, K 2-3, 3 scout / 2 deep-dive trials, 3 stability seeds):
+  fits, archiving, stability (all seeds converged), merge and selection complete; settings
+  recorded in `environment_metadata.json`, trial user attrs and model metadata.
+- New incline reference for `check_cross_machine.sh`: 0.8629798889160156, 770 epochs.
+- Cost: about 17% more time per epoch; epoch counts similar to v9.3, well inside 24 h per task
+  (longest v9.2 task: 6.3 h).
+
+### Import order changes fits (ticket 104)
+
+Found while verifying: importing numpy before torch gives C1/K=3 seed 42 (term off)
+0.8446382880210876 / 1,476 epochs instead of 0.8447861671447754 / 1,452, reproducibly; other
+pre-imports (`json`, `glob`, `random`) have no effect. Presumed cause: different BLAS/OpenMP
+runtimes, the first loaded serving both (not traced). Production imports torch first, so is
+unaffected. The calibration grid imported numpy first: its fits are internally comparable but
+are not bit-identical to pipeline fits (equivalent to a seed change).

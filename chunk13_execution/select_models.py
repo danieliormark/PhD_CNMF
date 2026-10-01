@@ -20,7 +20,7 @@ import os
 import numpy as np
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--results", default="results/v9.3.t1_v2")
+ap.add_argument("--results", default="results/v9.4.t1_v2")
 ap.add_argument("--margin", type=float, default=0.0,
                 help="required excess of each track over its chance maximum")
 args = ap.parse_args()
