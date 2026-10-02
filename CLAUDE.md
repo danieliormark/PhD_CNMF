@@ -998,64 +998,88 @@ Full evidence, every table, every script: FINDINGS §24.
 ### 4.24 Dual-track stability mechanism (Track A / Track B) — what they measure, how,
 and why two tracks (`_pair_tracks`, Module 4 §S5)
 
-Two independent fits of the same (config, K) at different seeds give two sets of U matrices
-whose community *indices* are meaningless labels — community 2 in seed 1000 has no reason to
-correspond to community 2 in seed 1001. Before any comparison can mean anything, the two
-fits' communities must be *matched* to each other first. Both tracks do this matching the
-same way (Hungarian assignment) but score the matched result differently, which is why there
-are two tracks rather than one.
+Two independent fits of the same (config, K) at different seeds produce `U_norm` tables with
+no relationship between their community *column indices* — fit 1's column 0 has no reason to
+mean the same community as fit 2's column 0. Nothing can be compared until the columns are
+*relabeled* to line up. Both tracks do that relabeling the same way (Hungarian assignment,
+`scipy.optimize.linear_sum_assignment`) but then score the result differently — that scoring
+difference, not the relabeling, is what actually makes them diverge.
 
-**Step 1 — stack every facet into one matrix per fit.** `S1_raw`/`S2_raw` vertically stack
-every active facet's `U_norm` rows (article rows, author rows, atom rows, … all in one tall
-matrix) so the match is decided on the whole model's structure at once, not facet by facet.
+**Worked example** (K=2 communities; facet `art` = 3 articles, facet `auth` = 2 authors, the
+second one dead). Each facet is one table per fit: **rows = that facet's entities, columns =
+the K communities**, entry = that entity's raw membership mass in that community.
 
-**Step 2 — build a K×K cost matrix and solve it with the Hungarian algorithm
-(`linear_sum_assignment`).** Entry (k1, k2) of the cost matrix is how *dissimilar* seed 1's
-community k1 is from seed 2's community k2; the algorithm then picks the one-to-one column
-permutation that minimises total dissimilarity across all K pairs simultaneously (not just
-the best pairwise match for each column greedily, which can produce conflicts). **The two
-tracks use different dissimilarity measures, so they can and do pick different
-permutations:**
-- **Track A's cost**: Jensen-Shannon distance between the two fits' columns after
-  `col_normalize` (each community column rescaled to sum to 1, i.e. treated as a
-  distribution of *emission mass over entities* — "which entities does this community emit
-  mass to, and in what proportions").
-- **Track B's cost**: 1 − cosine similarity between the two fits' raw (unnormalised) columns
-  — comparing the columns' shape and relative scale together, not a probability distribution.
+Fit 1, `art`: `[[8,2],[1,9],[5,5]]`. Fit 2, `art`: `[[1.5,7.5],[8.5,1.2],[4.8,5.1]]` — same
+real pattern (article 1 mostly one community, article 2 mostly the other, article 3 even),
+just under swapped column labels: fit 1's column 0 is fit 2's column 1. Fit 1, `auth`:
+`[[6,4],[0,0]]` (author 2 is a zero row, dead). Fit 2, `auth`: `[[3.8,6.1],[0.1,0]]`.
 
-**Step 3 — score the matched fits, per facet, entity by entity.** This is where the two
-tracks diverge substantively, not just in how they picked the permutation:
-- **Track A** row-normalises *each entity's own row* (`row_normalize`: every entity's
-  membership vector rescaled to sum to 1, i.e. "given this entity is somewhere, how is it
-  split across communities") and takes the Jensen-Shannon distance between the two fits' row
-  for that entity. Track A = 1 − the mean of this over *every* entity in the facet, live or
-  barely-engaged, each counted equally. A natural-log JSD has a non-zero floor even between
-  two unrelated random distributions (≈0.17 theoretical minimum; the real, measured chance
-  level is 0.47–0.74 depending on K — FINDINGS §30), so Track A is read against that measured
-  chance level, never against 0.
-- **Track B** takes the raw (not row-normalised) cosine similarity between the two fits' rows
-  for that entity, then averages across entities *weighted by each entity's row sum in fit 1*
-  (how much total membership mass that entity actually carries). An entity with almost no
-  mass anywhere (dead or barely-engaged) contributes almost nothing to Track B, whereas it
-  counts exactly the same as a strongly-engaged entity in Track A. This is the main
-  substantive difference between the tracks, not a redundant alternative metric: **Track A
-  asks "do strongly- and weakly-engaged entities alike keep the same relative community split
-  across seeds", Track B asks "do the entities that actually matter to the model's mass keep
-  the same split"** — and FINDINGS §28 found these two questions get different answers in a
-  real, non-negligible fraction of models (Pearson r=0.75, not 1.0; the largest single gap
-  +0.137).
+**Step 1 — stack every facet's table into one, for relabeling only.** `np.vstack` puts the
+`auth` table directly under the `art` table: the result has 3+2=5 rows (every entity from
+every facet, one after another) and still only K=2 columns — nothing is added column-wise,
+rows are just concatenated. This pooled table is used *only* to decide one relabeling for the
+*whole model at once* — community 0 must mean the same thing in `art` and in `auth`
+simultaneously, so the decision can't be made separately per facet (that could relabel `art`
+one way and `auth` a conflicting way).
 
-**Both tracks are entity-level comparisons throughout** — neither ever compares communities
-to each other directly as objects; "community" only exists as the Hungarian-matched column
-index used to line up two entities' same-numbered membership entry. (An earlier description
-of Track B as community-level was wrong; corrected in FINDINGS §28/§30.)
+**Step 2 — compare columns against columns in that pooled table, and solve for the best
+one-to-one relabeling.** A K×K table of "how different would fit 1's column k1 and fit 2's
+column k2 be, if paired" is built, then `linear_sum_assignment` picks the pairing (one fit-2
+column per fit-1 column) with the lowest total difference across all K pairs at once — not
+column-by-column greedily, which could assign two fit-1 columns to the same fit-2 column.
+**The two tracks disagree about what "different" means here**, each producing its own K×K
+table and its own solved pairing:
+- **Track A**: rescale each column of the pooled table to sum to 1 (`col_normalize` — column
+  k becomes "how community k's mass is spread across these 5 entities"), then Jensen-Shannon
+  distance between columns.
+- **Track B**: no rescaling — 1 − cosine similarity between the raw pooled columns, so
+  overall size/scale is part of the comparison, not just shape.
 
-**Chance level, not 0, is the right floor for both tracks** (ticket 95, FINDINGS §30):
-measured by re-running this exact pairing on one fit's entity rows shuffled within each facet
-(breaks entity correspondence, keeps each community's size/shape distribution intact).
-`run_dual_track_stability_analysis` computes this per model, and `select_models.py`'s
-qualification rule (ticket 91) requires both tracks to clear their own model's chance
-maximum, not a fixed universal number.
+  In the worked example both land on the same answer here: fit 1's community 0 ↔ fit 2's
+  column 1, fit 1's community 1 ↔ fit 2's column 0 — the swap is correctly detected.
+
+**Step 3 — go back to the original, un-stacked, per-facet tables and score entity by entity.**
+The pooled table's only job was Step 2; scoring happens facet by facet on the real tables,
+with fit 2's columns now reordered according to whichever pairing that track solved.
+- **Track A**: rescale *each row* (each entity) of a facet's table to sum to 1
+  (`row_normalize` — entity i becomes "how its own mass splits across the K communities"),
+  then take the Jensen-Shannon distance between fit 1's row and fit 2's relabeled row, for
+  that same entity. Track A's score for the facet = 1 − the mean of this distance over *every*
+  entity, dead or thriving, each counted the same. In the worked example: article rows score
+  0.977 (fit 1's `[0.8,0.2]` vs. fit 2's relabeled `[0.83,0.17]` for article 1, and similarly
+  close for the other two) — but the author facet scores only 0.762, dragged down entirely by
+  the dead author: `row_normalize` has no real signal for a `[0,0]` row, so it substitutes the
+  maximally-uncertain fallback `[0.5,0.5]`, while fit 2's merely near-zero `[0.1,0]` reads as a
+  confident `[1,0]` once rescaled — two numbers that are both noise, compared as if they meant
+  something, and they disagree.
+- **Track B**: plain cosine similarity between fit 1's raw row and fit 2's relabeled raw row
+  for each entity (no rescaling at all), then average across entities *weighted by that
+  entity's row sum in fit 1* — its total raw membership mass. Articles again score high
+  (0.999: real mass, real agreement). The dead author has row sum 0 in fit 1, so its weight is
+  0 — it contributes nothing, and the author facet scores 0.9995, essentially just author 1.
+
+That is the actual substance of the difference, demonstrated rather than asserted: **Track A
+gives a dead or barely-engaged entity a full vote, so its two near-meaningless numbers still
+have to "agree" between fits; Track B gives that same entity no vote at all.** Neither
+treatment is wrong — they answer different questions ("does everything agree" vs. "does
+everything that actually carries mass agree") — which is why both are kept rather than one
+being picked, and why FINDINGS §28 finds them diverging on a real, non-negligible fraction of
+models (Pearson r=0.75, not 1.0; the largest single gap +0.137).
+
+**Both tracks are entity-level comparisons throughout, never community-level** — "community"
+only exists as the column index used to line up one entity's same-numbered membership entry
+across the two fits, both before scoring (the relabeling) and during it (which column of each
+row to compare). (An earlier description of Track B as community-level was wrong; corrected
+in FINDINGS §28/§30.)
+
+**Chance level, not 0, is the right floor for both tracks** (ticket 95, FINDINGS §30): a
+natural-log Jensen-Shannon distance alone already sits well above 0 between two *unrelated*
+distributions, so a raw score can look artificially reassuring. Measured by re-running this
+exact Step 1–3 pipeline with one fit's entity rows shuffled within each facet first (breaks
+which row belongs to which real entity, keeps each community's size/shape distribution
+intact) — `run_dual_track_stability_analysis` computes this per model, and
+`select_models.py`'s qualification rule (ticket 91) requires both tracks to clear their own
+model's chance maximum, not a fixed universal number.
 
 ## 5. Namespace Gotcha
 
