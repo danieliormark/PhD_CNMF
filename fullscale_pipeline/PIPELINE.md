@@ -124,6 +124,10 @@ R1 ──► R2/R3 ──► P0 sequence_metadata_relaxed.csv (GAP) ──► P1
 | Documents in v3 (P6+P7) | 22,795 | 22,572 kept + 223 restored |
 | Shards / raw DBs / curated DBs | 50 / 50 / 50 | |
 
+Size of the current corpus (words, sentences, hyperedges), model families, author identification
+(ORCID coverage, OpenAlex author IDs) and what unidentified authors cost: `CORPUS_STATISTICS.md`
+(2026-10-02).
+
 The "22k" corpus is therefore a **filtered subset** of what was retrieved. It covers 22,756 of the
 46,241 current targets; 23,485 current targets have never been through P1–G3, and 39 of its
 documents are not in the current list `[DERIVED]`.
