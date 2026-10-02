@@ -1032,8 +1032,12 @@ table and its own solved pairing:
 - **Track A**: rescale each column of the pooled table to sum to 1 (`col_normalize` — column
   k becomes "how community k's mass is spread across these 5 entities"), then Jensen-Shannon
   distance between columns.
-- **Track B**: no rescaling — 1 − cosine similarity between the raw pooled columns, so
-  overall size/scale is part of the comparison, not just shape.
+- **Track B**: 1 − cosine similarity between the pooled columns. (`col_normalize` is skipped
+  here, but — checked directly, not assumed — it would not have changed this cost matrix:
+  cosine similarity is scale-invariant, so cosine on raw columns and on `col_normalize`'s
+  rescaled columns comes out identical to float precision. The two tracks can still pick
+  different permutations, but that's because Jensen-Shannon and cosine are genuinely
+  different measures of "different," not because one rescales and the other doesn't.)
 
   In the worked example both land on the same answer here: fit 1's community 0 ↔ fit 2's
   column 1, fit 1's community 1 ↔ fit 2's column 0 — the swap is correctly detected.
@@ -1052,11 +1056,19 @@ with fit 2's columns now reordered according to whichever pairing that track sol
   maximally-uncertain fallback `[0.5,0.5]`, while fit 2's merely near-zero `[0.1,0]` reads as a
   confident `[1,0]` once rescaled — two numbers that are both noise, compared as if they meant
   something, and they disagree.
-- **Track B**: plain cosine similarity between fit 1's raw row and fit 2's relabeled raw row
-  for each entity (no rescaling at all), then average across entities *weighted by that
-  entity's row sum in fit 1* — its total raw membership mass. Articles again score high
-  (0.999: real mass, real agreement). The dead author has row sum 0 in fit 1, so its weight is
-  0 — it contributes nothing, and the author facet scores 0.9995, essentially just author 1.
+- **Track B**: plain cosine similarity between fit 1's row and fit 2's relabeled row for each
+  entity, then average across entities *weighted by that entity's row sum in fit 1* — its
+  total raw membership mass. **Precisely where "raw" matters, and where it doesn't**: cosine
+  similarity is scale-invariant (verified directly — `cosine(A,B)` on raw rows and on
+  `row_normalize(A)`/`row_normalize(B)` gave identical values to full float precision), so
+  rescaling a row before comparing it would not have changed a single one of these
+  per-entity numbers. What raw rows are actually needed for is the *weight* in the next step
+  — row-normalizing first would make every live row's sum trivially 1, destroying "weighted
+  by how much mass this entity really carries" as a concept, and would also replace a dead
+  `[0,0]` row with `row_normalize`'s uniform `[0.5,0.5]` fallback before the weight could ever
+  zero it out. Articles again score high (0.999: real mass, real agreement). The dead author
+  has row sum 0 in fit 1, so its weight is 0 — it contributes nothing, and the author facet
+  scores 0.9995, essentially just author 1.
 
 That is the actual substance of the difference, demonstrated rather than asserted: **Track A
 gives a dead or barely-engaged entity a full vote, so its two near-meaningless numbers still
@@ -1077,14 +1089,27 @@ $m_i=\tfrac12(p_i+q_i)$ (scipy's natural-log convention — the source of the �
 floor between unrelated distributions), is then averaged, unweighted, over every entity:
 $\text{TrackA}_{\text{facet}} = 1-\frac1N\sum_{i=1}^N \text{JS}(p_i,q_i)$.
 
-Track B, per entity $i$: $u_i=(U_1)_i$, $v_i=(U_2')_i$ — the same rows, but raw, never
-rescaled. $\cos(u_i,v_i)=\dfrac{u_i\cdot v_i}{\lVert u_i\rVert\lVert v_i\rVert}$, and
-$w_i=\sum_{k=1}^K (U_1)_{i,k}$ (entity $i$'s total raw mass in fit 1 — a weight only, $u_i$
-itself is never divided by it). $\text{TrackB}_{\text{facet}} = \dfrac{\sum_i w_i\cos(u_i,v_i)}{\sum_i w_i}$
+Track B, per entity $i$: $u_i=(U_1)_i$, $v_i=(U_2')_i$ — the same raw rows ($\cos$ is
+scale-invariant, so $\cos(u_i,v_i)$ would be unchanged by row-normalizing first; nothing
+about this step requires "raw" specifically). $\cos(u_i,v_i)=\dfrac{u_i\cdot v_i}{\lVert
+u_i\rVert\lVert v_i\rVert}$, and $w_i=\sum_{k=1}^K (U_1)_{i,k}$ (entity $i$'s total raw mass
+in fit 1, used only as a weight below — *this* is where "raw" is required: row-normalizing
+first would make every live $w_i=1$ by construction). $\text{TrackB}_{\text{facet}} = \dfrac{\sum_i w_i\cos(u_i,v_i)}{\sum_i w_i}$
 — an entity with $w_i=0$ (the dead author above) contributes nothing to the sum.
 
 Both tracks' model-level scores are the plain, unweighted mean of
-$\text{TrackA}_{\text{facet}}$ / $\text{TrackB}_{\text{facet}}$ across every active facet.
+$\text{TrackA}_{\text{facet}}$ / $\text{TrackB}_{\text{facet}}$ across every active facet —
+articles get their own facet score, so do authors, affiliations, atoms, etc., each from its
+own independent run of Steps 1–3, and the model-level number is just the mean of those
+facet numbers, one vote per facet regardless of how many entities it has or how much mass
+they carry. This is what lets one number speak for the *whole* model rather than for
+whichever facet happens to have the most rows: the factorization shares one K-dimensional
+community space across every facet at once, so the model is only genuinely stable if that
+shared structure holds up for every kind of entity it describes, not just the largest one.
+An unweighted mean of facet scores (rather than pooling every entity from every facet into
+one giant average) is specifically what stops a large facet like articles from drowning out
+a small one like journals — a model that reproduces well for articles but falls apart for
+authors should not read as "stable" merely because there are far more articles than authors.
 
 **Both tracks are entity-level comparisons throughout, never community-level** — "community"
 only exists as the column index used to line up one entity's same-numbered membership entry
