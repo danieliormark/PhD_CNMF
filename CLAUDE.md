@@ -1066,20 +1066,53 @@ everything that actually carries mass agree") — which is why both are kept rat
 being picked, and why FINDINGS §28 finds them diverging on a real, non-negligible fraction of
 models (Pearson r=0.75, not 1.0; the largest single gap +0.137).
 
+**Step 3 as equations.** For one facet with N entities and K communities, after Step 2 has
+already reordered fit 2's columns (so $U_2'$ below already has fit 1's column labels):
+
+Track A, per entity $i$: $p_i = \text{row\_normalize}(U_1)_i$, $q_i = \text{row\_normalize}(U_2')_i$
+— each a length-K distribution for the *same* entity $i$, one per fit (a zero row becomes the
+uniform guess $[1/K,\dots,1/K]$, never left undefined). Their Jensen-Shannon distance,
+$\text{JS}(p_i,q_i)=\sqrt{\tfrac12\text{KL}(p_i\|m_i)+\tfrac12\text{KL}(q_i\|m_i)}$ with
+$m_i=\tfrac12(p_i+q_i)$ (scipy's natural-log convention — the source of the ≈0.17 non-zero
+floor between unrelated distributions), is then averaged, unweighted, over every entity:
+$\text{TrackA}_{\text{facet}} = 1-\frac1N\sum_{i=1}^N \text{JS}(p_i,q_i)$.
+
+Track B, per entity $i$: $u_i=(U_1)_i$, $v_i=(U_2')_i$ — the same rows, but raw, never
+rescaled. $\cos(u_i,v_i)=\dfrac{u_i\cdot v_i}{\lVert u_i\rVert\lVert v_i\rVert}$, and
+$w_i=\sum_{k=1}^K (U_1)_{i,k}$ (entity $i$'s total raw mass in fit 1 — a weight only, $u_i$
+itself is never divided by it). $\text{TrackB}_{\text{facet}} = \dfrac{\sum_i w_i\cos(u_i,v_i)}{\sum_i w_i}$
+— an entity with $w_i=0$ (the dead author above) contributes nothing to the sum.
+
+Both tracks' model-level scores are the plain, unweighted mean of
+$\text{TrackA}_{\text{facet}}$ / $\text{TrackB}_{\text{facet}}$ across every active facet.
+
 **Both tracks are entity-level comparisons throughout, never community-level** — "community"
 only exists as the column index used to line up one entity's same-numbered membership entry
 across the two fits, both before scoring (the relabeling) and during it (which column of each
 row to compare). (An earlier description of Track B as community-level was wrong; corrected
 in FINDINGS §28/§30.)
 
+**The relabeling (Step 2) is solved separately for every pair of seeds, never once
+globally.** A model with 10 stability seeds has C(10,2)=45 pairs; `run_dual_track_stability_
+analysis` loops `for i, j in itertools.combinations(range(n_conv), 2)` and calls
+`_pair_tracks(fits[i], fits[j], ...)` fresh each time — a brand-new Steps 1–3 run, including
+its own Hungarian solve, with no memory of any other pair's relabeling. The model's reported
+Track A/B is the plain mean over all 45 independently-matched pairs.
+
 **Chance level, not 0, is the right floor for both tracks** (ticket 95, FINDINGS §30): a
 natural-log Jensen-Shannon distance alone already sits well above 0 between two *unrelated*
-distributions, so a raw score can look artificially reassuring. Measured by re-running this
-exact Step 1–3 pipeline with one fit's entity rows shuffled within each facet first (breaks
-which row belongs to which real entity, keeps each community's size/shape distribution
-intact) — `run_dual_track_stability_analysis` computes this per model, and
-`select_models.py`'s qualification rule (ticket 91) requires both tracks to clear their own
-model's chance maximum, not a fixed universal number.
+distributions, so a raw score can look artificially reassuring. Estimated inside that same
+loop, right after each pair's real score: for pair (i, j), build a **shuffled copy of fit
+j** — for each facet independently, randomly permute which row sits at which index
+(`fits[j]["U"][f][rng.permutation(...)]`), so the same set of row vectors and the same
+column sums (each community's overall size/shape in fit j) are preserved, but which specific
+entity each row belongs to is destroyed. Run the *exact same* Steps 1–3 between the real fit
+i and this scrambled fit j, giving one "chance" sample; collect one such sample per pair (45
+total), then take their mean and max. If Track A or B still scored high against the
+scrambled version, that could only be the metric rewarding overall resemblance between the
+two fits' community sizes/shapes, not genuine entity-level correspondence — so clearing that
+ceiling (ticket 91's qualification rule, `select_models.py`) is what shows the real score
+reflects actual agreement about which entity sits where, not just aggregate shape.
 
 ## 5. Namespace Gotcha
 
