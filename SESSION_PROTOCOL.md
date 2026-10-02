@@ -186,6 +186,8 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
   `check_cross_machine.sh` and `chunk14_star_profiler.py`.
   Since 2026-10-02 also `ticket102_calibration/` (the concentration-term
   calibration and text-check scripts, FINDINGS §31; record only, not run by the pipeline).
+  Since 2026-10-03 also `stability_calibration/` (`facet_stability.py` and its outputs for the
+  C2 and C6 K=4 knee models, FINDINGS §32; diagnostic, not run by the pipeline).
 
 ---
 

@@ -1,0 +1,11 @@
+converged 10 of 10
+model: A 0.745 (chance 0.577, adj 0.40, SD 0.023) | B 0.780 (chance 0.500, adj 0.56, SD 0.046)
+affil          A 0.544/0.460 adj +0.16 | B 0.611/0.395 adj +0.36 | same main community 0.462/0.278 adj +0.26 | mass-weighted 0.528/0.296
+art            A 0.828/0.495 adj +0.66 | B 0.964/0.500 adj +0.93 | same main community 0.804/0.308 adj +0.72 | mass-weighted 0.954/0.373
+auth           A 0.617/0.513 adj +0.22 | B 0.596/0.402 adj +0.32 | same main community 0.448/0.237 adj +0.28 | mass-weighted 0.537/0.256
+core_atom      A 0.759/0.692 adj +0.22 | B 0.647/0.654 adj -0.02 | same main community 0.364/0.243 adj +0.16 | mass-weighted 0.380/0.241
+core_child_he  A 0.862/0.654 adj +0.60 | B 0.965/0.491 adj +0.93 | same main community 0.798/0.256 adj +0.73 | mass-weighted 0.921/0.258
+cousin_he      A 0.876/0.627 adj +0.67 | B 0.976/0.485 adj +0.95 | same main community 0.844/0.245 adj +0.79 | mass-weighted 0.936/0.247
+fringe_atom    A 0.721/0.655 adj +0.19 | B 0.570/0.609 adj -0.10 | same main community 0.277/0.258 adj +0.02 | mass-weighted 0.286/0.254
+journ          A 0.808/0.565 adj +0.56 | B 0.937/0.520 adj +0.87 | same main community 0.768/0.333 adj +0.65 | mass-weighted 0.953/0.369
+parent_he      A 0.687/0.533 adj +0.33 | B 0.756/0.446 adj +0.56 | same main community 0.633/0.268 adj +0.50 | mass-weighted 0.676/0.262

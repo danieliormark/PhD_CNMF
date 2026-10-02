@@ -2199,6 +2199,9 @@ question, caught on a later audit pass and worth stating plainly rather than dro
    *even under pure random search* across the tuned range — a real and useful result — but it
    does not show whether NSGA-II's optimization pressure specifically would (or wouldn't)
    seek out and exploit a gap, which is the stronger claim "the decisive one" implies.
+   **[CORRECTED 2026-10-02, §32]** With one tuned parameter NSGA-II's selection and crossover never
+   take effect even after the first generation: mutation (probability 1/n_params = 1) redraws every
+   value at random. Every pipeline run so far has been random search over `lambda_z_offdiag`.
 2. Because a fresh `NSGAIISampler(seed=MASTER_SEED)` is constructed once per cell, all 12
    cells draw the **identical 20 `lambda_z_offdiag` values** (confirmed directly from the
    stored records). The 240 trials are 20 distinct lambda draws × 12 cells, not 240
@@ -4171,7 +4174,7 @@ seeds gave identical reports.
 
 ## 31. In-loop concentration floor (ticket 102) and weighted membership in the objective (ticket 100): calibration, independent text check, v9.4 (2026-10-02)
 
-**Status: built into `chunk13v9.py` as v9.4 (`results/v9.4.t1_v2/`), not yet run on CSF.**
+**Status: built into `chunk13v9.py` as v9.4 (`results/v9.4.t1_v2/`), not yet run on CSF.** **[UPDATE 2026-10-02: run on CSF as job 21761286, all six configs completed; results and selection in §32.]**
 Settings `LAMBDA_CONC = 0.1`, `CONC_GAMMA = 0.8`, `CONC_WARMUP = 300`. Scripts used below are
 kept in `chunk13_execution/ticket102_calibration/` (paths inside point at the session
 scratchpad; outputs were not kept).
@@ -4306,3 +4309,111 @@ pre-imports (`json`, `glob`, `random`) have no effect. Presumed cause: different
 runtimes, the first loaded serving both (not traced). Production imports torch first, so is
 unaffected. The calibration grid imported numpy first: its fits are internally comparable but
 are not bit-identical to pipeline fits (equivalent to a seed change).
+
+---
+
+## 32. v9.4 production run; what Track A/B mean per facet; seed noise in the selected models; the sampler is random search (2026-10-02/03)
+
+### v9.4 production run (CSF job 21761286)
+
+All six configs ran as array tasks from 00:26 on 2026-10-02 and finished with exit code 0: C4 2 h 38 m,
+C3 2 h 41 m, C5 3 h 14 m, C2 3 h 27 m, C6 3 h 28 m, C1 3 h 37 m (a figure of "~4.6 h" for C3/C4 given in
+conversation was wrong). Results `results/v9.4.t1_v2/` (159 MB); the merge reported no consistency
+problem. `select_models.py` (ticket 91 rule, margin 0):
+
+| Config | Qualifying models by K | K chosen (hypervolume) | Knee | math_loss | soc_penalty | Track A (chance max) | Track B (chance max) |
+|---|---|---|---|---|---|---|---|
+| C1 | 3:7, 4:9, 5:8 | 4 (0.0238) | trial_0265 | 0.8028 | 0.0174 | 0.651 (0.601) | 0.601 (0.530) |
+| C2 | 2:1, 3:7, 4:8, 5:4 | 4 (0.0133) | trial_0094 | 0.7790 | 0.0078 | 0.735 (0.607) | 0.768 (0.556) |
+| C3 | 2:3, 3:2, 4:9, 5:8 | 4 (0.0142) | trial_0030 | 0.8025 | 0.0291 | 0.672 (0.600) | 0.621 (0.556) |
+| C4 | 3:6, 4:10, 5:7 | 5 (0.0130) | trial_0261 | 0.7757 | 0.0331 | 0.651 (0.568) | 0.630 (0.545) |
+| C5 | 2:7, 3:8, 4:7, 5:8 | 4 (0.0124) | trial_0029 | 0.7693 | 0.0225 | 0.742 (0.610) | 0.703 (0.557) |
+| C6 | 2:10, 3:8, 4:10, 5:10 | 4 (0.0089) | trial_0086 | 0.8006 | 0.0182 | 0.759 (0.635) | 0.783 (0.569) |
+
+K=4 in five of six configs; every config has qualifying models at several K. Configs are not
+comparable with each other (ticket 93).
+
+**The two knee models looked at in detail (C2/K=4/trial_0094, C6/K=4/trial_0086).** Both: 10/10
+stability seeds converged; `collapse_pen` 0 (largest community share 0.269 and 0.315, ceiling 0.60);
+**no ghost community** (smallest share 0.209 and 0.207, ghost threshold 0.5/K = 0.125); coherence
+near 1 in every community (penalty weight 0); unengaged live entities only 4 and 6 authors.
+`semantic_pen` equals the mean of the *weighted* Penalty_A and Penalty_B exactly in both (C2:
+(0.0 + 0.0157)/2; C6: (0.0325 + 0.0040)/2), confirming ticket 100's wiring in production. C6's
+higher `sociological_penalty` comes from Penalty_A (item attribution), C2's Penalty_A is 0.
+`raw_conc_loss` is small in both (0.00049, 0.00044): little shared-term concentration left to correct.
+Ghost communities are a diagnostic only: `collapse_pen` penalises the *largest* share above 0.60 and
+nothing penalises a *small* share, so a split like 0.40/0.40/0.15/0.05 would pass with no penalty.
+
+### What Track A/B mean, facet by facet
+
+Track A ranges from about 0.17 (1 − √ln2, the largest Jensen-Shannon distance in natural log) to 1;
+Track B from 0 to 1. Neither has a direct meaning, and both are read against a K-dependent chance
+level. To translate them, each knee model was refitted on incline at its 10 stability seeds (launcher
+arithmetic settings; 10/10 converged) and, for all 45 seed pairs and a row-shuffled control pair each,
+the share of live entities keeping the same main community after matching was measured per facet
+(`chunk13_execution/stability_calibration/facet_stability.py`). The refits reproduce the CSF scores
+closely (C2: A 0.745 vs 0.735, B 0.780 vs 0.768). Chance-adjusted score = (real − chance) / (1 − chance),
+the share of the possible improvement over chance achieved (the idea behind Cohen's kappa); it makes
+models at different K comparable.
+
+Same main community in both fits, real (chance), and Track B chance-adjusted:
+
+| Facet | C2/K=4 same main community | C2 Track B adj. | C6/K=4 same main community | C6 Track B adj. |
+|---|---|---|---|---|
+| articles | 80% (31%) | +0.93 | 74% (29%) | +0.87 |
+| journals | 77% (33%) | +0.87 | 72% (34%) | +0.72 |
+| child hyperedges | 80% (26%) | +0.93 | 78% (24%) | +0.92 |
+| cousin hyperedges | 84% (25%) | +0.95 | 83% (26%) | +0.93 |
+| parent hyperedges | 63% (27%) | +0.56 | 77% (27%) | +0.84 |
+| authors | 45% (24%) | +0.32 | 53% (25%) | +0.24 |
+| affiliations | 46% (28%) | +0.36 | 45% (26%) | +0.31 |
+| core atoms (words) | 36% (24%) | −0.02 | 29% (25%) | −0.12 |
+| fringe atoms (words) | 28% (26%) | −0.10 | 28% (25%) | −0.14 |
+| **model level** | | A +0.40, B +0.56 | | A +0.40, B +0.55 |
+
+Mass-weighted, the stable facets reach 84–95% agreement (articles 95% / 90%).
+
+- **The model-level score averages very different facets.** Articles, journals and hyperedges are
+  reproducible; authors and affiliations moderately; **individual words are not**: core and fringe
+  atoms keep their main community barely above chance, and their Track B is at or below chance in
+  both models. A model "qualifies" because the facet average clears chance, not because every facet
+  does. Substantively, on this toy corpus the community of a single word is close to arbitrary across
+  seeds; community structure is carried by articles and hyperedges.
+- **Spread across seed pairs:** SD of Track A 0.023 / 0.027, Track B 0.046 / 0.056 (C2 / C6); Track B
+  varies about twice as much, more sensitive to which solution a seed lands in.
+- None of this is computed by the pipeline. Candidates: the per-facet "same main community" share in
+  Section 5, and the chance-adjusted score in `select_models.py`.
+
+### Seed noise in the selected models' sociological penalty
+
+`objective_variance` (Section 5, 10 seeds) against the value at the selection seed (42):
+
+| Model | soc_penalty at seed 42 | over 10 seeds | math_loss at seed 42 | over 10 seeds |
+|---|---|---|---|---|
+| C2/K=4/trial_0094 | 0.0078 | 0.040 ± 0.015 | 0.779 | 0.787 ± 0.007 |
+| C6/K=4/trial_0086 | 0.0182 | 0.043 ± 0.023 | 0.801 | 0.791 ± 0.006 |
+
+The knees' sociological penalty is 2–5 times lower at seed 42 than on average. Pareto fronts are built
+at one seed, and the knee is chosen partly for a low penalty, so part of its advantage is a favourable
+seed (selection on noise); `math_loss` is barely affected. Comparisons of models on `sociological_penalty`
+should use the 10-seed mean, which Section 5 already records.
+
+### With one tuned parameter, the NSGA-II sampler is random search
+
+Optuna's NSGA-II builds a child from parent trials, then mutates each parameter with probability
+1/(number of parameters) (`optuna==4.9.0`, `NSGAIIChildGenerationStrategy`). With one parameter
+(`lambda_z_offdiag`) that probability is 1: the inherited value is always discarded and redrawn by the
+sampler's internal `RandomSampler` (log-uniform here). The trials' scores therefore never influence the
+next value. Confirmed by reproduction: a fresh `NSGAIISampler(seed=42)` returns exactly the scout's
+first draws (0.003149, 0.635122, 0.084718, 0.02481, 0.000421).
+
+This also explains the duplicate trials (ticket 92), which were attributed to "NSGA-II repeating earlier
+values". The deep dive constructs a new `NSGAIISampler(seed=MASTER_SEED)` on the existing study, so its
+random stream restarts and replays the scout's draws in order before producing new values: in v9.4 every
+duplicate is trial n = trial n − (scout length) (C2/K=4: 103 of 103 with offset 103; C6/K=4: 100 of 100
+with offset 100; C1/K=3, not deep-dived: none). Since v9.3 replays are reused without refitting, so the
+cost is small, but the deep dive adds about 100 new random values, not 200. Fronts are the
+non-dominated subset of about 200 log-uniform draws; with one parameter this covers the range densely.
+**Owner decision 2026-10-02: keep the sampler** (it worked; tuning further penalty weights later would
+make NSGA-II's crossover and selection effective, since with two parameters each child keeps an
+inherited value with probability ½).

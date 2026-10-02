@@ -353,7 +353,10 @@ backward through the active topology. The constant is intentionally absent.
 ### 4.12 Multi-objective Pareto, not scalarised meta-loss
 
 The objective returns `(pure_recon_loss, sociological_penalty)` as a 2-tuple, optimised by
-`NSGAIISampler`. Lambda weights (`LAMBDA_COLLAPSE` etc.) were removed from the aggregation —
+`NSGAIISampler`. **[NOTE 2026-10-02, FINDINGS §32]** With one tuned parameter this is random
+search in practice: NSGA-II's mutation probability is 1/n_params = 1, so every inherited value is
+redrawn at random and trial scores never steer sampling. Kept by owner decision; it becomes a real
+evolutionary search once two or more parameters are tuned. Lambda weights (`LAMBDA_COLLAPSE` etc.) were removed from the aggregation —
 the three penalties sum unweighted into `sociological_penalty`. See open ticket 35.
 
 > **[SUPERSEDED IN PART — corrected 2026-09-22 against the code, not rewritten.] The sum has
@@ -1137,6 +1140,7 @@ total), then take their mean and max. If Track A or B still scored high against 
 scrambled version, that could only be the metric rewarding overall resemblance between the
 two fits' community sizes/shapes, not genuine entity-level correspondence — so clearing that
 ceiling (ticket 91's qualification rule, `select_models.py`) is what shows the real score
+reflects actual agreement about which entity sits where, not just aggregate shape.
 
 **Rows, never columns — verified, not just reasoned.** Shuffling fit j's *columns* instead
 would be the wrong operation, and not just a weaker one: Step 2 already searches over every
@@ -1152,7 +1156,13 @@ construction. Row-shuffling the same fit 2 and re-matching collapsed both tracks
 order, so this is the one operation that actually destroys entity correspondence while
 leaving each community's aggregate size/shape intact — which is what a chance floor needs to
 represent.
-reflects actual agreement about which entity sits where, not just aggregate shape.
+
+**Reading the scores (FINDINGS §32).** Track A ranges from about 0.17 to 1, Track B from 0 to 1.
+A scale-free reading is the chance-adjusted score (real − chance)/(1 − chance). Per facet, the
+model-level number hides large differences: in the C2 and C6 K=4 knee models, 72–84% of articles,
+journals and child/cousin hyperedges keep their main community across seeds (chance 24–34%), parent
+hyperedges 63–77%, authors and affiliations 45–53%, and words (core and fringe atoms) barely above chance, with Track B at or below
+it. `chunk13_execution/stability_calibration/facet_stability.py` computes this for any archived model.
 
 ## 5. Namespace Gotcha
 
@@ -1354,7 +1364,7 @@ model, take the highest hypervolume; (3) within that K, take the knee of the
 `math_loss`/`sociological_penalty` front rather than the lowest `math_loss`. Open
 sub-questions: threshold values; whether hypervolume should choose K at all, given that it
 still rewards the capacity effect `math_loss` has (§4.6). Open sub-questions: threshold values; whether hypervolume should choose K at all, given that it still rewards the capacity effect `math_loss` has (§4.6); how to compare configs. `summarize_preferred_models.py` (execution dir) lists every archived model per config with its penalties and stability, without choosing. |
-| 92 | M3 §5.2 `objective()` / M4 §S2-S4 — duplicate trials | **New 2026-10-01.** The search space is one number (`lambda_z_offdiag`; `lambda_l1` fixed, K fixed per study) and every trial uses the same seed (`MASTER_SEED`), so a repeated value reproduces an earlier fit exactly. NSGA-II repeated earlier values in 1,865 of 6,130 completed trials (30.4%) in the 2026-09-30 run. Effects: about 30% of compute wasted; the "100 usable trials" budget counts copies; Pareto fronts contain duplicates (C3 K=4: 20 points, 10 distinct; C3 K=6: both archived models are the same model), so archive counts and stability pass rates partly count copies. | **[IMPLEMENTED 2026-10-01, v9.3]** As specified below; also the attempt cap now counts only non-duplicate (fitted) trials, with a hard cap of 10x on all trials so a sampler stuck on repeats cannot loop forever. Unit-tested: an enqueued repeat returned the earlier values instantly with `duplicate_of` set. *(Original status kept below.)* **Fix scheduled 2026-10-01, queued for implementation, not yet built.** Decided against
+| 92 | M3 §5.2 `objective()` / M4 §S2-S4 — duplicate trials | **New 2026-10-01.** The search space is one number (`lambda_z_offdiag`; `lambda_l1` fixed, K fixed per study) and every trial uses the same seed (`MASTER_SEED`), so a repeated value reproduces an earlier fit exactly. NSGA-II repeated earlier values in 1,865 of 6,130 completed trials (30.4%) in the 2026-09-30 run. **[CORRECTED 2026-10-02, FINDINGS §32]** The cause is not NSGA-II repeating values: the deep dive constructs a new `NSGAIISampler(seed=MASTER_SEED)` on the same study, so its random stream restarts and replays the scout's draws in order (v9.4: every duplicate is trial n = trial n − scout length; no duplicates in K values without a deep dive). The duplicate-reuse fix below remains correct and makes the replay nearly free. Effects: about 30% of compute wasted; the "100 usable trials" budget counts copies; Pareto fronts contain duplicates (C3 K=4: 20 points, 10 distinct; C3 K=6: both archived models are the same model), so archive counts and stability pass rates partly count copies. | **[IMPLEMENTED 2026-10-01, v9.3]** As specified below; also the attempt cap now counts only non-duplicate (fitted) trials, with a hard cap of 10x on all trials so a sampler stuck on repeats cannot loop forever. Unit-tested: an enqueued repeat returned the earlier values instantly with `duplicate_of` set. *(Original status kept below.)* **Fix scheduled 2026-10-01, queued for implementation, not yet built.** Decided against
 modifying the NSGA-II sampler itself (would change its actual search dynamics, untested,
 for no benefit beyond what the simpler fix gives). Instead, a single detect-before-refit
 mechanism inside `objective()` covers (a)+(b)+(c) together: before calling
