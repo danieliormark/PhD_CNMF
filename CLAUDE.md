@@ -1112,6 +1112,21 @@ total), then take their mean and max. If Track A or B still scored high against 
 scrambled version, that could only be the metric rewarding overall resemblance between the
 two fits' community sizes/shapes, not genuine entity-level correspondence — so clearing that
 ceiling (ticket 91's qualification rule, `select_models.py`) is what shows the real score
+
+**Rows, never columns — verified, not just reasoned.** Shuffling fit j's *columns* instead
+would be the wrong operation, and not just a weaker one: Step 2 already searches over every
+possible column reordering of fit j to find the best match, so a column-shuffled "chance"
+pair is just another arbitrary column order for Hungarian matching to undo — it always
+recovers the same entity-to-entity comparison as the unshuffled pair, regardless of how good
+or bad the real agreement is. Checked directly (synthetic 60-entity, K=4 test, same entities
+and true communities in both fits, fit 2's columns in an arbitrary order to start):
+column-shuffling fit 2 further and re-matching gave **the identical score to four decimal
+places** (Track A 0.8883, Track B 0.9967, both times) — a completely uninformative test, by
+construction. Row-shuffling the same fit 2 and re-matching collapsed both tracks (Track A
+0.5204, Track B 0.4222): Hungarian matching has no mechanism to fix row order, only column
+order, so this is the one operation that actually destroys entity correspondence while
+leaving each community's aggregate size/shape intact — which is what a chance floor needs to
+represent.
 reflects actual agreement about which entity sits where, not just aggregate shape.
 
 ## 5. Namespace Gotcha
