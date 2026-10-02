@@ -995,6 +995,68 @@ Destroyed, then recovered byte-for-byte from a NAS daily snapshot
 
 Full evidence, every table, every script: FINDINGS §24.
 
+### 4.24 Dual-track stability mechanism (Track A / Track B) — what they measure, how,
+and why two tracks (`_pair_tracks`, Module 4 §S5)
+
+Two independent fits of the same (config, K) at different seeds give two sets of U matrices
+whose community *indices* are meaningless labels — community 2 in seed 1000 has no reason to
+correspond to community 2 in seed 1001. Before any comparison can mean anything, the two
+fits' communities must be *matched* to each other first. Both tracks do this matching the
+same way (Hungarian assignment) but score the matched result differently, which is why there
+are two tracks rather than one.
+
+**Step 1 — stack every facet into one matrix per fit.** `S1_raw`/`S2_raw` vertically stack
+every active facet's `U_norm` rows (article rows, author rows, atom rows, … all in one tall
+matrix) so the match is decided on the whole model's structure at once, not facet by facet.
+
+**Step 2 — build a K×K cost matrix and solve it with the Hungarian algorithm
+(`linear_sum_assignment`).** Entry (k1, k2) of the cost matrix is how *dissimilar* seed 1's
+community k1 is from seed 2's community k2; the algorithm then picks the one-to-one column
+permutation that minimises total dissimilarity across all K pairs simultaneously (not just
+the best pairwise match for each column greedily, which can produce conflicts). **The two
+tracks use different dissimilarity measures, so they can and do pick different
+permutations:**
+- **Track A's cost**: Jensen-Shannon distance between the two fits' columns after
+  `col_normalize` (each community column rescaled to sum to 1, i.e. treated as a
+  distribution of *emission mass over entities* — "which entities does this community emit
+  mass to, and in what proportions").
+- **Track B's cost**: 1 − cosine similarity between the two fits' raw (unnormalised) columns
+  — comparing the columns' shape and relative scale together, not a probability distribution.
+
+**Step 3 — score the matched fits, per facet, entity by entity.** This is where the two
+tracks diverge substantively, not just in how they picked the permutation:
+- **Track A** row-normalises *each entity's own row* (`row_normalize`: every entity's
+  membership vector rescaled to sum to 1, i.e. "given this entity is somewhere, how is it
+  split across communities") and takes the Jensen-Shannon distance between the two fits' row
+  for that entity. Track A = 1 − the mean of this over *every* entity in the facet, live or
+  barely-engaged, each counted equally. A natural-log JSD has a non-zero floor even between
+  two unrelated random distributions (≈0.17 theoretical minimum; the real, measured chance
+  level is 0.47–0.74 depending on K — FINDINGS §30), so Track A is read against that measured
+  chance level, never against 0.
+- **Track B** takes the raw (not row-normalised) cosine similarity between the two fits' rows
+  for that entity, then averages across entities *weighted by each entity's row sum in fit 1*
+  (how much total membership mass that entity actually carries). An entity with almost no
+  mass anywhere (dead or barely-engaged) contributes almost nothing to Track B, whereas it
+  counts exactly the same as a strongly-engaged entity in Track A. This is the main
+  substantive difference between the tracks, not a redundant alternative metric: **Track A
+  asks "do strongly- and weakly-engaged entities alike keep the same relative community split
+  across seeds", Track B asks "do the entities that actually matter to the model's mass keep
+  the same split"** — and FINDINGS §28 found these two questions get different answers in a
+  real, non-negligible fraction of models (Pearson r=0.75, not 1.0; the largest single gap
+  +0.137).
+
+**Both tracks are entity-level comparisons throughout** — neither ever compares communities
+to each other directly as objects; "community" only exists as the Hungarian-matched column
+index used to line up two entities' same-numbered membership entry. (An earlier description
+of Track B as community-level was wrong; corrected in FINDINGS §28/§30.)
+
+**Chance level, not 0, is the right floor for both tracks** (ticket 95, FINDINGS §30):
+measured by re-running this exact pairing on one fit's entity rows shuffled within each facet
+(breaks entity correspondence, keeps each community's size/shape distribution intact).
+`run_dual_track_stability_analysis` computes this per model, and `select_models.py`'s
+qualification rule (ticket 91) requires both tracks to clear their own model's chance
+maximum, not a fixed universal number.
+
 ## 5. Namespace Gotcha
 
 **Relation keys and facet names are different namespaces.** This has caused two separate bugs.
