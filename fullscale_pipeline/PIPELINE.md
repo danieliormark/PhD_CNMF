@@ -475,7 +475,8 @@ Conda environment `tensor_env` (`/mnt/hum01-home01/p91688di/miniconda3/envs/tens
 torch 2.11.0; transformers 4.25.1; numpy 2.2.5 (a leftover 2.2.6 record also exists; see §6 item 17); scipy 1.15.3; pandas 2.3.3; rapidfuzz 3.14.5 (added 2026-09-25 with `pip install --no-deps`, F2); awscli 1.44.78 (R2/R3;
 `boto3` is not installed). Cluster: CSF3, partitions `serial` (one core only) and `multicore`; short
 network-only commands (R1, isolate_delta) were run directly on the `incline` login host, which has no
-`sbatch`.
+`sbatch`. CSF3 time, CPU and GPU limits, what can run in parallel, and a rough full-scale time
+estimate: [`CSF3_RESOURCES.md`](CSF3_RESOURCES.md).
 
 ## Appendix A — files that are NOT part of the current chain
 
