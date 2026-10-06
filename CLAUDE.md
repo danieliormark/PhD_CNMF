@@ -1164,6 +1164,126 @@ journals and child/cousin hyperedges keep their main community across seeds (cha
 hyperedges 63–77%, authors and affiliations 45–53%, and words (core and fringe atoms) barely above chance, with Track B at or below
 it. `chunk13_execution/stability_calibration/facet_stability.py` computes this for any archived model.
 
+### 4.25 Temporal prior (v10, ticket 105) — DESIGN DECIDED 2026-10-06, NOT YET BUILT OR TESTED
+
+> Everything below is the design and the reasoning behind it. Claims about how the prior behaves
+> are expectations to be checked by the tests named at the end, not results. When results come
+> in, they are added with dated notes; this text stays.
+
+**What is being built.** `chunk13v10.py` (a copy of v9.4; `chunk13v9.py` stays as it is) fits
+slice T2 with a soft prior towards the T1 model, as planned in §10. The source is Lin, Sun,
+Sundaram, Kelliher, Castro and Konuru (2011), *Community discovery via metagraph factorization*,
+ACM TKDD 5(3), article 17, §6 "Time evolving extension" (MFT).
+
+**What the article does.** At time t it minimises
+(1−α)·Σ_r D(X_r ‖ model) + α·[D(z_{t−1} ‖ z) + Σ_q D(U^(q)_{t−1} ‖ U^(q))]:
+- D is generalised KL; U^(q) holds p(entity | community), with columns summing to 1; z holds
+  p(community).
+- The previous model works as Dirichlet pseudo-counts.
+- α was chosen by how well the model predicts the next period (best roughly 0.2–0.4).
+- K is fixed over time (its own Open Issue 4). Facets keep the same entities, and no explicit
+  community matching is needed.
+
+**Owner decisions (2026-10-06).**
+- **The number of communities is free in T2.** T2 searches K 2–5. T1 and T2 communities are
+  matched one-to-one only where the match beats chance; the rest stay unmatched, so emergence
+  and dissolution can show in the number of communities.
+- **The prior comes from the selected T1 knee model of each config** (`select_models.py` output
+  of the v9.4 run).
+- **The prior acts on entity membership, not on community profiles.** This is the main
+  departure from the article. It is explained next.
+
+**The choice: entity membership, not community profile.**
+- The article's prior pulls each community's profile, p(entity | community), towards the
+  previous period's. Our prior instead pulls each *persisting* entity's membership,
+  p(community | entity), towards its T1 membership.
+- A persisting entity is one that is live in both slices and engaged in the T1 model.
+- Membership is read as weighted membership (ticket 100). This is the same quantity the
+  article uses to *report* memberships: p(k|i) ∝ p(i|k)·p(k), its §5.2.1.
+- The profile form was rejected for four reasons:
+  1. **It would hold back emergence.** A T2 community built from new entities has almost no
+     profile over persisting ones. A profile prior would force that noise to imitate some T1
+     community.
+  2. **It would penalise growth.** Profile columns sum to 1, so new members joining an old
+     community take probability from its persisting members and raise the penalty.
+  3. **It depends on how each slice's ties are weighted.** Damping is computed per slice (ticket
+     84 D7), so the same entity's weights differ between slices. Membership is row-normalised,
+     which cancels this.
+  4. **It needs extra choices when K differs.** With different K in T1 and T2, profiles cannot be
+     compared without them. Memberships only need the community matching.
+
+**Does departing from the article break the mathematics? No, but three things change.**
+1. **No convergence guarantee is lost.** The article's proof that the cost never increases
+   (Theorem 2) relies on its KL data term and its multiplicative updates. v9.4 uses neither:
+   it has a squared-error data term, Adam, clamping and an empirical stopping rule.
+2. **The meaning of the weight changes.** With a squared-error data term the prior is a
+   regulariser, not a Dirichlet prior. Its weight `LAMBDA_TEMPORAL` is not the article's α, and
+   has no pseudo-count meaning. It is fixed by calibration, not by Optuna (§4.7). Optuna's
+   objectives would always prefer weight 0.
+3. **The article's z-prior has no counterpart.** Community sizes, new entities, and community
+   mass on T2-only entities are unconstrained. That is what keeps emergence free.
+
+One rule must be kept from the article: the direction of the divergence, D(prior ‖ current).
+- In this direction, zero prior mass on a new T2 community costs nothing directly.
+- In the reverse direction, the penalty would be infinite whenever T2 gives an entity
+  membership the prior lacks. That would forbid emergence and break the partial matching.
+
+**What is measured in which space.**
+
+| Space | What lives there | Used by |
+|---|---|---|
+| Reconstruction (data) space: entries of X_r and of U_norm·Z_scaled·U_normᵀ | squared residual (`math_loss`); community mass shares from the diagonal of Z_scaled | training loss, Optuna's first axis, collapse check |
+| Parameter (factor) space: U_norm (unit-norm columns, determined); `U_scales` (undetermined, ticket 79); Z_scaled | community direction over a facet's entities; `U_prob` | Track A/B stability; Z off-diagonal penalty |
+| Weighted membership (ticket 100): U_norm[i,k] times the reconstruction mass of column k, row-normalised | each entity's split over communities, read with each community's weight | Penalty_A/B, domain balance, concentration floor, **the temporal prior and the T1↔T2 matching** |
+| The article, for comparison | data term on X (data space); prior on p(i\|k) and p(k) (parameter space); memberships reported as p(k\|i) | — |
+
+**How the term works.**
+- **Freeze.** At the warm-up epoch (the same as the concentration floor's, 300), the fit's
+  current memberships of persisting entities are matched to the T1 memberships:
+  - a rectangular Hungarian assignment on the community columns;
+  - each pair kept only if it beats the 95th percentile of 200 row-shuffles of the T2 rows.
+  The mapping is then frozen and recorded.
+- **Penalty.** From then on: weight × the mean over persisting entities of
+  KL(T1 membership ‖ T2 membership), mapped onto the matched T2 communities.
+  - Each entity is weighted by the share of its T1 membership that lies on matched communities.
+    A member of a T1 community with no match is not pushed anywhere.
+  - Column norms and column weights are detached, so **the gradient reaches only the persisting
+    entity's own row**.
+  - Without detaching the column norms, a new member joining an old community would shrink the
+    persisting members' unit-norm entries, and the gradient would push new members away.
+  - Same detaching logic as ticket 102. The same coupling may affect the concentration floor;
+    to be checked.
+- **Stopping.** v9.4's two-part stopping test is kept.
+- **Regression requirement.** Weight 0, or no prior, must reproduce v9.4 exactly.
+
+**Expected behaviour — to be verified, not yet shown.**
+
+| Change between slices | Expected effect of the prior | Risk | Test |
+|---|---|---|---|
+| New entities join an old community | none (no prior on them, no gradient reaches them) | none by design | gradient check; planted "growth" |
+| A persisting entity moves to another community, old or new | costs weight × KL: the intended inertia; the move happens when the data gain is larger | too large a weight freezes real moves | planted "migration"; calibration |
+| An old community splits | persisting members resist being divided | **artificial emergence**: at high weight the change may show only through new entities, giving a spurious "new" community | planted "split" |
+| Fewer communities (merge, dissolution) | K is chosen outside the fit; unmatched T1 communities exert no pull | the prior's cost may differ by K and bias the choice of K | planted "merge"; K chosen with and without the prior |
+| Matching fails for lack of evidence | unmatched communities carry no prior | "unmatched" is not "emerged" (few persisting entities on the toy) | communities labelled persisted / emerged / unresolved / dissolved from the evidence |
+
+**Bounds of the toy corpus.**
+- Live in both slices: authors 4 of 212/253, affiliations 5, journals 3, parent hyperedges 0,
+  child hyperedges 24, cousin hyperedges 34, core atoms 123, fringe atoms 118.
+- Articles are disjoint (25 vs 36), and only 2 of the 36 T2 articles share an author with T1.
+- On the toy the temporal link is therefore almost entirely through words. It can test the
+  mechanics and the safeguards, not social continuity.
+
+**Planned tests**, in order, with plan and evidence to follow in FINDINGS:
+- T0: regression against v9.4.
+- T1: unit checks: gradient check; gauge invariance; permutation; empty persisting set; finite
+  loss with unmatched columns; zero gradient on new entities.
+- T2: matching against the shuffle null and across seeds.
+- T3: planted two-slice scenarios: growth, migration, split, merge, dissolution plus
+  emergence.
+- T4: interaction with the concentration floor.
+- T5: calibration grid on T2, including held-out ties and the text check.
+- T6: production runs with and without the prior, and the comparison.
+
 ## 5. Namespace Gotcha
 
 **Relation keys and facet names are different namespaces.** This has caused two separate bugs.
@@ -1401,6 +1521,8 @@ mistake, not a fix to existing behavior. |
 | 102 | M2 `run_inner_solver` — differentiable shared-term concentration term | **New 2026-10-02, design sketch only, nothing built.** Penalty_B (ticket 94) and its weighted form (ticket 100) are outer-loop: computed once after a trial finishes, never seen by Module 2's gradient descent (§4.1's Epistemic Boundary). So no reweighting of Penalty_B inside `sociological_penalty` can change what any single fit actually does — it can only prefer one already-fitted trial over another drawn from the same `lambda_z_offdiag`. If every trial at a given lambda concentrates shared terms the same way, outer-loop scoring has nothing better to select (FINDINGS §30: `lambda_z_offdiag` is not a consistent lever on this). Reducing the concentration itself needs a term inside the inner loss. | **[IMPLEMENTED 2026-10-02, v9.4; calibration and evidence FINDINGS §31]** Loss added to `run_inner_solver`: `LAMBDA_CONC * mean_i max(0, CONC_GAMMA * s_i - H(p_i))^2` over live entities of `CONC_FACETS` (core_child_he, cousin_he, core_atom, fringe_atom). `p_i` = the entity's reconstruction-weighted membership (ticket 100; column weights detached, so spreading onto an unused column cannot satisfy the term); `H` = entropy normalised by log K. `s_i` = normalised entropy of the community distribution the entity inherits from the articles that use it (articles' weighted membership pushed down the raw relations, Penalty_B's propagation), computed once at epoch `CONC_WARMUP` from detached values and then frozen. One-sided floor: niche entities (low `s_i`) are untouched; an entity is pushed only when its spread is below `CONC_GAMMA * s_i`. Entity set fixed at the freeze and not gated by model mass (no draining escape route). Settings, fixed and not Optuna-tunable: `LAMBDA_CONC = 0.1`, `CONC_GAMMA = 0.8`, `CONC_WARMUP = 300`; `LAMBDA_CONC = 0.0` reproduces v9.3 exactly (verified). **Early stopping changed with it:** while the term is on, no stop before warm-up + 21 epochs, and the relative-change test must pass for reconstruction as well as for the total loss (otherwise reconstruction rising while the term falls looks flat: grid mean recon cost +1.4% -> +0.5% with the fix). Logged: `raw_conc_loss`, `conc_settings` (diagnostics, trial user attrs, model metadata); settings in `environment_metadata.json`. `PIPELINE_VERSION = "v9.4.t1_v2"`. Effect at these settings (20 config/K cells x 5 seeds): shared-but-exclusive entities 25% -> 3% (graph measure), 49% -> 19% (independent abstract-text measure); recon +0.5% mean; all fits converged; article reassignment and entity mass loss within seed-to-seed variation; stability margin over chance shrinks by roughly a fifth. **Known cost, open: ticket 103** (genuinely niche words spread). **Two errors in the original sketch below, corrected 2026-10-02:** (1) Penalty_B's monopoly threshold is `MAX_MONOPOLY = 0.85`, not 0.60 (0.60 is the collapse threshold `MAX_SHARE_THRESHOLD`); (2) the structural entropy is not computable from raw matrices alone: it propagates the model's own article memberships, hence the warm-up-and-freeze design. *(Original status kept:)* ~~Open — sketch, not designed, not tested, intentionally deferred to next session.~~  Candidate direction, following the existing `lambda_domain_balance` precedent (§4.18 — an in-loop differentiable counterpart to an outer-loop check, same pattern): the structural entropy Penalty_B already computes per entity (from the fixed raw relation matrices, not from trainable parameters) could be precomputed once per config and used as a fixed per-entity weight inside a new differentiable penalty added to the inner loss every epoch — conceptually `lambda_shared * sum_entities(structural_entropy[entity] * (max_k U_prob[entity,k] - threshold)_+^2)`, alongside the existing sparsity/z-offdiag terms. Needs: the exact differentiable form derived and checked against real gradients; a test for whether it actually reduces concentration or just evacuates mass the way `lambda_l1` did without fixing row concentration (tickets 77/78 — the precedent this must not repeat blindly). |
 | 103 | M2 concentration term (ticket 102) — niche words spread | **New 2026-10-02 (FINDINGS §31).** An independent check against the 25 T1 abstracts (does the word literally occur, Porter-stem match; text distribution = community make-up of the abstracts containing it, using each fit's own article memberships) shows a cost the graph-based checks cannot see. Of about 67 atoms per fit whose abstracts lie at least 90% in one community, the share the model spreads below 0.6 rises from 10% (no term) to 16% at the production setting (0.1/0.8), significant in 9 of 20 cells, and to 25-43% at higher weights. Probable cause (inferred, not tested): `s_i` comes from the hyperedge graph, where a word inside a phrase that recurs across many articles (a widely used parent hyperedge) inherits that phrase's spread, so the graph calls it shared although its own text occurrences are local. | **Open — limitation accepted for the v9.4 run, not fixed.** The production weight was chosen low partly for this reason (above λ≈0.3 gains on shared words flatten while niche errors climb steeply). Candidate fix, untested: compute `s_i` over shorter, more direct paths (atom -> child hyperedge -> article) so broad parent phrases do not make local words look shared; needs its own small grid with the same text check. Limits of the evidence: 25 abstracts, atoms only (hyperedges cannot be matched to text this way), 24-26% of atoms not found in any abstract (parser leftovers such as `-`, lemma forms the stemmer misses). |
 | 104 | every script that loads `chunk13v9.py` — import order | **New 2026-10-02.** Importing numpy before torch changes fits: C1/K=3, seed 42, `lambda_conc=0`: math_loss 0.8446382880210876 / 1,476 epochs with numpy imported first, 0.8447861671447754 / 1,452 with torch first or nothing first; reproducible run to run (bisected: `json`/`glob`/`random` pre-imports have no effect, numpy does). Presumed cause: numpy and torch ship different BLAS/OpenMP runtimes and the first one loaded serves both (not traced). | **Recorded; production unaffected.** `chunk13v9.py` imports torch before numpy (comment added at the imports) and the launcher runs it directly, so pipeline fits are consistent. Scratch scripts that imported numpy first (the 2026-10-02 ticket-102 grid, last session's `refit_cell.py`) produced fits that are internally consistent but not bit-identical to pipeline fits, the same as a seed change. Rule: any script meant to reproduce a pipeline fit exactly must import torch (or the module) before numpy. |
+| 105 | new `chunk13v10.py` — temporal extension (T1 → T2 soft prior) | **New 2026-10-06.** §10's planned temporal step, modelled on Lin et al. 2011 (MetaFac, §6 MFT). Owner decisions: K free in T2 with partial matching; prior on persisting entities' weighted membership, not on community profiles (departure from the article, justified in §4.25); prior from each config's selected T1 knee model. | **Open — design decided, nothing built.** Full design, mathematics check, spaces table and expected-behaviour table: §4.25. Tests T0–T6 listed there; nothing is claimed about the prior's behaviour until they are run. |
+| 106 | chunk12v2.py `idf_global` (upstream; also the future M1 builder) — cross-slice information | **New 2026-10-06.** idf for the three anchor relations is computed from document frequencies pooled over T1 and T2 (`chunk12v2.py` L136, L282–284, N = 61). T1's matrices therefore depend on T2 articles, which an online temporal method (ticket 105) should not allow. | **Open — not fixed on the toy** (negligible there: 99% / 88% / 86% of parent / child / cousin hyperedges have df = 1, §4.21). For the full-scale builder, compute idf per slice or cumulatively up to the slice. Related open choice: for three slices, chain (T1→T2→T3, the article's method) or cumulative history. |
 
 ### Recently closed (verify before trusting)
 
@@ -1499,6 +1621,10 @@ Recorded as intent, not as contracts. Current code does **not** implement any of
 exists on disk (§11) but nothing in the pipeline currently loads it.
 
 ### Temporal slices (T1 → T2)
+
+> **[UPDATED 2026-10-06]** Design decided as ticket 105, §4.25 (prior on entity membership, K
+> free with partial matching, prior from the T1 knee model); not yet built. The intro above is
+> also stale: `PIPELINE_VERSION` is now `v9.4.t1_v2`, and T2 can be loaded with `--data`.
 
 When the chronological loop is built, the output of slice T1 will be passed into the T2
 solver as `U_prior`, and the temporal term will be a **differentiable distance metric**
