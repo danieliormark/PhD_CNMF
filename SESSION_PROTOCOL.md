@@ -324,3 +324,7 @@ the full-scale pipeline only. The pipeline is expected to change, so the record 
   without asking, as long as nothing in the main pipeline changes. Changes to pipeline files or outputs are announced first (section J).
 - **In this pipeline "blacklist" and "remove" mean the same.** Exploratory diagnostics do not go into the main pipeline record (section J).
 
+- **Never launch agents or subagents without the owner's permission (added 2026-10-06).** This covers the Agent tool (Explore, Plan,
+  general-purpose or any other type), workflows, and any other mechanism that starts additional model instances, including during plan
+  mode. Ask first, saying what the agent would do and roughly what it would cost. Reason: agents use up the 5-hour usage limit very
+  quickly without finishing enough work. Do the work directly with your own tools unless the owner has approved an agent for that task.
