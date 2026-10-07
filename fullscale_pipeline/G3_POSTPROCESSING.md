@@ -130,11 +130,27 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
    Frequency still not measured. Before implementing, measure how often a `Mv`-typed "be" has no passive-subject-marked
    main verb in its own clause (the mistyped-copula signature) versus a genuine non-passive auxiliary use, so the
    production script's behaviour on that residual case is known rather than assumed.
-2. **Clauses embedded in arguments.** The periphery splits every clause into `dummy_cousin` and `cousin_he`, but
-   the parent's own arguments are flattened whole, so a relative, infinitival or participial clause inside them keeps
-   its verbs in `focal_he` / `sibling_he`: 11% of `focal_he` and 28% of `sibling_he` contain a verb (shard 0). Example:
-   "features of ChatGPT that a novice author can use" → `(sibling_he academic/M/en author/C/en can/M/en novice/C/en
-   use/P/en writing/C/en)`. Should such clauses be split out into their own verb group and hyperedge?
+2. **Clauses embedded in arguments — DECIDED 2026-10-07 (owner): leave flattened (status quo).** The periphery
+   splits every clause into `dummy_cousin` and `cousin_he`, but the parent's own arguments are flattened whole, so a
+   relative, infinitival or participial clause inside them keeps its verbs in `focal_he` / `sibling_he`: 11% of
+   `focal_he` and 28% of `sibling_he` contain a verb (shard 0). Example (shard 0, PMC10788737, re-verified 2026-10-07
+   against the current test script, corrected from an earlier truncated quote): *"This review paper aims to explore
+   some features of ChatGPT that a novice author can use for academic writing."* → `(parent (dummy_sibling
+   explore/P/en) (focal_he chatgpt/C/focal feature/C/en) (sibling_he academic/M/en author/C/en can/M/en novice/C/en
+   use/P/en writing/C/en))`. "Features of ChatGPT" (the parent's own argument) is correctly `focal_he`; the embedded
+   relative clause "that a novice author can use for academic writing" is flattened into `sibling_he`'s bag, where
+   its own subject ("author"), modal ("can") and verb ("use") sit at the same status as every other atom in the bag.
+
+   **Reasons given (owner):** (1) a cousin hyperedge is, by this schema's own definition, *not* part of any parent —
+   cousins hold whatever other clause the unit contains, structurally separate from a parent's arguments (§1).
+   Splitting an embedded clause out as a cousin would misrepresent it as something it is not: it genuinely is part
+   of the parent's own argument, not a sibling structure beside it. (2) The finer partition buys little
+   interpretively — splitting `sibling_he`'s bag into "a novice author can use" and "academic writing" barely
+   changes what can be read off it; the words were already held together as one argument-level bag, so dividing
+   that bag further is a difference of degree, not of substance, for this case.
+
+   **Accepted cost, not hidden by this decision:** the embedded clause's own internal subject-verb relation (which
+   word acts on which) stays unrecovered from the flattened bag, same as before. No code change for this question.
 3. **Lexical modality verbs** (allow, enable, permit, help): now separate verb groups ("allows users to receive" →
    `(dummy_cousin allow)`, `(dummy_cousin receive)`). Join them with their complement verb? (raised, not decided)
 4. **Stop list** (deferred by the owner). Base: the RDS list `PG/nltk_abridged_stopwords_list.txt` = NLTK's 198
