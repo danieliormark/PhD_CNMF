@@ -1,0 +1,112 @@
+[
+ {
+  "config": "C2",
+  "K": 4,
+  "weight": 0.0,
+  "seeds": [
+   {
+    "seed": 1000,
+    "math_loss": 0.8537195920944214,
+    "converged": true,
+    "epochs": 1200,
+    "accepted_at_freeze": 0,
+    "heldout_auc": {
+     "S_Art_Auth": 1.0,
+     "M_Atom_Child": 0.7699785380633758,
+     "M_Child_Art": 0.8208616780045351,
+     "M_Fringe_Cousin": 0.7869118442401298,
+     "M_Cousin_Art": 0.90625,
+     "M_Child_Parent": 0.91
+    },
+    "heldout_auc_mean": 0.8656670100513401,
+    "heldout_converged": true,
+    "posthoc_pairs": 1,
+    "persisting_in_matched": 88,
+    "share_keeping_community": 0.1590909090909091
+   },
+   {
+    "seed": 1001,
+    "math_loss": 0.8431025743484497,
+    "converged": true,
+    "epochs": 1819,
+    "accepted_at_freeze": 0,
+    "heldout_auc": {
+     "S_Art_Auth": 1.0,
+     "M_Atom_Child": 0.8125236712536296,
+     "M_Child_Art": 0.7346938775510204,
+     "M_Fringe_Cousin": 0.8464034613304489,
+     "M_Cousin_Art": 0.8732638888888888,
+     "M_Child_Parent": 0.8688888888888889
+    },
+    "heldout_auc_mean": 0.8559622979854794,
+    "heldout_converged": true,
+    "posthoc_pairs": 0,
+    "persisting_in_matched": 0,
+    "share_keeping_community": null
+   }
+  ],
+  "stability": {
+   "track_A": 0.637126732712344,
+   "track_B": 0.5868669245963665,
+   "chance_A": 0.5468553140831016,
+   "chance_B": 0.5012195676972198,
+   "adj_A": 0.19921102781242178,
+   "adj_B": 0.17171354638699066
+  }
+ },
+ {
+  "config": "C2",
+  "K": 4,
+  "weight": 0.01,
+  "seeds": [
+   {
+    "seed": 1000,
+    "math_loss": 0.8537195920944214,
+    "converged": true,
+    "epochs": 1200,
+    "accepted_at_freeze": 0,
+    "heldout_auc": {
+     "S_Art_Auth": 1.0,
+     "M_Atom_Child": 0.7699785380633758,
+     "M_Child_Art": 0.8208616780045351,
+     "M_Fringe_Cousin": 0.7869118442401298,
+     "M_Cousin_Art": 0.90625,
+     "M_Child_Parent": 0.91
+    },
+    "heldout_auc_mean": 0.8656670100513401,
+    "heldout_converged": true,
+    "posthoc_pairs": 1,
+    "persisting_in_matched": 88,
+    "share_keeping_community": 0.1590909090909091
+   },
+   {
+    "seed": 1001,
+    "math_loss": 0.8431025743484497,
+    "converged": true,
+    "epochs": 1819,
+    "accepted_at_freeze": 0,
+    "heldout_auc": {
+     "S_Art_Auth": 1.0,
+     "M_Atom_Child": 0.8125236712536296,
+     "M_Child_Art": 0.7346938775510204,
+     "M_Fringe_Cousin": 0.8464034613304489,
+     "M_Cousin_Art": 0.8732638888888888,
+     "M_Child_Parent": 0.8688888888888889
+    },
+    "heldout_auc_mean": 0.8559622979854794,
+    "heldout_converged": true,
+    "posthoc_pairs": 0,
+    "persisting_in_matched": 0,
+    "share_keeping_community": null
+   }
+  ],
+  "stability": {
+   "track_A": 0.637126732712344,
+   "track_B": 0.5868669245963665,
+   "chance_A": 0.5468553140831016,
+   "chance_B": 0.5012195676972198,
+   "adj_A": 0.19921102781242178,
+   "adj_B": 0.17171354638699066
+  }
+ }
+]

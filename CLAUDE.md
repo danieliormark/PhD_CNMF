@@ -1284,6 +1284,113 @@ One rule must be kept from the article: the direction of the divergence, D(prior
 - T5: calibration grid on T2, including held-out ties and the text check.
 - T6: production runs with and without the prior, and the comparison.
 
+**[UPDATE 2026-10-07 — implementation, first test results, revised calibration plan]**
+
+*Built (`chunk13v10.py`, scripts in `chunk13_execution/temporal_calibration/`).* The prior,
+the matching and the loss term are module-level functions (`temporal_match_columns`,
+`temporal_mapped_prior`, `temporal_loss_value`) so they can be unit-tested. The stop-gradient
+on column norms and weights is as designed. Two changes from the design above, both found by
+the tests:
+- **The match's chance test.** Comparing the Hungarian-selected pairs with a same-pair null
+  accepted 20% of pairs between unrelated memberships (T1h). Now each pair is standardised
+  against its own shuffle distribution, the assignment is solved on that standardised excess,
+  and a pair is accepted only if it beats the 95th percentile of the *matched* standardised
+  values from the shuffles. The selection is then part of the null. Unrelated memberships
+  are now accepted 3.8% of the time, and planted permutations are recovered 100%.
+- **Prior variants**, owner decision 2026-10-07, implemented as test arms only, not as the
+  production default (`temporal_prior_from_seeds`). They use the T1 knee model plus its
+  stability-seed refits; the seeds' tensors are not archived, so they are refitted, which
+  takes minutes:
+  - **consensus prior:** the mean aligned profile across the models;
+  - **confidence weighting:** each persisting entity's pull is multiplied by the
+    reproducibility of its T1 profile, 1 − its mean JS distance across models / √ln 2.
+
+  Neither is bias-free:
+  - **Consensus** pulls entities whose T1 seeds disagree towards a *mixed* profile, and the
+    KL direction then penalises a concentrated T2 profile. This could suppress real leader
+    formation for exactly the entities whose T1 state is unknown. It also relies on seed
+    alignment, which blurs communities that are not present in every seed.
+  - **Confidence** measures optimisation stability only, not data uncertainty and not
+    correctness. Seeds that agree on a systematically wrong profile get the strongest pull.
+    It also tracks how well connected an entity is, so the prior's memory covers mainly the
+    connected core, not the periphery.
+
+  It changes the effective weight per entity, so arms are compared at their own best weight.
+  Combining the two cancels consensus's main bias, because unstable entities get a mixed
+  prior but almost no weight. The diagnosis compares each arm with the true-membership prior
+  (below).
+
+*Test results.*
+- **T0:** v10 without a prior, or with a prior at weight 0, reproduces v9.4 bit for bit on T1
+  and T2. This was tested on C1/K3, C2/K4 and C6/K4, and gives the §6 reference on incline32.
+- **T1** (gradient, gauge, permutation, empty set, unmatched columns, zero gradient on new
+  rows) and **T1b** (prior variants) pass. T1g confirms that the v9.4 concentration term
+  (ticket 102) has the column-norm coupling this design removes: a gradient of 0.015 on
+  rows outside its entity set. This is recorded, not fixed.
+- **T2, real toy T2, 6 configs × K 2–5 × 10 seeds:** 15.1% of possible pairs are accepted,
+  and 38% of fits accept at least one. Accepted pairs are rarely the same across seeds:
+  1 T1 community has a consistent target. Persisting entities are mostly words, which are not
+  reproducible even within T1 (FINDINGS §32).
+- **T2 with atoms excluded** from the persisting set (owner's full-scale plan drops atom
+  facets; 70 persisting entities):
+  - overall: 11.9% of pairs, 35% of fits, but 5 consistent targets;
+  - C2 (28.5%) and C5 (20.0%) improve;
+  - C3 and C6 drop to chance.
+- **T3, hard-partition planted worlds:** at every weight from 0.03 to 3 the prior missed most
+  pass criteria:
+  - persisting entities recovered worse;
+  - migrants held back;
+  - splits hidden, with spurious all-new communities in the toy-like regime;
+  - 33–83% of accepted matches wrong in that regime.
+
+  Only new entities were recovered better. These results are superseded as a basis for
+  calibration (see below) and kept as the record of what prompted the redesign.
+- **Path sensitivity** (T1b, measured 2026-10-07): two priors differing by about 1e-8 gave
+  fits that first differ at epoch 313 by one float32 rounding step. Early stopping then fired
+  at 938 vs 1,996 epochs, and math_loss ended 0.014 apart. The fits are deterministic run to
+  run. Any change to the loss moves the optimisation path, so single-seed comparisons of a
+  weight's effect are not reliable. Part of the T3 "effects" may be this.
+
+*Revised calibration plan* (owner decisions 2026-10-07):
+- **Calibrate on planted data** (option b), one config (C2), with and without atom
+  relations, in parallel on incline. A short check on real T2 follows at the chosen weight.
+- **Planted truth is soft.** Profiles are drawn with a tunable mixedness and ties are
+  generated from the mixtures, because under a soft partition "migration" is a profile shift,
+  not a reassignment.
+- **Calibration measures are profile-based:**
+  - persisting entities split by how much their true profile changed: distance from the
+    fitted T2 profile to the truth for truly stable entities (gain) and for truly changed
+    ones (cost);
+  - the slope of fitted change against true change (below 1 means change is suppressed);
+  - new entities' error;
+  - community events detected or missed;
+  - reconstruction, convergence, and whether matches are correct.
+
+  No leader classification is used, so 1–3 seeds per world suffice.
+- **Diagnosis first.** Arms:
+  - no prior;
+  - knee prior;
+  - consensus;
+  - knee + confidence;
+  - consensus + confidence;
+  - a **true-membership prior (oracle benchmark)**: the prior built from the planted true T1
+    profiles, which separates a poor prior from a flawed mechanism;
+  - a near-zero-weight control at 1e-6, which separates the prior's pull from path
+    sensitivity;
+  - a later freeze epoch.
+- **Weight grid:** below 0.03, starting at 1e-4.
+- **Not implemented, documented as an option for interpreting real data:** entity-level
+  *leader classes*:
+  - clear leader: top loading ≥ 0.5 and ≥ 0.2 above the second;
+  - mixed: top two within 0.1;
+  - or, for fitted profiles, a seed-based significance test of top versus second loading
+    (≥ 10 seeds; a tie bootstrap for data uncertainty).
+
+  Leader-class changes: switch, leader emergence, leader dissolution, drift. A leader change
+  of a near-tied entity speaks about the entity, not about the model's stability. A large
+  share of such entities is a question for the data (is it the truth?) and for the model (is
+  it stable?).
+
 ## 5. Namespace Gotcha
 
 **Relation keys and facet names are different namespaces.** This has caused two separate bugs.
@@ -1521,7 +1628,7 @@ mistake, not a fix to existing behavior. |
 | 102 | M2 `run_inner_solver` — differentiable shared-term concentration term | **New 2026-10-02, design sketch only, nothing built.** Penalty_B (ticket 94) and its weighted form (ticket 100) are outer-loop: computed once after a trial finishes, never seen by Module 2's gradient descent (§4.1's Epistemic Boundary). So no reweighting of Penalty_B inside `sociological_penalty` can change what any single fit actually does — it can only prefer one already-fitted trial over another drawn from the same `lambda_z_offdiag`. If every trial at a given lambda concentrates shared terms the same way, outer-loop scoring has nothing better to select (FINDINGS §30: `lambda_z_offdiag` is not a consistent lever on this). Reducing the concentration itself needs a term inside the inner loss. | **[IMPLEMENTED 2026-10-02, v9.4; calibration and evidence FINDINGS §31]** Loss added to `run_inner_solver`: `LAMBDA_CONC * mean_i max(0, CONC_GAMMA * s_i - H(p_i))^2` over live entities of `CONC_FACETS` (core_child_he, cousin_he, core_atom, fringe_atom). `p_i` = the entity's reconstruction-weighted membership (ticket 100; column weights detached, so spreading onto an unused column cannot satisfy the term); `H` = entropy normalised by log K. `s_i` = normalised entropy of the community distribution the entity inherits from the articles that use it (articles' weighted membership pushed down the raw relations, Penalty_B's propagation), computed once at epoch `CONC_WARMUP` from detached values and then frozen. One-sided floor: niche entities (low `s_i`) are untouched; an entity is pushed only when its spread is below `CONC_GAMMA * s_i`. Entity set fixed at the freeze and not gated by model mass (no draining escape route). Settings, fixed and not Optuna-tunable: `LAMBDA_CONC = 0.1`, `CONC_GAMMA = 0.8`, `CONC_WARMUP = 300`; `LAMBDA_CONC = 0.0` reproduces v9.3 exactly (verified). **Early stopping changed with it:** while the term is on, no stop before warm-up + 21 epochs, and the relative-change test must pass for reconstruction as well as for the total loss (otherwise reconstruction rising while the term falls looks flat: grid mean recon cost +1.4% -> +0.5% with the fix). Logged: `raw_conc_loss`, `conc_settings` (diagnostics, trial user attrs, model metadata); settings in `environment_metadata.json`. `PIPELINE_VERSION = "v9.4.t1_v2"`. Effect at these settings (20 config/K cells x 5 seeds): shared-but-exclusive entities 25% -> 3% (graph measure), 49% -> 19% (independent abstract-text measure); recon +0.5% mean; all fits converged; article reassignment and entity mass loss within seed-to-seed variation; stability margin over chance shrinks by roughly a fifth. **Known cost, open: ticket 103** (genuinely niche words spread). **Two errors in the original sketch below, corrected 2026-10-02:** (1) Penalty_B's monopoly threshold is `MAX_MONOPOLY = 0.85`, not 0.60 (0.60 is the collapse threshold `MAX_SHARE_THRESHOLD`); (2) the structural entropy is not computable from raw matrices alone: it propagates the model's own article memberships, hence the warm-up-and-freeze design. *(Original status kept:)* ~~Open — sketch, not designed, not tested, intentionally deferred to next session.~~  Candidate direction, following the existing `lambda_domain_balance` precedent (§4.18 — an in-loop differentiable counterpart to an outer-loop check, same pattern): the structural entropy Penalty_B already computes per entity (from the fixed raw relation matrices, not from trainable parameters) could be precomputed once per config and used as a fixed per-entity weight inside a new differentiable penalty added to the inner loss every epoch — conceptually `lambda_shared * sum_entities(structural_entropy[entity] * (max_k U_prob[entity,k] - threshold)_+^2)`, alongside the existing sparsity/z-offdiag terms. Needs: the exact differentiable form derived and checked against real gradients; a test for whether it actually reduces concentration or just evacuates mass the way `lambda_l1` did without fixing row concentration (tickets 77/78 — the precedent this must not repeat blindly). |
 | 103 | M2 concentration term (ticket 102) — niche words spread | **New 2026-10-02 (FINDINGS §31).** An independent check against the 25 T1 abstracts (does the word literally occur, Porter-stem match; text distribution = community make-up of the abstracts containing it, using each fit's own article memberships) shows a cost the graph-based checks cannot see. Of about 67 atoms per fit whose abstracts lie at least 90% in one community, the share the model spreads below 0.6 rises from 10% (no term) to 16% at the production setting (0.1/0.8), significant in 9 of 20 cells, and to 25-43% at higher weights. Probable cause (inferred, not tested): `s_i` comes from the hyperedge graph, where a word inside a phrase that recurs across many articles (a widely used parent hyperedge) inherits that phrase's spread, so the graph calls it shared although its own text occurrences are local. | **Open — limitation accepted for the v9.4 run, not fixed.** The production weight was chosen low partly for this reason (above λ≈0.3 gains on shared words flatten while niche errors climb steeply). Candidate fix, untested: compute `s_i` over shorter, more direct paths (atom -> child hyperedge -> article) so broad parent phrases do not make local words look shared; needs its own small grid with the same text check. Limits of the evidence: 25 abstracts, atoms only (hyperedges cannot be matched to text this way), 24-26% of atoms not found in any abstract (parser leftovers such as `-`, lemma forms the stemmer misses). |
 | 104 | every script that loads `chunk13v9.py` — import order | **New 2026-10-02.** Importing numpy before torch changes fits: C1/K=3, seed 42, `lambda_conc=0`: math_loss 0.8446382880210876 / 1,476 epochs with numpy imported first, 0.8447861671447754 / 1,452 with torch first or nothing first; reproducible run to run (bisected: `json`/`glob`/`random` pre-imports have no effect, numpy does). Presumed cause: numpy and torch ship different BLAS/OpenMP runtimes and the first one loaded serves both (not traced). | **Recorded; production unaffected.** `chunk13v9.py` imports torch before numpy (comment added at the imports) and the launcher runs it directly, so pipeline fits are consistent. Scratch scripts that imported numpy first (the 2026-10-02 ticket-102 grid, last session's `refit_cell.py`) produced fits that are internally consistent but not bit-identical to pipeline fits, the same as a seed change. Rule: any script meant to reproduce a pipeline fit exactly must import torch (or the module) before numpy. |
-| 105 | new `chunk13v10.py` — temporal extension (T1 → T2 soft prior) | **New 2026-10-06.** §10's planned temporal step, modelled on Lin et al. 2011 (MetaFac, §6 MFT). Owner decisions: K free in T2 with partial matching; prior on persisting entities' weighted membership, not on community profiles (departure from the article, justified in §4.25); prior from each config's selected T1 knee model. | **Open — design decided, nothing built.** Full design, mathematics check, spaces table and expected-behaviour table: §4.25. Tests T0–T6 listed there; nothing is claimed about the prior's behaviour until they are run. |
+| 105 | new `chunk13v10.py` — temporal extension (T1 → T2 soft prior) | **New 2026-10-06.** §10's planned temporal step, modelled on Lin et al. 2011 (MetaFac, §6 MFT). Owner decisions: K free in T2 with partial matching; prior on persisting entities' weighted membership, not on community profiles (departure from the article, justified in §4.25); prior from each config's selected T1 knee model. | **Open — design decided, nothing built.** Full design, mathematics check, spaces table and expected-behaviour table: §4.25. Tests T0–T6 listed there; nothing is claimed about the prior's behaviour until they are run. **[UPDATE 2026-10-07]** Built (`chunk13v10.py`); T0, T1, T1b pass; T2 (real toy T2, with and without atoms) and T3 (hard-partition planted worlds) run; the match's chance test corrected; consensus prior and confidence weighting added as test arms; path sensitivity to rounding found; calibration redesigned (soft planted truth, profile-based measures, diagnosis first). Not yet calibrated, no production run. Details: §4.25 update. |
 | 106 | chunk12v2.py `idf_global` (upstream; also the future M1 builder) — cross-slice information | **New 2026-10-06.** idf for the three anchor relations is computed from document frequencies pooled over T1 and T2 (`chunk12v2.py` L136, L282–284, N = 61). T1's matrices therefore depend on T2 articles, which an online temporal method (ticket 105) should not allow. | **Open — not fixed on the toy** (negligible there: 99% / 88% / 86% of parent / child / cousin hyperedges have df = 1, §4.21). For the full-scale builder, compute idf per slice or cumulatively up to the slice. Related open choice: for three slices, chain (T1→T2→T3, the article's method) or cumulative history. |
 
 ### Recently closed (verify before trusting)

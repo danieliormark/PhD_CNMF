@@ -1,0 +1,29 @@
+{
+  "a_consensus_equals_knee": true,
+  "a_conf_all_one": true,
+  "b_permuted_seeds_aligned_back": true,
+  "b_conf_all_one": true,
+  "c_conf_in_unit_interval": true,
+  "c_changed_entities_conf_below_one": true,
+  "c_other_entities_conf_one": true,
+  "c_min_conf_others": 0.9997245276123272,
+  "c_conf_of_changed": [
+    0.708,
+    0.864,
+    0.866,
+    0.76,
+    0.863
+  ],
+  "d_conf_exactly_one": true,
+  "d_P_max_abs_diff": 2.220446049250313e-16,
+  "d_same_match": true,
+  "d_pairs": [
+    [
+      0,
+      1,
+      3.032478809
+    ]
+  ],
+  "d_prior_equal": true,
+  "T1b_pass": true
+}

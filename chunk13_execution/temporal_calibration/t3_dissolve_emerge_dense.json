@@ -1,0 +1,605 @@
+[
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.0,
+  "converged": true,
+  "epochs": 959,
+  "math_loss": 0.716072678565979,
+  "t1_accuracy": 0.7275471698113207,
+  "accuracy": {
+   "all": 0.5466078323221181,
+   "persisting": 0.5687134502923976,
+   "new": 0.557909604519774,
+   "dissolved": 0.49504950495049505,
+   "emerged": 0.4885844748858447
+  },
+  "accepted": 0,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.03,
+  "converged": true,
+  "epochs": 1704,
+  "math_loss": 0.728069543838501,
+  "t1_accuracy": 0.7275471698113207,
+  "accuracy": {
+   "all": 0.5962493105350248,
+   "persisting": 0.5467836257309941,
+   "new": 0.7231638418079096,
+   "dissolved": 0.4752475247524752,
+   "emerged": 0.4520547945205479
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.1,
+  "converged": true,
+  "epochs": 1459,
+  "math_loss": 0.7409726977348328,
+  "t1_accuracy": 0.7275471698113207,
+  "accuracy": {
+   "all": 0.607280750137893,
+   "persisting": 0.5628654970760234,
+   "new": 0.6610169491525424,
+   "dissolved": 0.4752475247524752,
+   "emerged": 0.6940639269406392
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.3,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7433382272720337,
+  "t1_accuracy": 0.7275471698113207,
+  "accuracy": {
+   "all": 0.5890788747931605,
+   "persisting": 0.706140350877193,
+   "new": 0.615819209039548,
+   "dissolved": 0.41089108910891087,
+   "emerged": 0.3013698630136986
+  },
+  "accepted": 3,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [
+   {
+    "fitted": 0,
+    "true": 4,
+    "share_new": 0.911504424778761,
+    "n": 226
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 1.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7543963193893433,
+  "t1_accuracy": 0.7275471698113207,
+  "accuracy": {
+   "all": 0.5896304467733039,
+   "persisting": 0.4619883040935672,
+   "new": 0.7358757062146892,
+   "dissolved": 0.3564356435643564,
+   "emerged": 0.730593607305936
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [
+   {
+    "fitted": 0,
+    "true": 0,
+    "share_new": 0.943609022556391,
+    "n": 266
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 3.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7667965292930603,
+  "t1_accuracy": 0.7275471698113207,
+  "accuracy": {
+   "all": 0.5099778270509978,
+   "persisting": 0.725925925925926,
+   "new": 0.4505649717514124,
+   "dissolved": 0.32673267326732675,
+   "emerged": 0.2054794520547945
+  },
+  "accepted": 3,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [
+   {
+    "fitted": 0,
+    "true": 4,
+    "share_new": 0.9705882352941176,
+    "n": 272
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.0,
+  "converged": true,
+  "epochs": 928,
+  "math_loss": 0.7110403776168823,
+  "t1_accuracy": 0.6558490566037736,
+  "accuracy": {
+   "all": 0.49641478212906787,
+   "persisting": 0.4845201238390093,
+   "new": 0.4907010014306152,
+   "dissolved": 0.4708333333333333,
+   "emerged": 0.5745614035087719
+  },
+  "accepted": 0,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.03,
+  "converged": true,
+  "epochs": 2079,
+  "math_loss": 0.7289621829986572,
+  "t1_accuracy": 0.6558490566037736,
+  "accuracy": {
+   "all": 0.6381687810259239,
+   "persisting": 0.5170278637770898,
+   "new": 0.721030042918455,
+   "dissolved": 0.48333333333333334,
+   "emerged": 0.8903508771929824
+  },
+  "accepted": 3,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [
+   {
+    "fitted": 3,
+    "true": 4,
+    "share_new": 0.9754385964912281,
+    "n": 285
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.1,
+  "converged": true,
+  "epochs": 1889,
+  "math_loss": 0.7333112359046936,
+  "t1_accuracy": 0.6558490566037736,
+  "accuracy": {
+   "all": 0.6607832322118037,
+   "persisting": 0.6594427244582043,
+   "new": 0.6695278969957081,
+   "dissolved": 0.42916666666666664,
+   "emerged": 0.881578947368421
+  },
+  "accepted": 3,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [
+   {
+    "fitted": 3,
+    "true": 4,
+    "share_new": 0.9802631578947368,
+    "n": 304
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.3,
+  "converged": true,
+  "epochs": 1679,
+  "math_loss": 0.7350101470947266,
+  "t1_accuracy": 0.6558490566037736,
+  "accuracy": {
+   "all": 0.6469939327082185,
+   "persisting": 0.718266253869969,
+   "new": 0.6080114449213162,
+   "dissolved": 0.35833333333333334,
+   "emerged": 0.868421052631579
+  },
+  "accepted": 3,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [
+   {
+    "fitted": 3,
+    "true": 4,
+    "share_new": 0.9910179640718563,
+    "n": 334
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 1.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7378363013267517,
+  "t1_accuracy": 0.6558490566037736,
+  "accuracy": {
+   "all": 0.5995587424158852,
+   "persisting": 0.5835913312693498,
+   "new": 0.5951359084406295,
+   "dissolved": 0.30416666666666664,
+   "emerged": 0.9692982456140351
+  },
+  "accepted": 3,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 3.0,
+  "converged": true,
+  "epochs": 1737,
+  "math_loss": 0.7630301117897034,
+  "t1_accuracy": 0.6558490566037736,
+  "accuracy": {
+   "all": 0.5990071704357418,
+   "persisting": 0.6981424148606811,
+   "new": 0.51931330472103,
+   "dissolved": 0.3625,
+   "emerged": 0.8114035087719298
+  },
+  "accepted": 3,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [
+   {
+    "fitted": 3,
+    "true": 4,
+    "share_new": 0.9720812182741116,
+    "n": 394
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.0,
+  "converged": true,
+  "epochs": 1491,
+  "math_loss": 0.7049976587295532,
+  "t1_accuracy": 0.7350943396226415,
+  "accuracy": {
+   "all": 0.8163265306122449,
+   "persisting": 0.7791044776119403,
+   "new": 0.8101449275362319,
+   "dissolved": 0.7685185185185185,
+   "emerged": 0.9831223628691983
+  },
+  "accepted": 0,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.03,
+  "converged": true,
+  "epochs": 1353,
+  "math_loss": 0.7604943513870239,
+  "t1_accuracy": 0.7350943396226415,
+  "accuracy": {
+   "all": 0.5421952564809708,
+   "persisting": 0.4552238805970149,
+   "new": 0.6420289855072464,
+   "dissolved": 0.38425925925925924,
+   "emerged": 0.6413502109704642
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.1,
+  "converged": true,
+  "epochs": 1301,
+  "math_loss": 0.7604551315307617,
+  "t1_accuracy": 0.7350943396226415,
+  "accuracy": {
+   "all": 0.5631549917264203,
+   "persisting": 0.4552238805970149,
+   "new": 0.6956521739130435,
+   "dissolved": 0.37962962962962965,
+   "emerged": 0.6497890295358649
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.3,
+  "converged": true,
+  "epochs": 1401,
+  "math_loss": 0.7739501595497131,
+  "t1_accuracy": 0.7350943396226415,
+  "accuracy": {
+   "all": 0.5758411472697187,
+   "persisting": 0.4761194029850746,
+   "new": 0.7101449275362319,
+   "dissolved": 0.38425925925925924,
+   "emerged": 0.6413502109704642
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 1.0,
+  "converged": true,
+  "epochs": 1636,
+  "math_loss": 0.7880508303642273,
+  "t1_accuracy": 0.7350943396226415,
+  "accuracy": {
+   "all": 0.5714285714285714,
+   "persisting": 0.47313432835820896,
+   "new": 0.7231884057971014,
+   "dissolved": 0.2962962962962963,
+   "emerged": 0.6582278481012658
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [
+   {
+    "fitted": 0,
+    "true": 2,
+    "share_new": 0.9492753623188406,
+    "n": 276
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 3.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7923231720924377,
+  "t1_accuracy": 0.7350943396226415,
+  "accuracy": {
+   "all": 0.5570876999448428,
+   "persisting": 0.4164179104477612,
+   "new": 0.6985507246376812,
+   "dissolved": 0.3148148148148148,
+   "emerged": 0.7637130801687764
+  },
+  "accepted": 3,
+  "false_matches": 1,
+  "emerged_matched": true,
+  "new_only": [
+   {
+    "fitted": 0,
+    "true": 2,
+    "share_new": 0.9806451612903225,
+    "n": 310
+   }
+  ],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ }
+]

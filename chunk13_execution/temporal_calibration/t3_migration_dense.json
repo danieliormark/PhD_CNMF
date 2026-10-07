@@ -1,0 +1,524 @@
+[
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.0,
+  "converged": true,
+  "epochs": 917,
+  "math_loss": 0.7166272401809692,
+  "t1_accuracy": 0.7735849056603774,
+  "accuracy": {
+   "all": 0.531715388858246,
+   "persisting": 0.5316804407713499,
+   "new": 0.5318230852211435,
+   "migrant": 0.53125
+  },
+  "accepted": 0,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.03,
+  "converged": true,
+  "epochs": 638,
+  "math_loss": 0.8017188310623169,
+  "t1_accuracy": 0.7735849056603774,
+  "accuracy": {
+   "all": 0.44677330391616105,
+   "persisting": 0.4214876033057851,
+   "new": 0.49514563106796117,
+   "migrant": 0.28125
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.1,
+  "converged": true,
+  "epochs": 3008,
+  "math_loss": 0.7306264042854309,
+  "t1_accuracy": 0.7735849056603774,
+  "accuracy": {
+   "all": 0.6138996138996139,
+   "persisting": 0.44352617079889806,
+   "new": 0.8069039913700108,
+   "migrant": 0.26875
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 0.3,
+  "converged": true,
+  "epochs": 1964,
+  "math_loss": 0.7545743584632874,
+  "t1_accuracy": 0.7735849056603774,
+  "accuracy": {
+   "all": 0.592388306674021,
+   "persisting": 0.5426997245179064,
+   "new": 0.6903991370010788,
+   "migrant": 0.25
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 1.0,
+  "converged": true,
+  "epochs": 2713,
+  "math_loss": 0.7442384958267212,
+  "t1_accuracy": 0.7735849056603774,
+  "accuracy": {
+   "all": 0.6514065085493657,
+   "persisting": 0.6322314049586777,
+   "new": 0.7443365695792881,
+   "migrant": 0.2
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 0,
+  "K": 4,
+  "lambda": 3.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7665518522262573,
+  "t1_accuracy": 0.7735849056603774,
+  "accuracy": {
+   "all": 0.6751241036955322,
+   "persisting": 0.7203856749311295,
+   "new": 0.7313915857605178,
+   "migrant": 0.14375
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.0,
+  "converged": true,
+  "epochs": 957,
+  "math_loss": 0.7191448211669922,
+  "t1_accuracy": 0.7230188679245283,
+  "accuracy": {
+   "all": 0.6569222283507998,
+   "persisting": 0.6444759206798867,
+   "new": 0.6612729234088457,
+   "migrant": 0.6833333333333333
+  },
+  "accepted": 0,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.03,
+  "converged": true,
+  "epochs": 1895,
+  "math_loss": 0.7383068799972534,
+  "t1_accuracy": 0.7230188679245283,
+  "accuracy": {
+   "all": 0.6574738003309432,
+   "persisting": 0.49291784702549574,
+   "new": 0.8230852211434736,
+   "migrant": 0.45
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.1,
+  "converged": true,
+  "epochs": 2568,
+  "math_loss": 0.7383005023002625,
+  "t1_accuracy": 0.7230188679245283,
+  "accuracy": {
+   "all": 0.6701599558742416,
+   "persisting": 0.5155807365439093,
+   "new": 0.8489751887810141,
+   "migrant": 0.35555555555555557
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 0.3,
+  "converged": true,
+  "epochs": 2108,
+  "math_loss": 0.7491025924682617,
+  "t1_accuracy": 0.7230188679245283,
+  "accuracy": {
+   "all": 0.6034197462768891,
+   "persisting": 0.5325779036827195,
+   "new": 0.7357065803667745,
+   "migrant": 0.2
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 1.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7493679523468018,
+  "t1_accuracy": 0.7230188679245283,
+  "accuracy": {
+   "all": 0.7049089906232764,
+   "persisting": 0.6926345609065155,
+   "new": 0.8392664509169363,
+   "migrant": 0.06111111111111111
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 1,
+  "K": 4,
+  "lambda": 3.0,
+  "converged": true,
+  "epochs": 2433,
+  "math_loss": 0.7659778594970703,
+  "t1_accuracy": 0.7230188679245283,
+  "accuracy": {
+   "all": 0.6271373414230557,
+   "persisting": 0.6161473087818697,
+   "new": 0.7173678532901834,
+   "migrant": 0.20555555555555555
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.0,
+  "converged": true,
+  "epochs": 890,
+  "math_loss": 0.7194263935089111,
+  "t1_accuracy": 0.6656603773584906,
+  "accuracy": {
+   "all": 0.5405405405405406,
+   "persisting": 0.5533428165007113,
+   "new": 0.5458468176914779,
+   "migrant": 0.4644808743169399
+  },
+  "accepted": 0,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.03,
+  "converged": true,
+  "epochs": 2729,
+  "math_loss": 0.733221709728241,
+  "t1_accuracy": 0.6656603773584906,
+  "accuracy": {
+   "all": 0.6640926640926641,
+   "persisting": 0.5064011379800853,
+   "new": 0.8457389428263214,
+   "migrant": 0.34972677595628415
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.1,
+  "converged": true,
+  "epochs": 1861,
+  "math_loss": 0.7514063715934753,
+  "t1_accuracy": 0.6656603773584906,
+  "accuracy": {
+   "all": 0.5427468284611142,
+   "persisting": 0.36984352773826457,
+   "new": 0.7238403451995685,
+   "migrant": 0.2896174863387978
+  },
+  "accepted": 4,
+  "false_matches": 2,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 0.3,
+  "converged": true,
+  "epochs": 3149,
+  "math_loss": 0.7501087784767151,
+  "t1_accuracy": 0.6656603773584906,
+  "accuracy": {
+   "all": 0.6227247655819085,
+   "persisting": 0.5248933143669986,
+   "new": 0.7885652642934197,
+   "migrant": 0.15846994535519127
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 1.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.7438017129898071,
+  "t1_accuracy": 0.6656603773584906,
+  "accuracy": {
+   "all": 0.6486486486486487,
+   "persisting": 0.6813655761024182,
+   "new": 0.7281553398058253,
+   "migrant": 0.12021857923497267
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ },
+ {
+  "rep": 2,
+  "K": 4,
+  "lambda": 3.0,
+  "converged": false,
+  "epochs": 8000,
+  "math_loss": 0.754973292350769,
+  "t1_accuracy": 0.6656603773584906,
+  "accuracy": {
+   "all": 0.61003861003861,
+   "persisting": 0.620199146514936,
+   "new": 0.6936353829557713,
+   "migrant": 0.14754098360655737
+  },
+  "accepted": 4,
+  "false_matches": 0,
+  "emerged_matched": false,
+  "new_only": [],
+  "persisting_n": {
+   "auth": 126,
+   "affil": 20,
+   "journ": 6,
+   "parent_he": 48,
+   "core_child_he": 131,
+   "core_atom": 232,
+   "cousin_he": 129,
+   "fringe_atom": 194
+  }
+ }
+]
