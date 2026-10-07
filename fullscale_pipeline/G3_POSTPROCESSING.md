@@ -110,12 +110,26 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
 
 ## 6. Open questions (owner decisions needed before the production run)
 
-1. **Passive voice.** Dropping auxiliary "be" loses the difference between "should approach" and "should be
-   approached". The parser marks voice without it: in 3,379 "be + verb" constructions, 3,010 (89%) give the main verb a
-   passive-subject role. Options: (i) a marker atom in the verb group, e.g. `passive/M/en`; (ii) keep "be" only in
-   passives; (iii) record the focal term's role in its clause (subject, object, passive subject, agent), which also
-   answers who acts on whom, since `focal_he` does not say whether the focal term is subject or object. A related
-   parser error: a copula "be" is occasionally typed `Mv` and dropped ("cannot be absorbable"); frequency not measured.
+1. **Passive voice — DECIDED 2026-10-07 (owner): option (ii), keep auxiliary "be" in passive constructions.**
+   Dropping auxiliary "be" loses the difference between "a model should approach this problem" and "a model should
+   be approached" — the owner's own example, and the reason given: the two mean different things (who acts on
+   whom), so collapsing them is not an acceptable simplification. Detection reuses the parser's own, already-measured
+   signal: of 3,379 "be + verb" constructions, 3,010 (89%) give the main verb a passive-subject role — that marking,
+   not a separate heuristic, is what "passive" means here. **Rule:** when an auxiliary "be" (type `Mv`) sits in a
+   clause whose main verb carries the passive-subject role, keep it in the verb group, exactly as modals already are
+   (g2); when it does not (the other ~11%, e.g. ordinary progressive "is approaching"), continue to drop it as g1
+   already does. Options (i) (a `passive/M/en` marker atom) and (iii) (recording the focal term's full clause role:
+   subject, object, passive subject, agent) are not adopted for this question — (iii) remains open separately as a
+   richer, not-yet-decided layer (would also answer who acts on whom for *active* constructions, which keeping "be"
+   does not).
+
+   **Left open by this decision, not solved by it: the copula-mistyping failure mode.** A copula "be" (the already-kept
+   main-verb case, g1 — "an LLM **is** a type of AI") is sometimes mistyped by the parser as auxiliary `Mv` and dropped
+   ("cannot be **absorbable**"). A mistyped copula's clause has no other main verb to carry a passive-subject role, so
+   it will not pass this rule's keep-condition either — the new rule does not rescue it, and does not make it worse.
+   Frequency still not measured. Before implementing, measure how often a `Mv`-typed "be" has no passive-subject-marked
+   main verb in its own clause (the mistyped-copula signature) versus a genuine non-passive auxiliary use, so the
+   production script's behaviour on that residual case is known rather than assumed.
 2. **Clauses embedded in arguments.** The periphery splits every clause into `dummy_cousin` and `cousin_he`, but
    the parent's own arguments are flattened whole, so a relative, infinitival or participial clause inside them keeps
    its verbs in `focal_he` / `sibling_he`: 11% of `focal_he` and 28% of `sibling_he` contain a verb (shard 0). Example:
