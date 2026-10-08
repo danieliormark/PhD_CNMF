@@ -540,5 +540,56 @@ modal verbs). Host incline, `tensor_env`; nothing written to the RDS data folder
 - Results, labels and accepted residual errors: G3_POSTPROCESSING.md §6 item 3. Decisions recorded there and in §6 items
   1–2 (commits d7d3f4d, 857d8ba and this one).
 
+**RL-083 · 2026-10-08 · G3 · TEST (read-only) · LIVE**
+Evidence for G3_POSTPROCESSING.md §6 item 4 (stop list). Host incline, `tensor_env`:
+`python g3_curation_test.py --shard 0 --limit 700 --outdir fullscale_pipeline/diagnostics/g3_stoplist/shard0 --show 0`
+(script sha256 `2a5e01342bf4`, unchanged): 694 articles, 14,225 units, 0 problems, 116,938 structures, 45,746 distinct
+argument hyperedges. Counts per candidate class (structure occurrences, hyperedges made only of candidate words, distinct
+hyperedges lost if the class were stop-listed) computed in a scratch pass over `g3_test_000.jsonl` [LOG]. Also found:
+in the periphery "not" is left as a `cousin_he` of its own (355 in shard 0: "will not be known" →
+`(dummy_cousin know will) (cousin_he not)`), while in parents negation joins the verb group [LOG]. Output local only
+(`fullscale_pipeline/diagnostics/g3_stoplist/`); nothing written to the RDS data folders.
+Follow-up tests the same day, on modified **copies** of the script in that folder (the RDS script is unchanged):
+`g3_negfix.py` (negation counted as a verb-group member in `sweep`, as `extract` already does): self-test 54/54; shard 0:
+parents unchanged, standalone negation cousins 360 → 17, negation in `dummy_cousin` 12 → 553 [LOG]. `g3_q4.py`
+(`ONLY_MODE=keep`: "only" off the stop list; `vg`: also a verb-group member like negation): "only" alone as a hyperedge
+111 (keep) vs 12 (vg); in verb groups 130 (vg) [LOG]. Scratch passes over shard 0 for "overall / finally / notably /
+similarly" (60 labelled occurrences), "as well (as)" (217 occurrences by context) and single-adverb hyperedges (3,894;
+50 labelled with the verb they would attach to) [LOG].
+Second round (2026-10-08, same folder): `hard_g3.py` runs the current script, `g3_negfix.py` and `g3_q4.py`
+(`ONLY_MODE=vg2`: "only" joins the verb group only when a predicate follows it, directly or after one adverb, and not
+after "if") on 24 constructed sentences parsed with graphbrain as G2 (`hard_neg_only.json`): current script 5/10 negation
+cases, negfix 9/10 (the 10th an expectation error, meaning kept), vg2 14/14 "only" cases [LOG]. Negation fix on shards
+20 and 30 (`--limit 400`, 16,727 units) against the current script: parents unchanged, standalone negation cousins
+411 → 26, no other change [LOG]. "only" guard on shard 0: 21 removals from verb groups, all restrictions on numbers or
+nouns [LOG]. `adverb_check.py` on shards 20 and 30: 6,257 single-adverb hyperedges categorised (attach 3,000, connective
+1,215, opener 755, stance opener 45, left 1,242) [LOG]. "as well (as)" contexts on G2 shards 20, 30, 40: 343 [LOG].
+Third round (2026-10-08): `g3_q4full.py` = `g3_q4.py` plus the question-4 rules switched on by `Q4=1` (connectives incl.
+although/thereby/though/since/whereas and "even though/if"; opener drop list; "as well (as)" with the degree guard; "not
+only/just/merely/simply/solely" fused into one non-negating atom `not_only`; plain adverbs (type M) as verb-group members;
+position rules applied only when every occurrence of an identical atom qualifies). Self-test 54/54; shards 0 and 20
+(`--limit 400`, 16,526 units, 0 problems): single-modifier hyperedges 7,556 → 1,375, distinct verb groups about +40%,
+`not_only` 139, 12 ambiguous positions [LOG]; samples read: 15 stance/time openers (14 correct; error: "Historically Black
+Colleges"), 25 attached adverbs (22 correct; errors: subordinators since/though, then added to the connectives), 8 not_only
+(8 correct) [LOG]. Hard cases `hard_q4.json` (25): 23 pass, A10 an over-specified expectation, A12 a parse with no
+predicate in every version; a duplicate-atom leak of "only" (A25) found and fixed (all occurrences must qualify) [LOG].
+Fourth round (2026-10-08): "but also" fusion added to `g3_q4full.py` (`also` → `but_also` when "but" stands at most three
+tokens before it with only auxiliaries, modals, be/have/do forms or pronouns in between and no punctuation; when the parser
+attaches "also" to the conjunction, `(also/M but/J) A B`, it is moved into the predicate of the conjunct after "but").
+Self-test 54/54; hard cases `hard_but.json` 7/8 (B06: no predicate path in the parse of an inverted "Not only did…");
+shards 0 and 20, 0 problems: not_only/but_also 238 (verb group 130, argument 101, alone 7), 32 sampled, about 29
+attributed correctly [LOG]. Parents whose verb group holds 2+ verbs (upward climbing now also passes adverbs): shard 0
+4.9% → 5.6% [LOG]. `hard_q4.json` unchanged at 22/25 (the three known non-defects) [LOG].
+
+**RL-084 · 2026-10-08 · G3 · WORD LIST (new) · LIVE**
+New G3 word list `PG/g3_word_lists/adverb_roles.tsv` (sha256 `486043050b18`, 499 words; copy of the tracked
+`fullscale_pipeline/g3_word_lists/adverb_roles.tsv`, built by `build_adverb_roles.py`, sha256 `7aced43f9054`, from the
+single adverbs the tested question-4 rule attaches in G2 v3 shards 0 and 20, RL-083). Columns: rank, word, attachments,
+role, action, flag, example. Roles by the assistant from the owner's decisions of 2026-10-08 (G3_POSTPROCESSING.md §6
+item 4, to be written): keep (attach to the verb group) degree, frequency, manner, focus, likelihood hedges; drop time,
+stance/attitude, certainty boosters, other hedges, in-clause discourse words, subordinators; leave (no attachment, no drop)
+nouns the parser typed as modifiers; particles deferred to §6 item 5. Share of attachments: keep 73%, drop 25%, leave 1%,
+particles 0.5%; 24 rows flagged for the owner's review. Not yet read by any G3 script. Host incline. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

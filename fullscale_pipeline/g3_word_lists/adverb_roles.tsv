@@ -1,0 +1,500 @@
+rank	word	attachments	role	action	flag	example
+1	significantly	212	degree	keep		.92/0.74, respectively, as shown in Fig. 8), significantly exceeding other five baseline m
+2	often	161	frequency	keep		These hybrids often demonstrate strong performance by combi
+3	still	154	time	drop	persistence ('LLMs still require'), often contrastive: time or keep?	If making available the produced corpora is still complex, the availability of produced l
+4	well	138	manner_listed	keep		Besides, as the use of LLMs is well established now, we have noticed several
+5	consistently	116	frequency	keep	frequency (= every time) or manner	Moreover, ChatGPT consistently outperformed both Bard and Copil
+6	effectively	108	manner	keep		structional information on how to do so most effectively.
+7	recently	97	time	drop		More recently, proposed a pre_trained language mod
+8	already	85	time	drop		Among survey respondents, 38.4% report already having used ChatGPT for studying, 29.
+9	directly	85	manner	keep		00% asked ChatGPT specific content questions directly to ChatGPT, 63.4% asked ChatGPT to p
+10	currently	84	time	drop		t ChatGPT should not be used in patient care currently given the lack of response validati
+11	specifically	84	focus	keep		e continues to advance, vitrification robots specifically engineered for mammalian oocytes
+12	systematically	75	manner	keep		We systematically developed and evaluated prompt
+13	locally	74	manner	keep		 Unpaywall36 (RRID, SCR_016471) as well as a locally hosted open_weight large language mod
+14	generally	72	hedge_other	drop	Hyland hedge; could be frequency (= usually)	While language models are generally heavy, REF000031 explore compacting
+15	primarily	71	focus	keep		act on use of ChatGPT, with those interested primarily in medicine subspecialties most lik
+16	yet	69	time	drop	in 'not yet validated' a drop leaves 'not validated': consider keeping	should not be use in a clinical care setting yet.
+17	correctly	69	manner	keep		e difference was mainly due to DeepSeek-R1 incorrectly scoring patients aged 65 years in t
+18	even	68	focus	keep	focus ('even outperformed'); 'even though/if' already dropped as a subordinator	he question: Can LLMs effectively emulate or even surpass human decision_making capability
+19	first	65	discourse	drop	in-clause sequence ('we first investigated'); 'the first model' is an adjective and not affected	, sentiment polarity for the full corpus was first classified into 3 categories (positive,
+20	frequently	62	frequency	keep		and Wikipedia have been shown to be the most frequently used sites by medical students, ev
+21	widely	62	manner	keep		y to increase as the technology becomes more widely accepted.
+22	potentially	62	hedge_likelihood	keep	likelihood hedge	ng models, such as ChatGPT-4o Deep Research, potentially benefit from Leading models' supe
+23	rapidly	58	manner	keep		, however these factors are likely to change rapidly given the rapid adoption and advancem
+24	previously	57	time	drop		tional keywords including combined terms not previously identified.
+25	increasingly	55	degree	keep	a trend over time, put under degree (kept); could be time	LMs) by tools like ChatGPT,1 clinicians have increasingly incorporated large language mode
+26	explicitly	54	manner	keep		ilarities between patients’ EHR data without explicitly identifying a patient’s caseness f
+27	accurately	53	manner	keep		gs that LLMs exhibit inherent limitations in accurately analyzing and interpreting image_b
+28	typically	51	frequency	keep		es used to train protein language models are typically biased with respect to the superkin
+29	fully	51	degree	keep		eflect aspects of contextual expectation not fully captured by current neural surprisal es
+30	likely	42	hedge_likelihood	keep		r standard clinical viewing conditions would likely be higher than reported here, which wo
+31	carefully	41	manner	keep		e collaborate with a radiation oncologist to carefully design scenarios of severe symptoms
+32	successfully	39	manner	keep		rotein and antibody sequence space have been successfully employed in increasing the affin
+33	sometimes	38	frequency	keep		n Probabilistic One_shot for Bowel Pain, but sometimes slightly hurts Llama 3.1 in other p
+34	substantially	38	degree	keep		ration, then GPT 2 Small should also benefit substantially from values of T>1.
+35	independently	38	manner	keep		ure evaluation quality, all LLM outputs were independently assessed by 2 authors in a blin
+36	closely	38	manner	keep		hown in Figure 2, the results reveal that RL closely mirrors human benchmarks across multi
+37	particularly	37	focus	keep		sometimes perpetuate biases or inaccuracies, particularly if ChatGPT has been trained on b
+38	initially	32	time	drop		These results initially establish that language models are 
+39	rather	32	discourse	drop	mostly 'rather than'	data sharing, we measured intention to share rather than verified availability, using LLMs
+40	occasionally	30	frequency	keep		radiologist remains essential, as GPT-4o may occasionally misinterpret reports and generat
+41	mainly	29	focus	keep		tperforms baseline models on the OC dataset, mainly exhibiting a 0.79% improvement in the 
+42	automatically	29	manner	keep		ing research: larger language models are not automatically better cognitive models, granul
+43	manually	28	manner	keep		Therefore, it is essential to manually verify and cross_check any reference
+44	together	28	discourse	drop		to pulling knowledge from different sources] together and create something new out of it w
+45	efficiently	27	manner	keep		ChatGPT can efficiently write the abstract if the exact p
+46	subsequently	27	time	drop		edge from historical experiences, which they subsequently utilize to inform their decision
+47	commonly	27	frequency	keep		of AI tools, such as ChatGPT, have been most commonly in the form of obtaining support fro
+48	clearly	27	booster	drop		We found that Exomiser clearly outperforms the current generation of
+49	similarly	26	discourse	drop		 user_friendly, chatbot format, students may similarly adopt this technology, as studies h
+50	importantly	26	stance	drop		More importantly, LLMs have continued to evolve in
+51	comprehensively	26	manner	keep		or nonvalvular atrial fibrillation, adept at comprehensively analyzing a patient’s basic i
+52	randomly	25	manner	keep		the United States into online conversations, randomly assigning a pretrained chat assistan
+53	especially	25	focus	keep		aking research is costly and time_consuming, especially since state_of_the_art LLMs requir
+54	ultimately	24	time	drop	time or stance (result)	responses that can perpetuate inequities and ultimately lead to harm and misinformation.
+55	exclusively	23	focus	keep		Rather than depending exclusively on users' self_reported option sc
+56	poorly	23	manner	keep		rent general_purpose multimodal LLMs perform poorly on a narrow radiological task—this is 
+57	overall	22	discourse	drop		ers provided by ChatGPT (8.0 [6.8–9.0]) were overall higher than the ones provided by both
+58	actually	22	booster	drop	booster; sometimes contrastive ('actually decreased')	The effects are weaker for those who actually received the rephrasing suggestions 
+59	always	22	frequency	keep		to remember that this language model may not always provide novel ideas but can help gener
+60	easily	21	manner	keep		ting with Ollama, we provided the ability to easily switch from one LLM to another, withou
+61	far	20	degree	keep	degree ('far exceeded'); 'so far' is time	Our study is the first, as far as we are aware, to test a LLM in this co
+62	strongly	20	degree	keep		On the physiology dataset, BERT with all PEs strongly performed well with and without clas
+63	critically	19	manner	keep	in-clause mostly manner ('critically appraise'), as an opener stance; default manner	Critically, the LLM operates under an AD-I pr
+64	largely	19	degree	keep		performance on a narrow radiological task is largely an expected finding in this study; th
+65	inadvertently	19	manner	keep		data collection process of ChatGPT/GPT-4 may inadvertently increase the risk of plagiarism
+66	separately	18	manner	keep		e then re_estimated the mixed_effects models separately for each partition and compared th
+67	simultaneously	18	time	drop	time ('at the same time') or manner	 these scenarios, two players make decisions simultaneously, and the outcomes of two playe
+68	reliably	18	manner	keep		ip between human and LLM rating SDs differed reliably across psycholinguistic variables, u
+69	simply	18	focus	keep	focus; 'not simply' is fused into not_only	ures (extracted by DNABERT and GENA-LM) were simply concatenated.
+70	interestingly	17	stance	drop		Interestingly, M1s were more likely to be fam
+71	slightly	17	degree	keep		istic One_shot for Bowel Pain, but sometimes slightly hurts Llama 3.1 in other paradigms o
+72	quickly	16	manner	keep		rlying chatbots can mimic human language and quickly return detailed and coherent_seeming 
+73	instead	16	discourse	drop		uld show the same within_family pattern; if, instead, the phenomenon is specific to certai
+74	incorrectly	16	manner	keep		The difference was mainly due to DeepSeek-R1 incorrectly scoring patients aged 65 years in
+75	positively	16	manner	keep		 and direction scores in the language models positively correlated with representativeness
+76	broadly	16	manner	keep		out GenAI and LLMs in medical education more broadly include ensuring the accuracy and con
+77	markedly	15	degree	keep		itivity for both GPT-4o and Gemini increased markedly with the V3 minimal prompt (0.40 to 
+78	continually	15	frequency	keep		oped the Me-LLaMA 13B and 70B base models by continually pre_training the LLaMA2 13B and 7
+79	predominantly	14	focus	keep		ely lower median performance benchmarks were predominantly smaller in size.
+80	partially	14	degree	keep		bic C-terminal end of BMAP27mut molecule was partially introduced into the membrane and th
+81	necessarily	13	hedge_likelihood	keep	'not necessarily X' would become 'not X' if dropped: kept as a likelihood hedge	orizations of LLM implementations and do not necessarily provide insights into LLM impleme
+82	greatly	13	degree	keep		The promotion of these applications will greatly promote the development and innovatio
+83	dynamically	13	manner	keep		el semantic cues with a pre_trained LLM, and dynamically fuse high_level semantic cues wit
+84	extensively	13	degree	keep		ChatGPT will be leveraged more extensively in the following areas: real_time
+85	inevitably	13	stance	drop		ChatGPT thus inevitably moves in the direction of a DIGA (
+86	entirely	12	degree	keep		itting by forgoing antigen_specific training entirely.
+87	above	12	discourse	drop		 prevalence_driven CVC overcalling discussed above.
+88	actively	12	manner	keep		atGPT/GPT-4, patients and family members can actively participate in rehabilitation and im
+89	usually	12	frequency	keep		“I usually only use ChatGPT for like quick summa
+90	highly	12	degree	keep		Yet, ChatGPT consistently scores highly in comparative diagnostic tests.
+91	mostly	12	degree	keep		ted LLMs to use decimal precision, responses mostly consisted of integer or half_integer (
+92	heavily	11	degree	keep		ore, unlike traditional AI models, LLMs rely heavily on prompt design and implicit reasoni
+93	appropriately	11	manner	keep		ed even when relevant excerpts from REK were appropriately retrieved, as the LLM misinterp
+94	rarely	11	frequency	keep		General_purpose LLMs rarely produced relevant, evidence_based answ
+95	robustly	10	manner	keep		RoBERTa stands for Robustly optimized BERT approach.
+96	gradually	10	manner	keep		Although the incidence of hallucinations has gradually decreased with each iteration, the 
+97	thoroughly	10	degree	keep		isfaction, trust, and comprehension, and for thoroughly analyzing interactions between cli
+98	newly	10	time	drop		ools, particularly in highly specialized and newly emerging areas of medical expertise.
+99	finally	10	discourse	drop		ance in rare_disease diagnostic support, and finally present our analysis of seven LLMs as
+100	continuously	10	frequency	keep		s an artificial intelligence program that is continuously updated with new versions, and t
+101	completely	10	degree	keep		uestions in the field of infectious diseases completely correct.
+102	equally	9	degree	keep		strating that this technology may not appeal equally to all medical students.
+103	readily	9	manner	keep		GPT to ask medical questions; utilization of readily accessible and easy to comprehend res
+104	globally	9	manner	keep		Globally, accuracy scores of ChatGPT were hig
+105	adequately	9	degree	keep		ChatGPT, Bard, and Copilot performed overall adequately in responding to COPD_related ques
+106	implicitly	9	manner	keep		These aggregated benchmarks implicitly map the multivariate benchmark pro
+107	jointly	9	manner	keep		GenAI and LLMs would not necessarily be jointly ‘learning’ with humans, but rather wo
+108	otherwise	9	discourse	drop		th ideas and perspectives learners might not otherwise have considered, while also helping
+109	notably	9	degree	keep	in-clause degree ('notably lower'); the opener 'Notably,' is dropped by the opener rule	teration, in medical licensing examinations, notably being the first to evaluate its perfo
+110	solely	8	focus	keep		 LLM-based using patients with mild symptoms solely” is presented in Table 1.
+111	deliberately	8	manner	keep		We deliberately matched the readers’ viewing con
+112	meaningfully	8	manner	keep		ngs confirm that textual representations can meaningfully enhance the prediction of corpor
+113	concurrently	7	time	drop		Concurrently, as artificial intelligence cont
+114	precisely	7	manner	keep		egy allowed the plugin functionalities to be precisely tailored to the specific requiremen
+115	naturally	7	manner	keep		In addition, surprisal links naturally to information_theoretic measures o
+116	merely	7	focus	keep		 the possibility that temperature scaling is merely a generic flexibility parameter.
+117	historically	7	time	drop		itive units that psycholinguistic theory has historically taken to be the locus of probabi
+118	quantitatively	7	manner	keep		lti_vendor LLM benchmarking and is addressed quantitatively by the repeat_inference stabil
+119	only	7	focus	keep	own guarded rule (joins the verb group only when a verb follows)	“I usually only use ChatGPT for like quick summarization
+120	much	7	degree	keep		l like people might just rely on ChatGPT too much to create the structures of people's pap
+121	qualitatively	7	manner	keep		An additional three studies in this cohort qualitatively evaluated the readability of LL
+122	inherently	7	manner	keep		h a causal language modelling objective that inherently models sequential dependencies fro
+123	experimentally	7	manner	keep		 this context, the present work proposes and experimentally validates a modular five_layer
+124	rigorously	7	manner	keep		ential privacy leakage if safeguards are not rigorously applied.
+125	fundamentally	7	manner	keep		mained below that of expert trainees and was fundamentally limited by their inability to p
+126	deeply	7	degree	keep		By deeply analyzing and comparing the architectu
+127	partly	7	degree	keep		ta from the internet prior to 2021, which is partly from a nonmedical environment, and alt
+128	repeatedly	7	frequency	keep		erations; Eureka evolves reward functions by repeatedly generating candidates, scoring can
+129	surprisingly	7	stance	drop		Surprisingly, despite DeepSeek-Qwen3-8B's muc
+130	perhaps	6	hedge_likelihood	keep		Perhaps students are aware of reported inaccu
+131	basically	6	hedge_other	drop		ent analysis and returns an array which will basically contain scores for each of the thre
+132	can	6	parse_leftover	leave		 “Occasional urgency, but no accidents”) and cannot directly simulate severe patterns.
+133	publicly	6	manner	keep		ariate performance benchmarks were available publicly from Open LLM and Open Medical LLM l
+134	responsibly	6	manner	keep		nary step before the same instruments can be responsibly adopted in any applied reading re
+135	properly	6	manner	keep		T may generate a long letter if not prompted properly.
+136	forward	6	particle	open question 5		ere are several challenges to address moving forward.
+137	fairly	6	degree	keep		ent that mitigates some common challenges in fairly assessing LLM performance and comparin
+138	probably	6	hedge_likelihood	keep		being motivated to use ChatGPT more (78.3%), probably because ChatGPT allows More than fou
+139	collectively	6	discourse	drop		al shortcomings of large language models and collectively agree on the crucial pieces of i
+140	indirectly	6	manner	keep		At the same time, the state can indirectly influence LLM output through these
+141	remarkably	6	degree	keep	in-clause mostly degree ('remarkably high'); as an opener stance	Remarkably, the study reported only one error
+142	dramatically	5	degree	keep		logies like large language models (LLMs) has dramatically increased in the last year since
+143	soon	5	time	drop		arter of respondents were exposed to ChatGPT soon after it was released, demonstrating its
+144	objectively	5	manner	keep		formance benchmarks is expected to assist in objectively justifying the choice of LLMs whi
+145	favorably	5	manner	keep		ly, our study found that ChatGPT scored more favorably in accuracy and completeness when c
+146	twice	5	degree	keep		he same chest radiograph submitted to GPT-4o twice may yield meaningfully different output
+147	below	5	discourse	drop		agnosis, based on ICD-10 coding as described below.
+148	exactly	5	degree	keep		ive judgements as to whether an LLM response exactly matched the correct diagnosis.
+149	programmatically	5	manner	keep		5213 individuals with a solved diagnosis and programmatically generated prompts using a st
+150	empirically	5	manner	keep		signed the best matching Mondo term above an empirically determined threshold using Curate
+151	sequentially	5	manner	keep		mbedding, wherein two_dimensional images are sequentially arranged and divided into N non_
+152	individually	5	manner	keep		 zero_shot prompting approach, with the RRFs individually entered into the ChatGPT web int
+153	iteratively	5	manner	keep		s were then allowed to interact with GPT-4.0 iteratively, including asking follow_up quest
+154	seamlessly	5	manner	keep		plications can allow healthcare solutions to seamlessly adapt to newer and better LLMs, as
+155	nearly	5	degree	keep		ll, with assistance and adaptations, GPT-3.5 nearly passed the United States Medical Licen
+156	longitudinally	5	manner	keep		extends these findings by evaluating ChatGPT longitudinally across three time points and t
+157	progressively	5	degree	keep		ommendation to seek professional care may be progressively deprioritized, whether as a res
+158	offline	5	manner_listed	keep		clusion for adaptive sensing: an LLM is used offline, within a feedback_driven optimizatio
+159	is	5	parse_leftover	leave		It is well known that the performance of LLMs is
+160	essentially	5	hedge_other	drop		, as in Proto_MBTI or MBTI_in_Thoughts, LLMs essentially become simulacra for experiments.
+161	suitably	5	manner	keep		ch, and thus cannot guide their choices in a suitably informed way.
+162	domestically	5	manner	keep		language patient information settings, where domestically developed LLMs are more commonly
+163	anecdotally	5	manner	keep		First, Gemini-2.5 Pro was anecdotally selected as the primary AI engine
+164	ever	4	frequency	keep	frequency or time	When asked if ChatGPT could ever supplant Anki© as a medical education re
+165	strategically	4	manner	keep		imilarities in LLM performance can assist in strategically selecting those with comparable
+166	ideally	4	stance	drop		While performance benchmarks are expected to ideally interrogate complementary characteris
+167	internally	4	manner	keep		n can be tested: the GPT 2 lineage offers an internally controlled four_point gradient sha
+168	optimally	4	manner	keep		ings indicate that no single model performed optimally across all tasks; overall, ChatGPT-
+169	numerically	4	manner	keep		Both radiologists numerically outperformed all three LLMs on ev
+170	truly	4	booster	drop		 you express your idea which typically it is truly how you feel, however you just don't kn
+171	sufficiently	4	degree	keep		Existing literature has not sufficiently addressed how LLMs can complemen
+172	severely	4	degree	keep		spects of LLMs in cancer decision making are severely under_studied, with topics such as “
+173	ethically	4	manner	keep		ucial part of ensuring that LLMs can be used ethically for diverse patient populations.
+174	skillfully	4	manner	keep		itecture with a self_attention mechanism can skillfully model genomic information by captu
+175	whether	4	subordinator	drop		 variables, we first ran an omnibus test for whether the strength of human–LLM relationshi
+176	differently	4	manner	keep		 lists or the same words but rearranged into differently composed lists.
+177	later	4	time	drop		ith four encoder BERT-like models (described later).
+178	online	4	manner_listed	keep		 predicting AMPs using BERT-AmPEP60 are made online.
+179	please	4	discourse	drop	politeness in quoted prompts	Please summarize five peer_reviewed studies' 
+180	safely	4	manner	keep		In order to safely utilize ChatGPT or similar large langu
+181	confidently	4	manner	keep		ds a safeguard by reducing the likelihood of confidently stated falsehoods.
+182	originally	4	time	drop		o leverage existing LLMs which, although not originally designed for text classification, 
+183	second	4	discourse	drop		 through the final classification layer; and second, developing a domain_specific version,
+184	possibly	4	hedge_likelihood	keep		ecifically in internal medicine and surgery, possibly reacting to a high demand in this ar
+185	long	4	manner_listed	keep		AI has long been present in medicine, but recent inn
+186	briefly	4	manner	keep		This section briefly discusses the architecture of BERT fo
+187	perfectly	4	degree	keep		While these networks do not perfectly align with the Watts–Strogatz model
+188	almost	4	degree	keep		, and the Borda vector averages are likewise almost perfectly correlated (except Claude 3.
+189	unless	4	subordinator	drop		Unless mentioned otherwise, all aspects of th
+190	regularly	4	frequency	keep		tGPT valuable are more likely to use ChatGPT regularly.
+191	behind	4	particle	open question 5		: high_coverage MT (such as No Language Left Behind, FLORES-20015) enables translate_train
+192	urgently	4	manner	keep		 states in Nature's Daily briefing: ‘Science urgently needs a plan for ChatGPT’.2 A contro
+193	certainly	4	booster	drop		This function will certainly be improved in future versions of C
+194	purely	4	focus	keep		 thus following a human_like pattern, or are purely motivated by altruism.
+195	next	4	discourse	drop		We next prompted ChatGPT to process the sentence
+196	considerably	4	degree	keep		Artificial intelligence research has considerably improved large language models (
+197	meticulously	4	manner	keep		For instance, CodeBERT is meticulously trained on programming languages
+198	unsurprisingly	3	stance	drop		Unsurprisingly, most biomedical NLP papers pu
+199	fine	3	manner_listed	keep		Our approach begins with fine tuning the RoBERTa transformer model wit
+200	undoubtedly	3	booster	drop		 the internet for self_education,2 some will undoubtedly use LLM chatbots to find cancer_r
+201	strictly	3	manner	keep		eed control, exact reproducibility cannot be strictly guaranteed; however, deterministic d
+202	aggressively	3	manner	keep		l dysfunction, Probabilistic One_shot AD-LLM aggressively flags anomalies, achieving extre
+203	exceptionally	3	degree	keep		Mild in Probabilistic One_shot also performs exceptionally well on Bowel Pain.
+204	profoundly	3	degree	keep		ily to the Llama 2 and Llama 3 families, has profoundly enlarged the toolkit available for
+205	formally	3	manner	keep		To formally quantify LLM sensitivity to prompt p
+206	judiciously	3	manner	keep		 provides insights on how to utilize ChatGPT judiciously.
+207	adversely	3	manner	keep		antial unfairness affecting individual users adversely.
+208	negatively	3	manner	keep		ctal, and (to a lesser extent) prostate, may negatively affect the ability of LLM research
+209	thoughtfully	3	manner	keep		ing user_centered interfaces, embedding LLMs thoughtfully into clinical processes, and inv
+210	verbatim	3	manner_listed	keep		y, but LLMs can sometimes recall information verbatim.
+211	whereby	3	discourse	drop		or instance, LLMs exhibit emergent phenomena whereby LLMs learn to perform tasks not expli
+212	fortunately	3	stance	drop		Fortunately, work is underway to make LLMs mo
+213	arguably	3	hedge_other	drop		Existing studies have demonstrated GPT-4 is arguably one of the strongest LLMs in this ta
+214	effortlessly	3	manner	keep		ical issues, the system administrators could effortlessly switch to another LLM that provi
+215	autonomously	3	manner	keep		LM identifies a history of trauma, LLM could autonomously suggest localized resources or e
+216	alternatively	3	discourse	drop		Alternatively, LLMs that fail to escalate to 
+217	impressively	3	degree	keep		While LLMs can, somewhat impressively, emulate the speech pattern and 
+218	somewhat	3	degree	keep		While LLMs can, somewhat impressively, emulate the speech pat
+219	bidirectionally	3	manner	keep		n model designed to pre_train unlabeled text bidirectionally using a technique called Mask
+220	cautiously	3	manner	keep		es with medical judgment, and should be used cautiously in clinical applications.
+221	collaboratively	3	manner	keep		 allows multiple health care institutions to collaboratively train LLMs on multiple health
+222	retrospectively	3	manner	keep		GPT outputs were further retrospectively compared to real_world multid
+223	uniformly	3	manner	keep		–Strogatz model, where rewiring is performed uniformly at random, here each rewiring decis
+224	linguistically	3	manner	keep		nges everything, ChatGPT is simply brilliant linguistically, even in German’!
+225	securely	3	manner	keep		hatGPT/ChatGPT/ChatGPT assembles information securely as texts in a wide variety of langua
+226	apparently	3	hedge_other	drop		ChatGPT can apparently programme ChatGPT's own codes and 
+227	course	3	discourse	drop	'of course' (booster/discourse)	Of course, this never comes close to a human coa
+228	selectively	3	manner	keep		wers, users lose the incentive to spend time selectively processing information and derivi
+229	crucially	3	stance	drop		Crucially, LLMs such as ChatGPT can emulate a
+230	erroneously	3	manner	keep		nalysis of the results revealed that Mixtral erroneously identified medical terminologies 
+231	periodically	3	frequency	keep		ChatGPT became vague after the first month (“periodically”), while EvidenceHunt recommende
+232	modestly	3	degree	keep		ogists, primary diagnosis accuracy increased modestly from 69.3% to 71.3% following LLM as
+233	presently	3	time	drop		of LLM-assisted interpretation, as most LLMs presently operate on selected key images rath
+234	intentionally	3	manner	keep		ing language models that invoke ClinAgent is intentionally out of scope.
+235	unanimously	3	manner	keep		They unanimously agreed on their preference for th
+236	insufficiently	3	degree	keep		w, LLMs' performance in clinical settings is insufficiently validated, and the risks of in
+237	straightforwardly	3	manner	keep		r instance, asking for the recipe for napalm straightforwardly may not work, but if the pr
+238	comparably	3	degree	keep		Comparably, in an English summary, the LLM ge
+239	traditionally	3	time	drop	time or hedge	P where it usually involves language models, traditionally meant training on extensive lab
+240	constantly	3	frequency	keep		s obtained in this study, because ChatGPT is constantly being updated with new features an
+241	marginally	3	degree	keep		ll_crafted, domain_specific prompt can still marginally improve LLM performance by encoura
+242	comparatively	3	degree	keep		 model innovation or novel applications) was comparatively more performed on BERT-based mo
+243	r	3	parse_leftover	leave		In terms of sphere prediction error (Figure 5), th
+244	accidentally	3	manner	keep		he risk that the synthesizing language model accidentally generates parts of the synthesiz
+245	annually	3	frequency	keep		 research on LLMs in TCM has been increasing annually, with numerous professional LLMs eme
+246	predictably	3	stance	drop		ance benchmarks, ChatGPT-4's accuracy aligns predictably with the variation in question di
+247	statistically	2	manner	keep		Age was not statistically associated with use of or famil
+248	ahead	2	particle	open question 5		Looking ahead, we anticipate the continued developmen
+249	culturally	2	manner	keep		anguage to provide a list of characteristics culturally associated with each social catego
+250	relatively	2	degree	keep		 ChatGPT), as retrieved via top words, align relatively less with human representations of
+251	semantically	2	manner	keep		n comparative analysis between the delivered semantically and emotionally annotated stimul
+252	daily	2	frequency	keep		 yet trained using real_time data that comes daily from the internet, biomedical databases
+253	throughout	2	particle	open question 5		In contrast, RL remained stable throughout, while GPT-4 fluctuated significan
+254	intuitively	2	manner	keep		ext that allows users to receive information intuitively.
+255	linearly	2	manner	keep		The input features are first flattened and linearly transformed into similar to the Q, K
+256	sort	2	hedge_other	drop	'sort of' (hedge)	ese sources, sometimes really a great way of sort of summarizing the present information a
+257	maybe	2	hedge_likelihood	keep		t ChatGPT pushes out with a grain of salt or maybe like double checking that with a credib
+258	roughly	2	degree	keep		 and finding that the LLM-generated text was roughly comparable to online search resources
+259	herein	2	discourse	drop		 cognitive processes, and we use this method herein.
+260	conceptually	2	manner	keep		Although conceptually simple, evaluation of the differ
+261	drastically	2	degree	keep		on set computer) machine) architectures have drastically reduced the computational demands
+262	medically	2	manner	keep		may be achievable with other or future, more medically tailored LLMs, generalizability is 
+263	mistakenly	2	manner	keep		e language models into chatbots, users could mistakenly think users are presented with spe
+264	voluntarily	2	manner	keep		arning conditions, 15 of the 20 participants voluntarily joined post_task focus group disc
+265	uniquely	2	manner	keep		LLMs are uniquely positioned, then, to facilitate acce
+266	rightfully	2	stance	drop		s written: “The recent advances in LLMs have rightfully raised questions about LLMs' poten
+267	someday	2	time	drop		lation services, large language models could someday create high_quality multilingual pati
+268	enough	2	degree	keep		’ multilingual functions do not perform well enough compared to commercial translation ser
+269	computationally	2	manner	keep		ver, LLM-based de_identification methods are computationally intensive, more expensive to 
+270	methodologically	2	manner	keep		Methodologically, the included studies may ha
+271	synthetically	2	manner	keep		tion); (3) the evaluation approach relies on synthetically generated textual data; (4) the
+272	hierarchically	2	manner	keep		ller LLMs can be used to guide larger models hierarchically; for example, BERT can be empl
+273	proactively	2	manner	keep		It is also important to proactively address organizational considerat
+274	tremendously	2	degree	keep		Thus, LLM may tremendously assist towards the vision of int
+275	evenly	2	manner	keep		taset using GPT-4, comprising 2000 sentences evenly distributed across four ASC types.
+276	proficiently	2	manner	keep		s of parameters, allowing language models to proficiently generate new text.
+277	competitively	2	manner	keep		ile studies have shown that ChatGPT performs competitively on English_language ophthalmolo
+278	preferentially	2	manner	keep		luations of LLMs in medical education should preferentially use newly developed, nonpublic
+279	exhaustively	2	manner	keep		performance of these protein language models exhaustively and compared nine current protei
+280	approximately	2	degree	keep		 performed at or near the passing threshold (approximately 60%), while GPT-4 achieved appr
+281	normally	2	frequency	keep		 scrutiny, or clinical validation that would normally stand behind such a statement.
+282	identically	2	manner	keep		 is that a hospital treating all LLM outputs identically—labelling everything ‘clinical de
+283	unfortunately	2	stance	drop		In a literature search, ChatGPT unfortunately so far only records references 
+284	quite	2	degree	keep		GPT's own codes and algorithms, but we don’t quite understand that yet as clinicians.
+285	blindly	2	manner	keep		Hence, blindly following suggestions by the LLM in s
+286	wrongly	2	manner	keep		elevant literature, possibly contributing to wrongly prioritized genes.
+287	conveniently	2	manner	keep		to simulate how healthcare professionals may conveniently turn to the more widely availabl
+288	indiscriminately	2	manner	keep		ChatGPT-4 indiscriminately identifies all potential dan
+289	definitively	2	booster	drop		pective, real_world studies are essential to definitively evaluate ChatGPT's clinical effi
+290	adaptively	2	manner	keep		Furthermore, LLMs can adaptively refine LLMs' responses based on st
+291	excessively	2	degree	keep		Students may depend excessively on LLMs to perform learning tasks
+292	thereafter	2	time	drop		BERT has been thereafter extensively fine_tuned by research
+293	back	2	particle	open question 5		omatic text revision, and writes the results back; a GitHub Actions workflow that uses our
+294	unconsciously	2	manner	keep		y instructed to stay in one persona, LLM may unconsciously shape LLM's style according to 
+295	temporarily	2	time	drop		The above work shows that we can both temporarily customize an LLM's personality (v
+296	reasonably	2	manner	keep		 Five trait scores can be inferred from text reasonably well, and showed that LLM-based em
+297	uncritically	2	manner	keep		n and insight or mislead and oversimplify if uncritically applied.
+298	fast	2	manner_listed	keep		f AI in the healthcare sector are developing fast, and in the near future, such models (e.
+299	sharply	2	degree	keep		th education was minimal until 2020 but rose sharply from 2021, peaking in 2023–2024 with 
+300	architecturally	2	manner	keep		version string was displayed; note: Manus is architecturally an autonomous AI agent rather
+301	fifth	2	discourse	drop		.5 led in binary accuracy (97.1%) but ranked fifth in open_ended weighted score (93.4%), w
+302	clinically	2	manner	keep		readiness map that separates capability from clinically proven readiness (Figure 3); and (
+303	alone	2	focus	keep		 in DRP detection as compared to pharmacists alone, but the LLM alone performed less effec
+304	steadily	2	manner	keep		However, LLMs are evolving steadily, and newer versions of ChatGPT now a
+305	formerly	2	time	drop		Google Gemini, formerly known as Google Bard, has been repor
+306	under	2	particle	open question 5		ately 2,000 sentences after segmentation) in under 1 s. By comparison, LLM-TIKG17 (Llama2-
+307	insofar	2	discourse	drop		prisal estimates differ from the EEG results insofar as the GPT-2 surprisal estimates sugg
+308	afterward	2	time	drop		Afterward, the BioBert pre_trained model is u
+309	base	2	parse_leftover	leave		nificant, which is slightly higher than Bert-base-uncased and Bert-base-cased algorithms.
+310	ai_based	2	parse_leftover	leave		TS can address the whole workflow of general AI_based molecule generators, and the framewo
+311	theoretically	2	manner	keep		gularities while leaving internal mechanisms theoretically underdescribed.
+312	sometime	2	time	drop		nking capacity is not like a human brain, so sometime ChatGPT may make disaster in some de
+313	majorly	2	degree	keep		ChatGPT, they confined ChatGPT's application majorly to research writing.
+314	structurally	2	manner	keep		s semantic interpretation, but using LLMs to structurally interpret needs is new.
+315	generically	2	manner	keep		ve pretrained transformer (GPT) family model generically as ChatGPT because we considered 
+316	seriously	2	manner	keep		d to what extent LLM users take such outputs seriously is debatable, and likely to depend 
+317	c	2	parse_leftover	leave		oprietary LLMs; b Few_shot proprietary LLMs; c Fine_tuned open_source LLMs; and d Radiolog
+318	last	2	discourse	drop		First, ChatGPT's knowledge database was last updated in April 2023, potentially limit
+319	cloud_based	2	parse_leftover	leave		Most of the studies used cloud_based LLMs, but cloud_based LLMs typica
+320	hereafter	2	discourse	drop		ecently, ChatGPT with OpenAI user interface (hereafter denoted as ChatGPT), a chatbot syst
+321	prospectively	2	manner	keep		Further research should prospectively evaluate the performance of LLM
+322	tightly	2	manner	keep		that employ LLMs as heuristic add_ons, LEHCA tightly couples LLM-generated cognitive outpu
+323	domain_knowledge	2	other	leave		derscores the precision and effectiveness of domain_knowledge embedded prompt engineering 
+324	conceivably	2	manner	keep		the context of mental healthcare, LLMs could conceivably quickly assimilate patient data, 
+325	eventually	2	manner	keep		 to the existing Transformer models that are eventually merged into the final output layer
+326	hardly	2	manner	keep		ll input passages are correct, then the LLMs hardly fail.
+327	supposedly	2	manner	keep		plete redacted sentences from academic texts supposedly included in their training data, e
+328	low_latency	2	other	leave		ChatGPT-4o is a multimodal, low_latency GPT-4-class model optimised for r
+329	unexpectedly	2	manner	keep		s TCMD benchmark showed general_purpose LLMs unexpectedly outperforming TCM_specific LLMs,
+330	machine	2	other	leave		then measured GPT-4’s accuracy on the Arabic machine translated dataset where GPT-4 achiev
+331	affirmatively	1	manner	keep		mproved research productivity, 90% responded affirmatively, and the majority believe it wi
+332	additively	1	manner	keep		her cloze norms and model surprisal combined additively or interactively, we fit an extend
+333	monotonically	1	manner	keep		wed no improvement at any T>1: ΔLL decreased monotonically from (3.47) through (3.41), (3.
+334	purposely	1	manner	keep		n commercial clinically_focussed AI scribes, purposely excluding non_medically focused AI 
+335	emotionally	1	manner	keep		Using a well_trained EBSC LLM transformer, emotionally charged inputs—messages, sentimen
+336	vertically	1	manner	keep		Vertically analyzing, GPT-3.5 showed fluctuat
+337	synergistically	1	manner	keep		 DualPG‐DTA, an innovative DL framework that synergistically integrates dual pretrained la
+338	kind	1	hedge_other	drop		too lazy, then you know, that's where it can kind of cross the line.
+339	easy	1	other	leave		So just take it easy, focus on your inputs to ChatGPT, becaus
+340	like	1	other	leave		ited by the use of ChatGPT.“AI is not fully, like it's not transparent exactly … like wher
+341	double	1	degree	keep		ushes out with a grain of salt or maybe like double checking that with a credible source f
+342	computer	1	other	leave		e led to renewed interest in the impact that computer aided diagnosis can have on medicine
+343	gratefully	1	manner	keep		pondents who participated in this study, and gratefully acknowledge the assistance of the 
+344	smartphone_based	1	other	leave		 platform used (e.g., web_based application, smartphone_based app), input modality (e.g., 
+345	temporally	1	manner	keep		core idea is to convert raw time series into temporally structured natural language prompt
+346	molecular_property	1	other	leave		mation regarding molecular substructures for molecular_property prediction.
+347	altogether	1	degree	keep		Altogether, we find evidence that LLM respons
+348	priori	1	manner_listed	keep		Given that we did not have a priori hypotheses about the relative strength
+349	immediately	1	manner	keep		les rather than narrative text that could be immediately passed to an LLM.
+350	notwithstanding	1	discourse	drop		Notwithstanding, LLMs pose significant data p
+351	barely	1	manner	keep		s on BoolQ and RTE tasks, all seq2seq models barely beat the majority classifier on both t
+352	forwards	1	particle	open question 5		Going forwards, LLMs are predicted to impact all as
+353	image_based	1	other	leave		ons in accurately analyzing and interpreting image_based data.
+354	falsely	1	manner	keep		005151 about biochemistry questions, ChatGPT falsely stated that these questions, being pr
+355	unsuccessfully	1	manner	keep		Gemini unsuccessfully tried to “justify” its choice,
+356	excellently	1	manner	keep		Overall, both platforms performed excellently only when both platforms were sim
+357	accuracy_wise	1	other	leave		Accuracy_wise, there is a considerable differ
+358	bert	1	other	leave		Specifically, they fine_tuned the Romanian-BERT-cased model by adding a linear layer wit
+359	recursively	1	manner	keep		Moreover, recursively training an LLM on synthetically 
+360	beforehand	1	time	drop		a U-Net-inspired transformer model discussed beforehand called Patcher as their segmentati
+361	prompt	1	other	leave		Claude.ai prompt used to utilise generative artificial 
+362	presumably	1	hedge_likelihood	keep		tting, especially considering that GPT-4 was presumably benchmarked on academic and profes
+363	transformer	1	other	leave		Unlike transformer based large language models, whic
+364	worldwide	1	manner_listed	keep		As various studies on ChatGPT are ongoing worldwide, crossover randomized controlled tr
+365	homophily	1	manner	keep		Homophily shows the largest AMEs across datas
+366	graphically	1	manner	keep		Figure 2 graphically presents the attitudes of the tot
+367	demonstrably	1	manner	keep		 clinical_sounding misinformation and do not demonstrably improve diagnostic accuracy, the
+368	elsewhere	1	manner_listed	keep		 for EEG decoding and has since been adopted elsewhere.
+369	bashfully	1	manner	keep		researcher… Gone are the days when we almost bashfully searched Google instead of PubMed f
+370	really	1	booster	drop		’d like to say &Co, but there is no &Co yet) really this incredible lever on all levels of
+371	definitely	1	booster	drop		asks such as insurance letters, ChatGPT will definitely be a game_changer and safe healthc
+372	suboptimally	1	manner	keep		ding information, particularly when prompted suboptimally or when clinical details are inc
+373	before	1	particle	open question 5		ation has also been tested in the literature before.
+374	around	1	particle	open question 5		essful in MSE, still has an error proportion around 30%.
+375	seldom	1	frequency	keep		erogeneous model families: recent AD studies seldom compare transformer models against div
+376	diagnostically	1	manner	keep		llected an independent dataset of 1014 cases diagnostically solved between July 2024 and D
+377	concisely	1	manner	keep		acts in the record data before providing the concisely worded output to be automatically e
+378	informally	1	manner	keep		with ChatGPT's more recent model updates, we informally observed that increasing prompt le
+379	sparsely	1	manner	keep		The problem of sampling a signal sparsely while preserving reconstruction fide
+380	synchronously	1	manner	keep		_tuned—on the four further channels recorded synchronously in the same dataset over the sa
+381	authoritatively	1	manner	keep		n for cryptococcal meningitis, GPT-3.5 often authoritatively provided hazardous recommenda
+382	protein	1	other	leave		Furthermore, the emergence of protein based Large Language Models (LLMs) re
+383	high_accuracy	1	other	leave		earning algorithms to develop and optimize a high_accuracy antibacterial peptide predictio
+384	therein	1	discourse	drop		lls had a total of 50 questions with images; therein, ChatGPT-4 had an average accuracy ra
+385	outcome_oriented	1	other	leave		accuracy and completeness to ensure, from an outcome_oriented perspective, that the models
+386	validly	1	manner	keep		ional tool whose urgency categories could be validly mapped one_to_one to those of a stand
+387	universally	1	manner	keep		gests that the advantage of ChatGPT-4 is not universally established in all scenarios.
+388	mechanically	1	manner	keep		Mechanically extracting answers from LLMs ine
+389	inadequately	1	manner	keep		uate ChatGPT-4 and discovered that the model inadequately represented demographic diversit
+390	introspectively	1	manner	keep		nts' decision_making trajectory and outcomes introspectively and to recognize and address 
+391	transparently	1	manner	keep		els into the Manubot publishing ecosystem to transparently suggest revisions to improve th
+392	psychologically	1	manner	keep		eals that while LLMs are powerful, achieving psychologically calibrated predictions is non
+393	cognitively	1	manner	keep		(Li H. et al. 2025) proposed a cognitively aligned framework called ProtoMBT
+394	authentically	1	manner	keep		ment raises questions about whether LLMs can authentically represent the full spectrum of 
+395	outright	1	manner_listed	keep		ral, many intuitive people will not say that outright.
+396	transformer_based	1	other	leave		tary questions were generated using GPT-4, a transformer_based large language model, acces
+397	nowadays	1	time	drop		RT, and DistilBERT are utilized in NLP tasks nowadays.
+398	pretraining	1	other	leave		RoBERTa is a variation of BERT where the pretraining is performed in a larger dataset 
+399	professionally	1	manner	keep		LMs’ capacity to recommend well_established, professionally authored materials.
+400	encouragingly	1	stance	drop		Encouragingly, preliminary studies show the p
+401	unwittingly	1	manner	keep		 assistants, and content creation, users may unwittingly encounter censorship.
+402	namely	1	manner	keep		tion and require the most human supervision, namely LLM-based systems.
+403	up_to_date	1	other	leave		e_concordance task, since using a retrieved, up_to_date source as a substitute for paramet
+404	unknowingly	1	manner	keep		in the probabilistic framework and the model unknowingly guesses, constructing an answer t
+405	convincingly	1	manner	keep		stion GPT-4’s sources as GPT-4’s sources are convincingly and authoritatively presented.
+406	afterwards	1	time	drop		res given by ChatGPT-4, which were collected afterwards) are strengths, at least in highli
+407	atypically	1	manner	keep		inical integration, particularly for rare or atypically manifesting tumor types.
+408	lexically	1	manner	keep		 may suggest that the predictions are mainly lexically driven.
+409	quantitively	1	manner	keep		he presence of the amplitude difference) and quantitively (predicting actual amplitude dif
+410	curiously	1	stance	drop		Curiously, GPT-2, despite yielding good resul
+411	lastly	1	manner	keep		 information into the learning task, and (3) lastly adopts an XGBoost model to learn a con
+412	specially	1	manner	keep		ERT based model named SlovakBERT was trained specially for Slovak language.
+413	inaccurately	1	manner	keep		ChatGPT 4.0, despite tracking conversations, inaccurately counted inquiries, thereby under
+414	hopefully	1	stance	drop		In particular, large language models will hopefully allow data across multiple electron
+415	knowledge	1	other	leave		 of pre_trained protein language models, the knowledge embedding object also extracts biol
+416	conditionally	1	manner	keep		 language model generates artificial enzymes conditionally upon prompts from the Enzyme Co
+417	improperly	1	manner	keep		To mitigate the risk of improperly saving reward and configuration fi
+418	ambiguously	1	manner	keep		C, CADRADS, Cardiac function) was missing or ambiguously stated, the prompt was adapted to
+419	despite	1	particle	open question 5		Of note, despite all coronary CTA reports were in Germ
+420	concomitantly	1	manner	keep		f users’ intent to use ChatGPT will increase concomitantly with users' trust in the techno
+421	nb	1	other	leave		le 2 presents the performance metrics of the NB, TB, and BERT-based models using the annot
+422	monetarily	1	manner	keep		ts to resolve this, it can be very expensive monetarily (and for other resources) and have
+423	swiftly	1	manner	keep		e_trained language model enabling ChatGPT to swiftly and precisely understand customer inq
+424	reportedly	1	manner	keep		sed matching tool for clinical trials, which reportedly achieves an 87.3% accuracy rate.
+425	syntactically	1	manner	keep		archical prompt, the GPT-4 model generates a syntactically correct and schema_aligned SQL 
+426	ad	1	other	leave		fore among the models most likely to be used ad hoc by clinicians, patients, and health sy
+427	hoc	1	other	leave		e among the models most likely to be used ad hoc by clinicians, patients, and health syste
+428	narrowly	1	manner	keep		Stronger results were reported in more narrowly defined vignette tasks, such as chil
+429	moderately	1	manner	keep		LLMs performed moderately to strongly on several structured 
+430	seemingly	1	hedge_other	drop		del (LLM) performance, with RLHF fine_tuning seemingly leading to the production of more ‘
+431	putatively	1	manner	keep		value alignment’ is, which tools are used to putatively achieve value alignment, and wheth
+432	beside	1	particle	open question 5		Beside being an epistemic issue (how do we kn
+433	mini	1	other	leave		cumentation quality was assessed by a gpt-4o-mini-based evaluator guided by a clinician_de
+434	best_performing	1	other	leave		In our study, the best_performing fine_tuned LLMs, Qwen3-14B, o
+435	inappropriately	1	manner	keep		t provided topic summaries, which were often inappropriately merged.
+436	vastly	1	manner	keep		 context_sensitive word representations that vastly enhance performance across diverse NLP
+437	fold	1	other	leave		animals, MMP-9 expression levels increased 9-fold along the biobridge.
+438	scientifically	1	manner	keep		While this attitude does not equate to scientifically validated educational effectiv
+439	undeniably	1	manner	keep		s, it can help enhance learners’ motivation, undeniably indicating the promising potential
+440	incrementally	1	manner	keep		The system incrementally constructs and updates a global
+441	inductively	1	manner	keep		ived labels were the base topic labels to be inductively improved upon following LLM topic
+442	text_based	1	other	leave		to understand and interpret information in a text_based manner.
+443	loosely	1	manner	keep		LLMs as static priors, one_shot planners, or loosely coupled external tools, which limits 
+444	south	1	other	leave		focus fire on enemy damage dealers” or “move south”) are parsed and converted into agent_s
+445	ostensibly	1	manner	keep		counting, adding, and multiplying abilities, ostensibly require less sophisticated cogniti
+446	well_crafted	1	other	leave		e direct access to external databases, but a well_crafted, domain_specific prompt can stil
+447	adeptly	1	manner	keep		y utilizing custom_designed prompts, the LLM adeptly dissected a critical step in the synt
+448	wherein	1	discourse	drop		he traditional models of language processing wherein a sequence of words is fed into a mod
+449	spontaneously	1	manner	keep		phenomenon that we would prefer not to occur spontaneously when a user accesses ChatGPT or
+450	consciously	1	manner	keep		ceive AI systems as moral agents, users may, consciously or unconsciously, shift the locus
+451	consequentially	1	manner	keep		Consequentially, a substantial outcome involv
+452	hyperbolically	1	manner	keep		l decision support, sometimes described more hyperbolically as “precision medicine”.
+453	contextually	1	manner	keep		The LLM processes this information contextually, including any SMILES strings, c
+454	patient	1	other	leave		systems, and applications that can summarise patient records and create referral letters o
+455	optionally	1	manner	keep		ptom entries into individual phenotypes; (4) optionally, infer phenotype terms from bioche
+456	organically	1	manner	keep		This knowledge graph organically integrates symbolic directional i
+457	close	1	other	leave		 tied at 100.00% on every metric, GPT-3.5 is close behind, and KG_only exceeds each conven
+458	zero_shot	1	other	leave		The results indicate that even zero_shot LLM-based systems may be useful for
+459	unidirectionally	1	manner	keep		understanding text, while GPT processes text unidirectionally (usually from left to right)
+460	intensely	1	manner	keep		ed models show higher precision and are more intensely used for innovation such as classif
+461	guideline_based	1	other	leave		 cardiovascular surgery questions reflecting guideline_based clinical reasoning.
+462	acceptable	1	other	leave		ature extraction has been completed and does acceptable on Taxonomy 1 and Taxonomy 3 (wher
+463	privately	1	manner	keep		Currently, GPT-3 is privately controlled by OpenAI, and health ca
+464	remotely	1	manner	keep		led by OpenAI, and health care providers can remotely run the program and pay for usage pe
+465	visually	1	manner	keep		Figure 2 visually depicts the Z-test scores, demonstra
+466	mean	1	other	leave		dividuals’ personal genome sequences using a mean squared error loss between the actual di
+467	b	1	other	leave		reezing model components during fine_tuning; b fine_tuning on individual_level data togeth
+468	natively	1	manner	keep		Because Enformer does not natively have an LCL RNA_seq output track, we
+469	operationally	1	manner	keep		A “novel idea” was operationally defined as a research topic tha
+470	left	1	other	leave		Top left shows chromatin accessibility assays wit
+471	twin	1	other	leave		educing the training dimension, and uses the twin (Siamese) and three_level (triplet) netw
+472	early	1	manner	keep		that a minority of AI chatbot users realized early that these LLMs do not voluntarily cite
+473	vigilantly	1	manner	keep		This observation stresses scholars’ urge to vigilantly examine reference accuracy for any
+474	subquadratically	1	manner	keep		nger context up to 1M nucleotides by scaling subquadratically, which resulted in HyenaDNA.
+475	therefrom	1	discourse	drop		ly evolving knowledge and guidelines derived therefrom, which highlights the necessity of 
+476	overly	1	manner	keep		ompound the challenges faced by students who overly depend on ChatGPT, impeding students' 
+477	promptly	1	manner	keep		abling students to overcome learning hurdles promptly.
+478	right	1	other	leave		 AI into universities, it's crucial to do it right.
+479	comfortably	1	manner	keep		oss all categories, with pass rates achieved comfortably in 12 out of 13 categories and th
+480	capably	1	manner	keep		or clinically_relevant tasks, LLMs can still capably summarize clinic visit transcripts in
+481	anyway	1	discourse	drop		ning set, which is massive and often unknown anyway.
+482	human	1	other	leave		fect, the output is sometimes preferred over human generated responses.
+483	user	1	other	leave		, linguistic summarization produces a set of user tailored explanations, and an LLM can re
+484	third	1	discourse	drop		Notably, BTF3, which scored third in the GPT-4/Claude method, received a 
+485	feasibly	1	manner	keep		Findings suggested that LLMs can feasibly recommend relevant, comprehensible, 
+486	negligibly	1	manner	keep		he highest mean total score, with ChatGPT‑4o negligibly lower and DeepSeek‑V3 substantiall
+487	igg4	1	other	leave		se mimics (including suspected infection and IgG4-related periaortitis): DeepSeek-R1 and C
+488	flexibly	1	manner	keep		ncorporates a dynamic balancing mechanism to flexibly choose between generating new words 
+489	genuinely	1	manner	keep		LLMs genuinely help with several tasks: generating
+490	preliminarily	1	manner	keep		Our results demonstrated that ChatGPT can preliminarily diagnose retinal vascular disea
+491	latently	1	manner	keep		This shows a clear deviation in how LLMs latently interpret the GSES compared to human
+492	routinely	1	manner	keep		However, LLMs routinely ‘hallucinate’ or give incorrect or 
+493	illegitimately	1	manner	keep		these models exhibit demographic biases that illegitimately favor certain groups over othe
+494	personally	1	manner	keep		Even if a job seeker personally does not trust an LLM for any care
+495	scalably	1	manner	keep		 tens of thousands of instances using a LLM, scalably and rapidly.
+496	away	1	particle	open question 5		ti_scale, such as small targets that are far away.
+497	redundantly	1	manner	keep		ifferent dimensions of fictional worlds, not redundantly encoding the same information.
+498	externally	1	manner	keep		The use of externally established genre labels to show t
+499	interchangeably	1	manner	keep		large language models (LLMs)” are often used interchangeably in the literature, contributi
