@@ -1,23 +1,23 @@
 rank	word	attachments	role	action	flag	example
 1	significantly	212	degree	keep		.92/0.74, respectively, as shown in Fig. 8), significantly exceeding other five baseline m
-2	often	161	frequency	keep		These hybrids often demonstrate strong performance by combi
+2	often	161	frequency	keep		These hybrids often demonstrate strong performance by combi # propose to drop
 3	still	154	time	drop	persistence ('LLMs still require'), often contrastive: time or keep?	If making available the produced corpora is still complex, the availability of produced l
 4	well	138	manner_listed	keep		Besides, as the use of LLMs is well established now, we have noticed several
-5	consistently	116	frequency	keep	frequency (= every time) or manner	Moreover, ChatGPT consistently outperformed both Bard and Copil
-6	effectively	108	manner	keep		structional information on how to do so most effectively.
+5	consistently	116	frequency	keep	frequency (= every time) or manner	Moreover, ChatGPT consistently outperformed both Bard and Copil # propose to drop
+6	effectively	108	manner	keep		structional information on how to do so most effectively. 
 7	recently	97	time	drop		More recently, proposed a pre_trained language mod
 8	already	85	time	drop		Among survey respondents, 38.4% report already having used ChatGPT for studying, 29.
-9	directly	85	manner	keep		00% asked ChatGPT specific content questions directly to ChatGPT, 63.4% asked ChatGPT to p
+9	directly	85	manner	keep		00% asked ChatGPT specific content questions directly to ChatGPT, 63.4% asked ChatGPT to p 
 10	currently	84	time	drop		t ChatGPT should not be used in patient care currently given the lack of response validati
 11	specifically	84	focus	keep		e continues to advance, vitrification robots specifically engineered for mammalian oocytes
-12	systematically	75	manner	keep		We systematically developed and evaluated prompt
+12	systematically	75	manner	keep		We systematically developed and evaluated prompt 
 13	locally	74	manner	keep		 Unpaywall36 (RRID, SCR_016471) as well as a locally hosted open_weight large language mod
 14	generally	72	hedge_other	drop	Hyland hedge; could be frequency (= usually)	While language models are generally heavy, REF000031 explore compacting
 15	primarily	71	focus	keep		act on use of ChatGPT, with those interested primarily in medicine subspecialties most lik
 16	yet	69	time	drop	in 'not yet validated' a drop leaves 'not validated': consider keeping	should not be use in a clinical care setting yet.
 17	correctly	69	manner	keep		e difference was mainly due to DeepSeek-R1 incorrectly scoring patients aged 65 years in t
-18	even	68	focus	keep	focus ('even outperformed'); 'even though/if' already dropped as a subordinator	he question: Can LLMs effectively emulate or even surpass human decision_making capability
-19	first	65	discourse	drop	in-clause sequence ('we first investigated'); 'the first model' is an adjective and not affected	, sentiment polarity for the full corpus was first classified into 3 categories (positive,
+18	even	68	focus	keep# propose to drop	focus ('even outperformed'); 'even though/if' already dropped as a subordinator	he question: Can LLMs effectively emulate or even surpass human decision_making capability
+19	first	65	discourse	drop # propose to keep to avoid conflict between rules	in-clause sequence ('we first investigated'); 'the first model' is an adjective and not affected	, sentiment polarity for the full corpus was first classified into 3 categories (positive,
 20	frequently	62	frequency	keep		and Wikipedia have been shown to be the most frequently used sites by medical students, ev
 21	widely	62	manner	keep		y to increase as the technology becomes more widely accepted.
 22	potentially	62	hedge_likelihood	keep	likelihood hedge	ng models, such as ChatGPT-4o Deep Research, potentially benefit from Leading models' supe
@@ -26,7 +26,7 @@ rank	word	attachments	role	action	flag	example
 25	increasingly	55	degree	keep	a trend over time, put under degree (kept); could be time	LMs) by tools like ChatGPT,1 clinicians have increasingly incorporated large language mode
 26	explicitly	54	manner	keep		ilarities between patients’ EHR data without explicitly identifying a patient’s caseness f
 27	accurately	53	manner	keep		gs that LLMs exhibit inherent limitations in accurately analyzing and interpreting image_b
-28	typically	51	frequency	keep		es used to train protein language models are typically biased with respect to the superkin
+28	typically	51	frequency	keep # propose to drop		es used to train protein language models are typically biased with respect to the superkin
 29	fully	51	degree	keep		eflect aspects of contextual expectation not fully captured by current neural surprisal es
 30	likely	42	hedge_likelihood	keep		r standard clinical viewing conditions would likely be higher than reported here, which wo
 31	carefully	41	manner	keep		e collaborate with a radiation oncologist to carefully design scenarios of severe symptoms
@@ -34,20 +34,20 @@ rank	word	attachments	role	action	flag	example
 33	sometimes	38	frequency	keep		n Probabilistic One_shot for Bowel Pain, but sometimes slightly hurts Llama 3.1 in other p
 34	substantially	38	degree	keep		ration, then GPT 2 Small should also benefit substantially from values of T>1.
 35	independently	38	manner	keep		ure evaluation quality, all LLM outputs were independently assessed by 2 authors in a blin
-36	closely	38	manner	keep		hown in Figure 2, the results reveal that RL closely mirrors human benchmarks across multi
+36	closely	38	manner	keep # propose to drop		hown in Figure 2, the results reveal that RL closely mirrors human benchmarks across multi
 37	particularly	37	focus	keep		sometimes perpetuate biases or inaccuracies, particularly if ChatGPT has been trained on b
 38	initially	32	time	drop		These results initially establish that language models are 
 39	rather	32	discourse	drop	mostly 'rather than'	data sharing, we measured intention to share rather than verified availability, using LLMs
 40	occasionally	30	frequency	keep		radiologist remains essential, as GPT-4o may occasionally misinterpret reports and generat
-41	mainly	29	focus	keep		tperforms baseline models on the OC dataset, mainly exhibiting a 0.79% improvement in the 
-42	automatically	29	manner	keep		ing research: larger language models are not automatically better cognitive models, granul
+41	mainly	29	focus	keep # propose to drop		tperforms baseline models on the OC dataset, mainly exhibiting a 0.79% improvement in the 
+42	automatically	29	manner 	keep # propose to drop		ing research: larger language models are not automatically better cognitive models, granul
 43	manually	28	manner	keep		Therefore, it is essential to manually verify and cross_check any reference
 44	together	28	discourse	drop		to pulling knowledge from different sources] together and create something new out of it w
 45	efficiently	27	manner	keep		ChatGPT can efficiently write the abstract if the exact p
 46	subsequently	27	time	drop		edge from historical experiences, which they subsequently utilize to inform their decision
 47	commonly	27	frequency	keep		of AI tools, such as ChatGPT, have been most commonly in the form of obtaining support fro
 48	clearly	27	booster	drop		We found that Exomiser clearly outperforms the current generation of
-49	similarly	26	discourse	drop		 user_friendly, chatbot format, students may similarly adopt this technology, as studies h
+49	similarly	26	discourse	drop #propose to keep if we have "similarly to"		 user_friendly, chatbot format, students may similarly adopt this technology, as studies h
 50	importantly	26	stance	drop		More importantly, LLMs have continued to evolve in
 51	comprehensively	26	manner	keep		or nonvalvular atrial fibrillation, adept at comprehensively analyzing a patient’s basic i
 52	randomly	25	manner	keep		the United States into online conversations, randomly assigning a pretrained chat assistan
@@ -71,7 +71,7 @@ rank	word	attachments	role	action	flag	example
 70	interestingly	17	stance	drop		Interestingly, M1s were more likely to be fam
 71	slightly	17	degree	keep		istic One_shot for Bowel Pain, but sometimes slightly hurts Llama 3.1 in other paradigms o
 72	quickly	16	manner	keep		rlying chatbots can mimic human language and quickly return detailed and coherent_seeming 
-73	instead	16	discourse	drop		uld show the same within_family pattern; if, instead, the phenomenon is specific to certai
+73	instead	16	discourse	drop #propose to keep (close to contradiction/negation		uld show the same within_family pattern; if, instead, the phenomenon is specific to certai
 74	incorrectly	16	manner	keep		The difference was mainly due to DeepSeek-R1 incorrectly scoring patients aged 65 years in
 75	positively	16	manner	keep		 and direction scores in the language models positively correlated with representativeness
 76	broadly	16	manner	keep		out GenAI and LLMs in medical education more broadly include ensuring the accuracy and con
@@ -85,7 +85,7 @@ rank	word	attachments	role	action	flag	example
 84	extensively	13	degree	keep		ChatGPT will be leveraged more extensively in the following areas: real_time
 85	inevitably	13	stance	drop		ChatGPT thus inevitably moves in the direction of a DIGA (
 86	entirely	12	degree	keep		itting by forgoing antigen_specific training entirely.
-87	above	12	discourse	drop		 prevalence_driven CVC overcalling discussed above.
+87	above	12	discourse	drop #propose to keep if not in the end of sentense (e.g. above expectations/average)		 prevalence_driven CVC overcalling discussed above.
 88	actively	12	manner	keep		atGPT/GPT-4, patients and family members can actively participate in rehabilitation and im
 89	usually	12	frequency	keep		“I usually only use ChatGPT for like quick summa
 90	highly	12	degree	keep		Yet, ChatGPT consistently scores highly in comparative diagnostic tests.
