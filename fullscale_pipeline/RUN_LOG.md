@@ -612,5 +612,14 @@ contrast role beside instead/rather) and keep simply (8 of 10 sampled occurrence
 same class as merely/purely/solely, already kept; 1 booster sense accepted as a residual, as elsewhere in this table).
 Host incline. [LOG]
 
+**RL-087 · 2026-10-08 · G3 · DOC · LIVE**
+G3_POSTPROCESSING.md §6 item 4 (stop list) written up as decided, consolidating RL-083 to RL-086 and the owner's two
+review rounds on `g3_word_lists/adverb_roles.tsv`: "our" kept off the list; numbers unchanged; "only" a guarded
+verb-group member; the negation fix; "not only"/"but also" fused into non-negating atoms (flagged for a later
+drop decision); core connectives plus the subordinator extension dropped everywhere; the opener rule for
+overall/finally/notably/similarly and a matching discourse/sequence opener list; the single-adverb role table;
+"as well as"/"as well" with the degree-word guard. §1 schema row and §3 g2 row updated; §8 and the status line
+mark items 1-4 decided. No code changed; `g3_curation_test.py` is unchanged on disk. Host incline. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

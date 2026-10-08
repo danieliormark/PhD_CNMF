@@ -1,7 +1,7 @@
 # Stage G3 — postprocessing (curation) of the G2 parse: decisions, open questions, test status
 
 Status (2026-09-30): **design agreed in part; test script built and tested on real data; not yet run on the corpus.**
-*[2026-10-08: §6 items 1–3 decided; items 1 and 3 not yet implemented in the test script.]*
+*[2026-10-08: §6 items 1–4 decided; items 1, 3 and 4 not yet implemented in the test script.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080). The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
 item 29). Input: G2 v3, see [`G2_PARSING.md`](G2_PARSING.md). Path abbreviations as in PIPELINE.md.
@@ -268,12 +268,116 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
      others stay in the argument bag, as before.
    - **misses**, unchanged from before: mostly parser errors ("help" typed as a noun in "can help generate", a
      complement attached elsewhere), and about 30% of the V-ing pattern.
-4. **Stop list** (deferred by the owner). Base: the RDS list `PG/nltk_abridged_stopwords_list.txt` = NLTK's 198
-   English stop words minus 77 (negations, be/have/do and modal forms, more/most/few/same/both/each,
-   above/below/against/under/through/until/before, we/our/ours/she) plus also/whilst; the toy list differs only in be
-   (toy) / also (RDS). Candidates to add, by frequency among kept atoms (700 articles): our/ours/us (778), discourse
-   adverbs (however 391, therefore 161, additionally 140, respectively 125, furthermore 124, moreover, thus, hence),
-   well (444, mostly "as well as"), number words (two 342, three 294, one; ordinals undecided). Borderline: only.
+4. **Stop list — DECIDED 2026-10-08 (owner), across several rounds.** Base unchanged: the RDS list
+   `PG/nltk_abridged_stopwords_list.txt` = NLTK's 198 English stop words minus 77 (negations, be/have/do and modal
+   forms, more/most/few/same/both/each, above/below/against/under/through/until/before, we/our/ours/she) plus
+   also/whilst. On top of it, the decisions below either drop a word outright, or let it join the verb group it
+   belongs to (the same place modals already go, §3 g2) instead of being either kept as a separate hyperedge or
+   dropped as a bare stop word. None of this is yet implemented in `g3_curation_test.py`; it is implemented and
+   tested in `g3_word_lists/` and `diagnostics/g3_stoplist/` (RUN_LOG RL-083 to RL-086).
+
+   - **"our"/"us": kept, not added.** Owner's reason: distinguishes the authors' own models or approaches from
+     others', which the analysis should not discard.
+   - **Numbers.** Numeric forms ("2", "2024") were already dropped by decision f (no letters). Spelled-out numbers
+     are not added: cardinals carry study-design information ("two models", "three groups"); ordinals split between
+     content ("the first model of this kind") and a discourse use ("First, …"), handled by the opener rule below.
+   - **"only" — a guarded verb-group member, like negation**, not a stop word and not always dropped. "Only LLMs can
+     generate…" keeps "only" in `focal_he`; "LLMs can only generate…" puts it in the verb group with "can" and
+     "generate". The guard: "only" joins the verb group only when a predicate follows it, directly or after one
+     adverb, and never after "if" ("if only because…"). Without the guard, 5 of 40 sampled verb-group placements were
+     wrong ("only four qualified", "only 20 amino acids"); the guard removed exactly those 21 wrong placements
+     corpus-wide and no correct one. 14 constructed hard cases distinguishing the two positions all pass.
+   - **Negation, fixed to stay with its predicate.** `g3_curation_test.py` already keeps negation in the verb group
+     when building a parent (§3 h), but not when building the periphery (`sweep`), which used a narrower test
+     (predicate or modal only) than `extract` (predicate, modal or negation). "The results will **not** be known"
+     gave `(dummy_cousin know will)` + a separate `(cousin_he not)`; the fix makes `sweep` use the same test as
+     `extract`. Self-test 54/54; on shards 0, 20 and 30 (31,000 units) no parent changed, and standalone negation
+     hyperedges fell from 771 to 43 (the rest elliptical, "but not others", with no verb to join). 9 of 10
+     constructed hard cases pass; the 10th keeps its correct meaning regardless (a case of decision 2, an embedded
+     clause).
+   - **"not only" / "just" / "merely" / "simply" / "solely", and "but also": fused into one non-negating atom each,
+     `not_only` / `but_also`, not treated as negation.** Detected deterministically: "not" or "n't" directly
+     followed by one of the five words; "also" with "but" standing at most three tokens before it, with only
+     auxiliaries, modals, be/have/do forms or pronouns in between and no punctuation ("but also", "but can also",
+     "but it also"). Attributed to the clause's verb group or argument exactly as any other atom, reusing the same
+     predicate-finding logic (one parser quirk needed a fix: when the parser attaches "also" to the conjunction
+     itself rather than to either clause, it is moved into the predicate of the clause after "but"). Reason: the
+     polarity of "not only … but also …" depends on the words it scopes over, not on the construction itself
+     ("not only **incapable**" stays negative; "not only **cheaper**" does not), so no polarity list is needed, and
+     the construction must not be read as a plain negation of its first clause. Self-test 54/54; sampled corpus
+     placements (238 cases across shards 0 and 20, split 130 verb group / 101 argument / 7 alone): about 29 of 32
+     correct; 7 of 8 and then 7 of 8 constructed hard cases pass (the two failures are a parser reading with no
+     predicate path, common to every version tested). **Flagged, not solved now, to revisit once all of §6 is
+     decided:** once correctly fused and attributed, "not only"/"but also" read substantively as "and" (owner);
+     whether and at which stage of the rule sequence to drop them without disturbing how anything else was attached
+     is left open.
+   - **Core discourse connectives, and subordinators found to cause the same problem: dropped everywhere**, not
+     only as stop words but from the kept-adverb rule below too. List: however, therefore, additionally,
+     furthermore, moreover, thus, hence, consequently, nevertheless, nonetheless, accordingly, conversely,
+     meanwhile, likewise, indeed, respectively, although, thereby, since, whereas, though, and "even though"/"even
+     if". The subordinators were added after the parser typed them as plain adverbs and the rule below would
+     otherwise have attached them to a verb group ("since our input will be…" → `(be since will)`). Owner's
+     reason for not keeping any of these (2026-10-08): synonymous connectives would create distinct hyperedges for
+     the same relation ("although" vs "despite", "since" vs "because"), imposing a sparsity the data does not
+     really have, since the model cannot see that the words mean the same thing; dropping removes the problem for
+     connectives entirely (prepositions such as "despite" are already dropped by type).
+   - **"Overall" / "finally" / "notably" / "similarly": dropped only as sentence openers.** Rule: the word is the
+     first word of its unit, or follows ";" or ":", and is directly followed by a comma. 60 labelled occurrences:
+     every connective use caught ("Finally, …" 14/14, "Notably, …" 14/14, "Similarly, …" 11/11), no content use lost
+     ("the **overall** accuracy", "performed **similarly** to"). A plain word-type test cannot tell the two apart,
+     and dropping the word wherever it stands alone would also drop "performed similarly".
+   - **A matching opener-drop list** (discourse and sequence words acting as openers only): finally, first, second,
+     third, fourth, fifth, firstly, secondly, thirdly, fourthly, lastly, last, next, overall, similarly,
+     specifically, notably, yet (opener use only — see below), instead, together, collectively, rather, besides,
+     herein, hereafter, subsequently, thereinto, regardless, otherwise, together with the single words above. Same
+     rule and same evidence (sampled 40/40 correct, shards 20 and 30). In-clause "first" ("we first investigated")
+     is a separate, kept role (next item): the two uses are told apart by position, not confused.
+   - **Single adverbs, attached to their own clause's verb group** wherever they stand in the sentence, **selectively
+     by role**, per a word-by-word table built from real attachment data and revised twice by the owner:
+     `g3_word_lists/adverb_roles.tsv` (513 words, sha256 `f66d153f5efa`; built by `build_adverb_roles.py`, sha256
+     `4b6f4ae541e0`; mirrored on RDS at `PG/g3_word_lists/adverb_roles.tsv` for CSF). Columns: rank, word,
+     attachments (count in a corpus sample), role, action, flag (the assistant's reasoning), owner_note (the
+     owner's own comments, kept verbatim), example. Of 4,962 sampled attachments, 59% keep (attach) and 39% drop;
+     1% are nouns the parser mistyped as modifiers, neither attached nor dropped. Roles kept: degree (greatly,
+     marginally), low frequency (rarely, occasionally — "often implies no special claim, rarely changes the
+     meaning" is the owner's distinction from high-frequency words), a schedule sense (periodically, daily),
+     manner (the open majority of -ly words), exclusive focus (only, merely, simply, solely), likelihood hedges
+     (likely, possibly, necessarily), negative or low forms added from corpus counts and kept even where the
+     positive is dropped (incorrectly, inconsistently, insufficiently, indirectly — 26 words), contrast (instead,
+     rather, otherwise), and concessive "yet". Roles dropped: high-frequency generalisers (often, always, usually,
+     typically, consistently), scalar focusers that do not change the claim (even, mainly, especially,
+     particularly), stance/attitude (interestingly, surprisingly, unexpectedly), certainty boosters (clearly,
+     definitely, actually), other hedges (generally, apparently), time (recently, currently, still — owner: "does
+     not add new information" — simultaneously, traditionally). Two conditional, position-dependent exceptions
+     mirror the opener rule: "similarly" is kept only directly before "to" (52 of 896 occurrences in 3 shards; the
+     bare connective use is dropped); "above"/"below" are dropped only at the end of a clause ("discussed above.")
+     and kept as a comparison otherwise ("above average"; 400 vs 186 "above", shards 20/30/40 and 0/10). On real
+     data (shards 0 and 20, 400-unit limit, 16,526 units, 0 problems): single-modifier hyperedges fell from 7,556 to
+     a count consistent with the smaller kept set; 25 constructed hard cases pass 22/25 (two are a parser reading
+     with no predicate anywhere in the sentence, one an over-specific test expectation); 58 of 60 sampled real
+     placements correct (one error: a proper name, "Historically Black Colleges", not an adverb at all). Owner's
+     own review (two rounds, commits `03d29d8` and the one after, kept verbatim in `owner_note`) corrected or
+     confirmed about 50 of the highest-frequency words; the remaining rows followed the same stated logic by
+     analogy (keep what turns a claim towards negation, contrast or comparison; drop generic generalisers and
+     focusers that do not), each flagged as "analogy/added" rather than the owner's own word.
+   - **Flagged, not solved now:** the same argument that justified dropping connectives — synonymous words
+     fragmenting otherwise-identical hyperedges — applies to the kept adverbs themselves ("significantly",
+     "substantially" and "markedly" before the same verb are now three different verb groups; distinct verb groups
+     rose from 4.9% to 5.6% of parents in the sampled shards). Proposed, not run: compare G3 variants with more and
+     less merging (attach every adverb; drop every single adverb; the role table above; a WordNet-synonym grouping)
+     by the sparsity of the article × child-hyperedge and article × cousin-hyperedge incidence computed directly
+     from G3 output, once this and the "not only"/"but also" question above are both revisited together.
+   - **"as well as" / "as well": the connective use dropped, the comparative use kept.** "GPT-4 **as well as** BERT
+     was evaluated" and "used **as well**" (meaning "too") are dropped; "performed **as well as** the residents" and
+     "**at least** as well as…" are kept. Rule: "well" after "as" is dropped unless the word two tokens before is a
+     verb or one of a short list of degree words (at least, not, about, nearly, almost, just, equally, roughly,
+     approximately), or the comparison continues "or better/worse than". 560 cases across four shards: the simple
+     rule alone missed 5 comparisons with a degree word in that position; the extended rule fixed all 5, leaving
+     about 0.3% of drops wrong. Chosen over substituting "and" (already redundant, since "and" is itself a stop
+     word) as more direct and no less accurate.
+   - Residual, left as parser error and not addressed: a handful of sentences the parser reads with no predicate at
+     all ("GPT-4 as well as BERT was evaluated on the exam" in isolation), which every rule set, including the
+     unmodified script, fails identically.
 5. **Leftover phrasal particles** ("on/M", 220 in 700 articles): particles are exempt from the stop list so that they
    can be fused with a verb; proposal: exempt them only when fused.
 6. **"LLM" homonym guard in P2** (deferred; upstream of G2): "LLM" is a PLAIN focal term with no guard; PMC8815195
@@ -305,10 +409,12 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 
 ## 8. Before the production run
 
-1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–3 decided; item 4 next.]*
+1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–4 decided; item 5 next.]*
 1a. Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
-   passives) and item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
-   a regression test).
+   passives), item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
+   a regression test), and item 4 (negation fix, the "only"/"not only"/"but also" rules, connectives, the opener
+   rule and the adverb role table, ported from `g3_word_lists/` and `diagnostics/g3_stoplist/g3_q4full.py`, hard
+   cases included).
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5).
@@ -323,3 +429,5 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `tensor_data_staging/nltk_abridged_stopwords_list.txt` (toy stop list) | f5893e962fcd |
 | `fullscale_pipeline/g3_modal_check/modal_rules.py` (rule of §6 item 3, test implementation) | 3f993e0ff164 |
 | `fullscale_pipeline/g3_modal_check/hard_cases.json` (40 hard cases with expected results) | 25bc5059068e |
+| `fullscale_pipeline/g3_word_lists/adverb_roles.tsv` (§6 item 4 adverb role table, 513 words) | f66d153f5efa |
+| `fullscale_pipeline/g3_word_lists/build_adverb_roles.py` (builds the table from corpus attachment data) | 4b6f4ae541e0 |
