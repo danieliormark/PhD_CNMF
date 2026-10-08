@@ -1,7 +1,7 @@
 # Stage G3 — postprocessing (curation) of the G2 parse: decisions, open questions, test status
 
 Status (2026-09-30): **design agreed in part; test script built and tested on real data; not yet run on the corpus.**
-*[2026-10-08: §6 items 1–4 decided; items 1, 3 and 4 not yet implemented in the test script.]*
+*[2026-10-08: §6 items 1–5 decided; items 1, 3, 4 and 5 not yet implemented in the test script.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080). The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
 item 29). Input: G2 v3, see [`G2_PARSING.md`](G2_PARSING.md). Path abbreviations as in PIPELINE.md.
@@ -281,6 +281,12 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
    - **Numbers.** Numeric forms ("2", "2024") were already dropped by decision f (no letters). Spelled-out numbers
      are not added: cardinals carry study-design information ("two models", "three groups"); ordinals split between
      content ("the first model of this kind") and a discourse use ("First, …"), handled by the opener rule below.
+     *[Correction 2026-10-08, found while testing item 5 (RL-090): spelled-out numbers do not all survive today.
+     As a modifier they are typed `M#` and kept ("two models" → `two/M`); as the head of a noun phrase they are typed
+     `C#`, which is not in `KEEP_TYPES`, and are dropped by type ("the first **one**", "**one** of the largest",
+     "**twelve** out of 20"): 257 occurrences in shard 0. The same type filter drops 476 alphanumeric labels typed
+     `C#` ("Figure 8A", "7e-6"), which is harmless. Flagged for the owner after items 5–7, with the comparison loss
+     described under item 5.]*
    - **"only" — a guarded verb-group member, like negation**, not a stop word and not always dropped. "Only LLMs can
      generate…" keeps "only" in `focal_he`; "LLMs can only generate…" puts it in the verb group with "can" and
      "generate". The guard: "only" joins the verb group only when a predicate follows it, directly or after one
@@ -378,8 +384,56 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
    - Residual, left as parser error and not addressed: a handful of sentences the parser reads with no predicate at
      all ("GPT-4 as well as BERT was evaluated on the exam" in isolation), which every rule set, including the
      unmodified script, fails identically.
-5. **Leftover phrasal particles** ("on/M", 220 in 700 articles): particles are exempt from the stop list so that they
-   can be fused with a verb; proposal: exempt them only when fused.
+5. **Leftover phrasal particles — DECIDED 2026-10-08 (owner).** Before: the particles out, up, down, in, on, off,
+   over (`PHRASAL_PARTICLES`) were exempt from the stop list unconditionally, so that `fuse_phrasal` could fuse them
+   with their verb ("carried out" → `carry_out`). When fusion failed, the particle stayed as a content atom of its
+   own (`(cousin_he on/M/en)`; "look up or clarify information" → `(cousin_he information lecture up)`). Not yet
+   implemented in `g3_curation_test.py`; implemented and tested as a copy, kept as the patch
+   `g3_phrasal_check/g3_q5fix.patch` against the RDS script (RUN_LOG RL-088 to RL-090).
+
+   - **The exemption becomes fusion-conditional.** Particles are ordinary stop words; one survives only as part of
+     a fused verb. Fusion runs before the stop list, so this changes nothing else.
+   - **Type guard: only particles the parser types `Ml` (its particle tag, spaCy `prt`) or plain `M` may fuse;**
+     not `Mt` (a preposition turned modifier) or `C`. All 16 `Mt` fusions in the test sample were wrong ("based
+     **on**" / "depending **on**" glued to a nearby participle: `employ_on`, `use_on`, `provide_on`), and both `C`
+     fusions came from garbled text. Plain-`M` fusions were mostly right ("go on", "start over", "creep in").
+   - **Chain fusion: an `Ml` particle fuses with the verb under a chain of one-argument modifiers** ("to",
+     auxiliaries, modals, negation, adverbs): `(out/Ml (should/Mm (be/Mv carried)))` → `carry_out`. Without it,
+     fusion missed 200 of 416 `Ml` particles, 184 of them in exactly this pattern ("to look up", "should be carried
+     out", "often make up", "was switched off"), and the flip alone would then have turned "make up" into `make`
+     and "rule out" into `rule`.
+   - **Evidence** (shards 0, 20, 30, 40, 700 articles each: 2,780 articles, 56,126 units; self-test 54/54; 0
+     problems). `Ml`: 216 fused and 200 left over before, 400 fused and none left over after (16 unfused because of
+     parse errors, now dropped). Fusions: 269 unchanged, 185 gained (`carry_out` 36, `point_out` 17, `break_down`,
+     `rule_out`, `make_up`, `turn_off`; 40 of 40 sampled correct), 17 lost (17 of 17 wrong). Dropped leftovers:
+     1,096 `Mt` (prepositions, mostly "based on", which G3 drops everywhere else by type) and 315 plain `M` (quantity
+     phrases whose number decision f already removes: "over 90%", "up to 3 times", "35 out of 50"); 40 of 40
+     sampled drops lose no meaning that the remaining atoms still carried. 24 constructed sentences parsed as in G2
+     (`g3_phrasal_check/hard_q5.json`): `make_up`, `look_up`, `switch_off`, `turn_on`, `speed_up` recovered, false
+     `employ_on` removed, separable forms kept ("carried the assessment out", "followed the patients up").
+   - **Accepted residuals (owner).** About 5 of 454 fusions remain wrong (`fine_tune_on`, `set_over`, `improve_in`,
+     `depict_in`, `clarify_over`: garbled source text or G2 attachment errors). "fed our own data in" loses
+     `feed_in` because the parser types "in" as `C` (constructed case; the two `C` fusions in the corpus sample were
+     both wrong). In 8 units the fused verb now joins the verb group of the clause below through the existing rule
+     that a verb-only argument joins the verb group, about 5 of them wrongly ("It has been pointed out that ChatGPT
+     can provide…" → `(can point_out provide)`); the leftover particle had blocked that rule by accident. For manual
+     checking: PMC11572215.r1.L144.S6.U1, PMC12015923.r1.L148.S5.U1, PMC12232492.r1.L166.S2.U1,
+     PMC12415252.r1.L58.S2.U1, PMC12457457.r1.L461.S4.U1, PMC12628953.r1.L134.S4.U1, PMC12988595.r1.L192.S1.U1,
+     PMC13143990.r1.L161.S2.U1.
+   - **Considered and not built: a token-adjacency guard** (the particle must be the word right after its verb).
+     Graphbrain already links a separated particle to its own verb, so separable phrasal verbs fuse correctly when
+     the particle comes several words later: 9 correct fusions at distance 2–4 ("made this information **up**",
+     "breaking DNA sequences **down**", "turn this option **off**") would be lost, against 2 wrong ones caught. The
+     wrong fusions that matter are mostly adjacent ("based **on** embedding") and are caught by the type guard,
+     which adjacency would not do. Distance is also undefined for 46 single-token compounds ("follow_up"), and
+     ambiguous wherever a word occurs twice in a unit, since atoms carry every position of their word (§5). A
+     weaker check, particle after its verb, would catch about 3 more wrong fusions in 2,780 articles and was not
+     judged worth the extra rule.
+   - **Flagged, for the owner after items 5–7 (numbers).** Decision f drops every atom without letters, so the
+     number in a comparison goes and only its frame can remain ("over 90% agreement" → `percent agreement`; "35 out
+     of 50" → nothing). If comparisons with numbers should survive, one option is to keep "over" / "up to" /
+     "under" when they modify a `percent` atom; not tested. Related: spelled-out numbers as noun heads are dropped
+     by type (item 4, correction of 2026-10-08).
 6. **"LLM" homonym guard in P2** (deferred; upstream of G2): "LLM" is a PLAIN focal term with no guard; PMC8815195
    uses it for lipid-lowering medication ("not on LLM (89.5%)") and passed P2.
 7. **Focal terms with no governing verb:** 280 of 14,225 units (2%) contain a focal term but yield no parent (no verb
@@ -409,12 +463,14 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 
 ## 8. Before the production run
 
-1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–4 decided; item 5 next.]*
+1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–5 decided; item 6 next. Then the numbers
+   question flagged under items 4 and 5, and the two flags under item 4.]*
 1a. Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
    passives), item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
    a regression test), and item 4 (negation fix, the "only"/"not only"/"but also" rules, connectives, the opener
    rule and the adverb role table, ported from `g3_word_lists/` and `diagnostics/g3_stoplist/g3_q4full.py`, hard
-   cases included).
+   cases included), and item 5 (fusion-conditional particle exemption, type guard, chain fusion, from
+   `g3_phrasal_check/g3_q5fix.patch`, with `hard_q5.json` as a regression check).
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5).
@@ -431,3 +487,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_modal_check/hard_cases.json` (40 hard cases with expected results) | 25bc5059068e |
 | `fullscale_pipeline/g3_word_lists/adverb_roles.tsv` (§6 item 4 adverb role table, 513 words) | f66d153f5efa |
 | `fullscale_pipeline/g3_word_lists/build_adverb_roles.py` (builds the table from corpus attachment data) | 4b6f4ae541e0 |
+| `fullscale_pipeline/g3_phrasal_check/g3_q5fix.patch` (§6 item 5, diff against `g3_curation_test.py`) | d7c40968b4cb |
+| `fullscale_pipeline/g3_phrasal_check/hard_q5.json` (24 constructed particle cases) | 69873d864054 |
+| `fullscale_pipeline/g3_phrasal_check/hard_q5.py` (parses them; runs the RDS script and the test copies) | b1428685f3e2 |
+| `fullscale_pipeline/g3_phrasal_check/q5_types.py`, `q5_compare.py` (particle types from G2; orig vs fix) | 5b105b053aed, 47dfbc208df2 |

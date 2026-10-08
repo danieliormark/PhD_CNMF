@@ -621,5 +621,51 @@ overall/finally/notably/similarly and a matching discourse/sequence opener list;
 "as well as"/"as well" with the degree-word guard. §1 schema row and §3 g2 row updated; §8 and the status line
 mark items 1-4 decided. No code changed; `g3_curation_test.py` is unchanged on disk. Host incline. [LOG]
 
+**RL-088 · 2026-10-08 · G3 · TEST (read-only) · LIVE**
+Evidence for G3_POSTPROCESSING.md §6 item 5 (leftover phrasal particles). Host incline, `tensor_env`,
+`PYTHONPATH=$HOME/np1_for_spacy`: `python g3_curation_test.py --shard 0 --limit 700 --outdir
+fullscale_pipeline/diagnostics/g3_stoplist/q5 --show 0` (script sha256 `2a5e01342bf4`, unchanged): 694 articles,
+14,225 units, 0 problems. Scratch pass over `g3_test_000.jsonl` [LOG]: standalone (unfused) `PHRASAL_PARTICLES`
+atoms sitting alone in a `cousin_he`/`sibling_he`/`focal_he` — on 60, up 36, out 36, over 13, in 6, off 5, down 5
+(161 total); distinct fused phrasal-verb lemmas (`stand_out`, `break_down`, `set_up`, `point_out`, `follow_up`,
+`carry_out`, `feed_in`, `bake_in`, `go_on`, `speed_up`, `scale_up`, `pick_up`, `skip_over`, `come_out`, etc.) mostly
+correct. 5 of ~35 distinct fused `_on`/`_in` lemmas are wrong attachments (`employ_on`, `embed_on`, `improve_in`,
+`present_in`, `provide_on`), traced to the particle being far from its real verb in the text (1 case, a token-
+adjacency guard would catch it) or to an upstream G2 parse-attachment error / garbled source sentence (4 cases, not
+fixable by a G3-side guard). Output local only (`fullscale_pipeline/diagnostics/g3_stoplist/q5/`); nothing written
+to the RDS data folders.
+*[Corrected by RL-089: the five wrong fusions are all particles typed `Mt` or `C` and are removed by a type guard; on
+four shards adjacency would catch 2 wrong fusions and lose 9 correct separable ones, so it was not adopted.]*
+
+**RL-089 · 2026-10-08 · G3 · TEST (read-only) · LIVE**
+Q5 follow-up after the owner's request to check the flip for false positives/negatives and to assess a token-adjacency
+guard. Host incline, `tensor_env`. Copies in `fullscale_pipeline/diagnostics/g3_stoplist/q5/` (RDS script unchanged):
+`g3_q5flip.py` (sha256 `4c543643ef94`; particles no longer exempt from the stop list; a particle survives only inside a fused verb) and
+`g3_q5fix.py` (sha256 `e02344cdb57e`; flip + type guard: only particles typed `Ml` or plain `M` fuse, not `Mt`/`C` + chain fusion: an `Ml`
+particle wrapping a predicate under a chain of one-argument modifiers, e.g. `(out/Ml (should/Mm (be/Mv carried/P)))`,
+fuses with it). Both: self-test 54/54; shards 0, 20, 30, 40, `--limit 700` each (2,780 articles, 56,126 units), 0
+problems [LOG]. Particle types from the G2 v3 shard files (`q5_types.py`) [LOG]. Results (orig -> fix): `Ml` 216 fused /
+200 left over -> 400 fused / 0 left (16 unfused, parse errors, now dropped); `Mt` 16 fused (16/16 wrong: "based on",
+"depending on" glued to a participle) / 1,096 left -> all dropped; plain `M` 9 fused (mostly right, kept) / 315 left
+(quantity phrases: over N, up to N, N out of M) -> dropped. Fusions: 269 kept, 185 gained (40/40 sampled correct), 17
+lost (17/17 wrong). Side effects: 13 cousins merged by de-duplication; 8 units where a fused verb-only argument now joins
+the verb group below (existing join rule; about 5 wrong). Hard cases (`hard_q5.json`, 24 constructed sentences parsed as
+in G2): fix recovers make_up, look_up, switch_off, turn_on, speed_up; loses feed_in where "in" is typed `C`. Token
+distance verb->particle over the fix's 454 fusions: 1 for 394, 2-4 for 11 (9 correct separable: "made this information
+up", "breaking DNA sequences down"), -1 for 3, unknown for 46 (single-token compounds such as follow_up). Outputs local
+only; nothing written to the RDS data folders.
+
+**RL-090 · 2026-10-08 · G3 · TEST (read-only) + DOC · LIVE**
+Owner decisions on G3_POSTPROCESSING.md §6 item 5: fusion-conditional particle exemption, type guard (`Ml` or plain `M`
+only) and chain fusion approved; no token-adjacency guard; `feed_in` loss and the 8-unit verb-group residual accepted
+(unit ids listed in §6 item 5). Written up in §6 item 5; status line, §8 and §9 updated. Tracked:
+`fullscale_pipeline/g3_phrasal_check/` (`g3_q5fix.patch` sha256 `d7c40968b4cb`, diff of
+`diagnostics/g3_stoplist/q5/g3_q5fix.py` `e02344cdb57e` against `PG/scripts/g3_curation_test.py` `2a5e01342bf4`;
+`hard_q5.json` `69873d864054`; `hard_q5.py` `b1428685f3e2`; `q5_types.py` `5b105b053aed`; `q5_compare.py`
+`47dfbc208df2`). Read-only count, host incline, over `PG/g2_v3/shards/g2_parsed_000.jsonl`: atoms typed `C#` with
+letters 733 (257 spelled-out numbers, mostly "one"; 476 alphanumeric labels such as "8A", "7e-6"), all dropped by the
+`KEEP_TYPES` filter; `M#` with letters 1,524, kept. Recorded as a correction under §6 item 4 and flagged with the
+number-comparison question for the owner after items 5–7. No pipeline script changed; nothing written to RDS. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

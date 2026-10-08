@@ -1,0 +1,64 @@
+--- /mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/scripts/g3_curation_test.py	2026-09-30 13:57:15.331774000 +0100
++++ diagnostics/g3_stoplist/q5/g3_q5fix.py	2026-10-08 20:27:55.402633000 +0100
+@@ -51,7 +51,7 @@
+ CONNECTIVES = {'e.g.', 'eg', 'e.g', 'i.e.', 'ie', 'i.e', 'vs.', 'vs', 'v.', 'cf.', 'cf', 'etc.', 'etc', 'viz.', 'viz', 'et', 'al.', 'al',
+                'et al.', 'resp.'}
+ PHRASAL_PARTICLES = {'out', 'up', 'down', 'in', 'on', 'off', 'over'}
+-ACTIVE_STOP = (STOP | CUSTOM_NOISE) - NEGATION - PHRASAL_PARTICLES
++ACTIVE_STOP = (STOP | CUSTOM_NOISE) - NEGATION   # Q5 flip: particles survive only when fused
+ KEEP_TYPES = ('Cc', 'Cp', 'Ca', 'Cm', 'M', 'P')    # Cm (noun used as a modifier: "cancer research") added; 7.5 and chunk_4h dropped it
+ KINDS = ('parent', 'dummy_sibling', 'focal_he', 'sibling_he', 'dummy_cousin', 'cousin_he')
+ 
+@@ -318,18 +318,50 @@
+ 
+ 
+ # ------------------------------------------------------------------ 7.5 logic: phrasal verbs, periphery sweep, core circuits
++PARTICLE_TYPES = ('Ml',)    # Q5: the parser's particle type, or a plain modifier (type exactly 'M'); not Mt (preposition) or C
++
++
++def is_particle(a):
++    if not a.is_atom():
++        return False
++    t = a.type()
++    return urllib.parse.unquote(a.root()).lower() in PHRASAL_PARTICLES and (t.startswith(PARTICLE_TYPES) or t == 'M')
++
++
++def chain_pred(e):
++    """Q5: the predicate under a chain of one-argument modifiers ('to', auxiliaries, modals, negation, adverbs), or None"""
++    while not e.is_atom():
++        if len(e) != 2 or not e[0].is_atom() or not e[0].type().startswith('M'):
++            return None
++        e = e[1]
++    return e if e.type().startswith('P') else None
++
++
++def replace_atom(e, old, new):
++    if e.is_atom():
++        return new if e is old else e
++    return hedge(tuple(replace_atom(c, old, new) for c in e))
++
++
+ def fuse_phrasal(edge, ctx):
+     if edge.is_atom():
+         return edge
+     kids = [fuse_phrasal(c, ctx) for c in edge]
++    if os.environ.get("Q5_CHAIN", "1") == "1" and len(kids) == 2 and is_particle(kids[0]) \
++            and kids[0].type().startswith('Ml') and not kids[1].is_atom():
++        v = chain_pred(kids[1])
++        if v is not None:                      # (out/Ml (should/Mm (be/Mv carried/P))) -> (should (be carry_out))
++            fused = hedge(f"{ctx.lemma_of(v)}_{kids[0].root()}/{v.parts()[1]}/en")
++            for src in (v, kids[0]):
++                ctx.pos[str(fused)].extend(ctx.pos.get(str(src), []))
++            return replace_atom(kids[1], v, fused)
+     verbs, parts, others = [], [], []
+     for a in kids:
+         if not a.is_atom():
+             others.append(a); continue
+-        w = urllib.parse.unquote(a.root()).lower()
+         if a.type().startswith('P'):
+             verbs.append(a)
+-        elif w in PHRASAL_PARTICLES:
++        elif is_particle(a) if os.environ.get("Q5_TYPE", "1") == "1" else urllib.parse.unquote(a.root()).lower() in PHRASAL_PARTICLES:
+             parts.append(a)
+         else:
+             others.append(a)
