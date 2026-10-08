@@ -667,5 +667,78 @@ letters 733 (257 spelled-out numbers, mostly "one"; 476 alphanumeric labels such
 `KEEP_TYPES` filter; `M#` with letters 1,524, kept. Recorded as a correction under §6 item 4 and flagged with the
 number-comparison question for the owner after items 5–7. No pipeline script changed; nothing written to RDS. [LOG]
 
+**RL-091 · 2026-10-08 · G3 / P2 · TEST (read-only) · LIVE**
+Evidence for G3_POSTPROCESSING.md §6 item 6 ("LLM" and other focal-name homonyms). Host incline, `tensor_env`; scripts in
+`fullscale_pipeline/diagnostics/g3_homonym/` (local; outputs contain corpus text): `llm_scan.py` (every "LLM(s)" in all
+50 `PG/g2_v3/shards/g2_parsed_NNN.jsonl`, per article: forms, definitions, evidence), `llm_classify2.py` (a definition
+counts only if its word initials spell L-L-M), `anchor_scan.py` (P2's `focal_terms.Matcher` over every article: anchor
+and accepted hits per term), `name_scan.py` (ProGen, BioBridge, PaLM 2, ESM-2 with exact case). Results [LOG]: 34,662
+articles; "LLM" in 15,215 (329,474 occurrences). Defined as language model 13,424 articles (306,332 occ.); undefined
+but "language model" in the article 1,379 (40/40 sampled language model); undefined with other evidence 230 (30/30);
+defined as something else 73 (66 homonyms by hand, 5 misspelt "large language model", 1 uncertain, 1 both senses);
+undefined with no evidence 109 (hand-labelled: 66 homonym, 43 language model). Homonyms: 133 articles, 4,863
+occurrences (1.5%); 128 of them have no other accepted focal term. Rule R1 (accept "LLM" only if the article has another
+accepted focal term besides LLM/LLMs/transformer model(s), and does not define LLM as something else unless it also
+defines it as a language model): removes 132 of 133 homonym articles (4,826 occ.), loses 115 language-model articles
+(590 occ., 0.18%). Cue rules ("LLMs", "LLM-based", ...) recover about 100 occurrences but readmit 8-11 homonym
+articles. Other names: "transformer model(s)" is the only focal term in 6,349 articles (29/30 sampled neural
+transformers, mostly non-LLM; 1 electrical); homonyms found for ProGen (9 of 87 articles: company Progen), BioBridge (6
+of 8), PaLM 2 (1 of 307: protein "Palm 2" domain), ESM-2 (1 of 454: climate model); the same evidence rule removes
+7/9, 6/6, 1/1, 1/1 of them and loses 1, 0, 1, 6 model-sense articles. Nothing written to RDS; no script changed.
+
+**RL-092 · 2026-10-08 · G3 / P2 / R1 · TEST (read-only) · LIVE**
+Follow-up to RL-091 after the owner's first decisions on §6 item 6 (remove the 73 articles defining LLM otherwise, the 109
+with no definition and no evidence, and the ProGen/BioBridge/PaLM 2/ESM-2 homonym articles; asked about "transformer
+model"). Host incline. Read-only. (1) Why the transformer-only articles reached G2: R1's query
+(`query_pmc_entrez.py`, sha256 `1d057b072f50`) includes `"Transformer model"[Text Word]`, `"Transformer models"[Text
+Word]` and `"LLM"[Title/Abstract]`; P2 accepts "transformer model(s)" as a PLAIN focal term and only excludes it from
+article evidence (`NOT_ANCHOR`), so its sentences pass to P7 and G2. (2) `transformer_fulltext.py`: full raw texts
+(`LCS/pure_text_corpus/`) of the 6,349 articles whose only accepted focal term is "transformer model(s)": 4,710 have no
+LLM-related word anywhere; 1,639 have one somewhere (754 "generative AI"/chatbot, 634 "language model", 355 BERT-family,
+175 ChatGPT, 49 LLM; 290 also an electrical-transformer word); 25 sampled: 23 peripheral (generative-AI statements,
+references, AI-use disclosures, passing mentions), 2 borderline (an mBERT/XLM-RoBERTa study; one sentence on future
+multimodal LLMs). (3) Of the 73 articles defining LLM otherwise, 7 are about language models: 5 misspell the expansion
+("Large Languge Models"), 1 uses both senses (PMC12647564), 1 uncertain (PMC10967767). (4) The 74 articles in the
+LLM classes with no other accepted focal term are language-model uses; several write "large-language model(s)", which
+P2's PLAIN list does not match (a P2 matching gap). (5) PMC12405693 ("LLM-MK2", a cell line) was kept by rule R1
+only because a ProGen homonym counted as evidence; it is in the ProGen homonym set. Exclusion set sizes: 6,548 articles
+(18.9% of 34,662) with all 73 and all 6,349; 6,541 keeping the 7; 4,902 (14.1%) keeping the 7 and the 1,639. [LOG]
+
+**RL-093 · 2026-10-08 · G3 / P2 · TEST (read-only) · LIVE**
+Owner decisions on §6 item 6 (second round): remove 67 articles defining LLM otherwise (the 66 homonyms plus the uncertain
+PMC10967767); keep 6 (5 misspelt "large language model", PMC12647564 with both senses) and correct their spelling by
+hand; remove the 109 undefined/no-evidence articles and the 17 name homonyms; remove the 6,349 transformer-only articles
+unless they refer to LLM-related transformers such as BERT; exclusion by a separate short script, ideally part of
+preprocessing. Host incline. `transformer_regions.py`: the 6,349 searched in P0's analysed regions
+(`PP/content_regions_v2.csv`, raw text in `LCS/pure_text_corpus/`) for BERT-family, GPT-family, T5, LLaMA/Gemini/Claude/
+Mistral/PaLM/Qwen/DeepSeek and "language model"/LLM: 6,094 none; 255 some. All 255 read and labelled by hand
+(`transformer_255_labels.json`, one context per article): 76 use or compare such a model (text models: DistilBERT,
+ClinicalBERT, XLM-RoBERTa, BERTopic, SBERT; and BERT/GPT-style models of other data: scGPT, scBERT, ProtBERT, HuBERT,
+SleepGPT, TimeGPT, BERT4Rec), 122 mention one in passing (examples in an introduction, "similar to BERT", a related-work
+list), 31 only vision-language models (CLIP, BLIP, LLaVA), 26 false hits or peripheral (Gemini as a scanner, virus,
+camera or serum supplier; a stress-tensor symbol mT5; ASR n-gram language models; AI-use statements; a reviewer
+comment). Misspellings in the 5 kept articles: 6 occurrences in 6 G2 units ("Large Languge Models", "Large Langue
+Model", "large langaue model's", "Large learning models (LLMs)" x3). Nothing written to RDS; no script changed. [LOG]
+
+**RL-094 · 2026-10-08 · G3 / P2 · CODE (new) + OUTPUT + DOC · LIVE**
+Owner decisions on G3_POSTPROCESSING.md §6 item 6 (third round): also exclude the 122 passing-mention and 31
+vision-language-only transformer articles; correct the 3 "large learning models" misnomers; implement and document.
+Host incline, `tensor_env`. New tracked folder `fullscale_pipeline/g3_scope_exclusions/`: `decisions/` (hand-checked
+lists: `llm_defined_otherwise.csv` 6589528cfbfb, 67 exclude / 6 keep; `llm_no_definition_no_evidence.csv` 54539bf05cdb,
+109; `name_homonyms.csv` c47f861aad32, 17; `transformer_only.csv` 823a90e9142c, 6,273 exclude / 76 keep), `evidence/`
+(the scans of RL-091 to RL-093: `llm_scan.py` 5859451cb840, `llm_classify2.py` 57eb6cb4f935, `anchor_scan.py`
+3e10ca288ac9, `name_scan.py` 2a9ef07da2a1, `transformer_fulltext.py` e604967ebcc3, `transformer_regions.py`
+c882a11f5a54; their outputs hold corpus text and stay in `diagnostics/g3_homonym/`). `python build_scope_exclusions.py`
+(sha256 `3a5de5167371`): checks every listed article is in G2 v3 and every correction matches its unit once; wrote
+`scope_exclusions.csv` (`5b71d844d9af`, 6,466 articles: llm_defined_otherwise 67, llm_no_definition_no_evidence 109,
+name_homonym 17, transformer_only_not_llm 6,273) and `spelling_corrections.csv` (`d0a70f6c1a20`, 6 units). A first
+version corrected only the unit text; `test_corrections.py` (`dd18ca3aca3e`, runs `g3_curation_test.py`
+`2a5e01342bf4` unchanged) found the misspelt word left as an atom (`languge/C/en`) in 5 of 6 units, because G3 maps
+tokens through `atom2word`; the hook now corrects the same token in `atom2word` too: 6 of 6 units give one
+`llm/C/focal` atom and no stray atom. Copied to RDS for CSF: `PG/g3_scope_exclusions/` (`scope_exclusions.csv`,
+`spelling_corrections.csv`, `build_scope_exclusions.py`; sha256 identical to the tracked files; new folder, nothing
+overwritten). Documented in G3_POSTPROCESSING.md §6 item 6 (status line, §8, §9 updated), with dated notes in
+G2_PARSING.md and PIPELINE.md item 24. No pipeline script changed; P2 and G2 not rerun. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

@@ -164,6 +164,8 @@ python3 PG/scripts/merge_g2_v3.py --nshards 50                         # on incl
   exact; only the token index of such an atom is ambiguous (10.7% of the atom records in a G3 test).
 - **Upstream, not G2:** the focal term "LLM" has no homonym guard in P2 (PMC8815195 uses it for lipid-lowering
   medication); pending owner decision, see G3_POSTPROCESSING.md §6.
+  *[2026-10-08: decided in G3_POSTPROCESSING.md §6 item 6: 6,466 articles, homonym and off-topic ones, are excluded
+  from G3 and M1 by `g3_scope_exclusions/scope_exclusions.csv`; G2 itself is not rerun.]*
 - The sentence-unit rule misses some boundaries (missing periods, comma splices, bullets) and recall of the
   non-prose rules was not measured (precision per rule in PIPELINE.md item 30).
 

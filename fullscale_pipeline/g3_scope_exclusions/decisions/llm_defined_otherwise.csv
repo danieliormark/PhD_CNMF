@@ -1,0 +1,74 @@
+pmcid,llm_mentions,expansion,decision,note
+PMC10036260,11,logic learning machine,exclude,homonym
+PMC10299248,21,Logic Learning Machine,exclude,homonym
+PMC10546679,48,low lean mass,exclude,homonym
+PMC10564645,37,lipid lowering medications,exclude,homonym
+PMC10570332,5,lower limb megascore,exclude,homonym
+PMC10573322,38,lipid lowering medications,exclude,homonym
+PMC10686915,16,Lower Limb Melanoma; Lower Limb Melanoma,exclude,homonym
+PMC10703574,31,lipid lowering medications,exclude,homonym
+PMC10859375,35,lipid laden macrophages; lipid leaden macrophages,exclude,homonym
+PMC10967767,7,Linguistic Landscape Model,exclude,uncertain: 'Linguistic Landscape Model'
+PMC11019026,81,low lean mass,exclude,homonym
+PMC11171561,114,lipid laden macrophages,exclude,homonym
+PMC11199225,6,leg lean mass,exclude,homonym
+PMC11429458,186,lipid laden macrophages; lipid laden macrophage,exclude,homonym
+PMC11601203,3,large langaue model’s,keep,misspelt definition
+PMC11644704,5,lower limb motions,exclude,homonym
+PMC11696885,14,lipid laden macrophages; lipid laden macrophages,exclude,homonym
+PMC11732233,103,lipid laden macrophages,exclude,homonym
+PMC11741034,4,logic learning machine,exclude,homonym
+PMC11849343,4,Large Langue Model,keep,misspelt definition
+PMC11857855,51,lecithin linker microEs; lecithin linker microEs,exclude,homonym
+PMC11881179,29,Large learning models; large learning models,keep,misnomer 'large learning models'
+PMC11901804,58,L lectin module,exclude,homonym
+PMC11929840,54,Large Languge Models,keep,misspelt definition
+PMC11989310,2,Large learning models,keep,misnomer 'large learning models'
+PMC12085121,33,lipid lowering medications; lipid lowering medications,exclude,homonym
+PMC12093903,22,lipid laden macrophages,exclude,homonym
+PMC12158495,27,lipid lowering medications,exclude,homonym
+PMC12239570,63,luciferase like monooxygenase,exclude,homonym
+PMC12298974,31,low lean mass; Low lean mass,exclude,homonym
+PMC12432928,8,liver limited metastases,exclude,homonym
+PMC12565684,42,lipid laden macrophages; Lipid laden macrophages,exclude,homonym
+PMC12586031,34,Legal Logit Model,exclude,homonym
+PMC12647564,37,logic learning model; logic learning machine,keep,LLM review; one passage uses 'logic learning model (LLM)'
+PMC12659997,19,log linear model,exclude,homonym
+PMC12961120,28,low lean mass,exclude,homonym
+PMC12994828,4,linear logistic model,exclude,homonym
+PMC13011545,91,lipid laden macrophage,exclude,homonym
+PMC13095065,86,lipid lowering medication; Lipid lowering medication,exclude,homonym
+PMC13499364,10,local learning models,exclude,homonym
+PMC13559229,44,lipid laden macrophages,exclude,homonym
+PMC4464205,51,Logic Learning Machine; Logic Learning Machine,exclude,homonym
+PMC4770438,18,Long Lasting Memories,exclude,homonym
+PMC4788450,110,Loa loa microfilaraemia,exclude,homonym
+PMC4985554,22,leg lean mass,exclude,homonym
+PMC5091060,13,limb lean mass,exclude,homonym
+PMC5216633,49,lipid laden macrophages,exclude,homonym
+PMC5358527,4,lipid laden macrophages,exclude,homonym
+PMC5377362,14,local linear mapping; local linear mapping,exclude,homonym
+PMC5719419,112,long lived merozoite; long lived merozoite,exclude,homonym
+PMC5804267,49,lipid lowering medication,exclude,homonym
+PMC6308125,5,Long lasting memories,exclude,homonym
+PMC6566550,15,longitudinal lining model; longitudinal lining model,exclude,homonym
+PMC6873393,46,Logic Learning Machine; Logic Learning Machine,exclude,homonym
+PMC7155316,19,lipid lowering medication,exclude,homonym
+PMC7243129,22,Long Lasting Memories,exclude,homonym
+PMC7404471,3,lipid laden macrophages,exclude,homonym
+PMC7648253,12,lipid laden microphages,exclude,homonym
+PMC8270650,49,liquid like motion,exclude,homonym
+PMC8328796,49,leg lean mass,exclude,homonym
+PMC8419643,10,lipid laden macrophages,exclude,homonym
+PMC8452586,24,leucocephala leaf meal; leucocephala leaf meal,exclude,homonym
+PMC8457570,62,Low lean mass; low lean mass,exclude,homonym
+PMC8468777,15,lung limited metastasis,exclude,homonym
+PMC8739492,20,luciferase like monooxygenase,exclude,homonym
+PMC8815195,108,Lipid lowering medications; Lipid lowering medications,exclude,homonym
+PMC9008137,18,linear logistic model,exclude,homonym
+PMC9285345,59,Liebig’s law of the minimum,exclude,homonym
+PMC9305824,41,lipid lowering medication,exclude,homonym
+PMC9604872,21,Logic Learning Machine,exclude,homonym
+PMC9614376,72,lipid lowering medication,exclude,homonym
+PMC9832848,9,Low lean mass,exclude,homonym
+PMC9885533,30,least liked music,exclude,homonym

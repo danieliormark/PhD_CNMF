@@ -1,7 +1,8 @@
 # Stage G3 — postprocessing (curation) of the G2 parse: decisions, open questions, test status
 
 Status (2026-09-30): **design agreed in part; test script built and tested on real data; not yet run on the corpus.**
-*[2026-10-08: §6 items 1–5 decided; items 1, 3, 4 and 5 not yet implemented in the test script.]*
+*[2026-10-08: §6 items 1–6 decided; items 1, 3, 4 and 5 not yet implemented in the test script; item 6 is built
+(`g3_scope_exclusions/`) and G3 must read it.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080). The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
 item 29). Input: G2 v3, see [`G2_PARSING.md`](G2_PARSING.md). Path abbreviations as in PIPELINE.md.
@@ -434,8 +435,58 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
      of 50" → nothing). If comparisons with numbers should survive, one option is to keep "over" / "up to" /
      "under" when they modify a `percent` atom; not tested. Related: spelled-out numbers as noun heads are dropped
      by type (item 4, correction of 2026-10-08).
-6. **"LLM" homonym guard in P2** (deferred; upstream of G2): "LLM" is a PLAIN focal term with no guard; PMC8815195
-   uses it for lipid-lowering medication ("not on LLM (89.5%)") and passed P2.
+6. **Focal-name homonyms and corpus scope — DECIDED 2026-10-08 (owner), in three rounds.** First raised as an "LLM"
+   homonym guard in P2: "LLM" is a PLAIN focal term (no guard, any capitalisation) and P2's article evidence, so a
+   homonym both creates false focal atoms and unlocks the guarded names. Checked over the whole corpus (all 50 G2 v3
+   shards, 34,662 articles; full raw texts where P2's sentences were not enough; RUN_LOG RL-091 to RL-094). Decided:
+   **exclude 6,466 articles (18.7%) from G3 and M1 altogether**, and correct 6 misspelt definitions. Built as
+   `g3_scope_exclusions/` (reasons and lists below); P2 and G2 are not rerun. Ideally the exclusion belongs to
+   preprocessing, beside `PP/article_blacklist.py` (owner).
+
+   - **How "LLM" is used.** 15,215 articles, 329,474 mentions. Classified by the article's own definition (an
+     expansion before "(LLM)" counts only if its word initials spell L-L-M): defined as a language model 13,424
+     articles (93% of mentions); undefined but "language model" in the article 1,379 (40 of 40 sampled are the
+     language model); undefined with other LLM evidence 230 (30 of 30); defined as something else 73; undefined and
+     no evidence 109 (read by hand: 66 homonyms, 43 language model). Homonyms found: lipid-lowering medication, low
+     or leg lean mass, lipid-laden macrophages, logic learning machine, log-linear and linear logistic models,
+     LLM-105 (an explosive), long lateral mass screws, the leucine–leucine–methionine domain, the cell line LLM-MK2.
+     In all, 133 articles and 4,863 mentions (1.5%); 128 of these articles have no other focal term.
+   - **Excluded: the 73 that define LLM as something else, except 6** (67 excluded, including PMC10967767,
+     "Linguistic Landscape Model", as ambiguous). Kept: 5 articles about GPT models whose definition is misspelt or a
+     misnomer, and PMC12647564, an LLM review in which one passage uses "logic learning model (LLM)".
+   - **Excluded: all 109 with no definition and no evidence**, including the 43 language-model uses among them (owner:
+     the corpus is large enough to trade them for fewer false positives).
+   - **Excluded: 17 homonym articles of four other PLAIN names**, found by checking which articles rest on one focal
+     term alone: ProGen 9 of 87 (the company Progen: antibodies, ELISA kits, a supplement), BioBridge 6 of 8 (a
+     tendon implant, a surgical technique, a school programme), PaLM 2 1 of 307 (the Palm 2 domain of Csm1), ESM-2 1
+     of 454 (the climate model FIO-ESM-2-0). The bare names P2 already guards (GPT, Claude, Bard, Llama, Gemma) and
+     the other PLAIN names were clean in samples.
+   - **Excluded: 6,273 of the 6,349 articles whose only focal term is "transformer model(s)".** R1's PMC query asks
+     for `"Transformer model"[Text Word]` (and `"LLM"[Title/Abstract]`); P2 accepts the term as focal and only
+     denies it the role of article evidence (`NOT_ANCHOR`), so these articles passed to P7 and G2. In P0's analysed
+     regions of their raw texts, 6,094 name no LLM-related transformer at all; the 255 that do were read by hand: 76
+     use or compare a BERT- or GPT-type model (DistilBERT, ClinicalBERT, XLM-RoBERTa, BERTopic, SBERT; scGPT,
+     scBERT, ProtBERT, HuBERT, SleepGPT, TimeGPT), **kept**; 122 mention one only in passing ("such as BERT and GPT",
+     "similar to BERT's class token"), 31 only vision-language models (CLIP, BLIP, LLaVA), and 26 are false hits or
+     peripheral (Gemini as a scanner, virus, camera or serum supplier; the symbol mT5; n-gram "language models" in
+     speech recognition; AI-use statements), all **excluded** (owner).
+   - **Spelling corrections in the 6 kept articles.** 6 units: "Large Languge Models", "Large Langue Model", "large
+     langaue model's", and three "Large learning models (LLMs)", a misnomer corrected to "language" (owner). Applied
+     to the unit's text *and* to the same token in G2's `atom2word` before G3 matches focal terms: correcting the
+     text alone left the misspelt word as an atom of its own (`languge/C/en`) because positions are mapped through
+     `atom2word`. Tested with `g3_curation_test.py` (unchanged): 6 of 6 units give one `llm/C/focal` atom for the
+     definition and no stray atom.
+   - **How G3 and M1 use it.** G3 skips every article in `scope_exclusions.csv` and calls `apply_corrections` from
+     `build_scope_exclusions.py` on each unit before focal matching; M1 leaves the same articles out of every
+     relation, social ones included (otherwise they would still enter article–author and article–journal ties).
+     Mirrored for CSF at `PG/g3_scope_exclusions/`.
+   - **Considered, not adopted:** a mention-level rule (accept "LLM" only with other focal evidence and no other
+     definition) removed 132 of 133 homonym articles at a cost of 590 genuine mentions; the owner preferred removing
+     whole articles. Cue words ("LLMs", "LLM-based") would have recovered about 100 genuine mentions but let 8–11
+     homonym articles back in.
+   - **Flagged, not fixed:** P2's PLAIN list does not match hyphenated "large-language model(s)", which several
+     articles use; they stay in the corpus through their "LLM" mentions. If P2 is ever rerun, its list and R1's
+     query should be revised to match these decisions.
 7. **Focal terms with no governing verb:** 280 of 14,225 units (2%) contain a focal term but yield no parent (no verb
    above the term: title-like fragments, lists). Accept, or give them a structure of their own?
 
@@ -463,14 +514,16 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 
 ## 8. Before the production run
 
-1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–5 decided; item 6 next. Then the numbers
+1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–6 decided; item 7 next. Then the numbers
    question flagged under items 4 and 5, and the two flags under item 4.]*
 1a. Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
    passives), item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
    a regression test), and item 4 (negation fix, the "only"/"not only"/"but also" rules, connectives, the opener
    rule and the adverb role table, ported from `g3_word_lists/` and `diagnostics/g3_stoplist/g3_q4full.py`, hard
    cases included), and item 5 (fusion-conditional particle exemption, type guard, chain fusion, from
-   `g3_phrasal_check/g3_q5fix.patch`, with `hard_q5.json` as a regression check).
+   `g3_phrasal_check/g3_q5fix.patch`, with `hard_q5.json` as a regression check), and item 6 (skip the articles in
+   `g3_scope_exclusions/scope_exclusions.csv`; apply `spelling_corrections.csv` through `apply_corrections` before focal
+   matching; `test_corrections.py` as a regression check). M1 must leave the same articles out of every relation.
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5).
@@ -491,3 +544,8 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_phrasal_check/hard_q5.json` (24 constructed particle cases) | 69873d864054 |
 | `fullscale_pipeline/g3_phrasal_check/hard_q5.py` (parses them; runs the RDS script and the test copies) | b1428685f3e2 |
 | `fullscale_pipeline/g3_phrasal_check/q5_types.py`, `q5_compare.py` (particle types from G2; orig vs fix) | 5b105b053aed, 47dfbc208df2 |
+| `fullscale_pipeline/g3_scope_exclusions/build_scope_exclusions.py` (§6 item 6: builds the two lists; G3 correction hook) | 3a5de5167371 |
+| `fullscale_pipeline/g3_scope_exclusions/scope_exclusions.csv` (6,466 excluded articles with reasons; also on `PG/`) | 5b71d844d9af |
+| `fullscale_pipeline/g3_scope_exclusions/spelling_corrections.csv` (6 unit corrections; also on `PG/`) | d0a70f6c1a20 |
+| `fullscale_pipeline/g3_scope_exclusions/test_corrections.py` (the 6 units through `g3_curation_test.py`) | dd18ca3aca3e |
+| `fullscale_pipeline/g3_scope_exclusions/decisions/*.csv` (hand-checked lists), `evidence/*.py` (the scans) | see RUN_LOG RL-094 |

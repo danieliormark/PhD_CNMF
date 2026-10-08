@@ -321,6 +321,12 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     few could not be placed in a sentence. They leave the corpus at this stage. (d) Evidence for ambiguous names is at article level, so a homonym inside an article about LLMs
     is caught only by its homonym pattern. (e) "Transformer model(s)" stays in the list as before but does not count as article evidence; 41% of its occurrences are in articles with
     no other LLM term. (f) Context sentences do not cross headings and do cross paragraph breaks inside a section.
+    *[2026-10-08, G3_POSTPROCESSING.md §6 item 6: R1's query includes `"Transformer model(s)"[Text Word]` and
+    `"LLM"[Title/Abstract]`, so off-topic and homonym articles enter the corpus; 6,466 of the 34,662 articles in G2 v3
+    (6,273 with "transformer model(s)" as their only focal term and no LLM-related transformer in use; 176 using "LLM"
+    for something else or with no evidence; 17 ProGen/BioBridge/PaLM 2/ESM-2 homonyms) are excluded from G3 and M1 by
+    `fullscale_pipeline/g3_scope_exclusions/scope_exclusions.csv`, and 6 misspelt LLM definitions are corrected. P2 does
+    not match hyphenated "large-language model(s)". Ideally this exclusion moves into preprocessing (F-stage).]*
 25. **Known limits of P1c.** About 670 lines that look like abbreviation lists remain (mostly prose with inline glosses) and about 530 footnote-like lines that do not follow a table.
 
 26. **Known limits of P6 v2 (built 2026-09-26, run 2026-09-27/28).** (a) Precision was judged by reading samples (15 hard sentences, 143 and 30 real blocks), not against
