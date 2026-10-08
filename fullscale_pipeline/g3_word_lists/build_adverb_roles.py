@@ -41,17 +41,18 @@ ROLES = {
         uncritically indirectly differently hardly barely scarcely unfavorably unfavourably poorly wrongly erroneously
         mistakenly""",
     "sequence": "first",
-    "contrast": "instead rather",
+    "contrast": "instead rather otherwise",
+    "concessive": "yet",
     "comparison_conditional": "similarly",
     "deictic_conditional": "above below",
-    "time": """recently already currently previously initially subsequently ultimately yet still newly soon later
+    "time": """recently already currently previously initially subsequently ultimately still newly soon later
         historically presently originally formerly thereafter afterward someday sometime temporarily simultaneously
         concurrently traditionally nowadays beforehand afterwards""",
     "stance": """interestingly importantly surprisingly unsurprisingly unexpectedly fortunately unfortunately crucially
         ideally inevitably predictably rightfully strikingly encouragingly curiously intriguingly hopefully regrettably
         understandably""",
     "booster": "clearly certainly undoubtedly definitively definitely obviously evidently truly actually really",
-    "discourse": """together finally overall otherwise alternatively second next last fifth collectively herein hereafter
+    "discourse": """together finally overall alternatively second next last fifth collectively herein hereafter
         whereby insofar course please third anyway therein wherein therefrom notwithstanding""",
     "subordinator": "whether unless",
     "particle": "under behind ahead back forward throughout before around away beside despite forwards",
@@ -60,11 +61,15 @@ ROLES = {
 ACTION = {"degree": "keep", "frequency_low": "keep", "frequency_high": "drop", "schedule": "keep", "manner": "keep",
           "manner_listed": "keep", "manner_generic": "drop", "focus_scalar": "drop", "focus_exclusive": "keep",
           "hedge_likelihood": "keep", "hedge_other": "drop", "negative_form": "keep", "sequence": "keep",
-          "contrast": "keep", "comparison_conditional": "keep if followed by 'to', else drop",
+          "contrast": "keep", "concessive": "keep", "comparison_conditional": "keep if followed by 'to', else drop",
           "deictic_conditional": "drop at the end of a clause (before . , ; : or ')' or the end), else keep",
           "other": "leave", "time": "drop", "stance": "drop", "booster": "drop", "discourse": "drop", "subordinator": "drop",
           "particle": "open question 5", "parse_leftover": "leave"}
 OWNER_NOTES = {   # verbatim from the owner's review, commit 03d29d8
+    "yet": "keep", "still": "drop - does not add new information",
+    "otherwise": "not sure about this one - assistant recommended keep (contrastive/conditional, like instead/rather)",
+    "periodically": "can be kept similar to manner adverb", "simply": "not sure - assistant recommends keep (exclusive, like merely/purely/solely)",
+    "generally": "approve dropping", "actually": "approve dropping",
     "often": "propose to drop", "consistently": "propose to drop", "even": "propose to drop",
     "first": "propose to keep to avoid conflict between rules", "typically": "propose to drop",
     "closely": "propose to drop", "mainly": "propose to drop", "automatically": "propose to drop",
@@ -72,19 +77,14 @@ OWNER_NOTES = {   # verbatim from the owner's review, commit 03d29d8
     "above": "propose to keep if not in the end of sentense (e.g. above expectations/average)",
 }
 FLAGS = {
-    "yet": "in 'not yet validated' a drop leaves 'not validated': consider keeping",
-    "still": "persistence ('LLMs still require'), often contrastive: time or keep?",
     "increasingly": "a trend over time, put under degree (kept); could be time",
     "necessarily": "'not necessarily X' would become 'not X' if dropped: kept as a likelihood hedge",
     "remarkably": "in-clause mostly degree ('remarkably high'); as an opener stance",
     "critically": "in-clause mostly manner ('critically appraise'), as an opener stance; default manner",
-    "generally": "Hyland hedge; could be frequency (= usually), which is now dropped too",
-    "actually": "booster; sometimes contrastive ('actually decreased')",
     "rather": "by analogy with 'instead' (owner): mostly 'rather than' (substitution, close to contrast)",
     "ever": "frequency or time",
     "far": "degree ('far exceeded'); 'so far' is time",
     "ultimately": "time or stance (result)",
-    "simply": "exclusive ('simply prompting') or manner; 'not simply' is fused into not_only",
     "only": "own guarded rule (joins the verb group only when a verb follows)",
     "notably": "in-clause degree ('notably lower'); the opener 'Notably,' is dropped by the opener rule",
     "simultaneously": "time ('at the same time') or manner",
@@ -103,7 +103,6 @@ FLAGS = {
     "specifically": "by analogy with 'mainly' (owner); the opener 'Specifically,' is dropped by the opener rule",
     "primarily": "by analogy with 'mainly' (owner)",
     "predominantly": "by analogy with 'mainly' (owner)",
-    "periodically": "a schedule ('periodically evaluated'), kept like daily/annually; could be high frequency",
     "below": "by analogy with 'above' (owner)",
     "unexpectedly": "stance, like 'surprisingly'",
     "indirectly": "negative form of 'directly' (kept)",

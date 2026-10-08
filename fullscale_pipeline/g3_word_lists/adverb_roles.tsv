@@ -1,7 +1,7 @@
 rank	word	attachments	role	action	flag	owner_note	example
 1	significantly	212	degree	keep			.92/0.74, respectively, as shown in Fig. 8), significantly exceeding other five baseline m
 2	often	161	frequency_high	drop		propose to drop	These hybrids often demonstrate strong performance by combi
-3	still	154	time	drop	persistence ('LLMs still require'), often contrastive: time or keep?		If making available the produced corpora is still complex, the availability of produced l
+3	still	154	time	drop		drop - does not add new information	If making available the produced corpora is still complex, the availability of produced l
 4	well	138	manner_listed	keep			Besides, as the use of LLMs is well established now, we have noticed several
 5	consistently	116	frequency_high	drop		propose to drop	Moreover, ChatGPT consistently outperformed both Bard and Copil
 6	effectively	108	manner	keep			structional information on how to do so most effectively.
@@ -12,9 +12,9 @@ rank	word	attachments	role	action	flag	owner_note	example
 11	specifically	84	focus_scalar	drop	by analogy with 'mainly' (owner); the opener 'Specifically,' is dropped by the opener rule		e continues to advance, vitrification robots specifically engineered for mammalian oocytes
 12	systematically	75	manner	keep			We systematically developed and evaluated prompt
 13	locally	74	manner	keep			 Unpaywall36 (RRID, SCR_016471) as well as a locally hosted open_weight large language mod
-14	generally	72	hedge_other	drop	Hyland hedge; could be frequency (= usually), which is now dropped too		While language models are generally heavy, REF000031 explore compacting
+14	generally	72	hedge_other	drop		approve dropping	While language models are generally heavy, REF000031 explore compacting
 15	primarily	71	focus_scalar	drop	by analogy with 'mainly' (owner)		act on use of ChatGPT, with those interested primarily in medicine subspecialties most lik
-16	yet	69	time	drop	in 'not yet validated' a drop leaves 'not validated': consider keeping		should not be use in a clinical care setting yet.
+16	yet	69	concessive	keep		keep	should not be use in a clinical care setting yet.
 17	correctly	69	manner	keep			e difference was mainly due to DeepSeek-R1 incorrectly scoring patients aged 65 years in t
 18	even	68	focus_scalar	drop		propose to drop	he question: Can LLMs effectively emulate or even surpass human decision_making capability
 19	first	65	sequence	keep		propose to keep to avoid conflict between rules	, sentiment polarity for the full corpus was first classified into 3 categories (positive,
@@ -56,7 +56,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 55	exclusively	23	focus_exclusive	keep			Rather than depending exclusively on users' self_reported option sc
 56	poorly	23	negative_form	keep			rent general_purpose multimodal LLMs perform poorly on a narrow radiological task—this is 
 57	overall	22	discourse	drop			ers provided by ChatGPT (8.0 [6.8–9.0]) were overall higher than the ones provided by both
-58	actually	22	booster	drop	booster; sometimes contrastive ('actually decreased')		The effects are weaker for those who actually received the rephrasing suggestions 
+58	actually	22	booster	drop		approve dropping	The effects are weaker for those who actually received the rephrasing suggestions 
 59	always	22	frequency_high	drop	by analogy with 'often' (owner): a high-frequency generaliser		to remember that this language model may not always provide novel ideas but can help gener
 60	easily	21	manner	keep			ting with Ollama, we provided the ability to easily switch from one LLM to another, withou
 61	far	20	degree	keep	degree ('far exceeded'); 'so far' is time		Our study is the first, as far as we are aware, to test a LLM in this co
@@ -67,7 +67,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 66	separately	18	manner	keep			e then re_estimated the mixed_effects models separately for each partition and compared th
 67	simultaneously	18	time	drop	time ('at the same time') or manner		 these scenarios, two players make decisions simultaneously, and the outcomes of two playe
 68	reliably	18	manner	keep			ip between human and LLM rating SDs differed reliably across psycholinguistic variables, u
-69	simply	18	focus_exclusive	keep	exclusive ('simply prompting') or manner; 'not simply' is fused into not_only		ures (extracted by DNABERT and GENA-LM) were simply concatenated.
+69	simply	18	focus_exclusive	keep		not sure - assistant recommends keep (exclusive, like merely/purely/solely)	ures (extracted by DNABERT and GENA-LM) were simply concatenated.
 70	interestingly	17	stance	drop			Interestingly, M1s were more likely to be fam
 71	slightly	17	degree	keep			istic One_shot for Bowel Pain, but sometimes slightly hurts Llama 3.1 in other paradigms o
 72	quickly	16	manner	keep			rlying chatbots can mimic human language and quickly return detailed and coherent_seeming 
@@ -106,7 +106,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 105	adequately	9	degree	keep			ChatGPT, Bard, and Copilot performed overall adequately in responding to COPD_related ques
 106	implicitly	9	manner	keep			These aggregated benchmarks implicitly map the multivariate benchmark pro
 107	jointly	9	manner	keep			GenAI and LLMs would not necessarily be jointly ‘learning’ with humans, but rather wo
-108	otherwise	9	discourse	drop			th ideas and perspectives learners might not otherwise have considered, while also helping
+108	otherwise	9	contrast	keep		not sure about this one - assistant recommended keep (contrastive/conditional, like instead/rather)	th ideas and perspectives learners might not otherwise have considered, while also helping
 109	notably	9	degree	keep	in-clause degree ('notably lower'); the opener 'Notably,' is dropped by the opener rule		teration, in medical licensing examinations, notably being the first to evaluate its perfo
 110	solely	8	focus_exclusive	keep			 LLM-based using patients with mild symptoms solely” is presented in Table 1.
 111	deliberately	8	manner	keep			We deliberately matched the readers’ viewing con
@@ -229,7 +229,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 228	selectively	3	manner	keep			wers, users lose the incentive to spend time selectively processing information and derivi
 229	crucially	3	stance	drop			Crucially, LLMs such as ChatGPT can emulate a
 230	erroneously	3	negative_form	keep			nalysis of the results revealed that Mixtral erroneously identified medical terminologies 
-231	periodically	3	schedule	keep	a schedule ('periodically evaluated'), kept like daily/annually; could be high frequency		ChatGPT became vague after the first month (“periodically”), while EvidenceHunt recommende
+231	periodically	3	schedule	keep		can be kept similar to manner adverb	ChatGPT became vague after the first month (“periodically”), while EvidenceHunt recommende
 232	modestly	3	degree	keep			ogists, primary diagnosis accuracy increased modestly from 69.3% to 71.3% following LLM as
 233	presently	3	time	drop			of LLM-assisted interpretation, as most LLMs presently operate on selected key images rath
 234	intentionally	3	manner	keep			ing language models that invoke ClinAgent is intentionally out of scope.

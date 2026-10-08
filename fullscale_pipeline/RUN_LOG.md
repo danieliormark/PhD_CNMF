@@ -602,5 +602,15 @@ predominantly); rather kept like instead; below conditional like above; unexpect
 low-frequency forms added and kept (counts from the text of G2 v3 shards 0-9). Share of attachments: keep 58%, drop 40%.
 Host incline. [LOG]
 
+**RL-086 · 2026-10-08 · G3 · WORD LIST (revision) · LIVE**
+`PG/g3_word_lists/adverb_roles.tsv` revised after the owner's second review round: sha256 `f66d153f5efa`, 513 words, built by
+`build_adverb_roles.py` (sha256 `4b6f4ae541e0`). Owner's decisions: keep yet, drop still, drop generally, drop actually, keep
+periodically (unchanged, already kept), simply left to the assistant's judgement (not sure), otherwise left to the
+assistant's judgement (not sure). Assistant's recommendation, applied: keep otherwise (120 of 127 occurrences in G2 v3
+shards 0-9 carry a conditional/counterfactual meaning, e.g. "unless specified otherwise"; moved from discourse to a new
+contrast role beside instead/rather) and keep simply (8 of 10 sampled occurrences are the exclusive/minimising sense, the
+same class as merely/purely/solely, already kept; 1 booster sense accepted as a residual, as elsewhere in this table).
+Host incline. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
