@@ -751,5 +751,88 @@ variant to `llm`. `focal_words.txt` not regenerated (the pattern is a regex, not
 P2, P6, P7 not rerun: the change acts in G3 only. Among the 6,466 excluded articles only PMC13486626 (class "no
 definition, no evidence") contains the form and so now has evidence; left excluded pending the owner. Host incline. [LOG]
 
+**RL-096 · 2026-10-08 · G3 · TEST (read-only) · LIVE**
+Evidence for G3_POSTPROCESSING.md §6 item 7 (focal terms with no governing verb). Host incline, `tensor_env`. Scratch
+passes over the RL-089 outputs of `g3_curation_test.py` (`2a5e01342bf4`, shards 0, 20, 30, 40, 700 articles each), with
+the 6,466 articles of `g3_scope_exclusions/scope_exclusions.csv` left out, and over the matching G2 v3 edges [LOG]:
+54,620 units, 53,735 with a focal term, 908 (1.7%) with no parent and no cousin. By G2 edge: no predicate anywhere 411
+(abbreviation glosses 76, short labels/heading-like 82, captions/footnotes 36, "X: ..." list items 34, reference lines
+21, other verbless 162); predicate present but the top edge a conjunction/colon and the focal term in a verbless
+conjunct 341; predicate present, focal term in a modifier outside it 156. A fallback (nearest ancestor with a clause
+child; that clause's verb), 40 sampled units with a predicate, hand-labelled: verb found 38, correct 26, wrong 10
+(3 speaker labels "ChatGPT response:", 2 junk predicates "’"/"–", wrong clause), 2 unclear. Outputs local only
+(`diagnostics/g3_stoplist/q5/q7_*.json`); nothing written to RDS; no script changed.
+
+**RL-097 · 2026-10-08 · G3 · TEST (read-only) · LIVE**
+Owner on §6 item 7: PMC13486626 stays excluded; the 411 verbless units (group A) are dropped (as now: no structure);
+test the group-B fallback with its guards. Copy `fullscale_pipeline/diagnostics/g3_q7/g3_q7.py` (final sha256 `b863c03286be`; the
+RDS script is unchanged): when no predicate lies above a focal term, the nearest ancestor holding a clause beside the
+focal branch gives the verb group (`Q7=1`); guards by environment: `Q7_JUNK` (reject a clause whose predicate atoms
+have no letters), `Q7_LABEL` (verbless focal branch before a ":" edge), `Q7_LABEL2` (focal words in a prefix of <= 5
+words before the first ":"), `Q7_LABEL3` (narrow: such a prefix with a response word, or a quotation after ":").
+Self-test 54/54 each time. Shards 0, 20, 30, 40, `--limit 700`, 0 problems; baseline `Q7=0` with the current
+`focal_terms.py` (so the RL-095 word-list change is not counted) [LOG]. Results, excluded articles left out: no guards
++648 parents in 622 units, 356 of 908 empty focal units recovered, no baseline parent lost; colon guards +614; colon and
+prefix guards +601 (removed 47 parents: 17 correctly, 30 wrongly, mostly "Model: description" definition lists such as
+"GPT-4o (URL): Introduced by OpenAI..."); narrow guard + junk guard +640 parents in 614 units, 348 recovered, removed 8
+parents, 8/8 correctly ("ChatGPT response: '...'"); the junk guard fired 4 times and changed no parent. Hand labels: 50
+random added parents (colon and prefix guards) 38 correct, 11 wrong (verbs invented by the parser, wrong clause), 1
+unclear; the 39 parents the narrow guard keeps back are 30 correct, 9 wrong. Constructed cases (`hard_q7.json`, 24,
+parsed as in G2, `hard_q7.py`): original 21, no guards 21, colon guards 21, prefix 22, narrow 22 of 24 (the 2 failures
+fail in every version: "Prompt to ChatGPT:" parsed with "prompt" as verb; a "’" junk predicate with no other clause).
+Outputs local only; nothing written to RDS. Host incline.
+
+**RL-098 · 2026-10-08 · G3 · TEST (read-only) · LIVE**
+Owner on §6 item 7: drop label-colon units ("BERT encoder: ...") where the fallback would apply, rather than recover
+them; delete text reproducing LLM output, so that it is not conflated with researchers' text about LLMs. Host incline,
+`tensor_env`, all 50 G2 v3 shards, kept corpus (689,197 units). `response_scan.py` (sha256 `a182e5950bef`): units whose
+<= 6-word prefix before ":" holds a focal term: with a response word 147 (86 articles; also researcher headings such as
+"LLM invocation and output handling:"), with a quotation after ":" 153 (86; also researchers' prompts), other labels
+3,252 (1,743; definitions, headings, a few transcript turns). `llm_output_units.py` (`0c8b9e6a92ab`): a unit is LLM
+output if its prefix holds a model name plus only a response word and filler, or only the model name with a quotation
+after ":"; prompt labels (prompt, asked, instructed, query, input, question) are kept; a curly double quotation left
+open continues into the next unit only if it is the next unit of the same sentence or the next sentence (G2 holds only
+focal sentences, so non-adjacent units were wrongly joined in two earlier versions: 458, then 224 false
+continuations). Result: 155 label units + 7 continuations = 162 units in 55 articles; 30 sampled labels all model
+output; known misses: outputs introduced by "asked"/"questions" ("When asked why ..., Gemini says: '...'"). On shards 0,
+20, 30, 40 with the fallback and the colon/prefix guards (`guard2`, RL-097): +601 fallback parents, 327 empty units
+recovered, 572 focal units without parent; 24 LLM-output units dropped (15 baseline parents, 19 cousins). Outputs
+local only (`diagnostics/g3_q7/`); nothing written to RDS. [LOG]
+
+**RL-099 · 2026-10-08 · G3 · TEST (read-only) · LIVE**
+Re-examined RL-097's 50-case fallback sample against the actual G2 parse tree (not just the sentence text), after the
+owner asked for misattribution detail. Host incline. Of 50, 36 correct (72%), 14 wrong (28%, revised down from the
+earlier 38/50 eyeball read). Five causes identified, each with a traced example: (1) wrong-conjunct choice — the
+fallback returns the first predicate sibling in left-to-right order, not the one nearest the focal term, when an
+"and"/"but" ancestor has more than one ("Web_interface access was chosen... but... parents... chose a commercial
+LLM" attaches LLM to the wrong, same-lemma "choose"; "featured... and was developed based on GPT-4's..." attaches
+GPT-4 to "feature" not "develop"); (2) verb-lemma collision, a special case of (1) where two separate clauses share
+one verb root and the dummy_sibling groups them by lemma; (3) a present participle used adjectivally but typed `Mv`
+by the parser ("existing embeddings", "as evidenced in") is accepted by `is_pred()` as a real predicate; (4) the
+sibling check looks only at the immediate head of each candidate (`has_pred(c[0])`), so a true predicate one level
+down under a bare adverb ("llms (often (generate ...))") is missed and the fallback climbs further, often onto one
+of the (3)-type false predicates; (5) upstream G2 attachment ambiguity independent of the fallback (a passive agent
+or an em-dash clause attached to the wrong head). A sixth, softer pattern: "kitchen-sink" parents whose `focal_he`
+absorbs many unrelated words from a loosely-related clause, correlated with wrongness (mean 5.4 words in the 14
+wrong vs 2.9 in the 36 correct); a `focal_he` >= 8-word cap would catch 4 of 14 wrong cases with 0 false positives on
+this sample, tested but not adopted pending the owner. Separately verified the LLM-output continuation rule (RL-098):
+tightened to require true text adjacency (same sentence, i.e. the unit split at a clause boundary, or the next
+sentence by raw line), which rejects one real multi-turn dialogue continuation 5 lines later in the same article
+(G2 keeps only focal sentences, so "next focal sentence" skips non-focal ones in between and is not the same as
+"next sentence") in favour of never joining two unrelated sentences; 7 of the 162 LLM-output units are continuations
+under the strict rule. Outputs local only; nothing written to RDS. [LOG]
+
+**RL-100 · 2026-10-08 · G3 · CODE (new) + OUTPUT + DOC · LIVE**
+Owner's final decision on §6 item 7: drop the fallback entirely (persistent ~28% error rate on recovered parents,
+RL-099) and leave both groups (verbless units; predicate-elsewhere units) without a parent, as today; keep the
+LLM-output unit deletion. Host incline, `tensor_env`. No change to `g3_curation_test.py` or any pipeline script for
+this item: the fallback was never adopted, so there is nothing to revert. New tracked folder
+`fullscale_pipeline/g3_llm_output/`: `build_llm_output_units.py` (sha256 `cbceaf621848`; cleaned, deterministic
+version of `diagnostics/g3_q7/llm_output_units.py`, checked it loads `g3_scope_exclusions/scope_exclusions.csv` and
+excludes those articles) run over all 50 G2 v3 shards: 162 units, 55 articles (155 label, 7 continuation), matching
+the diagnostic run exactly; wrote `llm_output_units.csv` (`b71d5717e250`). Copied to RDS for CSF:
+`PG/g3_llm_output/` (same two files, identical sha256). Documented in G3_POSTPROCESSING.md §6 item 7 (all 7 items
+now decided); status line, §8 and §9 updated. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

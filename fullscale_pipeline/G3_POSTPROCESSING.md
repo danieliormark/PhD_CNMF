@@ -1,8 +1,8 @@
 # Stage G3 — postprocessing (curation) of the G2 parse: decisions, open questions, test status
 
 Status (2026-09-30): **design agreed in part; test script built and tested on real data; not yet run on the corpus.**
-*[2026-10-08: §6 items 1–6 decided; items 1, 3, 4 and 5 not yet implemented in the test script; item 6 is built
-(`g3_scope_exclusions/`) and G3 must read it.]*
+*[2026-10-08: §6 items 1–7 decided; items 1, 3, 4 and 5 not yet implemented in the test script; items 6 and 7
+are built (`g3_scope_exclusions/`, `g3_llm_output/`) and G3 must read both.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080). The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
 item 29). Input: G2 v3, see [`G2_PARSING.md`](G2_PARSING.md). Path abbreviations as in PIPELINE.md.
@@ -493,8 +493,42 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
      matched and now are; every spelling maps to `llm`. P2, P6 and P7 are not rerun, so the change acts in G3 only (G3
      matches focal terms with this file). One excluded article now has evidence, PMC13486626 (no definition of LLM, a
      "large‐language‐model‐assisted" GPT-4o screening): left excluded, for the owner to confirm.]*
-7. **Focal terms with no governing verb:** 280 of 14,225 units (2%) contain a focal term but yield no parent (no verb
-   above the term: title-like fragments, lists). Accept, or give them a structure of their own?
+7. **Focal terms with no governing verb — DECIDED 2026-10-08 (owner).** 908 of 53,735 focal units in the test
+   sample (1.7%, excluded articles left out) have no parent and no cousin, in two groups: 411 with no predicate
+   anywhere in the G2 parse (abbreviation glosses, headings, captions, "X: ..." list items, reference lines), and
+   497 with a predicate elsewhere in the sentence that the focal term does not sit under (elided verbs in a
+   coordination, "Open Evidence produced X and ChatGPT Y"; a fronted adjunct, "Similar to ChatGPT, ..."). Checked
+   over the whole kept corpus and tested on copies; neither `g3_curation_test.py` nor the production script needs
+   any change for this item. RUN_LOG RL-096 to RL-099.
+
+   - **Both groups are left without a parent, as today.** A fallback was built and tested (climb to the nearest
+     ancestor holding a clause beside the focal branch, with guards) and recovered about two-thirds of the 497: on
+     four test shards, 601 added parents in 587 units, 327 to 348 of the 908 empty units filled, depending on the
+     guard. Checked against the real G2 parse tree, not just the sentence text, its accuracy was 72% (36 of 50
+     correct) and did not improve enough across rounds of guarding. Five traced causes: when a coordinated clause
+     has more than one predicate sibling, the fallback returns the first in document order rather than the one
+     nearest the focal term (two "choose" clauses in one sentence merged into one parent; "featured... and was
+     developed based on GPT-4's..." attached to "feature" instead of "develop"); a present participle used as an
+     adjective is typed `Mv` by the parser and accepted by `is_pred()` as a real verb ("exist**ing** embeddings",
+     "as evidenc**ed** in..."); the sibling check looks only at the immediate head of each candidate, missing a
+     predicate one level down under a bare adverb ("LLMs often **generate**..."); and some errors are upstream G2
+     attachment mistakes independent of the fallback (a passive agent attached to the wrong head). **Owner: given
+     the persistent error rate, drop the fallback rather than guard it further** — both groups stay as they are.
+   - **Units that reproduce LLM-generated text are deleted outright, so model output is not conflated with
+     researchers' own statements about LLMs (owner).** A unit is LLM output if its short prefix (<= 8 words) before
+     a ":" holds a focal term plus only a response word ("ChatGPT response:", "Answer from GPT-4:") or holds only
+     the focal term with a quotation following ("ChatGPT: "Sure!..."); a prefix with a prompt/question word
+     ("ChatGPT prompt:", "was asked:") is a researcher's prompt and is kept. A unit continuing an open quotation is
+     deleted too, but only when it is truly adjacent (the next unit cut from the same sentence, or the next
+     sentence by raw line) — G2 keeps only focal sentences, so two consecutive G2 records can be pages apart in the
+     real article; an earlier, looser version joined 224 to 458 unrelated sentences this way before the adjacency
+     check was added. Built as `g3_llm_output/build_llm_output_units.py` (deterministic; no model, no randomness):
+     162 units in 55 articles across the whole kept corpus (155 labels, 7 continuations; 30 sampled labels all
+     genuine model output), mirrored to `PG/g3_llm_output/` for CSF. Known miss, not fixed: output introduced by a
+     question word ("When asked why..., Gemini says: '...'") reads as a prompt and is kept.
+   - **How G3 must use it:** skip every `uid` in `g3_llm_output/llm_output_units.csv`, the same way it skips the
+     articles in `g3_scope_exclusions/scope_exclusions.csv` (§6 item 6) — before focal matching, since a deleted
+     unit is removed whether or not it already parses to a parent.
 
 ## 7. Test script
 
@@ -520,16 +554,18 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 
 ## 8. Before the production run
 
-1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–6 decided; item 7 next. Then the numbers
-   question flagged under items 4 and 5, and the two flags under item 4.]*
+1. Owner decisions on §6 — DONE, all 7 items decided 2026-10-08. *[Remaining: the numbers question flagged
+   under items 4 and 5, and the two flags under item 4 (the not_only/but_also drop question, and synonym
+   fragmentation of kept adverbs), both deferred to after all 7 questions, per the owner.]*
 1a. Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
    passives), item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
    a regression test), and item 4 (negation fix, the "only"/"not only"/"but also" rules, connectives, the opener
    rule and the adverb role table, ported from `g3_word_lists/` and `diagnostics/g3_stoplist/g3_q4full.py`, hard
    cases included), and item 5 (fusion-conditional particle exemption, type guard, chain fusion, from
-   `g3_phrasal_check/g3_q5fix.patch`, with `hard_q5.json` as a regression check), and item 6 (skip the articles in
+   `g3_phrasal_check/g3_q5fix.patch`, with `hard_q5.json` as a regression check), item 6 (skip the articles in
    `g3_scope_exclusions/scope_exclusions.csv`; apply `spelling_corrections.csv` through `apply_corrections` before focal
-   matching; `test_corrections.py` as a regression check). M1 must leave the same articles out of every relation.
+   matching; `test_corrections.py` as a regression check; M1 must leave the same articles out of every relation), and
+   item 7 (skip every `uid` in `g3_llm_output/llm_output_units.csv`; item 7 needs no other change).
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5).
@@ -550,6 +586,8 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_phrasal_check/hard_q5.json` (24 constructed particle cases) | 69873d864054 |
 | `fullscale_pipeline/g3_phrasal_check/hard_q5.py` (parses them; runs the RDS script and the test copies) | b1428685f3e2 |
 | `fullscale_pipeline/g3_phrasal_check/q5_types.py`, `q5_compare.py` (particle types from G2; orig vs fix) | 5b105b053aed, 47dfbc208df2 |
+| `fullscale_pipeline/g3_llm_output/build_llm_output_units.py` (§6 item 7; also on `PG/g3_llm_output/`) | cbceaf621848 |
+| `fullscale_pipeline/g3_llm_output/llm_output_units.csv` (162 units, 55 articles; also on `PG/g3_llm_output/`) | b71d5717e250 |
 | `fullscale_pipeline/g3_scope_exclusions/build_scope_exclusions.py` (§6 item 6: builds the two lists; G3 correction hook) | 3a5de5167371 |
 | `fullscale_pipeline/g3_scope_exclusions/scope_exclusions.csv` (6,466 excluded articles with reasons; also on `PG/`) | 5b71d844d9af |
 | `fullscale_pipeline/g3_scope_exclusions/spelling_corrections.csv` (6 unit corrections; also on `PG/`) | d0a70f6c1a20 |
