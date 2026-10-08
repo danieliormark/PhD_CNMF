@@ -1,50 +1,76 @@
-"""Build the G3 adverb role table (G3_POSTPROCESSING.md §6 item 4, owner decision 2026-10-08).
+"""Build the G3 adverb role table (G3_POSTPROCESSING.md §6 item 4, owner decisions 2026-10-08).
 
 Input: diagnostics/g3_stoplist/adverb_attachments.json (every single adverb that the tested question-4 rule attaches to a
 verb group in G2 v3 shards 0 and 20, --limit 400, with counts and one example). Output: adverb_roles.tsv.
-Roles are assigned by the explicit sets below (the assistant's reading, to be reviewed by the owner); words not listed
-default to 'manner' if they end in -ly, else 'other' (mostly nouns the parser typed as modifiers). Actions:
-keep (attach to the verb group): degree, frequency, manner, focus, likelihood hedge
-leave (neither attached nor dropped; the structure stays as the parse gives it): other, parse_leftover
-drop: time, stance/attitude, certainty booster, other hedge, discourse, subordinator
-A 'flag' marks rows where the role is uncertain or where dropping could change the meaning.
+Roles are assigned by the explicit sets below; words not listed default to 'manner' if they end in -ly, else 'other'
+(mostly nouns the parser typed as modifiers). Negative and low-frequency forms that the sample did not contain are added
+from a count over the text of G2 v3 shards 0-9 (NEGATIVE_FORMS), so that they are not left to the default.
+
+Owner's logic (review of 2026-10-08, commit 03d29d8): keep adverbs that turn or qualify the claim towards negation,
+contrast or comparison (instead, similarly to, above average, rarely, incorrectly, inconsistently); drop generic
+generalisers and focusers that do not change the claim (often, typically, consistently, even, mainly, closely,
+automatically); keep in-clause 'first' (no conflict with spelled-out numbers being kept).
+
+Actions: keep = attach to the verb group; drop; leave = neither attached nor dropped; conditional actions are spelled
+out in the action column; 'open question 5' = phrasal particles.
 """
-import json, os, sys
+import json, os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "..", "diagnostics", "g3_stoplist", "adverb_attachments.json")
 
 ROLES = {
-    "degree": """significantly substantially fully largely slightly markedly partially greatly entirely highly mostly heavily
+    "degree": """significantly substantially fully slightly markedly partially greatly entirely highly heavily
         completely thoroughly equally deeply partly dramatically nearly almost considerably exceptionally profoundly
         somewhat modestly marginally comparatively relatively roughly approximately drastically tremendously quite
-        excessively sharply much far sufficiently insufficiently adequately strongly severely extensively twice enough
+        excessively sharply much far sufficiently insufficiently adequately strongly severely extensively enough
         majorly fairly exactly comparably increasingly progressively perfectly remarkably impressively notably double
-        altogether""",
-    "frequency": """often frequently sometimes occasionally commonly always usually rarely typically repeatedly continually
-        continuously constantly regularly periodically annually daily consistently normally ever seldom""",
-    "focus": """even especially particularly specifically mainly primarily exclusively predominantly solely merely simply
-        purely alone chiefly only""",
+        altogether minimally negligibly disproportionately""",
+    "frequency_low": "sometimes occasionally rarely seldom infrequently twice ever",
+    "frequency_high": """often frequently commonly always usually typically repeatedly continually continuously constantly
+        regularly normally consistently""",
+    "schedule": "periodically annually daily",
+    "focus_scalar": "even especially particularly specifically mainly primarily predominantly chiefly largely mostly",
+    "focus_exclusive": "only solely exclusively merely purely alone simply",
     "hedge_likelihood": "likely unlikely probably possibly perhaps maybe potentially presumably necessarily",
     "hedge_other": "generally apparently arguably seemingly essentially basically sort kind",
     "manner_listed": "well offline online long fine fast verbatim outright worldwide elsewhere priori",
+    "manner_generic": "closely automatically",
+    "negative_form": """incorrectly inaccurately inconsistently inappropriately inadequately insignificantly nonsignificantly
+        non_significantly unreliably unsuccessfully improperly incompletely unevenly unequally irregularly unpredictably
+        uncritically indirectly differently hardly barely scarcely unfavorably unfavourably poorly wrongly erroneously
+        mistakenly""",
+    "sequence": "first",
+    "contrast": "instead rather",
+    "comparison_conditional": "similarly",
+    "deictic_conditional": "above below",
     "time": """recently already currently previously initially subsequently ultimately yet still newly soon later
         historically presently originally formerly thereafter afterward someday sometime temporarily simultaneously
         concurrently traditionally nowadays beforehand afterwards""",
-    "stance": """interestingly importantly surprisingly unsurprisingly fortunately unfortunately crucially ideally
-        inevitably predictably rightfully strikingly encouragingly curiously intriguingly hopefully regrettably
+    "stance": """interestingly importantly surprisingly unsurprisingly unexpectedly fortunately unfortunately crucially
+        ideally inevitably predictably rightfully strikingly encouragingly curiously intriguingly hopefully regrettably
         understandably""",
     "booster": "clearly certainly undoubtedly definitively definitely obviously evidently truly actually really",
-    "discourse": """similarly together rather first finally overall instead otherwise alternatively second next last fifth
-        collectively herein hereafter whereby insofar above below course please third anyway therein wherein therefrom
-        notwithstanding""",
+    "discourse": """together finally overall otherwise alternatively second next last fifth collectively herein hereafter
+        whereby insofar course please third anyway therein wherein therefrom notwithstanding""",
     "subordinator": "whether unless",
     "particle": "under behind ahead back forward throughout before around away beside despite forwards",
     "parse_leftover": "can is r c ai_based cloud_based base",
 }
-ACTION = {"degree": "keep", "frequency": "keep", "manner": "keep", "focus": "keep", "hedge_likelihood": "keep",
-          "manner_listed": "keep", "other": "leave", "time": "drop", "stance": "drop", "booster": "drop", "hedge_other": "drop",
-          "discourse": "drop", "subordinator": "drop", "particle": "open question 5", "parse_leftover": "leave"}
+ACTION = {"degree": "keep", "frequency_low": "keep", "frequency_high": "drop", "schedule": "keep", "manner": "keep",
+          "manner_listed": "keep", "manner_generic": "drop", "focus_scalar": "drop", "focus_exclusive": "keep",
+          "hedge_likelihood": "keep", "hedge_other": "drop", "negative_form": "keep", "sequence": "keep",
+          "contrast": "keep", "comparison_conditional": "keep if followed by 'to', else drop",
+          "deictic_conditional": "drop at the end of a clause (before . , ; : or ')' or the end), else keep",
+          "other": "leave", "time": "drop", "stance": "drop", "booster": "drop", "discourse": "drop", "subordinator": "drop",
+          "particle": "open question 5", "parse_leftover": "leave"}
+OWNER_NOTES = {   # verbatim from the owner's review, commit 03d29d8
+    "often": "propose to drop", "consistently": "propose to drop", "even": "propose to drop",
+    "first": "propose to keep to avoid conflict between rules", "typically": "propose to drop",
+    "closely": "propose to drop", "mainly": "propose to drop", "automatically": "propose to drop",
+    "similarly": 'propose to keep if we have "similarly to"', "instead": "propose to keep (close to contradiction/negation",
+    "above": "propose to keep if not in the end of sentense (e.g. above expectations/average)",
+}
 FLAGS = {
     "yet": "in 'not yet validated' a drop leaves 'not validated': consider keeping",
     "still": "persistence ('LLMs still require'), often contrastive: time or keep?",
@@ -52,17 +78,13 @@ FLAGS = {
     "necessarily": "'not necessarily X' would become 'not X' if dropped: kept as a likelihood hedge",
     "remarkably": "in-clause mostly degree ('remarkably high'); as an opener stance",
     "critically": "in-clause mostly manner ('critically appraise'), as an opener stance; default manner",
-    "generally": "Hyland hedge; could be frequency (= usually)",
-    "consistently": "frequency (= every time) or manner",
+    "generally": "Hyland hedge; could be frequency (= usually), which is now dropped too",
     "actually": "booster; sometimes contrastive ('actually decreased')",
-    "rather": "mostly 'rather than'",
-    "first": "in-clause sequence ('we first investigated'); 'the first model' is an adjective and not affected",
-    "even": "focus ('even outperformed'); 'even though/if' already dropped as a subordinator",
+    "rather": "by analogy with 'instead' (owner): mostly 'rather than' (substitution, close to contrast)",
     "ever": "frequency or time",
     "far": "degree ('far exceeded'); 'so far' is time",
-    "potentially": "likelihood hedge",
     "ultimately": "time or stance (result)",
-    "simply": "focus; 'not simply' is fused into not_only",
+    "simply": "exclusive ('simply prompting') or manner; 'not simply' is fused into not_only",
     "only": "own guarded rule (joins the verb group only when a verb follows)",
     "notably": "in-clause degree ('notably lower'); the opener 'Notably,' is dropped by the opener rule",
     "simultaneously": "time ('at the same time') or manner",
@@ -70,20 +92,48 @@ FLAGS = {
     "course": "'of course' (booster/discourse)",
     "sort": "'sort of' (hedge)",
     "please": "politeness in quoted prompts",
+    "largely": "by analogy with 'mainly' (owner): 'largely due to'; was degree",
+    "mostly": "by analogy with 'mainly' (owner); was degree",
+    "frequently": "by analogy with 'often' (owner)",
+    "usually": "by analogy with 'typically' (owner)",
+    "commonly": "by analogy with 'often' (owner)",
+    "always": "by analogy with 'often' (owner): a high-frequency generaliser",
+    "particularly": "by analogy with 'mainly' / 'even' (owner)",
+    "especially": "by analogy with 'mainly' / 'even' (owner)",
+    "specifically": "by analogy with 'mainly' (owner); the opener 'Specifically,' is dropped by the opener rule",
+    "primarily": "by analogy with 'mainly' (owner)",
+    "predominantly": "by analogy with 'mainly' (owner)",
+    "periodically": "a schedule ('periodically evaluated'), kept like daily/annually; could be high frequency",
+    "below": "by analogy with 'above' (owner)",
+    "unexpectedly": "stance, like 'surprisingly'",
+    "indirectly": "negative form of 'directly' (kept)",
+    "differently": "comparison; kept",
+}
+NEGATIVE_FORMS = {   # text occurrences in G2 v3 shards 0-9, for words the attachment sample did not contain
+    "incorrectly": 228, "differently": 81, "rarely": 75, "indirectly": 51, "minimally": 39, "insufficiently": 33,
+    "disproportionately": 30, "inadequately": 13, "inconsistently": 12, "inaccurately": 11, "seldom": 10,
+    "inappropriately": 10, "unexpectedly": 9, "uncritically": 8, "barely": 7, "hardly": 7, "improperly": 4, "scarcely": 4,
+    "unreliably": 2, "infrequently": 2, "unpredictably": 2, "incompletely": 2, "unevenly": 2, "unsuccessfully": 1,
+    "non_significantly": 1, "irregularly": 1, "unequally": 1, "insignificantly": 1, "unfavourably": 1, "negligibly": 1,
 }
 
 
 def main():
     d = json.load(open(SRC))
     role_of = {w: r for r, ws in ROLES.items() for w in ws.split()}
-    out = ["rank\tword\tattachments\trole\taction\tflag\texample"]
-    for i, (w, n) in enumerate(d["counts"], 1):
+    counts = list(d["counts"])
+    seen = {w for w, _ in counts}
+    added = [(w, 0) for w, n in sorted(NEGATIVE_FORMS.items(), key=lambda x: -x[1]) if w not in seen]
+    out = ["rank\tword\tattachments\trole\taction\tflag\towner_note\texample"]
+    for i, (w, n) in enumerate(counts + added, 1):
         r = role_of.get(w) or ("manner" if w.endswith("ly") else "other")
         ex = d["examples"].get(w, "").replace("\t", " ").replace("\n", " ")
-        out.append(f"{i}\t{w}\t{n}\t{r}\t{ACTION[r]}\t{FLAGS.get(w, '')}\t{ex}")
+        if (w, n) in added:
+            ex = f"(not in the attachment sample; {NEGATIVE_FORMS[w]} occurrences in the text of shards 0-9)"
+        out.append(f"{i}\t{w}\t{n}\t{r}\t{ACTION[r]}\t{FLAGS.get(w, '')}\t{OWNER_NOTES.get(w, '')}\t{ex}")
     path = os.path.join(HERE, "adverb_roles.tsv")
     open(path, "w").write("\n".join(out) + "\n")
-    print(path, len(out) - 1, "words")
+    print(path, len(out) - 1, "words,", len(added), "added negative/low forms")
 
 
 if __name__ == "__main__":

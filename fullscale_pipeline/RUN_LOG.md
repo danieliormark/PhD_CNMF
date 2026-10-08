@@ -591,5 +591,16 @@ stance/attitude, certainty boosters, other hedges, in-clause discourse words, su
 nouns the parser typed as modifiers; particles deferred to §6 item 5. Share of attachments: keep 73%, drop 25%, leave 1%,
 particles 0.5%; 24 rows flagged for the owner's review. Not yet read by any G3 script. Host incline. [LOG]
 
+**RL-085 · 2026-10-08 · G3 · WORD LIST (revision) · LIVE**
+`PG/g3_word_lists/adverb_roles.tsv` revised after the owner's review (commit 03d29d8, comments now in the `owner_note`
+column): sha256 `f109f358b15b`, 513 words, built by `build_adverb_roles.py` (sha256 `f8f291e2a29d`). Owner's changes: drop often,
+consistently, typically, even, mainly, closely, automatically; keep in-clause first and instead; similarly kept only before
+"to"; above dropped at the end of a clause, else kept. Applied by analogy (assistant, flagged in the table): the other
+high-frequency generalisers and scalar focusers dropped (frequently, commonly, always, usually, continually, continuously,
+repeatedly, regularly, constantly, normally; specifically, primarily, particularly, especially, largely, mostly,
+predominantly); rather kept like instead; below conditional like above; unexpectedly as stance; 14 negative or
+low-frequency forms added and kept (counts from the text of G2 v3 shards 0-9). Share of attachments: keep 58%, drop 40%.
+Host incline. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
