@@ -574,7 +574,7 @@ estimate: [`CSF3_RESOURCES.md`](CSF3_RESOURCES.md).
 | `pmc_preprocessing/citation_resolution_4b_restore.py` | 861b71001a65 | 2026-05-20 21:58 |
 | `pmc_preprocessing/focal_words.txt` (generated from `focal_terms.py`, 208 terms) | 87abdc416191 | 2026-09-26 |
 | `pmc_preprocessing/focal_words.before_v2_20260926.txt` (the 185-term list of 2026-09-23) | 5a163624bf28 | 2026-09-23 13:31 |
-| `pmc_preprocessing/focal_terms.py` | ae5962450379 | 2026-09-26 |
+| `pmc_preprocessing/focal_terms.py` | 892f98bb986e (was ae5962450379 for the P2/P6/P7 runs; hyphenated "large-language model(s)" added 2026-10-08, RL-095, acts in G3 only) | 2026-10-08 |
 | `pmc_preprocessing/focal_extraction_v2.py` | 78e3e9e5599e | 2026-09-26 |
 | `phase5_graphbrain/scripts/01_matrix_partition.py` | 89be16b155f0 | 2026-05-21 00:35 |
 | `phase5_graphbrain/scripts/02_transformer_node.py` | cf8c8b02e28b | 2026-05-21 00:37 |

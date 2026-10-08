@@ -487,6 +487,12 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
    - **Flagged, not fixed:** P2's PLAIN list does not match hyphenated "large-language model(s)", which several
      articles use; they stay in the corpus through their "LLM" mentions. If P2 is ever rerun, its list and R1's
      query should be revised to match these decisions.
+     *[Fixed 2026-10-08 (owner: "if needed"), RL-095: `PP/focal_terms.py` gains the pattern
+     `large[-‐‑]language[-‐‑ ]models?` (PLAIN, so also article evidence; self-test 19/19; the previous version kept as
+     `focal_terms.before_hyphen_20261008.py`). In the kept corpus 87 such mentions in 85 units of 76 articles were not
+     matched and now are; every spelling maps to `llm`. P2, P6 and P7 are not rerun, so the change acts in G3 only (G3
+     matches focal terms with this file). One excluded article now has evidence, PMC13486626 (no definition of LLM, a
+     "large‐language‐model‐assisted" GPT-4o screening): left excluded, for the owner to confirm.]*
 7. **Focal terms with no governing verb:** 280 of 14,225 units (2%) contain a focal term but yield no parent (no verb
    above the term: title-like fragments, lists). Accept, or give them a structure of their own?
 

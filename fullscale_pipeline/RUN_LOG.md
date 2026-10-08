@@ -740,5 +740,16 @@ tokens through `atom2word`; the hook now corrects the same token in `atom2word` 
 overwritten). Documented in G3_POSTPROCESSING.md §6 item 6 (status line, §8, §9 updated), with dated notes in
 G2_PARSING.md and PIPELINE.md item 24. No pipeline script changed; P2 and G2 not rerun. [LOG]
 
+**RL-095 · 2026-10-08 · P2 word list / G3 · CODE-CHANGE + TEST · LIVE**
+Owner: add hyphenated "large-language model(s)" to the word list if needed. Checked first (`hyphen_scan.py`, sha256
+`a0320bbc44ed`, over all G2 v3 units of the kept corpus): 87 mentions in 85 units of 76 articles, none matched by
+P2's matcher (`large-language-model` 37, `large‐language models` 21, ...); 12 of the articles would gain article
+evidence. Edited `PP/focal_terms.py` (sha256 `ae5962450379` -> `892f98bb986e`; backup
+`PP/focal_terms.before_hyphen_20261008.py`, `ae5962450379`): `EXTRA_PLAIN` gains `large[-‐‑]language[-‐‑ ]models?`;
+new self-test case; `--selftest` 19 of 19. Rerun: 87 of 87 matched; `g3_curation_test.py` `canonical()` maps every
+variant to `llm`. `focal_words.txt` not regenerated (the pattern is a regex, not a surface form; G3 uses the matcher).
+P2, P6, P7 not rerun: the change acts in G3 only. Among the 6,466 excluded articles only PMC13486626 (class "no
+definition, no evidence") contains the form and so now has evidence; left excluded pending the owner. Host incline. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->
