@@ -1,6 +1,7 @@
 # Stage G3 — postprocessing (curation) of the G2 parse: decisions, open questions, test status
 
 Status (2026-09-30): **design agreed in part; test script built and tested on real data; not yet run on the corpus.**
+*[2026-10-08: §6 items 1–3 decided; items 1 and 3 not yet implemented in the test script.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080). The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
 item 29). Input: G2 v3, see [`G2_PARSING.md`](G2_PARSING.md). Path abbreviations as in PIPELINE.md.
@@ -13,7 +14,7 @@ analogue of the toy `chunk12.py`) turns into relation matrices:
 | Structure | What it holds |
 |---|---|
 | atom | one word as a lemma with a coarse type: `/C` concept, `/P` predicate (verb), `/M` modifier; a focal term is one atom `<canonical>/C/focal` |
-| `dummy_sibling` | the compound verb group of the clause that governs the focal term: its verbs, negations and modals (plus verbs of levels above that hold nothing but verbs, negations or modals) |
+| `dummy_sibling` | the compound verb group of the clause that governs the focal term: its verbs, negations and modals (plus verbs of levels above that hold nothing but verbs, negations or modals); since 2026-10-08 also a lexical modal verb together with its complement verb(s), §6 item 3 (decided, not yet implemented) |
 | `focal_he` | the argument of that clause that contains the focal term, flattened to a set of atoms |
 | `sibling_he` | each other argument of that clause, and the non-verb modifiers of its head, flattened |
 | **parent** | `(parent dummy_sibling focal_he sibling_he …)`, one per focal occurrence (identical ones merged) |
@@ -64,7 +65,7 @@ Item letters follow PIPELINE.md item 29.
 | e | **Connective abbreviations** dropped: e.g., i.e., vs., cf., etc., viz., et al. (Sentence cuts at abbreviation periods are handled in G2.) | 2026-09-29 |
 | f | **Atoms without letters** dropped (numbers, signs, brackets, formula debris); "%" becomes the separate atom `percent/C/en`. | 2026-09-30 |
 | g1 | **Auxiliaries:** be, have, do dropped only when the parser types them as auxiliaries (`Mv`); kept as main verbs (`be/P`: "An LLM **is** a type of AI"). The stop list is not applied to main-verb be/have/do (the RDS list holds "been" and "am", the toy list "be", which silently deleted main verbs before). | 2026-09-29/30 |
-| g2 | **Modal verbs:** an atom of the compound verb group, in `dummy_sibling` and `dummy_cousin` alike: "should be approached" → `(dummy_sibling approach/P/en should/M/en)`. A modal is type `Mm`, or a modal word the parser typed as another modifier ("can/M", "ca" from "can't"). Verbs that express modality lexically (allow, enable) are ordinary predicates. A modal of a clause embedded in an argument stays with that clause's verb inside the argument (see open question 2). Options `--modals tag` and `drop` remain only for comparison. | 2026-09-30 |
+| g2 | **Modal verbs:** an atom of the compound verb group, in `dummy_sibling` and `dummy_cousin` alike: "should be approached" → `(dummy_sibling approach/P/en should/M/en)`. A modal is type `Mm`, or a modal word the parser typed as another modifier ("can/M", "ca" from "can't"). Verbs that express modality lexically (allow, enable) are ordinary predicates *[superseded 2026-10-08 by §6 item 3: they now form one verb group with their complement verb]*. A modal of a clause embedded in an argument stays with that clause's verb inside the argument (see open question 2). Options `--modals tag` and `drop` remain only for comparison. | 2026-09-30 |
 | h | **Negation** (not, no, never, n't, nor) kept whenever it is a modifier, including "no" as a determiner ("no difference", dropped by 7.5 and chunk_4h). | 2026-09-29/30 |
 | — | **Nouns used as modifiers** (type `Cm`: "*cancer* research", "*human* evaluation") kept; 7.5 and chunk_4h dropped them (about 1,000 content atoms per 200 articles). | 2026-09-30 |
 | — | **Hyphenated words** are joined in G2 (focal parts kept apart); nothing to do in G3. | 2026-09-29 |
@@ -151,8 +152,122 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
 
    **Accepted cost, not hidden by this decision:** the embedded clause's own internal subject-verb relation (which
    word acts on which) stays unrecovered from the flattened bag, same as before. No code change for this question.
-3. **Lexical modality verbs** (allow, enable, permit, help): now separate verb groups ("allows users to receive" →
-   `(dummy_cousin allow)`, `(dummy_cousin receive)`). Join them with their complement verb? (raised, not decided)
+3. **Lexical modality verbs — DECIDED 2026-10-07/08 (owner): a lexical modal verb and its complement verb(s) form one
+   verb group**, under the rule and guards below. Not yet implemented in `g3_curation_test.py`; the rule is implemented
+   and tested in the stand-alone script `fullscale_pipeline/g3_modal_check/modal_rules.py` (RUN_LOG RL-082).
+   Originally raised as: allow, enable, permit, help are separate verb groups ("allows users to receive" →
+   `(dummy_cousin allow)`, `(dummy_cousin receive)`); join them with their complement verb?
+
+   **Reason (owner).** "allow demonstrate" is qualitatively different from both "allow" and "demonstrate"; sparsity
+   must not be reduced at the cost of accuracy. **Before the decision** the same construction came out in three
+   ways, depending on details of the parse (shard 0, 300 articles): 22 parents already merged (when nothing but a
+   dropped pronoun sat beside the lexical verb, "This allows BERT to excel" → `(dummy_sibling allow excel)`), 56
+   parents with the complement verb inside a sibling bag, 116 separate `dummy_cousin`s.
+
+   **Relation to decision 2.** A narrow exception: the complement verb leaves the argument bag. It stays inside the
+   parent (it moves into the verb group), so the reason for decision 2 (a cousin is not part of a parent) is
+   untouched; a lexical modal verb without its complement says almost nothing ("enable LLMs").
+
+   **Rule.** The trigger and its complement verb(s) form one verb group, in `dummy_sibling` and `dummy_cousin` alike.
+   The arguments of both clauses become arguments of the merged clause, including the causer and the enabled entity
+   (option c, chosen over leaving the complement verb's clause as the parent, a, or moving only the enabled entity
+   into it, b: under a and b, 15 of 31 parents with the focal term inside the complement lost the modal verb, and
+   whether the causer appeared depended on which of two parse shapes the parser chose). **Participle guard:** when
+   the trigger is an -ing participial adjunct ("These domains are well represented in the training data, allowing
+   LLMs to provide…"), no causer is taken from the parse; the parser then gives the whole preceding clause, which
+   is already in the cousins.
+
+   | Group | Triggers | Complement |
+   |---|---|---|
+   | enabling, causing | allow, enable, permit, help, let, force, empower | (object +) infinitive, with or without "to" |
+   | directives | ask, prompt, instruct | object + to-infinitive |
+   | semi-modals | need, have/has/had to, be able / unable to, fail to, tend to | to-infinitive |
+   | gerund complements | help **in** V-ing; allow / enable / permit + V-ing | gerund |
+
+   **Not included: require.** 19 of its 24 "require … to V" cases were purpose clauses ("deploying LLMs requires
+   careful monitoring to avoid…", "the manual effort required to analyse…", "further research is required to
+   determine…"); complement and purpose readings share one parse in active, passive and participial uses alike.
+   Other directive verbs seen in the corpus (guide, invite) were not tested.
+
+   **"be able / unable to":** the copula is dropped and `able` / `unable` is kept as a modal-like atom, as for "can":
+   "ChatGPT was able to offer…" → `(dummy_sibling able offer)`.
+
+   **Guards** (each can be switched off in the test script):
+   - passive infinitives count ("allowed the plugin functionalities to be tailored"); a complement wrapped in a
+     modifier or a coordination is unwrapped;
+   - **word order:** the complement verb must follow the trigger. Removes fronted purpose clauses: "To test this, we
+     prompted GPT-3.5 to advise…" → `prompt advise`, not `prompt test`;
+   - **anchor and positional fallback** (semi-modals): the verb right after "to" (or "to be"), if the parser typed it
+     as a predicate, has priority over an infinitive found elsewhere in the parse, and is used when the parse
+     attaches no complement at all ("ChatGPT was able to score…" parsed as `(was chatgpt able)`);
+   - **need:** no merge for passive or participial "needed" ("further research is needed to explore…", "the
+     resources needed to train LLMs…": purpose), nor when a noun phrase stands between "need" and "to" ("we need
+     more data to train the model");
+   - **let:** no merge for hortative or imperative "let" (followed by *us* or *'s*, or the first word of the unit:
+     "Let us consider…", "Let's think step by step"), for definitions ("let X denote / be / represent / consist", also
+     after an opening phrase: "Formally, let H be the dimension…") or for "let me / us know";
+   - **gerunds:** help in V-ing takes its verb only from the "in" phrase ("Improving performance may help in
+     overcoming…" → `help overcoming`); for allow / enable / permit the gerund must directly follow the trigger
+     (removes participial adjuncts: "…, thereby allowing", "hence improving"), and there is no gerund reading after a
+     passive trigger ("was enabled using RAG": a means adjunct);
+   - **precedence:** when a token has an infinitive and a gerund reading, the gerund reading is tried first ("Bard
+     can help in preparing articles, summarize the evidence and provide ideas" → `help preparing`, not the
+     coordinated main verbs).
+
+   **Evidence** (labels by the assistant from reading each sentence; a complement and a purpose clause are told apart
+   by whether "in order to" fits without changing the meaning). Shard samples are random draws from G2 v3:
+
+   | Group | Sample | Merges | Correct | Missed |
+   |---|---|---|---|---|
+   | allow, enable, permit, help, let | shard 0, 300 articles, 247 tokens (first rule, before the later guards) | 125 | 121 real constructions (114 complete; 6 caught only the first of several coordinated verbs; 1 wrong verb); the 4 non-modal merges were 3 hortative "let" (now guarded) and 1 "allows for … to formulate" | 20 (14 parser errors) |
+   | force | 60, whole corpus | 50 | 50 (1 with extra verbs from a relative clause) | 2 |
+   | empower | 60, whole corpus | 53 | 52 | 4 |
+   | instruct | 60, whole corpus | 54 | 54 (also correctly unmerged as part of a model name, "Mistral-7B Instruct") | 2 |
+   | ask / prompt | shard 0, 300 articles | 20 / 16 | 20 / 16 (one wrong verb each from a fronted purpose clause, removed by the word-order guard) | 0 / 0 |
+   | need | shards 20, 30; 40 tokens, final guards | 14 | 14 | 1 |
+   | have to | three samples | 55 | 51 obligation, 4 possession (accepted, below) | — |
+   | fail to / tend to | shards 20, 30; 40 tokens each | 40 / 38 | 40 / 38 | 0 / 2 (broken text) |
+   | be able / unable to | shards 20, 30; 40 tokens | 40 | 39 (1 wrong verb) | 0 |
+   | help in V-ing | 60, whole corpus | 54 | 54 | 2 |
+   | allow / enable / permit + V-ing | 80, whole corpus, final rule | 23 | 23 | 11 (unchanged from before) |
+
+   Guard effects, each read case by case: **word order** (shards 1–4, 1,819 merges) changed 65 decisions: 23 false
+   merges removed, 33 verbs corrected, 9 without effect, none harmed; **positional fallback** recovered 34 of 34
+   correct constructions on shard 0 and 19 of 19 on shards 20 and 30 (5 took only the first of several coordinated
+   verbs); **anchor** (whole corpus) changed 12, 10 improved, 2 neutral; **need guard** blocked 8 of 8 purpose
+   clauses in the fresh sample (1 active "DeepSeek also needed to provide…" wrongly blocked, the parser having marked
+   it as a participle); **need-object guard** (whole corpus, acts on 149 of 5,449 "need" candidates) 42 of 43 sampled
+   blocks correct after it was narrowed to an intervening noun phrase (a first version wrongly blocked 7 "need to V"
+   with a spurious parser object); **let guard** (whole corpus, 437 "let") 38 of 40 sampled blocks correct ("These
+   observations let us hypothesize" wrongly blocked, "Let ChatGPT give you a starting point" debatable), its
+   definitional extension 25 of 26 correct; **adjacency guard** blocked 7 wrong verbs in 80 V-ing tokens; **passive
+   trigger** 2 of 2 correct; **gerund-first precedence** 5 of 5 correct (whole corpus).
+
+   **Interaction of the guards.** Every decision was recomputed with each guard switched off in turn: in 803 sampled
+   candidates no decision depended on two guards; in the whole-corpus "let" sweep two did, both correct with the two
+   guards agreeing ("To formalize the problem, let Xi represent…"). 40 constructed hard cases, each combining two or
+   more guard situations, with expected results fixed before running (`g3_modal_check/hard_cases.json`, parsed with
+   graphbrain as G2 does): 30 of 40 at first, 33 of 40 with the final rule. The one real interaction found, the
+   "be able" rule taking a later infinitive of another clause while the word-order guard kept it ("To be able to
+   answer, the model needs to retrieve…"), led to the anchor. When a guard errs, the result is a missing merge, i.e.
+   the state before this decision, not a changed meaning.
+
+   **Accepted residual errors.**
+   - **have to with a fronted object** is merged as obligation: "the potential [that] LLMs have to transform
+     medicine" → `have transform` (4 of 55 have-to merges; nouns potential ×2, facts, opportunities). Owner's choice
+     2026-10-08, option a (accept, for simplicity), over a lexical guard on such nouns (would have caught all 4 in the
+     samples, at the risk of skipping obligations like "the data that the model had to process"), dropping "have
+     to" (losing about 93% correct merges) and skipping relative clauses (losing many correct obligations such as
+     "challenges that have to be addressed").
+   - **noun object + purpose infinitive** read as a complement: "users can enable logging to monitor the system",
+     "LLMs allow fine_tuning of models to improve performance" (about 1 in 100 allow merges; the ambiguity that
+     excluded require).
+   - **coordinated main verbs** read as complements: "LLMs can empower patients and clinicians, eliminate barriers…"
+     (1 of 53 empower merges).
+   - **coordination:** a few percent of merges catch only the first of several coordinated complement verbs; the
+     others stay in the argument bag, as before.
+   - **misses**, unchanged from before: mostly parser errors ("help" typed as a noun in "can help generate", a
+     complement attached elsewhere), and about 30% of the V-ing pattern.
 4. **Stop list** (deferred by the owner). Base: the RDS list `PG/nltk_abridged_stopwords_list.txt` = NLTK's 198
    English stop words minus 77 (negations, be/have/do and modal forms, more/most/few/same/both/each,
    above/below/against/under/through/until/before, we/our/ours/she) plus also/whilst; the toy list differs only in be
@@ -190,7 +305,10 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 
 ## 8. Before the production run
 
-1. Owner decisions on §6 (at least 1, 2 and 4).
+1. Owner decisions on §6 (at least 1, 2 and 4). *[2026-10-08: items 1–3 decided; item 4 next.]*
+1a. Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
+   passives) and item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
+   a regression test).
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5).
@@ -203,3 +321,5 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `PG/scripts/chunk_4h_hpc.py` (superseded, May) | dfc6cc5e9662 |
 | `PG/nltk_abridged_stopwords_list.txt` (RDS stop list) | 2b6c7d9fdae9 |
 | `tensor_data_staging/nltk_abridged_stopwords_list.txt` (toy stop list) | f5893e962fcd |
+| `fullscale_pipeline/g3_modal_check/modal_rules.py` (rule of §6 item 3, test implementation) | 3f993e0ff164 |
+| `fullscale_pipeline/g3_modal_check/hard_cases.json` (40 hard cases with expected results) | 25bc5059068e |

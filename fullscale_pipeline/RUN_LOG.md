@@ -520,5 +520,25 @@ Checked from the files on disk while writing them (read-only):
 - Breakdown of the merged G2 v3 output: non-prose sentences 6,591 = captions 3,865, DOI captions 1,398, caption bodies 694, reference lines 574, headings 60; dropped units 36 = debris 30, heading 3, reference line after prose 2, caption after prose 1; 2,032 sentences cut at a glued citation; units per sentence: 1 for 683,675 sentences, 2 for 11,325, 3 or more for 1,351; 708,631 database source edges; output 2.5 GB JSONL and 117 GB of shard files.
 - G3 test rerun for the document (scratch): `g3_curation_test.py` `2a5e01342bf4`, shard 0 (all 694 articles), `--db`: 14,225 units, 0 errors, 0 problems, 16,983 parents, 56,989 cousins, 280 units with a focal term but no parent, database read back in chunk12's way.
 
+**RL-082 · 2026-10-07/08 · G3 · TEST (read-only) + DOC · LIVE**
+Evidence runs for the owner's decisions on G3_POSTPROCESSING.md §6 items 1–3 (passive voice, embedded clauses, lexical
+modal verbs). Host incline, `tensor_env`; nothing written to the RDS data folders; no pipeline script changed.
+- `g3_curation_test.py` (sha256 `2a5e01342bf4`, unchanged) on shard 0 with `--limit 60` and `--limit 300`
+  (1,236 and 5,829 units, 0 problems), outputs in the session scratch folder. Used to re-verify the §6 item 2 example
+  (the earlier quoted fragment was truncated; corrected in commit 857d8ba) and to count how lexical modal verbs come out
+  today [LOG: this session's output].
+- Lexical modal verbs (§6 item 3): first detectors (scratch scripts, shard 0, 300 articles; files lost from the session
+  scratch folder before they were saved, figures as reported in §6 item 3) [INFERENCE from the session record], then
+  the rule implemented in `fullscale_pipeline/g3_modal_check/modal_rules.py` (final sha256 `3f993e0ff164`; edited during
+  the session as guards were added and narrowed). It reads `PG/g2_v3/shards/g2_parsed_NNN.jsonl` and recomputes every
+  decision with each guard switched off. Runs: `pool` on shards 0; 20,30 (seed 7); 1–4 (all candidates); 40–42 (seed
+  31); all 50 shards for force, empower, instruct, help in V-ing, allow/enable V-ing (seeds 11, 23) and whole-corpus
+  sweeps for need, let and the gerund groups (`WORDS` / `SAMPLE_POOLS` filters); `hard` on the 40 constructed cases
+  (`hard_cases.json`, parsed with graphbrain `create_parser(lang="en", lemmas=True)` with `PYTHONPATH=$HOME/np1_for_spacy`,
+  as G2): 33/40 with the final rule. Outputs (contain corpus text, so local only):
+  `fullscale_pipeline/diagnostics/g3_modal_check/` [LOG].
+- Results, labels and accepted residual errors: G3_POSTPROCESSING.md §6 item 3. Decisions recorded there and in §6 items
+  1–2 (commits d7d3f4d, 857d8ba and this one).
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

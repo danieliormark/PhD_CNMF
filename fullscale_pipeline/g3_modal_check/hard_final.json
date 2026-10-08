@@ -1,0 +1,1911 @@
+[
+ {
+  "id": "H01",
+  "text": "To evaluate the model, we asked GPT-4 to summarize the notes.",
+  "targets": "order guard: fronted purpose",
+  "expect": [
+   [
+    "asked",
+    [
+     "summarize"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "asked",
+    [
+     "summarize"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "asked",
+    "pos": 6,
+    "group": "ask",
+    "verbs": [
+     "summarize"
+    ],
+    "loo": {
+     "order": [
+      "ask",
+      [
+       "evaluate",
+       "summarize"
+      ]
+     ]
+    },
+    "groups": [
+     "ask"
+    ]
+   }
+  ],
+  "edge": "(asked/Pd.xsox.<f-----/en ((to/Mi/en evaluate/Pd.o.-i-----/en) (the/Md/en model/Cc.s/en)) we/Ci/en gpt-4/Cp.s/en ((to/Mi/en summarize/P.o.-i-----/en) (the/Md/en notes/Cc.p/en)))"
+ },
+ {
+  "id": "H02",
+  "text": "Let us assume that the model is able to generate text.",
+  "targets": "let guard (hortative) + able",
+  "expect": [
+   [
+    "let",
+    []
+   ],
+   [
+    "able",
+    [
+     "generate"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "let",
+    []
+   ],
+   [
+    "able",
+    [
+     "generate"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "Let",
+    "pos": 0,
+    "group": null,
+    "verbs": [],
+    "loo": {
+     "let": [
+      "allow",
+      [
+       "assume",
+       "generate"
+      ]
+     ]
+    },
+    "groups": [
+     "allow"
+    ]
+   },
+   {
+    "trigger": "able",
+    "pos": 7,
+    "group": "able",
+    "verbs": [
+     "generate"
+    ],
+    "loo": {},
+    "groups": [
+     "able"
+    ]
+   }
+  ],
+  "edge": "(let/P!.rx.-i-----/en (assume/P.sr.-i-----/en us/Ci/en (that/T/en (is/P.sc.|f--3s-/en (the/Md/en model/Cc.s/en) able/Ca/en))) ((to/Mi/en generate/P.o.-i-----/en) text/Cc.s/en))"
+ },
+ {
+  "id": "H03",
+  "text": "Researchers let GPT-4 play a game in which it had to divide money.",
+  "targets": "let with subject + have to in relative clause",
+  "expect": [
+   [
+    "let",
+    [
+     "play"
+    ]
+   ],
+   [
+    "had",
+    [
+     "divide"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "let",
+    [
+     "play"
+    ]
+   ],
+   [
+    "had",
+    [
+     "divide"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "let",
+    "pos": 1,
+    "group": "allow",
+    "verbs": [
+     "play"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   },
+   {
+    "trigger": "had",
+    "pos": 9,
+    "group": "have_to",
+    "verbs": [
+     "divide"
+    ],
+    "loo": {},
+    "groups": [
+     "have_to"
+    ]
+   }
+  ],
+  "edge": "(let/Pd.srx.<f-----/en researchers/Cc.p/en (play/P.so.-i-----/en gpt-4/Cp.s/en (a/Md/en game/Cc.s/en)) ((which/Mw/en in/T/en) (had/P.sx.<f-----/en it/Ci/en ((to/Mi/en divide/P.o.-i-----/en) money/Cc.s/en))))"
+ },
+ {
+  "id": "H04",
+  "text": "Further research is needed to determine whether LLMs are able to reason.",
+  "targets": "need guard + able",
+  "expect": [
+   [
+    "needed",
+    []
+   ],
+   [
+    "able",
+    [
+     "reason"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "needed",
+    []
+   ],
+   [
+    "able",
+    [
+     "reason"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "needed",
+    "pos": 3,
+    "group": null,
+    "verbs": [],
+    "loo": {
+     "need": [
+      "need",
+      [
+       "determine"
+      ]
+     ]
+    },
+    "groups": [
+     "need"
+    ]
+   },
+   {
+    "trigger": "able",
+    "pos": 9,
+    "group": "able",
+    "verbs": [
+     "reason"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "able"
+    ]
+   }
+  ],
+  "edge": "((is/Mv.|f--3s-/en needed/Pd.px.<pf----/en) (further/Ma/en research/Cc.s/en) ((to/Mi/en determine/Pd.r.-i-----/en) (whether/T/en (are/P.sc.|f-----/en llms/Cp.p/en ((to/Mi/en reason/P.c.-i-----/en) able/Ca/en)))))"
+ },
+ {
+  "id": "H05",
+  "text": "LLMs need to be able to explain their answers.",
+  "targets": "chain need + able",
+  "expect": [
+   [
+    "need",
+    [
+     "be"
+    ]
+   ],
+   [
+    "able",
+    [
+     "explain"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "need",
+    [
+     "be"
+    ]
+   ],
+   [
+    "able",
+    [
+     "explain"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "need",
+    "pos": 1,
+    "group": "need",
+    "verbs": [
+     "be"
+    ],
+    "loo": {},
+    "groups": [
+     "need"
+    ]
+   },
+   {
+    "trigger": "able",
+    "pos": 4,
+    "group": "able",
+    "verbs": [
+     "explain"
+    ],
+    "loo": {},
+    "groups": [
+     "able"
+    ]
+   }
+  ],
+  "edge": "(need/Pd.sx.|f-----/en llms/Cc.p/en ((to/Mi/en be/P.cx.-i-----/en) able/Ca/en ((to/Mi/en explain/P.o.-i-----/en) (their/Mp/en answers/Cc.p/en))))"
+ },
+ {
+  "id": "H06",
+  "text": "The file failed to be processed by the server.",
+  "targets": "passive infinitive",
+  "expect": [
+   [
+    "failed",
+    [
+     "processed"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "failed",
+    [
+     "processed"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "failed",
+    "pos": 2,
+    "group": "fail",
+    "verbs": [
+     "processed"
+    ],
+    "loo": {},
+    "groups": [
+     "fail"
+    ]
+   }
+  ],
+  "edge": "(failed/Pd.sx.<f-----/en (the/Md/en file/Cc.s/en) ((to/Mi/en (be/Mv.-i-----/en processed/P.a.<pf----/en)) (by/T/en (the/Md/en server/Cc.s/en))))"
+ },
+ {
+  "id": "H07",
+  "text": "Clinicians will have to verify outputs that LLMs fail to flag.",
+  "targets": "have to + fail in relative clause",
+  "expect": [
+   [
+    "have",
+    [
+     "verify"
+    ]
+   ],
+   [
+    "fail",
+    [
+     "flag"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "have",
+    [
+     "verify"
+    ]
+   ],
+   [
+    "fail",
+    [
+     "flag"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "have",
+    "pos": 2,
+    "group": "have_to",
+    "verbs": [
+     "verify"
+    ],
+    "loo": {},
+    "groups": [
+     "have_to"
+    ]
+   },
+   {
+    "trigger": "fail",
+    "pos": 8,
+    "group": "fail",
+    "verbs": [
+     "flag"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "fail"
+    ]
+   }
+  ],
+  "edge": "((will/Mm/en have/Pd.sx.-i-----/en) clinicians/Cc.p/en ((to/Mi/en verify/P.or.-i-----/en) outputs/Cc.p/en ((to/Mi/en flag/P.or.-i-----/en) that/C/en (fail/P.s.|f-----/en llms/Cc.p/en))))"
+ },
+ {
+  "id": "H08",
+  "text": "The potential that LLMs have to transform medicine is large.",
+  "targets": "KNOWN RESIDUAL: possessive have in relative clause",
+  "expect": [
+   [
+    "have",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "have",
+    [
+     "transform"
+    ]
+   ]
+  ],
+  "pass": false,
+  "detail": [
+   {
+    "trigger": "have",
+    "pos": 4,
+    "group": "have_to",
+    "verbs": [
+     "transform"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "have_to"
+    ]
+   }
+  ],
+  "edge": "(is/Pd.srro.|f--3s-/en (the/Md/en potential/Cc.s/en) (have/P.os.|f-----/en that/C/en llms/Cp.p/en) ((to/Mi/en transform/P.o.-i-----/en) medicine/Cc.s/en) large/Ca/en)"
+ },
+ {
+  "id": "H09",
+  "text": "To reduce errors, the model needs to be retrained regularly.",
+  "targets": "order guard + passive infinitive",
+  "expect": [
+   [
+    "needs",
+    [
+     "retrained"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "needs",
+    [
+     "retrained"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "needs",
+    "pos": 6,
+    "group": "need",
+    "verbs": [
+     "retrained"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "need"
+    ]
+   }
+  ],
+  "edge": "((regularly/M/en (to/Mi/en (be/Mv.-i-----/en retrained/P.r.<pf----/en))) (needs/Pd.xs.|f--3s-/en ((to/Mi/en reduce/Pd.o.-i-----/en) errors/Cc.p/en) (the/Md/en model/Cc.s/en)))"
+ },
+ {
+  "id": "H10",
+  "text": "This feature allows teaching models to reason step by step.",
+  "targets": "precedence: gerund complement with its own infinitive",
+  "expect": [
+   [
+    "allows",
+    [
+     "teaching"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "allows",
+    [
+     "reason"
+    ]
+   ]
+  ],
+  "pass": false,
+  "detail": [
+   {
+    "trigger": "allows",
+    "pos": 2,
+    "group": "allow",
+    "verbs": [
+     "reason"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "enable_ger"
+    ]
+   }
+  ],
+  "edge": "(allows/Pd.sx.|f--3s-/en (this/Md/en feature/Cc.s/en) ((to/Mi/en reason/P.sx.-i-----/en) (+/B.am/. teaching/Cc.s/en models/Cc.p/en) (by/Br.ma/en step/Cc.s/en step/Cc.s/en)))"
+ },
+ {
+  "id": "H11",
+  "text": "The framework enables processing large documents, thereby allowing users to save time.",
+  "targets": "adjacency + participial allowing",
+  "expect": [
+   [
+    "enables",
+    [
+     "processing"
+    ]
+   ],
+   [
+    "allowing",
+    [
+     "save"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "enables",
+    [
+     "processing"
+    ]
+   ],
+   [
+    "allowing",
+    [
+     "save"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "enables",
+    "pos": 2,
+    "group": "enable_ger",
+    "verbs": [
+     "processing"
+    ],
+    "loo": {
+     "adj": [
+      "enable_ger",
+      [
+       "processing",
+       "allowing"
+      ]
+     ]
+    },
+    "groups": [
+     "allow",
+     "enable_ger"
+    ]
+   },
+   {
+    "trigger": "allowing",
+    "pos": 8,
+    "group": "allow",
+    "verbs": [
+     "save"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   }
+  ],
+  "edge": "(enables/Pd.srx.|f--3s-/en (the/Md/en framework/Cc.s/en) (processing/P.o.|pg----/en (large/Ma/en documents/Cc.p/en)) ((thereby/M/en allowing/Pd.x.|pg----/en) ((to/Mi/en save/P.so.-i-----/en) users/Cc.p/en time/Cc.s/en)))"
+ },
+ {
+  "id": "H12",
+  "text": "Prompt engineering helps in reducing hallucinations and improving accuracy.",
+  "targets": "help in + coordination",
+  "expect": [
+   [
+    "helps",
+    [
+     "reducing",
+     "improving"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "helps",
+    [
+     "reducing",
+     "improving"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "helps",
+    "pos": 2,
+    "group": "help_in",
+    "verbs": [
+     "reducing",
+     "improving"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "help_in"
+    ]
+   }
+  ],
+  "edge": "(helps/Pd.sx.|f--3s-/en (prompt/Ma/en engineering/Cc.s/en) (in/T/en (and/J/en (reducing/P.o.|pg----/en hallucinations/Cc.p/en) (improving/Pd.o.|pg----/en accuracy/Cc.s/en))))"
+ },
+ {
+  "id": "H13",
+  "text": "Improving performance may help in overcoming these limitations.",
+  "targets": "in guard: gerund subject",
+  "expect": [
+   [
+    "help",
+    [
+     "overcoming"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "help",
+    [
+     "overcoming"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "help",
+    "pos": 3,
+    "group": "help_in",
+    "verbs": [
+     "overcoming"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "help_in"
+    ]
+   }
+  ],
+  "edge": "((may/Mm/en help/P!.rx.-i-----/en) (improving/Pd.o.|pg----/en performance/Cc.s/en) (in/T/en (overcoming/P.o.|pg----/en (these/Md/en limitations/Cc.p/en))))"
+ },
+ {
+  "id": "H14",
+  "text": "The tool helps clinicians to write notes and helps in coding diagnoses.",
+  "targets": "two helps, infinitive and in-gerund",
+  "expect": [
+   [
+    "helps",
+    [
+     "write"
+    ]
+   ],
+   [
+    "helps",
+    [
+     "coding"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "helps",
+    [
+     "write"
+    ]
+   ],
+   [
+    "helps",
+    [
+     "coding"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "helps",
+    "pos": 2,
+    "group": "allow",
+    "verbs": [
+     "write"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   },
+   {
+    "trigger": "helps",
+    "pos": 8,
+    "group": "help_in",
+    "verbs": [
+     "coding"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "help_in"
+    ]
+   }
+  ],
+  "edge": "(and/J/en (helps/Pd.sx.|f--3s-/en (the/Md/en tool/Cc.s/en) ((to/Mi/en write/P.so.-i-----/en) clinicians/Cc.p/en notes/Cc.p/en)) (helps/Pd.x.|f--3s-/en (in/T/en (coding/P.o.|pg----/en diagnoses/Cc.p/en))))"
+ },
+ {
+  "id": "H15",
+  "text": "ChatGPT was unable to answer questions that required images.",
+  "targets": "unable + require (dropped)",
+  "expect": [
+   [
+    "unable",
+    [
+     "answer"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "unable",
+    [
+     "answer"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "unable",
+    "pos": 2,
+    "group": "able",
+    "verbs": [
+     "answer"
+    ],
+    "loo": {},
+    "groups": [
+     "able"
+    ]
+   }
+  ],
+  "edge": "(was/Pd.sc.<f-----/en chatgpt/Cp.s/en (:/Jr.ma unable/Ca/en ((to/Mi/en answer/P.or.-i-----/en) questions/Cc.p/en (required/P.so.<f-----/en that/C/en images/Cc.p/en))))"
+ },
+ {
+  "id": "H16",
+  "text": "We instructed the model to ignore prior instructions and to respond only in JSON.",
+  "targets": "instruct + coordinated complements",
+  "expect": [
+   [
+    "instructed",
+    [
+     "ignore",
+     "respond"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "instructed",
+    [
+     "ignore",
+     "respond"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "instructed",
+    "pos": 1,
+    "group": "instruct",
+    "verbs": [
+     "ignore",
+     "respond"
+    ],
+    "loo": {},
+    "groups": [
+     "instruct"
+    ]
+   }
+  ],
+  "edge": "(instructed/Pd.sox.<f-----/en we/Ci/en (the/Md/en model/Cc.s/en) (and/J/en ((to/Mi/en ignore/P.o.-i-----/en) (prior/Ma/en instructions/Cc.p/en)) ((to/Mi/en respond/Pd.x.-i-----/en) ((only/M/en in/T/en) json/Cp.s/en))))"
+ },
+ {
+  "id": "H17",
+  "text": "Mistral-7B Instruct was used to generate summaries.",
+  "targets": "Instruct as part of a model name",
+  "expect": [
+   [
+    "instruct",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "instruct",
+    []
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "Instruct",
+    "pos": 1,
+    "group": null,
+    "verbs": [],
+    "loo": {},
+    "groups": [
+     "instruct"
+    ]
+   }
+  ],
+  "edge": "((was/Mv.<f-----/en used/Pd.px.<pf----/en) (+/B.am/. mistral-7b/Cp.s/en instruct/Cp.s/en) ((to/Mi/en generate/P.o.-i-----/en) summaries/Cc.p/en))"
+ },
+ {
+  "id": "H18",
+  "text": "The students were forced to rely on ChatGPT.",
+  "targets": "passive force",
+  "expect": [
+   [
+    "forced",
+    [
+     "rely"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "forced",
+    [
+     "rely"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "forced",
+    "pos": 3,
+    "group": "force",
+    "verbs": [
+     "rely"
+    ],
+    "loo": {},
+    "groups": [
+     "force"
+    ]
+   }
+  ],
+  "edge": "((were/Mv.<f-----/en forced/Pd.px.<pf----/en) (the/Md/en students/Cc.p/en) ((to/Mi/en rely/P.x.-i-----/en) (on/T/en chatgpt/Cp.s/en)))"
+ },
+ {
+  "id": "H19",
+  "text": "LLMs can empower patients and clinicians, eliminate barriers to information, and transform care.",
+  "targets": "empower + coordinated main verbs (no complement)",
+  "expect": [
+   [
+    "empower",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "empower",
+    [
+     "eliminate",
+     "transform"
+    ]
+   ]
+  ],
+  "pass": false,
+  "detail": [
+   {
+    "trigger": "empower",
+    "pos": 2,
+    "group": "empower",
+    "verbs": [
+     "eliminate",
+     "transform"
+    ],
+    "loo": {},
+    "groups": [
+     "empower"
+    ]
+   }
+  ],
+  "edge": "((can/Mm/en empower/Pd.sor.-i-----/en) llms/Cp.p/en (and/J/en patients/Cc.p/en clinicians/Cc.p/en) (and/J/en (eliminate/P!.o.-i-----/en (to/Br.ma/en barriers/Cc.p/en information/Cc.s/en)) (transform/P!.o.-i-----/en care/Cc.s/en)))"
+ },
+ {
+  "id": "H20",
+  "text": "These models tend to be overconfident and fail to recognize uncertainty.",
+  "targets": "tend + fail coordinated",
+  "expect": [
+   [
+    "tend",
+    [
+     "be"
+    ]
+   ],
+   [
+    "fail",
+    [
+     "recognize"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "tend",
+    [
+     "be"
+    ]
+   ],
+   [
+    "fail",
+    [
+     "recognize"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "tend",
+    "pos": 2,
+    "group": "tend",
+    "verbs": [
+     "be"
+    ],
+    "loo": {},
+    "groups": [
+     "tend"
+    ]
+   },
+   {
+    "trigger": "fail",
+    "pos": 7,
+    "group": "fail",
+    "verbs": [
+     "recognize"
+    ],
+    "loo": {},
+    "groups": [
+     "fail"
+    ]
+   }
+  ],
+  "edge": "(and/J/en (tend/Pd.sx.|f-----/en (these/Md/en models/Cc.p/en) ((to/Mi/en be/P.c.-i-----/en) overconfident/Ca/en)) (fail/P!.x.|f-----/en ((to/Mi/en recognize/P.o.-i-----/en) uncertainty/Cc.s/en)))"
+ },
+ {
+  "id": "H21",
+  "text": "What the model needs to learn is how to cite sources.",
+  "targets": "fronted wh-object",
+  "expect": [
+   [
+    "needs",
+    [
+     "learn"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "needs",
+    [
+     "learn"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "needs",
+    "pos": 3,
+    "group": "need",
+    "verbs": [
+     "learn"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "need"
+    ]
+   }
+  ],
+  "edge": "(is/Pd.rx.|f--3s-/en ((to/Mi/en learn/P.or.-i-----/en) what/Cw/en (needs/Pd.s.|f--3s-/en (the/Md/en model/Cc.s/en))) ((how/M/en (to/Mi/en cite/P.o.-i-----/en)) sources/Cc.p/en))"
+ },
+ {
+  "id": "H22",
+  "text": "The data that the model had to process were noisy.",
+  "targets": "have to in relative clause (obligation)",
+  "expect": [
+   [
+    "had",
+    [
+     "process"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "had",
+    [
+     "process"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "had",
+    "pos": 5,
+    "group": "have_to",
+    "verbs": [
+     "process"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "have_to"
+    ]
+   }
+  ],
+  "edge": "(were/Pd.sro.<f-----/en (the/Md/en data/Cc.p/en) ((to/Mi/en process/P.or.-i-----/en) that/C/en (had/P.s.<f-----/en (the/Md/en model/Cc.s/en))) noisy/Ca/en)"
+ },
+ {
+  "id": "H23",
+  "text": "LLMs prompted with clinical vignettes tend to overdiagnose.",
+  "targets": "prompted without complement + tend",
+  "expect": [
+   [
+    "prompted",
+    []
+   ],
+   [
+    "tend",
+    [
+     "overdiagnose"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "prompted",
+    []
+   ],
+   [
+    "tend",
+    [
+     "overdiagnose"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "prompted",
+    "pos": 1,
+    "group": null,
+    "verbs": [],
+    "loo": {},
+    "groups": [
+     "prompt"
+    ]
+   },
+   {
+    "trigger": "tend",
+    "pos": 5,
+    "group": "tend",
+    "verbs": [
+     "overdiagnose"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "tend"
+    ]
+   }
+  ],
+  "edge": "((to/Mi/en overdiagnose/P.r.-i-----/en) (tend/Pd.sr.|f-----/en llms/Cc.p/en (prompted/P.x.<pf----/en (with/T/en (clinical/Ma/en vignettes/Cc.p/en)))))"
+ },
+ {
+  "id": "H24",
+  "text": "When prompted to explain, GPT-4 was able to provide reasons.",
+  "targets": "bare prompted + able",
+  "expect": [
+   [
+    "prompted",
+    [
+     "explain"
+    ]
+   ],
+   [
+    "able",
+    [
+     "provide"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "prompted",
+    [
+     "explain"
+    ]
+   ],
+   [
+    "able",
+    [
+     "provide"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "prompted",
+    "pos": 1,
+    "group": "prompt",
+    "verbs": [
+     "explain"
+    ],
+    "loo": {},
+    "groups": [
+     "prompt"
+    ]
+   },
+   {
+    "trigger": "able",
+    "pos": 7,
+    "group": "able",
+    "verbs": [
+     "provide"
+    ],
+    "loo": {},
+    "groups": [
+     "able"
+    ]
+   }
+  ],
+  "edge": "((when/M/en prompted/Pd.r.<pf----/en) ((to/Mi/en explain/P.r.-i-----/en) (,/J/en (was/Pd.sc.<f-----/en gpt-4/Cp.s/en able/Ca/en) ((to/Mi/en provide/P.o.-i-----/en) reasons/Cc.p/en))))"
+ },
+ {
+  "id": "H25",
+  "text": "We need more data to train the model.",
+  "targets": "active need + object + purpose infinitive",
+  "expect": [
+   [
+    "need",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "need",
+    []
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "need",
+    "pos": 1,
+    "group": null,
+    "verbs": [],
+    "loo": {
+     "needobj": [
+      "need",
+      [
+       "train"
+      ]
+     ]
+    },
+    "groups": [
+     "need"
+    ]
+   }
+  ],
+  "edge": "(need/Pd.sox.|f-----/en we/Ci/en (more/Mc/en data/Cc.p/en) ((to/Mi/en train/Pd.o.-i-----/en) (the/Md/en model/Cc.s/en)))"
+ },
+ {
+  "id": "H26",
+  "text": "The hospital needed the model to run offline.",
+  "targets": "active needed + object control",
+  "expect": [
+   [
+    "needed",
+    [
+     "run"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "needed",
+    [
+     "run"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "needed",
+    "pos": 2,
+    "group": "need",
+    "verbs": [
+     "run"
+    ],
+    "loo": {},
+    "groups": [
+     "need"
+    ]
+   }
+  ],
+  "edge": "(needed/Pd.sx.<f-----/en (the/Md/en hospital/Cc.s/en) ((offline/M/en (to/Mi/en run/P.s.-i-----/en)) (the/Md/en model/Cc.s/en)))"
+ },
+ {
+  "id": "H27",
+  "text": "Users can enable logging to monitor the system.",
+  "targets": "enable + noun + purpose infinitive",
+  "expect": [
+   [
+    "enable",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "enable",
+    [
+     "monitor"
+    ]
+   ]
+  ],
+  "pass": false,
+  "detail": [
+   {
+    "trigger": "enable",
+    "pos": 2,
+    "group": "allow",
+    "verbs": [
+     "monitor"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "enable_ger"
+    ]
+   }
+  ],
+  "edge": "((can/Mm/en enable/Pd.sox.-i-----/en) users/Cc.p/en logging/Cc.s/en ((to/Mi/en monitor/Pd.o.-i-----/en) (the/Md/en system/Cc.s/en)))"
+ },
+ {
+  "id": "H28",
+  "text": "The update allowed the model to be deployed on phones.",
+  "targets": "allow + passive infinitive",
+  "expect": [
+   [
+    "allowed",
+    [
+     "deployed"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "allowed",
+    [
+     "deployed"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "allowed",
+    "pos": 2,
+    "group": "allow",
+    "verbs": [
+     "deployed"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   }
+  ],
+  "edge": "(allowed/Pd.sx.<f-----/en (the/Md/en update/Cc.s/en) ((to/Mi/en (be/Mv.-i-----/en deployed/P.px.<pf----/en)) (the/Md/en model/Cc.s/en) (on/T/en phones/Cc.p/en)))"
+ },
+ {
+  "id": "H29",
+  "text": "ChatGPT helped students who were struggling to understand the material.",
+  "targets": "infinitive inside a relative clause of the object",
+  "expect": [
+   [
+    "helped",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "helped",
+    []
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "helped",
+    "pos": 1,
+    "group": null,
+    "verbs": [],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   }
+  ],
+  "edge": "(:/J/. (helped/Pd.so.<f-----/en chatgpt/Cp.s/en students/Cc.p/en) ((were/Mv.<f-----/en struggling/P.sx.|pg----/en) who/Cw/en ((to/Mi/en understand/P.o.-i-----/en) (the/Md/en material/Cc.s/en))))"
+ },
+ {
+  "id": "H30",
+  "text": "Not being able to access the internet, the model fails to answer recent questions.",
+  "targets": "able in a participial adjunct + fail",
+  "expect": [
+   [
+    "able",
+    [
+     "access"
+    ]
+   ],
+   [
+    "fails",
+    [
+     "answer"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "able",
+    [
+     "access"
+    ]
+   ],
+   [
+    "fails",
+    [
+     "answer"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "able",
+    "pos": 2,
+    "group": "able",
+    "verbs": [
+     "access"
+    ],
+    "loo": {},
+    "groups": [
+     "able"
+    ]
+   },
+   {
+    "trigger": "fails",
+    "pos": 10,
+    "group": "fail",
+    "verbs": [
+     "answer"
+    ],
+    "loo": {},
+    "groups": [
+     "fail"
+    ]
+   }
+  ],
+  "edge": "(fails/Pd.xsx.|f--3s-/en ((not/Mn/en being/Pd.cx.|pg----/en) able/Ca/en ((to/Mi/en access/P.o.-i-----/en) (the/Md/en internet/Cc.s/en))) (the/Md/en model/Cc.s/en) ((to/Mi/en answer/P.o.-i-----/en) (recent/Ma/en questions/Cc.p/en)))"
+ },
+ {
+  "id": "H31",
+  "text": "It is necessary to ask the model to verify its answers before you allow it to act.",
+  "targets": "ask + allow in one sentence",
+  "expect": [
+   [
+    "ask",
+    [
+     "verify"
+    ]
+   ],
+   [
+    "allow",
+    [
+     "act"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "ask",
+    [
+     "verify"
+    ]
+   ],
+   [
+    "allow",
+    [
+     "act"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "ask",
+    "pos": 4,
+    "group": "ask",
+    "verbs": [
+     "verify"
+    ],
+    "loo": {},
+    "groups": [
+     "ask"
+    ]
+   },
+   {
+    "trigger": "allow",
+    "pos": 13,
+    "group": "allow",
+    "verbs": [
+     "act"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   }
+  ],
+  "edge": "(is/Pd.scx.|f--3s-/en it/Ci/en necessary/Ca/en ((to/Mi/en ask/P.oxx.-i-----/en) (the/Md/en model/Cc.s/en) ((to/Mi/en verify/P.o.-i-----/en) (its/Mp/en answers/Cc.p/en)) (before/T/en (allow/Pd.sx.|f-----/en you/Ci/en ((to/Mi/en act/P.s.-i-----/en) it/Ci/en)))))"
+ },
+ {
+  "id": "H32",
+  "text": "LLMs have to be fine_tuned before they are able to perform well.",
+  "targets": "have to passive + able",
+  "expect": [
+   [
+    "have",
+    [
+     "fine_tuned"
+    ]
+   ],
+   [
+    "able",
+    [
+     "perform"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "have",
+    [
+     "fine_tuned"
+    ]
+   ],
+   [
+    "able",
+    [
+     "perform"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "have",
+    "pos": 1,
+    "group": "have_to",
+    "verbs": [
+     "fine_tuned"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "have_to"
+    ]
+   },
+   {
+    "trigger": "able",
+    "pos": 8,
+    "group": "able",
+    "verbs": [
+     "perform"
+    ],
+    "loo": {
+     "fallback": [
+      null,
+      []
+     ]
+    },
+    "groups": [
+     "able"
+    ]
+   }
+  ],
+  "edge": "((to/Mi/en (be/Mv.-i-----/en fine_tuned/P.rx.<pf----/en)) (have/Pd.s.|f-----/en llms/Cc.p/en) ((before/M/en are/Pd.sc.|f-----/en) they/Ci/en ((well/M/en (to/Mi/en perform/P.c.-i-----/en)) able/Ca/en)))"
+ },
+ {
+  "id": "H33",
+  "text": "We asked whether LLMs can help reduce workload.",
+  "targets": "bare-infinitive help",
+  "expect": [
+   [
+    "help",
+    [
+     "reduce"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "help",
+    [
+     "reduce"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "help",
+    "pos": 5,
+    "group": "allow",
+    "verbs": [
+     "reduce"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   }
+  ],
+  "edge": "(asked/Pd.sr.<f-----/en we/Ci/en (whether/T/en ((can/Mm/en help/P.sr.-i-----/en) llms/Cp.p/en (reduce/P.o.-i-----/en workload/Cc.s/en))))"
+ },
+ {
+  "id": "H34",
+  "text": "Letting the model choose its own tools improved results.",
+  "targets": "letting (-ing, no subject)",
+  "expect": [
+   [
+    "letting",
+    [
+     "choose"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "letting",
+    [
+     "choose"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "Letting",
+    "pos": 0,
+    "group": "allow",
+    "verbs": [
+     "choose"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   }
+  ],
+  "edge": "(improved/Pd.ro.<f-----/en (letting/Pd.r.|pg----/en (choose/P.so.-i-----/en (the/Md/en model/Cc.s/en) (its/Mp/en (own/Ma/en tools/Cc.p/en)))) results/Cc.p/en)"
+ },
+ {
+  "id": "H35",
+  "text": "Optimization methods could allow integrating clinical guidelines to yield better answers.",
+  "targets": "precedence: gerund complement then purpose infinitive",
+  "expect": [
+   [
+    "allow",
+    [
+     "integrating"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "allow",
+    [
+     "yield"
+    ]
+   ]
+  ],
+  "pass": false,
+  "detail": [
+   {
+    "trigger": "allow",
+    "pos": 3,
+    "group": "allow",
+    "verbs": [
+     "yield"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "enable_ger"
+    ]
+   }
+  ],
+  "edge": "((could/Mm/en allow/Pd.sx.-i-----/en) (+/B.am/. optimization/Cc.s/en methods/Cc.p/en) ((to/Mi/en yield/P.ro.-i-----/en) (integrating/Pd.o.|pg----/en (clinical/Ma/en guidelines/Cc.p/en)) (better/Mc/en answers/Cc.p/en)))"
+ },
+ {
+  "id": "H36",
+  "text": "The system allows teaching content to be adjusted in real time.",
+  "targets": "precedence: -ing noun modifier then infinitive",
+  "expect": [
+   [
+    "allows",
+    [
+     "adjusted"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "allows",
+    [
+     "adjusted"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "allows",
+    "pos": 2,
+    "group": "allow",
+    "verbs": [
+     "adjusted"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "enable_ger"
+    ]
+   }
+  ],
+  "edge": "(allows/Pd.sx.|f--3s-/en (the/Md/en system/Cc.s/en) ((to/Mi/en (be/Mv.-i-----/en adjusted/P.px.<pf----/en)) (+/B.am/. teaching/Cc.s/en content/Cc.s/en) (in/T/en (real/Ma/en time/Cc.s/en))))"
+ },
+ {
+  "id": "H37",
+  "text": "LLMs allow fine_tuning of models to improve performance.",
+  "targets": "nominal gerund + purpose infinitive",
+  "expect": [
+   [
+    "allow",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "allow",
+    [
+     "improve"
+    ]
+   ]
+  ],
+  "pass": false,
+  "detail": [
+   {
+    "trigger": "allow",
+    "pos": 1,
+    "group": "allow",
+    "verbs": [
+     "improve"
+    ],
+    "loo": {},
+    "groups": [
+     "allow",
+     "enable_ger"
+    ]
+   }
+  ],
+  "edge": "(allow/Pd.sox.|f-----/en llms/Cc.p/en (of/Br.ma/en fine_tuning/Cc.s/en models/Cc.p/en) ((to/Mi/en improve/P.o.-i-----/en) performance/Cc.s/en))"
+ },
+ {
+  "id": "H38",
+  "text": "The model was enabled using RAG.",
+  "targets": "KNOWN RISK: adjacent means adjunct",
+  "expect": [
+   [
+    "enabled",
+    []
+   ]
+  ],
+  "got": [
+   [
+    "enabled",
+    []
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "enabled",
+    "pos": 3,
+    "group": null,
+    "verbs": [],
+    "loo": {
+     "passive_ger": [
+      "enable_ger",
+      [
+       "using"
+      ]
+     ]
+    },
+    "groups": [
+     "allow",
+     "enable_ger"
+    ]
+   }
+  ],
+  "edge": "((was/Mv.<f-----/en enabled/Pd.px.<pf----/en) (the/Md/en model/Cc.s/en) (using/Pd.o.|pg----/en rag/Cp.s/en))"
+ },
+ {
+  "id": "H39",
+  "text": "To be able to answer, the model needs to retrieve documents.",
+  "targets": "fronted able clause + order guard",
+  "expect": [
+   [
+    "able",
+    [
+     "answer"
+    ]
+   ],
+   [
+    "needs",
+    [
+     "retrieve"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "able",
+    [
+     "answer"
+    ]
+   ],
+   [
+    "needs",
+    [
+     "retrieve"
+    ]
+   ]
+  ],
+  "pass": true,
+  "detail": [
+   {
+    "trigger": "able",
+    "pos": 2,
+    "group": "able",
+    "verbs": [
+     "answer"
+    ],
+    "loo": {
+     "anchor": [
+      "able",
+      [
+       "retrieve"
+      ]
+     ]
+    },
+    "groups": [
+     "able"
+    ]
+   },
+   {
+    "trigger": "needs",
+    "pos": 8,
+    "group": "need",
+    "verbs": [
+     "retrieve"
+    ],
+    "loo": {
+     "order": [
+      "need",
+      [
+       "be",
+       "retrieve"
+      ]
+     ]
+    },
+    "groups": [
+     "need"
+    ]
+   }
+  ],
+  "edge": "(needs/Pd.xsx.|f--3s-/en ((to/Mi/en be/Pd.c.-i-----/en) ((to/Mi/en answer/P.c.-i-----/en) able/Ca/en)) (the/Md/en model/Cc.s/en) ((to/Mi/en retrieve/P.o.-i-----/en) documents/Cc.p/en))"
+ },
+ {
+  "id": "H40",
+  "text": "The tool, which allows users to upload images, helps doctors diagnose faster.",
+  "targets": "relative clause allows + main help",
+  "expect": [
+   [
+    "allows",
+    [
+     "upload"
+    ]
+   ],
+   [
+    "helps",
+    [
+     "diagnose"
+    ]
+   ]
+  ],
+  "got": [
+   [
+    "allows",
+    [
+     "upload"
+    ]
+   ],
+   [
+    "helps",
+    []
+   ]
+  ],
+  "pass": false,
+  "detail": [
+   {
+    "trigger": "allows",
+    "pos": 4,
+    "group": "allow",
+    "verbs": [
+     "upload"
+    ],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   },
+   {
+    "trigger": "helps",
+    "pos": 10,
+    "group": null,
+    "verbs": [],
+    "loo": {},
+    "groups": [
+     "allow"
+    ]
+   }
+  ],
+  "edge": "(:/J/. (helps/Pd.sr.|f--3s-/en (the/Md/en tool/Cc.s/en) (allows/P.sx.|f--3s-/en which/C/en ((to/Mi/en upload/P.so.-i-----/en) users/Cc.p/en images/Cc.p/en))) ((faster/M=/en diagnose/P.s.-i-----/en) doctors/Cc.p/en))"
+ }
+]
