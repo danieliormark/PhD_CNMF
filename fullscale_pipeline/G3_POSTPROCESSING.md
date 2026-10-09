@@ -370,10 +370,13 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
    - **Flagged, not solved now:** the same argument that justified dropping connectives — synonymous words
      fragmenting otherwise-identical hyperedges — applies to the kept adverbs themselves ("significantly",
      "substantially" and "markedly" before the same verb are now three different verb groups; distinct verb groups
-     rose from 4.9% to 5.6% of parents in the sampled shards). Proposed, not run: compare G3 variants with more and
-     less merging (attach every adverb; drop every single adverb; the role table above; a WordNet-synonym grouping)
-     by the sparsity of the article × child-hyperedge and article × cousin-hyperedge incidence computed directly
-     from G3 output, once this and the "not only"/"but also" question above are both revisited together.
+     rose from 4.9% to 5.6% of parents in the sampled shards). **Decided 2026-10-09 (owner): no merging first.**
+     Run M1 on G3's output as already decided (the role table, no synonym grouping) and measure the sparsity of the
+     article × child-hyperedge and article × cousin-hyperedge incidence directly; only build a merging step (a
+     WordNet-synonym grouping, or collapsing to the role classes of the adverb table) if that sparsity turns out to
+     be a real problem. Superseded: comparing several G3 variants (attach every adverb; drop every single adverb;
+     the role table; a WordNet grouping) up front, before M1 exists. This is an M1-stage question, not G3; revisit
+     once M1 is built and run.
    - **"as well as" / "as well": the connective use dropped, the comparative use kept.** "GPT-4 **as well as** BERT
      was evaluated" and "used **as well**" (meaning "too") are dropped; "performed **as well as** the residents" and
      "**at least** as well as…" are kept. Rule: "well" after "as" is dropped unless the word two tokens before is a
