@@ -834,5 +834,97 @@ the diagnostic run exactly; wrote `llm_output_units.csv` (`b71d5717e250`). Copie
 `PG/g3_llm_output/` (same two files, identical sha256). Documented in G3_POSTPROCESSING.md §6 item 7 (all 7 items
 now decided); status line, §8 and §9 updated. [LOG]
 
+**RL-101 · 2026-10-09 · G3 · TEST (read-only) · LIVE**
+Owner: commit the synonym-merging decision (done, 2e650bc); identify where in the rule sequence to drop the fused
+`not_only` / `but_also` atoms (§6 item 4 flag), accuracy first, speed second. Host incline, `tensor_env`. Copy
+`diagnostics/g3_notonly/g3_q4drop.py` (sha256 `3f3eb2a404b5`; from `diagnostics/g3_stoplist/g3_q4full.py`, RDS script unchanged),
+switch `NOTONLY_DROP`: 0 keep, 1 drop both atoms in `Ctx.curate()` (option C), `paired` drop `but_also` always and
+`not_only` only when "but", "also" or "as well" follows it in the unit. Option D (keep, then strip the atoms from the
+finished structures and remove emptied hyperedges) computed from the keep output as the reference for pure removal.
+Text level (A) not possible without re-running G2; edge level (B) not built: it would rebuild modifier edges for no
+speed gain, since `curate()` decisions are cached per atom. Self-test 54/54 in all three settings. Shards 0, 20, 30,
+40, `--limit 700` (56,126 units), 0 problems; run times within noise (31-36 s per shard in every setting) [LOG]. C
+equals D in all 359 units with a fused atom and changes no other unit; no parent invalidated (`compare_cd.py`). Hard
+cases of question 4 (57, `hard_cd.py`): C equals D in 57/57; no "not" left as negation. Pairing (`pairing.py`): 297
+fused not-only occurrences, 273 paired in their unit, 24 unpaired, 0 paired only across units of the sentence; in most
+unpaired cases dropping reverses or distorts the claim ("risks are not merely theoretical", "not solely relying on
+ChatGPT's responses", "not simply due to ...", "an adjunct, not simply a replacement"). `paired` setting: equals keep
+minus exactly the intended atoms in all 56,126 units (`but_also` removed in 291 units, `not_only` kept in the 27
+unpaired units); hard cases as intended. Pre-existing limitation, unchanged: 3 of 319 units with a not-only
+construction are not fused because the unit has another identical "not" atom (all positions must qualify). Outputs
+local only; nothing written to RDS. [LOG]
+
+**RL-102 · 2026-10-09 · G3 · TEST (read-only) · LIVE**
+Owner questions dropping "not only"/"but also" ("help clinicians but also mislead patients": "but" is contrastive) and
+asks whether the cases that read as "and" can be told apart deterministically. Scratch pass over the RL-101 keep
+outputs (shards 0, 20, 30, 40) [LOG]: "but (...) also" 313 occurrences, 248 after a "not only/just/merely/simply/
+solely", 65 bare. Hand labels: 20 sampled "not only X but also Y" all additive, whatever the valence (both positive,
+"improved learning efficiency... but have also expanded applicability"; both negative, "not only misleading, but also
+deceptive"); 30 sampled bare "X but also Y" 26 contrastive (a positive and a negative property, "can greatly improve
+academic work but also brings up ethical issues", "highest AUC but also cost the longest training time"), 4 additive.
+The valence of a conjunct ("reduced costs" good, "reduced accuracy" bad) is not needed to tell the two apart, and could
+not be read deterministically anyway. Nothing written to RDS; no script changed.
+
+**RL-103 · 2026-10-09 · G3 · TEST (read-only) · LIVE**
+Owner on the "not only"/"but also" question: paired "not only X but also Y" reads as "and" and may be dropped, but a
+bare contrastive "X but also Y" (no "not only") does not and must keep `but_also`; checked whether the pairing rule
+holds on hard cases where the two halves are far apart in complex clauses, before adopting it. Host incline,
+`tensor_env`. Same copy as RL-101/102, `diagnostics/g3_notonly/g3_q4drop.py` (sha256 `980b89fd4682`, fixed during this round,
+see below): `NOTONLY_DROP=paired` drops `but_also` always and `not_only` only when paired.
+`q4_paired()` found a partner anywhere later in the unit, with no distance limit, which is correct for distance (true
+pairs up to 25 words apart, heavily embedded, are all still found) but open to a later, unrelated "but"/"also" in a
+different independent clause of the same unit. 10 constructed adversarial cases (`hard_pairing.json`) built to
+trigger exactly that: 5 of 5 wrongly paired on the first version. Checked against real data (300 fused `not_only`
+occurrences, shards 0/20/30/40): only 1 of 273 "paired" cases is a genuine error, and it is exactly this kind
+("does not simply vanish...; Its F1 increment is null... but significantly positive again...", a semicolon-separated,
+unrelated "but"); every other sampled case (29 "but" not immediately followed by "also"/an auxiliary, 23 relying on
+"but" alone with no "also" in the unit) read by hand is a genuine additive pair, including a 21-word gap with no
+"also" at all ("Not only will future versions of ChatGPT supersede GPT-4, but the current GPT-4 sits behind a
+paywall."). Fix: `q4_paired` now works on `ctx.text` directly (punctuation has no token position of its own, unlike
+words, so the position-based version never saw the ';' it was built to detect) and stops the search for a partner
+at the next ';'. Self-test 54/54. Re-run on the real one error: fixed. Only 2 of 56,126 test-shard units change
+between the old and fixed version (the one real error, and one real true pair that also happens to have a ';',
+which the fix now keeps rather than drops — safe, conservative). 10 constructed cases re-checked: 10/14 pass (7 true
+pairs across embedded clauses, the real fixed error, 2 correctly-kept unpaired cases); 3 of 5 adversarial cases still
+wrongly paired — a comma-spliced independent clause with a new subject, no ';' and no "also" anywhere ("ChatGPT is
+not only widely used..., but hospital administrators, who also track budget constraints, raised separate... concerns
+entirely unrelated to ChatGPT."). This residual pattern has 0 confirmed occurrences in the ~300 real cases sampled.
+Outputs local only; nothing written to RDS. [LOG]
+
+**RL-104 · 2026-10-09 · G3 · AUDIT + CODE-CHANGE (test copy) + TEST · LIVE**
+Owner: audit the RL-103 tests and results (made with Sonnet 5) and, if valid and reliably good, vote on option 2 with
+the fix. Host incline, `tensor_env`. Findings on RL-103 (copy kept as `diagnostics/g3_notonly/g3_q4drop_rl103.py`,
+sha256 `980b89fd4682`): (1) it did not implement option 2 -- in `paired` mode `but_also` was dropped always, so the bare
+contrastive "X but also Y" the owner asked to keep was deleted, and no test checked that half of the rule; (2) the
+text-based `q4_paired` located "not" with `\bn't\b`, which never matches inside "doesn't"/"isn't", so contraction
+pairs never paired; (3) it located the n-th "not" by counting tokens while the regex cannot see the "not" of
+"cannot" (tokenized "can" + "not"), so a "cannot" earlier in the unit shifted the count; (2) and (3) fail in the safe
+direction and are rare (whole corpus: 3 contraction pairs, 3 "cannot" cases); (4) "273/273, 100%" overstated: 52 of
+273 paired cases were read, 240 were classed safe by a regex. The hard-case harness and the semicolon diagnosis were
+otherwise sound. Fixed in `diagnostics/g3_notonly/g3_q4drop.py` (sha256 `02b35e6278f8`): `Ctx.spans` from the script's own
+`token_spans()`; `q4_paired` finds a partner after the not-only word, before the next ';'; new `q4_also_paired`
+drops `but_also` only when a not-only stands before its "but", after the last ';' (option 2). Self-test 54/54 in all
+settings. Hard cases `hard_option2.json` (23: the RL-103 set, contractions, "cannot", bare contrastive, mixed;
+`hard_option2.py`): fixed 19/23, RL-103 11/23; failures: the 3 constructed comma-spliced new-subject clauses (also in
+RL-103) and one constructed unit with two "but ... also" (identical "also" atoms are decided together). Shards 0, 20,
+30, 40 (56,126 units), 0 problems: structure equals keep apart from the two atoms in every unit; `not_only` 271
+dropped, 29 kept (same decisions as RL-103 in these shards); `but_also` 236 dropped, 55 kept. Hand-read: 30 of 30
+sampled dropped `but_also` are not-only partners; of the 55 kept, about 43 contrastive, about 12 additive (marker kept,
+no meaning lost). Corpus has no observed unit with two "but ... also" after a not-only. Outputs local only; nothing
+written to RDS. [LOG]
+
+**RL-105 · 2026-10-09 · G3 · CODE-CHANGE (test copy) + DOC · LIVE**
+Owner: adopt option 2 and document the not-only/but-also mechanisms and guards. Host incline, `tensor_env`.
+`diagnostics/g3_notonly/g3_q4drop.py` (sha256 `c6d3edf8682a`): option 2 is now the default (`NOTONLY_DROP` unset =
+`paired`; `0` and `1` remain for tests). Self-test 54/54; shard 0 (`--limit 700`, 14,225 units, 0 problems)
+identical to the explicit `paired` run of RL-104. New tracked folder `fullscale_pipeline/g3_notonly/`:
+`g3_q4_option2.patch` (`99ec4a8c84fa`, the whole question-4 rule set with option 2 as a diff against
+`PG/scripts/g3_curation_test.py` `2a5e01342bf4`; supersedes `diagnostics/g3_stoplist/g3_q4full.py` as the reference
+for porting), `hard_option2.json` (`66b11a9a5144`) and `hard_option2.py` (`b000aae90c5b`, re-run from the tracked
+folder: 19/23), `compare_cd.py` (`fa7300335dc2`). G3_POSTPROCESSING.md §6 item 4: the not-only/but-also bullet
+rewritten as decided (fusion, attribution, identical-atom guard, option-2 drop with the ';' boundary and token-span
+alignment, why `curate()`, evidence, history, accepted limits); §8 item 1 and 1a and §9 updated. Nothing written to
+RDS; the RDS script is unchanged. [LOG]
+
 <!-- Append new entries below. Format: **RL-nnn · date/time · stage · TYPE · LIVE** then command,
 host, job ID, script sha256, inputs, outputs, outcome, deviation reference. -->

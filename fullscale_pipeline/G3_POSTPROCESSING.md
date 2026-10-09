@@ -302,22 +302,67 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
      hyperedges fell from 771 to 43 (the rest elliptical, "but not others", with no verb to join). 9 of 10
      constructed hard cases pass; the 10th keeps its correct meaning regardless (a case of decision 2, an embedded
      clause).
-   - **"not only" / "just" / "merely" / "simply" / "solely", and "but also": fused into one non-negating atom each,
-     `not_only` / `but_also`, not treated as negation.** Detected deterministically: "not" or "n't" directly
-     followed by one of the five words; "also" with "but" standing at most three tokens before it, with only
-     auxiliaries, modals, be/have/do forms or pronouns in between and no punctuation ("but also", "but can also",
-     "but it also"). Attributed to the clause's verb group or argument exactly as any other atom, reusing the same
-     predicate-finding logic (one parser quirk needed a fix: when the parser attaches "also" to the conjunction
-     itself rather than to either clause, it is moved into the predicate of the clause after "but"). Reason: the
-     polarity of "not only … but also …" depends on the words it scopes over, not on the construction itself
-     ("not only **incapable**" stays negative; "not only **cheaper**" does not), so no polarity list is needed, and
-     the construction must not be read as a plain negation of its first clause. Self-test 54/54; sampled corpus
-     placements (238 cases across shards 0 and 20, split 130 verb group / 101 argument / 7 alone): about 29 of 32
-     correct; 7 of 8 and then 7 of 8 constructed hard cases pass (the two failures are a parser reading with no
-     predicate path, common to every version tested). **Flagged, not solved now, to revisit once all of §6 is
-     decided:** once correctly fused and attributed, "not only"/"but also" read substantively as "and" (owner);
-     whether and at which stage of the rule sequence to drop them without disturbing how anything else was attached
-     is left open.
+   - **"not only" / "just" / "merely" / "simply" / "solely", and "but also": fused, then dropped only as a pair —
+     DECIDED 2026-10-08/09 (owner), option 2.** Implemented in `g3_notonly/g3_q4_option2.patch` (the full question-4
+     rule set against `g3_curation_test.py`; RUN_LOG RL-083, RL-101 to RL-104). Five mechanisms, in the order they
+     act; all of them sit in `Ctx.curate()`, which decides each atom once:
+     1. **Fusion of "not only".** "not" or "n't" directly followed by one of the five words becomes one non-negating
+        atom `not_only`; the second word is dropped (`q4_fused_not_only`). Reason: the polarity of the construction
+        depends on the words it scopes over ("not only **incapable**" stays negative, "not only **cheaper**" does not),
+        and it must not be read as a plain negation of its clause.
+     2. **Fusion of "but also".** "also" with "but" at most three tokens before it, only auxiliaries, modals,
+        be/have/do forms or pronouns in between and no punctuation ("but also", "but can also", "but it also"),
+        becomes `but_also`. A parser quirk is corrected first: when "also" is attached to the conjunction itself
+        (`(also/M but/J) A B`), it is moved into the predicate of the clause after "but" (`q4_move_also`).
+     3. **Attribution.** Both atoms count as verb-group members (`pred_or_neg`), so they reach the clause's verb group
+        or argument by the same predicate-finding logic as any other atom. About 29 of 32 sampled placements correct.
+     4. **Guard for identical atoms.** Atoms carry no position of their own, so a rule tied to a position holds only
+        if every occurrence of the same atom string qualifies (`q4_all`). Consequence: in 3 of 319 test units with a
+        not-only construction the unit has another "not", nothing is fused, and the construction reads as a negation.
+     5. **Dropping, option 2.** `not_only` is dropped when a partner — "but", "also" or "as well" — follows the
+        not-only word in the unit before the next ";" (`q4_paired`); `but_also` is dropped when a not-only stands
+        before its "but" in the unit after the last ";" (`q4_also_paired`). So the additive pair "**not only** reduced
+        costs **but also** improved accuracy" becomes `reduce` + `improve`, which reads as "and"; a bare "X **but
+        also** Y" keeps `but_also` as the contrast marker ("may help clinicians **but also** mislead patients", owner:
+        "but" here is a contradiction, and without it the clause could be misread); an unpaired "not only/merely/
+        simply" keeps `not_only`, the only trace of a denial ("risks are **not merely** theoretical", "an adjunct,
+        **not simply** a replacement" — dropping would assert the opposite). The ";" stops the search because it opens
+        an independent clause whose "but"/"also" is not this construction's partner ("does **not simply** vanish once
+        labels are removed; Its F1 increment is null at 0.02 **but** significantly positive again..."). Words are
+        located in the text through `token_spans()`: punctuation has no token position of its own, and the
+        alignment finds "n't" and the "not" of "cannot" (tokenized "can" + "not") in order.
+
+     **Why drop in `curate()`, not earlier or later.** Removing the words from the text would need G2 to be re-run
+     (token positions shift); stripping them from the parse edge would mean rebuilding modifier edges such as
+     `(not/Mn (only/M provide))`, an easy way to produce malformed edges, for no gain in speed; stripping them from
+     the finished structures needs an extra pass and re-hashing. Dropping in `curate()` is the earliest safe point: on
+     shards 0, 20, 30 and 40 (56,126 units) its output equals the strip-afterwards reference in every one of the 359
+     units with a fused atom and changes no other unit, and all 57 question-4 hard cases agree; run time is the same
+     within noise (31–38 s per shard), since `curate()` decides each atom once.
+
+     **Evidence for option 2.** "but … also" (313 occurrences in the test shards): 248 follow a not-only and are
+     additive (20 of 20 sampled, whatever the valence: "not only misleading, **but also** deceptive"); 65 are bare
+     and mostly contrastive (26 of 30 sampled: "highest AUC **but also** cost the longest training time"). The
+     valence of the halves ("reduced costs" good, "reduced accuracy" bad) is not needed and could not be read
+     deterministically. "not only" (300 fused): 273 paired, 24 unpaired. Result of the final rule on the four
+     shards: `not_only` dropped in 271 units, kept in 29; `but_also` dropped in 236, kept in 55; structure otherwise
+     identical to keeping both atoms. Read by hand: 30 of 30 sampled dropped `but_also` are not-only partners; of the
+     55 kept, about 43 are contrastive and about 12 additive ("programmers **but also** managers"; the marker is
+     kept, no meaning lost). Distance between the halves does not matter: true pairs up to 25 words apart, across
+     embedded clauses, are found. Hard cases `g3_notonly/hard_option2.json` (23, including contractions, "cannot",
+     bare contrastive and mixed constructions): 19 of 23.
+
+     **History.** The owner first proposed dropping both atoms (they read as "and"); the paired/unpaired difference
+     for "not only" was found on corpus samples (RL-101), then the contrastive bare "but also" (owner, RL-102). A first
+     implementation tested with another model (RL-103) still dropped `but_also` always and missed contractions and
+     "cannot"; corrected after an audit (RL-104).
+
+     **Known limits, accepted (no case found in the corpus, constructed sentences only):** a comma-spliced new
+     clause with its own subject after a not-only, with no ";" and no "also" ("ChatGPT is not only widely used...,
+     **but** hospital administrators... raised separate concerns"), wrongly drops `not_only` (3 of 3 constructed
+     cases); a unit with two "but … also" after a not-only drops the contrastive second one with the first, because
+     identical "also" atoms are decided together. Also: a true pair split by ";" keeps `not_only` (safe; 1 real case);
+     "not be solely X but may also Y" is not fused at all, because "not" and "solely" are not adjacent.
    - **Core discourse connectives, and subordinators found to cause the same problem: dropped everywhere**, not
      only as stop words but from the kept-adverb rule below too. List: however, therefore, additionally,
      furthermore, moreover, thus, hence, consequently, nevertheless, nonetheless, accordingly, conversely,
@@ -557,9 +602,9 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 
 ## 8. Before the production run
 
-1. Owner decisions on §6 — DONE, all 7 items decided 2026-10-08. *[Remaining: the numbers question flagged
-   under items 4 and 5, and the two flags under item 4 (the not_only/but_also drop question, and synonym
-   fragmentation of kept adverbs), both deferred to after all 7 questions, per the owner.]*
+1. Owner decisions on §6 — DONE, all 7 items decided 2026-10-08. *[2026-10-09: the two flags under item 4 are
+   settled (not-only/but-also option 2; synonym merging deferred to M1). Remaining: the numbers question flagged
+   under items 4 and 5.]*
 1a. Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
    passives), item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
    a regression test), and item 4 (negation fix, the "only"/"not only"/"but also" rules, connectives, the opener
@@ -568,7 +613,10 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    `g3_phrasal_check/g3_q5fix.patch`, with `hard_q5.json` as a regression check), item 6 (skip the articles in
    `g3_scope_exclusions/scope_exclusions.csv`; apply `spelling_corrections.csv` through `apply_corrections` before focal
    matching; `test_corrections.py` as a regression check; M1 must leave the same articles out of every relation), and
-   item 7 (skip every `uid` in `g3_llm_output/llm_output_units.csv`; item 7 needs no other change).
+   item 7 (skip every `uid` in `g3_llm_output/llm_output_units.csv`; item 7 needs no other change). For item 4, the
+   reference implementation of the whole rule set, including the not-only/but-also option 2, is
+   `g3_notonly/g3_q4_option2.patch` (it supersedes `diagnostics/g3_stoplist/g3_q4full.py`), with
+   `g3_notonly/hard_option2.json` as a regression check.
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5).
@@ -589,6 +637,9 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_phrasal_check/hard_q5.json` (24 constructed particle cases) | 69873d864054 |
 | `fullscale_pipeline/g3_phrasal_check/hard_q5.py` (parses them; runs the RDS script and the test copies) | b1428685f3e2 |
 | `fullscale_pipeline/g3_phrasal_check/q5_types.py`, `q5_compare.py` (particle types from G2; orig vs fix) | 5b105b053aed, 47dfbc208df2 |
+| `fullscale_pipeline/g3_notonly/g3_q4_option2.patch` (§6 item 4 rule set incl. not-only/but-also option 2, diff against `g3_curation_test.py`) | 99ec4a8c84fa |
+| `fullscale_pipeline/g3_notonly/hard_option2.json`, `hard_option2.py` (23 hard cases; runner) | 66b11a9a5144, b000aae90c5b |
+| `fullscale_pipeline/g3_notonly/compare_cd.py` (drop in `curate()` vs strip afterwards) | fa7300335dc2 |
 | `fullscale_pipeline/g3_llm_output/build_llm_output_units.py` (§6 item 7; also on `PG/g3_llm_output/`) | cbceaf621848 |
 | `fullscale_pipeline/g3_llm_output/llm_output_units.csv` (162 units, 55 articles; also on `PG/g3_llm_output/`) | b71d5717e250 |
 | `fullscale_pipeline/g3_scope_exclusions/build_scope_exclusions.py` (§6 item 6: builds the two lists; G3 correction hook) | 3a5de5167371 |

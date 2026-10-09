@@ -1,0 +1,272 @@
+--- /mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/scripts/g3_curation_test.py	2026-09-30 13:57:15.331774000 +0100
++++ diagnostics/g3_notonly/g3_q4drop.py	2026-10-09 17:34:29.608167000 +0100
+@@ -52,6 +52,48 @@
+                'et al.', 'resp.'}
+ PHRASAL_PARTICLES = {'out', 'up', 'down', 'in', 'on', 'off', 'over'}
+ ACTIVE_STOP = (STOP | CUSTOM_NOISE) - NEGATION - PHRASAL_PARTICLES
++ONLY_MODE = os.environ.get('ONLY_MODE', 'drop')
++Q4 = os.environ.get('Q4', '0') == '1'
++NOTONLY_MODE = os.environ.get('NOTONLY_DROP', 'paired')  # §6 item 4 (owner 2026-10-09, option 2): not_only and but_also dropped only as a pair; 0 keep all, 1 drop all (tests only)
++NOTONLY_DROP = NOTONLY_MODE == '1'
++
++
++NOT_ONLY_RX = re.compile(r"(?i)(?:\bnot|n't)\s+(?:only|just|merely|simply|solely)\b")
++PARTNER_RX = re.compile(r"(?i)\bbut\b|\balso\b|\bas well\b")
++
++
++def q4_paired(ctx, p):
++    """the 'not only/just/...' whose 'not' is token p has a partner ('but', 'also', 'as well') later in the unit, before
++    the next ';' (a ';' starts an independent clause whose 'but'/'also' is not this construction's partner). Works on the
++    text through token spans (punctuation has no token position; 'n't' and the 'not' of 'cannot' are found in order)."""
++    sp = ctx.spans.get(p + 1) or ctx.spans.get(p)
++    if sp is None:
++        return False
++    after = ctx.text[sp[1]:].split(";", 1)[0]
++    return bool(PARTNER_RX.search(after))
++
++
++def q4_also_paired(ctx, p):
++    """the 'but (...) also' whose 'also' is token p closes a 'not only/just/...' standing before its 'but' in the unit,
++    after the last ';' -- the additive pair; a bare 'X but also Y' (no not-only) is contrastive and is not paired"""
++    q = next((q for q in range(p - 1, p - 4, -1) if ctx.words.get(q) == "but"), None)
++    sp = ctx.spans.get(q) if q is not None else None
++    if sp is None:
++        return False
++    before = ctx.text[:sp[0]].rsplit(";", 1)[-1]
++    return bool(NOT_ONLY_RX.search(before))
++
++
++Q4_CONNECTIVES = set("however therefore additionally furthermore moreover thus hence consequently nevertheless nonetheless "
++                     "accordingly conversely meanwhile likewise indeed respectively although thereby though since whereas".split())
++Q4_OPENER_DROP = set("finally first second third fourth fifth sixth seventh firstly secondly thirdly fourthly lastly last next "
++                     "overall similarly specifically notably yet instead together collectively rather besides herein hereafter "
++                     "briefly concretely relatedly correspondingly complementarily namely plus essentially basically "
++                     "subsequently thereinto regardless otherwise".split())
++Q4_NOT_ONLY = {"only", "just", "merely", "simply", "solely"}
++Q4_DEGREE = {"least", "not", "about", "nearly", "almost", "just", "equally", "roughly", "approximately", "quite", "half", "twice"}
++if ONLY_MODE != 'drop':
++    ACTIVE_STOP = ACTIVE_STOP - {'only'}
+ KEEP_TYPES = ('Cc', 'Cp', 'Ca', 'Cm', 'M', 'P')    # Cm (noun used as a modifier: "cancer research") added; 7.5 and chunk_4h dropped it
+ KINDS = ('parent', 'dummy_sibling', 'focal_he', 'sibling_he', 'dummy_cousin', 'cousin_he')
+ 
+@@ -167,6 +209,49 @@
+     return urllib.parse.unquote(a.root()).lower() in NEGATION and a.type().startswith('M')
+ 
+ 
++CURRENT_CTX = None
++
++
++def only_before_verb(src):
++    """'only' (source atom string) directly before a predicate, or before one adverb and then a predicate; not 'if only'"""
++    ctx = CURRENT_CTX
++    if ONLY_MODE == 'vg':
++        return True
++    def ok(p):
++        if ctx.words.get(p - 1) == 'if':
++            return False
++        t1 = ctx.bypos.get(p + 1, '/x/').split('/')[1]
++        t2 = ctx.bypos.get(p + 2, '/x/').split('/')[1]
++        return t1.startswith(('P', 'Mv', 'Mm')) or (t1.startswith('M') and not t1.startswith(('Md', 'M#', 'Mn')) and t2.startswith(('P', 'Mv')))
++    ps = [p for _, p in ctx.pos.get(str(src), [])]
++    return bool(ps) and all(ok(p) for p in ps)      # every occurrence of an identical atom must qualify
++
++
++def is_adverb(a):
++    """Q4: a plain modifier (type M, an adverb) that joins the verb group; particles (open question 5) and 'only' excluded"""
++    w = urllib.parse.unquote(a.root()).lower()
++    return Q4 and a.type() == 'M' and w not in PHRASAL_PARTICLES and w != 'only'
++
++
++def is_vg_mod(a):
++    """negation, and 'only' when it modifies a predicate (ONLY_MODE vg / vg2): members of the verb group"""
++    if is_neg(a) or is_adverb(a):
++        return True
++    if ONLY_MODE in ('vg', 'vg2') and urllib.parse.unquote(a.root()).lower() == 'only' and a.type().startswith('M'):
++        return only_before_verb(a)
++    return False
++
++
++def flat_is_verb_group(f):
++    """a flattened group made only of verb-group atoms; an 'only' counts only if each of its sources passes only_before_verb"""
++    for out in f.atoms():
++        if not (pred_or_neg(out) or (Q4 and all(is_adverb(hedge(src)) for src in f.items[str(out)][1]))):
++            return False
++        if urllib.parse.unquote(out.root()).lower() == 'only' and not all(only_before_verb(src) for src in f.items[str(out)][1]):
++            return False
++    return True
++
++
+ def has_pred(head):
+     return any(is_pred(a) for a in terminal(head))
+ 
+@@ -192,6 +277,74 @@
+     return hashlib.sha1(f"{i}|{edge_str}".encode("utf-8")).hexdigest()[:12]
+ 
+ 
++def q4_opener(ctx, word, p):
++    """token p opens the unit or a clause after ; or :, and a comma follows it in the text"""
++    nth = sum(1 for q, w in ctx.words.items() if q < p and w == word)
++    ms = list(re.finditer(r"\b" + re.escape(word) + r"\b", ctx.text, re.I))
++    if nth >= len(ms):
++        return False
++    m = ms[nth]
++    before = ctx.text[:m.start()].rstrip()
++    return (re.fullmatch(r"[\W\d_]*", before) is not None or before.endswith((";", ":"))) and ctx.text[m.end():m.end() + 1] == ","
++
++
++def q4_as_well(ctx, p):
++    """'well' at p is the connective 'as well (as)': after 'as', not after a verb or a degree word, not 'or better/worse'"""
++    if ctx.words.get(p - 1) != "as":
++        return False
++    t2 = ctx.bypos.get(p - 2, "/x/").split("/")[1]
++    if t2.startswith(("P", "Mv")) or ctx.words.get(p - 2) in Q4_DEGREE:
++        return False
++    follow = " ".join(ctx.words.get(q, "") for q in range(p + 1, p + 5))
++    return not re.search(r"\bor (better|worse)\b", follow)
++
++
++BE_HAVE_DO = {"is", "are", "was", "were", "be", "been", "has", "have", "had", "do", "does", "did"}
++
++
++def q4_but_before(ctx, p):
++    """'but also', or 'but' + up to two auxiliaries, modals, forms of be/have/do or pronouns + 'also' ('but can also',
++    'but it also'); no punctuation (no missing token position) in between"""
++    for q in range(p - 1, p - 4, -1):
++        if q not in ctx.words:
++            return False
++        if ctx.words[q] == "but":
++            return True
++        t = ctx.bypos.get(q, "/x/").split("/")[1]
++        if not (t.startswith(("Ci", "Mv", "Mm")) or ctx.words[q] in BE_HAVE_DO):
++            return False
++    return False
++
++
++def q4_move_also(edge):
++    """the parser can attach 'also' to the conjunction ('(also/M but/J) A B'): move it into the predicate of the conjunct
++    that follows 'but' (the last one), so that it reaches that clause's verb group"""
++    if edge.is_atom():
++        return edge
++    kids = [q4_move_also(c) for c in edge]
++    conn = kids[0]
++    if (Q4 and not conn.is_atom() and len(conn) == 2 and len(kids) >= 3 and all(a.is_atom() for a in conn)
++            and {urllib.parse.unquote(a.root()).lower() for a in conn} == {"also", "but"}):
++        also = next(a for a in conn if a.root() == "also")
++        but = next(a for a in conn if a.root() == "but")
++        last = kids[-1]
++        if not last.is_atom() and has_pred(last[0]):
++            last = hedge(tuple([hedge((also, last[0]))] + list(last[1:])))
++            return hedge(tuple([but] + kids[1:-1] + [last]))
++    return hedge(tuple(kids))
++
++
++def q4_all(ctx, atom, test):
++    """a position rule holds for every position of this source atom (atoms with the same string are not told apart)"""
++    ps = [p for _, p in ctx.pos.get(str(atom), [])]
++    if not ps:
++        return False
++    hits = [test(p) for p in ps]
++    if any(hits) and not all(hits):
++        ctx.stats['q4_ambiguous_position'] += 1
++    return all(hits)
++
++
+ # ------------------------------------------------------------------ per-unit context and atom curation
+ class Ctx:
+     def __init__(self, unit, modals):
+@@ -202,6 +355,12 @@
+             if m:
+                 self.lemma[m.group(1)] = m.group(2).split('/')[0]
+         self.pos = collections.defaultdict(list)                        # source atom -> [(word, position)]
++        self.bypos = {p: at for at, w, p in unit["atom2word"]}
++        self.text = unit["text"]
++        self.spans = token_spans(unit["text"], unit["atom2word"])
++        self.words = {p: w.lower() for at, w, p in unit["atom2word"]}
++        global CURRENT_CTX
++        CURRENT_CTX = self
+         for a, w, p in unit["atom2word"]:
+             self.pos[a].append((w, p))
+         self.decisions = {}                                             # (atom, periphery) -> (reason or None, out atom, modal)
+@@ -229,6 +388,22 @@
+             reason = 'no_letters'; self.detail['no_letters'][word] += 1
+         elif word in CONNECTIVES:
+             reason = 'connective'; self.detail['connective'][word] += 1
++        elif Q4 and word in NEGATION and t.startswith('M') and q4_all(self, atom, lambda p: self.words.get(p + 1) in Q4_NOT_ONLY):
++            drop = NOTONLY_DROP or (NOTONLY_MODE == 'paired' and q4_all(self, atom, lambda p: q4_paired(self, p)))
++            out = None if drop else hedge('not_only/M/en'); reason = 'q4_not_only_dropped' if drop else None; self.detail['q4_not_only'][f"{word} {'/'.join(sorted({self.words.get(p + 1) for _, p in self.pos.get(str(atom), [])}))}"] += 1
++        elif Q4 and word in Q4_NOT_ONLY and q4_all(self, atom, lambda p: self.words.get(p - 1) in ("not", "n't")):
++            reason = 'q4_fused_not_only'
++        elif Q4 and word == 'also' and q4_all(self, atom, lambda p: q4_but_before(self, p)):
++            drop = NOTONLY_DROP or (NOTONLY_MODE == 'paired' and q4_all(self, atom, lambda p: q4_also_paired(self, p)))
++            out = None if drop else hedge('but_also/M/en'); reason = 'q4_but_also_dropped' if drop else None; self.detail['q4_but_also']['but (…) also'] += 1
++        elif Q4 and word == 'even' and q4_all(self, atom, lambda p: self.words.get(p + 1) in ('though', 'if')):
++            reason = 'q4_connective'; self.detail['q4_connective']['even (though/if)'] += 1
++        elif Q4 and word in Q4_CONNECTIVES:
++            reason = 'q4_connective'; self.detail['q4_connective'][word] += 1
++        elif Q4 and word in Q4_OPENER_DROP and q4_all(self, atom, lambda p: q4_opener(self, word, p)):
++            reason = 'q4_opener'; self.detail['q4_opener'][word] += 1
++        elif Q4 and word == 'well' and q4_all(self, atom, lambda p: q4_as_well(self, p)):
++            reason = 'q4_as_well'
+         elif word in NEGATION and t.startswith('M'):
+             out = class_collapse(hedge(f"{lemma}/{t}/en"), 'M'); self.detail['negation'][f"{word}/{t}"] += 1
+         elif t.startswith('Ci'):
+@@ -314,7 +489,8 @@
+ def pred_or_neg(a):
+     """a curated atom that belongs to a compound verb group: verb, negation or modal"""
+     w = urllib.parse.unquote(a.root()).lower()
+-    return a.type().startswith(('P', 'Mv')) or w in NEGATION or (a.type().startswith('M') and w in MODAL_LEMMAS)
++    return a.type().startswith(('P', 'Mv')) or w in NEGATION or (a.type().startswith('M') and w in MODAL_LEMMAS) \
++        or (ONLY_MODE in ('vg', 'vg2') and w == 'only') or w in ('not_only', 'but_also')
+ 
+ 
+ # ------------------------------------------------------------------ 7.5 logic: phrasal verbs, periphery sweep, core circuits
+@@ -359,18 +535,18 @@
+     if has_pred(head):
+         out, rec = [], []
+         head_atoms = terminal(head, barrier)
+-        preds = flatten_atoms([a for a in head_atoms if is_pred(a)], True, ctx)
++        preds = flatten_atoms([a for a in head_atoms if is_pred(a) or is_vg_mod(a)], True, ctx)
+         for arg in edge[1:]:
+             if str(arg) == barrier:
+                 continue
+             t = flatten(arg, barrier, True, ctx)
+-            if t and all(pred_or_neg(a) for a in t.atoms()):
++            if t and flat_is_verb_group(t):
+                 preds.merge(t)
+             else:
+                 rec.append(arg)
+         if preds:
+             out.append(('dummy_cousin', preds))
+-        mods = flatten_atoms([a for a in head_atoms if not is_pred(a)], True, ctx)
++        mods = flatten_atoms([a for a in head_atoms if not (is_pred(a) or is_vg_mod(a))], True, ctx)
+         if mods:
+             out.append(('cousin_he', mods))
+         for arg in rec:
+@@ -383,7 +559,7 @@
+ 
+ 
+ def extract(edge, ctx):
+-    norm = fuse_phrasal(edge, ctx)
++    norm = fuse_phrasal(q4_move_also(edge), ctx)
+     circuits, cousins = {}, {}
+     for path in focal_paths(norm):
+         if len(path) < 2:
+@@ -397,15 +573,15 @@
+             step = flatten(path[i], str(path[i + 1]), False, ctx)
+             if not step:
+                 continue
+-            if all(pred_or_neg(a) for a in step.atoms()):
++            if flat_is_verb_group(step):
+                 tele.merge(step); hi = i
+             else:
+                 break
+         barrier = str(path[hi])
+         parent, farg = path[pidx], path[pidx + 1]
+         head_atoms = terminal(parent[0])
+-        cp = [a for a in head_atoms if is_pred(a) or is_neg(a)]
+-        cn = [a for a in head_atoms if not (is_pred(a) or is_neg(a))]
++        cp = [a for a in head_atoms if is_pred(a) or is_vg_mod(a)]
++        cn = [a for a in head_atoms if not (is_pred(a) or is_vg_mod(a))]
+         dummy = Flat().merge(tele).merge(flatten_atoms(cp, False, ctx))
+         if not dummy:
+             ctx.stats['focal_path_empty_verb_group'] += 1
