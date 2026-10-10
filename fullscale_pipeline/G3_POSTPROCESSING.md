@@ -799,8 +799,9 @@ python g3_curation_v2.py --shard N [--limit A | --limit 0] --outdir DIR [--db] [
 python run_hard.py hard/hard_*.json                                             # 199 constructed cases, 175 with expectations
 ```
 
-`g3_v2/g3_curation_v2.py` (sha256 `0f3146266f26`; `2f7e8f356692` at RL-117, `389123552561` at RL-120, `efbf44b09683` at
-RL-121, which changed only input checks with outputs byte-identical) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
+`g3_v2/g3_curation_v2.py` (sha256 `b3eadb6d385c`, the head-word lemma rule of §8 item 5, RL-129; `0f3146266f26` at
+RL-124/125, `2f7e8f356692` at RL-117, `389123552561` at RL-120, `efbf44b09683` at RL-121, which changed only input
+checks with outputs byte-identical) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
 beside the script). Built stage by stage from the RDS test script of §7.2 (RUN_LOG RL-112 to RL-117); the RDS script is
 unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environment as G2 (`tensor_env`,
 `PYTHONPATH=$HOME/np1_for_spacy`). The switches kept from the test copies (`Q4`, `ONLY_MODE`, `NOTONLY_DROP`, `XBASED`,
