@@ -27,16 +27,20 @@ set -o pipefail
 fail() { echo "PROBLEM: $1"; echo "SOME G3 CHECKS FAILED"; exit 1; }
 
 echo; echo "== 1. script hashes"
-for x in "g3_curation_v2.py 266ddcbb00d2" "modal_merge.py 75c7022ac187" "run_hard.py 80b9ca527b8f"; do
+for x in "g3_curation_v2.py 0f3146266f26" "modal_merge.py 75c7022ac187" "run_hard.py 80b9ca527b8f"; do
     set -- $x; got=$(sha256sum $D/$1 | cut -c1-12)
     echo "$1 $got"; [ "$got" = "$2" ] || fail "$1 sha256 $got, expected $2"
 done
 
 echo; echo "== 2. self-test"
-(cd $D && python g3_curation_v2.py --selftest 2>&1 | grep -E "FAIL|passed") | tee /dev/stderr | grep -q "^54 of 54 passed" || fail "self-test"
+OUT=$(cd $D && python g3_curation_v2.py --selftest 2>&1 | grep -E "FAIL|passed")
+echo "$OUT"
+echo "$OUT" | grep -q "^54 of 54 passed" || fail "self-test"
 
 echo; echo "== 3. hard cases (expected: TOTAL 162/175, the 13 known failures)"
-(cd $D && python run_hard.py hard/hard_*.json 2>&1 | grep -E "pass|TOTAL") | tee /dev/stderr | grep -q "^TOTAL 162/175" || fail "hard cases"
+OUT=$(cd $D && python run_hard.py hard/hard_*.json 2>&1 | grep -E "pass|TOTAL")
+echo "$OUT"
+echo "$OUT" | grep -q "^TOTAL 162/175" || fail "hard cases"
 
 echo; echo "== 4. shards 0 and 20, whole"
 for i in 0 20; do

@@ -7,6 +7,7 @@ are built (`g3_scope_exclusions/`, `g3_llm_output/`) and G3 must read both.]*
 decided; its participle and cousin rules are implemented in a test copy, the rest is to be built.]*
 *[2026-10-10: every rule of §6 items 1–8 is implemented in the test script v2, `g3_v2/g3_curation_v2.py` (§7.1),
 and tested on shards 0 and 20; the production script (§8 item 2) is not yet built.]*
+*[2026-10-10, RL-123/RL-124: the production script is the test script itself (mirrored, hash-pinned); CSF test passed (job 22539002); the SLURM array and checked merge are written and tested; not yet submitted for the full corpus.]*
 *[2026-10-10, RL-118 to RL-121: the promised checks are done, 0–10 as words rolled back, non-text numbers widened, and
 code, tables and documents harmonised. Two small questions are open for the owner (§8 item 4).]*
 *[2026-10-10, RL-122: both answered and implemented: units without a parent are removed and articles left without any
@@ -789,7 +790,7 @@ python g3_curation_v2.py --shard N [--limit A | --limit 0] --outdir DIR [--db] [
 python run_hard.py hard/hard_*.json                                             # 199 constructed cases, 175 with expectations
 ```
 
-`g3_v2/g3_curation_v2.py` (sha256 `266ddcbb00d2`; `2f7e8f356692` at RL-117, `389123552561` at RL-120, `efbf44b09683` at
+`g3_v2/g3_curation_v2.py` (sha256 `0f3146266f26`; `2f7e8f356692` at RL-117, `389123552561` at RL-120, `efbf44b09683` at
 RL-121, which changed only input checks with outputs byte-identical) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
 beside the script). Built stage by stage from the RDS test script of §7.2 (RUN_LOG RL-112 to RL-117); the RDS script is
 unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environment as G2 (`tensor_env`,
@@ -966,8 +967,21 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    *[2026-10-10, RL-123: production uses the test script v2 itself, mirrored to `PG/scripts/g3_v2/` and pinned by
    sha256 (no second copy that could drift). CSF test written: `PG/scripts/g3_v2/check_csf_g3.sh` (script hashes,
    self-test, hard cases, whole shards 0 and 20 compared byte for byte with an incline reference run of the same script
-   in `PG/g3_v1_csftest/reference_incline/`); passes on incline, to be submitted on CSF. Still to write: the SLURM
-   array for the 50 shards and the checked merge.]*
+   in `PG/g3_v1_csftest/reference_incline/`); passed on CSF (job 22539002).]*
+   *[2026-10-10, RL-124: the SLURM array and the checked merge are written and tested. `g3_v2/submit_g3_v1.sh`
+   (sha256 `d0c8dad02783`; tracked copy of `PG/scripts/g3_v2/submit_g3_v1.sh`): 50-task array on `serial` (1 core, 4 GB,
+   30 min; no parser is loaded, so this is ample), task *i* curates G2 v3 shard *i* with `g3_curation_v2.py` into
+   `PG/g3_v1/shards/`. `g3_v2/merge_g3_v1.py` (sha256 `a6921837ecf3`): re-derives completeness from each shard's own
+   `g3_articles_NNN.jsonl` against its real G2 v3 shard file (every pmcid present exactly once, article status counts
+   match, no pmcid shared across shards), checks every shard's report for the same script sha256 and input hashes and
+   0 problems/0 unit errors, then concatenates the five record files and writes `g3_v1_summary.json`. Tested end to end
+   on all 50 shards in a scratch folder: every shard 0 problems, the merge's own checks all passed, totals
+   self-consistent (34,662 articles = the known corpus size; 6,466 excluded = the known item-6 count; 28,075 valid +
+   121 invalid + 6,466 excluded = 34,662; the five output files' line counts match the summary's counts exactly) and
+   match the known corpus totals; a corrupted report and a pre-existing output were each separately confirmed to stop
+   the merge with no partial file left. Scratch output deleted; nothing produced in `PG/g3_v1/` yet. To submit on CSF
+   (owner): `sbatch PG/scripts/g3_v2/submit_g3_v1.sh`, then after all 50 tasks `python PG/scripts/g3_v2/merge_g3_v1.py
+   --nshards 50`.]*
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5). *[2026-10-09: M1 must also handle the
    flags in §6 item 8: content keys, the specificity of verb groups, and the article exclusions of item 6.]*
 4. *[Added 2026-10-10, RL-121.]* Two small questions for the owner; the test script's current behaviour is given:
@@ -1008,7 +1022,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8) | 266ddcbb00d2 |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8; its report also records host/job/task since RL-124) | 0f3146266f26 |
+| `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
+| `fullscale_pipeline/g3_v2/check_csf_g3.sh` (CSF test, RL-123; mirrored to `PG/scripts/g3_v2/`) | baa9f73046ad |
+| `fullscale_pipeline/g3_v2/submit_g3_v1.sh` (50-task SLURM array, RL-124; mirrored) | d0c8dad02783 |
+| `fullscale_pipeline/g3_v2/merge_g3_v1.py` (checked merge, RL-124; mirrored) | a6921837ecf3 |
 | `fullscale_pipeline/g3_v2/modal_merge.py` (§6 item 3: decision rule copied from `g3_modal_check/modal_rules.py`, edge-order fix, and the clause merge; imported by the script) | 75c7022ac187 |
 | `fullscale_pipeline/g3_v2/reflexive_restore.py` (§6 item 8: builds the reflexive table; 43 min on incline) | 92fa72c383de |
 | `fullscale_pipeline/g3_v2/measure_be.py` (§6 item 1: the measurement required before implementing passive "be") | 8cbfe1c89631 |

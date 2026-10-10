@@ -1254,3 +1254,33 @@ shard, peak memory 57 MB; records identical to RL-122. New `g3_v2/check_csf_g3.s
 for byte and the reports for 0 problems and 0 unit errors. Dry run on incline (bash, outside SLURM): ALL G3 CHECKS OK;
 its output deleted. To submit on CSF: `sbatch /mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/scripts/g3_v2/check_csf_g3.sh`.
 [LOG]
+
+**RL-124 · 2026-10-10 · G3 · CODE (SLURM array, checked merge) + TEST · LIVE**
+RL-123's CSF test (job 22539002) passed: "ALL G3 CHECKS OK" (its log was missing its opening lines, a `tee /dev/stderr`
+buffering artefact of the check script, not of the test itself; fixed below). Owner: build the production array and
+merge. Host incline37/incline32, `tensor_env`.
+`g3_v2/check_csf_g3.sh`: the self-test and hard-case sections no longer pipe through `tee /dev/stderr`, so a rerun's log
+is complete from the first line; re-verified with a fresh incline reference run and a bash dry run, both clean.
+`g3_v2/g3_curation_v2.py` (sha256 `0f3146266f26`): the report also records `host`, `job` (`SLURM_ARRAY_JOB_ID` or
+`SLURM_JOB_ID`) and `task` (`SLURM_ARRAY_TASK_ID`), mirroring G2 v3's done file; every record file unchanged (checked
+against the RL-122 outputs of shards 0 and 20, byte for byte). `check_csf_g3.sh`'s pinned hash updated to match; the
+incline reference run and the dry check were both redone and pass.
+New `g3_v2/submit_g3_v1.sh` (sha256 `d0c8dad02783`): 50-task SLURM array, `serial`, 1 core, 4 GB, 30 min (no parser is
+loaded in production G3 — confirmed by import: `focal_terms.py` imports only `re`/`sys`, `modal_merge.py` only
+`graphbrain.hedge` — so this is ample); task *i* runs `g3_curation_v2.py --shard i --limit 0 --outdir PG/g3_v1/shards/`.
+New `g3_v2/merge_g3_v1.py` (sha256 `a6921837ecf3`): for each shard, checks the report's script sha256 and input hashes
+(read from the script itself, not hardcoded) agree across all 50, and 0 problems/0 unit errors; re-derives completeness
+by reading the shard's own `g3_articles_NNN.jsonl` against the real G2 v3 shard file directly (every pmcid exactly once,
+none missing, none extra, status counts sum to the article count); checks no pmcid is shared across shards; then
+concatenates the five record files and writes `g3_v1_summary.json`. Refuses to overwrite; on any failure removes the
+partial `.tmp` files it had started (checked: a corrupted report and a pre-existing output each stopped the merge
+cleanly, no partial file left).
+Tested end to end: all 50 G2 v3 shards curated into a scratch folder (`--limit 0` each, 10 at a time, all 0 problems, 0
+tracebacks), then merged there. Merge totals: 34,662 articles (28,075 valid, 121 invalid_no_parent, 6,466 excluded — the
+excluded count matches item 6's own figure exactly); 687,824 units, 816,075 parents, 2,266,190 cousins; the five output
+files' line counts match the summary's own counts exactly (`g3_test_v1.jsonl` 664,725 = units_with_parent;
+`g3_noparent_v1.jsonl` 23,099 = units_removed_no_parent; `g3_articles_v1.jsonl` 34,662 = every article;
+`g3_nonprose_v1.jsonl` 1,211 = the four nonprose counts summed; `g3_errors_v1.jsonl` empty, matching 0 unit errors
+everywhere). Scratch output deleted; `PG/g3_v1/` not yet produced. Both scripts mirrored to `PG/scripts/g3_v2/`.
+To run on CSF (owner): `sbatch PG/scripts/g3_v2/submit_g3_v1.sh`; after all 50 tasks,
+`python PG/scripts/g3_v2/merge_g3_v1.py --nshards 50`. [LOG]

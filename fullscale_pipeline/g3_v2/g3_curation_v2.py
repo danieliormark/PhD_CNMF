@@ -1238,7 +1238,8 @@ def run(a):
         for x in articles:
             fn.write(json.dumps(x) + "\n")
     report = dict(stage="G3 test v2", input=inp, script=os.path.abspath(__file__), script_sha=sha(__file__), modals=a.modals,
-                  inputs={p: h for p, h in INPUT_SHA.items()},
+                  host=os.uname().nodename, job=os.environ.get("SLURM_ARRAY_JOB_ID") or os.environ.get("SLURM_JOB_ID"),
+                  task=os.environ.get("SLURM_ARRAY_TASK_ID"), inputs={p: h for p, h in INPUT_SHA.items()},
                   limit=a.limit, seconds=round(secs, 1), seconds_per_unit=round(secs / max(stats['units'], 1), 4), counts=dict(stats),
                   focal_surface_to_canonical=[[s, c, n] for (s, c), n in surfaces.most_common()],
                   detail={k: dict(v.most_common(60)) for k, v in detail.items()}, problems=problems[:200], n_problems=len(problems))
