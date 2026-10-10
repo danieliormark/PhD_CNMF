@@ -1026,7 +1026,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    `g3_word_lists/head_lemmas.tsv`, guards for irregular plain lemmas (kept as written) and for plain plurals (spaCy's
    kept); also covers words joined by a Unicode hyphen. On shards 0 and 20 all 57 distinct rewrites (216 occurrences)
    were read: 214 correct, 2 wrong (`data_basis`, ambiguous "bases"); structure unchanged. Hard set
-   `hard_lemmas_rl129.json` 13/13. Production rerun on CSF pending; the RL-125 output is kept as `PG/g3_v1_rl125/`.]*
+   `hard_lemmas_rl129.json` 13/13.]*
+   *[2026-10-10, RL-130: run for real on CSF (job 22548004), merged. Output in `PG/g3_v1/` unchanged from RL-125 except
+   the lemma corrections and 2 fewer cousins (two pairs of clauses that used to differ only by the spelling bug now
+   correctly collapse into one, traced by hand on real data). The RL-125 output is kept as `PG/g3_v1_rl125/`. G3
+   production is complete.]*
 
 ## 9. Files
 

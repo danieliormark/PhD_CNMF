@@ -1389,3 +1389,21 @@ shards, not a sample: 56 correct (214 occurrences: `pre_traine`→`pre_train` 99
 default and 4242. Production: script and hard sets mirrored to `PG/scripts/g3_v2/`; `check_csf_g3.sh` re-pinned (script
 `b3eadb6d385c`, TOTAL 175/188); incline reference rebuilt; dry run ALL G3 CHECKS OK. The RL-125 output was moved, not
 deleted, to `PG/g3_v1_rl125/`, so the array can write `PG/g3_v1/` again. Owner to submit on CSF. [LOG]
+
+**RL-130 · 2026-10-10 · G3 · PRODUCTION RUN · LIVE**
+Owner: `sbatch check_csf_g3.sh` then `sbatch --dependency=afterok:<check id> submit_g3_v1.sh` (check job 22548003, array
+22548004). Race, not a failure: the check job actually ran to completion (sacct: `COMPLETED 0:0`) while its log was read
+mid-write and looked cut off after shard 0; the owner's `scancel 22548004` on that wrong reading lost the race against
+SLURM releasing the array the moment the check's `afterok` dependency was satisfied — by the time the cancel reached the
+scheduler, the array had already launched and (being fast, no parser loaded) finished most or all of its 50 tasks.
+Confirmed clean regardless: all 50 `g3_v1_22548004_*.out` logs end `exit 0`; all 50 shard reports 0 problems, 0 unit
+errors; no failure signature anywhere. A second, redundant check job (22548129, same `sbatch` line re-run per the
+owner's literal instructions) also passed; its test output not touched, scratch only.
+`python merge_g3_v1.py --nshards 50`: every check passed; output written to `PG/g3_v1/` (the RL-125 output first moved
+to `PG/g3_v1_rl125/`, RL-129, so the refuse-to-overwrite guard allowed this write). Totals identical to RL-125 except
+6,171 `lemma_head_rule` corrections and cousins 2,266,190 → 2,266,188. Both missing cousins traced by hand (not assumed
+harmless): PMC11605461 and PMC11686211, each a unit where a `pre_traine`-spelled verb-group clause and a correctly
+spelled `pre_train` clause used to be two distinct `dummy_cousin` entities and now collapse into one, since both
+clauses hold no other atom — the intended effect of RL-129's fix, observed on real data for the first time. `g3_v1/
+g3_v1_summary.json`: script_sha `b3eadb6d385c`, job `22548004`, article_status unchanged (28,075 / 121 / 6,466).
+`PG/g3_v1_rl125/` kept as the pre-fix record. G3 production, with the head-word lemma rule, is complete. [LOG]
