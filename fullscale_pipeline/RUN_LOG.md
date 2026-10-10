@@ -1199,3 +1199,26 @@ command-line argument list, "μ Human 11.79", "Martinson 2023)", a "24—" enume
 "LLaMA 22"). Shards 0 and 20: 0 errors, 0 problems; parents 16,523 / 17,130, cousins 47,077 / 49,224. Also found, not
 changed (focal matching, §4): the matcher reads a score after a name as a version ("ChatGPT 8.0 [7.0–10.0]" →
 `gpt_8`). [LOG]
+
+**RL-121 · 2026-10-10 · G3 · AUDIT + CODE (input checks, adverb table) + MEASUREMENT + DOC · LIVE**
+Owner: harmonise G3 code, decisions and documentation; run any test a decision needs first. Host incline32, `tensor_env`.
+Audit: every sha256 cited in G3_POSTPROCESSING.md §7.1/§9 checked against the local and RDS files (38 files, all match);
+the four RDS input mirrors match git. Found and fixed: (1) `g3_word_lists/adverb_roles.tsv` still gave the 12 rows decided
+in §6 item 8 (option 3) the action "open question 5" and the test script overrode them in code; `build_adverb_roles.py`
+(sha256 `f05285f9bb65`) now writes the decided actions (direction words: fuse with the verb; before, throughout, despite,
+beside: drop; around, under: kept before a number, else drop), the table (sha256 `79466ff78dfe`, exactly the 12 rows
+changed) is copied to `PG/g3_word_lists/`, and `g3_v2/g3_curation_v2.py` (sha256 `efbf44b09683`) reads them from the table
+with a start-up check instead of the override; (2) the script imported P2's `focal_terms.py` and read the stop list
+without a hash check; both are now in `INPUT_SHA` (892f98bb986e, 2b6c7d9fdae9). Verification: self-test 54/54, hard
+cases 154/167 (the 13 known failures), shard 0 (`--limit 700`) and shard 20 (`--limit 0`, PYTHONHASHSEED 99) records and
+non-prose files byte-identical to RL-120. Measurements for two items left without an owner answer: (a) units that lose
+every parent under the hyphen-participle rule, whole v2 script against the same with `XBASED=0`: shard 0 27 of 13,820,
+shard 20 14 of 14,483, none gains (RL-111 counted 29 on shard 0 with the earlier copy); about half headings, captions or
+bullet fragments; (b) a score after a model name read as a version (RL-120): in the focal-form tables of shards 0 and 20,
+3 forms in 2 units ("ChatGPT 8.0/9.0 [..]" in a score table, PMC12821988; "GPT 0.78 to 0.65", PMC13257059); other
+name + number forms are real versions (ChatGPT 5.2–5.5, Grok 3/4, Gemma 2/3, Qwen 2.5). The glossary count of shard 0
+rose from 9 (RL-117) to 11 at RL-120 because the number rules now remove the stray "4" in "Language Model 4; LLM equals
+large language model." (one unit, 2 parents). Documents: dated notes in G3_POSTPROCESSING.md (status, §1, §6 items 1, 3,
+4, 5, 8, §7.1 commands, inputs, results and earlier runners, §8 item 4 with the two questions, §9), PIPELINE.md (G2 and
+G3 rows, flow diagram, focal_words readers, items 21, 24, 29, command and file tables) and G2_PARSING.md (copula count).
+[LOG]

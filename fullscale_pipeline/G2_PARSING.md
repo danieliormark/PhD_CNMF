@@ -158,7 +158,9 @@ python3 PG/scripts/merge_g2_v3.py --nshards 50                         # on incl
   ("can automatically flag reports" → `flag/C`), a copula "be" typed as an auxiliary (`Mv`) in "cannot be
   absorbable", "can" typed `M` instead of `Mm` (29 of about 1,200 in 700 articles), and lemma artefacts of the
   transformer lemmatiser on joined words ("pretrained" → `pretraine`). Their frequency beyond these samples has not
-  been measured.
+  been measured. *[2026-10-09, RL-112: the mistyped copula was measured on shard 0: about 15 of 4,154 auxiliary-typed
+  "be" (G3_POSTPROCESSING.md §6 item 1). "can" typed `M` is handled by G3 as a modal word. The others are still
+  unmeasured.]*
 - **Repeated words:** graphbrain edges do not carry token positions, so when a word occurs twice in a unit its atom
   string is the same for both occurrences; `atom2word` lists both positions. Attribution of atoms to sub-edges is
   exact; only the token index of such an atom is ambiguous (10.7% of the atom records in a G3 test).

@@ -98,15 +98,18 @@ if ONLY_MODE != 'drop':
     ACTIVE_STOP = ACTIVE_STOP - {'only'}
 # §6 item 4: the adverb role table (built by g3_word_lists/build_adverb_roles.py, owner-reviewed), RDS copy for CSF
 ADVERB_ROLES_PATH = PG + "g3_word_lists/adverb_roles.tsv"
-ADVERB_ROLES_SHA = "f66d153f5efa"
+ADVERB_ROLES_SHA = "79466ff78dfe"
 ADV_ROLE = {r["word"]: r["action"] for r in csv.DictReader(open(ADVERB_ROLES_PATH, encoding="utf-8"), delimiter="\t")}
-# the 12 rows marked "open question 5" (owner 2026-10-09, option 3): direction words fuse with their verb like the item-5
-# particles ("look_ahead", "move_forward", "leave_behind") and otherwise stay a modifier in their phrase ("a step forward");
-# time uses (before, throughout) dropped like the table's time adverbs; around/under kept only before a number (numbers
-# rule), otherwise dropped; despite/beside dropped
+# the 12 "particle" rows (owner 2026-10-09, option 3, written into the table): direction words fuse with their verb like the
+# item-5 particles ("look_ahead", "move_forward", "leave_behind") and otherwise stay a modifier in their phrase ("a step
+# forward"); time uses (before, throughout) dropped like the table's time adverbs; around/under kept only before a number
+# (the comparison-word rule keeps them there), otherwise dropped; despite/beside dropped
 DIRECTION_PARTICLES = {'forward', 'forwards', 'ahead', 'behind', 'back', 'away'}
-ADV_ROLE.update({w: 'drop' for w in ('before', 'throughout', 'around', 'under', 'despite', 'beside')})
-ADV_ROLE.update({w: 'direction' for w in DIRECTION_PARTICLES})
+TABLE_ACTION_CODE = {"fuse with its verb like a phrasal particle, else leave in its phrase": 'direction',
+                     "keep before a number (numbers rule), else drop": 'drop'}
+assert {w for w, a in ADV_ROLE.items() if a == "fuse with its verb like a phrasal particle, else leave in its phrase"} \
+    == DIRECTION_PARTICLES, "adverb table out of step with §6 item 8 (direction words)"
+ADV_ROLE = {w: TABLE_ACTION_CODE.get(a, a) for w, a in ADV_ROLE.items()}
 CLAUSE_END = re.compile(r"^\s*(?:[.,;:)]|$)")
 # §6 items 6 and 7: articles out of scope, units reproducing LLM output, word-for-word spelling corrections (RDS copies)
 SCOPE_EXCLUSIONS = PG + "g3_scope_exclusions/scope_exclusions.csv"
@@ -116,6 +119,8 @@ REFLEXIVE_TABLE = PG + "g3_reflexive/reflexive_restored.jsonl"      # §6 item 8
 INPUT_SHA = {SCOPE_EXCLUSIONS: "5b71d844d9af", SPELLING_CORRECTIONS: "d0a70f6c1a20", LLM_OUTPUT_UNITS: "b71d5717e250",
              ADVERB_ROLES_PATH: ADVERB_ROLES_SHA}
 INPUT_SHA[REFLEXIVE_TABLE] = "d121a203daec"
+INPUT_SHA[STOPWORDS] = "2b6c7d9fdae9"
+INPUT_SHA[PP + "focal_terms.py"] = "892f98bb986e"     # P2's matcher with the RL-095 hyphen pattern (acts in G3 only)
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
 LAYOUT_WORDS = {'table', 'tables', 'tab', 'fig', 'figs', 'figure', 'figures', 'appendix', 'appendices', 'supplementary',
                 'panel', 'panels', 'equation', 'equations', 'eq', 'eqs'}

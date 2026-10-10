@@ -134,7 +134,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 133	publicly	6	manner	keep			ariate performance benchmarks were available publicly from Open LLM and Open Medical LLM l
 134	responsibly	6	manner	keep			nary step before the same instruments can be responsibly adopted in any applied reading re
 135	properly	6	manner	keep			T may generate a long letter if not prompted properly.
-136	forward	6	particle	open question 5			ere are several challenges to address moving forward.
+136	forward	6	particle	fuse with its verb like a phrasal particle, else leave in its phrase	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		ere are several challenges to address moving forward.
 137	fairly	6	degree	keep			ent that mitigates some common challenges in fairly assessing LLM performance and comparin
 138	probably	6	hedge_likelihood	keep			being motivated to use ChatGPT more (78.3%), probably because ChatGPT allows More than fou
 139	collectively	6	discourse	drop			al shortcomings of large language models and collectively agree on the crucial pieces of i
@@ -189,7 +189,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 188	almost	4	degree	keep			, and the Borda vector averages are likewise almost perfectly correlated (except Claude 3.
 189	unless	4	subordinator	drop			Unless mentioned otherwise, all aspects of th
 190	regularly	4	frequency_high	drop			tGPT valuable are more likely to use ChatGPT regularly.
-191	behind	4	particle	open question 5			: high_coverage MT (such as No Language Left Behind, FLORES-20015) enables translate_train
+191	behind	4	particle	fuse with its verb like a phrasal particle, else leave in its phrase	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		: high_coverage MT (such as No Language Left Behind, FLORES-20015) enables translate_train
 192	urgently	4	manner	keep			 states in Nature's Daily briefing: ‘Science urgently needs a plan for ChatGPT’.2 A contro
 193	certainly	4	booster	drop			This function will certainly be improved in future versions of C
 194	purely	4	focus_exclusive	keep			 thus following a human_like pattern, or are purely motivated by altruism.
@@ -246,12 +246,12 @@ rank	word	attachments	role	action	flag	owner_note	example
 245	annually	3	schedule	keep			 research on LLMs in TCM has been increasing annually, with numerous professional LLMs eme
 246	predictably	3	stance	drop			ance benchmarks, ChatGPT-4's accuracy aligns predictably with the variation in question di
 247	statistically	2	manner	keep			Age was not statistically associated with use of or famil
-248	ahead	2	particle	open question 5			Looking ahead, we anticipate the continued developmen
+248	ahead	2	particle	fuse with its verb like a phrasal particle, else leave in its phrase	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		Looking ahead, we anticipate the continued developmen
 249	culturally	2	manner	keep			anguage to provide a list of characteristics culturally associated with each social catego
 250	relatively	2	degree	keep			 ChatGPT), as retrieved via top words, align relatively less with human representations of
 251	semantically	2	manner	keep			n comparative analysis between the delivered semantically and emotionally annotated stimul
 252	daily	2	schedule	keep			 yet trained using real_time data that comes daily from the internet, biomedical databases
-253	throughout	2	particle	open question 5			In contrast, RL remained stable throughout, while GPT-4 fluctuated significan
+253	throughout	2	particle	drop	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		In contrast, RL remained stable throughout, while GPT-4 fluctuated significan
 254	intuitively	2	manner	keep			ext that allows users to receive information intuitively.
 255	linearly	2	manner	keep			The input features are first flattened and linearly transformed into similar to the Q, K
 256	sort	2	hedge_other	drop	'sort of' (hedge)		ese sources, sometimes really a great way of sort of summarizing the present information a
@@ -291,7 +291,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 290	adaptively	2	manner	keep			Furthermore, LLMs can adaptively refine LLMs' responses based on st
 291	excessively	2	degree	keep			Students may depend excessively on LLMs to perform learning tasks
 292	thereafter	2	time	drop			BERT has been thereafter extensively fine_tuned by research
-293	back	2	particle	open question 5			omatic text revision, and writes the results back; a GitHub Actions workflow that uses our
+293	back	2	particle	fuse with its verb like a phrasal particle, else leave in its phrase	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		omatic text revision, and writes the results back; a GitHub Actions workflow that uses our
 294	unconsciously	2	manner	keep			y instructed to stay in one persona, LLM may unconsciously shape LLM's style according to 
 295	temporarily	2	time	drop			The above work shows that we can both temporarily customize an LLM's personality (v
 296	reasonably	2	manner	keep			 Five trait scores can be inferred from text reasonably well, and showed that LLM-based em
@@ -304,7 +304,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 303	alone	2	focus_exclusive	keep			 in DRP detection as compared to pharmacists alone, but the LLM alone performed less effec
 304	steadily	2	manner	keep			However, LLMs are evolving steadily, and newer versions of ChatGPT now a
 305	formerly	2	time	drop			Google Gemini, formerly known as Google Bard, has been repor
-306	under	2	particle	open question 5			ately 2,000 sentences after segmentation) in under 1 s. By comparison, LLM-TIKG17 (Llama2-
+306	under	2	particle	keep before a number (numbers rule), else drop	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		ately 2,000 sentences after segmentation) in under 1 s. By comparison, LLM-TIKG17 (Llama2-
 307	insofar	2	discourse	drop			prisal estimates differ from the EEG results insofar as the GPT-2 surprisal estimates sugg
 308	afterward	2	time	drop			Afterward, the BioBert pre_trained model is u
 309	base	2	parse_leftover	leave			nificant, which is slightly higher than Bert-base-uncased and Bert-base-cased algorithms.
@@ -350,7 +350,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 349	immediately	1	manner	keep			les rather than narrative text that could be immediately passed to an LLM.
 350	notwithstanding	1	discourse	drop			Notwithstanding, LLMs pose significant data p
 351	barely	1	negative_form	keep			s on BoolQ and RTE tasks, all seq2seq models barely beat the majority classifier on both t
-352	forwards	1	particle	open question 5			Going forwards, LLMs are predicted to impact all as
+352	forwards	1	particle	fuse with its verb like a phrasal particle, else leave in its phrase	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		Going forwards, LLMs are predicted to impact all as
 353	image_based	1	other	leave			ons in accurately analyzing and interpreting image_based data.
 354	falsely	1	manner	keep			005151 about biochemistry questions, ChatGPT falsely stated that these questions, being pr
 355	unsuccessfully	1	negative_form	keep			Gemini unsuccessfully tried to “justify” its choice,
@@ -371,8 +371,8 @@ rank	word	attachments	role	action	flag	owner_note	example
 370	really	1	booster	drop			’d like to say &Co, but there is no &Co yet) really this incredible lever on all levels of
 371	definitely	1	booster	drop			asks such as insurance letters, ChatGPT will definitely be a game_changer and safe healthc
 372	suboptimally	1	manner	keep			ding information, particularly when prompted suboptimally or when clinical details are inc
-373	before	1	particle	open question 5			ation has also been tested in the literature before.
-374	around	1	particle	open question 5			essful in MSE, still has an error proportion around 30%.
+373	before	1	particle	drop	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		ation has also been tested in the literature before.
+374	around	1	particle	keep before a number (numbers rule), else drop	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		essful in MSE, still has an error proportion around 30%.
 375	seldom	1	frequency_low	keep			erogeneous model families: recent AD studies seldom compare transformer models against div
 376	diagnostically	1	manner	keep			llected an independent dataset of 1014 cases diagnostically solved between July 2024 and D
 377	concisely	1	manner	keep			acts in the record data before providing the concisely worded output to be automatically e
@@ -417,7 +417,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 416	conditionally	1	manner	keep			 language model generates artificial enzymes conditionally upon prompts from the Enzyme Co
 417	improperly	1	negative_form	keep			To mitigate the risk of improperly saving reward and configuration fi
 418	ambiguously	1	manner	keep			C, CADRADS, Cardiac function) was missing or ambiguously stated, the prompt was adapted to
-419	despite	1	particle	open question 5			Of note, despite all coronary CTA reports were in Germ
+419	despite	1	particle	drop	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		Of note, despite all coronary CTA reports were in Germ
 420	concomitantly	1	manner	keep			f users’ intent to use ChatGPT will increase concomitantly with users' trust in the techno
 421	nb	1	other	leave			le 2 presents the performance metrics of the NB, TB, and BERT-based models using the annot
 422	monetarily	1	manner	keep			ts to resolve this, it can be very expensive monetarily (and for other resources) and have
@@ -430,7 +430,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 429	moderately	1	manner	keep			LLMs performed moderately to strongly on several structured 
 430	seemingly	1	hedge_other	drop			del (LLM) performance, with RLHF fine_tuning seemingly leading to the production of more ‘
 431	putatively	1	manner	keep			value alignment’ is, which tools are used to putatively achieve value alignment, and wheth
-432	beside	1	particle	open question 5			Beside being an epistemic issue (how do we kn
+432	beside	1	particle	drop	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		Beside being an epistemic issue (how do we kn
 433	mini	1	other	leave			cumentation quality was assessed by a gpt-4o-mini-based evaluator guided by a clinician_de
 434	best_performing	1	other	leave			In our study, the best_performing fine_tuned LLMs, Qwen3-14B, o
 435	inappropriately	1	negative_form	keep			t provided topic summaries, which were often inappropriately merged.
@@ -494,7 +494,7 @@ rank	word	attachments	role	action	flag	owner_note	example
 493	illegitimately	1	manner	keep			these models exhibit demographic biases that illegitimately favor certain groups over othe
 494	personally	1	manner	keep			Even if a job seeker personally does not trust an LLM for any care
 495	scalably	1	manner	keep			 tens of thousands of instances using a LLM, scalably and rapidly.
-496	away	1	particle	open question 5			ti_scale, such as small targets that are far away.
+496	away	1	particle	fuse with its verb like a phrasal particle, else leave in its phrase	decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)		ti_scale, such as small targets that are far away.
 497	redundantly	1	manner	keep			ifferent dimensions of fictional worlds, not redundantly encoding the same information.
 498	externally	1	manner	keep			The use of externally established genre labels to show t
 499	interchangeably	1	manner	keep			large language models (LLMs)” are often used interchangeably in the literature, contributi

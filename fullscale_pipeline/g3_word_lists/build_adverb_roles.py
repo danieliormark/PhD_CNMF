@@ -12,7 +12,8 @@ generalisers and focusers that do not change the claim (often, typically, consis
 automatically); keep in-clause 'first' (no conflict with spelled-out numbers being kept).
 
 Actions: keep = attach to the verb group; drop; leave = neither attached nor dropped; conditional actions are spelled
-out in the action column; 'open question 5' = phrasal particles.
+out in the action column. The 12 'particle' rows (first left as 'open question 5') carry the actions decided in
+G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3).
 """
 import json, os
 
@@ -65,6 +66,11 @@ ACTION = {"degree": "keep", "frequency_low": "keep", "frequency_high": "drop", "
           "deictic_conditional": "drop at the end of a clause (before . , ; : or ')' or the end), else keep",
           "other": "leave", "time": "drop", "stance": "drop", "booster": "drop", "discourse": "drop", "subordinator": "drop",
           "particle": "open question 5", "parse_leftover": "leave"}
+# the 12 "particle" rows, decided after item 5 (G3_POSTPROCESSING.md §6 item 8, owner 2026-10-09, option 3)
+PARTICLE_ACTION = {**{w: "fuse with its verb like a phrasal particle, else leave in its phrase"
+                      for w in ("forward", "forwards", "ahead", "behind", "back", "away")},
+                   **{w: "drop" for w in ("before", "throughout", "despite", "beside")},
+                   **{w: "keep before a number (numbers rule), else drop" for w in ("around", "under")}}
 OWNER_NOTES = {   # verbatim from the owner's review, commit 03d29d8
     "yet": "keep", "still": "drop - does not add new information",
     "otherwise": "not sure about this one - assistant recommended keep (contrastive/conditional, like instead/rather)",
@@ -129,7 +135,10 @@ def main():
         ex = d["examples"].get(w, "").replace("\t", " ").replace("\n", " ")
         if (w, n) in added:
             ex = f"(not in the attachment sample; {NEGATIVE_FORMS[w]} occurrences in the text of shards 0-9)"
-        out.append(f"{i}\t{w}\t{n}\t{r}\t{ACTION[r]}\t{FLAGS.get(w, '')}\t{OWNER_NOTES.get(w, '')}\t{ex}")
+        act, flag = ACTION[r], FLAGS.get(w, '')
+        if r == "particle":
+            act, flag = PARTICLE_ACTION[w], "decided in G3_POSTPROCESSING.md §6 item 8 (owner 2026-10-09, option 3)"
+        out.append(f"{i}\t{w}\t{n}\t{r}\t{act}\t{flag}\t{OWNER_NOTES.get(w, '')}\t{ex}")
     path = os.path.join(HERE, "adverb_roles.tsv")
     open(path, "w").write("\n".join(out) + "\n")
     print(path, len(out) - 1, "words,", len(added), "added negative/low forms")
