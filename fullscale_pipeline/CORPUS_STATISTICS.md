@@ -13,6 +13,8 @@ and OpenAlex. §8 is a separate, narrower, differently-sourced analysis: the 28,
 `valid` (G3's actual scope for M1), using only MEDLINE's own PublicationType tags, never the
 publisher's self-declared field or OpenAlex. Do not mix the two: §1-§7's article-type row (a) and
 §8's primary type are not the same measurement over the same corpus.]*
+*[2026-10-10: §9 (author coverage) uses the same narrowed corpus as §8, after the retraction filter:
+the 28,029-article working corpus.]*
 
 ## 1. Inputs
 
@@ -324,3 +326,127 @@ no network call needed, both caches already complete for this corpus). Writes
 PublicationType tags, the primary type, and a `retracted` flag) and prints both tables above.
 Then `corpus_statistics/working_corpus.py` applies the retraction filter and writes
 `working_corpus_pmcids.txt` and `corpus_exclusions_post_g3.csv`.
+
+## 9. Author coverage of the working corpus (2026-10-10)
+
+Scope: the working corpus of §8 (`working_corpus_pmcids.txt`, 28,029 articles); the analysis covers
+the 27,991 with a PMID, and reports the 38 without one separately. Pipeline agreed with the owner
+before running: article-anchored; PubMed's own author list is the byline backbone; OpenAlex only as
+the identity layer (author IDs), matched per article, never author-first.
+
+### 9.1 Repository and journal versions of one article (checked first, owner's request)
+
+The concern: one paper present twice, as a repository copy (preprint server, PMC's preprint
+collection) and as the journal version; and, for journal data, a repository location taken instead
+of the journal. Checked on the 28,029, not assumed from the preprocessing record:
+
+- **No repository copies remain in the corpus.** F1 (PIPELINE.md, rule R1) removed every article whose
+  PMC header says "Article version: preprint" (1,475). In the working corpus the header version is "1"
+  (28,013) or "2" (16, journal revisions); no journal abbreviation or publisher is a repository
+  (bioRxiv, medRxiv, Research Square, arXiv, SSRN, Preprints, Zenodo, OSF, ...); no header DOI is a
+  repository DOI.
+- **No identifier shared by two articles:** 0 duplicate PMIDs, 0 duplicate DOIs, 0 OpenAlex works
+  matched to two articles.
+- **Identical normalised titles: 2 pairs, both different papers, kept.** PMC12507154 / PMC12947111
+  (Indian J Ophthalmol): an original study (6 authors) and a piece by 2 other authors under the same
+  title. PMC7618139 / PMC7618188: two papers by overlapping teams in Cortex and NeuroImage, different
+  author lists and PMIDs.
+- **OpenAlex side.** OpenAlex keeps separate records for a preprint and its journal version, and the
+  PMID is sometimes attached to the preprint record. The matching of §4 already keeps, per article,
+  the OpenAlex record whose DOI is the article's own PMC-header DOI, i.e. the version in the corpus.
+  In the working corpus this overrode the PMID hit 69 times: the PMID hit was a repository record
+  30 times (arXiv, bioRxiv/medRxiv, Research Square, SSRN, ChemRxiv, figshare and institutional
+  repositories), another version of the same journal article 36 times (mostly F1000Research-type
+  versions, `.1` in PMC and `.2` in OpenAlex), and something else 3 times. **No kept record has a repository DOI.** 12 kept records are another
+  publication than the corpus version (a conference abstract, a chapter, a later journal record;
+  the corpus version is not in OpenAlex); their author lists agree name by name with PubMed in all
+  12, so their author IDs are used. 22 recent articles (2025: 9, 2026: 13) have no OpenAlex record.
+- **Journal data:** taken from PubMed (`NlmUniqueID`, ISSN), which for this corpus is always the
+  journal. OpenAlex locations are not used for the journal; where they are needed later (e.g. the 38
+  articles without a PMID), a location whose source is a repository is ignored and the journal
+  location used.
+
+### 9.2 Method
+
+1. `pubmed_authors_fetch.py`: NCBI `efetch` (MEDLINE citation XML) for the 27,991 PMIDs: author list in
+   order (surname, forenames, ORCID where the publisher supplied it, affiliation text), group
+   (collective) authors, journal, dates. All 27,991 found; no author list is marked incomplete
+   (`CompleteYN`); every article has at least one personal author; 217 also list a group author.
+2. OpenAlex: the cached record of §4 (`openalex_verified.json`, author ID, ORCID and name per
+   authorship; fetched 2026-10-02), restricted to the working corpus.
+3. Alignment inside each article: PubMed bylines and OpenAlex authorships are aligned in order
+   (longest common subsequence); a pair counts only if the surname agrees (all surname tokens present,
+   or the joined surname equal to consecutive tokens: "de Freitas" / "DeFreitas") and, where both sides
+   have given names, an initial agrees. No pair is made on position alone. Check: of 163,646 aligned
+   bylines with an OpenAlex ID, 0 have a disagreeing given-name initial (a first version, matching the
+   joined surname anywhere inside the name, paired 9 wrong bylines, e.g. "He" inside "Shusheng";
+   fixed before these figures).
+4. A byline is identified if it has an OpenAlex author ID or an ORCID. Distinct people: OpenAlex IDs and
+   ORCIDs merged where they co-occur on a byline (union-find); unidentified bylines give the upper bound.
+
+`author_coverage.py` writes `corpus_statistics/author_coverage_by_article.csv` (per article, counts
+only, no names) and, untracked, `diagnostics/author_coverage/bylines.jsonl` and
+`author_coverage_summary.json`.
+
+### 9.3 Results
+
+| Bylines (PubMed personal authors, 27,991 articles) | n | % |
+|---|---|---|
+| Total | 175,502 | 100 |
+| Aligned to an OpenAlex authorship | 174,732 | 99.6 |
+| With an OpenAlex author ID | 163,646 | 93.2 |
+| With an ORCID from PubMed (publisher-supplied) | 58,663 | 33.4 |
+| Identified (OpenAlex ID or ORCID) | 166,821 | 95.1 |
+| Neither | 8,681 | 4.9 |
+
+| Articles (27,991) | n | % |
+|---|---|---|
+| Every byline has an OpenAlex ID | 20,765 | 74.2 |
+| Every byline identified (OpenAlex ID or ORCID) | 22,474 | 80.3 |
+| At least one OpenAlex ID | 27,761 | 99.2 |
+| No byline identified | 107 | 0.4 |
+| First or last author unidentified | 1,846 | 6.6 |
+
+**Distinct people:** 131,756 OpenAlex author IDs and 104,689 ORCIDs; merged, **133,128 identified
+people**; with each of the 8,681 unidentified bylines counted as a separate person, at most 141,809.
+
+**Why 770 bylines have no aligned authorship:** OpenAlex lists fewer authors than PubMed (338 bylines,
+56 articles; e.g. one author for a nine-author paper), OpenAlex's list is cut at 100 authorships
+(258, 7 articles; a single-work query returns the full list, so this is fixable at the next fetch),
+no OpenAlex record (106, 22 articles), names that do not match (68, 46 articles). In the other
+direction 2,859 OpenAlex authorships have no PubMed byline: mostly members of a group author that
+OpenAlex lists individually, and authorships OpenAlex duplicates within one work. They are not
+bylines and are not counted.
+
+**OpenAlex disambiguation, checked against the publisher-supplied ORCID (independent of OpenAlex):**
+of 45,898 ORCIDs seen with an OpenAlex ID, 501 (1.1%) appear under two or more OpenAlex IDs (one
+person split into several profiles; the merge above joins them); of 46,361 OpenAlex IDs seen with a
+PubMed ORCID, 55 (0.12%) carry two or more ORCIDs (different people merged into one profile; not
+corrected); 566 bylines have a PubMed ORCID different from the ORCID on the OpenAlex profile.
+
+**By year** (bylines; % with OpenAlex ID / % identified): 2019 58 (100 / 100); 2020 460 (92.4 / 94.8);
+2021 2,064 (96.5 / 97.6); 2022 3,866 (96.9 / 97.5); 2023 10,701 (96.7 / 97.5); 2024 29,754
+(94.8 / 95.9); **2025 65,785 (89.2 / 91.9)**; 2026 62,814 (95.9 / 97.3). The 2025 dip seen in §5 remains.
+
+**By primary type** (§8; % with OpenAlex ID / % identified): research article 143,508 bylines
+(93.0 / 94.9); review 22,288 (94.3 / 95.4); systematic review etc. 5,604 (94.2 / 96.1); clinical
+trial/protocol 1,971 (92.7 / 95.5); editorial/letter/comment/news 1,530 (95.0 / 96.6); dataset 329
+(93.0 / 94.8); conference proceedings 182 (96.2 / 96.7); historical article 90 (92.2 / 93.3). No type
+stands out.
+
+**The 38 articles without a PMID** have no PubMed author list; all 38 have an OpenAlex record (found by
+DOI), with 214 authorships in total. Not included in the tables above.
+
+**Compared with §4** (34,662 articles, OpenAlex's own author lists as bylines): there, 73.6% of
+articles had an ID for every author and 6.8% of bylines lacked one. On the working corpus, with
+PubMed's list as the byline, 74.2% of articles have an OpenAlex ID for every byline and 6.8% of bylines
+lack one; ORCID lowers the unidentified share to 4.9%.
+
+**Not done here** (later steps): affiliation coverage (owner: later); institutions, which need a new
+OpenAlex fetch (the cache holds no institutions or locations; the earlier key is not in this
+environment, so `OPENALEX_API_KEY` must be set when it is run); the decision on unidentified bylines
+(placeholder nodes or name linking, §5).
+
+**Reproduction:** from `corpus_statistics/`: `NCBI_API_KEY=... python3 pubmed_authors_fetch.py`
+(about 9 min; cache `diagnostics/author_coverage/pubmed_authors.json`), then
+`python3 author_coverage.py` (about 20 s).

@@ -1456,3 +1456,30 @@ reference set for every later step, author counts included) and `corpus_exclusio
 **Known gap, not resolved:** the 38 valid articles with no PMID have no PubMed record to check for
 retraction, so they are kept on absence of evidence, not confirmed negative — weaker than the
 confirmation the other 27,991 working-corpus articles have. Documented in CORPUS_STATISTICS.md §8. [LOG]
+
+**RL-133 · 2026-10-10 · CORPUS-STATS · AUDIT (read-only) + CODE (new) + OUTPUT + DOC · LIVE**
+Owner: run the author coverage analysis with the agreed pipeline (article-anchored; PubMed author list
+as byline backbone; OpenAlex as identity layer only); first check that repository and journal versions
+of one article do not both remain, journal data preferring the non-repository location. Host incline37.
+(1) Duplicate check on the 28,029 working corpus: no "Article version: preprint" left (F1 rule R1
+removed 1,475); no repository journal, publisher or header DOI; 0 shared PMIDs, DOIs or OpenAlex works;
+2 identical-title pairs, both different papers (kept). OpenAlex: the §4 matching keeps the record whose
+DOI is the article's PMC-header DOI; it overrode the PMID hit 69 times (30 repository records, 36 other
+versions of the same journal article, 3 other); 0 kept records have a repository DOI. 12 kept records
+are another publication than the corpus version, but their author lists agree name by name with PubMed
+in all 12. Journal data come from PubMed (NLM ID, ISSN); repository locations in OpenAlex are ignored.
+A first repository-DOI pattern flagged Cold Spring Harbor journals (`10.1101/gr.`) and F1000-type
+journals as repositories and missed ChemRxiv and institutional repositories; corrected before reporting.
+(2) New `corpus_statistics/pubmed_authors_fetch.py` (efetch, 27,991 PMIDs, all found, no incomplete
+author list) and `corpus_statistics/author_coverage.py`. Alignment PubMed ↔ OpenAlex inside each
+article: order-preserving, surname plus given-name initial; a first version matched the joined surname
+as a substring anywhere ("He" inside "Shusheng"), 9 wrong pairs, fixed; after the fix 0 of 163,646
+aligned bylines with an OpenAlex ID have a disagreeing initial. Results: 175,502 bylines; 93.2% with an
+OpenAlex ID, 33.4% with a publisher ORCID, 95.1% identified by either, 4.9% neither. Articles: 74.2%
+every byline with an OpenAlex ID, 80.3% every byline identified, 0.4% none; first or last author
+unidentified 6.6%. Distinct identified people 133,128 (at most 141,809 with unidentified bylines). OpenAlex
+vs publisher ORCID: 1.1% of ORCIDs split over several OpenAlex IDs, 0.12% of OpenAlex IDs with several
+ORCIDs. 2025 bylines lowest (89.2% OpenAlex ID). Unaligned bylines (770) are OpenAlex incompleteness (fewer
+authors listed, the 100-authorship cut, no record), not alignment failures. Not done: affiliations
+(owner: later), institutions (need a new OpenAlex fetch; no `OPENALEX_API_KEY` in this environment).
+Documented in CORPUS_STATISTICS.md §9. [LOG]
