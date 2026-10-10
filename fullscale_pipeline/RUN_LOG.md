@@ -1483,3 +1483,24 @@ ORCIDs. 2025 bylines lowest (89.2% OpenAlex ID). Unaligned bylines (770) are Ope
 authors listed, the 100-authorship cut, no record), not alignment failures. Not done: affiliations
 (owner: later), institutions (need a new OpenAlex fetch; no `OPENALEX_API_KEY` in this environment).
 Documented in CORPUS_STATISTICS.md §9. [LOG]
+
+**RL-134 · 2026-10-10 · CORPUS-STATS · CODE (new) + OUTPUT + DOC · LIVE**
+Owner, before affiliations: (1) what a byline is (one author entry on one article); (2) author coverage for
+all remaining papers and for research articles only; (3) what to do with bylines without an OpenAlex ID.
+OpenAlex key supplied by the owner for this session only; kept in a mode-600 file in the session
+scratchpad, passed by environment variable, never written to the repository (checked: absent from every
+output and staged file). New `corpus_statistics/author_coverage_scopes.py`; new
+`corpus_statistics/openalex_works_fetch.py` (fresh works with full authorships, institutions and locations
+for the working corpus; 27,999 refreshed, 8 gone, 8 of 42 DOI lookups found, 13 works re-read past the
+100-authorship cut); `author_coverage.py` gained `--openalex refresh` (cache mode reproduces its earlier
+output byte for byte). (2) Coverage barely differs by scope: identified bylines 95.2% (all, 28,029
+articles incl. the 38 without PMID via OpenAlex), 95.1% (research articles, 22,631), 95.2% (articles +
+reviews). (3) Refresh moved unidentified bylines only 8,681 → 8,361. Of these, 95% are authorships OpenAlex
+lists without an author profile; 2025 is over-represented (7.8% of its bylines vs 2.4-5.2% elsewhere),
+as are middle positions; 99.6% have PubMed affiliation text and 89% of ID-less OpenAlex authorships carry an
+institution. 1,276 match exactly one identified person by surname + first given name, 889 several, 182
+names repeat among unidentified bylines; about 2,550 (1.5% of bylines) could be people who appear
+elsewhere in the corpus. 86% of identified people appear in only one corpus article. Options put to the
+owner (not decided): drop; one placeholder author per byline (with its institution); placeholders plus
+corroborated name linking; re-query OpenAlex before the M1 build. Documented in CORPUS_STATISTICS.md
+§9.4-§9.5. [LOG]

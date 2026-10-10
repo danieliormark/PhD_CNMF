@@ -450,3 +450,58 @@ environment, so `OPENALEX_API_KEY` must be set when it is run); the decision on 
 **Reproduction:** from `corpus_statistics/`: `NCBI_API_KEY=... python3 pubmed_authors_fetch.py`
 (about 9 min; cache `diagnostics/author_coverage/pubmed_authors.json`), then
 `python3 author_coverage.py` (about 20 s).
+
+### 9.4 Coverage by scope (owner question, 2026-10-10)
+
+A **byline** is one author entry on one article: a person on five articles has five bylines. "all" is
+the working corpus (28,029 articles; for the 38 without a PMID the OpenAlex authorships stand in as
+bylines). "article" is the primary type "Research article" of §8 (22,631, not §8's 22,672: 41 of the
+46 retracted papers were research articles). "article+review" adds narrative and systematic reviews.
+Figures on the refreshed OpenAlex records of §9.5 (`author_coverage_scopes.py --openalex refresh`):
+
+| | all | article | article+review |
+|---|---|---|---|
+| Articles | 28,029 | 22,631 | 27,354 |
+| Bylines | 175,716 | 143,508 | 171,400 |
+| % bylines with an OpenAlex ID | 93.5 | 93.3 | 93.5 |
+| % bylines with a publisher ORCID | 33.4 | 33.7 | 33.3 |
+| % bylines identified (either) | 95.2 | 95.1 | 95.2 |
+| Unidentified bylines | 8,371 | 6,979 | 8,197 |
+| % articles, every byline with an OpenAlex ID | 74.8 | 74.0 | 74.7 |
+| % articles, every byline identified | 80.7 | 80.3 | 80.6 |
+| Articles with no byline identified | 105 | 90 | 101 |
+| % articles, first or last author unidentified | 6.5 | 6.6 | 6.5 |
+| Identified people | 133,576 | 110,474 | 130,742 |
+| Upper bound (each unidentified byline a person) | 141,947 | 117,453 | 138,939 |
+
+Coverage does not depend on the scope.
+
+### 9.5 Refreshed OpenAlex records and the unidentified bylines (2026-10-10)
+
+`openalex_works_fetch.py` re-read the OpenAlex works of the working corpus (key and contact e-mail from
+the environment only; cache `diagnostics/author_coverage/openalex_works.json`), with full authorships
+(author ID, ORCID, institutions, raw affiliation strings) and locations: 27,999 works re-read, 8 since
+merged or deleted by OpenAlex, 8 of 42 DOI lookups now find the corpus version, 13 works with exactly
+100 authorships re-read one by one past the list cut. `author_coverage.py --openalex refresh` repeats
+§9.3 on them (outputs with suffix `_refresh`; the cache-based run is unchanged byte for byte).
+
+Eight days after the first fetch: unidentified bylines 8,681 → 8,361 (366 gained an identity, 46 lost
+one), OpenAlex ID changed for 92 bylines (profiles merged or split). OpenAlex lag explains little.
+
+**The 8,361 that remain** (PubMed bylines):
+- 7,926 (95%) are aligned to an OpenAlex authorship that has no author ID: OpenAlex lists the person
+  but has not attached a profile. 391 are not aligned (OpenAlex lists fewer or differently written
+  authors), 44 are in articles with no OpenAlex record.
+- Year: 7.8% of 2025 bylines are unidentified, against 2.4–5.2% in the other years (5,148 of the 8,361).
+- Position: middle 77.0% (68.8% of all bylines), first 13.6% (15.9%), last 9.5% (15.3%).
+- They are spread over 5,395 articles; 3,829 of them have only one unidentified byline.
+- Affiliation survives: 99.6% have PubMed affiliation text; 89.0% of OpenAlex authorships without an
+  author ID still carry an institution (93.9% of those with one).
+- Name match to identified people in the corpus (surname plus first given name): 1,276 (15.3%) match
+  exactly one identified person, 889 match two or more, 6,080 match none; 182 names occur among
+  unidentified bylines in two or more articles (385 bylines). At most about 2,550 bylines (1.5% of all)
+  could therefore be a person who appears elsewhere in the corpus.
+- For comparison, **86.0% of identified people appear in only one corpus article** (12,531 in two,
+  3,259 in three, 1,254 in four, 1,650 in five or more).
+
+How to treat them is open (owner); the options are discussed in RUN_LOG RL-134.

@@ -23,6 +23,28 @@ TYPES = {r["pmcid"]: r["primary_type"] for r in csv.DictReader(open(FP + "corpus
 SAME_VERSION = {"pmid+doi", "doi", "pmid_only_no_header_doi", "doi_differs_from_pmid_hit"}
 OTHER_VERSION = {"pmid_doi_mismatch_no_doi_hit"}   # OpenAlex record is another publication (abstract, chapter)
 
+# --openalex refresh: same per-article choice, authorships from openalex_works_fetch.py's fresh records;
+# the corpus version found by DOI replaces another publication or a work OpenAlex has since removed.
+import sys
+REFRESH = "--openalex" in sys.argv and sys.argv[sys.argv.index("--openalex") + 1] == "refresh"
+SUFFIX = "_refresh" if REFRESH else ""
+if REFRESH:
+    OW = json.load(open(OD + "openalex_works.json"))
+    as_old = lambda w: dict(id=w["id"], doi=w["doi"], authors=[dict(id=a["id"], orcid=a["orcid"], raw=a["raw"] or a["name"])
+                                                              for a in w["authorships"]])
+    V2 = {}
+    for p in wc:
+        m, w = V.get(p) or ["unmatched", None]
+        fresh = OW["by_id"].get(w["id"].rsplit("/", 1)[-1]) if w else None
+        by_doi = OW["by_doi"].get((((H.get(p) or {}).get("doi")) or "").lower())
+        if by_doi and (not fresh or m in OTHER_VERSION):
+            V2[p] = ["doi", as_old(by_doi)]
+        elif fresh:
+            V2[p] = [m, as_old(fresh)]
+        else:
+            V2[p] = ["unmatched", None]
+    V = V2
+
 
 def toks(s):
     s = unicodedata.normalize("NFKD", s or "")
@@ -115,10 +137,10 @@ for pmcid in wc:
                      n_bylines=len(personal), n_group=len(group), n_oa_aligned=len(pairs), n_oa_id=n_id,
                      n_orcid=n_orcid, n_identified=n_ident, n_oa_authorships=len(oa), complete=rec["complete"]))
 
-with open(FP + "corpus_statistics/author_coverage_by_article.csv", "w", newline="") as f:
+with open(FP + f"corpus_statistics/author_coverage_by_article{SUFFIX}.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(arts[0].keys()))
     w.writeheader(); w.writerows(arts)
-with open(OD + "bylines.jsonl", "w") as f:
+with open(OD + f"bylines{SUFFIX}.jsonl", "w") as f:
     for b in bylines:
         f.write(json.dumps(b, ensure_ascii=False) + "\n")
 
@@ -202,5 +224,5 @@ S["by_type"] = {t: dict(bylines=v[0], openalex_id=v[1], identified=v[2]) for t, 
 NP = [a for a in arts if a["pubmed"] == "no_pmid"]
 S["no_pmid_tail"] = dict(articles=len(NP), with_openalex_record=sum(a["oa"] != "none" for a in NP),
                          openalex_authorships=sum(a["n_oa_authorships"] for a in NP))
-json.dump(S, open(OD + "author_coverage_summary.json", "w"), indent=1, default=dict)
+json.dump(S, open(OD + f"author_coverage_summary{SUFFIX}.json", "w"), indent=1, default=dict)
 print(json.dumps(S, indent=1, default=dict))
