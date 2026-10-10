@@ -161,6 +161,16 @@ python3 PG/scripts/merge_g2_v3.py --nshards 50                         # on incl
   been measured. *[2026-10-09, RL-112: the mistyped copula was measured on shard 0: about 15 of 4,154 auxiliary-typed
   "be" (G3_POSTPROCESSING.md §6 item 1). "can" typed `M` is handled by G3 as a modal word. The others are still
   unmeasured.]*
+  *[2026-10-10, RL-127: the lemmatiser artefact measured corpus-wide, not just sampled: 35,201 occurrences, 4,934
+  distinct (root, lemma) pairs where an underscore-joined root's lemma differs from the root, most following one
+  pattern (a spurious trailing "e" on a verb that does not take one — `pre_trained`→`pre_traine` 2,198,
+  `retrieval_augmented`→`retrieval_augmente` 803, and about 30 more down to low frequency), while many same-shaped
+  compounds already lemmatise correctly (`fine_tuned`→`fine_tune` 6,871, `ai_generated`→`ai_generate` 1,622) — the
+  lemmatiser is inconsistent on out-of-vocabulary joined compounds, not uniformly wrong, and not a process-order bug
+  (tested directly: delaying the hyphen-join does not help, and undoing it loses the clause structure entirely, G2
+  item 30(l)). Not yet fixed: a small, measured correction table in G3 is the recommended approach, not a G2 rerun
+  (both stages are deterministic, so a plain rerun reproduces the same lemma unchanged). See RUN_LOG RL-127,
+  G3_POSTPROCESSING.md §8 item 4.]*
 - **Repeated words:** graphbrain edges do not carry token positions, so when a word occurs twice in a unit its atom
   string is the same for both occurrences; `atom2word` lists both positions. Attribution of atoms to sub-edges is
   exact; only the token index of such an atom is ambiguous (10.7% of the atom records in a G3 test).

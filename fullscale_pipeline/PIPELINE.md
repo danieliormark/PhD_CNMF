@@ -120,6 +120,7 @@ R1 ──► R2/R3 ──► P0 sequence_metadata_relaxed.csv (GAP) ──► P1
 | Articles with focal sentences, P2 v2 (2026-09-26) | 34,662 | of 39,299; 4,637 without (item 24); 268,532 blocks, 1,297,393 sentences (684,366 focal); file `LCS/focal_extractions_v2.jsonl` |
 | Articles with a resolved record, P6 v2 (2026-09-27/28) | 34,662 | same articles as P2 v2; 203,493 of 285,941 personal pronouns replaced (11,445 with an antecedent in the context sentences), 48,906 rejected, 34,025 demonstratives left, 340,271 noun-phrase links; `LCS/coref_v2/` |
 | Focal sentences after P7 v2 (2026-09-28) | 702,948 | of 1,297,393; 34,662 articles; 12,644 citation tokens in 14,154 places became 10,555 works (5,696 identified by DOI or PMCID, 2,644 by reference text only, 2,215 unresolved), 964 cited in two or more articles; `LCS/focal_sentences_v2.jsonl`, `LCS/citation_works_v2.jsonl` (after the DOI fix of RL-069) |
+| **Articles curated by G3, in M1's scope (2026-10-10, RL-125)** | **28,196** | of 34,662 (81.3%); 6,466 excluded as focal-term false positives (G3_POSTPROCESSING.md §6 item 6, item 24 below); of the 28,196, 121 have no usable G3 parent (**28,075** with actual content); `PG/g3_v1/g3_articles_v1.jsonl` |
 | Documents with focal windows (P2 v1, May) | 22,795 | superseded; 5,489 without = exactly the rows of `exclusion_report.csv` |
 | Documents in v3 (P6+P7) | 22,795 | 22,572 kept + 223 restored |
 | Shards / raw DBs / curated DBs | 50 / 50 / 50 | |
@@ -327,6 +328,13 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
     for something else or with no evidence; 17 ProGen/BioBridge/PaLM 2/ESM-2 homonyms) are excluded from G3 and M1 by
     `fullscale_pipeline/g3_scope_exclusions/scope_exclusions.csv`, and 6 misspelt LLM definitions are corrected. P2 does
     not match hyphenated "large-language model(s)". Ideally this exclusion moves into preprocessing (F-stage).]*
+    *[2026-10-10, RL-125: confirmed in the real production run (job 22540333) — exactly 6,466 articles excluded, no
+    more and no fewer than planned; verified directly that none of them contributes any unit to `g3_test_v1.jsonl`
+    (spot-checked PMC10967767 and PMC8815195 by name, both present only as an `excluded` row with 0 units/0 parents,
+    absent from the whole 2.7 GB output). **The corpus G3 and (downstream) M1 work with is therefore 28,196 articles**
+    (34,662 − 6,466), of which 121 further turn out to have no usable G3 parent at all for an unrelated reason (§6
+    item 8's units-without-a-parent rule, RL-122) — **28,075 articles with actual content** in `g3_test_v1.jsonl`.
+    This does not change P1–G2's own counts (still 34,662): the exclusion is scoped to G3 and M1 only.]*
 25. **Known limits of P1c.** About 670 lines that look like abbreviation lists remain (mostly prose with inline glosses) and about 530 footnote-like lines that do not follow a table.
 
 26. **Known limits of P6 v2 (built 2026-09-26, run 2026-09-27/28).** (a) Precision was judged by reading samples (15 hard sentences, 143 and 30 real blocks), not against

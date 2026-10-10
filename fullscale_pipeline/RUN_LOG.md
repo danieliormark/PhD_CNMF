@@ -1295,3 +1295,45 @@ article: 28,075 valid, 121 invalid_no_parent, 6,466 excluded — matches item 6'
 816,075 parents, 2,266,190 cousins. Totals identical to the RL-124 scratch dry run. `g3_v1_summary.json` records
 script_sha `0f3146266f26`, merge_script_sha `a6921837ecf3`, the 7 input hashes, and job `22540333`. G3 production is
 complete. Next: the M1 input contract (G3_POSTPROCESSING.md §8 item 3). [LOG]
+
+**RL-126 · 2026-10-10 · G3 · DOC · LIVE**
+Owner: document the exclusion of the false-positive articles and state the new corpus size explicitly (not just the
+component counts). Added a dated note at G3_POSTPROCESSING.md §6 item 6 and at PIPELINE.md's item 24 note and its
+corpus-size milestone table (new row): **28,196 articles** (34,662 − 6,466 excluded) is the corpus G3 and M1 work
+with; of those, 121 further have no usable parent for the separate reason decided in item 8 (RL-122), leaving
+**28,075** articles with actual content in `g3_test_v1.jsonl`. Both figures were re-verified against the real
+production run (job 22540333) before writing them, not taken from the plan. [LOG]
+
+**RL-127 · 2026-10-10 · G3 · AUDIT (read-only) · LIVE**
+Owner's question, following the "pre_traine" finding of the last session: would it be more reliable to rerun G2
+and/or G3? Investigated before answering, not guessed at. Host incline37, `tensor_env`.
+(1) G2's hyphen-joining (`join_hyphens`, `graphbrain_parse_v3.py`) is not reversible without a worse cost: tested
+directly with `create_parser(lang="en", lemmas=True)` — "The model was pre-trained on PubMed abstracts." (hyphen
+kept) parses as `(-/Pd ((was pre/Pd) (the model)))`, losing "on PubMed abstracts" and splitting "pre"/"trained"
+apart; "...was pre_trained on PubMed abstracts." (joined) parses correctly, `(was pre_trained) ... (on (pubmed
+abstracts))`. The join is a deliberate, already-justified fix for a structural parse failure (PIPELINE.md item
+30(l)), not something to undo for the lemma's sake.
+(2) The lemma defect is not a process-order bug: "GPT-2 was fine_tuned on the dataset." lemmatises correctly to
+`fine_tune/P` through the identical mechanism (same call, same joining) that gives "pre_trained" the wrong
+`pre_traine/P`. Re-running the same code on the same text is deterministic and would reproduce the same error
+exactly; delaying the join relative to lemmatisation was tested too (lemmatising the unjoined hyphenated form) and
+does not help — the unjoined parse is the broken one from (1), so there is no usable compound lemma to take from it
+either.
+(3) Measured the true scope directly (regex scan of every `_lemma` edge in all 34,662 articles' raw G2 v3 output,
+not a sample): 35,201 occurrences across 4,934 distinct (root, lemma) pairs where the underscore-joined root's
+lemma differs from the root. The large majority follow one identifiable pattern — a spurious trailing "e" added to
+a verb stem that does not take one (`pre_trained`→`pre_traine` 2,198; `retrieval_augmented`→`retrieval_augmente`
+803; `ai_powered`→`ai_powere` 377; `board_certified`→`board_certifie` 300; `question_answering`→`question_answere`
+221; `self_reported`→`self_reporte` 197; `human_authored`→`human_authore` 152; `resource_constrained`→
+`resource_constraine` 149; `english_speaking`→`english_speake` 121; `fastest_growing`→`fastest_growe` 88;
+`instruction_following`→`instruction_followe` 83; `prompt_engineered`→`prompt_engineere` 75; about 30 more at lower
+frequency), while others of the same shape already lemmatise correctly (`fine_tuned`→`fine_tune` 6,871;
+`ai_generated`→`ai_generate` 1,622; `ai_based`→`ai_base` 676; `privacy_preserving`→`privacy_preserve` 299;
+`self_supervised`→`self_supervise` 122; `time_consuming`→`time_consume` 89) — the transformer lemmatiser is simply
+inconsistent on out-of-vocabulary joined compounds, not uniformly wrong. One outlier noted, a different-looking bug:
+`second_best`→`second_b` (76), not the trailing-e pattern.
+**Conclusion, given to the owner: rerunning G2 and/or G3 as they are would not help** — both are deterministic, and
+nothing about an article's processing history changes their output. The surface parse is already correct (only the
+lemma string is wrong), so no G2 rerun is needed at all; a fix belongs in G3, as a small, measured correction table
+built the way every other G3 rule was (sample, hand-judge, hard cases, before/after counts on real shards) — not yet
+built, pending the owner's decision to proceed. [LOG]

@@ -516,6 +516,15 @@ item 4.]*
    `g3_scope_exclusions/` (reasons and lists below); P2 and G2 are not rerun. Ideally the exclusion belongs to
    preprocessing, beside `PP/article_blacklist.py` (owner).
 
+   *[2026-10-10, RL-125, confirmed against the real production run (job 22540333), not just the plan: exactly 6,466
+   articles excluded — `scope_exclusions.csv` has 6,466 rows, `g3_articles_v1.jsonl` has exactly 6,466 rows with
+   status `excluded`, and none of them contributes a single unit to `g3_test_v1.jsonl` (checked directly: two named
+   examples, PMC10967767 and PMC8815195, are present only as an excluded row with 0 units/0 parents and absent from
+   the whole output). **New corpus size for G3 and M1: 28,196 articles** (34,662 − 6,466). Of those, 121 further have
+   no usable G3 parent at all, for the separate, unrelated reason decided in item 8 (units with no parent anywhere
+   are removed, RL-122) — **28,075 articles carry actual content** in `g3_test_v1.jsonl`. This does not revise
+   P1–G2's own article count (still 34,662 there): the exclusion is scoped to G3 and M1.]*
+
    - **How "LLM" is used.** 15,215 articles, 329,474 mentions. Classified by the article's own definition (an
      expansion before "(LLM)" counts only if its word initials spell L-L-M): defined as a language model 13,424
      articles (93% of mentions); undefined but "language model" in the article 1,379 (40 of 40 sampled are the
@@ -996,6 +1005,17 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
      written the same way ("ChatGPT 5.3", "Grok 4", "Gemma 2") are read correctly. Left as is.
    *[Both decided 2026-10-10 (owner) and implemented, RL-122: units without a parent are removed and articles without
    any parent marked invalid (§7.1 step 9); scores are no longer read as versions (§4).]*
+5. *[Added 2026-10-10, RL-127.]* **Lemmatiser artefact on hyphen-joined compounds — a new question, not yet
+   decided.** G2's transformer lemmatiser is inconsistent on out-of-vocabulary underscore-joined words (G2_PARSING.md):
+   `fine_tuned`→`fine_tune` is right, `pre_trained`→`pre_traine` is not. Measured corpus-wide, not sampled: 35,201
+   occurrences, 4,934 distinct (root, lemma) pairs differ; most of the frequent ones add a spurious trailing "e" to a
+   verb that does not take one (`pre_trained` 2,198, `retrieval_augmented` 803, `ai_powered` 377, `board_certified`
+   300, `question_answering` 221, `self_reported` 197, and about 25 more down to low frequency). Not a process-order
+   bug: tested directly, delaying the lemma step relative to the hyphen-join does not help, and undoing the join to
+   let the lemmatiser see the hyphenated form loses the clause structure entirely (the reason the join exists, item
+   30(l)). **Recommended: a small, measured correction table in G3** (`lemma_of()`), built the way every other G3 rule
+   was — sample the frequent pairs, judge by hand, hard cases, before/after counts — not a G2 rerun (deterministic;
+   would reproduce the same lemma). Not built; waiting on the owner's decision to proceed.
 
 ## 9. Files
 
