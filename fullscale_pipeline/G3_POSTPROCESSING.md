@@ -1022,6 +1022,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    uses are kept as written and unaffected. Proposed instead of a hand table: a head-word rule (prefix + the corpus's own
    lemma of the last part as a plain word, applied only where spaCy's suffix rule fired), with an exception for
    comparatives/superlatives (`second_best` → `second_good` otherwise).]*
+   *[Decided 2026-10-10 (owner: proceed), implemented RL-129: the head-word rule in `g3_curation_v2.py` with the table
+   `g3_word_lists/head_lemmas.tsv`, guards for irregular plain lemmas (kept as written) and for plain plurals (spaCy's
+   kept); also covers words joined by a Unicode hyphen. On shards 0 and 20 all 57 distinct rewrites (216 occurrences)
+   were read: 214 correct, 2 wrong (`data_basis`, ambiguous "bases"); structure unchanged. Hard set
+   `hard_lemmas_rl129.json` 13/13. Production rerun on CSF pending; the RL-125 output is kept as `PG/g3_v1_rl125/`.]*
 
 ## 9. Files
 
@@ -1052,9 +1057,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8; its report also records host/job/task since RL-124) | 0f3146266f26 |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | b3eadb6d385c (0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
+| `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
-| `fullscale_pipeline/g3_v2/check_csf_g3.sh` (CSF test, RL-123; mirrored to `PG/scripts/g3_v2/`) | baa9f73046ad |
+| `fullscale_pipeline/g3_v2/check_csf_g3.sh` (CSF test, RL-123; mirrored to `PG/scripts/g3_v2/`) | d3aa9aeb97ef (re-pinned RL-129) |
 | `fullscale_pipeline/g3_v2/submit_g3_v1.sh` (50-task SLURM array, RL-124; mirrored) | d0c8dad02783 |
 | `fullscale_pipeline/g3_v2/merge_g3_v1.py` (checked merge, RL-124; mirrored) | a6921837ecf3 |
 | `fullscale_pipeline/g3_v2/modal_merge.py` (§6 item 3: decision rule copied from `g3_modal_check/modal_rules.py`, edge-order fix, and the clause merge; imported by the script) | 75c7022ac187 |

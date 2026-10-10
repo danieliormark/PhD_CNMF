@@ -1362,3 +1362,30 @@ too (`deep_learne`→`deep_learning`, `instruction_followe`→`instruction_follo
 superlatives) and `plug_ins` stays plural. Not built; the usual checks (labelled sample, hard cases, shards 0 and 20)
 would come first, then a G3 rerun (about 5 min) and a new merge. G2 is untouched either way. Agreed with RL-127: no G2
 rerun (deterministic, and the parse is right); the hyphen join stays. [LOG]
+
+**RL-129 · 2026-10-10 · G3 · CODE (head-word lemma rule) + CHECK · LIVE**
+Owner: proceed with the RL-128 plan. Host incline37, `tensor_env`.
+New `g3_word_lists/build_head_lemmas.py` (sha256 `0dcfc42943ae` before the Unicode-hyphen extension; see §9 for the
+final hash) writes `head_lemmas.tsv` (sha256 `34cee7ee73d0`, 2,106 rows, words only; copied to `PG/g3_word_lists/`):
+for every last part of a joined word whose lemma spaCy changed, the most frequent lemma G2's parse gives that part as a
+plain word (word, coarse type). Joined = "_" (G2's hyphen join) or a Unicode hyphen G2 left alone (U+2010/2011/2013;
+found when one "pre‐trained" escaped the first version). `g3_v2/g3_curation_v2.py` (sha256 `b3eadb6d385c`), in the
+per-unit lemma map: where spaCy's lemma of a joined word differs from the word, the lemma becomes the head (with its
+joiner) plus the plain-word lemma of the last part; kept as written when that plain lemma is an irregular form not
+sharing the word's first letters (best → good: `second_best` stays; led → lead: `investigator_led` stays); spaCy's
+lemma kept when there is no plain-word lemma, or when spaCy only stripped a noun's final "s" and the table has nothing
+better (`set_ups`→`set_up`, `plug_ins`→`plug_in`). Two guard fixes found by the check: the prefix test compares at most
+as many letters as the shorter word (`ups`/`up`), and the plural guard. Counted as `lemma_head_rule`, examples under
+`detail`. Input hash pinned in `INPUT_SHA`.
+Checks: self-test 54/54; new hard set `g3_v2/hard/hard_lemmas_rl129.json` (13 cases: joined verbs, gerunds,
+participles as modifiers, an irregular superlative, plurals with and without a plain-word lemma) 13/13; all sets
+175/188 (the 13 known failures). Shards 0 and 20 (whole) against the RL-125 production shards: units, parents (16,523
+/ 17,130), cousins (47,077 / 49,224), no-parent units, article statuses and non-prose units identical; 171 units
+changed, every change a lemma; all 57 distinct rewrites (216 occurrences) read by hand — the whole population on the two
+shards, not a sample: 56 correct (214 occurrences: `pre_traine`→`pre_train` 99, `meta_analyse`→`meta_analysis` 15,
+`document_grounde`→`document_ground` 9, `self_hoste`→`self_host` 5, `sub_specialtie`→`sub_specialty`, `de_identifie`→
+`de_identify`, `best_performe`→`best_perform`, `third_b`→`third_best`, ...), 1 wrong (`data_base`→`data_basis`, 2:
+"bases" is the plural of both base and basis; accepted). No `pre_traine` left. Shard 20 byte-identical under hash seeds
+default and 4242. Production: script and hard sets mirrored to `PG/scripts/g3_v2/`; `check_csf_g3.sh` re-pinned (script
+`b3eadb6d385c`, TOTAL 175/188); incline reference rebuilt; dry run ALL G3 CHECKS OK. The RL-125 output was moved, not
+deleted, to `PG/g3_v1_rl125/`, so the array can write `PG/g3_v1/` again. Owner to submit on CSF. [LOG]

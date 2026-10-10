@@ -118,9 +118,18 @@ SCOPE_EXCLUSIONS = PG + "g3_scope_exclusions/scope_exclusions.csv"
 SPELLING_CORRECTIONS = PG + "g3_scope_exclusions/spelling_corrections.csv"
 LLM_OUTPUT_UNITS = PG + "g3_llm_output/llm_output_units.csv"
 REFLEXIVE_TABLE = PG + "g3_reflexive/reflexive_restored.jsonl"      # §6 item 8, built by g3_v2/reflexive_restore.py
+# §8 item 5 (owner 2026-10-10, RL-129): spaCy's rule lemmatiser gives an underscore-joined (out-of-vocabulary) word its first
+# suffix rule unchecked (pre_trained -> pre_traine, question_answering -> question_answere, second_best -> second_b). Where it
+# changed a joined word, the lemma is rebuilt as the part before the last "_" plus the lemma G2's parse gives the last part as a
+# plain word (table built by g3_word_lists/build_head_lemmas.py); where that plain lemma is an irregular form not sharing the
+# word's first three letters (best -> good), the joined word is kept as written; with no plain-word lemma, spaCy's stays.
+HEAD_LEMMAS = PG + "g3_word_lists/head_lemmas.tsv"
+JOINED = re.compile('(.+[_\u2010\u2011\u2013])([^_\u2010\u2011\u2013]+)')   # joined by G2 ("_") or a Unicode hyphen G2 left alone
+HEAD_LEMMA = {(r["word"], r["type"]): r["lemma"] for r in csv.DictReader(open(HEAD_LEMMAS, encoding="utf-8"), delimiter="\t")}
 INPUT_SHA = {SCOPE_EXCLUSIONS: "5b71d844d9af", SPELLING_CORRECTIONS: "d0a70f6c1a20", LLM_OUTPUT_UNITS: "b71d5717e250",
              ADVERB_ROLES_PATH: ADVERB_ROLES_SHA}
 INPUT_SHA[REFLEXIVE_TABLE] = "d121a203daec"
+INPUT_SHA[HEAD_LEMMAS] = "34cee7ee73d0"
 INPUT_SHA[STOPWORDS] = "2b6c7d9fdae9"
 INPUT_SHA[PP + "focal_terms.py"] = "892f98bb986e"     # P2's matcher with the RL-095 hyphen pattern (acts in G3 only)
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
@@ -516,11 +525,24 @@ def q4_all(ctx, atom, test):
 class Ctx:
     def __init__(self, unit, modals):
         self.modals = modals
-        self.lemma = {}
+        self.lemma, self.lemma_head = {}, set()
         for x in unit["extra_edges"]:
             m = re.fullmatch(r'\(_lemma (\S+) (\S+)\)', x)
             if m:
-                self.lemma[m.group(1)] = m.group(2).split('/')[0]
+                key, lem = m.group(1), m.group(2).split('/')[0]
+                root, t = urllib.parse.unquote(key.split('/')[0]), key.split('/')[1][:1]
+                jm = JOINED.fullmatch(root)
+                spacy = urllib.parse.unquote(lem).lower()
+                if jm and spacy != root.lower():                          # §8 item 5: spaCy's suffix rule fired on a joined word
+                    head, last = jm.group(1), jm.group(2)                 # head keeps its joiner ("pre_", "pre\u2010")
+                    plain = HEAD_LEMMA.get((last.lower(), t))
+                    if plain is not None and not (t == 'C' and plain == last.lower() and spacy == root.lower()[:-1]):
+                        # (a noun whose final "s" spaCy stripped, with no plain-word lemma to go on, keeps spaCy's: set_ups -> set_up)
+                        n = min(3, len(plain), len(last))
+                        new = f"{head}{plain}" if plain[:n] == last.lower()[:n] else root
+                        if new.lower() != spacy:
+                            lem = new; self.lemma_head.add(key)
+                self.lemma[key] = lem
         self.pos = collections.defaultdict(list)                        # source atom -> [(word, position)]
         self.bypos = {p: at for at, w, p in unit["atom2word"]}
         self.text = unit["text"]
@@ -740,6 +762,8 @@ class Ctx:
                     self.detail['mv_kept'][lemma] += 1
                 if not self.lemma.get(f"{root}/{t[:1]}/en"):
                     self.stats['lemma_missing'] += 1
+                if f"{root}/{t[:1]}/en" in self.lemma_head:
+                    self.stats['lemma_head_rule'] += 1; self.detail['lemma_head_rule'][f"{root} -> {lemma}"] += 1
                 lc = clean_root(urllib.parse.unquote(lemma).lower()) or lemma
                 lc = urllib.parse.quote(lc, safe="_-'&@+")                   # §6 item 8: symbols cleaned, hyphen -> _
                 out = class_collapse(hedge(f"{lc}/{t}/en"))
