@@ -1241,3 +1241,16 @@ mention); records otherwise identical to RL-121 except 2 units of shard 0 (PMC12
 excluded; shard 20 569 valid, 3 invalid, 121 excluded. The 5 invalid articles, read: an abbreviation list, an AI-use
 declaration ("ChatGPT (Version 4.0) [Large language model]."), a "Method: ..." label, and two articles whose only focal
 sentence the parser left without a governing clause. [LOG]
+
+**RL-123 · 2026-10-10 · G3 · CODE (CSF test) + REFERENCE RUN · LIVE**
+Owner: code, memory and git aligned on G3; make the CSF test. Production will run the test script v2 itself (no fork):
+`g3_curation_v2.py` (266ddcbb00d2), `modal_merge.py` (75c7022ac187), `run_hard.py` (80b9ca527b8f) and `hard/` (all sets
+and the parse cache, identical to git) copied to `PG/scripts/g3_v2/`. Reference run on incline37 (Xeon Gold 6326) from
+the RDS copy, whole shards 0 and 20 (`--limit 0`) into `PG/g3_v1_csftest/reference_incline/`: 0 problems, 44-45 s per
+shard, peak memory 57 MB; records identical to RL-122. New `g3_v2/check_csf_g3.sh` (tracked; copy at
+`PG/scripts/g3_v2/check_csf_g3.sh`; SLURM `serial`, 1 core, 4 GB, 30 min): checks the three script hashes, self-test
+54/54, hard cases TOTAL 162/175 (parses cached, so no parser is loaded), curates shards 0 and 20 into
+`PG/g3_v1_csftest/job_<id>/`, compares the test, noparent, articles, nonprose and error files with the reference byte
+for byte and the reports for 0 problems and 0 unit errors. Dry run on incline (bash, outside SLURM): ALL G3 CHECKS OK;
+its output deleted. To submit on CSF: `sbatch /mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/scripts/g3_v2/check_csf_g3.sh`.
+[LOG]

@@ -963,6 +963,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    cousin rules from `diagnostics/g3_audit/g3_rules2.py`, with `g3_audit_rules/hard_rules2.json` as a regression check.
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
+   *[2026-10-10, RL-123: production uses the test script v2 itself, mirrored to `PG/scripts/g3_v2/` and pinned by
+   sha256 (no second copy that could drift). CSF test written: `PG/scripts/g3_v2/check_csf_g3.sh` (script hashes,
+   self-test, hard cases, whole shards 0 and 20 compared byte for byte with an incline reference run of the same script
+   in `PG/g3_v1_csftest/reference_incline/`); passes on incline, to be submitted on CSF. Still to write: the SLURM
+   array for the 50 shards and the checked merge.]*
 3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5). *[2026-10-09: M1 must also handle the
    flags in §6 item 8: content keys, the specificity of verb groups, and the article exclusions of item 6.]*
 4. *[Added 2026-10-10, RL-121.]* Two small questions for the owner; the test script's current behaviour is given:
