@@ -1,0 +1,137 @@
+[
+ {
+  "id": "J01",
+  "text": "As shown in Table 2, GPT-4 outperformed the residents.",
+  "expect": [
+   "outperform/P/en",
+   "resident/C/en"
+  ],
+  "forbid": [
+   "table/",
+   "/2/"
+  ],
+  "note": "layout label and its number dropped"
+ },
+ {
+  "id": "J02",
+  "text": "GPT-4 was trained on data from a panel survey presented in a table.",
+  "expect": [
+   "panel/",
+   "table/"
+  ],
+  "forbid": [],
+  "note": "layout words in plain text kept"
+ },
+ {
+  "id": "J03",
+  "text": "The accuracy of ChatGPT (Fig. 1b) was over 90% in all groups.",
+  "expect": [
+   "over/M/en",
+   "90/",
+   "percent/C/en"
+  ],
+  "forbid": [
+   "fig/",
+   "1b/"
+  ],
+  "note": "figure label dropped; comparison and number kept"
+ },
+ {
+  "id": "J04",
+  "text": "ChatGPT answered 12 of the 20 questions correctly (p < 0.001).",
+  "expect": [
+   "12/",
+   "20/"
+  ],
+  "forbid": [
+   "0%2e001/",
+   "001/"
+  ],
+  "note": "statistic dropped, counts kept"
+ },
+ {
+  "id": "J05",
+  "text": "We compared two models, GPT-4 and 3 versions of BERT.",
+  "expect": [
+   "two/M/en",
+   "three/"
+  ],
+  "forbid": [
+   "/3/"
+  ],
+  "note": "0-10 as words, digits and spelled alike"
+ },
+ {
+  "id": "J06",
+  "text": "GPT-4 achieved a mean score of 8.0 [6.0-9.0] in 2023.",
+  "expect": [
+   "8%2e0/",
+   "2023/"
+  ],
+  "forbid": [
+   "6%2e0/",
+   "9%2e0/"
+  ],
+  "note": "numbers inside square brackets dropped; year and value kept"
+ },
+ {
+  "id": "J07",
+  "text": "LLMs such as GPT-4 (URL41333710) generate text.",
+  "expect": [
+   "generate/P/en"
+  ],
+  "forbid": [
+   "url41333710"
+  ],
+  "note": "URL token dropped"
+ },
+ {
+  "id": "J08",
+  "text": "We evaluated DeepSeek-V3 and ChatGPT 4o on the exam.",
+  "expect": [
+   "deepseek_v3/C/focal",
+   "gpt_4o/C/focal"
+  ],
+  "forbid": [
+   "(focal_he 4o",
+   " 4o/C/en",
+   " v3/C/en"
+  ],
+  "note": "version token folded into the focal atom"
+ },
+ {
+  "id": "J09",
+  "text": "Llama-3.1-8B was fine-tuned on clinical notes.",
+  "expect": [
+   "llama_3_1/C/focal"
+  ],
+  "forbid": [
+   "8b/"
+  ],
+  "note": "model size dropped"
+ },
+ {
+  "id": "J10",
+  "text": "Let n denote the number of tokens processed by BERT.",
+  "expect": [
+   "bert/C/focal"
+  ],
+  "forbid": [
+   "/n/",
+   " n/"
+  ],
+  "note": "single letter dropped"
+ },
+ {
+  "id": "J11",
+  "text": "Patients often use ChatGPT for self_education,2 some without supervision.",
+  "expect": [
+   "self_education/"
+  ],
+  "forbid": [
+   "self_education%2c2",
+   "self_education,2"
+  ],
+  "note": "glued citation digit removed"
+ }
+]

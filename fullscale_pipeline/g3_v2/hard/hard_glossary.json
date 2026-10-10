@@ -1,0 +1,6 @@
+[
+ {"id": "G01", "text": "LLM equals large language model.", "expect": [], "forbid": ["(parent"], "note": "glossary line dropped"},
+ {"id": "G02", "text": "LLM stands for large language model.", "expect": [], "forbid": ["(parent"], "note": "glossary line dropped"},
+ {"id": "G03", "text": "GPT-4 stands out among LLMs.", "expect": ["stand_out/P/en", "gpt_4/C/focal"], "forbid": [], "note": "fused stand_out is not a glossary verb (regression found 2026-10-09)"},
+ {"id": "G04", "text": "The total of 25 websites that GPT-4 referred to were outnumbered by citations.", "expect": ["refer/P/en"], "forbid": [], "note": "one-sided: not a glossary line"}
+]

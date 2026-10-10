@@ -1,0 +1,228 @@
+[
+ {
+  "id": "N01",
+  "text": "GPT-4 answered the questions, but the physicians did not trust the answers.",
+  "expect": [
+   "(dummy_cousin not/M/en trust/P/en)"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ]
+ },
+ {
+  "id": "N02",
+  "text": "ChatGPT was used, although its answers were not verified by experts.",
+  "expect": [
+   "not/M/en verify/P/en"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ]
+ },
+ {
+  "id": "N03",
+  "text": "The results will not be known until LLMs are tested.",
+  "expect": [
+   "(dummy_cousin be/M/en know/P/en not/M/en will/M/en)"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ],
+  "expect_before": [
+   "(dummy_cousin know/P/en not/M/en will/M/en)"
+  ],
+  "note": " expectation updated 2026-10-09: §6 item 1, passive be kept"
+ },
+ {
+  "id": "N04",
+  "text": "BERT is not available for this language, so we did not use it.",
+  "expect": [
+   "(dummy_cousin not/M/en use/P/en)"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ]
+ },
+ {
+  "id": "N05",
+  "text": "GPT-4 performed well, whereas the older model did not.",
+  "expect": [],
+  "forbid": []
+ },
+ {
+  "id": "N06",
+  "text": "Neither BERT nor GPT-2 solved the task.",
+  "expect": [
+   "solve/P/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "N07",
+  "text": "Clinicians never trusted ChatGPT, and they could not verify its claims.",
+  "expect": [
+   "never/M/en trust/P/en",
+   "(dummy_cousin could/M/en not/M/en verify/P/en)"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ]
+ },
+ {
+  "id": "N08",
+  "text": "GPT-4 did not reduce errors because the prompts were not optimized.",
+  "expect": [
+   "(dummy_sibling not/M/en reduce/P/en)",
+   "not/M/en optimize/P/en"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ]
+ },
+ {
+  "id": "N09",
+  "text": "LLMs cannot replace clinicians, who do not rely on unverified outputs.",
+  "expect": [
+   "(dummy_cousin not/M/en rely/P/en)"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ]
+ },
+ {
+  "id": "N10",
+  "text": "The model was evaluated on data that GPT-4 had not seen before.",
+  "expect": [
+   "not/M/en see/P/en"
+  ],
+  "forbid": [
+   "(cousin_he not/M/en)"
+  ]
+ },
+ {
+  "id": "O01",
+  "text": "Only LLMs can generate fluent text.",
+  "expect": [
+   "(focal_he llm/C/focal only/M/en)"
+  ],
+  "forbid": [
+   "generate/P/en only/M/en)"
+  ]
+ },
+ {
+  "id": "O02",
+  "text": "LLMs can only generate fluent text.",
+  "expect": [
+   "(dummy_sibling can/M/en generate/P/en only/M/en)"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "O03",
+  "text": "Only this study used GPT-4.",
+  "expect": [
+   "only/M/en study/C/en"
+  ],
+  "forbid": [
+   "(dummy_sibling only/M/en use/P/en)"
+  ]
+ },
+ {
+  "id": "O04",
+  "text": "This study only used GPT-4.",
+  "expect": [
+   "(dummy_sibling only/M/en use/P/en)"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "O05",
+  "text": "GPT-4 was trained on only 500 notes.",
+  "expect": [
+   "only/M/en"
+  ],
+  "forbid": [
+   "(dummy_sibling only/M/en train/P/en)"
+  ]
+ },
+ {
+  "id": "O06",
+  "text": "We only evaluated German reports with GPT-4.",
+  "expect": [
+   "(dummy_sibling evaluate/P/en only/M/en)"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "O07",
+  "text": "GPT-4 is the only model that passed the exam.",
+  "expect": [
+   "only/M/en"
+  ],
+  "forbid": [
+   "(dummy_sibling be/P/en only/M/en)"
+  ]
+ },
+ {
+  "id": "O08",
+  "text": "GPT-4 not only matched but exceeded human scores.",
+  "expect": [
+   "not/M/en only/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "O09",
+  "text": "LLMs can generate not only text but also images.",
+  "expect": [],
+  "forbid": [
+   "(dummy_sibling can/M/en generate/P/en not/M/en"
+  ]
+ },
+ {
+  "id": "O10",
+  "text": "Only a few studies have evaluated ChatGPT.",
+  "expect": [
+   "only/M/en study/C/en"
+  ],
+  "forbid": [
+   "(dummy_sibling evaluate/P/en only/M/en)"
+  ]
+ },
+ {
+  "id": "O11",
+  "text": "ChatGPT answered only three of ten questions correctly.",
+  "expect": [
+   "only/M/en"
+  ],
+  "forbid": [
+   "(dummy_sibling answer/P/en only/M/en)"
+  ]
+ },
+ {
+  "id": "O12",
+  "text": "The model was only tested on English, and GPT-4 was not tested at all.",
+  "expect": [
+   "only/M/en test/P/en",
+   "(dummy_sibling be/M/en not/M/en test/P/en)"
+  ],
+  "forbid": [],
+  "expect_before": [
+   "only/M/en test/P/en",
+   "(dummy_sibling not/M/en test/P/en)"
+  ],
+  "note": "expectation updated 2026-10-09: §6 item 1, passive be kept"
+ },
+ {
+  "id": "O13",
+  "text": "GPT-4 is not only accurate but also fast.",
+  "expect": [],
+  "forbid": []
+ },
+ {
+  "id": "O14",
+  "text": "Only when prompted did ChatGPT cite its sources.",
+  "expect": [],
+  "forbid": []
+ }
+]

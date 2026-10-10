@@ -1,0 +1,143 @@
+[
+ {
+  "id": "P01",
+  "text": "GPT-4, which was trained on a vast corpus of scientific literature spanning several decades, not only achieved state-of-the-art accuracy on the benchmark, but, after extensive fine-tuning across multiple independent datasets, also demonstrated remarkable robustness.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "P02",
+  "text": "The GPT-4 model not only reduced costs for hospitals that had previously relied on manual review, a process that often took several days to complete, but also improved accuracy across nearly every diagnostic category tested.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "P03",
+  "text": "Researchers found that ChatGPT, despite being trained on a relatively small dataset collected over just six months, not only matched the performance of larger commercial models but also generalized well to unseen languages.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "P04",
+  "text": "ChatGPT not only helped students draft essays more quickly, according to a survey of over 500 participants conducted across three universities, but also, somewhat unexpectedly, reduced their reported anxiety about writing.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "P05",
+  "text": "The ChatGPT deployment, which took place over several months and involved extensive stakeholder consultation, not only cut operating costs, but it also raised new concerns among clinicians about overreliance on automated suggestions.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "F01",
+  "text": "ChatGPT is not only accurate for common diseases, a finding consistent with earlier pilot work; separately, the vendor also announced price increases, but that decision was unrelated to ChatGPT's performance.",
+  "not_only": true,
+  "but_also": false
+ },
+ {
+  "id": "F02",
+  "text": "GPT-4 is not only cheaper to run; researchers also noted that deployment timelines, which depend on local infrastructure, but overall the rollout proceeded smoothly across most sites.",
+  "not_only": true,
+  "but_also": false
+ },
+ {
+  "id": "F03",
+  "text": "ChatGPT is not only widely used in radiology departments, a trend documented since 2022, but hospital administrators, who also track budget constraints, raised separate staffing concerns entirely unrelated to ChatGPT.",
+  "not_only": true,
+  "but_also": false
+ },
+ {
+  "id": "F04",
+  "text": "The dataset used to train GPT-4 is not only large, spanning over a decade of records, but prior studies on GPT-4, which also used smaller samples, reported broadly similar conclusions despite the difference in scale.",
+  "not_only": true,
+  "but_also": false
+ },
+ {
+  "id": "M01",
+  "text": "GPT-4 not only detects anomalies in real time but also flags them for review, and separately, administrators also receive a weekly summary, but that summary was not evaluated here.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "T01",
+  "text": "GPT-4 not only improved accuracy but reduced latency as well.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "F05",
+  "text": "The paper argues that GPT-4 is not only biased against one demographic group, a concern raised in several independent audits conducted over the past two years, but regulators in a separate unrelated proceeding also fined the vendor of GPT-4 for a data breach.",
+  "not_only": true,
+  "but_also": false
+ },
+ {
+  "id": "R1",
+  "text": "The use of LLMs in writing can not only shape the opinions people express; the use can also have a short_term effect on people's personal beliefs and attitudes.",
+  "not_only": true,
+  "but_also": false,
+  "note": "true pair across ';' -- kept by design (safe)"
+ },
+ {
+  "id": "R2",
+  "text": "ChatGPT's F1 increment does not simply vanish once labels are removed; ChatGPT's F1 increment is null at 0.02 and 0.05 but significantly positive again at 0.10.",
+  "not_only": true,
+  "but_also": false
+ },
+ {
+  "id": "C1",
+  "text": "GPT-4 doesn't just summarize text but also writes code.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "C2",
+  "text": "ChatGPT isn't only fast but also cheap.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "C3",
+  "text": "GPT-4 cannot replace clinicians, and GPT-4 is not only slow but also costly.",
+  "not_only": false,
+  "but_also": false
+ },
+ {
+  "id": "B03",
+  "text": "GPT-4 was accurate but also slow.",
+  "not_only": false,
+  "but_also": true
+ },
+ {
+  "id": "B05",
+  "text": "GPT-4 passed the exam but can also explain its answers.",
+  "not_only": false,
+  "but_also": true
+ },
+ {
+  "id": "B08",
+  "text": "These tools may help clinicians but also mislead patients, as ChatGPT often fabricates references.",
+  "not_only": false,
+  "but_also": true
+ },
+ {
+  "id": "B09",
+  "text": "ChatGPT improves academic work but also brings up ethical issues.",
+  "not_only": false,
+  "but_also": true
+ },
+ {
+  "id": "X1",
+  "text": "Not only is ChatGPT fast; ChatGPT is accurate but also costly.",
+  "not_only": true,
+  "but_also": true,
+  "note": "';' separates an unpaired not-only from a bare but-also"
+ },
+ {
+  "id": "X2",
+  "text": "ChatGPT not only reduced costs but also improved accuracy, but it also introduced new errors.",
+  "not_only": false,
+  "but_also": true,
+  "note": "second, contrastive 'but it also' -- expected limitation: identical 'also' atoms are decided together"
+ }
+]

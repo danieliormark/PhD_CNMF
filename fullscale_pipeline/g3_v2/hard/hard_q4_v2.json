@@ -1,0 +1,286 @@
+[
+ {
+  "id": "A01",
+  "text": "Interestingly, GPT-4 outperformed the residents.",
+  "expect": [
+   "outperform/P/en"
+  ],
+  "forbid": [
+   "interestingly/M/en"
+  ],
+  "expect_before": [
+   "interestingly/M/en outperform/P/en"
+  ],
+  "forbid_before": [
+   "(sibling_he interestingly/M/en)"
+  ],
+  "note": "expectation updated 2026-10-09: adverb role table: stance adverbs dropped (owner 2026-10-08)"
+ },
+ {
+  "id": "A02",
+  "text": "Finally, GPT-4 was evaluated on the test set.",
+  "expect": [
+   "evaluate/P/en"
+  ],
+  "forbid": [
+   "finally/M/en"
+  ]
+ },
+ {
+  "id": "A03",
+  "text": "GPT-4 was finally released in 2023.",
+  "expect": [
+   "release/P/en"
+  ],
+  "forbid": [
+   "finally/M/en"
+  ],
+  "expect_before": [
+   "finally/M/en release/P/en"
+  ],
+  "forbid_before": [],
+  "note": "expectation updated 2026-10-09: adverb role table: 'finally' dropped (discourse)"
+ },
+ {
+  "id": "A04",
+  "text": "Overall, ChatGPT achieved a high overall accuracy.",
+  "expect": [
+   "accuracy/C/en high/M/en overall/M/en"
+  ],
+  "forbid": [
+   "achieve/P/en overall/M/en"
+  ]
+ },
+ {
+  "id": "A05",
+  "text": "Recently, ChatGPT has attracted considerable attention.",
+  "expect": [
+   "attract/P/en"
+  ],
+  "forbid": [
+   "recently/M/en"
+  ],
+  "expect_before": [
+   "attract/P/en recently/M/en"
+  ],
+  "forbid_before": [],
+  "note": "expectation updated 2026-10-09: adverb role table: time adverbs dropped"
+ },
+ {
+  "id": "A06",
+  "text": "ChatGPT not only reduced costs but also improved accuracy.",
+  "expect": [
+   "reduce/P/en"
+  ],
+  "forbid": [
+   "not_only/M/en",
+   "but_also/M/en",
+   "(dummy_sibling not/M/en"
+  ],
+  "expect_before": [
+   "not_only/M/en reduce/P/en"
+  ],
+  "forbid_before": [
+   "(dummy_sibling not/M/en"
+  ],
+  "note": "expectation updated 2026-10-09: option 2: a paired not-only/but-also is dropped"
+ },
+ {
+  "id": "A07",
+  "text": "BERT is not simply a smaller version of GPT-3.",
+  "expect": [
+   "not_only/M/en"
+  ],
+  "forbid": [
+   "not/M/en"
+  ]
+ },
+ {
+  "id": "A08",
+  "text": "GPT-4 is not only incapable of reasoning but also unreliable.",
+  "expect": [
+   "incapable/C/en"
+  ],
+  "forbid": [
+   "not_only/M/en",
+   "not/M/en"
+  ],
+  "expect_before": [
+   "not_only/M/en"
+  ],
+  "forbid_before": [
+   "not/M/en"
+  ],
+  "note": "expectation updated 2026-10-09: option 2: paired not-only dropped"
+ },
+ {
+  "id": "A09",
+  "text": "GPT-4 does not only rely on its training data.",
+  "expect": [
+   "not_only/M/en"
+  ],
+  "forbid": [
+   "(dummy_sibling not/M/en"
+  ]
+ },
+ {
+  "id": "A10",
+  "text": "GPT-4 did not perform as well as the residents.",
+  "expect": [
+   "not/M/en perform/P/en well/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "A11",
+  "text": "GPT-4 performed at least as well as the residents.",
+  "expect": [
+   "well/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "A12",
+  "text": "GPT-4 as well as BERT was evaluated on the exam.",
+  "expect": [
+   "evaluate/P/en"
+  ],
+  "forbid": [
+   "well/M/en"
+  ]
+ },
+ {
+  "id": "A13",
+  "text": "We evaluated GPT-4 as well.",
+  "expect": [
+   "evaluate/P/en"
+  ],
+  "forbid": [
+   "well/M/en"
+  ]
+ },
+ {
+  "id": "A14",
+  "text": "GPT-4 performed well on the exam.",
+  "expect": [
+   "perform/P/en well/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "A15",
+  "text": "However, GPT-4 failed the exam, since the questions were ambiguous.",
+  "expect": [
+   "fail/P/en"
+  ],
+  "forbid": [
+   "however/M/en",
+   "since/M/en"
+  ]
+ },
+ {
+  "id": "A16",
+  "text": "Even though ChatGPT is popular, BERT remains widely used.",
+  "expect": [
+   "bert/C/focal"
+  ],
+  "forbid": [
+   "though",
+   "even/M/en"
+  ]
+ },
+ {
+  "id": "A17",
+  "text": "GPT-4 even outperformed the experts.",
+  "expect": [
+   "outperform/P/en"
+  ],
+  "forbid": [
+   "even/M/en"
+  ],
+  "expect_before": [
+   "even/M/en outperform/P/en"
+  ],
+  "forbid_before": [],
+  "note": "expectation updated 2026-10-09: adverb role table: scalar focus 'even' dropped"
+ },
+ {
+  "id": "A18",
+  "text": "First, we prompted GPT-4 with each case.",
+  "expect": [
+   "prompt/P/en"
+  ],
+  "forbid": [
+   "first/M/en"
+  ]
+ },
+ {
+  "id": "A19",
+  "text": "GPT-4 was the first model to pass the exam.",
+  "expect": [
+   "first/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "A20",
+  "text": "Our model outperformed GPT-4 significantly.",
+  "expect": [
+   "outperform/P/en significantly/M/en",
+   "our/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "A21",
+  "text": "Specifically, GPT-4 answered 80% of the questions correctly.",
+  "expect": [
+   "answer/P/en correctly/M/en"
+  ],
+  "forbid": [
+   "specifically/M/en"
+  ]
+ },
+ {
+  "id": "A22",
+  "text": "GPT-4 answered the questions, whereas BERT failed.",
+  "expect": [
+   "answer/P/en"
+  ],
+  "forbid": [
+   "whereas"
+  ]
+ },
+ {
+  "id": "A23",
+  "text": "Importantly, GPT-4 did not hallucinate.",
+  "expect": [
+   "hallucinate/P/en not/M/en"
+  ],
+  "forbid": [
+   "importantly/M/en"
+  ],
+  "expect_before": [
+   "hallucinate/P/en importantly/M/en not/M/en"
+  ],
+  "forbid_before": [],
+  "note": "expectation updated 2026-10-09: adverb role table: stance adverbs dropped"
+ },
+ {
+  "id": "A24",
+  "text": "LLMs have not yet been validated in clinical practice.",
+  "expect": [
+   "not/M/en validate/P/en yet/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "A25",
+  "text": "Only LLMs can generate fluent text, but LLMs can only rarely cite sources.",
+  "expect": [
+   "(focal_he llm/C/focal only/M/en)",
+   "only/M/en rarely/M/en"
+  ],
+  "forbid": []
+ }
+]

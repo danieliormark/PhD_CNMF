@@ -1,0 +1,154 @@
+[
+ {
+  "id": "M01",
+  "text": "This allows BERT to excel at classification tasks.",
+  "expect": [
+   "(dummy_sibling allow/P/en excel/P/en)",
+   "bert/C/focal"
+  ],
+  "forbid": [
+   "(dummy_cousin excel"
+  ],
+  "note": "enabling verb + object + to-infinitive"
+ },
+ {
+  "id": "M02",
+  "text": "ChatGPT allows users to receive information intuitively.",
+  "expect": [
+   "allow/P/en",
+   "receive/P/en",
+   "user/C/en",
+   "information/C/en"
+  ],
+  "forbid": [
+   "(dummy_cousin receive",
+   "(sibling_he receive"
+  ],
+  "note": "causer and enabled entity both arguments of the merged clause; atoms checked one by one (an attached adverb can sit between them)"
+ },
+ {
+  "id": "M03",
+  "text": "We asked GPT-4 to summarize the clinical notes.",
+  "expect": [
+   "ask/P/en summarize/P/en",
+   "gpt_4/C/focal"
+  ],
+  "forbid": [],
+  "note": "directive"
+ },
+ {
+  "id": "M04",
+  "text": "To test this, we prompted GPT-3.5 to advise the patients.",
+  "expect": [
+   "advise/P/en prompt/P/en"
+  ],
+  "forbid": [
+   "prompt/P/en test/P/en"
+  ],
+  "note": "word-order guard: fronted purpose clause"
+ },
+ {
+  "id": "M05",
+  "text": "ChatGPT was able to offer useful advice.",
+  "expect": [
+   "able/M/en",
+   "offer/P/en"
+  ],
+  "forbid": [
+   "be/P/en",
+   "(sibling_he able"
+  ],
+  "note": "be able: copula left out, able modal-like"
+ },
+ {
+  "id": "M06",
+  "text": "GPT-4 failed to identify the correct diagnosis.",
+  "expect": [
+   "fail/P/en identify/P/en"
+  ],
+  "forbid": [],
+  "note": "semi-modal fail to"
+ },
+ {
+  "id": "M07",
+  "text": "LLMs tend to produce plausible but wrong answers.",
+  "expect": [
+   "produce/P/en tend/P/en"
+  ],
+  "forbid": [],
+  "note": "semi-modal tend to"
+ },
+ {
+  "id": "M08",
+  "text": "Further research is needed to explore the limits of ChatGPT.",
+  "expect": [
+   "explore/P/en"
+  ],
+  "forbid": [
+   "need/P/en explore/P/en",
+   "explore/P/en need/P/en"
+  ],
+  "note": "need guard: passive needed is purpose"
+ },
+ {
+  "id": "M09",
+  "text": "Let us consider how ChatGPT answers medical questions.",
+  "expect": [
+   "answer/P/en"
+  ],
+  "forbid": [
+   "consider/P/en let/P/en",
+   "let/P/en consider/P/en"
+  ],
+  "note": "let guard: hortative; KNOWN FAILURE, pre-existing: the let guard blocks the merge, but G3 already pulls a level holding only verbs and a dropped pronoun ('let us') into the verb group (the 22 accidental merges recorded under \u00a76 item 3)"
+ },
+ {
+  "id": "M10",
+  "text": "These domains are well represented in the training data, allowing LLMs to provide generally accurate responses.",
+  "expect": [
+   "allow/P/en provide/P/en",
+   "llm/C/focal"
+  ],
+  "forbid": [],
+  "note": "participle trigger: merged, no causer taken"
+ },
+ {
+  "id": "M11",
+  "text": "ChatGPT can help in preparing scientific articles.",
+  "expect": [
+   "help/P/en prepare/P/en"
+  ],
+  "forbid": [],
+  "note": "help in V-ing"
+ },
+ {
+  "id": "M12",
+  "text": "Retrieval augmentation enables GPT-4 to cite its sources and to explain its reasoning.",
+  "expect": [
+   "cite/P/en enable/P/en"
+  ],
+  "forbid": [],
+  "note": "coordinated complements (at least the first merged)"
+ },
+ {
+  "id": "M13",
+  "text": "Clinicians have to verify every answer that ChatGPT gives.",
+  "expect": [
+   "have/P/en verify/P/en"
+  ],
+  "forbid": [],
+  "note": "have to: obligation"
+ },
+ {
+  "id": "M14",
+  "text": "Deploying LLMs requires careful monitoring to avoid harm.",
+  "expect": [
+   "require/P/en"
+  ],
+  "forbid": [
+   "avoid/P/en require/P/en",
+   "require/P/en avoid/P/en"
+  ],
+  "note": "require is not a trigger"
+ }
+]

@@ -1,0 +1,93 @@
+[
+ {
+  "id": "B01",
+  "text": "ChatGPT not only reduced costs but also improved accuracy.",
+  "expect": [
+   "reduce/P/en",
+   "improve/P/en"
+  ],
+  "forbid": [
+   "not_only/M/en",
+   "but_also/M/en"
+  ],
+  "expect_before": [
+   "not_only/M/en reduce/P/en",
+   "but_also/M/en improve/P/en"
+  ],
+  "forbid_before": [],
+  "note": "expectation updated 2026-10-09: option 2: paired not-only/but-also dropped"
+ },
+ {
+  "id": "B02",
+  "text": "LLMs can generate not only text but also images.",
+  "expect": [
+   "image/C/en",
+   "text/C/en"
+  ],
+  "forbid": [
+   "not_only/M/en",
+   "but_also/M/en"
+  ],
+  "expect_before": [
+   "but_also/M/en image/C/en"
+  ],
+  "forbid_before": [
+   "(dummy_sibling but_also"
+  ],
+  "note": "expectation updated 2026-10-09: option 2: paired not-only/but-also dropped"
+ },
+ {
+  "id": "B03",
+  "text": "GPT-4 was accurate but also slow.",
+  "expect": [
+   "but_also/M/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "B04",
+  "text": "GPT-4 answered correctly, but BERT also failed.",
+  "expect": [
+   "fail/P/en"
+  ],
+  "forbid": [
+   "but_also"
+  ]
+ },
+ {
+  "id": "B05",
+  "text": "GPT-4 passed the exam but can also explain its answers.",
+  "expect": [
+   "but_also/M/en can/M/en explain/P/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "B06",
+  "text": "Not only did GPT-4 pass the exam, but it also outperformed the residents.",
+  "expect": [
+   "not_only/M/en",
+   "but_also/M/en outperform/P/en"
+  ],
+  "forbid": []
+ },
+ {
+  "id": "B07",
+  "text": "ChatGPT is also used by students.",
+  "expect": [
+   "use/P/en"
+  ],
+  "forbid": [
+   "but_also",
+   "also/M/en"
+  ]
+ },
+ {
+  "id": "B08",
+  "text": "These tools may help clinicians but also mislead patients, as ChatGPT often fabricates references.",
+  "expect": [
+   "but_also/M/en mislead/P/en"
+  ],
+  "forbid": []
+ }
+]

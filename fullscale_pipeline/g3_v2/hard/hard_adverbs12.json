@@ -1,0 +1,124 @@
+[
+ {
+  "id": "D01",
+  "text": "Looking ahead, we anticipate a wider use of LLMs in hospitals.",
+  "expect": [
+   "look_ahead/P/en"
+  ],
+  "forbid": [
+   "ahead/M/en"
+  ],
+  "note": "direction word fused with its verb"
+ },
+ {
+  "id": "D02",
+  "text": "Regulators must move forward with rules for ChatGPT.",
+  "expect": [
+   "move_forward/P/en"
+  ],
+  "forbid": [
+   "forward/M/en"
+  ],
+  "note": "direction word fused"
+ },
+ {
+  "id": "D03",
+  "text": "GPT-4 represents a significant step forward for clinical NLP.",
+  "expect": [
+   "forward/M/en",
+   "step/C/en"
+  ],
+  "forbid": [
+   "_forward/"
+  ],
+  "note": "not attached to a verb: kept as a modifier in its phrase"
+ },
+ {
+  "id": "D04",
+  "text": "The response of the LLM is sent back to the user.",
+  "expect": [
+   "send_back/P/en"
+  ],
+  "forbid": [
+   "back/M/en"
+  ],
+  "note": "direction word fused (passive); KNOWN FAILURE: the parser attaches 'back' to 'to the user' ((back/M to/Jr) ...), not to the verb, so it stays a modifier in a cousin"
+ },
+ {
+  "id": "D05",
+  "text": "No language should be left behind by LLMs.",
+  "expect": [
+   "leave_behind/P/en"
+  ],
+  "forbid": [
+   "behind/M/en"
+  ],
+  "note": "direction word fused"
+ },
+ {
+  "id": "D06",
+  "text": "In contrast, GPT-4 remained stable throughout.",
+  "expect": [
+   "remain/P/en"
+  ],
+  "forbid": [
+   "throughout"
+  ],
+  "note": "time use dropped"
+ },
+ {
+  "id": "D07",
+  "text": "This question has been tested with ChatGPT before.",
+  "expect": [
+   "test/P/en"
+  ],
+  "forbid": [
+   "before"
+  ],
+  "note": "time use dropped"
+ },
+ {
+  "id": "D08",
+  "text": "ChatGPT scored around 30% on the anatomy questions.",
+  "expect": [
+   "around/M/en",
+   "30/",
+   "percent/C/en"
+  ],
+  "forbid": [],
+  "note": "approximation before a number kept"
+ },
+ {
+  "id": "D09",
+  "text": "GPT-4 scored under 5 marks on four questions.",
+  "expect": [
+   "under/M/en",
+   "five/"
+  ],
+  "forbid": [],
+  "note": "approximation before a number kept"
+ },
+ {
+  "id": "D10",
+  "text": "Clinicians used ChatGPT around the clock during the pilot.",
+  "expect": [
+   "use/P/en",
+   "clock/C/en"
+  ],
+  "forbid": [
+   "around/"
+  ],
+  "note": "preposition use: dropped by type"
+ },
+ {
+  "id": "D11",
+  "text": "Despite its size, BERT performed well.",
+  "expect": [
+   "perform/P/en"
+  ],
+  "forbid": [
+   "despite"
+  ],
+  "note": "preposition use dropped"
+ }
+]

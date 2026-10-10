@@ -1,0 +1,110 @@
+[
+ {
+  "id": "V01",
+  "text": "Such a model should be approached with caution, according to the authors of the ChatGPT study.",
+  "expect": [
+   "be/M/en",
+   "approach/P/en",
+   "should/M/en"
+  ],
+  "forbid": [],
+  "note": "owner's example: passive, be kept"
+ },
+ {
+  "id": "V02",
+  "text": "ChatGPT should approach this problem with caution.",
+  "expect": [
+   "approach/P/en should/M/en"
+  ],
+  "forbid": [
+   "be/M/en"
+  ],
+  "note": "active: no be"
+ },
+ {
+  "id": "V03",
+  "text": "The accuracy of ChatGPT is approaching that of residents.",
+  "expect": [
+   "approach/P/en"
+  ],
+  "forbid": [
+   "be/M/en"
+  ],
+  "note": "progressive: auxiliary dropped"
+ },
+ {
+  "id": "V04",
+  "text": "The answers were not clearly reported by ChatGPT.",
+  "expect": [
+   "be/M/en",
+   "report/P/en",
+   "not/M/en"
+  ],
+  "forbid": [],
+  "note": "passive with negation and adverb between"
+ },
+ {
+  "id": "V05",
+  "text": "LLMs are increasingly being used in hospitals.",
+  "expect": [
+   "be/M/en",
+   "use/P/en"
+  ],
+  "forbid": [],
+  "note": "two auxiliaries, passive"
+ },
+ {
+  "id": "V06",
+  "text": "ChatGPT is a chatbot developed by OpenAI.",
+  "expect": [
+   "be/P/en"
+  ],
+  "forbid": [
+   "be/M/en"
+  ],
+  "note": "copula, main verb: kept as be/P"
+ },
+ {
+  "id": "V07",
+  "text": "GPT-4 was more commonly used than BERT.",
+  "expect": [
+   "be/M/en",
+   "use/P/en"
+  ],
+  "forbid": [],
+  "note": "degree word between auxiliary and verb"
+ },
+ {
+  "id": "V08",
+  "text": "The prompts were directly and indirectly utilized by GPT-4.",
+  "expect": [
+   "be/M/en"
+  ],
+  "forbid": [],
+  "note": "coordinated adverbs between auxiliary and verb; KNOWN FAILURE: the parser gives 'utilized' no passive role (Pd.s?a) and types 'indirectly' as a noun, so the auxiliary is dropped, as the rule (the parser's passive signal) says"
+ },
+ {
+  "id": "V09",
+  "text": "GPT-4 has been trained on a large corpus.",
+  "expect": [
+   "be/M/en",
+   "train/P/en"
+  ],
+  "forbid": [
+   "have/"
+  ],
+  "note": "perfect passive: have dropped, be kept"
+ },
+ {
+  "id": "V10",
+  "text": "ChatGPT has been improving steadily.",
+  "expect": [
+   "improve/P/en"
+  ],
+  "forbid": [
+   "be/M/en",
+   "have/"
+  ],
+  "note": "perfect progressive: both auxiliaries dropped"
+ }
+]

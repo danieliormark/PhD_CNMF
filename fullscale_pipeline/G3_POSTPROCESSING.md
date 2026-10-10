@@ -3,6 +3,10 @@
 Status (2026-09-30): **design agreed in part; test script built and tested on real data; not yet run on the corpus.**
 *[2026-10-08: §6 items 1–7 decided; items 1, 3, 4 and 5 not yet implemented in the test script; items 6 and 7
 are built (`g3_scope_exclusions/`, `g3_llm_output/`) and G3 must read both.]*
+*[2026-10-09: §6 item 8 (audit of the curated output: identifiers, junk and non-prose pieces, duplicates, numbers)
+decided; its participle and cousin rules are implemented in a test copy, the rest is to be built.]*
+*[2026-10-10: every rule of §6 items 1–8 is implemented in the test script v2, `g3_v2/g3_curation_v2.py` (§7.1),
+and tested on shards 0 and 20; the production script (§8 item 2) is not yet built.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080). The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
 item 29). Input: G2 v3, see [`G2_PARSING.md`](G2_PARSING.md). Path abbreviations as in PIPELINE.md.
@@ -578,7 +582,273 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
      articles in `g3_scope_exclusions/scope_exclusions.csv` (§6 item 6) — before focal matching, since a deleted
      unit is removed whether or not it already parses to a parent.
 
+8. **Audit of the curated output — DECIDED 2026-10-09 (owner), several rounds.** The owner's four points: traceable
+   ids, junk and non-prose pieces, the stop list beside the adverb table, and duplicated words. Checked on the shard-0
+   output of the question-4 test copy (694 articles, 14,225 units) and, where stated, on the whole corpus (RUN_LOG
+   RL-106 to RL-110). Two rules are implemented in a test copy; everything else is decided and still to be built.
+
+   - **Identifiers.** Provenance as in §5 holds (0 problems). Each structure gets three identifiers:
+
+     | Identifier | Built from | Example | What it is for |
+     |---|---|---|---|
+     | occurrence id (exists) | position | `<uid>.P1.S2`, with `sha1(id\|edge)[:12]` as an integrity hash | tracing a structure to its unit, sentence and article |
+     | entity id | role + set of words (the edge string) | `(sibling_he survey/C/en user/C/en)` | the matrix row: the role decides the facet, so a structure lands in the right matrix |
+     | **content key** (new) | set of words only, without the role: `sha1(sorted atoms)[:16]` | {survey, user} | finding the same content in different roles or facets |
+
+     The **content key**'s uses:
+     - In v11 there are no atom facets (owner: single-word community attribution is not theoretically meaningful,
+       since the theory works on associations, and it is unstable). So a child hyperedge and a cousin hyperedge with
+       the same words, possibly from different sentences or articles, are otherwise unrelated in the matrices; the
+       key is what can link them if M1 wants that link.
+     - Counting how often content recurs across roles.
+     - Storing each distinct content once.
+     - Grouping identical content when building tables.
+
+     16 hex characters keep the chance of any collision negligible at corpus size; 12 would give about 0.7% for
+     roughly 2 million distinct structures. M1 must check that no two different word sets share a key. The role
+     stays part of the entity id: (focal_he X), (sibling_he X) and (cousin_he X) are different entities.
+   - **Spelling-corrected units (§6 item 6):** verify the unit hash on the original text, then correct, and record
+     the correction (the check otherwise fails on the 6 corrected units).
+   - **Junk and non-prose pieces.** Upstream removal (P1b, P1c, G2 v3) and decision f leave, in shard 0, these atom
+     classes. Decided:
+     - Layout words (table, fig, figure, appendix, supplementary, panel, equation) are dropped when they are not
+       plain text, i.e. when they name a non-text object by a label ("Table 2", "Fig. 1b", "Supplementary Table
+       S1"), together with the label. Label uses: table 343/368, fig 253/261, figure 207/234, appendix 28/36.
+       Kept in prose: "the figure presents", "an expert panel", "a panel survey".
+     - Letters-plus-digits atoms (2,113) are kept, because most are names (word2vec, T5, ESM2, 3D, CHA2DS2, F1,
+       12th). Exceptions: figure labels (by the label rule); model sizes (8b, 13b, 70b) dropped; version tokens split
+       off a focal name (764 directly after a focal term: "DeepSeek-V3" → `deepseek` + `v3`, "ChatGPT 4o") folded
+       into the canonical focal atom (`deepseek_v3`, `gpt_4o`), consistent with §4.
+     - A hyphen left inside an atom (U+2010 and similar, 273) becomes "_". The other symbol atoms (escaped ".",
+       "(", ")", "&", "@"; glued citation digits "self_education,2") are reviewed and cleaned.
+     - Citation tokens (`REF000053`, 341) are kept: cited works are sources of authority and objects of critique.
+     - URL tokens (`URL12345678`, 29) are removed.
+     - Single letters (534: variables, list labels) are dropped.
+     - Plain text must contain at least a parent; units without one already contribute nothing. Lines that do
+       parse to a parent but are not prose are dropped by four rules, precision to be checked on a labelled sample:
+       headings (no end punctuation and Title Case, or a section number such as "4.2.2."); reference entries
+       ("45 L. P. Argyle, Out of one, many: ..."); pseudocode ("B_output←Pooled_output(...)//..."); figure-panel
+       captions ("A Accuracy evaluation ...; B Accuracy evaluation ..."). Glossary lines ("LLM equals large
+       language model.", "LLM1 indicates GPT-4o (...)") are dropped by a glossary rule: a parent whose verb is
+       equal/indicate/denote/stand for/refer to and whose arguments are only focal terms and their expansions.
+       73 candidate units with a parent in shard 0.
+   - **Stop list and adverb table: kept as separate files**, loaded through one place with a consistency check at
+     start-up. The NLTK list drops a word whatever its role; the corpus-built table applies only to single adverbs
+     and decides attach or drop. They share only "only", which has its own rule. 12 table rows still read "open
+     question 5" and are to be updated to item 5's decision. How the table was built is documented in item 4.
+   - **Duplicated words.** Within one structure duplicates are impossible (a structure is a set). Found elsewhere:
+     - **Participle properties, now one rule (implemented in the test copy).** A participle joined by a hyphen to
+       the word before it ("LLM-based chatbots", "ChatGPT-generated text", "LLM- based", en dash, or a hyphen word
+       G2 already joined, `expert_written`) is a property of the noun, not a predicate (owner): its phrase is not
+       a clause, the word is kept as written and typed as a modifier (`based/M/en`, not `base/P/en`), and it never
+       counts as a verb-group member. Without a hyphen the participle is treated as before ("text generated by
+       ChatGPT" keeps `generate` as its verb). Before: G3 made the modifier itself a clause, putting the focal term
+       in `focal_he` and `sibling_he` and the participle in the verb group and `focal_he` (647 parents, 3.8%).
+       After: the phrase sits in the focal argument of the clause's real verb ("LLM-based assessment tools ...
+       could promote ..." → `(dummy_sibling could promote) (focal_he assessment based llm tool) ...`). Shard 0:
+       parents with a token in two children 647 → 27 (the rest are other parse patterns); 971 parents changed;
+       836 hyphen properties; 29 units lose every parent: in all of them the parser attached the focal phrase
+       outside every clause, and before the rule the participle served as a fake verb. 9 are headings, titles or
+       labels; 20 are real sentences (subject phrase parsed as the head of the sentence; focal phrase under a
+       top-level "on"/"than"/"in" connector). Handling under discussion (RL-111). Hard cases
+       `g3_audit_rules/hard_rules2.json`: 10 of 10 (4 of 10 before). "llm_based" is not made a focal term of its
+       own (it would split the `llm` entity).
+     - **Emphatic reflexives (P6).** P6 replaced every reflexive pronoun by its antecedent; emphatic uses then
+       duplicate the noun ("even for the model the model", "just like LLMs LLMs"). Told apart by the dependency
+       label of the reflexive in the original sentence (spaCy `en_core_web_trf`, all 3,157 replacements; samples
+       read by hand): emphatic = apposition (1,914; 8/8), adverbial noun phrase (248; 8/8), predicate attribute
+       (22; 8/8), "in itself" (48; 10/10), "by itself/themselves" except a passive agent (about 90; 8/10 "alone");
+       object = direct or indirect object (606; 16/16), other prepositions (about 150), small-clause subjects (46;
+       7/8). Decided: object uses stay ("LLMs cannot evaluate LLMs" is a statement; lexicalised "presents itself
+       as" stays too); emphatic uses get the original pronoun back from P6's record (original text and character
+       offsets are kept), which G3 then drops as a pronoun, and the affected units are re-parsed with G2's parser
+       and given to G3 through a replacement table with the original unit hash kept (as for spelling corrections).
+       A larger labelled sample (about 100) confirms the split before use.
+     - **Cousins seen differently by different parents (implemented in the test copy).** Each parent's cousins are
+       the unit minus that parent's own clause. When the sweep had to cut a phrase open to reach a clause nested in
+       it, it split the phrase word by word, while a parent whose own clause was that nested clause saw the phrase
+       whole: "Those who find ChatGPT valuable are more likely to use ChatGPT regularly" gave `(cousin_he more)` +
+       `(cousin_he likely)` for one parent and `(cousin_he likely more)` for the other. Rule: a phrase cut open
+       keeps all its words outside the nested clauses as one cousin, which is exactly how the other parent sees it,
+       so a phrase has one rendering in every view and identical cousins are one entity with a parent list. A
+       narrower variant (group only loose single words) left the views inconsistent (13/15 hard cases) and was
+       rejected. Real units (RL-111): of 30 changed units read by hand, 26 correct, 4 join items that are separate
+       (3 coordinated list items, 1 run-in label), the way G3 already joins coordinated items in any phrase with no
+       clause inside. Shard 0: tokens in two cousins of a unit 725 → 191 with both rules (the rest: a verb group
+       absorbing a verb-only clause in one view only, by the verb-group rule); one-word cousins 12,398 → 10,183;
+       cousins 53,609 → 48,809; parents unchanged by this rule. Hard cases: 5 of 5 (0 of 5 before).
+     - **Not changed (owner):** one parent per focal hyperedge, also when one clause holds two focal terms (836
+       clauses in shard 0; the approach is centred on focal terms and their hyperedges, so parents are not merged).
+       Cousins are not typed by kinship degree; the current breadth is sufficient. For the record, clause levels
+       down to the focal term (shard 0 only, approximate: relations with a predicate connector, 12 focal names,
+       14,726 occurrences): 1 level 59.7%, 2 levels 30.2%, 3 levels 7.7%, 4 or more 1.8%.
+   - **Numbers — DECIDED 2026-10-09 (owner, revised the same day; supersedes option (c), which used one placeholder
+     atom for every value and so made all numbers look alike).** Non-text numbers are removed by rule; every other
+     number stays as written, years included; integers 0–10 become words, applied only after the removal rules, so
+     that a label is never turned into a count. Removed: labels (Table/Figure/Section/Question/Step N, "Table 2",
+     "Section 2.3"); bracketed list labels ("(1)"); enumerators and numbers at the start of a unit ("[21] A
+     clinician…"); every number inside square brackets (intervals such as "[5.8–7.0]" and citation leftovers such
+     as "(PAL)[18]"; owner: they bear little relevant meaning); statistical notation (a number after p, CI, OR, HR,
+     ±, =, <, >, n =). Integers 0–10 as words remove a style artefact (journals differ on spelling out numbers
+     below ten), not a meaning; their precision is checked on a hand-labelled sample before use. Shard 0 (RL-111):
+     10,401 numbers in kept units, of which 2,864 are already part of a focal name, about 1,400 fall under the
+     removal rules (labels 685, square brackets 244, statistics 196, list labels 195, enumerators 77), and the rest
+     (percentages 1,564, integers 0–10 1,390, integers above 10 1,362, decimals 1,123, years 375, ranges 326) are
+     kept, minus statistics among decimals and ranges. Accepted cost: hyperedges that differ only by a value are
+     different entities (measured at M1). Comparison words next to a number (over, under, up to, more/less than,
+     at least, nearly, approximately) are kept. Spelled-out numbers heading a noun phrase (typed `C#`, dropped by
+     type today) are kept as written. Supersedes the open flag under items 4 and 5. To be implemented and tested.
+   - **The 12 adverb-table rows left by item 5 — DECIDED 2026-10-09 (owner, option 3).** forward, forwards, ahead,
+     behind, back, away, throughout, before, under, around, despite, beside were given the role "particle" when the
+     table was built and deferred to item 5, which decided only the seven fusable particles. Most of their uses are
+     prepositions (types T, Br, Jr; dropped by type, about 400 in shard 0); the table acts on the plain-adverb uses
+     only (43 in shard 0, about 1,000 in the corpus). Rule, following decisions already taken: direction words
+     (forward(s), ahead, behind, back, away) fuse with their verb like the item-5 particles, including a plain
+     modifier on a modal/auxiliary chain ("Looking ahead" → `look_ahead`, "must move forward" → `move_forward`, "left
+     behind" → `leave_behind`), and otherwise stay a modifier in their phrase ("a significant step forward"); time uses
+     (before, throughout) are dropped like the table's time adverbs; around and under are kept only before a number
+     (numbers rule: "around 30%"), otherwise dropped; despite and beside are dropped. Hard cases
+     `g3_v2/hard/hard_adverbs12.json` 10/11 (D04: the parser attaches "back" to "to the user", not to the verb).
+   - **Flag for M1 (owner 2026-10-09): verb groups are deliberately specific.** Keeping passive "be" (`be/M`, item 1)
+     makes "X was trained" and "X trained" different verb-group entities, and the same holds for the other atoms G3
+     puts into `dummy_sibling` / `dummy_cousin`: modals (can, should; item 2 of §3), negation, `only`, `not_only` /
+     `but_also` when kept, the adverbs the role table keeps (item 4), `able` / `unable` and the complement verbs of a
+     lexical modal (item 3), fused phrasal verbs and direction words (item 5 and above), and verbs pulled up from
+     verb-only levels. Each makes one core verb appear in several entities, which raises the sparsity of every
+     relation that holds verb groups. This is intended (owner: these distinctions carry meaning), but M1 should
+     measure it (how many verb-group entities per core verb, and their article counts) and decide whether a
+     back-off is needed. A cheap option, not built: a second key on verb groups over the predicate lemmas alone
+     (modifiers left out), written like the content key, so M1 could group or compare verb groups by their core verb.
+     Related: the synonym question of item 4 (deferred to M1) concerns the same relations.
+   - **Implemented** in the test script v2 (§7.1), together with every other rule of this item. The earlier copy:
+   - **Test copy and checks:** `diagnostics/g3_audit/g3_rules2.py` (sha256 `53f3162ddb83`; `XBASED=hyphen`,
+     `GROUP=1`; `XBASED=0 GROUP=0` reproduces the question-4 copy byte for byte); hard cases
+     `g3_audit_rules/hard_rules2.json` and runner `hard_rules2.py` (15/15; 4/15 before); audit scripts in
+     `diagnostics/g3_audit/`.
+
 ## 7. Test script
+
+### 7.1 Test script v2 (current, 2026-10-10): every rule of §6 items 1–8
+
+```
+cd fullscale_pipeline/g3_v2
+python g3_curation_v2.py --selftest                                             # 54 cases
+python g3_curation_v2.py --shard N [--limit A | --limit 0] --outdir DIR [--db] [--show K]
+python run_hard.py hard/hard_*.json                                             # 145 constructed cases
+```
+
+`g3_v2/g3_curation_v2.py` (sha256 `2f7e8f356692`) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
+beside the script). Built stage by stage from the RDS test script of §7.2 (RUN_LOG RL-112 to RL-117); the RDS script is
+unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environment as G2 (`tensor_env`,
+`PYTHONPATH=$HOME/np1_for_spacy`). The switches kept from the test copies (`Q4`, `ONLY_MODE`, `NOTONLY_DROP`, `XBASED`,
+`GROUP`, `HYPH_JOINED`, `Q5_CHAIN`, `Q5_TYPE`) default to the decided settings and exist for comparison runs only.
+
+**What it does, in order.**
+1. **Article:** skipped if listed in `scope_exclusions.csv` (§6 item 6).
+2. **Unit**, each checked against its list's unit hash:
+   - skipped if it reproduces LLM output (item 7);
+   - skipped if it is not prose: heading, reference entry, pseudocode or panel caption (item 8); the skipped units
+     are written to `g3_nonprose_NNN.jsonl` for review;
+   - replaced by its restored, re-parsed version if it holds an emphatic reflexive (item 8);
+   - spelling-corrected (item 6).
+   The unit hash is always verified on the original G2 text, and a changed unit records `text_original`.
+3. **Article evidence** for the guarded focal names is taken from the kept, corrected units.
+4. **Lexical modal verbs (item 3)** are merged on the parse as G2 gave it, before any replacement.
+5. **Focal terms** are found and replaced, with a version token after a versioned name folded into its atom (item 8).
+6. **Extraction:**
+   - phrasal particles and direction words are fused with their verb (items 5 and 8);
+   - a phrase holding a hyphen-joined participle is not a clause (item 8);
+   - the parent clause and its verb group are found as before;
+   - the cousins are swept, a phrase cut open keeping its other words as one cousin (item 8);
+   - glossary parents are dropped (item 8).
+7. **Atoms**, each decided once per unit (`Ctx.curate`):
+   - focal atoms, and the hyphen properties written as `based/M`;
+   - labels and their numbers, non-text numbers dropped, other numbers kept (0–10 as words);
+   - `percent`; atoms without letters, connectives, URL tokens, model sizes;
+   - comparison words before a number;
+   - the item-4 rules (not-only / but-also option 2, connectives, openers, "as well");
+   - the adverb role table, including the 12 rows decided in item 8;
+   - negation, pronouns, determiners;
+   - passive "be" kept as `be/M` (item 1), other auxiliaries dropped;
+   - modals, and `able` of a merged "be able to";
+   - the stop list (particles no longer exempt, item 5), the type filter, single letters;
+   - the remaining atoms written as lemma and type, symbols cleaned and Unicode hyphens written as "_".
+8. **Identifiers:** ids and hashes as in §5, plus a content key on every child, cousin and parent (item 8).
+
+**Inputs**, read from RDS, each checked against its sha256 before the run:
+
+| File | sha256 (12) |
+|---|---|
+| `PG/g3_scope_exclusions/scope_exclusions.csv` | 5b71d844d9af |
+| `PG/g3_scope_exclusions/spelling_corrections.csv` | d0a70f6c1a20 |
+| `PG/g3_llm_output/llm_output_units.csv` | b71d5717e250 |
+| `PG/g3_word_lists/adverb_roles.tsv` | f66d153f5efa |
+| `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 units; corpus text, so on RDS only) | d121a203daec |
+
+**Outputs** (refuses to overwrite) as in §7.2:
+- `g3_test_NNN.jsonl`: per record, also `content_key`, and `text_original`, `corrections`, `reflexive_restored` where
+  they apply;
+- `g3_errors_NNN.jsonl`;
+- `g3_report_NNN.json`: also the input hashes, and counts of every new rule;
+- `g3_nonprose_NNN.jsonl`;
+- with `--db`, the chunk12-form database.
+
+**Checks**, before exit (exit code 1 on any problem): those of §7.2, plus that every content key matches its edge and
+that each list entry matches its unit.
+
+**Test suite.**
+- **Self-test:** 54/54. Four cases were updated where a decision changed the expected output: passive "be", the modal
+  merge, a plain-text number now kept, and "allows … to integrate".
+- **Hard cases:** `g3_v2/hard/`, run with `run_hard.py` on the parse cache `hard/parsed_cache.json`, 132/145:
+
+  | Set | Pass |
+  |---|---|
+  | item 4 adverbs | 22/25 |
+  | but also | 7/8 |
+  | negation and only | 22/24 |
+  | option 2 | 19/23 |
+  | item 8 participle and cousin | 15/15 |
+  | passive | 9/10 |
+  | lexical modal, G3 level | 13/14 |
+  | item 8 atom and number | 11/11 |
+  | the 12 adverbs | 10/11 |
+  | glossary | 4/4 |
+
+  The 13 failures are all known and documented in RUN_LOG and in the cases' notes: parser misreadings, option 2's four
+  accepted limits, and "let us" pulled up by the existing rule for verb-only levels.
+- **Copied sets:** sets copied from earlier work whose expectations predate a later decision keep the old expectation
+  beside the new one, with a note.
+- **Item-5 particle cases:** they carry no expectations. They are compared with the item-5 reference copy: 14/24
+  identical, and the 10 differences all come from later decided rules.
+- **Lexical-modal decision cases:** through the copied decision module, 33/40, the same as the original.
+
+**Results** (RL-117), both shards with 0 errors and 0 problems, about 0.003 s per unit:
+
+| | Shard 0 (`--limit 700`) | Shard 20 (whole shard) |
+|---|---|---|
+| Articles | 694 | 693 |
+| Excluded articles | 132 | 121 |
+| Units | 13,820 | 14,483 |
+| Units with a parent | 13,311 | 14,013 |
+| Parents | 16,525 | 17,130 |
+| Cousins | 47,100 | 49,265 |
+| Atoms kept / dropped | 281,852 / 178,048 | 294,517 / 185,017 |
+| Modal merges (not applied) | 621 (38) | 731 (54) |
+| Reflexive-restored units | 24 | 34 |
+| LLM-output units | 0 | 2 |
+| Non-prose units | 25 | 15 |
+| Glossary parents | 9 | 5 |
+
+**Determinism.** Shard 0 and shard 20 were each run twice under different Python hash seeds; each pair is
+byte-identical. Before RL-117, the lexical-modal decision took "the first verb" from graphbrain's `atoms()`, which is a
+set, so 2 units of shard 0 changed between runs. The decision now reads atoms in edge order.
+
+**Flags for M1** (§6 item 8):
+- the content key;
+- the specificity of verb groups;
+- the article exclusions of item 6, which M1 must apply to every relation.
+
+### 7.2 Earlier test script (2026-09-30, superseded by 7.1; kept as the record)
 
 ```
 python g3_curation_test.py --selftest                                           # 54 cases
@@ -604,8 +874,9 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 
 1. Owner decisions on §6 — DONE, all 7 items decided 2026-10-08. *[2026-10-09: the two flags under item 4 are
    settled (not-only/but-also option 2; synonym merging deferred to M1). Remaining: the numbers question flagged
-   under items 4 and 5.]*
-1a. Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
+   under items 4 and 5.]* *[2026-10-09: numbers decided in item 8 (option c); item 8 added and decided.]*
+1a. *[DONE in the test script 2026-10-10: `g3_v2/g3_curation_v2.py`, §7.1; the production script remains, item 2.]*
+   Implement the decided rules in the test script, then the production script: §6 item 1 (auxiliary "be" kept in
    passives), item 3 (lexical modal verbs, ported from `g3_modal_check/modal_rules.py`, with its hard cases as
    a regression test), and item 4 (negation fix, the "only"/"not only"/"but also" rules, connectives, the opener
    rule and the adverb role table, ported from `g3_word_lists/` and `diagnostics/g3_stoplist/g3_q4full.py`, hard
@@ -616,10 +887,13 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    item 7 (skip every `uid` in `g3_llm_output/llm_output_units.csv`; item 7 needs no other change). For item 4, the
    reference implementation of the whole rule set, including the not-only/but-also option 2, is
    `g3_notonly/g3_q4_option2.patch` (it supersedes `diagnostics/g3_stoplist/g3_q4full.py`), with
-   `g3_notonly/hard_option2.json` as a regression check.
+   `g3_notonly/hard_option2.json` as a regression check. Item 8: content key, junk and non-prose rules, glossary rule, model-version
+   folding, emphatic-reflexive restoration (with the re-parse of affected units), numbers; the participle and
+   cousin rules from `diagnostics/g3_audit/g3_rules2.py`, with `g3_audit_rules/hard_rules2.json` as a regression check.
 2. Production script from the test script: output folder `PG/g3_v1/` (not `PG/postprocessed_output/`), one task per
    G2 shard, a SLURM wrapper, a CSF test, and a separate checked merge (as for G2).
-3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5).
+3. The M1 input contract (JSONL and/or database, cousin–parent links as in §5). *[2026-10-09: M1 must also handle the
+   flags in §6 item 8: content keys, the specificity of verb groups, and the article exclusions of item 6.]*
 
 ## 9. Files
 
@@ -647,3 +921,14 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_scope_exclusions/spelling_corrections.csv` (6 unit corrections; also on `PG/`) | d0a70f6c1a20 |
 | `fullscale_pipeline/g3_scope_exclusions/test_corrections.py` (the 6 units through `g3_curation_test.py`) | dd18ca3aca3e |
 | `fullscale_pipeline/g3_scope_exclusions/decisions/*.csv` (hand-checked lists), `evidence/*.py` (the scans) | see RUN_LOG RL-094 |
+| `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
+| `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
+| **Test script v2 (§7.1)** | |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8) | 2f7e8f356692 |
+| `fullscale_pipeline/g3_v2/modal_merge.py` (§6 item 3: decision rule copied from `g3_modal_check/modal_rules.py`, edge-order fix, and the clause merge; imported by the script) | 75c7022ac187 |
+| `fullscale_pipeline/g3_v2/reflexive_restore.py` (§6 item 8: builds the reflexive table; 43 min on incline) | 92fa72c383de |
+| `fullscale_pipeline/g3_v2/measure_be.py` (§6 item 1: the measurement required before implementing passive "be") | 8cbfe1c89631 |
+| `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached) | 80b9ca527b8f |
+| `fullscale_pipeline/g3_v2/hard/hard_*.json` (11 sets, 169 cases, 145 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
+| `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
+| `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |
