@@ -170,7 +170,9 @@ python3 PG/scripts/merge_g2_v3.py --nshards 50                         # on incl
   (tested directly: delaying the hyphen-join does not help, and undoing it loses the clause structure entirely, G2
   item 30(l)). Not yet fixed: a small, measured correction table in G3 is the recommended approach, not a G2 rerun
   (both stages are deterministic, so a plain rerun reproduces the same lemma unchanged). See RUN_LOG RL-127,
-  G3_POSTPROCESSING.md §8 item 4.]*
+  G3_POSTPROCESSING.md §8 item 4.]* *[Corrected 2026-10-10, RL-128: not inconsistent — spaCy's rule lemmatiser gives an
+  out-of-vocabulary word the first suffix rule (-ed/-ing → -e, -est → ""); the wrong ones are 13,123 occurrences, 2,272
+  distinct words; the 35,201 above included correct cases. The pointer above should read §8 item 5.]*
 - **Repeated words:** graphbrain edges do not carry token positions, so when a word occurs twice in a unit its atom
   string is the same for both occurrences; `atom2word` lists both positions. Attribution of atoms to sub-edges is
   exact; only the token index of such an atom is ambiguous (10.7% of the atom records in a G3 test).

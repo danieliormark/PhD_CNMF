@@ -1016,6 +1016,12 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    30(l)). **Recommended: a small, measured correction table in G3** (`lemma_of()`), built the way every other G3 rule
    was — sample the frequent pairs, judge by hand, hard cases, before/after counts — not a G2 rerun (deterministic;
    would reproduce the same lemma). Not built; waiting on the owner's decision to proceed.
+   *[Corrected 2026-10-10, RL-128: the lemmatiser is not inconsistent but rule-based (an out-of-vocabulary word gets the
+   first suffix rule, -ed/-ing → -e, -est → ""); 35,201 included correct cases. The real scope: 13,123 wrong suffix-rule
+   lemmas on joined words (2,272 distinct), e.g. `pre_traine/P` 2,823 vs `pre_train/P` 305 in the G3 output; modifier
+   uses are kept as written and unaffected. Proposed instead of a hand table: a head-word rule (prefix + the corpus's own
+   lemma of the last part as a plain word, applied only where spaCy's suffix rule fired), with an exception for
+   comparatives/superlatives (`second_best` → `second_good` otherwise).]*
 
 ## 9. Files
 

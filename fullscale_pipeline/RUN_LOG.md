@@ -1337,3 +1337,28 @@ nothing about an article's processing history changes their output. The surface 
 lemma string is wrong), so no G2 rerun is needed at all; a fix belongs in G3, as a small, measured correction table
 built the way every other G3 rule was (sample, hand-judge, hard cases, before/after counts on real shards) — not yet
 built, pending the owner's decision to proceed. [LOG]
+
+**RL-128 · 2026-10-10 · G3 · AUDIT (read-only) + CORRECTION of RL-127 · LIVE**
+Owner asked whether the RL-127 diagnosis and proposal hold. Re-checked; host incline37, `tensor_env`. Corrections:
+(1) **Mechanism.** The lemmatiser is not "inconsistent": `en_core_web_trf`'s lemmatiser runs in `rule` mode, and for an
+out-of-vocabulary word (every underscore-joined word is one) it takes the first suffix rule without a lookup check
+(-ed → -e, -ing → -e, -est → ""): `pre_trained`→`pre_traine`, `question_answering`→`question_answere`,
+`second_best`→`second_b`, while the plain word "trained" gives `train`. It is right only by luck where the base ends
+in "e" (`fine_tune`, `ai_generate`). Systematic and predictable.
+(2) **Counts.** RL-127's 35,201 counted every joined word whose lemma differs from it, including correct cases
+(`fine_tuned`→`fine_tune` 6,871) and plurals; its 7,426 / "88% wrong" came from grepping raw JSON, which repeats atoms
+in the source lists. Recounted from the parent and cousin edges of `PG/g3_v1/g3_test_v1.jsonl`: `pre_traine/P`
+2,823 vs `pre_train/P` 305 (about 90% of verb uses wrong, so the headline holds); the modifier uses are kept as written
+under §6 item 8 (`pre_trained/M` 12,525) and are not affected. Over all raw G2 lemma edges, spaCy applied a suffix
+rule to a joined word 34,830 times: 21,707 right by luck, 13,123 wrong (2,272 distinct words; types M 8,528,
+P 3,308, C 1,286).
+(3) **Remedy.** RL-127's hand table of the ~30 frequent pairs would leave about 2,240 distinct wrong words. A rule does
+better: where spaCy's lemma of a joined word differs from the word, use the part before the last "_" plus the
+corpus's own most frequent lemma of the last part as a plain word (lookup built from G2's lemma edges, so G3 still
+loads no spaCy). Tested on the raw lemma edges: it corrects all 13,123 suffix-rule errors listed above that have a
+plain-word lemma (371 occurrences have none and stay), leaves the 21,707 right ones unchanged, and fixes gerund nouns
+too (`deep_learne`→`deep_learning`, `instruction_followe`→`instruction_following`). Errors of its own seen in the top
+45: `second_best`→`second_good` (plain "best" lemmatises to "good"; needs an exception for comparatives and
+superlatives) and `plug_ins` stays plural. Not built; the usual checks (labelled sample, hard cases, shards 0 and 20)
+would come first, then a G3 rerun (about 5 min) and a new merge. G2 is untouched either way. Agreed with RL-127: no G2
+rerun (deterministic, and the parse is right); the hyphen join stays. [LOG]
