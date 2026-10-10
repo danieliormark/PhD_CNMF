@@ -7,6 +7,13 @@ changed. Scripts: `fullscale_pipeline/corpus_statistics/` (tracked). Data they r
 caches). The OpenAlex key is read from the `OPENALEX_API_KEY` environment variable and is not stored
 in any file.
 
+*[2026-10-10: §1-§7 below describe the full 34,662-article G2 corpus, before the G3 exclusions
+(G3_POSTPROCESSING.md §6 item 6) existed, and use the publisher's self-declared "Subjects:" field
+and OpenAlex. §8 is a separate, narrower, differently-sourced analysis: the 28,075 articles G3 marks
+`valid` (G3's actual scope for M1), using only MEDLINE's own PublicationType tags, never the
+publisher's self-declared field or OpenAlex. Do not mix the two: §1-§7's article-type row (a) and
+§8's primary type are not the same measurement over the same corpus.]*
+
 ## 1. Inputs
 
 | Input | Stage | What it contributes |
@@ -193,3 +200,90 @@ From `fullscale_pipeline/corpus_statistics/`, in `tensor_env`, in this order:
 `parse_header`, `classify_subject` and the `Subjects:` values it recorded; its word and term counts
 are superseded (note at its top). OpenAlex results change as OpenAlex updates its records; the cached
 responses used here are in `diagnostics/openalex_authors/`.
+
+## 8. Article types of the 28,075-article valid G3/M1 corpus (2026-10-10)
+
+**Scope, deliberately narrower than §1-§7: only the 28,075 articles G3 marks `status: "valid"`**
+(`PG/g3_v1/g3_articles_v1.jsonl`; 34,662 G2-parsed articles minus 6,466 excluded as focal-term false
+positives, G3_POSTPROCESSING.md §6 item 6, minus 121 further with no usable G3 parent, §6 item 8
+step 9). This is the corpus M1 will actually build relation matrices from, not the full G2 corpus
+§1-§7 describe. The owner asked for this before moving to author counts, so that the corpus itself
+is fixed first: nothing outside this 28,075-article set, and no later step touching authors, is
+part of this entry.
+
+**Source, deliberately narrow: MEDLINE's own `PublicationType` tags, from NCBI Entrez, for the
+article's own PMID — not OpenAlex, and not the publisher's self-declared JATS "Subjects:" line
+that §1-§7's row (a) and the older `diagnostics/paper_type_table.py` use.** The PMID comes from the
+PMC header of the article itself (`headers.json`, R2 stage, already fetched for §4 — PMC/Entrez
+metadata, not OpenAlex). `PublicationType` is MEDLINE's own curated, controlled-vocabulary tag list
+per PMID (`corpus_statistics/pubmed_pubtype_fetch.py`, NCBI `efetch`, cached in
+`diagnostics/openalex_authors/pubmed_pubtypes.json`; already fetched for all 34,620 PMIDs of the
+full G2 corpus when this was first run 2026-10-06, so the 28,075-article subset needed no new
+fetch). An article can carry several tags (most carry one, up to six seen).
+
+**Where PMC/MEDLINE/Entrez/PubMed lack the information — reported, not filled in from elsewhere:**
+**38 of the 28,075 valid articles have no PMID in their PMC header at all**, so PMC/Entrez gives no
+link to a MEDLINE record and no type can be read for them from this source. Of the remaining 28,037
+(all with a PMID), every one was found by Entrez `efetch` and carries at least one `PublicationType`
+tag — no further gaps.
+
+**Raw MEDLINE `PublicationType` tags** (multi-label; 39 distinct tags seen; counts are articles, not
+tag instances — an article with several tags is counted once per tag it carries):
+
+| PublicationType (MEDLINE) | n articles | PublicationType (MEDLINE) | n articles |
+|---|---|---|---|
+| Journal Article | 27,671 | Dataset | 29 |
+| Review | 3,807 | Historical Article | 25 |
+| Research Support, Non-U.S. Gov't | 2,549 | Research Support, N.I.H., Intramural | 18 |
+| Comparative Study | 894 | Conference Proceedings | 12 |
+| Research Support, N.I.H., Extramural | 633 | Comment | 12 |
+| Systematic Review | 583 | English Abstract | 11 |
+| Scoping Review | 324 | Network Meta-Analysis | 8 |
+| Validation Study | 225 | Introductory Journal Article | 5 |
+| Editorial | 221 | Clinical Trial, Phase II | 4 |
+| Observational Study | 204 | Clinical Trial | 4 |
+| Research Support, U.S. Gov't, Non-P.H.S. | 166 | Pragmatic Clinical Trial | 4 |
+| Randomized Controlled Trial | 166 | Consensus Statement | 3 |
+| Multicenter Study | 153 | Clinical Trial, Phase I | 3 |
+| Meta-Analysis | 109 | Equivalence Trial | 3 |
+| Evaluation Study | 82 | Evidence Synthesis | 3 |
+| Letter | 69 | Interview | 1 |
+| News | 58 | Video-Audio Media | 1 |
+| Retracted Publication | 46 | Guideline | 1 |
+| Research Support, U.S. Gov't, P.H.S. | 45 | Clinical Study | 1 |
+| Clinical Trial Protocol | 45 | | |
+
+**46 of the 28,075 are tagged `Retracted Publication`** by MEDLINE (co-occurring with another tag,
+e.g. still "Journal Article" — this is a status flag, not a content type, so it does not form its
+own row below; it is a candidate exclusion or flag for M1 to decide on later, not acted on here).
+The `Research Support, *` and `English Abstract` tags are administrative (funding source, language
+note), not content type, and likewise form no row of their own.
+
+**Single-label primary type**, assigned by a fixed priority order over the tags above only (most
+specific evidence-synthesis/study-design tag first, down to a bare "Journal Article"; full order and
+tag groupings in `article_types_valid.py`), so every article gets exactly one row:
+
+| Primary type | n articles |
+|---|---|
+| Research article (Journal Article tag, no more specific type) | 22,672 |
+| Review (narrative / other) | 3,802 |
+| Systematic review / meta-analysis / scoping review | 926 |
+| Editorial / letter / comment / news | 360 |
+| Clinical trial / protocol | 218 |
+| No PMID in PMC header | 38 |
+| Dataset / data paper | 29 |
+| Historical article | 18 |
+| Conference proceedings / abstract | 12 |
+| **Total** | **28,075** |
+
+No article fell into "Unclassified" or "Other" — every one of the 28,037 with a PMID carries at
+least one tag this scheme recognises. The "Guideline" (1) and "Consensus Statement" (3) tags seen in
+the raw table above never win the single-label slot: all four of those articles also carry a
+higher-priority tag (Review, Scoping Review, or Systematic Review), checked directly — the priority
+order, not a missing category, is why "Guideline / consensus statement" shows no row.
+
+**Reproduction:** `corpus_statistics/article_types_valid.py` (reads `PG/g3_v1/g3_articles_v1.jsonl`,
+`diagnostics/openalex_authors/headers.json`, `diagnostics/openalex_authors/pubmed_pubtypes.json`;
+no network call needed, both caches already complete for this corpus). Writes
+`corpus_statistics/article_types_valid.csv` (28,075 rows: pmcid, pmid, the raw `|`-joined
+PublicationType tags, and the primary type) and prints both tables above.

@@ -1407,3 +1407,29 @@ spelled `pre_train` clause used to be two distinct `dummy_cousin` entities and n
 clauses hold no other atom — the intended effect of RL-129's fix, observed on real data for the first time. `g3_v1/
 g3_v1_summary.json`: script_sha `b3eadb6d385c`, job `22548004`, article_status unchanged (28,075 / 121 / 6,466).
 `PG/g3_v1_rl125/` kept as the pre-fix record. G3 production, with the head-word lemma rule, is complete. [LOG]
+
+**RL-131 · 2026-10-10 · CORPUS-STATS · CODE (new) + OUTPUT + DOC · LIVE**
+Owner: before moving to author counts, confine all further analysis to the 28,075 articles G3 marks
+`valid` (not the 121 `invalid_no_parent` or 6,466 `excluded`), and get their types from
+PMC/MEDLINE/Entrez/PubMed only — not OpenAlex, not the publisher's own self-classification — flagging
+where that source lacks the information rather than filling in from elsewhere.
+New `corpus_statistics/article_types_valid.py`. Scope: the 28,075 `valid` pmcids from
+`PG/g3_v1/g3_articles_v1.jsonl` (verified against the real file, not assumed from RUN_LOG). Source: the
+PMID printed in the article's own PMC header (`diagnostics/openalex_authors/headers.json`, PMC/Entrez
+metadata, R2 stage — not OpenAlex) and MEDLINE's own `PublicationType` tag list for that PMID
+(`diagnostics/openalex_authors/pubmed_pubtypes.json`, fetched by NCBI `efetch` on 2026-10-06; already
+covers all 34,620 PMIDs of the full G2 corpus, a superset of the 28,075, so no new network fetch was
+needed). Never falls back to the publisher's self-declared "Subjects:" line, unlike
+CORPUS_STATISTICS.md §2 row (a) and the older `diagnostics/paper_type_table.py`.
+Gaps reported, not filled in: 38 of the 28,075 have no PMID in their PMC header at all (no
+PMC/MEDLINE/Entrez/PubMed type possible for them); of the remaining 28,037, every one has >=1
+MEDLINE `PublicationType` tag — no further gaps. 39 distinct raw tags seen (most articles carry one,
+up to six); a fixed priority order over these tags (most specific evidence-synthesis/study-design
+type first) gives each article one primary type with no "Unclassified"/"Other" residue: research
+article 22,672; review 3,802; systematic review/meta-analysis/scoping review 926; editorial/letter/
+comment/news 360; clinical trial/protocol 218; no PMID 38; dataset 29; historical article 18;
+conference proceedings 12. 46 articles also carry `Retracted Publication` (a status flag, not a
+content type, so not its own row — left for a later decision, not acted on). Output:
+`corpus_statistics/article_types_valid.csv` (28,075 rows: pmcid, pmid, raw tags, primary type).
+Documented in CORPUS_STATISTICS.md §8 (new; §1-§7 kept, with a dated note at the top flagging the
+scope/method difference). [LOG]
