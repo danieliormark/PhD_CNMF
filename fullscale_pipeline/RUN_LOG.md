@@ -1284,3 +1284,14 @@ files' line counts match the summary's own counts exactly (`g3_test_v1.jsonl` 66
 everywhere). Scratch output deleted; `PG/g3_v1/` not yet produced. Both scripts mirrored to `PG/scripts/g3_v2/`.
 To run on CSF (owner): `sbatch PG/scripts/g3_v2/submit_g3_v1.sh`; after all 50 tasks,
 `python PG/scripts/g3_v2/merge_g3_v1.py --nshards 50`. [LOG]
+
+**RL-125 · 2026-10-10 · G3 · PRODUCTION RUN · LIVE**
+Owner: `sbatch PG/scripts/g3_v2/submit_g3_v1.sh` (job 22540333, 50-task array, `serial`). All 50 tasks finished in about
+4.5 min (first report 17:54, last 17:58); every `g3_report_NNN.json` shows 0 problems and 0 unit errors; no failure
+signature in any log. `python PG/scripts/g3_v2/merge_g3_v1.py --nshards 50`: every check passed; output written to
+`PG/g3_v1/` (refused-to-overwrite guard confirms this is the first write). `g3_articles_v1.jsonl` 34,662 (one row per
+article: 28,075 valid, 121 invalid_no_parent, 6,466 excluded — matches item 6's own count exactly); `g3_test_v1.jsonl`
+664,725 units with a parent; `g3_noparent_v1.jsonl` 23,099; `g3_nonprose_v1.jsonl` 1,211; `g3_errors_v1.jsonl` empty;
+816,075 parents, 2,266,190 cousins. Totals identical to the RL-124 scratch dry run. `g3_v1_summary.json` records
+script_sha `0f3146266f26`, merge_script_sha `a6921837ecf3`, the 7 input hashes, and job `22540333`. G3 production is
+complete. Next: the M1 input contract (G3_POSTPROCESSING.md §8 item 3). [LOG]

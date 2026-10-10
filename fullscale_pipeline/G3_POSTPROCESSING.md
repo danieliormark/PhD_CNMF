@@ -968,6 +968,10 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    sha256 (no second copy that could drift). CSF test written: `PG/scripts/g3_v2/check_csf_g3.sh` (script hashes,
    self-test, hard cases, whole shards 0 and 20 compared byte for byte with an incline reference run of the same script
    in `PG/g3_v1_csftest/reference_incline/`); passed on CSF (job 22539002).]*
+   *[2026-10-10, RL-125: run for real (job 22540333). All 50 tasks finished in ~4.5 min, 0 problems, 0 unit errors
+   anywhere. `PG/g3_v1/` now holds the corpus-scale G3 output: 34,662 articles (28,075 valid, 121 invalid_no_parent,
+   6,466 excluded, matching item 6's own count); 664,725 units with a parent; 816,075 parents; 2,266,190 cousins;
+   identical to the RL-124 scratch dry run. G3 production is complete. Next: the M1 input contract (item 3).]*
    *[2026-10-10, RL-124: the SLURM array and the checked merge are written and tested. `g3_v2/submit_g3_v1.sh`
    (sha256 `d0c8dad02783`; tracked copy of `PG/scripts/g3_v2/submit_g3_v1.sh`): 50-task array on `serial` (1 core, 4 GB,
    30 min; no parser is loaded, so this is ample), task *i* curates G2 v3 shard *i* with `g3_curation_v2.py` into
