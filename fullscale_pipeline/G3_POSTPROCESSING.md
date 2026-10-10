@@ -9,6 +9,8 @@ decided; its participle and cousin rules are implemented in a test copy, the res
 and tested on shards 0 and 20; the production script (§8 item 2) is not yet built.]*
 *[2026-10-10, RL-118 to RL-121: the promised checks are done, 0–10 as words rolled back, non-text numbers widened, and
 code, tables and documents harmonised. Two small questions are open for the owner (§8 item 4).]*
+*[2026-10-10, RL-122: both answered and implemented: units without a parent are removed and articles left without any
+parent are marked invalid; a score written after a model name is no longer read as a version.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080) *[superseded by `g3_v2/g3_curation_v2.py`,
 §7.1; the RDS script stays as the record, §7.2]*. The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
@@ -100,6 +102,11 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
   "GPT-44" (GPT-4 plus a glued citation 4) reads as `gpt`.
 - Shard 0 (694 articles): 19,997 mentions, 191 surface forms → 91 canonical atoms; the test report lists every
   surface form with its canonical atom and count, for review.
+- *[2026-10-10, owner (RL-122): a version written as the next token (§6 item 8) is not taken when the number is a
+  score: followed by a bracketed interval ("ChatGPT 8.0 [7.0–10.0]" → `chatgpt`, the 8.0 kept as a plain value) or
+  below 1 ("GPT 0.78 to 0.65"). The numbers inside such brackets were already dropped (§6 item 8). Real versions
+  starting a range ("from ChatGPT 3.5 to 4o") or followed by a citation number or a score in round brackets ("Grok 3
+  (0.78)") stay versions.]*
 
 ## 5. Provenance
 
@@ -679,7 +686,9 @@ item 4.]*
        (`XBASED=0`): 27 of 13,820 units lose every parent in shard 0 (0.20%), 14 of 14,483 in shard 20 (0.10%), none
        gains one; about half are headings, captions or bullet fragments ("• BERT-based monolingual model."). The
        script leaves them without a parent (option A of RL-111, the same treatment as item 7); the owner's
-       confirmation is open, §8 item 4.]*
+       confirmation is open, §8 item 4.]* *[Decided 2026-10-10 (owner), RL-122: every unit that ends up without a
+       parent, for this or any other reason, is removed; an article none of whose units has a parent is marked invalid.
+       See §7.1, step 9.]*
      - **Emphatic reflexives (P6).** P6 replaced every reflexive pronoun by its antecedent; emphatic uses then
        duplicate the noun ("even for the model the model", "just like LLMs LLMs"). Told apart by the dependency
        label of the reflexive in the original sentence (spaCy `en_core_web_trf`, all 3,157 replacements; samples
@@ -777,11 +786,11 @@ item 4.]*
 cd fullscale_pipeline/g3_v2
 python g3_curation_v2.py --selftest                                             # 54 cases
 python g3_curation_v2.py --shard N [--limit A | --limit 0] --outdir DIR [--db] [--show K]
-python run_hard.py hard/hard_*.json                                             # 191 constructed cases, 167 with expectations
+python run_hard.py hard/hard_*.json                                             # 199 constructed cases, 175 with expectations
 ```
 
-`g3_v2/g3_curation_v2.py` (sha256 `efbf44b09683`; `2f7e8f356692` at RL-117, `389123552561` at RL-120; RL-121 changed
-only input checks, outputs byte-identical) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
+`g3_v2/g3_curation_v2.py` (sha256 `266ddcbb00d2`; `2f7e8f356692` at RL-117, `389123552561` at RL-120, `efbf44b09683` at
+RL-121, which changed only input checks with outputs byte-identical) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
 beside the script). Built stage by stage from the RDS test script of §7.2 (RUN_LOG RL-112 to RL-117); the RDS script is
 unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environment as G2 (`tensor_env`,
 `PYTHONPATH=$HOME/np1_for_spacy`). The switches kept from the test copies (`Q4`, `ONLY_MODE`, `NOTONLY_DROP`, `XBASED`,
@@ -819,6 +828,10 @@ unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environ
    - the stop list (particles no longer exempt, item 5), the type filter, single letters;
    - the remaining atoms written as lemma and type, symbols cleaned and Unicode hyphens written as "_".
 8. **Identifiers:** ids and hashes as in §5, plus a content key on every child, cousin and parent (item 8).
+9. **Units and articles without a parent** (owner 2026-10-10, RL-122): a unit with no parent is removed from the output
+   and written to `g3_noparent_NNN.jsonl` for review; an article none of whose units has a parent is marked
+   `invalid_no_parent` in `g3_articles_NNN.jsonl`, which gives every article of the shard a status (`excluded`, `valid`,
+   `invalid_no_parent`). M1 uses only `valid` articles, in every relation, social ones included.
 
 **Inputs**, read from RDS, each checked against its sha256 before the run:
 
@@ -834,7 +847,8 @@ unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environ
 
 **Outputs** (refuses to overwrite) as in §7.2:
 - `g3_test_NNN.jsonl`: per record, also `content_key`, and `text_original`, `corrections`, `reflexive_restored` where
-  they apply;
+  they apply; *[since RL-122 only units with a parent]*;
+- `g3_noparent_NNN.jsonl` and `g3_articles_NNN.jsonl` (RL-122, step 9);
 - `g3_errors_NNN.jsonl`;
 - `g3_report_NNN.json`: also the input hashes, and counts of every new rule;
 - `g3_nonprose_NNN.jsonl`;
@@ -846,7 +860,7 @@ that each list entry matches its unit.
 **Test suite.**
 - **Self-test:** 54/54. Four cases were updated where a decision changed the expected output: passive "be", the modal
   merge, a plain-text number now kept, and "allows … to integrate".
-- **Hard cases:** `g3_v2/hard/`, run with `run_hard.py` on the parse cache `hard/parsed_cache.json`, 154/167 (RL-120; 132/145 before):
+- **Hard cases:** `g3_v2/hard/`, run with `run_hard.py` on the parse cache `hard/parsed_cache.json`, 162/175 (RL-122; 154/167 at RL-120, 132/145 before):
 
   | Set | Pass |
   |---|---|
@@ -861,6 +875,7 @@ that each list entry matches its unit.
   | the 12 adverbs | 10/11 |
   | glossary | 4/4 |
   | non-text numbers (RL-120) | 22/22 |
+  | scores after model names (RL-122) | 8/8 |
 
   The 13 failures are all known and documented in RUN_LOG and in the cases' notes: parser misreadings, option 2's four
   accepted limits, and "let us" pulled up by the existing rule for verb-only levels.
@@ -875,6 +890,9 @@ that each list entry matches its unit.
 - **Lexical-modal decision cases:** through the copied decision module, 33/40, the same as the original.
 
 **Results** (RL-121; identical to RL-120), both shards with 0 errors and 0 problems, about 0.003 s per unit
+*[RL-122: the same, except that the units without a parent (shard 0: 510, of which 290 hold a focal mention; shard 20:
+470 and 252) are removed, 2 units of shard 0 lose a false version, and the articles are 560 valid, 2 invalid (shard 0)
+and 569 valid, 3 invalid (shard 20)]*
 *[RL-117 values, before the number changes of RL-119/RL-120, in brackets where they differ]*:
 
 | | Shard 0 (`--limit 700`) | Shard 20 (whole shard) |
@@ -953,6 +971,8 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    - **A score after a model name read as a version** (§4; P2's matcher): "ChatGPT 8.0 [7.0–10.0]" → `gpt_8`,
      "GPT 0.78 to 0.65" → `gpt_0_78`. 3 surface forms in 2 units of shards 0 and 20 (about 28,000 units); real versions
      written the same way ("ChatGPT 5.3", "Grok 4", "Gemma 2") are read correctly. Left as is.
+   *[Both decided 2026-10-10 (owner) and implemented, RL-122: units without a parent are removed and articles without
+   any parent marked invalid (§7.1 step 9); scores are no longer read as versions (§4).]*
 
 ## 9. Files
 
@@ -983,11 +1003,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8) | efbf44b09683 |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8) | 266ddcbb00d2 |
 | `fullscale_pipeline/g3_v2/modal_merge.py` (§6 item 3: decision rule copied from `g3_modal_check/modal_rules.py`, edge-order fix, and the clause merge; imported by the script) | 75c7022ac187 |
 | `fullscale_pipeline/g3_v2/reflexive_restore.py` (§6 item 8: builds the reflexive table; 43 min on incline) | 92fa72c383de |
 | `fullscale_pipeline/g3_v2/measure_be.py` (§6 item 1: the measurement required before implementing passive "be") | 8cbfe1c89631 |
 | `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached) | 80b9ca527b8f |
-| `fullscale_pipeline/g3_v2/hard/hard_*.json` (12 sets, 191 cases, 167 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
+| `fullscale_pipeline/g3_v2/hard/hard_*.json` (13 sets, 199 cases, 175 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
 | `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
 | `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |

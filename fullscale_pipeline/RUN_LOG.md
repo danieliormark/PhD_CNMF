@@ -1222,3 +1222,22 @@ large language model." (one unit, 2 parents). Documents: dated notes in G3_POSTP
 4, 5, 8, §7.1 commands, inputs, results and earlier runners, §8 item 4 with the two questions, §9), PIPELINE.md (G2 and
 G3 rows, flow diagram, focal_words readers, items 21, 24, 29, command and file tables) and G2_PARSING.md (copula count).
 [LOG]
+
+**RL-122 · 2026-10-10 · G3 · CODE (test script v2: units and articles without a parent; scores after model names) · LIVE**
+Owner, on the two questions of RL-121: (1) a unit that ends up without a parent is removed; an article none of whose units
+has a parent is marked invalid; (2) "can we just remove all values in such brackets [7.0–10.0]?" — those values were
+already dropped (every number inside square brackets, RL-114); the false version came from the number before the bracket,
+so the item-8 version step of `focal_mentions` now refuses a number followed by a bracketed interval or below 1. A first
+guard that also refused a number followed by "to <number>" removed 9 real versions in shard 0 ("from 91.4% for Gemini 3 to
+98.1%", "DeepSeek-V3.2 to 89.0%", "from ChatGPT 3.5 to 4o"), so it was narrowed. Host incline32, `tensor_env`.
+`g3_v2/g3_curation_v2.py` sha256 `266ddcbb00d2`: units without a parent go to `g3_noparent_NNN.jsonl` instead of
+`g3_test_NNN.jsonl`; new `g3_articles_NNN.jsonl` with one status per article (excluded / valid / invalid_no_parent); report
+counts `units_removed_no_parent`, `articles_valid`, `articles_invalid_no_parent`; all output files refuse to overwrite.
+New hard set `g3_v2/hard/hard_versions_rl122.json` (sha256 `302cf7da0fe4`) 8/8; all sets 162/175 (the 13 known failures);
+self-test 54/54. Shard 0 (`--limit 700`) and shard 20 (`--limit 0`, PYTHONHASHSEED 5): 0 errors, 0 problems; the written
+units are exactly those that had a parent in RL-121 (13,310 and 14,013), removed 510 and 470 (290 and 252 with a focal
+mention); records otherwise identical to RL-121 except 2 units of shard 0 (PMC12821988, "ChatGPT 8.0/9.0 [..]" →
+`chatgpt`; PMC13257059, "GPT 0.78 to 0.65" → `gpt`, also Gemini and Claude); articles: shard 0 560 valid, 2 invalid, 132
+excluded; shard 20 569 valid, 3 invalid, 121 excluded. The 5 invalid articles, read: an abbreviation list, an AI-use
+declaration ("ChatGPT (Version 4.0) [Large language model]."), a "Method: ..." label, and two articles whose only focal
+sentence the parser left without a governing clause. [LOG]

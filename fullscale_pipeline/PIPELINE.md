@@ -184,7 +184,7 @@ before the start only 75 (1.4%); regex discrepancy in the main body 12 (0.2%).
   `source_periphery` links with ids `<pmcid>::<uid>::<hash>`; there is no `source_fringe` any more (chunk12 never read
   it; fringe atoms come from the cousins). chunk12 keeps only the last parent per sentence id, so M1 must link
   cousins to parents through each cousin's parent list (G3_POSTPROCESSING.md §5). The matrix builder will also need
-  article metadata and authorship edges, which have not yet been built for the full corpus.
+  article metadata and authorship edges, which have not yet been built for the full corpus. *[2026-10-10 (owner, RL-122): units without a parent are not written; each shard also writes `g3_articles_NNN.jsonl` with every article's status (`excluded`, `valid`, `invalid_no_parent`), and M1 uses only valid articles, in every relation.]*
 
 ## 5. Deviations from the historical scripts
 
@@ -584,6 +584,6 @@ estimate: [`CSF3_RESOURCES.md`](CSF3_RESOURCES.md).
 | `phase5_graphbrain/scripts/submit_v2.sh` | f8021d0db570 | 2026-05-23 20:27 |
 | `phase5_graphbrain/scripts/chunk_4h_hpc.py` | dfc6cc5e9662 | 2026-05-29 23:36 |
 | `phase5_graphbrain/scripts/g3_curation_test.py` | 2a5e01342bf4 | 2026-09-30 |
-| `PhD_CNMF/fullscale_pipeline/g3_v2/g3_curation_v2.py` (G3 test script v2, in git; not yet on RDS) with `modal_merge.py` | efbf44b09683, 75c7022ac187 | 2026-10-10 |
+| `PhD_CNMF/fullscale_pipeline/g3_v2/g3_curation_v2.py` (G3 test script v2, in git; not yet on RDS) with `modal_merge.py` | 266ddcbb00d2, 75c7022ac187 | 2026-10-10 |
 | `phase5_graphbrain/scripts/submit_4h.sh` | cc13dba06e28 | 2026-05-30 19:19 |
 | `phase5_graphbrain/nltk_abridged_stopwords_list.txt` | 2b6c7d9fdae9 | 2026-06-29 21:42 |

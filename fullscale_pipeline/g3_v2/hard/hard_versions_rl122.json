@@ -1,0 +1,76 @@
+[
+ {
+  "id": "W01",
+  "text": "Understandability was rated higher for ChatGPT 8.0 [7.0–10.0] than for Bard.",
+  "expect": [
+   "chatgpt/C/focal"
+  ],
+  "forbid": [
+   "gpt_8",
+   "7%2e0",
+   "10%2e0"
+  ],
+  "note": "a score before a bracketed interval is not a version; the interval is dropped (owner 2026-10-10)"
+ },
+ {
+  "id": "W02",
+  "text": "Accuracy dropped on multi-device cases for GPT 0.78 to 0.65 and Gemini 0.89 to 0.79.",
+  "expect": [
+   "drop/P/en"
+  ],
+  "forbid": [
+   "gpt_0_78",
+   "gemini_0_89"
+  ],
+  "note": "a number below 1 is a score, not a version"
+ },
+ {
+  "id": "W03",
+  "text": "Agreement was moderate for Grok 3 (0.78) and Gemini 2 (0.73).",
+  "expect": [
+   "grok_3/C/focal",
+   "gemini_2/C/focal"
+  ],
+  "note": "a real version followed by a score in round brackets stays a version"
+ },
+ {
+  "id": "W04",
+  "text": "ChatGPT 5.3 answered 531 out of 540 questions correctly.",
+  "expect": [
+   "gpt_5_3/C/focal"
+  ],
+  "note": "a real version as the next token"
+ },
+ {
+  "id": "W05",
+  "text": "We compared ChatGPT 4o [OpenAI] with Claude.",
+  "expect": [
+   "gpt_4o/C/focal"
+  ],
+  "note": "a bracket holding a word, not a number, does not block the version"
+ },
+ {
+  "id": "W06",
+  "text": "Accuracy varied from 91.4% for Gemini 3 to 98.1% for Kimi.",
+  "expect": [
+   "gemini_3/C/focal"
+  ],
+  "note": "a real version at the start of a 'to' range stays a version"
+ },
+ {
+  "id": "W07",
+  "text": "The accuracy rose from ChatGPT 3.5 to GPT-4o.",
+  "expect": [
+   "gpt_3_5/C/focal"
+  ],
+  "note": "a real version at the start of a 'to' range stays a version"
+ },
+ {
+  "id": "W08",
+  "text": "ChatGPT 4 [12] was used to draft the replies.",
+  "expect": [
+   "gpt_4/C/focal"
+  ],
+  "note": "a bare bracketed number (citation) does not block the version"
+ }
+]

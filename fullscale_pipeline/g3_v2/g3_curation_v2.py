@@ -27,7 +27,9 @@ used: it skips a focal term's immediate clause, keeps a fringe pool nothing read
     python g3_curation_test.py --selftest
     python g3_curation_test.py --shard 0 --limit 200 --outdir DIR [--modals tag|drop|keep] [--db]
 
-Writes DIR/g3_test_NNN.jsonl (one record per unit), g3_errors_NNN.jsonl, g3_report_NNN.json and, with --db, g3_test_NNN.sqlite in the form
+Writes DIR/g3_test_NNN.jsonl (one record per unit with a parent; owner 2026-10-10), g3_noparent_NNN.jsonl (the removed units without a
+parent), g3_articles_NNN.jsonl (per article: excluded, valid, or invalid_no_parent when no unit has a parent; M1 keeps only valid ones),
+g3_nonprose_NNN.jsonl, g3_errors_NNN.jsonl, g3_report_NNN.json and, with --db, g3_test_NNN.sqlite in the form
 chunk12 reads (('source_core', 'pmcid::uid::hash', parent), ('source_periphery', 'pmcid::uid::hash', cousin)). Refuses to overwrite.
 Checks at the end (exit 1 on any problem): input unit hashes, every output id and hash, every atom traced to a token position, every
 cousin's parents present, and with --db the database read back in chunk12's way.
@@ -150,6 +152,11 @@ COMPARE_WORDS = {'over', 'under', 'above', 'below', 'up', 'more', 'less', 'fewer
                  'approximately', 'about', 'around', 'almost', 'roughly'}
 URL_RX = re.compile(r'^url\d{8}$')
 SIZE_RX = re.compile(r'^\d+(?:\.\d+)?[bm]$')                     # model sizes left beside a name: 8b, 13b, 70b
+# a number followed by a bracketed interval is a score, not a version ("ChatGPT 8.0 [7.0–10.0]"; owner 2026-10-10), and so is a
+# number below 1 ("GPT 0.78 to 0.65"). Not used: a following "to <number>" (real versions start ranges: "from ChatGPT 3.5 to 4o"),
+# a bare bracketed number (a citation), a score in round brackets (real versions take one: "Grok 3 (0.78)")
+VALUE_AFTER = re.compile(r'^\s*\[\s*[−-]?\d+(?:\.\d+)?\s*(?:[–—-]|to\b|,)')
+SCORE_TOKEN = re.compile(r'^0\.\d')
 VERSION_TOKEN = re.compile(r'^(?:v\d+(?:\.\d+)*|[ro]\d+|\d(?:\.\d{1,2})?[a-z]{0,2})$', re.I)
 HYPHEN_CHARS = re.compile('[\u2010\u2011\u2013\u2014]')
 
@@ -258,7 +265,8 @@ def focal_mentions(matcher, text, a2w, anchored):
         if later and re.fullmatch(VERSIONED, canonical(surf)) and not re.search(r'\d', canonical(surf)):
             q = later[0]
             gap, tokw = text[spans[pos[-1]][1]:spans[q][0]], text[spans[q][0]:spans[q][1]]
-            if gap in ('-', ' ', '\u2010', '\u2013', '- ') and VERSION_TOKEN.match(tokw) and not SIZE_RX.match(tokw.lower()):
+            if gap in ('-', ' ', '\u2010', '\u2013', '- ') and VERSION_TOKEN.match(tokw) and not SIZE_RX.match(tokw.lower()) \
+                    and not VALUE_AFTER.match(text[spans[q][1]:]) and not SCORE_TOKEN.match(tokw):
                 pos = pos + [q]; surf = text[a:spans[q][1]]
         out.append((term, surf, canonical(surf), pos))
     return out
@@ -1105,14 +1113,15 @@ def run(a):
     inp = a.input or SHARDS + f"g2_parsed_{tag}.jsonl"
     os.makedirs(a.outdir, exist_ok=True)
     out_p, err_p, rep_p = (os.path.join(a.outdir, f"g3_{x}_{tag}.{e}") for x, e in (("test", "jsonl"), ("errors", "jsonl"), ("report", "json")))
+    np_p, nop_p, art_p = (os.path.join(a.outdir, f"g3_{x}_{tag}.jsonl") for x in ("nonprose", "noparent", "articles"))
     db_p = os.path.join(a.outdir, f"g3_test_{tag}.sqlite")
-    for p in (out_p, err_p, rep_p) + ((db_p,) if a.db else ()):
+    for p in (out_p, err_p, rep_p, np_p, nop_p, art_p) + ((db_p,) if a.db else ()):
         if os.path.exists(p):
             sys.exit(f"refusing to overwrite {p}")
     matcher = focal_terms.Matcher()
     excluded, llm_out, corrections = load_lists()
     reflexives = load_reflexives()
-    nonprose = []
+    nonprose, noparent, articles = [], [], []
     stats, detail = collections.Counter(), collections.defaultdict(collections.Counter)
     surfaces, problems, samples = collections.Counter(), [], []
     hg, stack = None, contextlib.ExitStack()
@@ -1128,7 +1137,9 @@ def run(a):
             stats['articles'] += 1
             if r["pmcid"] in excluded:                                  # §6 item 6: out of scope, left out of G3 and M1
                 stats['articles_excluded'] += 1
+                articles.append(dict(pmcid=r["pmcid"], status="excluded", units=0, parents=0))
                 continue
+            art_units = art_parents = 0
             units = []
             for s in r["sentences"]:
                 for u in s["units"]:
@@ -1173,7 +1184,12 @@ def run(a):
                     stats['unit_errors'] += 1; stats['error_' + type(e).__name__] += 1
                     fe.write(json.dumps(dict(uid=u["uid"], error=type(e).__name__, message=str(e)[:500])) + "\n")
                     continue
-                fo.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                if rec["parents"]:                                      # owner 2026-10-10: a unit without a parent is removed
+                    fo.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                    art_units += 1; art_parents += len(rec["parents"])
+                else:
+                    stats['units_removed_no_parent'] += 1
+                    noparent.append(dict(uid=u["uid"], focal=bool(rec["focal_mentions"]), text=rec["text"]))
                 stats.update(ctx.stats)
                 for k, c in ctx.detail.items():
                     detail[k].update(c)
@@ -1192,6 +1208,10 @@ def run(a):
                         hg.add(hedge(('source_core', f"{r['pmcid']}::{u['uid']}::{p['hash']}", hedge(p["edge"]))))
                     for c in rec["cousins"]:
                         hg.add(hedge(('source_periphery', f"{r['pmcid']}::{u['uid']}::{c['hash']}", hedge(c["edge"]))))
+            # owner 2026-10-10: an article none of whose units has a parent is invalid (M1 leaves it out of every relation)
+            status = "valid" if art_parents else "invalid_no_parent"
+            stats['articles_' + status] += 1
+            articles.append(dict(pmcid=r["pmcid"], status=status, units=art_units, parents=art_parents))
     secs = time.time() - t0
     stack.close()
     if hg is not None:
@@ -1208,9 +1228,15 @@ def run(a):
                 if len(str(link[1]).split('::')) != 3:
                     problems.append(f"db: source_periphery id not readable in chunk12's way: {str(link[1])}")
         stats['db_source_core'], stats['db_source_periphery'] = n_core, n_per
-    with open(os.path.join(a.outdir, f"g3_nonprose_{tag}.jsonl"), "w", encoding="utf-8") as fn:   # §6 item 8, for review
+    with open(np_p, "w", encoding="utf-8") as fn:                    # §6 item 8, for review
         for kind, uid, text in nonprose:
             fn.write(json.dumps(dict(kind=kind, uid=uid, text=text), ensure_ascii=False) + "\n")
+    with open(nop_p, "w", encoding="utf-8") as fn:                   # removed units without a parent, for review
+        for x in noparent:
+            fn.write(json.dumps(x, ensure_ascii=False) + "\n")
+    with open(art_p, "w", encoding="utf-8") as fn:                   # one status row per article of the shard, for M1
+        for x in articles:
+            fn.write(json.dumps(x) + "\n")
     report = dict(stage="G3 test v2", input=inp, script=os.path.abspath(__file__), script_sha=sha(__file__), modals=a.modals,
                   inputs={p: h for p, h in INPUT_SHA.items()},
                   limit=a.limit, seconds=round(secs, 1), seconds_per_unit=round(secs / max(stats['units'], 1), 4), counts=dict(stats),
