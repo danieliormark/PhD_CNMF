@@ -255,9 +255,10 @@ tag instances — an article with several tags is counted once per tag it carrie
 
 **46 of the 28,075 are tagged `Retracted Publication`** by MEDLINE (co-occurring with another tag,
 e.g. still "Journal Article" — this is a status flag, not a content type, so it does not form its
-own row below; it is a candidate exclusion or flag for M1 to decide on later, not acted on here).
-The `Research Support, *` and `English Abstract` tags are administrative (funding source, language
-note), not content type, and likewise form no row of their own.
+own row below). The `Research Support, *` and `English Abstract` tags are administrative (funding
+source, language note), not content type, and likewise form no row of their own.
+*[2026-10-10, owner: retracted publications are to be removed from the corpus. See the "Working
+corpus" note below — acted on, not left as a flag.]*
 
 **Single-label primary type**, assigned by a fixed priority order over the tags above only (most
 specific evidence-synthesis/study-design tag first, down to a bare "Journal Article"; full order and
@@ -282,8 +283,44 @@ the raw table above never win the single-label slot: all four of those articles 
 higher-priority tag (Review, Scoping Review, or Systematic Review), checked directly — the priority
 order, not a missing category, is why "Guideline / consensus statement" shows no row.
 
+**What "Historical Article" means (owner question, 2026-10-10).** It is NLM's own MeSH publication
+type (Unique ID `D016456`, tree V02.530), scope note: an article or part of an article "giving an
+account of past events or circumstances significant in a field of study" (often checked together
+with the Biography heading). It is assigned mechanically to a citation indexed with a historical
+MeSH descriptor, the "History" subheading, or a Personal Name as Subject entry — it marks how NLM
+*indexed* the record, not a judgement that the paper itself is old or a history paper in the way a
+historian would use the term. Checked against our own 18 primary-"Historical article" pmcids
+(titles pulled from `pure_text_corpus` headers): most are substantively historical in the expected
+sense — restoring/attributing ancient texts with deep nets (PMC8907065), a dataset of 19th-century
+fauna built with an LLM (PMC13012729), century-old Irish folk cures (PMC12704799), medieval rabbinic
+literature (PMC11262698), political uses of the ancient past (PMC11373803), a 30-year retrospective
+of one symposium's collaboration networks (PMC11747933), 50/60-year bibliometric retrospectives of a
+journal (PMC12539508, PMC12881886) — matching the "History" MeSH-subheading auto-rule for anniversary
+reviews. One is not: PMC11725834 ("Across the firewall: foreign media's role in shaping Chinese
+social media narratives on the Russo-Ukrainian war") is about an ongoing conflict, not history in the
+ordinary sense; most likely NLM's historical-period MeSH indexing (e.g. a "History, 21st Century"
+descriptor) fired on the subject matter, not the paper's own framing. So the tag is a reliable signal
+that NLM's indexers attached a historical MeSH heading, not a guarantee every such paper "is" a
+history paper by the field's own lights — worth a manual read of the 18 (or all 25 raw-tagged) before
+treating this as a clean category, if it matters downstream.
+
+**Working corpus (owner decision, 2026-10-10): retracted publications are removed.** The 46 articles
+MEDLINE tags `Retracted Publication` are taken out of the corpus that any further analysis (author
+counts included) is confined to. This is a new filter layered on top of G3's own output, not a G3
+rerun: retraction is an article-level fact from PubMed, independent of G3's focal-term/parse-level
+exclusions (§6 item 6), so `PG/g3_v1/` itself is untouched — nothing is silently dropped, every
+excluded pmcid and its reason is recorded. **New working-corpus size: 28,029** (28,075 valid − 46
+retracted). `corpus_statistics/working_corpus.py` writes `working_corpus_pmcids.txt` (the 28,029
+pmcids — the frozen reference set for every later step) and `corpus_exclusions_post_g3.csv` (the 46
+exclusions, with their PMID and MEDLINE tags, for the record). **Known gap, not resolved by this:**
+the 38 valid articles with no PMID have no PubMed record to check, so their retraction status is
+unknown, not confirmed negative — they are kept in the working corpus on the absence of evidence,
+which is weaker than the positive confirmation the other 27,991 have.
+
 **Reproduction:** `corpus_statistics/article_types_valid.py` (reads `PG/g3_v1/g3_articles_v1.jsonl`,
 `diagnostics/openalex_authors/headers.json`, `diagnostics/openalex_authors/pubmed_pubtypes.json`;
 no network call needed, both caches already complete for this corpus). Writes
 `corpus_statistics/article_types_valid.csv` (28,075 rows: pmcid, pmid, the raw `|`-joined
-PublicationType tags, and the primary type) and prints both tables above.
+PublicationType tags, the primary type, and a `retracted` flag) and prints both tables above.
+Then `corpus_statistics/working_corpus.py` applies the retraction filter and writes
+`working_corpus_pmcids.txt` and `corpus_exclusions_post_g3.csv`.

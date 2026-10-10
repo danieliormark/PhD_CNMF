@@ -84,13 +84,13 @@ for pmcid in valid:
     pmid = (H.get(pmcid) or {}).get("pmid")
     if not pmid:
         no_pmid.append(pmcid)
-        rows.append((pmcid, "", "", "No PMID in PMC header"))
+        rows.append((pmcid, "", "", "No PMID in PMC header", "unknown (no PMID to check)"))
         primary_count["No PMID in PMC header"] += 1
         continue
     types = PT.get(pmid)
     if types is None:
         no_pubmed_record.append(pmcid)
-        rows.append((pmcid, pmid, "", "PMID not found by Entrez efetch"))
+        rows.append((pmcid, pmid, "", "PMID not found by Entrez efetch", "unknown (no PubMed record to check)"))
         primary_count["PMID not found by Entrez efetch"] += 1
         continue
     names = [t["name"] for t in types]
@@ -98,15 +98,16 @@ for pmcid in valid:
         empty_type_list.append(pmcid)
     for n in names:
         tag_count[n] += 1
-    if RETRACTED_TAG in names:
+    is_retracted = RETRACTED_TAG in names
+    if is_retracted:
         retracted.append(pmcid)
     cat = classify(names) if names else "Unclassified (PubMed record has no PublicationType at all)"
     primary_count[cat] += 1
-    rows.append((pmcid, pmid, "|".join(names), cat))
+    rows.append((pmcid, pmid, "|".join(names), cat, "True" if is_retracted else "False"))
 
 with open(OUT, "w", newline="") as f:
     w = csv.writer(f)
-    w.writerow(["pmcid", "pmid", "pubmed_publication_types", "primary_type"])
+    w.writerow(["pmcid", "pmid", "pubmed_publication_types", "primary_type", "retracted"])
     w.writerows(rows)
 
 print(f"valid articles: {len(valid):,}")

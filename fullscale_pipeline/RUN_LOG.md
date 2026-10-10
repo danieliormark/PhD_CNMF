@@ -1433,3 +1433,26 @@ content type, so not its own row — left for a later decision, not acted on). O
 `corpus_statistics/article_types_valid.csv` (28,075 rows: pmcid, pmid, raw tags, primary type).
 Documented in CORPUS_STATISTICS.md §8 (new; §1-§7 kept, with a dated note at the top flagging the
 scope/method difference). [LOG]
+
+**RL-132 · 2026-10-10 · CORPUS-STATS · AUDIT (read-only) + CODE (new) + OUTPUT + DOC · LIVE**
+Owner, two questions following RL-131. (1) What does MEDLINE's "Historical Article" tag mean? Looked
+up NLM's own MeSH scope note (`D016456`, tree V02.530: an account of past events/circumstances
+significant in a field of study, often checked with Biography; auto-assigned to a citation indexed
+with a historical MeSH descriptor, the "History" subheading, or a Personal Name as Subject — an
+indexing fact, not a judgement that the paper itself reads as history). Checked against the corpus's
+own 18 primary-"Historical article" pmcids (titles pulled from `pure_text_corpus` headers): 17 are
+substantively historical (ancient-text restoration, 19th-century datasets, century-old folk cures,
+medieval literature, multi-decade bibliometric retrospectives); one, PMC11725834 ("Across the
+firewall: foreign media's role in... the Russo-Ukrainian war"), is about an ongoing conflict, not
+history in the ordinary sense — most likely a historical-period MeSH descriptor fired on the subject
+matter, illustrating the tag is an indexing signal, not a content guarantee. (2) Owner: retracted
+publications are to be removed from the corpus. New `corpus_statistics/working_corpus.py`: excludes
+the 46 `Retracted Publication`-tagged articles from the 28,075 `valid` set — a filter layered on top
+of G3's own output (RDS `PG/g3_v1/` untouched, no rerun; retraction is a PubMed-level fact, orthogonal
+to G3's own focal-term exclusions). Writes `working_corpus_pmcids.txt` (28,029 pmcids — the new frozen
+reference set for every later step, author counts included) and `corpus_exclusions_post_g3.csv` (the
+46 exclusions with PMID and MEDLINE tags, for the record; verified `28,075 valid = 28,029 working +
+46 excluded` exactly). `article_types_valid.py` gained a `retracted` column (re-run, same totals).
+**Known gap, not resolved:** the 38 valid articles with no PMID have no PubMed record to check for
+retraction, so they are kept on absence of evidence, not confirmed negative — weaker than the
+confirmation the other 27,991 working-corpus articles have. Documented in CORPUS_STATISTICS.md §8. [LOG]
