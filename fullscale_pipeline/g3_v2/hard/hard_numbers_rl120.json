@@ -1,0 +1,244 @@
+[
+ {
+  "id": "K01",
+  "text": "Details are given in Online Resource 5, as GPT-4 recommended.",
+  "expect": [
+   "recommend/P/en"
+  ],
+  "forbid": [
+   "resource/",
+   "online/",
+   "5/"
+  ],
+  "note": "reference to a non-text object: word and number dropped"
+ },
+ {
+  "id": "K02",
+  "text": "The answers of ChatGPT are listed in Textbox 3.",
+  "expect": [
+   "list/P/en"
+  ],
+  "forbid": [
+   "textbox/",
+   "3/"
+  ],
+  "note": "reference to a non-text object"
+ },
+ {
+  "id": "K03",
+  "text": "Topic 7 was the most common topic in ChatGPT outputs.",
+  "expect": [
+   "topic/C/en"
+  ],
+  "forbid": [
+   "7/"
+  ],
+  "note": "index number dropped, word kept"
+ },
+ {
+  "id": "K04",
+  "text": "Two spine surgeons, Surgeon 1 and Surgeon 2, independently rated the ChatGPT answers.",
+  "expect": [
+   "surgeon/C/en",
+   "two/"
+  ],
+  "forbid": [
+   "1/",
+   "2/"
+  ],
+  "note": "index numbers dropped; spelled-out count kept"
+ },
+ {
+  "id": "K05",
+  "text": "Results for BERT are given in Tables 4, 6, 7, and 8.",
+  "expect": [
+   "give/P/en"
+  ],
+  "forbid": [
+   "table/",
+   "4/",
+   "6/",
+   "7/",
+   "8/"
+  ],
+  "note": "label list with ', and'"
+ },
+ {
+  "id": "K06",
+  "text": "Patients 65 years or older used ChatGPT less often.",
+  "expect": [
+   "65/"
+  ],
+  "forbid": [],
+  "note": "guard: a value after a plural person noun is kept"
+ },
+ {
+  "id": "K07",
+  "text": "The fine-tuned LLM was superior to readers 1 and 2.",
+  "expect": [
+   "reader/C/en"
+  ],
+  "forbid": [
+   "1/",
+   "2/"
+  ],
+  "note": "index numbers in a list"
+ },
+ {
+  "id": "K08",
+  "text": "REF000123 3 used GPT-4 for coding tasks.",
+  "expect": [
+   "use/P/en"
+  ],
+  "forbid": [
+   "(3/",
+   " 3/C/en",
+   " 3/M/en"
+  ],
+  "note": "digit glued after a citation token"
+ },
+ {
+  "id": "K09",
+  "text": "The model Rating ~ LLM + (1 | Word) was fitted for GPT-3.5.",
+  "expect": [
+   "fit/P/en"
+  ],
+  "forbid": [
+   "1/"
+  ],
+  "note": "number inside a formula"
+ },
+ {
+  "id": "K10",
+  "text": "Claude Sonnet 4 was compared with GPT-4o on the exam.",
+  "expect": [
+   "4/"
+  ],
+  "forbid": [],
+  "note": "number inside a name: plain text, kept"
+ },
+ {
+  "id": "K11",
+  "text": "On October 9, 2023, OpenAI released a new version of ChatGPT.",
+  "expect": [
+   "9/",
+   "2023/"
+  ],
+  "forbid": [],
+  "note": "date in prose: kept"
+ },
+ {
+  "id": "K12",
+  "text": "We ran ChatGPT with 4 different prompting strategies.",
+  "expect": [
+   "4/"
+  ],
+  "forbid": [],
+  "note": "count kept"
+ },
+ {
+  "id": "K13",
+  "text": "GPT-4 scored 5 out of 7 points on the test.",
+  "expect": [
+   "5/",
+   "7/"
+  ],
+  "forbid": [],
+  "note": "values kept"
+ },
+ {
+  "id": "K14",
+  "text": "In round 1, GPT-4 answered all questions.",
+  "expect": [
+   "round/C/en"
+  ],
+  "forbid": [
+   "1/"
+  ],
+  "note": "index number dropped"
+ },
+ {
+  "id": "K15",
+  "text": "The model of ChatGPT reached 80% accuracy, and the smartphone model (80.0%) was similar.",
+  "expect": [
+   "80%2e0/",
+   "80/"
+  ],
+  "forbid": [],
+  "note": "value after an index noun kept (gap and % guards)"
+ },
+ {
+  "id": "K16",
+  "text": "Of these, 27 patients (90%) had moderate disease according to ChatGPT.",
+  "expect": [
+   "90/",
+   "27/"
+  ],
+  "forbid": [],
+  "note": "value in parentheses after a plural noun kept"
+ },
+ {
+  "id": "K17",
+  "text": "GPT-4 scored a median of 4.5 (4.0\u20135.0) on completeness.",
+  "expect": [
+   "4%2e5/"
+  ],
+  "forbid": [
+   "4%2e0/",
+   "5%2e0/"
+  ],
+  "note": "interval after a value dropped, the value kept"
+ },
+ {
+  "id": "K18",
+  "text": "Fan et al. (2020) applied BERT to clinical notes.",
+  "expect": [
+   "apply/P/en"
+  ],
+  "forbid": [
+   "2020/"
+  ],
+  "note": "citation year dropped"
+ },
+ {
+  "id": "K19",
+  "text": "The bias of ChatGPT was large (mean -20.4%, SD 18.11%).",
+  "expect": [
+   "bias/C/en"
+  ],
+  "forbid": [
+   "18%2e11/"
+  ],
+  "note": "SD value dropped"
+ },
+ {
+  "id": "K20",
+  "text": "This addresses Challenge 1, which GPT-4 could not solve.",
+  "expect": [
+   "challenge/C/en"
+  ],
+  "forbid": [
+   "1/M/en",
+   "1/C/en"
+  ],
+  "note": "index number dropped"
+ },
+ {
+  "id": "K21",
+  "text": "DeepSeek answers were the least accessible (CTE Grade Level 17.4; CRS Grade Level 15.7).",
+  "expect": [
+   "17%2e4/"
+  ],
+  "forbid": [],
+  "note": "a decimal after an index noun is a value"
+ },
+ {
+  "id": "K22",
+  "text": "We compared ChatGPT + top 5 results with GPT-4 alone.",
+  "expect": [
+   "5/"
+  ],
+  "forbid": [],
+  "note": "'+' in prose is not a formula"
+ }
+]

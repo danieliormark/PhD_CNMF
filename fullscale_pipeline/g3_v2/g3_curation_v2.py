@@ -119,15 +119,28 @@ INPUT_SHA[REFLEXIVE_TABLE] = "d121a203daec"
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
 LAYOUT_WORDS = {'table', 'tables', 'tab', 'fig', 'figs', 'figure', 'figures', 'appendix', 'appendices', 'supplementary',
                 'panel', 'panels', 'equation', 'equations', 'eq', 'eqs'}
+# RL-120 (owner 2026-10-10: remove what is not plain text): more references to non-text objects ("Textbox 3", "Online
+# Resource 5", "Supplementary Note 3", "Box 1", "Algorithm 1"), dropped with their number like "Table 2"
+LAYOUT_WORDS |= {'textbox', 'textboxes', 'box', 'boxes', 'resource', 'resources', 'note', 'notes', 'algorithm',
+                 'algorithms', 'scheme', 'schemes', 'chart', 'charts', 'listing', 'listings', 'file', 'files', 'video', 'videos'}
+LAYOUT_PREFIX = {'supplementary', 'supplemental', 'online', 'additional', 'extended'}
 NUM_LABEL_WORDS = LAYOUT_WORDS | {'section', 'sections', 'question', 'questions', 'step', 'steps', 'phase', 'phases',
                                   'chapter', 'chapters', 'item', 'items', 'version', 'versions', 'experiment', 'study'}
+# RL-120: index numbers on things in the prose ("Topic 7", "Surgeon 2", "group 0", "round 1"): the word is plain text and
+# stays, the number is a pointer and goes
+INDEX_NOUNS = set('topic tier round group reader review variant arm cohort wave session iteration scenario case task prompt '
+                  'level model rater reviewer annotator surgeon participant patient respondent physician expert judge '
+                  'evaluator student condition dataset run challenge rule hypothesis aim objective criterion'.split())
+NUM_LABEL_WORDS |= INDEX_NOUNS | {w + 's' for w in INDEX_NOUNS}
+UNIT_AFTER = re.compile(r'^\s*(?:%|(?:years?|months?|weeks?|days?|hours?|minutes?|seconds?|percent|times?|fold)\b)', re.I)
 LABEL_RX = re.compile(r'^(?:s?\d+(?:\.\d+)*[a-z]?|[a-z]|[ivx]+)$')
 NUMBER_RX = re.compile(r'^\d+(?:[.,]\d+)*$')
 SMALL_NUMBERS = 'zero one two three four five six seven eight nine ten'.split()
 NUMBER_WORDS = set(SMALL_NUMBERS) | set('eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty '
                                        'thirty forty fifty sixty seventy eighty ninety hundred thousand million billion '
                                        'dozen'.split())
-STAT_BEFORE = re.compile(r'(?i)(?:\bp\s*[<=>≤≥]\s*|\bci\b[\s:,]*|±\s*|\b(?:or|hr|rr|r|n|t|f|sd|se|iqr|auc|κ|kappa|α|β)\s*[=:<>≤≥]\s*|[=<>≤≥]\s*)$')
+STAT_BEFORE = re.compile(r'(?i)(?:\bp\s*[<=>≤≥]\s*|\bci\b[\s:,]*|±\s*|\b(?:or|hr|rr|r|n|t|f|sd|se|iqr|auc|κ|kappa|α|β)\s*[=:<>≤≥]\s*|[=<>≤≥]\s*'
+                         r'|\b(?:sd|se|iqr|u|z)\s+|\bet al\.?,?\s*\(?)$')     # RL-120: "SD 18.11", "U 116", "et al. (2020)"
 COMPARE_WORDS = {'over', 'under', 'above', 'below', 'up', 'more', 'less', 'fewer', 'least', 'most', 'nearly',
                  'approximately', 'about', 'around', 'almost', 'roughly'}
 URL_RX = re.compile(r'^url\d{8}$')
@@ -143,11 +156,6 @@ def clean_root(word):
     w = re.sub(r'[,;.)\]]+\d+$', '', w)
     w = w.strip('.,;:()[]\'"')
     return w if re.search(r'[a-z]', w) else None
-
-
-def number_word(word):
-    """an integer 0-10 written as a word (§6 item 8: removes the journal-style difference between "2 models" and "two models")"""
-    return SMALL_NUMBERS[int(word)] if re.fullmatch(r'\d{1,2}', word) and int(word) <= 10 else None
 
 
 # §6 item 8: units that parse to a parent but are not prose; glossary parents
@@ -539,18 +547,28 @@ class Ctx:
                 q, got = nxt[p], []
                 while q is not None and self.words.get(q) in ('.', ':'):      # "Fig . 1b": the period can be a token
                     q = nxt.get(q)
-                while q is not None and LABEL_RX.match(self.words.get(q, '')) and len(got) < 4:
+                if q is None or p not in self.spans or q not in self.spans \
+                        or not re.fullmatch(r'[\s.]*', self.text[self.spans[p][1]:self.spans[q][0]]):
+                    continue                                           # RL-120: the label stands directly before its number
+                index_noun = w in INDEX_NOUNS or (w.endswith('s') and w[:-1] in INDEX_NOUNS)
+                while q is not None and LABEL_RX.match(self.words.get(q, '')) and len(got) < 6:
+                    if index_noun and not re.fullmatch(r'\d+[a-z]?', self.words.get(q, '')):
+                        break                                          # "Grade Level 17.4": an index is a whole number
+                    if q in self.spans and UNIT_AFTER.match(self.text[self.spans[q][1]:]):
+                        break                                          # "patients 65 years", "model (80%)": a value, not an index
                     got.append(q)
                     r = nxt.get(q)
-                    gap = self.text[self.spans[q][1]:self.spans[r][0]] if r in self.spans and q in self.spans else ''
-                    q = r if gap.strip() in ('-', '–', ',', 'and', '&') or (gap.strip() == '' and False) else None
+                    while r is not None and self.words.get(r) in (',', 'and', 'or', '&', '-', '–'):
+                        r = nxt.get(r)                                 # the connectives can be tokens of their own
+                    gap = self.text[self.spans[q][1]:self.spans[r][0]] if r in self.spans and q in self.spans else 'x'
+                    q = r if re.fullmatch(r'[\s,&\-–]*(?:and|or)?[\s,&\-–]*', gap) else None    # "Tables 4, 6, 7, and 8"
                 if got:
                     labels.update(got); nontext.update(got)
                     if w in LAYOUT_WORDS:
                         labels.add(p)
                         prev = order[order.index(p) - 1] if order.index(p) else None
-                        if prev is not None and self.words.get(prev).rstrip('.') == 'supplementary':
-                            labels.add(prev)
+                        if prev is not None and self.words.get(prev).rstrip('.') in LAYOUT_PREFIX:
+                            labels.add(prev)                           # "Supplementary Note 3", "Online Resource 5"
         first = order[0] if order else None
         for p in order:
             w = self.words[p]
@@ -562,9 +580,31 @@ class Ctx:
                     or (before.endswith('(') and after.startswith(')') and len(w) <= 2) \
                     or (p == first and re.match(r'^\s*[(\[]?\d+(?:\.\d+)*[.)\]]?\s', self.text)) \
                     or STAT_BEFORE.search(before[-14:]) or re.match(r'\s*±', after) or re.match(r'\s*%\s*CI\b', after) \
-                    or (re.search(r'\d\s*[–-]\s*$', before[-6:]) and any(q in nontext for q in (p - 1, p - 2))):
+                    or (re.search(r'\d\s*[–-]\s*$', before[-6:]) and any(q in nontext for q in (p - 1, p - 2))) \
+                    or self.debris_number(p, a, b, before, after):
                 nontext.add(p)
         return labels, nontext
+
+    def debris_number(self, p, a, b, before, after):
+        """RL-120: a number that is citation or list debris ("REF009518 3", "2020.1,2", "6., 7., 8"), sits inside a formula
+        ("(1 | Word)"), or belongs to a snapshot-date id ("gpt-4-turbo-2024-04-09")"""
+        order = sorted(self.words)
+        i = order.index(p)
+        if i and re.fullmatch(r'ref\d+', self.words[order[i - 1]]):
+            return True
+        if re.search(r'[A-Za-z)\]\d][.,]$', before) or re.match(r'\.\s*,', after):
+            return True
+        o, c = before.rfind('('), after.find(')')
+        if o > before.rfind(')') and c >= 0 and re.search(r'[|~^*=]', before[o:] + after[:c]):     # not "+": "ChatGPT + top 5"
+            return True
+        if o > before.rfind(')') and c >= 0 and re.search(r'[\d%]\s*$', before[:o]) and \
+                re.fullmatch(r'[−\-]?\d+(?:\.\d+)?%?\s*(?:to|–|-|,)\s*[−\-]?\d+(?:\.\d+)?%?', (before[o + 1:] + self.text[a:b] + after[:c]).strip()):
+            return True                                                # an interval right after a value: "4.5 (4.0–5.0)"
+        for m in re.finditer(r'\d{4}-\d{2}-\d{2}', self.text[max(0, a - 11):b + 11]):
+            s0 = max(0, a - 11) + m.start()
+            if s0 <= a and b <= s0 + len(m.group(0)):
+                return True
+        return False
 
     def compares_number(self, p):
         """a comparison word ("over 90%", "more than 20", "up to 5") whose next content word is a kept number"""
@@ -624,9 +664,8 @@ class Ctx:
         elif NUMBER_RX.match(word) or (t.startswith(('C#', 'M#')) and word in NUMBER_WORDS):
             if q4_all(self, atom, lambda p: p in self.nontext_num):
                 reason = 'number_nontext'; self.detail['number_nontext'][word] += 1
-            else:                                                             # §6 item 8: plain-text numbers kept as written
-                w = number_word(word) if NUMBER_RX.match(word) else None
-                out = hedge(f"{w or root.lower()}/{'C' if t.startswith('C') else 'M'}/en"); self.detail['number_kept'][w or word] += 1
+            else:                                  # §6 item 8: plain-text numbers kept as written (0-10 as words rolled back, RL-119)
+                out = hedge(f"{root.lower()}/{'C' if t.startswith('C') else 'M'}/en"); self.detail['number_kept'][word] += 1
         elif not re.search(r'[a-z]', word):
             reason = 'no_letters'; self.detail['no_letters'][word] += 1
         elif URL_RX.match(word):

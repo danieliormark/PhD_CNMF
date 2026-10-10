@@ -685,11 +685,24 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
    - **Numbers — DECIDED 2026-10-09 (owner, revised the same day; supersedes option (c), which used one placeholder
      atom for every value and so made all numbers look alike).** Non-text numbers are removed by rule; every other
      number stays as written, years included; integers 0–10 become words, applied only after the removal rules, so
-     that a label is never turned into a count. Removed: labels (Table/Figure/Section/Question/Step N, "Table 2",
+     that a label is never turned into a count. *[Rolled back 2026-10-10 (owner, RUN_LOG RL-118/RL-119): the promised
+     precision check found 41 of 100 converted digits were labels, model versions, dates or debris that the removal
+     rules miss ("Textbox 3", "Claude Sonnet 4", "October 9"), so the conversion made them look like counts; and the
+     conversion was judged not important. Every plain-text number now stays as written, digits included; spelled-out
+     numbers stay as written too, so "2 models" and "two models" remain different atoms. The removal rules still
+     miss those 41 kinds of cases, which now leak as digits: open, see RL-118.]*
+     *[2026-10-10, owner: remove what is not plain text, keep what is (RL-120). Dropped now: references to non-text
+     objects with their number ("Textbox 3", "Online Resource 5", "Supplementary Note 3", "Box 1"); index numbers on
+     things in the prose, the word kept ("Topic 7", "Surgeon 2", "group 0", "round 1"); citation and list debris,
+     formula numbers, snapshot-date ids, numbers after SD/SE/IQR, intervals right after a value, citation years ("et
+     al. (2020)"). Kept as plain text: numbers inside names ("Claude Sonnet 4") and dates ("October 9, 2023"). Guards:
+     the label directly before its number; "%" or a unit after a number makes it a value; an index is a whole number.
+     Checked on fresh samples: 37/40 removals correct before the last two fixes (all 40 after), 95/100 kept numbers
+     plain text.]* Removed: labels (Table/Figure/Section/Question/Step N, "Table 2",
      "Section 2.3"); bracketed list labels ("(1)"); enumerators and numbers at the start of a unit ("[21] A
      clinician…"); every number inside square brackets (intervals such as "[5.8–7.0]" and citation leftovers such
      as "(PAL)[18]"; owner: they bear little relevant meaning); statistical notation (a number after p, CI, OR, HR,
-     ±, =, <, >, n =). Integers 0–10 as words remove a style artefact (journals differ on spelling out numbers
+     ±, =, <, >, n =). *[Rolled back, see the note above:]* integers 0–10 as words remove a style artefact (journals differ on spelling out numbers
      below ten), not a meaning; their precision is checked on a hand-labelled sample before use. Shard 0 (RL-111):
      10,401 numbers in kept units, of which 2,864 are already part of a focal name, about 1,400 fall under the
      removal rules (labels 685, square brackets 244, statistics 196, list labels 195, enumerators 77), and the rest
@@ -737,7 +750,7 @@ python g3_curation_v2.py --shard N [--limit A | --limit 0] --outdir DIR [--db] [
 python run_hard.py hard/hard_*.json                                             # 145 constructed cases
 ```
 
-`g3_v2/g3_curation_v2.py` (sha256 `2f7e8f356692`) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
+`g3_v2/g3_curation_v2.py` (sha256 `389123552561`; `2f7e8f356692` before RL-119/RL-120) with its module `g3_v2/modal_merge.py` (`75c7022ac187`; it must sit
 beside the script). Built stage by stage from the RDS test script of §7.2 (RUN_LOG RL-112 to RL-117); the RDS script is
 unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environment as G2 (`tensor_env`,
 `PYTHONPATH=$HOME/np1_for_spacy`). The switches kept from the test copies (`Q4`, `ONLY_MODE`, `NOTONLY_DROP`, `XBASED`,
@@ -763,7 +776,8 @@ unchanged. `--limit` counts articles (default 100; 0 = the whole shard). Environ
    - glossary parents are dropped (item 8).
 7. **Atoms**, each decided once per unit (`Ctx.curate`):
    - focal atoms, and the hyphen properties written as `based/M`;
-   - labels and their numbers, non-text numbers dropped, other numbers kept (0–10 as words);
+   - labels and their numbers, non-text numbers dropped, other numbers kept as written (the 0–10-as-words step was
+     rolled back, RL-119);
    - `percent`; atoms without letters, connectives, URL tokens, model sizes;
    - comparison words before a number;
    - the item-4 rules (not-only / but-also option 2, connectives, openers, "as well");
@@ -799,7 +813,7 @@ that each list entry matches its unit.
 **Test suite.**
 - **Self-test:** 54/54. Four cases were updated where a decision changed the expected output: passive "be", the modal
   merge, a plain-text number now kept, and "allows … to integrate".
-- **Hard cases:** `g3_v2/hard/`, run with `run_hard.py` on the parse cache `hard/parsed_cache.json`, 132/145:
+- **Hard cases:** `g3_v2/hard/`, run with `run_hard.py` on the parse cache `hard/parsed_cache.json`, 154/167 (RL-120; 132/145 before):
 
   | Set | Pass |
   |---|---|
@@ -813,6 +827,7 @@ that each list entry matches its unit.
   | item 8 atom and number | 11/11 |
   | the 12 adverbs | 10/11 |
   | glossary | 4/4 |
+  | non-text numbers (RL-120) | 22/22 |
 
   The 13 failures are all known and documented in RUN_LOG and in the cases' notes: parser misreadings, option 2's four
   accepted limits, and "let us" pulled up by the existing rule for verb-only levels.
@@ -924,11 +939,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8) | 2f7e8f356692 |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8) | 389123552561 |
 | `fullscale_pipeline/g3_v2/modal_merge.py` (§6 item 3: decision rule copied from `g3_modal_check/modal_rules.py`, edge-order fix, and the clause merge; imported by the script) | 75c7022ac187 |
 | `fullscale_pipeline/g3_v2/reflexive_restore.py` (§6 item 8: builds the reflexive table; 43 min on incline) | 92fa72c383de |
 | `fullscale_pipeline/g3_v2/measure_be.py` (§6 item 1: the measurement required before implementing passive "be") | 8cbfe1c89631 |
 | `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached) | 80b9ca527b8f |
-| `fullscale_pipeline/g3_v2/hard/hard_*.json` (11 sets, 169 cases, 145 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
+| `fullscale_pipeline/g3_v2/hard/hard_*.json` (12 sets, 191 cases, 167 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
 | `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
 | `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |

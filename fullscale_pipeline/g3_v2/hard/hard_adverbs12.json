@@ -93,10 +93,14 @@
   "text": "GPT-4 scored under 5 marks on four questions.",
   "expect": [
    "under/M/en",
-   "five/"
+   "5/"
   ],
   "forbid": [],
-  "note": "approximation before a number kept"
+  "note": "approximation before a number kept; expectation updated 2026-10-10: digits kept as written (RL-119)",
+  "expect_before": [
+   "under/M/en",
+   "five/"
+  ]
  },
  {
   "id": "D10",

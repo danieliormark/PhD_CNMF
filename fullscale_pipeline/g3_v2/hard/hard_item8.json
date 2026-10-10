@@ -54,12 +54,19 @@
   "text": "We compared two models, GPT-4 and 3 versions of BERT.",
   "expect": [
    "two/M/en",
-   "three/"
+   "3/"
   ],
   "forbid": [
-   "/3/"
+   "three/"
   ],
-  "note": "0-10 as words, digits and spelled alike"
+  "note": "expectation updated 2026-10-10: 0-10 no longer converted to words (owner, RL-119); spelled-out numbers kept as written, digits kept as written",
+  "expect_before": [
+   "two/M/en",
+   "three/"
+  ],
+  "forbid_before": [
+   "/3/"
+  ]
  },
  {
   "id": "J06",

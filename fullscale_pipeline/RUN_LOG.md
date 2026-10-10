@@ -1144,3 +1144,58 @@ kept, 178,048 dropped, 621 modal merges (38 skipped), 24 reflexive-restored unit
 parents, 0.0033 s per unit; shard 20 — 693 articles, 121 excluded, 14,483 units, 14,013 with a parent, 17,130 parents,
 49,265 cousins, 731 modal merges (54 skipped), 34 reflexive-restored, 2 LLM-output, 15 non-prose, 5 glossary; both 0
 errors, 0 problems. `fullscale_pipeline/g3_v2/runs/` (373 MB, corpus-derived) added to `.git/info/exclude`. [LOG]
+
+**RL-118 · 2026-10-10 · G3 · CHECK (§6 item 8: two promised labelled checks) · LIVE**
+Host incline32. Labelled by the assistant from reading each case in context; samples, labels and the drawing code in
+`diagnostics/g3_checks/` (local; untracked like the rest of `diagnostics/`).
+(1) Emphatic vs object reflexives (item 8 promised "about 100" before use; the table had been built and applied first,
+RL-115): 60 drawn from the 1,211 restored units (seed 1010) — 60/60 emphatic, correctly restored; 40 drawn from the
+reflexives the rule keeps as objects (dobj, dative, other prepositions, small-clause subjects, conj; "by" phrases left
+out because the cached parse cannot tell a passive agent from "by itself") — 40/40 correctly kept, 2 borderline and
+harmless ("decides for itself", "without themselves relying"). The split stands.
+(2) Integers 0-10 written as words (item 8 promised a precision check before use; it had been applied, RL-114): 100
+drawn from the 2,206 converted digits in the RL-117 outputs of shards 0 and 20 (seed 2020): 59 are counts or values in
+plain text ("2 reviewers", "4 dimensions", "up to 4 times", "a score of 5"); 41 are not: labels the label rule misses 22
+("Textbox 3", "Online Resource 5", "Supplementary Note 3", "Surgeon 2", "Topic 7", "Tier 1", "round 1", "group 0 and 3",
+"prompt variant 0", "readers 1 and 2", the later items of "Tables 4, 6, 7, and 8", and labels sharing an atom with a
+plain occurrence of the same digit in the unit), model versions outside the focal folding 7 ("Claude Sonnet 4", "DALL-E
+3", "ChatGPT 4 and 5", "transformer 3 (GPT-3)"), dates 4 ("October 9, 2023", "2024-04-09"), products or ids 3 ("AMD Ryzen
+7", "ROS 2"), citation or list debris 3, a formula 1, a statistic 1. So the conversion turns labels, versions and dates
+into counts ("Table 3" and "three models" become the same atom). The non-text number rules leak the same cases also
+when digits are kept as written. Not changed yet: for the owner. [LOG]
+
+**RL-119 · 2026-10-10 · G3 · CODE (test script v2: 0-10 as words rolled back) · LIVE**
+Owner, after RL-118: writing integers 0-10 as words is not important enough to keep, given that 41 of 100 converted digits
+were labels, versions, dates or debris. Host incline32, `tensor_env`. `g3_v2/g3_curation_v2.py` (sha256 `b78ee9b98a40`):
+`number_word()` removed; every plain-text number is kept as written; spelled-out numbers stay as written (so "2 models"
+and "two models" are different atoms again). Hard-case expectations updated, old ones kept with a note: J05
+(`hard_item8.json`) and D09 (`hard_adverbs12.json`). Self-test 54/54; hard cases 132/145 (unchanged; the 13 known
+failures). Shard 0 (`--limit 700`) and shard 20 (`--limit 0`): 0 errors, 0 problems; parents and cousins unchanged
+(16,525 / 47,100; 17,130 / 49,265); 725 and 757 units changed against RL-117, all of them a digit written as a word
+before and as the digit now, except 3 units per shard where a digit and the same number spelled out ("5" and "five")
+had been merged into one atom and are now two. Still open from RL-118: the non-text number rules miss labels such as
+"Textbox 3", "Surgeon 2", "Topic 7", list items after ", and", model versions outside focal folding, dates, products;
+these now leak as digits. [LOG]
+
+**RL-120 · 2026-10-10 · G3 · CODE + CHECK (test script v2: non-text numbers, owner's plain-text rule) · LIVE**
+Owner: remove what is not plain text, keep what is. Applied to the RL-118 misses (classification by the assistant,
+stated to the owner): references to non-text objects are dropped with their number ("Textbox 3", "Online Resource 5",
+"Supplementary Note 3", "Box 1", "Algorithm 1"; a preceding supplementary / supplemental / online / additional / extended
+goes too); index numbers on things in the prose are dropped and the word kept ("Topic 7", "Surgeon 2", "group 0", "round
+1", "readers 1 and 2", "Challenge 1"; 34 index nouns and their plurals); citation and list debris, numbers inside
+formulas ("|", "~", "^", "*", "="), snapshot-date ids, numbers after SD / SE / IQR / U / Z, intervals in parentheses right
+after a value ("4.5 (4.0–5.0)"), and citation years ("et al. (2020)") are dropped; numbers inside names ("Claude Sonnet
+4", "DALL-E 3") and dates in prose ("October 9, 2023") are plain text and kept. Guards: the label must stand directly
+before its number (space or period only); a number followed by "%" or a unit is a value; after an index noun only a
+whole number is an index; label lists continue over connective tokens (", and", "or"). Host incline32, `tensor_env`.
+`g3_v2/g3_curation_v2.py` sha256 `389123552561`. New hard set `g3_v2/hard/hard_numbers_rl120.json` (sha256 `402544dba99d`) 22/22; all sets
+154/167 (the 13 known failures); self-test 54/54. Checks (labels in `diagnostics/g3_checks/rl120_labels.json`):
+round 1 — 40 newly removed tokens, 31 correct, 9 real counts lost ("topics, 13 (9.5%)", "27 patients (90%)", "model,
+90%"), all from the missing directly-before and % guards, which were then added; the 100-number kept sample of round 1
+was invalid (it drew digits from focal atoms' sources: 12 of its 15 "version leaks" were inside `gpt_3_5` etc.).
+Round 2 (fresh samples, seed 1201): removed 37/40 correct (wrong: "Grade Level 17.4", and two "+" read as a formula);
+both causes fixed, after which those 3 are kept and the other 37 still removed; kept 95/100 plain text (leaks: a
+command-line argument list, "μ Human 11.79", "Martinson 2023)", a "24—" enumerator, citation digits after names
+"LLaMA 22"). Shards 0 and 20: 0 errors, 0 problems; parents 16,523 / 17,130, cousins 47,077 / 49,224. Also found, not
+changed (focal matching, §4): the matcher reads a score after a name as a version ("ChatGPT 8.0 [7.0–10.0]" →
+`gpt_8`). [LOG]

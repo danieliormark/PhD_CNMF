@@ -11596,5 +11596,1598 @@
 12
 ]
 ]
+},
+"Details are given in Online Resource 5, as GPT-4 recommended.": {
+"main_edge": "((are/Mv.|f-----/en given/Pd.pxx.<pf----/en) details/Cc.p/en (in/T/en (5/M#/en (+/B.am/. online/Cp.s/en resource/Cp.s/en))) (as/T/en (recommended/Pd.s.<pf----/en gpt-4/Cp.s/en)))",
+"extra_edges": [
+"(_lemma details/C/en detail/C/en)",
+"(_lemma online/C/en online/C/en)",
+"(_lemma as/T/en as/T/en)",
+"(_lemma given/P/en give/P/en)",
+"(_lemma resource/C/en resource/C/en)",
+"(_lemma in/T/en in/T/en)",
+"(_lemma 5/M/en 5/M/en)",
+"(_lemma are/M/en be/M/en)",
+"(_lemma recommended/P/en recommend/P/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)"
+],
+"atom2word": [
+[
+"details/Cc.p/en",
+"Details",
+0
+],
+[
+"are/Mv.|f-----/en",
+"are",
+1
+],
+[
+"given/Pd.pxx.<pf----/en",
+"given",
+2
+],
+[
+"in/T/en",
+"in",
+3
+],
+[
+"online/Cp.s/en",
+"Online",
+4
+],
+[
+"resource/Cp.s/en",
+"Resource",
+5
+],
+[
+"5/M#/en",
+"5",
+6
+],
+[
+"as/T/en",
+"as",
+8
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+9
+],
+[
+"recommended/Pd.s.<pf----/en",
+"recommended",
+10
+]
+]
+},
+"The answers of ChatGPT are listed in Textbox 3.": {
+"main_edge": "((are/Mv.|f-----/en listed/Pd.px.<pf----/en) (of/Br.ma/en (the/Md/en answers/Cc.p/en) chatgpt/Cp.s/en) (in/T/en (3/M#/en textbox/Cc.s/en)))",
+"extra_edges": [
+"(_lemma the/M/en the/M/en)",
+"(_lemma listed/P/en list/P/en)",
+"(_lemma are/M/en be/M/en)",
+"(_lemma answers/C/en answer/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma in/T/en in/T/en)",
+"(_lemma textbox/C/en textbox/C/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma 3/M/en 3/M/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"answers/Cc.p/en",
+"answers",
+1
+],
+[
+"of/Br.ma/en",
+"of",
+2
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+3
+],
+[
+"are/Mv.|f-----/en",
+"are",
+4
+],
+[
+"listed/Pd.px.<pf----/en",
+"listed",
+5
+],
+[
+"in/T/en",
+"in",
+6
+],
+[
+"textbox/Cc.s/en",
+"Textbox",
+7
+],
+[
+"3/M#/en",
+"3",
+8
+]
+]
+},
+"Topic 7 was the most common topic in ChatGPT outputs.": {
+"main_edge": "(was/Pd.scx.<f-----/en (7/M#/en topic/Cc.s/en) (the/Md/en ((most/M^/en common/Ma/en) topic/Cc.s/en)) (in/T/en (+/B.am/. chatgpt/Cp.s/en outputs/Cc.p/en)))",
+"extra_edges": [
+"(_lemma common/M/en common/M/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma outputs/C/en output/C/en)",
+"(_lemma most/M/en most/M/en)",
+"(_lemma 7/M/en 7/M/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma topic/C/en topic/C/en)",
+"(_lemma in/T/en in/T/en)",
+"(_lemma was/P/en be/P/en)"
+],
+"atom2word": [
+[
+"topic/Cc.s/en",
+"Topic",
+0
+],
+[
+"7/M#/en",
+"7",
+1
+],
+[
+"was/Pd.scx.<f-----/en",
+"was",
+2
+],
+[
+"the/Md/en",
+"the",
+3
+],
+[
+"most/M^/en",
+"most",
+4
+],
+[
+"common/Ma/en",
+"common",
+5
+],
+[
+"topic/Cc.s/en",
+"topic",
+6
+],
+[
+"in/T/en",
+"in",
+7
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+8
+],
+[
+"outputs/Cc.p/en",
+"outputs",
+9
+]
+]
+},
+"Two spine surgeons, Surgeon 1 and Surgeon 2, independently rated the ChatGPT answers.": {
+"main_edge": "((independently/M/en rated/Pd.so.<f-----/en) (+/B.mm/. (two/M#/en (+/B.am/. spine/Cc.s/en surgeons/Cc.p/en)) (and/J/en (1/M#/en surgeon/Cp.s/en) (2/M#/en surgeon/Cp.s/en))) (the/Md/en (+/B.am/. chatgpt/Cp.s/en answers/Cc.p/en)))",
+"extra_edges": [
+"(_lemma two/M/en two/M/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma independently/M/en independently/M/en)",
+"(_lemma surgeon/C/en surgeon/C/en)",
+"(_lemma answers/C/en answer/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma spine/C/en spine/C/en)",
+"(_lemma surgeons/C/en surgeon/C/en)",
+"(_lemma 1/M/en 1/M/en)",
+"(_lemma 2/M/en 2/M/en)",
+"(_lemma rated/P/en rate/P/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"two/M#/en",
+"Two",
+0
+],
+[
+"spine/Cc.s/en",
+"spine",
+1
+],
+[
+"surgeons/Cc.p/en",
+"surgeons",
+2
+],
+[
+"surgeon/Cp.s/en",
+"Surgeon",
+4
+],
+[
+"1/M#/en",
+"1",
+5
+],
+[
+"and/J/en",
+"and",
+6
+],
+[
+"surgeon/Cp.s/en",
+"Surgeon",
+7
+],
+[
+"2/M#/en",
+"2",
+8
+],
+[
+"independently/M/en",
+"independently",
+10
+],
+[
+"rated/Pd.so.<f-----/en",
+"rated",
+11
+],
+[
+"the/Md/en",
+"the",
+12
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+13
+],
+[
+"answers/Cc.p/en",
+"answers",
+14
+]
+]
+},
+"Results for BERT are given in Tables 4, 6, 7, and 8.": {
+"main_edge": "((are/Mv.|f-----/en given/Pd.px.<pf----/en) (for/Br.ma/en results/Cc.p/en bert/Cp.s/en) (in/T/en (+/B.mm/. (+/B.mm/. (4/M#/en tables/Cc.p/en) 6/C#/en) (and/J/en 7/C#/en 8/C#/en))))",
+"extra_edges": [
+"(_lemma for/B/en for/B/en)",
+"(_lemma given/P/en give/P/en)",
+"(_lemma 6/C/en 6/C/en)",
+"(_lemma 8/C/en 8/C/en)",
+"(_lemma in/T/en in/T/en)",
+"(_lemma 4/M/en 4/M/en)",
+"(_lemma tables/C/en table/C/en)",
+"(_lemma 7/C/en 7/C/en)",
+"(_lemma are/M/en be/M/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma results/C/en result/C/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"results/Cc.p/en",
+"Results",
+0
+],
+[
+"for/Br.ma/en",
+"for",
+1
+],
+[
+"bert/Cp.s/en",
+"BERT",
+2
+],
+[
+"are/Mv.|f-----/en",
+"are",
+3
+],
+[
+"given/Pd.px.<pf----/en",
+"given",
+4
+],
+[
+"in/T/en",
+"in",
+5
+],
+[
+"tables/Cc.p/en",
+"Tables",
+6
+],
+[
+"4/M#/en",
+"4",
+7
+],
+[
+"6/C#/en",
+"6",
+9
+],
+[
+"7/C#/en",
+"7",
+11
+],
+[
+"and/J/en",
+"and",
+13
+],
+[
+"8/C#/en",
+"8",
+14
+]
+]
+},
+"Patients 65 years or older used ChatGPT less often.": {
+"main_edge": "(((less/M=/en often/M/en) used/Pd.so.<f-----/en) (+/B.mm/. patients/Cc.p/en ((older/Mc/en or/Mj/en) (65/M#/en years/Cc.p/en))) chatgpt/Cp.s/en)",
+"extra_edges": [
+"(_lemma patients/C/en patient/C/en)",
+"(_lemma used/P/en use/P/en)",
+"(_lemma often/M/en often/M/en)",
+"(_lemma or/J/en or/J/en)",
+"(_lemma less/M/en less/M/en)",
+"(_lemma older/M/en old/M/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma 65/M/en 65/M/en)",
+"(_lemma years/C/en year/C/en)"
+],
+"atom2word": [
+[
+"patients/Cc.p/en",
+"Patients",
+0
+],
+[
+"65/M#/en",
+"65",
+1
+],
+[
+"years/Cc.p/en",
+"years",
+2
+],
+[
+"or/Mj/en",
+"or",
+3
+],
+[
+"older/Mc/en",
+"older",
+4
+],
+[
+"used/Pd.so.<f-----/en",
+"used",
+5
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+6
+],
+[
+"less/M=/en",
+"less",
+7
+],
+[
+"often/M/en",
+"often",
+8
+]
+]
+},
+"The fine-tuned LLM was superior to readers 1 and 2.": {
+"main_edge": "(was/Pd.sc.<f-----/en (the/Md/en ((fine/M/en tuned/Mv.<pf----/en) llm/Cp.s/en)) (to/Br.ma/en superior/Ca/en (and/J/en (1/M#/en readers/Cc.p/en) 2/C#/en)))",
+"extra_edges": [
+"(_lemma fine/M/en fine/M/en)",
+"(_lemma 2/C/en 2/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma to/B/en to/B/en)",
+"(_lemma superior/C/en superior/C/en)",
+"(_lemma tuned/M/en tune/M/en)",
+"(_lemma readers/C/en reader/C/en)",
+"(_lemma 1/M/en 1/M/en)",
+"(_lemma was/P/en be/P/en)",
+"(_lemma llm/C/en llm/C/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"fine/M/en",
+"fine",
+1
+],
+[
+"tuned/Mv.<pf----/en",
+"tuned",
+3
+],
+[
+"llm/Cp.s/en",
+"LLM",
+4
+],
+[
+"was/Pd.sc.<f-----/en",
+"was",
+5
+],
+[
+"superior/Ca/en",
+"superior",
+6
+],
+[
+"to/Br.ma/en",
+"to",
+7
+],
+[
+"readers/Cc.p/en",
+"readers",
+8
+],
+[
+"1/M#/en",
+"1",
+9
+],
+[
+"and/J/en",
+"and",
+10
+],
+[
+"2/C#/en",
+"2",
+11
+]
+]
+},
+"REF000123 3 used GPT-4 for coding tasks.": {
+"main_edge": "(used/Pd.sox.<f-----/en (3/M#/en ref000123/Cp.s/en) gpt-4/Cp.s/en (for/T/en (+/B.am/. coding/Cc.s/en tasks/Cc.p/en)))",
+"extra_edges": [
+"(_lemma 3/M/en 3/M/en)",
+"(_lemma used/P/en use/P/en)",
+"(_lemma for/T/en for/T/en)",
+"(_lemma tasks/C/en task/C/en)",
+"(_lemma coding/C/en coding/C/en)",
+"(_lemma ref000123/C/en ref000123/C/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)"
+],
+"atom2word": [
+[
+"ref000123/Cp.s/en",
+"REF000123",
+0
+],
+[
+"3/M#/en",
+"3",
+1
+],
+[
+"used/Pd.sox.<f-----/en",
+"used",
+2
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+3
+],
+[
+"for/T/en",
+"for",
+4
+],
+[
+"coding/Cc.s/en",
+"coding",
+5
+],
+[
+"tasks/Cc.p/en",
+"tasks",
+6
+]
+]
+},
+"The model Rating ~ LLM + (1 | Word) was fitted for GPT-3.5.": {
+"main_edge": "((was/Mv.<f-----/en fitted/Pd.px.<pf----/en) (+/B.mm/. (the/Md/en (+/B.am/. model/Cc.s/en rating/Cc.s/en)) (+/B.mm/. (+/B.mm/. llm/Cc.s/en 1/C#/en) word/Cc.s/en)) (for/T/en gpt-3%2e5/Cp.s/en))",
+"extra_edges": [
+"(_lemma gpt-3%2e5/C/en gpt-3%2e5/C/en)",
+"(_lemma 1/C/en 1/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma fitted/P/en fit/P/en)",
+"(_lemma word/C/en word/C/en)",
+"(_lemma model/C/en model/C/en)",
+"(_lemma for/T/en for/T/en)",
+"(_lemma rating/C/en rating/C/en)",
+"(_lemma llm/C/en llm/C/en)",
+"(_lemma was/M/en be/M/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"model/Cc.s/en",
+"model",
+1
+],
+[
+"rating/Cc.s/en",
+"Rating",
+2
+],
+[
+"llm/Cc.s/en",
+"LLM",
+4
+],
+[
+"1/C#/en",
+"1",
+7
+],
+[
+"word/Cc.s/en",
+"Word",
+9
+],
+[
+"was/Mv.<f-----/en",
+"was",
+11
+],
+[
+"fitted/Pd.px.<pf----/en",
+"fitted",
+12
+],
+[
+"for/T/en",
+"for",
+13
+],
+[
+"gpt-3%2e5/Cp.s/en",
+"GPT-3.5",
+14
+]
+]
+},
+"Claude Sonnet 4 was compared with GPT-4o on the exam.": {
+"main_edge": "((was/Mv.<f-----/en compared/Pd.pxx.<pf----/en) (4/M#/en (+/B.am/. claude/Cp.s/en sonnet/Cp.s/en)) (with/T/en gpt-4o/Cp.s/en) (on/T/en (the/Md/en exam/Cc.s/en)))",
+"extra_edges": [
+"(_lemma on/T/en on/T/en)",
+"(_lemma sonnet/C/en sonnet/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma claude/C/en claude/C/en)",
+"(_lemma with/T/en with/T/en)",
+"(_lemma compared/P/en compare/P/en)",
+"(_lemma 4/M/en 4/M/en)",
+"(_lemma exam/C/en exam/C/en)",
+"(_lemma was/M/en be/M/en)",
+"(_lemma gpt-4o/C/en gpt-4o/C/en)"
+],
+"atom2word": [
+[
+"claude/Cp.s/en",
+"Claude",
+0
+],
+[
+"sonnet/Cp.s/en",
+"Sonnet",
+1
+],
+[
+"4/M#/en",
+"4",
+2
+],
+[
+"was/Mv.<f-----/en",
+"was",
+3
+],
+[
+"compared/Pd.pxx.<pf----/en",
+"compared",
+4
+],
+[
+"with/T/en",
+"with",
+5
+],
+[
+"gpt-4o/Cp.s/en",
+"GPT-4o",
+6
+],
+[
+"on/T/en",
+"on",
+7
+],
+[
+"the/Md/en",
+"the",
+8
+],
+[
+"exam/Cc.s/en",
+"exam",
+9
+]
+]
+},
+"On October 9, 2023, OpenAI released a new version of ChatGPT.": {
+"main_edge": "(released/Pd.xso.<f-----/en (on/Tt/en (2023/M#/en (9/M#/en october/Cp.s/en))) openai/Cp.s/en (of/Br.ma/en (a/Md/en (new/Ma/en version/Cc.s/en)) chatgpt/Cp.s/en))",
+"extra_edges": [
+"(_lemma on/T/en on/T/en)",
+"(_lemma new/M/en new/M/en)",
+"(_lemma october/C/en october/C/en)",
+"(_lemma openai/C/en openai/C/en)",
+"(_lemma 9/M/en 9/M/en)",
+"(_lemma 2023/M/en 2023/M/en)",
+"(_lemma version/C/en version/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma a/M/en a/M/en)",
+"(_lemma released/P/en release/P/en)"
+],
+"atom2word": [
+[
+"on/Tt/en",
+"On",
+0
+],
+[
+"october/Cp.s/en",
+"October",
+1
+],
+[
+"9/M#/en",
+"9",
+2
+],
+[
+"2023/M#/en",
+"2023",
+4
+],
+[
+"openai/Cp.s/en",
+"OpenAI",
+6
+],
+[
+"released/Pd.xso.<f-----/en",
+"released",
+7
+],
+[
+"a/Md/en",
+"a",
+8
+],
+[
+"new/Ma/en",
+"new",
+9
+],
+[
+"version/Cc.s/en",
+"version",
+10
+],
+[
+"of/Br.ma/en",
+"of",
+11
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+12
+]
+]
+},
+"We ran ChatGPT with 4 different prompting strategies.": {
+"main_edge": "(ran/Pd.sox.<f-----/en we/Ci/en chatgpt/Cp.s/en (with/T/en (4/M#/en (different/Ma/en (+/B.am/. prompting/Cc.s/en strategies/Cc.p/en)))))",
+"extra_edges": [
+"(_lemma prompting/C/en prompting/C/en)",
+"(_lemma with/T/en with/T/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma 4/M/en 4/M/en)",
+"(_lemma different/M/en different/M/en)",
+"(_lemma ran/P/en run/P/en)",
+"(_lemma strategies/C/en strategy/C/en)",
+"(_lemma we/C/en we/C/en)"
+],
+"atom2word": [
+[
+"we/Ci/en",
+"We",
+0
+],
+[
+"ran/Pd.sox.<f-----/en",
+"ran",
+1
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+2
+],
+[
+"with/T/en",
+"with",
+3
+],
+[
+"4/M#/en",
+"4",
+4
+],
+[
+"different/Ma/en",
+"different",
+5
+],
+[
+"prompting/Cc.s/en",
+"prompting",
+6
+],
+[
+"strategies/Cc.p/en",
+"strategies",
+7
+]
+]
+},
+"GPT-4 scored 5 out of 7 points on the test.": {
+"main_edge": "(scored/Pd.sox.<f-----/en gpt-4/Cp.s/en (+/B.am/. ((out/M/en (of/M/en 7/M#/en)) 5/C#/en) points/Cc.p/en) (on/T/en (the/Md/en test/Cc.s/en)))",
+"extra_edges": [
+"(_lemma 5/C/en 5/C/en)",
+"(_lemma on/T/en on/T/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma scored/P/en score/P/en)",
+"(_lemma test/C/en test/C/en)",
+"(_lemma 7/M/en 7/M/en)",
+"(_lemma points/C/en point/C/en)",
+"(_lemma of/M/en of/M/en)",
+"(_lemma out/M/en out/M/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)"
+],
+"atom2word": [
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+0
+],
+[
+"scored/Pd.sox.<f-----/en",
+"scored",
+1
+],
+[
+"5/C#/en",
+"5",
+2
+],
+[
+"out/M/en",
+"out",
+3
+],
+[
+"of/M/en",
+"of",
+4
+],
+[
+"7/M#/en",
+"7",
+5
+],
+[
+"points/Cc.p/en",
+"points",
+6
+],
+[
+"on/T/en",
+"on",
+7
+],
+[
+"the/Md/en",
+"the",
+8
+],
+[
+"test/Cc.s/en",
+"test",
+9
+]
+]
+},
+"In round 1, GPT-4 answered all questions.": {
+"main_edge": "(answered/Pd.xso.<f-----/en (in/T/en (1/M#/en round/Cc.s/en)) gpt-4/Cp.s/en (all/Md/en questions/Cc.p/en))",
+"extra_edges": [
+"(_lemma 1/M/en 1/M/en)",
+"(_lemma in/T/en in/T/en)",
+"(_lemma answered/P/en answer/P/en)",
+"(_lemma all/M/en all/M/en)",
+"(_lemma round/C/en round/C/en)",
+"(_lemma questions/C/en question/C/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)"
+],
+"atom2word": [
+[
+"in/T/en",
+"In",
+0
+],
+[
+"round/Cc.s/en",
+"round",
+1
+],
+[
+"1/M#/en",
+"1",
+2
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+4
+],
+[
+"answered/Pd.xso.<f-----/en",
+"answered",
+5
+],
+[
+"all/Md/en",
+"all",
+6
+],
+[
+"questions/Cc.p/en",
+"questions",
+7
+]
+]
+},
+"The model of ChatGPT reached 80% accuracy, and the smartphone model (80.0%) was similar.": {
+"main_edge": "(and/J/en (reached/Pd.so.<f-----/en (of/Br.ma/en (the/Md/en model/Cc.s/en) chatgpt/Cp.s/en) (+/B.am/. (80/M#/en %25/Cc.s/en) accuracy/Cc.s/en)) (was/Pd.sc.<f-----/en (+/B.mm/. (the/Md/en (+/B.am/. smartphone/Cc.s/en model/Cc.s/en)) (80%2e0/M#/en %25/C/en)) similar/Ca/en))",
+"extra_edges": [
+"(_lemma 80/M/en 80/M/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma %25/C/en %25/C/en)",
+"(_lemma smartphone/C/en smartphone/C/en)",
+"(_lemma accuracy/C/en accuracy/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma reached/P/en reach/P/en)",
+"(_lemma was/P/en be/P/en)",
+"(_lemma 80%2e0/M/en 80%2e0/M/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma model/C/en model/C/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma similar/C/en similar/C/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"model/Cc.s/en",
+"model",
+1
+],
+[
+"of/Br.ma/en",
+"of",
+2
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+3
+],
+[
+"reached/Pd.so.<f-----/en",
+"reached",
+4
+],
+[
+"80/M#/en",
+"80",
+5
+],
+[
+"%25/Cc.s/en",
+"%",
+6
+],
+[
+"accuracy/Cc.s/en",
+"accuracy",
+7
+],
+[
+"and/J/en",
+"and",
+9
+],
+[
+"the/Md/en",
+"the",
+10
+],
+[
+"smartphone/Cc.s/en",
+"smartphone",
+11
+],
+[
+"model/Cc.s/en",
+"model",
+12
+],
+[
+"80%2e0/M#/en",
+"80.0",
+14
+],
+[
+"%25/C/en",
+"%",
+15
+],
+[
+"was/Pd.sc.<f-----/en",
+"was",
+17
+],
+[
+"similar/Ca/en",
+"similar",
+18
+]
+]
+},
+"Of these, 27 patients (90%) had moderate disease according to ChatGPT.": {
+"main_edge": "(had/Pd.soxx.<f-----/en (+/B.mm/. (27/M#/en patients/Cc.p/en) (90/M#/en %25/C/en)) (moderate/Ma/en disease/Cc.s/en) (according/Tv.|pg----/en (to/Mt/en chatgpt/Cp.s/en)) (of/T/en these/Cd/en))",
+"extra_edges": [
+"(_lemma 90/M/en 90/M/en)",
+"(_lemma these/C/en these/C/en)",
+"(_lemma %25/C/en %25/C/en)",
+"(_lemma had/P/en have/P/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma to/M/en to/M/en)",
+"(_lemma 27/M/en 27/M/en)",
+"(_lemma patients/C/en patient/C/en)",
+"(_lemma disease/C/en disease/C/en)",
+"(_lemma of/T/en of/T/en)",
+"(_lemma according/T/en accord/T/en)",
+"(_lemma moderate/M/en moderate/M/en)"
+],
+"atom2word": [
+[
+"of/T/en",
+"Of",
+0
+],
+[
+"these/Cd/en",
+"these",
+1
+],
+[
+"27/M#/en",
+"27",
+3
+],
+[
+"patients/Cc.p/en",
+"patients",
+4
+],
+[
+"90/M#/en",
+"90",
+6
+],
+[
+"%25/C/en",
+"%",
+7
+],
+[
+"had/Pd.soxx.<f-----/en",
+"had",
+9
+],
+[
+"moderate/Ma/en",
+"moderate",
+10
+],
+[
+"disease/Cc.s/en",
+"disease",
+11
+],
+[
+"according/Tv.|pg----/en",
+"according",
+12
+],
+[
+"to/Mt/en",
+"to",
+13
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+14
+]
+]
+},
+"GPT-4 scored a median of 4.5 (4.0–5.0) on completeness.": {
+"main_edge": "(scored/Pd.sox.<f-----/en gpt-4/Cp.s/en (of/Br.ma/en (a/Md/en median/Cc.s/en) (+/B.mm/. 4%2e5/C#/en 4%2e0–5%2e0/C#/en)) (on/T/en completeness/Cc.s/en))",
+"extra_edges": [
+"(_lemma completeness/C/en completeness/C/en)",
+"(_lemma 4%2e0–5%2e0/C/en 4%2e0–5%2e0/C/en)",
+"(_lemma on/T/en on/T/en)",
+"(_lemma 4%2e5/C/en 4%2e5/C/en)",
+"(_lemma median/C/en median/C/en)",
+"(_lemma scored/P/en score/P/en)",
+"(_lemma a/M/en a/M/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)",
+"(_lemma of/B/en of/B/en)"
+],
+"atom2word": [
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+0
+],
+[
+"scored/Pd.sox.<f-----/en",
+"scored",
+1
+],
+[
+"a/Md/en",
+"a",
+2
+],
+[
+"median/Cc.s/en",
+"median",
+3
+],
+[
+"of/Br.ma/en",
+"of",
+4
+],
+[
+"4%2e5/C#/en",
+"4.5",
+5
+],
+[
+"4%2e0–5%2e0/C#/en",
+"4.0–5.0",
+7
+],
+[
+"on/T/en",
+"on",
+9
+],
+[
+"completeness/Cc.s/en",
+"completeness",
+10
+]
+]
+},
+"Fan et al. (2020) applied BERT to clinical notes.": {
+"main_edge": "(applied/Pd.sssox.<f-----/en (+/B.mm/. fan/Cp.s/en et/Cp.s/en) al/Cc.s/en (+/B.ma/. %2e/C/en 2020/C#/en) bert/Cp.s/en (to/T/en (clinical/Ma/en notes/Cc.p/en)))",
+"extra_edges": [
+"(_lemma clinical/M/en clinical/M/en)",
+"(_lemma applied/P/en apply/P/en)",
+"(_lemma to/T/en to/T/en)",
+"(_lemma notes/C/en note/C/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma fan/C/en fan/C/en)",
+"(_lemma %2e/C/en %2e/C/en)",
+"(_lemma 2020/C/en 2020/C/en)",
+"(_lemma al/C/en al/C/en)",
+"(_lemma et/C/en et/C/en)"
+],
+"atom2word": [
+[
+"fan/Cp.s/en",
+"Fan",
+0
+],
+[
+"et/Cp.s/en",
+"et",
+1
+],
+[
+"al/Cc.s/en",
+"al",
+2
+],
+[
+"%2e/C/en",
+".",
+3
+],
+[
+"2020/C#/en",
+"2020",
+5
+],
+[
+"applied/Pd.sssox.<f-----/en",
+"applied",
+7
+],
+[
+"bert/Cp.s/en",
+"BERT",
+8
+],
+[
+"to/T/en",
+"to",
+9
+],
+[
+"clinical/Ma/en",
+"clinical",
+10
+],
+[
+"notes/Cc.p/en",
+"notes",
+11
+]
+]
+},
+"The bias of ChatGPT was large (mean -20.4%, SD 18.11%).": {
+"main_edge": "(was/Pd.scx.<f-----/en (of/Br.ma/en (the/Md/en bias/Cc.s/en) chatgpt/Cp.s/en) large/Ca/en (+/B.am/. (,/J/en mean/Cc.s/en (-20%2e4/M#/en %25/C/en)) (+/B.mm/. sd/Cc.s/en (18%2e11/M#/en %25/C/en))))",
+"extra_edges": [
+"(_lemma bias/C/en bias/C/en)",
+"(_lemma ,/J/en ,/J/en)",
+"(_lemma -20%2e4/M/en -20%2e4/M/en)",
+"(_lemma %25/C/en %25/C/en)",
+"(_lemma was/P/en be/P/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma sd/C/en sd/C/en)",
+"(_lemma large/C/en large/C/en)",
+"(_lemma 18%2e11/M/en 18%2e11/M/en)",
+"(_lemma mean/C/en mean/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma of/B/en of/B/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"bias/Cc.s/en",
+"bias",
+1
+],
+[
+"of/Br.ma/en",
+"of",
+2
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+3
+],
+[
+"was/Pd.scx.<f-----/en",
+"was",
+4
+],
+[
+"large/Ca/en",
+"large",
+5
+],
+[
+"mean/Cc.s/en",
+"mean",
+7
+],
+[
+"-20%2e4/M#/en",
+"-20.4",
+8
+],
+[
+"%25/C/en",
+"%",
+9
+],
+[
+",/J/en",
+",",
+10
+],
+[
+"sd/Cc.s/en",
+"SD",
+11
+],
+[
+"18%2e11/M#/en",
+"18.11",
+12
+],
+[
+"%25/C/en",
+"%",
+13
+]
+]
+},
+"This addresses Challenge 1, which GPT-4 could not solve.": {
+"main_edge": "(:/J/. (addresses/Pd.so.|f--3s-/en this/Cd/en (1/M#/en challenge/Cc.s/en)) ((could/Mm/en (not/Mn/en solve/P.os.-i-----/en)) which/C/en gpt-4/Cp.s/en))",
+"extra_edges": [
+"(_lemma gpt-4/C/en gpt-4/C/en)",
+"(_lemma challenge/C/en challenge/C/en)",
+"(_lemma solve/P/en solve/P/en)",
+"(_lemma could/M/en could/M/en)",
+"(_lemma addresses/P/en address/P/en)",
+"(_lemma 1/M/en 1/M/en)",
+"(_lemma which/C/en which/C/en)",
+"(_lemma this/C/en this/C/en)",
+"(_lemma not/M/en not/M/en)"
+],
+"atom2word": [
+[
+"this/Cd/en",
+"This",
+0
+],
+[
+"addresses/Pd.so.|f--3s-/en",
+"addresses",
+1
+],
+[
+"challenge/Cc.s/en",
+"Challenge",
+2
+],
+[
+"1/M#/en",
+"1",
+3
+],
+[
+"which/C/en",
+"which",
+5
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+6
+],
+[
+"could/Mm/en",
+"could",
+7
+],
+[
+"not/Mn/en",
+"not",
+8
+],
+[
+"solve/P.os.-i-----/en",
+"solve",
+9
+]
+]
+},
+"DeepSeek answers were the least accessible (CTE Grade Level 17.4; CRS Grade Level 15.7).": {
+"main_edge": "(were/Pd.scx.<f-----/en (+/B.am/. deepseek/Cp.s/en answers/Cc.p/en) (the/Md/en (least/M^/en accessible/Ca/en)) (+/B.am/. (17%2e4/M#/en (+/B.aa/. cte/Cp.s/en (+/B.aa/. grade/Cc.s/en level/Cp.s/en))) (15%2e7/M#/en (+/B.am/. crs/Cp.s/en (+/B.am/. grade/Cp.s/en level/Cp.s/en)))))",
+"extra_edges": [
+"(_lemma 17%2e4/M/en 17%2e4/M/en)",
+"(_lemma grade/C/en grade/C/en)",
+"(_lemma deepseek/C/en deepseek/C/en)",
+"(_lemma crs/C/en crs/C/en)",
+"(_lemma were/P/en be/P/en)",
+"(_lemma cte/C/en cte/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma least/M/en least/M/en)",
+"(_lemma answers/C/en answer/C/en)",
+"(_lemma accessible/C/en accessible/C/en)",
+"(_lemma 15%2e7/M/en 15%2e7/M/en)",
+"(_lemma level/C/en level/C/en)"
+],
+"atom2word": [
+[
+"deepseek/Cp.s/en",
+"DeepSeek",
+0
+],
+[
+"answers/Cc.p/en",
+"answers",
+1
+],
+[
+"were/Pd.scx.<f-----/en",
+"were",
+2
+],
+[
+"the/Md/en",
+"the",
+3
+],
+[
+"least/M^/en",
+"least",
+4
+],
+[
+"accessible/Ca/en",
+"accessible",
+5
+],
+[
+"cte/Cp.s/en",
+"CTE",
+7
+],
+[
+"grade/Cc.s/en",
+"Grade",
+8
+],
+[
+"level/Cp.s/en",
+"Level",
+9
+],
+[
+"17%2e4/M#/en",
+"17.4",
+10
+],
+[
+"crs/Cp.s/en",
+"CRS",
+12
+],
+[
+"grade/Cp.s/en",
+"Grade",
+13
+],
+[
+"level/Cp.s/en",
+"Level",
+14
+],
+[
+"15%2e7/M#/en",
+"15.7",
+15
+]
+]
+},
+"Significance was reached for ChatGPT + top 5 results versus GPT-4 alone.": {
+"main_edge": "(for/Jr.ma/en ((was/Mv.<f-----/en reached/Pd.p.<pf----/en) significance/Cc.s/en) (versus/Br.ma/en (+/B.am/. chatgpt/Cm/en ((top/Ma/en 5/M#/en) results/Cc.p/en)) (alone/M/en gpt-4/Cp.s/en)))",
+"extra_edges": [
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma was/M/en be/M/en)",
+"(_lemma top/M/en top/M/en)",
+"(_lemma significance/C/en significance/C/en)",
+"(_lemma versus/B/en versus/B/en)",
+"(_lemma results/C/en result/C/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)",
+"(_lemma alone/M/en alone/M/en)",
+"(_lemma for/B/en for/B/en)",
+"(_lemma reached/P/en reach/P/en)",
+"(_lemma 5/M/en 5/M/en)"
+],
+"atom2word": [
+[
+"significance/Cc.s/en",
+"Significance",
+0
+],
+[
+"was/Mv.<f-----/en",
+"was",
+1
+],
+[
+"reached/Pd.p.<pf----/en",
+"reached",
+2
+],
+[
+"for/Jr.ma/en",
+"for",
+3
+],
+[
+"chatgpt/Cm/en",
+"ChatGPT",
+4
+],
+[
+"top/Ma/en",
+"top",
+6
+],
+[
+"5/M#/en",
+"5",
+7
+],
+[
+"results/Cc.p/en",
+"results",
+8
+],
+[
+"versus/Br.ma/en",
+"versus",
+9
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+10
+],
+[
+"alone/M/en",
+"alone",
+11
+]
+]
+},
+"We compared ChatGPT + top 5 results with GPT-4 alone.": {
+"main_edge": "(compared/Pd.sox.<f-----/en we/Ci/en (+/B.am/. chatgpt/Cm/en ((top/Ma/en 5/M#/en) results/Cc.p/en)) (with/T/en (alone/M/en gpt-4/Cp.s/en)))",
+"extra_edges": [
+"(_lemma with/T/en with/T/en)",
+"(_lemma we/C/en we/C/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)",
+"(_lemma compared/P/en compare/P/en)",
+"(_lemma 5/M/en 5/M/en)",
+"(_lemma alone/M/en alone/M/en)",
+"(_lemma results/C/en result/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma top/M/en top/M/en)"
+],
+"atom2word": [
+[
+"we/Ci/en",
+"We",
+0
+],
+[
+"compared/Pd.sox.<f-----/en",
+"compared",
+1
+],
+[
+"chatgpt/Cm/en",
+"ChatGPT",
+2
+],
+[
+"top/Ma/en",
+"top",
+4
+],
+[
+"5/M#/en",
+"5",
+5
+],
+[
+"results/Cc.p/en",
+"results",
+6
+],
+[
+"with/T/en",
+"with",
+7
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+8
+],
+[
+"alone/M/en",
+"alone",
+9
+]
+]
 }
 }
