@@ -1546,3 +1546,12 @@ the author-level aggregation is not misleading: only 678 of 175,502 bylines (0.3
 text; among the 8,361 authors with no OpenAlex ID/ORCID (one paper each), 99.6% still have a PubMed
 affiliation and 94.6% an OpenAlex one. Flagged: text coverage is not institution-normalisation — that is the
 next step before author-affiliation ties can be built. Documented in CORPUS_STATISTICS.md §9.8. [LOG]
+
+**RL-138 · 2026-10-12 · CORPUS-STATS · CODE (new) + OUTPUT + DOC · LIVE**
+Owner: known share of authors with >1 corpus paper, by year and in total. New
+`corpus_statistics/author_repeat_share.py`, read-only on cached data. Computable only for the 133,416
+authors with an OpenAlex ID or ORCID known (§9.3). In total: 14.0% (18,694) have >1 paper; 86.0% have
+exactly 1, 9.4% 2, 2.4% 3, 0.9% 4, 1.2% 5+. By year (an author counted in every year they have a paper;
+% of that year's authors with >1 paper anywhere in the corpus): falls from 38-44% in 2019-2022 to 17.3% in
+2026. Flagged as right-censoring, not a real decline: a 2019 author has had seven more years for a second
+paper to appear than a 2026 author has. Documented in CORPUS_STATISTICS.md §9.9. [LOG]

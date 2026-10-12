@@ -652,3 +652,35 @@ article-author-affiliation ties can be built.
 
 **Reproduction:** `corpus_statistics/author_affiliation_coverage.py` (reads the already-cached
 `pubmed_authors.json`, `openalex_works.json`, `bylines_refresh.jsonl`; no new fetch).
+
+### 9.9 Share of authors with more than one corpus paper (2026-10-12)
+
+**Computable only for authors whose OpenAlex author ID or ORCID we know** (§9.3's grouping): without an
+identity, two bylines of the same real person cannot be told apart from two different people (§9.6's 889
+ambiguous name matches show why this would be guesswork). 133,416 authors.
+
+**In total: 18,694 (14.0%) have more than one paper in the corpus.** By number of papers: 1 paper 86.0%
+(114,722), 2 papers 9.4%, 3 papers 2.4%, 4 papers 0.9%, 5 or more 1.2%.
+
+**By year** (an author is credited to every year they have a paper in; "%" is the share of that year's
+authors who have, across the whole corpus, more than one paper):
+
+| Year | Authors active | % with >1 corpus paper |
+|---|---|---|
+| 2019 | 76 | 38.2% |
+| 2020 | 458 | 44.3% |
+| 2021 | 1,864 | 38.7% |
+| 2022 | 3,569 | 37.8% |
+| 2023 | 10,067 | 35.5% |
+| 2024 | 25,937 | 30.9% |
+| 2025 | 53,650 | 23.0% |
+| 2026 | 54,724 | 17.3% |
+
+**This falls with year mostly because of right-censoring, not because repeat authorship is declining.**
+The corpus runs through 2026; an author whose first corpus paper is from 2019 has had seven more years in
+which a second paper could appear, while one whose first paper is from 2026 has had almost none. The
+declining share by year is the expected shape of this effect (each later cohort has had less time to
+reach a second paper), not evidence that fewer authors return to the field over time.
+
+**Reproduction:** `corpus_statistics/author_repeat_share.py` (reads the already-cached refreshed OpenAlex
+snapshot and bylines; no new fetch).
