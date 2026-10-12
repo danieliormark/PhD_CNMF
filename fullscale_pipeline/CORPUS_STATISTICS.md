@@ -691,6 +691,9 @@ snapshot and bylines; no new fetch).
   paper set) across the full 28,029. R1's PMC query (`query_pmc_entrez.py`) has no date filter at all; the
   floor is organic — BERT and GPT-1 are both 2018, so 2019 is when papers using them first appear in press.
   2015 predates the Transformer architecture (2017) itself.
+  *[2026-10-12, second check (owner): the independent, separately-built toy corpus
+  (`tensor_data_staging/toy_large/corpus_article_metadata.csv`, 123 articles) also starts at 2019 (9
+  articles) and has none earlier — a second, unrelated construction landing on the same floor.]*
 - **The by-year % and the 14.0% total are not the same quantity, and are not expected to agree.** The
   14.0% counts each of the 133,416 authors once. Each by-year row instead counts an author once per year
   they have a paper in, so a multi-paper author whose papers fall in different years is counted as a
@@ -699,3 +702,45 @@ snapshot and bylines; no new fetch).
   (author, year) "active" slots from only 133,416 people — the 16,929 extra slots are entirely re-counted
   multi-paper authors. Multi-paper authors are 23.7% of all these slots, which is why every by-year % sits
   well above 14.0%, not scattered around it.
+
+### 9.10 Per-article coverage of author identifiers (2026-10-12)
+
+**How many authors per article have neither an OpenAlex ID nor an ORCID known** (full working corpus,
+28,029 articles; same per-author knowledge as §9.3-§9.7):
+
+| Missing | Articles | % |
+|---|---|---|
+| 0 | 22,623 | 80.7% |
+| 1 | 3,838 | 13.7% |
+| 2 | 976 | 3.5% |
+| 3 | 311 | 1.1% |
+| 4 | 126 | 0.4% |
+| 5 | 54 | 0.2% |
+| 6 or more | 101 | 0.4% |
+
+**What share of an article's own authors that is**, since a missing author matters differently on a
+2-author paper than on a 30-author one:
+
+![Distribution of the share of an article's own authors with neither an OpenAlex ID nor an ORCID known](corpus_statistics/author_id_missing_distribution.png)
+
+| Missing share of authors | Articles | % |
+|---|---|---|
+| 0% | 22,623 | 80.7% |
+| 1-9% | 744 | 2.7% |
+| 10-19% | 1,863 | 6.6% |
+| 20-29% | 1,452 | 5.2% |
+| 30-39% | 581 | 2.1% |
+| 40-49% | 144 | 0.5% |
+| 50-59% | 364 | 1.3% |
+| 60-69% | 86 | 0.3% |
+| 70-79% | 19 | 0.1% |
+| 80-89% | 35 | 0.1% |
+| 90-100% | 118 | 0.4% |
+
+Mean 4.6%, median 0.0% of an article's authors missing. The 50-59% bin (364 articles, more than the
+40-49% or 60-69% bins either side) is mostly 2-author articles with exactly one author missing (50.0%
+falls in that bin by construction) — an artefact of small author counts producing coarse percentages, not
+a real bump in the underlying rate.
+
+**Reproduction:** `corpus_statistics/author_id_missing_chart.py` (reads the already-cached
+`diagnostics/author_coverage/author_id_missing_per_article.json`; no new fetch).

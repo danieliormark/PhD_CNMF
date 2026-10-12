@@ -1566,3 +1566,18 @@ multi-paper authors (71.7%) span 2+ distinct years (avg 1.91), giving 150,345 (a
 133,416 people; multi-paper authors are 23.7% of all slots, matching the observed by-year range. Both
 clarifications added as a dated note to CORPUS_STATISTICS.md §9.9, no committed-figure correction needed
 (RL-138's numbers were right; only the "shouldn't these be comparable" reading needed addressing). [LOG]
+
+**RL-140 · 2026-10-12 · CORPUS-STATS · AUDIT (read-only) + CODE (new) + OUTPUT + DOC · LIVE**
+Owner: (1) earliest year in the toy corpus, as a cross-check on RL-139's 2019 floor; (2) a table of articles
+by count of authors missing both an OpenAlex ID and an ORCID (0..5, 6+), and a distribution/graph of the
+missing SHARE of an article's own authors. (1) Toy corpus (`tensor_data_staging/toy_large/
+corpus_article_metadata.csv`, 123 articles, built independently) also starts at 2019 (9 articles), none
+earlier — a second confirmation the 2019 floor is real. (2) New `corpus_statistics/author_id_missing_chart.py`
+(dataviz skill loaded first; single-series bar chart, blue #2a78d6, no legend needed). Full working corpus,
+28,029 articles: 80.7% have every author's OpenAlex ID or ORCID known, 13.7% are missing exactly one author,
+tapering to 0.4% missing 6 or more. By missing SHARE of an article's own authors: 80.7% at 0%, long right
+tail (2.7% in 1-9%, down to 0.1-0.4% in the 70%+ bins); mean 4.6%, median 0%. A first version of the chart
+had a bin-boundary bug (the "1-9%" bin's lower edge included the exact-zero articles already counted in "0%",
+inflating it from 744 to 23,367) and a title/subtitle overlap; both caught by looking at the rendered image
+before using it, fixed, re-verified against an assert that every article falls in exactly one bin.
+Documented in CORPUS_STATISTICS.md §9.9 (toy-corpus note) and §9.10. [LOG]
