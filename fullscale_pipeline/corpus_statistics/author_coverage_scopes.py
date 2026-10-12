@@ -33,15 +33,18 @@ SCOPES = {"all": lambda t: True, "article": lambda t: t == RESEARCH,
 
 
 def summarise(keep):
+    """Bylines and papers (table 1), and authors = distinct people (table 2). Bylines are grouped into one
+    person where they share an OpenAlex author ID or an ORCID (from PubMed or the OpenAlex profile); a byline
+    with neither cannot be grouped and counts as one person (an overcount if such a person has several)."""
     P = {p for p, a in arts.items() if keep(a["type"])}
     bl = [b for b in B if b["pmcid"] in P]
-    ident = lambda b: bool(b["oa_id"] or b["pm_orcid"] or b["oa_orcid"])
+    oa = lambda b: bool(b["oa_id"])
+    pmo = lambda b: bool(b["pm_orcid"])
+    anyo = lambda b: bool(b["pm_orcid"] or b["oa_orcid"])
+    known = lambda b: oa(b) or anyo(b)
     per = collections.defaultdict(lambda: [0, 0, 0])
-    fl = collections.defaultdict(list)
     for b in bl:
-        v = per[b["pmcid"]]; v[0] += 1; v[1] += bool(b["oa_id"]); v[2] += ident(b)
-        if b["pos"] in (0, b["n"] - 1):
-            fl[b["pmcid"]].append(ident(b))
+        v = per[b["pmcid"]]; v[0] += 1; v[1] += oa(b); v[2] += known(b)
     parent = {}
     def find(x):
         parent.setdefault(x, x)
@@ -54,24 +57,44 @@ def summarise(keep):
             find(k)
         for k in ks[1:]:
             parent[find(k)] = find(ks[0])
-    people = len({find(k) for k in parent})
-    n, na = len(bl), len(P)
-    unid = sum(not ident(b) for b in bl)
+    person = collections.defaultdict(lambda: [False, False, False])     # OpenAlex ID, PubMed ORCID, any ORCID
+    nothing = 0
+    for b in bl:
+        ks = [k for k in (("A", b["oa_id"]), ("O", b["pm_orcid"]), ("O", b["oa_orcid"])) if k[1]]
+        if not ks:
+            nothing += 1; continue
+        v = person[find(ks[0])]; v[0] |= oa(b); v[1] |= pmo(b); v[2] |= anyo(b)
+    n, na, npl = len(bl), len(P), len(person) + nothing
     pct = lambda x, d: round(100 * x / d, 1) if d else None
-    return dict(articles=na, articles_openalex_bylines=len({b["pmcid"] for b in bl if b["src"] == "openalex"}),
-                bylines=n, pct_openalex_id=pct(sum(bool(b["oa_id"]) for b in bl), n),
-                pct_publisher_orcid=pct(sum(bool(b["pm_orcid"]) for b in bl), n),
-                pct_identified=pct(n - unid, n), unidentified_bylines=unid,
-                pct_articles_all_openalex_id=pct(sum(v[1] == v[0] for v in per.values()), na),
-                pct_articles_all_identified=pct(sum(v[2] == v[0] for v in per.values()), na),
-                articles_none_identified=sum(v[2] == 0 for v in per.values()),
-                pct_articles_first_or_last_unidentified=pct(sum(not all(v) for v in fl.values()), na),
-                identified_people=people, upper_bound_people=people + unid)
+    T1 = {"Papers": na,
+          "Papers whose bylines come from OpenAlex (no PubMed record)": len({b["pmcid"] for b in bl if b["src"] == "openalex"}),
+          "Bylines": n,
+          "% bylines with an OpenAlex author ID known": pct(sum(map(oa, bl)), n),
+          "% bylines with an ORCID known from PubMed (publisher-supplied)": pct(sum(map(pmo, bl)), n),
+          "% bylines with a PubMed author identifier other than ORCID": 0.0,
+          "% bylines with an ORCID known from PubMed or the OpenAlex profile": pct(sum(map(anyo, bl)), n),
+          "% bylines with both an OpenAlex author ID and an ORCID known": pct(sum(oa(b) and anyo(b) for b in bl), n),
+          "% bylines with an OpenAlex author ID or an ORCID known": pct(sum(map(known, bl)), n),
+          "Bylines with neither an OpenAlex author ID nor an ORCID known": sum(not known(b) for b in bl),
+          "% papers in which every byline has an OpenAlex author ID known": pct(sum(v[1] == v[0] for v in per.values()), na),
+          "% papers in which every byline has an OpenAlex author ID or an ORCID known": pct(sum(v[2] == v[0] for v in per.values()), na),
+          "Papers in which no byline has an OpenAlex author ID or an ORCID known": sum(v[2] == 0 for v in per.values())}
+    T2 = {"Authors (distinct people, estimated)": npl,
+          "  of which: people whose OpenAlex author ID or ORCID we know": len(person),
+          "  of which: bylines with neither, one person each": nothing,
+          "% authors with an OpenAlex author ID known": pct(sum(v[0] for v in person.values()), npl),
+          "% authors with an ORCID known from PubMed (publisher-supplied)": pct(sum(v[1] for v in person.values()), npl),
+          "% authors with a PubMed author identifier other than ORCID": 0.0,
+          "% authors with an ORCID known from PubMed or the OpenAlex profile": pct(sum(v[2] for v in person.values()), npl),
+          "% authors with both an OpenAlex author ID and an ORCID known": pct(sum(v[0] and v[2] for v in person.values()), npl),
+          "% authors with an OpenAlex author ID or an ORCID known": pct(len(person), npl),
+          "% authors with neither": pct(nothing, npl)}
+    return dict(bylines_and_papers=T1, authors=T2)
 
 
 S = {k: summarise(f) for k, f in SCOPES.items()}
 json.dump(S, open(OD + f"author_coverage_scopes{SUFFIX}.json", "w"), indent=1)
-rows = list(S["all"].keys())
-print("| | " + " | ".join(S) + " |\n|---|" + "---|" * len(S))
-for r in rows:
-    print(f"| {r} | " + " | ".join(f"{S[k][r]:,}" if isinstance(S[k][r], int) else str(S[k][r]) for k in S) + " |")
+for t in ("bylines_and_papers", "authors"):
+    print(f"\n| {t} | " + " | ".join(S) + " |\n|---|" + "---|" * len(S))
+    for r in S["all"][t]:
+        print(f"| {r} | " + " | ".join(f"{S[k][t][r]:,}" if isinstance(S[k][t][r], int) else str(S[k][t][r]) for k in S) + " |")

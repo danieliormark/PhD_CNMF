@@ -556,3 +556,63 @@ bylines have a same-name partner on another article sharing an institution or co
   is no link, and any link is a false merge, measured in the single-article column above.
 
 How to treat unidentified bylines is not decided (owner).
+
+### 9.7 Terminology, byline source, and coverage by identifier and source (2026-10-12)
+
+**Terminology (owner, 2026-10-12).** "Identified" (author, byline, people) is ambiguous: it does not say by
+which identifier or from which source. From here on, the identifier and its source are named explicitly
+("bylines with an OpenAlex author ID known", "authors whose ORCID we know from PubMed"). In §9.3-§9.6,
+"identified" means: with an OpenAlex author ID or an ORCID known (ORCID from PubMed or from the OpenAlex
+author profile); "identified people" means the number of distinct people built from those identifiers.
+
+**Where the bylines come from: metadata, not the article text.** The bylines are PubMed's author list
+(MEDLINE citation XML from NCBI Entrez `efetch`, `pubmed_authors_fetch.py`), for the 38 papers without a PMID
+OpenAlex's authorship list. The article texts are not read for authors. (CORPUS_STATISTICS §4 counted
+author lines in the PMC header of the article files; §4 itself found that count unreliable.)
+
+**Author identifiers in PMC/PubMed/MEDLINE/Entrez.** NLM assigns no author identifier of its own. The only
+author identifier in the PubMed records is ORCID, supplied by the publisher (`<Identifier Source="ORCID">`,
+58,702 of 175,728 author entries); no other source occurs. The PMC article headers likewise carry ORCID links
+only (other matches such as "Scopus" are the database named in abstracts). Identifiers other than ORCID occur
+only on affiliations (Ringgold 3,580, GRID 3,304, ISNI 3,273, ROR 2,835 affiliation entries), and are not
+author identifiers.
+
+**Table 1: bylines and papers.** "OpenAlex profile ORCID" is the ORCID OpenAlex attaches to its author
+profile (OpenAlex's own linking, not the publisher's). Refreshed OpenAlex records (§9.5).
+
+| | all | article | article+review |
+|---|---|---|---|
+| Papers | 28,029 | 22,631 | 27,354 |
+| Papers whose bylines come from OpenAlex (no PubMed record) | 38 | 0 | 0 |
+| Bylines | 175,716 | 143,508 | 171,400 |
+| % bylines with an OpenAlex author ID known | 93.5 | 93.3 | 93.5 |
+| % bylines with an ORCID known from PubMed (publisher-supplied) | 33.4 | 33.7 | 33.3 |
+| % bylines with a PubMed author identifier other than ORCID | 0.0 | 0.0 | 0.0 |
+| % bylines with an ORCID known from PubMed or the OpenAlex profile | 77.7 | 77.8 | 77.6 |
+| % bylines with both an OpenAlex author ID and an ORCID known | 75.9 | 76.0 | 75.9 |
+| % bylines with an OpenAlex author ID or an ORCID known | 95.2 | 95.1 | 95.2 |
+| Bylines with neither an OpenAlex author ID nor an ORCID known | 8,371 | 6,979 | 8,197 |
+| % papers in which every byline has an OpenAlex author ID known | 74.8 | 74.0 | 74.7 |
+| % papers in which every byline has an OpenAlex author ID or an ORCID known | 80.7 | 80.3 | 80.6 |
+| Papers in which no byline has an OpenAlex author ID or an ORCID known | 105 | 90 | 101 |
+
+**Table 2: authors (distinct people).** Bylines are grouped into one person where they share an OpenAlex
+author ID or an ORCID (from PubMed or the OpenAlex profile). A byline with neither cannot be grouped and is
+counted as one person, which overcounts people who have several such bylines; the percentages therefore
+slightly understate coverage. A person counts as having an identifier if any of their bylines carries it.
+
+| | all | article | article+review |
+|---|---|---|---|
+| Authors (distinct people, estimated) | 141,947 | 117,453 | 138,939 |
+|   of which: people whose OpenAlex author ID or ORCID we know | 133,576 | 110,474 | 130,742 |
+|   of which: bylines with neither, one person each | 8,371 | 6,979 | 8,197 |
+| % authors with an OpenAlex author ID known | 92.3 | 92.2 | 92.3 |
+| % authors with an ORCID known from PubMed (publisher-supplied) | 34.1 | 34.4 | 34.0 |
+| % authors with a PubMed author identifier other than ORCID | 0.0 | 0.0 | 0.0 |
+| % authors with an ORCID known from PubMed or the OpenAlex profile | 73.6 | 74.0 | 73.6 |
+| % authors with both an OpenAlex author ID and an ORCID known | 71.8 | 72.2 | 71.8 |
+| % authors with an OpenAlex author ID or an ORCID known | 94.1 | 94.1 | 94.1 |
+| % authors with neither | 5.9 | 5.9 | 5.9 |
+
+For the 38 papers without a PMID there is no PubMed record, hence no publisher ORCID from PubMed.
+Reproduction: `author_coverage_scopes.py --openalex refresh`.

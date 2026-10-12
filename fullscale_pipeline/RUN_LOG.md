@@ -1520,3 +1520,16 @@ unidentified bylines: 893 corroborated links to identified people; 338 of 385 sa
 have a corroborated partner. A first run of the ORCID check lost its output (its script file had been
 truncated by a killed shell command); rerun from a file written afresh, then folded into the tracked script.
 Documented in CORPUS_STATISTICS.md §9.6. [LOG]
+
+**RL-136 · 2026-10-12 · CORPUS-STATS · CODE-CHANGE + OUTPUT + DOC · LIVE**
+Owner: drop the term "identified" (name identifier and source instead); asked whether bylines come from texts or
+metadata; asked to extend the coverage table with PMC/PubMed/MEDLINE/Entrez author identifiers and to add a table
+on authors rather than papers. Checked (cached data, seconds): PubMed records carry one author identifier type,
+ORCID from the publisher (58,702 author entries); NLM assigns none of its own; PMC article headers carry ORCID
+links only; ROR/GRID/ISNI/Ringgold occur only on affiliations. Bylines come from PubMed metadata (OpenAlex
+metadata for the 38 papers without a PMID), not from article texts. `author_coverage_scopes.py` now prints
+table 1 (bylines and papers, ORCID by source: PubMed 33.4%, PubMed or OpenAlex profile 77.7%, OpenAlex author ID
+93.5%, either 95.2% of bylines in all papers) and table 2 (authors = distinct people, bylines grouped by shared
+OpenAlex author ID or ORCID, bylines with neither one person each: 141,947 authors in all papers; OpenAlex author
+ID known for 92.3%, PubMed ORCID 34.1%, any ORCID 73.6%, either 94.1%). Scopes barely differ. Documented in
+CORPUS_STATISTICS.md §9.7 with a terminology note. [LOG]
