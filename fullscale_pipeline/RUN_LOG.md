@@ -1581,3 +1581,12 @@ had a bin-boundary bug (the "1-9%" bin's lower edge included the exact-zero arti
 inflating it from 744 to 23,367) and a title/subtitle overlap; both caught by looking at the rendered image
 before using it, fixed, re-verified against an assert that every article falls in exactly one bin.
 Documented in CORPUS_STATISTICS.md §9.9 (toy-corpus note) and §9.10. [LOG]
+
+**RL-141 · 2026-10-12 · CORPUS-STATS · AUDIT (read-only) · LIVE**
+Owner: of the authors with no OpenAlex ID and no ORCID known, what share also lack affiliation from both
+PMC/PubMed/MEDLINE/Entrez and OpenAlex? Read-only on cached data (bylines_refresh.jsonl, openalex_works.json,
+pubmed_authors.json), extended to include the 38 no-PMID articles' OpenAlex-only bylines (full 28,029-article
+scope). Of 8,374: 99.4% have a PubMed affiliation, 94.7% an OpenAlex one, 99.9% either. **Lacking both: 11
+(0.13%).** Read by hand: 4 are PubMed parsing a study-group name as a personal author (no forename, no
+CollectiveName tag); the other 7 are real named individuals whose affiliation this script's two sources
+both miss for this paper. Added as a follow-up note to CORPUS_STATISTICS.md §9.8. [LOG]

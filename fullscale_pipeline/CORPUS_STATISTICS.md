@@ -653,6 +653,18 @@ article-author-affiliation ties can be built.
 **Reproduction:** `corpus_statistics/author_affiliation_coverage.py` (reads the already-cached
 `pubmed_authors.json`, `openalex_works.json`, `bylines_refresh.jsonl`; no new fetch).
 
+**Follow-up (owner, 2026-10-12): of the authors with neither an OpenAlex ID nor an ORCID known (8,374,
+full working corpus, including the 38 no-PMID articles' OpenAlex-only bylines), how many also lack
+affiliation from both sources?** PubMed/MEDLINE/Entrez affiliation 99.4% (8,327), OpenAlex affiliation
+94.7% (7,926), either 99.9% (8,363). **Lacking both: 11 (0.13%).** Read by hand: 4 are a parsing artefact,
+not a real gap — PubMed gives a study-group name ("On Behalf Of The Cascade And K-Cascade Consortia", "For
+The Alzheimer's Disease Neuroimaging Initiative") no forename, so `valid="Y"` with `last` set and no
+`CollectiveName` tag, and this script counts it as a personal author; the other 7 are real individually-
+named authors (e.g. PMC11266269, 4 of its 12 authors) for whom this specific paper's record states no
+affiliation on either side. 8,374 vs 8,371 in §9.7/§9.9's "all" scope is 3 authors apart, from a small
+difference in how a handful of the 38 no-PMID articles' OpenAlex authorships without an ID are counted;
+not chased further, since it changes no conclusion here.
+
 ### 9.9 Share of authors with more than one corpus paper (2026-10-12)
 
 **Computable only for authors whose OpenAlex author ID or ORCID we know** (§9.3's grouping): without an
