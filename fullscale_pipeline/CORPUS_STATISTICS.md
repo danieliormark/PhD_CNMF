@@ -706,6 +706,18 @@ snapshot and bylines; no new fetch).
   *[2026-10-12, second check (owner): the independent, separately-built toy corpus
   (`tensor_data_staging/toy_large/corpus_article_metadata.csv`, 123 articles) also starts at 2019 (9
   articles) and has none earlier — a second, unrelated construction landing on the same floor.]*
+  *[Corrected 2026-10-12: "no date filter at all" was imprecise — a background check of the actual
+  `query_pmc_entrez.py` (not just PIPELINE.md's summary) found it slices its esearch by month starting
+  January 2015 (a pagination technique against Entrez's per-query result cap, not a topic restriction),
+  and the run log (`pmc_metadata_log.txt`) shows it genuinely found 183 candidate PMCIDs from 2015-2018
+  (1-7 per month). Traced all 183 forward: 148 reached the P1 whitelist, 26 of those reached the 34,662
+  focal corpus (P2), and all 26 were excluded by G3's own homonym/false-positive filter (§6 item 6) —
+  confirmed by reading their titles, e.g. "Differential diagnosis of pleural mesothelioma using **Logic
+  Learning Machine**" and "Numerical Methods for the Analysis of **Power Transformer** Tank Deformation",
+  none an LLM/GPT/BERT paper. So the floor is not merely unfiltered absence; every pre-2019 candidate
+  the query turned up, back to January 2015, was individually checked and found to be a false match.
+  Stronger evidence for the same conclusion, but the earlier "no date filter" wording was wrong about the
+  mechanism and is corrected here, not silently fixed.]*
 - **The by-year % and the 14.0% total are not the same quantity, and are not expected to agree.** The
   14.0% counts each of the 133,416 authors once. Each by-year row instead counts an author once per year
   they have a paper in, so a multi-paper author whose papers fall in different years is counted as a

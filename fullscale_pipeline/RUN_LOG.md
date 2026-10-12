@@ -1590,3 +1590,17 @@ scope). Of 8,374: 99.4% have a PubMed affiliation, 94.7% an OpenAlex one, 99.9% 
 (0.13%).** Read by hand: 4 are PubMed parsing a study-group name as a personal author (no forename, no
 CollectiveName tag); the other 7 are real named individuals whose affiliation this script's two sources
 both miss for this paper. Added as a follow-up note to CORPUS_STATISTICS.md §9.8. [LOG]
+
+**RL-142 · 2026-10-12 · CORPUS-STATS · AUDIT (read-only) + CORRECTION of RL-139 · LIVE**
+A stale background `find` (started during RL-139, abandoned when PIPELINE.md's summary seemed to answer the
+question) completed and surfaced the real `query_pmc_entrez.py` (`/mnt/hum01-rds/Basov/p91688di/`), not
+previously read directly. RL-139's "R1's PMC query has no date filter at all" was imprecise: the script
+slices its esearch by month from January 2015 (pagination against Entrez's result cap), and
+`pmc_metadata_log.txt` shows this genuinely found 183 PMCIDs from 2015-2018. Traced all 183 through
+`target_metadata.json` -> `article_whitelist.txt` (148) -> `focal_sentences_v2.jsonl` (26) ->
+`g3_scope_exclusions/scope_exclusions.csv`: all 26 that reached the 34,662-article G2 corpus were excluded
+there as homonyms/off-topic (confirmed by title: "Logic Learning Machine", "Power Transformer Tank
+Deformation", "biobridge", "lipid-lowering medication" — the documented §6 item 6 homonym list). Zero of the
+183 reached the 28,029 working corpus. Conclusion unchanged and better evidenced (every pre-2019 candidate,
+not just "none found"); the mechanism stated in RL-139 was wrong and is corrected here per standing
+convention, not silently edited. CORPUS_STATISTICS.md §9.9's note updated in place. [LOG]
