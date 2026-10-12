@@ -1533,3 +1533,16 @@ table 1 (bylines and papers, ORCID by source: PubMed 33.4%, PubMed or OpenAlex p
 OpenAlex author ID or ORCID, bylines with neither one person each: 141,947 authors in all papers; OpenAlex author
 ID known for 92.3%, PubMed ORCID 34.1%, any ORCID 73.6%, either 94.1%). Scopes barely differ. Documented in
 CORPUS_STATISTICS.md §9.7 with a terminology note. [LOG]
+
+**RL-137 · 2026-10-12 · CORPUS-STATS · CODE (new) + OUTPUT + DOC · LIVE**
+Owner: % of unique authors (not byline instances) with an affiliation stated by PMC/PubMed/MEDLINE/Entrez and
+by OpenAlex, for all authors and for authors with an OpenAlex ID or ORCID known, affiliation at publication
+only (no profile/current affiliation). New `corpus_statistics/author_affiliation_coverage.py`, read-only on
+already-cached data (pubmed_authors.json, openalex_works.json, bylines_refresh.jsonl's oa_idx to the exact
+aligned authorship). Author = §9.3's grouping; credited from any one of an author's papers. Result: near-
+universal. All authors (141,777): PubMed 99.7%, OpenAlex 99.4%, either 99.9%. Authors with an OpenAlex ID or
+ORCID known (133,416): PubMed 99.7%, OpenAlex 99.7%, either 99.9%. Checked at the byline-instance level so
+the author-level aggregation is not misleading: only 678 of 175,502 bylines (0.39%) lack PubMed affiliation
+text; among the 8,361 authors with no OpenAlex ID/ORCID (one paper each), 99.6% still have a PubMed
+affiliation and 94.6% an OpenAlex one. Flagged: text coverage is not institution-normalisation — that is the
+next step before author-affiliation ties can be built. Documented in CORPUS_STATISTICS.md §9.8. [LOG]

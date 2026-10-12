@@ -616,3 +616,39 @@ slightly understate coverage. A person counts as having an identifier if any of 
 
 For the 38 papers without a PMID there is no PubMed record, hence no publisher ORCID from PubMed.
 Reproduction: `author_coverage_scopes.py --openalex refresh`.
+
+### 9.8 Affiliation coverage by unique author, at publication (2026-10-12)
+
+**Scope of "affiliation" here: the affiliation stated for that specific paper, never a profile or
+"current" affiliation.** For PubMed this is the `AffiliationInfo` text on that author's entry in that
+citation; for OpenAlex it is `raw_affiliation_strings` on that author's authorship of that work (not the
+author profile's institution history). Counted per unique author (§9.3's grouping: bylines sharing an
+OpenAlex author ID or an ORCID are one person; a byline with neither is its own person): an author counts
+as having an affiliation from a source if **any one of their working-corpus papers** states one, since
+each instance is independently "the affiliation at that publication".
+
+| | n / % |
+|---|---|
+| All authors (estimate, 141,777) | |
+| &nbsp;&nbsp;with an affiliation stated by PubMed/MEDLINE/Entrez | 99.7% |
+| &nbsp;&nbsp;with an affiliation stated by OpenAlex | 99.4% |
+| &nbsp;&nbsp;with an affiliation stated by either | 99.9% |
+| Authors with an OpenAlex author ID or an ORCID known (133,416) | |
+| &nbsp;&nbsp;with an affiliation stated by PubMed/MEDLINE/Entrez | 99.7% |
+| &nbsp;&nbsp;with an affiliation stated by OpenAlex | 99.7% |
+| &nbsp;&nbsp;with an affiliation stated by either | 99.9% |
+
+Verified at the byline-instance level, not just the aggregated author level: of 175,502 bylines, only
+678 (0.39%) have no PubMed affiliation text at all, so the near-universal author-level coverage is not an
+artefact of crediting an author from one paper out of several. Among the 8,361 authors with neither an
+OpenAlex author ID nor an ORCID known (one paper each by construction), 8,327 (99.6%) still have a PubMed
+affiliation and 7,913 (94.6%) an OpenAlex one.
+
+**What this does and does not mean for M1.** The affiliation *text* is almost always present. It is not
+yet normalised to one institution node (free text, "University of Aveiro" vs "Univ. of Aveiro"; a OpenAlex
+authorship can list several institutions). That normalisation, and OpenAlex's own institution coverage
+(93.9% of authorships with an author ID carry an institution, §9.5), are the next step before the
+article-author-affiliation ties can be built.
+
+**Reproduction:** `corpus_statistics/author_affiliation_coverage.py` (reads the already-cached
+`pubmed_authors.json`, `openalex_works.json`, `bylines_refresh.jsonl`; no new fetch).
