@@ -684,3 +684,18 @@ reach a second paper), not evidence that fewer authors return to the field over 
 
 **Reproduction:** `corpus_statistics/author_repeat_share.py` (reads the already-cached refreshed OpenAlex
 snapshot and bylines; no new fetch).
+
+**Two clarifications (owner, 2026-10-12).**
+- **Earliest year: 2019, not a dropped date range.** Checked both ways (OpenAlex `publication_year` and
+  PubMed's own date agree: 17 vs 14 papers in 2019, the gap being epub vs print date, not a different
+  paper set) across the full 28,029. R1's PMC query (`query_pmc_entrez.py`) has no date filter at all; the
+  floor is organic — BERT and GPT-1 are both 2018, so 2019 is when papers using them first appear in press.
+  2015 predates the Transformer architecture (2017) itself.
+- **The by-year % and the 14.0% total are not the same quantity, and are not expected to agree.** The
+  14.0% counts each of the 133,416 authors once. Each by-year row instead counts an author once per year
+  they have a paper in, so a multi-paper author whose papers fall in different years is counted as a
+  ">1 paper" case in *every one* of those years. Checked directly: 13,401 of the 18,694 multi-paper authors
+  (71.7%) have papers in 2 or more distinct years (average 1.91 years each), producing 150,345 total
+  (author, year) "active" slots from only 133,416 people — the 16,929 extra slots are entirely re-counted
+  multi-paper authors. Multi-paper authors are 23.7% of all these slots, which is why every by-year % sits
+  well above 14.0%, not scattered around it.

@@ -1555,3 +1555,14 @@ exactly 1, 9.4% 2, 2.4% 3, 0.9% 4, 1.2% 5+. By year (an author counted in every 
 % of that year's authors with >1 paper anywhere in the corpus): falls from 38-44% in 2019-2022 to 17.3% in
 2026. Flagged as right-censoring, not a real decline: a 2019 author has had seven more years for a second
 paper to appear than a 2026 author has. Documented in CORPUS_STATISTICS.md §9.9. [LOG]
+
+**RL-139 · 2026-10-12 · CORPUS-STATS · AUDIT (read-only) · LIVE**
+Owner, two clarifications on RL-138. (1) Earliest corpus year: confirmed 2019 is genuine, not a dropped date
+range — OpenAlex and PubMed dates agree (17 vs 14 papers in 2019, full 28,029 working corpus) and R1's PMC
+query has no date filter; the floor is organic (BERT/GPT-1 are 2018). (2) Why by-year %s (17-44%) exceed the
+14.0% total: the two are different quantities, not inconsistent. The total counts each of 133,416 authors
+once; each by-year row counts a multi-paper author once per year they published in. 13,401 of 18,694
+multi-paper authors (71.7%) span 2+ distinct years (avg 1.91), giving 150,345 (author, year) slots from
+133,416 people; multi-paper authors are 23.7% of all slots, matching the observed by-year range. Both
+clarifications added as a dated note to CORPUS_STATISTICS.md §9.9, no committed-figure correction needed
+(RL-138's numbers were right; only the "shouldn't these be comparable" reading needed addressing). [LOG]
