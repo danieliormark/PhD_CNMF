@@ -131,7 +131,7 @@ for pmcid in wc:
         oa_id = x["id"] if x and x.get("id") else None
         n_id += bool(oa_id); n_orcid += bool(pm_orcid or oa_orcid); n_ident += bool(oa_id or pm_orcid or oa_orcid)
         bylines.append(dict(pmcid=pmcid, pos=i, n=len(personal), last=a["last"], fore=a["fore"],
-                            pm_orcid=pm_orcid, oa_orcid=oa_orcid, oa_id=oa_id, aligned=x is not None,
+                            pm_orcid=pm_orcid, oa_orcid=oa_orcid, oa_id=oa_id, aligned=x is not None, oa_idx=pairs.get(i),
                             oa_status=oa_status, year=year, n_affs=len(a["affs"])))
     arts.append(dict(pmcid=pmcid, pmid=pmid, pubmed="ok", oa=oa_status, year=year, type=TYPES[pmcid],
                      n_bylines=len(personal), n_group=len(group), n_oa_aligned=len(pairs), n_oa_id=n_id,

@@ -505,3 +505,54 @@ one), OpenAlex ID changed for 92 bylines (profiles merged or split). OpenAlex la
   3,259 in three, 1,254 in four, 1,650 in five or more).
 
 How to treat them is open (owner); the options are discussed in RUN_LOG RL-134.
+
+### 9.6 Can unidentified bylines be linked to people by name? (2026-10-12)
+
+**What "no author ID" means.** OpenAlex keeps, per work, one *authorship* per byline (the name as printed,
+the institutions) and, separately, *author profiles* built by its disambiguation, which groups authorships
+across works into people. Each authorship points to one profile. For 95% of the unidentified bylines the
+authorship is there (name, and usually an institution) but the pointer to a profile is empty. Example, live
+record W4404622635 (PMC11649015): "David Y. Zhang", University of Pennsylvania, author ID none; his four
+co-authors have profiles. Why OpenAlex left these unassigned is not documented; the 2025 concentration
+suggests records not yet fully processed.
+
+**Rules tested** (`name_linking_test.py`). Name key: surname + first given name, accents and case removed.
+*Name only*: link a byline to a person if exactly one person in the corpus has its name key. *Corroborated*:
+among people with the name key, link only if exactly one of them shares, on another article, an OpenAlex
+institution or an identified co-author with the byline. 15.5% of identified bylines (25,527 of 164,937)
+carry a name key shared by two or more identified people (6,623 shared keys).
+
+**Test where the truth is known:** each identified byline's identity hidden, then linked back.
+
+| Rule | People on 2+ articles (51,803 bylines): correct / ambiguous, no link / no link / wrong | People on 1 article (113,134 bylines; any link is a merge): link / ambiguous / no link |
+|---|---|---|
+| Name only | 81.4% / 16.3% / 2.1% / 0.2% | 6.5% (7,399) / 8.5% / 85.0% |
+| Corroborated | 84.6% / 8.6% / 6.5% / 0.4% | 3.6% (4,052) / 0.7% / 95.7% |
+
+The links made for single-article people are not all errors. The truth here is OpenAlex's own identities,
+which split about 1% of people into two profiles (§9.3), so a same-name person with a shared co-author on
+another article may be one person OpenAlex failed to merge; sampled cases with rare names (Lincoln D Stein,
+Eduardo Aguilar-Bejarano, Paulina Kliem) look like exactly that. Of the 4,052, **96** join records whose
+publisher-supplied ORCIDs differ (two people, or one person holding two ORCIDs: e.g. Sandro Claudio Lera);
+the other 3,956 cannot be decided from ORCIDs (with OpenAlex's profile ORCIDs added, 1,659 differ, but
+those ORCIDs are themselves sometimes wrong, §9.3). The true false-merge rate of the corroborated rule
+therefore lies between about 0.1% and 3.6% of single-article bylines; a hand-checked sample is needed to
+fix it.
+
+**Applied to the 8,361 unidentified bylines:** evidence exists for most (85.8% have an OpenAlex
+institution, 96.7% at least one identified co-author). Name only: 1,276 linked, 889 ambiguous; corroborated:
+**893 linked** to an identified person, 151 ambiguous, 7,201 not linked, 116 with only an initial (no key).
+Among the unidentified bylines themselves, 182 names occur on 2+ articles (385 bylines), and 338 of these
+bylines have a same-name partner on another article sharing an institution or co-author.
+
+**When the true counterpart is not an identified person:**
+- *Another unidentified byline*: found only by linking unidentified bylines with each other (the 338 above),
+  under the same corroboration rule.
+- *A counterpart written differently* (initials only, transliteration, changed surname) or *missing from
+  OpenAlex's list* (391 bylines not aligned, so no OpenAlex institution, only co-authors as evidence): the
+  name key does not meet it and the person stays split; for identified people 2.1% of multi-article bylines
+  have no same-key counterpart.
+- *No counterpart in the corpus* (the usual case: 86% of identified people appear once): the right outcome
+  is no link, and any link is a false merge, measured in the single-article column above.
+
+How to treat unidentified bylines is not decided (owner).

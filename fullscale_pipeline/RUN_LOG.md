@@ -1504,3 +1504,19 @@ elsewhere in the corpus. 86% of identified people appear in only one corpus arti
 owner (not decided): drop; one placeholder author per byline (with its institution); placeholders plus
 corroborated name linking; re-query OpenAlex before the M1 build. Documented in CORPUS_STATISTICS.md
 §9.4-§9.5. [LOG]
+
+**RL-135 · 2026-10-12 · CORPUS-STATS · TEST (read-only) + CODE (new) + DOC · LIVE**
+Owner asked what "no OpenAlex author ID" means, and how placeholders plus name linking would work, including
+when the true counterpart is another unidentified or a missing author. (1) Shown on a live record
+(W4404622635): the authorship exists with name and institution, the pointer to an author profile is empty.
+(2) `author_coverage.py` now records which OpenAlex authorship each byline is aligned to (`oa_idx`; per-article
+outputs byte-identical). New `corpus_statistics/name_linking_test.py`: name-only and corroborated (shared
+OpenAlex institution or identified co-author on another article) linking, tested by hiding the identity of
+identified bylines. People on 2+ articles: corroborated 84.6% correct, 0.4% wrong (name only 81.4% / 0.2%).
+People on 1 article: corroborated links 3.6% of them (name only 6.5%); with OpenAlex identities as truth these
+count as false merges, but many are OpenAlex's own profile splits: only 96 of the 4,052 join records with
+different publisher ORCIDs, so the true false-merge rate lies between about 0.1% and 3.6%. Applied to the 8,361
+unidentified bylines: 893 corroborated links to identified people; 338 of 385 same-name unidentified bylines
+have a corroborated partner. A first run of the ORCID check lost its output (its script file had been
+truncated by a killed shell command); rerun from a file written afresh, then folded into the tracked script.
+Documented in CORPUS_STATISTICS.md §9.6. [LOG]
