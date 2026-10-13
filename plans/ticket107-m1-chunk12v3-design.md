@@ -189,19 +189,31 @@ Test the new M1 on a sample of the full-scale corpus rather than on the toy, whi
 missing data (49% of toy authorships have no institution; 59 of 121 toy articles have only a
 repository or no venue) and was curated by the old G3 rules from abstracts. The full-scale sample
 has G3 v2 hyperedges, journals from PubMed for every article, affiliation at publication, and
-full-text focal sentences. **Slices: open.** Proposed 2019 (T1) / 2020 (T2); the working corpus
+full-text focal sentences. **Slices: open.** *[Decided 2026-10-13 (owner): T1 = 2020, T2 = 2021 — small for fast building, tests and calibration (2020: 91 articles, 1,654 G3 parents, 460 bylines; 2021: 385 articles, 6,725 parents, 2,064 bylines; toy T1 for comparison: 25 articles, 63 parents). Both years are in the BERT era, so little emergence is expected; emergence behaviour is calibrated on planted data. If the comparison criteria do not separate the approaches clearly at this size, repeat the comparison on 2021/2022 (385/744).]* Proposed 2019 (T1) / 2020 (T2); the working corpus
 has only 17 / 91 articles in those years (2021: 385, 2022: 744, 2023: 1,914, 2024: 4,956), so
 alternatives were put to the owner: (i) T1 2019-2022 (1,237) vs T2 2023 (1,914), (ii) T1 2022 (744)
 vs T2 2023 (1,914) — both a pre/post-ChatGPT break, a genuine emergence case.
 
 ## 5. Open — to be decided
 
-1. Slices (section 4) and which date defines a paper's year (PubMed print or electronic date, or
+1. ~~Slices~~ *[decided 2026-10-13: 2020/2021, section 4]*; still open: which date defines a paper's year (PubMed print or electronic date, or
    OpenAlex year).
 2. How the configurations are compared, fixed before results (ticket 91 precedent). They
    reconstruct different matrices, so reconstruction loss and hypervolume cannot rank them (ticket
    93). Candidates: chance-adjusted seed stability per shared facet; held-out ties on shared
    relations; a text check; temporal matching quality.
+   *[2026-10-13: the owner likes the four candidates. From Tang, Wang, Zhao & Wang 2025 (CLAUDE.md §10):
+   (A) the ℓ2,∞ membership error is dropped (owner) — it needs the true memberships, so planted tests only;
+   its maximum is driven by the worst, usually single-tie, entity; and its informative part, the mean distance
+   of fitted to true profiles, is already in §4.25's revised calibration measures. (B) Matched cosine between
+   membership matrices — to consider as a fifth criterion: agreement between the two approaches on the facets
+   both have (articles, child hyperedges, parents, journals, affiliations), with a shuffle-based chance level as
+   for Track A/B (ticket 95); costs no new fits (uses the stability runs' memberships, a K×K matching, a shuffle
+   null — seconds); if the approaches agree, the simpler one wins. (C) Dirichlet(α) membership draws — to
+   consider for the planted calibration only (temporal prior, regulariser λ), combined with the degree- and
+   weight-preserving generator of FINDINGS §25; the cost is planted fits, which multiply with each α level (two
+   levels proposed: clear-cut and mixed); not for comparing the approaches unless the real-data criteria fail,
+   since that would need authors, affiliations, sentences and word sets generated jointly.]*
 3. Weighting inside each matrix. Status quo (chunk12v2): anchors `log1p(tf)·idf` with global idf;
    clause relations binary; ticket 63 damping on article×author; per-author normalisation on
    author×affiliation; then every relation scaled to unit norm and the loss split 0.5 social /
@@ -213,3 +225,20 @@ vs T2 2023 (1,914) — both a pre/post-ChatGPT break, a genuine emergence case.
 4. Code scope: chunk12v3 reading G3 v2's JSONL output; chunk13 changes (facet lists, a same-facet
    relation, the regulariser, penalties and stability for the new facets, persisting entities for
    the temporal prior).
+5. **Data preparation (owner, 2026-10-13):** authors can list more than one affiliation within a slice;
+   institutions must be deduplicated first (OpenAlex institution IDs, then text matching for the rest), at the
+   data-preparation step, not yet.
+6. **K selection — raised 2026-10-13, under discussion.** Status quo (`select_models.py`, ticket 91): K fixed per
+   study over 2-5; a model qualifies on stability (all seeds converge, both tracks above their own shuffled chance
+   maximum); among qualifying K the highest scout hypervolume wins, then the knee. Hypervolume rewards lower
+   reconstruction loss, which falls with K, so in practice the rule picks the largest K that still passes
+   stability (v9.4: K = 4 in five configs, 5 in C4). Discussion points (assistant's proposal, not decided):
+   in-sample loss is not an Occam signal; established routes are complexity penalties (AIC/BIC/MDL; poor fit for
+   this loss), out-of-sample fit (bi-cross-validation, Owen & Perry 2009; network cross-validation, Chen & Lei
+   2018), stability against a random baseline (Brunet et al. 2004; Lange et al. 2004; Wu et al. 2016), Bayesian
+   relevance determination (Tan & Févotte 2013; Peixoto 2014), and a null-calibrated elbow (Frigyesi & Höglund
+   2008). Proposal: neither depenalise high K nor add a complexity penalty; check each criterion for K-dependence
+   that is mechanical (thresholds or baselines not scaled with K) and make it K-aware; choose K by held-out fit
+   with chance-adjusted stability as the gate, not by hypervolume; search by a coarse-to-fine K grid at full scale,
+   optionally narrowed by a spectral pre-estimate (Le & Levina 2015); warm starts and relevance pruning as
+   experiments only.
