@@ -250,6 +250,11 @@ from the original linear plan.
 toward large K for capacity reasons alone. One study per K; comparison across K happens via
 hypervolume in Module 4's scout phase.
 
+**[UPDATE 2026-10-14]** Confirmed on every archived trial: best and median `math_loss` fall with K in all 12
+config/run series of v9.2 and v9.4 (`chunk13_execution/k_loss_by_K.py`). How to choose K instead (out-of-sample fit
+with stability as the gate, not hypervolume; no depenalising of high K) is discussed, not decided:
+`plans/ticket107-m1-chunk12v3-design.md` §6.
+
 *Ticket 59 update:* `K_LIST` is `[2, 3, 4, 5, 6]`, not `[5, 8, 10, 12, 15]`. T1 has ~3,300
 total non-zero observations (§11); K=15 gave ~19 free parameters per observation, and C1's
 sole anchor `M_Parent_Art` (160×25, 63 non-zeros) asked `svds` for more components

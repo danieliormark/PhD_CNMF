@@ -228,7 +228,7 @@ vs T2 2023 (1,914) — both a pre/post-ChatGPT break, a genuine emergence case.
 5. **Data preparation (owner, 2026-10-13):** authors can list more than one affiliation within a slice;
    institutions must be deduplicated first (OpenAlex institution IDs, then text matching for the rest), at the
    data-preparation step, not yet.
-6. **K selection — raised 2026-10-13, under discussion.** Status quo (`select_models.py`, ticket 91): K fixed per
+6. **K selection — raised 2026-10-13, under discussion** *[expanded 2026-10-14 into §6 below, with evidence]*. Status quo (`select_models.py`, ticket 91): K fixed per
    study over 2-5; a model qualifies on stability (all seeds converge, both tracks above their own shuffled chance
    maximum); among qualifying K the highest scout hypervolume wins, then the knee. Hypervolume rewards lower
    reconstruction loss, which falls with K, so in practice the rule picks the largest K that still passes
@@ -242,3 +242,101 @@ vs T2 2023 (1,914) — both a pre/post-ChatGPT break, a genuine emergence case.
    with chance-adjusted stability as the gate, not by hypervolume; search by a coarse-to-fine K grid at full scale,
    optionally narrowed by a spectral pre-estimate (Le & Levina 2015); warm starts and relevance pruning as
    experiments only.
+
+## 6. Choosing K — discussion record (2026-10-13/14); not decided
+
+Recorded at the owner's request so the reasoning survives a compacted conversation. Nothing here is an owner
+decision yet; the proposal (6.5) is the assistant's.
+
+### 6.1 Status quo
+
+`select_models.py` (ticket 91), per config: K is fixed per Optuna study over `K_LIST` (2-5 since v9.3); a model
+qualifies if all 10 stability seeds converge and both stability tracks beat the maximum of their own shuffled chance
+level (ticket 95); among K values with a qualifying model the highest scout hypervolume wins; then the knee of that
+K's front. Hypervolume is built on reconstruction loss, which falls with K (6.2), so it favours the largest K; in
+practice the rule picks **the largest K that still passes stability** (v9.4: K = 4 in five configs, K = 5 in C4).
+Stability is doing the braking. Ticket 91 left open whether hypervolume should choose K at all.
+
+### 6.2 Evidence on the toy corpus
+
+**In-sample fit improves with every K** (checked 2026-10-14, `chunk13_execution/k_loss_by_K.py`, all COMPLETE,
+converged, non-duplicate trials in each config/K Optuna database). Best reconstruction loss (`math_loss`; 1.0 = the
+model that reconstructs nothing):
+
+| Run | Config | K=2 | K=3 | K=4 | K=5 | K=6 |
+|---|---|---|---|---|---|---|
+| v9.2 | C1 | 0.889 | 0.844 | 0.800 | 0.758 | 0.738 |
+| | C2 | 0.875 | 0.823 | 0.774 | 0.740 | 0.733 (16 trials) |
+| | C3 | 0.879 | 0.832 | 0.789 | 0.774 | 0.738 (74) |
+| | C4 | 0.880 | 0.837 | 0.786 | 0.753 | 0.724 (78) |
+| | C5 | 0.871 | 0.820 | 0.768 | 0.726 | 0.705 (53) |
+| | C6 | 0.877 | 0.827 | 0.778 | 0.746 | none converged |
+| v9.4 | C1 | 0.891 | 0.843 | 0.800 | 0.760 | — |
+| | C2 | 0.875 | 0.824 | 0.775 | 0.740 | — |
+| | C3 | 0.881 | 0.833 | 0.789 | 0.774 | — |
+| | C4 | 0.881 | 0.840 | 0.788 | 0.754 | — |
+| | C5 | 0.871 | 0.819 | 0.768 | 0.726 | — |
+| | C6 | 0.878 | 0.825 | 0.779 | 0.754 | — |
+
+Other cells have 100-200 trials. Best and median both fall with K in all 12 config/run series, with diminishing gains
+(v9.2: about 0.05 from K=2 to 3, 0.007-0.036 from K=5 to 6). The gap between median and best trial grows with K: at
+K=2 the median is within 0.001-0.003 of the best; in v9.4 at K=4-5, C3 and C4's medians sit 0.029-0.049 above it —
+the optimiser reaches good solutions less reliably as K grows.
+
+**Almost every quality measure worsens with K** (FINDINGS §27-§29): convergence (at K=6 only C1 reached its 100
+converged trials; C6 none); stability failures (every archived C3 and C4 model at K=5/6 failed); low-mass ("ghost")
+communities (0% of models at K=2/3, 11% at K=4, 20% at K=5, 56% at K=6); item-to-community attribution (Penalty_A,
+0.023 at K=2 to 0.142 at K=6 among stability-verified models). FINDINGS: "K=5/6 is where this corpus runs out of real
+structure to support that many communities."
+
+**Some trends with K are mechanical, not evidence:** Track A's chance level itself depends on K (0.47-0.67, FINDINGS
+§27 correction), which is why stability is judged against each model's own shuffled baseline; the largest community's
+mass share (`max_share`) and the concentration of shared terms (Penalty_B) improve automatically with K, because
+mass spreads over more communities.
+
+### 6.3 Why in-sample loss falls with K, and where "more parameters are harder" shows
+
+The loss measures how well the model reproduces the data, not how well the parameters are pinned down. A K+1 model
+contains the K model as a special case (an extra community with zero weight), so its best reachable fit cannot be
+worse; in the extreme it would memorise the matrices. The intuition that more parameters are harder to get right is
+also true, but it concerns their reliability: each parameter rests on less evidence, so solutions fit noise and differ
+between runs. That shows up as seed instability, low-mass communities, poor attribution, and (if measured) worse fit
+on held-out ties — not in in-sample loss. The one place it reaches the observed loss is the search: more local
+minima and slower convergence (6.2's widening median-best gap). Polynomial analogy: a higher degree passes closer to
+every point, but its coefficients swing between samples and it predicts new points worse.
+
+### 6.4 Established routes to choosing K
+
+| Route | How complexity is penalised | References | Fit for this model |
+|---|---|---|---|
+| Complexity penalty | AIC/BIC/MDL: fit minus a cost per parameter | Squires et al. 2017 (MDL for NMF) | Poor: squared-error loss plus penalties; the parameter count is ambiguous (scale freedom, clamping) |
+| Out-of-sample fit | Hold out entries; overfitting shows as worse held-out fit, so nothing needs penalising | Owen & Perry 2009 (bi-cross-validation for NMF); Chen & Lei 2018 (network cross-validation) | Good; already planned (CLAUDE.md §10 item 1: held-out ties, masking adjusted per relation) |
+| Stability | Largest K that stays reproducible, compared with a random baseline | Brunet et al. 2004 (cophenetic correlation); Lange et al. 2004; Wu et al. 2016 (staNMF) | Good; what the current rule effectively does |
+| Bayesian | Marginal likelihood penalises complexity automatically; relevance priors switch off unused components | Tan & Févotte 2013 (ARD-NMF); Peixoto 2014 (MDL for block models) | Possible, but a different modelling framework |
+| Null-calibrated elbow | Add communities only while the real data's loss falls faster than on randomised data with the same degrees | Frigyesi & Höglund 2008 | Feasible: the degree- and weight-preserving generator exists (FINDINGS §25) |
+
+### 6.5 Proposal (assistant, 2026-10-13/14)
+
+1. **Neither depenalise high K nor add a complexity penalty.** The deterioration in 6.2 is the Occam signal
+   (communities without support), and should act as such.
+2. **Audit each criterion for mechanical K-dependence** (a threshold or baseline that does not scale with K, a chance
+   level that changes with K) and make it K-aware, as the 0.5/K low-mass threshold already is (ticket 86) — do not
+   boost or penalise K wholesale.
+3. **Choose K by held-out fit, with chance-adjusted stability as the gate; keep the knee within K.** Do not choose K by
+   hypervolume (it inherits the capacity effect). The null-calibrated elbow is a cheap second opinion.
+4. **Search.** At trial scale (K 2-6, fits in seconds) trying every K is not the bottleneck; the cost is the many
+   Optuna trials per K, and with one tuned parameter Optuna is effectively random search (CLAUDE.md §4.12), so a small
+   fixed grid of that parameter per K would save more. At full scale, where K may be 10-50: a coarse-to-fine K grid
+   (2, 4, 8, 16, 32, then refine), optionally narrowed first by a spectral pre-estimate on article-level matrices
+   (eigengap or Bethe Hessian; Le & Levina 2015). Warm starts (initialise K+1 from K by splitting the community with
+   most residual) and relevance pruning (one fit at a large K with a group penalty on community mass) only as
+   experiments: the first adds path dependence, to which this pipeline is sensitive (CLAUDE.md §4.25 update); the
+   second moves the choice into a hyperparameter and overlaps with low-mass communities (ticket 86).
+5. **Temporal.** T2's free K uses the same criteria; the planned with/without-prior comparison of the chosen K (ticket
+   105, test T6) checks whether the prior biases K.
+
+### 6.6 Open for the owner
+
+Whether to replace hypervolume as the K selector; which held-out design (fraction and masking per relation, CLAUDE.md
+§10 item 1); whether to add the null-calibrated elbow; the K range and search scheme for the 2020/2021 trial and for
+full scale.
