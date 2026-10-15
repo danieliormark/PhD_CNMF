@@ -1403,7 +1403,7 @@ the approach without an author facet only journals and affiliations persist on t
 prior for T2 articles was raised but not adopted (it would hold back topic switching by returning authors).
 Details and the other temporal observations: `plans/ticket107-m1-chunk12v3-design.md` §3.
 
-**[UPDATE 2026-10-15]** The KL distance in the prior is to be compared with bounded alternatives (Jensen-Shannon, Hellinger) in the planted two-slice worlds, with an added specialisation scenario: KL resists an entity specialising in its old main community more than a swap, and is unbounded. `plans/ticket107-m1-chunk12v3-design.md` §7.1.
+**[UPDATE 2026-10-15]** The KL distance in the prior is to be compared with bounded alternatives (Jensen-Shannon, Hellinger) in the planted two-slice worlds, with an added specialisation scenario: KL resists an entity specialising in its old main community more than a swap, and is unbounded. `plans/ticket107-m1-chunk12v3-design.md` §7.1. **[UPDATE 2026-10-16]** The T1↔T2 matching becomes one-to-many and graded (a transition-matrix of link weights with a chance floor), replacing one-to-one Hungarian pairs, plus descriptive labels (continues / descends from / merges / new / dissolved): design doc §7.2. The temporal architecture itself (incremental prior vs independent fits with event tracking vs one joint model) is reopened pending a persistence measurement.
 
 ## 5. Namespace Gotcha
 

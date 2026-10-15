@@ -447,3 +447,38 @@ planted **specialisation** scenario (persisting entities concentrating on their 
 growth / migration / split / merge / emergence scenarios. Compare: recovery of the planted changes (migration,
 specialisation, split, emergence) and the stability gain. Because JS charges for mass on new communities, the emergence
 scenario must be checked under the JS arm in particular. Cost: one or two extra arms on worlds built anyway.
+
+### 7.2 T1↔T2 matching: one-to-many, graded (a transition matrix), plus descriptive labels — DECIDED (owner, 2026-10-16)
+
+**Replaces** the one-to-one Hungarian matching of CLAUDE.md §4.25 (each T1 community paired with at most one T2
+community, a pair kept or dropped).
+
+**Why.** T2's K is searched over its full range, not around K₁ (2026-10-15), and the corpus grows 2-4× per year, so
+splits are likely. One-to-one matching can pair a T1 community A with only one of its children: A's persisting members
+are pulled towards that one child, the other children look new, and the split is hidden — the "artificial emergence"
+risk already recorded in §4.25. Merges have the mirror problem.
+
+**The rule.** Every T1 community A and T2 community B get a link weight w(A→B) in [0, 1]: the share of A's persisting
+members' membership mass that lands in B, counted only above its own chance level (row-shuffle null, as in ticket 95),
+so a chance-level overlap gives exactly 0; then normalised over B for each A. A persisting entity's prior in T2 terms
+is its T1 profile multiplied by this table: a transition matrix, the form probabilistic dynamic community models use
+for community change (e.g. Yang et al. 2009, cited by MetaFac). Graded rather than binary: no hard threshold where a
+link jumps from 0 to full strength; splits and merges come out naturally; weak evidence gives a weak pull.
+
+**Known costs (accepted as the least wrong option for a growing corpus):**
+- K₁ × K₂ candidate links instead of at most K₁ pairs: more chance links, so the chance correction must account for
+  the number of links tested (the selection-aware null of the 2026-10-07 update, extended to all links).
+- The pull is divided among an old community's descendants ("stay somewhere among A's descendants"): weaker, so less
+  continuity is bought at a given weight.
+- Splits and merges together form a web, not pairs; reporting is harder (handled by the labels below).
+- Circularity, shared with the old matching: the weights come from the T2 fit itself at the freeze epoch, so the prior
+  partly reinforces what the fit was already doing.
+
+**Descriptive labels (approved, owner 2026-10-16).** After each T2 fit, each T2 community is labelled from where its
+persisting members' mass came from: *continues* A, *descends from* A (one of several children of a split), *merges* A
+and B, or *new*; each T1 community without a descendant is *dissolved*. Reported by facet type (semantic, people,
+venues/institutions), because each kind of continuity means something different.
+
+**Order of work:** the matching rule is fixed before the prior's weight is calibrated (a different matching changes what
+the prior does). The temporal architecture itself is reopened (owner, 2026-10-16: expansive growth); see the persistence
+measurement, to follow.
