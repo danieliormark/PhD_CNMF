@@ -4,7 +4,8 @@
 > records observations about the temporal extension (not decisions); section 5 lists what is
 > still open. Nothing is built.** Decisions were reached in discussion with the owner on
 > 2026-10-12/13 (the owner also consulted colleagues on the semantic side). Later decisions are
-> added with dates; this text stays.
+> added with dates; this text stays. *[2026-10-15: comparison criteria refined (§5 item 2); K-selection
+> literature check, hold-out procedure and the decisions so far in §6.7.]*
 
 ## Context
 
@@ -214,6 +215,22 @@ vs T2 2023 (1,914) — both a pre/post-ChatGPT break, a genuine emergence case.
    weight-preserving generator of FINDINGS §25; the cost is planted fits, which multiply with each α level (two
    levels proposed: clear-cut and mixed); not for comparing the approaches unless the real-data criteria fail,
    since that would need authors, affiliations, sentences and word sets generated jointly.]*
+   *[2026-10-14/15, owner agreed:]*
+   - **Matched cosine** is used for the comparison *between* the approaches, read between two reference points:
+     the shuffle null (floor) and the agreement between two seeds of the *same* approach, measured the same way
+     (ceiling). Agreement near the ceiling means the approaches find the same communities, and the simpler one
+     wins. Within one approach it is a benchmark and a per-community diagnostic (which communities reproduce),
+     not a second stability gate; Track A/B remain the gate.
+   - **Dirichlet(α) draws are not a comparison criterion.** They are only the way the soft true profiles of the
+     planted calibration worlds are drawn (CLAUDE.md §4.25 update: planted truth must be soft). Taken off the
+     comparison list. Reason against using planted worlds to compare the approaches: the generator would have to
+     create bylines, and any rule for how co-authorship arises is the model behind one of the two approaches, which
+     would then win by construction.
+   - **Held-out fit is used at least in the trial** (owner, 2026-10-15). Comparison list as proposed 2026-10-14
+     (not separately re-confirmed as a table): (1) held-out fit on the shared relations — main ranking; (2) Track
+     A/B stability against chance — gate; (3) matched cosine between approaches; (4) text check; (5) T1↔T2 matching
+     quality, T2 stage only. The same hidden cells of the shared relations are used in both approaches, so the
+     K-selection fits also score the comparison.
 3. Weighting inside each matrix. Status quo (chunk12v2): anchors `log1p(tf)·idf` with global idf;
    clause relations binary; ticket 63 damping on article×author; per-author normalisation on
    author×affiliation; then every relation scaled to unit norm and the loss split 0.5 social /
@@ -340,3 +357,64 @@ every point, but its coefficients swing between samples and it predicts new poin
 Whether to replace hypervolume as the K selector; which held-out design (fraction and masking per relation, CLAUDE.md
 §10 item 1); whether to add the null-calibrated elbow; the K range and search scheme for the 2020/2021 trial and for
 full scale.
+
+### 6.7 Update 2026-10-14/15: literature check, the hold-out procedure, what is agreed
+
+**Corrections to 6.4/6.5 and to the discussion, found by the literature check:**
+- Edge cross-validation (Li, Levina & Zhu 2020, *Biometrika* 107(2)) guarantees, asymptotically, that it does **not
+  choose too few** communities; the authors state cross-validation gives no protection against choosing **too many**.
+  The assistant had said it tends to underestimate K; that was wrong. The parsimony comes from the one-standard-error
+  rule, not from the method.
+- DFMF (Žitnik & Zupan 2015), the closest published relative of our model, chooses each rank in a preset range by
+  repeated halving (test midpoint and ends, keep the better half), judging explained variance, residual sum of squares
+  and the cophenetic coefficient, taking the rank where the cophenetic coefficient starts to fall (as summarised by the
+  search; full text not read).
+- Squires, Prügel-Bennett & Niranjan 2017 (MDL rank selection for NMF) is in *Neural Computation* 29(8); per its
+  institution's summary it argues cross-validation is often impractical and "rarely works" for NMF.
+- Klami, Bouchard & Tripathi 2014: group sparsity infers whether each factor is shared or private to one matrix; not
+  confirmed that it also chooses the total number of factors.
+
+**Methods found (sources verified 2026-10-15; details from abstracts or summaries unless stated):**
+
+| Family | Method | Fit for this model |
+|---|---|---|
+| Hold-out | Edge cross-validation (Li et al. 2020): ~10% of all node pairs held out, empty ones included; 3 random splits, or 20 repeats keeping the most frequent choice; squared error, deviance or AUC; weighted networks covered | General enough; full text read for these details |
+| | Node cross-validation (Chen & Lei 2018) | Much worse than edge CV in harder settings (one simulation: 49% vs 0% correct) |
+| | Bi-cross-validation (Owen & Perry 2009) | Reported unstable in practice (Kanagal & Sindhwani 2010) |
+| | Cell-wise ("imputation") CV for NMF | Most accurate metric in a comparative study, "no solution worked perfectly" |
+| | **solrCMF** (Held, Lindbäck & Jörnsten 2024, arXiv): collective factorisation, cell-wise 10-fold CV per data matrix, MSE, one-standard-error rule | **Closest precedent for 6.5's proposal**; full text read for these details |
+| | Linked Matrix Factorization (2017): cell-wise CV, ranks raised one at a time until the error stops falling | Forward-search variant |
+| Stability | Consensus/cophenetic (Brunet et al. 2004); proportion of ambiguous clustering (Șenbabaoğlu et al. 2014) | Șenbabaoğlu et al. show consensus clustering finds "stable" clusters in data without structure — supports judging stability against chance; stability tends to favour coarse K (nmfkc documentation) |
+| Model-based | ARD-NMF (Tan & Févotte 2013, *TPAMI*); MDL for NMF (Squires et al. 2017); layered and weighted SBM with MDL (Peixoto 2015, *PRE* 92; 2018, *PRE* 97); group-sparse CMF (Klami et al. 2014) | Different frameworks; usable only as independent checks |
+| Tests | StGoF (Jin, Ke, Luo & Wang 2023, *JASA*); multilayer tests and modularity (2024-26 preprints) | Built for hard memberships (StGoF overestimates K with many mixed nodes) or for several layers over one node set; single-layer methods "can not be immediately applied" to multilayer data |
+
+No method was found for exactly this setting (soft memberships, many entity types, many relations). Real-data results
+in the literature are imperfect and criteria often disagree.
+
+**The hold-out procedure (as explained to the owner 2026-10-15):**
+- What is hidden: a random share of the *cells* of each relation matrix, every cell (empty or not) with the same
+  chance; never entities. Empty cells must be included, or a model predicting ties everywhere would pass.
+- How: hidden cells are left out of the loss through a mask (no value, not 0). Only for the NNDSVD start, which needs a
+  complete matrix, are hidden cells set to 0 and visible values scaled by 1/(share visible), as in edge CV. In code: the
+  trace-trick loss minus the hidden cells' terms.
+- Scoring: mean squared error between the model's value and the true value on the hidden cells; weighted values are
+  not a problem. Reported per relation, combined with the training weights, and separately for hidden ties and hidden
+  empty cells.
+- An entity's last tie is never hidden (single-tie entities then contribute no hidden cells; stated as a limit).
+- Weights (idf, damping, normalisation) are computed from the full data and treated as fixed (a small leak, stated).
+- Repetition: hidden share and number of folds are linked (k folds hide 1/k each); alternative: repeated random 10%
+  splits. **Deferred (owner).**
+- Choice of K: smallest K whose mean held-out loss is within one standard error of the best (as in solrCMF).
+- During K selection a small λ_z_offdiag grid replaces the full Optuna search; Optuna and the knee run at the chosen K.
+  Trial estimate: 9 K × 5 splits × 3 λ × 2 seeds ≈ 270 fits per approach and slice.
+
+**Agreed (owner, 2026-10-15):** the hold-out is used at least in the trial; the trial also tests a coarse grid (owner's
+proposal: K = 3, 5, 8). Proposed (assistant): run the full grid 2-10 anyway and replay the coarse search on its results
+(look only at 3, 5, 8, refine around the best), so the coarse search is checked against the full grid at no extra cost.
+
+**Still open:** folds; the T1→T2 order (T2's K chosen from fits without the prior, then the prior run at that K) and
+whether K should be chosen automatically at all — the owner's concerns (2026-10-15): later slices may grow by thousands
+of articles and need several new communities, so a ±1 check is too narrow; and the criteria may disagree about K.
+Planted worlds (validating the K procedure; calibrating the regulariser λ and the temporal prior's weight) are proposed
+and under discussion; owner's concern recorded: if they were built from fitted T1 profiles they would inherit the
+model's error — the proposal draws the truth synthetically and borrows only sizes, degrees and weights from the data.
