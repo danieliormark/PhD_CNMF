@@ -1403,6 +1403,8 @@ the approach without an author facet only journals and affiliations persist on t
 prior for T2 articles was raised but not adopted (it would hold back topic switching by returning authors).
 Details and the other temporal observations: `plans/ticket107-m1-chunk12v3-design.md` §3.
 
+**[UPDATE 2026-10-15]** The KL distance in the prior is to be compared with bounded alternatives (Jensen-Shannon, Hellinger) in the planted two-slice worlds, with an added specialisation scenario: KL resists an entity specialising in its old main community more than a swap, and is unbounded. `plans/ticket107-m1-chunk12v3-design.md` §7.1.
+
 ## 5. Namespace Gotcha
 
 **Relation keys and facet names are different namespaces.** This has caused two separate bugs.

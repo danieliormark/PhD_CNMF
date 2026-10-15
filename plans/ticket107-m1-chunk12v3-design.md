@@ -418,3 +418,32 @@ of articles and need several new communities, so a ±1 check is too narrow; and 
 Planted worlds (validating the K procedure; calibrating the regulariser λ and the temporal prior's weight) are proposed
 and under discussion; owner's concern recorded: if they were built from fitted T1 profiles they would inherit the
 model's error — the proposal draws the truth synthetically and borrows only sizes, degrees and weights from the data.
+
+## 7. Temporal prior under ticket 107 — owner-requested checks (2026-10-15)
+
+### 7.1 The distance in the prior: compare KL with bounded alternatives (owner, 2026-10-15)
+
+The temporal prior (CLAUDE.md §4.25) penalises KL(T1 membership ‖ T2 membership) for persisting entities. KL is
+defined for soft profiles (any probability vectors; non-integer values are no issue), and MetaFac and FacetNet use it,
+but it weighs kinds of change unevenly. Example, T1 profile (0.7, 0.3):
+
+| T2 profile | change | KL(T1 ‖ T2) | Jensen-Shannon (max ln 2) |
+|---|---|---|---|
+| (0.5, 0.5) | more mixed | 0.08 | 0.02 |
+| (0.3, 0.7) | main community swapped | 0.34 | 0.08 |
+| (0.99, 0.01) | specialised in the old main community | 0.78 | 0.10 |
+| (0.01, 0.99) | old main community abandoned | 2.62 | 0.32 |
+
+- KL judges ratios, so losing a minority share costs more than a swap: it would resist **specialisation** more than
+  **migration**. It is unbounded: leaving a community completely costs without limit (floored at 1e-12).
+- Its asymmetry is deliberate: T2 mass on a community where T1 had none costs nothing directly, which keeps emergence
+  free. A symmetric measure (JS) charges for that too, but a bounded amount.
+- Under the squared-error data term KL has no Dirichlet pseudo-count meaning (§4.25 point 2), so the choice is not
+  forced by the model.
+
+**Decided:** in the planted two-slice calibration worlds, compare KL with at least one bounded alternative —
+Jensen-Shannon divergence and/or Hellinger distance — at matched strength (each at its own calibrated weight). Add a
+planted **specialisation** scenario (persisting entities concentrating on their old main community) to the existing
+growth / migration / split / merge / emergence scenarios. Compare: recovery of the planted changes (migration,
+specialisation, split, emergence) and the stability gain. Because JS charges for mass on new communities, the emergence
+scenario must be checked under the JS arm in particular. Cost: one or two extra arms on worlds built anyway.
