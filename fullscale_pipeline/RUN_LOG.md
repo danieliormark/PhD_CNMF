@@ -1604,3 +1604,19 @@ Deformation", "biobridge", "lipid-lowering medication" — the documented §6 it
 183 reached the 28,029 working corpus. Conclusion unchanged and better evidenced (every pre-2019 candidate,
 not just "none found"); the mechanism stated in RL-139 was wrong and is corrected here per standing
 convention, not silently edited. CORPUS_STATISTICS.md §9.9's note updated in place. [LOG]
+
+**RL-143 · 2026-10-16 · CORPUS-STATS · AUDIT (read-only) · LIVE**
+Owner: measure entity persistence between time slices (overall and per facet; with and without the author facet;
+consecutive years and the slices 2019–22 / 2023–24 / 2025–26; both year definitions) to choose the temporal design
+(ticket 107). New `corpus_statistics/entity_persistence.py` and, on the owner's follow-up request, the distinctiveness
+check `entity_persistence_weighted.py` (idf on T2 alone; multi-word only). Read-only on G3 v1 output and the cached
+PubMed/OpenAlex/byline data; 663,779 G3 units of the 28,029 working-corpus articles; ~2 min each, 3 GB peak. Outputs in
+`diagnostics/author_coverage/entity_persistence*.json` (diagnostics are not tracked). Results and definitions:
+CORPUS_STATISTICS.md §9.11. Two quick read-only checks done alongside, reported there: what the top persisting
+hyperedges are, and the share of single-word child hyperedges by kind. [LOG]
+
+**RL-144 · 2026-10-16 · DOC · DESIGN (ticket 107) · LIVE**
+Temporal design comparison recorded in `plans/ticket107-m1-chunk12v3-design.md` §7.3 (independent per-slice fits with
+step-by-step tracking vs a second factorisation over all slices; assumptions, choice of the number of communities,
+trade-offs, mechanisms that would no longer fit). Owner (2026-10-16): option 2 (tracking) fits the article's
+assumptions and goals better. [LOG]

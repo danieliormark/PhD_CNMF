@@ -482,3 +482,118 @@ venues/institutions), because each kind of continuity means something different.
 **Order of work:** the matching rule is fixed before the prior's weight is calibrated (a different matching changes what
 the prior does). The temporal architecture itself is reopened (owner, 2026-10-16: expansive growth); see the persistence
 measurement, to follow.
+
+### 7.3 Temporal design: options compared (discussion 2026-10-15/16); owner prefers option 2
+
+**Why reopened.** The corpus grows 2-4× a year (2020: 91 articles … 2025: 10,058), and entity persistence is low
+(CORPUS_STATISTICS.md §9.11): about nine in ten entities are new in every slice (child hyperedges 2-11% persisting,
+parents ~1%, authors 3-10%, journals 16-58%, affiliations 13-59%). About half of the ties touch a recurring entity, but
+mostly through generic phrasing; distinctive continuity (multi-word, idf-weighted) is 12-28%. An entity-wise prior
+(option 1) would act on ~5% of entities, dominated by the least distinctive ones.
+
+**Options and the literature's taxonomy** (Rossetti & Cazabet 2018, *ACM Computing Surveys* 51(2), full text read):
+
+| Survey class | Definition (survey) | Here |
+|---|---|---|
+| Instant-optimal | communities at t depend only on the data at t; then matched across steps | option 2; option 3b |
+| Temporal trade-off | communities at t balance the data at t against the past | option 1: the prior (MetaFac, FacetNet, CLAUDE.md §4.25) |
+| Cross-time | one partition searched for all steps at once | option 3a: one joint factorisation |
+
+The survey: instant-optimal methods' main weakness is that an algorithm's own instability cannot be told from real
+change (remedies: track stable community cores, or match all steps at once); most cross-time methods have a fixed number
+of communities and no merge or split. 3a is therefore set aside (one K for the whole period; a persisting entity has one
+membership for the whole period); it remains the natural home for cross-slice citation ties if those are ever added.
+
+Terms: *step community* = a community found by fitting one slice alone; its *profile* = each active entity's loading on
+it (weighted membership); *dynamic community* = a community followed over slices, made of step communities;
+*recurring entity* = one that can appear in more than one slice (child hyperedges, parents, journals, affiliations,
+authors; never articles). Social **Approach 1/2** (with/without author facet) is a separate axis from these temporal
+**options**. Community change types are called **scenarios** (owner; Palla et al. and Greene et al. call them events).
+
+**Shared layer 1 (options 2 and 3b).** Each slice is fitted alone with its own K_t, chosen by the agreed procedure
+(hold-out, stability gate, one-standard-error rule). Both options link step communities across slices only through
+recurring entities; the article part of a community plays no role in the linking.
+
+**Option 2 — step-by-step tracking** (Greene, Doyle & Cunningham 2010, full text read). Each first-slice step community
+starts a dynamic community; its *front* is its latest step community (not a Pareto front). Each new step community is
+compared with every front; a pair is linked if the similarity exceeds the link threshold. Greene et al.: Jaccard overlap
+of hard member sets (overlap allowed, no graded loadings), threshold θ set by hand, θ ∈ [0.1, 0.5] tested, low θ (≤ 0.3,
+best 0.1) best on planted benchmarks; death after d = 3 unobserved steps. **Our adaptation:** soft profiles; the similarity
+is the §7.2 link weight (or cosine); the threshold is replaced by a chance floor (entity-shuffle null, ticket 95), per
+facet type. Scenarios: one link = continuation; one front linked by several = split; several fronts linked to one =
+merge; no link = birth; front unlinked for d slices = death; >10% size change = growth/contraction. Chaining compares
+each step with its latest predecessor, so gradual **drift** is followed (A → A′ → A″ even if A″ shares little with A).
+Assumes: continuity is local and gradual; time order matters; layer-1 communities are stable enough to compare.
+
+**Option 3b — a second factorisation over all slices** (Greene & Cross 2017, full text read; they track topics, not
+heterogeneous communities). Table **B**: rows = every step community of every slice (Σ K_t rows); columns = recurring
+entities; entries = the step community's loading (Greene & Cross keep each row's top t = 10-20 terms, rest 0). NMF
+B ≈ U · V with k′ components:
+- **U** (step communities × k′): one row per step community, **one column per dynamic community**; entry = how much
+  that step community belongs to that dynamic community.
+- **V** (k′ × recurring entities): one row per dynamic community (a single profile for the whole period),
+  **one column per recurring entity**; entry = that entity's weight in that dynamic community.
+Greene & Cross choose each window's k and k′ by a coherence score (k′ range 25-90) and assign each window topic to its
+maximum-weight dynamic topic (hard). Time order is not used. Scenarios read from U: birth/death = first/last slice with
+a step community; split = two step communities of one slice in one dynamic community; merge = one step community
+loading on two dynamic communities (soft weights only; invisible under hard assignment). Each step community is compared
+with a shared time-free centre, so strong drift shows as a break. Assumes: a dynamic community has a recognisable
+profile over the whole period; time order does not matter; each step community counts as one row regardless of size
+(later, larger slices with more step communities shape V more).
+
+**Choosing the number of communities:**
+
+| | Option 2 | Option 3b |
+|---|---|---|
+| per slice (K_t) | agreed procedure, free per slice | same (identical layer 1) |
+| number of dynamic communities | not chosen: results from the linking | chosen: k′ (Greene & Cross by coherence; here by our procedure on B: hold-out cells of B + seed stability; cheap, B is tiny) |
+| extra decisions | link threshold or chance floor; d (slices before death) | k′; top-t truncation; reading U (hard or soft cut-off) |
+| wrong choice | too low: spurious continuations; too high: spurious births/deaths | k′ too small: new themes forced into old (false continuity); too large: continuations break |
+
+**Intermittence** (a community absent for a slice, then back) is unrealistic in a field growing 2-4× a year (owner).
+Option 2 can rule it out (d = 1) or check it (d = 2, count cases); 3b ignores order, so it can only be checked afterwards.
+
+**Against the article's assumptions:**
+
+| Assumption / feature | Option 2 | Option 3b |
+|---|---|---|
+| K changes over time | yes, per slice | yes, per slice |
+| expansive growth | new step communities simply start chains | later slices give more rows; V leans to recent themes |
+| modest distinctive continuity (12-28%) | a weak real link per step suffices | every step community must resemble one shared profile |
+| fast-moving field (ChatGPT vocabulary break) | drift and breaks shown step by step | breaks and drift both show as new dynamic communities |
+| soft, heterogeneous communities | soft similarity + per-facet chance floors (our adaptation) | per-facet block weighting in B (our adaptation) |
+| intermittence unrealistic | can be ruled out | only checked afterwards |
+| layer-1 instability | affects every link; mitigated by profiles from reproducible members only ("cores") | same, slightly dampened |
+
+**Trade-offs.** Option 2: explicit drift and all scenarios incl. merges; simple, auditable rules; reuses §7.2 link
+weights and labels; no extra factorisation; established (the survey's typical instant-optimal example). Against: only
+consecutive slices compared, so one wrong link propagates down a chain; long-range relations only via the chain; the
+threshold/chance floor is a decision. Option 3b: one global view (a weak step does not decide alone); long-range
+recurrence visible directly; k′ chosen with our usual procedure. Against: merges invisible without soft weights; drift
+penalised; time order ignored; one more choice and one more seed-dependent factorisation; less established for
+heterogeneous communities. Main trade-off: following change step by step (2) vs identifying lasting themes over the
+whole period (3b). Both can be computed from the same layer-1 fits.
+
+**Owner (2026-10-16): option 2 fits the article's assumptions and goals better.**
+
+**Mechanisms that would no longer fit, or would need changing (under 2 or 3b):**
+1. The temporal prior (ticket 105, `chunk13v10.py`) is unused: fits are independent per slice. Its calibration and the
+   KL vs bounded-alternative comparison of §7.1 become moot for the prior; the same question returns as the choice of
+   similarity measure between profiles.
+2. The §7.2 graded link weights become option 2's similarity, computed after the fits instead of steering T2; the
+   descriptive labels map onto option 2's scenarios (for 3b they would be derived from U).
+3. The planted two-slice worlds change purpose: from calibrating a prior to checking that the tracking recovers planted
+   scenarios. 3b needs at least three slices.
+4. The 2020/2021 trial cannot tell 2 from 3b (with two slices both reduce to linking two sets of communities); three
+   slices would be needed (e.g. 2020, 2021, 2022: 91, 385, 744 articles).
+5. Per-slice idf (ticket 106) stays necessary but weights the same entity differently in each slice: profiles must be
+   compared after normalising each, or links reflect weighting rather than membership.
+6. Global entity indexing across slices (chunk12 design) must be kept: both options need an entity to carry the same ID
+   in every slice.
+7. Social Approach 2 (no author facet) cannot use authors to link slices; authors carry 5-13% of author ties' continuity
+   (§9.11) — a small but real loss for "same people" continuity.
+8. Seed instability: both options compare single fits; using only reproducible members (per-entity Track A/B) or a
+   consensus over seeds becomes a new step before the linking.
+
+Sources: Rossetti & Cazabet 2018 (arXiv 1707.03186); Greene, Doyle & Cunningham 2010 (ASONAM; UCD report); Greene &
+Cross 2017 (arXiv 1607.03055); Palla, Barabási & Vicsek 2007 (*Nature* 446).

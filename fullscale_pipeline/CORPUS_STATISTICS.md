@@ -768,3 +768,64 @@ a real bump in the underlying rate.
 
 **Reproduction:** `corpus_statistics/author_id_missing_chart.py` (reads the already-cached
 `diagnostics/author_coverage/author_id_missing_per_article.json`; no new fetch).
+
+### 9.11 Entity persistence between time slices (2026-10-16)
+
+Owner request (ticket 107 temporal design): how much of a slice's entities, and of its ties, already existed in the
+previous slice. Scripts `corpus_statistics/entity_persistence.py` and `entity_persistence_weighted.py` (read-only on
+`PG/g3_v1/g3_test_v1.jsonl`, `pubmed_authors.json`, `openalex_works.json`, `bylines_refresh.jsonl`; no network; ~2 min
+each). Ticket-107 facets, no atoms; Approach 1 (author facet) and Approach 2 (no author facet).
+
+**Definitions.** An entity **persists** if it has at least one tie in both T1 and T2. A facet's persistence = share of
+T2's entities that persist (also reported: share of T1's entities reappearing in T2). A **tie** = one non-zero cell of
+a relation matrix, e.g. one (child hyperedge, article) pair; a T2 tie "touches a persisting entity" if either end
+persists (articles never persist). Identities: merged child layer by G3's role-free `content_key`; parent by
+`content_key`; journal by NLM ID; author by OpenAlex ID or ORCID (others left out); affiliation by OpenAlex institution
+ID (dedup deferred; 94.1% of 175,502 bylines have one). Year: OpenAlex `publication_year` and PubMed epub-else-print
+year, both run (owner); they differ by at most 2 percentage points, so OpenAlex figures are shown.
+
+**Share of T2's entities already present in T1:**
+
+| Slice pair (articles) | child | parent | journal | affiliation | author (Appr. 1) | all non-article |
+|---|---|---|---|---|---|---|
+| 2020 → 2021 (91 → 385) | 7% | 1% | 20% | 13% | 4% | 6% |
+| 2022 → 2023 (744 → 1,914) | 5% | 0% | 24% | 25% | 4% | 4% |
+| 2023 → 2024 (1,914 → 4,956) | 7% | 1% | 32% | 36% | 6% | 6% |
+| 2025 → 2026 (10,058 → 9,842) | 11% | 1% | 58% | 58% | 10% | 9% |
+| 2019–22 → 2023–24 (1,237 → 6,870) | 2% | 0% | 16% | 21% | 3% | 2% |
+| 2023–24 → 2025–26 (6,870 → 19,900) | 7% | 1% | 40% | 40% | 7% | 5% |
+
+**Share of T2's ties touching a persisting entity:**
+
+| Slice pair | child × article | child × parent | article × journal | affiliation ties | author × article | all ties |
+|---|---|---|---|---|---|---|
+| 2020 → 2021 | 38% | 48% | 51% | 21–24% | 6% | 42% |
+| 2023 → 2024 | 50% | 62% | 77% | 69–72% | 10% | 56% |
+| 2025 → 2026 | 54% | 64% | 91% | 86–88% | 13% | 59% |
+| 2019–22 → 2023–24 | 39% | 50% | 66% | 55–57% | 5% | 45% |
+
+Pooled over all ties, 92–97% of the persisting mass is child hyperedges (journals < 1%, one tie per article). From
+2020 → 2021 on, 99.6–100% of T2 articles share at least one child hyperedge with T1. The persisting hyperedges are
+mostly generic: in 2023 → 2024 the top 100 of 24,317 carry 26% of persisting ties (top: `(dummy_sibling be/P/en)`,
+`(dummy_cousin use/P/en)`, `(focal_he llm/C/focal)`). Single-word child hyperedges are 45% of the 5.0 M occurrences
+(verb groups 69–77%, `focal_he` 33%, arguments 22–35%) but 2.9% of the 1.58 M distinct hyperedges: a verb group is
+usually one verb, and an argument often a single noun once determiners and stopwords are removed.
+
+**Distinctiveness weighting** (share of T2 child × article mass on persisting hyperedges; idf on T2 alone, tie weight
+`log1p(tf)·idf`; "multi-word" drops single-atom and focal-only hyperedges):
+
+| Slice pair | unweighted | idf | multi-word | multi-word + idf |
+|---|---|---|---|---|
+| 2020 → 2021 | 38% | 29% | 14% | 12% |
+| 2021 → 2022 | 45% | 36% | 22% | 18% |
+| 2022 → 2023 | 39% | 29% | 15% | 12% |
+| 2023 → 2024 | 50% | 38% | 27% | 22% |
+| 2024 → 2025 | 53% | 41% | 31% | 26% |
+| 2025 → 2026 | 54% | 43% | 32% | 28% |
+| 2019–22 → 2023–24 | 39% | 27% | 15% | 11% |
+| 2023–24 → 2025–26 | 53% | 40% | 31% | 25% |
+
+Reading: about nine in ten entities are new in every slice; about half of the ties involve a recurring entity, mostly
+through common scientific language; distinctive continuity is about half the raw figure, grows as the field matures,
+and dips at the ChatGPT break (2022 → 2023). Approaches 1 and 2 differ only by the author facet, which carries little
+continuity. Consequences for the temporal design: ticket 107 design doc §7.3.
