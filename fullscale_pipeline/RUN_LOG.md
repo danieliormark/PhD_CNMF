@@ -1620,3 +1620,15 @@ Temporal design comparison recorded in `plans/ticket107-m1-chunk12v3-design.md` 
 step-by-step tracking vs a second factorisation over all slices; assumptions, choice of the number of communities,
 trade-offs, mechanisms that would no longer fit). Owner (2026-10-16): option 2 (tracking) fits the article's
 assumptions and goals better. [LOG]
+
+**RL-145 · 2026-10-17 · CORPUS-STATS · AUDIT (read-only) · LIVE**
+Owner: coverage of publication-process dates by year, and which year definition each analysis used. New
+`corpus_statistics/publication_dates.py` (read-only, PMC headers + PubMed + OpenAlex). Coverage: received 87%, accepted
+95%, electronic publication 99%, print 87-100%; no year poorly covered. OpenAlex year = e-publication year for 98.5%;
+received date falls in the previous year for 41%. Analyses used OpenAlex year except §9.3's by-year byline table
+(PubMed electronic-else-print; 97.9% agreement). CORPUS_STATISTICS.md §9.12. [LOG]
+
+**RL-146 · 2026-10-17 · DOC · DESIGN (ticket 107) · LIVE**
+Design doc §7.4: owner decides to test option 2 and option 2 with temporal smoothing of the previous slice (γ);
+OpenAlex year proposed as the year definition; production/visibility-date reasoning recorded but not used now;
+slice-boundary sensitivity noted. [LOG]

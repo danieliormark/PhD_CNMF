@@ -829,3 +829,39 @@ Reading: about nine in ten entities are new in every slice; about half of the ti
 through common scientific language; distinctive continuity is about half the raw figure, grows as the field matures,
 and dips at the ChatGPT break (2022 → 2023). Approaches 1 and 2 differ only by the author facet, which carries little
 continuity. Consequences for the temporal design: ticket 107 design doc §7.3.
+
+### 9.12 Publication-process dates: coverage, and which year definition each analysis used (2026-10-17)
+
+Owner request. Script `corpus_statistics/publication_dates.py` (read-only, no network): PMC article header in the
+pure-text corpus ("Received …; Revised …; Accepted …", "Electronic publication date:", "Publication date:"), PubMed
+(`epub_year` = ArticleDate, `pub_year` = JournalIssue PubDate) and OpenAlex `publication_year`. Working corpus 28,029.
+
+**Coverage by OpenAlex year** (share of that year's articles with each date):
+
+| OpenAlex year | articles | PubMed epub | PubMed print | PMC epub | PMC print | received | accepted |
+|---|---|---|---|---|---|---|---|
+| 2019 | 17 | 65% | 100% | 100% | 94% | 94% | 94% |
+| 2020 | 91 | 91% | 100% | 100% | 87% | 91% | 91% |
+| 2021 | 385 | 95% | 99% | 100% | 79% | 92% | 96% |
+| 2022 | 744 | 94% | 100% | 99% | 79% | 91% | 96% |
+| 2023 | 1,914 | 93% | 100% | 99% | 85% | 84% | 93% |
+| 2024 | 4,956 | 91% | 100% | 99% | 87% | 85% | 93% |
+| 2025 | 10,058 | 93% | 100% | 99% | 87% | 87% | 94% |
+| 2026 | 9,842 | 94% | 100% | 100% | 90% | 89% | 96% |
+| no OpenAlex year | 22 | 82% | 100% | 91% | 55% | 64% | 77% |
+| all | 28,029 | 93% | 100% | 99% | 87% | 87% | 95% |
+
+No year has poor coverage. The lowest figures are the PMC print date in 2021-22 (79%; continuous-publication journals
+print no issue date) and PubMed's electronic date in 2019 (11 of 17). Received → PMC e-publication (both day-precise,
+n = 24,384): median 140 days, p10 45, p90 297.
+
+**Agreement with OpenAlex `publication_year`** (articles where both are known): PubMed epub 98.4% same year; PMC epub
+98.5%; PubMed print 93.4%; PMC print 93.5%; accepted 93.6%; **received 57.7%** (10,030 received the year before);
+PubMed epub-else-print (the bylines' year) 97.9%; PubMed epub vs PMC epub 99.8%. Disagreements are almost all one year,
+mostly the other source later than OpenAlex. So OpenAlex's year is in practice the electronic-publication year, and
+slicing by received date would move about 40% of articles back a year.
+
+**Which year each analysis used:** OpenAlex `publication_year` in the design doc's slice counts (ticket 107 §4), §9.9
+(repeat authorship by year, earliest year), the influence analysis (unidentified-author share by year) and §9.11
+(both definitions run; OpenAlex shown). PubMed electronic-else-print year in §9.3's by-year byline table (inherited from
+`author_coverage.py`). The two definitions agree for 97.9% of articles, so no reported conclusion depends on the choice.

@@ -597,3 +597,45 @@ whole period (3b). Both can be computed from the same layer-1 fits.
 
 Sources: Rossetti & Cazabet 2018 (arXiv 1707.03186); Greene, Doyle & Cunningham 2010 (ASONAM; UCD report); Greene &
 Cross 2017 (arXiv 1607.03055); Palla, Barabási & Vicsek 2007 (*Nature* 446).
+
+### 7.4 Temporal options to test, year definition, and the production/visibility reasoning (2026-10-17)
+
+**Decided (owner, 2026-10-17): the trial tests two temporal options.**
+1. **Option 2 (clean):** each slice is fitted on its own articles and their ties only; step communities are linked
+   across slices afterwards (graded links with chance floors per facet type, §7.2; scenario labels).
+2. **Option 2 with temporal smoothing of the previous slice:** the fit for slice t also includes slice t−1's articles
+   and all their ties, multiplied by a factor γ < 1. Linking as in 1.
+Option 2 corresponds to MetaFac's α = 0 baseline ("MF"). The smoothed variant belongs to the survey's "temporal
+trade-off" class (a sliding window carrying *data*), unlike MetaFac's prior, which carries the previous *model*, acts
+only on persisting entities and needs matching. The MetaFac-style prior (ticket 105) is not part of either: options 2
+are instant-optimal by definition; the prior would act on ~5% of entities, mostly generic ones (CORPUS_STATISTICS.md
+§9.11); MetaFac assumes the same entities and a fixed K; and it imposes the continuity we want to describe (ticket 105 T3
+showed it hiding splits). γ, and whether γ is fixed or estimated, is not yet decided. The owner will also discuss both
+options with colleagues.
+
+**Year definition — proposed (assistant): OpenAlex `publication_year`.** It is available for all but 22 articles,
+equals the electronic-publication year for 98.5% of articles, and was used in every slice count recorded so far (only
+§9.3's by-year byline table used PubMed electronic-else-print, which agrees for 97.9%). CORPUS_STATISTICS.md §9.12.
+
+**Recorded, not used now (owner, 2026-10-17): production date vs visibility date.**
+*Reasoning.* An article has a production time (written, submitted) and a visibility time (published, readable by
+others); slices by publication year use the observer's clock. An article plays two roles: as a *product* it expresses
+the landscape its authors could see while writing, plus their own contribution; as a *resource* it joins the landscape
+from publication on. The vanguard of the research front (work written at the same time) is largely invisible to
+authors, so co-membership of a community does not require mutual awareness (communities here rest on shared
+associations, venues and institutions, not interaction; consistent with an idea enacted similarly in several places),
+but influence can only run from the visible to the not-yet-written.
+*Measurement idea.* Production slices by received date (87% coverage, §9.12); landscape L(τ) = articles visible before
+τ (by e-publication date). Each recurrence of an entity can then be classified as *inherited* (its earlier use was
+visible before the later article was produced) or *parallel* (not yet visible: independent emergence, Merton's
+multiples, or a common outside source), splitting observed continuity into possible uptake and convergence.
+*Why not now (owner):* the received → publication lag (median 140 days) varies by discipline and journal; writing can
+take years, with intermediate results shown at conferences and seminars; preprints make work visible earlier than
+e-publication; received is the latest, not the earliest, point of the writing. To revisit in later articles or if
+reviewers ask.
+
+**Slice boundaries (owner, 2026-10-16/17).** Calendar boundaries are arbitrary except where a rupture anchors them
+(ChatGPT, 30 Nov 2022, visible as the dip in distinctive continuity, §9.11). Shifting boundaries by months or changing
+slice length can change the communities found (the modifiable temporal unit problem; Sulo, Berger-Wolf & Grossman 2010).
+Candidate response, not decided: report only scenarios that survive shifted boundaries (e.g. January vs July starts,
+12 vs 18 months).
