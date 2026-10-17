@@ -419,6 +419,22 @@ Planted worlds (validating the K procedure; calibrating the regulariser λ and t
 and under discussion; owner's concern recorded: if they were built from fitted T1 profiles they would inherit the
 model's error — the proposal draws the truth synthetically and borrows only sizes, degrees and weights from the data.
 
+### 6.8 K selection — decisions (owner, 2026-10-17)
+
+- **Decision protocol (decided).** Each measure has one role, fixed in advance: (1) stability against chance (Track A/B,
+  ticket 95) is the **gate** — a K whose solutions do not reproduce is excluded; (2) held-out fit with the
+  one-standard-error rule defines the **band** of K values the data cannot tell apart; (3) inspection and the text
+  check **choose within the band**, with reasons recorded; (4) hypervolume plays **no role in choosing K**, only in
+  choosing the knee within a K. Disagreement rules: if no K in the band passes the gate, take the largest K below the
+  band that passes, and flag it; if the band is wide, report it as a range and give the main results at two
+  resolutions; always check the substantive conclusions at neighbouring K.
+- **Trial K range (decided):** full grid K = 2-10 per slice; the coarse search (3, 5, 8, then refinement around the best)
+  is replayed on those results to check it against the full grid at no extra cost.
+- **Temporal variants (decided):** option 2 and option 2 with smoothing (§7.4) are fitted separately, so each chooses
+  its own K per slice.
+- **Still open:** repetition scheme of the hold-out (folds vs repeated random splits; hidden share); whether a small
+  λ_z_offdiag grid replaces the full Optuna search during K selection; how the smoothing weight is set.
+
 ## 7. Temporal prior under ticket 107 — owner-requested checks (2026-10-15)
 
 ### 7.1 The distance in the prior: compare KL with bounded alternatives (owner, 2026-10-15)
