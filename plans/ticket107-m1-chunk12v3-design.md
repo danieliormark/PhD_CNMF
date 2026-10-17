@@ -439,6 +439,7 @@ model's error — the proposal draws the truth synthetically and borrows only si
   a fold; an entity's last tie is never hidden. Literature range of held-out shares in networks: 5-20% (Vallès-Català et
   al. 2018: 5%; Li, Levina & Zhu 2020: 10%; De Bacco et al. 2017: 20%); a larger share favours selecting the right model
   (Shao 1993), a smaller one keeps sparse data fittable (Vallès-Català et al.; Ghasemian, Hosseinmardi & Clauset 2020).
+- **Hold-out scheme comparison (owner, 2026-10-17):** run on one combination only, social Approach 1 (author facet: the most relations); the chosen scheme is then used everywhere.
 - **Grid and coarse search both run in the trial (owner, 2026-10-17, confirming the trial range above).**
 - **Still open:** whether a small λ_z_offdiag grid replaces the full Optuna search while K is chosen (the "K-selection
   stage" / "model-selection stage" proposal, to be re-explained); how the smoothing weight is set.
@@ -665,6 +666,8 @@ Candidate response, not decided: report only scenarios that survive shifted boun
 12 vs 18 months).
 
 ### 7.5 Planted worlds: how they would be used (explained 2026-10-17; role and limits per owner)
+
+**Architecture deferred (owner, 2026-10-17):** a robustness check run after the analysis; its exact design is discussed later. Open question for then: how well the generator reproduces higher-order patterns of the data, and whether specific synthetic-data methods exist for heterogeneous, soft-partition networks.
 
 **Role (owner):** a validation / robustness check of the procedures, not a step that produces results. It is still the
 main evidence that the K procedure works for this model type, for which no published validation exists, so it supports a
