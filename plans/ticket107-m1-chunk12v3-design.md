@@ -432,8 +432,16 @@ model's error — the proposal draws the truth synthetically and borrows only si
   is replayed on those results to check it against the full grid at no extra cost.
 - **Temporal variants (decided):** option 2 and option 2 with smoothing (§7.4) are fitted separately, so each chooses
   its own K per slice.
-- **Still open:** repetition scheme of the hold-out (folds vs repeated random splits; hidden share); whether a small
-  λ_z_offdiag grid replaces the full Optuna search during K selection; how the smoothing weight is set.
+- **Hold-out in the trial (owner, 2026-10-17):** compare three schemes — 5-fold (20% hidden per fold, every cell hidden
+  once), 10-fold (10%), and relation-by-relation (hide 20% of one relation's cells while the other relations stay complete,
+  as in De Bacco, Power, Larremore & Moore 2017, *PRE* 95, 042317) — and see how each behaves. Empty cells are hidden at
+  the same share as ties. **Per-entity cap (approved where pertinent):** no entity loses more than one-third of its ties in
+  a fold; an entity's last tie is never hidden. Literature range of held-out shares in networks: 5-20% (Vallès-Català et
+  al. 2018: 5%; Li, Levina & Zhu 2020: 10%; De Bacco et al. 2017: 20%); a larger share favours selecting the right model
+  (Shao 1993), a smaller one keeps sparse data fittable (Vallès-Català et al.; Ghasemian, Hosseinmardi & Clauset 2020).
+- **Grid and coarse search both run in the trial (owner, 2026-10-17, confirming the trial range above).**
+- **Still open:** whether a small λ_z_offdiag grid replaces the full Optuna search while K is chosen (the "K-selection
+  stage" / "model-selection stage" proposal, to be re-explained); how the smoothing weight is set.
 
 ## 7. Temporal prior under ticket 107 — owner-requested checks (2026-10-15)
 
@@ -655,3 +663,34 @@ reviewers ask.
 slice length can change the communities found (the modifiable temporal unit problem; Sulo, Berger-Wolf & Grossman 2010).
 Candidate response, not decided: report only scenarios that survive shifted boundaries (e.g. January vs July starts,
 12 vs 18 months).
+
+### 7.5 Planted worlds: how they would be used (explained 2026-10-17; role and limits per owner)
+
+**Role (owner):** a validation / robustness check of the procedures, not a step that produces results. It is still the
+main evidence that the K procedure works for this model type, for which no published validation exists, so it supports a
+methodological claim (appendix material).
+
+**Procedure.** (1) Skeleton from a real slice: entity sets of one social approach's relations (each approach validated in
+its own representation, never against the other), each entity's number of ties per relation, the weighting rules.
+(2) Planted truth: K_true; each entity's true profile drawn from a Dirichlet distribution (two mixing levels); per relation
+a community-to-community propensity table (e.g. 0.8 within / 0.2 across, and a harder 0.6 / 0.4). (3) Ties: each entity
+keeps its real number of ties per relation; partners drawn with probability ∝ the partner's real degree × the profiles'
+overlap through the propensity table. (4) Our procedure runs unchanged. (5) Scoring against the truth.
+Uses: **U1** does the K procedure (hold-out, stability gate, one-standard-error rule) recover K_true (or put it in its band),
+and how close are fitted to true profiles per facet; **U2** multi-slice worlds (persisting entities in the measured
+proportions, §9.11) to test the linking, fitted at the true K. Cost: U1 ≈ 100-150 fits in a reduced design (1 mixing level,
+2 planted K, 2 worlds, coarse K grid); U2 tens of fits.
+
+**What the generator reproduces and what not.** Reproduced: each entity's exact number of ties in every relation (so an
+entity's degrees across relations keep their real correlation), approximately the partners' degrees, the weight
+distribution. In the FINDINGS §25 version real weights are *shuffled* onto the new ties, which breaks the link between a
+tie's weight and its endpoints (damping by author count, idf by document frequency). **Improvement adopted for planning:**
+generate tie counts, then apply chunk12v3's own weighting rules, so weights relate to degrees exactly as in the real
+matrices. Not reproduced: co-author cliques, nesting of child hyperedges in parents (sentence structure), topical
+clustering of journals, the fact that one article's ties in different relations come from one text.
+
+**Scenarios are interpretations (owner, 2026-10-17).** Under soft membership there is no established quantitative
+definition of split, merge etc. (Palla et al. and Greene et al. define them on crisp sets), and soft partitions allow
+more nuanced ideal types of redistribution of loadings. So U2 does not score scenario labels. It plants a **known
+redistribution of membership mass between communities (a true transition table)** and checks how well the estimated
+graded link weights (§7.2) recover that table; scenarios remain an interpretive reading of the recovered table.
