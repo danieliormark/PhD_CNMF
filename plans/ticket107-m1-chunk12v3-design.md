@@ -765,3 +765,32 @@ floor spreads shared entities; a row-sparsity redesign of L1 would concentrate t
 4. **Optuna decision:** with the map known — how many weights remain tuned and how many penalty components rank fits —
    decide whether Optuna's multi-objective search stays or a grid suffices.
 5. **Trial test design** for the points that need data, judged by 1(d); folded into the trial procedure.
+
+### 8.3 P1 progress and decisions (2026-10-19)
+
+Scripts: `fullscale_pipeline/corpus_statistics/trial_p1_checks.py`, `trial_institution_lineage.py` (read-only except
+an OpenAlex institutions fetch, cached in diagnostics).
+
+- **E, trial article set (owner):** research articles and all reviews (narrative, systematic, scoping,
+  meta-analyses); OpenAlex `publication_year`. Excluded: 13 editorials/letters/comments in 2021. The 5 articles of 2021
+  without a PubMed ID (type not available from PubMed) were checked by OpenAlex type (all "article") and by reading
+  their texts: four research papers, one survey / research-agenda paper (PMC8523728, header classification "survey
+  articles") — all included (owner). **Trial: 2020 = 91 articles, 2021 = 372.**
+- **F, C:** coverage is high (2020/2021: 99% of articles with an OpenAlex institution ID and with an author whose
+  OpenAlex ID or ORCID we know; 95-98% of bylines with a known author ID; 96-97% with an institution ID); every trial
+  article has an NLM journal ID; 148 journals, no title or ID duplicates.
+- **D, G3 invariants (automated):** 0 violations of every rule checked (6,821 units, 8,137 parents). 9 parents hold the
+  same word set twice (e.g. "DistilBERT: DistilBERT is…", "from dataset to dataset"). **Decision (owner):** these are
+  genuine; with hyperedges as the units, a repeated hyperedge in a sentence counts twice, as the text was written.
+- **D, observation (owner asked to record):** "BERT_base has less parameter information compared with BERT_large"
+  becomes `(focal_he bert/C/focal)` and `(sibling_he bert/C/focal)`: G3's canonical focal terms map both variants to
+  `bert`, so the base/large contrast is lost. More generally, lemmatisation and canonicalisation merge forms the authors
+  kept apart. **For interpretation (owner):** once the model has run on the processed, lemmatised words, community
+  descriptions should be traced back to the original wording (G3 keeps, for every atom, its source words and token
+  positions), so that readings are made on what authors actually wrote.
+- **B, institutions (owner: use the higher-level entity, for a denser network):** 817 institutions on trial bylines,
+  all fetched. Finding: OpenAlex `lineage` lists all ancestors (sorted by ID, not by level); institutions often have
+  several parents (joint research units, e.g. Institut Necker: CNRS, Inserm, Université Paris Cité); and the registry
+  data has errors (CONICET listed under a geodetic observatory). "Top of the lineage" is therefore not well defined;
+  the rule is being decided. 86 institutions have a parent present; 64 "related" (not parent-child) pairs among
+  top-level entities (often university–hospital) stay separate under any lineage rule.
