@@ -886,3 +886,11 @@ an OpenAlex institutions fetch, cached in diagnostics).
   sentence, so in cousins it would make unrelated contexts alike and repeat a second parent's focal term. Relevant to
   chunk12v3, where child and cousin hyperedges share one layer by word set: keeping focal atoms in cousins could make a
   cousin identical to a focal hyperedge. Owner to confirm or revise.
+- **Owner decisions, 2026-10-19 (second round; RL-150, RL-151; the full list is in ROLLING_NOTES.md):** D4.1 approved
+  (production run with the other G3 changes); D2 groups 1–3 approved, hyphenated names as one atom (`ct_bert`); group 4
+  approved with false-positive checks, counting only research articles, historical articles and reviews (draft rule:
+  ~97% precision on 150 occurrences; 50 candidate new articles to review); new papers only through missed models, not
+  tools; incremental run approved in general, to be launched after the remaining details are agreed; D6 sentence-centric
+  parents decided (G3_POSTPROCESSING.md §6 item 10); D5 count approved, after the corpus is fixed. Found on the way:
+  B06 (inverted auxiliary) fixed in G3; A12 a test-harness artefact; curly apostrophes after plurals derail spaCy's
+  parse in 880 units — a G2 fix with re-parsing proposed for the incremental step.

@@ -1022,13 +1022,22 @@ def sweep(edge, barrier, ctx):
     return [('cousin_he', f)] if f else []
 
 
+def aux_only_head(head, ctx):
+    """RL-151: a head made only of auxiliaries (be/have/do typed Mv) is not a clause of its own: subject-auxiliary
+    inversion ("Not only did GPT-4 pass the exam") is parsed as (did/Mv gpt-4) inside the clause of "pass"; without this,
+    that pair was taken as the governing clause, its verb group came out empty and the focal term got no parent"""
+    atoms = terminal(head)
+    return bool(atoms) and all(a.type().startswith('Mv') and ctx.lemma_of(a) in AUXILIARIES for a in atoms)
+
+
 def extract(edge, ctx):
     norm = fuse_phrasal(q4_move_also(edge), ctx)
     circuits, cousins = {}, {}
     for path in focal_paths(norm):
         if len(path) < 2:
             continue
-        pidx = next((i for i in range(len(path) - 2, -1, -1) if has_pred(path[i][0]) and is_clause(path[i])), -1)
+        pidx = next((i for i in range(len(path) - 2, -1, -1) if has_pred(path[i][0]) and is_clause(path[i])
+                     and not aux_only_head(path[i][0], ctx)), -1)
         if pidx == -1:
             ctx.stats['focal_path_no_predicate'] += 1
             continue

@@ -9,12 +9,13 @@ Case formats (one set may mix them):
   together              item 8 cousin cases: every cousin holding one of these words is one cousin holding all of them
   not_only / but_also   item 4 option 2: is the atom expected in the output (true) or not (false)
   (no expectation)      item 5 particle cases: printed, and compared with the item-5 reference copy if --ref is given
-Parses are cached in hard/parsed_cache.json (the parser is deterministic for a given text), so reruns need no parser.
+Parses (G2's parse_piece, RL-151) are cached in hard/parsed_cache_g2.json (the parser is deterministic for a given text), so reruns need no parser.
 """
 import argparse, hashlib, importlib.util, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CACHE = os.path.join(HERE, "hard", "parsed_cache.json")
+CACHE = os.path.join(HERE, "hard", "parsed_cache_g2.json")     # RL-151; parsed_cache.json = graphbrain default cuts (before)
+G2_SCRIPT = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/scripts/graphbrain_parse_v3.py"
 
 
 def load(path, name="g3v2"):
@@ -30,9 +31,9 @@ def parse_all(texts):
     if todo:
         from graphbrain.parsers import create_parser
         parser = create_parser(lang="en", lemmas=True)
+        g2 = load(G2_SCRIPT, "g2")
         for t in todo:
-            parser.atom2token = {}
-            p = parser.parse(t)["parses"][0]
+            p = g2.parse_piece(parser, t)[0][0]        # RL-151: G2's own sentence-cut rule, as in the pipeline
             cache[t] = dict(main_edge=str(p["main_edge"]), extra_edges=[str(x) for x in p.get("extra_edges", [])],
                             atom2word=sorted(([str(a), w, i] for a, (w, i) in p.get("atom2word", {}).items()), key=lambda x: x[2]))
         json.dump(cache, open(CACHE, "w"), indent=0, ensure_ascii=False)

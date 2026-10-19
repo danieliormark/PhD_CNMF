@@ -1691,3 +1691,42 @@ pretrained language model BERT" → cousins `fine tune`, `pretrained`). Owner: a
 definition not a cousin; a parent can hold several focal hyperedges; the rule should change types, not remove words.
 Proposal (sentence-centric) to the owner, not implemented. [LOG]
 
+**RL-151 · 2026-10-19 · G3 · CODE + CHECK (failed hard cases B06/A12) + AUDIT (curly apostrophe parses; D2 group 4) · LIVE**
+Host incline33. Owner: B06 and A12 should not fail (the verb "did" and the compound predicate "was evaluated" are visible);
+find the stage, fix if feasible, otherwise estimate the frequency. Both sentences were run through G2's own
+`process_sentence` and then G3 (`g3_v2/d41/g2g3.py`).
+- **A12** ("GPT-4 as well as BERT was evaluated on the exam"): a test-harness artefact. graphbrain's default splitter cuts
+  the sentence after "BERT"; `run_hard.py` took that first piece, while G2 rejects the cut (not a sentence end) and
+  re-parses, after which G3 gives `(parent (dummy_sibling be evaluate) (focal_he bert gpt_4) (sibling_he exam))`. Fixed in
+  the harness: `run_hard.py` (sha256 `8b28758d27cd`) parses with G2's `parse_piece`; new cache `hard/parsed_cache_g2.json`
+  (`parsed_cache.json` kept as the record of the earlier runs).
+- **B06** ("Not only did GPT-4 pass the exam, but it also outperformed the residents"): a G3 error. The G2 parse puts the
+  inverted auxiliary with the subject, `(did/Mv gpt-4)`, inside the clause of "pass"; G3 took that pair as the governing
+  clause (innermost clause with a predicate-like head), dropped "did" as an auxiliary, found an empty verb group and gave
+  the unit no parent. Fixed: `aux_only_head` — a head made only of auxiliaries (be/have/do typed Mv) is not a governing
+  clause; the search moves to the next clause out. `g3_v2/g3_curation_v2.py` sha256 `c8b46c840f74`. B06's expectation
+  updated to the decided option 2 (owner 2026-10-09: paired not-only/but-also dropped), as B01/B02 were
+  (`hard/hard_but_v2.json` sha256 `46e3f15572ee`). Self-test 54/54; hard cases 189/200 (11 failures, explained to the owner:
+  2 parser limits, 1 coordinated verbs, 8 cosmetic or by decision). Shards 0 and 20: 0 problems; corpus counter
+  `focal_path_empty_verb_group` 1,419 occurrences in the G3 v1 reports; in shard 0 the fix resolves 5 of 40.
+- **Remaining empty verb groups, found while checking the 35 left in shard 0:** chiefly a G2 (spaCy) error — after a
+  plural, a curly apostrophe ("LLMs’ responses", "physicians’ attitudes", "models’ clinical potential") is often tagged as
+  the clause's verb (`’/P`), which wrecks the parse; with a straight apostrophe the same sentences parse correctly
+  (possessive builder) and G3 gives the right parents (tested on 3 sentences). In G2 v3: 880 units (in 692 articles) have
+  a quote mark parsed as a verb, 855 of them with a plural possessive "s’"; 13,326 units contain "s’"; 59,566 of 702,948
+  focal sentences contain a curly apostrophe after a letter. Not fixable in G3; proposed for the incremental G2 step:
+  write curly apostrophes as straight before parsing and re-parse the sentences that contain one (`g3_v2/d41/apos.py`).
+D2 group 4 draft (owner: only research articles, historical articles and reviews count): rule `focal_group4_rule.py`
+(case-sensitive family spelling glued to other letters, e.g. DistilBERT, scGPT, MedGemma; lower-case checkpoint names of
+accepted models; exclusions: tools — BERTopic, BERTScore, KeyBERT, GPTZero, ZeroGPT, DetectGPT, SelfCheckGPT, Ollama,
+LlamaIndex, llama.cpp, GPTQ, AutoGPT, MetaGPT, HuggingGPT, ShareGPT, BertViz; code identifiers; URLs and Hugging Face
+organisations; look-alikes — ANGPT* and SGPT genes or enzymes, BARD1, Luria-Bertani, GeminiSEM, CIBERSORTx misspelt, Palm2K
+polymers, an X-ray device, a survey variable). In allowed-type articles: 4,932 + 98 forms accepted (47,000 occurrences),
+78 tool forms, 38 excluded, 136 citation-glued forms (BERT21 = BERT + citation 21, group 1), 1,717 noise forms (Hilbert,
+Robert, puberty, palmitate ...). Precision on 150 random accepted occurrences read in context: 4 clear false positives
+(a code class, a device, a variable, a polymer; all now excluded) and 1 borderline (GPTZip), about 97%. Candidate new
+articles (whitelist, no focal sentence today, a missed model of groups 1–4): 50 (scripts `focal_group4_forms.py`,
+`focal_group4_new_articles.py`); types not cached, to be fetched and each article reviewed after the matcher is final.
+Type note: "Clinical trial / protocol" (218 G3-valid articles, including trial reports) is left out by the owner's list;
+raised with the owner. [LOG]
+

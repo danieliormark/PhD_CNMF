@@ -6,101 +6,53 @@
 > Older contents are not kept here (git history has them); the durable record stays in the design docs, RUN_LOG and
 > CORPUS_STATISTICS.
 
-## State (2026-10-19, after RL-149)
+## State (2026-10-19, after RL-151)
 
-- **Current work:** ticket 107 P1 (data quality) — design doc §8.3, "P1 owner decisions and follow-ups"; RUN_LOG RL-149;
-  G3_POSTPROCESSING.md §6 item 9.
-- **Done:** D4.1 + figure-panel legends implemented in `g3_v2/g3_curation_v2.py` (sha256 `43ae81d2c33a`), tested (self-test
-  54/54, hard 187/200, shards 0 and 20 compared); not yet run on the corpus. D2 measured corpus-wide (scan scripts
-  `corpus_statistics/focal_gap_scan.py`, `focal_gap_classify.py`); D5 traced to spaCy; D6 rule origin traced (no
-  recorded reason).
-- **Waiting for the owner:** D2 decisions (fix spellings of listed terms + LLaMA bug + Bert/Roberta; hyphenated name as
-  one atom or listed part; adopt unlisted model names; incremental rerun route); D6 confirm/revise; D5 whether to
-  measure/apply a dash→bracket G2 rule.
-- **Next:** implement D2 in `focal_terms.py`, incremental P2→P6→P7→G2 run, one G3 production rerun, re-verify trial P1
-  checks; then P2 (weighting, chunk12v3 trial matrices).
+- **Current work:** ticket 107 P1 (data quality): G3 and focal-term fixes before the trial matrices. Records: design doc
+  §8.3 ("P1 owner decisions and follow-ups"), RUN_LOG RL-149/RL-150, G3_POSTPROCESSING.md §6 items 9 (D4.1) and 10 (D6).
+- **Sequential plan (in this order):**
+  1. D2 groups 1–3: add the spellings of listed terms to `focal_terms.py` (fix the "LLaMA" pattern bug); hyphenated names
+     as one focal atom (CT-BERT → `ct_bert`, assistant's proposal, owner approved).
+  2. D2 group 4: extend the list with unlisted model names (not tools, not noise), checked for false positives
+     (llama the animal, LLM as a biomedical abbreviation); only articles of type research article, historical article
+     or any review count (other types disregarded).
+  3. New papers: whitelist articles that gain a focal sentence only through missed *models* (not tools), of the
+     allowed types; list for the owner before adding.
+  4. Incremental run (approved in general; details to agree first): P2 with the new matcher → P6 only on new blocks →
+     P7 with existing REF ids frozen → G2 only on new sentences (plus re-parse where G2 joined an unlisted name) → checks
+     that every existing id/hash is unchanged.
+  5. G3 changes, all in one production rerun: D4.1 (implemented, tested), B06 inverted-auxiliary fix (done; script
+     `c8b46c840f74`), D6 sentence-centric parents (decided, to implement).
+  6. D5 count of dash-enclosed asides with a focal term (approved), on the corpus as fixed after step 3.
+  7. Re-verify the trial P1 checks, then P2 (weighting, chunk12v3 trial matrices).
 
-## Latest output (assistant, 2026-10-19, verbatim)
+## Open points for the owner (2026-10-19, after RL-151)
 
-All of this is recorded (design doc §8.3, RUN_LOG RL-148; commit `6a14454`, pushed).
+- Curly apostrophe after a plural ("LLMs’ responses") derails spaCy in 880 units (692 articles): approve normalising
+  curly apostrophes in G2 and re-parsing the 59,566 sentences that contain one, inside the incremental G2 step?
+- "Clinical trial / protocol" articles (218 in the G3-valid corpus, many are trial reports): excluded by the type list —
+  confirm, or count trial reports as research articles?
+- Group 4 draft rule and exclusion lists (RUN_LOG RL-151) to confirm; the 50 candidate new articles are reviewed after the
+  matcher is final.
 
-## A. Author linking — applied
+## Owner input (2026-10-19, verbatim decisions, recorded on request)
 
-The current method had not been applied before (only tested). Applied now to the 74 trial bylines without an ID:
-**23 linked** to a person whose ID we know (each with a shared institution or shared co-author on other articles; all
-look sound — e.g. eight University of Edinburgh authors of one paper, Tsinghua and Mayo Clinic authors), **2
-ambiguous** (left unlinked), **49 stay their own person**. The table with every link's evidence is
-`corpus_statistics/author_links_trial.csv`.
-
-## D2. Focal terms typed as ordinary words — investigated
-
-177 of 10,160 focal-term occurrences in the trial (1.7%), in 68 articles. Three causes, from every case:
-1. **Hyphenated model names containing a focal term:** FARM-BERT, CT-BERT, Med-BERT, Bioclinical-BERT, Sentence-BERT,
-   bert-base-uncased, roberta-large. The step that splits words keeps such hyphenated words apart, and the detector of
-   focal terms does not list the "BERT" part, so it is typed as an ordinary word.
-2. **Other spellings:** "Bert", "bert", "Roberta" — possibly deliberate, to avoid matching people named Bert or Roberta;
-   to be checked.
-3. **Lists where only some occurrences were detected.**
-
-A consequence beyond the type: an undetected occurrence also gets **no parent of its own** (a sentence whose only
-focal term is "CT-BERT" produces no parent).
-
-**Fix — your decision:** treat a hyphenated name containing a focal term, and the other spellings when the article
-elsewhere uses the focal term, as focal occurrences ("Bioclinical-BERT" → `bert/C/focal` + `bioclinical`, with its
-own parent). This changes G3, so G3 would be rerun (about 5 minutes on CSF).
-
-## D4.1. Numbers and special characters — investigated
-
-**Legitimate, kept:** numbers in running text — sizes, counts, scores ("768 hidden nodes", "F1 score of 0.78"),
-already kept by your 2026-10-10 decision ("keep what is plain text"); names containing digits (f1, word2vec, T5, i2b2);
-years; accented names (Fréchet).
-
-**Leftovers from formatting, to fix:**
-
-| What | Example | Proposed |
-|---|---|---|
-| PDF ligatures | `ﬁne`, `classiﬁcation` | **normalise** to "fine", "classification" (real words) |
-| words glued to brackets | `lucene(a`, `rnn)-based` | strip the bracket, keep the word |
-| formula fragments | `O(n2`, `p(st+1\|s0`, `t′`, `Xα` | drop |
-| stray quote marks as atoms | `’` | drop |
-| footnote / citation numbers | "PubMed 1 abstracts", "KeyBERT 12, 28" | drop (the known gap recorded in RL-118; roughly 1 in 6 small integers in my sample) |
-| a figure-panel caption treated as a sentence | "a, HNRNPA1 locus showing: predicted CAGE expression in K562; …" | drop |
-
-**A finding worth knowing:** the `REFnnnnnn` tokens (citations replaced by placeholders) are **global IDs of cited
-works** — the same work has the same token in every article citing it (REF000001 appears in 22 articles). You decided
-earlier to keep them ("sources of authority"). So when a sentence names a cited work as part of its text ("REF009941
-proposed the pretraining…"), our hyperedges already link articles that cite the same work: 293 occurrences in the
-trial. A partial citation signal is already inside the data.
-
-## D5. "Focal term inside a 'that'-clause" — a parser error
-
-The sentence: *"In order to use just_in_time AIG in conjunction with CAT, it is imperative that the item generating
-method—in our case language models—reliably produce items that represent a requested construct …"*
-
-The focal term ("language models") belongs to the clause whose verb is "produce". By G3's rule that clause should give
-the parent: verb group `reliably produce`, focal hyperedge "the item generating method / language models", sibling
-"items that represent a requested construct …", and "it is imperative …" a cousin.
-
-The parser did not build "the item generating method … reliably produce items" as a clause. It left two loose pieces —
-the noun phrase with the focal term, and "reliably produce items …" — inside the clause "it is imperative that …". So
-G3 found "it is imperative" as the clause governing the focal term: verb group `be`, focal hyperedge = the noun phrase,
-sibling = "reliably produce items …". G3 applied its rule correctly to a wrong parse. One case in 30 sentences; its
-frequency cannot be measured without checking parses by hand.
-
-## D6. A lone modifier as a cousin — follows G3's rule
-
-G3 removes focal-term words from cousins (G3_POSTPROCESSING §3, kept from the earlier version). The sentence had two
-focal occurrences, so two parents. For the second parent, the first parent's clause — "the first stage was fine_tuning
-the pretrained language model BERT" — is another clause, so it becomes a cousin; with the focal words ("language
-model", "BERT") removed, its non-verb part is just `pretrained`. Expected by the rule, not an error; single-word cousins
-of this kind are its side effect.
-
-## D7. Long hyperedges — legitimate except one
-
-68 of 49,867 trial hyperedges have 20 or more words. The largest are plain-text enumerations — lists of models
-("BERT, Bioclinical-BERT, PubMedBERT, RoBERTa, and DeBERTa"), of methods, of workflow steps ("text collection
-(Reddit), text preprocessing (removal of URLs, lowercasing, …)") — legitimate as you say. The one exception is the
-figure-panel caption above (a 40-word hyperedge that is caption text, not prose).
-
-**Decisions needed before P2:** the D2 fix (and G3 rerun), and the D4.1 cleaning list. Both can go into one G3 patch
-and rerun, documented like earlier G3 decisions.
+- **D4.1:** approved; implement (done in the test script; production run in step 5). Citations with apostrophes:
+  checked, names and REF ids kept (RL-150).
+- **Failed hard cases:** B06 "Not only did GPT-4 pass the exam, but it also outperformed the residents" — the verb "did"
+  is visible and special not-only/but-also rules exist, so the failure is surprising; A12 "GPT-4 as well as BERT was
+  evaluated on the exam" — "was evaluated" is a compound predicate. Investigate whether the right post-processing code
+  was applied and at which stage the error occurs; fix it if feasible; if not feasible or a trade-off, estimate how
+  frequent the error is and report.
+- **D2 groups 1–3:** approved ("more elegant to add these model aliases into the list"); CT-BERT → `ct_bert` approved.
+- **D2 group 4:** approved with one addition: consider only articles, historical articles and all types of reviews;
+  other types are disregarded. Start with it; while it runs, do work that does not depend on it (e.g. the failed hard
+  cases; except for the D5 incidence count, new sentences are not needed for that).
+- **New papers:** check whether new papers should be added — only those with missed models, not instruments.
+- **Incremental run:** a good idea; approved in general, but be systematic: first agree on the other things, then launch.
+- **D6:** sentence-centric approach agreed — one parent per clause holding a focal term; each argument holding a focal
+  word is a focal hyperedge (several allowed); a focal hyperedge may hold several focal words; a clause with a focal term
+  is never a cousin; the rule changes types and removes no words or hyperedges. Document it.
+- **D5:** count of dash-enclosed asides approved; the corpus to count on is defined after the hyphenated model names
+  are solved.
+- **Clitic main verbs** → be/have/will/would: approved ("a great point").

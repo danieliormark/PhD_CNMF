@@ -824,6 +824,25 @@ item 4.]*
    *[RL-150: a citation number glued after a possessive ("Hsu’s22") is removed with it; names in narrative citations
    (O’Connor, D’Souza) and `REFnnnnnn` tokens are kept.]*
 
+10. **Sentence-centric parents (D6) — DECIDED 2026-10-19 (owner); not yet implemented.** The rule inherited from the toy
+   script ("focal atoms are left out of the cousins", §3) was meant to say that by definition a hyperedge containing a
+   focal term cannot be a cousin; it should change types, not remove words or hyperedges. Measured on the G3 v1 output
+   (RL-150): 39,418 of 816,075 parents (4.8%) repeat a clause that already has a parent, with the focal role moved to
+   another argument ("GPT-4 outperformed BERT" gives two parents); focal atoms removed from cousins 138,036 times, because a
+   focal clause comes back as a stripped cousin of the sentence's other parents ("fine_tuning the pretrained language
+   model BERT" → cousins `fine tune`, `pretrained`). Decision (owner, after the assistant's comparison of a
+   sentence-centric and a word-centric reading under chunk12v3's merged child/cousin facet):
+   - one parent per clause that holds a focal term; every argument holding a focal word is a `focal_he` (a parent can have
+     several); a `focal_he` can hold several focal words; the other arguments are `sibling_he`;
+   - a clause holding a focal term is never a cousin; cousins are the clauses without a focal term, attached to every
+     parent of the unit;
+   - no word or hyperedge is removed; each clause appears once, with its type.
+   Reason: with no word facet and child and cousin hyperedges in one layer keyed by word set, the word-centric reading
+   enters a focal clause twice (as its parent's children and as cousins of the other parents) and rotated parents weight
+   a clause by the number of models it names; the word-centric view can be rebuilt at interpretation from the
+   sentence-centric data (a focal word's parent plus the other parents of the same unit). Kept by decision 2 (§6 item 2):
+   a focal clause embedded in another clause's argument is its own parent and also part of the outer clause's sibling.
+
 ## 7. Test script
 
 ### 7.1 Test script v2 (current, 2026-10-10): every rule of §6 items 1–8
@@ -1098,7 +1117,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 87b71a939244 (RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | c8b46c840f74 (RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
@@ -1108,7 +1127,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_v2/modal_merge.py` (§6 item 3: decision rule copied from `g3_modal_check/modal_rules.py`, edge-order fix, and the clause merge; imported by the script) | 75c7022ac187 |
 | `fullscale_pipeline/g3_v2/reflexive_restore.py` (§6 item 8: builds the reflexive table; 43 min on incline) | 92fa72c383de |
 | `fullscale_pipeline/g3_v2/measure_be.py` (§6 item 1: the measurement required before implementing passive "be") | 8cbfe1c89631 |
-| `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached) | 80b9ca527b8f |
+| `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached; since RL-151 with G2's sentence-cut rule) | 8b28758d27cd (80b9ca527b8f before RL-151) |
 | `fullscale_pipeline/g3_v2/hard/hard_*.json` (13 sets, 199 cases, 175 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
 | `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
 | `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |

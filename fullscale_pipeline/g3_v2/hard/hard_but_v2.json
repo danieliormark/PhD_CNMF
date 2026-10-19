@@ -66,10 +66,20 @@
   "id": "B06",
   "text": "Not only did GPT-4 pass the exam, but it also outperformed the residents.",
   "expect": [
+   "pass/P/en",
+   "gpt_4/C/focal",
+   "outperform/P/en"
+  ],
+  "forbid": [
+   "not_only/M/en",
+   "but_also/M/en"
+  ],
+  "expect_before": [
    "not_only/M/en",
    "but_also/M/en outperform/P/en"
   ],
-  "forbid": []
+  "forbid_before": [],
+  "note": "expectation updated 2026-10-19 (RL-151) to option 2 (owner 2026-10-09: paired not-only/but-also dropped), as B01/B02 were; before RL-151 the case also failed for another reason: the inverted auxiliary (did/Mv gpt-4) was taken as the governing clause and the unit had no parent"
  },
  {
   "id": "B07",
