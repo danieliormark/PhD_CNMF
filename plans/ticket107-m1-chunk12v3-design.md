@@ -697,3 +697,71 @@ definition of split, merge etc. (Palla et al. and Greene et al. define them on c
 more nuanced ideal types of redistribution of loadings. So U2 does not score scenario labels. It plants a **known
 redistribution of membership mass between communities (a true transition table)** and checks how well the estimated
 graded link weights (§7.2) recover that table; scenarios remain an interpretive reading of the recovered table.
+
+## 8. Agenda: revisiting the optimisation mechanisms (recorded 2026-10-19, owner)
+
+Purpose: before the trial, decide for every in-loop weight and outer-loop penalty whether to keep, recalibrate,
+redesign, move between loops, or drop it; then decide whether Optuna stays. Nothing is run until the prerequisites
+are done, so every test runs on the real trial data.
+
+### 8.0 Inventory (from CLAUDE.md §4, §8; FINDINGS)
+
+**Inner loop** (changes what a fit converges to):
+
+| Mechanism | What it does | Current | Toy evidence | Problem type |
+|---|---|---|---|---|
+| Off-diagonal coupling λ_z_offdiag | penalises ties between different communities in Z | only Optuna-tuned weight (1e-4–1) | inflates auth/affil collinearity (0.26 → 0.70 → 0.87 at 0/0.05/0.5); pushes against shared semantics (§9); no consistent lever on shared-term concentration | side effects; role unexamined |
+| L1 sparsity λ_l1 (tickets 73/77/78) | mean of all U_norm entries | fixed 0 | penalises column concentration, not row concentration; spread memberships at every weight, cost fit; the "hairball" it targets did not occur | mechanism design |
+| In-loop domain balance (ticket 82) | per-community social vs semantic membership share, dead band ±0.15 | weight 0 | 1 of 20 settings beat seed noise; weight 5 broke convergence; input carries no signal on the toy (FINDINGS §25) | data/input; toy noise floor |
+| Concentration floor (ticket 102) | pushes shared semantic entities to spread as far as their articles do | 0.1 / 0.8 / warm-up 300 | shared-but-exclusive 25% → 3%; spreads niche words (ticket 103); gradient leak onto other rows (ticket 105 T1g) | side effects; defined on words |
+| Word-similarity regulariser (ticket 107) | pulls hyperedges with shared words together | new | — | calibration |
+
+Also: early stopping (two-part test), extended epochs (ticket 96), initialisation.
+
+**Outer loop** (scores finished fits; Optuna's second objective; decides front and knee; changes no fit):
+
+| Penalty | What it does | Weight | Toy evidence | Problem type |
+|---|---|---|---|---|
+| Collapse | largest community's share of reconstructed mass > 0.60 | 1 | fired 2/12 cells, only K = 2; fixed threshold means different things at each K | threshold, K-dependence |
+| Coherence | anchor-relation Z diagonal cohesion, weakest community < 0.50 | 0 | never fired; gauge-dependent input | input validity |
+| Item attribution (Penalty_A) | do the semantic items a community's articles use belong to it | ½ of semantic_pen | with Penalty_B, most of Optuna's 2nd axis | re-specify propagation paths (atoms gone, child/cousin merged) |
+| Shared-term concentration (Penalty_B) | shared entities > 0.85 in one community, × sharedness | ½ of semantic_pen | 21% of shared entities > 0.9 without the floor; λ_z no lever | re-specify facets |
+| Domain balance (outer) | as in-loop | 0 | planted: ~0.10 regardless of truth | data/input |
+
+Aggregation: unweighted sum (ticket 35). **Diagnostics only:** low-mass ("ghost") communities (ticket 86; no noise floor),
+unengaged entities (ticket 100), auth/affil collinearity, Track A/B (now the K gate).
+**Linked pairs:** concentration floor ↔ Penalty_B; in-loop ↔ outer domain balance. **Opposing pushes:** the concentration
+floor spreads shared entities; a row-sparsity redesign of L1 would concentrate them.
+
+### 8.1 Prerequisites (owner, 2026-10-19)
+
+- **P1 — data quality check and improvement:** author matching where applicable; checking that the postprocessing
+  (G3) worked exactly as intended; related input checks.
+- **P2 — weighting inside each relation matrix and building the chunk12v3 relation matrices** for the trial,
+  following the decided representation and options. Weighting changes the inputs most mechanisms read (idf decides
+  which entities count as shared; per-relation scaling sets domain shares and λ_l1's useful range; weights set the
+  scale of every noise floor).
+- Then: adapting the model code (masked loss, new facets, same-facet relation, regulariser, re-specified penalties).
+
+### 8.2 Agenda
+
+1. **Principles** (one discussion, no data needed): (a) what each layer is for — in-loop terms shape fits, outer
+   penalties rank finished fits, diagnostics describe; (b) when an outer penalty gets an in-loop counterpart — proposed
+   rule: only if an independent check can show the counterpart does the right thing (ticket 102's text check), else it
+   only lowers its own score (ticket 82's exploit); (c) every threshold set against the measured seed noise of its own
+   quantity on trial data, and checked for K-dependence (§6.5 point 2); (d) what counts as "working": fires on real
+   data; moves its target beyond seed noise; an independent check agrees; acceptable cost in fit and convergence.
+2. **Mechanism by mechanism** (purpose under ticket 107; re-specification for the new facets; toy evidence; options:
+   keep / recalibrate / redesign / move between loops / drop; what the trial must measure):
+   (a) off-diagonal coupling; (b) L1 sparsity — drop or redesign as row sparsity, with its interplay with the floor;
+   (c) concentration floor — new facets, gradient leak, how "shared" is computed (ticket 103), interplay with idf;
+   (d) domain balance in-loop and outer — signal at trial scale, recalibrated band, sensitivity, or drop;
+   (e) collapse — K-aware threshold, possibly merged with low-mass detection into one mass-distribution check;
+   (f) coherence — gauge-free redesign or drop; (g) Penalty_A — propagation paths for child × parent and child ×
+   article, parents as targets (ticket 66); (h) Penalty_B — facets, 0.85 threshold, relation to the floor;
+   (i) low-mass communities — outer check or diagnostic; (j) word-similarity regulariser calibration;
+   (k) aggregation — unweighted sum or weights (ticket 35).
+3. **Placement map:** one table — each mechanism in-loop / outer / diagnostic / dropped, with a value or calibration rule.
+4. **Optuna decision:** with the map known — how many weights remain tuned and how many penalty components rank fits —
+   decide whether Optuna's multi-objective search stays or a grid suffices.
+5. **Trial test design** for the points that need data, judged by 1(d); folded into the trial procedure.
