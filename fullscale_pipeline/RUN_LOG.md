@@ -1643,3 +1643,11 @@ cached; lineage is a sorted set of ancestors with multiple parents and registry 
 `institution_review_trial.py` → `institution_review_trial.csv` (option 4: nearest university parent + hand review,
 108 cases, 35 merged). `g3_trial_sample.py` → `g3_trial_sample/sample_30.md`, `reading_notes.md` (7 points).
 Details: ticket 107 design doc §8.3. [LOG]
+
+**RL-148 · 2026-10-19 · CORPUS-STATS · AUDIT + DATA PREP (trial, ticket 107 P1 follow-ups) · LIVE**
+Author linking applied to the 74 trial bylines without an ID (`author_links_trial.py` → `author_links_trial.csv`:
+23 linked, 2 ambiguous, 49 unlinked). Read-only investigations on the trial G3 output: focal-term occurrences typed
+`/en` (1.7%; hyphenated model names, other spellings, partly listed lists); numbers and special characters (plain-text
+values kept; leaks: ligatures, bracket-glued words, formula fragments, footnote markers, one caption);
+`REFnnnnnn` tokens confirmed as global cited-work IDs; one parser error; lone-modifier cousins explained by the
+focal-atom rule. Ticket 107 design doc §8.3. [LOG]

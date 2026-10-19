@@ -821,3 +821,40 @@ an OpenAlex institutions fetch, cached in diagnostics).
   hyperedge, when a word repeats (21.1% of trial hyperedges), which limits tracing communities back to the exact
   original words; the same focal term sometimes typed `/en` instead of `/focal` (separate entities); participles as
   the parent's verb group (`use` 9.7% of parents, `base` 1.8%).
+
+**P1 follow-ups (2026-10-19, owner questions on D and A).**
+- **A applied (owner):** current method (corroborated rule, surname + first given name) on the 74 trial bylines
+  without an ID: 23 linked to a person whose ID we know (all with a shared institution or co-author on other
+  articles), 2 ambiguous (not linked), 49 stay their own person; no unlinked-to-unlinked link. Table:
+  `corpus_statistics/author_links_trial.csv` (script `author_links_trial.py`).
+- **D2, focal terms typed as ordinary words (owner: they should be part of focal hyperedges; investigate):** 177 of
+  10,160 focal-term occurrences in the trial (1.7%), in 68 articles, carry `/en` instead of `/focal`. Causes, from
+  every case: (a) hyphenated model names containing a focal term (FARM-BERT, CT-BERT, Med-BERT, Bioclinical-BERT,
+  Sentence-BERT, bert-base-uncased, roberta-large): G2 keeps such words apart and the focal-mention detector does not
+  list the focal part; (b) other spellings: "Bert", "bert", "Roberta" (possibly deliberate protection against personal
+  names, to be checked); (c) lists where only some occurrences were listed. Unlisted occurrences also get no parent of
+  their own. Fix: to be decided (owner).
+- **D3 (owner):** by rule the main verb of the sentence becomes a cousin when the focal term's clause is a participle
+  phrase; acceptable for the analysis if sibling and cousin are assigned correctly; at interpretation the main arguments
+  may be shown separately.
+- **D4.1, numbers and special characters (owner: keep legitimate content, drop formatting remnants):** in the trial,
+  numbers in 2.6% of hyperedges (mostly plain-text sizes, counts, scores — kept by the 2026-10-10 decision), decimals
+  1.3% (result values), letters+digits 2.4% (names: f1, word2vec, t5, i2b2; and `REFnnnnnn`), years 0.2%, other encoded
+  characters 0.3%. Leaks found: PDF ligatures (`ﬁne`, `classiﬁcation`: to normalise, not drop); words glued to
+  brackets (`lucene(a`, `rnn)-based`); formula fragments (`o(n2`, `p(st+1|s0`, `t′`, `xα`); stray quote atoms;
+  footnote/citation markers left as numbers ("PubMed 1 abstracts", "KeyBERT 12, 28"; the open RL-118 leak); one
+  figure-panel caption kept as prose (PMC8490152, 40-atom sibling). Accented names (Fréchet) are legitimate.
+  **`REFnnnnnn` tokens are global cited-work IDs** (`citation_works_v2.jsonl`: one ID per work, e.g. REF000001 cited
+  in 22 articles), kept by decision (G3 §6 item 6): a narrative citation inside a focal sentence is a partial citation
+  link between articles (293 occurrences in the trial).
+- **D5, one focal term attached to the wrong clause (PMC9166894.r1.L288.S6.U1):** a parser error, not a G3 rule: in
+  "it is imperative that the item generating method—in our case language models—reliably produce items …" graphbrain
+  did not build "… method … reliably produce items" as a clause; it left the noun phrase with the focal term and
+  "reliably produce items …" as two separate pieces of the argument of "it is imperative". G3 therefore found "it is
+  imperative" as the clause governing the focal term (verb group `be`) and put "reliably produce items …" in a sibling.
+  With a correct parse the parent would be `produce`, and "it is imperative" a cousin.
+- **D6, lone modifier as a cousin:** by rule (G3 §3: focal atoms are left out of cousins). In a sentence with two focal
+  occurrences, each parent's cousins include the other parent's clause with its focal atoms removed; "fine_tuning the
+  pretrained language model BERT" thus leaves the cousin `(cousin_he pretrained/M/en)` for the second parent.
+- **D7, long hyperedges:** 68 of 49,867 trial hyperedges have 20+ atoms; the largest are plain-text lists (models,
+  methods, workflow steps) and long argument chains — legitimate — except the figure-panel caption above.

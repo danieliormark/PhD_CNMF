@@ -1,0 +1,75 @@
+pmcid,position,name,decision,target,evidence
+PMC7064166,1,"Forbes, Daniel",not linked: no corroborated candidate (stays its own person),,
+PMC7309262,0,"Wen, Andrew",linked to a person whose ID we know,"Wen, Andrew (https://openalex.org/A5003128469)","PMC10337517: institution Mayo Clinic | PMC11420592: institution Mayo Clinic | PMC12444719: co-author Fan, Jungwei"
+PMC7309262,1,"Elwazir, Mohamed Y",not linked: no corroborated candidate (stays its own person),,
+PMC7309262,2,"Moon, Sungrim",linked to a person whose ID we know,"Moon, Sungrim (https://openalex.org/A5004688014)","PMC10065225: institution Mayo Clinic; co-author Fan, Jungwei | PMC10337517: institution Mayo Clinic | PMC11041481: institution Mayo Clinic; co-author Fan, Jungwei | PMC11423779: co-author Fan, Jungwei | PMC12769801: institution Mayo Clinic"
+PMC7410498,0,"Wagner, Tyler",linked to a person whose ID we know,"Wagner, Tyler (https://openalex.org/A5121133914)",PMC12909362: institution Nference (United States)
+PMC7410498,23,"Anand, Akash",linked to a person whose ID we know,"Anand, Akash (https://openalex.org/A5102681356)","PMC12097284: institution Nference (India); co-author Soundararajan, Venky; co-author Barve, Rakesh"
+PMC7415240,1,"Anand, Vivek",not linked: no corroborated candidate (stays its own person),,
+PMC7563092,3,"Yu, Yong",not linked: no corroborated candidate (stays its own person),,
+PMC7597339,2,"Zeng, Sheng",not linked: no corroborated candidate (stays its own person),,
+PMC7679382,2,"Choi, Sunho",not linked: no corroborated candidate (stays its own person),,
+PMC7750964,3,"Nguyen, Anh",not linked: no corroborated candidate (stays its own person),,
+PMC7780378,3,"Ning, Yali",not linked: no corroborated candidate (stays its own person),,
+PMC7801924,3,"Chan, Jessica",not linked: no corroborated candidate (stays its own person),,
+PMC7801924,5,"Paine Iii, Robert",not linked: no corroborated candidate (stays its own person),,
+PMC7805957,0,"Chen, Haoran",not linked: no corroborated candidate (stays its own person),,
+PMC7805957,1,"Lin, Ke",not linked: no corroborated candidate (stays its own person),,
+PMC7805957,2,"Maye, Alexander",not linked: no corroborated candidate (stays its own person),,
+PMC7805957,3,"Li, Jianmin",not linked: no corroborated candidate (stays its own person),,
+PMC7805957,4,"Hu, Xiaolin",not linked: no corroborated candidate (stays its own person),,
+PMC7817575,1,"Rodrigo, Alvaro",not linked: no corroborated candidate (stays its own person),,
+PMC7817575,3,"Echegoyen, Guillermo",not linked: no corroborated candidate (stays its own person),,
+PMC7871023,11,"Lemaitre, Guillaume",not linked: no corroborated candidate (stays its own person),,
+PMC8068876,0,"Lim, JongYoon",linked to a person whose ID we know,"Lim, JongYoon (https://openalex.org/A5085026213)","PMC9879253: institution University of Auckland; co-author Lee, Sanghyub John"
+PMC8068876,2,"Ahn, Ho Seok",linked to a person whose ID we know,"Ahn, Ho Seok (https://openalex.org/A5057419366)","PMC9879253: institution University of Auckland; co-author Lee, Sanghyub John"
+PMC8160980,3,"Bae, Junsu",not linked: no corroborated candidate (stays its own person),,
+PMC8176715,0,"Casey, Arlene",linked to a person whose ID we know,"Casey, Arlene (https://openalex.org/A5076964550)",PMC12449363: institution University of Edinburgh | PMC13097797: institution University of Edinburgh | PMC13461888: institution University of Edinburgh
+PMC8176715,1,"Davidson, Emma",linked to a person whose ID we know,"Davidson, Emma M (https://openalex.org/A5075891446)",PMC13288941: institution University of Edinburgh
+PMC8176715,2,"Poon, Michael",linked to a person whose ID we know,"Poon, Michael T C (https://openalex.org/A5050685415)",PMC13288941: institution University of Edinburgh | PMC9770568: institution University of Edinburgh
+PMC8176715,3,"Dong, Hang",linked to a person whose ID we know,"Dong, Hang (https://openalex.org/A5035163413)",PMC9770568: institution University of Edinburgh
+PMC8176715,4,"Duma, Daniel",not linked: no corroborated candidate (stays its own person),,
+PMC8176715,5,"Grivas, Andreas",not linked: no corroborated candidate (stays its own person),,
+PMC8176715,6,"Grover, Claire",linked to a person whose ID we know,"Grover, Claire (https://openalex.org/A5108653041)",PMC13288941: institution University of Edinburgh
+PMC8176715,7,"Suárez-Paniagua, Víctor",not linked: no corroborated candidate (stays its own person),,
+PMC8176715,8,"Tobin, Richard",linked to a person whose ID we know,"Tobin, Richard (https://openalex.org/A5073041438)",PMC11808655: institution University of Edinburgh | PMC13288941: institution University of Edinburgh
+PMC8176715,9,"Whiteley, William",linked to a person whose ID we know,"Whiteley, William (https://openalex.org/A5058224218)",PMC13288941: institution University of Edinburgh | PMC9770568: institution University of Edinburgh
+PMC8176715,10,"Wu, Honghan",not linked: ambiguous (2+ corroborated candidates),,
+PMC8176715,11,"Alex, Beatrice",linked to a person whose ID we know,"Alex, Beatrice (https://openalex.org/A5043179000)",PMC11413433: institution University of Edinburgh | PMC11808655: institution University of Edinburgh | PMC12894197: institution University of Edinburgh | PMC13097797: institution University of Edinburgh | PMC13288941: institution University of Edinburgh | PMC13402457: institution University of Edinburgh | PMC9770568: institution University of Edinburgh
+PMC8202286,4,"Liu, Zhichao",not linked: ambiguous (2+ corroborated candidates),,
+PMC8212138,5,"Anderson, Jeff R",not linked: no corroborated candidate (stays its own person),,
+PMC8220305,2,"Love, Jennifer S",linked to a person whose ID we know,"Love, Jennifer (https://openalex.org/A5102914624)","PMC11747534: co-author Sarker, Abeed; co-author Perrone, Jeanmarie | PMC11756621: co-author Sarker, Abeed | PMC12434632: co-author Sarker, Abeed; co-author Perrone, Jeanmarie | PMC13340079: co-author Sarker, Abeed; co-author Perrone, Jeanmarie"
+PMC8222600,1,"Ren, Ping",not linked: no corroborated candidate (stays its own person),,
+PMC8227369,1,"Davis, Brian",not linked: no corroborated candidate (stays its own person),,
+PMC8248717,20,"Berner, Gabi",not linked: no corroborated candidate (stays its own person),,
+PMC8248717,23,"Wagner, Tyler",linked to a person whose ID we know,"Wagner, Tyler (https://openalex.org/A5121133914)",PMC12909362: institution Nference (United States)
+PMC8292511,1,"Khokhlov, Ivan",not linked: no corroborated candidate (stays its own person),,
+PMC8310449,1,"Cao, Jun",not linked: no corroborated candidate (stays its own person),,
+PMC8316410,4,"Anand, Akash",linked to a person whose ID we know,"Anand, Akash (https://openalex.org/A5102681356)","PMC12097284: institution Nference (India); co-author Soundararajan, Venky; co-author Barve, Rakesh"
+PMC8361807,1,"Finnerty Mutlu, Ailbhe N",not linked: no corroborated candidate (stays its own person),,
+PMC8366025,0,"Bhatt, Arjun",not linked: no corroborated candidate (stays its own person),,
+PMC8366288,1,"Hegde, Bharat",not linked: no corroborated candidate (stays its own person),,
+PMC8371605,1,"Evans, Richard",not linked: no corroborated candidate (stays its own person),,
+PMC8371605,14,"Cowie, Andrew",not linked: no corroborated candidate (stays its own person),,
+PMC8396480,2,"Lee, Jian Ming",not linked: no corroborated candidate (stays its own person),,
+PMC8432804,4,"Guan, Lei",not linked: no corroborated candidate (stays its own person),,
+PMC8441174,1,"Akhtar, Javed",not linked: no corroborated candidate (stays its own person),,
+PMC8449118,2,"Cheng, Kaiwen",not linked: no corroborated candidate (stays its own person),,
+PMC8512493,1,"Dai, Heng",not linked: no corroborated candidate (stays its own person),,
+PMC8521977,5,"Hart, Christopher",not linked: no corroborated candidate (stays its own person),,
+PMC8529716,0,"Jain, Harshit",not linked: no corroborated candidate (stays its own person),,
+PMC8529716,2,"Mishra, Suyash",not linked: no corroborated candidate (stays its own person),,
+PMC8544381,3,"Lin, Shing-An",not linked: no corroborated candidate (stays its own person),,
+PMC8545227,0,"Chowdhury, Imran",not linked: no corroborated candidate (stays its own person),,
+PMC8564583,2,"Hughes, Travis",linked to a person whose ID we know,"Hughes, Travis (https://openalex.org/A5101451159)","PMC8316410: institution Nference (United States); co-author O'Horo, John C; co-author Halamka, John D; co-author Badley, Andrew D; co-author Pawlowski, Colin; co-author Bade, Sairam; co-author Soundararajan, Venky; co-author Zemmour, David"
+PMC8564583,15,"Wagner, Tyler",linked to a person whose ID we know,"Wagner, Tyler (https://openalex.org/A5121133914)",PMC12909362: institution Nference (United States)
+PMC8670389,2,"Yadav, Sonal",not linked: no corroborated candidate (stays its own person),,
+PMC8678741,1,"Chao, Fan",linked to a person whose ID we know,"Chao, Fan (https://openalex.org/A5030349209)","PMC8719053: institution Harbin Institute of Technology; co-author Yu, Guang"
+PMC8703214,3,"Alizadeh, Meysam",linked to a person whose ID we know,"Alizadeh, Meysam (https://openalex.org/A5058797533)",PMC10372638: institution Harvard University
+PMC8728304,3,"Liu, Ningjing",not linked: no corroborated candidate (stays its own person),,
+PMC8769017,3,"Ye, Yining",not linked: no corroborated candidate (stays its own person),,
+PMC8769017,4,"Liu, Zhiyuan",linked to a person whose ID we know,"Liu, Zhiyuan (https://openalex.org/A5100320723)",PMC10498500: institution Tsinghua University | PMC10915406: institution Tsinghua University | PMC11520398: institution Tsinghua University | PMC11635025: institution Tsinghua University | PMC12215907: institution Tsinghua University
+PMC8769017,5,"Sun, Maosong",linked to a person whose ID we know,"Sun, Maosong (https://openalex.org/A5046448314)",PMC10498500: institution Tsinghua University | PMC11520398: institution Tsinghua University | PMC12215907: institution Tsinghua University
+PMC8769017,6,"Jin, Jianbin",not linked: no corroborated candidate (stays its own person),,
+PMC9053275,4,"Lan, Jun",not linked: no corroborated candidate (stays its own person),,
+PMC9710637,0,"Stärk, Hannes",not linked: no corroborated candidate (stays its own person),,
