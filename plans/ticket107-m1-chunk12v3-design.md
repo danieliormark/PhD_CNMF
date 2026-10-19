@@ -858,3 +858,31 @@ an OpenAlex institutions fetch, cached in diagnostics).
   pretrained language model BERT" thus leaves the cousin `(cousin_he pretrained/M/en)` for the second parent.
 - **D7, long hyperedges:** 68 of 49,867 trial hyperedges have 20+ atoms; the largest are plain-text lists (models,
   methods, workflow steps) and long argument chains — legitimate — except the figure-panel caption above.
+
+**P1 owner decisions and follow-ups (2026-10-19, RL-149).**
+- **A:** approved (current linking method, applied).
+- **D4.1 and the caption (owner: approve the handling, implement; the caption must be dropped):** implemented in the G3
+  test script and checked on shards 0 and 20 (G3_POSTPROCESSING.md §6 item 9). Not yet run on the corpus: one G3 rerun
+  after the D2 decision.
+- **D2 (owner: treat hyphenated model names as focal words, other spellings too when LLMs are meant; rerun earlier
+  stages if needed; new ids/hashes must not conflict; reprocess misclassified sentences):** the corpus-wide scan shows
+  a larger gap than the trial's G3 output: (1) spellings of listed terms — hyphen prefix (XLM-RoBERTa, Med-PaLM,
+  CT-BERT) 11,916 occurrences, glued versions (ChatGPT4, ChatGPT3.5) 2,758, plurals (GPTs) 1,194, checkpoint names
+  (bert-base-uncased) 3,073, "language-model" 480; (2) a bug: "LLaMA" alone never matched (2,403); (3) "Bert" / "Roberta"
+  in articles with LLM evidence are the models (samples read); (4) model names not on the list (DistilBERT, ClinicalBERT,
+  scGPT, MedGemma; tools such as BERTopic, BERTScore, GPTZero, Ollama) 46,991 occurrences in 5,180 articles. Few new
+  articles; about 9,000 new focal lines from (1)–(3) and 21,000 more from (4). Proposed: incremental rerun (P2 with the
+  new matcher; P6 only on new blocks; existing REF ids frozen, new works numbered from REF010556; G2 only on new
+  sentences, plus re-parse of sentences where an unlisted name was joined by G2's hyphen rule if (4) is adopted; G3 in
+  full; checks that every existing sentence id and hash is unchanged and new ids are disjoint). **Waiting for the owner:**
+  fix (1)–(3)?; hyphenated name as one focal atom (`ct_bert`, like `smiles_bert`) or the listed part only?; adopt (4)
+  (a definition question: what counts as an LLM)?; the incremental route?
+- **D5:** the error is in spaCy's dependency parse used by graphbrain (G2), not in G3: "models" read as the verb of
+  "method", "produce" a second clause without a subject. The focal hyperedge in that unit is "the item generating method
+  — in our case language models" (`case generate item language_model method our`). Writing the dash-enclosed aside in
+  brackets gives the correct parse; a G2 rule for it is possible (re-parse), not measured, not applied.
+- **D6:** the rule "focal atoms are left out of the cousins" (G3_POSTPROCESSING §3) comes unchanged from the June toy
+  script; no reason is recorded. Inferred purpose: the focal term is the centre of every parent and is in every
+  sentence, so in cousins it would make unrelated contexts alike and repeat a second parent's focal term. Relevant to
+  chunk12v3, where child and cousin hyperedges share one layer by word set: keeping focal atoms in cousins could make a
+  cousin identical to a focal hyperedge. Owner to confirm or revise.

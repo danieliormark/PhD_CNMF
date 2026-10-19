@@ -1651,3 +1651,28 @@ Author linking applied to the 74 trial bylines without an ID (`author_links_tria
 values kept; leaks: ligatures, bracket-glued words, formula fragments, footnote markers, one caption);
 `REFnnnnnn` tokens confirmed as global cited-work IDs; one parser error; lone-modifier cousins explained by the
 focal-atom rule. Ticket 107 design doc §8.3. [LOG]
+
+**RL-149 · 2026-10-19 · G3 · CODE + CHECK (D4.1 formatting remnants) + AUDIT (D2 focal-term gaps, D5 parse) · LIVE**
+Host incline33, `tensor_env` with `PYTHONPATH=$HOME/np1_for_spacy`. Owner (ticket 107 P1): D4.1 approved as proposed,
+figure-panel caption dropped. `g3_v2/g3_curation_v2.py` (sha256 `43ae81d2c33a`, was `b3eadb6d385c`): `tidy_word` in
+`clean_root` (ligatures, quotes, glued brackets, formula/table debris), `Ctx.citation_numbers` (flattened superscript
+citations), `PANEL_LEGEND` (lower-case panel legends as non-prose), clitic main verbs → be/have/will/would (also
+straight clitics, previously dropped by the stop list against decision g1). Rules and their measurement:
+G3_POSTPROCESSING.md §6 item 9; scripts `g3_v2/d41/`. New hard set `g3_v2/hard/hard_d41.json` (sha256 `c666b54db5dd`)
+12/12; all sets 187/200 (13 known failures); self-test 54/54; shards 0 and 20 in full vs the G3 v1 production output: 0
+problems, parents 16,523 → 16,522 / 17,130 → 17,134, cousins 47,077 → 47,079 / 49,224 → 49,221, every change of a known
+kind. Not run on the corpus: the production rerun waits for the D2 decision, so that G3 runs once.
+D2 audit (read-only, `corpus_statistics/focal_gap_scan.py`, `focal_gap_classify.py`, over the cleaned region files of
+the whitelist, P2's input): tokens with a model-family name not accepted by `focal_terms.py`: spellings of listed terms
+(hyphen prefix 11,916 occurrences, version glued 2,758, plurals 1,194, other case 5,803 incl. noise, checkpoint names
+3,073, "language-model" 480); a pattern bug: GENERIC "Llama" `L[Ll]a[Mm]a` misses "LLaMA" (2,403); model names not on the
+list (DistilBERT, ClinicalBERT, scGPT, MedGemma, ...) 46,991 in 5,180 articles. New articles: a few dozen at most; new
+focal lines in corpus articles: about 9,000 (listed terms) and 21,000 more (unlisted names). G2's hyphen rule already
+kept listed names apart (no re-parse for them). ID safety: sentence ids are positional; P7's REF numbering (sorted over
+all works) and P6's focal-antecedent preference would change existing texts and hashes in a full rerun, so an
+incremental route is proposed (existing ids/hashes frozen). Owner decisions pending. D5: the misattached focal term
+(PMC9166894.r1.L288.S6.U1) comes from spaCy's dependency parse (`en_core_web_trf`: "models" read as the verb of
+"method", "produce" a subject-less second clause), carried over by graphbrain; spacing the dashes does not change it;
+brackets in place of the dashes give the correct parse (not applied). D6: the rule "focal atoms are left out of the
+cousins" comes unchanged from the toy 7.5 script; no reason is recorded anywhere. [LOG]
+

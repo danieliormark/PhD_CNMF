@@ -19,6 +19,9 @@ used: it skips a focal term's immediate clause, keeps a fringe pool nothing read
       (the RDS list holds "been" and "am", the toy list "be") and does not decide the modal question ("will")
   types kept: Cc, Cp, Ca, Cm, M, P (Cm, a noun used as a modifier, "cancer research", was dropped by 7.5 and chunk_4h)
   (h) negation (not, no, never, n't, nor) kept whenever it is a modifier, including "no" as a determiner
+  D4.1 (owner 2026-10-19, RL-149): formatting remnants inside words cleaned (tidy_word: ligatures, quotes, glued brackets,
+      formula and table debris), flattened superscript citation numbers dropped (Ctx.citation_numbers), figure-panel legends
+      opening with lower-case panel letters removed as non-prose (PANEL_LEGEND)
   provenance: every structure has an id and hash sha1("<id>|<edge>")[:12] (the G2 unit-hash form): parent <uid>.P<k>, its children
       <uid>.P<k>.D (dummy_sibling), .F (focal_he), .S<j> (sibling_he), cousins <uid>.K<j> with the parents they were swept against (the unit is
       the grandparent edge that holds a parent and its cousins); every output atom lists the source atoms, words and token positions it
@@ -165,16 +168,73 @@ SIZE_RX = re.compile(r'^\d+(?:\.\d+)?[bm]$')                     # model sizes l
 # number below 1 ("GPT 0.78 to 0.65"). Not used: a following "to <number>" (real versions start ranges: "from ChatGPT 3.5 to 4o"),
 # a bare bracketed number (a citation), a score in round brackets (real versions take one: "Grok 3 (0.78)")
 VALUE_AFTER = re.compile(r'^\s*\[\s*[−-]?\d+(?:\.\d+)?\s*(?:[–—-]|to\b|,)')
+CITE_LIST = re.compile(r'(?<=[A-Za-z)\]%] )(\d{1,3}(?:\s?[,–-]\s?\d{1,3})*)(?=\s+[.,;:)\]](?:\s|$))')     # D4.1
+CITE_VALUE_WORDS = set('of to was were is are be been equals equal than by cost costs from at out times about approximately '
+                       'around nearly over under with and or between top only all first last every each per page pages line '
+                       'lines version n'.split())
 SCORE_TOKEN = re.compile(r'^0\.\d')
 VERSION_TOKEN = re.compile(r'^(?:v\d+(?:\.\d+)*|[ro]\d+|\d(?:\.\d{1,2})?[a-z]{0,2})$', re.I)
 HYPHEN_CHARS = re.compile('[\u2010\u2011\u2013\u2014]')
 
 
+# D4.1 (owner 2026-10-19, RL-149): formatting remnants inside words. PDF ligatures are written out; curly quotes and the prime
+# used as an apostrophe become "'"; a clitic left as a word of its own ("’s", "’m", "’ve", from a curly apostrophe the
+# tokeniser did not split; as a main verb it becomes be / have / will / would) and a possessive or clitic glued to a
+# word go, as the straight forms do; formula and table
+# debris (|, =, ^, ~, <, >, mathematical operators; "o(n2", "p(x"; a Greek letter or prime with at most one Latin letter,
+# "xα", "fθ", "δr"; a Greek letter inside brackets) is dropped; brackets glued to words go ("(AI)-based" -> ai_based,
+# "author(s)" -> author, "Lucene(a)" -> lucene, "[18F]FDG" -> 18f_fdg); "+" and "·" are plain text (C++, Command R+,
+# CNN+LSTM, DALL·E) and stay; Aβ stays
+LIGATURES = {'ﬀ': 'ff', 'ﬁ': 'fi', 'ﬂ': 'fl', 'ﬃ': 'ffi', 'ﬄ': 'ffl', 'ﬅ': 'st', 'ﬆ': 'st'}
+SINGLE_QUOTES = re.compile("[‘’‚‛`´′]")
+CLITIC = re.compile(r"^'(?:s|m|d|t|ve|re|ll)\d*$")
+CLITIC_TAIL = re.compile(r"(?<=[a-z0-9])'(?:s|m|d|ve|re|ll)$")
+CLITIC_VERB = {"'s": 'be', "'m": 'be', "'re": 'be', "'ve": 'have', "'ll": 'will', "'d": 'would'}
+FORMULA_SIGNS = re.compile(r"[|=^~<>∑∏√∂∫×÷∈∀∃≠±∗∘⊂⊆∪∩→←↔⇒⊕⊗⋅∣¬∼]")
+SYMBOL_MARKS = re.compile("[Ͱ-Ͽ″‴̂]")
+FORMULA_CALL = re.compile(r"^[a-z]{1,2}\(")                                   # o(n2, p(x, f(x
+GROUP_NAME = re.compile(r"^([a-z]{1,2})\((\d)\)[-_]([a-z]{3,}.*)$")          # se(3)-equivariant -> se3_equivariant
+ENUM_TAIL = re.compile(r"\((?:[a-z]|\d{1,2})\)?$")                            # lucene(a, icc(2, 3(a
+PLURAL_TAIL = re.compile(r"\((?:s|es)\)?$")                                   # author(s
+BRACKETS = "()[]{}"
+DQUOTES = '“”„‟"'
+
+
+def tidy_word(w):
+    """D4.1: the word with formatting remnants removed, or None when it is formula or table debris (applied in clean_root)"""
+    for k, v in LIGATURES.items():
+        w = w.replace(k, v)
+    w = SINGLE_QUOTES.sub("'", w.replace(';', ';').replace('\\', ''))   # U+037E: the Greek question mark (";")
+    if CLITIC.match(w) or FORMULA_SIGNS.search(w):
+        return None
+    w = CLITIC_TAIL.sub('', w)
+    g = GROUP_NAME.match(w)
+    if g:
+        w = f"{g.group(1)}{g.group(2)}_{g.group(3)}"
+    elif FORMULA_CALL.match(w):
+        return None
+    if SYMBOL_MARKS.search(w) and (any(c in w for c in BRACKETS) or 'approximately' in w):
+        return None                                                            # "μθ(xt", "κapproximately" (κ ≈)
+    w = PLURAL_TAIL.sub('', w)
+    w = ENUM_TAIL.sub('', w)
+    w = re.sub(f"[{DQUOTES}]" + r"\d+$", '', w)                                 # perfect”15 -> perfect (a citation)
+    w = re.sub(r"[)\]}]-|-[(\[{]", '_', w)                                      # (AI)-based -> ai_based
+    w = re.sub(r"(?<=[a-z0-9])[()\[\]{}" + DQUOTES + r"]+(?=[a-z0-9])", '_', w)    # godel(grounded, models“bert
+    w = re.sub(r"[()\[\]{}" + DQUOTES + "]", '', w)
+    w = re.sub(r"(?<![a-z0-9])'|'(?![a-z0-9])", '', w).rstrip('−')
+    if SYMBOL_MARKS.search(w) and len(re.sub(r"[^a-z]", '', w)) <= 1 and not w.startswith('aβ'):
+        return None
+    return re.sub(r'_+', '_', w).strip('_')
+
+
 def clean_root(word):
     """§6 item 8: an atom's word cleaned of glued citation digits ('self_education,2', 'nccn)3'), edge punctuation, and with a
-    Unicode hyphen inside it written as '_'; None if no letter is left"""
+    Unicode hyphen inside it written as '_'; then D4.1's tidy_word; None if no letter is left"""
     w = HYPHEN_CHARS.sub('_', word)
     w = re.sub(r'[,;.)\]]+\d+$', '', w)
+    w = tidy_word(w)
+    if w is None:
+        return None
     w = w.strip('.,;:()[]\'"')
     return w if re.search(r'[a-z]', w) else None
 
@@ -186,6 +246,10 @@ SECTION_NO = re.compile(r'^\s*\d+\.\d+(?:\.\d+)*\.?\s+[A-Z]')
 REFERENCE_ENTRY = re.compile(r"^\s*\[?\d+\]?\.?\s+(?:(?:[A-Z]\.\s?){1,3}\s*[A-Z][A-Za-z'\-]+|[A-Z][A-Za-z'\-]+,?\s+(?:[A-Z]\.\s?){1,3})[,.]")
 PSEUDOCODE = re.compile(r'←|//|:=')
 PANEL_CAPTION = re.compile(r'^[A-H]\s+[A-Z][a-z]+[^;]*;\s*[B-H]\s+[A-Z][a-z]+')
+# D4.1 (owner 2026-10-19): a figure-panel legend in the journal style that opens with lower-case panel letters and a comma
+# ("a, Enformer is trained to …", "d, e Heatmaps showing …", "a, b: rows with matching superscripts …"); all 125 such units
+# of the G3 v1 output were read: figure legends, and 3 table notes
+PANEL_LEGEND = re.compile(r'^[a-h]\s*,\s|^[a-h](?:\s*,\s*[a-h])+\s*[:\s]')
 GLOSS_VERBS = {'equal', 'indicate', 'denote', 'stand', 'refer'}
 
 
@@ -196,7 +260,7 @@ def nonprose_kind(text):
         return 'pseudocode'
     if REFERENCE_ENTRY.match(text):
         return 'reference'
-    if PANEL_CAPTION.match(text):
+    if PANEL_CAPTION.match(text) or PANEL_LEGEND.match(text):
         return 'panel_caption'
     if len(words) <= 20 and (SECTION_NO.match(text) and (not END_PUNCT.search(text) or text.rstrip().endswith('?'))):
         return 'heading'
@@ -618,7 +682,23 @@ class Ctx:
                     or (re.search(r'\d\s*[–-]\s*$', before[-6:]) and any(q in nontext for q in (p - 1, p - 2))) \
                     or self.debris_number(p, a, b, before, after):
                 nontext.add(p)
+        nontext |= self.citation_numbers()
         return labels, nontext
+
+    def citation_numbers(self):
+        """D4.1 (owner 2026-10-19): superscript citations flattened into the text, a number or list of numbers after a word and
+        followed by a space and punctuation ("based on BERT 18 .", "hallucinations 7– 9 ,", "domains 8 , 9 , 10 , 11 ,");
+        every number of the list goes. Not: after a value word ("would cost 0 .", "of 2 : 1"), a ratio, a thousands figure
+        split by a space ("7 , 380 seconds"), or the end of the unit without punctuation ("out of 100")"""
+        out = set()
+        for m in CITE_LIST.finditer(self.text):
+            prev = re.findall(r"[A-Za-z]+", self.text[:m.start()][-30:])
+            items = re.findall(r"\d+", m.group(1))
+            if (prev and prev[-1].lower() in CITE_VALUE_WORDS) or re.match(r"\s+:\s*\d", self.text[m.end():]) \
+                    or (len(items) == 2 and len(items[1]) == 3 and ',' in m.group(1)):
+                continue
+            out |= {p for p, (s, e) in self.spans.items() if m.start() <= s and e <= m.end() and NUMBER_RX.match(self.words.get(p, ''))}
+        return out
 
     def debris_number(self, p, a, b, before, after):
         """RL-120: a number that is citation or list debris ("REF009518 3", "2020.1,2", "6., 7., 8"), sits inside a formula
@@ -694,6 +774,10 @@ class Ctx:
             out = hedge(f"{root.lower()}/M/en"); self.detail['hyphen_property'][word] += 1
         elif word == '%':
             out = hedge('percent/C/en'); self.detail['percent'][t] += 1
+        elif t.startswith('P') and CLITIC.match(SINGLE_QUOTES.sub("'", word)):
+            v = CLITIC_VERB.get(SINGLE_QUOTES.sub("'", word).rstrip('0123456789'))     # D4.1: "I’m a language model", the
+            out = hedge(f"{v}/P/en") if v else None; reason = None if v else 'clitic'  # main verb of a curly clitic
+            self.detail['clitic_verb'][word] += 1
         elif q4_all(self, atom, lambda p: p in self.label_pos):
             reason = 'label'; self.detail['label'][word] += 1                 # §6 item 8: "Table 2", "Fig. 1b"
         elif NUMBER_RX.match(word) or (t.startswith(('C#', 'M#')) and word in NUMBER_WORDS):

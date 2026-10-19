@@ -6,22 +6,19 @@
 > Older contents are not kept here (git history has them); the durable record stays in the design docs, RUN_LOG and
 > CORPUS_STATISTICS.
 
-## State (2026-10-19)
+## State (2026-10-19, after RL-149)
 
-- **Current work:** ticket 107 (new matrix builder chunk12v3 + trial on the full-scale corpus, slices 2020/2021),
-  prerequisite **P1, data quality** — `plans/ticket107-m1-chunk12v3-design.md` §8.1 (prerequisites), §8.3 (P1 progress,
-  results and follow-ups); RUN_LOG RL-147, RL-148.
-- **Done in P1:** trial article set (2020: 91, 2021: 372); coverage, journals, G3 automated invariants; author-linking
-  checks and application (`author_links_trial.csv`); institutions — option 4 with hand review
-  (`institution_review_trial.csv`); G3 hand-read sample (`fullscale_pipeline/g3_trial_sample/`) and follow-up
-  investigations (D2, D4.1, D5–D7).
-- **Waiting for the owner:** (1) the D2 fix — treat hyphenated names containing a focal term, and other spellings when
-  the article elsewhere uses the focal term, as focal occurrences (G3 change + rerun, ~5 min on CSF); (2) the D4.1
-  cleaning list (normalise ligatures, strip brackets glued to words, drop formula fragments, stray quotes, footnote
-  numbers, the figure-panel caption). Both can be one documented G3 patch and rerun. The owner also reads
-  `g3_trial_sample/sample_30.md`.
-- **Next after P1:** P2 — weighting inside each relation matrix and building the chunk12v3 matrices; then the agenda of
-  §8.2 (principles, mechanism by mechanism, placement map, Optuna decision, trial test design).
+- **Current work:** ticket 107 P1 (data quality) — design doc §8.3, "P1 owner decisions and follow-ups"; RUN_LOG RL-149;
+  G3_POSTPROCESSING.md §6 item 9.
+- **Done:** D4.1 + figure-panel legends implemented in `g3_v2/g3_curation_v2.py` (sha256 `43ae81d2c33a`), tested (self-test
+  54/54, hard 187/200, shards 0 and 20 compared); not yet run on the corpus. D2 measured corpus-wide (scan scripts
+  `corpus_statistics/focal_gap_scan.py`, `focal_gap_classify.py`); D5 traced to spaCy; D6 rule origin traced (no
+  recorded reason).
+- **Waiting for the owner:** D2 decisions (fix spellings of listed terms + LLaMA bug + Bert/Roberta; hyphenated name as
+  one atom or listed part; adopt unlisted model names; incremental rerun route); D6 confirm/revise; D5 whether to
+  measure/apply a dash→bracket G2 rule.
+- **Next:** implement D2 in `focal_terms.py`, incremental P2→P6→P7→G2 run, one G3 production rerun, re-verify trial P1
+  checks; then P2 (weighting, chunk12v3 trial matrices).
 
 ## Latest output (assistant, 2026-10-19, verbatim)
 

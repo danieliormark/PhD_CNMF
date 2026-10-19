@@ -1,0 +1,136 @@
+[
+ {
+  "id": "D41-01",
+  "text": "ChatGPT improved the classiﬁcation accuracy of the ﬁnal workﬂow.",
+  "expect": [
+   "classification/",
+   "final/",
+   "workflow/"
+  ],
+  "forbid": [
+   "%ef%ac"
+  ],
+  "note": "PDF ligatures written out"
+ },
+ {
+  "id": "D41-02",
+  "text": "It’s clear that ChatGPT’s answers were useful for O’Connor’s team.",
+  "expect": [
+   "answer/",
+   "useful/",
+   "o'connor/"
+  ],
+  "forbid": [
+   "%e2%80%99/",
+   "’/",
+   "’s/"
+  ],
+  "note": "curly apostrophes: clitic and possessive go, a name keeps its apostrophe"
+ },
+ {
+  "id": "D41-03",
+  "text": "No artificial intelligence (AI)-based tools, such as large language models (LLMs), chatbots, or image creators, were used in this study.",
+  "expect": [
+   "ai_based/"
+  ],
+  "forbid": [
+   "%29"
+  ],
+  "note": "a bracket glued to a word goes (corpus sentence PMC11694689.r1.L114.S7)"
+ },
+ {
+  "id": "D41-04",
+  "text": "The author(s) used ChatGPT to edit the text.",
+  "expect": [
+   "author/"
+  ],
+  "forbid": [
+   "author%28s"
+  ],
+  "note": "plural marker in brackets"
+ },
+ {
+  "id": "D41-05",
+  "text": "The attention of the LLM scales as O(n2) with the sequence length.",
+  "expect": [
+   "scale/"
+  ],
+  "forbid": [
+   "o%28n2",
+   "/o%28"
+  ],
+  "note": "formula fragment dropped"
+ },
+ {
+  "id": "D41-06",
+  "text": "KeyBERT is a keyword extraction tool that is based on BERT 18 .",
+  "expect": [
+   "keybert/"
+  ],
+  "forbid": [
+   "18/"
+  ],
+  "note": "flattened superscript citation"
+ },
+ {
+  "id": "D41-07",
+  "text": "LLMs are prone to hallucinations 7– 9 , and GPT-4 is no exception.",
+  "expect": [
+   "hallucination/"
+  ],
+  "forbid": [
+   "7/",
+   "9/"
+  ],
+  "note": "citation range"
+ },
+ {
+  "id": "D41-08",
+  "text": "ChatGPT was used with a temperature of 0 .",
+  "expect": [
+   "temperature/",
+   "0/"
+  ],
+  "note": "a value after 'of' stays"
+ },
+ {
+  "id": "D41-09",
+  "text": "Fine-tuning BERT took 7 , 380 seconds on the dataset.",
+  "expect": [
+   "380/"
+  ],
+  "note": "a thousands figure split by a space stays"
+ },
+ {
+  "id": "D41-10",
+  "text": "The LLM was evaluated with the score function fθ and the ΔAUC.",
+  "expect": [
+   "%CE%B4auc/"
+  ],
+  "forbid": [
+   "fθ",
+   "f%ce%b8"
+  ],
+  "note": "a symbol with one Latin letter goes; a Greek-prefixed word stays"
+ },
+ {
+  "id": "D41-11",
+  "text": "The C++ code calls ChatGPT and Command R+ through one API.",
+  "expect": [
+   "c++/"
+  ],
+  "note": "plus signs are plain text"
+ },
+ {
+  "id": "D41-12",
+  "text": "Bard’s response to our prompts was, “I’m a language model and don’t have the capacity to understand and respond.”",
+  "expect": [
+   "language_model/C/focal",
+   "be/P/en"
+  ],
+  "forbid": [
+   "%E2%80%99m"
+  ],
+  "note": "a curly clitic as the main verb becomes its verb (corpus sentence PMC11325115.r1.L156.S5)"
+ }
+]

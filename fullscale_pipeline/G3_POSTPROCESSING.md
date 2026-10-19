@@ -788,6 +788,40 @@ item 4.]*
      `g3_audit_rules/hard_rules2.json` and runner `hard_rules2.py` (15/15; 4/15 before); audit scripts in
      `diagnostics/g3_audit/`.
 
+9. **Formatting remnants and figure legends (ticket 107 P1, D4.1) — DECIDED 2026-10-19 (owner): keep legitimate
+   content, drop formatting remnants; the figure-panel caption must be dropped. Implemented in the test script, not yet
+   run on the corpus (RL-149).** Found by reading the trial sample (`g3_trial_sample/`) and then measured on the whole
+   G3 v1 output (`g3_v2/d41/d41_collect.py`, `d41_numbers.py`): ligature 38 atom occurrences, curly quotes 1,903,
+   glued brackets 3,673, formula signs 1,963, Greek letters with Latin letters 650 (of 664,725 units). Rules
+   (`tidy_word` in `clean_root`; every before → after change was listed and read, `d41_tidy2.py`):
+   - PDF ligatures written out (ﬁne → fine); curly quotes and the prime used as an apostrophe become "'" (o'connor
+     stays); a clitic left as a word of its own ("’s", "’m", "’ve") goes, and a possessive or clitic glued to a word goes
+     ("openai′s" → openai), as with straight apostrophes; a clitic that is the clause's main verb becomes be / have /
+     will / would ("I’m a language model", "ChatGPT's your go_to buddy") — this also applies to straight clitics, which
+     the stop list dropped as main verbs before, against decision g1 (§3);
+   - brackets glued to words go ("(AI)-based" → ai_based, "author(s)" → author, "Lucene(a)" → lucene, "[18F]FDG" →
+     18f_fdg, "SE(3)-equivariant" → se3_equivariant; an enumerator "2(b)" is dropped);
+   - formula and table debris dropped: any of | = ^ ~ < > and mathematical operators ("w|p", "pFDR<0", "s^"), a one-
+     or two-letter function call ("O(n2)", "p(x"), a Greek letter or prime with at most one Latin letter ("fθ", "δr",
+     "ηp2"), a Greek letter inside brackets; kept as plain text: "+" (C++, Command R+, CNN+LSTM, Bio+Clinical BERT),
+     "·" (DALL·E), words with a Greek prefix or suffix (ΔAUC, TCRβ, IL-4Rα, Aβ42);
+   - **citation numbers:** a flattened superscript citation, i.e. a number or list after a word and followed by a space
+     and punctuation ("based on BERT 18 .", "hallucinations 7– 9 ,", "domains 8 , 9 , 10 , 11 ,"), with every number of
+     its list (`Ctx.citation_numbers`); not after a value word ("of 0 .", "would cost 0 ."), not a ratio ("2 : 1"), not a
+     thousands figure split by a space ("7 , 380 seconds"), not at the end of a unit without punctuation ("out of 100").
+     279 kept number atoms in the G3 v1 output show this sign; all were read: citations, except the values named above.
+     **Not caught:** citations without the space-and-punctuation sign ("PubMed 1 abstracts", "KeyBERT 12, 28 is"): the
+     other sign tried (a small number between a capitalised word and a lower-case word) matched 2,991 cases, almost all
+     real counts, versions or labels, so it is not used;
+   - **figure-panel legends** opening with lower-case panel letters and a comma ("a, Enformer is trained to …", "d, e
+     Heatmaps showing …") are removed as non-prose (`PANEL_LEGEND`, reported as `panel_caption`): all 125 such units of
+     the G3 v1 output were read (figure legends and 3 table notes). Units opening with a capital letter ("A. …", "b. I
+     asked ChatGPT …") include list items of the prose and are not touched.
+   Checks: self-test 54/54; hard cases 187/200 (new set `g3_v2/hard/hard_d41.json`, 12/12; the 13 known failures);
+   shards 0 and 20 in full against the production output (`d41_compare.py`): 0 problems; parents 16,523 → 16,522 and
+   17,130 → 17,134, cousins 47,077 → 47,079 and 49,224 → 49,221; every changed atom is one of the kinds above, plus a
+   Unicode hyphen at a word end ("disease‐" → disease) and one table note that lost its only parent.
+
 ## 7. Test script
 
 ### 7.1 Test script v2 (current, 2026-10-10): every rule of §6 items 1–8
@@ -1062,7 +1096,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | b3eadb6d385c (0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 43ae81d2c33a (D4.1, RL-149; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
