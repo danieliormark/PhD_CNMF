@@ -6,7 +6,9 @@
 #   G4     unlisted model names accepted by the draft group-4 rule (focal_group4_rule.py)
 # PMC search ignores letter case, so a form whose lower case is also a name or word seen as noise in the scan (Robert,
 # Albert, Herbert, ...) is left out of the query; everything returned is filtered later by the case-sensitive matcher.
-#   python3 retrieval_gap_query.py SCAN.json FORMS.json OUT.json      (needs NCBI_API_KEY for 10 requests/s)
+#   python3 retrieval_gap_query.py SCAN.json FORMS.json OUT.json [FIELD] [SETS]      (needs NCBI_API_KEY for 10 requests/s)
+# FIELD defaults to Title/Abstract; "Body - All Words" is what R1's [Text Word] becomes in PMC (full body text, without
+# the abstract). SETS (comma list, default GEN,ALIAS,G4) may add OLD: R1's own [Title/Abstract] names, searched in FIELD.
 import calendar, collections, json, os, re, sys, time, urllib.parse, urllib.request
 
 LCS = "/mnt/hum01-rds/Basov/p91688di/llm_corpus_staging/"
@@ -30,16 +32,25 @@ def esearch(term, mindate, maxdate):
     raise RuntimeError(f"esearch failed: {term[:80]} {mindate}")
 
 
+FIELD = sys.argv[4] if len(sys.argv) > 4 else "Title/Abstract"
+
+
 def ids_for(terms):
-    q = "(" + " OR ".join(f'"{t}"[Title/Abstract]' for t in terms) + ') AND "open access"[filter]'
+    q = "(" + " OR ".join(f'"{t}"[{FIELD}]' for t in terms) + ') AND "open access"[filter]'
     out = set()
     for y in range(2015, 2027):
         n, ids = esearch(q, f"{y}/01/01", f"{y}/12/31" if y < 2026 else "2026/09/30")
         if n > 9999:                                      # split by month, as R1 did
             for m in range(1, 13 if y < 2026 else 10):
                 n2, ids2 = esearch(q, f"{y}/{m:02d}/01", f"{y}/{m:02d}/{calendar.monthrange(y, m)[1]}")
-                assert n2 <= 9999, (terms[:3], y, m, n2)
-                out |= set(ids2)
+                if n2 > 9999:                             # split the month in thirds
+                    last = calendar.monthrange(y, m)[1]
+                    for a, b in ((1, 10), (11, 20), (21, last)):
+                        n3, ids3 = esearch(q, f"{y}/{m:02d}/{a:02d}", f"{y}/{m:02d}/{b:02d}")
+                        assert n3 <= 9999, (terms[:3], y, m, a, n3)
+                        out |= set(ids3)
+                else:
+                    out |= set(ids2)
         else:
             out |= set(ids)
     return {f"PMC{i}" for i in out}
@@ -65,7 +76,10 @@ if __name__ == "__main__":
             if c[:2] in ("A1", "A2", "A3", "A5", "A6"):
                 alias[o["tok"]] += 1
     g4 = [f["form"] for f in F if ns["is_model"](f["form"]) == "model"]
-    sets = {"GEN": GEN}
+    want = (sys.argv[5] if len(sys.argv) > 5 else "GEN,ALIAS,G4").split(",")
+    r1 = open("/mnt/hum01-rds/Basov/p91688di/query_pmc_entrez.py").read()
+    OLD = re.findall(r'"([^"]+)"\[Title/Abstract\]', r1)
+    sets = {"GEN": GEN, "OLD": OLD}
     for name, src in (("ALIAS", list(alias)), ("G4", g4)):
         seen, keep = set(), []
         for t in src:
@@ -73,8 +87,10 @@ if __name__ == "__main__":
             if c and c.lower() not in seen:
                 seen.add(c.lower()); keep.append(c)
         sets[name] = keep
+    sets = {k: v for k, v in sets.items() if k in want}
     target = set(open(LCS + "target_pmcids.txt").read().split())
-    res = {"terms": sets, "ids": {}}
+    print("field", FIELD, "sets", {k: len(v) for k, v in sets.items()}, flush=True)
+    res = {"field": FIELD, "terms": sets, "ids": {}}
     for name, terms in sets.items():
         got = set()
         for i in range(0, len(terms), 80):

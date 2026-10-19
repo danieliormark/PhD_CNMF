@@ -1762,3 +1762,21 @@ only: homonyms (Gemini, llamas, the enzyme GPT, n-gram language models) are expe
 is applied after download. Output `LCS/retrieval_gap_20261019.json` (term lists and PMCIDs per set). Nothing downloaded;
 owner to confirm. [LOG]
 
+**RL-154 · 2026-10-19 · R1/R3 · CORPUS DATA (download started) + AUDIT (search fields) · LIVE**
+Owner: fetch approved; OpenAlex key supplied in the dialogue (used from the environment only, never written to a file or
+to git); document on git every change that affects the corpus; why title/abstract only? Search fields, checked by counts
+(open access, 2015-01..2026-09): PMC translates R1's `[Text Word]` to `[Body - All Words]` (the body text, without the
+abstract). So R1 selected by **body text for three phrases** ("large language model(s)", "Bidirectional encoder
+representations from transformers", "Transformer model(s)") and by **title/abstract for every name** (ChatGPT, GPT-4,
+BioBERT, ...). RL-153 mirrored the name rule (title/abstract); the owner had asked for the whole text. Counts by field:
+ChatGPT title/abstract 5,652 vs body 65,145; BERT 1,871 vs 17,621; DistilBERT 100 vs 703; "large language model"
+3,151 vs 15,035. A full-text gap search is running (`retrieval_gap_query.py`, now with a field argument and the set OLD
+= R1's own names searched in the same field, for comparison).
+Download (R3b): the 10,588 title/abstract candidates of RL-153 (`LCS/gap_pmcids_20261019_tiab.txt`) are needed under any
+field choice, so their download has started on incline (the node reaches the public bucket; R2 also ran outside SLURM;
+`sbatch` is not available on incline, a CSF wrapper is kept): `fullscale_pipeline/retrieval/fetch_gap_pmc.py` — R3's
+method (`aws s3 cp --no-sign-request`, first version found) with bucket versions 1-9 instead of 1-4 (deviation D4), into
+the separate folder `LCS/pure_text_corpus_gap/`; status `LCS/fetch_gap_status.tsv`, log `LCS/fetch_gap_20261019.log`. Nothing
+joins the corpus before the keep rule (at least one focal term of the new matcher in the plain text, allowed types,
+blacklist) is applied and recorded. [LOG]
+
