@@ -1676,3 +1676,18 @@ incremental route is proposed (existing ids/hashes frozen). Owner decisions pend
 brackets in place of the dashes give the correct parse (not applied). D6: the rule "focal atoms are left out of the
 cousins" comes unchanged from the toy 7.5 script; no reason is recorded anywhere. [LOG]
 
+**RL-150 · 2026-10-19 · G3 · CODE (D4.1 follow-up) + MEASUREMENT (D6) · LIVE**
+Owner asked whether legitimate citations with apostrophes were removed. Checked on every atom of the G3 v1 output with an
+apostrophe (`g3_v2/d41/d41_collect.py`, then the patched `clean_root`): `REFnnnnnn` tokens untouched; names in
+narrative citations kept and normalised (O’Connor → o'connor, D’Souza, Dell’Acqua, O'Brien); a possessive "'s" goes (20
+occurrences: Alzheimer’s → alzheimer, Cohen's → cohen), as spaCy already does with straight "'s". Gap found and fixed: a
+citation number glued after a possessive ("Hsu’s22", "PubMed’s43", "Sachdeva’s39") is now removed with it → hsu,
+pubmed, sachdeva. `g3_v2/g3_curation_v2.py` sha256 `87b71a939244`; self-test 54/54, hard 187/200.
+D6 measurement on the G3 v1 output: 816,075 parents in 664,725 units are 776,657 distinct clauses — 39,418 parents
+(4.8%, in 37,572 units) repeat a clause that already has a parent, with the focal role moved to another argument ("GPT-4
+outperformed BERT" gives two parents); 99,507 units (15%) hold 2+ different focal clauses; focal atoms removed from
+cousins 138,036 times (a focal clause appears again as a cousin of the other parent, stripped: "fine_tuning the
+pretrained language model BERT" → cousins `fine tune`, `pretrained`). Owner: a clause containing a focal term is by
+definition not a cousin; a parent can hold several focal hyperedges; the rule should change types, not remove words.
+Proposal (sentence-centric) to the owner, not implemented. [LOG]
+

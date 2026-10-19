@@ -207,7 +207,7 @@ def tidy_word(w):
     w = SINGLE_QUOTES.sub("'", w.replace(';', ';').replace('\\', ''))   # U+037E: the Greek question mark (";")
     if CLITIC.match(w) or FORMULA_SIGNS.search(w):
         return None
-    w = CLITIC_TAIL.sub('', w)
+    w = CLITIC_TAIL.sub('', re.sub(r"(?<=[a-z])'s\d+$", "'s", w))       # hsu’s22 (citation 22) -> hsu
     g = GROUP_NAME.match(w)
     if g:
         w = f"{g.group(1)}{g.group(2)}_{g.group(3)}"
