@@ -1632,3 +1632,14 @@ received date falls in the previous year for 41%. Analyses used OpenAlex year ex
 Design doc §7.4: owner decides to test option 2 and option 2 with temporal smoothing of the previous slice (γ);
 OpenAlex year proposed as the year definition; production/visibility-date reasoning recorded but not used now;
 slice-boundary sensitivity noted. [LOG]
+
+**RL-147 · 2026-10-19 · CORPUS-STATS · AUDIT + DATA PREP (trial, ticket 107 P1) · LIVE**
+Owner-approved P1 checks on the trial slices (2020: 91 articles; 2021: 372, incl. 5 no-PMID articles checked by
+OpenAlex type and text). `trial_p1_checks.py` (scope, coverage, journals, G3 invariants: 0 violations; 9 repeated
+hyperedges in a sentence, genuine, counted twice per owner). `name_linking_checks.py` (linking among unlinked bylines:
+precision 0.85-0.94, recall 0.88-0.92; name-key variants: current key kept). `pmc_vs_pubmed_authors.py` (97.3% of PubMed
+authors in the PMC header; PubMed list cleaner). `trial_institution_lineage.py` (OpenAlex institutions fetch, 817,
+cached; lineage is a sorted set of ancestors with multiple parents and registry errors) and
+`institution_review_trial.py` → `institution_review_trial.csv` (option 4: nearest university parent + hand review,
+108 cases, 35 merged). `g3_trial_sample.py` → `g3_trial_sample/sample_30.md`, `reading_notes.md` (7 points).
+Details: ticket 107 design doc §8.3. [LOG]

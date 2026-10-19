@@ -794,3 +794,30 @@ an OpenAlex institutions fetch, cached in diagnostics).
   data has errors (CONICET listed under a geodetic observatory). "Top of the lineage" is therefore not well defined;
   the rule is being decided. 86 institutions have a parent present; 64 "related" (not parent-child) pairs among
   top-level entities (often university–hospital) stay separate under any lineage rule.
+
+**P1 results, continued (2026-10-19).**
+- **A, author linking checks** (`name_linking_checks.py`, `pmc_vs_pubmed_authors.py`): (A1) linking bylines without an
+  ID *to each other* (hide-and-recover, 3 random draws of 8,374 hidden bylines): with the current name key, precision
+  0.85-0.94, recall 0.88-0.92; 0.30-0.65% of the hidden bylines end up in a wrong pair. (A2) name-key variants: surname
+  + first given name (current) is the best balance; first initial only doubles to triples false merges (precision
+  0.63-0.77; 6.2% of single-article people falsely linked to a known person vs 3.5%); all given names loses recall
+  (0.81-0.85) for no gain in precision. Linking to a person whose ID we know, current key: 83.7% correct, 0.4% wrong
+  among people with 2+ articles; 3.5% of single-article people linked (upper bound of false merges, part are OpenAlex
+  profile splits). (A3) PMC full-text author lists vs PubMed's: 97.3% of PubMed authors found in the PMC header
+  (trial 99.8%); the header lists more lines in 48% of articles because it also carries reviewers, titles and author
+  biographies, and is cut at 120 lines (very long author lists). PubMed's list is the cleaner source; no sign of
+  authors missing from it.
+- **B, institutions (option 4, owner):** rule (1), climb to the nearest university parent and never above it, plus a
+  hand review of every trial institution with a university parent: `corpus_statistics/institution_review_trial.csv`
+  (108 cases: 35 merged, 73 kept, each with its reason; script `institution_review_trial.py`). Merged: sub-units,
+  university medical centres and hospitals recorded as part of the university, joint research units with one
+  university parent, one duplicate record (Université Jean Monnet). Kept: universities under state systems, federations
+  or alliances (57), units with 2+ university parents (8), agencies, national laboratories, health clusters, trusts.
+  Two caveats: OpenAlex/ROR record today's structure, not 2020-2021 (e.g. UT Health San Antonio merged with UTSA only in
+  2025, kept apart); rule (1) does not merge sub-units of companies or agencies (Google DeepMind / Google, Data61 /
+  CSIRO, CNR institutes).
+- **D, hand-read sample:** `fullscale_pipeline/g3_trial_sample/sample_30.md` (30 units, seed 107) and
+  `reading_notes.md`. Structure coherent; seven points noted, chiefly: atom provenance is per sentence, not per
+  hyperedge, when a word repeats (21.1% of trial hyperedges), which limits tracing communities back to the exact
+  original words; the same focal term sometimes typed `/en` instead of `/focal` (separate entities); participles as
+  the parent's verb group (`use` 9.7% of parents, `base` 1.8%).
