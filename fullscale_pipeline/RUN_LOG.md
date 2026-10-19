@@ -1748,3 +1748,17 @@ U+2019 after a letter or digit written as "'", both through the current G3 (`c8b
 Conclusion offered to the owner: normalise and re-parse only the sentences whose G2 parse has a quote mark typed as a verb
 (876), not all 59,566 with a curly apostrophe; atom identity is already unified in G3 (D4.1). Not applied. [LOG]
 
+**RL-153 · 2026-10-19 · R1 · AUDIT (retrieval gap; read-only Entrez esearch) · LIVE**
+Owner: retrieve the papers that name missed models and check whether they are already in the list. Found on the way: R1
+(`query_pmc_entrez.py`, run 2026-09-23) never searched the bare names added to `focal_terms.py` on 2026-09-26 (BERT,
+RoBERTa, GPT, Gemini, Bard, Llama, Mistral, PaLM, Gemma, "language model(s)"). `corpus_statistics/retrieval_gap_query.py`
+(host incline33, NCBI API key from the environment): R1's filters ("open access"[filter], publication dates 2015-01 to
+2026-09), [Title/Abstract]; three term sets — GEN (those 11 names), ALIAS (1,584 spellings of listed terms from the D2
+scan), G4 (3,290 model names accepted by the draft group-4 rule); forms whose lower case is a name or word seen as noise
+are left out, because PMC search ignores case. Articles found / not in R1's 46,241 targets: GEN 23,276 / 9,496; ALIAS
+25,612 / 9,608; G4 8,515 / 1,462; union not in R1: 10,588 (1,092 of them only through ALIAS or G4). These are candidates
+only: homonyms (Gemini, llamas, the enzyme GPT, n-gram language models) are expected among them, and the keep rule
+(owner: at least one focal term of the new matcher in the plain text, as P2, plus the allowed types and the blacklist)
+is applied after download. Output `LCS/retrieval_gap_20261019.json` (term lists and PMCIDs per set). Nothing downloaded;
+owner to confirm. [LOG]
+

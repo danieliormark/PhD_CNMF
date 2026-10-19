@@ -26,7 +26,11 @@
   6. D5 count of dash-enclosed asides with a focal term (approved), on the corpus as fixed after step 3.
   7. Re-verify the trial P1 checks, then P2 (weighting, chunk12v3 trial matrices).
 
-## Open points for the owner (2026-10-19, after RL-151)
+## Open points for the owner (2026-10-19, after RL-153)
+
+- Retrieval gap (RL-153): 10,588 open-access articles name a focal term in title/abstract but are not in R1's targets
+  (9,496 through the bare names added after R1 ran). Confirm download (S3 via a CSF job), then the keep rule.
+- OpenAlex key for the social data of new articles: re-supply in the dialogue (never on git), or use the mailto pool.
 
 - Curly apostrophe after a plural ("LLMs’ responses") derails spaCy in 880 units (692 articles). Owner: test on real
   and hard cases first (does the fix work; does it introduce new problems) before committing to re-parsing. Tested (RL-152):
@@ -59,3 +63,9 @@
   matched but exceeded human scores") — output acceptable: "exceeded human scores" is a legitimate clause related to the
   parent but not part of it; clinical trials / protocols excluded (a separate genre, rarely included in such corpora), so
   the allowed types are research articles, historical articles and reviews.
+- **Third round (2026-10-19):** re-parse of the 876 sentences with an apostrophe parsed as a verb approved for the to-do
+  list; the sequence approved in general; new papers: retrieve the ids and the papers following the group-4 proposal,
+  check whether they are already in the list, run the preprocessing on them (P0 regions, ..., blocks); existing
+  articles also need their block extraction updated where they contain the missed aliases. **Keep rule for new papers
+  (owner):** the same rule as originally — an article is kept if at least one focal term (new matcher) is found in its
+  plain text (P2: a focal sentence), not only in title/abstract. Also: say where CSF or external APIs are needed.
