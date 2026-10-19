@@ -28,10 +28,9 @@
 
 ## Open points for the owner (2026-10-19, after RL-151)
 
-- Curly apostrophe after a plural ("LLMs’ responses") derails spaCy in 880 units (692 articles): approve normalising
-  curly apostrophes in G2 and re-parsing the 59,566 sentences that contain one, inside the incremental G2 step?
-- "Clinical trial / protocol" articles (218 in the G3-valid corpus, many are trial reports): excluded by the type list —
-  confirm, or count trial reports as research articles?
+- Curly apostrophe after a plural ("LLMs’ responses") derails spaCy in 880 units (692 articles). Owner: test on real
+  and hard cases first (does the fix work; does it introduce new problems) before committing to re-parsing. Tested (RL-152):
+  recommended to re-parse only the 876 sentences whose quote mark was parsed as a verb; awaiting owner.
 - Group 4 draft rule and exclusion lists (RUN_LOG RL-151) to confirm; the 50 candidate new articles are reviewed after the
   matcher is final.
 
@@ -56,3 +55,7 @@
 - **D5:** count of dash-enclosed asides approved; the corpus to count on is defined after the hyphenated model names
   are solved.
 - **Clitic main verbs** → be/have/will/would: approved ("a great point").
+- **Second round (2026-10-19):** G2 apostrophe fix — test on real and hard cases before any re-parse; O08 ("not only
+  matched but exceeded human scores") — output acceptable: "exceeded human scores" is a legitimate clause related to the
+  parent but not part of it; clinical trials / protocols excluded (a separate genre, rarely included in such corpora), so
+  the allowed types are research articles, historical articles and reviews.

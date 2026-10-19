@@ -1730,3 +1730,21 @@ articles (whitelist, no focal sentence today, a missed model of groups 1–4): 5
 Type note: "Clinical trial / protocol" (218 G3-valid articles, including trial reports) is left out by the owner's list;
 raised with the owner. [LOG]
 
+**RL-152 · 2026-10-19 · G2 · TEST (curly apostrophe normalisation, not applied) · LIVE**
+Owner: test before committing to any re-parse — does the fix do its job, does it introduce problems. `g3_v2/d41/apos_test.py`
+(host incline33): each sentence parsed twice with the current G2 code (`process_sentence`), as written and with every
+U+2019 after a letter or digit written as "'", both through the current G3 (`c8b46c840f74`); parents compared.
+- Broken group (all 876 sentences whose G2 v3 parse has a quote mark typed as a verb): quote-as-verb gone in 871; sentences
+  without a parent 214 → 10; 304 gain parents, 322 same number with changed content, 246 identical, 4 fewer (mostly
+  role-rotated duplicates collapsing; one loses part of a sibling).
+- Control (400 random of the 58,306 other sentences with a curly apostrophe): 330 identical; 62 same number of parents with
+  changed content — read 14: mostly better (the owner of a possessive joins its noun phrase: "students’ use of ChatGPT" →
+  `student` in the focal hyperedge), some worse (a clause swallowed: "Cochran’s Q was not significant"; a quoted sibling
+  lost); 5 gain a parent; 3 lose one ("ChatGPT 5.4’s 98% accuracy", "Reddit users’ … BioBERT", "the model’s … scores
+  point to ChatGPT's suitability"), i.e. about 0.75%.
+- 15 constructed hard cases (possessives, contractions, names, decades, single-quoted terms, quotations): 11 identical, 4
+  changed, all for the better (a missing parent restored; possessive phrase joined; negation into the verb group; a quoted
+  term parsed more fully, its closing quote still typed as a verb).
+Conclusion offered to the owner: normalise and re-parse only the sentences whose G2 parse has a quote mark typed as a verb
+(876), not all 59,566 with a curly apostrophe; atom identity is already unified in G3 (D4.1). Not applied. [LOG]
+
