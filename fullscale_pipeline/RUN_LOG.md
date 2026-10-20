@@ -1948,3 +1948,20 @@ inside kept articles (false focal sentences in otherwise genuine articles): gap 
 Lists rebuilt (F0 and F1 dropped): `gap_stage/gap_removals_stage_ab.csv`, `gap_stage/gap_article_list_after_ab.txt`
 (**16,703** = 15,378 kept + 1,325 F2 pending the manual check), `LCS/article_exclusions_stage_b.csv` (current: 783 F1 +
 104 F0 = 887, not yet applied). Note on reader excerpts: P2 blocks already merge touching windows (± 1 sentence). [LOG]
+
+**RL-161 · 2026-10-21 · Stage B · CODE (reader excerpts, scoring) + GOLD LABELS (calibration batch) · LIVE**
+Manual check of F2, option B (owner): readers judge excerpts, not full articles (median raw article ~60 KB ≈ 15k tokens;
+excerpt ≈ 600 tokens). `retrieval/gap_f2_excerpts.py` writes a batch as plain text plus a JSON index
+(`gap_stage/stage_b/manual/`): title, journal, year; abstract (the text after the PMC header block up to the
+Introduction, first 150 words; separator lines may carry a stray control byte) and keywords; every P2 block (touching
+±1-sentence windows already merged by P2) whose non-statement focal sentences hold a surviving ambiguous hit, the hit
+marked ⟦…⟧, with its section heading; the whole-text context-word count and the article's own LLM/GPT/BERT expansions;
+one question per (article, term), plural forms merged, term-specific wording (transformer = the machine-learning
+architecture). Rubric `manual/RUBRIC.md` (verdicts yes / no / statement / unsure with reason codes; neural language
+models incl. protein/chemical LMs count, linguistic/cognitive, programming-language and n-gram "language models" do
+not, as in the v2 matcher's homonym rule). `retrieval/gap_f2_score.py` scores a reader's JSONL against gold labels.
+Articles judged so far by the assistant: 400 in the two formal hand-check rounds (labels of the 200 flagged ones in
+`handcheck/judgements_r1_r2_flagged.csv`; only 32 of the 400 are still F2 after RL-160). Calibration batch `calib_v1`:
+115 articles, 129 questions (the 32 + 53 new F2 + 15 current F2 + 15 positive controls: kept articles whose terms are
+all ambiguous); gold labels by the assistant (`calib_v1_gold.json`): no 91, yes 34, statement 2, unsure 2. Not yet
+given to any reader agent (owner approval pending). [LOG]
