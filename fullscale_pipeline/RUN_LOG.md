@@ -1824,3 +1824,36 @@ the fetcher now reads the same bucket objects over their public HTTPS address (`
 <PMCID>.<v>/<PMCID>.<v>.txt`, versions 1-9, first found; written via a `.part` file and renamed), about 2,100 files/min;
 `FETCH_VIA=aws` restores the CLI. The interrupted run left no empty or partial files; present files are skipped.]* [LOG]
 
+**RL-155 · 2026-10-20 · R1 · AUDIT + RULE CHANGE (corpus-extension candidates; read-only Entrez) · LIVE**
+Owner (2026-10-19/20): the candidate search uses the full body text (plus title/abstract); types are checked before the
+download; false positives and scale to be dealt with; every proposal must be elaborated. State at the start: the jobs of
+RL-154 stopped when the session ended (download at 7,500/10,588, resumed and finished: 10,578 downloaded, 10 not in the
+bucket; the body-text search lost with the session's scratch folder, rerun with its work files in `LCS/gap_audit/`).
+1. Search fields, measured by counts (open access, 2015-01..2026-09): body-text hits of the bare names are dominated by
+   homonyms, because PMC search ignores case: PaLM 67,699 (palm), GPT 39,671 (the enzyme), Gemini 37,088, Bard 12,239
+   (C. R. Bard), BERT/RoBERTa ~300-380 per year in 2015-2017 (people named Bert, Roberta) before the models existed.
+   Full body-text search over all sets: 297,324 articles not in R1, mostly through such homonyms.
+2. Per-term counts (`retrieval_term_counts.py` → `term_counts.tsv`, 4,874 spellings and model names, body and
+   title/abstract) located them: names containing an evidence-requiring family (GPT, Gemini, Bard, Llama, Mistral, PaLM,
+   Gemma; e.g. "Med-PaLM" is searched as "palm") and spellings PMC reduces to words or names ("HuBERT+" → "hubert").
+3. **Group-4 rule corrected** (`focal_group4_rule.py`): a title-case family name (Llama, Mistral, Gemma, Gemini) followed
+   by more lower-case letters is a different word (Gemmatimonadetes, Geminiviridae, Geminin, Llamafile), except a plural
+   "s" or a version "v" + digit (SynLlamas, Mistralv0.1); exclusions added: GPTMS (a silane), CSS-Palm (a tool); plural
+   tool names excluded like the singular (BERTopics). On the corpus scan: 23 forms no longer accepted (the biology and
+   tool words above; 2 glued typos "MedGemmathe", "Llamalast" lost), 4,911 accepted.
+4. Search terms dropped (evidence rule and PMC's reading): 2,101 containing an evidence-requiring name; 40 that PMC turns
+   into a search already run; 98 that PMC reads as a word or name; 23 no longer accepted; 144 duplicates; 2,468 kept.
+   R1's guarded names that need article evidence (Claude, Grok, Galactica, GROVER, AGBT, KPGT, X-MOL, GO-PRO, Transmol,
+   MOLGEN, MoMu, GIMLET, PMLM, KeAP, RITA, GPN, ENBED; 17) are likewise not searched on their own in the body text.
+5. Release-date check (`retrieval_release_check.py` → `release_check.tsv`): a BERT-family name cannot appear before late
+   2018, so hits in 2015-2018 are collisions. 54 of 2,468 kept terms have such hits (DR-BERT 199 before / 308 from 2019,
+   GEBERT 157/773, BERTino 124/404, CyBERT 36/23, ...); flagged together with BERT, RoBERTa, "language model(s)".
+6. Context condition for flagged terms (a context word in the body: transformer, language model, NLP, pretrained,
+   fine-tuned, deep learning, neural network, machine learning, embedding, attention mechanism, tokeniser), recall on the
+   current corpus (`retrieval_context_recall.py`; articles whose P2 terms include the term): BERT 6,732/6,733, RoBERTa
+   1,383/1,383, "language model" 9,286/9,839 (94.4%, without the language-model words themselves as context). Caveat:
+   the current corpus is LLM-centred by construction; recall among body-only candidates may be lower.
+7. Candidate search running (`retrieval_candidates.py` → `candidates.json`): body text and title/abstract; version A =
+   flagged terms plain, version B = flagged terms with the context condition; to be reported with type eligibility before
+   any further download. [LOG]
+

@@ -16,6 +16,11 @@ API_KEY = os.environ.get("NCBI_API_KEY", "")
 INTERVAL = 0.11 if API_KEY else 0.35
 URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 GEN = ["BERT", "RoBERTa", "GPT", "Gemini", "Bard", "Llama", "Mistral", "PaLM", "Gemma", "language model", "language models"]
+# GEN split (owner 2026-10-19, full-text search): NOEVID names count as focal terms on their own; EVID names count only in an
+# article that also has a PLAIN term (focal_terms.NEED_EVIDENCE), and such an article is found through OLD/ALIAS anyway,
+# so EVID alone cannot bring in an article that passes the keep rule
+NOEVID = ["BERT", "RoBERTa", "language model", "language models"]
+EVID = ["GPT", "Gemini", "Bard", "Llama", "Mistral", "PaLM", "Gemma"]
 SUFFIX = re.compile(r"[-_](?:based|derived|driven|like|style|powered|assisted|generated|only|enhanced)$", re.I)
 
 
@@ -37,7 +42,7 @@ FIELD = sys.argv[4] if len(sys.argv) > 4 else "Title/Abstract"
 
 def ids_for(terms):
     q = "(" + " OR ".join(f'"{t}"[{FIELD}]' for t in terms) + ') AND "open access"[filter]'
-    out = set()
+    out = {}
     for y in range(2015, 2027):
         n, ids = esearch(q, f"{y}/01/01", f"{y}/12/31" if y < 2026 else "2026/09/30")
         if n > 9999:                                      # split by month, as R1 did
@@ -48,12 +53,12 @@ def ids_for(terms):
                     for a, b in ((1, 10), (11, 20), (21, last)):
                         n3, ids3 = esearch(q, f"{y}/{m:02d}/{a:02d}", f"{y}/{m:02d}/{b:02d}")
                         assert n3 <= 9999, (terms[:3], y, m, a, n3)
-                        out |= set(ids3)
+                        out.update({i: y for i in ids3})
                 else:
-                    out |= set(ids2)
+                    out.update({i: y for i in ids2})
         else:
-            out |= set(ids)
-    return {f"PMC{i}" for i in out}
+            out.update({i: y for i in ids})
+    return {f"PMC{i}": y for i, y in out.items()}
 
 
 if __name__ == "__main__":
@@ -78,8 +83,8 @@ if __name__ == "__main__":
     g4 = [f["form"] for f in F if ns["is_model"](f["form"]) == "model"]
     want = (sys.argv[5] if len(sys.argv) > 5 else "GEN,ALIAS,G4").split(",")
     r1 = open("/mnt/hum01-rds/Basov/p91688di/query_pmc_entrez.py").read()
-    OLD = re.findall(r'"([^"]+)"\[Title/Abstract\]', r1)
-    sets = {"GEN": GEN, "OLD": OLD}
+    OLD = re.findall(r'"([^"]+)"\[(?:Title/Abstract|Text Word)\]', r1)    # R1's names and its three body-text phrases
+    sets = {"GEN": GEN, "NOEVID": NOEVID, "EVID": EVID, "OLD": OLD}
     for name, src in (("ALIAS", list(alias)), ("G4", g4)):
         seen, keep = set(), []
         for t in src:
@@ -92,11 +97,12 @@ if __name__ == "__main__":
     print("field", FIELD, "sets", {k: len(v) for k, v in sets.items()}, flush=True)
     res = {"field": FIELD, "terms": sets, "ids": {}}
     for name, terms in sets.items():
-        got = set()
+        got = {}
         for i in range(0, len(terms), 80):
-            got |= ids_for(terms[i:i + 80])
-            print(f"{name}: {min(i + 80, len(terms))}/{len(terms)} terms, {len(got):,} articles, {len(got - target):,} not in R1", flush=True)
+            got.update(ids_for(terms[i:i + 80]))
+            print(f"{name}: {min(i + 80, len(terms))}/{len(terms)} terms, {len(got):,} articles, {len(set(got) - target):,} not in R1", flush=True)
         res["ids"][name] = sorted(got)
+        res.setdefault("year", {}).update(got)
     allnew = set().union(*map(set, res["ids"].values())) - target
     res["summary"] = {k: dict(found=len(v), not_in_r1=len(set(v) - target)) for k, v in res["ids"].items()}
     res["summary"]["all"] = dict(not_in_r1=len(allnew))

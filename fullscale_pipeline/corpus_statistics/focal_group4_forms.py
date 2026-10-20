@@ -1,6 +1,6 @@
 # Group 4 (owner 2026-10-19): unlisted model-name forms, counted only in articles of the allowed types
 # (research article, historical article, narrative review, systematic / scoping review / meta-analysis).
-import collections, json, re, sys
+import collections, json, os, re, sys
 sys.path.insert(0, "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/corpus_statistics")
 R = json.load(open(sys.argv[1]))
 D = "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/diagnostics/openalex_authors/"
@@ -53,4 +53,4 @@ for i, (na, n, nn, k) in enumerate(rows):
     cum += n
     if i < 400: print(f"{k}\t{na}\t{n}\t{nn}")
     if i in (99, 199, 399, 799): print(f"--- top {i+1} forms cover {100*cum/tot:.1f}% of occurrences")
-json.dump([dict(form=k, articles=na, occ=n, new_articles=nn) for na, n, nn, k in rows], open("g4_forms.json", "w"))
+json.dump([dict(form=k, articles=na, occ=n, new_articles=nn) for na, n, nn, k in rows], open(os.path.join(os.path.dirname(os.path.abspath(sys.argv[1])), "g4_forms.json"), "w"))
