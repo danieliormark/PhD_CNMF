@@ -44,6 +44,16 @@
   stay in the corpus at all (poor author deduplication) — owner to decide.
 - OpenAlex key: supplied in the dialogue 2026-10-19, used from the environment only.
 
+## Stage A/B state (2026-10-20, RL-157 to RL-159)
+
+- New corpus after Stage A/B drops: `LCS/gap_stage/gap_article_list_after_ab.txt`, 18,478 articles (15,534 kept +
+  2,944 F2 ambiguous-only pending); removals with reasons in `gap_removals_stage_ab.csv`.
+- **FLAG (owner): remove the current corpus's AI-use-statement-only articles** — 781 (+3 pre-release only) in
+  `LCS/article_exclusions_stage_b.csv`; they went through P7, G2 and G3 (737 valid in g3_v1) and must not enter M1.
+- F2: owner asked for options, not a run. Proposed: hit-level rules in a matcher v3.1 (abbreviation definitions,
+  supplier/instrument patterns, sentence context), then a hand check of the remaining grey zone.
+- Statement position measured: mid-body declarations are common (Methods subsections), so position is not a veto.
+
 ## Open points for the owner (2026-10-19, after RL-153)
 
 - Curly apostrophe after a plural ("LLMs’ responses") derails spaCy in 880 units (692 articles). Owner: test on real

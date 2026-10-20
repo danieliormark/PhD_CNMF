@@ -1890,3 +1890,34 @@ kept + 3,685 F2 pending). Current corpus: `LCS/article_exclusions_stage_b.csv` (
 **not yet applied** to `article_whitelist.txt` (applying it reruns F4 and downstream; to be done with the incremental run).
 Check: no F1 article has a focal term in its title (183 have AI in the title, e.g. AI in radiotherapy; AI is not a focal
 term). Known residual: 1 F1 error in 20 current-corpus checks (a survey on AI in academic writing). [LOG]
+
+**RL-159 · 2026-10-20 · Stage B · CODE (release-date rule, statement rule) + CORPUS DATA (drops) + MEASUREMENT (statement position) · LIVE**
+- Venue: no remaining article (gap 18,478; current whitelist 39,299) has a repository or preprint server as its journal
+  (esummary / R1 metadata); preprints were already removed by the header rule (gap 1,994).
+- Release-date rule (owner), per term hit, applied before the flags: a named model's hit in an article published before
+  the model's release year is removed (`RELEASE` in `gap_stage_b.py`; general terms such as "language model", LLM,
+  "transformer model" exempt); a sentence left without a term is no longer focal; new flag **F0 prerelease_only**.
+  Removed hits listed per sentence in `stage_b/stage_b_prerelease_hits.tsv` (gap 2,230 hits, current 25), also for
+  articles that keep other terms. Sampled removals are all homonyms (ESM-2 = supplementary material, Llamas = a surname,
+  Zeiss Gemini450 SEM, M-Palm/SwissPalm, Progen antibodies before 2020).
+- Statement rule: "this study/research" no longer counts as a manuscript word for positive statements (it turned
+  "the antibodies used in this study" into a statement); negated statements now need an object about the paper
+  (submitted work, production, preparation, writing, this study, any aspect, images, study data); the looser negation
+  ("not used to generate content or analyse data") counts only next to another statement in the same article.
+  Runs 3–8 kept in `stage_b/run*/`.
+- Final flags: gap kept 15,534, F2 2,944, F1 6,960, F0 871; current kept 33,666, F2 212, F1 781, F0 3.
+- Drops (owner: no focal sentence, AI-use statement only, pre-release only): `gap_stage/gap_removals_stage_ab.csv`
+  (no_focal_sentence 82,158, structure 7,990, ai_use_statement_only 6,960, preprint 1,994, prerelease_only 871, type 139)
+  and `gap_stage/gap_article_list_after_ab.txt` (**18,478** = kept 15,534 + F2 2,944 pending); the RL-158 lists are kept in
+  `gap_stage/lists_rl158/`. Current corpus: `LCS/article_exclusions_stage_b.csv` (781 F1 + 3 F0 = 784).
+- **To do (owner, 2026-10-20): remove the current corpus's statement-only articles** (RL-158 counted 758; 781 + 3 F0
+  with the final rules). They passed every stage so far: all are in P7 (`focal_sentences_v2.jsonl`, 826 sentences for
+  the 758) and G3 (`g3_v1`: 737 valid, 17 excluded, 4 without a parent), and would enter M1. Apply by adding
+  `article_exclusions_stage_b.csv` to F4 (whitelist) or to G3/M1 scope exclusions in the incremental run.
+- Statement position (owner's idea; `retrieval/gap_statement_position.py`, `stage_b/position/statement_position.tsv`):
+  for each statement sentence, the nearest heading, whether it is back matter / names AI use, whether an Introduction is
+  above and a Results/Discussion/Conclusion heading below. Of the gap F1 statement sentences, 2,827 of 7,371 sit between
+  an Introduction and a later body heading; their headings are mostly "Use of generative AI…", "Declaration of generative
+  AI…" or Methods / Statistical analysis / Data analysis subsections. A sample of 30 under Methods-type headings: all 30
+  genuine declarations (journals place the disclosure at the end of Methods). Position is therefore not a usable veto;
+  an AI-use heading can serve as positive evidence. [LOG]
