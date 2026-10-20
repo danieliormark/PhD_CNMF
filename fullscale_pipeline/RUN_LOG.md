@@ -2000,3 +2000,6 @@ of all 103,027 removals in `gap_removals_stage_ab.csv`: no focal sentence 82,158
 only 6,996, hits rejected 2,639, preprint 1,994, F2 other sense 1,111, type 139); current-corpus exclusions
 `LCS/article_exclusions_stage_b.csv` **980** (AI-use statement only 789, hits rejected 104, F2 other sense 87), still to be
 applied in the incremental run together with the 255 rejected hits inside kept current articles. [LOG]
+
+**RL-164 · 2026-10-21 · Stage A/B · DOCUMENTATION · LIVE**
+Method written up in `fullscale_pipeline/retrieval/STAGE_AB_METHOD.md` (rules, owner decisions, manual-check protocol, the exact reader prompts, agent type and model as recorded — `claude-haiku-5-5`, no effort level set — and per-run token use). Lists on git in `retrieval/stage_b_lists/`: `dropped_no_focal_terms_left.csv` (F0 all hits rejected: new 2,639, current 104; F2 other sense: new 1,111, current 87; each with the rejected hits or term verdicts), `dropped_ai_use_statement_only.csv` (new 6,996, current 789), `dropped_no_focal_sentence_p2_gap.txt` (82,158), `kept_new_corpus_after_stage_ab.txt` (15,563). Owner: 2026 articles are kept for now. [LOG]
