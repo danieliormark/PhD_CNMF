@@ -1857,3 +1857,36 @@ bucket; the body-text search lost with the session's scratch folder, rerun with 
    flagged terms plain, version B = flagged terms with the context condition; to be reported with type eligibility before
    any further download. [LOG]
 
+
+**RL-157 · 2026-10-20 · P0–P2 (staging) + Stage B · CODE (focal_terms_v3) + CORPUS DATA (counts, then owner-approved drops) · LIVE**
+Stage A: the original preprocessing applied to the downloaded gap corpus (`LCS/pure_text_corpus_gap/`, 118,590 files) in
+a staging tree `LCS/gap_stage/` (`retrieval/gap_stage_a.py`: the stage scripts unchanged, their roots P/LCS redirected;
+chained by `run_rest.sh`, `run_p2.sh`, `run_p2b.sh`, copies in `retrieval/`). Cohort 118,590 → P0 include 110,600 → whitelist
+(allowed type, not preprint) 108,467 → P1/P1b/P1c 108,467 → P2 with **`focal_terms_v3.py`** (D2 groups 1–4; master copy
+`PP/focal_terms_v3.py`, copy in `retrieval/`; v2 unchanged and still used by the existing pipeline).
+- v3 bugs found from the outputs and fixed (P2 run three times; earlier outputs kept in `p2_run1_bug/`, `p2_run2/`):
+  (1) v3 re-examined tokens v2 had *rejected* (it skipped only accepted spans), so "glutamyl pyruvic transaminase (GPT)"
+  became a group-4 model name and then served as article evidence for v2's own GPT hits (1,843 of 28,378 articles); now
+  every token v2 accepted or rejected is v2's, and bare listed names (GPT, Gemini, …, plurals) never enter as group 4.
+  (2) after the Stage B hand check: all-capital GPT compounds (CGPT, GPTMS-t-SiO2, R-GPTS, HAE-ANGPT) and runs of 15+
+  capitals (peptides) refused as group 4. Self-test 42/42.
+- Final P2: 26,309 of 108,467 articles with a focal sentence (220,708 sentences, 0 errors).
+Stage B (`retrieval/gap_stage_b.py`, outputs `gap_stage/stage_b/`; run1/run2 kept): article-level flags, also measured on
+the current corpus. Focal sentences labelled AI-use statement (disclosure formula, negated use, or a use word with a
+manuscript/figure/code task said of the authors, without research words) or focal; terms ambiguous (generic and guarded
+names, LLM(s), ProGen, language/transformer model(s), GPT2, palm 2, glued GPT1-type) or strong. **F1** = every focal
+sentence a statement; **F2** = only ambiguous terms and (no context word, or a confound marker and < 5 context words).
+Gap: kept 15,632, F1 6,992, F2 3,685; current corpus (34,662): F1 758, F2 216. Hand checks (two rounds, new seeds after each
+fix; samples in `stage_b/handcheck/`): flagged gap 59/60 correct, flagged current 36/40, kept gap 85/100 before the last
+statement fix (380 gap + 34 current moved to F1 by it; spot check 26/30). By year: F1 is 2024–2026 (3,928 in 2026), F2
+dominates before 2022 (1,049 of 1,459 in 2015–2019). [LOG]
+
+**RL-158 · 2026-10-20 · Stage A/B · CORPUS DATA (drops, owner decision) · LIVE**
+Owner: AI-use statements are not analysed; an article whose only focal words are in such statements is removed; articles
+with no focal sentence in the body text are removed. F2: no action yet (owner asked for options first). Lists only, no
+file deleted: `gap_stage/gap_removals_stage_ab.csv` (99,273 rows with reason: no_focal_sentence 82,158, structure 7,990,
+ai_use_statement_only 6,992, preprint 1,994, type 139) and `gap_stage/gap_article_list_after_ab.txt` (19,317 = 15,632
+kept + 3,685 F2 pending). Current corpus: `LCS/article_exclusions_stage_b.csv` (758 F1, format of `article_exclusions.csv`),
+**not yet applied** to `article_whitelist.txt` (applying it reruns F4 and downstream; to be done with the incremental run).
+Check: no F1 article has a focal term in its title (183 have AI in the title, e.g. AI in radiotherapy; AI is not a focal
+term). Known residual: 1 F1 error in 20 current-corpus checks (a survey on AI in academic writing). [LOG]
