@@ -1965,3 +1965,20 @@ Articles judged so far by the assistant: 400 in the two formal hand-check rounds
 115 articles, 129 questions (the 32 + 53 new F2 + 15 current F2 + 15 positive controls: kept articles whose terms are
 all ambiguous); gold labels by the assistant (`calib_v1_gold.json`): no 91, yes 34, statement 2, unsure 2. Not yet
 given to any reader agent (owner approval pending). [LOG]
+
+**RL-162 · 2026-10-21 · Stage B · MANUAL CHECK (Haiku readers + assistant) · LIVE**
+Calibration (`calib_v1`, one Haiku agent, pinned model, read-only except its output file; 162k tokens, 2 min):
+decisive agreement with the assistant's gold labels 123/123; 2 gold-yes passing mentions answered unsure; both AI-use
+statements and both gold-unsure cases matched. Excerpt fixes after it (no rule change): passages chosen so every asked
+term is shown; long passages cut to ±250-character windows around every mark (4 of 129 questions had no visible mark).
+Full run: 12 batches of ~113 articles (1,352 F2 articles not in the calibration set, 1,443 questions; 8 questions still
+without a visible mark). 10 Haiku agents ran (≈155–163k tokens each, ≈1.6M in total); **batches 10 and 11 (226
+articles, 240 questions) were blocked at launch by the auto-mode classifier and are not done** (files ready in
+`manual/`). Outputs `manual/f2_bNN_haiku.jsonl`: 1,203/1,203 answered, no format errors; no 956, yes 167, statement 27,
+unsure 53. Assistant spot check of 60 random Haiku decisions (30 yes, 30 no): 60/60 correct. The 53 unsure decided by
+the assistant (`manual/assistant_unsure_review.json`): 16 yes, 5 no, 32 **computational language model of unspecified
+type** (BCI spellers, speech decoding, typing, psycholinguistic surprisal; neural vs n-gram not stated) — owner to
+decide whether this class counts as focal. Per-term verdicts so far: `manual/f2_decisions_partial.tsv` (calibration
+articles from the gold labels). Article outcome (keep if any term is focal; drop if all terms are other-sense or AI-use
+statements), 1,226 of 1,452 F2 articles decided: gap keep 185 / drop 927 (22 of them statement-only), current keep 32 /
+drop 82 (5 statement-only); if the unspecified class does not count, gap keep 153. Not yet applied to any list. [LOG]
