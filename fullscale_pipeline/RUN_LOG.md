@@ -1808,3 +1808,15 @@ extract, filtered by article type, then the full texts and metadata of the rest.
 - Type eligibility of the 116,783 candidates running (`retrieval/gap_eligibility.py`: PMC esummary metadata, PubMed
   publication types; allowed: research article, historical article, reviews; no PMID → decided after download). [LOG]
 
+**RL-156 · 2026-10-20 · R1/R3 · CORPUS DATA (type eligibility; download of the eligible candidates started) · LIVE**
+`retrieval/gap_eligibility.py` on the 116,783 full-text candidates (RL-155): PMC esummary metadata (PMID, DOI, title,
+journal, dates; cache `LCS/gap_esummary_cache.json`) and PubMed publication types (cache `LCS/gap_pubtypes_cache.json`),
+classified with the categories of `article_types_valid.py`. Eligible (owner: research article, historical article, any
+review): research article 90,027, narrative review 16,673, systematic / scoping review / meta-analysis 3,265, historical
+article 132, type unknown — no PMID — 1,455 (kept, decided from the PMC header after download); total **111,552**. Not
+eligible: editorial / letter / comment / news 2,694, clinical trial / protocol 1,997, other named type 202, dataset 152,
+guideline 102, proceedings 84 (`LCS/gap_eligibility_20261020_body.tsv`, `LCS/gap_pmcids_20261020_body_eligible.txt`).
+Download of the 108,168 eligible articles not yet present started on incline (`retrieval/fetch_gap_pmc.py`, now with a
+workers argument, 16; method unchanged), into `LCS/pure_text_corpus_gap/`; log `LCS/fetch_gap_20261020.log`. RDS volume
+7.7 TB free. [LOG]
+
