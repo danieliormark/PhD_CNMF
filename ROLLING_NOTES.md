@@ -26,11 +26,25 @@
   6. D5 count of dash-enclosed asides with a focal term (approved), on the corpus as fixed after step 3.
   7. Re-verify the trial P1 checks, then P2 (weighting, chunk12v3 trial matrices).
 
-## Open points for the owner (2026-10-19, after RL-153)
+## Corpus extension state (2026-10-20)
 
-- Retrieval gap (RL-153): 10,588 open-access articles name a focal term in title/abstract but are not in R1's targets
-  (9,496 through the bare names added after R1 ran). Confirm download (S3 via a CSF job), then the keep rule.
-- OpenAlex key for the social data of new articles: re-supply in the dialogue (never on git), or use the mailto pool.
+- **Terms:** list = object names (term list, article list of PMCIDs); corpus = files. Never confuse them (owner).
+- **Article list kept (owner, 2026-10-20): the overnight high-recall list** — `LCS/gap_pmcids_20261020_body.txt`
+  (116,783 candidate PMCIDs; 111,552 eligible by type, `..._body_eligible.txt`; term list in `LCS/gap_body_20261020.json`).
+  The morning re-run (`gap_audit/candidates.json`, versions A/B) is a narrower repeat of it and is not used as a list;
+  its error: it dropped one-word model names containing GPT/Llama/Gemma (AgriGPT, AceGPT), which are not homonyms.
+- **Downloaded corpus:** `LCS/pure_text_corpus_gap/` — 118,590 files, one per PMCID, no duplicates; 111,391 of the 111,552
+  eligible; the 161 not downloaded are not in the bucket (114 from 2026) — ignored. The 591 articles found only by the
+  morning search (2025-2026, indexed after the night search) — ignored (owner: no hunting for 2026 articles; their author
+  deduplication is poor). 57 files also exist in the old `pure_text_corpus/` (May leftovers, not in R1's targets): match
+  them up when merging.
+- **Next (owner):** clean the high-recall corpus — remove false-positive articles and articles whose focal terms cannot
+  be told apart from biomedical terminology (conspicuous terms). Method to be proposed in detail before running.
+- **Open:** about 44% of the candidates are from 2026 (morning breakdown: ~45,000 of ~103,000); whether 2026 articles
+  stay in the corpus at all (poor author deduplication) — owner to decide.
+- OpenAlex key: supplied in the dialogue 2026-10-19, used from the environment only.
+
+## Open points for the owner (2026-10-19, after RL-153)
 
 - Curly apostrophe after a plural ("LLMs’ responses") derails spaCy in 880 units (692 articles). Owner: test on real
   and hard cases first (does the fix work; does it introduce new problems) before committing to re-parsing. Tested (RL-152):
