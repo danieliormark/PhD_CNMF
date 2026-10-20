@@ -1921,3 +1921,30 @@ term). Known residual: 1 F1 error in 20 current-corpus checks (a survey on AI in
   AI…" or Methods / Statistical analysis / Data analysis subsections. A sample of 30 under Methods-type headings: all 30
   genuine declarations (journals place the disclosure at the end of Methods). Position is therefore not a usable veto;
   an AI-use heading can serve as positive evidence. [LOG]
+
+**RL-160 · 2026-10-20 · Stage B · CODE (hit-level homonym rules) + CORPUS DATA (drops) · LIVE**
+Owner chose option B for F2 (rules first, then Haiku agents for clear cases, hard ones to Sonnet or the assistant; no
+agents spawned yet). Deterministic hit-level rules added to `gap_stage_b.py`, applied with the release-date rule; a hit is
+removed with a named reason (`stage_b/stage_b_rejected_hits.tsv`), and F0 is renamed **hits_rejected** (all hits removed):
+- abbreviation definitions: "long form (LLM/GPT/BERT)" counts only if the initials of its last words spell the
+  abbreviation; an expansion with "language … model" / "generative pre-train" is the LM sense; LLM/GPT hits are rejected
+  in an article that defines the abbreviation only otherwise (lipid-lowering medications, Logic Learning Machine,
+  Grooved Pegboard Test, glutamic pyruvic transaminase) and never mentions "large language model";
+- sentence patterns: ProGen written otherwise than "ProGen" without a protein-generation or language-model cue (the
+  supplier), Gemini + instrument (Zeiss Gemini SEM, Gemini 180 monochromator), Geant4 physics lists (QGSP_BERT_HP),
+  transformer with electrical words and no machine-learning cue, linguistic "language model", GPT enzyme words,
+  ESM-2 in climate-model or electronic-supplementary contexts, palm domains, explicit LLM other senses (LLM-1xx
+  explosives, lean mass, lipid-lowering, Rulex);
+- no sentence rule applies when the sentence itself has a language-model cue (prompt, token, embedding, fine-tuned,
+  ChatGPT, GPT-n, …).
+Verification (runs 9–13 kept in `stage_b/run*/`): each round sampled rejected hits inside *kept* articles (where a wrong
+rejection costs good material) and F0 articles; errors found and fixed in turn: loose definitions ("an advanced …
+model (LLM)"), self-cueing patterns, "LLM-70B" and case ids "LLM-009", the protein model ESM-2 near "Supplementary
+Table", ProGen written "Progen" in model sentences, "serum" in a clinical LLM paper. Final round: 40 of 40 rejections in
+kept articles and 20 of 20 F0 articles judged correct after the last fixes (5 errors of that round fixed and re-tested).
+Final flags: gap kept 15,378, F2 1,325, F0 2,639, F1 6,967; current kept 33,648, F2 127, F0 104, F1 783. Rejected hits
+inside kept articles (false focal sentences in otherwise genuine articles): gap 463 in 85 articles, current 255 in 40
+(to be removed from the sentence sets in the incremental run).
+Lists rebuilt (F0 and F1 dropped): `gap_stage/gap_removals_stage_ab.csv`, `gap_stage/gap_article_list_after_ab.txt`
+(**16,703** = 15,378 kept + 1,325 F2 pending the manual check), `LCS/article_exclusions_stage_b.csv` (current: 783 F1 +
+104 F0 = 887, not yet applied). Note on reader excerpts: P2 blocks already merge touching windows (± 1 sentence). [LOG]

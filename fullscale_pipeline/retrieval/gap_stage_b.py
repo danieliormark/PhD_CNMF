@@ -15,7 +15,9 @@ or paper; same year allowed) is removed; a sentence left without a term is no lo
 model", LLM, "transformer model") have no release year and are untouched. Removed hits are listed per sentence in
 stage_b_prerelease_hits.tsv (also for articles that keep other focal sentences).
 Article flags (one per article, first that applies):
-    F0 prerelease_only  every focal sentence lost its terms to the release-date rule
+    F0 hits_rejected    every focal sentence lost its terms to the release-date rule or a homonym rule (RL-160: the
+                        hit's sentence shows the other meaning, e.g. "Progen, Heidelberg", "Zeiss Gemini450 SEM",
+                        "QGSP_BERT", a transformer "winding", or the article expands LLM as something else)
     F1 statement_only   every focal sentence is an AI-use statement
     F2 ambiguous        the focal (non-statement) sentences hold only AMBIGUOUS terms, and the article either has no context
                         word in its cleaned text, or a confound marker of one of its terms and fewer than 5
@@ -110,6 +112,72 @@ GENERAL = {"language model", "large language model", "large language models", "l
            "transformer models", "bidirectional encoder representations from transformers"}
 
 
+# Homonym rules per hit (2026-10-20, RL-160): the hit's own sentence (or the article's abbreviation definitions) shows the
+# other meaning. Each returns a reason; the hit is removed like a pre-release hit.
+ABBR = re.compile(r"((?:[A-Za-z][\w’'-]*\s+){1,6})\(\s*(LLMs?|GPT|BERT)\s*\)")
+LM_SENSE = re.compile(r"(?i)language\b.*\bmodel|generative pre-?train|bidirectional encoder")
+LM_CUE = re.compile(r"(?i)language models?|ChatGPT|GPT-?\d|prompt|tokens?\b|embedding|fine-?tun|pre-?train|"
+                    r"transformer-based|transformer architecture|neural|deep learning|\bPLMs?\b|generative AI")   # not the terms themselves   # a sentence rule never applies next to these
+SENT_RULES = {   # term key -> (reason, pattern in the hit's sentence)
+    "progen": ("progen_supplier", None),                       # special: ProGen the model is written "ProGen"
+    "gemini": ("gemini_instrument", re.compile(r"Gemini\s?\d{3}|GeminiSEM|Gemini SEM|Zeiss[^.]{0,40}Gemini|Gemini[^.]{0,20}(?:SEM|microscop)")),
+    "bert": ("bert_geant4", re.compile(r"(?:QGSP|FTFP|QBBC|QGSC)_?BERT|BERT_HP|Bertini|FreeSurfer[^.]{0,60}\bbert\b|\bbert\b[^.]{0,60}FreeSurfer", re.I)),
+    "transformer model": ("transformer_electrical", re.compile(r"(?i)winding|voltage|\bcoils?\b|inductor|inductance|eddy[- ]current|"
+                          r"magnetic core|primary and secondary|power transformer|transformer oil|\bkV\b|\bMVA\b|tokamak|"
+                          r"three[- ]phase|3-phase|\bRLC\b|differential transformer|air[- ]core")),
+    "language model": ("language_model_linguistic", re.compile(r"(?i)sign language|for (?:their )?child|children'?s? (?:second )?language|"
+                       r"caregiver|(?:adult|parent|teacher)s? (?:as |serve as )?(?:good )?language models?|aphasia|Broca|Wernicke")),
+    "gpt2": ("gpt_enzyme", re.compile(r"\bGPT1\b|\bGOT[12]?\b|transaminase|aminotransferase|alanine|isoform|mitochondrial")),
+    "gpt": ("gpt_enzyme", re.compile(r"\bGPT1\b|\bGOT[12]?\b|transaminase|aminotransferase|alanine|\bSGPT\b")),
+    "esm-2": ("esm_supplement_or_climate", re.compile(r"(?i)electronic supplementary|ESM-?2[,;)]\s*(?:tables?|figs?)|CMIP|ACCESS-ESM|"
+                                                r"CESM\d|earth system|climate|\bGCMs?\b")),
+    "palm 2": ("palm_domain", re.compile(r"(?i)palm (?:1|2|I|II)\b.{0,20}domain|palm domain|thumb|fingers? (?:sub)?domain|polymerase|RdRp|cyclase")),
+    "llm": ("llm_other_sense", re.compile(r"LLM-1\d\d\b|lean mass|lipid[- ]lowering|lipid[- ]laden|log[- ]layer mismatch|Rulex|"
+                                          r"logic learning machine|laminated limestone|\bLLm\b|MCAN/")),
+}
+SENT_RULES["transformer models"] = SENT_RULES["transformer model"]
+ML_CUE = re.compile(r"(?i)network|trained|training|learning|neural|deep|attention|encoder|decoder|predict\w*|classif\w*|"
+                    r"embedding|token|self-attention|architecture|Vision Transformer|ViT|BERT|GPT|LSTM|CNN")
+SENT_RULES["llms"] = SENT_RULES["llm"]
+
+
+def abbr_senses(text):
+    """the article's own expansions of LLM/GPT/BERT: {abbr: set of 'lm' / 'other'} from "long form (ABBR)"; a long form
+    counts only if the initials of its last words spell the abbreviation (hyphenated parts count as words), the usual
+    abbreviation-definition test; an article that mentions "large language model" anywhere gets no 'other' sense"""
+    out = collections.defaultdict(set)
+    llm_text = bool(re.search(r"(?i)large[- ]language[- ]models?", text))
+    for m in ABBR.finditer(text):
+        ab = m.group(2).upper().rstrip("S")
+        words = re.findall(r"[A-Za-z]+", m.group(1))                    # hyphen parts as words: lipid-lowering = L L
+        joined = re.findall(r"[A-Za-z][A-Za-z-]*", m.group(1))           # or as one word: pre-trained = P
+        if not any(len(w) >= len(ab) and "".join(x[0] for x in w[-len(ab):]).upper() == ab for w in (words, joined)):
+            continue
+        if LM_SENSE.search(m.group(1)):
+            out[ab].add("lm")
+        elif not llm_text:
+            out[ab].add("other")
+    return out
+
+
+def homonym_reason(t, text, senses):
+    """reason to reject hit t in a sentence with this text, or None"""
+    k = t.lower() if not t.startswith("v3:") else t.split(":", 2)[2].lower()
+    if k in ("llm", "llms") and senses.get("LLM") == {"other"} and not LM_CUE.search(text):
+        return "llm_defined_otherwise"
+    if k == "gpt" and senses.get("GPT") == {"other"} and not LM_CUE.search(text):
+        return "gpt_defined_otherwise"
+    if k == "progen":
+        model = re.search(r"ProGen|(?i:generat\w* (?:\w+ )?(?:proteins?|sequences?)|protein generation|language model)", text)
+        return None if (model or LM_CUE.search(text)) else "progen_supplier"
+    rule = SENT_RULES.get(k) or (SENT_RULES.get("gemini") if t.startswith("v3:") and "gemini" in k else None)
+    if rule and rule[1] is not None and rule[1].search(text) and not LM_CUE.search(text):
+        if rule[0] == "transformer_electrical" and ML_CUE.search(text):
+            return None                      # a machine-learning transformer applied to an electrical or physical problem
+        return rule[0]
+    return None
+
+
 def release_year(t):
     """release year of the model a term names, None for general terms; v3 terms by their surface form"""
     name = t.split(":", 2)[2] if t.startswith("v3:") else t
@@ -153,13 +221,16 @@ def one(args):
     corpus, line, files, year = args
     r = json.loads(line)
     sents0 = [s for b in r["blocks"] for s in b["sentences"] if s["focal"]]
+    text = "\n".join(open(f, encoding="utf-8", errors="replace").read() for f in files)
+    senses = abbr_senses(text)
     pre, sents = [], []
     for s in sents0:
         keep = []
         for t in s["terms"]:
             ry = release_year(t)
-            if year and ry and year < ry:
-                pre.append((s["sid"], t, ry))
+            why = f"prerelease<{ry}" if (year and ry and year < ry) else homonym_reason(t, s["text"], senses)
+            if why:
+                pre.append((s["sid"], t, why))
             else:
                 keep.append(t)
         if keep:
@@ -169,12 +240,11 @@ def one(args):
         lab = ["statement" if l == "statement" or NEGATED_LOOSE.search(s["text"]) else l for s, l in zip(sents, lab)]
     sub = collections.Counter(term_key(t) for s, l in zip(sents, lab) if l == "focal" for t in s["terms"])
     allt = collections.Counter(term_key(t) for s in sents for t in s["terms"])
-    text = "\n".join(open(f, encoding="utf-8", errors="replace").read() for f in files)
     n_ctx = len(CONTEXT.findall(text))
     conf = sorted(k for k in sub if k in CONFOUND and CONFOUND[k].search(text))
     amb_only = bool(sub) and all(is_ambig(k) for k in sub)
     if sents0 and not sents:
-        flag = "F0_prerelease_only"
+        flag = "F0_hits_rejected"
     elif sents and not sub:
         flag = "F1_statement_only"
     elif amb_only and (n_ctx == 0 or (conf and n_ctx < CONF_MAX_CONTEXT)):
@@ -185,7 +255,7 @@ def one(args):
                 terms=";".join(f"{k}:{v}" for k, v in sorted(allt.items())),
                 terms_focal=";".join(sorted(sub)), ambiguous_only=int(amb_only), n_context=n_ctx,
                 confound=";".join(conf), flag=flag, n_prerelease_hits=len(pre),
-                prerelease=";".join(sorted({f"{t}<{ry}" for _, t, ry in pre})), _pre=pre,
+                prerelease=";".join(sorted({f"{t}:{why}" for _, t, why in pre})), _pre=pre,
                 example=((sents or sents0)[0]["text"][:300] if sents0 else ""))
 
 
@@ -217,9 +287,9 @@ if __name__ == "__main__":
     cols = ["corpus", "pmcid", "year", "flag", "n_focal", "n_statement", "terms_focal", "ambiguous_only", "n_context",
             "confound", "n_prerelease_hits", "prerelease", "terms", "example"]
     summ = {}
-    with open(out, "w", newline="", encoding="utf-8") as f, open(OUT + "stage_b_prerelease_hits.tsv", "w") as fp, Pool(w) as pool:
+    with open(out, "w", newline="", encoding="utf-8") as f, open(OUT + "stage_b_rejected_hits.tsv", "w") as fp, Pool(w) as pool:
         wr = csv.DictWriter(f, fieldnames=cols, delimiter="\t"); wr.writeheader()
-        fp.write("corpus\tpmcid\tyear\tsid\tterm\trelease_year\n")
+        fp.write("corpus\tpmcid\tyear\tsid\tterm\treason\n")
         for corpus in ("gap", "current"):
             c, cy = collections.Counter(), collections.defaultdict(collections.Counter)
             for row in pool.imap(one, jobs(corpus, Y[corpus]), chunksize=50):
