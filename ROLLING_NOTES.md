@@ -44,6 +44,16 @@
   stay in the corpus at all (poor author deduplication) — owner to decide.
 - OpenAlex key: supplied in the dialogue 2026-10-19, used from the environment only.
 
+## Stage A/B state (2026-10-21, RL-157 to RL-163) — corpus extension cleaned
+
+- New corpus: `LCS/gap_stage/gap_article_list_after_ab.txt`, **15,563** articles after Stage A/B and the F2 manual check
+  (Haiku readers + assistant; owner rule: only *neural* language models are focal). All removals with reasons in
+  `gap_removals_stage_ab.csv`.
+- **FLAG (owner): remove from the current corpus** the 980 articles in `LCS/article_exclusions_stage_b.csv` (789
+  AI-use-statement only, 104 all hits rejected, 87 F2 other sense) and the 255 rejected hits inside kept articles
+  (`stage_b/stage_b_rejected_hits.tsv`); they went through P7/G2/G3 and must not enter M1.
+- Next: author-deduplication statistics by year for the new articles; decision on 2026 articles; incremental pipeline.
+
 ## Stage A/B state (2026-10-20, RL-157 to RL-159)
 
 - New corpus after Stage A/B drops: `LCS/gap_stage/gap_article_list_after_ab.txt`, 18,478 articles (15,534 kept +

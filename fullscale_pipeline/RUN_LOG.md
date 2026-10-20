@@ -1982,3 +1982,21 @@ decide whether this class counts as focal. Per-term verdicts so far: `manual/f2_
 articles from the gold labels). Article outcome (keep if any term is focal; drop if all terms are other-sense or AI-use
 statements), 1,226 of 1,452 F2 articles decided: gap keep 185 / drop 927 (22 of them statement-only), current keep 32 /
 drop 82 (5 statement-only); if the unspecified class does not count, gap keep 153. Not yet applied to any list. [LOG]
+
+**RL-163 · 2026-10-21 · Stage B · MANUAL CHECK complete + CORPUS DATA (F2 drops) · LIVE**
+Batches 10 and 11 relaunched (owner) and done (Haiku; 151k and 162k tokens); batch 11 skipped 2 questions, decided by the
+assistant. Owner rule (2026-10-21): the focal concept is the **neural** language model; a computational language model
+whose neural nature the text does not show is not focal. The assistant's second look at the 34 "computational, type
+unspecified" cases (full marked passages, title, context-word count): 1 shows a neural model (Markov vs RNN language
+models), 33 not (BCI spellers, speech decoders, HMM/Dasher typing, bigram or unspecified surprisal, distributional
+models, UDPipe, an OpenAlex topic label); batches 10/11 unsure: 6 decided (MacWhisper = Whisper, a neural model, kept;
+ASR, P300, GloVe, word-based and surprisal models not). Decisions in `manual/assistant_unsure_review.json`.
+Final per-term verdicts `manual/f2_decisions_final.tsv` (1,382 Haiku, 61 assistant, 109 calibration gold) and article
+outcomes `manual/f2_article_outcomes.tsv` (keep if any term is focal): gap keep 185, drop 1,111 other sense + 29
+statement-only; current keep 34, drop 87 + 6. Spot checks of Haiku decisions: 60/60 (batches 1–9, 12) and 16/16
+(batches 10–11). Total Haiku cost ≈ 2.1M tokens (calibration 162k + 12 batches ≈ 1.9M).
+Lists (RL-160 versions kept in `gap_stage/lists_rl160/`): `gap_article_list_after_ab.txt` **15,563** articles (reasons
+of all 103,027 removals in `gap_removals_stage_ab.csv`: no focal sentence 82,158, structure 7,990, AI-use statement
+only 6,996, hits rejected 2,639, preprint 1,994, F2 other sense 1,111, type 139); current-corpus exclusions
+`LCS/article_exclusions_stage_b.csv` **980** (AI-use statement only 789, hits rejected 104, F2 other sense 87), still to be
+applied in the incremental run together with the 255 rejected hits inside kept current articles. [LOG]
