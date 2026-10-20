@@ -1780,3 +1780,31 @@ the separate folder `LCS/pure_text_corpus_gap/`; status `LCS/fetch_gap_status.ts
 joins the corpus before the keep rule (at least one focal term of the new matcher in the plain text, allowed types,
 blacklist) is applied and recorded. [LOG]
 
+**RL-155 · 2026-10-20 · R1/R3 · AUDIT + CORPUS DATA (full-text candidate search; download of the title/abstract set complete) · LIVE**
+Owner: search the whole body text for candidate articles (systematic, miss no true positive); first the list of texts to
+extract, filtered by article type, then the full texts and metadata of the rest. Host incline33.
+- First full-text run (`corpus_statistics/retrieval_gap_query.py`, field `Body - All Words`, sets OLD/GEN/ALIAS/G4): 297,181
+  articles not in R1 — inflated. Per-term body counts (`retrieval/gap_term_counts.py`, 5,066 count-only queries) showed
+  why: (i) errors in the assistant's term lists — PMC search ignores case, so spellings such as "chatGPT", "PaLM", "Bert",
+  "LLaMA" fold into bare names and "HuBERT+" / "ROBERT-a" into the names hubert / robert (8,039 / 6,022 hits); the group-4
+  rule had accepted "Gemmatimonadetes" (a bacterial phylum) through "Gemma"; (ii) GUARDED R1 names are homonyms in body text
+  (Claude 25,716, RITA 19,793, GROVER 7,868, KeAP 3,032); (iii) genuine high-volume terms (ChatGPT 65,145, "language
+  model(s)" 27,316 / 35,371, LLM(s) ~19,000, BERT 17,621, GPT-4 10,408).
+- Corrected run (`retrieval/gap_body_query.py`): body text and title/abstract, R1's filters; kept 4,978 terms (R1's PLAIN
+  names and three body phrases, BERT / RoBERTa / "language model(s)", the cleaned ALIAS and G4 forms); left out 37:
+  the GUARDED names and the GENERIC names that need article evidence (the matcher counts them only in an article that also
+  has a PLAIN term, which these searches find anyway), and the case-folding collisions listed in the output. Found: body
+  161,912, title/abstract 20,860; **not in R1: 116,783** (`LCS/gap_body_20261020.json`, list
+  `LCS/gap_pmcids_20261020_body.txt`); 3,479 of them already downloaded, 113,304 to fetch. Known loss: real names such as
+  GeminiPro, GeminiMol fall under the glued-Gemini exclusion (evidence names, found through PLAIN terms when they qualify).
+- The download of the 10,588 title/abstract candidates (RL-154) is complete: 10,583 files, 5 not in the bucket (versions
+  1-9). The status file shows a second, concurrent run of the download (rows "present" after "downloaded" for 7,914
+  articles); it was not started from this session; files are unaffected (the script skips present files).
+  `retrieval_gap_query.py` was also edited outside this session (NOEVID/EVID split, years); not committed by the assistant.
+- Probe (`retrieval/gap_p0_probe.py`, read-only): P0's own region rule on the 10,583 downloaded articles with the
+  **current** matcher: a focal term anywhere in the text in 2,299, inside the analysed regions in 2,112, only outside
+  them in 187 (e.g. back-matter declarations). Most of the title/abstract candidates came through homonyms or through
+  names the current matcher does not know; the new matcher (D2 groups 1-4) decides the real survival.
+- Type eligibility of the 116,783 candidates running (`retrieval/gap_eligibility.py`: PMC esummary metadata, PubMed
+  publication types; allowed: research article, historical article, reviews; no PMID → decided after download). [LOG]
+
