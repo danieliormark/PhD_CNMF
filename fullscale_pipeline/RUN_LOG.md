@@ -1819,4 +1819,8 @@ guideline 102, proceedings 84 (`LCS/gap_eligibility_20261020_body.tsv`, `LCS/gap
 Download of the 108,168 eligible articles not yet present started on incline (`retrieval/fetch_gap_pmc.py`, now with a
 workers argument, 16; method unchanged), into `LCS/pure_text_corpus_gap/`; log `LCS/fetch_gap_20261020.log`. RDS volume
 7.7 TB free. [LOG]
+*[RL-156, addendum: with the `aws` CLI started once per file the rate was about 104 files/min (about 17 h for the list);
+the fetcher now reads the same bucket objects over their public HTTPS address (`https://pmc-oa-opendata.s3.amazonaws.com/
+<PMCID>.<v>/<PMCID>.<v>.txt`, versions 1-9, first found; written via a `.part` file and renamed), about 2,100 files/min;
+`FETCH_VIA=aws` restores the CLI. The interrupted run left no empty or partial files; present files are skipped.]* [LOG]
 
