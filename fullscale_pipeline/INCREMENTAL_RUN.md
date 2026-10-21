@@ -42,3 +42,24 @@ and P2 weighting for the chunk12v3 trial matrices.
 
 ## Where CSF is needed
 P6 and G2 (array jobs, launchers as `.sh` files for the owner to submit). Steps 1, 2, 4 and 6 run locally.
+
+## Traceability and uniqueness when old and new material are merged (owner, 2026-10-21)
+
+Provenance chain, unchanged by the merge: word (atom2word: atom → word position in the unit text) → unit (`<sid>.U<k>`,
+unit hash) → sentence (`PMCID.rN.L<raw line>.S<k>`, hash, hash_final) → block (`PMCID.rN.B<k>`) → article (PMCID);
+hyperedges carry their unit id, so every hyperedge and its parents trace to a sentence and an article.
+Rules for the merge:
+1. **One record per article, in one place.** The merged G2 output is written as a fresh shard set (`PG/g2_v3_1/`), every
+   article exactly once: an existing article keeps its old parse for untouched sentences, and its re-parsed or new
+   sentences replace or join them inside the same record. No article is read from two shard sets.
+2. **Ids are never reused or renumbered.** Sentence and unit ids are built from the PMCID and raw line, so new articles
+   cannot collide with old ones (the two article sets are disjoint: 0 shared PMCIDs). Existing REF ids are frozen; new
+   works are numbered from the next free id; a merge of two existing works keeps the smaller id and records the other
+   as an alias (no id points to two works).
+3. **Hashes are recomputed, never copied** for anything whose text changed; an unchanged sentence keeps its hash.
+4. **Checks before G3** (written to a report): every sid, uid and REF id unique across the merged output; every sid
+   belongs to the article its id names; every REF token in a text_final exists in the works file; every unit hash and
+   hash_final recomputes from its id and text; every existing (sid, hash_final) and unit id is unchanged or listed with
+   its reason (re-parse, dropped sentence, REF remap); no sentence of an excluded article or a dropped sentence remains;
+   counts per corpus, class and year.
+5. URL tokens (`URL` + 8 digits) are deliberately shared: the same address gets the same token in every article.
