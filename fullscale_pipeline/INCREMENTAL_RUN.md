@@ -78,5 +78,5 @@ Rules for the merge:
 
 Inputs of record beside the shards: `focal_sentences_v2.jsonl` (P7, mapped REF ids, statements removed),
 `citation_works_v2.jsonl`, `url_table_v3_1.json`, `check_report.json`. The existing `PG/g2_v3/` and `LCS/` outputs are
-untouched; the current corpus's article exclusions (`LCS/article_exclusions_stage_b.csv`, 887) are applied in this
+untouched; the current corpus's article exclusions (`LCS/article_exclusions_stage_b.csv`, 980: 789 AI-use statement only, 104 all hits rejected, 87 F2 other sense) are applied in this
 output, not yet in `LCS/article_whitelist.txt` (only P0–P2 read the whitelist; nothing downstream needs it changed).
