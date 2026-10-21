@@ -2077,3 +2077,22 @@ assistant kept 4 genuine ones (an over-eager homonym rule: "LLm", a "generative 
 removed 5 where coreference re-entered the same homonym (Logic Learning Machine, legal logit model, low lean mass).
 **Final: 816,678 sentences, 825,693 units** (current corpus 33,783 articles, 734,857 sentences; new 15,563 articles, 81,821 sentences), 12,690 citation works,
 2,413 URL tokens. Ready for the G3 production rerun. [LOG]
+
+**RL-170 · 2026-10-22 · G3: D6 sentence-centric parents and §6 item 11 cousin scope and typed links implemented · CODE · LIVE**
+`g3_v2/g3_curation_v2.py` (sha256 25b27d784157; the repo copy, which holds D4.1 and B06; the RDS mirror is still the
+RL-130 production version and is replaced when the rerun is prepared). D6: one parent per clause governing a focal term,
+every argument holding a focal word a `focal_he` (ids `.F<j>`), cousins swept once per unit outside every parent clause.
+Item 11: cousins linked to every parent of their sentence, identical content across a sentence's units folded
+(`also_in`), units without a parent kept for their cousins when the sentence has a parent, `embedded_in` on parents,
+typed links in a new `g3_occurrences_NNN.jsonl`; `check_record` extended. Tests: self-test 54/54; hard cases 199/210 (the
+189/200 of before with the same 11 failures, plus the new set `hard/hard_d6_item11.json` 10/10: rotated parents, embedded
+clause, two-unit sentence, cousin with two parents, clause as child in one sentence and cousin in another, folding); the 24
+particle cases identical to the old script except P18 (two rotated parents → one parent with two `focal_he`) and P01 (no
+focal term, unchanged output). Shards 0 and 20 on G2 v3, old vs new script, 0 problems each: parents 16,524 → 15,694 and
+17,136 → 16,370; cousins 47,082 → 37,015 and 49,221 → 38,876; focal atoms dropped from cousins 2,870 → 435 and 2,900 →
+387; 203 and 207 units kept only for cousins; no sentence loses an atom; 12 sampled changed sentences read, all as
+designed. Found while preparing the rerun on `PG/g2_v3_1/` (not yet acted on, for the owner): G3's item-6 scope
+exclusions, item-7 LLM-output list and item-8 reflexive table cover only the old corpus (3 reflexive units changed hash
+in the re-parse and would stop the run); among the 15,563 new articles, 153 rest on "transformer model(s)" alone and 417
+on "LLM(s)" alone, 314 of them with no "language model" anywhere in the text (sample: Master of Laws, E-LLM, LLM-class
+oxidoreductases, Landau–Lifshitz–Matheron ansatz, passing mentions). [LOG]

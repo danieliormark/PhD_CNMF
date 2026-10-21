@@ -15462,5 +15462,811 @@
 10
 ]
 ]
+},
+"GPT-4 outperformed BERT on the benchmark.": {
+"main_edge": "(outperformed/Pd.sox.<f-----/en gpt-4/Cp.s/en bert/Cp.s/en (on/T/en (the/Md/en benchmark/Cc.s/en)))",
+"extra_edges": [
+"(_lemma outperformed/P/en outperform/P/en)",
+"(_lemma on/T/en on/T/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)",
+"(_lemma benchmark/C/en benchmark/C/en)",
+"(_lemma bert/C/en bert/C/en)"
+],
+"atom2word": [
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+0
+],
+[
+"outperformed/Pd.sox.<f-----/en",
+"outperformed",
+1
+],
+[
+"bert/Cp.s/en",
+"BERT",
+2
+],
+[
+"on/T/en",
+"on",
+3
+],
+[
+"the/Md/en",
+"the",
+4
+],
+[
+"benchmark/Cc.s/en",
+"benchmark",
+5
+]
+]
+},
+"LLMs show that ChatGPT outperformed physicians.": {
+"main_edge": "(show/Pd.sr.|f-----/en llms/Cc.p/en (that/T/en (outperformed/P.so.<f-----/en chatgpt/Cp.s/en physicians/Cc.p/en)))",
+"extra_edges": [
+"(_lemma outperformed/P/en outperform/P/en)",
+"(_lemma llms/C/en llm/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma physicians/C/en physician/C/en)",
+"(_lemma that/T/en that/T/en)",
+"(_lemma show/P/en show/P/en)"
+],
+"atom2word": [
+[
+"llms/Cc.p/en",
+"LLMs",
+0
+],
+[
+"show/Pd.sr.|f-----/en",
+"show",
+1
+],
+[
+"that/T/en",
+"that",
+2
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+3
+],
+[
+"outperformed/P.so.<f-----/en",
+"outperformed",
+4
+],
+[
+"physicians/Cc.p/en",
+"physicians",
+5
+]
+]
+},
+"We found that ChatGPT outperformed physicians.": {
+"main_edge": "(found/Pd.sr.<f-----/en we/Ci/en (that/T/en (outperformed/P.so.<f-----/en chatgpt/Cp.s/en physicians/Cc.p/en)))",
+"extra_edges": [
+"(_lemma outperformed/P/en outperform/P/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma found/P/en find/P/en)",
+"(_lemma physicians/C/en physician/C/en)",
+"(_lemma that/T/en that/T/en)",
+"(_lemma we/C/en we/C/en)"
+],
+"atom2word": [
+[
+"we/Ci/en",
+"We",
+0
+],
+[
+"found/Pd.sr.<f-----/en",
+"found",
+1
+],
+[
+"that/T/en",
+"that",
+2
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+3
+],
+[
+"outperformed/P.so.<f-----/en",
+"outperformed",
+4
+],
+[
+"physicians/Cc.p/en",
+"physicians",
+5
+]
+]
+},
+"ChatGPT achieved high accuracy.": {
+"main_edge": "(achieved/Pd.so.<f-----/en chatgpt/Cp.s/en (high/Ma/en accuracy/Cc.s/en))",
+"extra_edges": [
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma high/M/en high/M/en)",
+"(_lemma achieved/P/en achieve/P/en)",
+"(_lemma accuracy/C/en accuracy/C/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"achieved/Pd.so.<f-----/en",
+"achieved",
+1
+],
+[
+"high/Ma/en",
+"high",
+2
+],
+[
+"accuracy/Cc.s/en",
+"accuracy",
+3
+]
+]
+},
+"Clinicians remained sceptical about adoption.": {
+"main_edge": "(remained/Pd.sc.<f-----/en clinicians/Cc.p/en (about/Br.ma/en sceptical/Ca/en adoption/Cc.s/en))",
+"extra_edges": [
+"(_lemma clinicians/C/en clinician/C/en)",
+"(_lemma about/B/en about/B/en)",
+"(_lemma sceptical/C/en sceptical/C/en)",
+"(_lemma remained/P/en remain/P/en)",
+"(_lemma adoption/C/en adoption/C/en)"
+],
+"atom2word": [
+[
+"clinicians/Cc.p/en",
+"Clinicians",
+0
+],
+[
+"remained/Pd.sc.<f-----/en",
+"remained",
+1
+],
+[
+"sceptical/Ca/en",
+"sceptical",
+2
+],
+[
+"about/Br.ma/en",
+"about",
+3
+],
+[
+"adoption/Cc.s/en",
+"adoption",
+4
+]
+]
+},
+"ChatGPT answered the questions and Gemini summarised the reports, while clinicians reviewed the cases.": {
+"main_edge": "(and/J/en (answered/Pd.so.<f-----/en chatgpt/Cp.s/en (the/Md/en questions/Cc.p/en)) (summarised/Pd.sox.<f-----/en gemini/Cp.s/en (the/Md/en reports/Cc.p/en) (while/T/en (reviewed/Pd.so.<f-----/en clinicians/Cc.p/en (the/Md/en cases/Cc.p/en)))))",
+"extra_edges": [
+"(_lemma questions/C/en question/C/en)",
+"(_lemma clinicians/C/en clinician/C/en)",
+"(_lemma reports/C/en report/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma while/T/en while/T/en)",
+"(_lemma summarised/P/en summarise/P/en)",
+"(_lemma gemini/C/en gemini/C/en)",
+"(_lemma reviewed/P/en review/P/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma cases/C/en case/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma answered/P/en answer/P/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"answered/Pd.so.<f-----/en",
+"answered",
+1
+],
+[
+"the/Md/en",
+"the",
+2
+],
+[
+"questions/Cc.p/en",
+"questions",
+3
+],
+[
+"and/J/en",
+"and",
+4
+],
+[
+"gemini/Cp.s/en",
+"Gemini",
+5
+],
+[
+"summarised/Pd.sox.<f-----/en",
+"summarised",
+6
+],
+[
+"the/Md/en",
+"the",
+7
+],
+[
+"reports/Cc.p/en",
+"reports",
+8
+],
+[
+"while/T/en",
+"while",
+10
+],
+[
+"clinicians/Cc.p/en",
+"clinicians",
+11
+],
+[
+"reviewed/Pd.so.<f-----/en",
+"reviewed",
+12
+],
+[
+"the/Md/en",
+"the",
+13
+],
+[
+"cases/Cc.p/en",
+"cases",
+14
+]
+]
+},
+"ChatGPT generated reports that clinicians reviewed carefully.": {
+"main_edge": "(:/J/. (generated/Pd.so.<f-----/en chatgpt/Cp.s/en reports/Cc.p/en) ((carefully/M/en reviewed/P.os.<f-----/en) that/C/en clinicians/Cc.p/en))",
+"extra_edges": [
+"(_lemma clinicians/C/en clinician/C/en)",
+"(_lemma reviewed/P/en review/P/en)",
+"(_lemma reports/C/en report/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma that/C/en that/C/en)",
+"(_lemma carefully/M/en carefully/M/en)",
+"(_lemma generated/P/en generate/P/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"generated/Pd.so.<f-----/en",
+"generated",
+1
+],
+[
+"reports/Cc.p/en",
+"reports",
+2
+],
+[
+"that/C/en",
+"that",
+3
+],
+[
+"clinicians/Cc.p/en",
+"clinicians",
+4
+],
+[
+"reviewed/P.os.<f-----/en",
+"reviewed",
+5
+],
+[
+"carefully/M/en",
+"carefully",
+6
+]
+]
+},
+"Clinicians reviewed the reports carefully, and ChatGPT summarised them.": {
+"main_edge": "(and/J/en ((carefully/M/en reviewed/Pd.so.<f-----/en) clinicians/Cc.p/en (the/Md/en reports/Cc.p/en)) (summarised/Pd.so.<f-----/en chatgpt/Cp.s/en them/Ci/en))",
+"extra_edges": [
+"(_lemma clinicians/C/en clinician/C/en)",
+"(_lemma reviewed/P/en review/P/en)",
+"(_lemma reports/C/en report/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma summarised/P/en summarise/P/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma carefully/M/en carefully/M/en)",
+"(_lemma them/C/en they/C/en)"
+],
+"atom2word": [
+[
+"clinicians/Cc.p/en",
+"Clinicians",
+0
+],
+[
+"reviewed/Pd.so.<f-----/en",
+"reviewed",
+1
+],
+[
+"the/Md/en",
+"the",
+2
+],
+[
+"reports/Cc.p/en",
+"reports",
+3
+],
+[
+"carefully/M/en",
+"carefully",
+4
+],
+[
+"and/J/en",
+"and",
+6
+],
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+7
+],
+[
+"summarised/Pd.so.<f-----/en",
+"summarised",
+8
+],
+[
+"them/Ci/en",
+"them",
+9
+]
+]
+},
+"ChatGPT helped, as the authors noted.": {
+"main_edge": "(helped/Pd.sx.<f-----/en chatgpt/Cp.s/en (as/T/en (noted/Pd.s.<f-----/en (the/Md/en authors/Cc.p/en))))",
+"extra_edges": [
+"(_lemma authors/C/en author/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma noted/P/en note/P/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma helped/P/en help/P/en)",
+"(_lemma as/T/en as/T/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"helped/Pd.sx.<f-----/en",
+"helped",
+1
+],
+[
+"as/T/en",
+"as",
+3
+],
+[
+"the/Md/en",
+"the",
+4
+],
+[
+"authors/Cc.p/en",
+"authors",
+5
+],
+[
+"noted/Pd.s.<f-----/en",
+"noted",
+6
+]
+]
+},
+"As the authors noted, results improved.": {
+"main_edge": "(improved/Pd.xs.<f-----/en (as/T/en (noted/Pd.s.<f-----/en (the/Md/en authors/Cc.p/en))) results/Cc.p/en)",
+"extra_edges": [
+"(_lemma authors/C/en author/C/en)",
+"(_lemma improved/P/en improve/P/en)",
+"(_lemma noted/P/en note/P/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma as/T/en as/T/en)",
+"(_lemma results/C/en result/C/en)"
+],
+"atom2word": [
+[
+"as/T/en",
+"As",
+0
+],
+[
+"the/Md/en",
+"the",
+1
+],
+[
+"authors/Cc.p/en",
+"authors",
+2
+],
+[
+"noted/Pd.s.<f-----/en",
+"noted",
+3
+],
+[
+"results/Cc.p/en",
+"results",
+5
+],
+[
+"improved/Pd.xs.<f-----/en",
+"improved",
+6
+]
+]
+},
+"Fine-tuning the pretrained language model BERT improved recall, and GPT-4 reduced errors.": {
+"main_edge": "(and/J/en (improved/Pd.ro.<f-----/en ((fine/M/en tuning/Pd.o.|pg----/en) (+/B.mm/. (the/Md/en (+/B.am/. (pretrained/Ma/en language/Cc.s/en) model/Cc.s/en)) bert/Cp.s/en)) recall/Cc.s/en) (reduced/Pd.so.<f-----/en gpt-4/Cp.s/en errors/Cc.p/en))",
+"extra_edges": [
+"(_lemma improved/P/en improve/P/en)",
+"(_lemma model/C/en model/C/en)",
+"(_lemma reduced/P/en reduce/P/en)",
+"(_lemma errors/C/en error/C/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma pretrained/M/en pretrained/M/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma language/C/en language/C/en)",
+"(_lemma recall/C/en recall/C/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)",
+"(_lemma tuning/P/en tune/P/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma fine/M/en fine/M/en)"
+],
+"atom2word": [
+[
+"fine/M/en",
+"Fine",
+0
+],
+[
+"tuning/Pd.o.|pg----/en",
+"tuning",
+2
+],
+[
+"the/Md/en",
+"the",
+3
+],
+[
+"pretrained/Ma/en",
+"pretrained",
+4
+],
+[
+"language/Cc.s/en",
+"language",
+5
+],
+[
+"model/Cc.s/en",
+"model",
+6
+],
+[
+"bert/Cp.s/en",
+"BERT",
+7
+],
+[
+"improved/Pd.ro.<f-----/en",
+"improved",
+8
+],
+[
+"recall/Cc.s/en",
+"recall",
+9
+],
+[
+"and/J/en",
+"and",
+11
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+12
+],
+[
+"reduced/Pd.so.<f-----/en",
+"reduced",
+13
+],
+[
+"errors/Cc.p/en",
+"errors",
+14
+]
+]
+},
+"ChatGPT showed that clinicians reviewed the reports.": {
+"main_edge": "(showed/Pd.sr.<f-----/en chatgpt/Cp.s/en (that/T/en (reviewed/P.so.<f-----/en clinicians/Cc.p/en (the/Md/en reports/Cc.p/en))))",
+"extra_edges": [
+"(_lemma clinicians/C/en clinician/C/en)",
+"(_lemma that/T/en that/T/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma showed/P/en show/P/en)",
+"(_lemma reports/C/en report/C/en)",
+"(_lemma reviewed/P/en review/P/en)",
+"(_lemma the/M/en the/M/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"showed/Pd.sr.<f-----/en",
+"showed",
+1
+],
+[
+"that/T/en",
+"that",
+2
+],
+[
+"clinicians/Cc.p/en",
+"clinicians",
+3
+],
+[
+"reviewed/P.so.<f-----/en",
+"reviewed",
+4
+],
+[
+"the/Md/en",
+"the",
+5
+],
+[
+"reports/Cc.p/en",
+"reports",
+6
+]
+]
+},
+"ChatGPT helped, and results improved.": {
+"main_edge": "(and/J/en (helped/Pd.s.<f-----/en chatgpt/Cp.s/en) (improved/Pd.s.<f-----/en results/Cc.p/en))",
+"extra_edges": [
+"(_lemma results/C/en result/C/en)",
+"(_lemma helped/P/en help/P/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma improved/P/en improve/P/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"helped/Pd.s.<f-----/en",
+"helped",
+1
+],
+[
+"and/J/en",
+"and",
+3
+],
+[
+"results/Cc.p/en",
+"results",
+4
+],
+[
+"improved/Pd.s.<f-----/en",
+"improved",
+5
+]
+]
+},
+"Results improved.": {
+"main_edge": "(improved/Pd.s.<f-----/en results/Cc.p/en)",
+"extra_edges": [
+"(_lemma improved/P/en improve/P/en)",
+"(_lemma results/C/en result/C/en)"
+],
+"atom2word": [
+[
+"results/Cc.p/en",
+"Results",
+0
+],
+[
+"improved/Pd.s.<f-----/en",
+"improved",
+1
+]
+]
+},
+"ChatGPT answered.": {
+"main_edge": "(answered/Pd.s.<f-----/en chatgpt/Cp.s/en)",
+"extra_edges": [
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma answered/P/en answer/P/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"answered/Pd.s.<f-----/en",
+"answered",
+1
+]
+]
+},
+"Gemini summarised the reports, while clinicians reviewed the cases.": {
+"main_edge": "(summarised/Pd.sox.<f-----/en gemini/Cp.s/en (the/Md/en reports/Cc.p/en) (while/T/en (reviewed/Pd.so.<f-----/en clinicians/Cc.p/en (the/Md/en cases/Cc.p/en))))",
+"extra_edges": [
+"(_lemma cases/C/en case/C/en)",
+"(_lemma while/T/en while/T/en)",
+"(_lemma clinicians/C/en clinician/C/en)",
+"(_lemma summarised/P/en summarise/P/en)",
+"(_lemma reports/C/en report/C/en)",
+"(_lemma gemini/C/en gemini/C/en)",
+"(_lemma reviewed/P/en review/P/en)",
+"(_lemma the/M/en the/M/en)"
+],
+"atom2word": [
+[
+"gemini/Cp.s/en",
+"Gemini",
+0
+],
+[
+"summarised/Pd.sox.<f-----/en",
+"summarised",
+1
+],
+[
+"the/Md/en",
+"the",
+2
+],
+[
+"reports/Cc.p/en",
+"reports",
+3
+],
+[
+"while/T/en",
+"while",
+5
+],
+[
+"clinicians/Cc.p/en",
+"clinicians",
+6
+],
+[
+"reviewed/Pd.so.<f-----/en",
+"reviewed",
+7
+],
+[
+"the/Md/en",
+"the",
+8
+],
+[
+"cases/Cc.p/en",
+"cases",
+9
+]
+]
+},
+"Clinicians reviewed the cases, and Gemini summarised them.": {
+"main_edge": "(and/J/en (reviewed/Pd.so.<f-----/en clinicians/Cc.p/en (the/Md/en cases/Cc.p/en)) (summarised/Pd.so.<f-----/en gemini/Cp.s/en them/Ci/en))",
+"extra_edges": [
+"(_lemma them/C/en they/C/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma cases/C/en case/C/en)",
+"(_lemma gemini/C/en gemini/C/en)",
+"(_lemma summarised/P/en summarise/P/en)",
+"(_lemma clinicians/C/en clinician/C/en)",
+"(_lemma reviewed/P/en review/P/en)"
+],
+"atom2word": [
+[
+"clinicians/Cc.p/en",
+"Clinicians",
+0
+],
+[
+"reviewed/Pd.so.<f-----/en",
+"reviewed",
+1
+],
+[
+"the/Md/en",
+"the",
+2
+],
+[
+"cases/Cc.p/en",
+"cases",
+3
+],
+[
+"and/J/en",
+"and",
+5
+],
+[
+"gemini/Cp.s/en",
+"Gemini",
+6
+],
+[
+"summarised/Pd.so.<f-----/en",
+"summarised",
+7
+],
+[
+"them/Ci/en",
+"them",
+8
+]
+]
 }
 }

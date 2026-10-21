@@ -9,6 +9,11 @@ Case formats (one set may mix them):
   together              item 8 cousin cases: every cousin holding one of these words is one cousin holding all of them
   not_only / but_also   item 4 option 2: is the atom expected in the output (true) or not (false)
   (no expectation)      item 5 particle cases: printed, and compared with the item-5 reference copy if --ref is given
+  units + d6            D6 / item 11 sentence cases (RL-170): "units" = the texts of one sentence's G2 units (each parsed on its
+                        own, as G2 parses the pieces cut at a glued citation); "d6" = parents (count), focal_he (count per parent),
+                        embedded ([inner, outer] parent numbers, 1-based over the sentence), cousin_has / cousin_lacks (strings),
+                        cousin_units (units holding a cousin), folded (cousins folded into an earlier unit); every record must
+                        also pass the script's own check_record against the sentence's parents
 Parses (G2's parse_piece, RL-151) are cached in hard/parsed_cache_g2.json (the parser is deterministic for a given text), so reruns need no parser.
 """
 import argparse, hashlib, importlib.util, json, os, sys
@@ -50,6 +55,36 @@ def run(m, u):
     return rec
 
 
+def run_sentence(m, texts, parsed):
+    """D6 / item 11: the units of one sentence, curated and linked as in the script's run()"""
+    us, recs = [], []
+    for k, t in enumerate(texts, 1):
+        uid = f"PMCX.r1.L1.S1.U{k}"
+        u = dict(uid=uid, hash=hashlib.sha1(f"{uid}|{t}".encode()).hexdigest()[:12], text=t, **parsed[t])
+        rec, _ = m.curate_unit("PMCX", dict(sid="PMCX.r1.L1.S1", hash_final="0" * 12), u, m.focal_terms.Matcher(), True, "keep")
+        us.append(u); recs.append(rec)
+    folded = m.link_sentence(recs)
+    return us, recs, folded
+
+
+def judge_d6(m, d, us, recs, folded):
+    pars = [p for r in recs for p in r["parents"]]
+    num = {p["id"]: i for i, p in enumerate(pars, 1)}
+    cou = [c["edge"] for r in recs for c in r["cousins"]]
+    ok = all(not m.check_record(r, u, list(num)) for u, r in zip(us, recs) if r["parents"] or (num and r["cousins"]))
+    ok &= d.get("parents", len(pars)) == len(pars)
+    if "focal_he" in d:
+        ok &= d["focal_he"] == [sum(c["kind"] == "focal_he" for c in p["children"]) for p in pars]
+    if "embedded" in d:
+        ok &= sorted(d["embedded"]) == sorted([num[p["id"]], num[o]] for p in pars for o in p.get("embedded_in", []))
+    ok &= all(any(s in e for e in cou) for s in d.get("cousin_has", []))
+    ok &= not any(s in e for s in d.get("cousin_lacks", []) for e in cou)
+    if "cousin_units" in d:
+        ok &= d["cousin_units"] == [k for k, r in enumerate(recs, 1) if r["cousins"]]
+    ok &= d.get("folded", folded) == folded
+    return bool(ok)
+
+
 def judge(c, rec):
     par = " ".join(x["edge"] for x in rec["parents"]); cou = [x["edge"] for x in rec["cousins"]]
     allout = par + " " + " ".join(cou)
@@ -78,9 +113,18 @@ def main():
     total = [0, 0]
     for path in a.sets:
         cases = [c for c in json.load(open(path)) if "for" not in c or "q4full" in c["for"]]
-        parsed = parse_all([c["text"] for c in cases])
+        parsed = parse_all([t for c in cases for t in c.get("units", [c.get("text")]) if t])
         res, same = [], [0, 0]
         for c in cases:
+            if "units" in c:                               # D6 / item 11 sentence case
+                us, recs, folded = run_sentence(m, c["units"], parsed)
+                ok = judge_d6(m, c["d6"], us, recs, folded)
+                res.append(ok)
+                if a.show and not ok:
+                    print(f"  FAIL {c['id']}: {' || '.join(c['units'])}")
+                    for r in recs:
+                        print("     ", " ".join(p["edge"] for p in r["parents"]), "||", " ".join(x["edge"] for x in r["cousins"]))
+                continue
             rec = run(m, unit_of(c["text"], parsed[c["text"]]))
             ok = judge(c, rec)
             res.append(ok)

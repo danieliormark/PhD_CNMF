@@ -33,10 +33,13 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
   down-weighting of generic material, to be tested).
 
 **Remaining, in order:**
-1. **G3 changes for the production rerun:** D6 sentence-centric parents (decided, to implement), item 11 (to
-   implement), with D4.1 and B06 (implemented); new hard cases (two-unit sentence, cousin with several parents, clause
-   that is a child in one sentence and a cousin in another, embedded focal clause); self-test; then the production run
-   on `PG/g2_v3_1/` (CSF, launcher to prepare).
+1. **G3 changes for the production rerun:** D6 and item 11 **implemented and tested 2026-10-22 (RL-170)**, with D4.1
+   and B06; hard set `g3_v2/hard/hard_d6_item11.json` 10/10, self-test 54/54, hard cases 199/210 (same 11 known
+   failures), shards 0/20 compared. **Blocking the production run on `PG/g2_v3_1/`** (RL-170, for the owner): G3's
+   input lists (item 6 scope exclusions, item 7 LLM-output units, item 8 reflexive table) cover only the old corpus;
+   3 reflexive units changed hash; new articles resting on "transformer model(s)" alone (153) or on "LLM(s)" alone (417,
+   314 with no "language model" in the text) are not screened as item 6 screened the old corpus. Then: CSF launcher,
+   CSF check with a new incline reference, checked merge (adds `g3_occurrences`).
 2. Small known items: add "BERTH" (an evapotranspiration product) to the group-4 exclusions; the open RL-118 leak
    (citation numbers left as words).
 3. D5 count of dash-enclosed asides (approved), on the G3 output.

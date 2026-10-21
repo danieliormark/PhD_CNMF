@@ -122,6 +122,9 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
   than once in a unit (10.7% of atom records list several positions); this does not affect the matrices.
 - The one place positions decide attribution is focal-term replacement when the same word also occurs outside the
   mention: it reached a non-focal occurrence in 3 of 19,971 mentions.
+- *[2026-10-22, RL-170, D6 and item 11: `focal_he` ids are `<uid>.P<k>.F<j>` (a parent can have several); a cousin lists
+  every parent of its *sentence*; parents carry `embedded_in`; the typed links are also written as one row per occurrence
+  in `g3_occurrences_NNN.jsonl` (§6 items 10 and 11).]*
 - For M1: the database written with `--db` uses chunk12's id form `pmcid::uid::hash`. **chunk12 keeps only the last
   parent per sentence id** (`hash_to_parent[sent_hash] = parent_idx`); M1 must use each cousin's parent list instead.
 
@@ -824,7 +827,8 @@ item 4.]*
    *[RL-150: a citation number glued after a possessive ("Hsu’s22") is removed with it; names in narrative citations
    (O’Connor, D’Souza) and `REFnnnnnn` tokens are kept.]*
 
-10. **Sentence-centric parents (D6) — DECIDED 2026-10-19 (owner); not yet implemented.** The rule inherited from the toy
+10. **Sentence-centric parents (D6) — DECIDED 2026-10-19 (owner); implemented 2026-10-22 (RL-170), see the note at the end of
+   this item.** The rule inherited from the toy
    script ("focal atoms are left out of the cousins", §3) was meant to say that by definition a hyperedge containing a
    focal term cannot be a cousin; it should change types, not remove words or hyperedges. Measured on the G3 v1 output
    (RL-150): 39,418 of 816,075 parents (4.8%) repeat a clause that already has a parent, with the focal role moved to
@@ -842,6 +846,14 @@ item 4.]*
    a clause by the number of models it names; the word-centric view can be rebuilt at interpretation from the
    sentence-centric data (a focal word's parent plus the other parents of the same unit). Kept by decision 2 (§6 item 2):
    a focal clause embedded in another clause's argument is its own parent and also part of the outer clause's sibling.
+   *[2026-10-22, RL-170: implemented in `g3_v2/g3_curation_v2.py` (`extract`). Focal paths are grouped by their governing
+   clause (its position in the unit edge); each argument holding a focal word is a `focal_he`, ids `.F1`, `.F2` … (was `.F`);
+   a focal word in the clause's head makes the head the `focal_he`, as before. Cousins are swept once per unit with every
+   parent clause as a barrier. Shards 0 and 20 (G2 v3 input, old and new script): parents 16,524 → 15,694 and 17,136 →
+   16,370 (−5.0%, −4.5%; RL-150 had measured 4.8% rotated parents), 812 and 746 parents with 2+ `focal_he`; focal atoms
+   dropped from cousins 2,870 → 435 and 2,900 → 387 (the rest are focal terms with no governing clause, item 7); no
+   sentence loses an atom (every atom of the old output is in the new one, per sentence). Hard set
+   `g3_v2/hard/hard_d6_item11.json` 10/10.]*
 
 ## 7. Test script
 
@@ -1117,7 +1129,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | c8b46c840f74 (RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 25b27d784157 (RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
@@ -1127,13 +1139,14 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_v2/modal_merge.py` (§6 item 3: decision rule copied from `g3_modal_check/modal_rules.py`, edge-order fix, and the clause merge; imported by the script) | 75c7022ac187 |
 | `fullscale_pipeline/g3_v2/reflexive_restore.py` (§6 item 8: builds the reflexive table; 43 min on incline) | 92fa72c383de |
 | `fullscale_pipeline/g3_v2/measure_be.py` (§6 item 1: the measurement required before implementing passive "be") | 8cbfe1c89631 |
-| `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached; since RL-151 with G2's sentence-cut rule) | 8b28758d27cd (80b9ca527b8f before RL-151) |
+| `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached; since RL-151 with G2's sentence-cut rule; since RL-170 multi-unit sentence cases) | 79a8179adf74 (8b28758d27cd at RL-151, 80b9ca527b8f before) |
+| `fullscale_pipeline/g3_v2/hard/hard_d6_item11.json` (10 D6 / item 11 sentence cases, RL-170) | 32f339765a87 |
 | `fullscale_pipeline/g3_v2/hard/hard_*.json` (13 sets, 199 cases, 175 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
 | `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
 | `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |
 
 11. **Cousin scope, link types and between-clause links — DECIDED 2026-10-21 (owner), for the production rerun with
-   D4.1/B06/D6; not yet implemented.** Measured on G3 v1 (current corpus): 660,619 sentences with a parent; 15.4% have 2+
+   D4.1/B06/D6; implemented 2026-10-22 (RL-170), see the note at the end of this item.** Measured on G3 v1 (current corpus): 660,619 sentences with a parent; 15.4% have 2+
    distinct focal clauses (13.6% two, 1.5% three, 0.3% four or more) and hold 27% of all child hyperedges (751,319 of
    2,746,514); parents spread over 2+ units in 3,824 sentences.
    - **Cousins scoped by sentence, not by unit:** a clause without a focal term is a cousin of every parent of its
@@ -1151,3 +1164,15 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    1/n, but generic material ("the study shows …", mostly a parent's verb group under decision 2, sometimes a cousin)
    should be down-weighted by a frequency-based rule whose assumptions are tested first (tf-idf is a candidate, not a
    decision; see the idf-versus-shared-meaning question, CLAUDE.md §4.21).
+   *[2026-10-22, RL-170: implemented in `g3_curation_v2.py` (`link_sentence`, `occurrences`). Every cousin of a sentence
+   lists every parent of that sentence; identical cousin content in later units of the sentence is folded into the
+   first occurrence (`also_in`: uid and atoms of each folded copy, so no word is lost); a unit without a parent is kept
+   (written to `g3_test_NNN.jsonl` with no parents) when its sentence has a parent and it holds cousins; a parent whose
+   clause lies inside an argument (not the head) of another parent's clause gets `embedded_in` (every such outer
+   parent, also when it lies in the outer `focal_he`). New file `g3_occurrences_NNN.jsonl`: one row per parent, child and
+   cousin occurrence (`occ` id, `hash`, `key` = content key, `role`, uid, sid, pmcid, `links`: `contains` child → parent,
+   `co_occurs` cousin → parent, `embedded` parent → outer parent). `check_record` checks the child id pattern, that every
+   parent has a verb group and a `focal_he`, that embedded links and cousin parent lists are exact, and that no cousin
+   holds a focal atom. Shards 0 and 20: cousins 47,082 → 37,015 and 49,221 → 38,876 (the focal clauses that came back as
+   other parents' cousins are gone); 203 and 207 units kept only for their cousins; 60 and 52 cousins folded; 89 and 77
+   sentences with parents in two or more units; 1,313 and 1,315 embedded parents; 0 problems.]*

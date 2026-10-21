@@ -22,22 +22,27 @@ used: it skips a focal term's immediate clause, keeps a fringe pool nothing read
   D4.1 (owner 2026-10-19, RL-149): formatting remnants inside words cleaned (tidy_word: ligatures, quotes, glued brackets,
       formula and table debris), flattened superscript citation numbers dropped (Ctx.citation_numbers), figure-panel legends
       opening with lower-case panel letters removed as non-prose (PANEL_LEGEND)
+  D6 (owner 2026-10-19, RL-170): one parent per clause that governs a focal term; every argument holding a focal word is a focal_he;
+      a clause holding a focal term is never a cousin (no rotated parents, no focal clause stripped into another parent's cousins)
+  item 11 (owner 2026-10-21, RL-170): cousins scoped by sentence (linked to every parent of the sentence, identical content folded
+      into one occurrence, a unit without a parent kept for its cousins when its sentence has a parent); typed links in
+      g3_occurrences_NNN.jsonl: contains (child -> parent), co_occurs (cousin -> parent), embedded (parent -> outer parent)
   provenance: every structure has an id and hash sha1("<id>|<edge>")[:12] (the G2 unit-hash form): parent <uid>.P<k>, its children
-      <uid>.P<k>.D (dummy_sibling), .F (focal_he), .S<j> (sibling_he), cousins <uid>.K<j> with the parents they were swept against (the unit is
-      the grandparent edge that holds a parent and its cousins); every output atom lists the source atoms, words and token positions it
-      comes from. Unit -> sentence (sid, hash_final) -> article (pmcid) as in G2.
+      <uid>.P<k>.D (dummy_sibling), .F<j> (focal_he), .S<j> (sibling_he), cousins <uid>.K<j> with every parent of their sentence (also_in:
+      the same cousin in the sentence's later units, with their atoms); every output atom lists the source atoms, words and token
+      positions it comes from. Unit -> sentence (sid, hash_final) -> article (pmcid) as in G2.
 
     python g3_curation_test.py --selftest
     python g3_curation_test.py --shard 0 --limit 200 --outdir DIR [--modals tag|drop|keep] [--db]
 
-Writes DIR/g3_test_NNN.jsonl (one record per unit with a parent; owner 2026-10-10), g3_noparent_NNN.jsonl (the removed units without a
+Writes DIR/g3_test_NNN.jsonl (one record per unit with a parent, owner 2026-10-10, or with cousins of a sentence that has one, item 11), g3_noparent_NNN.jsonl (the removed units without a
 parent), g3_articles_NNN.jsonl (per article: excluded, valid, or invalid_no_parent when no unit has a parent; M1 keeps only valid ones),
-g3_nonprose_NNN.jsonl, g3_errors_NNN.jsonl, g3_report_NNN.json and, with --db, g3_test_NNN.sqlite in the form
+g3_nonprose_NNN.jsonl, g3_errors_NNN.jsonl, g3_occurrences_NNN.jsonl (item 11), g3_report_NNN.json and, with --db, g3_test_NNN.sqlite in the form
 chunk12 reads (('source_core', 'pmcid::uid::hash', parent), ('source_periphery', 'pmcid::uid::hash', cousin)). Refuses to overwrite.
 Checks at the end (exit 1 on any problem): input unit hashes, every output id and hash, every atom traced to a token position, every
 cousin's parents present, and with --db the database read back in chunk12's way.
 """
-import argparse, collections, contextlib, csv, hashlib, json, os, random, re, sys, time, urllib.parse
+import argparse, collections, contextlib, csv, hashlib, itertools, json, os, random, re, sys, time, urllib.parse
 
 sys.setrecursionlimit(20000)
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
@@ -351,8 +356,15 @@ def is_focal(atom):
     return len(p) > 2 and p[2] == 'focal'
 
 
+def at_barrier(edge, barrier):
+    """barrier: None, one edge string, or a set of edge strings (D6: every parent clause of the unit)"""
+    if not barrier:
+        return False
+    return str(edge) == barrier if isinstance(barrier, str) else str(edge) in barrier
+
+
 def terminal(edge, barrier=None):
-    if edge is None or (barrier and str(edge) == barrier):
+    if edge is None or at_barrier(edge, barrier):
         return []
     if edge.is_atom():
         return [edge]
@@ -480,7 +492,7 @@ def is_clause(edge):
 
 
 def deep_pred(edge, barrier):
-    if edge is None or str(edge) == barrier:
+    if edge is None or at_barrier(edge, barrier):
         return False
     if edge.is_atom():
         if XBASED == 'all':
@@ -492,7 +504,7 @@ def deep_pred(edge, barrier):
 def split_clauses(edge, barrier, acc, clauses, phrases):
     """a phrase cut open to reach the clauses nested in it: its loose words (acc, one cousin), its sub-phrases without a
     clause (phrases, one cousin each; GROUP '1' puts their words in acc too) and the nested clauses"""
-    if edge is None or str(edge) == barrier:
+    if edge is None or at_barrier(edge, barrier):
         return
     if edge.is_atom():
         acc.append(edge); return
@@ -969,15 +981,16 @@ def fuse_phrasal(edge, ctx):
     return hedge(tuple(kids))
 
 
-def focal_paths(edge, path=None):
+def focal_paths(edge, path=None, idx=()):
+    """[(edges from the unit edge down to a focal atom, index of each step's sub-edge in the edge above)]"""
     path = (path or []) + [edge]
     if edge.is_atom():
-        return [path] if is_focal(edge) else []
-    return [p for sub in edge for p in focal_paths(sub, path)]
+        return [(path, idx)] if is_focal(edge) else []
+    return [p for i, sub in enumerate(edge) for p in focal_paths(sub, path, idx + (i,))]
 
 
 def sweep(edge, barrier, ctx):
-    if edge is None or str(edge) == barrier:
+    if edge is None or at_barrier(edge, barrier):
         return []
     if edge.is_atom():
         f = flatten(edge, barrier, True, ctx)
@@ -988,7 +1001,7 @@ def sweep(edge, barrier, ctx):
         head_atoms = terminal(head, barrier)
         preds = flatten_atoms([a for a in head_atoms if is_pred(a) or is_vg_mod(a)], True, ctx)
         for arg in edge[1:]:
-            if str(arg) == barrier:
+            if at_barrier(arg, barrier):
                 continue
             t = flatten(arg, barrier, True, ctx)
             if t and flat_is_verb_group(t):
@@ -1031,9 +1044,14 @@ def aux_only_head(head, ctx):
 
 
 def extract(edge, ctx):
+    """D6 (owner 2026-10-19): one parent per clause that governs a focal term; each argument of the clause that holds a focal
+    word is a focal_he, the other arguments (and the head's non-verb modifiers) sibling_he. Cousins are the clauses of the
+    unit outside every parent clause, linked to every parent (§6 item 11: to every parent of the sentence, link_sentence);
+    a clause holding a focal term is never a cousin. Returns (circuits {parent edge: parts}, cousins {cousin edge: [kind,
+    flat]}, embedded {parent edge: [edges of the parents in whose argument its clause lies]}, item 11)"""
     norm = fuse_phrasal(q4_move_also(edge), ctx)
-    circuits, cousins = {}, {}
-    for path in focal_paths(norm):
+    clauses = {}                                        # clause position -> [path, clause index in path, focal argument indices]
+    for path, idx in focal_paths(norm):
         if len(path) < 2:
             continue
         pidx = next((i for i in range(len(path) - 2, -1, -1) if has_pred(path[i][0]) and is_clause(path[i])
@@ -1041,6 +1059,9 @@ def extract(edge, ctx):
         if pidx == -1:
             ctx.stats['focal_path_no_predicate'] += 1
             continue
+        clauses.setdefault(idx[:pidx], [path, pidx, set()])[2].add(idx[pidx])
+    circuits, where, barriers = {}, collections.defaultdict(list), set()
+    for cpos, (path, pidx, fargs) in clauses.items():
         hi, tele = pidx, Flat()
         for i in range(pidx - 1, -1, -1):
             step = flatten(path[i], str(path[i + 1]), False, ctx)
@@ -1050,38 +1071,46 @@ def extract(edge, ctx):
                 tele.merge(step); hi = i
             else:
                 break
-        barrier = str(path[hi])
-        parent, farg = path[pidx], path[pidx + 1]
+        parent = path[pidx]
         head_atoms = terminal(parent[0])
         cp = [a for a in head_atoms if is_pred(a) or is_vg_mod(a)]
         cn = [a for a in head_atoms if not (is_pred(a) or is_vg_mod(a))]
         dummy = Flat().merge(tele).merge(flatten_atoms(cp, False, ctx))
         if not dummy:
-            ctx.stats['focal_path_empty_verb_group'] += 1
+            ctx.stats['focal_clause_empty_verb_group'] += 1
             continue
-        focal = flatten(farg, None, False, ctx)
-        if not focal:
+        focals, sibs = [], []
+        if 0 in fargs:                                  # a focal word in the head: the head is the focal_he (as before D6)
+            f = flatten(parent[0], None, False, ctx)
+            if f:
+                focals.append(f)
+        else:
+            nf = flatten_atoms(cn, False, ctx)
+            if nf:
+                sibs.append(nf)
+        for j, arg in enumerate(parent[1:], 1):
+            f = flatten(arg, None, False, ctx)
+            if f:
+                (focals if j in fargs else sibs).append(f)
+        if not focals:
+            ctx.stats['focal_clause_empty_focal_he'] += 1
             continue
-        sibs = []
-        nf = flatten_atoms(cn, False, ctx)
-        if nf:
-            sibs.append(nf)
-        for arg in parent[1:]:
-            if arg == farg:
-                continue
-            s = flatten(arg, None, False, ctx)
-            if s:
-                sibs.append(s)
-        parts = [('dummy_sibling', dummy), ('focal_he', focal)] + [('sibling_he', s) for s in sibs]
-        circ = hedge(('parent',) + tuple(mk(k, f) for k, f in parts))
-        key = str(circ)
+        parts = [('dummy_sibling', dummy)] + [('focal_he', f) for f in focals] + [('sibling_he', s) for s in sibs]
+        key = str(hedge(('parent',) + tuple(mk(k, f) for k, f in parts)))
+        ctx.stats['focal_clauses_identical_merged'] += key in circuits
         circuits.setdefault(key, parts)
-        for kind, f in sweep(norm, barrier, ctx):
-            ck = str(mk(kind, f))
-            cousins.setdefault(ck, [kind, f, []])
-            if key not in cousins[ck][2]:
-                cousins[ck][2].append(key)
-    return circuits, cousins
+        where[key].append(cpos)
+        barriers.add(str(path[hi]))
+    embedded = {}                                       # item 11: inside an argument (not the head) of an outer parent clause
+    for a, pas in where.items():
+        outer = [b for b, pbs in where.items() if b != a and any(len(pb) < len(pa) and pa[:len(pb)] == pb and pa[len(pb)] >= 1
+                                                               for pa in pas for pb in pbs)]
+        if outer:
+            embedded[a] = outer
+    cousins = {}
+    for kind, f in sweep(norm, frozenset(barriers), ctx):   # no parent: the whole unit (its cousins may serve the sentence)
+        cousins.setdefault(str(mk(kind, f)), [kind, f])
+    return circuits, cousins, embedded
 
 
 # ------------------------------------------------------------------ one unit
@@ -1120,7 +1149,7 @@ def curate_unit(art, s, u, matcher, anchored, modals):
             if how != 'not_in_edge':
                 ctx.pos[str(catom)].extend((w, p) for a in need for w, p in ctx.pos.get(a, []) if p in pos)
         mrec.append(dict(term=term, surface=surf, canonical=canon, positions=pos, replaced=how))
-    circuits, cousins = extract(edge, ctx)
+    circuits, cousins, embedded = extract(edge, ctx)
     gloss = [k for k, parts in circuits.items()                         # §6 item 8: "LLM equals large language model."
              if all(urllib.parse.unquote(a.root()) in GLOSS_VERBS or not pred_or_neg(a)
                     for kind, f in parts if kind == 'dummy_sibling' for a in f.atoms())
@@ -1129,33 +1158,68 @@ def curate_unit(art, s, u, matcher, anchored, modals):
              and sum(kind != 'dummy_sibling' for kind, _ in parts) >= 2]          # a term and its expansion: two sides
     for k in gloss:
         del circuits[k]; ctx.stats['parent_glossary_dropped'] += 1
-    if gloss:
-        cousins = {ck: [kind, f, [p for p in ps if p not in gloss]] for ck, (kind, f, ps) in cousins.items()}
-        cousins = {ck: v for ck, v in cousins.items() if v[2]}
     uid = u["uid"]
     parents, pid_of = [], {}
     for k, (key, parts) in enumerate(circuits.items(), 1):
         pid = f"{uid}.P{k}"; pid_of[key] = pid
-        kids, j = [], 0
+        kids, n = [], collections.Counter()
         for kind, f in parts:
-            if kind == 'sibling_he':
-                j += 1
-            cid = f"{pid}.{ {'dummy_sibling': 'D', 'focal_he': 'F'}.get(kind, f'S{j}') }"
+            n[kind] += 1
+            cid = f"{pid}.{ {'dummy_sibling': 'D', 'focal_he': f'F{n[kind]}'}.get(kind, f'S{n[kind]}') }"   # D6: .F1, .F2 ...
             e = str(mk(kind, f))
             kids.append(dict(id=cid, hash=h12(cid, e), kind=kind, edge=e, content_key=content_key(str(a) for a in f.atoms()),
                              atoms=atom_record(f, ctx),
                              **({'modality': f.tags} if f.tags else {})))
         parents.append(dict(id=pid, hash=h12(pid, key), edge=key, content_key=content_key(k["content_key"] for k in kids),
                             children=kids))
+    for p in parents:                                   # item 11: embedded link to the outer parent(s)
+        outer = [pid_of[b] for b in embedded.get(p["edge"], []) if b in pid_of]
+        if outer:
+            p["embedded_in"] = outer
     cous = []
-    for j, (ck, (kind, f, pkeys)) in enumerate(cousins.items(), 1):
+    for j, (ck, (kind, f)) in enumerate(cousins.items(), 1):
         kid = f"{uid}.K{j}"
         cous.append(dict(id=kid, hash=h12(kid, ck), kind=kind, edge=ck, content_key=content_key(str(a) for a in f.atoms()),
-                         parents=[pid_of[p] for p in pkeys], atoms=atom_record(f, ctx),
+                         parents=[p["id"] for p in parents], atoms=atom_record(f, ctx),     # link_sentence widens to the sentence
                          **({'modality': f.tags} if f.tags else {})))
     rec = dict(pmcid=art, sid=s["sid"], hash_final=s["hash_final"], uid=uid, unit_hash=u["hash"], text=u["text"],
                focal_mentions=mrec, parents=parents, cousins=cous)
     return rec, ctx
+
+
+def link_sentence(recs):
+    """§6 item 11 (owner 2026-10-21): cousins are scoped by sentence. Every cousin of a sentence is linked (co-occurs) to every
+    parent of that sentence, also those of its other units; identical cousin content in several units of a sentence is one
+    occurrence, kept in the first unit, the others listed in also_in with their atoms (no word is lost); cousin ids are
+    renumbered per unit. recs: the curated units of one sentence, in order. Returns the number of folded cousins."""
+    pids = [p["id"] for r in recs for p in r["parents"]]
+    first, folded = {}, 0
+    for r in recs:
+        kept = []
+        for c in r["cousins"]:
+            if c["edge"] in first:
+                first[c["edge"]].setdefault("also_in", []).append(dict(uid=r["uid"], atoms=c["atoms"])); folded += 1
+            else:
+                first[c["edge"]] = c; kept.append(c)
+        for j, c in enumerate(kept, 1):
+            c["id"] = f"{r['uid']}.K{j}"; c["hash"] = h12(c["id"], c["edge"]); c["parents"] = list(pids)
+        r["cousins"] = kept
+    return folded
+
+
+def occurrences(rec):
+    """§6 item 11: one row per hyperedge occurrence (id, hash, entity key = content key, role, uid/sid/pmcid) with typed
+    links: contains (child -> its parent), co_occurs (cousin -> each parent of its sentence), embedded (parent -> the outer
+    parent in whose argument its clause lies). No parent-parent links of the same sentence (owner)."""
+    base = dict(uid=rec["uid"], sid=rec["sid"], pmcid=rec["pmcid"])
+    for p in rec["parents"]:
+        yield dict(occ=p["id"], hash=p["hash"], key=p["content_key"], role="parent", **base,
+                   links=[["embedded", o] for o in p.get("embedded_in", [])])
+        for c in p["children"]:
+            yield dict(occ=c["id"], hash=c["hash"], key=c["content_key"], role=c["kind"], **base, links=[["contains", p["id"]]])
+    for c in rec["cousins"]:
+        yield dict(occ=c["id"], hash=c["hash"], key=c["content_key"], role=c["kind"], **base,
+                   links=[["co_occurs", q] for q in c["parents"]])
 
 
 # ------------------------------------------------------------------ checks
@@ -1193,8 +1257,9 @@ def correct_unit(u, fixes):
     return u
 
 
-def check_record(rec, u):
-    """provenance problems of one output record against its input unit"""
+def check_record(rec, u, sentence_pids=None):
+    """provenance problems of one output record against its input unit; sentence_pids: the parent ids of its whole sentence
+    (item 11; None = the unit's own)"""
     bad = []
     if hashlib.sha1(f"{u['uid']}|{u['text']}".encode("utf-8")).hexdigest()[:12] != u["hash"]:
         bad.append("input unit hash does not verify")
@@ -1205,12 +1270,24 @@ def check_record(rec, u):
         pids.add(p["id"])
         if str(hedge(('parent',) + tuple(hedge(c["edge"]) for c in p["children"]))) != p["edge"]:
             bad.append(f"children of {p['id']} do not rebuild the parent")
+        kinds = [c["kind"] for c in p["children"]]
+        if kinds[:1] != ['dummy_sibling'] or 'focal_he' not in kinds:
+            bad.append(f"parent {p['id']} without a verb group or a focal_he")
+        n = collections.Counter()
         for c in p["children"]:
-            if not c["id"].startswith(p["id"] + ".") or c["hash"] != h12(c["id"], c["edge"]):
+            n[c["kind"]] += 1
+            want = f"{p['id']}." + {'dummy_sibling': 'D', 'focal_he': f"F{n['focal_he']}"}.get(c["kind"], f"S{n['sibling_he']}")
+            if c["id"] != want or c["hash"] != h12(c["id"], c["edge"]):
                 bad.append(f"child id/hash {c['id']}")
-    for c in rec["cousins"]:
-        if c["hash"] != h12(c["id"], c["edge"]) or not c["parents"] or not set(c["parents"]) <= pids:
+    for p in rec["parents"]:
+        if not set(p.get("embedded_in", [])) <= pids - {p["id"]}:
+            bad.append(f"embedded link of {p['id']}")
+    every = set(sentence_pids) if sentence_pids is not None else pids
+    for j, c in enumerate(rec["cousins"], 1):
+        if c["id"] != f"{rec['uid']}.K{j}" or c["hash"] != h12(c["id"], c["edge"]) or not c["parents"] or set(c["parents"]) != every:
             bad.append(f"cousin {c['id']}")
+        if any(x.is_atom() and is_focal(x) for x in hedge(c["edge"])[1:]):
+            bad.append(f"cousin {c['id']} holds a focal term")
     for st in [c for p in rec["parents"] for c in p["children"]] + rec["cousins"]:   # content key = the edge's words, role left out
         if st["content_key"] != content_key(str(x) for x in hedge(st["edge"])[1:]):
             bad.append(f"content key {st['id']}")
@@ -1230,9 +1307,9 @@ def run(a):
     inp = a.input or SHARDS + f"g2_parsed_{tag}.jsonl"
     os.makedirs(a.outdir, exist_ok=True)
     out_p, err_p, rep_p = (os.path.join(a.outdir, f"g3_{x}_{tag}.{e}") for x, e in (("test", "jsonl"), ("errors", "jsonl"), ("report", "json")))
-    np_p, nop_p, art_p = (os.path.join(a.outdir, f"g3_{x}_{tag}.jsonl") for x in ("nonprose", "noparent", "articles"))
+    np_p, nop_p, art_p, occ_p = (os.path.join(a.outdir, f"g3_{x}_{tag}.jsonl") for x in ("nonprose", "noparent", "articles", "occurrences"))
     db_p = os.path.join(a.outdir, f"g3_test_{tag}.sqlite")
-    for p in (out_p, err_p, rep_p, np_p, nop_p, art_p) + ((db_p,) if a.db else ()):
+    for p in (out_p, err_p, rep_p, np_p, nop_p, art_p, occ_p) + ((db_p,) if a.db else ()):
         if os.path.exists(p):
             sys.exit(f"refusing to overwrite {p}")
     matcher = focal_terms.Matcher()
@@ -1246,7 +1323,8 @@ def run(a):
         from graphbrain import hopen
         hg = stack.enter_context(hopen(db_p))
     t0 = time.time()
-    with open(inp, encoding="utf-8") as f, open(out_p, "w", encoding="utf-8") as fo, open(err_p, "w", encoding="utf-8") as fe:
+    with open(inp, encoding="utf-8") as f, open(out_p, "w", encoding="utf-8") as fo, open(err_p, "w", encoding="utf-8") as fe, \
+            open(occ_p, "w", encoding="utf-8") as fx:
         for i, line in enumerate(f):
             if a.limit and i >= a.limit:
                 break
@@ -1287,44 +1365,62 @@ def run(a):
                             cu = correct_unit(cu, fixes); stats['units_corrected'] += 1
                     units.append((s, u, cu))
             anchored = any(matcher.anchor_hits(cu["text"]) for _, _, cu in units)    # article evidence from the kept units
-            for s, u, cu in units:
-                stats['units'] += 1
-                try:
-                    rec, ctx = curate_unit(r["pmcid"], s, cu, matcher, anchored, a.modals)
-                    if cu is not u:
-                        rec["text_original"] = u["text"]
-                        if u["uid"] in corrections:
-                            rec["corrections"] = corrections[u["uid"]][1]
-                        if u["uid"] in reflexives:
-                            rec["reflexive_restored"] = reflexives[u["uid"]]["restorations"]
-                except Exception as e:                                  # RecursionError included
-                    stats['unit_errors'] += 1; stats['error_' + type(e).__name__] += 1
-                    fe.write(json.dumps(dict(uid=u["uid"], error=type(e).__name__, message=str(e)[:500])) + "\n")
-                    continue
-                if rec["parents"]:                                      # owner 2026-10-10: a unit without a parent is removed
-                    fo.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                    art_units += 1; art_parents += len(rec["parents"])
-                else:
-                    stats['units_removed_no_parent'] += 1
-                    noparent.append(dict(uid=u["uid"], focal=bool(rec["focal_mentions"]), text=rec["text"]))
-                stats.update(ctx.stats)
-                for k, c in ctx.detail.items():
-                    detail[k].update(c)
-                for m in rec["focal_mentions"]:
-                    surfaces[(m["surface"], m["canonical"])] += 1; stats['mention_' + m["replaced"]] += 1
-                stats['focal_mentions'] += len(rec["focal_mentions"])
-                stats['units_with_parent'] += bool(rec["parents"]); stats['parents'] += len(rec["parents"])
-                stats['cousins'] += len(rec["cousins"])
-                stats['units_focal_no_parent'] += bool(rec["focal_mentions"]) and not rec["parents"]
-                bad = check_record(rec, u)                              # the unit hash is verified on the original text
-                problems += [f"{u['uid']}: {b}" for b in bad]
-                if rec["parents"] and len(samples) < 400:
-                    samples.append(rec)
-                if hg is not None:
-                    for p in rec["parents"]:
-                        hg.add(hedge(('source_core', f"{r['pmcid']}::{u['uid']}::{p['hash']}", hedge(p["edge"]))))
-                    for c in rec["cousins"]:
-                        hg.add(hedge(('source_periphery', f"{r['pmcid']}::{u['uid']}::{c['hash']}", hedge(c["edge"]))))
+            for sid, group in itertools.groupby(units, key=lambda x: x[0]["sid"]):  # item 11: one sentence at a time
+                done = []
+                for s, u, cu in group:
+                    stats['units'] += 1
+                    try:
+                        rec, ctx = curate_unit(r["pmcid"], s, cu, matcher, anchored, a.modals)
+                        if cu is not u:
+                            rec["text_original"] = u["text"]
+                            if u["uid"] in corrections:
+                                rec["corrections"] = corrections[u["uid"]][1]
+                            if u["uid"] in reflexives:
+                                rec["reflexive_restored"] = reflexives[u["uid"]]["restorations"]
+                    except Exception as e:                              # RecursionError included
+                        stats['unit_errors'] += 1; stats['error_' + type(e).__name__] += 1
+                        fe.write(json.dumps(dict(uid=u["uid"], error=type(e).__name__, message=str(e)[:500])) + "\n")
+                        continue
+                    done.append((u, rec, ctx))
+                stats['cousins_folded_in_sentence'] += link_sentence([rec for _, rec, _ in done])
+                spids = [p["id"] for _, rec, _ in done for p in rec["parents"]]
+                stats['sentences_with_parent'] += bool(spids)
+                stats['sentences_parents_in_2plus_units'] += sum(bool(rec["parents"]) for _, rec, _ in done) > 1
+                for u, rec, ctx in done:
+                    # owner 2026-10-10: a unit without a parent is removed; item 11: unless its sentence has a parent and it
+                    # holds cousins of that sentence
+                    if rec["parents"] or (spids and rec["cousins"]):
+                        fo.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                        for o in occurrences(rec):
+                            fx.write(json.dumps(o, ensure_ascii=False) + "\n"); stats['occurrence_rows'] += 1
+                        art_units += 1; art_parents += len(rec["parents"])
+                        stats['units_cousins_only'] += not rec["parents"]
+                    else:
+                        stats['units_removed_no_parent'] += 1
+                        noparent.append(dict(uid=u["uid"], focal=bool(rec["focal_mentions"]), text=rec["text"]))
+                    stats.update(ctx.stats)
+                    for k, c in ctx.detail.items():
+                        detail[k].update(c)
+                    for m in rec["focal_mentions"]:
+                        surfaces[(m["surface"], m["canonical"])] += 1; stats['mention_' + m["replaced"]] += 1
+                    stats['focal_mentions'] += len(rec["focal_mentions"])
+                    stats['units_with_parent'] += bool(rec["parents"]); stats['parents'] += len(rec["parents"])
+                    if rec["parents"] or spids:
+                        stats['cousins'] += len(rec["cousins"])
+                        stats['parents_embedded'] += sum(bool(p.get("embedded_in")) for p in rec["parents"])
+                        stats['parents_2plus_focal_he'] += sum(sum(c["kind"] == 'focal_he' for c in p["children"]) > 1
+                                                               for p in rec["parents"])
+                    stats['units_focal_no_parent'] += bool(rec["focal_mentions"]) and not rec["parents"]
+                    kept = bool(rec["parents"] or (spids and rec["cousins"]))   # a removed unit's cousins belong to no one
+                    bad = check_record(rec if kept else dict(rec, cousins=[]), u, spids)   # unit hash verified on the original text
+                    problems += [f"{u['uid']}: {b}" for b in bad]
+                    if rec["parents"] and len(samples) < 400:
+                        samples.append(rec)
+                    if hg is not None and (rec["parents"] or spids):
+                        for p in rec["parents"]:
+                            hg.add(hedge(('source_core', f"{r['pmcid']}::{u['uid']}::{p['hash']}", hedge(p["edge"]))))
+                        for c in rec["cousins"]:
+                            hg.add(hedge(('source_periphery', f"{r['pmcid']}::{u['uid']}::{c['hash']}", hedge(c["edge"]))))
             # owner 2026-10-10: an article none of whose units has a parent is invalid (M1 leaves it out of every relation)
             status = "valid" if art_parents else "invalid_no_parent"
             stats['articles_' + status] += 1
