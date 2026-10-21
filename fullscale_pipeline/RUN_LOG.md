@@ -2021,3 +2021,6 @@ Step 3 prepared: `retrieval/inc_p6.py` (wrapper: P6 v2 unchanged, paths pointed 
 `pmc_preprocessing/submit_inc_p6.sh` (copy in `retrieval/`). Inputs: `inc_run/p6_new_in/` 15,563 articles,
 `inc_run/p6_cur_in/` 5,571. Local trial (2 articles per unit): all status ok, 20–110 s per article. Waiting for the owner
 to submit the CSF arrays. [LOG]
+
+**RL-166 · 2026-10-21 · incremental run, step 4 prepared and tested · CODE · LIVE**
+`retrieval/inc_p7.py`: P7 (`focal_citations_v2.py`, unchanged) run once on the combined corpus in a staging folder, then its works mapped back to the existing REF ids (a work with tokens of one existing work keeps its id; with several, the smallest, the others recorded as aliases; a split existing work keeps its id in its largest part; new works get the next free ids), `text_final`/`hash_final` rewritten. Test on the current corpus alone (`--test-current-only`, v2 matcher, `inc_run/p7_test/`): 10,555 works, all kept their id; 702,948 of 702,948 existing sentences unchanged (sid and hash_final); 10 extra sentences, all made focal by coreference through the hyphenated "large-language model(s)" spelling added to `focal_terms.py` on 2026-10-08, after P7 ran. P6 arrays 23477301 (new, 100 tasks) and 23477302 (current, 40 tasks) submitted by the owner. [LOG]
