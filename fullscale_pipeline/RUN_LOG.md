@@ -2003,3 +2003,21 @@ applied in the incremental run together with the 255 rejected hits inside kept c
 
 **RL-164 · 2026-10-21 · Stage A/B · DOCUMENTATION · LIVE**
 Method written up in `fullscale_pipeline/retrieval/STAGE_AB_METHOD.md` (rules, owner decisions, manual-check protocol, the exact reader prompts, agent type and model as recorded — `claude-haiku-5-5`, no effort level set — and per-run token use). Lists on git in `retrieval/stage_b_lists/`: `dropped_no_focal_terms_left.csv` (F0 all hits rejected: new 2,639, current 104; F2 other sense: new 1,111, current 87; each with the rejected hits or term verdicts), `dropped_ai_use_statement_only.csv` (new 6,996, current 789), `dropped_no_focal_sentence_p2_gap.txt` (82,158), `kept_new_corpus_after_stage_ab.txt` (15,563). Owner: 2026 articles are kept for now. [LOG]
+
+**RL-165 · 2026-10-21 · incremental run, steps 1–3 prepared · CORPUS DATA + CODE · LIVE**
+Plan: `fullscale_pipeline/INCREMENTAL_RUN.md`. Corpus by year (new 15,563 + current remaining 33,682 = 49,245; new share
+96–100% before 2019, 49% in 2022, 25% in 2025, 33% in 2026) reported to the owner.
+Step 1: P2 with `focal_terms_v3.py` on the current corpus → `LCS/p2_v3_current/` (existing P2 untouched): 34,777 articles
+with a focal sentence (v2: 34,662), 1,358,202 sentences, 0 errors, 652 s.
+Step 2: `retrieval/inc_prepare.py` → `LCS/inc_run/`: every P2 v3 record cleaned with the Stage B hit rules, the F2
+per-term verdicts and the AI-use statement labels (a statement sentence or one left without a term is un-flagged; ids
+and hashes unchanged). Un-flagged: statements 5,131 current / 1,117 new; no term left 250 / 383; hits removed by the
+homonym rules 677, by release date 49. Current articles: unchanged 26,034, removals only 2,178 (drop list
+`drop_sids_current.tsv`), additions 5,470, new under v3 102 (101 kept after Stage B's article screen; PMC4750035, GPN the
+reagent, excluded), no focal sentence left 13. Additions come mostly from group-4 names (3,797 articles; sample of 20
+added names 19 genuine — scGPT, UKBioBERT, BioMistral-7b, polyBERT …; 1 homonym, "BERTH", an evapotranspiration product,
+to add to the exclusions) and hyphen-prefix names (1,274 articles).
+Step 3 prepared: `retrieval/inc_p6.py` (wrapper: P6 v2 unchanged, paths pointed at the unit, v3 matcher) and
+`pmc_preprocessing/submit_inc_p6.sh` (copy in `retrieval/`). Inputs: `inc_run/p6_new_in/` 15,563 articles,
+`inc_run/p6_cur_in/` 5,571. Local trial (2 articles per unit): all status ok, 20–110 s per article. Waiting for the owner
+to submit the CSF arrays. [LOG]
