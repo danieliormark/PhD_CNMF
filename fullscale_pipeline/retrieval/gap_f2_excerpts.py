@@ -90,13 +90,43 @@ def article(corpus, rec, meta, row):
             txt.append(re.sub("⟦+", "⟦", re.sub("⟧+", "⟧", x)))
         h = next((h[1] for h in reversed(heads) if h[0] < b["raw_line_first"] - 1), "")
         body = " ".join(txt)
-        blocks.append(dict(heading=h, text=body[:BLOCK_CHARS] + ("…" if len(body) > BLOCK_CHARS else "")))
+        if len(body) > BLOCK_CHARS:                     # windows of ±250 characters around every marked term, merged
+            wins = []
+            for m in re.finditer("⟦", body):
+                a0, b0 = max(0, m.start() - 250), min(len(body), m.start() + 250)
+                if wins and a0 <= wins[-1][1]:
+                    wins[-1][1] = b0
+                else:
+                    wins.append([a0, b0])
+            parts, used = [], 0
+            for a0, b0 in wins:
+                if used > 1500:
+                    break
+                parts.append(body[a0:b0]); used += b0 - a0
+            body = ("…" if wins[0][0] else "") + " … ".join(parts) + ("…" if wins[-1][1] < len(body) else "")
+        bterms = set()
         for sid, t in hits:
             k = SB.term_key(t) if not t.startswith("v3:") else t.split(":", 2)[2]
-            terms[re.sub(r"(?i)^(llm|transformer model|language model)s$", r"\1", k)].append(sid)
+            k = re.sub(r"(?i)^(llm|transformer model|language model)s$", r"\1", k)
+            terms[k].append(sid); bterms.add(k)
+        blocks.append(dict(heading=h, text=body, terms=bterms))
     return dict(corpus=corpus, pmcid=rec["pmcid"], title=meta.get("title", ""), journal=meta.get("journal", ""),
                 year=row["year"], abstract=ab, keywords=kw, n_context=row["n_context"], expansions=expansions(raw),
-                blocks=blocks[:MAX_BLOCKS], n_blocks=len(blocks), terms={k: v for k, v in terms.items()})
+                blocks=pick_blocks(blocks), n_blocks=len(blocks), terms={k: v for k, v in terms.items()})
+
+
+def pick_blocks(blocks):
+    """at most MAX_BLOCKS passages, chosen so that every asked term appears in at least one (then in text order)"""
+    chosen, seen = [], set()
+    for i, b in enumerate(blocks):
+        if b["terms"] - seen:
+            chosen.append(i); seen |= b["terms"]
+    for i in range(len(blocks)):
+        if len(chosen) >= MAX_BLOCKS:
+            break
+        if i not in chosen:
+            chosen.append(i)
+    return [blocks[i] for i in sorted(chosen[:max(MAX_BLOCKS, len(chosen))])]
 
 
 _FILES = {}
