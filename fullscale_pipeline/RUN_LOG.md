@@ -2075,5 +2075,5 @@ URL tokens unambiguous; every existing sentence unchanged or listed with its rea
 878 apostrophe re-parses, 482 changed text, 5,518 not carried). Of 9 dropped sentences kept through coreference, the
 assistant kept 4 genuine ones (an over-eager homonym rule: "LLm", a "generative pertained transformer (GPT)" typo) and
 removed 5 where coreference re-entered the same homonym (Logic Learning Machine, legal logit model, low lean mass).
-**Final: 816,678 sentences** (current 735,000 from existing and new parses; new 81,821), 12,690 citation works,
+**Final: 816,678 sentences, 825,693 units** (current corpus 33,783 articles, 734,857 sentences; new 15,563 articles, 81,821 sentences), 12,690 citation works,
 2,413 URL tokens. Ready for the G3 production rerun. [LOG]
