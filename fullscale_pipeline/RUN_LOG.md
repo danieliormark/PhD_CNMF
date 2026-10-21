@@ -2027,3 +2027,21 @@ to submit the CSF arrays. [LOG]
 
 **RL-167 · 2026-10-21 · incremental run, step 5 wrapper · CODE · LIVE**
 `retrieval/inc_g2.py` (copy in `PG/scripts/`): G2 v3 unchanged, with two approved additions through the wrapper — (1) hyphenated v3 model names stay whole (3,479 surfaces collected from the v3 P2 records, `inc_run/focal_surfaces_v3_hyphenated.txt`, added to the hyphen rule's focal list: BioMistral-7b, ProtBERT-BFD, XLM-RoBERTa …), (2) the curly-apostrophe rule of RL-152 applied as a re-parse: a sentence whose parse types a quote mark as a predicate is parsed again with U+2019 after a letter or digit written as an apostrophe; applied to the 876 existing sentences and, for consistency, to new sentences. Caption bodies read from both v3 P2 outputs. Tests: hyphen rule (BioMistral-7b, ProtBERT-BFD, CT-BERT kept; pre-trained joined); parser test on RL-152 hard cases: "The LLMs’ responses …" re-parsed, quote-as-verb gone; the other cases parsed once, unchanged. [LOG]
+
+**RL-168 · 2026-10-21 · incremental run, steps 3–5a done, 5b prepared · CORPUS DATA + CODE · LIVE**
+Step 3 (P6, CSF arrays 23477301 new / 23477302 current, owner): merged — 15,563 and 5,571 articles, all present once,
+no errors (`inc_run/p6_new/`, `inc_run/p6_cur/`).
+Step 4 (`inc_p7.py`, `inc_run/p7/out/`): P7 on 49,346 articles (28,212 current carried with 3,935 sentences
+un-flagged, 5,571 current rerun, 15,563 new): 812,155 sentences kept (21,308 through coreference), 12,649 works
+(1,204 in 2+ articles). REF remap: 10,472 existing ids kept (the other 83 existing works occur only in excluded articles
+or dropped sentences), 2,177 new ids from REF010556, 5 new links between existing works (smaller id kept; aliases in
+`ref_remap.json`), 2 splits (an existing work lost its bridging token with an excluded article; the smaller part got a
+new id). Existing sentences: 693,144 unchanged (sid and hash_final); 9,324 no longer kept (4,548 in excluded articles,
+4,741 in the drop list, 35 in rerun articles); 480 changed — 19 only in a REF id (the 5 links and 2 splits), 461 in
+text, all in articles rerun through P6 (other pronoun replacements with the new blocks and the v3 matcher: 137 more,
+175 fewer, 149 another antecedent); 118,531 new sentences.
+Step 5a (`inc_g2_prepare.py`, `inc_run/g2_in/`): 120,582 sentences to parse in 21,709 articles — 119,011 new or
+changed, 869 apostrophe (of RL-152's 876; the rest are in excluded articles or dropped sentences), 702 existing
+sentences where G2 had joined a hyphenated v3 name; 691,573 keep their existing parse. Local trial (5 articles, 6
+apostrophe sentences): all ok, all re-parsed normalised, database built.
+Step 5b prepared: `PG/scripts/submit_inc_g2.sh` (20 tasks, output `PG/g2_v3_inc/`; copy in `retrieval/`). [LOG]
