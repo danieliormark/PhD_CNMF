@@ -63,3 +63,20 @@ Rules for the merge:
    its reason (re-parse, dropped sentence, REF remap); no sentence of an excluded article or a dropped sentence remains;
    counts per corpus, class and year.
 5. URL tokens (`URL` + 8 digits) are deliberately shared: the same address gets the same token in every article.
+
+## Status (2026-10-21): done — merged output `PG/g2_v3_1/` passes all checks (RUN_LOG RL-165 to RL-169)
+
+| Step | Result |
+|---|---|
+| 1 P2 v3 on the current corpus | 34,777 articles with a focal sentence (v2: 34,662) |
+| 2 Prepare | current: 26,034 unchanged, 2,178 removals only, 5,470 additions, 101 new under v3 (+1 excluded), 13 nothing left; new: 15,563 |
+| 2b Statement correction | broad sentence-level rule was ~10% precise inside kept articles; 6,205 sentences checked by Haiku readers + assistant (`retrieval/STAGE_AB_METHOD.md` §6): 1,222 statements removed, 4,983 research sentences restored |
+| 3 P6 (CSF 23477301, 23477302) | 15,563 + 5,571 articles, all present once, no errors |
+| 4 P7 with frozen REF ids (`p7b`) | 10,499 existing ids kept, 5 new links (aliases), 2 splits, 2,191 new works; existing sentences 696,948 unchanged, 482 changed (rerun P6 antecedents, REF links/splits), 5,518 not carried |
+| 5 G2 (CSF 23488211 + local round 2) | 120,582 + 2,606 sentences parsed, 0 errors; 704 hyphenated-v3 and 878 apostrophe re-parses |
+| 6 Merge and checks | `PG/g2_v3_1/`: 49,346 articles (33,783 current, 15,563 new), 816,678 sentences, 825,693 units, 12,690 works; all checks passed; 5 homonym sentences re-entered through coreference removed after review, 4 genuine ones kept |
+
+Inputs of record beside the shards: `focal_sentences_v2.jsonl` (P7, mapped REF ids, statements removed),
+`citation_works_v2.jsonl`, `url_table_v3_1.json`, `check_report.json`. The existing `PG/g2_v3/` and `LCS/` outputs are
+untouched; the current corpus's article exclusions (`LCS/article_exclusions_stage_b.csv`, 887) are applied in this
+output, not yet in `LCS/article_whitelist.txt` (only P0–P2 read the whitelist; nothing downstream needs it changed).

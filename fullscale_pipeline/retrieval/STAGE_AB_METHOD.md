@@ -169,3 +169,91 @@ under-recorded.
   current corpus's exclusions are `LCS/article_exclusions_stage_b.csv` (980), not yet applied: they and the 255 rejected
   hits inside kept current articles are to be removed in the incremental run, before M1.
 - 2026 articles are kept for now (owner, 2026-10-21; 5,821 of the 15,563); they can be dropped later.
+
+## 6. Sentence-level AI-use statements inside kept articles (2026-10-21, RL-169)
+
+**The error.** The broad statement rule of Stage B (`gap_stage_b.is_statement`) was validated on whole articles: an
+article whose only focal sentences are AI-use statements is dropped (F1; 98 of 100 hand-checked flagged articles
+correct). In the incremental run (`inc_prepare.py`) the same rule was also applied to single sentences inside *kept*
+articles, to remove their statements (owner: statements are not analysed). There it was wrong most of the time: of 40
+random sentences it had removed, 4 were statements; 36 were research (survey results such as "LLMs were used for
+scientific writing (29/60)", methods such as "We used GPT-4 to extract key findings", recommendations to authors). About
+6,200 research sentences had been removed. It surfaced when the merge check found removed sentences that P7 had kept
+again through coreference.
+
+**Rule-based repair, measured and rejected.** A strict rule (disclosure formula; negation about the paper; a use word
+with an editing task; no research markers — `statement_strict.py`) reached about 83% precision at about 65% recall after
+three rounds; the remaining errors were research *about* AI-assisted writing, which uses the same words.
+
+**Manual check (owner decision).** Every candidate checked by a reader, calibrated first.
+- Candidates (`stmt_check.py build`): every sentence the broad rule had un-flagged inside a kept article — 6,205 (5,088
+  current corpus, 1,117 new). Each item: the article title, the section heading above the sentence (the strongest cue:
+  disclosures sit under "Acknowledgements", "Use of AI tools", "Declaration of generative AI" or at the end of Methods),
+  the sentence marked ⟦…⟧, and the sentences before and after it (from the P2 block).
+- Rubric (`STMT_READER_RUBRIC.md`): **statement** = about how *this* paper's text, figures or code were produced with AI
+  tools, or a declaration that they were / were not used (including a sentence that only completes such a declaration);
+  **research** = everything else, also AI use inside the research process (coding qualitative data, deduplicating
+  records, drafting survey items, study materials), other papers' disclosures, reviewers' comments, recommendations;
+  **unsure** when the shown text does not decide.
+- Readers: agent type `general-purpose`, model pinned to Haiku (`claude-haiku-5-5` in every transcript), no effort level
+  set (default). Instructions limited reading to the rubric and one batch file and writing to one answer file (not a
+  technical sandbox).
+- Gold set: 70 sentences already judged by the assistant (the two reproducible samples of 40 and 30): 29 statements,
+  41 research.
+
+**Exact prompt, calibration** (one agent):
+
+> You are a careful reader doing a narrow classification task. Work only with the files named here; do not search,
+> explore, or open any other file, and do not run code.
+> 1. Read the rubric: …/inc_run/stmt_check/RUBRIC.md
+> 2. Read the batch: …/inc_run/stmt_check/calib.txt — if it is long, read it in pieces with offset/limit until you have
+>    seen every line.
+> 3. Answer every QUESTION line (70 in total) by the rubric, judging the marked sentence with the help of its section
+>    heading, the article title and the sentences around it. Use "unsure" when the shown text does not decide it; do
+>    not force a choice.
+> 4. Write all answers to …/inc_run/stmt_check/calib_haiku.jsonl — one JSON object per line, exactly the rubric's output
+>    format, one line per question, no other text. Use the Write tool.
+>
+> Finish by replying with one line: the number of answers written and how many of each verdict.
+
+**Exact prompt, batches** (one agent per half-batch of about 250 sentences, `batch_NN_partK.txt`):
+
+> You are a careful reader doing a narrow classification task. Work only with the files named here; do not search,
+> explore, or open any other file, and do not run code.
+> 1. Read the rubric: …/inc_run/stmt_check/RUBRIC.md
+> 2. Read the batch: …/inc_run/stmt_check/batch_NN_partK.txt — it is long: read it in pieces with offset/limit until you
+>    have seen every line.
+> 3. Answer every QUESTION line by the rubric, judging the marked sentence with the help of its section heading, the
+>    article title and the sentences around it. Use "unsure" when the shown text does not decide it; do not force a
+>    choice.
+> 4. Write all answers to …/inc_run/stmt_check/batch_NN_partK_haiku.jsonl — one JSON object per line, exactly the
+>    rubric's output format, one line per question, no other text. Use the Write tool (you may write the answers in
+>    several steps, each time rewriting the file with all answers so far).
+>
+> Finish by replying with one line: the number of answers written and how many of each verdict.
+
+(… = `/mnt/hum01-rds/Basov/p91688di/llm_corpus_staging`.) Batches of 500 were split into halves because a whole batch
+(about 100k tokens) would have come close to the reader's context limit with its output; at most 20 agents ran at
+once (the concurrency limit), the rest when slots freed. A 4-agent pilot (1,000 sentences) ran before the other 22.
+
+**Procedure and results.**
+1. Calibration: 69 of 69 decisive answers agreed with the gold set (29/29 statements, 40/41 research; 1 research
+   sentence answered unsure).
+2. Full run, 26 agents: 6,135 sentences; statement 1,184, research 4,899, unsure 52; every question answered, no
+   format errors.
+3. Assistant: every unsure decided (11 statement, 41 research; dividing line: the tool used on this paper's text,
+   figures or code → statement; inside the research process → research); spot check of 30 random statement verdicts
+   (27 correct; errors: study materials generated under a disclosure formula, and papers *about* drafting with ChatGPT)
+   and 30 random research verdicts (29 correct; error: AI-written analysis code, a statement by the rubric); the 4 errors
+   corrected; calibration sentences take the gold labels.
+4. Final (`stmt_check/final_verdicts.json`): **1,222 statements removed, 4,983 research sentences restored**; F1 article
+   decisions unchanged.
+
+**Cost.** Agents' completion reports: about 120k tokens per half-batch run, about 57k for the calibration and each
+small batch-13 run; about 3.2M in total. Transcript usage records of the 27 runs: 15.9M tokens (cache read 13.3M, cache
+write 2.6M); their output counts (9,730) look too small for runs that each wrote about 250 JSON lines and are probably
+under-recorded. Wall time: about 3 minutes per run, most runs in parallel.
+
+**Applied** (`inc_reflag.py`, P7 rerun `p7b`, second G2 round, merge — see `../INCREMENTAL_RUN.md`): restored
+sentences got their focal terms back through the same hit filters as all others; genuine statements are removed from
+the merged output whatever their P7 source.
