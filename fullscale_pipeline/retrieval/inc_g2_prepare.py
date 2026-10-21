@@ -27,6 +27,18 @@ def has_v3_part(word, seqs):
 
 
 if __name__ == "__main__":
+    arg = lambda k: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else None
+    if arg("--p7"):                                   # RL-169: second round after the statement check
+        P7 = LCS + f"inc_run/{arg('--p7')}/out/focal_sentences_v2.mapped.jsonl"
+        OUT = LCS + f"inc_run/{arg('--out')}/"
+    done_inc = {}
+    for d in (arg("--parsed") or "").split(","):
+        if d:
+            import glob
+            for p in glob.glob(PG + d + "/shards/g2_parsed_*.jsonl"):
+                for line in open(p, encoding="utf-8"):
+                    for s in json.loads(line)["sentences"]:
+                        done_inc[s["sid"]] = s["hash_final"]
     os.makedirs(OUT, exist_ok=True)
     assert not os.path.exists(OUT + "g2_prepare_summary.json"), "outputs exist"
     seqs = v3_seqs()
@@ -52,6 +64,8 @@ if __name__ == "__main__":
             for s in r["sentences"]:
                 o = old.get(s["sid"])
                 why = "new" if (o is None or o[0] != s["hash_final"]) else o[1]
+                if why and done_inc.get(s["sid"]) == s["hash_final"]:
+                    why = None                                # parsed in an earlier incremental round
                 c[why or "keep existing parse"] += 1
                 if why:
                     keep.append(s); fr.write(f"{r['pmcid']}\t{s['sid']}\t{why}\n")

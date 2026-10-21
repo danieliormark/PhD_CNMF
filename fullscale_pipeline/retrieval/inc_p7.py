@@ -13,6 +13,8 @@ forward (sentences in inc_run/drop_sids_current.tsv un-flagged) + the new P6 rec
 content_regions_v2.csv of both corpora; pure_text_corpus/ as links to both raw corpora.
     python3 inc_p7.py --test-current-only   (check: the current corpus alone must reproduce every existing id and hash)
     python3 inc_p7.py                        (the real run, after the P6 merges)
+    python3 inc_p7.py --tag p7b --drop drop_sids_current_v2.tsv --reflag reflag_terms.json
+                                             (RL-169: research sentences restored after the statement check)
 Outputs in LCS/inc_run/p7[_test]/out/: focal_sentences_v2.jsonl, citation_works_v2.jsonl, ref_remap.json, inc_p7_summary.json.
 """
 import csv, collections, glob, hashlib, importlib.util, json, os, re, sys
@@ -31,11 +33,15 @@ def sha(s):
     return hashlib.sha1(s.encode("utf-8")).hexdigest()[:12]
 
 
+DROP = INC + "drop_sids_current.tsv"
+REFLAG = None
+
+
 def assemble(stage, test):
     os.makedirs(stage + "coref_v2", exist_ok=True); os.makedirs(stage + "pure_text_corpus", exist_ok=True)
     cls = {r["pmcid"]: r["class"] for r in csv.DictReader(open(INC + "classification_current.tsv"), delimiter="\t")}
     drop = collections.defaultdict(set)
-    for r in csv.DictReader(open(INC + "drop_sids_current.tsv"), delimiter="\t"):
+    for r in csv.DictReader(open(DROP), delimiter="\t"):
         drop[r["pmcid"]].add(r["sid"])
     carry = {p for p, c in cls.items() if c in ("unchanged", "removals_only")} if not test else None
     n = collections.Counter(); arts = {}
@@ -55,6 +61,14 @@ def assemble(stage, test):
             for unit, d in (("current", INC + "p6_cur/"), ("gap", INC + "p6_new/")):
                 for line in open(d + "coref_resolved_v2.jsonl", encoding="utf-8"):
                     pm = line[11:line.index('"', 11)]
+                    if REFLAG:
+                        r = json.loads(line); hit = False
+                        for b in r["blocks"]:
+                            for s in b["sentences"]:
+                                if s["sid"] in REFLAG and not s["focal"]:
+                                    s["focal"], s["terms"] = True, REFLAG[s["sid"]]; hit = True; n["sentences restored"] += 1
+                        if hit:
+                            line = json.dumps(r, ensure_ascii=False) + "\n"
                     fo.write(line); n[f"{unit} from new P6"] += 1; arts[pm] = unit
     with open(stage + "citation_dictionary_v2.jsonl", "w", encoding="utf-8") as fo:
         for src in (LCS + "citation_dictionary_v2.jsonl",) + (() if test else (GR + "llm_corpus_staging/citation_dictionary_v2.jsonl",)):
@@ -147,7 +161,12 @@ def compare(out):
 
 if __name__ == "__main__":
     test = "--test-current-only" in sys.argv
-    base = INC + ("p7_test/" if test else "p7/"); stage, out = base + "lcs/", base + "out/"
+    arg = lambda k: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else None
+    if arg("--drop"):
+        DROP = INC + arg("--drop")
+    if arg("--reflag"):
+        REFLAG = json.load(open(INC + arg("--reflag")))
+    base = INC + (arg("--tag") or ("p7_test" if test else "p7")) + "/"; stage, out = base + "lcs/", base + "out/"
     os.makedirs(stage, exist_ok=True)
     assert not os.path.exists(out + "inc_p7_summary.json"), "outputs exist"
     n, arts = assemble(stage, test)

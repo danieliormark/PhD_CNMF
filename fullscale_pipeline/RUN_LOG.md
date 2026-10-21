@@ -2045,3 +2045,35 @@ changed, 869 apostrophe (of RL-152's 876; the rest are in excluded articles or d
 sentences where G2 had joined a hyphenated v3 name; 691,573 keep their existing parse. Local trial (5 articles, 6
 apostrophe sentences): all ok, all re-parsed normalised, database built.
 Step 5b prepared: `PG/scripts/submit_inc_g2.sh` (20 tasks, output `PG/g2_v3_inc/`; copy in `retrieval/`). [LOG]
+
+**RL-169 · 2026-10-21 · incremental run: statement-rule error found and corrected, G2 done, merged output checked · LIVE**
+G2 (CSF array 23488211, 20 tasks, exit 0): 120,582 sentences parsed into `PG/g2_v3_inc/`. The first merge check failed on
+415 dropped sentences that P7 had kept again through coreference; reading them showed **an error of the assistant**: the
+broad statement rule (`gap_stage_b.is_statement`), validated only at article level (F1: whole statement-only articles,
+98/100 correct), had also been applied to single sentences inside kept articles in `inc_prepare.py`, where it was about
+10% precise (4 of 40 real statements; the rest survey results, methods, recommendations). F1 article decisions stay.
+Correction (owner: check every such sentence; Haiku readers, calibrate first):
+- `retrieval/stmt_check.py`: 6,205 candidates (5,088 current, 1,117 new) with title, section heading and neighbouring
+  sentences; rubric `retrieval/STMT_READER_RUBRIC.md` (statement = about how *this* paper's text, figures or code were
+  produced with AI tools, or a declaration that they were/were not; research = everything else).
+- Calibration (one Haiku agent, 70 assistant-judged sentences): 69/69 decisive answers agreed, 1 unsure. Full run: 26
+  Haiku agents of ~250 sentences (≈120k tokens each by their reports; 20 at a time, the concurrency limit): 1,184
+  statement, 4,899 research, 52 unsure. Assistant: 52 unsure decided (11 statement), spot check 30 statement verdicts
+  (27 correct) and 30 research verdicts (29 correct), 4 corrections applied. Final (`stmt_check/final_verdicts.json`):
+  **1,222 statements dropped, 4,983 research sentences restored**. A rule-based alternative was measured first and
+  rejected: a strict rule reached ~83% precision at ~65% recall.
+- `retrieval/inc_reflag.py`: drop list without the restored sentences (`drop_sids_current_v2.tsv`: 4,193 restored; 719
+  statements and 244 sentences without a term still dropped); 1,899 sentences restored in the new P6 records (terms through
+  the same hit filters). P7 rerun (`inc_p7.py --tag p7b …`): existing sentences unchanged 696,948, no longer kept 5,518,
+  changed 482 (same causes as RL-168), new 119,281; 10,499 existing REF ids kept, 5 links, 2 splits.
+- Second G2 round (`inc_g2_prepare.py --p7 p7b --out g2_in2 --parsed g2_v3_inc`): 2,606 sentences (2,595 restored, 11
+  apostrophe/hyphen re-parses), parsed locally into `PG/g2_v3_inc2/` (0 errors, 0.073 s per sentence).
+Merged output `PG/g2_v3_1/` (`inc_g2_merge_check.py --p7 p7b --newdirs g2_v3_inc2,g2_v3_inc …`): 49,346 articles, one
+record each; genuine statements removed whatever their P7 source (28 had come back through coreference); **all checks
+passed** (ids unique, ownership, hashes recompute, every REF token has its work, no excluded article or dropped sentence,
+URL tokens unambiguous; every existing sentence unchanged or listed with its reason: 695,366 unchanged, 704 hyphen and
+878 apostrophe re-parses, 482 changed text, 5,518 not carried). Of 9 dropped sentences kept through coreference, the
+assistant kept 4 genuine ones (an over-eager homonym rule: "LLm", a "generative pertained transformer (GPT)" typo) and
+removed 5 where coreference re-entered the same homonym (Logic Learning Machine, legal logit model, low lean mass).
+**Final: 816,678 sentences** (current 735,000 from existing and new parses; new 81,821), 12,690 citation works,
+2,413 URL tokens. Ready for the G3 production rerun. [LOG]
