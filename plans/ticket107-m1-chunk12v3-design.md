@@ -894,3 +894,12 @@ an OpenAlex institutions fetch, cached in diagnostics).
   parents decided (G3_POSTPROCESSING.md §6 item 10); D5 count approved, after the corpus is fixed. Found on the way:
   B06 (inverted auxiliary) fixed in G3; A12 a test-harness artefact; curly apostrophes after plurals derail spaCy's
   parse in 880 units — a G2 fix with re-parsing proposed for the incremental step.
+
+## Addendum 2026-10-21 — child/cousin ties to parents (owner decisions; details in G3_POSTPROCESSING.md §6 item 11)
+- Two relations between the merged child-level facet and the parent facet: **nested in** (child × parent) and
+  **co-occurs in the sentence** (cousin × parent), each with its own core matrix and weight, as `M_Child_Parent` /
+  `M_Cousin_Parent` in the toy; a regulariser is the fallback if the co-occurrence relation is too sparse.
+- Cousin ties in sentences with several parents are not split 1/n; generic, frequent material is to be down-weighted by
+  a frequency-based rule tested before use (candidate: tf-idf; conflicts to weigh: §4.21 idf versus shared meaning).
+- Provenance carries occurrence rows with typed links (contains / co-occurs / embedded); the builder must use each
+  cousin's full parent list (chunk12 kept only the last parent per sentence).

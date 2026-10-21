@@ -1131,3 +1131,23 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_v2/hard/hard_*.json` (13 sets, 199 cases, 175 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
 | `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
 | `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |
+
+11. **Cousin scope, link types and between-clause links — DECIDED 2026-10-21 (owner), for the production rerun with
+   D4.1/B06/D6; not yet implemented.** Measured on G3 v1 (current corpus): 660,619 sentences with a parent; 15.4% have 2+
+   distinct focal clauses (13.6% two, 1.5% three, 0.3% four or more) and hold 27% of all child hyperedges (751,319 of
+   2,746,514); parents spread over 2+ units in 3,824 sentences.
+   - **Cousins scoped by sentence, not by unit:** a clause without a focal term is a cousin of every parent of its
+     *sentence* ("ChatGPT achieved high accuracy.5 Clinicians remained sceptical about adoption.": G2 cuts at the glued
+     citation; the second unit's clause is today nobody's cousin). Identical cousin content within a sentence is one
+     occurrence with the list of all its parents (no duplicates across a sentence's units).
+   - **Link types in the provenance**, one occurrence row per hyperedge occurrence (occurrence id, entity key, role,
+     uid/sid/pmcid) with typed parent links: **contains** (child nested in the parent) and **co-occurs** (cousin in the
+     parent's sentence); between parents, **embedded** where a focal clause is its own parent and also lies inside an
+     outer parent's argument (decision 2: "We found that ChatGPT outperformed physicians").
+   - **No parent–parent same-sentence links** (owner): parents are traced through their sentence and article ids.
+   - Not adopted: child × other-parent ties (would re-enter focal clauses twice, which D6 removed).
+   For M1 (ticket 107 design doc): nested and co-occurring ties are qualitatively different and get separate relations
+   (or, if too sparse, a regulariser); a cousin in a sentence with many parents is not random, so its ties are not split
+   1/n, but generic material ("the study shows …", mostly a parent's verb group under decision 2, sometimes a cousin)
+   should be down-weighted by a frequency-based rule whose assumptions are tested first (tf-idf is a candidate, not a
+   decision; see the idf-versus-shared-meaning question, CLAUDE.md §4.21).
