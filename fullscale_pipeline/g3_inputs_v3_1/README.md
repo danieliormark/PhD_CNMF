@@ -46,3 +46,53 @@ focal term is one is removed — G3 does this, since such a sentence gets no par
 codes, "-based") is written as family + version, like its prose form: bert-base-uncased → `bert`, gemma-3-12b-it →
 `gemma_3`, gemini-2.5-pro → `gemini_2_5`, BERT-based → `bert` (the property word "based" of these 109 occurrences is not
 kept as an atom); GPT-35 (Azure's name) → `gpt_3_5`. 292 spellings, 1,561 occurrences change.
+
+## RL-173: Haiku review of the remaining group-4 spellings (2026-10-22)
+
+**Why.** Owner, for rigour: the 4,180 group-4 spellings that neither a rule nor the assistant's reading covered in RL-172
+(estimated 3–5% false) are each judged by a reader. 4,173 remained once RL-172's residual sample was decided.
+
+**Readers.** Agent type `general-purpose`, model Haiku (`haiku`), no effort level set. Rubric `G4_READER_RUBRIC.md`
+(model / not_model / mixed / unsure, with examples of each). Items (`g4_haiku.py build`): one spelling, its occurrences and
+articles in the kept corpus, up to three contexts from different articles with the article title; 17 batches (250, last
+173). Prompt (verbatim, NN = batch number; calibration: `calib.txt`, "72 in total", `calib_haiku.jsonl`, single write):
+
+> You are a careful reader doing a narrow classification task. Work only with the files named here; do not search,
+> explore, or open any other file, and do not run code.
+> 1. Read the rubric: …/g3_inputs_v3_1/g4/haiku/RUBRIC.md
+> 2. Read the batch: …/g3_inputs_v3_1/g4/haiku/batch_NN.txt — it is long: read it in pieces with offset/limit until you
+>    have seen every line.
+> 3. Answer every QUESTION line by the rubric, judging the spelling from its contexts and article titles. Use "unsure"
+>    when the shown text does not decide it, and "mixed" when the contexts disagree; do not force a choice.
+> 4. Write all answers to …/g3_inputs_v3_1/g4/haiku/batch_NN_haiku.jsonl — one JSON object per line, exactly the
+>    rubric's output format, one line per question, no other text. Use the Write tool (you may write the answers in
+>    several steps, each time rewriting the file with all answers so far).
+>
+> Finish by replying with one line: the number of answers written and how many of each verdict.
+
+(… = `/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain`.)
+
+**Calibration** on 72 spellings the assistant had decided in RL-172, none among the rubric's examples (36 model, 36
+not_model): 71 of 71 decisive answers agreed; the 72nd (AMBERT) was answered "mixed", and the reader was right where the
+gold label was not ("AMBERT 14" in one article is a typo for the AMBER software).
+
+**Full run.** 4,173 of 4,173 answered, no format errors: model 3,683 spellings (27,311 occurrences), not_model 364
+(1,036), unsure 119 (497), mixed 7 (46). Every verdict with its note: `g4_haiku_verdicts.csv`.
+
+**Assistant's check.** All 490 not_model, unsure and mixed verdicts read; 50 random model verdicts read (50 correct). Three
+lines applied consistently (`g4_haiku_decisions.py`): (1) a model's own code class (TFBertModel, GPT2LMHeadModel,
+DistilBertTokenizer …) names that model and is mapped to it (21 spellings; the rubric had listed code identifiers as
+not_model); (2) "<model>-extracted / -encoded / -assisted / -generated / -guided" and glued sentence fragments
+("ChatGPTas", "settings.GPT4TS56") refer to the model and are mapped to it (34); (3) a named LLM application, assistant
+or agent is a model (MemGPT, HuggingGPT, ZotGPT, FraudGPT, …: 25 kept), a named method, library, metric, framework,
+dataset, label, variable or repository is not (StructGPT, SparseGPT, TopicGPT, SelfCheckGPT, notation such as hiBERT: the
+other unsure/mixed rejected). The citation rule was widened to every kept spelling (a trailing ".NN" or 2–3 glued digits
+whose removal leaves a spelling of the corpus: 138 more, AntiBERTy19 → AntiBERTy, TCR-BERT.31 → TCR-BERT; one digit never
+removed).
+
+**Result** (`decisions/g4_decisions.csv`, 5,619 rows): 644 spellings rejected (2,623 occurrences), 1,404 mapped, the rest
+kept. Shards 0 and 20: 46 and 145 mentions rejected (RL-172: 16 and 136), 0 problems. Every group-4 spelling of the kept
+corpus now carries a decision from a rule, the assistant's reading or a reader checked as above.
+
+**Cost.** Agents' completion reports: calibration 61,177 tokens; batches 89,345–119,281 each; 1,995,419 in all; about 3–4
+minutes per batch, all 17 in parallel.

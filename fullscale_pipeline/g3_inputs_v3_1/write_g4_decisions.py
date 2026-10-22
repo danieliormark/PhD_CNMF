@@ -90,11 +90,26 @@ def main():
         else:
             target = stem                                        # SpikeGPT28 -> SpikeGPT
         rows.append((k, "", "map", target, "glued citation number", "citation rule"))
+    # RL-173: the Haiku review of the remaining spellings (g4_haiku_decisions.py), with the citation rule widened to every
+    # kept spelling: a trailing ".NN" or 2-3 glued digits whose removal leaves a spelling of the corpus is a citation
+    # (AntiBERTy19 -> AntiBERTy, TCR-BERT.31 -> TCR-BERT); one digit is never removed (DNABERT2, ProtGPT2 are versions)
+    done = {r[0] for r in rows}
+    spellings = set(G["occ"])
+    for r in csv.DictReader(open(os.path.join(HERE, "decisions", "g4_haiku_decisions.csv"))):
+        if r["spelling"] in done:
+            continue
+        if r["action"] == "keep":
+            m = re.match(r"^(.*[A-Za-z])(?:\.\d{1,3}|\d{2,3})$", r["spelling"])
+            if m and m.group(1) in spellings and len(m.group(1)) >= 4:
+                rows.append((r["spelling"], "", "map", m.group(1), "glued citation number", "citation rule (Haiku: model)")); continue
+        rows.append((r["spelling"], r["pmcid"], r["action"], r["target"], r["reason"], r["source"]))
     os.makedirs(os.path.join(HERE, "decisions"), exist_ok=True)
     with open(os.path.join(HERE, "decisions", "g4_decisions.csv"), "w", newline="") as f:
         w = csv.writer(f); w.writerow(["spelling", "pmcid", "action", "target", "reason", "source"]); w.writerows(rows)
     occ = G["occ"]
     rej = [r for r in rows if r[2] == "reject" and r[1] == ""]
+    import collections
+    print(collections.Counter((r[2], r[5].split(" ")[0]) for r in rows))
     print("rows", len(rows), "| reject spellings", len(rej), "occ", sum(occ.get(r[0], 0) for r in rej),
           "| citation maps", sum(r[5] == "citation rule" for r in rows), "| read maps", sum(r[5] == "read" and r[2] == "map" for r in rows))
     missing = [r[0] for r in rows if r[0] not in occ]

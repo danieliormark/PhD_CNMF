@@ -2144,3 +2144,16 @@ reports). G3 (`g3_curation_v2.py` 2ac5a0d873f8) reads `g4_decisions.csv` and `st
 rejected 16/10/136, mapped 47/40/34; no rejected spelling left as a focal atom. CSF check reference renewed (RL-171's kept),
 `check_csf_g3_v2.sh` pins renewed and passed on incline; scripts mirrored. Ready for the owner: CSF check, then the
 production array. [LOG]
+
+**RL-173 · 2026-10-22 · G3: Haiku review of the remaining 4,173 group-4 spellings · DECISIONS + CODE INPUT · LIVE**
+Owner: for rigour, every group-4 spelling not covered by RL-172's rules or reading is judged by a Haiku reader. Rubric
+`g3_inputs_v3_1/G4_READER_RUBRIC.md`; builder `g4_haiku.py` (spelling, counts, up to three contexts with titles; 17
+batches); calibration on 72 assistant-decided spellings: 71/71 decisive agree, the 72nd (AMBERT, "mixed") a correct catch
+of a gold error. Full run 4,173/4,173 answered: model 3,683, not_model 364, unsure 119, mixed 7. Assistant: all 490
+non-model verdicts read, 50 model verdicts read (50 correct); corrections by three stated lines (`g4_haiku_decisions.py`:
+model code classes mapped, "<model>-extracted/-assisted…" mapped, LLM apps/agents kept vs methods/libraries/metrics
+rejected); citation rule widened to kept spellings (138 more maps). `decisions/g4_decisions.csv` (05a32cbad7ce): 5,619
+rows, 644 spellings rejected (2,623 occurrences), 1,404 mapped. G3 `g3_curation_v2.py` 70984a47ac5a (only the input hash
+changed). Self-test 73/73, hard cases 206/217; shards 0/20 0 problems, mentions rejected 46/145; CSF check reference
+renewed (RL-172's kept), passed on incline; mirrored. Method, prompt, calibration and costs (1,995,419 tokens by the
+agents' reports): `g3_inputs_v3_1/README.md`; all verdicts `g4_haiku_verdicts.csv`. [LOG]
