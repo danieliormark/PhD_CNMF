@@ -37,11 +37,9 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    0 problems; merged to `PG/g3_v2/`: 41,778 valid articles, 6,953 excluded, 615 without a parent; 804,702 units,
    905,585 parents, 2,082,569 cousins. Inputs: RL-171–RL-174 (lists for the merged corpus, v3 matcher, checkpoint fold,
    group-4 decisions incl. Haiku review and the model/method line, homonyms, statement check).
-1b. **G3 rerun after the pre-M1 audit — READY TO SUBMIT (RL-176, RL-177).** Audit passed on structure, links, D6, lists,
-   lemmas, non-prose; fixed: case-free Stage B rejections, checkpoint fold for every name, product tiers kept (owner),
-   next-token tier/version join within the name's phrase. Self-test 93/93, hard 215/226, CSF check passed on incline.
-   Owner submits `check_csf_g3_v2.sh`, then `submit_g3_v2.sh`; then merge (tensor_env), re-run `audit_g3_v2.py`,
-   update RL-178, copy the summary to `g3_v2/g3_v2_summary.json`. RL-175 output: `PG/g3_v2_rl175/`.
+1b. **G3 rerun after the pre-M1 audit — DONE (RL-176 to RL-178).** CSF check 23678012, array 23678744, merged
+   `PG/g3_v2/`: 41,753 valid, 6,953 excluded, 640 invalid (25 Geant4/PfGPT homonym-only articles now invalid); re-audit
+   0 problems. RL-175 output kept as `PG/g3_v2_rl175/`. **Next: M1 merge discussion (ticket 107).**
 2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
    model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.

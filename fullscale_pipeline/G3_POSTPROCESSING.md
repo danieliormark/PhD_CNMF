@@ -1143,6 +1143,8 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    (5c23d9b1b915, §4 note of RL-177). Self-test 93/93, hard cases 215/226 (new set `hard_rl177_names.json` 9/9), CSF
    reference renewed (RL-174's kept as `reference_incline_rl174/`), check passed on incline. The RL-175 output is moved to
    `PG/g3_v2_rl175/`; the rerun writes `PG/g3_v2/` again. Submit order unchanged.]*
+   *[2026-10-22, RL-178: **rerun done** (check 23678012, array 23678744): `PG/g3_v2/` with 41,753 valid, 640 invalid,
+   6,953 excluded articles; re-audit 0 problems. This is M1's input.]*
 
 ## 9. Files
 

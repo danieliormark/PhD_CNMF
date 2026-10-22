@@ -2230,3 +2230,15 @@ homonyms, e.g. Geant4 `FTFP_BERT_HP`). Matcher gap noted, upstream: the lower-ca
 matched by the v3 matcher at all (`XLM-RoBERTa-base` is). CSF check renewed (pins, 93/93, 215/226, reference from the
 new script; RL-174's kept as `reference_incline_rl174/`), passed on incline. RL-175 output moved to `PG/g3_v2_rl175/`.
 Owner: `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh`, then `sbatch PG/scripts/g3_v2/submit_g3_v2.sh`, then the merge. [LOG]
+
+**RL-178 · 2026-10-22 · G3 v2 · PRODUCTION RERUN (RL-177 script) + RE-AUDIT · LIVE**
+Owner: CSF check 23678012 (node916: 93/93, 215/226, outputs byte-identical to the incline reference, ALL G3 CHECKS OK),
+then array 23678744: 50/50 exit 0. `merge_g3_v2.py --nshards 50` on incline: every shard checked OK; `PG/g3_v2/`
+(summary copied to `g3_v2/g3_v2_summary.json`). Articles 49,346: valid 41,753, excluded 6,953, invalid (no parent) 640.
+Against RL-175 (kept in `PG/g3_v2_rl175/`): 25 articles valid → invalid, every one read: 24 Geant4 physics papers whose
+only hit was "BERT" in a physics list (QGSP_BERT_HP, FTFP_BERT_EMZ: the Bertini cascade) and 1 on PfGPT (a Plasmodium
+enzyme) — their Stage B rejections now apply (case-free compare); Stage B rejected mentions 42 → 123. Units 786,246 (−50),
+parents 905,530 (−55), cousins 2,082,395 (−174), occurrence rows 5,998,581. Re-audit (`audit_g3_v2.py`): **0 problems**
+(no rejected term kept). Checkpoint settings left in focal names: 2,279 mentions → 145 (esm_msa_1b 82, protected on
+purpose; gpt_4b 23; about 40 one-offs such as `mistral_7b`, `bertbase_plus…`). Most frequent focal atoms now include the
+tiers: gpt_4o_mini 2,499, deepseek_r1 6,983 (was 5,922), deepseek_v3 2,950 (was 2,329). G3 is ready for M1. [LOG]
