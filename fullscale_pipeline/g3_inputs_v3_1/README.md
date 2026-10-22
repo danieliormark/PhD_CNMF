@@ -18,3 +18,31 @@ incremental run (additions, removals_only, new_in_v3); old decisions stand for a
 `g3_scope_exclusions/evidence/`. One reading of rule 2 differs from a literal replay: an article whose only "LLM" is
 undefined but which carries another accepted model name (Mistral, GPT-2, XLM-RoBERTa, BioBERT) counts as having
 evidence (20 articles kept; the old evidence regex misses these spellings).
+
+## RL-172 additions (2026-10-22)
+
+| File | What | Built by |
+|---|---|---|
+| `decisions/g4_decisions.csv` (copy `PG/g3_inputs_v3_1/g4_decisions.csv`) | group-4 model names (v3 matcher, class G4): 234 spellings rejected (1,334 occurrences: genes, plasmids, peptide/palmitate "Palm" tokens, palmitoylation tools, Geant4 physics lists, scales, trial names, devices, person names, tools), ROBERT decided per article (2 kept, 9 rejected), 11 read mappings (typos, Med-PaLM spellings) and 1,200 glued-citation mappings (SpikeGPT28 → SpikeGPT; of three digits the first is kept as a version when name + digit is a known name: DNABERT217 → DNABERT2) | `g4_review.py` (lists with contexts, RDS only) → reading → `write_g4_decisions.py` |
+| `statement_sentences.csv` | 138 AI-use statements found by the second statement check (`retrieval/stmt_check2.py`, STAGE_AB_METHOD.md §7); G3 skips them; the 91 articles with no other focal sentence are in `scope_exclusions.csv` (reason `ai_use_statement_only`) | `retrieval/stmt_check2.py` + reading |
+| `scope_exclusions.csv` | now 7,158 (RL-171's 7,067 + 91 statement-only) | `build_inputs_v3_1.py` |
+
+**Group-4 review, how it was done** (owner 2026-10-22: false positives must not become focal atoms; a sentence whose only
+focal term is one is removed — G3 does this, since such a sentence gets no parent).
+1. Precision sample of 100 G4 occurrences (60 from spellings in one article, 40 from the rest): 4–5 false among the 60, 0–1
+   among the 40; real names often carried a glued citation number (5 of 60).
+2. Candidate rules (gene-style GPT names, "Palm" chemistry, `_BERT_` physics lists, capitalised words, glued digits)
+   applied to all 5,900 spellings of the kept articles; every hit of the first four read (118 spellings), the glued-digit
+   hits (1,169) checked by stem (all real model names, mostly BioBERT/PubMedBERT/SciBERT/DNABERT + citation).
+3. Every spelling (431) of the 700 articles whose only focal terms are G4 names read with title and context.
+4. Residual sample of 60 occurrences from the 4,180 spellings neither under a rule nor read: 2–3 false (HMW-GS-GPT, a
+   glutenin hydrolysate; GeminiMol, a molecular model; LLaMA-Factory, a tool), added. **Residual estimate: about 3–5% of
+   the ~29,000 unreviewed occurrences**, mostly in articles that also carry other focal terms.
+5. Checked on shards 0, 2, 20: 16, 10 and 136 mentions rejected, 47, 40 and 34 mapped, no rejected spelling left as a
+   focal atom.
+
+**Checkpoint names** (owner 2026-10-22, in `g3_curation_v2.canonical`): a family name followed by a configuration
+(size, base/large, cased/uncased, multilingual, language, instruct/it/chat, pro/flash/lite, turbo, exp/preview, snapshot
+codes, "-based") is written as family + version, like its prose form: bert-base-uncased → `bert`, gemma-3-12b-it →
+`gemma_3`, gemini-2.5-pro → `gemini_2_5`, BERT-based → `bert` (the property word "based" of these 109 occurrences is not
+kept as an atom); GPT-35 (Azure's name) → `gpt_3_5`. 292 spellings, 1,561 occurrences change.

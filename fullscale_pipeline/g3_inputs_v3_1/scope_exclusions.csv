@@ -555,6 +555,7 @@ PMC10776381,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10777364,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10777403,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10778591,name_homonym,BioBridge homonym
+PMC10779200,ai_use_statement_only,second statement check (RL-172)
 PMC10780037,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10781153,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10781166,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -629,6 +630,7 @@ PMC10866502,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10866944,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10866995,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10868035,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC10868734,ai_use_statement_only,second statement check (RL-172)
 PMC10869447,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10870431,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10872715,name_homonym,BioBridge homonym
@@ -638,6 +640,7 @@ PMC10877759,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10879757,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10879798,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10880091,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC10880870,ai_use_statement_only,second statement check (RL-172)
 PMC10881843,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC10882002,transformer_only_not_llm,passing mention
 PMC10882068,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -801,6 +804,7 @@ PMC11042011,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11042032,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11042492,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11043201,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11044263,ai_use_statement_only,second statement check (RL-172)
 PMC11044905,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11046066,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11046249,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -842,6 +846,7 @@ PMC11066473,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11066637,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11068767,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11069215,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11070192,ai_use_statement_only,second statement check (RL-172)
 PMC11070416,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11070730,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11071121,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -1004,6 +1009,7 @@ PMC11212470,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC11212490,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11215062,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11215125,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11216069,ai_use_statement_only,second statement check (RL-172)
 PMC11216576,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11217171,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11217428,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -1219,6 +1225,7 @@ PMC11363233,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11363383,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11364810,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11366233,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11367300,ai_use_statement_only,second statement check (RL-172)
 PMC11367666,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11368949,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11371806,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -1247,6 +1254,7 @@ PMC11391655,transformer_only_not_llm,false/peripheral
 PMC11392267,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11393100,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11393231,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11394177,ai_use_statement_only,second statement check (RL-172)
 PMC11394616,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11394799,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11395467,name_homonym,BioBridge homonym
@@ -1348,6 +1356,7 @@ PMC11458396,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11458519,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11458561,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11460357,llm_no_definition_no_evidence,llm_no_definition_no_evidence
+PMC11461209,ai_use_statement_only,second statement check (RL-172)
 PMC11461453,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11461928,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11462242,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -1578,6 +1587,7 @@ PMC11593354,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11595777,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11595968,transformer_only_not_llm,vision-language model only
 PMC11596692,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11597085,ai_use_statement_only,second statement check (RL-172)
 PMC11597867,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11597967,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11598004,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -1586,6 +1596,7 @@ PMC11598144,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11598251,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11598307,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11598360,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11598371,ai_use_statement_only,second statement check (RL-172)
 PMC11598397,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11598773,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11599162,llm_no_definition_no_evidence,llm_no_definition_no_evidence
@@ -1645,6 +1656,7 @@ PMC11631054,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11631311,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11633492,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11633801,transformer_only_not_llm,passing mention
+PMC11634597,ai_use_statement_only,second statement check (RL-172)
 PMC11635181,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11636678,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11636735,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -1824,6 +1836,7 @@ PMC11727645,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11728419,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11729973,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11730192,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11731705,ai_use_statement_only,second statement check (RL-172)
 PMC11732233,llm_defined_otherwise,homonym
 PMC11732682,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11736791,transformer_only_not_llm,passing mention
@@ -1883,6 +1896,7 @@ PMC11763561,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11764155,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11764709,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11766131,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11766674,ai_use_statement_only,second statement check (RL-172)
 PMC11767603,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11768122,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11768327,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -1999,6 +2013,7 @@ PMC11825664,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11825733,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11825793,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11825859,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11826496,ai_use_statement_only,second statement check (RL-172)
 PMC11827293,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11827571,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11828345,transformer_only_not_llm,passing mention
@@ -2020,6 +2035,7 @@ PMC11833135,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11833834,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11834682,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11835060,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11836024,ai_use_statement_only,second statement check (RL-172)
 PMC11836381,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11837297,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11839814,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2072,6 +2088,7 @@ PMC11865518,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11867800,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11868382,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11868569,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11869544,ai_use_statement_only,second statement check (RL-172)
 PMC11870814,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC11871072,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11871232,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2129,6 +2146,7 @@ PMC11894149,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11894310,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11897181,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11897196,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11897479,ai_use_statement_only,second statement check (RL-172)
 PMC11897567,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11898072,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11898101,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2136,6 +2154,7 @@ PMC11898873,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11901804,llm_defined_otherwise,homonym
 PMC11902056,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11902100,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11902299,ai_use_statement_only,second statement check (RL-172)
 PMC11902341,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11902471,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11902500,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2192,6 +2211,7 @@ PMC11934553,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11934573,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11934607,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11934716,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11934944,ai_use_statement_only,second statement check (RL-172)
 PMC11936257,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11936907,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11936934,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2856,6 +2876,7 @@ PMC12249000,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12249006,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12250280,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12250350,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12250950,ai_use_statement_only,second statement check (RL-172)
 PMC12250974,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12251608,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12251656,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2885,6 +2906,7 @@ PMC12252513,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12254325,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12254386,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12254505,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12254705,ai_use_statement_only,second statement check (RL-172)
 PMC12255103,name_homonym,Electronic Supplementary Material
 PMC12255749,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12255772,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2933,6 +2955,7 @@ PMC12275058,transformer_only_not_llm,passing mention
 PMC12276262,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12277436,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12277460,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12277929,ai_use_statement_only,second statement check (RL-172)
 PMC12278423,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12279105,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12283777,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -2947,12 +2970,15 @@ PMC12286783,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12286936,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12287317,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12287768,llm_no_definition_no_evidence,llm_no_definition_no_evidence
+PMC12289540,ai_use_statement_only,second statement check (RL-172)
 PMC12289634,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12289976,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12290786,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12292341,ai_use_statement_only,second statement check (RL-172)
 PMC12292351,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12292363,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12292681,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12293250,ai_use_statement_only,second statement check (RL-172)
 PMC12293362,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12293705,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12293832,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3014,6 +3040,7 @@ PMC12311013,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12311106,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12311211,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12311896,transformer_only_not_llm,false/peripheral
+PMC12312635,ai_use_statement_only,second statement check (RL-172)
 PMC12313163,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12313583,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12313631,llm_no_definition_no_evidence,llm_no_definition_no_evidence
@@ -3043,6 +3070,7 @@ PMC12327613,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12327681,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12327698,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12328555,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12328661,ai_use_statement_only,second statement check (RL-172)
 PMC12328662,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12328700,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12328701,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3111,6 +3139,7 @@ PMC12350720,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12350743,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12351333,transformer_only_not_llm,passing mention
 PMC12351870,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12352281,ai_use_statement_only,second statement check (RL-172)
 PMC12352519,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12354865,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12355574,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3236,6 +3265,7 @@ PMC12402532,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12403264,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12403937,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12404794,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12404922,ai_use_statement_only,second statement check (RL-172)
 PMC12405520,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12405547,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12405548,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3304,8 +3334,10 @@ PMC12436550,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12436659,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12437695,llm_no_definition_no_evidence,
 PMC12440163,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12440213,ai_use_statement_only,second statement check (RL-172)
 PMC12440570,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12440931,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12442260,ai_use_statement_only,second statement check (RL-172)
 PMC12442933,name_homonym,biobridge
 PMC12443672,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12444385,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3313,11 +3345,14 @@ PMC12444479,llm_no_definition_no_evidence,
 PMC12446640,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12448153,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12448973,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12450466,ai_use_statement_only,second statement check (RL-172)
 PMC12450647,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12450949,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12450971,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12450992,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12451850,ai_use_statement_only,second statement check (RL-172)
 PMC12452097,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12452788,ai_use_statement_only,second statement check (RL-172)
 PMC12453234,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12453638,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12453695,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3441,6 +3476,7 @@ PMC12494236,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12494288,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12494796,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12494800,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12495373,ai_use_statement_only,second statement check (RL-172)
 PMC12499557,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12500700,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12500764,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3476,6 +3512,7 @@ PMC12518590,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12521120,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12521135,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12521486,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12522127,ai_use_statement_only,second statement check (RL-172)
 PMC12522651,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12522997,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12523352,transformer_only_not_llm,passing mention
@@ -3624,6 +3661,7 @@ PMC12578355,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12578809,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12578813,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12578891,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12579254,ai_use_statement_only,second statement check (RL-172)
 PMC12579454,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12580090,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12581344,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3701,6 +3739,7 @@ PMC12609981,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12610091,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12610129,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12610140,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12610215,ai_use_statement_only,second statement check (RL-172)
 PMC12610329,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12610486,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12610532,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3738,6 +3777,7 @@ PMC12618017,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12618475,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12618497,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12619275,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12619897,ai_use_statement_only,second statement check (RL-172)
 PMC12622450,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12622796,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12623416,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3785,6 +3825,7 @@ PMC12635355,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12637007,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12637362,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12638962,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12639084,ai_use_statement_only,second statement check (RL-172)
 PMC12639252,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12639451,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12640576,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3806,6 +3847,7 @@ PMC12646915,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12647053,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12647147,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12647158,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12647286,ai_use_statement_only,second statement check (RL-172)
 PMC12647490,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12647593,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12647628,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3885,6 +3927,7 @@ PMC12662931,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12663537,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12663573,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12665582,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12667247,ai_use_statement_only,second statement check (RL-172)
 PMC12668543,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12668636,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12669175,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3900,6 +3943,7 @@ PMC12675134,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12675521,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12675791,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12676247,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12676283,ai_use_statement_only,second statement check (RL-172)
 PMC12677501,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12678472,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12681050,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3965,11 +4009,13 @@ PMC12705657,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12705665,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12706014,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12706109,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12706196,ai_use_statement_only,second statement check (RL-172)
 PMC12707682,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12708721,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12708730,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12708764,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12708896,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12708993,ai_use_statement_only,second statement check (RL-172)
 PMC12709108,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12709757,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12709984,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -3995,6 +4041,7 @@ PMC12721220,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12722593,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12723012,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12723239,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12727330,ai_use_statement_only,second statement check (RL-172)
 PMC12728201,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12729017,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12729362,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4043,6 +4090,7 @@ PMC12743303,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12746487,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12747404,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12747693,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12747709,ai_use_statement_only,second statement check (RL-172)
 PMC12747714,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12748206,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12748492,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4087,6 +4135,7 @@ PMC12756611,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12756952,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12757211,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12757377,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12758054,ai_use_statement_only,second statement check (RL-172)
 PMC12758717,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12758778,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12758793,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4244,6 +4293,7 @@ PMC12821088,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12821690,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12822445,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12823605,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12823819,ai_use_statement_only,second statement check (RL-172)
 PMC12823927,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12824137,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12824216,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4407,6 +4457,7 @@ PMC12876861,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12876885,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12876967,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12876982,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12877042,ai_use_statement_only,second statement check (RL-172)
 PMC12877075,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12877173,transformer_only_not_llm,false/peripheral
 PMC12878001,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4471,6 +4522,7 @@ PMC12902119,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12904562,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12906057,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12907022,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12907075,ai_use_statement_only,second statement check (RL-172)
 PMC12907896,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12908692,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12908734,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4595,6 +4647,7 @@ PMC12961306,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12961395,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC12961433,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12962464,llm_no_definition_no_evidence,llm_no_definition_no_evidence
+PMC12963223,ai_use_statement_only,second statement check (RL-172)
 PMC12963372,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12965322,llm_no_definition_no_evidence,
 PMC12965534,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4604,6 +4657,7 @@ PMC12966481,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12966487,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12966492,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12966546,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12966607,ai_use_statement_only,second statement check (RL-172)
 PMC12969136,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12969638,llm_no_definition_no_evidence,
 PMC12971320,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4614,6 +4668,7 @@ PMC12975418,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12975989,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12976026,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12976331,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC12976592,ai_use_statement_only,second statement check (RL-172)
 PMC12976809,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12976938,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC12977878,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4702,6 +4757,7 @@ PMC13001115,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13002182,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13002982,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13003026,transformer_only_not_llm,passing mention
+PMC13003193,ai_use_statement_only,second statement check (RL-172)
 PMC13003343,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13004410,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13004532,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4755,6 +4811,7 @@ PMC13024026,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13024192,transformer_only_not_llm,vision-language model only
 PMC13024401,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13024492,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13024530,ai_use_statement_only,second statement check (RL-172)
 PMC13024558,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13024798,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13025195,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4794,6 +4851,7 @@ PMC13031953,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13032380,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13032896,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13034906,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13035548,ai_use_statement_only,second statement check (RL-172)
 PMC13035700,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13035720,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13035781,llm_no_definition_no_evidence,llm_no_definition_no_evidence
@@ -4801,6 +4859,7 @@ PMC13035881,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13035983,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13036210,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13036226,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13037968,ai_use_statement_only,second statement check (RL-172)
 PMC13038447,transformer_only_not_llm,passing mention
 PMC13038710,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13039022,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4873,6 +4932,7 @@ PMC13066596,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13066848,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13066926,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13067531,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13068042,ai_use_statement_only,second statement check (RL-172)
 PMC13068100,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13068111,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13068449,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -4923,6 +4983,7 @@ PMC13082465,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13082635,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13082664,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13083956,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13084017,ai_use_statement_only,second statement check (RL-172)
 PMC13085275,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13086224,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13086829,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5219,6 +5280,7 @@ PMC13204514,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13204768,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13204872,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13204905,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13205012,ai_use_statement_only,second statement check (RL-172)
 PMC13205247,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13205453,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13205606,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5269,6 +5331,7 @@ PMC13214603,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13214672,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13214739,name_homonym,climate model MRI-ESM-2.0
 PMC13215039,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13215443,ai_use_statement_only,second statement check (RL-172)
 PMC13216314,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13216319,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13216609,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5405,6 +5468,7 @@ PMC13262842,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13264878,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13264972,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13265549,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13265622,ai_use_statement_only,second statement check (RL-172)
 PMC13265740,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13265910,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13265961,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5441,6 +5505,7 @@ PMC13276054,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13276066,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13276170,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13276254,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13276311,ai_use_statement_only,second statement check (RL-172)
 PMC13276379,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13276392,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13276407,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5502,6 +5567,7 @@ PMC13301621,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13301692,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13305573,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13306002,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13306174,ai_use_statement_only,second statement check (RL-172)
 PMC13306338,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13306431,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13306495,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5597,6 +5663,7 @@ PMC13338226,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13338267,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13338373,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13338380,llm_no_definition_no_evidence,llm_no_definition_no_evidence
+PMC13339413,ai_use_statement_only,second statement check (RL-172)
 PMC13339558,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13339881,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13340010,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5712,6 +5779,7 @@ PMC13379580,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13381454,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13381694,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13381703,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13381806,ai_use_statement_only,second statement check (RL-172)
 PMC13381941,transformer_only_not_llm,vision-language model only
 PMC13384844,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13384943,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5721,6 +5789,7 @@ PMC13385398,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13385678,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13385687,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13385921,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13386208,ai_use_statement_only,second statement check (RL-172)
 PMC13386490,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13387499,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13388144,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5743,6 +5812,7 @@ PMC13392851,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13392987,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13393322,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13393445,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13394149,ai_use_statement_only,second statement check (RL-172)
 PMC13395446,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13395602,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13395926,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5782,6 +5852,7 @@ PMC13407763,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13407991,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13408109,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13408111,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13408470,ai_use_statement_only,second statement check (RL-172)
 PMC13408854,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13409480,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13409633,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5801,6 +5872,7 @@ PMC13413934,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13414135,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13414145,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13414210,llm_no_definition_no_evidence,
+PMC13415193,ai_use_statement_only,second statement check (RL-172)
 PMC13415282,name_homonym,climate model FIO-ESM-2-0
 PMC13415527,llm_no_definition_no_evidence,
 PMC13415589,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5861,6 +5933,7 @@ PMC13438027,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13438392,transformer_only_not_llm,passing mention
 PMC13438616,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13438762,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13439199,ai_use_statement_only,second statement check (RL-172)
 PMC13439270,llm_no_definition_no_evidence,
 PMC13439362,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13439380,llm_no_definition_no_evidence,llm_no_definition_no_evidence
@@ -5897,6 +5970,7 @@ PMC13451479,transformer_only_not_llm,passing mention
 PMC13451484,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13452094,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13452226,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13453290,ai_use_statement_only,second statement check (RL-172)
 PMC13453449,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13453829,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13454437,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5927,6 +6001,7 @@ PMC13462555,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13462779,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13462869,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13462960,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13463231,ai_use_statement_only,second statement check (RL-172)
 PMC13463800,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13463878,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13464582,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5940,6 +6015,7 @@ PMC13465470,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13465521,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13465813,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13465951,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13467071,ai_use_statement_only,second statement check (RL-172)
 PMC13467131,llm_no_definition_no_evidence,
 PMC13467497,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13468059,transformer_only_not_llm,passing mention
@@ -5964,6 +6040,8 @@ PMC13470182,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13470282,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13470477,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13470550,llm_no_definition_no_evidence,llm_no_definition_no_evidence
+PMC13470751,ai_use_statement_only,second statement check (RL-172)
+PMC13470752,ai_use_statement_only,second statement check (RL-172)
 PMC13470954,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13472773,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13473113,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -5985,6 +6063,7 @@ PMC13477905,transformer_only_not_llm,passing mention
 PMC13478059,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13478521,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13480390,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13481125,ai_use_statement_only,second statement check (RL-172)
 PMC13481858,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13481909,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13482573,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6040,6 +6119,7 @@ PMC13501329,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13501485,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13501834,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13502280,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13503246,ai_use_statement_only,second statement check (RL-172)
 PMC13503551,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13503684,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13503691,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6048,6 +6128,7 @@ PMC13503805,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13503829,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13503874,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13503952,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13504322,ai_use_statement_only,second statement check (RL-172)
 PMC13504831,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13505138,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13505573,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6072,6 +6153,7 @@ PMC13511630,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13512138,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13512344,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13512370,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13512848,ai_use_statement_only,second statement check (RL-172)
 PMC13514126,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13514376,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13514550,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6225,6 +6307,7 @@ PMC13572426,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13572615,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13572616,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13572618,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13572849,ai_use_statement_only,second statement check (RL-172)
 PMC13573346,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13573703,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13574614,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6280,6 +6363,7 @@ PMC13601255,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13601275,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13601295,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13601576,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13602658,ai_use_statement_only,second statement check (RL-172)
 PMC13602667,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13603166,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13603191,transformer_only_not_llm,only LLM-related hit is an AI-use statement
@@ -6310,6 +6394,7 @@ PMC13608416,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13608420,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13608753,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13608756,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13608964,ai_use_statement_only,second statement check (RL-172)
 PMC13609076,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13609308,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13609663,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6330,6 +6415,7 @@ PMC13611728,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13611769,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13611778,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13611816,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13612023,ai_use_statement_only,second statement check (RL-172)
 PMC13612353,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13612441,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13613273,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6352,6 +6438,7 @@ PMC13619107,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13620128,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13621198,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13621505,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13621642,ai_use_statement_only,second statement check (RL-172)
 PMC13621952,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13622958,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13624105,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6369,6 +6456,7 @@ PMC13630037,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13631067,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13631272,llm_no_definition_no_evidence,llm_no_definition_no_evidence
 PMC13634074,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13635881,ai_use_statement_only,second statement check (RL-172)
 PMC13637804,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13638250,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13638373,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6386,6 +6474,7 @@ PMC13644179,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13644508,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13646125,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13647694,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13647899,ai_use_statement_only,second statement check (RL-172)
 PMC13649406,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13649703,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13649991,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6410,6 +6499,7 @@ PMC13662011,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13662881,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13664605,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13664622,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13666270,ai_use_statement_only,second statement check (RL-172)
 PMC13666761,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13667166,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13667363,transformer_only_not_llm,no LLM-related transformer in analysed text
@@ -6428,6 +6518,7 @@ PMC13672313,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13673677,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13673992,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13674126,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC13676504,ai_use_statement_only,second statement check (RL-172)
 PMC13677066,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC13677226,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC4380351,llm_no_definition_no_evidence,

@@ -2126,3 +2126,21 @@ berttery18, ChatGPT57 with a glued citation) beside the pending "BERTH"; checkpo
 (`bert_base_uncased`, not folded to `bert`); AI-use statements still present as focal sentences in some kept articles
 (seen in the screen; the statement check covered only the broad rule's candidates); item 6 acts on whole articles, so
 ESM-2/BioBridge homonyms in articles kept for other terms remain. [LOG]
+
+**RL-172 · 2026-10-22 · G3: checkpoint names, group-4 false hits, second statement check · CODE + LISTS + DECISIONS · LIVE**
+CSF check of RL-171 (job 23636511, node625) passed; production held for these owner decisions (2026-10-22): (1) checkpoint
+names written like their prose form, family + version (`canonical`: bert-base-uncased → `bert`, gemma-3-12b-it → `gemma_3`,
+gemini-2.5-pro → `gemini_2_5`, BERT-based → `bert`, GPT-35 → `gpt_3_5`; 292 spellings, 1,561 occurrences; 19 self-test
+cases); (2) group-4 false hits must not become focal atoms: sample of 100 occurrences (rare spellings ~7% false), rule
+hits (118) and the 431 spellings of the 700 G4-only articles read by the assistant, residual sample of 60 (2–3 false),
+`g3_inputs_v3_1/decisions/g4_decisions.csv`: 234 spellings rejected (1,334 occurrences), ROBERT per article, 11 read maps,
+1,200 glued-citation maps (README there: method and residual estimate ~3–5% of ~29,000 unreviewed occurrences); BERTH is a
+genuine model (BERT for hydrology), so the pending "BERTH" exclusion is dropped; (3) leftover AI-use statements: 822
+pattern candidates read by 4 Haiku runs (RL-169 rubric and prompt; 140 statement, 680 research, 2 unsure), every
+statement and unsure verdict and 30 research verdicts read by the assistant, 5 changed: 138 statements, 91 articles
+statement-only (excluded, F1) and 44 with statements skipped (STAGE_AB_METHOD.md §7; 418k tokens by the agents'
+reports). G3 (`g3_curation_v2.py` 2ac5a0d873f8) reads `g4_decisions.csv` and `statement_sentences.csv`; scope exclusions
+7,158. Tests: self-test 73/73; hard cases 206/217 (V3-05 expectation now `bert`). Shards 0/2/20: 0 problems; G4 mentions
+rejected 16/10/136, mapped 47/40/34; no rejected spelling left as a focal atom. CSF check reference renewed (RL-171's kept),
+`check_csf_g3_v2.sh` pins renewed and passed on incline; scripts mirrored. Ready for the owner: CSF check, then the
+production array. [LOG]

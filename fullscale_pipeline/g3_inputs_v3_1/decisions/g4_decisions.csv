@@ -1,0 +1,1447 @@
+spelling,pmcid,action,target,reason,source
+1-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+177Lu-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+177Lu-Palm-3PRGD2,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+3nGPTMS,,reject,,"silane, chemistry or materials label",read
+AGPTi,,reject,,"silane, chemistry or materials label",read
+ALBERTI,,reject,,person name,read
+ALBERTINOI,,reject,,person name,read
+AMBERTOOLS,,reject,,"database or tool, not a language model",read
+AMBERTOOLS22,,reject,,"database or tool, not a language model",read
+APTES+GPTMS,,reject,,"silane, chemistry or materials label",read
+AVGPT+SDPT,,reject,,"scale, score, regimen, trial or label",read
+AtGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+AtGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+BDI-FS-GPT,,reject,,group-4 false hit in the sample,read
+BERTHELOT3,,reject,,group-4 false hit in the sample,read
+BERTIE,,reject,,"scale, score, regimen, trial or label",read
+BERTref,,reject,,Geant4 physics list or code identifier,read
+BPaLM,,reject,,"scale, score, regimen, trial or label",read
+BPaLM-based,,reject,,"scale, score, regimen, trial or label",read
+BPaLM-related,,reject,,"scale, score, regimen, trial or label",read
+BlazePalm,,reject,,"device or product, not a language model",read
+CGPT.15,,reject,,"scale, score, regimen, trial or label",read
+CKSAAP-Palm,,reject,,palmitoylation tool or database,read
+CLM-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+CTS_GPTMS_5,,reject,,"silane, chemistry or materials label",read
+Cas10-mPalm2,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Common-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Corn-SBM-DDGS-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+CorpPalm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+DOTA-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+DOTA-Palm-3PRGD2,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Date-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+DeepPalm,,reject,,group-4 false hit in the sample,read
+ECOBERTURA,,reject,,"device or product, not a language model",read
+EK35S-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+FTFP_BERT_EMY,,reject,,Geant4 physics list or code identifier,read
+FTFP_BERT_EMZ,,reject,,Geant4 physics list or code identifier,read
+FTFP_BERT_HP,,reject,,Geant4 physics list or code identifier,read
+FernandezAlbert,,reject,,person name,read
+Finger-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Finger-To-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Fist-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+G4HadronPhysicsFTFP_BERT_HP,,reject,,Geant4 physics list or code identifier,read
+G4HadronPhysicsQGSP_BERT_HP,,reject,,Geant4 physics list or code identifier,read
+GGPTase-I.250,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+GPS-Palm,,reject,,palmitoylation tool or database,read
+GPS-Palm48,,reject,,palmitoylation tool or database,read
+GPS-Palm60,,reject,,palmitoylation tool or database,read
+GPSPalm,,reject,,palmitoylation tool or database,read
+GPT1_ARATH,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+GPTS.22,,reject,,"silane, chemistry or materials label",read
+GPTV5_DLR,,reject,,"scale, score, regimen, trial or label",read
+GPTV_DL,,reject,,"scale, score, regimen, trial or label",read
+GPTV_DLR,,reject,,"scale, score, regimen, trial or label",read
+GPTV_radiomics,,reject,,"scale, score, regimen, trial or label",read
+GPTases,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+GPTi,,reject,,"silane, chemistry or materials label",read
+GPTi-coated,,reject,,"silane, chemistry or materials label",read
+GPTime,,reject,,"database or tool, not a language model",read
+GPTime26,,reject,,"database or tool, not a language model",read
+GPTime30,,reject,,"database or tool, not a language model",read
+GPTm,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+GPTransformer,,reject,,"database or tool, not a language model",read
+GPTx+ProAgio,,reject,,"scale, score, regimen, trial or label",read
+GPTx+ProAgio-treated,,reject,,"scale, score, regimen, trial or label",read
+GeminiBio,,reject,,"device or product, not a language model",read
+GeminiMol,,reject,,group-4 false hit in the sample,read
+GeminiMol23,,reject,,group-4 false hit in the sample,read
+HF-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+HILBERT2,,reject,,"scale, score, regimen, trial or label",read
+HMW-GS-GPT,,reject,,group-4 false hit in the sample,read
+HaGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+HygroPalm23‐A,,reject,,"device or product, not a language model",read
+KfGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+KfGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+LAMBERT,,reject,,person name,read
+LIBERTO,,reject,,"scale, score, regimen, trial or label",read
+LIBERTY,,reject,,"scale, score, regimen, trial or label",read
+LIBERTY-CD,,reject,,"scale, score, regimen, trial or label",read
+LIBERTY-CSU,,reject,,"scale, score, regimen, trial or label",read
+LIBERTY-PN,,reject,,"scale, score, regimen, trial or label",read
+LIBERTY-UC,,reject,,"scale, score, regimen, trial or label",read
+LIBERTYLUNG,,reject,,"scale, score, regimen, trial or label",read
+LLaMA-Factory,,reject,,"tool, not a model (group-4 rule)",read
+LLaMA-Factory35,,reject,,"tool, not a model (group-4 rule)",read
+LLaMA-Factory78,,reject,,"tool, not a model (group-4 rule)",read
+LLaMA_Factory,,reject,,"tool, not a model (group-4 rule)",read
+LeBert,,reject,,person name,read
+Lime-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Linker-Palm1,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+LlamaFactory44,,reject,,"tool, not a model (group-4 rule)",read
+Lu-DOTA-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Lu-DOTA-Palm-3PRGD2,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+MDD-Palm,,reject,,palmitoylation tool or database,read
+MDDPalm,,reject,,palmitoylation tool or database,read
+MS-GPTNet,,reject,,"database or tool, not a language model",read
+MU-6S-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Moreno-Llamas,,reject,,person name,read
+MyrPalm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+MyrPalm-ATG8-GFP,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+MyrPalm-GABARAPL1-GFP,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+MyrPalm-GABARAPL2-GFP,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+MyrPalm-LC3B-GFP,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+MyrPalm-LC3C-GFP,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+N-Palm1-LexA-C,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+NBA-Palm,,reject,,palmitoylation tool or database,read
+ND-Cana-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+ND-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+ND-Palm-Cana,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+ND-Palm-No,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+NDPE-Policies-Cover-83-of-Palm-Oil-Refining-Market.pdf,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+NbGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+OG-SBPalm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+OsGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+OsGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+OsGPT2s,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+PCV-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+PEDOT_GPTMS,,reject,,"silane, chemistry or materials label",read
+PEO_GPTMS,,reject,,"silane, chemistry or materials label",read
+PGPT_BASE_nr_Aug2021n_ul_1,,reject,,"database or tool, not a language model",read
+PGPT_pred,,reject,,"database or tool, not a language model",read
+PGPTs-associated,,reject,,"database or tool, not a language model",read
+PGPTsof,,reject,,"database or tool, not a language model",read
+PL_GPTMS-ARS,,reject,,"silane, chemistry or materials label",read
+PUBERTAL,,reject,,"scale, score, regimen, trial or label",read
+PfGPT,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+PhyloPalm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+PoGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+PopcornPalm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Print-on-Palm,,reject,,group-4 false hit in the sample,read
+ProAgio+GPTx,,reject,,"scale, score, regimen, trial or label",read
+ProAgio+GPTx-treated,,reject,,"scale, score, regimen, trial or label",read
+QD-Palm1,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+QGSP_BERT39.Figure,,reject,,Geant4 physics list or code identifier,read
+QGSP_BERT_EMV,,reject,,Geant4 physics list or code identifier,read
+QGSP_BERT_HP,,reject,,Geant4 physics list or code identifier,read
+QgGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT10,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT12,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT3,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT4,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT6,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT7,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+QgGPT9,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+R-GPTSa,,reject,,"scale, score, regimen, trial or label",read
+R-GPTSb,,reject,,"scale, score, regimen, trial or label",read
+R-GPTs,,reject,,"scale, score, regimen, trial or label",read
+RNA-SiANGPT2,,reject,,ANGPT/ANGPTL4 reagent,read
+ROBERTO,,reject,,person name,read
+Raker-Roberta,,reject,,"device or product, not a language model",read
+Roberta-Maria,,reject,,person name,read
+S-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+Si-GPTS.28,,reject,,"silane, chemistry or materials label",read
+SiANGPT2,,reject,,ANGPT/ANGPTL4 reagent,read
+SiANGPT2-treated,,reject,,ANGPT/ANGPTL4 reagent,read
+StGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+StGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+Swiss-Palm,,reject,,palmitoylation tool or database,read
+SwissPalm,,reject,,palmitoylation tool or database,read
+T1D-Cana-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+T1D-Diet-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+T1D-Palm,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+T1D-Palm-Cana,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+T1D-Palm-No,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+TM_CGPT,,reject,,"scale, score, regimen, trial or label",read
+TacPalm,,reject,,"device or product, not a language model",read
+Twi-LlamaTag,,reject,,person name,read
+Twi-LlamaTag-mCh,,reject,,person name,read
+UGPTis,,reject,,"scale, score, regimen, trial or label",read
+VILBERT-LOURMAT,,reject,,"device or product, not a language model",read
+YFP-Palm1,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+ePalm,,reject,,"device or product, not a language model",read
+g4h-phy_QGSP_BERT_HP,,reject,,Geant4 physics list or code identifier,read
+g4h‐phy_FTFP_BERT_HP,,reject,,Geant4 physics list or code identifier,read
+gGPT,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+get_BERT_or_XLNET_word_embedding_for_a_dataset.py,,reject,,Geant4 physics list or code identifier,read
+isGPT,,reject,,"database or tool, not a language model",read
+mEGFP-Palm1,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+mGPTMS,,reject,,"silane, chemistry or materials label",read
+mPalm2,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+mgPGPT,,reject,,"database or tool, not a language model",read
+mgPGPT-mapping-db,,reject,,"database or tool, not a language model",read
+non-Palm-stressed,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+oeGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+ofGPTrentropy,,reject,,"scale, score, regimen, trial or label",read
+order_BERT_HP,,reject,,Geant4 physics list or code identifier,read
+pFBL23-Palm1,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+pFX_EGPT,,reject,,plasmid or vector,read
+pGPT,,reject,,plasmid or vector,read
+pGPT-1,,reject,,plasmid or vector,read
+pGPT-BeauR-ORF7rep,,reject,,plasmid or vector,read
+pGPT-BeauR-ORF7rep-HIS,,reject,,plasmid or vector,read
+pGPT-BeauR-S-MM,,reject,,plasmid or vector,read
+pGPT-BeauR-S1-M41-S2,,reject,,plasmid or vector,read
+pGPT-EndoU-deficient-negative,,reject,,plasmid or vector,read
+pGPT-IBV-StuI-BamHI,,reject,,plasmid or vector,read
+pGPT-M41-S-BSM,,reject,,plasmid or vector,read
+pGPT-M41-S1-BeauR-S2,,reject,,plasmid or vector,read
+pGPT-M41-S2-L578F-N617S,,reject,,plasmid or vector,read
+pGPT-M41-S2-N826S-L857F-I1000V,,reject,,plasmid or vector,read
+pGPT-M41S,,reject,,plasmid or vector,read
+pGPT-NEB193,,reject,,plasmid or vector,read
+pGPT-ORF1a-negative,,reject,,plasmid or vector,read
+pGPT-ORF1a-positive,,reject,,plasmid or vector,read
+pGPT-ORF1b-negative,,reject,,plasmid or vector,read
+pGPT-ORF1b-positive,,reject,,plasmid or vector,read
+pGPT-S,,reject,,plasmid or vector,read
+pGPT-S-negative,,reject,,plasmid or vector,read
+pGPT-S-positive,,reject,,plasmid or vector,read
+pGPT-based,,reject,,plasmid or vector,read
+pGPT-nsp15-positive,,reject,,plasmid or vector,read
+pGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+pGPT4,,reject,,"scale, score, regimen, trial or label",read
+pGPTNEB193,,reject,,plasmid or vector,read
+pGPTVII,,reject,,plasmid or vector,read
+pORANGE-mEGFP-Palm1,,reject,,"palmitoyl/palmitate/palm, not PaLM",read
+practitionerGPTGlutamate,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+proGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+proGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+r-GPTSb,,reject,,"scale, score, regimen, trial or label",read
+r-GPTSb.Figure,,reject,,"scale, score, regimen, trial or label",read
+rANGPTL4,,reject,,ANGPT/ANGPTL4 reagent,read
+rANGPTL4-driven,,reject,,ANGPT/ANGPTL4 reagent,read
+rGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+rGPTSb,,reject,,"scale, score, regimen, trial or label",read
+rhANGPTL4,,reject,,ANGPT/ANGPTL4 reagent,read
+sgGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+sgGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+shANGPTL4,,reject,,ANGPT/ANGPTL4 reagent,read
+shANGPTL4+HGPA,,reject,,ANGPT/ANGPTL4 reagent,read
+siANGPT2,,reject,,ANGPT/ANGPTL4 reagent,read
+siGPT1,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+siGPT2,,reject,,"gene or protein (glucose-6-phosphate/phosphate translocator, transaminase)",read
+ROBERT,PMC11780922,map,RoBERTa,RoBERTa (dynamic mask),read
+ROBERT,PMC9947453,map,ROBERT,Real Option BERT,read
+ROBERT,*other,reject,,"rehabilitation robot ROBERT®, ROBERT software, person names",read
+ChapGPT,,map,ChatGPT,typo,read
+ChatpGPT,,map,ChatGPT,typo,read
+Fed_BERT_,,map,Fed_BERT_MSCNN,split token,read
+MED-Palm2,,map,Med-PaLM 2,spelling,read
+Med-Palm,,map,Med-PaLM,spelling,read
+Med-Palm-2,,map,Med-PaLM 2,spelling,read
+Med-Palm41,,map,Med-PaLM,Med-PaLM + citation,read
+MedPalm-22,,map,Med-PaLM 2,Med-PaLM 2 + citation 2,read
+prot_BERT_bfd,,map,ProtBERT-BFD,checkpoint id,read
+3UTRBERT23,,map,3UTRBERT,glued citation number,citation rule
+3UTRBERT41,,map,3UTRBERT,glued citation number,citation rule
+5UTRBERT24,,map,5UTRBERT,glued citation number,citation rule
+AKI-BERT44,,map,AKI-BERT,glued citation number,citation rule
+ALBERT10,,map,ALBERT,glued citation number,citation rule
+ALBERT12,,map,ALBERT,glued citation number,citation rule
+ALBERT13,,map,ALBERT,glued citation number,citation rule
+ALBERT14,,map,ALBERT,glued citation number,citation rule
+ALBERT15,,map,ALBERT,glued citation number,citation rule
+ALBERT16,,map,ALBERT,glued citation number,citation rule
+ALBERT26,,map,ALBERT,glued citation number,citation rule
+ALBERT28,,map,ALBERT,glued citation number,citation rule
+ALBERT29,,map,ALBERT,glued citation number,citation rule
+ALBERT30,,map,ALBERT,glued citation number,citation rule
+ALBERT35,,map,ALBERT,glued citation number,citation rule
+ALBERT37,,map,ALBERT,glued citation number,citation rule
+ALBERT38,,map,ALBERT,glued citation number,citation rule
+ALBERT42,,map,ALBERT,glued citation number,citation rule
+ALBERT43,,map,ALBERT,glued citation number,citation rule
+ALBERT48,,map,ALBERT,glued citation number,citation rule
+ALBERT55,,map,ALBERT,glued citation number,citation rule
+ALBERT66,,map,ALBERT,glued citation number,citation rule
+ALBERT98,,map,ALBERT,glued citation number,citation rule
+AMP-BERT29,,map,AMP-BERT,glued citation number,citation rule
+AOBERT37,,map,AOBERT,glued citation number,citation rule
+ARBERT22,,map,ARBERT,glued citation number,citation rule
+ARBERT55,,map,ARBERT,glued citation number,citation rule
+ATCBERT29,,map,ATCBERT,glued citation number,citation rule
+AbGPT42,,map,AbGPT,glued citation number,citation rule
+Adapt-cMolGPT87,,map,Adapt-cMolGPT,glued citation number,citation rule
+AlBert47,,map,AlBert,glued citation number,citation rule
+AmadeusGPT26,,map,AmadeusGPT,glued citation number,citation rule
+AminoBERT188,,map,AminoBERT,glued citation number,citation rule
+AnomalyGPT34,,map,AnomalyGPT,glued citation number,citation rule
+AnomalyGPT47,,map,AnomalyGPT,glued citation number,citation rule
+AntiBERTa18,,map,AntiBERTa,glued citation number,citation rule
+AntiBERTa217,,map,AntiBERTa2,glued citation number,citation rule
+AntiBERTa232,,map,AntiBERTa2,glued citation number,citation rule
+AntiBERTa242,,map,AntiBERTa2,glued citation number,citation rule
+AntiBERTa247,,map,AntiBERTa2,glued citation number,citation rule
+AntiBERTa268,,map,AntiBERTa2,glued citation number,citation rule
+AraBERT12,,map,AraBERT,glued citation number,citation rule
+AraBERT17,,map,AraBERT,glued citation number,citation rule
+AraBERT26,,map,AraBERT,glued citation number,citation rule
+AraPoemBERT18,,map,AraPoemBERT,glued citation number,citation rule
+Arabic-BERT52,,map,Arabic-BERT,glued citation number,citation rule
+Arabic-BERT64,,map,Arabic-BERT,glued citation number,citation rule
+ArabicBERT26,,map,ArabicBERT,glued citation number,citation rule
+AstroLLaMA64,,map,AstroLLaMA,glued citation number,citation rule
+Attr-BERT18,,map,Attr-BERT,glued citation number,citation rule
+AttriBERT57,,map,AttriBERT,glued citation number,citation rule
+AugGPT38,,map,AugGPT,glued citation number,citation rule
+AutoGPT16,,map,AutoGPT,glued citation number,citation rule
+AutoGPT26,,map,AutoGPT,glued citation number,citation rule
+AutoGPT34,,map,AutoGPT,glued citation number,citation rule
+BERT100,,map,BERT,glued citation number,citation rule
+BERT103,,map,BERT,glued citation number,citation rule
+BERT110,,map,BERT,glued citation number,citation rule
+BERT111,,map,BERT,glued citation number,citation rule
+BERT150,,map,BERT,glued citation number,citation rule
+BERT188,,map,BERT,glued citation number,citation rule
+BatteryBERT12,,map,BatteryBERT,glued citation number,citation rule
+BatteryBERT208,,map,BatteryBERT,glued citation number,citation rule
+BatteryBERT27,,map,BatteryBERT,glued citation number,citation rule
+BatteryBERT44,,map,BatteryBERT,glued citation number,citation rule
+BiBERTa41,,map,BiBERTa,glued citation number,citation rule
+Bio+ClinicalBERT18,,map,Bio+ClinicalBERT,glued citation number,citation rule
+Bio+ClinicalBERT21,,map,Bio+ClinicalBERT,glued citation number,citation rule
+Bio-BERT10,,map,Bio-BERT,glued citation number,citation rule
+Bio-ClinicalBERT12,,map,Bio-ClinicalBERT,glued citation number,citation rule
+BioBERT10,,map,BioBERT,glued citation number,citation rule
+BioBERT11,,map,BioBERT,glued citation number,citation rule
+BioBERT12,,map,BioBERT,glued citation number,citation rule
+BioBERT14,,map,BioBERT,glued citation number,citation rule
+BioBERT15,,map,BioBERT,glued citation number,citation rule
+BioBERT16,,map,BioBERT,glued citation number,citation rule
+BioBERT17,,map,BioBERT,glued citation number,citation rule
+BioBERT18,,map,BioBERT,glued citation number,citation rule
+BioBERT19,,map,BioBERT,glued citation number,citation rule
+BioBERT20,,map,BioBERT,glued citation number,citation rule
+BioBERT21,,map,BioBERT,glued citation number,citation rule
+BioBERT22,,map,BioBERT,glued citation number,citation rule
+BioBERT221,,map,BioBERT2,glued citation number,citation rule
+BioBERT23,,map,BioBERT,glued citation number,citation rule
+BioBERT24,,map,BioBERT,glued citation number,citation rule
+BioBERT25,,map,BioBERT,glued citation number,citation rule
+BioBERT27,,map,BioBERT,glued citation number,citation rule
+BioBERT29,,map,BioBERT,glued citation number,citation rule
+BioBERT30,,map,BioBERT,glued citation number,citation rule
+BioBERT32,,map,BioBERT,glued citation number,citation rule
+BioBERT33,,map,BioBERT,glued citation number,citation rule
+BioBERT35,,map,BioBERT,glued citation number,citation rule
+BioBERT36,,map,BioBERT,glued citation number,citation rule
+BioBERT37,,map,BioBERT,glued citation number,citation rule
+BioBERT38,,map,BioBERT,glued citation number,citation rule
+BioBERT41,,map,BioBERT,glued citation number,citation rule
+BioBERT43,,map,BioBERT,glued citation number,citation rule
+BioBERT44,,map,BioBERT,glued citation number,citation rule
+BioBERT51,,map,BioBERT,glued citation number,citation rule
+BioBERT52,,map,BioBERT,glued citation number,citation rule
+BioBERT54,,map,BioBERT,glued citation number,citation rule
+BioBERT57,,map,BioBERT,glued citation number,citation rule
+BioBERT58,,map,BioBERT,glued citation number,citation rule
+BioBERT67,,map,BioBERT,glued citation number,citation rule
+BioBERT69,,map,BioBERT,glued citation number,citation rule
+BioBERT71,,map,BioBERT,glued citation number,citation rule
+BioBERT84,,map,BioBERT,glued citation number,citation rule
+BioBERT86,,map,BioBERT,glued citation number,citation rule
+BioBERT93,,map,BioBERT,glued citation number,citation rule
+BioBert32,,map,BioBert,glued citation number,citation rule
+BioBert35,,map,BioBert,glued citation number,citation rule
+BioBert52,,map,BioBert,glued citation number,citation rule
+BioBert58,,map,BioBert,glued citation number,citation rule
+BioClincialBERT129,,map,BioClincialBERT,glued citation number,citation rule
+BioClinicalBERT129,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT14,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT16,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT18,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT23,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT27,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT30,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT32,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT57,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT63,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBERT83,,map,BioClinicalBERT,glued citation number,citation rule
+BioClinicalBert18,,map,BioClinicalBert,glued citation number,citation rule
+BioGPT14,,map,BioGPT,glued citation number,citation rule
+BioGPT17,,map,BioGPT,glued citation number,citation rule
+BioGPT18,,map,BioGPT,glued citation number,citation rule
+BioGPT19,,map,BioGPT,glued citation number,citation rule
+BioGPT21,,map,BioGPT,glued citation number,citation rule
+BioGPT22,,map,BioGPT,glued citation number,citation rule
+BioGPT23,,map,BioGPT,glued citation number,citation rule
+BioGPT25,,map,BioGPT,glued citation number,citation rule
+BioGPT26,,map,BioGPT,glued citation number,citation rule
+BioGPT27,,map,BioGPT,glued citation number,citation rule
+BioGPT282,,map,BioGPT2,glued citation number,citation rule
+BioGPT40,,map,BioGPT,glued citation number,citation rule
+BioGPT49,,map,BioGPT,glued citation number,citation rule
+BioGPT65,,map,BioGPT,glued citation number,citation rule
+BioGPT66,,map,BioGPT,glued citation number,citation rule
+BioGPT74,,map,BioGPT,glued citation number,citation rule
+BioGPT89,,map,BioGPT,glued citation number,citation rule
+BioLinkBERT28,,map,BioLinkBERT,glued citation number,citation rule
+BioLinkBERT35,,map,BioLinkBERT,glued citation number,citation rule
+BioLinkBERT36,,map,BioLinkBERT,glued citation number,citation rule
+BioLinkBERT58,,map,BioLinkBERT,glued citation number,citation rule
+BioLinkBert10,,map,BioLinkBert,glued citation number,citation rule
+BioLinkBert52,,map,BioLinkBert,glued citation number,citation rule
+BioMedBERT38,,map,BioMedBERT,glued citation number,citation rule
+BioMedBERT42,,map,BioMedBERT,glued citation number,citation rule
+BioMedGPT32,,map,BioMedGPT,glued citation number,citation rule
+BioMedGPT54,,map,BioMedGPT,glued citation number,citation rule
+BioMedGPT76,,map,BioMedGPT,glued citation number,citation rule
+BioMedRoBERTa22,,map,BioMedRoBERTa,glued citation number,citation rule
+BioMedRoBERTa43,,map,BioMedRoBERTa,glued citation number,citation rule
+BioMistral18,,map,BioMistral,glued citation number,citation rule
+BioMistral23,,map,BioMistral,glued citation number,citation rule
+BioMistral31,,map,BioMistral,glued citation number,citation rule
+BioMistral34,,map,BioMistral,glued citation number,citation rule
+BioMistral35,,map,BioMistral,glued citation number,citation rule
+BioMistral42,,map,BioMistral,glued citation number,citation rule
+BioMistral43,,map,BioMistral,glued citation number,citation rule
+BioMistral45,,map,BioMistral,glued citation number,citation rule
+Bio_ClinicBERT40,,map,Bio_ClinicBERT,glued citation number,citation rule
+Bio_ClinicalBERT26,,map,Bio_ClinicalBERT,glued citation number,citation rule
+Bio_ClinicalBERT37,,map,Bio_ClinicalBERT,glued citation number,citation rule
+Bio_ClinicalBERT38,,map,Bio_ClinicalBERT,glued citation number,citation rule
+Bio_ClinicalBERT45,,map,Bio_ClinicalBERT,glued citation number,citation rule
+Bio_ClinicalBERT47,,map,Bio_ClinicalBERT,glued citation number,citation rule
+Bioclinical-BERT38,,map,Bioclinical-BERT,glued citation number,citation rule
+BiomedBERT27,,map,BiomedBERT,glued citation number,citation rule
+BiomedBERT43,,map,BiomedBERT,glued citation number,citation rule
+BiomedBERT48,,map,BiomedBERT,glued citation number,citation rule
+BiomedGPT12,,map,BiomedGPT,glued citation number,citation rule
+BiomedGPT34,,map,BiomedGPT,glued citation number,citation rule
+BiomedGPT36,,map,BiomedGPT,glued citation number,citation rule
+BiomedGPT41,,map,BiomedGPT,glued citation number,citation rule
+BiomedGPT44,,map,BiomedGPT,glued citation number,citation rule
+BiomedGPT47,,map,BiomedGPT,glued citation number,citation rule
+BiomedGPT61,,map,BiomedGPT,glued citation number,citation rule
+BloombergGPT19,,map,BloombergGPT,glued citation number,citation rule
+BlueBERT12,,map,BlueBERT,glued citation number,citation rule
+BlueBERT15,,map,BlueBERT,glued citation number,citation rule
+BlueBERT16,,map,BlueBERT,glued citation number,citation rule
+BlueBERT20,,map,BlueBERT,glued citation number,citation rule
+BlueBERT50,,map,BlueBERT,glued citation number,citation rule
+BlueBERT58,,map,BlueBERT,glued citation number,citation rule
+BlueBERT95,,map,BlueBERT,glued citation number,citation rule
+BrainGPT15,,map,BrainGPT,glued citation number,citation rule
+BrainGPT66,,map,BrainGPT,glued citation number,citation rule
+BulkRNABert41,,map,BulkRNABert,glued citation number,citation rule
+CAMeL-BERT24,,map,CAMeL-BERT,glued citation number,citation rule
+CAMeLBERT39,,map,CAMeLBERT,glued citation number,citation rule
+CDM-BERT23,,map,CDM-BERT,glued citation number,citation rule
+CEHR-BERT11,,map,CEHR-BERT,glued citation number,citation rule
+CEHR-BERT29,,map,CEHR-BERT,glued citation number,citation rule
+CHEM-BERT23,,map,CHEM-BERT,glued citation number,citation rule
+CHEM-BERT28,,map,CHEM-BERT,glued citation number,citation rule
+COBERT15,,map,COBERT,glued citation number,citation rule
+CON-GAN-BERT42,,map,CON-GAN-BERT,glued citation number,citation rule
+CRISPR-BERT46,,map,CRISPR-BERT,glued citation number,citation rule
+CT-BERT48,,map,CT-BERT,glued citation number,citation rule
+CT-Foundation-Gemini27,,map,CT-Foundation-Gemini,glued citation number,citation rule
+CXR-BERT64,,map,CXR-BERT,glued citation number,citation rule
+CamemBERT26,,map,CamemBERT,glued citation number,citation rule
+CamemBERT28,,map,CamemBERT,glued citation number,citation rule
+CamemBERT36,,map,CamemBERT,glued citation number,citation rule
+CamemBERT46,,map,CamemBERT,glued citation number,citation rule
+CancerBERT13,,map,CancerBERT,glued citation number,citation rule
+CancerBERT19,,map,CancerBERT,glued citation number,citation rule
+CancerBERT23,,map,CancerBERT,glued citation number,citation rule
+CancerBERT33,,map,CancerBERT,glued citation number,citation rule
+CancerBERT42,,map,CancerBERT,glued citation number,citation rule
+CancerGPT49,,map,CancerGPT,glued citation number,citation rule
+ChatGPT10,,map,ChatGPT,glued citation number,citation rule
+ChatGPT11,,map,ChatGPT,glued citation number,citation rule
+ChatGPT113,,map,ChatGPT,glued citation number,citation rule
+ChatGPT115,,map,ChatGPT,glued citation number,citation rule
+ChatGPT12,,map,ChatGPT,glued citation number,citation rule
+ChatGPT13,,map,ChatGPT,glued citation number,citation rule
+ChatGPT14,,map,ChatGPT,glued citation number,citation rule
+ChatGPT141,,map,ChatGPT,glued citation number,citation rule
+ChatGPT15,,map,ChatGPT,glued citation number,citation rule
+ChatGPT16,,map,ChatGPT,glued citation number,citation rule
+ChatGPT17,,map,ChatGPT,glued citation number,citation rule
+ChatGPT18,,map,ChatGPT,glued citation number,citation rule
+ChatGPT187,,map,ChatGPT,glued citation number,citation rule
+ChatGPT19,,map,ChatGPT,glued citation number,citation rule
+ChatGPT20,,map,ChatGPT,glued citation number,citation rule
+ChatGPT21,,map,ChatGPT,glued citation number,citation rule
+ChatGPT213,,map,ChatGPT,glued citation number,citation rule
+ChatGPT22,,map,ChatGPT,glued citation number,citation rule
+ChatGPT23,,map,ChatGPT,glued citation number,citation rule
+ChatGPT24,,map,ChatGPT,glued citation number,citation rule
+ChatGPT25,,map,ChatGPT,glued citation number,citation rule
+ChatGPT27,,map,ChatGPT,glued citation number,citation rule
+ChatGPT28,,map,ChatGPT,glued citation number,citation rule
+ChatGPT29,,map,ChatGPT,glued citation number,citation rule
+ChatGPT30,,map,ChatGPT,glued citation number,citation rule
+ChatGPT301,,map,ChatGPT3,glued citation number,citation rule
+ChatGPT31,,map,ChatGPT,glued citation number,citation rule
+ChatGPT32,,map,ChatGPT,glued citation number,citation rule
+ChatGPT33,,map,ChatGPT,glued citation number,citation rule
+ChatGPT35,,map,ChatGPT,glued citation number,citation rule
+ChatGPT36,,map,ChatGPT,glued citation number,citation rule
+ChatGPT38,,map,ChatGPT,glued citation number,citation rule
+ChatGPT39,,map,ChatGPT,glued citation number,citation rule
+ChatGPT42,,map,ChatGPT,glued citation number,citation rule
+ChatGPT43,,map,ChatGPT,glued citation number,citation rule
+ChatGPT44,,map,ChatGPT,glued citation number,citation rule
+ChatGPT45,,map,ChatGPT,glued citation number,citation rule
+ChatGPT47,,map,ChatGPT,glued citation number,citation rule
+ChatGPT49,,map,ChatGPT,glued citation number,citation rule
+ChatGPT51,,map,ChatGPT,glued citation number,citation rule
+ChatGPT52,,map,ChatGPT,glued citation number,citation rule
+ChatGPT53,,map,ChatGPT,glued citation number,citation rule
+ChatGPT54,,map,ChatGPT,glued citation number,citation rule
+ChatGPT56,,map,ChatGPT,glued citation number,citation rule
+ChatGPT60,,map,ChatGPT,glued citation number,citation rule
+ChatGPT62,,map,ChatGPT,glued citation number,citation rule
+ChatGPT63,,map,ChatGPT,glued citation number,citation rule
+ChatGPT64,,map,ChatGPT,glued citation number,citation rule
+ChatGPT66,,map,ChatGPT,glued citation number,citation rule
+ChatGPT67,,map,ChatGPT,glued citation number,citation rule
+ChatGPT69,,map,ChatGPT,glued citation number,citation rule
+ChatGPT73,,map,ChatGPT,glued citation number,citation rule
+ChatGPT77,,map,ChatGPT,glued citation number,citation rule
+ChatGPT82,,map,ChatGPT,glued citation number,citation rule
+ChatGPT96,,map,ChatGPT,glued citation number,citation rule
+ChemBERT13,,map,ChemBERT,glued citation number,citation rule
+ChemBERT212,,map,ChemBERT,glued citation number,citation rule
+ChemBERT23,,map,ChemBERT,glued citation number,citation rule
+ChemBERTa114,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa13,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa15,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa16,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa18,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa21,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa23,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa25,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa28,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa31,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa35,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa44,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa46,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa51,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa59,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa66,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa67,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa70,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa75,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa90,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa91,,map,ChemBERTa,glued citation number,citation rule
+ChemBERTa95,,map,ChemBERTa,glued citation number,citation rule
+ChemGPT42,,map,ChemGPT,glued citation number,citation rule
+ChemGPT52,,map,ChemGPT,glued citation number,citation rule
+Chinese-BERT83,,map,Chinese-BERT,glued citation number,citation rule
+ClimateBERT44,,map,ClimateBERT,glued citation number,citation rule
+ClimateGPT441,,map,ClimateGPT,glued citation number,citation rule
+Clinical-BERT22,,map,Clinical-BERT,glued citation number,citation rule
+ClinicalBERT10,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT11,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT12,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT15,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT16,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT17,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT18,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT19,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT20,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT21,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT219,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT23,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT24,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT27,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT28,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT29,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT30,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT31,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT32,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT34,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT35,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT37,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT38,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT39,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT44,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT45,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT48,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT49,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT50,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT51,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT52,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT55,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT59,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT61,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT73,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBERT94,,map,ClinicalBERT,glued citation number,citation rule
+ClinicalBert13,,map,ClinicalBert,glued citation number,citation rule
+ClinicalBert14,,map,ClinicalBert,glued citation number,citation rule
+ClinicalBert59,,map,ClinicalBert,glued citation number,citation rule
+ClinicalBert64,,map,ClinicalBert,glued citation number,citation rule
+CodeBERT10,,map,CodeBERT,glued citation number,citation rule
+CodeBERT13,,map,CodeBERT,glued citation number,citation rule
+CodeBERT27,,map,CodeBERT,glued citation number,citation rule
+CodeBERT36,,map,CodeBERT,glued citation number,citation rule
+CodeBERT53,,map,CodeBERT,glued citation number,citation rule
+CodeBERT66,,map,CodeBERT,glued citation number,citation rule
+CodeBERT89,,map,CodeBERT,glued citation number,citation rule
+CodeLLaMA18,,map,CodeLLaMA,glued citation number,citation rule
+CodeLlama12,,map,CodeLlama,glued citation number,citation rule
+CodonBERT20,,map,CodonBERT,glued citation number,citation rule
+CodonBERT36,,map,CodonBERT,glued citation number,citation rule
+CodonBERT39,,map,CodonBERT,glued citation number,citation rule
+CodonBERT43,,map,CodonBERT,glued citation number,citation rule
+ColBERT17,,map,ColBERT,glued citation number,citation rule
+ColBERT25,,map,ColBERT,glued citation number,citation rule
+ColBERT29,,map,ColBERT,glued citation number,citation rule
+ColBERT44,,map,ColBERT,glued citation number,citation rule
+ColBERT51,,map,ColBERT,glued citation number,citation rule
+ConvBERT46,,map,ConvBERT,glued citation number,citation rule
+ConvBERT54,,map,ConvBERT,glued citation number,citation rule
+CvT-21DistilGPT265,,map,CvT-21DistilGPT2,glued citation number,citation rule
+CvT-DistilGPT237,,map,CvT-DistilGPT2,glued citation number,citation rule
+CvT2DistilGPT227,,map,CvT2DistilGPT2,glued citation number,citation rule
+CySecBERT32,,map,CySecBERT,glued citation number,citation rule
+DGEDT-RoBERTa56,,map,DGEDT-RoBERTa,glued citation number,citation rule
+DGEDT-RoBERTa61,,map,DGEDT-RoBERTa,glued citation number,citation rule
+DIA-BERT17,,map,DIA-BERT,glued citation number,citation rule
+DNA-BERT228,,map,DNA-BERT2,glued citation number,citation rule
+DNABERT11,,map,DNABERT,glued citation number,citation rule
+DNABERT13,,map,DNABERT,glued citation number,citation rule
+DNABERT15,,map,DNABERT,glued citation number,citation rule
+DNABERT19,,map,DNABERT,glued citation number,citation rule
+DNABERT20,,map,DNABERT,glued citation number,citation rule
+DNABERT21,,map,DNABERT,glued citation number,citation rule
+DNABERT214,,map,DNABERT2,glued citation number,citation rule
+DNABERT215,,map,DNABERT2,glued citation number,citation rule
+DNABERT217,,map,DNABERT2,glued citation number,citation rule
+DNABERT22,,map,DNABERT,glued citation number,citation rule
+DNABERT223,,map,DNABERT2,glued citation number,citation rule
+DNABERT225,,map,DNABERT2,glued citation number,citation rule
+DNABERT23,,map,DNABERT,glued citation number,citation rule
+DNABERT231,,map,DNABERT2,glued citation number,citation rule
+DNABERT24,,map,DNABERT,glued citation number,citation rule
+DNABERT27,,map,DNABERT,glued citation number,citation rule
+DNABERT28,,map,DNABERT,glued citation number,citation rule
+DNABERT29,,map,DNABERT,glued citation number,citation rule
+DNABERT33,,map,DNABERT,glued citation number,citation rule
+DNABERT37,,map,DNABERT,glued citation number,citation rule
+DNABERT39,,map,DNABERT,glued citation number,citation rule
+DNABERT443,,map,DNABERT,glued citation number,citation rule
+DNABERT51,,map,DNABERT,glued citation number,citation rule
+DNABERT72,,map,DNABERT,glued citation number,citation rule
+DNABERT89,,map,DNABERT,glued citation number,citation rule
+DNABert24,,map,DNABert,glued citation number,citation rule
+DR-BERT59,,map,DR-BERT,glued citation number,citation rule
+DeBERTa10,,map,DeBERTa,glued citation number,citation rule
+DeBERTa11,,map,DeBERTa,glued citation number,citation rule
+DeBERTa12,,map,DeBERTa,glued citation number,citation rule
+DeBERTa18,,map,DeBERTa,glued citation number,citation rule
+DeBERTa21,,map,DeBERTa,glued citation number,citation rule
+DeBERTa26,,map,DeBERTa,glued citation number,citation rule
+DeBERTa29,,map,DeBERTa,glued citation number,citation rule
+DeBERTa36,,map,DeBERTa,glued citation number,citation rule
+DeBERTa39,,map,DeBERTa,glued citation number,citation rule
+DeBERTa42,,map,DeBERTa,glued citation number,citation rule
+DeBERTa43,,map,DeBERTa,glued citation number,citation rule
+DeBERTa45,,map,DeBERTa,glued citation number,citation rule
+DeBERTa54,,map,DeBERTa,glued citation number,citation rule
+DeBERTa60,,map,DeBERTa,glued citation number,citation rule
+DeBERTa79,,map,DeBERTa,glued citation number,citation rule
+DeVLBERT16,,map,DeVLBERT,glued citation number,citation rule
+DementiaBERT24,,map,DementiaBERT,glued citation number,citation rule
+DepRoBERTa40,,map,DepRoBERTa,glued citation number,citation rule
+DepRoBERTa49,,map,DepRoBERTa,glued citation number,citation rule
+Dia-LLaMA13,,map,Dia-LLaMA,glued citation number,citation rule
+DiagnoseGPT18,,map,DiagnoseGPT,glued citation number,citation rule
+DiagrammerGPT14,,map,DiagrammerGPT,glued citation number,citation rule
+DialoGPT14,,map,DialoGPT,glued citation number,citation rule
+DialoGPT37,,map,DialoGPT,glued citation number,citation rule
+DiffusionBERT380,,map,DiffusionBERT,glued citation number,citation rule
+DistilBERT11,,map,DistilBERT,glued citation number,citation rule
+DistilBERT12,,map,DistilBERT,glued citation number,citation rule
+DistilBERT13,,map,DistilBERT,glued citation number,citation rule
+DistilBERT14,,map,DistilBERT,glued citation number,citation rule
+DistilBERT15,,map,DistilBERT,glued citation number,citation rule
+DistilBERT21,,map,DistilBERT,glued citation number,citation rule
+DistilBERT23,,map,DistilBERT,glued citation number,citation rule
+DistilBERT24,,map,DistilBERT,glued citation number,citation rule
+DistilBERT25,,map,DistilBERT,glued citation number,citation rule
+DistilBERT27,,map,DistilBERT,glued citation number,citation rule
+DistilBERT28,,map,DistilBERT,glued citation number,citation rule
+DistilBERT30,,map,DistilBERT,glued citation number,citation rule
+DistilBERT36,,map,DistilBERT,glued citation number,citation rule
+DistilBERT38,,map,DistilBERT,glued citation number,citation rule
+DistilBERT39,,map,DistilBERT,glued citation number,citation rule
+DistilBERT43,,map,DistilBERT,glued citation number,citation rule
+DistilBERT47,,map,DistilBERT,glued citation number,citation rule
+DistilBERT50,,map,DistilBERT,glued citation number,citation rule
+DistilBERT52,,map,DistilBERT,glued citation number,citation rule
+DistilBERT53,,map,DistilBERT,glued citation number,citation rule
+DistilBERT54,,map,DistilBERT,glued citation number,citation rule
+DistilBERT55,,map,DistilBERT,glued citation number,citation rule
+DistilBERT58,,map,DistilBERT,glued citation number,citation rule
+DistilBERT63,,map,DistilBERT,glued citation number,citation rule
+DistilBERT64,,map,DistilBERT,glued citation number,citation rule
+DistilBERT70,,map,DistilBERT,glued citation number,citation rule
+DistilKoBERT28,,map,DistilKoBERT,glued citation number,citation rule
+DistilRoBERTa33,,map,DistilRoBERTa,glued citation number,citation rule
+DistilRoBERTa41,,map,DistilRoBERTa,glued citation number,citation rule
+DistilRoBERTa45,,map,DistilRoBERTa,glued citation number,citation rule
+DocBERT74,,map,DocBERT,glued citation number,citation rule
+DockGPT116,,map,DockGPT,glued citation number,citation rule
+DrBERT18,,map,DrBERT,glued citation number,citation rule
+E-BERT48,,map,E-BERT,glued citation number,citation rule
+EK-GCN-BERT60,,map,EK-GCN-BERT,glued citation number,citation rule
+EL-CodeBERT18,,map,EL-CodeBERT,glued citation number,citation rule
+ET-BERT26,,map,ET-BERT,glued citation number,citation rule
+EYE-Llama17,,map,EYE-Llama,glued citation number,citation rule
+EarthGPT10,,map,EarthGPT,glued citation number,citation rule
+EmoRoBERTa81,,map,EmoRoBERTa,glued citation number,citation rule
+EpiBERT17,,map,EpiBERT,glued citation number,citation rule
+EpiBERT55,,map,EpiBERT,glued citation number,citation rule
+EuroBERT18,,map,EuroBERT,glued citation number,citation rule
+EvaluatorGPT18,,map,EvaluatorGPT,glued citation number,citation rule
+EyecareGPT44,,map,EyecareGPT,glued citation number,citation rule
+FG-BERT40,,map,FG-BERT,glued citation number,citation rule
+FakeBERT19,,map,FakeBERT,glued citation number,citation rule
+FakeBERT20,,map,FakeBERT,glued citation number,citation rule
+FaultGPT35,,map,FaultGPT,glued citation number,citation rule
+FedBERT28,,map,FedBERT,glued citation number,citation rule
+FinBERT20,,map,FinBERT,glued citation number,citation rule
+FinBERT25,,map,FinBERT,glued citation number,citation rule
+FinBERT45,,map,FinBERT,glued citation number,citation rule
+FinBERT48,,map,FinBERT,glued citation number,citation rule
+FinBERT64,,map,FinBERT,glued citation number,citation rule
+FinBERT65,,map,FinBERT,glued citation number,citation rule
+FinGPT46,,map,FinGPT,glued citation number,citation rule
+FinGPT77,,map,FinGPT,glued citation number,citation rule
+Finnish-BERT24,,map,Finnish-BERT,glued citation number,citation rule
+Flan-PaLM15,,map,Flan-PaLM,glued citation number,citation rule
+Flan-PaLM19,,map,Flan-PaLM,glued citation number,citation rule
+Flan-PaLM21,,map,Flan-PaLM,glued citation number,citation rule
+FlauBERT37,,map,FlauBERT,glued citation number,citation rule
+FlauBERT38,,map,FlauBERT,glued citation number,citation rule
+FrugalGPT15,,map,FrugalGPT,glued citation number,citation rule
+FrugalGPT57,,map,FrugalGPT,glued citation number,citation rule
+G-BERT28,,map,G-BERT,glued citation number,citation rule
+G-BERT38,,map,G-BERT,glued citation number,citation rule
+G-BERT48,,map,G-BERT,glued citation number,citation rule
+GAN-BERT12,,map,GAN-BERT,glued citation number,citation rule
+GAN-BERT41,,map,GAN-BERT,glued citation number,citation rule
+GatorTronGPT99,,map,GatorTronGPT,glued citation number,citation rule
+Gemini106,,map,Gemini,glued citation number,citation rule
+Gemini12,,map,Gemini,glued citation number,citation rule
+Gemini121,,map,Gemini,glued citation number,citation rule
+Gemini13,,map,Gemini,glued citation number,citation rule
+Gemini16,,map,Gemini,glued citation number,citation rule
+Gemini19,,map,Gemini,glued citation number,citation rule
+Gemini20,,map,Gemini,glued citation number,citation rule
+Gemini22,,map,Gemini,glued citation number,citation rule
+Gemini23,,map,Gemini,glued citation number,citation rule
+Gemini27,,map,Gemini,glued citation number,citation rule
+Gemini30,,map,Gemini,glued citation number,citation rule
+Gemini32,,map,Gemini,glued citation number,citation rule
+Gemini36,,map,Gemini,glued citation number,citation rule
+Gemini38,,map,Gemini,glued citation number,citation rule
+Gemini41,,map,Gemini,glued citation number,citation rule
+Gemini43,,map,Gemini,glued citation number,citation rule
+Gemini44,,map,Gemini,glued citation number,citation rule
+Gemini51,,map,Gemini,glued citation number,citation rule
+Gemini53,,map,Gemini,glued citation number,citation rule
+Gemini65,,map,Gemini,glued citation number,citation rule
+Gemini80,,map,Gemini,glued citation number,citation rule
+Gemma15,,map,Gemma,glued citation number,citation rule
+Gemma19,,map,Gemma,glued citation number,citation rule
+Gemma22,,map,Gemma,glued citation number,citation rule
+Gemma234,,map,Gemma,glued citation number,citation rule
+Gemma27,,map,Gemma,glued citation number,citation rule
+Gemma360,,map,Gemma,glued citation number,citation rule
+Gemma39,,map,Gemma,glued citation number,citation rule
+Gemma40,,map,Gemma,glued citation number,citation rule
+Gemma43,,map,Gemma,glued citation number,citation rule
+GeneGPT128,,map,GeneGPT,glued citation number,citation rule
+GeneGPT68,,map,GeneGPT,glued citation number,citation rule
+GeoGPT22,,map,GeoGPT,glued citation number,citation rule
+GeoGPT47,,map,GeoGPT,glued citation number,citation rule
+German-BERT23,,map,German-BERT,glued citation number,citation rule
+German-MedBERT29,,map,German-MedBERT,glued citation number,citation rule
+GermanBERT60,,map,GermanBERT,glued citation number,citation rule
+GermanMedBERT14,,map,GermanMedBERT,glued citation number,citation rule
+GilBERT21,,map,GilBERT,glued citation number,citation rule
+GoogleBERT13,,map,GoogleBERT,glued citation number,citation rule
+GraphCodeBERT12,,map,GraphCodeBERT,glued citation number,citation rule
+GraphCodeBERT33,,map,GraphCodeBERT,glued citation number,citation rule
+GraphCodeBERT34,,map,GraphCodeBERT,glued citation number,citation rule
+GraphCodeBERT37,,map,GraphCodeBERT,glued citation number,citation rule
+GraphCodeBERT90,,map,GraphCodeBERT,glued citation number,citation rule
+GreekBERT25,,map,GreekBERT,glued citation number,citation rule
+HIBERT14,,map,HIBERT,glued citation number,citation rule
+HRLN-BERT61,,map,HRLN-BERT,glued citation number,citation rule
+HRLN-RoBERTa56,,map,HRLN-RoBERTa,glued citation number,citation rule
+HRLN-RoBERTa61,,map,HRLN-RoBERTa,glued citation number,citation rule
+HarGPT26,,map,HarGPT,glued citation number,citation rule
+HealthGPT30,,map,HealthGPT,glued citation number,citation rule
+HeavyBERTa27,,map,HeavyBERTa,glued citation number,citation rule
+HistoGPT44,,map,HistoGPT,glued citation number,citation rule
+HistoGPT67,,map,HistoGPT,glued citation number,citation rule
+HuBERT15,,map,HuBERT,glued citation number,citation rule
+HuBERT17,,map,HuBERT,glued citation number,citation rule
+HuBERT26,,map,HuBERT,glued citation number,citation rule
+HuBERT27,,map,HuBERT,glued citation number,citation rule
+HuBERT29,,map,HuBERT,glued citation number,citation rule
+HuBERT35,,map,HuBERT,glued citation number,citation rule
+HuBERT42,,map,HuBERT,glued citation number,citation rule
+HuBERT56,,map,HuBERT,glued citation number,citation rule
+HuaTuoGPT13,,map,HuaTuoGPT,glued citation number,citation rule
+HuatuoGPT22,,map,HuatuoGPT,glued citation number,citation rule
+HuggingGPT18,,map,HuggingGPT,glued citation number,citation rule
+IMN-BERT100,,map,IMN-BERT,glued citation number,citation rule
+IgBERT19,,map,IgBERT,glued citation number,citation rule
+IgBert59,,map,IgBert,glued citation number,citation rule
+ImageBERT45,,map,ImageBERT,glued citation number,citation rule
+ImageGPT33,,map,ImageGPT,glued citation number,citation rule
+IndicBERT67,,map,IndicBERT,glued citation number,citation rule
+InstructGPT19,,map,InstructGPT,glued citation number,citation rule
+InstructGPT26,,map,InstructGPT,glued citation number,citation rule
+InstructGPT36,,map,InstructGPT,glued citation number,citation rule
+InstructGPT41,,map,InstructGPT,glued citation number,citation rule
+InstructGPT48,,map,InstructGPT,glued citation number,citation rule
+IvyGPT22,,map,IvyGPT,glued citation number,citation rule
+JET-BERT101,,map,JET-BERT,glued citation number,citation rule
+K-BERT17,,map,K-BERT,glued citation number,citation rule
+K-BERT27,,map,K-BERT,glued citation number,citation rule
+KG-BERT11,,map,KG-BERT,glued citation number,citation rule
+KG-BERT13,,map,KG-BERT,glued citation number,citation rule
+KG-BERT17,,map,KG-BERT,glued citation number,citation rule
+KG-BERT32,,map,KG-BERT,glued citation number,citation rule
+KM-BERT34,,map,KM-BERT,glued citation number,citation rule
+KR-BERT27,,map,KR-BERT,glued citation number,citation rule
+KeyBERT27,,map,KeyBERT,glued citation number,citation rule
+KeyBERT29,,map,KeyBERT,glued citation number,citation rule
+KeyBERT31,,map,KeyBERT,glued citation number,citation rule
+KeyBERT61,,map,KeyBERT,glued citation number,citation rule
+KeyBERT80,,map,KeyBERT,glued citation number,citation rule
+KnGPT18,,map,KnGPT,glued citation number,citation rule
+KoBERT31,,map,KoBERT,glued citation number,citation rule
+KrissBERT27,,map,KrissBERT,glued citation number,citation rule
+KrissBert53,,map,KrissBert,glued citation number,citation rule
+LAMBERT13,,map,LAMBERT,glued citation number,citation rule
+LCF-BERT14,,map,LCF-BERT,glued citation number,citation rule
+LEGAL-BERT11,,map,LEGAL-BERT,glued citation number,citation rule
+LEGAL-BERT12,,map,LEGAL-BERT,glued citation number,citation rule
+LLaMA10,,map,LLaMA,glued citation number,citation rule
+LLaMA11,,map,LLaMA,glued citation number,citation rule
+LLaMA12,,map,LLaMA,glued citation number,citation rule
+LLaMA13,,map,LLaMA,glued citation number,citation rule
+LLaMA14,,map,LLaMA,glued citation number,citation rule
+LLaMA142,,map,LLaMA,glued citation number,citation rule
+LLaMA15,,map,LLaMA,glued citation number,citation rule
+LLaMA16,,map,LLaMA,glued citation number,citation rule
+LLaMA17,,map,LLaMA,glued citation number,citation rule
+LLaMA19,,map,LLaMA,glued citation number,citation rule
+LLaMA20,,map,LLaMA,glued citation number,citation rule
+LLaMA21,,map,LLaMA,glued citation number,citation rule
+LLaMA217,,map,LLaMA,glued citation number,citation rule
+LLaMA22,,map,LLaMA,glued citation number,citation rule
+LLaMA222,,map,LLaMA,glued citation number,citation rule
+LLaMA229,,map,LLaMA,glued citation number,citation rule
+LLaMA23,,map,LLaMA,glued citation number,citation rule
+LLaMA233,,map,LLaMA,glued citation number,citation rule
+LLaMA24,,map,LLaMA,glued citation number,citation rule
+LLaMA25,,map,LLaMA,glued citation number,citation rule
+LLaMA255,,map,LLaMA,glued citation number,citation rule
+LLaMA26,,map,LLaMA,glued citation number,citation rule
+LLaMA28,,map,LLaMA,glued citation number,citation rule
+LLaMA29,,map,LLaMA,glued citation number,citation rule
+LLaMA330,,map,LLaMA,glued citation number,citation rule
+LLaMA34,,map,LLaMA,glued citation number,citation rule
+LLaMA35,,map,LLaMA,glued citation number,citation rule
+LLaMA37,,map,LLaMA,glued citation number,citation rule
+LLaMA38,,map,LLaMA,glued citation number,citation rule
+LLaMA39,,map,LLaMA,glued citation number,citation rule
+LLaMA438,,map,LLaMA,glued citation number,citation rule
+LLaMA49,,map,LLaMA,glued citation number,citation rule
+LLaMA53,,map,LLaMA,glued citation number,citation rule
+LLaMA57,,map,LLaMA,glued citation number,citation rule
+LLaMA64,,map,LLaMA,glued citation number,citation rule
+LLaMA68,,map,LLaMA,glued citation number,citation rule
+LLaMA74,,map,LLaMA,glued citation number,citation rule
+LLaMA87,,map,LLaMA,glued citation number,citation rule
+LSBert15,,map,LSBert,glued citation number,citation rule
+Lag-Llama28,,map,Lag-Llama,glued citation number,citation rule
+Lag-Llama46,,map,Lag-Llama,glued citation number,citation rule
+LamBERT13,,map,LamBERT,glued citation number,citation rule
+LegalBERT12,,map,LegalBERT,glued citation number,citation rule
+LegalBERT62,,map,LegalBERT,glued citation number,citation rule
+Llama223,,map,Llama,glued citation number,citation rule
+Llama233,,map,Llama,glued citation number,citation rule
+Llama239,,map,Llama,glued citation number,citation rule
+Llama274,,map,Llama,glued citation number,citation rule
+Llama317,,map,Llama,glued citation number,citation rule
+Llama324,,map,Llama,glued citation number,citation rule
+Llama335,,map,Llama,glued citation number,citation rule
+Llama93,,map,Llama,glued citation number,citation rule
+LogBERT12,,map,LogBERT,glued citation number,citation rule
+LogBERT79,,map,LogBERT,glued citation number,citation rule
+MC-BERT25,,map,MC-BERT,glued citation number,citation rule
+MED-BERT26,,map,MED-BERT,glued citation number,citation rule
+MFBERT73,,map,MFBERT,glued citation number,citation rule
+MG-BERT114,,map,MG-BERT,glued citation number,citation rule
+MG-BERT14,,map,MG-BERT,glued citation number,citation rule
+MG-BERT36,,map,MG-BERT,glued citation number,citation rule
+MG-BERT55,,map,MG-BERT,glued citation number,citation rule
+MG-BERT58,,map,MG-BERT,glued citation number,citation rule
+MHCRoBERTa103,,map,MHCRoBERTa,glued citation number,citation rule
+MMedIns-Llama335,,map,MMedIns-Llama,glued citation number,citation rule
+MOLE-BERT11,,map,MOLE-BERT,glued citation number,citation rule
+MacBERT32,,map,MacBERT,glued citation number,citation rule
+MacBERT53,,map,MacBERT,glued citation number,citation rule
+MacBert38,,map,MacBert,glued citation number,citation rule
+Mantis-8B-siglip-Llama327,,map,Mantis-8B-siglip-Llama,glued citation number,citation rule
+MatBERT18,,map,MatBERT,glued citation number,citation rule
+MatBERT26,,map,MatBERT,glued citation number,citation rule
+MatBERT42,,map,MatBERT,glued citation number,citation rule
+MatBERT47,,map,MatBERT,glued citation number,citation rule
+MatGPT49,,map,MatGPT,glued citation number,citation rule
+MatSciBERT14,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT17,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT20,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT23,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT32,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT35,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT36,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT43,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT64,,map,MatSciBERT,glued citation number,citation rule
+MatSciBERT71,,map,MatSciBERT,glued citation number,citation rule
+MaterialBERT21,,map,MaterialBERT,glued citation number,citation rule
+MaterialsBERT15,,map,MaterialsBERT,glued citation number,citation rule
+Me-LLaMA18,,map,Me-LLaMA,glued citation number,citation rule
+Me-LLaMA19,,map,Me-LLaMA,glued citation number,citation rule
+Me-LLaMA50,,map,Me-LLaMA,glued citation number,citation rule
+Med-BERT10,,map,Med-BERT,glued citation number,citation rule
+Med-BERT13,,map,Med-BERT,glued citation number,citation rule
+Med-BERT18,,map,Med-BERT,glued citation number,citation rule
+Med-BERT19,,map,Med-BERT,glued citation number,citation rule
+Med-BERT29,,map,Med-BERT,glued citation number,citation rule
+Med-BERT34,,map,Med-BERT,glued citation number,citation rule
+Med-BERT54,,map,Med-BERT,glued citation number,citation rule
+Med-BERT57,,map,Med-BERT,glued citation number,citation rule
+Med-Gemini24,,map,Med-Gemini,glued citation number,citation rule
+Med-Gemini36,,map,Med-Gemini,glued citation number,citation rule
+Med-Gemini52,,map,Med-Gemini,glued citation number,citation rule
+Med-PaLM126,,map,Med-PaLM1,glued citation number,citation rule
+Med-PaLM15,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM16,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM19,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM218,,map,Med-PaLM2,glued citation number,citation rule
+Med-PaLM22,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM227,,map,Med-PaLM2,glued citation number,citation rule
+Med-PaLM24,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM259,,map,Med-PaLM2,glued citation number,citation rule
+Med-PaLM26,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM39,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM44,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM51,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM58,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM635,,map,Med-PaLM,glued citation number,citation rule
+Med-PaLM64,,map,Med-PaLM,glued citation number,citation rule
+MedBERT17,,map,MedBERT,glued citation number,citation rule
+MedBERT18,,map,MedBERT,glued citation number,citation rule
+MedBERT33,,map,MedBERT,glued citation number,citation rule
+MedBERT34,,map,MedBERT,glued citation number,citation rule
+MedGPT16,,map,MedGPT,glued citation number,citation rule
+MedGemma18,,map,MedGemma,glued citation number,citation rule
+MedGemma20,,map,MedGemma,glued citation number,citation rule
+MedGemma28,,map,MedGemma,glued citation number,citation rule
+MedGemma36,,map,MedGemma,glued citation number,citation rule
+MedGemma39,,map,MedGemma,glued citation number,citation rule
+MedGemma42,,map,MedGemma,glued citation number,citation rule
+MedGemma49,,map,MedGemma,glued citation number,citation rule
+MedGemma56,,map,MedGemma,glued citation number,citation rule
+MedGemma58,,map,MedGemma,glued citation number,citation rule
+MedGemma61,,map,MedGemma,glued citation number,citation rule
+MedLLaMA345,,map,MedLLaMA3,glued citation number,citation rule
+MedPaLM15,,map,MedPaLM,glued citation number,citation rule
+MedPaLM16,,map,MedPaLM,glued citation number,citation rule
+MedPaLM34,,map,MedPaLM,glued citation number,citation rule
+MedPaLM77,,map,MedPaLM,glued citation number,citation rule
+Megatron-BERT44,,map,Megatron-BERT,glued citation number,citation rule
+MemGPT105,,map,MemGPT,glued citation number,citation rule
+MemGPT33,,map,MemGPT,glued citation number,citation rule
+MentalBERT26,,map,MentalBERT,glued citation number,citation rule
+MentalBERT29,,map,MentalBERT,glued citation number,citation rule
+MentalLLaMA77,,map,MentalLLaMA,glued citation number,citation rule
+MentalRoBERTa13,,map,MentalRoBERTa,glued citation number,citation rule
+MentalRoBERTa33,,map,MentalRoBERTa,glued citation number,citation rule
+MetBERT10,,map,MetBERT,glued citation number,citation rule
+MetaBERT19,,map,MetaBERT,glued citation number,citation rule
+MetaBERTa17,,map,MetaBERTa,glued citation number,citation rule
+MetaGPT15,,map,MetaGPT,glued citation number,citation rule
+MetaGPT18,,map,MetaGPT,glued citation number,citation rule
+MetaGPT19,,map,MetaGPT,glued citation number,citation rule
+MethylBERT42,,map,MethylBERT,glued citation number,citation rule
+MethylGPT50,,map,MethylGPT,glued citation number,citation rule
+MiniGPT421,,map,MiniGPT4,glued citation number,citation rule
+MiniGPT424,,map,MiniGPT4,glued citation number,citation rule
+MiniGPT441,,map,MiniGPT4,glued citation number,citation rule
+Mistral13,,map,Mistral,glued citation number,citation rule
+Mistral16,,map,Mistral,glued citation number,citation rule
+Mistral17,,map,Mistral,glued citation number,citation rule
+Mistral19,,map,Mistral,glued citation number,citation rule
+Mistral32,,map,Mistral,glued citation number,citation rule
+Mistral36,,map,Mistral,glued citation number,citation rule
+Mistral40,,map,Mistral,glued citation number,citation rule
+Mistral42,,map,Mistral,glued citation number,citation rule
+Mistral53,,map,Mistral,glued citation number,citation rule
+Mistral64,,map,Mistral,glued citation number,citation rule
+MobileBERT23,,map,MobileBERT,glued citation number,citation rule
+MobileBERT60,,map,MobileBERT,glued citation number,citation rule
+ModernBERT25,,map,ModernBERT,glued citation number,citation rule
+ModernBERT30,,map,ModernBERT,glued citation number,citation rule
+ModernBERT31,,map,ModernBERT,glued citation number,citation rule
+ModernBERT40,,map,ModernBERT,glued citation number,citation rule
+ModernBERT41,,map,ModernBERT,glued citation number,citation rule
+ModernBERT43,,map,ModernBERT,glued citation number,citation rule
+Mol-BERT13,,map,Mol-BERT,glued citation number,citation rule
+Mol-BERT70,,map,Mol-BERT,glued citation number,citation rule
+Mol-LLaMA96,,map,Mol-LLaMA,glued citation number,citation rule
+MolBERT11,,map,MolBERT,glued citation number,citation rule
+MolBERT13,,map,MolBERT,glued citation number,citation rule
+MolBERT44,,map,MolBERT,glued citation number,citation rule
+MolGPT15,,map,MolGPT,glued citation number,citation rule
+MolGPT21,,map,MolGPT,glued citation number,citation rule
+MolGPT22,,map,MolGPT,glued citation number,citation rule
+MolGPT29,,map,MolGPT,glued citation number,citation rule
+MolGPT77,,map,MolGPT,glued citation number,citation rule
+MolReGPT181,,map,MolReGPT,glued citation number,citation rule
+MolReGPT36,,map,MolReGPT,glued citation number,citation rule
+MolRoPE-BERT72,,map,MolRoPE-BERT,glued citation number,citation rule
+Mole-BERT18,,map,Mole-BERT,glued citation number,citation rule
+Mole-BERT37,,map,Mole-BERT,glued citation number,citation rule
+Mole-BERT64,,map,Mole-BERT,glued citation number,citation rule
+MoleBERT31,,map,MoleBERT,glued citation number,citation rule
+MotionBERT10,,map,MotionBERT,glued citation number,citation rule
+MotionBERT12,,map,MotionBERT,glued citation number,citation rule
+MotionBERT18,,map,MotionBERT,glued citation number,citation rule
+MotionBERT30,,map,MotionBERT,glued citation number,citation rule
+MyCrunchGPT19,,map,MyCrunchGPT,glued citation number,citation rule
+NavGPT38,,map,NavGPT,glued citation number,citation rule
+OntoGPT16,,map,OntoGPT,glued citation number,citation rule
+OpticalBERT28,,map,OpticalBERT,glued citation number,citation rule
+PAL-BERT41,,map,PAL-BERT,glued citation number,citation rule
+PMC-LLaMA11,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA13,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA15,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA17,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA25,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA281,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA31,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA34,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-LLaMA64,,map,PMC-LLaMA,glued citation number,citation rule
+PMC-Llama13,,map,PMC-Llama,glued citation number,citation rule
+PaliGemma71,,map,PaliGemma,glued citation number,citation rule
+PaloBERT104,,map,PaloBERT,glued citation number,citation rule
+ParsBERT29,,map,ParsBERT,glued citation number,citation rule
+ParsBERT33,,map,ParsBERT,glued citation number,citation rule
+PathologyBERT32,,map,PathologyBERT,glued citation number,citation rule
+PathologyBERT40,,map,PathologyBERT,glued citation number,citation rule
+PeptideBERT15,,map,PeptideBERT,glued citation number,citation rule
+PeptideBERT18,,map,PeptideBERT,glued citation number,citation rule
+PeptideBERT26,,map,PeptideBERT,glued citation number,citation rule
+PeptideBERT40,,map,PeptideBERT,glued citation number,citation rule
+PetBERT26,,map,PetBERT,glued citation number,citation rule
+PetBERT31,,map,PetBERT,glued citation number,citation rule
+PhenoBCBERT19,,map,PhenoBCBERT,glued citation number,citation rule
+PhenoBERT23,,map,PhenoBERT,glued citation number,citation rule
+PhenoBERT35,,map,PhenoBERT,glued citation number,citation rule
+PhenoGPT26,,map,PhenoGPT,glued citation number,citation rule
+PlanGPT18,,map,PlanGPT,glued citation number,citation rule
+Point-BERT11,,map,Point-BERT,glued citation number,citation rule
+Point-BERT15,,map,Point-BERT,glued citation number,citation rule
+Point-BERT17,,map,Point-BERT,glued citation number,citation rule
+Point-BERT41,,map,Point-BERT,glued citation number,citation rule
+Point-BERT42,,map,Point-BERT,glued citation number,citation rule
+Point-BERT60,,map,Point-BERT,glued citation number,citation rule
+PointBERT35,,map,PointBERT,glued citation number,citation rule
+PointBERT37,,map,PointBERT,glued citation number,citation rule
+PointBERT56,,map,PointBERT,glued citation number,citation rule
+PolBERT36,,map,PolBERT,glued citation number,citation rule
+PolyBERT16,,map,PolyBERT,glued citation number,citation rule
+Precious1GPT12,,map,Precious1GPT,glued citation number,citation rule
+ProBERT14,,map,ProBERT,glued citation number,citation rule
+ProLLaMA22,,map,ProLLaMA,glued citation number,citation rule
+ProkBERT38,,map,ProkBERT,glued citation number,citation rule
+PromptBERT17,,map,PromptBERT,glued citation number,citation rule
+ProtALBERT30,,map,ProtALBERT,glued citation number,citation rule
+ProtBERT11,,map,ProtBERT,glued citation number,citation rule
+ProtBERT12,,map,ProtBERT,glued citation number,citation rule
+ProtBERT19,,map,ProtBERT,glued citation number,citation rule
+ProtBERT21,,map,ProtBERT,glued citation number,citation rule
+ProtBERT25,,map,ProtBERT,glued citation number,citation rule
+ProtBERT27,,map,ProtBERT,glued citation number,citation rule
+ProtBERT28,,map,ProtBERT,glued citation number,citation rule
+ProtBERT29,,map,ProtBERT,glued citation number,citation rule
+ProtBERT31,,map,ProtBERT,glued citation number,citation rule
+ProtBERT32,,map,ProtBERT,glued citation number,citation rule
+ProtBERT38,,map,ProtBERT,glued citation number,citation rule
+ProtBERT43,,map,ProtBERT,glued citation number,citation rule
+ProtBert10,,map,ProtBert,glued citation number,citation rule
+ProtBert17,,map,ProtBert,glued citation number,citation rule
+ProtBert20,,map,ProtBert,glued citation number,citation rule
+ProtBert21,,map,ProtBert,glued citation number,citation rule
+ProtBert23,,map,ProtBert,glued citation number,citation rule
+ProtBert25,,map,ProtBert,glued citation number,citation rule
+ProtBert26,,map,ProtBert,glued citation number,citation rule
+ProtBert30,,map,ProtBert,glued citation number,citation rule
+ProtBert37,,map,ProtBert,glued citation number,citation rule
+ProtBert45,,map,ProtBert,glued citation number,citation rule
+ProtBert47,,map,ProtBert,glued citation number,citation rule
+ProtGPT211,,map,ProtGPT,glued citation number,citation rule
+ProtGPT213,,map,ProtGPT,glued citation number,citation rule
+ProtGPT215,,map,ProtGPT,glued citation number,citation rule
+ProtGPT218,,map,ProtGPT,glued citation number,citation rule
+ProtGPT219,,map,ProtGPT,glued citation number,citation rule
+ProtGPT233,,map,ProtGPT,glued citation number,citation rule
+ProtGPT238,,map,ProtGPT,glued citation number,citation rule
+ProtGPT242,,map,ProtGPT,glued citation number,citation rule
+ProteinBERT12,,map,ProteinBERT,glued citation number,citation rule
+ProteinBERT14,,map,ProteinBERT,glued citation number,citation rule
+ProteinBERT174,,map,ProteinBERT,glued citation number,citation rule
+ProteinBERT23,,map,ProteinBERT,glued citation number,citation rule
+ProteinBERT26,,map,ProteinBERT,glued citation number,citation rule
+ProteinBERT36,,map,ProteinBERT,glued citation number,citation rule
+ProteinBERT39,,map,ProteinBERT,glued citation number,citation rule
+ProteinBERT61,,map,ProteinBERT,glued citation number,citation rule
+ProteinBert16,,map,ProteinBert,glued citation number,citation rule
+ProteinBert39,,map,ProteinBert,glued citation number,citation rule
+ProtoBERT42,,map,ProtoBERT,glued citation number,citation rule
+PsychBERT28,,map,PsychBERT,glued citation number,citation rule
+PubMed-BERT130,,map,PubMed-BERT,glued citation number,citation rule
+PubMedBERT11,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT13,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT14,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT16,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT17,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT18,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT20,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT21,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT215,,map,PubMedBERT2,glued citation number,citation rule
+PubMedBERT22,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT23,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT24,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT26,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT30,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT31,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT32,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT33,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT35,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT37,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT39,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT42,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT49,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT51,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT52,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT55,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT61,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT63,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT87,,map,PubMedBERT,glued citation number,citation rule
+PubMedBERT92,,map,PubMedBERT,glued citation number,citation rule
+PubMedGPT12,,map,PubMedGPT,glued citation number,citation rule
+PubMedGPT19,,map,PubMedGPT,glued citation number,citation rule
+PubMedGPT25,,map,PubMedGPT,glued citation number,citation rule
+PubmedBERT23,,map,PubmedBERT,glued citation number,citation rule
+QuantGPT17,,map,QuantGPT,glued citation number,citation rule
+R-BERT17,,map,R-BERT,glued citation number,citation rule
+R-BERT30,,map,R-BERT,glued citation number,citation rule
+R-GAT+BERT25,,map,R-GAT+BERT,glued citation number,citation rule
+R2GenGPT10,,map,R2GenGPT,glued citation number,citation rule
+R2GenGPT29,,map,R2GenGPT,glued citation number,citation rule
+R2GenGPT61,,map,R2GenGPT,glued citation number,citation rule
+RGAT-RoBERTa62,,map,RGAT-RoBERTa,glued citation number,citation rule
+RNABERT23,,map,RNABERT,glued citation number,citation rule
+RNABERT31,,map,RNABERT,glued citation number,citation rule
+RNABERT33,,map,RNABERT,glued citation number,citation rule
+RNABERT38,,map,RNABERT,glued citation number,citation rule
+RNABERT71,,map,RNABERT,glued citation number,citation rule
+RSSG+BERT59,,map,RSSG+BERT,glued citation number,citation rule
+RadBERT33,,map,RadBERT,glued citation number,citation rule
+RadBERT36,,map,RadBERT,glued citation number,citation rule
+RadBERT40,,map,RadBERT,glued citation number,citation rule
+RareBert30,,map,RareBert,glued citation number,citation rule
+ReasonBERT83,,map,ReasonBERT,glued citation number,citation rule
+RemBERT68,,map,RemBERT,glued citation number,citation rule
+RoBERTa110,,map,RoBERTa,glued citation number,citation rule
+RoBERTa195,,map,RoBERTa,glued citation number,citation rule
+S-PubMedBert59,,map,S-PubMedBert,glued citation number,citation rule
+SAPBERT23,,map,SAPBERT,glued citation number,citation rule
+SAPBERT30,,map,SAPBERT,glued citation number,citation rule
+SBERT11,,map,SBERT,glued citation number,citation rule
+SBERT112,,map,SBERT,glued citation number,citation rule
+SBERT13,,map,SBERT,glued citation number,citation rule
+SBERT23,,map,SBERT,glued citation number,citation rule
+SBERT27,,map,SBERT,glued citation number,citation rule
+SBERT28,,map,SBERT,glued citation number,citation rule
+SBERT32,,map,SBERT,glued citation number,citation rule
+SBERT33,,map,SBERT,glued citation number,citation rule
+SBERT37,,map,SBERT,glued citation number,citation rule
+SBERT50,,map,SBERT,glued citation number,citation rule
+SBert29,,map,SBert,glued citation number,citation rule
+SHuBERT35,,map,SHuBERT,glued citation number,citation rule
+SLICES-BERT30,,map,SLICES-BERT,glued citation number,citation rule
+SMILE-BERT20,,map,SMILE-BERT,glued citation number,citation rule
+SMILES-BERT14,,map,SMILES-BERT,glued citation number,citation rule
+SMILES-BERT18,,map,SMILES-BERT,glued citation number,citation rule
+SMILES-BERT20,,map,SMILES-BERT,glued citation number,citation rule
+SMILES-BERT32,,map,SMILES-BERT,glued citation number,citation rule
+SMedBERT45,,map,SMedBERT,glued citation number,citation rule
+SPAN-BERT12,,map,SPAN-BERT,glued citation number,citation rule
+SapBERT32,,map,SapBERT,glued citation number,citation rule
+SapBERT37,,map,SapBERT,glued citation number,citation rule
+SapBERT48,,map,SapBERT,glued citation number,citation rule
+SapBERT50,,map,SapBERT,glued citation number,citation rule
+SapBERT71,,map,SapBERT,glued citation number,citation rule
+SapBert43,,map,SapBert,glued citation number,citation rule
+SapBert48,,map,SapBert,glued citation number,citation rule
+ScholarBERT207,,map,ScholarBERT,glued citation number,citation rule
+ScholarBERT89,,map,ScholarBERT,glued citation number,citation rule
+Sci-BERT62,,map,Sci-BERT,glued citation number,citation rule
+SciBERT10,,map,SciBERT,glued citation number,citation rule
+SciBERT11,,map,SciBERT,glued citation number,citation rule
+SciBERT13,,map,SciBERT,glued citation number,citation rule
+SciBERT16,,map,SciBERT,glued citation number,citation rule
+SciBERT17,,map,SciBERT,glued citation number,citation rule
+SciBERT19,,map,SciBERT,glued citation number,citation rule
+SciBERT20,,map,SciBERT,glued citation number,citation rule
+SciBERT22,,map,SciBERT,glued citation number,citation rule
+SciBERT220,,map,SciBERT,glued citation number,citation rule
+SciBERT30,,map,SciBERT,glued citation number,citation rule
+SciBERT31,,map,SciBERT,glued citation number,citation rule
+SciBERT35,,map,SciBERT,glued citation number,citation rule
+SciBERT36,,map,SciBERT,glued citation number,citation rule
+SciBERT45,,map,SciBERT,glued citation number,citation rule
+SciBERT46,,map,SciBERT,glued citation number,citation rule
+SciBERT63,,map,SciBERT,glued citation number,citation rule
+SciBERT82,,map,SciBERT,glued citation number,citation rule
+SciBERT83,,map,SciBERT,glued citation number,citation rule
+SciBert27,,map,SciBert,glued citation number,citation rule
+SecureBERT25,,map,SecureBERT,glued citation number,citation rule
+SecureBERT31,,map,SecureBERT,glued citation number,citation rule
+SelfCheckGPT23,,map,SelfCheckGPT,glued citation number,citation rule
+Sentence-BERT102,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT115,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT12,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT14,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT19,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT22,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT23,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT24,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT26,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT33,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT42,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT45,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT47,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT48,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT49,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT55,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT59,,map,Sentence-BERT,glued citation number,citation rule
+Sentence-BERT65,,map,Sentence-BERT,glued citation number,citation rule
+SentenceBERT28,,map,SentenceBERT,glued citation number,citation rule
+SentenceBert40,,map,SentenceBert,glued citation number,citation rule
+SentenceBert66,,map,SentenceBert,glued citation number,citation rule
+SeqXGPT20,,map,SeqXGPT,glued citation number,citation rule
+ShareGPT34,,map,ShareGPT,glued citation number,citation rule
+ShareGPT38,,map,ShareGPT,glued citation number,citation rule
+Sheared-LLaMA16,,map,Sheared-LLaMA,glued citation number,citation rule
+SikuBERT28,,map,SikuBERT,glued citation number,citation rule
+SkinGPT45,,map,SkinGPT,glued citation number,citation rule
+SocBERT11,,map,SocBERT,glued citation number,citation rule
+SpanBERT40,,map,SpanBERT,glued citation number,citation rule
+SparseGPT19,,map,SparseGPT,glued citation number,citation rule
+SparseGPT23,,map,SparseGPT,glued citation number,citation rule
+SpectralGPT150,,map,SpectralGPT,glued citation number,citation rule
+SpikeGPT28,,map,SpikeGPT,glued citation number,citation rule
+SpikeGPT84,,map,SpikeGPT,glued citation number,citation rule
+SpliceBERT22,,map,SpliceBERT,glued citation number,citation rule
+SpliceBERT24,,map,SpliceBERT,glued citation number,citation rule
+SpliceBERT26,,map,SpliceBERT,glued citation number,citation rule
+SpliceBERT54,,map,SpliceBERT,glued citation number,citation rule
+SpliceBert14,,map,SpliceBert,glued citation number,citation rule
+StructureGPT29,,map,StructureGPT,glued citation number,citation rule
+SurgicBERTa44,,map,SurgicBERTa,glued citation number,citation rule
+SynLLaMA18,,map,SynLLaMA,glued citation number,citation rule
+SyncoBERT21,,map,SyncoBERT,glued citation number,citation rule
+TCM-BERT10,,map,TCM-BERT,glued citation number,citation rule
+TCR-BERT10,,map,TCR-BERT,glued citation number,citation rule
+TCR-BERT31,,map,TCR-BERT,glued citation number,citation rule
+TCR-BERT91,,map,TCR-BERT,glued citation number,citation rule
+TFBert25,,map,TFBert,glued citation number,citation rule
+TiRoBERTa25,,map,TiRoBERTa,glued citation number,citation rule
+TimeGPT32,,map,TimeGPT,glued citation number,citation rule
+TimelyGPT45,,map,TimelyGPT,glued citation number,citation rule
+TinyBERT22,,map,TinyBERT,glued citation number,citation rule
+TinyBERT30,,map,TinyBERT,glued citation number,citation rule
+TinyBERT31,,map,TinyBERT,glued citation number,citation rule
+TinyBERT32,,map,TinyBERT,glued citation number,citation rule
+TinyBERT38,,map,TinyBERT,glued citation number,citation rule
+TinyBERT42,,map,TinyBERT,glued citation number,citation rule
+TinyBERT59,,map,TinyBERT,glued citation number,citation rule
+TinyLlama14,,map,TinyLlama,glued citation number,citation rule
+TinyLlama32,,map,TinyLlama,glued citation number,citation rule
+TinyLlama52,,map,TinyLlama,glued citation number,citation rule
+TinyLlama61,,map,TinyLlama,glued citation number,citation rule
+TopicGPT59,,map,TopicGPT,glued citation number,citation rule
+TrafficGPT19,,map,TrafficGPT,glued citation number,citation rule
+TrialGPT10,,map,TrialGPT,glued citation number,citation rule
+TrialGPT12,,map,TrialGPT,glued citation number,citation rule
+TrialGPT18,,map,TrialGPT,glued citation number,citation rule
+TrialGPT32,,map,TrialGPT,glued citation number,citation rule
+TrialLlama19,,map,TrialLlama,glued citation number,citation rule
+TrumorGPT23,,map,TrumorGPT,glued citation number,citation rule
+TrumorGPT44,,map,TrumorGPT,glued citation number,citation rule
+TrumorGPT48,,map,TrumorGPT,glued citation number,citation rule
+TrumorGPT52,,map,TrumorGPT,glued citation number,citation rule
+TrustGPT15,,map,TrustGPT,glued citation number,citation rule
+TwHIN-BERT20,,map,TwHIN-BERT,glued citation number,citation rule
+TwHIN-BERT39,,map,TwHIN-BERT,glued citation number,citation rule
+TxGemma24,,map,TxGemma,glued citation number,citation rule
+TxGemma31,,map,TxGemma,glued citation number,citation rule
+U-BERT22,,map,U-BERT,glued citation number,citation rule
+Umami-BERT32,,map,Umami-BERT,glued citation number,citation rule
+UmlsBERT70,,map,UmlsBERT,glued citation number,citation rule
+VLC-BERT34,,map,VLC-BERT,glued citation number,citation rule
+VetBERT46,,map,VetBERT,glued citation number,citation rule
+ViGPT29,,map,ViGPT,glued citation number,citation rule
+ViLBERT10,,map,ViLBERT,glued citation number,citation rule
+ViLBERT14,,map,ViLBERT,glued citation number,citation rule
+ViLBERT17,,map,ViLBERT,glued citation number,citation rule
+ViLBERT22,,map,ViLBERT,glued citation number,citation rule
+ViLBERT27,,map,ViLBERT,glued citation number,citation rule
+ViLBERT46,,map,ViLBERT,glued citation number,citation rule
+VideoGPT15,,map,VideoGPT,glued citation number,citation rule
+VideoGPT16,,map,VideoGPT,glued citation number,citation rule
+VideoGPT34,,map,VideoGPT,glued citation number,citation rule
+VideoLLaMA21,,map,VideoLLaMA,glued citation number,citation rule
+VisualBERT13,,map,VisualBERT,glued citation number,citation rule
+VisualBERT43,,map,VisualBERT,glued citation number,citation rule
+WS-BERT16,,map,WS-BERT,glued citation number,citation rule
+WebGPT25,,map,WebGPT,glued citation number,citation rule
+Wind2vec-BERT29,,map,Wind2vec-BERT,glued citation number,citation rule
+X-BERT23,,map,X-BERT,glued citation number,citation rule
+XLM-RoBERTa18,,map,XLM-RoBERTa,glued citation number,citation rule
+XLM-RoBERTa19,,map,XLM-RoBERTa,glued citation number,citation rule
+XLM-RoBERTa23,,map,XLM-RoBERTa,glued citation number,citation rule
+XLM-RoBERTa68,,map,XLM-RoBERTa,glued citation number,citation rule
+XrayGPT12,,map,XrayGPT,glued citation number,citation rule
+XrayGPT14,,map,XrayGPT,glued citation number,citation rule
+XrayGPT24,,map,XrayGPT,glued citation number,citation rule
+XrayGPT45,,map,XrayGPT,glued citation number,citation rule
+Yield-BERT10,,map,Yield-BERT,glued citation number,citation rule
+Yield-BERT14,,map,Yield-BERT,glued citation number,citation rule
+Yield-BERT32,,map,Yield-BERT,glued citation number,citation rule
+Yield-BERT40,,map,Yield-BERT,glued citation number,citation rule
+Yield-BERT43,,map,Yield-BERT,glued citation number,citation rule
+YieldBERT36,,map,YieldBERT,glued citation number,citation rule
+adapter-BERT17,,map,adapter-BERT,glued citation number,citation rule
+bert2BERT39,,map,bert2BERT,glued citation number,citation rule
+bert2BERT43,,map,bert2BERT,glued citation number,citation rule
+bioClinicalBERT13,,map,bioClinicalBERT,glued citation number,citation rule
+bioClinicalBERT18,,map,bioClinicalBERT,glued citation number,citation rule
+bioGPT21,,map,bioGPT,glued citation number,citation rule
+cMolGPT46,,map,cMolGPT,glued citation number,citation rule
+cMolGPT82,,map,cMolGPT,glued citation number,citation rule
+case.ChatGPT53,,map,case.ChatGPT,glued citation number,citation rule
+cdsBERT17,,map,cdsBERT,glued citation number,citation rule
+cdsBERT56,,map,cdsBERT,glued citation number,citation rule
+character-BERT23,,map,character-BERT,glued citation number,citation rule
+chemBERTa29,,map,chemBERTa,glued citation number,citation rule
+clinicalBERT24,,map,clinicalBERT,glued citation number,citation rule
+clinicalBERT58,,map,clinicalBERT,glued citation number,citation rule
+deBERTa57,,map,deBERTa,glued citation number,citation rule
+distilBERT21,,map,distilBERT,glued citation number,citation rule
+distilBERT28,,map,distilBERT,glued citation number,citation rule
+distilBERT87,,map,distilBERT,glued citation number,citation rule
+ehrBERT59,,map,ehrBERT,glued citation number,citation rule
+exBERT38,,map,exBERT,glued citation number,citation rule
+glyBERT46,,map,glyBERT,glued citation number,citation rule
+iEnhancer-BERT36,,map,iEnhancer-BERT,glued citation number,citation rule
+iGPT19,,map,iGPT,glued citation number,citation rule
+iupacGPT140,,map,iupacGPT,glued citation number,citation rule
+iupacGPT80,,map,iupacGPT,glued citation number,citation rule
+kBERT10,,map,kBERT,glued citation number,citation rule
+mBERT18,,map,mBERT,glued citation number,citation rule
+mBERT20,,map,mBERT,glued citation number,citation rule
+mBERT22,,map,mBERT,glued citation number,citation rule
+mBERT31,,map,mBERT,glued citation number,citation rule
+mBERT38,,map,mBERT,glued citation number,citation rule
+mBERT44,,map,mBERT,glued citation number,citation rule
+mBERT50,,map,mBERT,glued citation number,citation rule
+mBERT51,,map,mBERT,glued citation number,citation rule
+mHuBERT57,,map,mHuBERT,glued citation number,citation rule
+methBERT31,,map,methBERT,glued citation number,citation rule
+nanoBERT41,,map,nanoBERT,glued citation number,citation rule
+nanoGPT43,,map,nanoGPT,glued citation number,citation rule
+nanoGPT61,,map,nanoGPT,glued citation number,citation rule
+ntBERT35,,map,ntBERT,glued citation number,citation rule
+ntBERT79,,map,ntBERT,glued citation number,citation rule
+ontoGPT21,,map,ontoGPT,glued citation number,citation rule
+pBERT45,,map,pBERT,glued citation number,citation rule
+plRoBERTa37,,map,plRoBERTa,glued citation number,citation rule
+polyBERT101,,map,polyBERT,glued citation number,citation rule
+polyBERT16,,map,polyBERT,glued citation number,citation rule
+scBERT11,,map,scBERT,glued citation number,citation rule
+scBERT12,,map,scBERT,glued citation number,citation rule
+scBERT13,,map,scBERT,glued citation number,citation rule
+scBERT14,,map,scBERT,glued citation number,citation rule
+scBERT16,,map,scBERT,glued citation number,citation rule
+scBERT20,,map,scBERT,glued citation number,citation rule
+scBERT22,,map,scBERT,glued citation number,citation rule
+scBERT23,,map,scBERT,glued citation number,citation rule
+scBERT28,,map,scBERT,glued citation number,citation rule
+scBERT37,,map,scBERT,glued citation number,citation rule
+scBERT39,,map,scBERT,glued citation number,citation rule
+scBERT41,,map,scBERT,glued citation number,citation rule
+scBERT47,,map,scBERT,glued citation number,citation rule
+scBERT55,,map,scBERT,glued citation number,citation rule
+scBert15,,map,scBert,glued citation number,citation rule
+scBert20,,map,scBert,glued citation number,citation rule
+scGPT11,,map,scGPT,glued citation number,citation rule
+scGPT12,,map,scGPT,glued citation number,citation rule
+scGPT13,,map,scGPT,glued citation number,citation rule
+scGPT14,,map,scGPT,glued citation number,citation rule
+scGPT16,,map,scGPT,glued citation number,citation rule
+scGPT19,,map,scGPT,glued citation number,citation rule
+scGPT21,,map,scGPT,glued citation number,citation rule
+scGPT23,,map,scGPT,glued citation number,citation rule
+scGPT24,,map,scGPT,glued citation number,citation rule
+scGPT25,,map,scGPT,glued citation number,citation rule
+scGPT28,,map,scGPT,glued citation number,citation rule
+scGPT29,,map,scGPT,glued citation number,citation rule
+scGPT31,,map,scGPT,glued citation number,citation rule
+scGPT32,,map,scGPT,glued citation number,citation rule
+scGPT33,,map,scGPT,glued citation number,citation rule
+scGPT34,,map,scGPT,glued citation number,citation rule
+scGPT37,,map,scGPT,glued citation number,citation rule
+scGPT39,,map,scGPT,glued citation number,citation rule
+scGPT40,,map,scGPT,glued citation number,citation rule
+scGPT43,,map,scGPT,glued citation number,citation rule
+scGPT44,,map,scGPT,glued citation number,citation rule
+scGPT57,,map,scGPT,glued citation number,citation rule
+semi-RoBERTa75,,map,semi-RoBERTa,glued citation number,citation rule
+sentence-BERT56,,map,sentence-BERT,glued citation number,citation rule
+sentence-BERT72,,map,sentence-BERT,glued citation number,citation rule
+squeezeBERT88,,map,squeezeBERT,glued citation number,citation rule
+tGPT13,,map,tGPT,glued citation number,citation rule
+tGPT21,,map,tGPT,glued citation number,citation rule
+tGPT29,,map,tGPT,glued citation number,citation rule
+tGPT59,,map,tGPT,glued citation number,citation rule
+textttMotionBERT12,,map,textttMotionBERT,glued citation number,citation rule
+w2v-BERT23,,map,w2v-BERT,glued citation number,citation rule

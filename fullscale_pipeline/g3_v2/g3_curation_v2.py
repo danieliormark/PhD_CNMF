@@ -132,6 +132,8 @@ SPELLING_CORRECTIONS = INPUTS + "spelling_corrections.csv"
 LLM_OUTPUT_UNITS = INPUTS + "llm_output_units.csv"
 REFLEXIVE_TABLE = INPUTS + "reflexive_restored.jsonl"               # §6 item 8, built by g3_v2/reflexive_restore.py
 TERM_REJECTIONS = INPUTS + "term_rejections.tsv"                    # RL-171: focal hits Stage B rejected (sentence / article)
+G4_DECISIONS = INPUTS + "g4_decisions.csv"                          # RL-172: group-4 false hits (reject) and glued citations (map)
+STATEMENT_SENTENCES = INPUTS + "statement_sentences.csv"            # RL-172: AI-use statements found by the second check
 # §8 item 5 (owner 2026-10-10, RL-129): spaCy's rule lemmatiser gives an underscore-joined (out-of-vocabulary) word its first
 # suffix rule unchecked (pre_trained -> pre_traine, question_answering -> question_answere, second_best -> second_b). Where it
 # changed a joined word, the lemma is rebuilt as the part before the last "_" plus the lemma G2's parse gives the last part as a
@@ -140,7 +142,7 @@ TERM_REJECTIONS = INPUTS + "term_rejections.tsv"                    # RL-171: fo
 HEAD_LEMMAS = PG + "g3_word_lists/head_lemmas.tsv"
 JOINED = re.compile('(.+[_\u2010\u2011\u2013])([^_\u2010\u2011\u2013]+)')   # joined by G2 ("_") or a Unicode hyphen G2 left alone
 HEAD_LEMMA = {(r["word"], r["type"]): r["lemma"] for r in csv.DictReader(open(HEAD_LEMMAS, encoding="utf-8"), delimiter="\t")}
-INPUT_SHA = {SCOPE_EXCLUSIONS: "0b4ba5c2b2b1", SPELLING_CORRECTIONS: "f7a5277bd31e", LLM_OUTPUT_UNITS: "cb79e798185f",   # RL-171 lists (RL-130: 5b71d844d9af, d0a70f6c1a20, b71d5717e250)
+INPUT_SHA = {SCOPE_EXCLUSIONS: "f50826614f4a", SPELLING_CORRECTIONS: "f7a5277bd31e", LLM_OUTPUT_UNITS: "cb79e798185f",   # RL-172 scope list (RL-171 0b4ba5c2b2b1; RL-130: 5b71d844d9af, d0a70f6c1a20, b71d5717e250)
              ADVERB_ROLES_PATH: ADVERB_ROLES_SHA}
 INPUT_SHA[REFLEXIVE_TABLE] = "573be717ee21"                                # RL-130: d121a203daec
 INPUT_SHA[HEAD_LEMMAS] = "34cee7ee73d0"
@@ -149,6 +151,8 @@ INPUT_SHA[PP + "focal_terms.py"] = "892f98bb986e"     # P2's matcher with the RL
 INPUT_SHA[PP + "focal_terms_v3.py"] = "49f38796e655"                      # RL-171: the v3 matcher and its group-4 rule
 INPUT_SHA[focal_terms.RULES + "focal_group4_rule.py"] = "70d88dcdf8e4"
 INPUT_SHA[TERM_REJECTIONS] = "d04b816c4d72"
+INPUT_SHA[G4_DECISIONS] = "326130aeba60"
+INPUT_SHA[STATEMENT_SENTENCES] = "bfcb97d7b479"
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
 LAYOUT_WORDS = {'table', 'tables', 'tab', 'fig', 'figs', 'figure', 'figures', 'appendix', 'appendices', 'supplementary',
                 'panel', 'panels', 'equation', 'equations', 'eq', 'eqs'}
@@ -298,16 +302,30 @@ SYNONYMS = {   # merged after spelling normalisation; everything else keeps its 
     'language_models': 'language_model', 'transformer_models': 'transformer_model',
     'bidirectional_encoder_representations_from_transformers': 'bert',
     'chat_gpt': 'chatgpt', 'google_gemini': 'gemini', 'google_bard': 'bard', 'mistral_ai': 'mistral',
+    'gpt_35': 'gpt_3_5',            # RL-172: Azure's name for GPT-3.5 (GPT-35-turbo)
 }
 VERSIONED = r'(chatgpt|gpt|llama|qwen|claude|gemini|grok|palm|gemma|mistral|deepseek)'
 VERSION_SUFFIX = re.compile(r'^[-‐– ]?(?:v?\d(?:\.\d{1,2})?[a-z]?|\d+(?:\.\d+)?[bm])$', re.I)   # one-digit major: "GPT-44" is GPT-4 + citation 4
 SIZE_IN_NAME = {'esm-1b', 'esm-msa-1b', 'protst-esm-1b'}       # focal-list names whose "1b" is not a model size
 
 
+# RL-172 (owner 2026-10-22): a checkpoint name is written like its prose form, family + version: the configuration after it
+# (size, base/large, cased/uncased, multilingual, language, instruct/it/chat, pro/flash, turbo, snapshot codes, '-based')
+# is dropped, as sizes and dates already were (2026-09-30): bert-base-uncased -> bert, gemma-3-12b-it -> gemma_3,
+# gemini-2.5-pro -> gemini_2_5, llama-7b -> llama. Only when the first part after the name is such a setting (BERT-CRF stays)
+CKPT_FAMILY = r'(bert|roberta|gpt|chatgpt|llama|gemini|mistral|mixtral|gemma|qwen|deepseek|claude|palm|t5|flan-t5)'
+CKPT_SETTING = (r'(?:base|large|small|tiny|mini|medium|xl|xxl|uncased|cased|multilingual|instruct|it|chat|pro|flash|lite|ultra|'
+                r'nano|turbo|exp|preview|latest|based|hf|\d+(?:\.\d+)?(?:x\d+)?[bm]|e\d+b|\d{3,4})')
+CKPT = re.compile(CKPT_FAMILY + r'((?:[- ]?\d+(?:\.\d+)?[a-z]?(?![\d.]*[bm](?:[-_ ]|$)))?)[-_ ]' + CKPT_SETTING + r'(?:[-_ ].*)?')
+
+
 def canonical(surface):
     """one canonical atom root per focal term: lower case, separators -> '_', '.0' dropped, a glued version split ('gpt4o' -> 'gpt_4o'),
     SYNONYMS applied. 'GPT-4', 'GPT4', 'GPT 4', 'GPT-4.0' -> gpt_4; 'LLMs', 'large language models' -> llm; 'GPT-4o' stays gpt_4o."""
     s = surface.lower().replace('‐', '-').replace('–', '-')
+    m = CKPT.fullmatch(s)
+    if m and s not in SIZE_IN_NAME:                                     # RL-172: checkpoint settings dropped
+        s = m.group(1) + m.group(2)
     s = re.sub(r'[\s\-_](?:(?:19|20)\d\d(?:-\d\d){0,2}|\d{4})$', '', s)   # snapshot date (owner 2026-09-30): gpt-4o-2024 -> gpt-4o
     if s not in SIZE_IN_NAME:
         s = re.sub(r'[\s\-_]\d+(?:\.\d+)?(?:x\d+)?[bm]$', '', s)         # model size (owner 2026-09-30): mistral-7b -> mistral
@@ -1142,7 +1160,14 @@ def curate_unit(art, s, u, matcher, anchored, modals):
     ments = focal_mentions(matcher, u["text"], u["atom2word"], anchored)
     rej_s, rej_a = REJECT[0].get(s["sid"], ()), REJECT[1].get(art, ())   # RL-171: hits Stage B rejected stay rejected
     kept_m = [m for m in ments if m[0] not in rej_s and m[0] not in rej_a]
-    ctx.stats['mention_rejected_stage_b'] += len(ments) - len(kept_m); ments = kept_m
+    ctx.stats['mention_rejected_stage_b'] += len(ments) - len(kept_m); ments = []
+    for term, surf, canon, pos in kept_m:                              # RL-172: group-4 decisions
+        d = g4_decision(term, art)
+        if d and d[0] == 'reject':
+            ctx.stats['mention_rejected_g4'] += 1; continue
+        if d and d[0] == 'map':
+            canon = canonical(d[1]); ctx.stats['mention_mapped_g4'] += 1
+        ments.append((term, surf, canon, pos))
     covered = {p for *_, pos in ments for p in pos}
     by_pos = collections.defaultdict(list)
     for a, w, p in u["atom2word"]:
@@ -1246,6 +1271,20 @@ def load_reflexives():
 
 
 REJECT = ({}, {})       # RL-171: ({sid: {term}}, {pmcid: {term}}) from TERM_REJECTIONS, set by run(); empty in the self-test
+G4D = {}                # RL-172: {(spelling, pmcid or '' or '*other'): (action, target)} from G4_DECISIONS, set by run()
+
+
+def g4_decision(term, pmcid):
+    """(action, target) for a v3 group-4 mention: an article-specific row first, then '*other' (every other article of a
+    spelling decided per article), then the corpus-wide row; None if the spelling is not in the table"""
+    if not term.startswith('v3:G4:'):
+        return None
+    sp = term.split(':', 2)[2]
+    return G4D.get((sp, pmcid)) or G4D.get((sp, '*other')) or G4D.get((sp, ''))
+
+
+def load_g4():
+    return {(r['spelling'], r['pmcid']): (r['action'], r['target']) for r in csv.DictReader(open(G4_DECISIONS, encoding='utf-8'))}
 
 
 def load_rejections():
@@ -1341,8 +1380,10 @@ def run(a):
             sys.exit(f"refusing to overwrite {p}")
     matcher = focal_terms.Matcher()
     excluded, llm_out, corrections = load_lists()
-    global REJECT
+    global REJECT, G4D
     REJECT = load_rejections()
+    G4D = load_g4()
+    statements = {r['sid']: r['hash_final'] for r in csv.DictReader(open(STATEMENT_SENTENCES, encoding='utf-8'))}   # RL-172
     reflexives = load_reflexives()
     nonprose, noparent, articles = [], [], []
     stats, detail = collections.Counter(), collections.defaultdict(collections.Counter)
@@ -1366,6 +1407,11 @@ def run(a):
             art_units = art_parents = 0
             units = []
             for s in r["sentences"]:
+                if s["sid"] in statements:                            # RL-172: an AI-use statement (second check)
+                    stats['sentences_ai_use_statement'] += 1
+                    if statements[s["sid"]] != s["hash_final"]:
+                        problems.append(f"{s['sid']}: statement list hash_final {statements[s['sid']]} != {s['hash_final']}")
+                    continue
                 for u in s["units"]:
                     if not u["main_edge"]:
                         continue
@@ -1525,7 +1571,13 @@ CANON_CASES = [('LLMs', 'llm'), ('large language models', 'llm'), ('Large Langua
                ('Mixtral 8x7B', 'mixtral'), ('gpt-4o-2024', 'gpt_4o'), ('GPT-4-0613', 'gpt_4'), ('gpt-4o-2024-05-13', 'gpt_4o'),
                ('Qwen2.5', 'qwen_2_5'), ('GPT-3', 'gpt_3'), ('BioMedGPT-10B', 'biomedgpt'), ('Qwen2.5-1.5B', 'qwen_2_5'),
                ('Llama-3.2-1B', 'llama_3_2'), ('Chat GPT-4.0', 'gpt_4'), ('ESM-1b', 'esm_1b'), ('ESM-MSA-1b', 'esm_msa_1b'),
-               ('ESM-1v', 'esm_1v')]
+               ('ESM-1v', 'esm_1v'),
+               # RL-172: checkpoint names written like their prose form
+               ('bert-base-uncased', 'bert'), ('bert-base-chinese', 'bert'), ('roberta-large-mnli', 'roberta'), ('llama-7b', 'llama'),
+               ('gemma-3-12b-it', 'gemma_3'), ('gemini-2.5-pro', 'gemini_2_5'), ('gemini-1.5-flash-002', 'gemini_1_5'),
+               ('mistral-7b-instruct', 'mistral'), ('BERT-based', 'bert'), ('LLaMA-based', 'llama'), ('gemma-3n-e4b-it', 'gemma_3n'),
+               ('GPT-4-turbo', 'gpt_4'), ('gpt-4o-mini', 'gpt_4o'), ('Llama-3.1-8B-Instruct', 'llama_3_1'), ('BERT-CRF', 'bert_crf'),
+               ('bert-large', 'bert'), ('llama-2', 'llama_2'), ('GPT-3.5-turbo', 'gpt_3_5'), ('gpt-35-turbo', 'gpt_3_5')]
 
 
 def unit(text, edge, words, lemmas):

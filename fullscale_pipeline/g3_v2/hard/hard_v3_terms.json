@@ -3,7 +3,7 @@
  {"id": "V3-02", "text": "MedGemma outperformed BioMistral on the benchmark.", "expect": ["(focal_he medgemma/C/focal)", "(focal_he biomistral/C/focal)"], "note": "group-4 names; D6 two focal_he"},
  {"id": "V3-03", "text": "Responses of ChatGPT4 and ChatGPT3.5 were compared by the raters.", "expect": ["gpt_4/C/focal", "gpt_3_5/C/focal"], "note": "A2 glued versions, ChatGPT-<version> folded into GPT-<version>"},
  {"id": "V3-04", "text": "LLaMA generated the summaries.", "expect": ["llama/C/focal"], "note": "A0: bare LLaMA (v2 never matched it)"},
- {"id": "V3-05", "text": "We used bert-base-uncased for classification.", "expect": ["(focal_he bert_base_uncased/C/focal) (sibling_he"], "forbid": ["(focal_he bert_base_uncased/C/focal) (focal_he bert_base_uncased/C/focal)"], "note": "A5 checkpoint name, one atom (D2); a name the parser split over two arguments gives one focal_he"},
+ {"id": "V3-05", "text": "We used bert-base-uncased for classification.", "expect": ["(focal_he bert/C/focal) (sibling_he"], "forbid": ["(focal_he bert/C/focal) (focal_he bert/C/focal)", "bert_base"], "note": "A5 checkpoint name, one atom (D2), written as its family since RL-172 (owner 2026-10-22); a name the parser split over two arguments gives one focal_he"},
  {"id": "V3-06", "text": "BERTopic was applied to the abstracts.", "expect": [], "forbid": ["/focal"], "note": "a tool, not a model (group-4 rule)"},
  {"id": "V3-07", "text": "Bert Vogelstein described the pathway.", "expect": [], "forbid": ["/focal"], "note": "A4: a person's name"}
 ]

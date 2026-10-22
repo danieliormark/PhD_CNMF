@@ -109,6 +109,11 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
   starting a range ("from ChatGPT 3.5 to 4o") or followed by a citation number or a score in round brackets ("Grok 3
   (0.78)") stay versions.]*
 
+- *[2026-10-22, RL-172, owner: checkpoint names are written like their prose form, family + version (bert-base-uncased →
+  `bert`, gemma-3-12b-it → `gemma_3`, gemini-2.5-pro → `gemini_2_5`; "-based" dropped: BERT-based → `bert`); 292 spellings,
+  1,561 occurrences; group-4 false hits rejected and glued citation numbers dropped through
+  `g3_inputs_v3_1/decisions/g4_decisions.csv` (README there).]*
+
 ## 5. Provenance
 
 - Ids and hashes follow G2's unit-hash form `sha1("<id>|<edge>")[:12]`: parent `<uid>.P<k>`; its children
@@ -1107,6 +1112,10 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    (passed on incline), launcher `submit_g3_v2.sh` (output `PG/g3_v2/`), merge `merge_g3_v2.py`. To submit (owner):
    `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh`; when it ends with "ALL G3 CHECKS OK", `sbatch
    PG/scripts/g3_v2/submit_g3_v2.sh`; after the 50 tasks, `python PG/scripts/g3_v2/merge_g3_v2.py --nshards 50`.
+   *[2026-10-22, RL-172: also the checkpoint-name rule (§4), the group-4 decisions (`g4_decisions.csv`: false hits
+   rejected, glued citations mapped) and the second statement check (`statement_sentences.csv` skipped; 91
+   statement-only articles excluded, 7,158 exclusions). Self-test 73/73, hard cases 206/217; CSF check reference renewed
+   (`reference_incline/`; RL-171's kept as `reference_incline_rl171/`), passed on incline. Submit order unchanged.]*
 
 ## 9. Files
 
@@ -1137,7 +1146,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 2b2056484019 (RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 2ac5a0d873f8 (RL-172, checkpoint names, group-4 decisions, statements; 2b2056484019 at RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |

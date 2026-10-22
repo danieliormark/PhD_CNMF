@@ -3,6 +3,9 @@
                             plus the exclusions of decisions/item6_v3_1.csv (pmcid, reason, detail; reasons as before)
   spelling_corrections.csv  the old 6 corrections plus the new ones below, each checked against its g2_v3_1 unit
   term_rejections.tsv       stage_b_rejections.tsv (build_stage_b_rejections.py) without the lifted rows below
+  RL-172: scope_exclusions.csv also holds the articles whose only focal sentences are AI-use statements found by the
+  second statement check (statement_sentences.csv, retrieval/stmt_check2.py; reason ai_use_statement_only, as F1);
+  g4_decisions.csv is copied from decisions/ (write_g4_decisions.py)
     python3 build_inputs_v3_1.py
 """
 import csv, glob, json, os, re, sys, collections
@@ -55,6 +58,16 @@ if __name__ == "__main__":
         u = units[uid]
         BSE.correct_text(u["text"], wrong, right); BSE.correct_a2w(u["atom2word"], wrong, right)   # raise unless exactly once
         corr.append((uid, u["hash"], wrong, right))
+    stm = list(csv.DictReader(open(OUT + "statement_sentences.csv")))          # RL-172
+    nfocal = collections.Counter()
+    for line in open(PG + "g2_v3_1/focal_sentences_v2.jsonl", encoding="utf-8"):
+        r = json.loads(line); nfocal[r["pmcid"]] = len(r["sentences"])
+    per = collections.Counter(r["pmcid"] for r in stm)
+    for pm, k in sorted(per.items()):
+        if k == nfocal[pm] and pm not in rows:
+            rows[pm] = (pm, "ai_use_statement_only", "second statement check (RL-172)"); c["new: statement only"] += 1
+    import shutil
+    shutil.copy(os.path.join(HERE, "decisions", "g4_decisions.csv"), OUT + "g4_decisions.csv")
     c["excluded, in g2_v3_1"] = len(set(rows) & arts); c["excluded, not in g2_v3_1 (Stage B or earlier)"] = len(set(rows) - arts)
     c["total excluded"] = len(rows)
     with open(OUT + "scope_exclusions.csv", "w", newline="") as f:

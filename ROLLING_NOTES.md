@@ -33,14 +33,15 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
   down-weighting of generic material, to be tested).
 
 **Remaining, in order:**
-1. **G3 production rerun — READY TO SUBMIT (RL-171).** D6 and item 11 (RL-170); input lists harmonised for the merged
-   corpus (items 6–8, `g3_inputs_v3_1/`: 7,067 exclusions incl. 606 new; LLM-output 169; reflexives 1,393); G3 on the v3
-   matcher with Stage B rejections; self-test 54/54, hard cases 206/217; CSF check passed on incline. Owner submits:
-   `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh`, then `submit_g3_v2.sh`, then `merge_g3_v2.py --nshards 50`. Open
-   questions (RL-171): checkpoint names folded to the family?; group-4 false hits (BERTHELOT3, DeepPalm, Print-on-Palm…)
-   with "BERTH"; leftover AI-use statements in kept articles; sentence-level ESM-2/BioBridge homonyms in kept articles.
-2. Small known items: add "BERTH" (an evapotranspiration product) to the group-4 exclusions; the open RL-118 leak
-   (citation numbers left as words).
+1. **G3 production rerun — READY TO SUBMIT (RL-172).** RL-171 (lists for the merged corpus, v3 matcher) plus RL-172
+   (checkpoint names folded to family + version; group-4 false hits rejected and glued citations mapped via
+   `g3_inputs_v3_1/decisions/g4_decisions.csv`; second statement check: 138 statements, 91 statement-only articles
+   excluded; exclusions 7,158). Self-test 73/73, hard cases 206/217, CSF check passed on incline. Owner submits:
+   `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh` (again: script changed), then `submit_g3_v2.sh`, then the merge.
+   Known residuals (documented): ~3–5% false among ~29,000 unreviewed group-4 occurrences; sentence-level ESM-2/BioBridge
+   homonyms in articles kept for other terms.
+2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
+   model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.
 4. Author-deduplication statistics by year for the new articles (OpenAlex/PubMed author fetch; OpenAlex key from the
    environment only), then the owner's decision on 2026 articles.
