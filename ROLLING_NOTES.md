@@ -37,6 +37,9 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    0 problems; merged to `PG/g3_v2/`: 41,778 valid articles, 6,953 excluded, 615 without a parent; 804,702 units,
    905,585 parents, 2,082,569 cousins. Inputs: RL-171–RL-174 (lists for the merged corpus, v3 matcher, checkpoint fold,
    group-4 decisions incl. Haiku review and the model/method line, homonyms, statement check).
+1b. **Pre-M1 audit (RL-176): structure, links, D6, lists, lemmas, non-prose pass; three fixes found** (case-sensitive
+   Stage B rejection, 63 mentions; checkpoint fold incomplete, 2,279; versions/settings split from names, ~11,200).
+   Waiting for the owner's decision on the fixes, then G3 code change, hard cases, CSF check, rerun, merge, re-audit.
 2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
    model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.

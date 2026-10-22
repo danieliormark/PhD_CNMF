@@ -2182,3 +2182,29 @@ the older corpus); no article was excluded that is not on the list. Units 804,70
 905,585 (74,588 embedded; 46,450 with 2+ focal_he); cousins 2,082,569 (2,755 folded within a sentence); occurrence rows
 5,998,998. G4 mentions: rejected 2,685, mapped 2,933; Stage B rejections 42; AI-use statement sentences skipped 45. The
 RL-130 output `PG/g3_v1/` is not touched. [LOG]
+
+**RL-176 · 2026-10-22 · G3 v2 · AUDIT before M1 (owner: "check that everything is ready") · LIVE**
+`g3_v2/audit_g3_v2.py` (one pass, 2.5 min) and `audit_g3_v2_pass2.py` on `PG/g3_v2/`; reports with samples (corpus text,
+RDS only): `PG/g3_v2/audit_g3_v2.json`, `pass2.json`. Independent of check_record, which the merge ran on every unit.
+**Passed:** uid unique, id prefixes, no unit of an excluded/invalid article, valid ⇔ ≥1 parent, per-article counts;
+every sentence has a parent, cousins list only parents of their own sentence; 5,998,998 occurrence rows = structures,
+every link target exists (contains 3,010,844, co_occurs 2,389,519, embedded 76,857); no statement sentence, no
+g4-rejected spelling, no focal atom in a cousin, no empty structure. D6: words shared between structures of a unit,
+counted on unambiguous token positions (shard 13): 1,531 units through an embedded parent (decision 2, as designed),
+8 of 17,184 otherwise (coordinated predicates sharing an argument); the larger raw count (293,884 units) is the known
+multi-position attribution of repeated words (§5). Lemmas: 79/80 correct in a random sample (error: `cased` → case,
+a checkpoint residue); be/percent/comparatives as designed; head-word rule working (Unicode-hyphen forms are
+normalised to `_` in kept atoms; only the report keys show the raw form). Stop words left: `only` 19,066 and `will`
+10,518 (kept by §6 items 3/4), particles over/up/about (phrasal), 39 others. Non-prose: flagged texts read (figure/table
+references in prose, number-heavy results, semicolon list items) are prose; 2 units hold an SVG fragment inside a quoted
+prompt. Numbers (decimals included) and REF tokens (15,459) kept by the 2026-10-09 / item-8 decisions.
+**Found, not yet fixed:**
+1. Bug: Stage B term rejections are compared case-sensitively (`BERT` vs `bert`): 63 mentions kept that should be
+   rejected (e.g. Geant4 `FTFP_BERT_HP`); 42 were rejected.
+2. Checkpoint fold (RL-172) covers 15 family names and needs a separator: 2,279 mentions, 372 spellings, 605 articles
+   keep settings (`bertbase` 353, `bertlarge` 124, `meta_llama_3_8b_instruct` 81, `xlm_roberta_base` 52, `deberta_large`,
+   `albert_base`, `distilbert_base_uncased` …); a few are not settings (`esm_msa_1b`, `e5_mistral_7b_ablation`).
+3. Version or setting left as its own atom next to the focal name: ~11,200 mentions — `turbo` after GPT-3.5/GPT-4 (~4,200),
+   versions after two-word names ("Claude Sonnet 4.5" → `claude_sonnet` + `4.5`, ~2,400), DeepSeek-R1/V3 when G2 made
+   the hyphen its own token (`deepseek` + `r1`/`v3`, ~2,000), snapshot codes (`1106`, `0613`, `0125`, ~300).
+Fixes need a G3 code change and a rerun (owner decision). [LOG]
