@@ -33,15 +33,10 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
   down-weighting of generic material, to be tested).
 
 **Remaining, in order:**
-1. **G3 production rerun — READY TO SUBMIT (RL-174).** RL-171 (lists for the merged corpus, v3 matcher) plus RL-172
-   (checkpoint names folded to family + version; group-4 false hits rejected and glued citations mapped via
-   `g3_inputs_v3_1/decisions/g4_decisions.csv`; second statement check: 138 statements, 91 statement-only articles
-   excluded; exclusions 7,158). Self-test 73/73, hard cases 206/217, CSF check passed on incline. Owner submits:
-   `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh` (again: script changed), then `submit_g3_v2.sh`, then the merge.
-   RL-173: every remaining group-4 spelling judged by Haiku readers (calibrated 71/71) and checked by the assistant;
-   RL-174: one model/method line applied to the 479 boundary spellings (613 rejected in all); homonyms of ESM-2,
-   PaLM 2, ProGen, BioBridge searched over all kept mentions: one false article (BioBridge plate + C. R. Bard) excluded,
-   2 Bard-company sentences rejected.
+1. **G3 production rerun — DONE (RL-175, 2026-10-22).** CSF check 23664260 passed; array 23664753, 50/50 tasks exit 0,
+   0 problems; merged to `PG/g3_v2/`: 41,778 valid articles, 6,953 excluded, 615 without a parent; 804,702 units,
+   905,585 parents, 2,082,569 cousins. Inputs: RL-171–RL-174 (lists for the merged corpus, v3 matcher, checkpoint fold,
+   group-4 decisions incl. Haiku review and the model/method line, homonyms, statement check).
 2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
    model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.

@@ -2170,3 +2170,15 @@ PaLM 2, ProGen, BioBridge over all kept mentions: one false article (PMC11320226
 excluded; Bard-company sentences in 2 more articles rejected (`decisions/manual_homonyms_rl174.csv`). Exclusions 7,159,
 term rejections 703. G3 96b03a3c6cce (input hashes only); self-test 73/73, hard 206/217; shards 0/20 0 problems; CSF
 reference renewed (RL-173's kept), check passed on incline; mirrored. Details: `g3_inputs_v3_1/README.md`. [LOG]
+
+**RL-175 · 2026-10-22 · G3 v2 · PRODUCTION RUN · LIVE**
+Owner: `sbatch check_csf_g3_v2.sh` (job 23664260, node931: self-test 73/73, hard 206/217, ALL G3 CHECKS OK), then
+`sbatch submit_g3_v2.sh` (array 23664753). All 50 tasks `exit 0`, 0 problems, 0 unit errors, script 96b03a3c6cce in every
+report; 73–128 s per task on CSF (19:30–19:32). `merge_g3_v2.py --nshards 50` (merge sha 2962977e4449, run on incline
+in `tensor_env`): every shard checked OK; output `PG/g3_v2/` (`g3_{test,occurrences,articles,noparent,nonprose,
+errors}_v2.jsonl`, `g3_v2_summary.json` with all input hashes). Articles 49,346: valid 41,778, excluded 6,953,
+invalid (no parent) 615. The other 206 PMCIDs on the 7,159-row exclusion list are not in `g2_v3_1` (the list also covers
+the older corpus); no article was excluded that is not on the list. Units 804,702 (775,091 with a parent); parents
+905,585 (74,588 embedded; 46,450 with 2+ focal_he); cousins 2,082,569 (2,755 folded within a sentence); occurrence rows
+5,998,998. G4 mentions: rejected 2,685, mapped 2,933; Stage B rejections 42; AI-use statement sentences skipped 45. The
+RL-130 output `PG/g3_v1/` is not touched. [LOG]
