@@ -12,6 +12,10 @@ and tested on shards 0 and 20; the production script (§8 item 2) is not yet bui
 code, tables and documents harmonised. Two small questions are open for the owner (§8 item 4).]*
 *[2026-10-10, RL-122: both answered and implemented: units without a parent are removed and articles left without any
 parent are marked invalid; a score written after a model name is no longer read as a version.]*
+*[2026-10-22, RL-170 to RL-175: **G3 v2 production run done on the merged corpus `PG/g2_v3_1/`**, output `PG/g3_v2/`
+(§8 item 6): D6 and §6 item 11 implemented, v3 matcher, input lists rebuilt (`g3_inputs_v3_1/README.md`), checkpoint
+names folded, group-4 false hits rejected (rule, assistant reading, Haiku review of every remaining spelling, one
+model/method line), residual homonyms checked, second statement check. `PG/g3_v1/` (RL-130) is kept as the record.]*
 Test script `PG/scripts/g3_curation_test.py` (RUN_LOG RL-078 to RL-080) *[superseded by `g3_v2/g3_curation_v2.py`,
 §7.1; the RDS script stays as the record, §7.2]*. The May G3 (`chunk_4h_hpc.py`) is
 superseded and must not be rerun (deviation D17 in [`PIPELINE.md`](PIPELINE.md); discussion history in PIPELINE.md
@@ -1116,6 +1120,15 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    rejected, glued citations mapped) and the second statement check (`statement_sentences.csv` skipped; 91
    statement-only articles excluded, 7,158 exclusions). Self-test 73/73, hard cases 206/217; CSF check reference renewed
    (`reference_incline/`; RL-171's kept as `reference_incline_rl171/`), passed on incline. Submit order unchanged.]*
+   *[2026-10-22, RL-173: the 4,173 group-4 spellings not covered by RL-172 judged by Haiku readers (calibrated 71/71),
+   all non-model verdicts and a sample read by the assistant. RL-174: one model/method line on 479 boundary spellings
+   (keep when the name's outputs come from a language model; map uses or configurations of a model to it; reject
+   procedures, detectors, metrics, non-generative tools, data); residual homonyms of ESM-2, PaLM 2, ProGen, BioBridge:
+   PMC11320226 excluded, 2 Bard-company sentences rejected. Final lists: 7,159 exclusions, 703 term rejections,
+   `g4_decisions.csv` 7e3732cb0cdb (613 spellings rejected). Method and counts: `g3_inputs_v3_1/README.md`.]*
+   *[2026-10-22, RL-175: **run.** CSF check 23664260 (73/73, 206/217), array 23664753 (50/50 exit 0, 0 problems, script
+   96b03a3c6cce), `merge_g3_v2.py --nshards 50` on incline: `PG/g3_v2/` with 41,778 valid, 615 invalid, 6,953 excluded
+   articles (the other 206 listed exclusions are not in `g2_v3_1`). Summary copied to `g3_v2/g3_v2_summary.json`.]*
 
 ## 9. Files
 
@@ -1146,7 +1159,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 2ac5a0d873f8 (RL-172, checkpoint names, group-4 decisions, statements; 2b2056484019 at RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 96b03a3c6cce (RL-174 and the RL-175 production run; 70984a47ac5a at RL-173, input hashes only; 2ac5a0d873f8 at RL-172, checkpoint names, group-4 decisions, statements; 2b2056484019 at RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
@@ -1159,10 +1172,12 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached; since RL-151 with G2's sentence-cut rule; since RL-170 multi-unit sentence cases) | 79a8179adf74 (8b28758d27cd at RL-151, 80b9ca527b8f before) |
 | `fullscale_pipeline/g3_v2/hard/hard_d6_item11.json` (10 D6 / item 11 sentence cases, RL-170) | 32f339765a87 |
 | `fullscale_pipeline/g3_v2/hard/hard_v3_terms.json` (7 v3-name cases, RL-171) | fc7bcad542a4 |
-| `fullscale_pipeline/g3_v2/submit_g3_v2.sh`, `merge_g3_v2.py`, `check_csf_g3_v2.sh` (rerun on `g2_v3_1`, RL-171; mirrored) | 40d9f70116cd, 2962977e4449, d58134a790e0 |
+| `fullscale_pipeline/g3_v2/submit_g3_v2.sh`, `merge_g3_v2.py`, `check_csf_g3_v2.sh` (rerun on `g2_v3_1`, RL-171; mirrored) | 40d9f70116cd, 2962977e4449, 4f7f89429f8e (d58134a790e0 at RL-171) |
 | `fullscale_pipeline/g3_v2/reflexive_restore.py` (since RL-171 with `--coref`, `--shards`) | 3ba30cef21ee |
 | `fullscale_pipeline/g3_llm_output/build_llm_output_units.py` (since RL-171 with `--shards`, `--excluded`, `--matcher`) | c31cac2aecea |
 | `fullscale_pipeline/g3_inputs_v3_1/` (RL-171: `screen_item6.py` 84681b0c58e3, `write_item6_decisions.py` 124cd670b4aa, `decisions/item6_v3_1.csv` f6c78a2ec93a, `build_stage_b_rejections.py` 46893a6d5fde, `build_inputs_v3_1.py` c5d2290b2a53; list copies) | see README |
+| `fullscale_pipeline/g3_inputs_v3_1/` (RL-172 to RL-174: `g4_review.py` 3a6cf5618b4f, `write_g4_decisions.py` e6762010bc6c, `g4_haiku.py` 71140432ef0e, `g4_haiku_decisions.py` df6b05882120, `g4_boundary_decisions.py` 3140798ebb72, `G4_READER_RUBRIC.md` 65e260df8a83, `g4_haiku_verdicts.csv` 2f4e5a0f7d0b; `decisions/g4_decisions.csv` 7e3732cb0cdb, `g4_haiku_decisions.csv` 1b6081498549, `g4_boundary_decisions.csv` 38f7aa9aca8f, `manual_homonyms_rl174.csv` f4446e23b7f1; `build_inputs_v3_1.py` 717c40803a3e; `retrieval/stmt_check2.py` 3b9d2bd3c6b9) | see README |
+| `fullscale_pipeline/g3_v2/g3_v2_summary.json` (RL-175 merge summary: counts, all input hashes, job id; copy of `PG/g3_v2/g3_v2_summary.json`) | — |
 | `fullscale_pipeline/g3_v2/hard/hard_*.json` (13 sets, 199 cases, 175 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
 | `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
 | `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |

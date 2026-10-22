@@ -246,7 +246,8 @@ once (the concurrency limit), the rest when slots freed. A 4-agent pilot (1,000 
    (27 correct; errors: study materials generated under a disclosure formula, and papers *about* drafting with ChatGPT)
    and 30 random research verdicts (29 correct; error: AI-written analysis code, a statement by the rubric); the 4 errors
    corrected; calibration sentences take the gold labels.
-4. Final (`stmt_check/final_verdicts.json`): **1,222 statements removed, 4,983 research sentences restored**; F1 article
+4. Final (`stmt_check/final_verdicts.json`, copy `retrieval/stmt_check_verdicts.json`: sentence id → verdict, with the
+   sources of each decision): **1,222 statements removed, 4,983 research sentences restored**; F1 article
    decisions unchanged.
 
 **Cost.** Agents' completion reports: about 120k tokens per half-batch run, about 57k for the calibration and each

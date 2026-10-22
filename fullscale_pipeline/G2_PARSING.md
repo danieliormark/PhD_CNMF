@@ -1,6 +1,11 @@
 # Stage G2 — graphbrain parse of the focal sentences (v3, current)
 
 Status: **DONE-current**, run on the whole corpus 2026-09-29 (RUN_LOG RL-074 to RL-077, corrected in RL-081).
+*[2026-10-21, RL-165 to RL-169: after the corpus extension, G2 v3 (same script) parsed only the new and changed
+sentences, merged with this output into `PG/g2_v3_1/` (49,346 articles: 33,783 current, 15,563 new; 816,678 sentences,
+825,693 units; all merge checks passed). That merged output, not `PG/g2_v3/`, is what G3 v2 reads (RL-175). Steps,
+rules and checks: [`INCREMENTAL_RUN.md`](INCREMENTAL_RUN.md); manual checks of the extension (F2 senses, AI-use
+statements): [`retrieval/STAGE_AB_METHOD.md`](retrieval/STAGE_AB_METHOD.md). `PG/g2_v3/` is kept unchanged.]*
 Part of the full-scale pipeline described in [`PIPELINE.md`](PIPELINE.md) (stage table §1, item 30, deviation D16).
 The script's own docstring (`PG/scripts/graphbrain_parse_v3.py`) is the authoritative short description; this
 document explains it, records how it was run and checked, and lists what is known to be imperfect.
@@ -14,6 +19,7 @@ sentence unit, each traceable to its article, sentence and unit. It reads the ou
 
 ```
 P7 v2  LCS/focal_sentences_v2.jsonl  ──►  G2 v3  PG/g2_v3/  ──►  G3 (test stage)  ──►  M1 (not built)
+[2026-10-22: P7 (incremental)  ──►  G2 v3 + merge  PG/g2_v3_1/  ──►  G3 v2  PG/g3_v2/  ──►  M1 (not built)]
 ```
 
 G2 v3 reads P7's output directly and shards it itself; the earlier partition step G1 and the outputs of the May G2
