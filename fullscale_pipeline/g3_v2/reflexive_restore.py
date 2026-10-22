@@ -14,6 +14,8 @@ located, is left as it is (counted). Output, one record per restored unit: uid, 
 restored text, the restorations, and the new parse (main edge, lemma edges, atom2word).
 
     python reflexive_restore.py --outdir DIR       (refuses to overwrite)
+    RL-171, the merged corpus: --coref LCS/inc_run/p7b/lcs/coref_v2/coref_resolved_v2.jsonl (the P6 records P7b read)
+    --shards 'PG/g2_v3_1/shards/g2_parsed_*.jsonl' --outdir PG/g3_inputs_v3_1
 """
 import argparse, collections, glob, hashlib, json, os, re, sys, time
 
@@ -44,6 +46,8 @@ def common_suffix(a, b):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--outdir", required=True)
+    ap.add_argument("--coref", default=COREF)
+    ap.add_argument("--shards", default=SHARDS)
     a = ap.parse_args()
     os.makedirs(a.outdir, exist_ok=True)
     out_p, sum_p = os.path.join(a.outdir, "reflexive_restored.jsonl"), os.path.join(a.outdir, "reflexive_summary.json")
@@ -53,7 +57,7 @@ def main():
     t0, st = time.time(), collections.Counter()
     # 1. every reflexive replacement in P6, with its offset in the resolved text
     items = []
-    for line in open(COREF, encoding="utf-8"):
+    for line in open(a.coref, encoding="utf-8"):
         art = json.loads(line)
         for b in art.get("blocks", []):
             for s in b.get("sentences", []):
@@ -81,7 +85,7 @@ def main():
             emph[it["sid"]].append(it)
     # 3. locate in the G2 units and restore
     restored = []
-    for f in sorted(glob.glob(SHARDS)):
+    for f in sorted(glob.glob(a.shards)):
         for line in open(f, encoding="utf-8"):
             art = json.loads(line)
             for s in art["sentences"]:
@@ -125,7 +129,7 @@ def main():
             fo.write(json.dumps(r, ensure_ascii=False) + "\n")
             st["units_restored"] += 1
     st["seconds"] = round(time.time() - t0)
-    json.dump(dict(stats=st, script=os.path.abspath(__file__)), open(sum_p, "w"), indent=1)
+    json.dump(dict(stats=st, script=os.path.abspath(__file__), coref=a.coref, shards=a.shards), open(sum_p, "w"), indent=1)
     print(json.dumps(st, indent=1))
 
 

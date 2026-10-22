@@ -1,0 +1,675 @@
+pmcid,corpus,rule,decision,label,note
+PMC10006965,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC10006992,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC10007059,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC10007093,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC10007472,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC10033530,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10048217,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10138877,gap,3 name only,exclude,name_homonym,ProGen antibody supplier
+PMC10158685,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10217297,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10233555,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10235686,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10238404,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10256231,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10298943,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10341321,gap,3 name only,exclude,name_homonym,DermLite ProGen dermatoscope
+PMC10353614,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10372225,current,"4 transformer only (old automatic exclusion, v3 name)",restore,use or compare,CheXbert labeler used for the clinical F1 metric
+PMC10383030,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10391848,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10411891,current,"4 transformer only (old automatic exclusion, v3 name)",restore,use or compare,DeepAIR built on ProtBert
+PMC10420363,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10468057,gap,3 name only,exclude,name_homonym,climate model AWI-ESM-2.1
+PMC10538277,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10556232,gap,3 name only,exclude,name_homonym,climate model MRI-ESM-2.0
+PMC10583776,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10588582,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10610807,current,"4 transformer only (old automatic exclusion, v3 name)",restore,use or compare,BERT-base and BERT-large used as text encoders
+PMC10642018,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10661668,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10694583,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10696091,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10707828,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10719290,gap,3 name only,exclude,name_homonym,climate model FIO-ESM-2-0
+PMC10743651,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10767164,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10778591,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10801410,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC10827635,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10859661,gap,3 name only,keep,model,ESM-2 protein language model
+PMC10872715,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10885184,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10940907,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC10987197,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11005038,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11026321,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC11034290,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11048630,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11049248,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11050065,gap,3 name only,exclude,name_homonym,climate model FIO-ESM-2-0
+PMC11063050,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11076556,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11132519,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11172884,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11174398,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11192369,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11212470,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11236943,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11252855,current,2 LLM undefined,keep,other accepted focal term,gpt
+PMC11255759,gap,1 LLM defined otherwise,exclude,homonym,lipid-lowering medications
+PMC11264736,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11282576,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11299731,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11360855,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11375086,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11395467,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11398257,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11405331,gap,1 LLM defined otherwise,exclude,homonym,Low-Low-Medium (landscape class)
+PMC11419392,gap,2 LLM undefined,keep,other accepted focal term,"biobert, scibert"
+PMC11423680,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11425023,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11442909,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11460357,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11464512,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,passing mention,Bert-based models in background
+PMC11484060,gap,3 name only,keep,model,ESM-2 protein language model
+PMC11485056,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC11487066,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11490748,gap,3 name only,keep,model,ESM-2 protein language model
+PMC11492982,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC11493540,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11504616,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11511535,current,"4 transformer only (old automatic exclusion, v3 name)",restore,use or compare,MotionBert one of the library's 3D detectors
+PMC11513862,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11514610,gap,3 name only,exclude,name_homonym,climate model FIO-ESM-2
+PMC11520775,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11523317,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11547076,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11548176,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11552181,gap,3 name only,keep,model,ESM-2 protein language model
+PMC11554900,gap,3 name only,exclude,name_homonym,climate model FIO-ESM-2-0
+PMC11567859,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11576321,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11584218,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11599162,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11607182,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11618901,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11638425,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC11639203,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,passing mention,ASSBert in related work
+PMC11652409,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11666245,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11669720,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11680920,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11695305,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11731964,current,"4 transformer only (old automatic exclusion, v3 name)",restore,use or compare,VetBert employed
+PMC11737764,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11740328,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11751497,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC11753970,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11755532,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11769335,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11771856,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11772660,gap,3 name only,exclude,name_homonym,climate model MRI-ESM-2
+PMC11775173,gap,3 name only,keep,model,ESM-2 protein language model
+PMC11780934,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11784834,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC11794706,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11804844,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11812997,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11819532,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11847395,gap,3 name only,keep,model,ESM-2 protein language model
+PMC11849834,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11855921,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11862180,gap,1 LLM defined otherwise,exclude,homonym,Least Learning Machine
+PMC11870814,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11876322,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11890605,gap,3 name only,exclude,name_homonym,climate model FIO-ESM-2-0
+PMC11894149,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,false hit or peripheral,BERTHELOT3: an author name with a glued citation (group-4 false hit)
+PMC11941011,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11954937,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11975620,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC11978981,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12022019,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12022337,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12029368,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12029425,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12049451,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12063592,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12065984,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12067560,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12074280,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12074362,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12094570,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12101920,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12103228,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12108176,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12122730,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12136712,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12148599,gap,3 name only,exclude,name_homonym,ProGen multisite genetics trial
+PMC12159532,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12177254,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12197281,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12206486,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12206841,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12213394,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12215992,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12221301,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12222714,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12230670,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12246196,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12255103,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC12258073,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12258331,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12264282,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12268135,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12273483,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12274247,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12287768,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12294801,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12300470,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12307585,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12309248,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12309442,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12313631,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12325582,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12334051,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12337555,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12345955,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12363997,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12371055,gap,3 name only,exclude,name_homonym,climate model MRI-ESM-2-0
+PMC12382258,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12386249,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12388945,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12399585,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12399737,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12408570,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12409402,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12412963,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12431268,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12448477,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12453261,gap,2 LLM undefined,keep,other accepted focal term,gpt
+PMC12456844,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC12459426,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC12460247,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12473210,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12475248,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12489274,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12494699,gap,2 LLM undefined,keep,other accepted focal term,v3:a1:twin-gpt
+PMC12505762,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12507549,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12514951,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12524289,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12526654,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12528354,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12530544,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12534315,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12537981,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12540194,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,false hit or peripheral,"DeepPalm, a CNN (group-4 false hit)"
+PMC12565718,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12576015,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12582444,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12582523,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12595544,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12602602,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC12609805,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC12614371,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12624021,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12629235,gap,2 LLM undefined,keep,other accepted focal term,v3:g4:mappergpt
+PMC12635066,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12640729,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12649439,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,false hit or peripheral,Print-on-Palm (group-4 false hit)
+PMC12651577,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12660824,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12675134,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12682524,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12684451,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12700461,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12705215,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12709757,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12713541,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12713645,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12729571,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12731659,gap,2 LLM undefined,keep,other accepted focal term,"v3:g4:fraudgpt1.0, v3:g4:wormgpt4.0"
+PMC12743303,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12747404,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12750014,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12750031,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12750492,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12754044,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12757211,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12758778,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12770382,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12777251,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12779666,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12788299,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12796443,gap,2 LLM undefined,keep,other accepted focal term,esm-2
+PMC12796461,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12815460,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12829946,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12837241,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12843383,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12844901,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12860298,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12862285,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12868081,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12870267,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12874650,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC12876122,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12896280,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12897937,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12909473,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12917456,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12919842,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12923953,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12925918,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12926115,gap,2 LLM undefined,keep,other accepted focal term,gpt
+PMC12930497,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12936056,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12942198,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12944462,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12946364,gap,3 name only,keep,model,the protein language model ProGen (with Evo)
+PMC12961306,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12961395,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12962464,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12980396,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12982108,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12982462,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12985593,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12995575,gap,3 name only,keep,model,ESM-2 protein language model
+PMC12998507,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC12999777,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC13003343,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13016303,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13017677,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13019816,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13020974,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13030098,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13035781,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13045036,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13045368,gap,2 LLM undefined,keep,other accepted focal term,gpt
+PMC13046720,gap,2 LLM undefined,keep,other accepted focal term,v3:a2:gpt2sp
+PMC13063796,gap,2 LLM undefined,keep,other accepted focal term,gpt
+PMC13064411,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13068006,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13068100,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13071485,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13072248,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13090149,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC13095695,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13111705,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13112073,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13115501,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,passing mention,AnomalyBert listed
+PMC13117960,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13120556,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13122584,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13127387,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13132410,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13143922,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13147407,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC13149645,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13150524,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13154198,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13154905,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13165679,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13165884,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13169664,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13172700,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13174273,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13194132,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13195704,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13197893,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13207975,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13209736,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13210591,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13210696,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13213965,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13214530,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13214739,gap,3 name only,exclude,name_homonym,climate model MRI-ESM-2.0
+PMC13218379,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13219030,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13225956,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC13247231,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13247578,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13249706,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13256239,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13259361,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13260997,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13267417,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13267602,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13269309,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13269727,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13275220,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13276054,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13276170,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13280302,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13281983,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13297609,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13297806,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13298820,gap,2 LLM undefined,keep,other accepted focal term,"chemberta-2, language model"
+PMC13304699,gap,2 LLM undefined,keep,other accepted focal term,"v3:g4:chemgpt, v3:g4:molbert"
+PMC13306677,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13309773,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13312657,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13312786,gap,2 LLM undefined,keep,other accepted focal term,v3:a1:xlm-roberta
+PMC13314926,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13332151,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13333897,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13338267,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13338380,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13341610,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13346191,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13346224,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13346781,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13350320,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13351568,gap,1 LLM defined otherwise,keep,misnomer corrected,'large linguistic model (LLM)' beside ChatGPT: corrected to language
+PMC13359105,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13359982,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13364065,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13368003,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13370852,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13371159,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13371655,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,passing mention,language-model embeddings listed
+PMC13374576,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13388996,gap,2 LLM undefined,keep,other accepted focal term,mistral
+PMC13399356,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13403431,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13404394,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13406586,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13406676,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13407009,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13407991,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13408770,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13412159,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13415282,gap,3 name only,exclude,name_homonym,climate model FIO-ESM-2-0
+PMC13417741,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13425812,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13433995,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13434723,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13435998,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13439380,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13439557,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13440146,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13441294,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13444135,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13469403,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13470282,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13470550,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13473474,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13477459,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13477592,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13478059,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13478521,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13481858,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13485553,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13486957,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13487184,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13487582,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13493578,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13495341,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13499442,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13500687,gap,2 LLM undefined,keep,other accepted focal term,"gpt, gpt-2, roberta"
+PMC13501485,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13501834,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13503874,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13506001,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13507153,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13507241,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13509788,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13517445,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13518077,gap,2 LLM undefined,keep,other accepted focal term,gpt-2
+PMC13521416,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13528658,current,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13534028,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13547471,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13549228,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13553708,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13557772,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13558200,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13568169,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13574758,gap,2 LLM undefined,keep,other accepted focal term,gpt
+PMC13574946,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13575070,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC13582443,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13585275,current,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13585421,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13585906,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13587670,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13589176,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13590425,gap,2 LLM undefined,keep,other accepted focal term,instructgpt
+PMC13594224,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13595082,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13597448,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13597558,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13597719,gap,4 transformer only,keep,use or compare,XLNet+SVM model used
+PMC13597755,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13597865,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13598059,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13600517,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13601229,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13601255,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13601275,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13601295,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13601576,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13602667,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13603166,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13603191,gap,4 transformer only,exclude,false hit or peripheral,only LLM-related hit is an AI-use statement
+PMC13603484,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13603656,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13603673,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13603751,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13603851,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13603927,gap,4 transformer only,exclude,passing mention,EEGPT listed in a review
+PMC13604482,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13604656,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13604968,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13605015,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13605446,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13605657,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13605685,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13605899,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13606006,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13606111,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13606132,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13606374,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13606575,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13606938,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13607154,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13608058,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13608084,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13608380,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13608416,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13608420,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13608753,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13608756,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13609076,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13609308,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13609663,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13610969,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611022,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611072,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611141,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611152,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611176,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13611348,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611434,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13611486,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611534,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611576,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611587,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611664,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611728,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611769,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611778,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13611816,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13612353,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13612441,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13613273,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13613305,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13613550,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13614581,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13614918,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13614943,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13615165,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13615973,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13616327,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13616657,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13616916,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13616948,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13617406,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13617548,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13618967,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13619045,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13619107,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13620128,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13621198,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13621505,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13621952,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13622958,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13624105,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13625019,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13625747,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13625842,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13626331,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13626933,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13627091,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13627326,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13627406,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13627989,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13629854,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13630037,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13631067,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13631272,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13634074,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13637804,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13638250,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13638373,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13638549,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13639743,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13639930,gap,4 transformer only,exclude,vision-language model only,VLMs in related work
+PMC13640346,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13641200,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13642209,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13642555,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13642708,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13642741,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13643274,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13644179,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13644508,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13646125,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13646168,gap,4 transformer only,keep,use or compare,BERTopic used for topic analysis (BERTopic kept in the old screen too)
+PMC13647694,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13649406,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13649703,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13649991,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13650112,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13652029,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13652297,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13653921,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13654140,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13655001,gap,4 transformer only,exclude,passing mention,foundation / vision-language models listed
+PMC13655062,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13655698,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13656193,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13656406,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13657056,gap,3 name only,keep,model,ESM-2 protein language model
+PMC13658059,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13658557,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13658904,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13660001,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13661371,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13661921,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13661940,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13662011,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13662881,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13664605,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13664622,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13666761,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667166,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667363,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667428,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667464,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667576,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667609,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667659,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667674,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13667710,gap,2 LLM undefined,keep,other accepted focal term,v3:g4:antgpt
+PMC13667740,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13667908,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13669349,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC13670435,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13670672,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13672313,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13673677,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13673992,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13674126,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13677066,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC13677226,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC4490422,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC4676111,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC4807561,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC4839106,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC4970031,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5062060,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5128940,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5458883,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5613112,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5621647,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5690195,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5904278,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC5905109,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC6025878,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC6051224,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC6057692,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC6424682,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC6658290,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC6781352,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC7178184,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC7248543,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC7281515,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC7380169,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC7433280,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC7584078,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC7619586,gap,4 transformer only,exclude,no LLM-related transformer in analysed text,
+PMC7707470,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC7718014,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC7779505,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8010810,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8116401,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8146945,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8347365,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8348730,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8468342,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC8512253,gap,1 LLM defined otherwise,exclude,homonym,Logic Learning Machine
+PMC8534351,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8802252,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC8822213,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC8864054,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC8879213,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC8927702,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC8943873,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8985994,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC8998287,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9046431,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9076714,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9174056,gap,3 name only,exclude,name_homonym,ProGen Biotech antibody supplier
+PMC9266071,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC9294311,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC9322118,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC9341446,gap,3 name only,exclude,name_homonym,climate model MRI-ESM-2.0
+PMC9353668,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9361993,gap,3 name only,exclude,name_homonym,Electronic Supplementary Material
+PMC9397811,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9460410,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9510088,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9601280,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9627357,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC9651573,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9759423,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9806376,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC9818166,current,"4 transformer only (old automatic exclusion, v3 name)",exclude,passing mention,CheXbert as an example in a review
+PMC9827478,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9842043,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC9871639,gap,"2 LLM undefined, no evidence",exclude,llm_no_definition_no_evidence,
+PMC9954532,gap,3 name only,exclude,name_homonym,BioBridge homonym
+PMC9995859,gap,3 name only,exclude,name_homonym,BioBridge homonym

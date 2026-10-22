@@ -47,10 +47,12 @@ import argparse, collections, contextlib, csv, hashlib, itertools, json, os, ran
 sys.setrecursionlimit(20000)
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
 PP = "/mnt/hum01-rds/Basov/p91688di/pmc_preprocessing/"
-SHARDS = PG + "g2_v3/shards/"
+SHARDS = PG + "g2_v3_1/shards/"                                       # RL-171: the merged corpus (was g2_v3)
 STOPWORDS = PG + "nltk_abridged_stopwords_list.txt"
 sys.path.insert(0, PP)
-import focal_terms                                                     # noqa: E402  P2's matcher, the single source of the focal terms
+import focal_terms as focal_terms_v2                                   # noqa: E402  v2, loaded first: v3 extends it
+import focal_terms_v3 as focal_terms                                   # noqa: E402  RL-171: P2's v3 matcher (v2 hits unchanged + v3 additions),
+                                                                       # the matcher of the merged corpus; the single source of the focal terms
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import modal_merge                                                     # noqa: E402  §6 item 3 (decision rule and edge rewrite)
 from graphbrain import hedge                                           # noqa: E402
@@ -121,11 +123,15 @@ assert {w for w, a in ADV_ROLE.items() if a == "fuse with its verb like a phrasa
     == DIRECTION_PARTICLES, "adverb table out of step with §6 item 8 (direction words)"
 ADV_ROLE = {w: TABLE_ACTION_CODE.get(a, a) for w, a in ADV_ROLE.items()}
 CLAUSE_END = re.compile(r"^\s*(?:[.,;:)]|$)")
-# §6 items 6 and 7: articles out of scope, units reproducing LLM output, word-for-word spelling corrections (RDS copies)
-SCOPE_EXCLUSIONS = PG + "g3_scope_exclusions/scope_exclusions.csv"
-SPELLING_CORRECTIONS = PG + "g3_scope_exclusions/spelling_corrections.csv"
-LLM_OUTPUT_UNITS = PG + "g3_llm_output/llm_output_units.csv"
-REFLEXIVE_TABLE = PG + "g3_reflexive/reflexive_restored.jsonl"      # §6 item 8, built by g3_v2/reflexive_restore.py
+# §6 items 6 and 7: articles out of scope, units reproducing LLM output, word-for-word spelling corrections; RL-171: the
+# lists rebuilt for the merged corpus in PG/g3_inputs_v3_1/ (fullscale_pipeline/g3_inputs_v3_1/; the RL-130 lists stay in
+# g3_scope_exclusions/, g3_llm_output/, g3_reflexive/)
+INPUTS = PG + "g3_inputs_v3_1/"
+SCOPE_EXCLUSIONS = INPUTS + "scope_exclusions.csv"
+SPELLING_CORRECTIONS = INPUTS + "spelling_corrections.csv"
+LLM_OUTPUT_UNITS = INPUTS + "llm_output_units.csv"
+REFLEXIVE_TABLE = INPUTS + "reflexive_restored.jsonl"               # §6 item 8, built by g3_v2/reflexive_restore.py
+TERM_REJECTIONS = INPUTS + "term_rejections.tsv"                    # RL-171: focal hits Stage B rejected (sentence / article)
 # §8 item 5 (owner 2026-10-10, RL-129): spaCy's rule lemmatiser gives an underscore-joined (out-of-vocabulary) word its first
 # suffix rule unchecked (pre_trained -> pre_traine, question_answering -> question_answere, second_best -> second_b). Where it
 # changed a joined word, the lemma is rebuilt as the part before the last "_" plus the lemma G2's parse gives the last part as a
@@ -134,12 +140,15 @@ REFLEXIVE_TABLE = PG + "g3_reflexive/reflexive_restored.jsonl"      # §6 item 8
 HEAD_LEMMAS = PG + "g3_word_lists/head_lemmas.tsv"
 JOINED = re.compile('(.+[_\u2010\u2011\u2013])([^_\u2010\u2011\u2013]+)')   # joined by G2 ("_") or a Unicode hyphen G2 left alone
 HEAD_LEMMA = {(r["word"], r["type"]): r["lemma"] for r in csv.DictReader(open(HEAD_LEMMAS, encoding="utf-8"), delimiter="\t")}
-INPUT_SHA = {SCOPE_EXCLUSIONS: "5b71d844d9af", SPELLING_CORRECTIONS: "d0a70f6c1a20", LLM_OUTPUT_UNITS: "b71d5717e250",
+INPUT_SHA = {SCOPE_EXCLUSIONS: "0b4ba5c2b2b1", SPELLING_CORRECTIONS: "f7a5277bd31e", LLM_OUTPUT_UNITS: "cb79e798185f",   # RL-171 lists (RL-130: 5b71d844d9af, d0a70f6c1a20, b71d5717e250)
              ADVERB_ROLES_PATH: ADVERB_ROLES_SHA}
-INPUT_SHA[REFLEXIVE_TABLE] = "d121a203daec"
+INPUT_SHA[REFLEXIVE_TABLE] = "573be717ee21"                                # RL-130: d121a203daec
 INPUT_SHA[HEAD_LEMMAS] = "34cee7ee73d0"
 INPUT_SHA[STOPWORDS] = "2b6c7d9fdae9"
 INPUT_SHA[PP + "focal_terms.py"] = "892f98bb986e"     # P2's matcher with the RL-095 hyphen pattern (acts in G3 only)
+INPUT_SHA[PP + "focal_terms_v3.py"] = "49f38796e655"                      # RL-171: the v3 matcher and its group-4 rule
+INPUT_SHA[focal_terms.RULES + "focal_group4_rule.py"] = "70d88dcdf8e4"
+INPUT_SHA[TERM_REJECTIONS] = "d04b816c4d72"
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
 LAYOUT_WORDS = {'table', 'tables', 'tab', 'fig', 'figs', 'figure', 'figures', 'appendix', 'appendices', 'supplementary',
                 'panel', 'panels', 'equation', 'equations', 'eq', 'eqs'}
@@ -1090,6 +1099,10 @@ def extract(edge, ctx):
                 sibs.append(nf)
         for j, arg in enumerate(parent[1:], 1):
             f = flatten(arg, None, False, ctx)
+            same = [g for g in focals if str(mk('focal_he', f)) == str(mk('focal_he', g))] if f and j in fargs else []
+            if same:                                    # one name split by the parser over two arguments, or a glossary line
+                same[0].sides = getattr(same[0], 'sides', 1) + 1; ctx.stats['focal_he_identical_merged'] += 1
+                continue
             if f:
                 (focals if j in fargs else sibs).append(f)
         if not focals:
@@ -1127,6 +1140,9 @@ def curate_unit(art, s, u, matcher, anchored, modals):
     except Exception as e:                  # never lose a unit to the merge: it stays unmerged, and this is counted
         edge = hedge(u["main_edge"]); ctx.stats['modal_merge_error_' + type(e).__name__] += 1
     ments = focal_mentions(matcher, u["text"], u["atom2word"], anchored)
+    rej_s, rej_a = REJECT[0].get(s["sid"], ()), REJECT[1].get(art, ())   # RL-171: hits Stage B rejected stay rejected
+    kept_m = [m for m in ments if m[0] not in rej_s and m[0] not in rej_a]
+    ctx.stats['mention_rejected_stage_b'] += len(ments) - len(kept_m); ments = kept_m
     covered = {p for *_, pos in ments for p in pos}
     by_pos = collections.defaultdict(list)
     for a, w, p in u["atom2word"]:
@@ -1155,7 +1171,7 @@ def curate_unit(art, s, u, matcher, anchored, modals):
                     for kind, f in parts if kind == 'dummy_sibling' for a in f.atoms())
              and any(urllib.parse.unquote(a.root()) in GLOSS_VERBS for kind, f in parts if kind == 'dummy_sibling' for a in f.atoms())
              and all(is_focal(a) for kind, f in parts if kind != 'dummy_sibling' for a in f.atoms())
-             and sum(kind != 'dummy_sibling' for kind, _ in parts) >= 2]          # a term and its expansion: two sides
+             and sum(getattr(f, 'sides', 1) for kind, f in parts if kind != 'dummy_sibling') >= 2]   # a term and its expansion: two sides (merged focal_he count both)
     for k in gloss:
         del circuits[k]; ctx.stats['parent_glossary_dropped'] += 1
     uid = u["uid"]
@@ -1227,6 +1243,17 @@ def occurrences(rec):
 def load_reflexives():
     """{uid: record} of the units whose emphatic reflexive pronouns are restored and re-parsed (§6 item 8)"""
     return {r["uid"]: r for r in (json.loads(l) for l in open(REFLEXIVE_TABLE, encoding="utf-8"))}
+
+
+REJECT = ({}, {})       # RL-171: ({sid: {term}}, {pmcid: {term}}) from TERM_REJECTIONS, set by run(); empty in the self-test
+
+
+def load_rejections():
+    """term_rejections.tsv: scope sentence (homonym rule, that sentence) or article (prerelease, F2 verdict, every sentence)"""
+    sent, art = collections.defaultdict(set), collections.defaultdict(set)
+    for r in csv.DictReader(open(TERM_REJECTIONS, encoding="utf-8"), delimiter="\t"):
+        (sent if r["scope"] == "sentence" else art)[r["key"]].add(r["term"])
+    return dict(sent), dict(art)
 
 
 def load_lists():
@@ -1314,6 +1341,8 @@ def run(a):
             sys.exit(f"refusing to overwrite {p}")
     matcher = focal_terms.Matcher()
     excluded, llm_out, corrections = load_lists()
+    global REJECT
+    REJECT = load_rejections()
     reflexives = load_reflexives()
     nonprose, noparent, articles = [], [], []
     stats, detail = collections.Counter(), collections.defaultdict(collections.Counter)

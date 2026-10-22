@@ -1100,6 +1100,14 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    correctly collapse into one, traced by hand on real data). The RL-125 output is kept as `PG/g3_v1_rl125/`. G3
    production is complete.]*
 
+6. *[Added 2026-10-22, RL-171.]* **Rerun on the merged corpus `PG/g2_v3_1/`.** The input lists of §6 items 6–8 rebuilt
+   with the same rules for the new articles and the changed current ones (`fullscale_pipeline/g3_inputs_v3_1/README.md`;
+   item 6: 7,067 exclusions; item 7: 169 units; item 8: 1,393 units); G3 matches focal terms with the v3 matcher
+   (`PP/focal_terms_v3.py`) and skips the hits Stage B rejected (`term_rejections.tsv`). CSF check `check_csf_g3_v2.sh`
+   (passed on incline), launcher `submit_g3_v2.sh` (output `PG/g3_v2/`), merge `merge_g3_v2.py`. To submit (owner):
+   `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh`; when it ends with "ALL G3 CHECKS OK", `sbatch
+   PG/scripts/g3_v2/submit_g3_v2.sh`; after the 50 tasks, `python PG/scripts/g3_v2/merge_g3_v2.py --nshards 50`.
+
 ## 9. Files
 
 | File | sha256 (12) |
@@ -1129,7 +1137,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 25b27d784157 (RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 2b2056484019 (RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
@@ -1141,6 +1149,11 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_v2/measure_be.py` (§6 item 1: the measurement required before implementing passive "be") | 8cbfe1c89631 |
 | `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached; since RL-151 with G2's sentence-cut rule; since RL-170 multi-unit sentence cases) | 79a8179adf74 (8b28758d27cd at RL-151, 80b9ca527b8f before) |
 | `fullscale_pipeline/g3_v2/hard/hard_d6_item11.json` (10 D6 / item 11 sentence cases, RL-170) | 32f339765a87 |
+| `fullscale_pipeline/g3_v2/hard/hard_v3_terms.json` (7 v3-name cases, RL-171) | fc7bcad542a4 |
+| `fullscale_pipeline/g3_v2/submit_g3_v2.sh`, `merge_g3_v2.py`, `check_csf_g3_v2.sh` (rerun on `g2_v3_1`, RL-171; mirrored) | 40d9f70116cd, 2962977e4449, d58134a790e0 |
+| `fullscale_pipeline/g3_v2/reflexive_restore.py` (since RL-171 with `--coref`, `--shards`) | 3ba30cef21ee |
+| `fullscale_pipeline/g3_llm_output/build_llm_output_units.py` (since RL-171 with `--shards`, `--excluded`, `--matcher`) | c31cac2aecea |
+| `fullscale_pipeline/g3_inputs_v3_1/` (RL-171: `screen_item6.py` 84681b0c58e3, `write_item6_decisions.py` 124cd670b4aa, `decisions/item6_v3_1.csv` f6c78a2ec93a, `build_stage_b_rejections.py` 46893a6d5fde, `build_inputs_v3_1.py` c5d2290b2a53; list copies) | see README |
 | `fullscale_pipeline/g3_v2/hard/hard_*.json` (13 sets, 199 cases, 175 with expectations) and `hard/parsed_cache.json` (their parses) | see RUN_LOG RL-112 to RL-117 |
 | `PG/g3_reflexive/reflexive_restored.jsonl` (1,211 restored and re-parsed units; corpus text, RDS only) | d121a203daec |
 | `fullscale_pipeline/g3_v2/runs/` (test outputs, corpus-derived; local only, excluded from git) | — |

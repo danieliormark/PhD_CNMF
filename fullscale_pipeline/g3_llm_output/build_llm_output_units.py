@@ -13,6 +13,8 @@ A prefix holding a prompt/question word (prompt, asked, instructed, query, ...) 
 output, and is kept.
 
     python build_llm_output_units.py [--outdir DIR]       # default: this folder; writes llm_output_units.csv
+    RL-171, the merged corpus: --shards 'PG/g2_v3_1/shards/g2_parsed_*.jsonl' --excluded PG/g3_inputs_v3_1/scope_exclusions.csv
+    --matcher v3 --outdir PG/g3_inputs_v3_1 (the v3 matcher, which G3 uses for the merged corpus)
 """
 import argparse, csv, glob, json, os, re, sys
 
@@ -73,9 +75,9 @@ def adjacent(a, b):
     return (la == lb and sb == sa + 1) or (lb == la + 1 and sb == 1)
 
 
-def find_units(excluded_articles=None):
+def find_units(excluded_articles=None, matcher=None):
     """[(pmcid, uid, unit_hash, reason, text)] for every LLM-output unit in the kept corpus"""
-    matcher = focal_terms.Matcher()
+    matcher = matcher or focal_terms.Matcher()
     excluded_articles = excluded_articles or set()
     out = []
     for f in sorted(glob.glob(SHARDS)):
@@ -109,8 +111,18 @@ def load_excluded(path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--outdir", default=HERE)
+    ap.add_argument("--shards", default=None, help="glob of G2 shard files (default: G2 v3)")
+    ap.add_argument("--excluded", default=EXCLUDED)
+    ap.add_argument("--matcher", choices=("v2", "v3"), default="v2")
     a = ap.parse_args()
-    units = find_units(load_excluded(EXCLUDED))
+    global SHARDS
+    SHARDS = a.shards or SHARDS
+    if a.matcher == "v3":
+        import focal_terms_v3
+        matcher = focal_terms_v3.Matcher()
+    else:
+        matcher = None
+    units = find_units(load_excluded(a.excluded), matcher)
     path = os.path.join(a.outdir, "llm_output_units.csv")
     with open(path, "w", newline="") as f:
         w = csv.writer(f)

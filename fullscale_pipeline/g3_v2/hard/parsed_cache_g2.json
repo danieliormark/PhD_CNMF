@@ -16268,5 +16268,336 @@
 8
 ]
 ]
+},
+"We fine-tuned ClinicalBERT and DistilBERT on the notes.": {
+"main_edge": "((fine/M/en tuned/Pd.sox.<f-----/en) we/Ci/en (and/J/en clinicalbert/Cp.s/en distilbert/Cp.s/en) (on/T/en (the/Md/en notes/Cc.p/en)))",
+"extra_edges": [
+"(_lemma distilbert/C/en distilbert/C/en)",
+"(_lemma fine/M/en fine/M/en)",
+"(_lemma we/C/en we/C/en)",
+"(_lemma clinicalbert/C/en clinicalbert/C/en)",
+"(_lemma notes/C/en note/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma on/T/en on/T/en)",
+"(_lemma tuned/P/en tune/P/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"we/Ci/en",
+"We",
+0
+],
+[
+"fine/M/en",
+"fine",
+1
+],
+[
+"tuned/Pd.sox.<f-----/en",
+"tuned",
+3
+],
+[
+"clinicalbert/Cp.s/en",
+"ClinicalBERT",
+4
+],
+[
+"and/J/en",
+"and",
+5
+],
+[
+"distilbert/Cp.s/en",
+"DistilBERT",
+6
+],
+[
+"on/T/en",
+"on",
+7
+],
+[
+"the/Md/en",
+"the",
+8
+],
+[
+"notes/Cc.p/en",
+"notes",
+9
+]
+]
+},
+"MedGemma outperformed BioMistral on the benchmark.": {
+"main_edge": "(outperformed/Pd.sox.<f-----/en medgemma/Cp.s/en biomistral/Cp.s/en (on/T/en (the/Md/en benchmark/Cc.s/en)))",
+"extra_edges": [
+"(_lemma medgemma/C/en medgemma/C/en)",
+"(_lemma outperformed/P/en outperform/P/en)",
+"(_lemma biomistral/C/en biomistral/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma benchmark/C/en benchmark/C/en)",
+"(_lemma on/T/en on/T/en)"
+],
+"atom2word": [
+[
+"medgemma/Cp.s/en",
+"MedGemma",
+0
+],
+[
+"outperformed/Pd.sox.<f-----/en",
+"outperformed",
+1
+],
+[
+"biomistral/Cp.s/en",
+"BioMistral",
+2
+],
+[
+"on/T/en",
+"on",
+3
+],
+[
+"the/Md/en",
+"the",
+4
+],
+[
+"benchmark/Cc.s/en",
+"benchmark",
+5
+]
+]
+},
+"Responses of ChatGPT4 and ChatGPT3.5 were compared by the raters.": {
+"main_edge": "((were/Mv.<f-----/en compared/Pd.pa.<pf----/en) (of/Br.ma/en responses/Cc.p/en (and/J/en chatgpt4/Cp.s/en chatgpt3%2e5/Cc.s/en)) (by/T/en (the/Md/en raters/Cc.p/en)))",
+"extra_edges": [
+"(_lemma chatgpt3%2e5/C/en chatgpt3%2e5/C/en)",
+"(_lemma raters/C/en rater/C/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma compared/P/en compare/P/en)",
+"(_lemma were/M/en be/M/en)",
+"(_lemma responses/C/en response/C/en)",
+"(_lemma chatgpt4/C/en chatgpt4/C/en)",
+"(_lemma by/T/en by/T/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"responses/Cc.p/en",
+"Responses",
+0
+],
+[
+"of/Br.ma/en",
+"of",
+1
+],
+[
+"chatgpt4/Cp.s/en",
+"ChatGPT4",
+2
+],
+[
+"and/J/en",
+"and",
+3
+],
+[
+"chatgpt3%2e5/Cc.s/en",
+"ChatGPT3.5",
+4
+],
+[
+"were/Mv.<f-----/en",
+"were",
+5
+],
+[
+"compared/Pd.pa.<pf----/en",
+"compared",
+6
+],
+[
+"by/T/en",
+"by",
+7
+],
+[
+"the/Md/en",
+"the",
+8
+],
+[
+"raters/Cc.p/en",
+"raters",
+9
+]
+]
+},
+"LLaMA generated the summaries.": {
+"main_edge": "(generated/Pd.so.<f-----/en llama/Cp.s/en (the/Md/en summaries/Cc.p/en))",
+"extra_edges": [
+"(_lemma llama/C/en llama/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma summaries/C/en summary/C/en)",
+"(_lemma generated/P/en generate/P/en)"
+],
+"atom2word": [
+[
+"llama/Cp.s/en",
+"LLaMA",
+0
+],
+[
+"generated/Pd.so.<f-----/en",
+"generated",
+1
+],
+[
+"the/Md/en",
+"the",
+2
+],
+[
+"summaries/Cc.p/en",
+"summaries",
+3
+]
+]
+},
+"We used bert-base-uncased for classification.": {
+"main_edge": "(used/Pd.soox.<f-----/en we/Ci/en bert/Cp.s/en (+/B.am/. base/Cc.s/en uncased/Cc.s/en) (for/T/en classification/Cc.s/en))",
+"extra_edges": [
+"(_lemma classification/C/en classification/C/en)",
+"(_lemma used/P/en use/P/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma we/C/en we/C/en)",
+"(_lemma for/T/en for/T/en)",
+"(_lemma uncased/C/en uncased/C/en)",
+"(_lemma base/C/en base/C/en)"
+],
+"atom2word": [
+[
+"we/Ci/en",
+"We",
+0
+],
+[
+"used/Pd.soox.<f-----/en",
+"used",
+1
+],
+[
+"bert/Cp.s/en",
+"bert",
+2
+],
+[
+"base/Cc.s/en",
+"base",
+4
+],
+[
+"uncased/Cc.s/en",
+"uncased",
+6
+],
+[
+"for/T/en",
+"for",
+7
+],
+[
+"classification/Cc.s/en",
+"classification",
+8
+]
+]
+},
+"BERTopic was applied to the abstracts.": {
+"main_edge": "((was/Mv.<f-----/en applied/Pd.px.<pf----/en) bertopic/Cp.s/en (to/T/en (the/Md/en abstracts/Cc.p/en)))",
+"extra_edges": [
+"(_lemma bertopic/C/en bertopic/C/en)",
+"(_lemma abstracts/C/en abstract/C/en)",
+"(_lemma was/M/en be/M/en)",
+"(_lemma applied/P/en apply/P/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma to/T/en to/T/en)"
+],
+"atom2word": [
+[
+"bertopic/Cp.s/en",
+"BERTopic",
+0
+],
+[
+"was/Mv.<f-----/en",
+"was",
+1
+],
+[
+"applied/Pd.px.<pf----/en",
+"applied",
+2
+],
+[
+"to/T/en",
+"to",
+3
+],
+[
+"the/Md/en",
+"the",
+4
+],
+[
+"abstracts/Cc.p/en",
+"abstracts",
+5
+]
+]
+},
+"Bert Vogelstein described the pathway.": {
+"main_edge": "(described/Pd.so.<f-----/en (+/B.am/. bert/Cp.s/en vogelstein/Cp.s/en) (the/Md/en pathway/Cc.s/en))",
+"extra_edges": [
+"(_lemma vogelstein/C/en vogelstein/C/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma pathway/C/en pathway/C/en)",
+"(_lemma described/P/en describe/P/en)",
+"(_lemma the/M/en the/M/en)"
+],
+"atom2word": [
+[
+"bert/Cp.s/en",
+"Bert",
+0
+],
+[
+"vogelstein/Cp.s/en",
+"Vogelstein",
+1
+],
+[
+"described/Pd.so.<f-----/en",
+"described",
+2
+],
+[
+"the/Md/en",
+"the",
+3
+],
+[
+"pathway/Cc.s/en",
+"pathway",
+4
+]
+]
 }
 }

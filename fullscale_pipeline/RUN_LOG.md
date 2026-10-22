@@ -2096,3 +2096,33 @@ exclusions, item-7 LLM-output list and item-8 reflexive table cover only the old
 in the re-parse and would stop the run); among the 15,563 new articles, 153 rest on "transformer model(s)" alone and 417
 on "LLM(s)" alone, 314 of them with no "language model" anywhere in the text (sample: Master of Laws, E-LLM, LLM-class
 oxidoreductases, Landau–Lifshitz–Matheron ansatz, passing mentions). [LOG]
+
+**RL-171 · 2026-10-22 · G3 inputs harmonised for the merged corpus; G3 on the v3 matcher; CSF check prepared · CODE + LISTS · LIVE**
+Owner: harmonise the new material with G3 §6 items 6–8. New tracked folder `g3_inputs_v3_1/` (README; data in
+`PG/g3_inputs_v3_1/`). Found on the way: G3 still matched focal terms with the v2 matcher, so the ~76,000 v3-only term
+occurrences of `g2_v3_1` (group-4 names 54,271) would have had no parent, and it would have re-accepted hits Stage B
+rejected. (1) **Item 6** (`screen_item6.py`, the old scans' tests on the new articles and on the 7,749 current articles whose
+focal terms changed): rule 2 (undefined "LLM", no evidence) 362 new + 8 current excluded; rule 1 (defined otherwise) 4
+excluded, 1 kept with a misnomer correction; rule 3 name-only articles read by the assistant: BioBridge 47/47 homonyms
+(collagen scaffold, rib implant, stem-cell "biobridge", suppliers), ESM-2 21 of 51 new (climate models, Electronic
+Supplementary Material), ProGen 4/5; rule 4 transformer-only: 143 new without an LLM-related model in the analysed text
+excluded, 20 with one read (2 kept: BERTopic, XLNet; 18 excluded, 14 of them AI-use statements); 13 old automatic
+exclusions whose sentences now hold a v3 name re-read: 5 restored (ProtBert, BERT-base/large, CheXbert, MotionBert, VetBert),
+8 stay. Result 7,067 exclusions (old 6,466 − 5 + 606). Reading of rule 2: an accepted model name counts as evidence (20
+kept). (2) **Item 7**: rebuilt with the v3 matcher, 169 units (old 162 all reproduced; 7 added; one rule false positive, a
+"BERT: 'cl_tohoku/…'" model list, left by rule). (3) **Item 8**: reflexive table rebuilt from the P6 records of P7b (208 s):
+1,393 units, 1,202 identical to the old table, 3 re-done on their new parse, 188 new. (4) **Stage B rejections**
+(`build_stage_b_rejections.py`, the calls of `inc_prepare.clean`): 677 sentence and 29 article rows, 0 from F2 (consistent
+with inc_prepare). (5) **G3** (`g3_curation_v2.py` 2b2056484019): v3 matcher (v2 loaded first; hashes of
+`focal_terms_v3.py` and the group-4 rule pinned), the new lists and `g2_v3_1` as input, mentions in `term_rejections.tsv`
+skipped (`mention_rejected_stage_b`), identical focal_he of one parent merged (a name the parser split over two
+arguments; the glossary rule counts merged sides). Tests: self-test 54/54; hard cases 206/217 (new `hard_v3_terms.json`
+7/7; same 11 known failures). Shards 0 and 20 of `g2_v3_1`: 0 problems; 19,130 and 17,697 parents, 2,602 + … v3
+mentions (G4 2,602 in the two shards); shard 2: 9 rejected mentions skipped, 0 leaked. (6) CSF: `submit_g3_v2.sh` (50
+tasks → `PG/g3_v2/shards/`), `merge_g3_v2.py` (adds the occurrences file and its checks; tested on shard 0),
+`check_csf_g3_v2.sh` (incline reference `PG/g3_v2_csftest/reference_incline/`; run end to end on incline: ALL G3 CHECKS
+OK); all mirrored to `PG/scripts/g3_v2/`. Flagged, not acted on: group-4 false hits (BERTHELOT3, DeepPalm, Print-on-Palm,
+berttery18, ChatGPT57 with a glued citation) beside the pending "BERTH"; checkpoint names keep their configuration
+(`bert_base_uncased`, not folded to `bert`); AI-use statements still present as focal sentences in some kept articles
+(seen in the screen; the statement check covered only the broad rule's candidates); item 6 acts on whole articles, so
+ESM-2/BioBridge homonyms in articles kept for other terms remain. [LOG]

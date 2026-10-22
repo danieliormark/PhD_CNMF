@@ -33,13 +33,12 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
   down-weighting of generic material, to be tested).
 
 **Remaining, in order:**
-1. **G3 changes for the production rerun:** D6 and item 11 **implemented and tested 2026-10-22 (RL-170)**, with D4.1
-   and B06; hard set `g3_v2/hard/hard_d6_item11.json` 10/10, self-test 54/54, hard cases 199/210 (same 11 known
-   failures), shards 0/20 compared. **Blocking the production run on `PG/g2_v3_1/`** (RL-170, for the owner): G3's
-   input lists (item 6 scope exclusions, item 7 LLM-output units, item 8 reflexive table) cover only the old corpus;
-   3 reflexive units changed hash; new articles resting on "transformer model(s)" alone (153) or on "LLM(s)" alone (417,
-   314 with no "language model" in the text) are not screened as item 6 screened the old corpus. Then: CSF launcher,
-   CSF check with a new incline reference, checked merge (adds `g3_occurrences`).
+1. **G3 production rerun — READY TO SUBMIT (RL-171).** D6 and item 11 (RL-170); input lists harmonised for the merged
+   corpus (items 6–8, `g3_inputs_v3_1/`: 7,067 exclusions incl. 606 new; LLM-output 169; reflexives 1,393); G3 on the v3
+   matcher with Stage B rejections; self-test 54/54, hard cases 206/217; CSF check passed on incline. Owner submits:
+   `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh`, then `submit_g3_v2.sh`, then `merge_g3_v2.py --nshards 50`. Open
+   questions (RL-171): checkpoint names folded to the family?; group-4 false hits (BERTHELOT3, DeepPalm, Print-on-Palm…)
+   with "BERTH"; leftover AI-use statements in kept articles; sentence-level ESM-2/BioBridge homonyms in kept articles.
 2. Small known items: add "BERTH" (an evapotranspiration product) to the group-4 exclusions; the open RL-118 leak
    (citation numbers left as words).
 3. D5 count of dash-enclosed asides (approved), on the G3 output.
