@@ -375,7 +375,8 @@ def canonical(surface):
     # RL-179 (owner 2026-10-22): a vendor name before a model is replaced by the model family: OpenAI o1 / ChatGPT o1 / GPT-o1 ->
     # gpt_o1; Google Gemini, Anthropic Claude, Meta Llama, OpenAI GPT, Google BERT -> the family alone (Microsoft Copilot is the
     # product's own name and stays)
-    s = re.sub(r'^(?:openai|chatgpt|gpt)_(o\d)(?=_|$)', r'gpt_\1', s)
+    s = re.sub(r'^(?:openai|chatgpt|gpt)_?(o\d)(?=_|$)', r'gpt_\1', s)     # also glued: GPTo1, ChatGPTo1 (owner: individual rules)
+    s = re.sub(r'^biobert_v1_(\d)\d+(?=_|$)', r'biobert_v1_\1', s)           # BioBERT has v1.0-1.2 only: v1.18 = v1.1 + citation 8
     s = re.sub(r'^(?:openai|google|anthropic|meta)_(?=(?:gpt|gemini|claude|llama|bert|palm|gemma|bard)(?:_|\d|$))', '', s)
     s = re.sub(r'^gpt_35(?=_|$)', 'gpt_3_5', s)                           # RL-172: Azure's GPT-35(-turbo)
     s = re.sub(r'^claude_(\d+(?:_\d+)?)_(sonnet|opus|haiku)$', r'claude_\2_\1', s)   # RL-177: tier before version
@@ -423,7 +424,8 @@ def focal_mentions(matcher, text, a2w, anchored):
                                   # 'BioBERT v1.1' is not), plain numbers only after a versioned family
             q, end = later[0], spans[pos[-1]][1]
             gap, tokw = text[end:spans[q][0]], text[spans[q][0]:spans[q][1]]
-            if tokw in ('-', '\u2010', '\u2013') and gap == '' and len(later) > 1 and text[spans[q][1]:spans[later[1]][0]] == '':
+            if tokw in ('-', '\u2010', '\u2013', '\u2014') and gap in ('', ' ') and len(later) > 1 \
+                    and text[spans[q][1]:spans[later[1]][0]] in ('', ' '):        # RL-179: also "Gemini 1.5 – Pro", the dash a token
                 q = later[1]; gap, tokw = '-', text[spans[q][0]:spans[q][1]]
             if gap not in ('-', ' ', '\u2010', '\u2013', '- ', ' - ', ' \u2013 ', ' \u2010 '):   # RL-179: "Gemini 1.5 – Pro"
                 break
@@ -1724,7 +1726,8 @@ CANON_CASES = [('LLMs', 'llm'), ('large language models', 'llm'), ('Large Langua
                # RL-179: vendor names replaced by the model family
                ('OpenAI o1', 'gpt_o1'), ('OpenAI o1 pro', 'gpt_o1_pro'), ('ChatGPT o3-mini', 'gpt_o3_mini'), ('GPT-o1', 'gpt_o1'),
                ('Google Gemini 2.5 Pro', 'gemini_2_5_pro'), ('Anthropic Claude 3.5 Sonnet', 'claude_sonnet_3_5'), ('Meta Llama 3', 'llama_3'),
-               ('OpenAI GPT-4.1 mini', 'gpt_4_1_mini'), ('BERT-mini', 'bert'), ('RoBERTa-Mini', 'roberta'), ('ProkBERT-mini', 'prokbert'), ('Microsoft Copilot', 'microsoft_copilot'), ('HuatuoGPT-o1', 'huatuogpt_o1')]
+               ('OpenAI GPT-4.1 mini', 'gpt_4_1_mini'), ('BERT-mini', 'bert'), ('RoBERTa-Mini', 'roberta'), ('ProkBERT-mini', 'prokbert'), ('Microsoft Copilot', 'microsoft_copilot'), ('HuatuoGPT-o1', 'huatuogpt_o1'),
+               ('ChatGPTo1 pro', 'gpt_o1_pro'), ('GPTo1', 'gpt_o1'), ('biobert-v1.18', 'biobert_v1_1'), ('BioBERT v1.123', 'biobert_v1_1'), ('BioBERT v1.2', 'biobert_v1_2')]
 
 
 def unit(text, edge, words, lemmas):

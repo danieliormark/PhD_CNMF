@@ -295,5 +295,19 @@
 "deberta_v324"
 ],
 "note": "RL-179: BERT-mini is a size; a v-version with a glued citation is not joined"
+},
+{
+"id": "N-25",
+"text": "The study used five LLMs (GPT-4, GPT-4o mini, Gemini 1.5 – Pro, Gemini 1.5 – Flash, and Llama 3.1) and two LRMs (Gemini 2.5 – Pro and GPT-oss-120B).",
+"expect": [
+"gemini_1_5_pro/C/focal",
+"gemini_1_5_flash/C/focal",
+"gemini_2_5_pro/C/focal"
+],
+"forbid": [
+" pro/",
+" flash/"
+],
+"note": "RL-179: a spaced dash the parser made its own token is stepped over"
 }
 ]

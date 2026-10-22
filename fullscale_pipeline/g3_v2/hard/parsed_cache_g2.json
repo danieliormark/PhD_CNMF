@@ -18950,5 +18950,196 @@
 10
 ]
 ]
+},
+"The study used five LLMs (GPT-4, GPT-4o mini, Gemini 1.5 – Pro, Gemini 1.5 – Flash, and Llama 3.1) and two LRMs (Gemini 2.5 – Pro and GPT-oss-120B).": {
+"main_edge": "(used/Pd.so.<f-----/en (the/Md/en study/Cc.s/en) (+/B.mm/. (and/J/en (five/M#/en llms/Cp.p/en) (,/J/en gpt-4/Cp.s/en (+/B.mm/. (+/B.am/. gpt-4o/Cp.s/en mini/Cc.s/en) (,/J/en (+/B.am/. (+/B.mm/. (1%2e5/M#/en gemini/Cp.s/en) –/C/en) pro/Cp.s/en) (+/B.mm/. (and/J/en (+/B.mm/. (1%2e5/M#/en gemini/Cp.s/en) –/C/en) flash/Cp.s/en) (3%2e1/M#/en llama/Cp.s/en)))))) (+/B.mm/. (two/M#/en lrms/Cp.p/en) (and/J/en (+/B.mm/. (–/M/en (+/B.ma/. gemini/Cp.s/en 2%2e5/Cp.s/en)) pro/Cp.s/en) (-/B/en gpt/Cp.s/en oss-120b/Cp.s/en)))))",
+"extra_edges": [
+"(_lemma llms/C/en llms/C/en)",
+"(_lemma lrms/C/en lrms/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma gpt-4o/C/en gpt-4o/C/en)",
+"(_lemma gemini/C/en gemini/C/en)",
+"(_lemma five/M/en five/M/en)",
+"(_lemma llama/C/en llama/C/en)",
+"(_lemma study/C/en study/C/en)",
+"(_lemma ,/J/en ,/J/en)",
+"(_lemma used/P/en use/P/en)",
+"(_lemma pro/C/en pro/C/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma –/M/en –/M/en)",
+"(_lemma 2%2e5/C/en 2%2e5/C/en)",
+"(_lemma -/B/en -/B/en)",
+"(_lemma 3%2e1/M/en 3%2e1/M/en)",
+"(_lemma 1%2e5/M/en 1%2e5/M/en)",
+"(_lemma mini/C/en mini/C/en)",
+"(_lemma gpt/C/en gpt/C/en)",
+"(_lemma gpt-4/C/en gpt-4/C/en)",
+"(_lemma two/M/en two/M/en)",
+"(_lemma oss-120b/C/en oss-120b/C/en)",
+"(_lemma flash/C/en flash/C/en)",
+"(_lemma –/C/en –/C/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"study/Cc.s/en",
+"study",
+1
+],
+[
+"used/Pd.so.<f-----/en",
+"used",
+2
+],
+[
+"five/M#/en",
+"five",
+3
+],
+[
+"llms/Cp.p/en",
+"LLMs",
+4
+],
+[
+"gpt-4/Cp.s/en",
+"GPT-4",
+6
+],
+[
+",/J/en",
+",",
+7
+],
+[
+"gpt-4o/Cp.s/en",
+"GPT-4o",
+8
+],
+[
+"mini/Cc.s/en",
+"mini",
+9
+],
+[
+"gemini/Cp.s/en",
+"Gemini",
+11
+],
+[
+"1%2e5/M#/en",
+"1.5",
+12
+],
+[
+"–/C/en",
+"–",
+13
+],
+[
+"pro/Cp.s/en",
+"Pro",
+14
+],
+[
+",/J/en",
+",",
+15
+],
+[
+"gemini/Cp.s/en",
+"Gemini",
+16
+],
+[
+"1%2e5/M#/en",
+"1.5",
+17
+],
+[
+"–/C/en",
+"–",
+18
+],
+[
+"flash/Cp.s/en",
+"Flash",
+19
+],
+[
+"and/J/en",
+"and",
+21
+],
+[
+"llama/Cp.s/en",
+"Llama",
+22
+],
+[
+"3%2e1/M#/en",
+"3.1",
+23
+],
+[
+"and/J/en",
+"and",
+25
+],
+[
+"two/M#/en",
+"two",
+26
+],
+[
+"lrms/Cp.p/en",
+"LRMs",
+27
+],
+[
+"gemini/Cp.s/en",
+"Gemini",
+29
+],
+[
+"2%2e5/Cp.s/en",
+"2.5",
+30
+],
+[
+"–/M/en",
+"–",
+31
+],
+[
+"pro/Cp.s/en",
+"Pro",
+32
+],
+[
+"and/J/en",
+"and",
+33
+],
+[
+"gpt/Cp.s/en",
+"GPT",
+34
+],
+[
+"-/B/en",
+"-",
+35
+],
+[
+"oss-120b/Cp.s/en",
+"oss-120B",
+36
+]
+]
 }
 }
