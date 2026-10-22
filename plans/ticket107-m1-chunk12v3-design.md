@@ -903,3 +903,15 @@ an OpenAlex institutions fetch, cached in diagnostics).
   a frequency-based rule tested before use (candidate: tf-idf; conflicts to weigh: §4.21 idf versus shared meaning).
 - Provenance carries occurrence rows with typed links (contains / co-occurs / embedded); the builder must use each
   cousin's full parent list (chunk12 kept only the last parent per sentence).
+
+## Addendum 2026-10-22 — model-name granularity and sparsity (owner, to do before M1 weighting is fixed)
+
+G3 now writes one focal atom per model at product-tier level (owner decisions RL-177/RL-179: `gpt_4o` and `gpt_4o_mini`,
+`gemini_2_5_pro` and `gemini_2_5_flash`, `claude_sonnet_4_5` are distinct atoms; sizes, base/large, instruct/chat,
+dates and snapshot codes are folded away). This splits the counts of a model family over several atoms (e.g.
+`gpt_4o` ≈ 32,000 mentions vs `gpt_4o_mini` ≈ 2,500). The family relation is not stored by G3; it can be recovered from
+the canonical names (family + version + tier). **To do in M1 (owner, 2026-10-22):** count the sparsity of the
+semantic facets (focal atoms, the child/cousin hyperedges they enter, their degree distributions and the share of
+degree-1 entities) under different model-merging levels — (a) as written by G3 (tier level), (b) version level (tiers
+merged: `gpt_4o_mini` → `gpt_4o`), (c) family level (`gpt_4o` → `gpt`), (d) generic terms only (every named model →
+its class, e.g. `llm`) — before the weighting and the choice of level are decided.
