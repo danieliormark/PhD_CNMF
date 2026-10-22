@@ -191,6 +191,7 @@ CITE_VALUE_WORDS = set('of to was were is are be been equals equal than by cost 
                        'around nearly over under with and or between top only all first last every each per page pages line '
                        'lines version n'.split())
 SCORE_TOKEN = re.compile(r'^0\.\d')
+GENERIC_NAMES = {'llm', 'language_model', 'transformer_model', 'small_language_model', 'chatbot', 'foundation_model'}   # RL-179
 SNAPSHOT_CODE = re.compile(r'^(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])$')              # RL-177: GPT-4 0613, 1106, 0125 (month + day)
 VERSION_TOKEN = re.compile(r'^(?:v\d+(?:\.\d+)*|[ro]\d+|\d(?:\.\d{1,2})?[a-z]{0,2})$', re.I)
 HYPHEN_CHARS = re.compile('[\u2010\u2011\u2013\u2014]')
@@ -339,7 +340,7 @@ def fold_checkpoint(s):
         return None
     fam, vers, tiers, cut = toks[:i], [], [], False
     for t in toks[i:]:
-        if CKPT_SETTING.match(t):                                         # a size ('7b') is a setting, not a version
+        if CKPT_SETTING.match(t) or (t == 'mini' and re.search(r'bert[a]?$', fam[-1])):   # a size ('7b'; BERT-mini) is a setting
             cut = True; break
         if CKPT_VERSION.match(t):
             vers.append(t)
@@ -349,9 +350,9 @@ def fold_checkpoint(s):
             return None
     if not cut and not tiers:
         return None
-    if fam[:2] == ['meta', 'llama']:
-        fam = fam[1:]
-    parts = fam + (tiers + vers if fam == ['claude'] else [x for x in toks[i:i + len(vers) + len(tiers)]])
+    if len(fam) > 1 and fam[0] in ('meta', 'openai', 'google', 'anthropic') and re.match(r'(gpt|gemini|claude|llama|bert|palm|gemma|bard)', fam[1]):
+        fam = fam[1:]                                                     # RL-179: vendor before the family dropped
+    parts = fam + (tiers + vers if fam == ['claude'] else vers + tiers)    # RL-179: Claude tier first, every other family version first
     return "_".join(parts)
 
 
@@ -371,6 +372,11 @@ def canonical(surface):
     s = re.sub(r'[^a-z0-9_]', '', s).strip('_')
     s = re.sub(r'_+', '_', s)
     s = re.sub(r'^chat_gpt(?=_|$)', 'chatgpt', s)
+    # RL-179 (owner 2026-10-22): a vendor name before a model is replaced by the model family: OpenAI o1 / ChatGPT o1 / GPT-o1 ->
+    # gpt_o1; Google Gemini, Anthropic Claude, Meta Llama, OpenAI GPT, Google BERT -> the family alone (Microsoft Copilot is the
+    # product's own name and stays)
+    s = re.sub(r'^(?:openai|chatgpt|gpt)_(o\d)(?=_|$)', r'gpt_\1', s)
+    s = re.sub(r'^(?:openai|google|anthropic|meta)_(?=(?:gpt|gemini|claude|llama|bert|palm|gemma|bard)(?:_|\d|$))', '', s)
     s = re.sub(r'^gpt_35(?=_|$)', 'gpt_3_5', s)                           # RL-172: Azure's GPT-35(-turbo)
     s = re.sub(r'^claude_(\d+(?:_\d+)?)_(sonnet|opus|haiku)$', r'claude_\2_\1', s)   # RL-177: tier before version
     s = SYNONYMS.get(s, s)
@@ -411,21 +417,26 @@ def focal_mentions(matcher, text, a2w, anchored):
         for _ in range(3):
             later = [p for p in sorted(spans) if p > pos[-1]]
             c = canonical(surf)
-            if not later or not re.match(VERSIONED + r'(?:_|$)', c):
-                break
+            versioned = re.match(VERSIONED + r'(?:_|$)', c)
+            if not later or c in GENERIC_NAMES or (not versioned and a > 0 and (text[a - 1].isalnum() or text[a - 1] in '-\u2010')):
+                break             # RL-179: tiers and v-versions after any model name that is a word of its own ('BERT' inside
+                                  # 'BioBERT v1.1' is not), plain numbers only after a versioned family
             q, end = later[0], spans[pos[-1]][1]
             gap, tokw = text[end:spans[q][0]], text[spans[q][0]:spans[q][1]]
             if tokw in ('-', '\u2010', '\u2013') and gap == '' and len(later) > 1 and text[spans[q][1]:spans[later[1]][0]] == '':
                 q = later[1]; gap, tokw = '-', text[spans[q][0]:spans[q][1]]
-            if gap not in ('-', ' ', '\u2010', '\u2013', '- '):
+            if gap not in ('-', ' ', '\u2010', '\u2013', '- ', ' - ', ' \u2013 ', ' \u2010 '):   # RL-179: "Gemini 1.5 – Pro"
                 break
-            has_version = bool(re.search(r'\d', c[len(re.match(VERSIONED, c).group(0)):]))
+            has_version = bool(re.search(r'\d', c[len(versioned.group(0)):] if versioned else c))
             is_version = VERSION_TOKEN.match(tokw) and not SIZE_RX.match(tokw.lower()) and not VALUE_AFTER.match(text[spans[q][1]:]) \
-                and not SCORE_TOKEN.match(tokw)
-            if not ((is_version and not has_version) or (tokw.lower() in CKPT_TIER - ({'max'} if not c.startswith('qwen') else set()) and c.split('_')[-1] not in CKPT_TIER)
-                    or (has_version and SNAPSHOT_CODE.match(tokw))):
+                and not SCORE_TOKEN.match(tokw) and (versioned or re.fullmatch(r'v\d{1,2}(?:\.\d{1,2})*', tokw, re.I))   # 'V324': v3 + citation
+            t_low, last = tokw.lower(), c.split('_')[-1]
+            is_tier = (t_low in CKPT_TIER - ({'max'} if not c.startswith('qwen') else set())
+                       and (last not in CKPT_TIER or (last == 'flash' and t_low == 'lite'))
+                       and not (t_low == 'nano' and re.match(r'\s*banana', text[spans[q][1]:], re.I)))   # Gemini "Nano Banana": a name
+            if not ((is_version and not has_version) or is_tier or (versioned and has_version and SNAPSHOT_CODE.match(tokw))):
                 break
-            old_rule = base is None and is_version and re.fullmatch(VERSIONED, c) and q == later[0]
+            old_rule = base is None and is_version and re.fullmatch(VERSIONED, c) and q == later[0] and gap in ('-', ' ', '\u2010', '\u2013', '- ')
             if base is None and not old_rule:
                 base = (surf, pos)
             pos = pos + [q]; surf = text[a:spans[q][1]]
@@ -470,6 +481,33 @@ def tight_cover(edge, need):
     for i in path:
         sub = sub[i]
     return all(str(a) in need or a.type()[:1] in ('B', 'J') or not re.search(r'[a-z0-9]', a.root(), re.I) for a in terminal(sub))
+
+
+def remove_atoms(edge, drop):
+    """RL-179: edge without the atoms in drop. A one-argument modifier in drop ("(4.6 claude_opus)") gives way to its argument;
+    another connector in drop leaves the edge as it is. An edge whose arguments are all removed keeps its connector when the
+    connector carries words (a modifier, predicate or nested edge) and goes when it is a pure builder or conjunction; a builder
+    left with one argument becomes that argument. Returns (edge or None, atoms removed)."""
+    if edge.is_atom():
+        return (None, 1) if str(edge) in drop else (edge, 0)
+    head = edge[0]
+    if head.is_atom() and str(head) in drop:
+        if head.type()[:1] == 'M' and len(edge) == 2:
+            k, m = remove_atoms(edge[1], drop)
+            return k, m + 1
+        return edge, 0
+    kids, n = [head], 0
+    for c in edge[1:]:
+        k, m = remove_atoms(c, drop); n += m
+        if k is not None:
+            kids.append(k)
+    if not n:
+        return edge, 0
+    if len(kids) == 1:
+        return (None, n) if head.is_atom() and head.type()[:1] in ('B', 'J') else (head, n)
+    if len(kids) == 2 and head.is_atom() and head.type()[:1] == 'B':
+        return kids[1], n
+    return hedge(tuple(kids)), n
 
 
 def smallest_cover(edge, need):
@@ -1230,30 +1268,32 @@ def curate_unit(art, s, u, matcher, anchored, modals):
         by_pos0[p].append(a)
     ments = []
     for term, surf, canon, pos, base in focal_mentions(matcher, u["text"], u["atom2word"], anchored):
+        extra = []
         if base and not tight_cover(edge, {a for p in pos for a in by_pos0.get(p, [])}):   # RL-177: joined token elsewhere in
-            surf, pos = base; canon = canonical(surf); ctx.stats['mention_join_not_phrase'] += 1; base = None   # the parse: old kept
-        ments.append((term, surf, canon, pos, base))
+            extra = [p for p in pos if p not in base[1]]; pos = base[1]; base = None        # the parse: the name's own atoms are
+            ctx.stats['mention_join_not_phrase'] += 1                                        # renamed, the stray token deleted (RL-179)
+        ments.append((term, surf, canon, pos, base, extra))
     rej_s, rej_a = REJECT[0].get(s["sid"], ()), REJECT[1].get(art, ())   # RL-171: hits Stage B rejected stay rejected
     kept_m = [m for m in ments if m[0].lower() not in rej_s and m[0].lower() not in rej_a]   # RL-177: 'BERT' = 'bert'
     ctx.stats['mention_rejected_stage_b'] += len(ments) - len(kept_m); ments = []
-    for term, surf, canon, pos, base in kept_m:                        # RL-172: group-4 decisions
+    for term, surf, canon, pos, base, extra in kept_m:                 # RL-172: group-4 decisions
         d = g4_decision(term, art)
         if d and d[0] == 'reject':
             ctx.stats['mention_rejected_g4'] += 1; continue
         if d and d[0] == 'map':
             canon = canonical(d[1]); ctx.stats['mention_mapped_g4'] += 1
-        ments.append((term, surf, canon, pos, base))
+        ments.append((term, surf, canon, pos, base, extra))
     covered = {p for m in ments for p in m[3]}
     by_pos = collections.defaultdict(list)
     for a, w, p in u["atom2word"]:
         by_pos[p].append(a)
     mrec = []
-    for term, surf, canon, pos, base in ments:
+    for term, surf, canon, pos, base, extra in ments:
         need = {a for p in pos for a in by_pos.get(p, [])}
         how = 'no_atom'
         if base and need and smallest_cover(edge, need) is None and not all({p for _, p in ctx.pos[a]} <= covered for a in need):
-            surf, pos = base; canon = canonical(surf); ctx.stats['mention_join_not_placed'] += 1; base = None   # RL-177: old form
-            need = {a for p in pos for a in by_pos.get(p, [])}
+            extra = [p for p in pos if p not in base[1]]; pos = base[1]; base = None        # RL-177/RL-179: placed as the old
+            need = {a for p in pos for a in by_pos.get(p, [])}; ctx.stats['mention_join_not_placed'] += 1   # form, full name kept
         if base:
             ctx.stats['mention_joined_rl177'] += 1
         if need:
@@ -1269,7 +1309,21 @@ def curate_unit(art, s, u, matcher, anchored, modals):
                     edge = replace_at(edge, path, mapping); how = 'scoped'
             if how != 'not_in_edge':
                 ctx.pos[str(catom)].extend((w, p) for a in need for w, p in ctx.pos.get(a, []) if p in pos)
-        mrec.append(dict(term=term, surface=surf, canonical=canon, positions=pos, replaced=how))
+                # RL-179 (owner 2026-10-22: a model and its tier are one atom): a joined token that lies outside the name's phrase
+                # is deleted where its word occurs only there in the unit; it stays (and the name is still the full one) otherwise
+                drop = {a for p in extra for a in by_pos.get(p, []) if ctx.pos.get(a) and {q for _, q in ctx.pos[a]} <= set(extra)}
+                if drop:
+                    new, n = remove_atoms(edge, drop)
+                    n = n if new is not None else 0
+                    if n:
+                        edge = new
+                        ctx.pos[str(catom)].extend((w, p) for a in drop for w, p in ctx.pos.get(a, []))
+                        ctx.stats['mention_stray_token_deleted'] += 1
+                    else:
+                        ctx.stats['mention_stray_token_kept'] += 1
+                elif extra:
+                    ctx.stats['mention_stray_token_kept'] += 1
+        mrec.append(dict(term=term, surface=surf, canonical=canon, positions=sorted(set(pos) | set(extra)), replaced=how))
     circuits, cousins, embedded = extract(edge, ctx)
     gloss = [k for k, parts in circuits.items()                         # §6 item 8: "LLM equals large language model."
              if all(urllib.parse.unquote(a.root()) in GLOSS_VERBS or not pred_or_neg(a)
@@ -1665,7 +1719,12 @@ CANON_CASES = [('LLMs', 'llm'), ('large language models', 'llm'), ('Large Langua
                ('Claude Sonnet 4.5', 'claude_sonnet_4_5'), ('claude-3-5-sonnet-20241022', 'claude_sonnet_3_5'),
                ('Claude-3-Opus', 'claude_opus_3'), ('Gemini 2.5 Pro', 'gemini_2_5_pro'), ('GPT-4 Turbo', 'gpt_4_turbo'),
                ('GPT-4-1106-preview', 'gpt_4'), ('acegpt-7b-chat', 'acegpt'), ('hermes-2-pro-mistral', 'hermes_2_pro_mistral'),
-               ('e5-mistral-7b-ablation', 'e5_mistral'), ('multilingual BERT', 'multilingual_bert'), ('Robert', 'robert')]
+               ('e5-mistral-7b-ablation', 'e5_mistral'), ('multilingual BERT', 'multilingual_bert'), ('Robert', 'robert'),
+               ('Gemini Pro 2.5', 'gemini_2_5_pro'), ('Claude 4 Opus', 'claude_opus_4'),
+               # RL-179: vendor names replaced by the model family
+               ('OpenAI o1', 'gpt_o1'), ('OpenAI o1 pro', 'gpt_o1_pro'), ('ChatGPT o3-mini', 'gpt_o3_mini'), ('GPT-o1', 'gpt_o1'),
+               ('Google Gemini 2.5 Pro', 'gemini_2_5_pro'), ('Anthropic Claude 3.5 Sonnet', 'claude_sonnet_3_5'), ('Meta Llama 3', 'llama_3'),
+               ('OpenAI GPT-4.1 mini', 'gpt_4_1_mini'), ('BERT-mini', 'bert'), ('RoBERTa-Mini', 'roberta'), ('ProkBERT-mini', 'prokbert'), ('Microsoft Copilot', 'microsoft_copilot'), ('HuatuoGPT-o1', 'huatuogpt_o1')]
 
 
 def unit(text, edge, words, lemmas):

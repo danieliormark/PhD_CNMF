@@ -1,11 +1,299 @@
 [
- {"id": "N-01", "text": "We compared DeepSeek-R1 and GPT-4o-mini on the benchmark.", "expect": ["deepseek_r1/C/focal", "gpt_4o_mini/C/focal"], "forbid": ["r1/C/en", "mini/C/en", "(focal_he deepseek/C/focal"], "note": "RL-177: a hyphen the parser made its own token is stepped over; tier kept"},
- {"id": "N-02", "text": "Claude Sonnet 4.5 outperformed Claude 3.5 Sonnet on every task.", "expect": ["claude_sonnet_4_5/C/focal", "claude_sonnet_3_5/C/focal"], "forbid": ["4%2e5", "sonnet/C/en"], "note": "RL-177 (owner): Claude written family + tier + version in either order"},
- {"id": "N-03", "text": "GPT-4 Turbo and Gemini 2.5 Pro answered all questions correctly.", "expect": ["gpt_4_turbo/C/focal", "gemini_2_5_pro/C/focal"], "forbid": ["turbo/C/en", "pro/C/en", "pro/M/en"], "note": "RL-177: tiers written as the next token are part of the name"},
- {"id": "N-04", "text": "We accessed GPT-4 0613 through the API.", "expect": ["gpt_4/C/focal"], "forbid": ["0613"], "note": "RL-177: snapshot code after a version is dropped"},
- {"id": "N-05", "text": "We set the GPT-4 max tokens parameter to 512.", "expect": ["gpt_4/C/focal"], "forbid": ["gpt_4_max"], "note": "RL-177: 'max' after a name is a tier only for Qwen"},
- {"id": "N-06", "text": "GPT-4 answered 1000 questions in the test.", "expect": ["gpt_4/C/focal", "1000/"], "forbid": ["gpt_4_1000"], "note": "RL-177: a count is not a snapshot code"},
- {"id": "N-07", "text": "Abstracts were classified with BERTbase and XLM-RoBERTa-base.", "expect": ["bert/C/focal", "xlm_roberta/C/focal"], "forbid": ["bertbase", "xlm_roberta_base"], "note": "RL-177: fold for every model name, glued settings (the v3 matcher does not match the lower-case hub spelling xlm-roberta-base at all: upstream, not a G3 case)"},
- {"id": "N-08", "text": "We fine-tuned Meta-Llama-3-8B-Instruct and Qwen-Max on the notes.", "expect": ["llama_3/C/focal", "qwen_max/C/focal"], "forbid": ["meta_llama", "instruct"], "note": "RL-177: vendor prefix dropped; Qwen-Max tier kept"},
- {"id": "N-09", "text": "Gemini Pro was less accurate than ChatGPT.", "expect": ["gemini_pro/C/focal", "chatgpt/C/focal"], "forbid": ["pro/C/en", "pro/M/en"], "note": "RL-177: tier without a version"}
+{
+"id": "N-01",
+"text": "We compared DeepSeek-R1 and GPT-4o-mini on the benchmark.",
+"expect": [
+"deepseek_r1/C/focal",
+"gpt_4o_mini/C/focal"
+],
+"forbid": [
+"r1/C/en",
+"mini/C/en",
+"(focal_he deepseek/C/focal"
+],
+"note": "RL-177: a hyphen the parser made its own token is stepped over; tier kept"
+},
+{
+"id": "N-02",
+"text": "Claude Sonnet 4.5 outperformed Claude 3.5 Sonnet on every task.",
+"expect": [
+"claude_sonnet_4_5/C/focal",
+"claude_sonnet_3_5/C/focal"
+],
+"forbid": [
+"4%2e5",
+"sonnet/C/en"
+],
+"note": "RL-177 (owner): Claude written family + tier + version in either order"
+},
+{
+"id": "N-03",
+"text": "GPT-4 Turbo and Gemini 2.5 Pro answered all questions correctly.",
+"expect": [
+"gpt_4_turbo/C/focal",
+"gemini_2_5_pro/C/focal"
+],
+"forbid": [
+"turbo/C/en",
+"pro/C/en",
+"pro/M/en"
+],
+"note": "RL-177: tiers written as the next token are part of the name"
+},
+{
+"id": "N-04",
+"text": "We accessed GPT-4 0613 through the API.",
+"expect": [
+"gpt_4/C/focal"
+],
+"forbid": [
+"0613"
+],
+"note": "RL-177: snapshot code after a version is dropped"
+},
+{
+"id": "N-05",
+"text": "We set the GPT-4 max tokens parameter to 512.",
+"expect": [
+"gpt_4/C/focal"
+],
+"forbid": [
+"gpt_4_max"
+],
+"note": "RL-177: 'max' after a name is a tier only for Qwen"
+},
+{
+"id": "N-06",
+"text": "GPT-4 answered 1000 questions in the test.",
+"expect": [
+"gpt_4/C/focal",
+"1000/"
+],
+"forbid": [
+"gpt_4_1000"
+],
+"note": "RL-177: a count is not a snapshot code"
+},
+{
+"id": "N-07",
+"text": "Abstracts were classified with BERTbase and XLM-RoBERTa-base.",
+"expect": [
+"bert/C/focal",
+"xlm_roberta/C/focal"
+],
+"forbid": [
+"bertbase",
+"xlm_roberta_base"
+],
+"note": "RL-177: fold for every model name, glued settings (the v3 matcher does not match the lower-case hub spelling xlm-roberta-base at all: upstream, not a G3 case)"
+},
+{
+"id": "N-08",
+"text": "We fine-tuned Meta-Llama-3-8B-Instruct and Qwen-Max on the notes.",
+"expect": [
+"llama_3/C/focal",
+"qwen_max/C/focal"
+],
+"forbid": [
+"meta_llama",
+"instruct"
+],
+"note": "RL-177: vendor prefix dropped; Qwen-Max tier kept"
+},
+{
+"id": "N-09",
+"text": "Gemini Pro was less accurate than ChatGPT.",
+"expect": [
+"gemini_pro/C/focal",
+"chatgpt/C/focal"
+],
+"forbid": [
+"pro/C/en",
+"pro/M/en"
+],
+"note": "RL-177: tier without a version"
+},
+{
+"id": "N-10",
+"text": "For AI capabilities, the system integrates the ChatGPT-4o-mini LLM from OpenAI to support virtual patient simulation.",
+"expect": [
+"gpt_4o_mini/C/focal"
+],
+"forbid": [
+"mini/C/en",
+"(focal_he gpt_4o/C/focal"
+],
+"note": "RL-179: tier outside the name's phrase (compound with LLM): name renamed, stray token deleted"
+},
+{
+"id": "N-11",
+"text": "Second, while the differences in accuracy for ANTI and PRO sentiment classifications that were present in GPT-3.5 disappeared in GPT-4 Turbo, and the accuracy of NEU classification increased by 20%, the NEU classification accuracy remained lower.",
+"expect": [
+"gpt_4_turbo/C/focal"
+],
+"forbid": [
+"turbo/C/en",
+"(parent (dummy_sibling increase/P/en) (focal_he"
+],
+"note": "RL-179: real corpus sentence; the parser puts 'Turbo' in another clause: no parent added, full name, stray token deleted"
+},
+{
+"id": "N-12",
+"text": "Gemini 2.0 Flash, ChatGPT-4o, OpenEvidence, and Perplexity Pro each attained a perfect score.",
+"expect": [
+"gemini_2_flash/C/focal",
+"gpt_4o/C/focal"
+],
+"forbid": [
+"flash/C/en",
+"gemini_2/C/focal"
+],
+"note": "RL-179: tier as a list item; 'Pro' of Perplexity stays"
+},
+{
+"id": "N-13",
+"text": "Closed models included GPT-4o, o4-mini, Claude Sonnet 3.7 and Grok 3 mini.",
+"expect": [
+"claude_sonnet_3_7/C/focal",
+"gpt_4o/C/focal"
+],
+"note": "RL-179: 'mini' occurs twice in the unit, so a stray one is not deleted (no expectation on Grok)"
+},
+{
+"id": "N-14",
+"text": "In this study, testing on the 2024 TAQE, GPT-4-turbo (80% correct) and DeepSeek-R1 (79% correct) both outperformed the previous version of ChatGPT.",
+"expect": [
+"gpt_4_turbo/C/focal",
+"deepseek_r1/C/focal",
+"80/",
+"79/"
+],
+"forbid": [
+"turbo/C/en",
+"r1/C/en"
+],
+"note": "RL-179: deleting the stray token must keep the modifier it heads ('80% correct')"
+},
+{
+"id": "N-15",
+"text": "The average scores were as follows: GPT-4 scored 3.18 0.86, Gemini 1.0 Ultra 3.02 0.95, and PaLM 2 3.09 0.92.",
+"expect": [
+"gemini_1_ultra/C/focal",
+"3%2e02"
+],
+"forbid": [
+"ultra/C/en"
+],
+"note": "RL-179: scores after a tier stay"
+},
+{
+"id": "N-16",
+"text": "The final draft was reviewed for clarity using Claude Opus 4.6 large language model (LLM).",
+"expect": [
+"claude_opus_4_6/C/focal"
+],
+"forbid": [
+"4%2e6"
+],
+"note": "RL-179: a stray version that is a one-argument modifier gives way to its argument"
+},
+{
+"id": "N-17",
+"text": "OpenAI o1 pro leverages increased computational resources to enhance accuracy.",
+"expect": [
+"gpt_o1_pro/C/focal"
+],
+"forbid": [
+"pro/C/en",
+"openai"
+],
+"note": "RL-179: vendor replaced by the family, tier joined"
+},
+{
+"id": "N-18",
+"text": "The study used five LLMs: GPT-4, GPT-4o mini, Gemini 1.5 – Pro, Gemini 1.5 – Flash, and Llama 3.1.",
+"expect": [
+"gemini_1_5_pro/C/focal",
+"gemini_1_5_flash/C/focal",
+"gpt_4o_mini/C/focal"
+],
+"forbid": [
+"pro/C/en",
+"flash/C/en"
+],
+"note": "RL-179: spaced dash between version and tier"
+},
+{
+"id": "N-19",
+"text": "ChemBERTa-v1 is based on RoBERTa, a bidirectional transformer encoder model.",
+"expect": [
+"chemberta_v1/C/focal"
+],
+"forbid": [
+"v1/C/en"
+],
+"note": "RL-179: a v-version after any model name"
+},
+{
+"id": "N-20",
+"text": "The figures were drafted with ChatGPT 5.1 and Gemini Nano Banana Pro.",
+"forbid": [
+"gemini_nano"
+],
+"note": "RL-179: Nano Banana is a model name, not the nano tier",
+"expect": [
+"gpt_5_1/C/focal"
+]
+},
+{
+"id": "N-21",
+"text": "Responses from Gemini 2.0 Flash-Lite were shorter than those from Google Gemini 2.5 Pro.",
+"expect": [
+"gemini_2_flash_lite/C/focal",
+"gemini_2_5_pro/C/focal"
+],
+"forbid": [
+"lite/C/en",
+"google"
+],
+"note": "RL-179: flash-lite, vendor dropped"
+},
+{
+"id": "N-22",
+"text": "We asked LLM 2 and LLM 3 to rate each answer.",
+"forbid": [
+"llm_2",
+"llm_3"
+],
+"note": "RL-179: generic names take no number",
+"expect": [
+"llm/C/focal"
+]
+},
+{
+"id": "N-23",
+"text": "We loaded the BioBERT v1.1 weights and AraBert-V01 embeddings for the baseline.",
+"expect": [
+"biobert_v1_1/C/focal",
+"arabert_v01/C/focal"
+],
+"forbid": [
+" bert_v1_1/",
+" bert_v01/"
+],
+"note": "RL-179: no join for a name inside a larger word"
+},
+{
+"id": "N-24",
+"text": "We compared BERT-mini with DeBERTa V324 on the benchmark.",
+"expect": [
+"bert/C/focal",
+"deberta/C/focal"
+],
+"forbid": [
+"bert_mini",
+"deberta_v324"
+],
+"note": "RL-179: BERT-mini is a size; a v-version with a glued citation is not joined"
+}
 ]
