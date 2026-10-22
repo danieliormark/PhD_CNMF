@@ -2117,8 +2117,8 @@ with inc_prepare). (5) **G3** (`g3_curation_v2.py` 2b2056484019): v3 matcher (v2
 `focal_terms_v3.py` and the group-4 rule pinned), the new lists and `g2_v3_1` as input, mentions in `term_rejections.tsv`
 skipped (`mention_rejected_stage_b`), identical focal_he of one parent merged (a name the parser split over two
 arguments; the glossary rule counts merged sides). Tests: self-test 54/54; hard cases 206/217 (new `hard_v3_terms.json`
-7/7; same 11 known failures). Shards 0 and 20 of `g2_v3_1`: 0 problems; 19,130 and 17,697 parents, 2,602 + … v3
-mentions (G4 2,602 in the two shards); shard 2: 9 rejected mentions skipped, 0 leaked. (6) CSF: `submit_g3_v2.sh` (50
+7/7; same 11 known failures). Shards 0 and 20 of `g2_v3_1`: 0 problems; 19,130 and 17,697 parents, 3,559 v3
+mentions in the two shards (2,602 group-4 names); shard 2: 9 rejected mentions skipped, 0 leaked. (6) CSF: `submit_g3_v2.sh` (50
 tasks → `PG/g3_v2/shards/`), `merge_g3_v2.py` (adds the occurrences file and its checks; tested on shard 0),
 `check_csf_g3_v2.sh` (incline reference `PG/g3_v2_csftest/reference_incline/`; run end to end on incline: ALL G3 CHECKS
 OK); all mirrored to `PG/scripts/g3_v2/`. Flagged, not acted on: group-4 false hits (BERTHELOT3, DeepPalm, Print-on-Palm,
