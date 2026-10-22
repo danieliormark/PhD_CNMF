@@ -126,7 +126,7 @@ system, app, method, tool, agent, pipeline, platform or library; rejected ones w
 and the like; all name groups decided both ways). Result: 151 mapped, 24 kept (formerly rejected: OntoGPT, TopicGPT,
 StructGPT, AugGPT, FrugalGPT, GPTArticleExtractor, ZoteroGPT, tpGPT, GPT4Designer, IoTGemini, GPTSwarm, ViperGPT,
 GPTCelltype …), 14 rejected (bert2BERT, GPTNeXt, GPTZip, InfoBERT, VisBERT …), plus 12 variants harmonised. Table now
-5,624 rows: 613 spellings rejected (2,387 occurrences), 1,554 mapped, 3,457 kept. Remaining case-differing groups were
+5,623 rows: 613 spellings rejected (2,387 occurrences), 1,546 mapped, 3,464 kept. Remaining case-differing groups were
 listed and read: all differ in meaning (above) or are citation variants of their base name.
 
 **Residual homonyms of listed names** (owner's question 1). ESM-2, BioBridge, ProGen and PaLM 2 are names of P2's list,
