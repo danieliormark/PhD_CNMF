@@ -46,6 +46,9 @@ focal term is one is removed — G3 does this, since such a sentence gets no par
 codes, "-based") is written as family + version, like its prose form: bert-base-uncased → `bert`, gemma-3-12b-it →
 `gemma_3`, gemini-2.5-pro → `gemini_2_5`, BERT-based → `bert` (the property word "based" of these 109 occurrences is not
 kept as an atom); GPT-35 (Azure's name) → `gpt_3_5`. 292 spellings, 1,561 occurrences change.
+*[2026-10-22, RL-177, owner: product tiers are kept (gemini_2_5_pro, gpt_4o_mini, gpt_4_turbo, claude_sonnet_4_5); the fold
+applies to every model name and to glued BERT-family settings; see G3_POSTPROCESSING.md §4. The examples above with pro,
+flash or turbo are superseded.]*
 
 ## RL-173: Haiku review of the remaining group-4 spellings (2026-10-22)
 

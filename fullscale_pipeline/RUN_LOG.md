@@ -2208,3 +2208,25 @@ prompt. Numbers (decimals included) and REF tokens (15,459) kept by the 2026-10-
    versions after two-word names ("Claude Sonnet 4.5" → `claude_sonnet` + `4.5`, ~2,400), DeepSeek-R1/V3 when G2 made
    the hyphen its own token (`deepseek` + `r1`/`v3`, ~2,000), snapshot codes (`1106`, `0613`, `0125`, ~300).
 Fixes need a G3 code change and a rerun (owner decision). [LOG]
+
+**RL-177 · 2026-10-22 · G3 v2 · CODE (model names; Stage B rejection case) + CHECK, rerun prepared · LIVE**
+Owner, on RL-176: implement fixes 1 and 2; for model + tier + version keep `claude_sonnet_4_5` ("different models of
+different power can be treated differently"); then, asked which words stay: product tiers stay, the rest is dropped.
+`g3_curation_v2.py` 5c23d9b1b915:
+1. Stage B term rejections compared without case (`load_rejections`, the mention filter).
+2. `fold_checkpoint` replaces the RL-172 regex: every model name, settings glued to a BERT-family name, leading `meta`
+   dropped; tiers kept (sonnet opus haiku pro flash lite mini nano turbo ultra max), Claude family + tier + version.
+3. Next-token join (`focal_mentions`): tiers, versions after a tier (Claude Sonnet 4.5) and month-day snapshot codes
+   join the name, also across a hyphen token; `max` only after Qwen; kept only when the covering sub-edge holds nothing
+   but the mention's atoms and connectors (`tight_cover`), and retried in the old form when it cannot be placed —
+   first version without this moved a focal atom over two clauses (a spurious parent) and lost 2 mentions in long lists.
+Tests: self-test 93/93 (6 tier expectations changed, 20 cases added); hard cases 215/226 (new
+`hard/hard_rl177_names.json` 9/9; the old script passes 2 of them); shards 0 and 20 against the RL-175 output: 1,007 of
+32,010 units change, only focal atoms: 1,178 tier/version/code atoms joined to their names (sonnet 239, pro 237, flash
+156, mini 147, turbo 118, opus 80, r1 47 …), 138 joins refused as not in the name's phrase, 3 retried in the old form; no
+word added, no parent count changed, cousins −1 per shard (a cousin made only of a joined token); mentions not placed
+19/13 → 18/13. Rejections on shards 1, 22, 28: 0 → 3, 2, 3 mentions; 2 articles become invalid (their only hits were
+homonyms, e.g. Geant4 `FTFP_BERT_HP`). Matcher gap noted, upstream: the lower-case hub spelling `xlm-roberta-base` is not
+matched by the v3 matcher at all (`XLM-RoBERTa-base` is). CSF check renewed (pins, 93/93, 215/226, reference from the
+new script; RL-174's kept as `reference_incline_rl174/`), passed on incline. RL-175 output moved to `PG/g3_v2_rl175/`.
+Owner: `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh`, then `sbatch PG/scripts/g3_v2/submit_g3_v2.sh`, then the merge. [LOG]

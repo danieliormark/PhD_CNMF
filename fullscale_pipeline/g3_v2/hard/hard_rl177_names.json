@@ -1,0 +1,11 @@
+[
+ {"id": "N-01", "text": "We compared DeepSeek-R1 and GPT-4o-mini on the benchmark.", "expect": ["deepseek_r1/C/focal", "gpt_4o_mini/C/focal"], "forbid": ["r1/C/en", "mini/C/en", "(focal_he deepseek/C/focal"], "note": "RL-177: a hyphen the parser made its own token is stepped over; tier kept"},
+ {"id": "N-02", "text": "Claude Sonnet 4.5 outperformed Claude 3.5 Sonnet on every task.", "expect": ["claude_sonnet_4_5/C/focal", "claude_sonnet_3_5/C/focal"], "forbid": ["4%2e5", "sonnet/C/en"], "note": "RL-177 (owner): Claude written family + tier + version in either order"},
+ {"id": "N-03", "text": "GPT-4 Turbo and Gemini 2.5 Pro answered all questions correctly.", "expect": ["gpt_4_turbo/C/focal", "gemini_2_5_pro/C/focal"], "forbid": ["turbo/C/en", "pro/C/en", "pro/M/en"], "note": "RL-177: tiers written as the next token are part of the name"},
+ {"id": "N-04", "text": "We accessed GPT-4 0613 through the API.", "expect": ["gpt_4/C/focal"], "forbid": ["0613"], "note": "RL-177: snapshot code after a version is dropped"},
+ {"id": "N-05", "text": "We set the GPT-4 max tokens parameter to 512.", "expect": ["gpt_4/C/focal"], "forbid": ["gpt_4_max"], "note": "RL-177: 'max' after a name is a tier only for Qwen"},
+ {"id": "N-06", "text": "GPT-4 answered 1000 questions in the test.", "expect": ["gpt_4/C/focal", "1000/"], "forbid": ["gpt_4_1000"], "note": "RL-177: a count is not a snapshot code"},
+ {"id": "N-07", "text": "Abstracts were classified with BERTbase and XLM-RoBERTa-base.", "expect": ["bert/C/focal", "xlm_roberta/C/focal"], "forbid": ["bertbase", "xlm_roberta_base"], "note": "RL-177: fold for every model name, glued settings (the v3 matcher does not match the lower-case hub spelling xlm-roberta-base at all: upstream, not a G3 case)"},
+ {"id": "N-08", "text": "We fine-tuned Meta-Llama-3-8B-Instruct and Qwen-Max on the notes.", "expect": ["llama_3/C/focal", "qwen_max/C/focal"], "forbid": ["meta_llama", "instruct"], "note": "RL-177: vendor prefix dropped; Qwen-Max tier kept"},
+ {"id": "N-09", "text": "Gemini Pro was less accurate than ChatGPT.", "expect": ["gemini_pro/C/focal", "chatgpt/C/focal"], "forbid": ["pro/C/en", "pro/M/en"], "note": "RL-177: tier without a version"}
+]

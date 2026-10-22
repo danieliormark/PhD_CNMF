@@ -117,6 +117,16 @@ Canonical form: lower case, separators → "_", a final ".0" dropped, a glued ve
   `bert`, gemma-3-12b-it → `gemma_3`, gemini-2.5-pro → `gemini_2_5`; "-based" dropped: BERT-based → `bert`); 292 spellings,
   1,561 occurrences; group-4 false hits rejected and glued citation numbers dropped through
   `g3_inputs_v3_1/decisions/g4_decisions.csv` (README there).]*
+- *[2026-10-22, RL-177, owner ("different models of different power can be treated differently"): **product tiers are kept**
+  (sonnet/opus/haiku, pro/flash/lite, mini/nano, turbo, ultra, max): gemini-2.5-pro → `gemini_2_5_pro`, gpt-4o-mini →
+  `gpt_4o_mini`, GPT-4 Turbo → `gpt_4_turbo`; Claude is family + tier + version whatever the order (Claude 3.5 Sonnet,
+  Claude Sonnet 3.5 → `claude_sonnet_3_5`). Still dropped: sizes, base/large, cased/uncased, multilingual,
+  instruct/chat/it, exp/preview/latest, `-based`, dates and snapshot codes. The fold now applies to every model name
+  (xlm-roberta-base → `xlm_roberta`, deberta-v3-large → `deberta_v3`), to settings glued to a BERT-family name (BERTbase →
+  `bert`) and drops a leading `meta` before llama. A tier, version or snapshot code written as the next token joins the
+  name (also across a hyphen the parser made its own token: DeepSeek-R1 parsed as deepseek - r1) only when it lies in the
+  name's own phrase of the parse; otherwise the mention keeps its RL-130 form, so no clause or parent changes. Stage B
+  term rejections are now compared without case (a bug: `BERT` was not matched by `bert`).]*
 
 ## 5. Provenance
 
@@ -1129,6 +1139,10 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    *[2026-10-22, RL-175: **run.** CSF check 23664260 (73/73, 206/217), array 23664753 (50/50 exit 0, 0 problems, script
    96b03a3c6cce), `merge_g3_v2.py --nshards 50` on incline: `PG/g3_v2/` with 41,778 valid, 615 invalid, 6,953 excluded
    articles (the other 206 listed exclusions are not in `g2_v3_1`). Summary copied to `g3_v2/g3_v2_summary.json`.]*
+   *[2026-10-22, RL-176/RL-177: pre-M1 audit (`g3_v2/audit_g3_v2.py`) found three name problems; fixed in the script
+   (5c23d9b1b915, §4 note of RL-177). Self-test 93/93, hard cases 215/226 (new set `hard_rl177_names.json` 9/9), CSF
+   reference renewed (RL-174's kept as `reference_incline_rl174/`), check passed on incline. The RL-175 output is moved to
+   `PG/g3_v2_rl175/`; the rerun writes `PG/g3_v2/` again. Submit order unchanged.]*
 
 ## 9. Files
 
@@ -1159,7 +1173,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 96b03a3c6cce (RL-174 and the RL-175 production run; 70984a47ac5a at RL-173, input hashes only; 2ac5a0d873f8 at RL-172, checkpoint names, group-4 decisions, statements; 2b2056484019 at RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 5c23d9b1b915 (RL-177, tiers kept, fold for every name, next-token join, case-free rejections; 96b03a3c6cce at RL-174 and the RL-175 production run; 70984a47ac5a at RL-173, input hashes only; 2ac5a0d873f8 at RL-172, checkpoint names, group-4 decisions, statements; 2b2056484019 at RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |
@@ -1172,7 +1186,8 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_v2/run_hard.py` (runs every hard-case set on the script; parses cached; since RL-151 with G2's sentence-cut rule; since RL-170 multi-unit sentence cases) | 79a8179adf74 (8b28758d27cd at RL-151, 80b9ca527b8f before) |
 | `fullscale_pipeline/g3_v2/hard/hard_d6_item11.json` (10 D6 / item 11 sentence cases, RL-170) | 32f339765a87 |
 | `fullscale_pipeline/g3_v2/hard/hard_v3_terms.json` (7 v3-name cases, RL-171) | fc7bcad542a4 |
-| `fullscale_pipeline/g3_v2/submit_g3_v2.sh`, `merge_g3_v2.py`, `check_csf_g3_v2.sh` (rerun on `g2_v3_1`, RL-171; mirrored) | 40d9f70116cd, 2962977e4449, 4f7f89429f8e (d58134a790e0 at RL-171) |
+| `fullscale_pipeline/g3_v2/submit_g3_v2.sh`, `merge_g3_v2.py`, `check_csf_g3_v2.sh` (rerun on `g2_v3_1`, RL-171; mirrored) | 40d9f70116cd, 2962977e4449, 70c77aeac8c8 (4f7f89429f8e at RL-174, d58134a790e0 at RL-171) |
+| `fullscale_pipeline/g3_v2/hard/hard_rl177_names.json` (9 model-name cases, RL-177); `audit_g3_v2.py`, `audit_g3_v2_pass2.py` (pre-M1 audit, RL-176) | a362fc48ff8e, cb629dc24af1 |
 | `fullscale_pipeline/g3_v2/reflexive_restore.py` (since RL-171 with `--coref`, `--shards`) | 3ba30cef21ee |
 | `fullscale_pipeline/g3_llm_output/build_llm_output_units.py` (since RL-171 with `--shards`, `--excluded`, `--matcher`) | c31cac2aecea |
 | `fullscale_pipeline/g3_inputs_v3_1/` (RL-171: `screen_item6.py` 84681b0c58e3, `write_item6_decisions.py` 124cd670b4aa, `decisions/item6_v3_1.csv` f6c78a2ec93a, `build_stage_b_rejections.py` 46893a6d5fde, `build_inputs_v3_1.py` c5d2290b2a53; list copies) | see README |

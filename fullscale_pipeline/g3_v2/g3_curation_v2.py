@@ -191,6 +191,7 @@ CITE_VALUE_WORDS = set('of to was were is are be been equals equal than by cost 
                        'around nearly over under with and or between top only all first last every each per page pages line '
                        'lines version n'.split())
 SCORE_TOKEN = re.compile(r'^0\.\d')
+SNAPSHOT_CODE = re.compile(r'^(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])$')              # RL-177: GPT-4 0613, 1106, 0125 (month + day)
 VERSION_TOKEN = re.compile(r'^(?:v\d+(?:\.\d+)*|[ro]\d+|\d(?:\.\d{1,2})?[a-z]{0,2})$', re.I)
 HYPHEN_CHARS = re.compile('[\u2010\u2011\u2013\u2014]')
 
@@ -310,22 +311,57 @@ SIZE_IN_NAME = {'esm-1b', 'esm-msa-1b', 'protst-esm-1b'}       # focal-list name
 
 
 # RL-172 (owner 2026-10-22): a checkpoint name is written like its prose form, family + version: the configuration after it
-# (size, base/large, cased/uncased, multilingual, language, instruct/it/chat, pro/flash, turbo, snapshot codes, '-based')
-# is dropped, as sizes and dates already were (2026-09-30): bert-base-uncased -> bert, gemma-3-12b-it -> gemma_3,
-# gemini-2.5-pro -> gemini_2_5, llama-7b -> llama. Only when the first part after the name is such a setting (BERT-CRF stays)
-CKPT_FAMILY = r'(bert|roberta|gpt|chatgpt|llama|gemini|mistral|mixtral|gemma|qwen|deepseek|claude|palm|t5|flan-t5)'
-CKPT_SETTING = (r'(?:base|large|small|tiny|mini|medium|xl|xxl|uncased|cased|multilingual|instruct|it|chat|pro|flash|lite|ultra|'
-                r'nano|turbo|exp|preview|latest|based|hf|\d+(?:\.\d+)?(?:x\d+)?[bm]|e\d+b|\d{3,4})')
-CKPT = re.compile(CKPT_FAMILY + r'((?:[- ]?\d+(?:\.\d+)?[a-z]?(?![\d.]*[bm](?:[-_ ]|$)))?)[-_ ]' + CKPT_SETTING + r'(?:[-_ ].*)?')
+# (size, base/large, cased/uncased, multilingual, language, instruct/it/chat, snapshot codes, '-based') is dropped, as sizes and
+# dates already were (2026-09-30): bert-base-uncased -> bert, gemma-3-12b-it -> gemma_3, llama-7b -> llama. Only when the first
+# part after the name and its versions is such a setting (BERT-CRF stays).
+# RL-177 (owner 2026-10-22, "different models of different power can be treated differently"): product tiers are part of the
+# name and kept (gemini-2.5-pro -> gemini_2_5_pro, gpt-4o-mini -> gpt_4o_mini, GPT-4 Turbo -> gpt_4_turbo); Claude is written
+# family + tier + version whatever the order (Claude 3.5 Sonnet, Claude Sonnet 3.5 -> claude_sonnet_3_5); the fold applies to
+# every model name, not only 15 families (xlm-roberta-base -> xlm_roberta, deberta-v3-large -> deberta_v3), also to settings
+# glued to a BERT-family name (BERTbase, RoBERTalarge -> bert, roberta); a leading 'meta' before llama is dropped (vendor).
+CKPT_TIER = {'sonnet', 'opus', 'haiku', 'pro', 'flash', 'lite', 'mini', 'nano', 'turbo', 'ultra', 'max'}
+CKPT_SETTING = re.compile(r'^(?:base|large|small|tiny|medium|xl|xxl|xlarge|xxlarge|uncased|cased|multilingual|instruct|it|chat|exp|'
+                          r'preview|latest|based|hf|\d+(?:\.\d+)?(?:x\d+)?[bmk]|e\d+b|\d{3,}|(?:19|20)\d\d\S*)$')
+CKPT_VERSION = re.compile(r'^(?:v?\d{1,2}(?:\.\d{1,2})*[a-z]{0,2}|[ro]\d+)$')
+CKPT_GLUED = re.compile(r'^(.*b(?:er)?t|.*berta)(base|large|uncased|cased)$')     # bertbase, robertalarge, phobertbase, albertbase
+
+
+def fold_checkpoint(s):
+    """family + versions + tiers of a lower-case model name; settings and everything after the first one dropped; None when the
+    name holds no setting or tier after its family (left to the other rules) or something unknown follows (BERT-CRF)"""
+    toks = []
+    for t in re.split(r'[\s_-]+', s.strip()):
+        m = CKPT_GLUED.match(t)
+        toks += [m.group(1), m.group(2)] if m and m.group(1) not in ('', 'ro') else [t]
+    known = lambda t: CKPT_SETTING.match(t) or CKPT_VERSION.match(t) or t in CKPT_TIER
+    i = next((k for k in range(1, len(toks)) if known(toks[k])), None)
+    if i is None:
+        return None
+    fam, vers, tiers, cut = toks[:i], [], [], False
+    for t in toks[i:]:
+        if CKPT_SETTING.match(t):                                         # a size ('7b') is a setting, not a version
+            cut = True; break
+        if CKPT_VERSION.match(t):
+            vers.append(t)
+        elif t in CKPT_TIER:
+            tiers.append(t)
+        else:
+            return None
+    if not cut and not tiers:
+        return None
+    if fam[:2] == ['meta', 'llama']:
+        fam = fam[1:]
+    parts = fam + (tiers + vers if fam == ['claude'] else [x for x in toks[i:i + len(vers) + len(tiers)]])
+    return "_".join(parts)
 
 
 def canonical(surface):
     """one canonical atom root per focal term: lower case, separators -> '_', '.0' dropped, a glued version split ('gpt4o' -> 'gpt_4o'),
     SYNONYMS applied. 'GPT-4', 'GPT4', 'GPT 4', 'GPT-4.0' -> gpt_4; 'LLMs', 'large language models' -> llm; 'GPT-4o' stays gpt_4o."""
     s = surface.lower().replace('‐', '-').replace('–', '-')
-    m = CKPT.fullmatch(s)
-    if m and s not in SIZE_IN_NAME:                                     # RL-172: checkpoint settings dropped
-        s = m.group(1) + m.group(2)
+    f = fold_checkpoint(s) if s not in SIZE_IN_NAME else None             # RL-172/RL-177: settings dropped, tiers kept
+    if f:
+        s = f
     s = re.sub(r'[\s\-_](?:(?:19|20)\d\d(?:-\d\d){0,2}|\d{4})$', '', s)   # snapshot date (owner 2026-09-30): gpt-4o-2024 -> gpt-4o
     if s not in SIZE_IN_NAME:
         s = re.sub(r'[\s\-_]\d+(?:\.\d+)?(?:x\d+)?[bm]$', '', s)         # model size (owner 2026-09-30): mistral-7b -> mistral
@@ -335,6 +371,8 @@ def canonical(surface):
     s = re.sub(r'[^a-z0-9_]', '', s).strip('_')
     s = re.sub(r'_+', '_', s)
     s = re.sub(r'^chat_gpt(?=_|$)', 'chatgpt', s)
+    s = re.sub(r'^gpt_35(?=_|$)', 'gpt_3_5', s)                           # RL-172: Azure's GPT-35(-turbo)
+    s = re.sub(r'^claude_(\d+(?:_\d+)?)_(sonnet|opus|haiku)$', r'claude_\2_\1', s)   # RL-177: tier before version
     s = SYNONYMS.get(s, s)
     m = re.fullmatch(VERSIONED + r'(\d[a-z0-9_]*)', s)
     if m:
@@ -360,20 +398,38 @@ def focal_mentions(matcher, text, a2w, anchored):
     for term, (a, b), surf in matcher.hits(text, anchored)[0]:
         pos = sorted(p for p, (s, e) in spans.items() if s < b and e > a)
         if not pos:
-            out.append((term, surf, canonical(surf), [])); continue
+            out.append((term, surf, canonical(surf), [], None)); continue
         ts, te = spans[pos[0]][0], spans[pos[-1]][1]
         if ts == a and te > b and VERSION_SUFFIX.match(text[b:te]):
             surf = text[a:te]
         # §6 item 8: a version written as the next token ("DeepSeek-V3", "ChatGPT 4o", "GPT 2") is part of the name, when the
         # name is a versioned family and has no version yet; a size token ("8B") is not (dropped as a model size)
-        later = [p for p in sorted(spans) if p > pos[-1]]
-        if later and re.fullmatch(VERSIONED, canonical(surf)) and not re.search(r'\d', canonical(surf)):
-            q = later[0]
-            gap, tokw = text[spans[pos[-1]][1]:spans[q][0]], text[spans[q][0]:spans[q][1]]
-            if gap in ('-', ' ', '\u2010', '\u2013', '- ') and VERSION_TOKEN.match(tokw) and not SIZE_RX.match(tokw.lower()) \
-                    and not VALUE_AFTER.match(text[spans[q][1]:]) and not SCORE_TOKEN.match(tokw):
-                pos = pos + [q]; surf = text[a:spans[q][1]]
-        out.append((term, surf, canonical(surf), pos))
+        base = None                                                       # RL-177: the mention as the RL-130 rule forms it
+        # RL-177: also a product tier ("Gemini 2.5 Pro", "GPT-4 Turbo", "GPT-4o mini", "Claude Sonnet 4.5": tier, then version) and a
+        # snapshot code after a version ("GPT-4 0613", dropped by canonical); a hyphen the parser made its own token is stepped over
+        # ("DeepSeek-R1" parsed as deepseek - r1); up to three tokens
+        for _ in range(3):
+            later = [p for p in sorted(spans) if p > pos[-1]]
+            c = canonical(surf)
+            if not later or not re.match(VERSIONED + r'(?:_|$)', c):
+                break
+            q, end = later[0], spans[pos[-1]][1]
+            gap, tokw = text[end:spans[q][0]], text[spans[q][0]:spans[q][1]]
+            if tokw in ('-', '\u2010', '\u2013') and gap == '' and len(later) > 1 and text[spans[q][1]:spans[later[1]][0]] == '':
+                q = later[1]; gap, tokw = '-', text[spans[q][0]:spans[q][1]]
+            if gap not in ('-', ' ', '\u2010', '\u2013', '- '):
+                break
+            has_version = bool(re.search(r'\d', c[len(re.match(VERSIONED, c).group(0)):]))
+            is_version = VERSION_TOKEN.match(tokw) and not SIZE_RX.match(tokw.lower()) and not VALUE_AFTER.match(text[spans[q][1]:]) \
+                and not SCORE_TOKEN.match(tokw)
+            if not ((is_version and not has_version) or (tokw.lower() in CKPT_TIER - ({'max'} if not c.startswith('qwen') else set()) and c.split('_')[-1] not in CKPT_TIER)
+                    or (has_version and SNAPSHOT_CODE.match(tokw))):
+                break
+            old_rule = base is None and is_version and re.fullmatch(VERSIONED, c) and q == later[0]
+            if base is None and not old_rule:
+                base = (surf, pos)
+            pos = pos + [q]; surf = text[a:spans[q][1]]
+        out.append((term, surf, canonical(surf), pos, base))
     return out
 
 
@@ -402,6 +458,18 @@ def replace_all(edge, mapping):
     if edge.is_atom():
         return mapping.get(str(edge), edge)
     return hedge(tuple(replace_all(c, mapping) for c in edge))
+
+
+def tight_cover(edge, need):
+    """RL-177: the smallest sub-edge holding every atom of need holds nothing else but connectors (a joined tier, version or
+    code belongs to the name's own phrase, not to a list or another clause)"""
+    path = smallest_cover(edge, {str(a) for a in need})
+    if path is None:
+        return False
+    sub = edge
+    for i in path:
+        sub = sub[i]
+    return all(str(a) in need or a.type()[:1] in ('B', 'J') or not re.search(r'[a-z0-9]', a.root(), re.I) for a in terminal(sub))
 
 
 def smallest_cover(edge, need):
@@ -1157,25 +1225,37 @@ def curate_unit(art, s, u, matcher, anchored, modals):
         edge, ctx.able = modal_merge.merge_unit(edge, u, ctx.stats)
     except Exception as e:                  # never lose a unit to the merge: it stays unmerged, and this is counted
         edge = hedge(u["main_edge"]); ctx.stats['modal_merge_error_' + type(e).__name__] += 1
-    ments = focal_mentions(matcher, u["text"], u["atom2word"], anchored)
+    by_pos0 = collections.defaultdict(list)
+    for a, w, p in u["atom2word"]:
+        by_pos0[p].append(a)
+    ments = []
+    for term, surf, canon, pos, base in focal_mentions(matcher, u["text"], u["atom2word"], anchored):
+        if base and not tight_cover(edge, {a for p in pos for a in by_pos0.get(p, [])}):   # RL-177: joined token elsewhere in
+            surf, pos = base; canon = canonical(surf); ctx.stats['mention_join_not_phrase'] += 1; base = None   # the parse: old kept
+        ments.append((term, surf, canon, pos, base))
     rej_s, rej_a = REJECT[0].get(s["sid"], ()), REJECT[1].get(art, ())   # RL-171: hits Stage B rejected stay rejected
-    kept_m = [m for m in ments if m[0] not in rej_s and m[0] not in rej_a]
+    kept_m = [m for m in ments if m[0].lower() not in rej_s and m[0].lower() not in rej_a]   # RL-177: 'BERT' = 'bert'
     ctx.stats['mention_rejected_stage_b'] += len(ments) - len(kept_m); ments = []
-    for term, surf, canon, pos in kept_m:                              # RL-172: group-4 decisions
+    for term, surf, canon, pos, base in kept_m:                        # RL-172: group-4 decisions
         d = g4_decision(term, art)
         if d and d[0] == 'reject':
             ctx.stats['mention_rejected_g4'] += 1; continue
         if d and d[0] == 'map':
             canon = canonical(d[1]); ctx.stats['mention_mapped_g4'] += 1
-        ments.append((term, surf, canon, pos))
-    covered = {p for *_, pos in ments for p in pos}
+        ments.append((term, surf, canon, pos, base))
+    covered = {p for m in ments for p in m[3]}
     by_pos = collections.defaultdict(list)
     for a, w, p in u["atom2word"]:
         by_pos[p].append(a)
     mrec = []
-    for term, surf, canon, pos in ments:
+    for term, surf, canon, pos, base in ments:
         need = {a for p in pos for a in by_pos.get(p, [])}
         how = 'no_atom'
+        if base and need and smallest_cover(edge, need) is None and not all({p for _, p in ctx.pos[a]} <= covered for a in need):
+            surf, pos = base; canon = canonical(surf); ctx.stats['mention_join_not_placed'] += 1; base = None   # RL-177: old form
+            need = {a for p in pos for a in by_pos.get(p, [])}
+        if base:
+            ctx.stats['mention_joined_rl177'] += 1
         if need:
             catom = hedge(f"{canon}/Cp/focal")
             mapping = {a: catom for a in need}
@@ -1291,7 +1371,7 @@ def load_rejections():
     """term_rejections.tsv: scope sentence (homonym rule, that sentence) or article (prerelease, F2 verdict, every sentence)"""
     sent, art = collections.defaultdict(set), collections.defaultdict(set)
     for r in csv.DictReader(open(TERM_REJECTIONS, encoding="utf-8"), delimiter="\t"):
-        (sent if r["scope"] == "sentence" else art)[r["key"]].add(r["term"])
+        (sent if r["scope"] == "sentence" else art)[r["key"]].add(r["term"].lower())   # RL-177: compared without case
     return dict(sent), dict(art)
 
 
@@ -1574,10 +1654,18 @@ CANON_CASES = [('LLMs', 'llm'), ('large language models', 'llm'), ('Large Langua
                ('ESM-1v', 'esm_1v'),
                # RL-172: checkpoint names written like their prose form
                ('bert-base-uncased', 'bert'), ('bert-base-chinese', 'bert'), ('roberta-large-mnli', 'roberta'), ('llama-7b', 'llama'),
-               ('gemma-3-12b-it', 'gemma_3'), ('gemini-2.5-pro', 'gemini_2_5'), ('gemini-1.5-flash-002', 'gemini_1_5'),
+               ('gemma-3-12b-it', 'gemma_3'), ('gemini-2.5-pro', 'gemini_2_5_pro'), ('gemini-1.5-flash-002', 'gemini_1_5_flash'),
                ('mistral-7b-instruct', 'mistral'), ('BERT-based', 'bert'), ('LLaMA-based', 'llama'), ('gemma-3n-e4b-it', 'gemma_3n'),
-               ('GPT-4-turbo', 'gpt_4'), ('gpt-4o-mini', 'gpt_4o'), ('Llama-3.1-8B-Instruct', 'llama_3_1'), ('BERT-CRF', 'bert_crf'),
-               ('bert-large', 'bert'), ('llama-2', 'llama_2'), ('GPT-3.5-turbo', 'gpt_3_5'), ('gpt-35-turbo', 'gpt_3_5')]
+               ('GPT-4-turbo', 'gpt_4_turbo'), ('gpt-4o-mini', 'gpt_4o_mini'), ('Llama-3.1-8B-Instruct', 'llama_3_1'), ('BERT-CRF', 'bert_crf'),
+               ('bert-large', 'bert'), ('llama-2', 'llama_2'), ('GPT-3.5-turbo', 'gpt_3_5_turbo'), ('gpt-35-turbo', 'gpt_3_5_turbo'),
+               # RL-177: tiers kept, every model name folded, glued BERT-family settings, Claude family + tier + version
+               ('BERTbase', 'bert'), ('RoBERTalarge', 'roberta'), ('phobertbase', 'phobert'), ('xlm-roberta-base', 'xlm_roberta'),
+               ('deberta-v3-large', 'deberta_v3'), ('distilbert-base-uncased', 'distilbert'), ('albert-base-v2', 'albert'),
+               ('meta-llama-3-8b-instruct', 'llama_3'), ('Claude 3.5 Sonnet', 'claude_sonnet_3_5'),
+               ('Claude Sonnet 4.5', 'claude_sonnet_4_5'), ('claude-3-5-sonnet-20241022', 'claude_sonnet_3_5'),
+               ('Claude-3-Opus', 'claude_opus_3'), ('Gemini 2.5 Pro', 'gemini_2_5_pro'), ('GPT-4 Turbo', 'gpt_4_turbo'),
+               ('GPT-4-1106-preview', 'gpt_4'), ('acegpt-7b-chat', 'acegpt'), ('hermes-2-pro-mistral', 'hermes_2_pro_mistral'),
+               ('e5-mistral-7b-ablation', 'e5_mistral'), ('multilingual BERT', 'multilingual_bert'), ('Robert', 'robert')]
 
 
 def unit(text, edge, words, lemmas):
