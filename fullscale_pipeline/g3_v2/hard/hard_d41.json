@@ -105,13 +105,16 @@
   "id": "D41-10",
   "text": "The LLM was evaluated with the score function fθ and the ΔAUC.",
   "expect": [
-   "%CE%B4auc/"
+   "llm/C/focal",
+   "score/"
   ],
   "forbid": [
    "fθ",
-   "f%ce%b8"
+   "f%ce%b8",
+   "%CE%B4auc",
+   "auc/"
   ],
-  "note": "a symbol with one Latin letter goes; a Greek-prefixed word stays"
+  "note": "a symbol with one Latin letter goes; a Greek-prefixed word stays [RL-180, owner: Greek notation dropped as a whole atom; was: expect %CE%B4auc/]"
  },
  {
   "id": "D41-11",

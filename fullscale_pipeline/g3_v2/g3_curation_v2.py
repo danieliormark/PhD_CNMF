@@ -42,7 +42,7 @@ chunk12 reads (('source_core', 'pmcid::uid::hash', parent), ('source_periphery',
 Checks at the end (exit 1 on any problem): input unit hashes, every output id and hash, every atom traced to a token position, every
 cousin's parents present, and with --db the database read back in chunk12's way.
 """
-import argparse, collections, contextlib, csv, hashlib, itertools, json, os, random, re, sys, time, urllib.parse
+import argparse, collections, contextlib, csv, hashlib, itertools, json, os, random, re, sys, time, unicodedata, urllib.parse
 
 sys.setrecursionlimit(20000)
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
@@ -61,7 +61,7 @@ STOP = {w.strip() for w in open(STOPWORDS, encoding="utf-8") if w.strip()}
 CUSTOM_NOISE = {'such', 'other', 'many', 'some', 'any', 'own', 'same', 'few', 'several', 'this', 'that', 'these', 'those', 'whilst'}
 NEGATION = {'not', 'no', 'never', "n't", 'nor'}
 AUXILIARIES = {'be', 'have', 'do'}
-MODAL_WORDS = {'can', 'could', 'may', 'might', 'must', 'shall', 'should', 'will', 'would', 'ca', 'wo', "'ll"}   # ca/wo: can't, won't
+MODAL_WORDS = {'can', 'could', 'may', 'might', 'must', 'shall', 'should', 'will', 'would', 'ca', 'wo', "'ll", "'d"}   # 'd: RL-180   # ca/wo: can't, won't
 CONNECTIVES = {'e.g.', 'eg', 'e.g', 'i.e.', 'ie', 'i.e', 'vs.', 'vs', 'v.', 'cf.', 'cf', 'etc.', 'etc', 'viz.', 'viz', 'et', 'al.', 'al',
                'et al.', 'resp.'}
 PHRASAL_PARTICLES = {'out', 'up', 'down', 'in', 'on', 'off', 'over'}
@@ -134,6 +134,7 @@ REFLEXIVE_TABLE = INPUTS + "reflexive_restored.jsonl"               # §6 item 8
 TERM_REJECTIONS = INPUTS + "term_rejections.tsv"                    # RL-171: focal hits Stage B rejected (sentence / article)
 G4_DECISIONS = INPUTS + "g4_decisions.csv"                          # RL-172: group-4 false hits (reject) and glued citations (map)
 STATEMENT_SENTENCES = INPUTS + "statement_sentences.csv"            # RL-172: AI-use statements found by the second check
+COMPOUND_FORMS = INPUTS + "compound_forms.tsv"                      # RL-180: spellings of one compound -> its most frequent form
 # §8 item 5 (owner 2026-10-10, RL-129): spaCy's rule lemmatiser gives an underscore-joined (out-of-vocabulary) word its first
 # suffix rule unchecked (pre_trained -> pre_traine, question_answering -> question_answere, second_best -> second_b). Where it
 # changed a joined word, the lemma is rebuilt as the part before the last "_" plus the lemma G2's parse gives the last part as a
@@ -153,6 +154,7 @@ INPUT_SHA[focal_terms.RULES + "focal_group4_rule.py"] = "70d88dcdf8e4"
 INPUT_SHA[TERM_REJECTIONS] = "1dcd13352f6a"
 INPUT_SHA[G4_DECISIONS] = "7e3732cb0cdb"                     # RL-174 (RL-173 05a32cbad7ce, RL-172 326130aeba60)
 INPUT_SHA[STATEMENT_SENTENCES] = "bfcb97d7b479"
+INPUT_SHA[COMPOUND_FORMS] = "1d1bc8c84b8a"                 # RL-180 (built from the RL-178 output)
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
 LAYOUT_WORDS = {'table', 'tables', 'tab', 'fig', 'figs', 'figure', 'figures', 'appendix', 'appendices', 'supplementary',
                 'panel', 'panels', 'equation', 'equations', 'eq', 'eqs'}
@@ -207,6 +209,21 @@ HYPHEN_CHARS = re.compile('[\u2010\u2011\u2013\u2014]')
 # CNN+LSTM, DALL·E) and stay; Aβ stays
 LIGATURES = {'ﬀ': 'ff', 'ﬁ': 'fi', 'ﬂ': 'fl', 'ﬃ': 'ffi', 'ﬄ': 'ffl', 'ﬅ': 'st', 'ﬆ': 'st'}
 SINGLE_QUOTES = re.compile("[‘’‚‛`´′]")
+# RL-180 (owner 2026-10-22): character clean-up of word atoms, applied after the model-name rules (focal atoms are not touched)
+INVISIBLE = re.compile('[\u200b-\u200f\u2060\ufeff\u00ad]')            # zero-width characters, soft hyphen
+GREEK = re.compile('[\u0370-\u03ff\u00b5\u2206]')                      # with ∆ (increment sign)
+GREEK_SPELLED = {'α': 'alpha', 'β': 'beta', 'γ': 'gamma', 'δ': 'delta', 'ε': 'epsilon', 'ϵ': 'epsilon', 'ζ': 'zeta', 'η': 'eta',
+                 'θ': 'theta', 'ι': 'iota', 'κ': 'kappa', 'λ': 'lambda', 'μ': 'mu', 'µ': 'mu', 'ν': 'nu', 'ξ': 'xi', 'π': 'pi',
+                 'ρ': 'rho', 'σ': 'sigma', 'ς': 'sigma', 'τ': 'tau', 'υ': 'upsilon', 'φ': 'phi', 'ϕ': 'phi', 'χ': 'chi', 'ψ': 'psi',
+                 'ω': 'omega'}
+GREEK_FIRST_NAMES = {'α_helix', 'π_stacking', 'nf_κb', 'ifn_γ', 'α_kg', 'β_chain', 'α_lipoic', 'α_ketoglutaric', 'α_pinene',
+                     'γh2ax', 'αβtcr', 'αβtcr_peptide_hla_i', 'αcdr3', 'βcdr3', 'αmhc', 'βmhc', 'tgfβr1', 'αbgtx', 'αcbtx',
+                     'δorf1', 'δorf3', 'δδg'}   # Greek letter first or inside, but a biomedical or chemical name (read, RL-180)
+GREEK_MICRO = {'μct': 'microct', 'µct': 'microct', 'μema': 'microema', 'µema': 'microema'}
+GREEK_END_NOTATION = {'scoreβ', 'oncologistχ', 'aucμ', 'prθ', 'casφ'}    # Greek letter last, but a variable (read, RL-180)
+COMPOUND_EXCEPT = {'pro_state', 'co_pilot', 're_agent', 'co_star', 're_present', 're_turn'}   # RL-180: read, a different word
+WORD_MAP = {'w/o': 'without'}
+LATIN_PLAIN = str.maketrans({'ı': 'i', 'ł': 'l', 'ø': 'o', 'đ': 'd', 'ð': 'd', 'ß': 'ss', 'æ': 'ae', 'œ': 'oe', 'þ': 'th'})   # no NFKD form
 CLITIC = re.compile(r"^'(?:s|m|d|t|ve|re|ll)\d*$")
 CLITIC_TAIL = re.compile(r"(?<=[a-z0-9])'(?:s|m|d|ve|re|ll)$")
 CLITIC_VERB = {"'s": 'be', "'m": 'be', "'re": 'be', "'ve": 'have', "'ll": 'will', "'d": 'would'}
@@ -250,13 +267,36 @@ def tidy_word(w):
 def clean_root(word):
     """§6 item 8: an atom's word cleaned of glued citation digits ('self_education,2', 'nccn)3'), edge punctuation, and with a
     Unicode hyphen inside it written as '_'; then D4.1's tidy_word; None if no letter is left"""
-    w = HYPHEN_CHARS.sub('_', word)
+    w = HYPHEN_CHARS.sub('_', INVISIBLE.sub('', word))
     w = re.sub(r'[,;.)\]]+\d+$', '', w)
     w = tidy_word(w)
     if w is None:
         return None
-    w = w.strip('.,;:()[]\'"')
+    w = w.strip('.,;:()[]\'"-_•·')                                         # RL-180: also hanging hyphens and bullets
     return w if re.search(r'[a-z]', w) else None
+
+
+def norm_word(w, forms=None):
+    """RL-180: final form of a word atom's root (after clean_root): Greek letters spelled out in names and the atom dropped (None)
+    when it is notation; accents removed; a hyphen inside written as '_'; spellings of one compound merged into its most frequent
+    form (forms: {letters without joiners: form}, from compound_forms.tsv) except the read exceptions"""
+    if GREEK.search(w):
+        if w in GREEK_MICRO:
+            w = GREEK_MICRO[w]
+        elif w in GREEK_FIRST_NAMES or ((re.search(r'[a-z0-9][\u0370-\u03ff\u00b5]+\d*$', w) or w.startswith('aβ'))
+                                        and w not in GREEK_END_NOTATION and not re.search(r'[,−+*;]', w)):
+            w = ''.join(GREEK_SPELLED.get(c, c) for c in w)
+        else:
+            return None
+        if GREEK.search(w):
+            return None
+    w = ''.join(c for c in unicodedata.normalize('NFKD', w) if not unicodedata.combining(c)).translate(LATIN_PLAIN).lower()
+    w = re.sub(r'[\s〈〉⟨⟩‹›«»†‡?]', '', w)                                  # no spaces (h˜i), angle brackets (〈sep〉), daggers
+    w = re.sub(r':\d+(?:\.\d+)?[bmk]$', '', w).strip('/')                    # size tags (vision:90b), slashes at the edges
+    w = re.sub(r'_+', '_', w.replace('-', '_')).strip('_')
+    if forms and w not in COMPOUND_EXCEPT:
+        w = forms.get(w.replace('_', ''), w)
+    return w or None
 
 
 # §6 item 8: units that parse to a parent but are not prose; glossary parents
@@ -535,7 +575,7 @@ def is_modal(a):
     """modal verb: type Mm, or a modal word the parser typed as another modifier ('can/M'); 'May' the month is C and not a modal"""
     t = a.type()
     return t.startswith('Mm') or (t.startswith('M') and not t.startswith(('Mv', 'Mn'))
-                                  and urllib.parse.unquote(a.root()).lower() in MODAL_WORDS)
+                                  and SINGLE_QUOTES.sub("'", urllib.parse.unquote(a.root()).lower()) in MODAL_WORDS)   # RL-180: ’ll
 
 
 def is_pred(a):
@@ -910,8 +950,10 @@ class Ctx:
             return self.decisions[key]
         out, modal, reason = None, None, None
         root, t = atom.root(), atom.type()
-        word = urllib.parse.unquote(root).lower()
+        word = INVISIBLE.sub('', urllib.parse.unquote(root).lower())          # RL-180: invisible characters removed
         lemma = self.lemma_of(atom)
+        if word in WORD_MAP:                                                  # RL-180: w/o -> without (then the stop list decides)
+            word = lemma = WORD_MAP[word]
         if str(atom) in self.able:
             out = hedge(f"{word}/M/en"); self.detail['modal_able'][word] += 1    # §6 item 3: "was able to offer" -> able offer
         elif is_focal(atom):
@@ -931,7 +973,8 @@ class Ctx:
             if q4_all(self, atom, lambda p: p in self.nontext_num):
                 reason = 'number_nontext'; self.detail['number_nontext'][word] += 1
             else:                                  # §6 item 8: plain-text numbers kept as written (0-10 as words rolled back, RL-119)
-                out = hedge(f"{root.lower()}/{'C' if t.startswith('C') else 'M'}/en"); self.detail['number_kept'][word] += 1
+                nroot = re.sub(r'(?<=\d)(?:,|%2c)(?=\d{3}(?!\d))', '', root.lower())   # graphbrain's encoding kept ('8%2e0')
+                out = hedge(f"{nroot}/{'C' if t.startswith('C') else 'M'}/en"); self.detail['number_kept'][word] += 1   # RL-180: 10,000 -> 10000
         elif not re.search(r'[a-z]', word):
             reason = 'no_letters'; self.detail['no_letters'][word] += 1
         elif URL_RX.match(word):
@@ -940,7 +983,7 @@ class Ctx:
             reason = 'model_size'; self.detail['model_size'][word] += 1       # §6 item 8
         elif word in COMPARE_WORDS and q4_all(self, atom, self.compares_number):
             out = hedge(f"{word}/M/en"); self.detail['comparison_kept'][word] += 1   # §6 item 8: "over 90%" keeps "over"
-        elif word in CONNECTIVES:
+        elif word in CONNECTIVES or word == 'and/or':                         # RL-180: and/or
             reason = 'connective'; self.detail['connective'][word] += 1
         elif Q4 and word in NEGATION and t.startswith('M') and q4_all(self, atom, lambda p: self.words.get(p + 1) in Q4_NOT_ONLY):
             drop = NOTONLY_DROP or (NOTONLY_MODE == 'paired' and q4_all(self, atom, lambda p: q4_paired(self, p)))
@@ -971,7 +1014,7 @@ class Ctx:
         elif t.startswith('Mv') and lemma in AUXILIARIES:
             reason = 'auxiliary'; self.detail['auxiliary_dropped'][lemma] += 1
         elif is_modal(atom):
-            lemma = {'ca': 'can', 'wo': 'will', "'ll": 'will'}.get(lemma, lemma)
+            lemma = {'ca': 'can', 'wo': 'will', "'ll": 'will', "'d": 'would'}.get(SINGLE_QUOTES.sub("'", word), lemma)   # RL-180: word, curly
             self.detail['modal'][lemma] += 1
             if self.modals == 'keep':
                 out = hedge(f"{lemma}/M/en")
@@ -995,9 +1038,13 @@ class Ctx:
                     self.stats['lemma_missing'] += 1
                 if f"{root}/{t[:1]}/en" in self.lemma_head:
                     self.stats['lemma_head_rule'] += 1; self.detail['lemma_head_rule'][f"{root} -> {lemma}"] += 1
-                lc = clean_root(urllib.parse.unquote(lemma).lower()) or lemma
-                lc = urllib.parse.quote(lc, safe="_-'&@+")                   # §6 item 8: symbols cleaned, hyphen -> _
-                out = class_collapse(hedge(f"{lc}/{t}/en"))
+                lc = clean_root(INVISIBLE.sub('', urllib.parse.unquote(lemma).lower())) or lemma
+                lc = norm_word(lc, FORMS)                                     # RL-180: Greek, accents, joiners, compounds
+                if lc is None or len(lc) == 1 or lc in ACTIVE_STOP:      # RL-180: the stop list again on the final form (öf -> of)
+                    reason = 'greek_notation' if lc is None else 'single_letter_or_symbol' if len(lc) == 1 else 'stoplist'
+                else:
+                    lc = urllib.parse.quote(lc, safe="_-'&@+")               # §6 item 8: symbols cleaned, hyphen -> _
+                    out = class_collapse(hedge(f"{lc}/{t}/en"))
         self.stats['atom_kept' if out is not None else 'atom_dropped'] += 1
         if reason:
             self.stats['drop_' + (reason if not reason.startswith('type_') else 'type')] += 1
@@ -1407,6 +1454,7 @@ def load_reflexives():
 
 
 REJECT = ({}, {})       # RL-171: ({sid: {term}}, {pmcid: {term}}) from TERM_REJECTIONS, set by run(); empty in the self-test
+FORMS = {}              # RL-180: {letters without joiners: written form} from COMPOUND_FORMS, set by run(); empty in the self-test
 G4D = {}                # RL-172: {(spelling, pmcid or '' or '*other'): (action, target)} from G4_DECISIONS, set by run()
 
 
@@ -1516,9 +1564,10 @@ def run(a):
             sys.exit(f"refusing to overwrite {p}")
     matcher = focal_terms.Matcher()
     excluded, llm_out, corrections = load_lists()
-    global REJECT, G4D
+    global REJECT, G4D, FORMS
     REJECT = load_rejections()
     G4D = load_g4()
+    FORMS = {r['key']: r['form'] for r in csv.DictReader(open(COMPOUND_FORMS, encoding='utf-8'), delimiter='\t')}
     statements = {r['sid']: r['hash_final'] for r in csv.DictReader(open(STATEMENT_SENTENCES, encoding='utf-8'))}   # RL-172
     reflexives = load_reflexives()
     nonprose, noparent, articles = [], [], []

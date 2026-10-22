@@ -1,0 +1,114 @@
+[
+{
+"id": "C-01",
+"text": "ChatGPT combined image- and text-based clinical data for the decision.",
+"expect": [
+"image/",
+"chatgpt/C/focal"
+],
+"forbid": [
+"image-",
+"image_"
+],
+"note": "RL-180: hanging hyphen removed, the word kept"
+},
+{
+"id": "C-02",
+"text": "The pretrained and pre-trained versions of BERT were compared.",
+"expect": [
+"bert/C/focal"
+],
+"forbid": [
+"pretrained/"
+],
+"note": "RL-180: spellings of one compound merged (needs the compound list: checked on shards)"
+},
+{
+"id": "C-03",
+"text": "ChatGPT showed a naïve view of the problem.",
+"expect": [
+"naive/"
+],
+"forbid": [
+"na%C3%AFve",
+"naïve"
+],
+"note": "RL-180: accents removed"
+},
+{
+"id": "C-04",
+"text": "BERT was trained on one million TCRβ sequences and HIF-1α targets.",
+"expect": [
+"tcrbeta/",
+"alpha/"
+],
+"forbid": [
+"%CE%B2",
+"%CE%B1"
+],
+"note": "RL-180: Greek letter in a name spelled out"
+},
+{
+"id": "C-05",
+"text": "As a measure for evaluating the LLM, μHuman is the actual grand mean and ΔAUC the change.",
+"expect": [
+"llm/C/focal"
+],
+"forbid": [
+"%CE%BC",
+"%CE%94",
+"human/",
+"auc/"
+],
+"note": "RL-180: Greek notation dropped as a whole atom"
+},
+{
+"id": "C-06",
+"text": "The “w/o structures” setting of the BERT baseline only uses ProtTrans embeddings.",
+"expect": [
+"without/",
+"bert/C/focal"
+],
+"forbid": [
+"w%2Fo",
+"w%2fo"
+],
+"note": "RL-180: w/o -> without when the parser reads it as a word; as a preposition or connector both are dropped by the type rule"
+},
+{
+"id": "C-07",
+"text": "ChatGPT said that it’ll guide the students and I’d be happy to help.",
+"expect": [
+"will/M/en",
+"chatgpt/C/focal"
+],
+"forbid": [
+"%E2%80%99ll",
+"%E2%80%99d"
+],
+"note": "RL-180: curly clitics through the modal rule"
+},
+{
+"id": "C-08",
+"text": "ChatGPT processed 10,000 clinical notes.",
+"expect": [
+"10000/"
+],
+"forbid": [
+"10%2C000"
+],
+"note": "RL-180: thousands comma removed"
+},
+{
+"id": "C-09",
+"text": "LLMs generated inaccurate and/or outdated answers.",
+"expect": [
+"llm/C/focal",
+"outdated/"
+],
+"forbid": [
+"and%2For"
+],
+"note": "RL-180: and/or dropped as a connective"
+}
+]

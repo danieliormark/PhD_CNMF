@@ -19141,5 +19141,780 @@
 36
 ]
 ]
+},
+"ChatGPT combined image- and text-based clinical data for the decision.": {
+"main_edge": "(combined/Pd.sox.<f-----/en chatgpt/Cp.s/en (+/B.am/. (based/Mv.<pf----/en ((image-/M/en and/Mj/en) text/Cc.s/en)) (clinical/Ma/en data/Cc.p/en)) (for/T/en (the/Md/en decision/Cc.s/en)))",
+"extra_edges": [
+"(_lemma based/M/en base/M/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma image-/M/en image-/M/en)",
+"(_lemma decision/C/en decision/C/en)",
+"(_lemma clinical/M/en clinical/M/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma data/C/en datum/C/en)",
+"(_lemma for/T/en for/T/en)",
+"(_lemma text/C/en text/C/en)",
+"(_lemma combined/P/en combine/P/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"combined/Pd.sox.<f-----/en",
+"combined",
+1
+],
+[
+"image-/M/en",
+"image-",
+2
+],
+[
+"and/Mj/en",
+"and",
+3
+],
+[
+"text/Cc.s/en",
+"text",
+4
+],
+[
+"based/Mv.<pf----/en",
+"based",
+6
+],
+[
+"clinical/Ma/en",
+"clinical",
+7
+],
+[
+"data/Cc.p/en",
+"data",
+8
+],
+[
+"for/T/en",
+"for",
+9
+],
+[
+"the/Md/en",
+"the",
+10
+],
+[
+"decision/Cc.s/en",
+"decision",
+11
+]
+]
+},
+"The pretrained and pre-trained versions of BERT were compared.": {
+"main_edge": "((were/Mv.<f-----/en compared/Pd.p.<pf----/en) (of/Br.ma/en (the/Md/en (+/B.am/. (+/B.am/. ((pretrained/Ma/en and/J/en) pre/C/en -/C/en) trained/C/en) versions/Cc.p/en)) bert/Cp.s/en))",
+"extra_edges": [
+"(_lemma pretrained/M/en pretrained/M/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma -/C/en -/C/en)",
+"(_lemma versions/C/en version/C/en)",
+"(_lemma compared/P/en compare/P/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma were/M/en be/M/en)",
+"(_lemma trained/C/en train/C/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma pre/C/en pre/C/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"pretrained/Ma/en",
+"pretrained",
+1
+],
+[
+"and/J/en",
+"and",
+2
+],
+[
+"pre/C/en",
+"pre",
+3
+],
+[
+"-/C/en",
+"-",
+4
+],
+[
+"trained/C/en",
+"trained",
+5
+],
+[
+"versions/Cc.p/en",
+"versions",
+6
+],
+[
+"of/Br.ma/en",
+"of",
+7
+],
+[
+"bert/Cp.s/en",
+"BERT",
+8
+],
+[
+"were/Mv.<f-----/en",
+"were",
+9
+],
+[
+"compared/Pd.p.<pf----/en",
+"compared",
+10
+]
+]
+},
+"ChatGPT showed a naïve view of the problem.": {
+"main_edge": "(showed/Pd.so.<f-----/en chatgpt/Cp.s/en (of/Br.ma/en (a/Md/en (naïve/Ma/en view/Cc.s/en)) (the/Md/en problem/Cc.s/en)))",
+"extra_edges": [
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma naïve/M/en naïve/M/en)",
+"(_lemma showed/P/en show/P/en)",
+"(_lemma problem/C/en problem/C/en)",
+"(_lemma view/C/en view/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma a/M/en a/M/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"showed/Pd.so.<f-----/en",
+"showed",
+1
+],
+[
+"a/Md/en",
+"a",
+2
+],
+[
+"naïve/Ma/en",
+"naïve",
+3
+],
+[
+"view/Cc.s/en",
+"view",
+4
+],
+[
+"of/Br.ma/en",
+"of",
+5
+],
+[
+"the/Md/en",
+"the",
+6
+],
+[
+"problem/Cc.s/en",
+"problem",
+7
+]
+]
+},
+"BERT was trained on one million TCRβ sequences and HIF-1α targets.": {
+"main_edge": "((was/Mv.<f-----/en trained/Pd.px.<pf----/en) bert/Cp.s/en (on/T/en (and/J/en (+/B.am/. (one/M#/en million/C#/en) (+/B.am/. tcrβ/Cp.s/en sequences/Cc.p/en)) (+/B.am/. hif-1α/Cc.s/en targets/Cc.p/en))))",
+"extra_edges": [
+"(_lemma tcrβ/C/en tcrβ/C/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma hif-1α/C/en hif-1α/C/en)",
+"(_lemma was/M/en be/M/en)",
+"(_lemma million/C/en million/C/en)",
+"(_lemma one/M/en one/M/en)",
+"(_lemma targets/C/en target/C/en)",
+"(_lemma trained/P/en train/P/en)",
+"(_lemma sequences/C/en sequence/C/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma on/T/en on/T/en)"
+],
+"atom2word": [
+[
+"bert/Cp.s/en",
+"BERT",
+0
+],
+[
+"was/Mv.<f-----/en",
+"was",
+1
+],
+[
+"trained/Pd.px.<pf----/en",
+"trained",
+2
+],
+[
+"on/T/en",
+"on",
+3
+],
+[
+"one/M#/en",
+"one",
+4
+],
+[
+"million/C#/en",
+"million",
+5
+],
+[
+"tcrβ/Cp.s/en",
+"TCRβ",
+6
+],
+[
+"sequences/Cc.p/en",
+"sequences",
+7
+],
+[
+"and/J/en",
+"and",
+8
+],
+[
+"hif-1α/Cc.s/en",
+"HIF-1α",
+9
+],
+[
+"targets/Cc.p/en",
+"targets",
+10
+]
+]
+},
+"As a measure for evaluating the LLM, μHuman is the actual grand mean and ΔAUC the change.": {
+"main_edge": "(and/J/en (is/Pd.xsc.|f--3s-/en (as/T/en (for/Jr.ma/en (a/Md/en measure/Cc.s/en) (evaluating/P.o.|pg----/en (the/Md/en llm/Cp.s/en)))) μhuman/Cc.s/en (the/Md/en (actual/Ma/en (grand/Ma/en mean/Cc.s/en)))) (+/B.mm/. δauc/Cc.s/en (the/Md/en change/Cc.s/en)))",
+"extra_edges": [
+"(_lemma llm/C/en llm/C/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma as/T/en as/T/en)",
+"(_lemma for/B/en for/B/en)",
+"(_lemma evaluating/P/en evaluate/P/en)",
+"(_lemma is/P/en be/P/en)",
+"(_lemma δauc/C/en δauc/C/en)",
+"(_lemma actual/M/en actual/M/en)",
+"(_lemma change/C/en change/C/en)",
+"(_lemma μhuman/C/en μhuman/C/en)",
+"(_lemma measure/C/en measure/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma grand/M/en grand/M/en)",
+"(_lemma mean/C/en mean/C/en)",
+"(_lemma a/M/en a/M/en)"
+],
+"atom2word": [
+[
+"as/T/en",
+"As",
+0
+],
+[
+"a/Md/en",
+"a",
+1
+],
+[
+"measure/Cc.s/en",
+"measure",
+2
+],
+[
+"for/Jr.ma/en",
+"for",
+3
+],
+[
+"evaluating/P.o.|pg----/en",
+"evaluating",
+4
+],
+[
+"the/Md/en",
+"the",
+5
+],
+[
+"llm/Cp.s/en",
+"LLM",
+6
+],
+[
+"μhuman/Cc.s/en",
+"μHuman",
+8
+],
+[
+"is/Pd.xsc.|f--3s-/en",
+"is",
+9
+],
+[
+"the/Md/en",
+"the",
+10
+],
+[
+"actual/Ma/en",
+"actual",
+11
+],
+[
+"grand/Ma/en",
+"grand",
+12
+],
+[
+"mean/Cc.s/en",
+"mean",
+13
+],
+[
+"and/J/en",
+"and",
+14
+],
+[
+"δauc/Cc.s/en",
+"ΔAUC",
+15
+],
+[
+"the/Md/en",
+"the",
+16
+],
+[
+"change/Cc.s/en",
+"change",
+17
+]
+]
+},
+"BERT was fine-tuned w/o the auxiliary loss.": {
+"main_edge": "((was/Mv.<f-----/en (fine/M/en tuned/Pd.px.<pf----/en)) bert/Cp.s/en (w%2fo/T/en (the/Md/en (auxiliary/Ma/en loss/Cc.s/en))))",
+"extra_edges": [
+"(_lemma tuned/P/en tune/P/en)",
+"(_lemma was/M/en be/M/en)",
+"(_lemma loss/C/en loss/C/en)",
+"(_lemma w%2fo/T/en w%2fo/T/en)",
+"(_lemma fine/M/en fine/M/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma auxiliary/M/en auxiliary/M/en)",
+"(_lemma bert/C/en bert/C/en)"
+],
+"atom2word": [
+[
+"bert/Cp.s/en",
+"BERT",
+0
+],
+[
+"was/Mv.<f-----/en",
+"was",
+1
+],
+[
+"fine/M/en",
+"fine",
+2
+],
+[
+"tuned/Pd.px.<pf----/en",
+"tuned",
+4
+],
+[
+"w%2fo/T/en",
+"w/o",
+5
+],
+[
+"the/Md/en",
+"the",
+6
+],
+[
+"auxiliary/Ma/en",
+"auxiliary",
+7
+],
+[
+"loss/Cc.s/en",
+"loss",
+8
+]
+]
+},
+"ChatGPT said that it’ll guide the students and I’d be happy to help.": {
+"main_edge": "(said/Pd.sr.<f-----/en chatgpt/Cp.s/en (and/J/en (that/T/en ((’ll/Mm/en guide/P.so.-i-----/en) it/Ci/en (the/Md/en students/Cc.p/en))) ((’d/Mm/en be/Pd.sc.-i-----/en) i/Ci/en ((to/Mi/en help/P.c.-i-----/en) happy/Ca/en))))",
+"extra_edges": [
+"(_lemma it/C/en it/C/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma students/C/en student/C/en)",
+"(_lemma and/J/en and/J/en)",
+"(_lemma ’d/M/en ’d/M/en)",
+"(_lemma ’ll/M/en ’ll/M/en)",
+"(_lemma to/M/en to/M/en)",
+"(_lemma said/P/en say/P/en)",
+"(_lemma happy/C/en happy/C/en)",
+"(_lemma guide/P/en guide/P/en)",
+"(_lemma be/P/en be/P/en)",
+"(_lemma that/T/en that/T/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma i/C/en i/C/en)",
+"(_lemma help/P/en help/P/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"said/Pd.sr.<f-----/en",
+"said",
+1
+],
+[
+"that/T/en",
+"that",
+2
+],
+[
+"it/Ci/en",
+"it",
+3
+],
+[
+"’ll/Mm/en",
+"’ll",
+4
+],
+[
+"guide/P.so.-i-----/en",
+"guide",
+5
+],
+[
+"the/Md/en",
+"the",
+6
+],
+[
+"students/Cc.p/en",
+"students",
+7
+],
+[
+"and/J/en",
+"and",
+8
+],
+[
+"i/Ci/en",
+"I",
+9
+],
+[
+"’d/Mm/en",
+"’d",
+10
+],
+[
+"be/Pd.sc.-i-----/en",
+"be",
+11
+],
+[
+"happy/Ca/en",
+"happy",
+12
+],
+[
+"to/Mi/en",
+"to",
+13
+],
+[
+"help/P.c.-i-----/en",
+"help",
+14
+]
+]
+},
+"ChatGPT processed 10,000 clinical notes.": {
+"main_edge": "(processed/Pd.so.<f-----/en chatgpt/Cp.s/en (10,000/M#/en (clinical/Ma/en notes/Cc.p/en)))",
+"extra_edges": [
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma 10,000/M/en 10,000/M/en)",
+"(_lemma clinical/M/en clinical/M/en)",
+"(_lemma processed/P/en process/P/en)",
+"(_lemma notes/C/en note/C/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"processed/Pd.so.<f-----/en",
+"processed",
+1
+],
+[
+"10,000/M#/en",
+"10,000",
+2
+],
+[
+"clinical/Ma/en",
+"clinical",
+3
+],
+[
+"notes/Cc.p/en",
+"notes",
+4
+]
+]
+},
+"LLMs generated inaccurate and/or outdated answers.": {
+"main_edge": "(generated/Pd.so.<f-----/en llms/Cc.p/en (+/B.am/. ((inaccurate/Ma/en and%2for/Mj/en) outdated/Ca/en) answers/Cc.p/en))",
+"extra_edges": [
+"(_lemma answers/C/en answer/C/en)",
+"(_lemma and%2for/J/en and%2for/J/en)",
+"(_lemma inaccurate/M/en inaccurate/M/en)",
+"(_lemma llms/C/en llm/C/en)",
+"(_lemma generated/P/en generate/P/en)",
+"(_lemma outdated/C/en outdated/C/en)"
+],
+"atom2word": [
+[
+"llms/Cc.p/en",
+"LLMs",
+0
+],
+[
+"generated/Pd.so.<f-----/en",
+"generated",
+1
+],
+[
+"inaccurate/Ma/en",
+"inaccurate",
+2
+],
+[
+"and%2for/Mj/en",
+"and/or",
+3
+],
+[
+"outdated/Ca/en",
+"outdated",
+4
+],
+[
+"answers/Cc.p/en",
+"answers",
+5
+]
+]
+},
+"Results of BERT (w/o LT) were lower than those of the full model.": {
+"main_edge": "(were/Pd.sc.<f-----/en (of/Br.ma/en results/Cc.p/en (w%2fo/Br.ma/en bert/Cp.s/en lt/Cp.s/en)) (than/Br.ma/en lower/Ca/en (of/Br.ma/en those/Cd/en (the/Md/en (full/Ma/en model/Cc.s/en)))))",
+"extra_edges": [
+"(_lemma full/M/en full/M/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma than/B/en than/B/en)",
+"(_lemma w%2fo/B/en w%2fo/B/en)",
+"(_lemma were/P/en be/P/en)",
+"(_lemma results/C/en result/C/en)",
+"(_lemma those/C/en those/C/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma lt/C/en lt/C/en)",
+"(_lemma lower/C/en low/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma model/C/en model/C/en)"
+],
+"atom2word": [
+[
+"results/Cc.p/en",
+"Results",
+0
+],
+[
+"of/Br.ma/en",
+"of",
+1
+],
+[
+"bert/Cp.s/en",
+"BERT",
+2
+],
+[
+"w%2fo/Br.ma/en",
+"w/o",
+4
+],
+[
+"lt/Cp.s/en",
+"LT",
+5
+],
+[
+"were/Pd.sc.<f-----/en",
+"were",
+7
+],
+[
+"lower/Ca/en",
+"lower",
+8
+],
+[
+"than/Br.ma/en",
+"than",
+9
+],
+[
+"those/Cd/en",
+"those",
+10
+],
+[
+"of/Br.ma/en",
+"of",
+11
+],
+[
+"the/Md/en",
+"the",
+12
+],
+[
+"full/Ma/en",
+"full",
+13
+],
+[
+"model/Cc.s/en",
+"model",
+14
+]
+]
+},
+"The “w/o structures” setting of the BERT baseline only uses ProtTrans embeddings.": {
+"main_edge": "((only/M/en uses/Pd.so.|f--3s-/en) (of/Br.ma/en (the/Md/en (+/B.am/. (+/B.aa/. w%2fo/Cm/en structures/Cm/en) setting/Cc.s/en)) (the/Md/en (+/B.am/. bert/Cp.s/en baseline/Cc.s/en))) (+/B.am/. prottrans/Cp.s/en embeddings/Cc.p/en))",
+"extra_edges": [
+"(_lemma prottrans/C/en prottrans/C/en)",
+"(_lemma of/B/en of/B/en)",
+"(_lemma bert/C/en bert/C/en)",
+"(_lemma only/M/en only/M/en)",
+"(_lemma embeddings/C/en embedding/C/en)",
+"(_lemma structures/C/en structure/C/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma uses/P/en use/P/en)",
+"(_lemma w%2fo/C/en w%2fo/C/en)",
+"(_lemma setting/C/en setting/C/en)",
+"(_lemma baseline/C/en baseline/C/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"w%2fo/Cm/en",
+"w/o",
+2
+],
+[
+"structures/Cm/en",
+"structures",
+3
+],
+[
+"setting/Cc.s/en",
+"setting",
+5
+],
+[
+"of/Br.ma/en",
+"of",
+6
+],
+[
+"the/Md/en",
+"the",
+7
+],
+[
+"bert/Cp.s/en",
+"BERT",
+8
+],
+[
+"baseline/Cc.s/en",
+"baseline",
+9
+],
+[
+"only/M/en",
+"only",
+10
+],
+[
+"uses/Pd.so.|f--3s-/en",
+"uses",
+11
+],
+[
+"prottrans/Cp.s/en",
+"ProtTrans",
+12
+],
+[
+"embeddings/Cc.p/en",
+"embeddings",
+13
+]
+]
 }
 }

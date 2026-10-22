@@ -112,33 +112,36 @@
   "id": "L11",
   "text": "The set_ups of the ChatGPT experiments were described in detail.",
   "expect": [
-   "set_up/"
+   "setup/"
   ],
   "forbid": [
-   "set_ups/"
+   "set_ups/",
+   "set_up/"
   ],
-  "note": "plural noun, last part without a plain-word lemma of its own: spaCy's -s rule kept"
+  "note": "plural noun, last part without a plain-word lemma of its own: spaCy's -s rule kept [RL-180: spellings merged into the most frequent form, setup; was: expect set_up/]"
  },
  {
   "id": "L12",
   "text": "The authors tested the plug_ins of ChatGPT.",
   "expect": [
-   "plug_in/"
+   "plugin/"
   ],
   "forbid": [
-   "plug_ins/"
+   "plug_ins/",
+   "plug_in/"
   ],
-  "note": "plural noun: spaCy's -s rule kept"
+  "note": "plural noun: spaCy's -s rule kept [RL-180: merged into plugin; was: expect plug_in/]"
  },
  {
   "id": "L13",
   "text": "Four sub_specialties were covered by GPT-4.",
   "expect": [
-   "sub_specialty/"
+   "subspecialty/"
   ],
   "forbid": [
-   "sub_specialtie/"
+   "sub_specialtie/",
+   "sub_specialty/"
   ],
-  "note": "plural noun with a plain-word lemma: rebuilt"
+  "note": "plural noun with a plain-word lemma: rebuilt [RL-180: merged into subspecialty; was: expect sub_specialty/]"
  }
 ]
