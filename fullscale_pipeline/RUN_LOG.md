@@ -2157,3 +2157,16 @@ rows, 644 spellings rejected (2,623 occurrences), 1,404 mapped. G3 `g3_curation_
 changed). Self-test 73/73, hard cases 206/217; shards 0/20 0 problems, mentions rejected 46/145; CSF check reference
 renewed (RL-172's kept), passed on incline; mirrored. Method, prompt, calibration and costs (1,995,419 tokens by the
 agents' reports): `g3_inputs_v3_1/README.md`; all verdicts `g4_haiku_verdicts.csv`. [LOG]
+
+**RL-174 · 2026-10-22 · G3: one model/method line applied to the group-4 boundary; residual homonyms · DECISIONS · LIVE**
+Owner (questions on RL-173, then "proceed as proposed"): one explicit line for the boundary, pipelines mapped to their
+model, residual homonyms of listed names checked. Line (`g3_inputs_v3_1/g4_boundary_decisions.py`): keep when the name's
+outputs are produced by a language model; map a use or configuration of a specific model (labels, "-based", compounds,
+adapters, modules, glossary letters, misspellings); reject procedures on models, detectors, metrics, non-generative
+tools, data and notation, non-language networks. 479 boundary spellings read: 151 mapped, 24 kept (OntoGPT, TopicGPT,
+GPTCelltype …, formerly rejected), 14 rejected; variants by separators/citation follow, case-sensitive (12 case
+variants decided explicitly). `g4_decisions.csv` 7e3732cb0cdb: 613 rejected (2,387 occurrences). Homonym search of ESM-2,
+PaLM 2, ProGen, BioBridge over all kept mentions: one false article (PMC11320226: BioBridge rib plate and C. R. Bard mesh)
+excluded; Bard-company sentences in 2 more articles rejected (`decisions/manual_homonyms_rl174.csv`). Exclusions 7,159,
+term rejections 703. G3 96b03a3c6cce (input hashes only); self-test 73/73, hard 206/217; shards 0/20 0 problems; CSF
+reference renewed (RL-173's kept), check passed on incline; mirrored. Details: `g3_inputs_v3_1/README.md`. [LOG]

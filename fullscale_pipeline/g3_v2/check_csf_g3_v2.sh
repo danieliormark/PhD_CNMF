@@ -28,7 +28,7 @@ set -o pipefail
 fail() { echo "PROBLEM: $1"; echo "SOME G3 CHECKS FAILED"; exit 1; }
 
 echo; echo "== 1. script hashes"
-for x in "g3_curation_v2.py 70984a47ac5a" "modal_merge.py 75c7022ac187" "run_hard.py 79a8179adf74"; do
+for x in "g3_curation_v2.py 96b03a3c6cce" "modal_merge.py 75c7022ac187" "run_hard.py 79a8179adf74"; do
     set -- $x; got=$(sha256sum $D/$1 | cut -c1-12)
     echo "$1 $got"; [ "$got" = "$2" ] || fail "$1 sha256 $got, expected $2"
 done

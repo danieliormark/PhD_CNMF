@@ -1154,6 +1154,7 @@ PMC11316927,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11319878,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11320145,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11320147,transformer_only_not_llm,no LLM-related transformer in analysed text
+PMC11320226,name_homonym,name_homonym: Bard (C. R. Bard medical devices) and BioBridge (rib plate); no LLM content
 PMC11320496,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11320516,transformer_only_not_llm,no LLM-related transformer in analysed text
 PMC11320696,transformer_only_not_llm,no LLM-related transformer in analysed text

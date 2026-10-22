@@ -1,0 +1,4 @@
+scope,key,term,reason
+exclude,PMC11320226,,name_homonym: Bard (C. R. Bard medical devices) and BioBridge (rib plate); no LLM content
+sentence,PMC12492233.r1.L184.S7,Bard,homonym: Bard the medical-device company
+sentence,PMC11066324.r1.L114.S7,Bard,homonym: Bard the medical-device company

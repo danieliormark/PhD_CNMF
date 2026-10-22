@@ -6,6 +6,7 @@
   RL-172: scope_exclusions.csv also holds the articles whose only focal sentences are AI-use statements found by the
   second statement check (statement_sentences.csv, retrieval/stmt_check2.py; reason ai_use_statement_only, as F1);
   g4_decisions.csv is copied from decisions/ (write_g4_decisions.py)
+  RL-174: decisions/manual_homonyms_rl174.csv adds read homonyms: article exclusions and sentence rejections
     python3 build_inputs_v3_1.py
 """
 import csv, glob, json, os, re, sys, collections
@@ -68,6 +69,10 @@ if __name__ == "__main__":
             rows[pm] = (pm, "ai_use_statement_only", "second statement check (RL-172)"); c["new: statement only"] += 1
     import shutil
     shutil.copy(os.path.join(HERE, "decisions", "g4_decisions.csv"), OUT + "g4_decisions.csv")
+    manual = list(csv.DictReader(open(os.path.join(HERE, "decisions", "manual_homonyms_rl174.csv"))))   # RL-174
+    for r in manual:
+        if r["scope"] == "exclude" and r["key"] not in rows:
+            rows[r["key"]] = (r["key"], "name_homonym", r["reason"]); c["new: manual homonym exclusion"] += 1
     c["excluded, in g2_v3_1"] = len(set(rows) & arts); c["excluded, not in g2_v3_1 (Stage B or earlier)"] = len(set(rows) - arts)
     c["total excluded"] = len(rows)
     with open(OUT + "scope_exclusions.csv", "w", newline="") as f:
@@ -81,5 +86,8 @@ if __name__ == "__main__":
             if i and key.split(".")[0] in LIFT:
                 c["rejections lifted"] += 1; continue
             fo.write(line); n += i > 0
+        for r in manual:                                                              # RL-174: read by the assistant
+            if r["scope"] == "sentence":
+                fo.write(f"sentence\t{r['key']}\t{r['term']}\tmanual_homonym\n"); n += 1; c["manual sentence rejections"] += 1
     c["term rejections"] = n
     print(json.dumps(dict(c), indent=1))

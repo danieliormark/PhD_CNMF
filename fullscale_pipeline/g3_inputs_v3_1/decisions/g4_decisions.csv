@@ -296,7 +296,7 @@ ArabicBERT26,,map,ArabicBERT,glued citation number,citation rule
 AstroLLaMA64,,map,AstroLLaMA,glued citation number,citation rule
 Attr-BERT18,,map,Attr-BERT,glued citation number,citation rule
 AttriBERT57,,map,AttriBERT,glued citation number,citation rule
-AugGPT38,,map,AugGPT,glued citation number,citation rule
+AugGPT38,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 AutoGPT16,,map,AutoGPT,glued citation number,citation rule
 AutoGPT26,,map,AutoGPT,glued citation number,citation rule
 AutoGPT34,,map,AutoGPT,glued citation number,citation rule
@@ -730,8 +730,8 @@ Flan-PaLM19,,map,Flan-PaLM,glued citation number,citation rule
 Flan-PaLM21,,map,Flan-PaLM,glued citation number,citation rule
 FlauBERT37,,map,FlauBERT,glued citation number,citation rule
 FlauBERT38,,map,FlauBERT,glued citation number,citation rule
-FrugalGPT15,,map,FrugalGPT,glued citation number,citation rule
-FrugalGPT57,,map,FrugalGPT,glued citation number,citation rule
+FrugalGPT15,,keep,,boundary review: outputs produced by a language model,read (RL-174)
+FrugalGPT57,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 G-BERT28,,map,G-BERT,glued citation number,citation rule
 G-BERT38,,map,G-BERT,glued citation number,citation rule
 G-BERT48,,map,G-BERT,glued citation number,citation rule
@@ -830,7 +830,7 @@ KeyBERT29,,map,KeyBERT,glued citation number,citation rule
 KeyBERT31,,map,KeyBERT,glued citation number,citation rule
 KeyBERT61,,map,KeyBERT,glued citation number,citation rule
 KeyBERT80,,map,KeyBERT,glued citation number,citation rule
-KnGPT18,,map,KnGPT,glued citation number,citation rule
+KnGPT18,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 KoBERT31,,map,KoBERT,glued citation number,citation rule
 KrissBERT27,,map,KrissBERT,glued citation number,citation rule
 KrissBert53,,map,KrissBert,glued citation number,citation rule
@@ -1035,7 +1035,7 @@ MotionBERT18,,map,MotionBERT,glued citation number,citation rule
 MotionBERT30,,map,MotionBERT,glued citation number,citation rule
 MyCrunchGPT19,,map,MyCrunchGPT,glued citation number,citation rule
 NavGPT38,,map,NavGPT,glued citation number,citation rule
-OntoGPT16,,map,OntoGPT,glued citation number,citation rule
+OntoGPT16,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 OpticalBERT28,,map,OpticalBERT,glued citation number,citation rule
 PAL-BERT41,,map,PAL-BERT,glued citation number,citation rule
 PMC-LLaMA11,,map,PMC-LLaMA,glued citation number,citation rule
@@ -1159,7 +1159,7 @@ PubMedGPT12,,map,PubMedGPT,glued citation number,citation rule
 PubMedGPT19,,map,PubMedGPT,glued citation number,citation rule
 PubMedGPT25,,map,PubMedGPT,glued citation number,citation rule
 PubmedBERT23,,map,PubmedBERT,glued citation number,citation rule
-QuantGPT17,,map,QuantGPT,glued citation number,citation rule
+QuantGPT17,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 R-BERT17,,map,R-BERT,glued citation number,citation rule
 R-BERT30,,map,R-BERT,glued citation number,citation rule
 R-GAT+BERT25,,map,R-GAT+BERT,glued citation number,citation rule
@@ -1265,8 +1265,8 @@ SikuBERT28,,map,SikuBERT,glued citation number,citation rule
 SkinGPT45,,map,SkinGPT,glued citation number,citation rule
 SocBERT11,,map,SocBERT,glued citation number,citation rule
 SpanBERT40,,map,SpanBERT,glued citation number,citation rule
-SparseGPT19,,map,SparseGPT,glued citation number,citation rule
-SparseGPT23,,map,SparseGPT,glued citation number,citation rule
+SparseGPT19,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
+SparseGPT23,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 SpectralGPT150,,map,SpectralGPT,glued citation number,citation rule
 SpikeGPT28,,map,SpikeGPT,glued citation number,citation rule
 SpikeGPT84,,map,SpikeGPT,glued citation number,citation rule
@@ -1298,7 +1298,7 @@ TinyLlama14,,map,TinyLlama,glued citation number,citation rule
 TinyLlama32,,map,TinyLlama,glued citation number,citation rule
 TinyLlama52,,map,TinyLlama,glued citation number,citation rule
 TinyLlama61,,map,TinyLlama,glued citation number,citation rule
-TopicGPT59,,map,TopicGPT,glued citation number,citation rule
+TopicGPT59,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 TrafficGPT19,,map,TrafficGPT,glued citation number,citation rule
 TrialGPT10,,map,TrialGPT,glued citation number,citation rule
 TrialGPT12,,map,TrialGPT,glued citation number,citation rule
@@ -1351,8 +1351,8 @@ Yield-BERT40,,map,Yield-BERT,glued citation number,citation rule
 Yield-BERT43,,map,Yield-BERT,glued citation number,citation rule
 YieldBERT36,,map,YieldBERT,glued citation number,citation rule
 adapter-BERT17,,map,adapter-BERT,glued citation number,citation rule
-bert2BERT39,,map,bert2BERT,glued citation number,citation rule
-bert2BERT43,,map,bert2BERT,glued citation number,citation rule
+bert2BERT39,,reject,,boundary review: outputs not produced by a language model (as bert2BERT),"read (RL-174, variant)"
+bert2BERT43,,reject,,boundary review: outputs not produced by a language model (as bert2BERT),"read (RL-174, variant)"
 bioClinicalBERT13,,map,bioClinicalBERT,glued citation number,citation rule
 bioClinicalBERT18,,map,bioClinicalBERT,glued citation number,citation rule
 bioGPT21,,map,bioGPT,glued citation number,citation rule
@@ -1370,7 +1370,7 @@ distilBERT21,,map,distilBERT,glued citation number,citation rule
 distilBERT28,,map,distilBERT,glued citation number,citation rule
 distilBERT87,,map,distilBERT,glued citation number,citation rule
 ehrBERT59,,map,ehrBERT,glued citation number,citation rule
-exBERT38,,map,exBERT,glued citation number,citation rule
+exBERT38,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 glyBERT46,,map,glyBERT,glued citation number,citation rule
 iEnhancer-BERT36,,map,iEnhancer-BERT,glued citation number,citation rule
 iGPT19,,map,iGPT,glued citation number,citation rule
@@ -1392,7 +1392,7 @@ nanoGPT43,,map,nanoGPT,glued citation number,citation rule
 nanoGPT61,,map,nanoGPT,glued citation number,citation rule
 ntBERT35,,map,ntBERT,glued citation number,citation rule
 ntBERT79,,map,ntBERT,glued citation number,citation rule
-ontoGPT21,,map,ontoGPT,glued citation number,citation rule
+ontoGPT21,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 pBERT45,,map,pBERT,glued citation number,citation rule
 plRoBERTa37,,map,plRoBERTa,glued citation number,citation rule
 polyBERT101,,map,polyBERT,glued citation number,citation rule
@@ -1487,7 +1487,7 @@ SmilesBERT,,keep,,SMILES BERT model family for compound prediction,haiku
 BioBERTv1.1,,keep,,BioBERT v1.1 model with 12 transformer layers,haiku
 CT-Foundation-Gemini,,keep,,"Based on Google Gemini architecture, pretrained on CT scans",haiku
 PhoBERT-Softmax,,keep,,"PhoBERT with softmax head, used as baseline model",haiku
-variants.DNABERT+Output,,keep,,DNABERT model variant with output head in DNABERT framework,haiku
+variants.DNABERT+Output,,map,DNABERT,boundary review: use or configuration of the model,read (RL-174)
 BERTgrid15,,keep,,BERT-based grid model for document information extraction,haiku
 ALBERT.14,,map,ALBERT,glued citation number,citation rule (Haiku: model)
 KoRoBERTa,,keep,,Korean RoBERTa model compared with KoBERT and KcBERT,haiku
@@ -1512,7 +1512,7 @@ GPT4vision,,keep,,"OpenAI GPT-4 vision model, multimodal LLM product",haiku
 DFCI-ImagingBERT,,keep,,Fine-tuned BERT model for imaging reports,haiku
 MedgebraGPT-4o,,keep,,Chatbot listed alongside ChatGPT-4o and Gemini,haiku
 jBioBERT,,keep,,BioBERT variant for biomedical text mining,haiku
-heatmap.MMBERT,,keep,,"MMBERT model in hybrid framework, heatmap prefix glued on",haiku
+heatmap.MMBERT,,map,MMBERT,boundary review: use or configuration of the model,read (RL-174)
 JointBert,,keep,,JointBERT model based on BERT transformer,haiku
 BERTWWM-BiLSTM-MHA-CRF,,keep,,"BERT-WWM with BiLSTM, attention and CRF architecture",haiku
 EqGPT,,keep,,Generative model trained on PDE terms,haiku
@@ -1537,7 +1537,7 @@ ProtBERTa_20,,keep,,Protein language model with reduced amino acid alphabet,haik
 F1-cheXbert,,reject,,"F1 metric computed with CheXbert labeler, not a model",haiku
 BERT4G25,,map,BERT4G,glued citation number,citation rule (Haiku: model)
 ChatGPT4-generated,,keep,,Responses generated by ChatGPT4 model,haiku
-LLaMA-adapter,,keep,,LLaMA-Adapter method applied to LLaMA language model,haiku
+LLaMA-adapter,,map,LLaMA,boundary review: use or configuration of the model,read (RL-174)
 SAPBERT_ENG,,keep,,Embedding model SAPBERT fine-tuned for medical terms,haiku
 EYE-Llama_p,,keep,,Intermediate pretrained checkpoint of EYE-Llama model,haiku
 ThermoPalm,,reject,,read: Enzyme-related ML tool; contexts do not show it is a language model,read (Haiku: unsure)
@@ -1566,7 +1566,7 @@ Gemma2-9B-instruct,,keep,,Gemma2 instruct model evaluated for information extrac
 ToxicRoBERTa9,,keep,,"Fine-tuned RoBERTa transformer for toxic comments, citation glued on",haiku
 BioMedBERT,,keep,,Biomedical BERT model used in several articles,haiku
 KenesBERT,,keep,,Kazakh BERT-based model alongside KazBERT,haiku
-Synthcoder-DistilBERT,,keep,,DistilBERT model with SynthCoder classification module,haiku
+Synthcoder-DistilBERT,,map,DistilBERT,boundary review: use or configuration of the model,read (RL-174)
 BERTmedical,,keep,,BERT model fine-tuned for misspelled drug names,haiku
 RoLlama3.1-8B,,keep,,Romanian Llama 3.1 model evaluated in benchmark,haiku
 ChaptGPT-generated,,keep,,Misspelling of ChatGPT-generated text,haiku
@@ -1585,7 +1585,7 @@ OpticalPureBERT,,keep,,BERT-architecture optical materials language model,haiku
 GIDBERT,,keep,,BERT fine-tuned for legal and negotiation text,haiku
 ClinicalBERT-Alsentzer,,keep,,ClinicalBERT model variant named by first author,haiku
 AntiBERTy_CDR,,keep,,AntiBERTy model variant for CDR sequences,haiku
-SBERT-k-means,,keep,,Clustering method combining SBERT embeddings with k-means,haiku
+SBERT-k-means,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
 SBERT-DocSCAN,,keep,,"SBERT model with DocSCAN clustering, a model combination",haiku
 ChemRoBERTA,,keep,,RoBERTa-based model used with cross-attention,haiku
 DetectBERT,,keep,,Proposed BERT model learning Android code features,haiku
@@ -1616,7 +1616,7 @@ conSultantBERT,,keep,,Fine-tuned Siamese sentence-BERT model for matching,haiku
 mRNABERT,,keep,,Universal mRNA language model,haiku
 ChineseBert,,keep,,ChineseBERT classifier compared with FastText,haiku
 BiomedBERT-abstract-fulltext,,keep,,BiomedBERT language model selected for relation extraction,haiku
-ProtBERT-based,,keep,,ProtBERT-based embeddings and prediction model,haiku
+ProtBERT-based,,map,ProtBert,boundary review: use or configuration of the model,read (RL-174)
 ARABERTV2,,keep,,BERT-based AraBERTv2 model with transformer architecture,haiku
 BERTScore34,,reject,,"Evaluation metric BERTScore, not a language model",haiku
 XLMRoBERTa,,keep,,XLM-RoBERTa transformer model compared for disinformation,haiku
@@ -1640,7 +1640,7 @@ DistilBERT-base-multilingual-cased,,keep,,Multilingual distilled BERT model for 
 NgSecGPT,,keep,,Vertical-domain security LLM component of AeroSec,haiku
 GuwenBert-Base,,keep,,Ancient Chinese BERT pretrained language model,haiku
 GBERT,,keep,,"German BERT model, also a hybrid GPT-BERT fake news model",haiku
-DeepARV-ChemBERTa.Fig,,keep,,ChemBERTa-based model variant in DeepARV framework,haiku
+DeepARV-ChemBERTa.Fig,,map,ChemBERTa,boundary review: use or configuration of the model,read (RL-174)
 codeBERT,,keep,,CodeBERT pre-trained transformer model,haiku
 RareBERT,,keep,,Rare disease prediction BERT extending Med-BERT,haiku
 ColBERTv28,,keep,,"Late-interaction ColBERT retrieval model, citation glued on",haiku
@@ -1666,7 +1666,7 @@ Roberta-Zinc,,keep,,Chemical domain RoBERTa model from Hugging Face,haiku
 MedGemma-27B42,,map,MedGemma-27B,glued citation number,citation rule (Haiku: model)
 belabBERT,,keep,,Dutch BERT model outperforming RobBERT,haiku
 SBERT-Sentence,,keep,,SBERT Sentence BERT model for sentence embeddings,haiku
-cGPT.Fig,,keep,,"Custom GPT app, cGPT, from GPT Store",haiku
+cGPT.Fig,,map,cGPT,boundary review: use or configuration of the model,read (RL-174)
 hnBERT,,reject,,Hidden-state notation h_n with BERT superscript,haiku
 BERTopic31,,reject,,BERTopic is a topic modelling software tool,haiku
 LlamaAffinity,,keep,,Llama-based antibody affinity prediction method,haiku
@@ -1676,7 +1676,7 @@ ViBERT,,keep,,ViBERT vision-language BERT model with VisualBERT,haiku
 HybridCNNBERTClassifier,,keep,,Hybrid CNN-BERT classifier architecture for taxonomy,haiku
 KnBERT,,keep,,Knowledge-enhanced BERT model for math word problems,haiku
 DistilProtBert,,keep,,Fine-tuned DistilProtBert model embeddings,haiku
-GPTNeXt-based,,reject,,Image classification framework sharing letters with GPT,haiku
+GPTNeXt-based,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 BERTwo,,keep,,BERT-based molecule-text model with pre-training,haiku
 BERTWithFeatures,,keep,,"Custom BERT model with features, fine-tuned end-to-end",haiku
 TinyGPT-V,,keep,,TinyGPT-V multimodal language model,haiku
@@ -1692,7 +1692,7 @@ MGBERT-Pointer,,keep,,MGBERT-Pointer Chinese NER model with BERT adapters,haiku
 SolBERT,,keep,,SolBERT self-supervised model for Web3 code,haiku
 RBERTct,,keep,,German radiology BERT model variant RBERT,haiku
 MentaLLaMA-chat-13B,,keep,,MentaLLaMA chat LLM compared with MentalRoBERTa,haiku
-PONE-D-24-07133BERT4FCA,,keep,,Manuscript ID glued onto BERT4FCA BERT-based method,haiku
+PONE-D-24-07133BERT4FCA,,map,BERT4FCA,boundary review: use or configuration of the model,read (RL-174)
 TM-BC-BERT,,keep,,BERT-based misinformation classifier TM-BC-BERT,haiku
 OpticalBERT-cased.17,,map,OpticalBERT-cased,glued citation number,citation rule (Haiku: model)
 CustomGPT,,keep,,"Custom GPT built on GPT-4 LLM, used as an assistant",haiku
@@ -1705,9 +1705,9 @@ Chinese-HuBERT,,keep,,HuBERT-style speech encoder used as audio encoder,haiku
 ReBERTa.26,,keep,,RoBERTa-type model; citation number glued on,haiku
 BERTCWS,,keep,,BERT-based unsupervised Chinese word segmentation framework,haiku
 ChatGPTTM,,keep,,"Trademarked form of ChatGPT, an LLM",haiku
-DualBERT-Trans-CNN,,keep,,Dual-scale BERT multi-task scoring framework,haiku
-TemBERTureCLS,,keep,,Classifier component of the TemBERTure BERT-based system,haiku
-ChagtGPT‐4,,keep,,"Misspelling of ChatGPT-4, used as learner agent",haiku
+DualBERT-Trans-CNN,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
+TemBERTureCLS,,map,TemBERTure,boundary review: use or configuration of the model,read (RL-174)
+ChagtGPT‐4,,map,ChatGPT-4,boundary review: use or configuration of the model,read (RL-174)
 HerBERT‐base,,keep,,HerBERT Polish BERT variant,haiku
 Senti-BERTwas,,keep,,"Senti-BERT sentiment model, typo in spelling",haiku
 DeBERTinha,,keep,,Portuguese adaptation of DeBERTaV3,haiku
@@ -1723,12 +1723,12 @@ PureMechBERT-cased,,keep,,"Domain-specific BERT model variant, cased",haiku
 RadOncGPT,,keep,,"Radiation oncology GPT-style LLM, parallel to RadiologyGPT",haiku
 GPTo3-mini,,keep,,OpenAI GPT-o3-mini model,haiku
 BERTScore.24,,reject,,"Evaluation metric BERTScore, not a language model",haiku
-UmBERTo-TPT,,keep,,UmBERTo Italian RoBERTa-type model used in pipeline,haiku
+UmBERTo-TPT,,map,UmBERTo,boundary review: use or configuration of the model,read (RL-174)
 MSABertGCN22,,map,MSABertGCN,glued citation number,citation rule (Haiku: model)
 1Gemini,,keep,,Gemini 2.5 Flash LLM; footnote 1 glued on,haiku
 distillBERT,,keep,,"DistilBERT model, misspelt",haiku
 RoBERTaGCN,,keep,,RoBERTa-GCN text classification model,haiku
-WoBert-based,,keep,,WoBERT-based sentiment classification module,haiku
+WoBert-based,,map,WoBERT,boundary review: use or configuration of the model,read (RL-174)
 TemBERTure125,,map,TemBERTure,glued citation number,citation rule (Haiku: model)
 BERTimabau,,keep,,Portuguese BERT model BERTimbau,haiku
 MetaLlama,,keep,,Medical LLaMA-based AI tool named as model,haiku
@@ -1737,9 +1737,9 @@ Twitter-roBERTa,,keep,,Twitter-RoBERTa sentiment classifier,haiku
 FaceScanPaliGemma_Race,,keep,,PaliGemma-based vision-language model on Hugging Face,haiku
 Chinese-BERTology-wwm-GCN-LS,,keep,,Chinese BERTology GCN classification model,haiku
 MedVisionLlama,,keep,,Vision-language model using LLM layers,haiku
-FrugalGPT,,reject,,"read: FrugalGPT: LLM routing method or framework, not clearly a model",read (Haiku: unsure)
+FrugalGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 exKidneyBERT,,keep,,Extended Kidney BERT pretrained language model,haiku
-MICC_GPTs,,reject,,read: Set of ChatGPT-generated responses rated; not clearly a model,read (Haiku: unsure)
+MICC_GPTs,,map,MICC-GPTs,boundary review: use or configuration of the model,read (RL-174)
 GigaBert,,keep,,GigaBERT language model used for fake news detection,haiku
 TransformerLLaMALarge,,reject,,read: Glossary entry concatenating LLaMA and Large Language Model; unclear,read (Haiku: unsure)
 ZimHealthBERT,,keep,,Specialized maternal health BERT model,haiku
@@ -1788,12 +1788,12 @@ WarmGPT,,keep,,LLM-based mental health conversational agent,haiku
 ArcheoBERTje,,keep,,Dutch archaeology BERT model,haiku
 BERTopic21,,reject,,BERTopic is a topic modelling software tool,haiku
 MentalLlama-7B,,keep,,MentalLlama fine-tuned LLM,haiku
-TemBERTureTm,,keep,,Regression model in TemBERTure system,haiku
+TemBERTureTm,,map,TemBERTure,boundary review: use or configuration of the model,read (RL-174)
 ResNetLLAMAII,,keep,,ResNet with LLaMA II trained for classification,haiku
 Ovis1.6-Gemma2-9b,,keep,,Ovis vision-language model with Gemma2 LM,haiku
 srBERTmy250K,,keep,,srBERT model trained for 250K steps,haiku
 ModernBERT-Large,,keep,,ModernBERT-Large model,haiku
-DeBERTa-GCN,,keep,,DeBERTa-GCN framework used as baseline model,haiku
+DeBERTa-GCN,,map,DeBERTa,boundary review: use or configuration of the model,read (RL-174)
 AnchiBERT,,keep,,AnchiBERT ancient Chinese BERT model,haiku
 HuBERT-equipped,,keep,,HuBERT-based speech encoder in SafeEar,haiku
 DeBERTa+CNN,,keep,,DeBERTa with CNN baseline model,haiku
@@ -1801,7 +1801,7 @@ xlm-Roberta-base,,keep,,XLM-RoBERTa base contextual model,haiku
 Word+1+Surprisal_GPT2+Surprisal_GPT2_PW,,reject,,"Regression predictor names, not a model",haiku
 CourseGPT-ZH,,keep,,Educational LLM developed with distillation,haiku
 RoGemma2-9B,,keep,,Romanian adaptation of Gemma-2-9B,haiku
-StructGPT,,reject,,read: StructGPT: LLM prompting framework; not clearly a model,read (Haiku: unsure)
+StructGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 distilBertTokenizerFast,,map,DistilBERT,the model's own code class,read (Haiku: not_model)
 ProBERT-pGNN,,keep,,ProBERT variant model in drug-target prediction,haiku
 ALBERT-BiGRU,,keep,,ALBERT-BiGRU model used as baseline,haiku
@@ -1879,7 +1879,7 @@ X-LoRA-Gemma.22,,map,X-LoRA-Gemma,glued citation number,citation rule (Haiku: mo
 R-GCN+SBERT,,keep,,R-GCN plus SBERT combined model,haiku
 GIBERTINI,,reject,,Tensiometer instrument name,haiku
 LlamaCare,,keep,,Clinical LLaMA 2 fine-tune,haiku
-ZoteroGPT,,reject,,"Zotero plugin name, software tool",haiku
+ZoteroGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 DistilBERTurk,,keep,,Turkish distilled BERT model,haiku
 BERTScoreF1,,reject,,"BERTScore metric variant, not a model",haiku
 ChatGPT3.5-turbo,,keep,,ChatGPT-3.5-turbo LLM,haiku
@@ -1907,7 +1907,7 @@ XLM-ROBERTABASE,,keep,,XLM-RoBERTa base fine-tuned on transcripts,haiku
 Chinese-BERTology-wwm-GCN,,keep,,BERTology with GCN classification model,haiku
 WaraBERT-V126,,keep,,Arabic BERT hybrid model,haiku
 ESN-ISPBO-BERT,,keep,,ESN-ISPBO combined with BERT sentiment model,haiku
-Llama405BCombinedAnswer,,reject,,Composite variable of Llama 405B answers,haiku
+Llama405BCombinedAnswer,,map,Llama,boundary review: use or configuration of the model,read (RL-174)
 tALBERT-S1,,keep,,Multi-label tALBERT-CNN variant model,haiku
 LLaMA-architecture,,keep,,Models of LLaMA architecture run locally,haiku
 PortBERT,,keep,,Protein BERT model,haiku
@@ -1923,10 +1923,10 @@ antiBERTa,,keep,,antiBERTa antibody embedding model,haiku
 RoGemma2,,keep,,Romanian Gemma2 adaptation,haiku
 ViTGPT2-generated,,keep,,Findings generated by ViTGPT2 model,haiku
 PertBERT,,keep,,PertBERT text-tabular model,haiku
-scGPT-Scratch,,keep,,scGPT variant fine-tuning approach,haiku
+scGPT-Scratch,,map,scGPT,boundary review: use or configuration of the model,read (RL-174)
 BERTouch,,keep,,Moroccan Darija BERT intent model,haiku
 BatteryOnlyBERT-cased,,keep,,"Battery domain BERT model, cased",haiku
-PMC_LLAMA_Answer,,reject,,Column name for answers from PMC Llama,haiku
+PMC_LLAMA_Answer,,map,PMC-LLaMA,boundary review: use or configuration of the model,read (RL-174)
 LlamaGuard-style,,reject,,read: Safety taxonomy style named after LlamaGuard; unclear,read (Haiku: unsure)
 VisionBERT,,keep,,Multimodal VisionBERT model,haiku
 ChatGPT43.Fig,,keep,,ChatGPT4 model; figure reference glued on,haiku
@@ -1950,9 +1950,9 @@ FTRoBERTaL,,keep,,Fine-tuned RoBERTa-large variant used as a claim verification 
 ALBERT-base,,keep,,ALBERT base transformer model in multiple articles,haiku
 TapeBert,,keep,,Protein language model compared with ProtBert and ESM,haiku
 BERTGen,,keep,,BERT-based model compared with RoBERTa on math problems,haiku
-StructGPT+KGMP,,reject,,"read: Named method combination; StructGPT is a framework, not clearly a model",read (Haiku: unsure)
-AugBERT,,reject,,read: BERT-based augmentation method; contexts do not say if it is a model,read (Haiku: unsure)
-AugGPT,,reject,,"read: ChatGPT-based augmentation framework; name denotes a method, not clearly a model",read (Haiku: unsure)
+StructGPT+KGMP,,map,StructGPT,boundary review: use or configuration of the model,read (RL-174)
+AugBERT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
+AugGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 DiffusionBERT,,keep,,Diffusion text generation model using BERT as backbone,haiku
 SBERTPage_Sentencekm,,reject,,Variable name for a sentence vector in a pipeline,haiku
 HybridCF-SBERT,,keep,,Hybrid recommender model using SBERT semantic similarity,haiku
@@ -1967,11 +1967,11 @@ PhenoBCBERT-specific,,keep,,PhenoBCBERT model outputs compared with PhenoGPT,hai
 StructBERT,,keep,,Alibaba StructBERT transformer model in several articles,haiku
 LlamaIndex20,,reject,,"Open-source LlamaIndex software framework, citation glued on",haiku
 MelBERT,,keep,,Metaphor detection transformer model,haiku
-AIIRMistral,,keep,,"Competition system built on Mistral-7B, named after the model",haiku
+AIIRMistral,,map,Mistral,boundary review: use or configuration of the model,read (RL-174)
 InferBERT,,keep,,Transformer causal inference model built on ALBERT,haiku
 MARBert,,keep,,Arabic BERT-structure model trained on Arabic text,haiku
 MolOrgGPT-L,,keep,,"Molecular generation GPT model, large variant",haiku
-MultiLabelZeroShotGPTClassifier,,reject,,Python class name in code,haiku
+MultiLabelZeroShotGPTClassifier,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
 MPBERT,,keep,,BERT-based baseline model for drug-target affinity,haiku
 MalBERTv2,,keep,,Malware detection BERT-style transformer model,haiku
 PowerMistral,,keep,,Pre-trained LLM-based framework for wind power forecasting,haiku
@@ -2005,7 +2005,7 @@ SapBert,,keep,,Biomedical concept pre-trained language model,haiku
 amBERT,,keep,,Multilingual BERT-family model listed among LLMs,haiku
 vBERT-BPE-embedded,,keep,,Embedding of vBERT genome language model,haiku
 Roberta-Urdu,,keep,,Urdu RoBERTa model used for embeddings,haiku
-BERTcls,,keep,,BERT CLS-token sentence encoder,haiku
+BERTcls,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 MedGPTs,,keep,,"Medical GenAI models, plural of MedGPT",haiku
 visBERT6,,keep,,VisBERT model for visualizing BERT token representations,haiku
 COVID-TwitterBERT,,keep,,COVID-specific BERT model for tweets,haiku
@@ -2017,7 +2017,7 @@ DeBERTa-v3-base,,keep,,DeBERTa-v3-base pre-trained backbone model,haiku
 TinyBERT-based,,keep,,TinyBERT-based prototypical and Siamese models,haiku
 PubMedGPT,,keep,,Biomedical LLM trained on PubMed abstracts,haiku
 MethylBERT-estimated,,keep,,Estimates from the MethylBERT transformer model,haiku
-BiLSTM-CRF-BERT,,keep,,"BiLSTM-CRF architecture with BERT, compared method",haiku
+BiLSTM-CRF-BERT,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 GPTmeans,,reject,,"Survey estimation method using GPT data, not a model",haiku
 MedGemma-extracted,,map,MedGemma,refers to the model,read (Haiku: unsure)
 F1-CheXbert-14,,reject,,"Factual correctness metric, CheXbert-based label F1",haiku
@@ -2032,7 +2032,7 @@ DIA-BERT_Model3,,keep,,Integrated DIA-BERT transformer model variant,haiku
 HuBERT-SVM,,keep,,HuBERT speech model with SVM classifier,haiku
 MBERT-SVM,,keep,,Hybrid MBERT plus SVM classifier model,haiku
 BERTAtt,,keep,,BERT-based feature extraction model,haiku
-Distil-RoBERT,,keep,,Distilled RoBERTa model for zero-shot classification,haiku
+Distil-RoBERT,,map,DistilRoBERTa,variant of DistilRoBERT,"read (RL-174, variant)"
 ColloBERT,,keep,,"Collobert language model, named as a BERT-style model",haiku
 BelGPT2,,keep,,Belgian GPT-2 model pretrained on French corpus,haiku
 HuatuoGPT2-13B,,keep,,Medical LLM compared on inpatient diagnosis,haiku
@@ -2071,7 +2071,7 @@ XLM-Roberta-base,,keep,,XLM-RoBERTa base language model,haiku
 ShareGPT4V-13B,,keep,,ShareGPT4V vision-language model family,haiku
 DistilBert,,keep,,DistilBERT transformer model in several articles,haiku
 WS-XLM-RoBERTa,,keep,,XLM-RoBERTa variant with weak supervision,haiku
-Monolingual-SBERT,,keep,,Monolingual SBERT model fine-tuned in pipeline,haiku
+Monolingual-SBERT,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
 bootBERT,,reject,,Notation for a boot-node vector in an equation,haiku
 Clinical_ModernBERT,,keep,,Clinical ModernBERT pretrained model checkpoint,haiku
 DistilBertPreTrainedModel,,map,DistilBERT,the model's own code class,read (Haiku: not_model)
@@ -2090,7 +2090,7 @@ chatGPT3,,keep,,ChatGPT 3 chatbot used to generate reports,haiku
 models.BERTSUM13,,keep,,BERTSUM extractive summarization model,haiku
 ArtGPT,,keep,,LLM-based system for art content interpretation,haiku
 LongMax-Dropout-DeBERTa,,keep,,DeBERTa variant with extended input length,haiku
-TesseractOCR-Roberta,,keep,,OCR plus RoBERTa pipeline used as baseline,haiku
+TesseractOCR-Roberta,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 DNAmBERT,,keep,,Transformer model for cfDNA methylation,haiku
 GazeGPT,,keep,,Eye-tracking multimodal GPT-based system,haiku
 LF2BERT,,keep,,Clinical transformer model in scoping review,haiku
@@ -2109,33 +2109,33 @@ Gemma3-4B43,,map,Gemma3-4B,glued citation number,citation rule (Haiku: model)
 CohortGPT,,keep,,LLM-based clinical trial recruitment framework,haiku
 BILSTM-CRF-BERT-SPA,,keep,,Entity disambiguation model BiLSTM-CRF with BERT,haiku
 ParsBert,,keep,,Persian BERT model used as embedding,haiku
-scGPT-Adapter,,keep,,Adapter method built on scGPT model,haiku
+scGPT-Adapter,,map,scGPT,boundary review: use or configuration of the model,read (RL-174)
 peptideBERT,,keep,,Peptide language model listed with ProtT5 and ESM-2,haiku
 PoliBERTweet30,,keep,,Domain-specific tweet BERT model,haiku
-VisBERT,,keep,,VisBERT model visualizing BERT token representations,haiku
+VisBERT,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 PhoBERT-Base,,keep,,Vietnamese PhoBERT base model,haiku
 PharmacyGPT,,keep,,Custom ChatGPT model for pharmacy,haiku
 ChaGPT-4,,keep,,Misspelling of ChatGPT-4 model,haiku
-LBert,,reject,,read: Ablation label for a component; contexts do not name a model clearly,read (Haiku: unsure)
+LBert,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 SportsBERT,,keep,,Domain-specific BERT adaptation for sports patents,haiku
 BioMistral-7B30,,map,BioMistral-7B,glued citation number,citation rule (Haiku: model)
 BioRedditBERT-base-uncased,,keep,,BioRedditBERT pre-trained initialization model,haiku
 AccidentGPT,,keep,,Multi-modal large model for accident analysis,haiku
 scGPT.14,,map,scGPT,glued citation number,citation rule (Haiku: model)
 SwinB+BERT9k,,keep,,Swin plus BERT encoder-decoder report model,haiku
-CharBert-Optimized,,keep,,CharBERT-based CNN component in federated model,haiku
+CharBert-Optimized,,map,CharBERT,boundary review: use or configuration of the model,read (RL-174)
 ItalianBERT,,keep,,Italian BERT model used in hate speech study,haiku
 GPTScore21,,reject,,"LLM-based evaluation metric GPTScore, not a model",haiku
 BERTScoreRecall,,reject,,BERTScore evaluation metric variant,haiku
 AraBERTv0.2-Twitter-large,,keep,,Arabic AraBERT model in ensemble,haiku
-SOAP-BiomedBERT,,keep,,BiomedBERT-based classification system,haiku
+SOAP-BiomedBERT,,map,BiomedBERT,boundary review: use or configuration of the model,read (RL-174)
 ProtBert-CE,,keep,,ProtBert-based annotation model for neuropeptides,haiku
-IoTGemini,,reject,,read: Framework described as LLM-guided; not clearly a model name,read (Haiku: unsure)
+IoTGemini,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 ChatGPT4.031,,keep,,"ChatGPT-4 model, citation glued on",haiku
 CycleGPT-HyperTemp,,keep,,Macrocycle generation model compared with others,haiku
 GPTs_name_trialNumber,,reject,,File name format for saved outputs,haiku
 T4attention_ProtBert-BFD,,keep,,T4attention model using ProtBert-BFD features,haiku
-exBERT,,reject,,"Interactive visualization dashboard, not a language model",haiku
+exBERT,,reject,,boundary review: outputs not produced by a language model (as exBERT38),"read (RL-174, variant)"
 gBiomedBERT,,keep,,Biomedical BERT model trained on biomedical text,haiku
 lALBERT,,keep,,"Lite BERT model, ALBERT",haiku
 ComBERT,,keep,,BERT-based model for AI agent services,haiku
@@ -2151,10 +2151,10 @@ BCR-V-BERT,,keep,,Multi-layer transformer for BCR sequence features,haiku
 AlBERTo,,keep,,Italian BERT model AlBERTo,haiku
 PubMedGPT6,,keep,,"PubMedGPT model, citation glued on",haiku
 ReflectionLlama,,keep,,Llama-based LLM compared in benchmark,haiku
-SparseGPT,,reject,,"read: Compression method for GPT models; name denotes method, not clearly a model",read (Haiku: unsure)
+SparseGPT,,reject,,boundary review: outputs not produced by a language model (as SparseGPT19),"read (RL-174, variant)"
 ReasonBERT,,keep,,English question-answering BERT model,haiku
 PetBERT-ICD,,keep,,Veterinary BERT model for ICD-11 coding,haiku
-OntoGPT,,reject,,Open-source Python package for LLM extraction,haiku
+OntoGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 dialogBERT,,keep,,Dialogue BERT pre-training model,haiku
 PMC-Llama13B,,keep,,Biomedical LLaMA-based LLM,haiku
 structures-VitroBERT,,keep,,BERT pretrained on in vitro data,haiku
@@ -2202,7 +2202,7 @@ CseBERT,,keep,,"BERT model for English, Croatian and Slovenian data",haiku
 Medical-LLaMA3-8B,,keep,,Fine-tuned Medical-LLaMA3 model in chronic disease prediction,haiku
 BioMistral-7B14,,map,BioMistral-7B,glued citation number,citation rule (Haiku: model)
 VideoLLaMA3-7B,,keep,,Vision-language model used in two articles,haiku
-GPTCelltype17,,map,GPTCelltype,glued citation number,citation rule (Haiku: model)
+GPTCelltype17,,map,GPTCelltype,variant of GPTCelltype,"read (RL-174, variant)"
 Clinical-XLM-RoBERTa,,keep,,Clinical RoBERTa-style pre-trained model compared for entity labeling,haiku
 SIGBERT,,keep,,NLP model cited as combined with mathematical frameworks,haiku
 Bio_ClinicaBERT,,keep,,Embedding model compared in SmPC extraction study,haiku
@@ -2240,11 +2240,11 @@ ChristBERTscratch,,keep,,"German medical BERT model, explicitly denoted as a mod
 GPTvoters,,keep,,LLM-based simulated voter variant built on GPT-4,haiku
 AMBERT-based,,keep,,AMBERT-based textual features from a BERT-type text model,haiku
 srBERT,,keep,,BERT-based article classification model for systematic reviews,haiku
-LLaMA-Adapter69,,reject,,"Named PEFT fine-tuning technique, listed among methods",haiku
+LLaMA-Adapter69,,map,LLaMA,boundary review: use or configuration of the model,read (RL-174)
 PaliGemmaVehicle,,keep,,Fine-tuned vision-language LLM for plate recognition,haiku
 DistilRoBERTa-BiGRU,,keep,,Hybrid DistilRoBERTa and BiGRU classification model,haiku
 DialogGPTfinetune2,,keep,,Pre-trained dialogue language model listed with BERT and BART,haiku
-BERTal,,keep,,BERT-based word encoding in fine-tuned BERT extraction method,haiku
+BERTal,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 F1-score.Wind2vec-BERT,,map,Wind2vec-BERT,refers to the model,read (Haiku: unsure)
 NorMistral-11B-Thinking,,keep,,Norwegian Mistral-based LLM evaluated zero-shot,haiku
 fastBERT.48,,keep,,Simpler BERT variant with citation number glued on,haiku
@@ -2354,7 +2354,7 @@ AraBert-V01,,keep,,AraBERT model variant deployed for sarcasm detection,haiku
 PONE-D-24-01459R2tRF-BERT,,keep,,tRF-BERT aspect-based sentiment model; manuscript ID prefixed,haiku
 GeoBERT,,keep,,Geological BERT pretraining model,haiku
 Bio+DischargeSummaryBERT,,keep,,Clinically oriented BERT weights compared in CMR study,haiku
-MedGemma-SP,,keep,,MedGemma-based model variant with prompting strategy,haiku
+MedGemma-SP,,map,MedGemma,boundary review: use or configuration of the model,read (RL-174)
 BioLlama3-70B,,keep,,Biomedical Llama3 model used as base LLM,haiku
 Q8BERT,,keep,,Quantized BERT model compared in compression study,haiku
 SciBERTbase,,keep,,SciBERT base model compared for deidentification,haiku
@@ -2366,7 +2366,7 @@ MentalBERT-based,,keep,,MentalBERT model used for cognitive analysis,haiku
 PaloBERT,,keep,,Greek social media RoBERTa-based model,haiku
 GenMedGPT-5k,,reject,,"Dataset of 5000 generated dialogues, not a model",haiku
 ARBERT,,keep,,"Arabic BERT model, also named ARBERT",haiku
-caBERT-based,,keep,,Q&A system based on caBERT model,haiku
+caBERT-based,,map,caBERT,boundary review: use or configuration of the model,read (RL-174)
 Med-PaLM.12,,keep,,Med-PaLM LLM with citation glued on,haiku
 IndoRoBERTa,,keep,,Indonesian RoBERTa model compared in NER benchmark,haiku
 TaBERT-based,,keep,,TaBERT-based dual attention model,haiku
@@ -2386,11 +2386,11 @@ BiomedBERT-base,,keep,,BiomedBERT-base backbone language model,haiku
 distilBERT.13,,map,distilBERT,glued citation number,citation rule (Haiku: model)
 GooglePaLM,,keep,,Google PaLM LLM used for sentiment analysis,haiku
 R2GenGPT,,keep,,Radiology report generation LLM named R2GenGPT,haiku
-ChemBERTaDTA,,keep,,Benchmark model using ChemBERTa SMILES representations,haiku
+ChemBERTaDTA,,map,ChemBERTa,boundary review: use or configuration of the model,read (RL-174)
 Distil-LESA-BERT-6,,keep,,Distilled BERT model variant for clinical notes,haiku
 BERT4Video,,keep,,BERT-based video understanding model,haiku
 KBALBERT,,keep,,Clinical KB-ALBERT model with UMLS knowledge,haiku
-mBERT-based,,keep,,mBERT-based classification system in several articles,haiku
+mBERT-based,,map,mBERT,boundary review: use or configuration of the model,read (RL-174)
 HybridCNNBERT,,keep,,Hybrid CNN-BERT architecture for taxonomic classification,haiku
 PyTorch-Pretrained-BERT,,reject,,"PyTorch library used to build BERT, not a model",haiku
 emotion-PaliGemma,,keep,,Fine-tuned PaliGemma vision-language model,haiku
@@ -2401,7 +2401,7 @@ ProtGPT-2,,keep,,ProtGPT-2 protein language model in several articles,haiku
 DERMRoBERTa,,keep,,DERM RoBERTa model used for entity recognition,haiku
 ProtBERT-BFD30,,map,ProtBERT-BFD,glued citation number,citation rule (Haiku: model)
 BERTSEC,,keep,,BERT model with softmax classifier named BERTSEC,haiku
-PhoBERT-CRF,,keep,,PhoBERT with CRF layer compared in NER benchmark,haiku
+PhoBERT-CRF,,map,PhoBERT,boundary review: use or configuration of the model,read (RL-174)
 ClinicalBERT7,,keep,,ClinicalBERT model tailored for biomedical applications,haiku
 ECG-Instruct-Llama-3.2-11B-Vision,,keep,,Llama 3.2 vision model fine-tuned for ECG images,haiku
 gAraBERTv2,,keep,,gAraBERTv2 transformer model for Arabic,haiku
@@ -2427,7 +2427,7 @@ RoBERT,,keep,,RoBERT model compared for hate speech and phishing,haiku
 CPBERT,,keep,,CPBERT model compared in drug-target affinity study,haiku
 EyeGPT-assisted,,map,EyeGPT,refers to the model,read (Haiku: unsure)
 BioBERTLARGE,,keep,,BioBERT large model variant,haiku
-GPT4Designer,,reject,,"Software framework controlling GPT-4 graphics, not a model",haiku
+GPT4Designer,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 EnsemBERT,,keep,,Neural approach leveraging PLMs for depression scoring,haiku
 SapBERT-from-PubMedBERT-fulltext,,keep,,SapBERT model checkpoint from PubMedBERT,haiku
 Med-PaLM.19,,keep,,Med-PaLM foundation model; citation glued on,haiku
@@ -2457,18 +2457,18 @@ FTBERTL,,keep,,fine-tuned BERT-large variant used in experiments,haiku
 AraBERT-BiLSTM,,keep,,hybrid model combining AraBERT with BiLSTM,haiku
 imageGPT,,keep,,"generative pretraining from pixels, GPT-2 style model",haiku
 ClinicalDistilBERT,,keep,,distilled clinical BERT model developed in study,haiku
-DBERT,,keep,,abbreviation defined as DistilBERT model,haiku
+DBERT,,map,DistilBERT,boundary review: use or configuration of the model,read (RL-174)
 DynaBERT,,keep,,BERT compression model with adjustable width and depth,haiku
 LLaMA-family,,keep,,generic family of LLaMA-based language models,haiku
 Gemma2-9B-Instruct,,keep,,Gemma2 9B instruction-tuned model used as refiner,haiku
 ParsBERT-Uncased,,keep,,Persian BERT variant listed among transformer models,haiku
-BERTweet-Large,,keep,,BERTweet large pretrained model in Flair library,haiku
+BERTweet-Large,,map,BERTweet,boundary review: use or configuration of the model,read (RL-174)
 ChunkBERT,,keep,,BERT-based variant splitting input into chunks,haiku
 mDeBERTa-v3-base-tasksource3,,keep,,multilingual DeBERTa-v3 fine-tuned model,haiku
 BioGPT9,,keep,,biomedical GPT language model fine-tuned for QA,haiku
 MusicBERT,,keep,,BERT-style pretrained model for symbolic music,haiku
 DialogGPT-2,,keep,,DialoGPT-2 model used as generator,haiku
-Gemma3-driven,,keep,,DisasTeller system driven by Gemma3 model variant,haiku
+Gemma3-driven,,map,Gemma3,boundary review: use or configuration of the model,read (RL-174)
 BERTScorePrecision,,reject,,"BERTScore precision metric, an evaluation measure",haiku
 caBERTnet,,keep,,question-answering network based on Clinical BERT,haiku
 BERTopic40,,reject,,BERTopic topic modelling software tool,haiku
@@ -2539,7 +2539,7 @@ BERTopic19,,reject,,"BERTopic framework, topic modelling software",haiku
 IMAGEBERT,,keep,,multimodal BERT model for image and text,haiku
 AraPoemBERT,,keep,,Arabic poetry BERT model,haiku
 BERTfine,,keep,,fine-tuned German BERT variant,haiku
-4-RoBERTaLarge_CTD-5-traindev,,keep,,competition submission system trained as RoBERTa-Large,haiku
+4-RoBERTaLarge_CTD-5-traindev,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 COVID-Twitter-BERT-V2,,keep,,COVID-Twitter-BERT v2 contextual embedding model,haiku
 BERTologyNERClassifier,,reject,,Python class name in transformers-sklearn toolkit,haiku
 JSL-MedLlama-3-8B-v2.0,,keep,,medical Llama-3 8B LLM,haiku
@@ -2547,7 +2547,7 @@ TwelveGPT,,keep,,LLM-based GPT platform named in sports AI context,haiku
 MammoBert,,keep,,BERT model for French mammogram labeling,haiku
 MedPalm,,keep,,"Med-PaLM medical LLM, a PaLM variant",haiku
 CephGPT4.0,,keep,,CephGPT model based on MiniGPT-4,haiku
-MT-ScBERT,,keep,,BERT-based module of MKG framework,haiku
+MT-ScBERT,,map,ScBERT,boundary review: use or configuration of the model,read (RL-174)
 Chinese-BERTology-wwm-GCN-LP,,keep,,Chinese BERT-based text classification model,haiku
 Bio-LinkBERT,,keep,,Bio-LinkBERT biomedical language model,haiku
 BERTopic17,,reject,,"BERTopic topic modelling tool, citation glued on",haiku
@@ -2555,7 +2555,7 @@ BioBERThas,,keep,,"BioBERT with a glued word, biomedical BERT model",haiku
 LegalBERT-pt,,keep,,Portuguese legal BERT model,haiku
 CeeBERT,,keep,,BERT model with dynamic early exits,haiku
 LLaMAv1,,keep,,LLaMA version 1 generative model,haiku
-BERTbased,,keep,,generic BERT-based method in epitope prediction,haiku
+BERTbased,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 OncoGPT-tailored,,keep,,OncoGPT generative model application,haiku
 AraBERTv0.2,,keep,,AraBERT version 0.2 model,haiku
 DistilClincialBERT,,keep,,"distilled clinical BERT model, misspelled name",haiku
@@ -2634,7 +2634,7 @@ RuBioBERT,,keep,,Russian biomedical BERT model,haiku
 HuatuoGPT-Vision-7B,,keep,,HuatuoGPT-Vision medical VLM,haiku
 BERTScore29,,reject,,"BERTScore metric, an evaluation measure",haiku
 mentalBERT,,keep,,mental health BERT model pretrained on Reddit,haiku
-iRoBERTa,,keep,,RoBERTa-style pretraining approach iRoBERTa,haiku
+iRoBERTa,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 Optimised-CodeBERT,,keep,,optimised CodeBERT model for vulnerability detection,haiku
 SpikeGPT2,,keep,,SpikeGPT2 generative model for spike mutations,haiku
 BioMistral-WFT,,keep,,weakly fine-tuned BioMistral model,haiku
@@ -2651,7 +2651,7 @@ CephGPT-4,,keep,,CephGPT-4 model for cephalometric analysis,haiku
 CKBERT,,keep,,Chinese knowledge-enhanced BERT model,haiku
 LungGPT-Ex,,keep,,LungGPT model variant for evidence generation,haiku
 RoBERTuito,,keep,,RoBERTuito Spanish social-media language model,haiku
-Al-BERT-BiGRU+LDA,,keep,,"BERT-BiGRU-LDA algorithm, hybrid transformer model",haiku
+Al-BERT-BiGRU+LDA,,map,ALBERT,boundary review: use or configuration of the model,read (RL-174)
 vBERT-BPE,,keep,,vBERT genome language model variant,haiku
 ProtBert-BiGRU-Attention,,keep,,ProtBert embeddings with BiGRU-attention network,haiku
 Gemma2-2B,,keep,,Gemma2 2B LLM compared in study,haiku
@@ -2661,7 +2661,7 @@ BioRoBERTa,,keep,,BioRoBERTa biomedical BERT-based model,haiku
 AceGPT-13B-chat,,keep,,AceGPT Arabic chat LLM,haiku
 FrALBERT,,keep,,French ALBERT model in mixture of experts,haiku
 Twitter-Roberta-Base-Sentiment-Latest21,,map,Twitter-Roberta-Base-Sentiment-Latest,glued citation number,citation rule (Haiku: model)
-ROBERTA-M,,keep,,RoBERTa-based model in textual entailment approach,haiku
+ROBERTA-M,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 MobileBert,,keep,,MobileBERT compact transformer model,haiku
 SiameseBERT,,keep,,Siamese BERT network for semantic similarity,haiku
 BioLinkBERTbase,,keep,,BioLinkBERT base model,haiku
@@ -2675,8 +2675,8 @@ BioMistral-Clinical,,keep,,BioMistral clinical model variant,haiku
 ChatGPT4.16,,keep,,ChatGPT 4.16 model version,haiku
 ChefGPT,,keep,,LLM-based recipe app named ChefGPT,haiku
 RoBERTaTokenizer,,map,RoBERTa,the model's own code class,read (Haiku: not_model)
-DistilRoBERTa-MT,,keep,,DistilRoBERTa multi-task transformer framework,haiku
-CharBERT-Optimized,,keep,,CharBERT-optimized CNN and Bi-LSTM model,haiku
+DistilRoBERTa-MT,,map,DistilRoBERTa,boundary review: use or configuration of the model,read (RL-174)
+CharBERT-Optimized,,map,CharBERT,boundary review: use or configuration of the model,read (RL-174)
 EpiBERTope.11,,map,EpiBERTope,glued citation number,citation rule (Haiku: model)
 TFGPT2LMHeadModel,,map,GPT-2,the model's own code class,read (Haiku: not_model)
 SLEBERT,,keep,,lexicon-enhanced BERT model for Chinese NER,haiku
@@ -2686,7 +2686,7 @@ DistilBERT-BiLSTM-CRF,,keep,,DistilBERT-BiLSTM-CRF architecture combination,haik
 mBERT8,,keep,,"multilingual BERT model, citation glued on",haiku
 CAMeLBERT-based,,keep,,CAMeLBERT-based feature extractor,haiku
 DeBERTa-based36,,map,DeBERTa-based,glued citation number,citation rule (Haiku: model)
-TigCLaF-AfriBERTa,,keep,,AfriBERTa variant of TigCLaF framework,haiku
+TigCLaF-AfriBERTa,,map,AfriBERTa,boundary review: use or configuration of the model,read (RL-174)
 Gemma2-9B-it35,,map,Gemma2-9B-it,glued citation number,citation rule (Haiku: model)
 neuroGPT-X,,keep,,neuroGPT-X model evaluated in study,haiku
 LLaVA-1.5-LLaMA-7B,,keep,,LLaVA-1.5 vision-language model with LLaMA-7B,haiku
@@ -2697,7 +2697,7 @@ PixelBert,,keep,,PixelBERT multimodal model for CXR and reports,haiku
 FragGPT-LoRA,,keep,,FragGPT-LoRA molecular generation model variant,haiku
 scGPT-default,,keep,,scGPT variant used as a fine-tuned single-cell model,haiku
 BlueBERT4,,keep,,BlueBERT variant pretrained on PubMed and MIMIC notes,haiku
-BioLinkerBERT,,keep,,BioLinkBERT classifier compared with the proposed method,haiku
+BioLinkerBERT,,map,BioLinkBERT,boundary review: use or configuration of the model,read (RL-174)
 RadioBERTw,,keep,,"RadioBERT with weighted loss, a clinical BERT model",haiku
 PrtoeinBERT,,keep,,listed as an IDR predictor; typo of ProtBERT,haiku
 CamemBERT-with-Dates,,keep,,CamemBERT variant in list of evaluated LLMs,haiku
@@ -2737,10 +2737,10 @@ MArBERT,,keep,,Arabic medical BERT model,haiku
 scGPT-TPE,,keep,,scGPT fine-tuning variant,haiku
 sBERT-OHEM,,keep,,sBERT model with OHEM training,haiku
 ALBERT-BiGRU-Attention,,keep,,ALBERT-BiGRU-Attention relation extraction model,haiku
-BERTBased,,keep,,class of BERT-based embedding models,haiku
+BERTBased,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 CAMeLBERT-Dialectal,,keep,,CAMeLBERT dialectal Arabic sentiment model,haiku
 happyBERT,,keep,,BERT retrained for happiness analysis,haiku
-ClinBioBert-Seq2Seq-BIO,,keep,,ClinicalBioBERT fine-tuning strategy with best F1,haiku
+ClinBioBert-Seq2Seq-BIO,,map,ClinBioBert,boundary review: use or configuration of the model,read (RL-174)
 SELFormer30ChemBERTa-77,,keep,,ChemBERTa-based baseline model,haiku
 Roberta-NER,,keep,,RoBERTa-based NER baseline,haiku
 gliadin-GPTs,,reject,,"gliadin gluten protein type, not a model",haiku
@@ -2791,11 +2791,11 @@ PoseBERT,,keep,,transformer pose sequence model,haiku
 BERTweet-based,,keep,,BERTweet-based classifier,haiku
 PeptideBert,,keep,,"LLM app, agent or model",read (Haiku: unsure)
 PhoGPT-4B-Chat,,keep,,Vietnamese generative LLM,haiku
-SOAP-BioMedBERT,,keep,,attention-based BioMedBERT model,haiku
+SOAP-BioMedBERT,,map,BiomedBERT,boundary review: use or configuration of the model,read (RL-174)
 sentenceBERT,,keep,,sentence-BERT embedding model,haiku
 BioCovidBERT,,keep,,COVID-literature BERT variant,haiku
 ViLBERT9,,keep,,ViLBERT dual-stream model,haiku
-YOLO-SAM-GPT,,reject,,read: detection pipeline with a GPT component; not clearly a model,read (Haiku: unsure)
+YOLO-SAM-GPT,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
 ProtBERTa_,,keep,,RoBERTa-based protein language model,haiku
 ThyGPT-predicted,,keep,,ThyGPT multimodal model,haiku
 ModernBERT-base,,keep,,ModernBERT base model,haiku
@@ -2806,7 +2806,7 @@ PeptideBERT.18,,map,PeptideBERT,glued citation number,citation rule (Haiku: mode
 BioBERT6,,keep,,BioBERT model,haiku
 BioMistral-7B37,,map,BioMistral-7B,glued citation number,citation rule (Haiku: model)
 PheNormGPT,,keep,,GPT-4 based normalization framework named after GPT,haiku
-KPFBERT-based,,keep,,KPF-BERT embeddings used in pipeline,haiku
+KPFBERT-based,,map,KPFBERT,boundary review: use or configuration of the model,read (RL-174)
 SynLlama-proposed,,keep,,SynLlama LLM generated analogs,haiku
 NanoBERTa-ASP,,keep,,RoBERTa-based nanobody paratope model,haiku
 CustomGPTs,,keep,,"custom GPTs, LLM-based chat apps",haiku
@@ -2844,10 +2844,10 @@ MechBERT-uncased,,keep,,MechBERT language model,haiku
 RoBERTa33continued,,keep,,RoBERTa with continued pretraining,haiku
 AllyGPT-generated,,keep,,outputs of the AllyGPT LLM,haiku
 TeenyTinyLlama-460m-Chat,,keep,,Portuguese small LLM,haiku
-T4SEpp_ProtBert,,keep,,ProtBert-based pipeline model variant,haiku
+T4SEpp_ProtBert,,map,ProtBert,boundary review: use or configuration of the model,read (RL-174)
 AgriGPT-VL,,keep,,AgriGPT-VL vision-language LLM,haiku
 SBERT-MLP,,keep,,SBERT-based classifier,haiku
-BERTFT,,keep,,BERT fine-tuned with full pipeline,haiku
+BERTFT,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 BERTMesh,,keep,,BERT-based article tagger,haiku
 MolBert,,keep,,MolBERT compound embedding model,haiku
 IgBERT-derived,,keep,,IgBERT embeddings with MLP classifier,haiku
@@ -2890,7 +2890,7 @@ BioFinBERT,,keep,,biotech BERT model,haiku
 medBERTde,,keep,,German medical BERT model,haiku
 BERTScore.Table,,reject,,metric reference in retrieval text,haiku
 HuatuoGPT-o1-70B64,,map,HuatuoGPT-o1-70B,glued citation number,citation rule (Haiku: model)
-GPT4b.Fig,,reject,,"figure label, not a model",haiku
+GPT4b.Fig,,map,GPT-4,boundary review: use or configuration of the model,read (RL-174)
 ExKidneyBERT,,keep,,kidney BERT model,haiku
 ClinicalBERT8,,keep,,clinical BERT model,haiku
 JMedRoBERTa,,keep,,Japanese medical RoBERTa model,haiku
@@ -2900,7 +2900,7 @@ LLaMA_QA_Soft__Gemini_Both_ReRank,,reject,,read: pipeline label combining LLaMA 
 OpticalBERT,,keep,,optoelectronics BERT model,haiku
 BatterySciBERT-uncased,,keep,,battery BERT model,haiku
 pGPT3.5,,keep,,GPT-3.5 LLM condition,haiku
-fRoBERTa,,keep,,RoBERTa-variant pretraining approach,haiku
+fRoBERTa,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 BiogottBERT-based,,keep,,German medical BERT fine-tune,haiku
 distil-RoBERTA-based,,keep,,distil-RoBERTa classifier,haiku
 BERTwalk,,keep,,BERTwalk gene network model,haiku
@@ -2916,7 +2916,7 @@ Text‐ChatGPT4,,keep,,ChatGPT-4 text condition,haiku
 ChemGPT-cancer,,keep,,fine-tuned ChemGPT model,haiku
 ProtBertBFD,,keep,,ProtBert BFD protein model,haiku
 DeBERTa‐based,,keep,,DeBERTa sentiment model,haiku
-SpanBERT-based,,keep,,SpanBERT approach,haiku
+SpanBERT-based,,map,SpanBERT,boundary review: use or configuration of the model,read (RL-174)
 ColBERT-based,,keep,,ColBERT re-ranking model,haiku
 VisionBERT_EarlyFusion,,keep,,VisionBERT classification model,haiku
 BERTopic74,,reject,,BERTopic topic modelling tool,haiku
@@ -2930,7 +2930,7 @@ RoBERTaGAT,,keep,,RoBERTa with graph attention model,haiku
 rate.DistilBERT,,keep,,DistilBERT model,haiku
 PONE-D-24-00877DR-GPT,,keep,,"DR-GPT LLM, garbled manuscript ID prefix",haiku
 ClinicalBERT.13,,map,ClinicalBERT,glued citation number,citation rule (Haiku: model)
-GPTone,,reject,,read: condition label for one-shot GPT texts; not clearly a model,read (Haiku: unsure)
+GPTone,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
 LLaMA-Clinic,,keep,,LLM-based clinical note application,haiku
 RNABERT_MLP,,keep,,RNABERT baseline model,haiku
 PERSEL-MBERT,,keep,,Persian mBERT variant,haiku
@@ -3009,7 +3009,7 @@ cosmosGPT,,keep,,Turkish GPT decoder model,haiku
 ARBERTv2,,keep,,Arabic BERT language model,haiku
 BERTLARGE,,keep,,BERT-large model variant,haiku
 ALBERT-IDCNN-MHA-CRF,,keep,,ALBERT-based NER architecture,haiku
-irAE-GPT.git.Fig,,keep,,LLM-based irAE-GPT framework named after model,haiku
+irAE-GPT.git.Fig,,map,irAE-GPT,boundary review: use or configuration of the model,read (RL-174)
 BERTimbau-Augmented,,keep,,BERTimbau-based model augmentation,haiku
 BERTopic53,,reject,,BERTopic topic modelling software tool,haiku
 StGPTs,,reject,,"Plant gene StGPT, not a model",haiku
@@ -3090,7 +3090,7 @@ GPTo1,,keep,,OpenAI o1 reasoning model,haiku
 Erlangshen-Roberta-330,,keep,,Erlangshen RoBERTa sentiment model,haiku
 MAGBERT,,keep,,Multimodal adaptation gate BERT model,haiku
 RuRoBERTa-Large,,keep,,RuRoBERTa-Large fine-tuned sentiment model,haiku
-SBERT-UMAP-KMeans,,keep,,SBERT embedding with UMAP and KMeans pipeline,haiku
+SBERT-UMAP-KMeans,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
 DEiTGPT2,,keep,,DeiT encoder with GPT2 decoder model,haiku
 LlamaIndex31,,reject,,LlamaIndex data framework library,haiku
 SeqPalm,,reject,,SeqPalm palmitoylation prediction tool,haiku
@@ -3106,7 +3106,7 @@ BERTrend,,reject,,BERTrend topic-trend detection method,haiku
 AllergyROBERTa,,keep,,Allergy-domain RoBERTa pretrained from scratch,haiku
 ViTLLaMAII,,keep,,Vision transformer with LLaMA model,haiku
 zLlama,,keep,,Zero-shot LLaMA model in comparison,haiku
-TopicGPT,,reject,,read: Prompt-based topic framework; not clearly a model,read (Haiku: unsure)
+TopicGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 BERTG,,keep,,BERT variant denoted BERTG,haiku
 MatterGPT,,keep,,Transformer-based materials model MatterGPT,haiku
 TCMBERT-BiLSTM-CRF,,keep,,TCM BERT-BiLSTM-CRF model,haiku
@@ -3128,7 +3128,7 @@ BioBERT1,,keep,,"BioBERT biomedical model, citation number",haiku
 ModernBERT-style,,keep,,ModernBERT-style encoder architecture,haiku
 AntiBERTy31,,map,AntiBERTy,glued citation number,citation rule (Haiku: model)
 one.BERTfilter,,reject,,read: Module name; contexts do not say what it is,read (Haiku: unsure)
-ALBERT_EN_BASE,,keep,,Pre-trained ALBERT base model,haiku
+ALBERT_EN_BASE,,map,ALBERT,boundary review: use or configuration of the model,read (RL-174)
 3DBERT-GNN,,keep,,Multimodal GNN-BERT molecular model,haiku
 HuatuoGPT-o1-8B31,,map,HuatuoGPT-o1-8B,glued citation number,citation rule (Haiku: model)
 BERTLAST,,keep,,BERT last-layer representation model,haiku
@@ -3148,7 +3148,7 @@ TWhinBERT,,keep,,Source-specific pretrained BERT model,haiku
 ImageGPT,,keep,,ImageGPT pixel autoregressive model,haiku
 NegPubMedBERT,,keep,,Negation-aware PubMedBERT model,haiku
 YieldBERT7,,keep,,BERT-based reaction yield model,haiku
-reguloGPT-CoT,,keep,,LLM-based causal extraction method named after model,haiku
+reguloGPT-CoT,,map,reguloGPT,boundary review: use or configuration of the model,read (RL-174)
 BiomedNLP-BiomedBERT-base,,keep,,BiomedBERT checkpoint name,haiku
 ruGPT,,keep,,ruGPT Russian GPT model,haiku
 TxGemma-27B,,keep,,TxGemma drug-development model,haiku
@@ -3169,16 +3169,16 @@ MiniGPT-4-7B11,,keep,,MiniGPT-4 multimodal model,haiku
 EchoGPT,,keep,,Fine-tuned Llama-2 echo report LLM,haiku
 PsycBERT,,keep,,Mental health pretrained language model,haiku
 DeBERTaV2-base,,keep,,DeBERTaV2-base encoder,haiku
-GPT4x3,,reject,,Strategy label for three GPT-4 Turbo calls,haiku
+GPT4x3,,map,GPT-4,boundary review: use or configuration of the model,read (RL-174)
 DistilBERT.Fig,,keep,,"DistilBERT baseline model, figure text glued",haiku
 dGPT,,keep,,Virtual patient LLM dialogue model,haiku
 InselBERT_mammo,,keep,,InselBERT mammography BERT model,haiku
 aclinicalBERT,,keep,,Clinical BERT model,haiku
-GPT4x1,,reject,,Strategy label for single GPT-4 Turbo call,haiku
+GPT4x1,,map,GPT-4,boundary review: use or configuration of the model,read (RL-174)
 AntiBERTy52,,map,AntiBERTy,glued citation number,citation rule (Haiku: model)
 MODERNBERT-LARGE,,keep,,ModernBERT-large masked language model,haiku
 CAMeLBERT-base,,keep,,CAMeLBERT Arabic BERT model,haiku
-DE-GPT3.5-3,,reject,,"Interview respondent code, not a model",haiku
+DE-GPT3.5-3,,map,GPT-3.5,boundary review: use or configuration of the model,read (RL-174)
 KidneyGPT,,keep,,Hypothetical domain-specific LLM for kidney care,haiku
 BioClinicalBERT.g,,keep,,"Clinical BioBERT model, glued citation",haiku
 promGPT2,,reject,,Gene promoter promGPT2 in plant experiment,haiku
@@ -3186,10 +3186,10 @@ BaseGPT,,reject,,"Regression variable name, not a model",haiku
 ChatGPTaug,,reject,,Augmentation function identifier using ChatGPT,haiku
 VilBert,,keep,,VilBERT vision-language transformer model,haiku
 AutomataGPT,,keep,,Decoder-only transformer AutomataGPT,haiku
-yGPT,,reject,,read: Glossary gloss of generic GPT; no specific model shown,read (Haiku: unsure)
+yGPT,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
 ftBlueBERTp,,keep,,Fine-tuned BlueBERT model,haiku
 MutBERT8L,,keep,,MutBERT transformer model variant,haiku
-ChromBERT-based,,keep,,"ChromBERT-based modules, model framework",haiku
+ChromBERT-based,,map,ChromBERT,boundary review: use or configuration of the model,read (RL-174)
 HerBERT,,keep,,HerBERT Polish BERT model,haiku
 ModernBERT-large21,,map,ModernBERT-large,glued citation number,citation rule (Haiku: model)
 Multi-BERT-wwm+FGM,,keep,,Multi-BERT-wwm baseline model with FGM,haiku
@@ -3243,10 +3243,10 @@ ICD-10-PCS-Gemini,,keep,,Gemini-based LLM compared with Claude and Perplexity,ha
 DrugBERT,,keep,,BERT-based framework for predicting drug efficacy,haiku
 RetBERT,,keep,,BERT sentence embedding model in recommender,haiku
 CovBERTurk,,keep,,Turkish language model compared on carbon and accuracy,haiku
-GPTCelltype4,,keep,,"GPT-4-based cell annotation method, named as LLM comparator",haiku
+GPTCelltype4,,map,GPTCelltype,boundary review: use or configuration of the model,read (RL-174)
 cEhrBERT1M,,keep,,BERT model trained on EHR notes,haiku
 n-LFM-GBERT,,keep,,"Grounded BERT with LSTM layers, named as model variant",haiku
-2-RoBERTaLarge-10-traindev,,keep,,RoBERTa-large submission run trained with fine-tuning strategy,haiku
+2-RoBERTaLarge-10-traindev,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 RBioBERT1,,keep,,R-BioBERT model variant compared on symptom classification,haiku
 FinDeBERTaV2,,keep,,DeBERTaV2 model trained on financial data,haiku
 RoBERTaLARGE,,keep,,"RoBERTa-large baseline, a transformer model",haiku
@@ -3270,7 +3270,7 @@ DistillProtBERT,,keep,,Distilled ProtBERT protein model,haiku
 lBERT,,reject,,read: Parameter notation for BERT features; no model name given,read (Haiku: unsure)
 ModerBert,,keep,,"ModernBERT architecture option, misspelled",haiku
 WS-UmBERTo-TPT,,keep,,UmBERTo-based weakly supervised NLP model,haiku
-OBERT,,keep,,Original BERT model compared on movie review classification,haiku
+OBERT,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 MedGemma-3.9,,keep,,"MedGemma model compared among small LLMs, size typo",haiku
 URLTran_RoBERTs,,keep,,RoBERTa-based component of URLTran models,haiku
 ChatPandaGPT,,keep,,"AI large language model Q&A function, GPT-named",haiku
@@ -3279,7 +3279,7 @@ RedditBERT,,keep,,BERT QA model adapted to Reddit language,haiku
 ALBERT-BILSTM-CRF,,keep,,ALBERT with BiLSTM-CRF architecture for NER,haiku
 BERTimbau-base,,keep,,Portuguese BERT model used as filter,haiku
 RoMistral-7B-Instruct,,keep,,Romanian Mistral 7B instruct LLM,haiku
-TrialGPT-Retrieval,,keep,,LLM module of TrialGPT for patient eligibility,haiku
+TrialGPT-Retrieval,,map,TrialGPT,boundary review: use or configuration of the model,read (RL-174)
 MedLlama3-v20,,keep,,Open medical LLM compared with general open models,haiku
 DistilledBERT,,keep,,Distilled BERT variant for concept embeddings,haiku
 exft-exTAPTPubMedBERT,,keep,,Fine-tuned PubMedBERT variant for pain identification,haiku
@@ -3287,7 +3287,7 @@ DeeBERT,,keep,,Early-exit BERT model for faster inference,haiku
 rfGPT,,reject,,"Random-forest style protein classifier, not a language model",haiku
 ALBERTBASE,,keep,,ALBERT base lite BERT model,haiku
 GAN-BanglaBERT,,keep,,BERT-based generative adversarial model for Bengali,haiku
-LLaMA-driven,,keep,,"LLaMA-driven extraction pipeline, LLM used as model",haiku
+LLaMA-driven,,map,LLaMA,boundary review: use or configuration of the model,read (RL-174)
 BiomedBERT-large,,keep,,Microsoft BiomedBERT large model fine-tuned for ADE extraction,haiku
 BERTLarge-LR,,keep,,BERT-Large model variant compared on cognitive impairment,haiku
 ProtBert-encoded,,keep,,ProtBert protein model used for encoding peptides,haiku
@@ -3302,7 +3302,7 @@ ProtAlbert,,keep,,ProtAlbert protein language model among ten listed models,haik
 AntiBERTy-based,,keep,,AntiBERTy-based antibody language model,haiku
 SAAGSciBert,,keep,,SciBERT-based document relation extraction model,haiku
 WOBERT,,keep,,WoBERT Plus Chinese BERT variant,haiku
-OntoGPT-extracted,,reject,,OntoGPT is an extraction software tool; label for its outputs,haiku
+OntoGPT-extracted,,map,OntoGPT,boundary review: use or configuration of the model,read (RL-174)
 ProtBERT-BFD-based,,keep,,ProtBERT-BFD protein feature extractor,haiku
 MaTableGPT,,keep,,"LLM app, agent or model",read (Haiku: unsure)
 BERTin,,keep,,Spanish BERT model compared with BETO and RoBERTa,haiku
@@ -3312,7 +3312,7 @@ ColBERTv1,,keep,,Fine-tuned ColBERT late-interaction reranker,haiku
 GPTTrainer,,reject,,"Coqui TTS trainer class name, code identifier",haiku
 DeBERTa-small,,keep,,DeBERTa-small fine-tuned for legal retrieval,haiku
 tALBERT-CNN-S2,,keep,,tALBERT-CNN multi-label classifier variant,haiku
-BERTCLS,,reject,,read: Function notation for BERT [CLS] embedding; no model named,read (Haiku: unsure)
+BERTCLS,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 MIND-Roberta,,keep,,MIND-IoT fine-tuned variant with RoBERTa head,haiku
 PromBERT,,keep,,Transformer-based promoter prediction model,haiku
 nanoBERT,,keep,,Nanobody-specific BERT model,haiku
@@ -3353,7 +3353,7 @@ Twitter-Roberta-Base,,keep,,Twitter-RoBERTa sentiment analyzer model,haiku
 GPTNeoX-based26,,keep,,LA4SR model built on GPT-NeoX architecture,haiku
 TohokuBERT,,keep,,"TohokuBERT, a Japanese BERT model",haiku
 ADMolOrgGPT-M,,keep,,MolOrgGPT model size variant,haiku
-MCBERT-BiLSTM-CRF,,keep,,BERT-BiLSTM-CRF sequence framework,haiku
+MCBERT-BiLSTM-CRF,,map,MCBERT,boundary review: use or configuration of the model,read (RL-174)
 PerioGPT,,keep,,Fine-tuned GPT-4o chatbot for periodontology,haiku
 Pre-TrainingGPTGenerative,,reject,,"Glued abbreviation list entry, not a specific model",haiku
 scGPT_bc,,keep,,scGPT single-cell foundation model checkpoint,haiku
@@ -3380,7 +3380,7 @@ fSapBERT,,keep,,Self-aligned pretrained BERT for biomedical entities,haiku
 GPTZero61,,reject,,GPTZero is a commercial AI-detection product,haiku
 DNABERT2-enhancer,,keep,,DNABERT-2 based enhancer prediction model,haiku
 AntiBERTY,,keep,,"Antibody-tuned language model, AntiBERTy",haiku
-BERTweet-large,,keep,,BERTweet large pre-trained language model,haiku
+BERTweet-large,,map,BERTweet,boundary review: use or configuration of the model,read (RL-174)
 PhoBERT,,keep,,Vietnamese BERT model used in several studies,haiku
 ChatGPTo3mini,,keep,,OpenAI o3-mini LLM compared on readability,haiku
 BERTurkbase,,keep,,BERTurk base encoder for spelling correction,haiku
@@ -3403,7 +3403,7 @@ BERT4Rec30,,map,BERT4Rec,glued citation number,citation rule (Haiku: model)
 tRFBERT,,keep,,BERT model for Bengali aspect sentiment,haiku
 OBERTic,,keep,,OBERT-ic Spanish BERT encoder,haiku
 MEmoBERT,,keep,,Multimodal transformer pretrained model for emotion,haiku
-MICC-GPTs,,keep,,Custom ChatGPT-based GPTs for cervical cancer information,haiku
+MICC-GPTs,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 PaliGemma-1,,keep,,PaliGemma vision-language model compared with FaceLLM,haiku
 EnahncerBERT,,keep,,Misspelled EnhancerBERT DNA language model,haiku
 GigaBERT-on,,keep,,GigaBERT Arabic BERT model,haiku
@@ -3421,7 +3421,7 @@ SimBERT,,keep,,SimBERT model used as nearest-neighbour baseline,haiku
 InterviewGPT2,,keep,,Chatbot built as an LLM interview assistant,haiku
 MedLocalGPT,,keep,,"LLM app, agent or model",read (Haiku: unsure)
 CMSA-mBERT,,keep,,Code-mixed multilingual mBERT variant for hate speech,haiku
-CodeLlama-Instruct,,keep,,CodeLlama instruct model in benchmark list,haiku
+CodeLlama-Instruct,,map,CodeLlama,boundary review: use or configuration of the model,read (RL-174)
 HistoGPT-S,,keep,,HistoGPT small model for pathology report generation,haiku
 CancerBERTUMN,,keep,,CancerBERT UMN model for phenotyping,haiku
 TFBertForSequenceClassification,,map,BERT,the model's own code class,read (Haiku: not_model)
@@ -3476,7 +3476,7 @@ models-mBERT,,keep,,Multilingual BERT (mBERT) model with typo,haiku
 ClinicalBERT-only,,keep,,ClinicalBERT text model in leukemia classifier,haiku
 MechBERT-cased,,keep,,Domain-specific MechBERT language model variant,haiku
 IndicBERTv2,,keep,,IndicBERT word embedding model,haiku
-DanceGPT-based,,keep,,LLM-based framework named after GPT for dance education,haiku
+DanceGPT-based,,map,DanceGPT,boundary review: use or configuration of the model,read (RL-174)
 ALBERTo,,keep,,Italian BERT-based model ALBERTo,haiku
 AudioBERT,,keep,,Named as an advanced model for audio text representation,haiku
 MotionGPT,,keep,,Motion-language multimodal LLM listed with video models,haiku
@@ -3529,7 +3529,7 @@ hSciBERT,,keep,,Scientific BERT model for clinical papers,haiku
 LLaMA.6,,keep,,LLaMA model with citation glued,haiku
 LLaMA-XR,,keep,,LLaMA-based radiology report generator,haiku
 HBERT,,reject,,read: Feature name; only a BERT-derived feature branch shown,read (Haiku: unsure)
-Sentence-BERT-KMeans++-TopMine,,reject,,Pipeline combining Sentence-BERT with clustering and phrase mining,haiku
+Sentence-BERT-KMeans++-TopMine,,map,Sentence-BERT,boundary review: use or configuration of the model,read (RL-174)
 MedAlbert-based,,keep,,Albert-based clinical prediction model,haiku
 ERoBERTa,,keep,,RoBERTa embedding model in ensemble,haiku
 ALBERTlarge,,keep,,Arabic ALBERT large model,haiku
@@ -3556,7 +3556,7 @@ ParsBERT-v3.0,,keep,,Persian BERT model ParsBERT,haiku
 PBBERTB,,keep,,PubMed BERT base and large variants,haiku
 TrialGPT,,keep,,GPT-4 based trial matching LLM tool,haiku
 adaptation.DABERT,,reject,,read: Garbled token; contexts do not show what it denotes,read (Haiku: unsure)
-GPTs2,,keep,,Misspelled GPT-2 transformer model,haiku
+GPTs2,,map,GPT-2,boundary review: use or configuration of the model,read (RL-174)
 MacBERT+CRF,,keep,,MacBERT with CRF baseline model,haiku
 TomBERT,,keep,,Target-oriented multimodal BERT model,haiku
 human-to-GPT,,reject,,Correlation measure between human and GPT judgments,haiku
@@ -3577,7 +3577,7 @@ GPTology,,reject,,Name of research practice using GPT,haiku
 FS-XLM-RoBERTa-TPT,,keep,,Fully supervised XLM-RoBERTa transformer variant,haiku
 GPTs59,,keep,,Custom GPTs feature of ChatGPT,haiku
 SapBERT-multilingual,,keep,,SapBERT multilingual biomedical bi-encoder,haiku
-MChatGPT,,reject,,Mean rating label for ChatGPT jokes,haiku
+MChatGPT,,map,ChatGPT,boundary review: use or configuration of the model,read (RL-174)
 CAMeLBERT.Methodology,,keep,,CAMeLBERT model with stray text,haiku
 scGPT-spatial,,keep,,Spatial single-cell foundation model scGPT,haiku
 MentalBERT,,keep,,Mental health domain BERT model,haiku
@@ -3607,7 +3607,7 @@ PlasmidGPT,,keep,,Generative GPT model for plasmid DNA,haiku
 LastBert,,keep,,BERT model for ADHD severity classification,haiku
 LLaMA.101,,keep,,LLaMA backbone of large language models,haiku
 ChatGPTis,,keep,,"ChatGPT variant, typo",haiku
-AIIRLLaMA,,keep,,Meta-Llama-3 based legal system,haiku
+AIIRLLaMA,,map,LLaMA,boundary review: use or configuration of the model,read (RL-174)
 distilledBERT,,keep,,Knowledge-distilled BERT model,haiku
 RNA-BERTA,,keep,,RNA BERT model for binding affinity,haiku
 DistilBERT-multilingual,,keep,,Multilingual DistilBERT fine-tuned model,haiku
@@ -3650,11 +3650,11 @@ DistilGPT-2,,keep,,Distilled GPT-2 generative model,haiku
 ARABBERTV2,,keep,,Arabic BERT V2 model,haiku
 KrissBERT,,keep,,Biomedical BERT concept mapping model,haiku
 INDOBERTWEET,,keep,,Indonesian Twitter BERT model,haiku
-bert2BERT-like,,reject,,Parameter initialization method name,haiku
+bert2BERT-like,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 ChatGPTo1,,keep,,ChatGPT o1 LLM,haiku
 DeBERTa39-based,,keep,,DeBERTa-based polymer language model,haiku
 AD-BERTCON-SSI,,keep,,BERT variant with semi-supervised learning,haiku
-BERTweet‐Large,,keep,,BERTweet-Large model,haiku
+BERTweet‐Large,,map,BERTweet,variant of BERTweet-Large,"read (RL-174, variant)"
 BatteryOnlyBERT2,,keep,,Battery-domain BERT model,haiku
 ColBERT,,keep,,BERT-based ColBERT ranking model,haiku
 ALBERT8,,keep,,ALBERT baseline model,haiku
@@ -3675,7 +3675,7 @@ ClinicalBERT-Huang,,keep,,Clinical BERT variant from Huang,haiku
 GPT4Tools17,,keep,,GPT-based tool-augmented LLM system,haiku
 CheXbert-Precision,,reject,,CheXbert-derived evaluation metric,haiku
 3UTRBERT‐embedding,,keep,,3UTRBERT embedding model,haiku
-lGPT,,reject,,read: Article 1 GPT model; article 2 serum enzyme abbreviation,read (Haiku: mixed)
+lGPT,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
 ChatGPTv4.0,,keep,,ChatGPT version 4.0 used for screening,haiku
 aBERT,,keep,,aBERT model from earlier study,haiku
 Roberta-Classical-Chinese,,keep,,Ancient Chinese RoBERTa model,haiku
@@ -3688,7 +3688,7 @@ CaBERT,,keep,,Clinical BERT pathology variant CaBERT,haiku
 EarlyBERT,,keep,,Compact EarlyBERT model,haiku
 MolOrgGPT-XL,,keep,,Molecular GPT model variant XL,haiku
 EL-CodeBERT,,keep,,CodeBERT two-step fine-tuned model,haiku
-LLaMA-Adapter,,keep,,LLaMA-Adapter fine-tuning of LLaMA model,haiku
+LLaMA-Adapter,,map,LLaMA,boundary review: use or configuration of the model,read (RL-174)
 S-PubMedBert-MS-MARCO,,keep,,PubMedBERT sentence embedding model,haiku
 prediction.MMBERT,,keep,,MMBERT multimodal model prediction,haiku
 exBert,,reject,,Attention visualization tool,haiku
@@ -3703,7 +3703,7 @@ SensEmBERT,,keep,,Contextual embedding model compared with BERT,haiku
 MedRoBERTA.nl-HAGA,,keep,,Named BERT model variant fine-tuned on Dutch clinical text,haiku
 COVID-TWITTER-BERT,,keep,,BERT model pretrained on COVID-19 tweets,haiku
 PubMedBERT6,,keep,,Pretrained biomedical BERT weights used in study,haiku
-ProtBert-like,,keep,,Protein language model derived from ProtBert,haiku
+ProtBert-like,,map,ProtBert,boundary review: use or configuration of the model,read (RL-174)
 gutBERT,,keep,,Used to resolve cell types; BERT-style single-cell model,haiku
 EntityBERT,,keep,,"BERT-based clinical language model, fine-tuned in several articles",haiku
 BERTopic24,,reject,,"Topic modeling software technique, not a language model",haiku
@@ -3720,7 +3720,7 @@ fClinicalBERT,,keep,,Fine-tuned ClinicalBERT model,haiku
 nPubMedBERT,,keep,,"BERT pretrained on PubMed text, named model",haiku
 RobBERT,,keep,,Dutch BERT-family language model across all contexts,haiku
 FakeNewsGPT-4,,keep,,Fake news detection model built on MiniGPT-4,haiku
-BERTFusionDNN,,keep,,Framework combining BERT with deep neural network,haiku
+BERTFusionDNN,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 KAdam‐EnGPT4LLM,,reject,,"Named optimisation algorithm, not a language model",haiku
 Gemma3-12B,,keep,,Gemma 3 vision-language model compared in several articles,haiku
 BioMedRoBERTa,,keep,,Biomedical RoBERTa model compared with BERT-based models,haiku
@@ -3733,7 +3733,7 @@ AmpGPT2-generated,,keep,,Generative model producing antimicrobial peptide candid
 RMABERT-ZS,,keep,,BERT-based model compared across fine-tuning stages,haiku
 RAG-SFT-GPT4o.Table,,keep,,Best model fine-tuned from GPT-4o,haiku
 SlackGPT,,keep,,Generative AI tool listed among LLM systems,haiku
-GPTNeXt,,keep,,"CNN architecture built on GPT framework, named model",haiku
+GPTNeXt,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 X-rayGPT,,keep,,Multimodal LLM mapping encoder into Vicuna-7B,haiku
 WildfireGPT.Table,,keep,,LLM-based wildfire spread model compared with TabNet,haiku
 GraphGPT,,keep,,"LLM app, agent or model",read (Haiku: mixed)
@@ -3757,11 +3757,11 @@ TimesGPT,,keep,,Time series foundation model compared with Chronos,haiku
 BioMedBERT-full,,keep,,Biomedical BERT pretrained language model,haiku
 Gemma2-2.6B,,keep,,Gemma2 LLM compared in extraction study,haiku
 NurGPT,,keep,,Healthcare fine-tuned GPT model proposed as example,haiku
-BatteryBERT-based,,keep,,BERT model used in data-extraction pipeline,haiku
+BatteryBERT-based,,map,BatteryBERT,boundary review: use or configuration of the model,read (RL-174)
 PaliGemmaForConditionalGeneration,,keep,,Vision-language transformer architecture of DermaGPT backbone,haiku
 AbBERT,,keep,,Antibody language model trained on OAS sequences,haiku
 ExpasyGPT,,keep,,LLM-driven query tool named after GPT,haiku
-CASSIA-GPT4.0,,keep,,Multi-agent LLM variant with GPT-4.0 underlying model,haiku
+CASSIA-GPT4.0,,map,GPT-4,boundary review: use or configuration of the model,read (RL-174)
 DeBERTa-CRF,,keep,,"Concept extraction transformer model, best performer",haiku
 MedGemma-4B,,keep,,Medical Gemma variant evaluated and used as generator,haiku
 antiBERTy,,keep,,Antibody language model compared with other PLMs,haiku
@@ -3770,7 +3770,7 @@ MedGemma-like,,keep,,Pathology-adapted MedGemma-style language model,haiku
 LoBERT,,keep,,BERT plus CNN sentiment model,haiku
 SpeechGPT,,keep,,Multimodal speech LLM compared with video models,haiku
 ModernBERT-based,,keep,,ModernBERT-based LD50 predictor and embeddings,haiku
-DrBERT-powered,,keep,,System built on DrBERT model for clinical interface,haiku
+DrBERT-powered,,map,DrBERT,boundary review: use or configuration of the model,read (RL-174)
 Chinese-BERTology-wwm-GCN-E,,keep,,Chinese BERT-based text classification model,haiku
 h1BERT,,reject,,"Notation for output embeddings of ClinicalBERT, not a model",haiku
 BERT2Ome,,keep,,Foundation-model prediction architecture for RNA modification,haiku
@@ -3811,7 +3811,7 @@ MDTeamGPT9,,keep,,"Multi-agent medical reasoning system, named model",haiku
 BioSEPBERT,,keep,,Pre-trained model based on start-end position pointers,haiku
 belabBERT-HAGA,,keep,,Dutch BERT model variant named in study,haiku
 GPTutor,,keep,,Programming tool powered by ChatGPT,haiku
-GPTArticleExtractor,,reject,,read: Extraction workflow named after GPT; LLM basis not stated,read (Haiku: unsure)
+GPTArticleExtractor,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 HierBERT,,keep,,Hierarchical BERT model for judgment prediction,haiku
 DeBERTa-BiLSTM,,keep,,DeBERTa combined with BiLSTM model,haiku
 LLaVA-Next-Mistral,,keep,,LLaVA variant built on Mistral language model,haiku
@@ -3839,16 +3839,16 @@ BERTScore64,,reject,,"Evaluation metric, not a model",haiku
 OncoGPT,,keep,,Transformer model for cancer treatment response prediction,haiku
 aminoBERT,,keep,,Protein language model alternative to ESM-2,haiku
 HerbBERT,,keep,,HerBERT-based model for text message classification,haiku
-TCMBERT-BiLSTM-Transformer-CRF,,keep,,TCM NER framework built on TCMBERT,haiku
+TCMBERT-BiLSTM-Transformer-CRF,,map,TCMBERT,boundary review: use or configuration of the model,read (RL-174)
 Yield-BERT.21,,keep,,Yield-BERT model for chemistry yield prediction,haiku
 PhoBERT-YQA,,keep,,PhoBERT-based model fine-tuned for Vietnamese QA,haiku
 MentaLLLaMA-chat-7B,,keep,,Mental health LLaMA-based chat model,haiku
 RoBERTabase,,keep,,RoBERTa base language model compared with BERT,haiku
-ScGPT-Human,,keep,,Spatial omics foundation model compared in benchmark,haiku
+ScGPT-Human,,map,scGPT,boundary review: use or configuration of the model,read (RL-174)
 InterviewGPT,,keep,,"LLM app, agent or model",read (Haiku: unsure)
 MetaBERTa-bigbird-gene68,,map,MetaBERTa-bigbird-gene,glued citation number,citation rule (Haiku: model)
 AffectGPT,,keep,,"LLM app, agent or model",read (Haiku: mixed)
-hBERT,,keep,,Bidirectional encoder model for depression detection,haiku
+hBERT,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 CustomBertForSequenceRegression,,keep,,Architecture class of base model klue/bert,haiku
 SciBERT6,,keep,,SciBERT model fine-tuned for sentence classification,haiku
 NanoAbLLaMA,,keep,,Nanobody LLM built on ProLLaMA framework,haiku
@@ -3866,7 +3866,7 @@ TrialGPT-aggregated,,map,TrialGPT,refers to the model,read (Haiku: not_model)
 miniGPT-based,,keep,,miniGPT-based visual feature model,haiku
 TinyBERT,,keep,,Compressed BERT model for NLP tasks,haiku
 HuatuoGPT-II,,keep,,Medical LLM with instruction format training,haiku
-bert2BERT,,keep,,Pretrained framework for growing larger BERT models,haiku
+bert2BERT,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 BiTTBERT,,keep,,BiTTBERT baseline model for relation extraction,haiku
 CamemBERT-base,,keep,,French CamemBERT base checkpoint,haiku
 DREGCN-CNN-BERT,,keep,,Emotion analysis model combining CNN and BERT,haiku
@@ -3891,7 +3891,7 @@ BERTScore38,,reject,,"Evaluation metric, not a model",haiku
 AugSBertChat,,keep,,Chatbot system enhanced by user feedback,haiku
 CAMeLBERT-Mix,,keep,,Arabic CAMeLBERT model pretrained on data,haiku
 Med-PaLM2,,keep,,Google medical LLM compared in several articles,haiku
-scGPT-Human,,keep,,Single-cell foundation model compared in benchmark,haiku
+scGPT-Human,,map,scGPT,boundary review: use or configuration of the model,read (RL-174)
 BERTCNN-MLM-Multi,,keep,,BERT configuration with masked language modeling,haiku
 AlBERTino,,keep,,Telecom-domain BERT variant,haiku
 CvT2DistilGPT2,,keep,,Vision transformer with distilled GPT-2 report generator,haiku
@@ -3939,7 +3939,7 @@ SaudiBERT,,keep,,Saudi dialect BERT model compared on essay scoring,haiku
 MedGemma-27B,,keep,,MedGemma medical LLM evaluated across articles,haiku
 GPTness,,reject,,"Concept of general-purpose technology, not a model",haiku
 ProtBert-BFD17,,map,ProtBert-BFD,glued citation number,citation rule (Haiku: model)
-GPTCelltype19,,map,GPTCelltype,refers to the model,read (Haiku: unsure)
+GPTCelltype19,,map,GPTCelltype,variant of GPTCelltype,"read (RL-174, variant)"
 sourcesBERT,,keep,,"BERT pretrained on generic text, compared in study",haiku
 DNABERT3,,keep,,DNABERT DNA foundation model,haiku
 YBERT,,reject,,"Insomnia prediction result label, not a model",haiku
@@ -3967,7 +3967,7 @@ RoBERT+BiLSTM+CRF,,keep,,RoBERT plus BiLSTM plus CRF NER architecture,haiku
 MemGPT,,keep,,"LLM app, agent or model",read (Haiku: unsure)
 ChtGPT,,keep,,misspelling of ChatGPT,haiku
 PMC-LlaMA,,keep,,medical LLaMA-based LLM fine-tuned in attack study,haiku
-CharBERT-optimized,,keep,,character-level BERT variant in federated framework,haiku
+CharBERT-optimized,,map,CharBERT,boundary review: use or configuration of the model,read (RL-174)
 LSTM-MacBERT-based,,keep,,MacBERT-based transfer learning model,haiku
 DistilBERT-Base,,keep,,DistilBERT model used for classification,haiku
 CDGAN-BERT3,,keep,,GAN-BERT semi-supervised variant,haiku
@@ -4022,7 +4022,7 @@ trialGPT,,keep,,LLM-based trial matching system named after GPT,haiku
 BERTScore12,,reject,,BERTScore similarity metric,haiku
 NanoBERTa,,keep,,RoBERTa-based nanobody paratope predictor,haiku
 bGPT,,keep,,GPT-style model for generating structural models,haiku
-GPTZip,,keep,,GPT-2 based compression method,haiku
+GPTZip,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 RoBERTaBio,,keep,,pretrained LLM for HIV text,haiku
 amiRGPT1-1,,reject,,plant vector name,haiku
 aGPT-Pplase,,reject,,enzyme domain name,haiku
@@ -4040,7 +4040,7 @@ FlightBERT++,,keep,,FlightBERT++ trajectory prediction framework,haiku
 ShareGPT4V,,keep,,multimodal LLM ShareGPT4V,haiku
 RoBERTa84.Table,,keep,,RoBERTa with citation glued on,haiku
 HeavyBERTa,,keep,,antibody heavy-chain transformer model,haiku
-GPTArticleExtractor50,,reject,,read: GPT-based extraction method; model status unclear,read (Haiku: unsure)
+GPTArticleExtractor50,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 EmoLLaMA-chat-13B,,keep,,LLaMA2-chat based sentiment model,haiku
 BERTGAT,,keep,,BERT combined with graph attention model,haiku
 PetBert,,keep,,veterinary BERT model,haiku
@@ -4063,7 +4063,7 @@ MedPaLM-238,,keep,,Med-PaLM 2 medical LLM,haiku
 ALBERT-GRU-CRF,,keep,,ALBERT-based GRU-CRF NER model,haiku
 BERTRi3,,reject,,single dimension component of ProtBert embedding,haiku
 Nous-Hermes-Llama2-70b,,keep,,Llama2-based LLM,haiku
-SapBERT-style,,keep,,"SapBERT-style approach, direct variant of SapBERT",haiku
+SapBERT-style,,map,SapBERT,boundary review: use or configuration of the model,read (RL-174)
 CvT-21DistilGPT2,,keep,,report generation model with DistilGPT2 decoder,haiku
 ProtBert-4-layer,,keep,,ProtBert-4-layer pretrained model,haiku
 ALBERT_base_zh,,keep,,ALBERT Chinese pretrained model,haiku
@@ -4125,7 +4125,7 @@ RobBERT-base,,keep,,Dutch RobBERT model,haiku
 RoBERTasecond2last,,keep,,RoBERTa layer-averaged sentence encoder,haiku
 CaBERTnet,,keep,,BERT-based clinical model,haiku
 LegalBERT-style,,keep,,legal BERT-style models,haiku
-CAMeLBERT-DNN,,keep,,CAMeLBERT-based framework,haiku
+CAMeLBERT-DNN,,map,CAMeLBERT,boundary review: use or configuration of the model,read (RL-174)
 GatorTronGPT8,,keep,,GatorTron GPT medical model,haiku
 ChCancerBERT-DGCNN-BILSTM-MHA-CRF,,keep,,Chinese cancer BERT NER model,haiku
 FoodBERT,,keep,,domain BERT model for food,haiku
@@ -4190,12 +4190,12 @@ PhenoSapBERT,,keep,,pre-fine-tuned SapBERT model,haiku
 plasmidGPT,,keep,,plasmid generative GPT model,haiku
 RobBERTa,,keep,,misspelling of RoBERTa,haiku
 Vanilla-VGCN-BERT,,keep,,VGCN-BERT model variant,haiku
-FST+CRF+KazRoBERTa,,keep,,pipeline including KazRoBERTa model,haiku
+FST+CRF+KazRoBERTa,,map,KazRoBERTa,boundary review: use or configuration of the model,read (RL-174)
 kDistilBERT,,keep,,distilled BERT model,haiku
 ruGPT-3,,keep,,ruGPT-3 Russian GPT model,haiku
 2-gliadin-GPT,,reject,,gliadin protein type,haiku
 qLLaMA-LoRA-7B,,keep,,LLaMA LoRA fine-tuned LLM,haiku
-TrialGPT-Matching,,keep,,LLM-based patient-trial eligibility module of TrialGPT system,haiku
+TrialGPT-Matching,,map,TrialGPT,boundary review: use or configuration of the model,read (RL-174)
 ImmunoBERT,,keep,,Transformer model for class I peptide-MHC binding prediction,haiku
 DotaGPT,,keep,,Medical LLM trained on doctor-verified samples,haiku
 SapBERT-like,,reject,,"read: Describes a contrastive training strategy, not clearly a named model",read (Haiku: unsure)
@@ -4215,7 +4215,7 @@ Tscores_GPT_ndom,,reject,,Column name for Grooved Pegboard Test T-scores,haiku
 OncoGPTs,,keep,,Fine-tuned personalized LLM instances for cancer therapy,haiku
 BioDistilBERT,,keep,,Compact distilled biomedical BERT model,haiku
 applications.TinyLlama,,keep,,TinyLlama benchmarked among on-device models; prefix looks like artifact,haiku
-Tools‐ChatGPT4,,reject,,read: Study condition label combining input type and ChatGPT4,read (Haiku: unsure)
+Tools‐ChatGPT4,,map,ChatGPT-4,boundary review: use or configuration of the model,read (RL-174)
 MARBERT-based,,keep,,Classification models based on MARBERT,haiku
 CripsrBERT,,keep,,BERT-embedding model for CRISPR off-target prediction,haiku
 BERTBASE,,keep,,Original BERT base model with 12 transformer blocks,haiku
@@ -4238,13 +4238,13 @@ Med-PaLM1,,keep,,"Med-PaLM model, earlier version",haiku
 SpanBERT-large,,keep,,SpanBERT large model used in relation extraction,haiku
 AgriBERT-NER,,keep,,BERT-based NER model for agriculture text,haiku
 BERT4Rec30.Table,,keep,,BERT4Rec recommender model; .Table suffix is artifact,haiku
-scGPT-human,,keep,,scGPT single-cell foundation model variant,haiku
+scGPT-human,,map,scGPT,boundary review: use or configuration of the model,read (RL-174)
 QLeBERT,,keep,,QLeBERT approach predicting product quality,haiku
 LLaMA-Instruct,,keep,,Fine-tuned LLaMA-Instruct model,haiku
 BioM-ALBERT,,keep,,Biomedical ALBERT transformer model,haiku
 LlamaAttention.forward,,map,LLaMA,the model's own code class,read (Haiku: not_model)
 DNABERT2-CAMP,,keep,,Hybrid model built on DNABERT-2 transformer,haiku
-RoBERTaFT,,keep,,RoBERTa model finetuned for seizure extraction,haiku
+RoBERTaFT,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 RegulatoryGPT,,reject,,read: Hypothetical future tool; not clearly a model,read (Haiku: unsure)
 SpanBERT,,keep,,SpanBERT transformer model for QA and extraction,haiku
 NDABERT,,keep,,Nucleotide DNA BERT model,haiku
@@ -4293,7 +4293,7 @@ BioTinyBERT,,keep,,Compact distilled biomedical BERT model,haiku
 OpenGPT,,keep,,"LLM app, agent or model",read (Haiku: mixed)
 PCBert-Kla,,keep,,Transformer model fusing physicochemical features with ProtBert,haiku
 MIBE-Roberta-FF-Bilstm,,keep,,RoBERTa-based sentiment model variant,haiku
-SBERT-UMAP-HDBSCAN,,reject,,read: Topic pipeline combining SBERT with UMAP and HDBSCAN,read (Haiku: unsure)
+SBERT-UMAP-HDBSCAN,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
 SenescenceGPT,,reject,,"Gene panel derived from GPT-4, not a model",haiku
 TorsionBERT-MCQ,,reject,,read: Scoring function named after TorsionBERT; not clearly a model,read (Haiku: unsure)
 ColBERT-style,,reject,,read: Retrieval architecture style named after ColBERT,read (Haiku: unsure)
@@ -4347,10 +4347,10 @@ PeptideGPT,,keep,,Fine-tuned ProtGPT2 peptide generator,haiku
 ALBERTbase,,keep,,ALBERT classification model for endpoint terms,haiku
 T4attention_ProtBert,,keep,,T4attention model using ProtBert features,haiku
 OBERTjq,,reject,,Formula variable in an attention equation,haiku
-KnGPT,,reject,,"read: Named compression technique for GPT-2, not clearly a model",read (Haiku: unsure)
+KnGPT,,reject,,boundary review: outputs not produced by a language model (as KnGPT18),"read (RL-174, variant)"
 ImpressionGPT,,keep,,LLM-based impression summarisation system,haiku
 Gemini1.5-Pro,,keep,,Google Gemini 1.5 Pro model,haiku
-AMBERT-aligned,,keep,,AMBERT text encoder used in fusion module,haiku
+AMBERT-aligned,,map,AMBERT,boundary review: use or configuration of the model,read (RL-174)
 AceGPT-v2-32B,,keep,,Arabic LLM evaluated in RAG framework,haiku
 ColBERT-Inspired,,reject,,"Re-ranking method inspired by ColBERT, not a model",haiku
 DrivingGPT,,keep,,Multimodal autoregressive driving transformer model,haiku
@@ -4456,7 +4456,7 @@ DIA-BERT_Model1,,keep,,Transformer model variant integrated into DIA-BERT,haiku
 ChatGPT4o-generated,,keep,,Papers generated by ChatGPT4o; names the LLM,haiku
 CheXbert-F1,,reject,,Evaluation metric based on CheXbert labeler output,haiku
 bilingual-SBERT,,keep,,Sentence-BERT model used for embeddings,haiku
-L-ALBERT-FiT,,keep,,Question classification method built on ALBERT,haiku
+L-ALBERT-FiT,,map,ALBERT,boundary review: use or configuration of the model,read (RL-174)
 BrainGPT,,keep,,Named neuroscience LLM compared with experts,haiku
 SurgicBERTa,,keep,,Pre-trained surgical-language BERT model,haiku
 DistiBERTLTM,,keep,,Distilled BERT model with training loss curves,haiku
@@ -4496,7 +4496,7 @@ ClinicalBERT.46,,map,ClinicalBERT,glued citation number,citation rule (Haiku: mo
 AMBERT+MEAM,,map,AMBERT,refers to the model,read (Haiku: unsure)
 BERTbase,,keep,,BERT-base architecture used as pre-trained model,haiku
 ScKGBERT,,keep,,Knowledge-enhanced single-cell BERT foundation model,haiku
-monolingual-SBERT,,keep,,Monolingual sentence-BERT model used in experiments,haiku
+monolingual-SBERT,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
 BiomedNLP-KRISSBERT-PubMed-UMLS-EL,,keep,,Huggingface BERT-based entity linking model,haiku
 GutGPT,,keep,,Named LLM for gastrointestinal bleeding,haiku
 GPT4TS_10,,keep,,GPT4TS time-series model; suffix is sample count,haiku
@@ -4525,7 +4525,7 @@ TCR-V-BERT,,keep,,TCR-specific BERT transformer model,haiku
 Ens-RF-BERT,,keep,,Ensemble model combining BERT and Random Forest,haiku
 CharAs-CBert,,keep,,Sentence representation BERT framework,haiku
 BrainGPT-example,,keep,,Hierarchically fine-tuned BrainGPT variant,haiku
-BrainGPT-generation,,keep,,BrainGPT generation variant of the framework,haiku
+BrainGPT-generation,,map,BrainGPT,boundary review: use or configuration of the model,read (RL-174)
 AntiBERTy_CLS,,keep,,AntiBERTy model variant used in ensemble,haiku
 BERTIG,,keep,,Language-model-based phase separation predictor,haiku
 Bio-GottBERT,,keep,,German biomedical BERT variant,haiku
@@ -4538,14 +4538,14 @@ BioBERT2,,keep,,BioBERT language model version,haiku
 PhysicalSciencesBERT,,keep,,BERT-base model pretrained on physical sciences corpus,haiku
 MarBert,,keep,,Arabic BERT model in listed models,haiku
 AraBERT-COV19,,keep,,Arabic COVID-19 BERT model variant,haiku
-DISTILBERT_FT,,keep,,DistilBERT fine-tuned detection method,haiku
+DISTILBERT_FT,,map,DistilBERT,boundary review: use or configuration of the model,read (RL-174)
 BatteryOnlyBERT,,keep,,Battery-domain BERT model from scratch,haiku
 MiniGPT-Med17,,map,MiniGPT-Med,glued citation number,citation rule (Haiku: model)
 CT-BERT++,,keep,,CT-BERT-based classifier model,haiku
 MedBERT-Mask,,keep,,Med-BERT with mask token head,haiku
 ShareGPT4V-7B,,keep,,ShareGPT4V multimodal model family,haiku
 Sentence-CamemBERT-Large,,keep,,French CamemBERT sentence embedding model,haiku
-protBERT-based,,keep,,ProtBERT-derived protein language model weights,haiku
+protBERT-based,,map,ProtBert,boundary review: use or configuration of the model,read (RL-174)
 mRoBERTa,,keep,,Multilingual RoBERTa model variant,haiku
 M-DistilBERT,,keep,,Distilled multilingual BERT model,haiku
 cseBERT,,keep,,Croatian/Slovenian/English BERT model,haiku
@@ -4561,7 +4561,7 @@ EnhancerBERT,,keep,,Transformer-based enhancer sequence representation model,hai
 AD-BERTLAST,,keep,,BERT-based entity alignment model variant,haiku
 KorSciBERT,,keep,,Korean scientific BERT pre-trained model,haiku
 SBERT-enhanced,,keep,,Sentence-BERT representations used in recommender,haiku
-ROBERTA_FT,,keep,,RoBERTa fine-tuned deepfake detection method,haiku
+ROBERTA_FT,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 MOLBERT,,keep,,MoLBERT SMILES representation model,haiku
 RuBERT-tiny2,,keep,,Small Russian BERT model,haiku
 KyBERT,,keep,,BERT-based Kyrgyz language model,haiku
@@ -4613,7 +4613,7 @@ ChatpGPT-3.5,,keep,,"Typo of ChatGPT-3.5, an LLM",haiku
 SikuBert,,keep,,Classical Chinese BERT model,haiku
 XLM-ROBERTa,,keep,,Multilingual RoBERTa model evaluated,haiku
 ProBERT,,keep,,ProtTrans BERT-based protein model,haiku
-vGPT-5,,keep,,ChatGPT version named as GenAI tool,haiku
+vGPT-5,,map,GPT-5,boundary review: use or configuration of the model,read (RL-174)
 ProtBERT_MLP,,keep,,Protein BERT language model with MLP classifier,haiku
 EdgeBERT,,keep,,Edge transformer model for embeddings,haiku
 KoBERT-NER,,keep,,Korean BERT NER model fine-tuned on notes,haiku
@@ -4625,12 +4625,12 @@ MiniGPT-420,,keep,,MiniGPT-4 open-source vision-language model,haiku
 TPlinkerBERT,,keep,,BERT-based entity-relation extraction model,haiku
 SentiBERT,,keep,,Sentiment BERT model with pre-training tasks,haiku
 HumBERT,,keep,,BERT model for humanitarian text classification,haiku
-TrialGPT-predicted,,keep,,LLM-based TrialGPT system predictions,haiku
+TrialGPT-predicted,,map,TrialGPT,boundary review: use or configuration of the model,read (RL-174)
 nanoBERT_small,,keep,,Small nanobody BERT model,haiku
 SelfCheckGPT7,,reject,,read: Hallucination-detection method using LLM sampling,read (Haiku: unsure)
 CHATGPT3.5,,keep,,ChatGPT 3.5 tool used by physicians,haiku
 AD-BERTLAST-SSI,,keep,,BERT-based knowledge fusion model variant,haiku
-DistilBERT-MRC,,keep,,Lightweight DistilBERT reading comprehension framework,haiku
+DistilBERT-MRC,,map,DistilBERT,boundary review: use or configuration of the model,read (RL-174)
 TinyBioBERT,,keep,,Distilled biomedical BERT model,haiku
 WellcomeBertMesh,,keep,,Transformer model for PubMed query creation,haiku
 TinyLlama_1.1b,,keep,,Fine-tuned TinyLlama LLM for chatbot,haiku
@@ -4680,7 +4680,7 @@ BERTopic59,,reject,,"Topic modeling method, not a language model",haiku
 DeBERTaV3,,keep,,DeBERTaV3 transformer model,haiku
 HuatuoGPT-2,,keep,,Medically fine-tuned HuatuoGPT-2 LLM,haiku
 Medical-vLBERT,,keep,,Medical Visual Language BERT model,haiku
-InfoBERT,,keep,,"BERT robustness training method, InfoBERT",haiku
+InfoBERT,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 WS-XPRESS-UmBERTo-TPT,,keep,,UmBERTo-based weakly supervised baseline,haiku
 EndoBERT,,keep,,Barrett's oesophagus BERT model,haiku
 byBert,,reject,,"Author name, not a model",haiku
@@ -4710,13 +4710,13 @@ Multimodal-AIR-BERT,,keep,,AIR-BERT-based TCR-pMHC specificity prediction model,
 DeBERTa-Large,,keep,,DeBERTa-Large pretrained model compared,haiku
 Llama4161,,keep,,"Meta Llama 4 open-weights model, citation glued",haiku
 HepaPathGPT,,keep,,Introduced as vision-language generative AI model,haiku
-DeBERTa-L,,keep,,DeBERTa-L pretrained model used in framework,haiku
+DeBERTa-L,,map,DeBERTa,boundary review: use or configuration of the model,read (RL-174)
 GPTs-3,,keep,,LLM-based GPT configuration extracting statements,haiku
 Med‐PaLMs,,keep,,Med-PaLM instruction-tuned medical language model,haiku
 MacBert,,keep,,MacBERT model used to encode conditions,haiku
 BioBERTBase1,,keep,,BioBERT base checkpoint trained on PubMed,haiku
 COVID-Twitter-BERT-v2,,keep,,BERT COVID-19 language model used for encoding,haiku
-GPTCelltype4o,,keep,,"GPT-4o-based cell annotation method, named after model",haiku
+GPTCelltype4o,,map,GPTCelltype,boundary review: use or configuration of the model,read (RL-174)
 TCRBert-LL-Masking,,keep,,TCRBert-based model evaluating generated TCRs,haiku
 ModernCamemBERT,,keep,,ModernCamemBERT encoder trained for relation extraction,haiku
 RadBERT,,keep,,BERT-based language model adapted for radiology,haiku
@@ -4763,7 +4763,7 @@ IQAGPT.Fig,,keep,,"IQAGPT vision-language model, suffix from text",haiku
 ADMolOrgGPT,,keep,,Molecule generation LLM model developed with RL,haiku
 Mistral24B,,keep,,Mistral 24B language model compared with gpt-4o,haiku
 zGPT,,keep,,"Zero-shot GPT model compared with zLlama, zClaude",haiku
-miGPT,,reject,,"Variable label for ChatGPT responses, not a model",haiku
+miGPT,,map,ChatGPT,boundary review: use or configuration of the model,read (RL-174)
 BingGPT,,keep,,Microsoft Bing chatbot named as AI tool,haiku
 BioClinicalBERT.20,,map,BioClinicalBERT,glued citation number,citation rule (Haiku: model)
 KaBERT,,keep,,Kazakh-specific transformer model,haiku
@@ -4813,7 +4813,7 @@ ProtBert.26,,map,ProtBert,glued citation number,citation rule (Haiku: model)
 ChromBERT-derived,,keep,,Representations derived from ChromBERT model,haiku
 TFProtBert,,keep,,SVM classifier named after ProtBert latent space,haiku
 ProtBERT-BFD51,,map,ProtBERT-BFD,glued citation number,citation rule (Haiku: model)
-GPTderived,,reject,,Label for sentiment scores derived from GPT,haiku
+GPTderived,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
 CamemBERT-bio,,keep,,Biomedical French CamemBERT variant,haiku
 UKBioBERT,,keep,,Genomic BERT foundation model pretrained with variants,haiku
 scGPT‐embedded,,keep,,Embeddings from scGPT single-cell model,haiku
@@ -4821,7 +4821,7 @@ DiagBERT,,keep,,Clinical transformer foundation model DiagBERT,haiku
 TacticalGPT-style,,reject,,read: Framework-style name; contexts do not say model or system,read (Haiku: unsure)
 Meta-Llama3-8B,,keep,,Meta Llama 3 8B language model baseline,haiku
 UMLSBert5,,keep,,Clinical BERT encoder trained on UMLS,haiku
-ProtChatGPT5,,keep,,Multimodal protein LLM framework,haiku
+ProtChatGPT5,,map,ProtChatGPT,boundary review: use or configuration of the model,read (RL-174)
 BERTtweet,,keep,,BERTweet embeddings used for classification,haiku
 BrainGPT-generated,,keep,,Report generated by BrainGPT model,haiku
 Bio_ClinicalBERT.32,,map,Bio_ClinicalBERT,glued citation number,citation rule (Haiku: model)
@@ -4836,7 +4836,7 @@ BioClinRoBERTa,,keep,,Clinical RoBERTa model used for classification,haiku
 ABERT+BI,,keep,,"ALBERT plus BiLSTM plus CRF model, typo",haiku
 AABERTs,,keep,,Aspect-aware BERT model type,haiku
 fBERTweet,,keep,,BERTweet variant for English tweets,haiku
-ontoGPT,,reject,,"ontoGPT software tool, not a language model",haiku
+ontoGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 PubMedBERT2,,keep,,BiomedBERT pretrained biomedical language model,haiku
 BatGPT-Chem,,keep,,Chemistry foundation large model from BatGPT,haiku
 KcBert,,keep,,Korean BERT-based classification model,haiku
@@ -4869,12 +4869,12 @@ DentalGPT,,keep,,Domain-specific dental LLM compared with general models,haiku
 RoBERTuito-based,,keep,,RoBERTuito-based sentiment model,haiku
 LightBERT,,keep,,BERT-style model pretrained on Wikipedia,haiku
 MolTranBertTokenizer,,reject,,Code identifier for tokenizer class,haiku
-ALBERT_en_base,,keep,,Pretrained ALBERT model used in pipeline,haiku
+ALBERT_en_base,,map,ALBERT,boundary review: use or configuration of the model,read (RL-174)
 mBERTbase,,keep,,Multilingual BERT base model,haiku
 TrialLLAMA,,keep,,LLaMA-based clinical trial matching model,haiku
-LLaMA-RAG,,keep,,LLaMA-based retrieval-augmented model,haiku
+LLaMA-RAG,,map,LLaMA,variant of LLaMA‑RAG,"read (RL-174, variant)"
 MHCRoBERTa,,keep,,Protein language model fine-tuned from ProtBERT,haiku
-TrialGPT-Ranking,,keep,,LLM-based module of TrialGPT system,haiku
+TrialGPT-Ranking,,map,TrialGPT,boundary review: use or configuration of the model,read (RL-174)
 AnnotateGPT,,keep,,LLM-based annotation platform named after GPT,haiku
 ProtBert-BFD-based,,keep,,ProtBert-BFD transformer encoding model,haiku
 FaceGemma,,keep,,Gemma model fine-tuned from PaliGemma,haiku
@@ -4882,7 +4882,7 @@ GPTs14,,keep,,"GPT large language model family, citation glued",haiku
 SwinS+BERT30k,,keep,,Swin plus BERT report generation model variant,haiku
 ESBERT,,keep,,Embedding matrix from SBERT model,haiku
 ProtBert‐BFD,,keep,,Fine-tuned ProtBert-BFD protein model,haiku
-ChromBERT-tools,,reject,,Software toolkit built on ChromBERT,haiku
+ChromBERT-tools,,map,ChromBERT,boundary review: use or configuration of the model,read (RL-174)
 AntiBERTy5,,keep,,Antibody protein language model AntiBERTy,haiku
 ChouBERT-16,,keep,,BERT model variant applied with GAN-BERT,haiku
 3bmGPT,,keep,,3D binding mode GPT LLM,haiku
@@ -4898,7 +4898,7 @@ GeminiAdvancedV,,keep,,Gemini Advanced vision-language model compared,haiku
 Gemma2-9b,,keep,,Gemma 2 9B model in screening comparison,haiku
 YieldBERT-DA,,keep,,YieldBERT with data augmentation model,haiku
 Hermes-3-Llama-3.2-3B,,keep,,Hermes Llama 3.2 3B summarization model,haiku
-LLaMA‑RAG,,keep,,LLaMA-based RAG experimental framework,haiku
+LLaMA‑RAG,,map,LLaMA,boundary review: use or configuration of the model,read (RL-174)
 scGPT-Spatial,,keep,,scGPT spatial single-cell foundation model,haiku
 CAMeLBERT,,keep,,Arabic dialect BERT model,haiku
 TBERT,,keep,,TBERT text model for feature extraction,haiku
@@ -4930,7 +4930,7 @@ Roberta-Zinc-480M-102M,,keep,,Molecular descriptor model from ZINC data,haiku
 SciTinyBERT,,keep,,Tiny BERT fine-tuned on scientific literature,haiku
 GPTCell,,keep,,LLM-based scRNA-seq agent named after GPT,haiku
 GPT4o23,,keep,,GPT-4o large language model in comparison,haiku
-LBERT,,keep,,LSTM with BERT embeddings configuration name,haiku
+LBERT,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 IgBERT-based,,keep,,IgBERT-based antibody pairing classifiers,haiku
 AraBERT-base-v2,,keep,,AraBERT base v2 Arabic model,haiku
 SenBERT-CNN,,keep,,BERT plus CNN sentiment model,haiku
@@ -4940,7 +4940,7 @@ SmileyLlama-generated,,keep,,Molecules generated by SmileyLlama model,haiku
 sciences.ALBERT,,map,ALBERT,refers to the model,read (Haiku: unsure)
 BERTBASE1,,keep,,Tohoku BERT-base Japanese model,haiku
 SaudiBERT+CapsNet,,keep,,SaudiBERT with CapsNet hybrid model,haiku
-GPTSwarm147,,reject,,read: Agent framework with graph optimization; model unclear,read (Haiku: unsure)
+GPTSwarm147,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 RoBERTa4GCN57,,keep,,RoBERTa-based graph attention model,haiku
 DAKI-ClinicalBERT,,keep,,Clinical BERT variant with external knowledge,haiku
 ftPubMedBERT,,keep,,Fine-tuned PubMedBERT model,haiku
@@ -4959,7 +4959,7 @@ BatteryBERT-cased,,keep,,Battery-domain BERT model variant in three articles,hai
 PONE-D-23-25711R1ChatGPT-generated,,reject,,"Manuscript title artifact, not a model name",haiku
 SynLlama-1B-2M,,keep,,Llama-3.2-1B fine-tuned model for synthesis routes,haiku
 scGPT-scVI,,keep,,scGPT-based single-cell integration model variant,haiku
-polyBERT-based,,keep,,Pipeline built on polyBERT chemical language model,haiku
+polyBERT-based,,map,polyBERT,boundary review: use or configuration of the model,read (RL-174)
 BERTimbau-large,,keep,,BERTimbau large Portuguese BERT model,haiku
 MetaBERTa,,keep,,BERT-style metagenomic language model,haiku
 DEBERTa,,keep,,DeBERTa transformer listed among ensemble models,haiku
@@ -4970,7 +4970,7 @@ BERTJapaneseTokenizer,,map,BERT,the model's own code class,read (Haiku: not_mode
 IIT-MTL-ClinicalBERT,,keep,,ClinicalBERT tuned with multi-task learning,haiku
 AraBERT-v1,,keep,,Arabic BERT fine-tuned version,haiku
 RomanBERT,,keep,,Roman Urdu BERT model in hate speech detection,haiku
-HCCN-ProtBert,,keep,,Classification framework built on ProtBert,haiku
+HCCN-ProtBert,,map,ProtBert,boundary review: use or configuration of the model,read (RL-174)
 RUBERT,,keep,,Russian BERT base model from Huggingface,haiku
 DementiaBERT,,keep,,BERT embeddings fine-tuned on dementia language,haiku
 RoBERTaLarge,,keep,,RoBERTa-Large fine-tuned for causal sentence extraction,haiku
@@ -4996,7 +4996,7 @@ xlm-ROBERTA,,keep,,XLM-RoBERTa pretrained BERT variant,haiku
 HuatuoGPT-7B6,,keep,,Medical LLM fine-tuned from Baichuan-7B,haiku
 BERTtransformer4Rec,,keep,,BERT-based transformer recommender model,haiku
 BERTMap,,keep,,BERT-based ontology mapping system compared with LLMs,haiku
-SBERT-K-Means,,reject,,"read: Clustering pipeline on SBERT embeddings, unclear if a model",read (Haiku: unsure)
+SBERT-K-Means,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
 BERTScore37,,reject,,BERTScore evaluation metric,haiku
 MedPaLM,,keep,,Med-PaLM medical large language model,haiku
 ALBERT-fine-tune,,keep,,ALBERT fine-tune model used as baseline,haiku
@@ -5038,7 +5038,7 @@ IndoBERT-base-p1,,keep,,IndoBERT model in sentiment experiment,haiku
 RoLlama-7B,,keep,,RoLlama-7B LLM in summarization comparison,haiku
 Sentence-BERT5,,keep,,"Sentence-BERT model, cited with glued number",haiku
 DialogGPTfinetune,,keep,,DialoGPT GPT-2 based dialogue model,haiku
-GeneGPT-based,,keep,,GeneGPT LLM approach compared with base models,haiku
+GeneGPT-based,,map,GeneGPT,boundary review: use or configuration of the model,read (RL-174)
 HuatuoGPT-Vision-7B36,,map,HuatuoGPT-Vision-7B,glued citation number,citation rule (Haiku: model)
 EnzBert-regular,,keep,,EnzBert model for enzyme commission prediction,haiku
 EnzBert-learnt,,keep,,EnzBert adaptive-threshold model variant,haiku
@@ -5056,7 +5056,7 @@ AraBERT-Mini,,keep,,AraBERT-Mini compressed transformer model,haiku
 non-CE-GPT,,keep,,Non-contrast-enhanced GPT-4 model versions,haiku
 BARTRoBERTa,,keep,,BART plus RoBERTa fake news model,haiku
 MiniBERTa,,keep,,MiniBERTa small RoBERTa-style model,haiku
-fBERT,,keep,,"BERT text encoder, also distilled as fDistilBERT",haiku
+fBERT,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
 CorefBERT,,keep,,CorefBERT language representation model,haiku
 protBERT-BFD,,keep,,Protein BERT model used in thermostability work,haiku
 ProtBert-UniRef100,,keep,,ProtBert protein language model variant,haiku
@@ -5090,7 +5090,7 @@ BeFreeGPT,,keep,,Smoking cessation chatbot named after GPT,haiku
 BlockBERT9,,keep,,Block-sparse BERT transformer model,haiku
 BERTopic1,,reject,,BERTopic topic modeling software tool,haiku
 HuBERT+Longformer,,keep,,HuBERT audio embeddings combined with Longformer,haiku
-ClinBioBert-Seq2Seq-Ttype,,keep,,ClinBioBERT-based temporal expression module,haiku
+ClinBioBert-Seq2Seq-Ttype,,map,ClinBioBert,boundary review: use or configuration of the model,read (RL-174)
 AcademicGPT,,keep,,AcademicGPT named LLM in review system,haiku
 InstructGPT2,,keep,,"InstructGPT language model, cited with number",haiku
 mDeBERTaV3,,keep,,Multilingual DeBERTa model in comparisons,haiku
@@ -5136,7 +5136,7 @@ BERTlarge,,keep,,BERT large model variant,haiku
 SEEDBERTL,,keep,,SEEDBERT model variant for claim verification,haiku
 JSL-MedLlama,,keep,,Medical Llama LLM benchmarked in psychiatry,haiku
 PubMedGPT-28,,keep,,PubMedGPT decoder LLM in screening,haiku
-Dropout-DeBERTa,,keep,,Two-stage DeBERTa model in extraction pipeline,haiku
+Dropout-DeBERTa,,map,DeBERTa,boundary review: use or configuration of the model,read (RL-174)
 BiomedNLP-PubMedBERT-base-uncased-abstract,,keep,,PubMedBERT checkpoint used for tokenizer and prediction,haiku
 Ovis1.6-Gemma2-9,,keep,,Ovis vision-language model in VQA comparison,haiku
 mBERT-CAM,,keep,,mBERT-based translation model with attention compression,haiku
@@ -5166,7 +5166,7 @@ PhotocatalysisBERT,,keep,,BERT-base pretrained on photocatalysis corpus,haiku
 ChouBERT-32,,keep,,ChouBERT plant health language model,haiku
 MicrobeGuardGPT,,reject,,"Conceptual reliability framework, not a model",haiku
 GPThistory,,keep,,ChatGPT adaptation tool for history production,haiku
-GCN_ProtBert,,keep,,GCN method using ProtBert features,haiku
+GCN_ProtBert,,map,ProtBert,boundary review: use or configuration of the model,read (RL-174)
 Indic-BERTKakwani,,keep,,Indic-BERT ALBERT-based pretrained model,haiku
 OncoBERT,,keep,,Oncology domain transformer model,haiku
 PatentGPT,,keep,,Patent-specific GPT pretrained model,haiku
@@ -5174,7 +5174,7 @@ DocsGPT,,keep,,DocsGPT chatbot compared with other LLMs,haiku
 AraBERTv0.2-large,,keep,,AraBERT large Arabic model,haiku
 MedGPT-7B,,keep,,Medical 7B LLM in evaluation review,haiku
 MarBERT,,keep,,Arabic BERT variant for offensive language,haiku
-UTSA-HSC-TrialGPT,,keep,,Adapted TrialGPT LLM-based screening system,haiku
+UTSA-HSC-TrialGPT,,map,TrialGPT,boundary review: use or configuration of the model,read (RL-174)
 AfriBERTa-based,,keep,,AfriBERTa-based language model,haiku
 ALBERT-BASE,,keep,,ALBERT base model architecture,haiku
 DeBERTa-v3-small,,keep,,DeBERTa-v3-small transformer comparison model,haiku
@@ -5183,23 +5183,23 @@ BrainGPT-template,,keep,,Fine-tuned 3D brain CT report generation LLM,haiku
 NumGPT,,keep,,Pretrained numeric language model,haiku
 aBERTopic,,reject,,Topic modeling tool derived from BERTopic,haiku
 GEBERT,,keep,,Combined gemini and BERT model for QA,haiku
-DeBERTa-Bi-GRU-Multi-Headed,,keep,,DeBERTa-based semantic representation module,haiku
+DeBERTa-Bi-GRU-Multi-Headed,,map,DeBERTa,boundary review: use or configuration of the model,read (RL-174)
 BERT4GCN57,,map,BERT4GCN,glued citation number,citation rule (Haiku: model)
 ClinicalBERT6,,keep,,ClinicalBERT base encoder,haiku
 EstBert,,keep,,Estonian BERT model in stance detection,haiku
 cBERT-DSH,,keep,,Hybrid clinical BERT model for asthma control,haiku
-RAG5+Llama3‐fine‐tuned,,keep,,Fine-tuned Llama3 model in RAG framework,haiku
-visBERT,,reject,,Explainability visualization tool for BERT,haiku
+RAG5+Llama3‐fine‐tuned,,map,Llama3,boundary review: use or configuration of the model,read (RL-174)
+visBERT,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 EmtionalBERT,,keep,,Emotion BERT model trained by transfer learning,haiku
 UMLSBERT,,keep,,BERT variant with UMLS embeddings,haiku
-Llama70BCombinedAnswer,,reject,,Composite variable name in dataset,haiku
+Llama70BCombinedAnswer,,map,Llama,boundary review: use or configuration of the model,read (RL-174)
 CMR-LLaMA.Fig,,keep,,"CMR-LLaMA finetuned LLM, glued figure label",haiku
 COVID-drug-stance-BERT-masked,,keep,,Stance BERT model trained on masked tweets,haiku
 Chat-GPT5.6,,keep,,LLM named Chat-GPT5.6 Sol used as an AI assistant,haiku
 Chinese-RoBERTa-wwm-ext+BiLSTM+CRF,,keep,,BERT-family backbone with BiLSTM+CRF architecture combination,haiku
 SarcasmBERT,,keep,,"BERT model fine-tuned on sarcasm data, named SarcasmBERT",haiku
 XLM-RoBERTA-base,,keep,,Pre-trained language model used in experiments,haiku
-SBERT-LDA,,keep,,SBERT embeddings combined with LDA topic model framework,haiku
+SBERT-LDA,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
 MolBERT,,keep,,"Transformer/BERT adaptation for molecules, used in several articles",haiku
 OptBERT,,keep,,Optimized BERT used for URL encoding,haiku
 WS-UmBERTo,,keep,,UmBERTo transformer backbone variant without pre-training,haiku
@@ -5244,12 +5244,12 @@ NABERT,,keep,,NAQANet variant with BERT encoding substituted in,haiku
 EnzBertDeepEC40,,keep,,EnzBERT model fine-tuned on DeepEC40 training set,haiku
 Bio_ClinicalBERT-based,,keep,,Bio_ClinicalBERT-based model for suicidal history detection,haiku
 JurisBERT,,keep,,BERT model series for Brazilian legal domain,haiku
-rLlama,,keep,,RAG approach with Llama model compared with GPT and Claude,haiku
+rLlama,,map,Llama,boundary review: use or configuration of the model,read (RL-174)
 InsilicoGPT,,keep,,Chatbot named InsilicoGPT answering queries via LLM,haiku
 ChatGPTPLOS,,reject,,Glued manuscript header 'ChatGPT' plus 'PLOS ONE' journal name,haiku
 CrudeBERT+,,keep,,Hybrid sentiment model built on CrudeBERT,haiku
 surgeryBERT.at,,keep,,Language model built from scratch for clinical text,haiku
-SecureGPT-enabled,,keep,,Institutional SecureGPT LLM used in RAG system,haiku
+SecureGPT-enabled,,map,SecureGPT,boundary review: use or configuration of the model,read (RL-174)
 JointBERT,,keep,,BERT-based joint intent and slot model for dialogue,haiku
 RoBERTaDepressionDetection,,keep,,Fine-tuned twitter-roberta-base for depression detection,haiku
 Gemma3-4B-QAT,,keep,,Gemma3 4B vision-language model in benchmark,haiku
@@ -5257,7 +5257,7 @@ RoLLaMA2-7B-Instruct,,keep,,Romanian LLaMA2 model with LoRA adapters,haiku
 LeonardGPT,,keep,,Fictional LLM built by a character in a thought experiment,haiku
 hGPT-mediated,,reject,,Human GPT enzyme (transferase) in biochemical assay,haiku
 LlamaIndex4,,reject,,"LlamaIndex is a software library, not a language model",haiku
-GPTs-2,,reject,,read: Output file label mentioning GPT-4o; not clearly a model name,read (Haiku: unsure)
+GPTs-2,,map,GPT-2,variant of GPTs2,"read (RL-174, variant)"
 CharGPT,,keep,,Misspelling of ChatGPT as a virtual doctor,haiku
 mBERT-MLM,,keep,,Multilingual BERT MLM model used for augmentation,haiku
 BantuBERTa,,keep,,BERT-style pre-trained language model for African languages,haiku
@@ -5270,7 +5270,7 @@ ArgiBERT,,keep,,Knowledge expansion model for plant pest classification,haiku
 GPT1mEosFP,,reject,,Fluorescent protein fusion construct in plant cells,haiku
 error_distanceTraceBERT,,reject,,Variable name in a plot subtraction expression,haiku
 ComBERT-driven,,keep,,ComBERT model used for service orchestration scheme,haiku
-ViperGPT,,reject,,read: Visual programming system; not clearly a language model,read (Haiku: unsure)
+ViperGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 VarChouBERT,,reject,,Variance label for ChouBERT embedding dimensions,haiku
 viBert4news,,keep,,Vietnamese BERT model compared among BERT variants,haiku
 IndoBERTweet,,keep,,Indonesian BERT model fine-tuned for tweets,haiku
@@ -5346,7 +5346,7 @@ ntBERT,,keep,,Pl@ntBERT language model of plant assemblages (truncated),haiku
 MedBert,,keep,,Medical BERT model used for multimodal stroke prediction,haiku
 Llama2Chat-7B,,keep,,Llama-based chat model compared for bias,haiku
 ft-exTAPTBlueBERTp,,keep,,Fine-tuned BlueBERT-based pain identification model,haiku
-DistilRoBERT,,keep,,Distilled RoBERTa model in stress detection technique,haiku
+DistilRoBERT,,map,DistilRoBERTa,boundary review: use or configuration of the model,read (RL-174)
 DynGraphBERT,,keep,,Transformer-based model for dynamic heterogeneous graphs,haiku
 ClinicalBERT.5,,map,ClinicalBERT,glued citation number,citation rule (Haiku: model)
 ChunkyBERT,,keep,,Transformer model for multiclass political bias detection,haiku
@@ -5367,7 +5367,7 @@ UMLS-KGI-BERT,,keep,,BERT model with graph-based learning for clinical text,haik
 CamemBERTSequenceClassifier,,map,CamemBERT,the model's own code class,read (Haiku: not_model)
 codonGPT,,keep,,Codon-native generative transformer language model,haiku
 RoMistral-7B,,keep,,Romanian Mistral-7B LLM benchmarked on tasks,haiku
-SportsBERT-based,,keep,,SportsBERT-based topic modeling approach,haiku
+SportsBERT-based,,map,SportsBERT,boundary review: use or configuration of the model,read (RL-174)
 LeBERT,,keep,,LeBERT sentiment classification model by Mutinda et al.,haiku
 GroupSurprisal_GPT2+Surprisal_GPT2_PW+Frequency+ND+Exposure,,reject,,Regression formula variable names with GPT2 surprisal,haiku
 AMBERTools,,reject,,AMBERTools is molecular dynamics software,haiku
@@ -5408,7 +5408,7 @@ Gly-ML-BERT-DL,,reject,,"GitHub repository name for code, not a model name",haik
 HuatuoGPT,,keep,,Medically fine-tuned LLM compared with Qwen and Llama,haiku
 LogGPT,,keep,,GPT-architecture log-based anomaly detection framework,haiku
 LayoutGPT,,keep,,LLM-based layout planning method using GPT-3.5/4,haiku
-BERTprepend,,reject,,read: Data augmentation method named BERTprepend; not clearly a model,read (Haiku: unsure)
+BERTprepend,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 KG-BERT5,,keep,,BERT model adapted for knowledge graph completion,haiku
 TraceBERT,,keep,,BERT-based trajectory modeling model,haiku
 GeneBERT,,keep,,Gene language model for gene prediction,haiku
@@ -5454,7 +5454,7 @@ GPTgo,,keep,,AI chatbot listed among compared LLMs,haiku
 LLaMA-Adpater,,keep,,"Misspelling of LLaMA-Adapter, a multimodal LLM",haiku
 MammoBERT,,keep,,Named BERT model applied to mammogram reports,haiku
 Med-PaLM4,,keep,,"Med-PaLM language model, medical LLM",haiku
-tpGPT,,reject,,"R package name for an imputation tool, not a model",haiku
+tpGPT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 mBERT_NN,,keep,,Named mBERT classifier model with F1 results,haiku
 ATCBERT,,keep,,Named BERT model compared with CII-BERT,haiku
 Medical-VLBERT,,keep,,Medical visual-linguistic BERT model for report generation,haiku
@@ -5482,7 +5482,7 @@ FinEstBERT,,keep,,Tri-lingual BERT model,haiku
 MedGemma-4B-it28,,map,MedGemma-4B-it,glued citation number,citation rule (Haiku: model)
 IBERT-ROA,,keep,,Proposed IBERT-based classifier model,haiku
 WS-RemBERT-TPT,,keep,,RemBERT-based model with and without TPT,haiku
-QuantGPT,,reject,,"Described as a compression technique, not a model",haiku
+QuantGPT,,reject,,boundary review: outputs not produced by a language model (as QuantGPT17),"read (RL-174, variant)"
 AntiBERTy22,,map,AntiBERTy,glued citation number,citation rule (Haiku: model)
 DAMmBERT,,keep,,Named model with confusion matrix results,haiku
 SensitiveCancerGPT,,keep,,Optimized GPT-style architecture for drug sensitivity,haiku
@@ -5492,7 +5492,7 @@ ClinicGPT,,keep,,Custom large language model chatbot,haiku
 mBERT-ADAPT18,,keep,,Domain-adapted multilingual BERT model,haiku
 LMW-GS-GPTs,,reject,,Glutenin subunit protein type abbreviation,haiku
 CancerBERTUMN_997,,keep,,BERT model variant evaluated on clinical data,haiku
-ChatGPT4oCombinedAnswer,,reject,,Composite variable name in analysis dataset,haiku
+ChatGPT4oCombinedAnswer,,map,GPT-4o,boundary review: use or configuration of the model,read (RL-174)
 ndhGPT,,reject,,Category label used for groups in scores,haiku
 NABert,,keep,,"Named protein language model, ProtT5 adapted",haiku
 LitReviewGPT,,keep,,Custom GPT app used for data extraction,haiku
@@ -5503,7 +5503,7 @@ HuatuoGPT-o1-7B44,,map,HuatuoGPT-o1-7B,glued citation number,citation rule (Haik
 GBERT_dataset,,reject,,"Dataset identifier, concatenated dataset name",haiku
 OsGPT,,reject,,Rice gene name OsGPT in CRISPR target list,haiku
 CheXbert58,,map,CheXbert,refers to the model,read (Haiku: unsure)
-THIRAWAT-SapBERT,,keep,,SapBERT-based reranking model in pipeline,haiku
+THIRAWAT-SapBERT,,map,SapBERT,boundary review: use or configuration of the model,read (RL-174)
 DeBERTa-based,,keep,,DeBERTa-based classifier or LPCGRL model,haiku
 S2ORC-SCIBERT7,,keep,,SciBERT model fine-tuned on biomedical datasets,haiku
 PodGPT,,keep,,Audio-augmented large language model framework,haiku
@@ -5524,7 +5524,7 @@ mobileBERT,,keep,,Fine-tuned MobileBERT sentiment model,haiku
 TaBERT,,keep,,TaBERT table-text transformer model,haiku
 AntiBERTy32,,map,AntiBERTy,glued citation number,citation rule (Haiku: model)
 CLLM+CBERT+K,,reject,,read: Ensemble method label; contexts do not say what it is,read (Haiku: unsure)
-ZeroShotGPTClassifier,,reject,,Software class in skllm library,haiku
+ZeroShotGPTClassifier,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
 BERTScore65,,reject,,"Evaluation metric, not a language model",haiku
 Path-GPTOmic,,keep,,Foundation model listed with TMO-Net and MolFM,haiku
 BanglishBERT,,keep,,Pre-trained transformer for Bengali classification,haiku
@@ -5550,7 +5550,7 @@ LEBERTs,,keep,,"Plural of LEBERT model, used as transformers",haiku
 MoLLaMA,,keep,,Universal representation model in drug design,haiku
 FlightBERT++29,,keep,,Multi-horizon flight trajectory BERT-style model,haiku
 BERTScore46,,reject,,Evaluation metric for explanation similarity,haiku
-hRoBERTa,,keep,,RoBERTa-based pretraining approach named hRoBERTa,haiku
+hRoBERTa,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
 speed-ALBERT,,keep,,ALBERT model variant named in text,haiku
 exft-exTAPTBlueBERTp,,keep,,Named BlueBERT-based model used as Oracle,haiku
 Al-BERT-Bi-GRU-Att+LDA,,keep,,Al-BERT pretrained sentiment model with Bi-GRU,haiku
@@ -5562,7 +5562,7 @@ LlamaAttention,,map,LLaMA,the model's own code class,read (Haiku: not_model)
 BioMistral5,,keep,,Medical LLM compared with OpenBioLLM,haiku
 PMC-LlaMA-13B,,keep,,Medical domain LLM attacked in study,haiku
 DistilBERTimbau,,keep,,Distilled Portuguese BERT model,haiku
-NSynBioGPT2,,keep,,AI system named after GPT-based SynBioGPT2,haiku
+NSynBioGPT2,,map,SynBioGPT2,boundary review: use or configuration of the model,read (RL-174)
 ProkBERT,,keep,,Genomic language model pretrained on microbial sequences,haiku
 MiniGPT-471,,keep,,MiniGPT-4 vision-language model tested,haiku
 JMedRoBERTa‐based,,keep,,JMedRoBERTa-based clustering model,haiku
@@ -5582,7 +5582,7 @@ AER-BERT+XGB,,keep,,BERT-based triage model with XGBoost,haiku
 RoBERTaBaseLTM,,keep,,RoBERTa base model for IoT anomaly detection,haiku
 kBERT,,keep,,BERT-style molecular representation model,haiku
 BERTRi2,,reject,,Per-residue feature vector label from ProtBert,haiku
-ProtBert-based,,keep,,ProtBert-based protein model framework,haiku
+ProtBert-based,,map,ProtBert,boundary review: use or configuration of the model,read (RL-174)
 BERTScore19,,reject,,"BERTScore evaluation metric, not a model",haiku
 RespBERT,,keep,,Clinical NLP backbone model in review,haiku
 TxGemma-Chat-9B,,keep,,TxGemma chat model in evaluated LLM list,haiku
@@ -5618,3 +5618,7 @@ MedAlbert+LRC,,keep,,"Transformer-based clinical model, named predictor",haiku
 RNABERT.444,,map,RNABERT,glued citation number,citation rule (Haiku: model)
 MetaBERT,,keep,,BERT-based embeddings used in recommender,haiku
 SweDeClinBERT,,keep,,Clinical language model for ADE detection,haiku
+fGPT,,map,GPT,boundary review: use or configuration of the model,read (RL-174)
+gBERT,,map,BERT,boundary review: use or configuration of the model,read (RL-174)
+uSBERT,,map,SBERT,boundary review: use or configuration of the model,read (RL-174)
+GPTCelltype,,keep,,boundary review: outputs produced by a language model,read (RL-174)

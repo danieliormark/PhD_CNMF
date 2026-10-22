@@ -103,6 +103,28 @@ def main():
             if m and m.group(1) in spellings and len(m.group(1)) >= 4:
                 rows.append((r["spelling"], "", "map", m.group(1), "glued citation number", "citation rule (Haiku: model)")); continue
         rows.append((r["spelling"], r["pmcid"], r["action"], r["target"], r["reason"], r["source"]))
+    # RL-174: the boundary review (g4_boundary_decisions.py) overrides earlier rows; spellings that differ from a reviewed
+    # one only in separators or a glued citation number get the same decision (case decides: ExBERT model, exBERT tool)
+    norm = lambda s: re.sub(r"[\s\-_‐‑.]+", "", re.sub(r"(?:\.\d{1,3}|\d{2,3})$", "", s))      # case kept: GBERT is not gBERT
+    bd = {r["spelling"]: r for r in csv.DictReader(open(os.path.join(HERE, "decisions", "g4_boundary_decisions.csv")))}
+    bnorm = {}
+    for sp, r in bd.items():
+        bnorm.setdefault(norm(sp), r)
+    out = []
+    for r in rows:
+        sp = r[0]
+        if r[1] == "" and sp in bd:
+            b = bd[sp]; out.append((sp, "", b["action"], b["target"], b["reason"], b["source"])); continue
+        b = bnorm.get(norm(sp)) if r[1] == "" else None
+        if b is not None and b["spelling"] != sp:
+            if b["action"] == "reject":
+                out.append((sp, "", "reject", "", b["reason"] + f" (as {b['spelling']})", "read (RL-174, variant)")); continue
+            target = b["target"] if b["action"] == "map" else b["spelling"]
+            out.append((sp, "", "map", target, f"variant of {b['spelling']}", "read (RL-174, variant)")); continue
+        out.append(r)
+    have = {r[0] for r in out}
+    out += [(sp, "", b["action"], b["target"], b["reason"], b["source"]) for sp, b in bd.items() if sp not in have]
+    rows = out
     os.makedirs(os.path.join(HERE, "decisions"), exist_ok=True)
     with open(os.path.join(HERE, "decisions", "g4_decisions.csv"), "w", newline="") as f:
         w = csv.writer(f); w.writerow(["spelling", "pmcid", "action", "target", "reason", "source"]); w.writerows(rows)

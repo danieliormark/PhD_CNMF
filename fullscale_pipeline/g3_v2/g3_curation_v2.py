@@ -142,7 +142,7 @@ STATEMENT_SENTENCES = INPUTS + "statement_sentences.csv"            # RL-172: AI
 HEAD_LEMMAS = PG + "g3_word_lists/head_lemmas.tsv"
 JOINED = re.compile('(.+[_\u2010\u2011\u2013])([^_\u2010\u2011\u2013]+)')   # joined by G2 ("_") or a Unicode hyphen G2 left alone
 HEAD_LEMMA = {(r["word"], r["type"]): r["lemma"] for r in csv.DictReader(open(HEAD_LEMMAS, encoding="utf-8"), delimiter="\t")}
-INPUT_SHA = {SCOPE_EXCLUSIONS: "f50826614f4a", SPELLING_CORRECTIONS: "f7a5277bd31e", LLM_OUTPUT_UNITS: "cb79e798185f",   # RL-172 scope list (RL-171 0b4ba5c2b2b1; RL-130: 5b71d844d9af, d0a70f6c1a20, b71d5717e250)
+INPUT_SHA = {SCOPE_EXCLUSIONS: "838f50923616", SPELLING_CORRECTIONS: "f7a5277bd31e", LLM_OUTPUT_UNITS: "cb79e798185f",   # RL-174 scope list (RL-172 f50826614f4a; RL-171 0b4ba5c2b2b1; RL-130: 5b71d844d9af, d0a70f6c1a20, b71d5717e250)
              ADVERB_ROLES_PATH: ADVERB_ROLES_SHA}
 INPUT_SHA[REFLEXIVE_TABLE] = "573be717ee21"                                # RL-130: d121a203daec
 INPUT_SHA[HEAD_LEMMAS] = "34cee7ee73d0"
@@ -150,8 +150,8 @@ INPUT_SHA[STOPWORDS] = "2b6c7d9fdae9"
 INPUT_SHA[PP + "focal_terms.py"] = "892f98bb986e"     # P2's matcher with the RL-095 hyphen pattern (acts in G3 only)
 INPUT_SHA[PP + "focal_terms_v3.py"] = "49f38796e655"                      # RL-171: the v3 matcher and its group-4 rule
 INPUT_SHA[focal_terms.RULES + "focal_group4_rule.py"] = "70d88dcdf8e4"
-INPUT_SHA[TERM_REJECTIONS] = "d04b816c4d72"
-INPUT_SHA[G4_DECISIONS] = "05a32cbad7ce"                     # RL-173 (RL-172: 326130aeba60)
+INPUT_SHA[TERM_REJECTIONS] = "1dcd13352f6a"
+INPUT_SHA[G4_DECISIONS] = "7e3732cb0cdb"                     # RL-174 (RL-173 05a32cbad7ce, RL-172 326130aeba60)
 INPUT_SHA[STATEMENT_SENTENCES] = "bfcb97d7b479"
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
 LAYOUT_WORDS = {'table', 'tables', 'tab', 'fig', 'figs', 'figure', 'figures', 'appendix', 'appendices', 'supplementary',

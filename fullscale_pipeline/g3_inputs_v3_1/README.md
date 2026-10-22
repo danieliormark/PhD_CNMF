@@ -96,3 +96,45 @@ corpus now carries a decision from a rule, the assistant's reading or a reader c
 
 **Cost.** Agents' completion reports: calibration 61,177 tokens; batches 89,345–119,281 each; 1,995,419 in all; about 3–4
 minutes per batch, all 17 in parallel.
+
+## RL-174: one line for the model / method boundary; residual homonyms (2026-10-22)
+
+**Why.** Owner's questions on RL-173: the boundary between models and methods had been drawn inconsistently (same name
+decided both ways in different spellings, e.g. SBERT-k-means kept but SBERT-K-Means rejected, LLaMA-adapter kept but
+LLaMA-Adapter69 rejected; similar LLM tools decided differently, GPTCelltype kept but OntoGPT and TopicGPT rejected).
+Owner: apply one explicit line to the whole boundary set; map "model + algorithm" pipelines to their model.
+
+**The line** (`g4_boundary_decisions.py`; "framework" vs "app" and "method" vs "model" could not be applied
+consistently, because the same system is described as both):
+- **keep** — the name denotes something whose outputs are produced by a language model: a trained or fine-tuned model,
+  or an LLM-backed app, agent, assistant, framework or pipeline that answers or generates (UroGPT, TrialGPT, OntoGPT,
+  GPTCelltype, TopicGPT, StructGPT, FrugalGPT);
+- **map to the underlying model** — a use or configuration of a specific model: run, arm, condition and answer labels
+  (BERT_FT, GPT4x3, Llama70BCombinedAnswer), "-based/-driven/-powered/-aligned/-optimized", compounds of a model with
+  other components (SBERT-k-means, BiLSTM-CRF-BERT, DeBERTa-GCN, GCN_ProtBert), adapters (LLaMA-Adapter → `llama`),
+  modules of a named system (TrialGPT-Ranking → `trialgpt`), glossary letters glued to the name, misspellings;
+- **reject** — outputs not produced by a language model: procedures that transform models (SparseGPT, QuantGPT, KnGPT,
+  oBERT, bert2BERT), detectors, metrics and benchmarks (DetectGPT, BERTScore, MedGPTEval), non-generative libraries and
+  tools (LlamaIndex, GPTCache, BERTopic, KeyBERT, exBERT, visBERT), datasets, files, variables, notation, non-language
+  networks (GPTNeXt).
+Variants that differ from a reviewed spelling only in separators or a glued citation number get its decision; case is
+not ignored, because it separates names (ExBERT a model, exBERT a tool; GBERT German BERT, gBERT a glossary entry;
+minGPT a repository, MinGPT a model). Case variants of one name were decided explicitly (12).
+
+**Reading.** 479 boundary spellings read by the assistant with a context each (kept spellings whose notes say framework,
+system, app, method, tool, agent, pipeline, platform or library; rejected ones whose notes say method, tool, framework
+and the like; all name groups decided both ways). Result: 151 mapped, 24 kept (formerly rejected: OntoGPT, TopicGPT,
+StructGPT, AugGPT, FrugalGPT, GPTArticleExtractor, ZoteroGPT, tpGPT, GPT4Designer, IoTGemini, GPTSwarm, ViperGPT,
+GPTCelltype …), 14 rejected (bert2BERT, GPTNeXt, GPTZip, InfoBERT, VisBERT …), plus 12 variants harmonised. Table now
+5,624 rows: 613 spellings rejected (2,387 occurrences), 1,554 mapped, 3,457 kept. Remaining case-differing groups were
+listed and read: all differ in meaning (above) or are citation variants of their base name.
+
+**Residual homonyms of listed names** (owner's question 1). ESM-2, BioBridge, ProGen and PaLM 2 are names of P2's list,
+not group 4, and item 6 removed only articles resting on them alone. Every kept mention was searched for the homonym
+senses found in item 6 (climate models MRI-/FIO-ESM-2-0, Electronic Supplementary Material "Table/see ESM-2", the BioBridge
+scaffold and implant, the Progen supplier, the Palm 2 domain): ESM-2 5,235 mentions, 66 pattern hits, all the protein model;
+PaLM 2 896, 9 hits, all the language model; ProGen 257, 8 hits, all the protein model; BioBridge 6, of which 2 the rib
+plate in PMC11320226. That article's other term, "Bard", is C. R. Bard (Marlex mesh): the article is excluded
+(`decisions/manual_homonyms_rl174.csv`). The same Bard sense, searched in all 1,026 kept articles with Bard: 2 more
+sentences ("BD Bard" in a disclosure, PMC12492233; "Bard Electrophysiology Division", PMC11066324), rejected at sentence
+level; the other 52 pattern hits are the chatbot. Exclusions 7,159; term rejections 703.
