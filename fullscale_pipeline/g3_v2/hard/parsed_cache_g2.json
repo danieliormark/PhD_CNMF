@@ -26380,5 +26380,154 @@ null,
 11,
 14
 ]
+},
+"Drawing on the application of LSTM model in natural language processing, MOGRIFIER LSTM, improves the generalization ability of language model.": {
+"main_edge": "(improves/Pd.xso.|f--3s-/en (drawing/Pd.x.|pg----/en (on/T/en (in/Br.ma/en (of/Br.ma/en (the/Md/en application/Cc.s/en) (+/B.am/. lstm/Cp.s/en model/Cc.s/en)) (+/B.am/. (natural/Ma/en language/Cc.s/en) processing/Cc.s/en)))) (+/B.am/. mogrifier/Cp.s/en lstm/Cp.s/en) (of/Br.ma/en (the/Md/en (+/B.am/. generalization/Cc.s/en ability/Cc.s/en)) (+/B.am/. language/Cc.s/en model/Cc.s/en)))",
+"extra_edges": [
+"(_lemma in/B/en in/B/en)",
+"(_lemma drawing/P/en draw/P/en)",
+"(_lemma processing/C/en processing/C/en)",
+"(_lemma generalization/C/en generalization/C/en)",
+"(_lemma model/C/en model/C/en)",
+"(_lemma ability/C/en ability/C/en)",
+"(_lemma mogrifier/C/en mogrifier/C/en)",
+"(_lemma language/C/en language/C/en)",
+"(_lemma on/T/en on/T/en)",
+"(_lemma lstm/C/en lstm/C/en)",
+"(_lemma application/C/en application/C/en)",
+"(_lemma improves/P/en improve/P/en)",
+"(_lemma natural/M/en natural/M/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma of/B/en of/B/en)"
+],
+"atom2word": [
+[
+"drawing/Pd.x.|pg----/en",
+"Drawing",
+0
+],
+[
+"on/T/en",
+"on",
+1
+],
+[
+"the/Md/en",
+"the",
+2
+],
+[
+"application/Cc.s/en",
+"application",
+3
+],
+[
+"of/Br.ma/en",
+"of",
+4
+],
+[
+"lstm/Cp.s/en",
+"LSTM",
+5
+],
+[
+"model/Cc.s/en",
+"model",
+6
+],
+[
+"in/Br.ma/en",
+"in",
+7
+],
+[
+"natural/Ma/en",
+"natural",
+8
+],
+[
+"language/Cc.s/en",
+"language",
+9
+],
+[
+"processing/Cc.s/en",
+"processing",
+10
+],
+[
+"mogrifier/Cp.s/en",
+"MOGRIFIER",
+12
+],
+[
+"lstm/Cp.s/en",
+"LSTM",
+13
+],
+[
+"improves/Pd.xso.|f--3s-/en",
+"improves",
+15
+],
+[
+"the/Md/en",
+"the",
+16
+],
+[
+"generalization/Cc.s/en",
+"generalization",
+17
+],
+[
+"ability/Cc.s/en",
+"ability",
+18
+],
+[
+"of/Br.ma/en",
+"of",
+19
+],
+[
+"language/Cc.s/en",
+"language",
+20
+],
+[
+"model/Cc.s/en",
+"model",
+21
+]
+],
+"atom_pos": [
+15,
+0,
+1,
+7,
+4,
+2,
+3,
+null,
+5,
+6,
+null,
+8,
+9,
+10,
+null,
+12,
+13,
+19,
+16,
+null,
+17,
+18,
+null,
+20,
+21
+]
 }
 }

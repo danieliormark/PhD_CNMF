@@ -688,6 +688,19 @@ def smallest_cover(edge, need):
     return [] if need <= {str(a) for a in terminal(edge)} else None
 
 
+def smallest_cover_pos(edge, ps, apos):
+    """RL-186: index path to the deepest sub-edge holding the atom occurrences at the token positions ps (by position,
+    not by atom string: "natural language processing … ability of language model" has two 'language' atoms)"""
+    if edge.is_atom():
+        return None
+    for i, c in enumerate(edge):
+        r = smallest_cover_pos(c, ps, apos)
+        if r is not None:
+            return [i] + r
+    got = set().union(*(apos.get(id(a), set()) for a in terminal(edge)))
+    return [] if ps <= got else None
+
+
 def replace_at(edge, path, mapping):
     if not path:
         return replace_all(edge, mapping)
@@ -1547,7 +1560,10 @@ def curate_unit(art, s, u, matcher, anchored, modals):
             if all({p for _, p in ctx.pos[a]} <= covered for a in need):
                 edge = replace_all(edge, mapping); how = 'global'
             else:
-                path = smallest_cover(edge, need)
+                ps = {p for p in pos if by_pos.get(p)}
+                path = smallest_cover_pos(edge, ps, ctx.apos) if ctx.apos is not None and ps else None
+                if path is None:                                       # no position known (a rebuilt atom): by string
+                    path = smallest_cover(edge, need)
                 if path is None:
                     how = 'not_in_edge'
                 else:

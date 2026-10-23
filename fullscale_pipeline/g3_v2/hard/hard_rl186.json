@@ -292,5 +292,26 @@
    "versus/M/en"
   ],
   "note": "RL-186: against as a noun (a stance label) is not versus"
+ },
+ {
+  "id": "P-04",
+  "text": "Drawing on the application of LSTM model in natural language processing, MOGRIFIER LSTM, improves the generalization ability of language model.",
+  "expect": [
+   "language_model/C/focal"
+  ],
+  "forbid": [
+   "(focal_he application/C/en language_model"
+  ],
+  "src": [
+   {
+    "in": "language_model/C/focal",
+    "atom": "language_model/C/focal",
+    "pos": [
+     20,
+     21
+    ]
+   }
+  ],
+  "note": "RL-186: a mention is placed by its own token positions (the first 'language' belongs to natural language processing); PMC8882909"
  }
 ]
