@@ -54,6 +54,15 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    **Open, waiting for the owner:** A3 part 2 — 688 distinct sentences (833 spellings) in 307 valid articles lost upstream
    because the v3 matcher missed lower-case spellings; needs P2 with the extended matcher -> P6 -> P7 (frozen REF ids) ->
    G2 -> merge `g2_v3_3` -> G3. Then B3 (author dedup stats, 2026 decision), B5 housekeeping, M1 discussion.
+   **Next G3 rerun, agreed 2026-10-23 (owner), before A3 part 2:**
+   - provenance fix: a child's token positions (`atoms[].src`) list every occurrence of the same lemma in the unit, also
+     those in another clause (PMC13159497.r1.L191.S1: "current" 5 and 26 in both children); keep only the positions
+     inside that hyperedge. Content and content keys are not affected.
+   - contrast and opposition words kept as atoms (now dropped as connectors): without (w/o -> without), versus/vs/against
+     (one form `versus`), than, unlike, in contrast (owner added); rather and instead already kept; between, of, with,
+     in, for stay dropped. Placement: the child holding the preposition's object ("better than clinicians" ->
+     {clinician, than}); clause-level "In contrast, …" to the verb group (as but_also). Trial, hard cases, count of
+     entities that split, then the full run.
 2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
    model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.
