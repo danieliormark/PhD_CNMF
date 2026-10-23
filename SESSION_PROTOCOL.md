@@ -330,3 +330,9 @@ the full-scale pipeline only. The pipeline is expected to change, so the record 
   general-purpose or any other type), workflows, and any other mechanism that starts additional model instances, including during plan
   mode. Ask first, saying what the agent would do and roughly what it would cost. Reason: agents use up the 5-hour usage limit very
   quickly without finishing enough work. Do the work directly with your own tools unless the owner has approved an agent for that task.
+- **Reader subagents may not write or run code (added 2026-10-23).** A prompt line "do not run code" was not enough: the Sonnet
+  F2 reader of the second reading (RL-181) wrote its answer file with a Python script through the shell (checked in its
+  transcript: the script held only its own verdicts and opened no file; reported to the owner). For any reader or checking
+  agent: (1) give it only the Read and Write tools (a custom agent definition with a `tools:` list, no Bash); (2) state in
+  the prompt "you have no permission to write, create or run code or scripts of any kind; write the answers only with the
+  Write tool"; (3) before using its answers, list the tool calls in its transcript and report any breach.

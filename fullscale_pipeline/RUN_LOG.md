@@ -2258,3 +2258,7 @@ First version dropped prose ("This represents a significant gap …", "Here we p
 fixed (stop words and openers are never symbols; after "here" only 1–2-letter or Greek symbols). Corpus: 343 units
 (0.044%), random 60 read: 58–60 notation (borderline: abbreviation legends, a survey construct); 783 symbol occurrences
 defined inside prose. Hard set `hard/hard_rl181_notation.json` 4/4; self-test 113/113, hard cases 244/255. [LOG]
+*[2026-10-23, owner on RL-181: F2 R061 ("access to resources and language models") is a true positive — the final yes stands;
+R080 (neuro-computational language models) stays no. R040 (UTR+BERT-derived) is a stand-alone table/list cell that G3
+already removes as non-prose (heading), so it does not reach the corpus. Reader-agent rule added to SESSION_PROTOCOL.md §K
+(tools limited to Read/Write; prompts forbid code; transcripts checked).]*
