@@ -44,6 +44,9 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    variables inside prose (salign, cctx) not measured; lower-case hub spellings (xlm-roberta-base) not matched by the v3
    matcher (upstream). **Next: M1 merge discussion (ticket 107)**; to do there: count semantic sparsity under different
    model-merging levels (design doc addendum 2026-10-22).
+   RL-183 (D5 read, open points measured): asides misattach a focal term in about 8–12% of 2,832 aside units; words glued
+   across an em dash become junk atoms (ai_the, sam_is …; 1,129 occurrences incl. legitimate en-dash compounds and ranges);
+   numbers to be left out of the modelling in M1 (owner); decisions pending on A1–A3 and the dash items.
 2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
    model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.

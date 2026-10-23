@@ -2287,3 +2287,19 @@ because they occur twice in the unit); checkpoint settings left about 60 mention
 esm_1b is a name); no vendor prefix left; o-series one form per model (gpt_o1 1,691, gpt_o3 659, gpt_o3_mini 511 …).
 CSF check renewed (pins, 161/161, 244/255, reference from this run; RL-177's kept as `reference_incline_rl177/`),
 check_csf_g3_v2.sh 1274ac6d0822, passed on incline. [LOG]
+
+**RL-183 · 2026-10-23 · G3 v2 · CHECK (D5 dash-enclosed asides, approved count) + open points measured · LIVE**
+D5: 2,832 units hold a dash-enclosed aside (spaced or em dashes, 2+ words) containing a focal term (3,687 with looser
+dashes, which include ranges and compounds). 50 drawn at random (seed 23) and read for the parent of every focal term:
+44–46 right (asides that list or name models attach to the right verb), 4 clearly wrong (an aside's participle clause or
+an apposition list attached to the main or the copular verb: "consent form—re_written with an LLM…—mirrors", lists under
+"aim"/"be" instead of "evaluate"/"compare", two of three models under "held" instead of "showing"), 2 doubtful: about
+8–12% of aside units, about 230–340 units corpus-wide (0.03–0.04%). Found in the same reading: words glued across a dash
+become one atom: 1,129 atom occurrences (885 types), 358 of them number ranges (6th_8th, 2019–2023) and many genuine
+compounds written with an en dash (ai_based, hipaa_compliant), but with an em dash also junk joins of two words
+(ai_the, nlp_the, sam_is, principles_nurse, ours_outperforme). Other open points measured: strict formula signals in
+prose 340 units (about half rankings "A > B > C" and special tokens <e1>, <CLS>); lower-case model spellings missed by
+the v3 matcher: 472 occurrences inside kept sentences (prefix before the family: xlm-, flan-, stsb-; names the matcher
+knows only capitalised: mistral-7b-instruct, deberta-v3-base, t5-xxl), sentences lost upstream not counted; GPT4b is
+the "biased" grader configuration of GPT-4 (maps to gpt_4 by the RL-174 rule). Numbers (owner): kept in hyperedges, left
+out of the modelling in M1 (design doc addendum 2026-10-23). [LOG]

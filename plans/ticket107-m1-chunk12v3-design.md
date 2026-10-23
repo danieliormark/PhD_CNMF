@@ -915,3 +915,16 @@ semantic facets (focal atoms, the child/cousin hyperedges they enter, their degr
 degree-1 entities) under different model-merging levels — (a) as written by G3 (tier level), (b) version level (tiers
 merged: `gpt_4o_mini` → `gpt_4o`), (c) family level (`gpt_4o` → `gpt`), (d) generic terms only (every named model →
 its class, e.g. `llm`) — before the weighting and the choice of level are decided.
+
+## Addendum 2026-10-23 — numbers: members of hyperedges, not of the model (owner)
+
+Owner: numbers are valuable for interpretation but usually meaningless for the modelling; keep them as members of
+hyperedges, but leave them out of the modelling (weight 0 or a mask). G3 keeps plain-text numbers as atoms (2026-10-09
+decision): 144,599 integer atoms of 1–3 digits plus decimals in the RL-182 output; a sample of 40 read in context: about
+5–10% are leaked labels or citation numbers (RL-118), the rest counts and values ("29 of 31", "45 answers", "12 GB").
+**To do in M1:** build the entity identity of every hyperedge (the merged child/cousin layer's word-set key, parents'
+keys) and every word-level relation or regulariser from the non-number atoms only; the numbers stay in the G3 records and
+the occurrence rows, so interpretation shows them. Consequence to state and measure: hyperedges that differ only in their
+numbers become one entity ("29 of 31 questions" and "28 of 31 questions" -> one `question` hyperedge), which lowers
+sparsity; count it together with the model-merging levels (addendum 2026-10-22). This also settles the RL-118 leak for
+the model without a G3 change.
