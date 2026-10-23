@@ -427,6 +427,9 @@ CKPT_TIER = {'sonnet', 'opus', 'haiku', 'pro', 'flash', 'lite', 'mini', 'nano', 
 CKPT_SETTING = re.compile(r'^(?:base|large|small|tiny|medium|xl|xxl|xlarge|xxlarge|uncased|cased|multilingual|instruct|it|chat|exp|'
                           r'preview|latest|based|hf|\d+(?:\.\d+)?(?:x\d+)?[bmk]|e\d+b|\d{3,}|(?:19|20)\d\d\S*)$')
 CKPT_VERSION = re.compile(r'^(?:v?\d{1,2}(?:\.\d{1,2})*[a-z]{0,2}|[ro]\d+)$')
+CKPT_LEAD = {'base', 'large', 'small', 'medium', 'cased', 'uncased'}    # RL-184 (owner): a setting written before the family;
+# not tiny (TinyBERT is a model), instruct (InstructGPT) or multilingual (Multilingual BERT)
+CKPT_GLUED_SIZE = re.compile(r'^(mistral|mixtral|gemma|llama|qwen|falcon|phi|deepseek|vicuna|baichuan)(\d+(?:\.\d+)?[bm])$')   # RL-184
 CKPT_GLUED = re.compile(r'^(.*b(?:er)?t|.*berta)(base|large|uncased|cased)$')     # bertbase, robertalarge, phobertbase, albertbase
 
 
@@ -463,6 +466,9 @@ def canonical(surface):
     """one canonical atom root per focal term: lower case, separators -> '_', '.0' dropped, a glued version split ('gpt4o' -> 'gpt_4o'),
     SYNONYMS applied. 'GPT-4', 'GPT4', 'GPT 4', 'GPT-4.0' -> gpt_4; 'LLMs', 'large language models' -> llm; 'GPT-4o' stays gpt_4o."""
     s = surface.lower().replace('‐', '-').replace('–', '-')
+    lead = re.match(r'^(' + '|'.join(CKPT_LEAD) + r')[\s_-]+(?=(?:bert|roberta|gpt|llama|t5|electra|xlnet|bart|mistral|gemma|qwen)\b)', s)
+    if lead:                                                              # RL-184 (owner): base-BERT -> bert; only before a model
+        s = s[lead.end():]                                                # family ('large language models' is untouched)
     f = fold_checkpoint(s) if s not in SIZE_IN_NAME else None             # RL-172/RL-177: settings dropped, tiers kept
     if f:
         s = f
@@ -483,7 +489,9 @@ def canonical(surface):
     s = re.sub(r'^(?:openai|google|anthropic|meta)_(?=(?:gpt|gemini|claude|llama|bert|palm|gemma|bard)(?:_|\d|$))', '', s)
     s = re.sub(r'^gpt_35(?=_|$)', 'gpt_3_5', s)                           # RL-172: Azure's GPT-35(-turbo)
     s = re.sub(r'^claude_(\d+(?:_\d+)?)_(sonnet|opus|haiku)$', r'claude_\2_\1', s)   # RL-177: tier before version
-    s = SYNONYMS.get(s, s)
+    s = CKPT_GLUED_SIZE.sub(r'\1', s)                                    # RL-184 (owner): mistral7b -> mistral
+    s = {'gpt_4b': 'gpt_4', 'gpt4b': 'gpt_4', 'gpt_2m': 'gpt_2', 'gpt2m': 'gpt_2'}.get(s, s)   # RL-184: read, GPT4b = the "biased" GPT-4
+    s = SYNONYMS.get(s, s)                                                # grader, GPT2M = GPT-2 Medium
     m = re.fullmatch(VERSIONED + r'(\d[a-z0-9_]*)', s)
     if m:
         s = f"{m.group(1)}_{m.group(2)}"
@@ -1846,7 +1854,10 @@ CANON_CASES = [('LLMs', 'llm'), ('large language models', 'llm'), ('Large Langua
                ('OpenAI o1', 'gpt_o1'), ('OpenAI o1 pro', 'gpt_o1_pro'), ('ChatGPT o3-mini', 'gpt_o3_mini'), ('GPT-o1', 'gpt_o1'),
                ('Google Gemini 2.5 Pro', 'gemini_2_5_pro'), ('Anthropic Claude 3.5 Sonnet', 'claude_sonnet_3_5'), ('Meta Llama 3', 'llama_3'),
                ('OpenAI GPT-4.1 mini', 'gpt_4_1_mini'), ('BERT-mini', 'bert'), ('RoBERTa-Mini', 'roberta'), ('ProkBERT-mini', 'prokbert'), ('Microsoft Copilot', 'microsoft_copilot'), ('HuatuoGPT-o1', 'huatuogpt_o1'),
-               ('ChatGPTo1 pro', 'gpt_o1_pro'), ('GPTo1', 'gpt_o1'), ('biobert-v1.18', 'biobert_v1_1'), ('BioBERT v1.123', 'biobert_v1_1'), ('BioBERT v1.2', 'biobert_v1_2')]
+               ('ChatGPTo1 pro', 'gpt_o1_pro'), ('GPTo1', 'gpt_o1'), ('base-BERT', 'bert'), ('Base-BERT', 'bert'), ('large-BERT', 'bert'), ('uncased-BERT', 'bert'),
+               ('Tiny-BERT', 'tiny_bert'), ('Instruct-GPT', 'instruct_gpt'), ('Mistral7B', 'mistral'), ('Gemma27B', 'gemma'),
+               ('GPT4b', 'gpt_4'), ('GPT2M', 'gpt_2'), ('Base-BiFormer-GPT', 'base_biformer_gpt'),
+               ('large language models', 'llm'), ('small language model', 'small_language_model'), ('biobert-v1.18', 'biobert_v1_1'), ('BioBERT v1.123', 'biobert_v1_1'), ('BioBERT v1.2', 'biobert_v1_2')]
 
 
 def unit(text, edge, words, lemmas):

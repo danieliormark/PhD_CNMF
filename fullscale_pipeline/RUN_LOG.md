@@ -2303,3 +2303,23 @@ the v3 matcher: 472 occurrences inside kept sentences (prefix before the family:
 knows only capitalised: mistral-7b-instruct, deberta-v3-base, t5-xxl), sentences lost upstream not counted; GPT4b is
 the "biased" grader configuration of GPT-4 (maps to gpt_4 by the RL-174 rule). Numbers (owner): kept in hyperedges, left
 out of the modelling in M1 (design doc addendum 2026-10-23). [LOG]
+
+**RL-184 · 2026-10-23 · G3 name rules (A1, code, not yet run) + upstream spelling scan (A3) + dash re-parse test (B2) · LIVE**
+A1 (owner): a setting word before a model family is dropped (base-BERT, large-BERT, uncased-BERT -> bert; only before a
+family stem, so "large language models" is untouched; not tiny/instruct/multilingual: TinyBERT, InstructGPT and
+Multilingual BERT are models); a size glued to a family is dropped (Mistral7B, Gemma27B -> mistral, gemma); read
+individually: GPT4b -> gpt_4 (the "biased" GPT-4 grader), GPT2M -> gpt_2 (GPT-2 Medium). Self-test 174/174.
+A3 (`retrieval/hub_spelling_scan.py`, read-only, 3 min, 187,617 cleaned full texts; families = 451 parts of the canonical
+focal names with a model stem; a hit needs a hub signal and must not be covered by a v3 matcher hit): in valid corpus
+articles 1,150 lower-case model spellings inside sentences that have another focal term (the name is an ordinary word)
+and 833 in sentences with no focal term (sentences lost); outside the corpus 139 sentences in 66 articles, mostly false
+(flank/flan, gemma cups, alpaca/llama, an ESM climate run) or AI-use statements; top missed: gpt-oss-20b 81,
+gpt-oss-120b 68, gemini-2.5-pro 64, gemini-2.5-flash 52, claude-3.5-sonnet 51, distilbert-base-uncased 36,
+xlm-roberta-base 31. Report `PG/hub_spelling_scan.json`.
+B2 (test, scratch): the 50 aside units of RL-183 and 40 units with words glued across an em dash re-parsed by G2's own
+parse function with the aside in brackets and glued em dashes spaced, then G3: 3 of the 4 clear aside errors fixed
+(consent form "re-written with an LLM", the model lists under "evaluate" and "compare"), one unchanged, one doubtful
+improved; every glued junk atom split correctly (ai_particularly, principles_nurse, lower_34, xgboost_and, 2024_marks,
+anthropic_were …); other changes small parse variations; two bugs of the test transformation (an unspaced en-dash range
+"5C–H" read as an aside; an aside containing brackets) to fix: only em dashes and spaced en dashes, and no brackets around
+an aside that holds brackets. [LOG]
