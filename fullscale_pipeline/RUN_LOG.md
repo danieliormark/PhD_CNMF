@@ -2323,3 +2323,33 @@ improved; every glued junk atom split correctly (ai_particularly, principles_nur
 anthropic_were …); other changes small parse variations; two bugs of the test transformation (an unspaced en-dash range
 "5C–H" read as an aside; an aside containing brackets) to fix: only em dashes and spaced en dashes, and no brackets around
 an aside that holds brackets. [LOG]
+
+**RL-185 · 2026-10-23 · G2 dash re-parse (B2) + G3 rules A1–A3 · PRODUCTION RERUN on incline + RE-AUDIT · LIVE**
+Owner (2026-10-23): A1 two narrow name rules and the individual mappings; A2 the formula-token rule (rankings need no rule);
+A3 match lower-case hub spellings in G3 (gpt-oss-20b and -120b merge to gpt_oss, sizes are dropped); B2 "if it works then
+proceed". B2: `retrieval/inc_dash_prepare.py` selects every G2 v3.1 sentence with an em dash or a spaced en dash (13,275;
+172 in excluded articles and 53 with a unit on a hash-keyed G3 list skipped) -> 13,050 sentences in 6,089 articles;
+`retrieval/inc_g2_dash.py` (inc_g2.py plus the dash rewrite: an aside of 2+ words, no brackets, not a number range, is put
+in brackets; a glued em dash is spaced; self-test 6/6; sid, hash_final and text_final unchanged) re-parsed them on incline
+(11,745 texts rewritten); `retrieval/inc_g2_dash_merge.py` -> `PG/g2_v3_2/` (13,050 replaced, 0 problems:
+`check_report.json`). G3 SHARDS and `merge_g3_v2.py` now read `g2_v3_2`. G3 (script 803b36806823): A1 setting word before a
+family and size glued to a family dropped; GPT4b -> gpt_4, GPT2M -> gpt_2; A2 a token with a maths character, or a
+symbol-like token inside a formula span, is dropped (`drop_formula_token` 546; o1 exempt; acronyms kept: an earlier
+no-vowel test dropped ndcg@10, crrs, sdg and was removed); A3 lower-case hub spellings (`hub_hits`: whole-segment family
+from `g3_inputs_v3_1/hub_families.txt`, 440 families, plus a hub signal) and GPT continuations oss/j/neo/neox joined; org
+prefix dropped only when it holds no family stem or digit ("GPT-4o/4o-mini" misread before); trailing dot stripped; a
+2+-digit number after a tier read as a cut snapshot code. Inputs: hub_families c1cb350b89b0, g4_decisions 08b623b537a7,
+compound_forms 1d1bc8c84b8a. Self-test 179/179, hard cases 252/263 (the 11 known failures; new `hard_rl185.json` 8/8).
+First full run (kept as `PG/g3_v2_rl185_try/`) showed two hub false positives: "g4em-standard_opt4" (Geant4 physics list,
+read as OPT) made PMC8749202 and PMC12296266 valid, and "1-2-3-gpt-6-7-8" (a plasmid); fixed (glued opt excluded; a token
+whose first and last segments are not words is skipped) and rerun: 50 shards on incline (10 parallel, 16:50–16:56), all
+exit 0; merge OK; audit 0 problems. Articles: valid 41,754, invalid 639, excluded 6,953; against RL-182 two articles
+became valid (PMC12937751, PMC12938441: their only model names were hub spellings), the two Geant4 papers are invalid
+again. Units with a parent 770,219 (RL-182 770,109), parents 905,341, cousins 2,080,433, occurrence rows 5,995,171.
+Mentions: hub spellings 730, gpt_oss/j/neo 917 (RL-182: 1; gpt_oss 395), stray tokens deleted 3,065; non-prose notation
+units 350. Measured on the first RL-185 run (the fix touches only hub tokens): atoms glued across an em dash 423 -> 0,
+maths-character atoms 3 -> 0, oss left as a word 517 -> 137. Left as they are: glued citation digits on hub spellings
+(gpt_oss_120b29, esm_1b21, albert-base-v25, a few), "GPT-4o/4o-mini" -> gpt_4o_4o_mini. RL-182 output kept as
+`PG/g3_v2_rl182/`. CSF check renewed (pins 803b36806823 / f169f86a244f, 179/179, 252/263, reference from this run, RL-182's
+kept as `reference_incline_rl182/`), check_csf_g3_v2.sh ed5a87938d0d; not yet run on CSF. A3 part 2 (the 688 sentences
+lost upstream, 307 valid articles) not started. [LOG]

@@ -46,7 +46,14 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    model-merging levels (design doc addendum 2026-10-22).
    RL-183 (D5 read, open points measured): asides misattach a focal term in about 8–12% of 2,832 aside units; words glued
    across an em dash become junk atoms (ai_the, sam_is …; 1,129 occurrences incl. legitimate en-dash compounds and ranges);
-   numbers to be left out of the modelling in M1 (owner); decisions pending on A1–A3 and the dash items.
+   numbers to be left out of the modelling in M1 (owner).
+1c. **G3 RL-185 rerun — DONE (2026-10-23).** G2 dash re-parse (13,050 sentences) merged to `PG/g2_v3_2/` (G3's input
+   now); A1 name rules, formula-token rule, lower-case hub spellings (730 mentions), GPT-OSS/J/Neo joined (917). Incline run:
+   `PG/g3_v2/` 41,754 valid, 639 invalid, 6,953 excluded; audit 0 problems; kept `PG/g3_v2_rl182/`, `_rl185_try/`.
+   CSF check renewed, not yet run on CSF (optional: `sbatch PG/scripts/g3_v2/check_csf_g3_v2.sh`).
+   **Open, waiting for the owner:** A3 part 2 — 688 distinct sentences (833 spellings) in 307 valid articles lost upstream
+   because the v3 matcher missed lower-case spellings; needs P2 with the extended matcher -> P6 -> P7 (frozen REF ids) ->
+   G2 -> merge `g2_v3_3` -> G3. Then B3 (author dedup stats, 2026 decision), B5 housekeeping, M1 discussion.
 2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
    model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.

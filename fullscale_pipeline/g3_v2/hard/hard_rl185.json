@@ -1,8 +1,99 @@
 [
- {"id": "H-01", "text": "We fine-tuned xlm-roberta-base and compared it with gemini-2.5-pro on the benchmark.", "expect": ["xlm_roberta/C/focal", "gemini_2_5_pro/C/focal"], "forbid": ["xlm_roberta_base", "roberta_base/"], "note": "RL-185: lower-case hub spellings recognised and folded"},
- {"id": "H-02", "text": "Sentiment was scored with cardiffnlp/twitter-roberta-base-sentiment-latest before BERT topic modelling.", "expect": ["twitter_roberta/C/focal", "bert/C/focal"], "forbid": ["cardiffnlp"], "note": "RL-185: organisation prefix dropped"},
- {"id": "H-03", "text": "We compared GPT-OSS-120B and GPT-J-6B with GPT-4 on the clinical questions.", "expect": ["gpt_oss/C/focal", "gpt_j/C/focal", "gpt_4/C/focal"], "forbid": ["oss_120b", " oss/"], "note": "RL-185: GPT-OSS / GPT-J join the GPT name, sizes dropped"},
- {"id": "H-04", "text": "Three species (alpaca/llama) were imaged before the LLM summarised the reports.", "expect": ["llm/C/focal"], "forbid": ["llama/C/focal"], "note": "RL-185: no hub hit without a digit or checkpoint word"},
- {"id": "H-05", "text": "In the LLMs used in this study, the similarity between words is calculated as the cosine similarity between 2 vectors x,y: Scos(x,y) ⟨x,y⟩∥x∥∥y∥.", "expect": ["llm/C/focal", "cosine/", "similarity/"], "forbid": ["%E2%88%A5", "scos"], "note": "RL-185 (owner): formula tokens dropped, the prose kept"},
- {"id": "H-06", "text": "The overall ranking was therefore ChatGPT > Gemini > Copilot.", "expect": ["chatgpt/C/focal", "gemini/C/focal", "ranking/"], "note": "RL-185: a ranking is not a formula: names stay"}
+{
+"id": "H-01",
+"text": "We fine-tuned xlm-roberta-base and compared it with gemini-2.5-pro on the benchmark.",
+"expect": [
+"xlm_roberta/C/focal",
+"gemini_2_5_pro/C/focal"
+],
+"forbid": [
+"xlm_roberta_base",
+"roberta_base/"
+],
+"note": "RL-185: lower-case hub spellings recognised and folded"
+},
+{
+"id": "H-02",
+"text": "Sentiment was scored with cardiffnlp/twitter-roberta-base-sentiment-latest before BERT topic modelling.",
+"expect": [
+"twitter_roberta/C/focal",
+"bert/C/focal"
+],
+"forbid": [
+"cardiffnlp"
+],
+"note": "RL-185: organisation prefix dropped"
+},
+{
+"id": "H-03",
+"text": "We compared GPT-OSS-120B and GPT-J-6B with GPT-4 on the clinical questions.",
+"expect": [
+"gpt_oss/C/focal",
+"gpt_j/C/focal",
+"gpt_4/C/focal"
+],
+"forbid": [
+"oss_120b",
+" oss/"
+],
+"note": "RL-185: GPT-OSS / GPT-J join the GPT name, sizes dropped"
+},
+{
+"id": "H-04",
+"text": "Three species (alpaca/llama) were imaged before the LLM summarised the reports.",
+"expect": [
+"llm/C/focal"
+],
+"forbid": [
+"llama/C/focal"
+],
+"note": "RL-185: no hub hit without a digit or checkpoint word"
+},
+{
+"id": "H-05",
+"text": "In the LLMs used in this study, the similarity between words is calculated as the cosine similarity between 2 vectors x,y: Scos(x,y) ⟨x,y⟩∥x∥∥y∥.",
+"expect": [
+"llm/C/focal",
+"cosine/",
+"similarity/"
+],
+"forbid": [
+"%E2%88%A5",
+"scos"
+],
+"note": "RL-185 (owner): formula tokens dropped, the prose kept"
+},
+{
+"id": "H-06",
+"text": "The overall ranking was therefore ChatGPT > Gemini > Copilot.",
+"expect": [
+"chatgpt/C/focal",
+"gemini/C/focal",
+"ranking/"
+],
+"note": "RL-185: a ranking is not a formula: names stay"
+},
+{
+"id": "H-07",
+"text": "The physics models included g4em-standard_opt4 and g4h-phy_QGSP_BERT_HP, while an LLM summarised the logs.",
+"expect": [
+"llm/C/focal"
+],
+"forbid": [
+"g4em_standard_opt4/C/focal",
+"opt/C/focal"
+],
+"note": "RL-185: a Geant4 physics list is not the OPT model"
+},
+{
+"id": "H-08",
+"text": "The plasmid recPEDV-MN 1-2-3-gpt-6-7-8 was used, and ChatGPT drafted the protocol summary.",
+"expect": [
+"chatgpt/C/focal"
+],
+"forbid": [
+"1_2_3_gpt"
+],
+"note": "RL-185: a number sequence is not a hub name"
+}
 ]

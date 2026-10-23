@@ -6,10 +6,10 @@
 #SBATCH --time=00:30:00
 #SBATCH --output=/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/scripts/logs_g3/g3_check_v2_%j.out
 #
-# Stage G3: test on a CSF compute node before the production rerun on the merged corpus (RL-171, renewed RL-177 and RL-182; copy of
+# Stage G3: test on a CSF compute node before the production rerun on the merged corpus (RL-171, renewed RL-177, RL-182 and RL-185; copy of
 # check_csf_g3.sh, RL-123).
 #   sbatch /mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/scripts/g3_v2/check_csf_g3_v2.sh
-# Checks the script hashes, runs the self-test and the hard cases, curates the whole of G2 v3.1 shards 0 and 20 into
+# Checks the script hashes, runs the self-test and the hard cases, curates the whole of G2 v3.2 shards 0 and 20 (v3.1 plus the dash re-parses, RL-185) into
 # PG/g3_v2_csftest/job_<jobid>/ and compares every output record file byte for byte with the incline reference run of
 # the same script (PG/g3_v2_csftest/reference_incline/). The last line must read "ALL G3 CHECKS OK".
 # Tracked copy: PhD_CNMF/fullscale_pipeline/g3_v2/check_csf_g3_v2.sh.
@@ -28,7 +28,7 @@ set -o pipefail
 fail() { echo "PROBLEM: $1"; echo "SOME G3 CHECKS FAILED"; exit 1; }
 
 echo; echo "== 1. script hashes"
-for x in "g3_curation_v2.py 87490dc64983" "modal_merge.py 75c7022ac187" "run_hard.py f778b14c2a2c"; do
+for x in "g3_curation_v2.py 803b36806823" "modal_merge.py 75c7022ac187" "run_hard.py f169f86a244f"; do
     set -- $x; got=$(sha256sum $D/$1 | cut -c1-12)
     echo "$1 $got"; [ "$got" = "$2" ] || fail "$1 sha256 $got, expected $2"
 done
@@ -36,12 +36,12 @@ done
 echo; echo "== 2. self-test"
 OUT=$(cd $D && python g3_curation_v2.py --selftest 2>&1 | grep -E "FAIL|passed")
 echo "$OUT"
-echo "$OUT" | grep -q "^161 of 161 passed" || fail "self-test"
+echo "$OUT" | grep -q "^179 of 179 passed" || fail "self-test"
 
-echo; echo "== 3. hard cases (expected: TOTAL 244/255, the 11 known failures)"
+echo; echo "== 3. hard cases (expected: TOTAL 252/263, the 11 known failures)"
 OUT=$(cd $D && python run_hard.py hard/hard_*.json 2>&1 | grep -E "pass|TOTAL")
 echo "$OUT"
-echo "$OUT" | grep -q "^TOTAL 244/255" || fail "hard cases"
+echo "$OUT" | grep -q "^TOTAL 252/263" || fail "hard cases"
 
 echo; echo "== 4. shards 0 and 20, whole"
 for i in 0 20; do

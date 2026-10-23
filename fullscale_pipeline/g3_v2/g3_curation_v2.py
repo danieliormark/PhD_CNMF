@@ -537,7 +537,10 @@ def hub_hits(text, spans_taken):
         if '-' not in tok and '/' not in tok or any(sa < b and sb > a for sa, sb in spans_taken):
             continue
         segs = [x for x in re.split(r'[-_/]', tok) if x]
-        fam = [x for x in segs if x in HUB_FAMS or re.fullmatch(r'([a-z]+)\d+(?:\.\d+)?', x) and re.fullmatch(r'([a-z]+)\d+(?:\.\d+)?', x).group(1) in HUB_FAMS]
+        if not re.match(r'[a-z]', segs[-1 if '/' not in tok else 0]) and not re.match(r'[a-z]', segs[0]):
+            continue                                                     # RL-185: a number sequence (1-2-3-gpt-6-7-8, a plasmid)
+        glued = lambda x: re.fullmatch(r'([a-z]+)\d+(?:\.\d+)?', x)
+        fam = [x for x in segs if x in HUB_FAMS or glued(x) and glued(x).group(1) in HUB_FAMS - {'opt'}]   # opt4 (Geant4) is not OPT
         if fam and any(HUB_SIGNAL_SEG.search(x) for x in segs if x not in fam):
             out.append((f"hub:{tok}", (a, b), tok))
     return out
