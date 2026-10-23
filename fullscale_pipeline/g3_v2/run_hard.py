@@ -111,6 +111,8 @@ def main():
     m = load(a.script)
     if hasattr(m, "FORMS") and os.path.exists(getattr(m, "COMPOUND_FORMS", "")):    # RL-180: the compound list, as run() loads it
         m.FORMS = {r["key"]: r["form"] for r in __import__("csv").DictReader(open(m.COMPOUND_FORMS, encoding="utf-8"), delimiter="\t")}
+    if hasattr(m, "HUB_FAMS") and os.path.exists(getattr(m, "HUB_FAMILIES", "")):   # RL-185: the hub family list, as run() loads it
+        m.HUB_FAMS.update(l.strip() for l in open(m.HUB_FAMILIES, encoding="utf-8") if l.strip() and not l.startswith("#"))
     ref = load(a.ref, "ref") if a.ref else None
     total = [0, 0]
     for path in a.sets:

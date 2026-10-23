@@ -134,7 +134,8 @@ REFLEXIVE_TABLE = INPUTS + "reflexive_restored.jsonl"               # §6 item 8
 TERM_REJECTIONS = INPUTS + "term_rejections.tsv"                    # RL-171: focal hits Stage B rejected (sentence / article)
 G4_DECISIONS = INPUTS + "g4_decisions.csv"                          # RL-172: group-4 false hits (reject) and glued citations (map)
 STATEMENT_SENTENCES = INPUTS + "statement_sentences.csv"            # RL-172: AI-use statements found by the second check
-COMPOUND_FORMS = INPUTS + "compound_forms.tsv"                      # RL-180: spellings of one compound -> its most frequent form
+COMPOUND_FORMS = INPUTS + "compound_forms.tsv"
+HUB_FAMILIES = INPUTS + "hub_families.txt"                          # RL-185: model families for lower-case hub spellings                      # RL-180: spellings of one compound -> its most frequent form
 # §8 item 5 (owner 2026-10-10, RL-129): spaCy's rule lemmatiser gives an underscore-joined (out-of-vocabulary) word its first
 # suffix rule unchecked (pre_trained -> pre_traine, question_answering -> question_answere, second_best -> second_b). Where it
 # changed a joined word, the lemma is rebuilt as the part before the last "_" plus the lemma G2's parse gives the last part as a
@@ -154,6 +155,7 @@ INPUT_SHA[focal_terms.RULES + "focal_group4_rule.py"] = "70d88dcdf8e4"
 INPUT_SHA[TERM_REJECTIONS] = "1dcd13352f6a"
 INPUT_SHA[G4_DECISIONS] = "08b623b537a7"                     # RL-181: RegulatoryGPT kept (RL-174 7e3732cb0cdb, RL-173 05a32cbad7ce, RL-172 326130aeba60)
 INPUT_SHA[STATEMENT_SENTENCES] = "bfcb97d7b479"
+INPUT_SHA[HUB_FAMILIES] = "c1cb350b89b0"                    # RL-185
 INPUT_SHA[COMPOUND_FORMS] = "1d1bc8c84b8a"                 # RL-180 (built from the RL-178 output)
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers
 LAYOUT_WORDS = {'table', 'tables', 'tab', 'fig', 'figs', 'figure', 'figures', 'appendix', 'appendices', 'supplementary',
@@ -223,6 +225,9 @@ GREEK_MICRO = {'μct': 'microct', 'µct': 'microct', 'μema': 'microema', 'µema
 GREEK_END_NOTATION = {'scoreβ', 'oncologistχ', 'aucμ', 'prθ', 'casφ'}    # Greek letter last, but a variable (read, RL-180)
 COMPOUND_EXCEPT = {'pro_state', 'co_pilot', 're_agent', 'co_star', 're_present', 're_turn'}   # RL-180: read, a different word
 WORD_MAP = {'w/o': 'without'}
+MATH_CHARS = re.compile('[∥⟨⟩∝∑∏√∫≈≠∈∉⊂⊆∪∩⊕⊗∀∃∇∂]')                     # RL-185: formula debris in an atom
+FORMULA_SPAN = re.compile(r"\b[A-Za-z][A-Za-z0-9]{0,8}\((?:[a-z][a-z0-9]?)(?:,\s*[a-z][a-z0-9]?)+\)"
+                          r"|\S*[⟨⟩∥∝∑∏√∫∈⊂⊆⊕⊗]\S*|\b\S+\s*[<>≤≥=]\s*\S+|\b\S+\s+at most\s+\S+")
 LATIN_PLAIN = str.maketrans({'ı': 'i', 'ł': 'l', 'ø': 'o', 'đ': 'd', 'ð': 'd', 'ß': 'ss', 'æ': 'ae', 'œ': 'oe', 'þ': 'th'})   # no NFKD form
 CLITIC = re.compile(r"^'(?:s|m|d|t|ve|re|ll)\d*$")
 CLITIC_TAIL = re.compile(r"(?<=[a-z0-9])'(?:s|m|d|ve|re|ll)$")
@@ -449,6 +454,8 @@ def fold_checkpoint(s):
         if CKPT_SETTING.match(t) or (t == 'mini' and re.search(r'bert[a]?$', fam[-1])):   # a size ('7b'; BERT-mini) is a setting
             cut = True; break
         if CKPT_VERSION.match(t):
+            if tiers and re.fullmatch(r'\d{2,}', t) and vers:                # RL-185: claude-3-5-sonnet-20… : a cut snapshot code
+                cut = True; break
             vers.append(t)
         elif t in CKPT_TIER:
             tiers.append(t)
@@ -465,7 +472,10 @@ def fold_checkpoint(s):
 def canonical(surface):
     """one canonical atom root per focal term: lower case, separators -> '_', '.0' dropped, a glued version split ('gpt4o' -> 'gpt_4o'),
     SYNONYMS applied. 'GPT-4', 'GPT4', 'GPT 4', 'GPT-4.0' -> gpt_4; 'LLMs', 'large language models' -> llm; 'GPT-4o' stays gpt_4o."""
-    s = surface.lower().replace('‐', '-').replace('–', '-')
+    s = surface.lower().replace('‐', '-').replace('–', '-').rstrip('.')
+    org = re.match(r'^([a-z0-9][a-z0-9._-]*)/(?=[a-z0-9])', s)
+    if org and not re.search(r'gpt|bert|llama|t5|roberta|mistral|gemma|qwen|claude|gemini|deepseek|\d', org.group(1)):
+        s = s[org.end():]                                                 # RL-185: a hub organisation prefix (cardiffnlp/…) dropped
     lead = re.match(r'^(' + '|'.join(CKPT_LEAD) + r')[\s_-]+(?=(?:bert|roberta|gpt|llama|t5|electra|xlnet|bart|mistral|gemma|qwen)\b)', s)
     if lead:                                                              # RL-184 (owner): base-BERT -> bert; only before a model
         s = s[lead.end():]                                                # family ('large language models' is untouched)
@@ -508,12 +518,39 @@ def token_spans(text, a2w):
     return spans
 
 
+# RL-185 (owner 2026-10-23): model names written in lower-case Hugging Face style (xlm-roberta-base, gemini-2.5-pro,
+# cardiffnlp/twitter-roberta-base-sentiment-latest) that the v3 matcher misses; families from HUB_FAMILIES (set by run())
+HUB_FAMS = set()
+HUB_TOKEN = re.compile(r"(?<![\w./-])((?:[a-z0-9][a-z0-9._-]*/)?[a-z0-9][a-z0-9._-]*[a-z0-9])(?![\w/])")
+HUB_SIGNAL_SEG = re.compile(r"\d|^(?:base|large|small|medium|xl|xxl|tiny|mini|instruct|chat|hf|uncased|cased|it|pro|flash|lite|turbo|"
+                            r"sonnet|opus|haiku|nano|ultra)$")
+
+
+def hub_hits(text, spans_taken):
+    """RL-185: lower-case hub spellings whose segments include a listed family as a whole segment (or the family + a version:
+    gemma3, qwen2.5) and a hub signal (a digit or a checkpoint word); not inside a matcher hit"""
+    out = []
+    if not HUB_FAMS:
+        return out
+    for m in HUB_TOKEN.finditer(text):
+        tok, a, b = m.group(1), m.start(1), m.end(1)
+        if '-' not in tok and '/' not in tok or any(sa < b and sb > a for sa, sb in spans_taken):
+            continue
+        segs = [x for x in re.split(r'[-_/]', tok) if x]
+        fam = [x for x in segs if x in HUB_FAMS or re.fullmatch(r'([a-z]+)\d+(?:\.\d+)?', x) and re.fullmatch(r'([a-z]+)\d+(?:\.\d+)?', x).group(1) in HUB_FAMS]
+        if fam and any(HUB_SIGNAL_SEG.search(x) for x in segs if x not in fam):
+            out.append((f"hub:{tok}", (a, b), tok))
+    return out
+
+
 def focal_mentions(matcher, text, a2w, anchored):
     """[(term, surface, canonical, token positions)] for every accepted focal match; a match inside a token is extended to the whole token
     only when the rest is a version ('ChatGPT' in 'ChatGPT-3.5' -> chatgpt_3_5), otherwise the matched text decides the canonical form"""
     spans = token_spans(text, a2w)
     out = []
-    for term, (a, b), surf in matcher.hits(text, anchored)[0]:
+    hits = matcher.hits(text, anchored)[0]
+    hits = hits + hub_hits(text, [h[1] for h in hits])                 # RL-185
+    for term, (a, b), surf in hits:
         pos = sorted(p for p, (s, e) in spans.items() if s < b and e > a)
         if not pos:
             out.append((term, surf, canonical(surf), [], None)); continue
@@ -547,7 +584,8 @@ def focal_mentions(matcher, text, a2w, anchored):
             is_tier = (t_low in CKPT_TIER - ({'max'} if not c.startswith('qwen') else set())
                        and (last not in CKPT_TIER or (last == 'flash' and t_low == 'lite'))
                        and not (t_low == 'nano' and re.match(r'\s*banana', text[spans[q][1]:], re.I)))   # Gemini "Nano Banana": a name
-            if not ((is_version and not has_version) or is_tier or (versioned and has_version and SNAPSHOT_CODE.match(tokw))):
+            gpt_cont = c == 'gpt' and re.fullmatch(r'(?i)(?:oss|j|neo|neox)(?:[-_.][\w.]+)*', tokw)   # RL-185: GPT-OSS-120B, GPT-J
+            if not ((is_version and not has_version) or is_tier or gpt_cont or (versioned and has_version and SNAPSHOT_CODE.match(tokw))):
                 break
             old_rule = base is None and is_version and re.fullmatch(VERSIONED, c) and q == later[0] and gap in ('-', ' ', '\u2010', '\u2013', '- ')
             if base is None and not old_rule:
@@ -1102,6 +1140,10 @@ class Ctx:
                 reason = 'type_' + t
             if reason is None and word in getattr(self, 'notation_syms', ()):
                 reason = 'notation_symbol'; self.detail['notation_symbol'][word] += 1            # RL-181
+            ps = {q for _, q in self.pos.get(str(atom), [])}
+            if reason is None and (MATH_CHARS.search(word) or (ps and ps <= getattr(self, 'formula_pos', set()) and is_symbol(word)
+                                                             and not re.fullmatch(r'o\d', word))):   # o1, o3: models
+                reason = 'formula_token'; self.detail['formula_token'][word] += 1                # RL-185
             if reason is None and (clean_root(word) is None or len(clean_root(word)) == 1):
                 reason = 'single_letter_or_symbol'; self.detail['single_letter_or_symbol'][word] += 1     # §6 item 8
             if reason is None:
@@ -1381,6 +1423,8 @@ def atom_record(flat, ctx):
 def curate_unit(art, s, u, matcher, anchored, modals):
     ctx = Ctx(u, modals)
     ctx.notation_syms = defined_symbols(u["text"])                    # RL-181: symbols defined inside prose ('where L is ...')
+    fspans = [m.span() for m in FORMULA_SPAN.finditer(u["text"])]      # RL-185 (owner): symbol tokens inside a formula span
+    ctx.formula_pos = {p for p, (a, b) in token_spans(u["text"], u["atom2word"]).items() if any(fa <= a and b <= fb for fa, fb in fspans)}
     edge = hedge(u["main_edge"])
     try:                                    # §6 item 3: lexical modal + complement = one clause, on the parse as G2 gave it
         edge, ctx.able = modal_merge.merge_unit(edge, u, ctx.stats)
@@ -1646,6 +1690,7 @@ def run(a):
     REJECT = load_rejections()
     G4D = load_g4()
     FORMS = {r['key']: r['form'] for r in csv.DictReader(open(COMPOUND_FORMS, encoding='utf-8'), delimiter='\t')}
+    HUB_FAMS.update(l.strip() for l in open(HUB_FAMILIES, encoding='utf-8') if l.strip() and not l.startswith('#'))
     statements = {r['sid']: r['hash_final'] for r in csv.DictReader(open(STATEMENT_SENTENCES, encoding='utf-8'))}   # RL-172
     reflexives = load_reflexives()
     nonprose, noparent, articles = [], [], []
@@ -1857,7 +1902,9 @@ CANON_CASES = [('LLMs', 'llm'), ('large language models', 'llm'), ('Large Langua
                ('ChatGPTo1 pro', 'gpt_o1_pro'), ('GPTo1', 'gpt_o1'), ('base-BERT', 'bert'), ('Base-BERT', 'bert'), ('large-BERT', 'bert'), ('uncased-BERT', 'bert'),
                ('Tiny-BERT', 'tiny_bert'), ('Instruct-GPT', 'instruct_gpt'), ('Mistral7B', 'mistral'), ('Gemma27B', 'gemma'),
                ('GPT4b', 'gpt_4'), ('GPT2M', 'gpt_2'), ('Base-BiFormer-GPT', 'base_biformer_gpt'),
-               ('large language models', 'llm'), ('small language model', 'small_language_model'), ('biobert-v1.18', 'biobert_v1_1'), ('BioBERT v1.123', 'biobert_v1_1'), ('BioBERT v1.2', 'biobert_v1_2')]
+               ('large language models', 'llm'), ('small language model', 'small_language_model'),
+               ('GPT-OSS-120B.', 'gpt_oss'), ('gpt-oss-20b', 'gpt_oss'), ('GPT-J-6B', 'gpt_j'), ('claude-3-5-sonnet-20', 'claude_sonnet_3_5'),
+               ('cardiffnlp/twitter-roberta-base-sentiment', 'twitter_roberta'), ('biobert-v1.18', 'biobert_v1_1'), ('BioBERT v1.123', 'biobert_v1_1'), ('BioBERT v1.2', 'biobert_v1_2')]
 
 
 def unit(text, edge, words, lemmas):
