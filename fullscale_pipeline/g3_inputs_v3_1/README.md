@@ -50,6 +50,14 @@ kept as an atom); GPT-35 (Azure's name) → `gpt_3_5`. 292 spellings, 1,561 occu
 applies to every model name and to glued BERT-family settings; see G3_POSTPROCESSING.md §4. The examples above with pro,
 flash or turbo are superseded.]*
 
+## RL-180/RL-181 additions (2026-10-23)
+
+| File | What | Built by |
+|---|---|---|
+| `compound_forms.tsv` | spellings of one compound (letters with joiners removed) -> their most frequent written form: 3,423 groups, 6,872 spellings; the read exceptions `pro_state`, `co_pilot`, `re_agent`, `co_star`, `re_present`, `re_turn` keep their own spelling (G3 `COMPOUND_EXCEPT`) | `build_compound_forms.py` on the RL-178 G3 output |
+| `decisions/g4_decisions.csv` | RegulatoryGPT kept (owner after the second reading, source `owner (RL-181)`); one row changed | `g4_boundary_decisions.py` -> `write_g4_decisions.py` |
+
+
 ## RL-173: Haiku review of the remaining group-4 spellings (2026-10-22)
 
 **Why.** Owner, for rigour: the 4,180 group-4 spellings that neither a rule nor the assistant's reading covered in RL-172

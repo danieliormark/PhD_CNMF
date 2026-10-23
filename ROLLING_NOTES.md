@@ -37,9 +37,13 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    0 problems; merged to `PG/g3_v2/`: 41,778 valid articles, 6,953 excluded, 615 without a parent; 804,702 units,
    905,585 parents, 2,082,569 cousins. Inputs: RL-171–RL-174 (lists for the merged corpus, v3 matcher, checkpoint fold,
    group-4 decisions incl. Haiku review and the model/method line, homonyms, statement check).
-1b. **G3 rerun after the pre-M1 audit — DONE (RL-176 to RL-178).** CSF check 23678012, array 23678744, merged
-   `PG/g3_v2/`: 41,753 valid, 6,953 excluded, 640 invalid (25 Geant4/PfGPT homonym-only articles now invalid); re-audit
-   0 problems. RL-175 output kept as `PG/g3_v2_rl175/`. **Next: M1 merge discussion (ticket 107).**
+1b. **G3 final rerun — DONE (RL-176 to RL-182, 2026-10-23).** Model names one atom per model at tier level (vendor names to
+   the family), word clean-up, notation units removed; second reading by Sonnet (κ 0.96–0.98, STAGE_AB_METHOD.md §8);
+   incline run: `PG/g3_v2/` 41,752 valid, 641 invalid, 6,953 excluded; audit 0 problems. Kept: `PG/g3_v2_rl175/`, `_rl178/`.
+   Open, small: ~60 checkpoint settings in reversed or glued forms (base-BERT, Mistral7B); formula fragments with Latin
+   variables inside prose (salign, cctx) not measured; lower-case hub spellings (xlm-roberta-base) not matched by the v3
+   matcher (upstream). **Next: M1 merge discussion (ticket 107)**; to do there: count semantic sparsity under different
+   model-merging levels (design doc addendum 2026-10-22).
 2. Small known item: the open RL-118 leak (citation numbers left as words). ("BERTH" checked in RL-172: a genuine
    model, BERT for hydrology; no exclusion.)
 3. D5 count of dash-enclosed asides (approved), on the G3 output.

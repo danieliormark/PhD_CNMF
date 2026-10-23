@@ -1144,7 +1144,13 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    reference renewed (RL-174's kept as `reference_incline_rl174/`), check passed on incline. The RL-175 output is moved to
    `PG/g3_v2_rl175/`; the rerun writes `PG/g3_v2/` again. Submit order unchanged.]*
    *[2026-10-22, RL-178: **rerun done** (check 23678012, array 23678744): `PG/g3_v2/` with 41,753 valid, 640 invalid,
-   6,953 excluded articles; re-audit 0 problems. This is M1's input.]*
+   6,953 excluded articles; re-audit 0 problems.]*
+   *[2026-10-23, RL-179 to RL-182: model + tier as one atom (stray tokens deleted), vendor names to the model family, wider
+   joins with guards; word clean-up (hanging hyphens, compound spellings merged into their most frequent form with read
+   exceptions, invisible characters, punctuation, thousands commas, accents, Greek letters spelled in names and notation
+   dropped, curly clitics through the modal rule, and/or, w/o); notation-definition units non-prose and defined symbols
+   dropped; RegulatoryGPT kept. **Rerun on incline** (script 87490dc64983): `PG/g3_v2/` with 41,752 valid, 641 invalid,
+   6,953 excluded articles; audit 0 problems; RL-178 kept as `PG/g3_v2_rl178/`. This is M1's input.]*
 
 ## 9. Files
 
@@ -1175,7 +1181,7 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
 | `fullscale_pipeline/g3_audit_rules/hard_rules2.json`, `hard_rules2.py` (§6 item 8: 15 hard cases for the participle and cousin rules; runner) | 51f577bd1bfe, d77b9859b754 |
 | `fullscale_pipeline/diagnostics/g3_audit/g3_rules2.py` (test copy with the item-8 participle and cousin rules; untracked working copy) | 53f3162ddb83 |
 | **Test script v2 (§7.1)** | |
-| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 5c23d9b1b915 (RL-177, tiers kept, fold for every name, next-token join, case-free rejections; 96b03a3c6cce at RL-174 and the RL-175 production run; 70984a47ac5a at RL-173, input hashes only; 2ac5a0d873f8 at RL-172, checkpoint names, group-4 decisions, statements; 2b2056484019 at RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
+| `fullscale_pipeline/g3_v2/g3_curation_v2.py` (the G3 test script with every rule of §6 items 1–8 and the head-word lemma rule of §8 item 5; its report also records host/job/task since RL-124) | 87490dc64983 (RL-182 production: RL-179–181 rules; 5c23d9b1b915 at RL-177, tiers kept, fold for every name, next-token join, case-free rejections; 96b03a3c6cce at RL-174 and the RL-175 production run; 70984a47ac5a at RL-173, input hashes only; 2ac5a0d873f8 at RL-172, checkpoint names, group-4 decisions, statements; 2b2056484019 at RL-171, v3 matcher and the lists of `g3_inputs_v3_1/`; 25b27d784157 at RL-170, D6 and item 11; c8b46c840f74 at RL-151, inverted auxiliary; 87b71a939244 at RL-150; 43ae81d2c33a at RL-149, D4.1; b3eadb6d385c at RL-130, the G3 v1 production run; 0f3146266f26 at RL-124/125) |
 | `fullscale_pipeline/g3_word_lists/build_head_lemmas.py`, `head_lemmas.tsv` (§8 item 5, RL-129; the table also on `PG/g3_word_lists/`) | 283739b171a1, 34cee7ee73d0 |
 | `fullscale_pipeline/g3_v2/hard/hard_lemmas_rl129.json` (13 lemma cases) | 4a137c19c345 |
 | `fullscale_pipeline/g3_v2/hard/hard_versions_rl122.json` (8 hard cases for the score-not-a-version guard) | 302cf7da0fe4 |

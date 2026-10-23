@@ -2269,3 +2269,21 @@ end punctuation and ≤15 words or no verb): 59 removed as headings, 46 removed 
 skipped, 92 kept; all 92 read: questionnaire items with a verb, sentences ending in a citation number or a colon before a
 removed formula, about 7 table residues ("Number of parameter(s) of the LLM involved", "Tool description: …", one
 abbreviation legend) — about 100 corpus-wide (0.01%). No table, bullet or end-punctuation rule added (owner).]*
+
+**RL-182 · 2026-10-23 · G3 v2 · PRODUCTION RERUN on incline (RL-177 to RL-181 rules) + RE-AUDIT · LIVE**
+Owner: check that the self-test covers every agreed fix, then the trial, then (if clean) 50 shards, merge and audit on
+incline (CSF not needed: the CSF check has shown byte-identical outputs). Self-test extended to 161 cases (case-free Stage B
+rejections via `stage_b_rejected`, every word clean-up rule, the compound exceptions, notation units); hard cases 244/255
+(the 11 known failures; names 25/25, clean-up 9/9, notation 4/4). Trial (shards 0, 13, 20, 37): 0 problems, 0 unit errors,
+no stop word / clitic / and-or / w-o atom left, 25 notation units. Script 87490dc64983, inputs: g4_decisions.csv
+08b623b537a7 (RegulatoryGPT kept), compound_forms.tsv 1d1bc8c84b8a. RL-178 output kept as `PG/g3_v2_rl178/`; 50 shards
+on incline (10 in parallel, 02:00–02:05), all exit 0, 0 problems; `merge_g3_v2.py --nshards 50`: every shard OK.
+Articles 49,346: valid 41,752, excluded 6,953, invalid 641 (one more than RL-178: PMC12815919, whose only focal unit was a
+symbol-definition line, now non-prose); units 785,883 with records (774,712 with a parent), parents 905,160, cousins
+2,080,626, occurrence rows 5,995,252. Audit 0 problems. Against RL-178 (whole corpus, word atoms): hanging hyphens 2,911
+-> 0, Greek letters 432 -> 1, accents 2,149 -> 6, unusual characters 28,384 -> 1,919; names with a tier/version left as a
+word 6,273 -> 2,607 (about 380 numbered labels LLM 1/2/3 kept apart on purpose, scores and citations, and words kept
+because they occur twice in the unit); checkpoint settings left about 60 mentions (base-BERT, Tiny-BERT, Mistral7B …;
+esm_1b is a name); no vendor prefix left; o-series one form per model (gpt_o1 1,691, gpt_o3 659, gpt_o3_mini 511 …).
+CSF check renewed (pins, 161/161, 244/255, reference from this run; RL-177's kept as `reference_incline_rl177/`),
+check_csf_g3_v2.sh 1274ac6d0822, passed on incline. [LOG]
