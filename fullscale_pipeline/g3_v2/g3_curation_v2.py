@@ -1388,8 +1388,7 @@ def curate_unit(art, s, u, matcher, anchored, modals):
             extra = [p for p in pos if p not in base[1]]; pos = base[1]; base = None        # the parse: the name's own atoms are
             ctx.stats['mention_join_not_phrase'] += 1                                        # renamed, the stray token deleted (RL-179)
         ments.append((term, surf, canon, pos, base, extra))
-    rej_s, rej_a = REJECT[0].get(s["sid"], ()), REJECT[1].get(art, ())   # RL-171: hits Stage B rejected stay rejected
-    kept_m = [m for m in ments if m[0].lower() not in rej_s and m[0].lower() not in rej_a]   # RL-177: 'BERT' = 'bert'
+    kept_m = [m for m in ments if not stage_b_rejected(m[0], s["sid"], art)]   # RL-171: hits Stage B rejected stay rejected
     ctx.stats['mention_rejected_stage_b'] += len(ments) - len(kept_m); ments = []
     for term, surf, canon, pos, base, extra in kept_m:                 # RL-172: group-4 decisions
         d = g4_decision(term, art)
@@ -1535,6 +1534,11 @@ def g4_decision(term, pmcid):
 
 def load_g4():
     return {(r['spelling'], r['pmcid']): (r['action'], r['target']) for r in csv.DictReader(open(G4_DECISIONS, encoding='utf-8'))}
+
+
+def stage_b_rejected(term, sid, art):
+    """RL-171/RL-177: a hit Stage B rejected for this sentence or article, compared without case ('BERT' = 'bert')"""
+    return term.lower() in REJECT[0].get(sid, ()) or term.lower() in REJECT[1].get(art, ())
 
 
 def load_rejections():
@@ -1909,8 +1913,40 @@ UNIT_CASES = [
 ]
 
 
+WORD_CASES = [   # RL-180: (root as G2/lemma gives it, final root or None); compounds use the small FORMS below
+    ('bio\u00admedical', 'biomedical'), ('\u200b\u200bopenai', 'openai'), ('follows:•', 'follows'), ('study.•', 'study'),
+    ('〈sep〉', 'sep'), ('h˜i', 'hi'), ('𝕏s', 'xs'), ('†note', 'note'), ('corpus?†', 'corpus'), ('/group', 'group'),
+    ('vision:90b', 'vision'), ('cdk4/6', 'cdk4/6'), ('naïve', 'naive'), ('yılmaz', 'yilmaz'), ('łódź', 'lodz'),
+    ('tcrβ', 'tcrbeta'), ('aβ42', 'abeta42'), ('hif_1α', 'hif_1alpha'), ('α_helix', 'alpha_helix'), ('μct', 'microct'),
+    ('δauc', None), ('μhuman', None), ('∆mcc', None), ('scoreβ', None), ('pre-', 'pre'), ('covid-19', 'covid_19'),
+    ('pretrained', 'pre_trained'), ('pre_trained', 'pre_trained'), ('pro_state', 'pro_state'), ('co_pilot', 'co_pilot'),
+    ('re_present', 're_present')]
+WORD_FORMS = {'pretrained': 'pre_trained', 'prostate': 'prostate', 'copilot': 'copilot', 'represent': 'represent'}
+NOTATION_CASES = [   # RL-181: (unit text, removed as notation?)
+    ('where H is the diagnostic hypothesis; x is the clinical input vector', True),
+    ('M denotes the total number of transformer encoder layers in BERT.', True), ('Let Ri denote the ith response by LLM.', True),
+    ('Here, denotes the vocabulary of ClinicalBERT.', True), ('Post denotes whether a month occurs after ChatGPT.', True),
+    ('Saprot represents the inaugural universal PLM.', False), ('Enformer represents a significant advance.', False),
+    ('M3 indicates that the fusion module works.', False), ('This represents a significant knowledge gap given LLMs.', False),
+    ('Here we present GeneInsight, a tool.', False), ('Here are ten simple rules for using large language models:', False),
+    ('Where ChatGPT is used, results improve.', False)]
+
+
 def selftest():
     bad = 0
+    global REJECT
+    saved, REJECT = REJECT, ({'S1': {'bert'}}, {'A1': {'gpt-5'}})                # RL-177: rejections compared without case
+    for term, sid, art, want in (('BERT', 'S1', 'A9', True), ('bert', 'S1', 'A9', True), ('BERT', 'S2', 'A9', False),
+                                 ('GPT-5', 'S2', 'A1', True), ('GPT-4', 'S2', 'A1', False)):
+        ok = stage_b_rejected(term, sid, art) == want; bad += not ok
+        print("PASS " if ok else "FAIL ", f"stage_b_rejected({term!r}, {sid}, {art}) = {not want if not ok else want}")
+    REJECT = saved
+    for raw, want in WORD_CASES:
+        c = clean_root(raw); got = norm_word(c, WORD_FORMS) if c else None; ok = got == want; bad += not ok
+        print("PASS " if ok else "FAIL ", f"norm_word({raw!r}) = {got!r}" + ("" if ok else f", expected {want!r}"))
+    for text, want in NOTATION_CASES:
+        got = nonprose_kind(text) == 'notation'; ok = got == want; bad += not ok
+        print("PASS " if ok else "FAIL ", f"notation({text[:50]!r}) = {got}")
     for s, want in CANON_CASES:
         got = canonical(s); ok = got == want; bad += not ok
         print("PASS " if ok else "FAIL ", f"canonical({s!r}) = {got!r}" + ("" if ok else f", expected {want!r}"))
@@ -1933,7 +1969,7 @@ def selftest():
             errs.append("no parent")
         bad += bool(errs)
         print("PASS " if not errs else "FAIL ", name, "" if not errs else f"{errs}\n      {txt}")
-    n = len(CANON_CASES) + len(UNIT_CASES)
+    n = len(CANON_CASES) + len(UNIT_CASES) + 5 + len(WORD_CASES) + len(NOTATION_CASES)
     print(f"\n{n - bad} of {n} passed")
     return bad
 
