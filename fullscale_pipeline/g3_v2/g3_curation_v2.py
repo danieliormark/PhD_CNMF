@@ -47,6 +47,7 @@ import argparse, collections, contextlib, csv, hashlib, itertools, json, os, ran
 sys.setrecursionlimit(20000)
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
 PP = "/mnt/hum01-rds/Basov/p91688di/pmc_preprocessing/"
+POSITIONS = PG + "g2_v3_2_pos/"                                       # RL-186: exact token position of every atom occurrence (g2_positions.py)
 SHARDS = PG + "g2_v3_2/shards/"                                       # RL-185: g2_v3_1 with the dash re-parses (RL-171: g2_v3_1)
 STOPWORDS = PG + "nltk_abridged_stopwords_list.txt"
 sys.path.insert(0, PP)
@@ -225,6 +226,13 @@ GREEK_MICRO = {'μct': 'microct', 'µct': 'microct', 'μema': 'microema', 'µema
 GREEK_END_NOTATION = {'scoreβ', 'oncologistχ', 'aucμ', 'prθ', 'casφ'}    # Greek letter last, but a variable (read, RL-180)
 COMPOUND_EXCEPT = {'pro_state', 'co_pilot', 're_agent', 'co_star', 're_present', 're_turn'}   # RL-180: read, a different word
 WORD_MAP = {'w/o': 'without'}
+# RL-186 (owner 2026-10-23): words of opposition, absence and comparison are kept as atoms (the parser types them as
+# connectors, T/J/B, which G3 drops), so "GPT-4 versus clinicians" and "GPT-4 with clinicians" are different word sets;
+# versus/vs/against are one form. "in contrast" (owner) is one atom, with the verb group when it opens a clause ("In
+# contrast, GPT-4 failed") and with its object otherwise ("in contrast to rule-based systems"). Not kept: between, of,
+# with, in, for (neutral); rather and instead were kept already (modifiers).
+CONTRAST_WORDS = {'without': 'without', 'versus': 'versus', 'vs': 'versus', 'vs.': 'versus', 'against': 'versus',
+                  'than': 'than', 'unlike': 'unlike'}
 MATH_CHARS = re.compile('[∥⟨⟩∝∑∏√∫≈≠∈∉⊂⊆∪∩⊕⊗∀∃∇∂]')                     # RL-185: formula debris in an atom
 FORMULA_SPAN = re.compile(r"\b[A-Za-z][A-Za-z0-9]{0,8}\((?:[a-z][a-z0-9]?)(?:,\s*[a-z][a-z0-9]?)+\)"
                           r"|\S*[⟨⟩∥∝∑∏√∫∈⊂⊆⊕⊗]\S*|\b\S+\s*[<>≤≥=]\s*\S+|\b\S+\s+at most\s+\S+")
@@ -621,7 +629,8 @@ def terminal(edge, barrier=None):
 
 def replace_all(edge, mapping):
     if edge.is_atom():
-        return mapping.get(str(edge), edge)
+        new = mapping.get(str(edge), edge)
+        return new(edge) if callable(new) else new          # RL-186: a factory makes one atom per occurrence
     return hedge(tuple(replace_all(c, mapping) for c in edge))
 
 
@@ -907,6 +916,8 @@ class Ctx:
                             lem = new; self.lemma_head.add(key)
                 self.lemma[key] = lem
         self.pos = collections.defaultdict(list)                        # source atom -> [(word, position)]
+        self.apos, self.keep = None, []                                 # RL-186: id(atom object) -> its own positions (None: unknown)
+        self.word_at = {p: w for at, w, p in unit["atom2word"]}
         self.bypos = {p: at for at, w, p in unit["atom2word"]}
         self.text = unit["text"]
         self.spans = token_spans(unit["text"], unit["atom2word"])
@@ -927,6 +938,30 @@ class Ctx:
         self.decisions = {}                                             # (atom, periphery) -> (reason or None, out atom, modal)
         self.able = set()                                               # 'able'/'unable' atoms merged as modal-like (§6 item 3)
         self.stats = collections.Counter(); self.detail = collections.defaultdict(collections.Counter)
+
+    def init_positions(self, edge, unit):
+        """RL-186: each atom occurrence of the unit edge gets its own token position (G2 positions file); without one, or
+        when the edge was rebuilt from another text (reflexive table, spelling correction), positions stay by atom string"""
+        pos = unit.get("atom_pos")
+        atoms = edge.all_atoms()
+        if pos is None or len(pos) != len(atoms):
+            self.stats['positions_by_string_unit'] += 1
+            return
+        self.apos = {}
+        for a, p in zip(atoms, pos):
+            if p is not None:
+                self.apos[id(a)] = {p}
+        self.keep.append(edge)
+        self.stats['positions_exact_unit'] += 1
+
+    def inherit(self, new, srcs):
+        """RL-186: a new atom made from source atoms carries their positions (if every source's is known)"""
+        if self.apos is None:
+            return new
+        got = [self.apos.get(id(x)) for x in srcs]
+        if all(g is not None for g in got):
+            self.apos[id(new)] = set().union(*got); self.keep.append(new)
+        return new
 
     def lemma_of(self, atom):
         p = atom.parts()
@@ -1095,6 +1130,13 @@ class Ctx:
             reason = 'model_size'; self.detail['model_size'][word] += 1       # §6 item 8
         elif word in COMPARE_WORDS and q4_all(self, atom, self.compares_number):
             out = hedge(f"{word}/M/en"); self.detail['comparison_kept'][word] += 1   # §6 item 8: "over 90%" keeps "over"
+        elif word in CONTRAST_WORDS:
+            out = hedge(f"{CONTRAST_WORDS[word]}/M/en"); self.detail['contrast_kept'][word] += 1           # RL-186
+        elif word == 'in' and q4_all(self, atom, lambda p: self.words.get(p + 1) == 'contrast'):
+            out = hedge('in_contrast/M/en'); self.detail['contrast_kept']['in contrast'] += 1           # RL-186
+            self.contrast_clause = q4_all(self, atom, lambda p: self.words.get(p + 2) not in ('to', 'with'))
+        elif word == 'contrast' and q4_all(self, atom, lambda p: self.words.get(p - 1) == 'in'):
+            reason = 'fused_in_contrast'
         elif word in CONNECTIVES or word == 'and/or':                         # RL-180: and/or
             reason = 'connective'; self.detail['connective'][word] += 1
         elif Q4 and word in NEGATION and t.startswith('M') and q4_all(self, atom, lambda p: self.words.get(p + 1) in Q4_NOT_ONLY):
@@ -1175,14 +1217,17 @@ class Ctx:
 class Flat:
     """a flattened group of atoms: out atom -> source atoms, plus modal tags"""
     def __init__(self):
-        self.items, self.tags = {}, []
+        self.items, self.tags, self.where = {}, [], {}     # where: out atom string -> {(source string, position or None)}
 
-    def add(self, out, src):
+    def add(self, out, src, pos=None):
         self.items.setdefault(str(out), [out, set()])[1].add(str(src))
+        w = self.where.setdefault(str(out), set())                   # RL-186: the source occurrence's own positions
+        w.update((str(src), p) for p in pos) if pos else w.add((str(src), None))
 
     def merge(self, o):
         for k, (a, s) in o.items.items():
             self.items.setdefault(k, [a, set()])[1].update(s)
+            self.where.setdefault(k, set()).update(o.where.get(k, ()))
         self.tags += [t for t in o.tags if t not in self.tags]
         return self
 
@@ -1198,7 +1243,7 @@ def flatten_atoms(atoms, periphery, ctx):
     for a in atoms:
         out, modal = ctx.curate(a, periphery)
         if out is not None:
-            f.add(out, a)
+            f.add(out, a, ctx.apos.get(id(a)) if ctx.apos is not None else None)
         if modal and modal not in f.tags:
             f.tags.append(modal)
     return f
@@ -1220,6 +1265,7 @@ def pred_or_neg(a):
     w = urllib.parse.unquote(a.root()).lower()
     return a.type().startswith(('P', 'Mv')) or w in NEGATION or (a.type().startswith('M') and w in MODAL_LEMMAS) \
         or (ONLY_MODE in ('vg', 'vg2') and w == 'only') or w in ('not_only', 'but_also') \
+        or (w == 'in_contrast' and getattr(CURRENT_CTX, 'contrast_clause', False)) \
         or (a.type().startswith('M') and w in ('be', 'able', 'unable'))       # passive be (§6 item 1), be able (§6 item 3)
 
 
@@ -1258,7 +1304,7 @@ def fuse_phrasal(edge, ctx):
             and not kids[1].is_atom():         # direction words (§6 item 8, option 3): a plain modifier on a verb chain too
         v = chain_pred(kids[1])
         if v is not None:                      # (out/Ml (should/Mm (be/Mv carried/P))) -> (should (be carry_out))
-            fused = hedge(f"{ctx.lemma_of(v)}_{kids[0].root()}/{v.parts()[1]}/en")
+            fused = ctx.inherit(hedge(f"{ctx.lemma_of(v)}_{kids[0].root()}/{v.parts()[1]}/en"), (v, kids[0]))
             for src in (v, kids[0]):
                 ctx.pos[str(fused)].extend(ctx.pos.get(str(src), []))
             return replace_atom(kids[1], v, fused)
@@ -1274,7 +1320,7 @@ def fuse_phrasal(edge, ctx):
             others.append(a)
     if verbs and parts:
         v = verbs[0]
-        fused = hedge(f"{ctx.lemma_of(v)}_{'_'.join(p.root() for p in parts)}/{v.parts()[1]}/en")
+        fused = ctx.inherit(hedge(f"{ctx.lemma_of(v)}_{'_'.join(p.root() for p in parts)}/{v.parts()[1]}/en"), [v] + parts)
         for src in [v] + parts:
             ctx.pos[str(fused)].extend(ctx.pos.get(str(src), []))
         return hedge(tuple([fused] + others))
@@ -1394,6 +1440,9 @@ def extract(edge, ctx):
             if same:                                    # one name split by the parser over two arguments, or a glossary line
                 same[0].sides = getattr(same[0], 'sides', 1) + 1; ctx.stats['focal_he_identical_merged'] += 1
                 continue
+            if f and j not in fargs and all(pred_or_neg(a) and a.root() == 'in_contrast' for a in f.atoms()):
+                dummy.merge(f); ctx.stats['in_contrast_to_verb_group'] += 1    # RL-186: "In contrast, X failed"
+                continue
             if f:
                 (focals if j in fargs else sibs).append(f)
         if not focals:
@@ -1419,8 +1468,20 @@ def extract(edge, ctx):
 
 # ------------------------------------------------------------------ one unit
 def atom_record(flat, ctx):
-    return [dict(atom=str(a), src=sorted([s, w, p] for s in flat.items[str(a)][1] for w, p in ctx.pos.get(s, [])) or
-                 [[s, None, None] for s in sorted(flat.items[str(a)][1])]) for a in flat.atoms()]
+    """src: [source atom, word, position] of the occurrences inside this hyperedge (RL-186); a source occurrence whose own
+    position is unknown lists every position of its atom string in the unit, as before RL-186 (counted)"""
+    out = []
+    for a in flat.atoms():
+        src = set()
+        for s, p in flat.where.get(str(a), ()):
+            if p is not None:
+                src.add((s, ctx.word_at.get(p), p))
+            else:
+                ctx.stats['positions_by_string_atom'] += 1
+                src.update((s, w, q) for w, q in ctx.pos.get(s, []))
+        out.append(dict(atom=str(a), src=[list(x) for x in sorted(src, key=str)] or
+                        [[s, None, None] for s in sorted(flat.items[str(a)][1])]))
+    return out
 
 
 def curate_unit(art, s, u, matcher, anchored, modals):
@@ -1429,10 +1490,12 @@ def curate_unit(art, s, u, matcher, anchored, modals):
     fspans = [m.span() for m in FORMULA_SPAN.finditer(u["text"])]      # RL-185 (owner): symbol tokens inside a formula span
     ctx.formula_pos = {p for p, (a, b) in token_spans(u["text"], u["atom2word"]).items() if any(fa <= a and b <= fb for fa, fb in fspans)}
     edge = hedge(u["main_edge"])
+    ctx.init_positions(edge, u)                                       # RL-186
     try:                                    # §6 item 3: lexical modal + complement = one clause, on the parse as G2 gave it
         edge, ctx.able = modal_merge.merge_unit(edge, u, ctx.stats)
     except Exception as e:                  # never lose a unit to the merge: it stays unmerged, and this is counted
         edge = hedge(u["main_edge"]); ctx.stats['modal_merge_error_' + type(e).__name__] += 1
+        ctx.apos = None; ctx.init_positions(edge, u)
     by_pos0 = collections.defaultdict(list)
     for a, w, p in u["atom2word"]:
         by_pos0[p].append(a)
@@ -1467,7 +1530,10 @@ def curate_unit(art, s, u, matcher, anchored, modals):
             ctx.stats['mention_joined_rl177'] += 1
         if need:
             catom = hedge(f"{canon}/Cp/focal")
-            mapping = {a: catom for a in need}
+            made = []                                                  # RL-186: one focal atom per replaced occurrence
+            def make(old, made=made, canon=canon):
+                new = ctx.inherit(hedge(f"{canon}/Cp/focal"), [old]); made.append(new); return new
+            mapping = {a: make for a in need}
             if all({p for _, p in ctx.pos[a]} <= covered for a in need):
                 edge = replace_all(edge, mapping); how = 'global'
             else:
@@ -1487,6 +1553,10 @@ def curate_unit(art, s, u, matcher, anchored, modals):
                     if n:
                         edge = new
                         ctx.pos[str(catom)].extend((w, p) for a in drop for w, p in ctx.pos.get(a, []))
+                        if ctx.apos is not None:                       # RL-186: the deleted token's place goes with the name
+                            for x in made:
+                                if id(x) in ctx.apos:
+                                    ctx.apos[id(x)] |= {p for a in drop for _, p in ctx.pos.get(a, [])}
                         ctx.stats['mention_stray_token_deleted'] += 1
                     else:
                         ctx.stats['mention_stray_token_kept'] += 1
@@ -1696,6 +1766,13 @@ def run(a):
     HUB_FAMS.update(l.strip() for l in open(HUB_FAMILIES, encoding='utf-8') if l.strip() and not l.startswith('#'))
     statements = {r['sid']: r['hash_final'] for r in csv.DictReader(open(STATEMENT_SENTENCES, encoding='utf-8'))}   # RL-172
     reflexives = load_reflexives()
+    pos_p = None if a.no_positions else POSITIONS + f"pos_{tag}.jsonl"     # RL-186: exact atom positions of this shard
+    positions = {}
+    if pos_p:
+        for l in open(pos_p, encoding="utf-8"):
+            x = json.loads(l)
+            if x["status"] == "exact":
+                positions[x["uid"]] = (x["hash"], x["pos"])
     nonprose, noparent, articles = [], [], []
     stats, detail = collections.Counter(), collections.defaultdict(collections.Counter)
     surfaces, problems, samples = collections.Counter(), [], []
@@ -1735,6 +1812,11 @@ def run(a):
                     if kind:                                            # §6 item 8: not plain text
                         stats['units_nonprose_' + kind] += 1; nonprose.append((kind, u["uid"], u["text"]))
                         continue
+                    if u["uid"] in positions:                       # RL-186
+                        if positions[u["uid"]][0] == u["hash"]:
+                            u = dict(u, atom_pos=positions[u["uid"]][1])
+                        else:
+                            problems.append(f"{u['uid']}: positions file hash {positions[u['uid']][0]} != unit hash {u['hash']}")
                     cu = u
                     if u["uid"] in reflexives:                         # §6 item 8: emphatic reflexive restored, re-parsed
                         rr = reflexives[u["uid"]]
@@ -1742,7 +1824,7 @@ def run(a):
                             problems.append(f"{u['uid']}: reflexive table does not match the unit")
                         else:
                             cu = dict(u, text=rr["text_restored"], main_edge=rr["main_edge"], extra_edges=rr["extra_edges"],
-                                      atom2word=rr["atom2word"]); stats['units_reflexive_restored'] += 1
+                                      atom2word=rr["atom2word"], atom_pos=None); stats['units_reflexive_restored'] += 1
                     if u["uid"] in corrections:                         # §6 item 6: corrected before focal matching
                         h, fixes = corrections[u["uid"]]
                         if h != u["hash"]:
@@ -1839,6 +1921,7 @@ def run(a):
     report = dict(stage="G3 test v2", input=inp, script=os.path.abspath(__file__), script_sha=sha(__file__), modals=a.modals,
                   host=os.uname().nodename, job=os.environ.get("SLURM_ARRAY_JOB_ID") or os.environ.get("SLURM_JOB_ID"),
                   task=os.environ.get("SLURM_ARRAY_TASK_ID"), inputs={p: h for p, h in INPUT_SHA.items()},
+                  positions=dict(file=pos_p, sha=sha(pos_p) if pos_p else None, units_exact=len(positions)),
                   limit=a.limit, seconds=round(secs, 1), seconds_per_unit=round(secs / max(stats['units'], 1), 4), counts=dict(stats),
                   focal_surface_to_canonical=[[s, c, n] for (s, c), n in surfaces.most_common()],
                   detail={k: dict(v.most_common(60)) for k, v in detail.items()}, problems=problems[:200], n_problems=len(problems))
@@ -2042,6 +2125,7 @@ def main():
     ap.add_argument("--limit", type=int, default=100, help="articles (0 = the whole shard)")
     ap.add_argument("--outdir")
     ap.add_argument("--input", help="a G2 v3 JSONL file instead of the shard file")
+    ap.add_argument("--no-positions", action="store_true", help="RL-186: positions by atom string (tests without a positions file)")
     ap.add_argument("--modals", choices=("keep", "tag", "drop"), default="keep")
     ap.add_argument("--db", action="store_true", help="also write the graphbrain database in chunk12's form")
     ap.add_argument("--show", type=int, default=8, help="random curated units printed for reading")

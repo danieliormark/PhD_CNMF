@@ -8,6 +8,8 @@ Case formats (one set may mix them):
   need / avoid          the same, item 8 participle cases
   together              item 8 cousin cases: every cousin holding one of these words is one cousin holding all of them
   not_only / but_also   item 4 option 2: is the atom expected in the output (true) or not (false)
+  src                   RL-186 provenance: [{"in": string of the hyperedge, "atom": atom, "pos": [token positions]}]: in every
+                        hyperedge whose edge holds "in", the atom lists exactly these positions (with expect / forbid or alone)
   (no expectation)      item 5 particle cases: printed, and compared with the item-5 reference copy if --ref is given
   units + d6            D6 / item 11 sentence cases (RL-170): "units" = the texts of one sentence's G2 units (each parsed on its
                         own, as G2 parses the pieces cut at a glued citation); "d6" = parents (count), focal_he (count per parent),
@@ -32,15 +34,20 @@ def load(path, name="g3v2"):
 
 def parse_all(texts):
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
-    todo = [t for t in texts if t not in cache]
+    todo = [t for t in texts if t not in cache or "atom_pos" not in cache[t]]     # RL-186: positions added to old entries
     if todo:
         from graphbrain.parsers import create_parser
         parser = create_parser(lang="en", lemmas=True)
         g2 = load(G2_SCRIPT, "g2")
         for t in todo:
             p = g2.parse_piece(parser, t)[0][0]        # RL-151: G2's own sentence-cut rule, as in the pipeline
-            cache[t] = dict(main_edge=str(p["main_edge"]), extra_edges=[str(x) for x in p.get("extra_edges", [])],
-                            atom2word=sorted(([str(a), w, i] for a, (w, i) in p.get("atom2word", {}).items()), key=lambda x: x[2]))
+            a2w = {id(k.atom_obj): v[1] for k, v in p.get("atom2word", {}).items()}
+            new = dict(main_edge=str(p["main_edge"]), extra_edges=[str(x) for x in p.get("extra_edges", [])],
+                       atom2word=sorted(([str(a), w, i] for a, (w, i) in p.get("atom2word", {}).items()), key=lambda x: x[2]),
+                       atom_pos=[a2w.get(id(a)) for a in p["main_edge"].all_atoms()])   # RL-186: as g2_positions.py
+            if t in cache and {k: cache[t][k] for k in ("main_edge", "atom2word")} != {k: new[k] for k in ("main_edge", "atom2word")}:
+                sys.exit(f"re-parse differs from the cached parse: {t[:80]}")
+            cache[t] = new
         json.dump(cache, open(CACHE, "w"), indent=0, ensure_ascii=False)
     return cache
 
@@ -96,9 +103,14 @@ def judge(c, rec):
             return None
         return ("not_only/M/en" in allout) == c["not_only"] and ("but_also/M/en" in allout) == c["but_also"]
     need, avoid = c.get("expect", c.get("need")), c.get("forbid", c.get("avoid", []))
-    if need is None:
+    if need is None and "src" not in c:
         return None
-    return all(s in allout for s in need) and not any(s in allout for s in avoid)
+    ok = need is None or (all(s in allout for s in need) and not any(s in allout for s in avoid))
+    hes = [k for x in rec["parents"] for k in x["children"]] + rec["cousins"]
+    for q in c.get("src", []):                          # RL-186
+        hit = [h for h in hes if q["in"] in h["edge"]]
+        ok &= bool(hit) and all(sorted(x[2] for a in h["atoms"] if a["atom"] == q["atom"] for x in a["src"]) == q["pos"] for h in hit)
+    return bool(ok)
 
 
 def main():
