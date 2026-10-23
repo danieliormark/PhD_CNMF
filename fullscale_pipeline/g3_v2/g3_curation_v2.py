@@ -233,6 +233,10 @@ WORD_MAP = {'w/o': 'without'}
 # with, in, for (neutral); rather and instead were kept already (modifiers).
 CONTRAST_WORDS = {'without': 'without', 'versus': 'versus', 'vs': 'versus', 'vs.': 'versus', 'against': 'versus',
                   'than': 'than', 'unlike': 'unlike'}
+CONTRAST_ATOMS = {f"{w}/M/en" for w in set(CONTRAST_WORDS.values())}
+# They are carried along, but they do not make a group of their own: a group of only these words is empty, and they do
+# not stop a verb group ("limit rather than"), so the clause structure stays as without them (RL-186 trial: 226 lone
+# hyperedges such as (cousin_he than), whose object was dropped)
 MATH_CHARS = re.compile('[∥⟨⟩∝∑∏√∫≈≠∈∉⊂⊆∪∩⊕⊗∀∃∇∂]')                     # RL-185: formula debris in an atom
 FORMULA_SPAN = re.compile(r"\b[A-Za-z][A-Za-z0-9]{0,8}\((?:[a-z][a-z0-9]?)(?:,\s*[a-z][a-z0-9]?)+\)"
                           r"|\S*[⟨⟩∥∝∑∏√∫∈⊂⊆⊕⊗]\S*|\b\S+\s*[<>≤≥=]\s*\S+|\b\S+\s+at most\s+\S+")
@@ -746,6 +750,8 @@ def is_vg_mod(a):
 def flat_is_verb_group(f):
     """a flattened group made only of verb-group atoms; an 'only' counts only if each of its sources passes only_before_verb"""
     for out in f.atoms():
+        if str(out) in CONTRAST_ATOMS:                                 # RL-186
+            continue
         if not (pred_or_neg(out) or (Q4 and all(is_adverb(hedge(src)) for src in f.items[str(out)][1]))):
             return False
         if urllib.parse.unquote(out.root()).lower() == 'only' and not all(only_before_verb(src) for src in f.items[str(out)][1]):
@@ -1130,7 +1136,7 @@ class Ctx:
             reason = 'model_size'; self.detail['model_size'][word] += 1       # §6 item 8
         elif word in COMPARE_WORDS and q4_all(self, atom, self.compares_number):
             out = hedge(f"{word}/M/en"); self.detail['comparison_kept'][word] += 1   # §6 item 8: "over 90%" keeps "over"
-        elif word in CONTRAST_WORDS:
+        elif word in CONTRAST_WORDS and not (t.startswith('C') and word == 'against'):    # "favor, against, none": a label
             out = hedge(f"{CONTRAST_WORDS[word]}/M/en"); self.detail['contrast_kept'][word] += 1           # RL-186
         elif word == 'in' and q4_all(self, atom, lambda p: self.words.get(p + 1) == 'contrast'):
             out = hedge('in_contrast/M/en'); self.detail['contrast_kept']['in contrast'] += 1           # RL-186
@@ -1235,7 +1241,7 @@ class Flat:
         return [self.items[k][0] for k in sorted(self.items)]
 
     def __bool__(self):
-        return bool(self.items)
+        return any(k not in CONTRAST_ATOMS for k in self.items)      # RL-186: contrast words alone are no group
 
 
 def flatten_atoms(atoms, periphery, ctx):
@@ -1479,7 +1485,7 @@ def atom_record(flat, ctx):
             else:
                 ctx.stats['positions_by_string_atom'] += 1
                 src.update((s, w, q) for w, q in ctx.pos.get(s, []))
-        out.append(dict(atom=str(a), src=[list(x) for x in sorted(src, key=str)] or
+        out.append(dict(atom=str(a), src=[list(x) for x in sorted(src, key=lambda x: (x[2] is None, x[2] or 0, x[0]))] or
                         [[s, None, None] for s in sorted(flat.items[str(a)][1])]))
     return out
 
@@ -1531,7 +1537,11 @@ def curate_unit(art, s, u, matcher, anchored, modals):
         if need:
             catom = hedge(f"{canon}/Cp/focal")
             made = []                                                  # RL-186: one focal atom per replaced occurrence
-            def make(old, made=made, canon=canon):
+            mine = set(pos) | set(extra)
+            def make(old, made=made, canon=canon, mine=mine):
+                if ctx.apos is not None and not ctx.apos.get(id(old), {None}) <= mine:
+                    ctx.stats['mention_token_of_other_name_kept'] += 1     # RL-186: the same word in another name stays
+                    return old                                             # for that name (GPT 3,5 and GPT 4)
                 new = ctx.inherit(hedge(f"{canon}/Cp/focal"), [old]); made.append(new); return new
             mapping = {a: make for a in need}
             if all({p for _, p in ctx.pos[a]} <= covered for a in need):

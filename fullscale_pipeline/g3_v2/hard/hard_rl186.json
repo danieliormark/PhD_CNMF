@@ -242,5 +242,55 @@
     ]
    }
   ]
+ },
+ {
+  "id": "P-03",
+  "text": "GPT 3.5 and GPT 4 were trained on text generated up to 2021.",
+  "expect": [
+   "gpt_3_5/C/focal",
+   "gpt_4/C/focal"
+  ],
+  "src": [
+   {
+    "in": "gpt_4/C/focal",
+    "atom": "gpt_4/C/focal",
+    "pos": [
+     3,
+     4
+    ]
+   },
+   {
+    "in": "gpt_3_5/C/focal",
+    "atom": "gpt_3_5/C/focal",
+    "pos": [
+     0,
+     1
+    ]
+   }
+  ],
+  "note": "RL-186: a word shared by two names stays with its own name (was: the first name took every 'GPT')"
+ },
+ {
+  "id": "C-12",
+  "text": "ChatGPT answered faster than ever before.",
+  "expect": [
+   "chatgpt/C/focal"
+  ],
+  "forbid": [
+   "(sibling_he than/M/en)",
+   "(cousin_he than/M/en)"
+  ],
+  "note": "RL-186: a contrast word whose object is dropped makes no hyperedge of its own"
+ },
+ {
+  "id": "C-13",
+  "text": "The GPT model classified tweets into 3 categories (favor, against, and none).",
+  "expect": [
+   "gpt/C/focal"
+  ],
+  "forbid": [
+   "versus/M/en"
+  ],
+  "note": "RL-186: against as a noun (a stance label) is not versus"
  }
 ]

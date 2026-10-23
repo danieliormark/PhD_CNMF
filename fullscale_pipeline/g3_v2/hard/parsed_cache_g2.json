@@ -26132,5 +26132,253 @@ null,
 12,
 11
 ]
+},
+"GPT 3.5 and GPT 4 were trained on text generated up to 2021.": {
+"main_edge": "(:/J/. ((were/Mv.<f-----/en trained/Pd.px.<pf----/en) (and/J/en (3%2e5/M#/en gpt/Cp.s/en) (4/M#/en gpt/Cp.s/en)) (on/T/en text/Cc.s/en)) (generated/P.x.<pf----/en (up/Tt/en (+/B.mm/. to/C/en 2021/C#/en))))",
+"extra_edges": [
+"(_lemma 4/M/en 4/M/en)",
+"(_lemma to/C/en to/C/en)",
+"(_lemma were/M/en be/M/en)",
+"(_lemma generated/P/en generate/P/en)",
+"(_lemma 2021/C/en 2021/C/en)",
+"(_lemma on/T/en on/T/en)",
+"(_lemma text/C/en text/C/en)",
+"(_lemma up/T/en up/T/en)",
+"(_lemma 3%2e5/M/en 3%2e5/M/en)",
+"(_lemma gpt/C/en gpt/C/en)",
+"(_lemma trained/P/en train/P/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"gpt/Cp.s/en",
+"GPT",
+0
+],
+[
+"3%2e5/M#/en",
+"3.5",
+1
+],
+[
+"and/J/en",
+"and",
+2
+],
+[
+"gpt/Cp.s/en",
+"GPT",
+3
+],
+[
+"4/M#/en",
+"4",
+4
+],
+[
+"were/Mv.<f-----/en",
+"were",
+5
+],
+[
+"trained/Pd.px.<pf----/en",
+"trained",
+6
+],
+[
+"on/T/en",
+"on",
+7
+],
+[
+"text/Cc.s/en",
+"text",
+8
+],
+[
+"generated/P.x.<pf----/en",
+"generated",
+9
+],
+[
+"up/Tt/en",
+"up",
+10
+],
+[
+"to/C/en",
+"to",
+11
+],
+[
+"2021/C#/en",
+"2021",
+12
+]
+],
+"atom_pos": [
+null,
+5,
+6,
+2,
+1,
+0,
+4,
+3,
+7,
+8,
+9,
+10,
+null,
+11,
+12
+]
+},
+"ChatGPT answered faster than ever before.": {
+"main_edge": "((faster/M=/en than/Jr.ma/en) (answered/Pd.s.<f-----/en chatgpt/Cp.s/en) (ever/M/en before/C/en))",
+"extra_edges": [
+"(_lemma faster/M/en fast/M/en)",
+"(_lemma ever/M/en ever/M/en)",
+"(_lemma answered/P/en answer/P/en)",
+"(_lemma chatgpt/C/en chatgpt/C/en)",
+"(_lemma than/B/en than/B/en)",
+"(_lemma before/C/en before/C/en)"
+],
+"atom2word": [
+[
+"chatgpt/Cp.s/en",
+"ChatGPT",
+0
+],
+[
+"answered/Pd.s.<f-----/en",
+"answered",
+1
+],
+[
+"faster/M=/en",
+"faster",
+2
+],
+[
+"than/Jr.ma/en",
+"than",
+3
+],
+[
+"ever/M/en",
+"ever",
+4
+],
+[
+"before/C/en",
+"before",
+5
+]
+],
+"atom_pos": [
+2,
+3,
+1,
+0,
+4,
+5
+]
+},
+"The GPT model classified tweets into 3 categories (favor, against, and none).": {
+"main_edge": "(classified/Pd.sox.<f-----/en (the/Md/en (+/B.am/. gpt/Cp.s/en model/Cc.s/en)) tweets/Cc.p/en (into/T/en (+/B.mm/. (3/M#/en categories/Cc.p/en) (+/B.mm/. favor/Cc.s/en (and/J/en against/Cc.s/en none/Cc.s/en)))))",
+"extra_edges": [
+"(_lemma classified/P/en classify/P/en)",
+"(_lemma the/M/en the/M/en)",
+"(_lemma into/T/en into/T/en)",
+"(_lemma tweets/C/en tweet/C/en)",
+"(_lemma categories/C/en category/C/en)",
+"(_lemma favor/C/en favor/C/en)",
+"(_lemma model/C/en model/C/en)",
+"(_lemma gpt/C/en gpt/C/en)",
+"(_lemma none/C/en none/C/en)",
+"(_lemma 3/M/en 3/M/en)",
+"(_lemma against/C/en against/C/en)",
+"(_lemma and/J/en and/J/en)"
+],
+"atom2word": [
+[
+"the/Md/en",
+"The",
+0
+],
+[
+"gpt/Cp.s/en",
+"GPT",
+1
+],
+[
+"model/Cc.s/en",
+"model",
+2
+],
+[
+"classified/Pd.sox.<f-----/en",
+"classified",
+3
+],
+[
+"tweets/Cc.p/en",
+"tweets",
+4
+],
+[
+"into/T/en",
+"into",
+5
+],
+[
+"3/M#/en",
+"3",
+6
+],
+[
+"categories/Cc.p/en",
+"categories",
+7
+],
+[
+"favor/Cc.s/en",
+"favor",
+9
+],
+[
+"against/Cc.s/en",
+"against",
+11
+],
+[
+"and/J/en",
+"and",
+13
+],
+[
+"none/Cc.s/en",
+"none",
+14
+]
+],
+"atom_pos": [
+3,
+0,
+null,
+1,
+2,
+4,
+5,
+null,
+6,
+7,
+null,
+9,
+13,
+11,
+14
+]
 }
 }
