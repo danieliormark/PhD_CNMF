@@ -2353,3 +2353,42 @@ maths-character atoms 3 -> 0, oss left as a word 517 -> 137. Left as they are: g
 `PG/g3_v2_rl182/`. CSF check renewed (pins 803b36806823 / f169f86a244f, 179/179, 252/263, reference from this run, RL-182's
 kept as `reference_incline_rl182/`), check_csf_g3_v2.sh ed5a87938d0d; not yet run on CSF. A3 part 2 (the 688 sentences
 lost upstream, 307 valid articles) not started. [LOG]
+
+**RL-186 · 2026-10-23/24 · G2 positions pass + G3 provenance fix and contrast words · PRODUCTION RERUN on incline + RE-AUDIT · LIVE**
+Owner (2026-10-23): fix the provenance of repeated words (a child listed every position of its word in the unit, also
+those in another clause: PMC13159497.r1.L191.S1, "current" 5 and 26 in both children); keep opposition / comparison
+words (without, versus, than, unlike, "in contrast"; between, of, with, in, for stay dropped); check first whether any
+of it needs G2 or earlier stages. It does: G2 stored atom2word as (atom string, word, position), so a repeated word
+cannot be tied to its place in the edge (35% of units, 779,392 hyperedges affected). **G2 positions pass**
+(`retrieval/g2_positions.py`, 699e5367449d): every parsed piece of `PG/g2_v3_2/` re-parsed with G2's own parse_piece
+(the incremental add-ons act on the text, and the stored piece text is the parsed text); per unit the re-parsed edge
+must equal the stored one and every (atom, position) pair must be a stored atom2word entry; output `PG/g2_v3_2_pos/`
+(one position per atom of hedge(main_edge).all_atoms(), null for builder atoms). Trial 1,000 sentences: 1,008/1,008
+exact. Run on incline, 16 in parallel (20:50–23:00; shards 48–49 stopped at the session break and were rerun
+23:29–00:03): 825,698 units, **825,554 exact**, 139 with an atom–position pair not stored, 5 whose re-parse differs
+(those keep positions by atom string, counted). G2's output unchanged. **G3** (script 42eb9575c2ce): reads the
+positions file (hash-checked per unit; reflexive-restored units, whose edge is rebuilt, keep positions by string);
+each atom object carries its own position through the edge rewrites (phrasal fusion, focal replacement, stray-token
+deletion), and `atoms[].src` lists only the occurrences inside that hyperedge. Contrast words kept as `/M` atoms
+(versus = versus/vs/vs./against; "against" typed as a noun, a stance label, stays as it is), placed with their object
+("better than clinicians" -> {clinician, than}); "in contrast" one atom, with the verb group when it opens a clause
+("In contrast, X failed" -> fail in_contrast) and with its object otherwise; a group of contrast words alone is no
+hyperedge and does not stop a verb group. **Found through the exact positions and fixed (pre-existing):** (1) a mention
+replaced every atom with its word string, so the first of two names sharing a word took the other's token ("Meta Llama
+3.1 … Meta Llama" -> both llama_3; "ChatGPT-4o mini, …, ChatGPT-4o" -> gpt_4o missing): replacement now only at the
+mention's own positions; (2) a scoped mention was placed in the first sub-edge holding its word strings ("…natural
+language processing, …, ability of language model" -> language_model in the wrong clause): placed by its own positions.
+Tests: self-test 179/179; hard cases 269/280 (new `hard_rl186.json` 17/17; the 11 known failures unchanged, compared
+by id). Trial (shards 0, 13, 20, 37; 66,911 units): 0 problems; 59,429 units unchanged, about 5,300 changed only by
+contrast words or "in contrast", 521 with corrected focal names (read: all corrections); three trial findings fixed
+before the full run (lone contrast hyperedges, noun "against", shared-word replacement). First full run kept as
+`PG/g3_v2_rl186_first/` (two articles lost their parent; one, PMC8882909, was the wrong-clause placement, fixed);
+**final run** 50 shards (00:16–00:22), all exit 0, merge OK, **audit 0 problems**. Articles: valid 41,753, invalid 640,
+excluded 6,953; against RL-185 one change: PMC12648190 valid -> invalid (its only term, "language model", is a keyword
+inside a search-query string with no governing clause; RL-185 had placed it in another clause). Parents 905,308
+(RL-185 905,341), cousins 2,079,358 (2,080,433), occurrence rows 5,989,987 (5,995,171); units with exact positions
+802,837 (by string 1,519); mentions not placed in the edge 672 -> 2; "in contrast" to the verb group 3,326. RL-185
+output kept as `PG/g3_v2_rl185/`. CSF check renewed (pins 42eb9575c2ce / 7eab6d3c4a6a, 179/179, 269/280, reference
+from this run, RL-185's kept as `reference_incline_rl185/`), check_csf_g3_v2.sh 7cd199727496, passed on incline
+(ALL G3 CHECKS OK, 00:31). First trial folder deleted with the owner's permission (superseded; its script is commit
+df12ddc). [LOG]

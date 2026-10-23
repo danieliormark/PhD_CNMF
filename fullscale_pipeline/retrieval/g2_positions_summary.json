@@ -1,0 +1,11 @@
+{
+ "shards": 50,
+ "counts": {
+  "articles": 49346,
+  "pieces": 811122,
+  "units": 825698,
+  "exact": 825554,
+  "pair_not_stored": 139,
+  "edge_differs": 5
+ }
+}

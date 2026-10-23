@@ -928,3 +928,24 @@ the occurrence rows, so interpretation shows them. Consequence to state and meas
 numbers become one entity ("29 of 31 questions" and "28 of 31 questions" -> one `question` hyperedge), which lowers
 sparsity; count it together with the model-merging levels (addendum 2026-10-22). This also settles the RL-118 leak for
 the model without a G3 change.
+
+## Addendum 2026-10-24 — first trial: no temporal extension, a subset of the corpus (owner)
+
+Owner, after discussion with colleagues: (1) **the first trial does not test the temporal extension** (option 2 and its
+γ variant of §7.4 are set aside for now, possibly returned to later); the trial is cross-sectional. The 2020/2021 slices
+(§4) were chosen for the temporal test and are no longer binding. (2) **The trial runs on a subset of the data: one
+discipline, or articles around one model or model family**, chosen after looking at the data — articles per model family,
+whether OpenAlex or PMC/MEDLINE/PubMed/Entrez metadata reliably separate disciplines — and preferring a part with cleaner
+data (fewer missing affiliations, better author identification).
+Data look (assistant, 2026-10-24, RL-186 output): 41,753 valid articles, 27,271 of them from the current corpus with
+OpenAlex records (author IDs, one OpenAlex field per work, MEDLINE publication types), 14,481 new without any author or
+field data yet (B3); institutions fetched only for the 2020/2021 trial. Fields (current part): Medicine 10,391,
+Computer Science 5,525, Biochemistry/Genetics/Molecular Biology 3,112, Psychology 1,853, Social Sciences 1,412, Health
+Professions 957, Engineering 817, Neuroscience 657; all authors with an OpenAlex ID 72–83% per field; 2024–2026 hold
+almost all articles. Families (articles mentioning / the only named family / main family): GPT 20,603 / 10,028 / 16,983;
+BERT 9,895 / 3,184 / 6,016; Gemini 4,161; Llama 3,284; Claude 2,988; DeepSeek 2,327; RoBERTa 1,941; ESM 1,162 / 516 /
+849; 9,796 articles name only generic terms. Proposed (not decided): a field subset of 1,500–3,000 articles, the field
+cross-checked against NLM's journal Broad Subject Terms; no filtering on author-ID completeness (it removes large teams
+and 2025 papers disproportionately), author linking instead; before choosing, an OpenAlex fetch for all valid articles
+(topic hierarchy, authorships with institutions) and the NLM catalog subjects, to tabulate candidate subsets with their
+coverage. Open for the owner: field or family; the discipline source; the fetch; the size.
