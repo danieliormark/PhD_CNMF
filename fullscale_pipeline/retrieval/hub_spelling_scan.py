@@ -84,6 +84,7 @@ def main():
     ap.add_argument("--workers", type=int, default=16)
     ap.add_argument("--out", default=PG + "hub_spelling_scan.json")
     ap.add_argument("--limit", type=int, default=0, help="files per corpus (0 = all; for a quick test)")
+    ap.add_argument("--dump", help="write every missed spelling (pmcid, corpus, status, spelling, other_hit, sentence) to this JSONL")
     a = ap.parse_args()
     fams = families()
     rx = hub_regex(fams)
@@ -95,11 +96,14 @@ def main():
         files = sorted(glob.glob(d + "PMC*.txt"))
         jobs += [(corpus, f, rx.pattern) for f in (files[:a.limit] if a.limit else files)]
     T = collections.Counter(); toks = collections.Counter(); lost_art = collections.defaultdict(list); samples = collections.defaultdict(list)
+    dump = open(a.dump, "w", encoding="utf-8") if a.dump else None
     with Pool(a.workers, initializer=init) as pool:
         for pm, corpus, found in pool.imap_unordered(scan_file, jobs, chunksize=64):
             T["files_" + corpus] += 1
             st = status.get(pm, "not_in_corpus")
             for f in found:
+                if dump:
+                    dump.write(json.dumps(dict(pmcid=pm, corpus=corpus, status=st, **f), ensure_ascii=False) + "\n")
                 key = ("in corpus (" + st + ")" if st != "not_in_corpus" else "not in corpus") + (", sentence has another focal hit" if f["other_hit"] else ", sentence has no focal hit")
                 T[key] += 1; toks[f["tok"]] += 1
                 if len(samples[key]) < 15:

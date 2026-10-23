@@ -47,7 +47,7 @@ import argparse, collections, contextlib, csv, hashlib, itertools, json, os, ran
 sys.setrecursionlimit(20000)
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
 PP = "/mnt/hum01-rds/Basov/p91688di/pmc_preprocessing/"
-SHARDS = PG + "g2_v3_1/shards/"                                       # RL-171: the merged corpus (was g2_v3)
+SHARDS = PG + "g2_v3_2/shards/"                                       # RL-185: g2_v3_1 with the dash re-parses (RL-171: g2_v3_1)
 STOPWORDS = PG + "nltk_abridged_stopwords_list.txt"
 sys.path.insert(0, PP)
 import focal_terms as focal_terms_v2                                   # noqa: E402  v2, loaded first: v3 extends it
