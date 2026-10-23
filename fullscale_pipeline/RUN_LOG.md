@@ -2392,3 +2392,24 @@ output kept as `PG/g3_v2_rl185/`. CSF check renewed (pins 42eb9575c2ce / 7eab6d3
 from this run, RL-185's kept as `reference_incline_rl185/`), check_csf_g3_v2.sh 7cd199727496, passed on incline
 (ALL G3 CHECKS OK, 00:31). First trial folder deleted with the owner's permission (superseded; its script is commit
 df12ddc). [LOG]
+
+**RL-187 · 2026-10-24 · Housekeeping (B5) + PubMed metadata for the new articles · CODE + CORPUS DATA (read-only Entrez) · LIVE**
+Owner (2026-10-24): before choosing the M1 trial subset, clean up and fetch journal and byline / affiliation metadata
+for the new articles, then discuss merging and deduplication. **B5:** (1) RUN_LOG has two entries numbered RL-155; the
+log is append-only, so neither is renumbered in place: from now on the second one (2026-10-20, "R1 · AUDIT + RULE
+CHANGE (corpus-extension candidates; read-only Entrez)") is cited as **RL-155b**; every existing reference to RL-155
+(ROLLING_NOTES, STAGE_AB_METHOD.md, RL-156) means the first (the full-text candidate search). (2) `LCS/article_whitelist.txt`
+(39,299, still holding the 980 Stage B exclusions) is left as it was and superseded by **`LCS/article_whitelist_v3_1.txt`**
+(44b73cc87493): 53,882 articles = the old whitelist minus the 980 (`article_exclusions_stage_b.csv`) plus the 15,563 new
+articles (`gap_stage/gap_article_list_after_ab.txt`); the list for any later P0–P2 run (A3 part 2). **New articles:**
+the 14,482 valid articles of the RL-186 G3 output without a PMC-header record (`corpus_statistics/new_articles_rl186.txt`;
+14,386 new from the gap corpus, 96 current-corpus articles focal only since the v3 matcher). Scripts extended, defaults
+unchanged (the original runs reproduce): `headers.py` (--pmcids/--out, reads pure_text_corpus_gap too), 
+`pubmed_authors_fetch.py` and `pubmed_pubtype_fetch.py` (--headers; same PMID-keyed caches, new keys added).
+Headers (`diagnostics/openalex_authors/headers_new.json`): 14,482 found, 14,372 with PMID, 14,460 with DOI; 105,745
+header author lines, 26,746 with ORCID. PubMed efetch: 14,372 of 14,372 found; 85,385 personal bylines, 85,215
+(99.8%) with affiliation text, 27,460 with ORCID; 14,311 articles with an affiliation on every byline; every article has
+an NLM journal ID; no author list marked incomplete; publication types for all 14,372, **67 tagged Retracted
+Publication** (to be removed at the working-corpus layer, as the 46 of `working_corpus.py`). Years (PubMed electronic or
+print): 2015–2019 281, 2020 202, 2021 524, 2022 933, 2023 1,321, 2024 2,120, 2025 3,763, 2026 5,228. OpenAlex matching
+and works (author and institution IDs) not run: the OpenAlex key is not in this session's environment. [LOG]

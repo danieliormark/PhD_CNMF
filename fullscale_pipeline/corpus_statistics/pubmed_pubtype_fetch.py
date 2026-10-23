@@ -7,6 +7,8 @@ import json, os, time, urllib.request, urllib.parse, re
 D = "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/diagnostics/openalex_authors/"
 KEY = os.environ.get("NCBI_API_KEY")
 H = json.load(open(D + "headers.json"))
+if "--headers" in __import__("sys").argv:   # RL-187: the new articles (headers_new.json); same cache, keyed by PMID
+    import sys; H = json.load(open(sys.argv[sys.argv.index("--headers") + 1]))
 pmid_to_pmcids = {}
 for pmcid, v in H.items():
     if v and v.get("pmid"):

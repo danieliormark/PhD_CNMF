@@ -3,16 +3,20 @@
 # The byline backbone for the author coverage analysis: name, order, ORCID where the publisher
 # supplied it, per-author affiliation text, collective (group) names. Resumable cache, batched POSTs.
 #   NCBI_API_KEY=... python3 pubmed_authors_fetch.py
-import json, os, time, urllib.request, urllib.parse
+import json, os, sys, time, urllib.request, urllib.parse
 import xml.etree.ElementTree as ET
 
 FP = "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/"
 H = json.load(open(FP + "diagnostics/openalex_authors/headers.json"))
+if "--headers" in sys.argv:          # RL-187: the new articles (headers_new.json); same cache, keyed by PMID
+    H = json.load(open(sys.argv[sys.argv.index("--headers") + 1]))
 OUTDIR = FP + "diagnostics/author_coverage/"
 OUT = OUTDIR + "pubmed_authors.json"
 KEY = os.environ.get("NCBI_API_KEY")
 
 wc = [l.strip() for l in open(FP + "corpus_statistics/working_corpus_pmcids.txt") if l.strip()]
+if "--headers" in sys.argv:
+    wc = sorted(H)
 pmids = sorted({H[p]["pmid"] for p in wc if (H.get(p) or {}).get("pmid")})
 os.makedirs(OUTDIR, exist_ok=True)
 cache = json.load(open(OUT)) if os.path.exists(OUT) else {}

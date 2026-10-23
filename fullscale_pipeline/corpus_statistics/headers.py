@@ -1,5 +1,9 @@
 # PMID, DOI and author lines (with ORCID where printed) from the PMC header of every
 # article that has at least one focal sentence (focal_sentences_v2.jsonl, 34,662 articles).
+# RL-187 (owner 2026-10-24): optional --pmcids FILE --out FILE for the new articles of the merged corpus; their texts
+# are in the gap corpus (pure_text_corpus_gap/) or, for current-corpus articles focal only since the v3 matcher, in
+# pure_text_corpus/. Without arguments the run is the original one.
+#   python3 headers.py [--pmcids FILE --out FILE]
 import json, re, sys
 from concurrent.futures import ThreadPoolExecutor
 
@@ -11,13 +15,21 @@ FOCAL = "/mnt/hum01-rds/Basov/p91688di/llm_corpus_staging/focal_sentences_v2.jso
 OUT = "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/diagnostics/openalex_authors/headers.json"
 ORCID = re.compile(r"orcid\.org/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])")
 
+PURE_GAP = "/mnt/hum01-rds/Basov/p91688di/llm_corpus_staging/pure_text_corpus_gap/"
 ids = [json.loads(l)["pmcid"] for l in open(FOCAL)]
+if "--pmcids" in sys.argv:
+    ids = [l.strip() for l in open(sys.argv[sys.argv.index("--pmcids") + 1]) if l.strip()]
+    OUT = sys.argv[sys.argv.index("--out") + 1]
 
 
 def one(pmcid):
-    try:
-        text = open(PURE + pmcid + ".txt", encoding="utf-8", errors="replace").read(12000)
-    except OSError:
+    for d in (PURE, PURE_GAP):
+        try:
+            text = open(d + pmcid + ".txt", encoding="utf-8", errors="replace").read(12000)
+            break
+        except OSError:
+            pass
+    else:
         return pmcid, None
     pmid = re.search(r"^PMID:\s*(\d+)", text, re.M)
     doi = re.search(r"^DOI:\s*(\S+)", text, re.M)
