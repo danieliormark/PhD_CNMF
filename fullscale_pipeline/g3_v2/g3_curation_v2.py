@@ -313,8 +313,69 @@ PANEL_LEGEND = re.compile(r'^[a-h]\s*,\s|^[a-h](?:\s*,\s*[a-h])+\s*[:\s]')
 GLOSS_VERBS = {'equal', 'indicate', 'denote', 'stand', 'refer'}
 
 
+# RL-181 (owner 2026-10-23): sentences that define the symbols of a removed formula ("where μLLM is the estimated grand mean")
+SYM_LABELS = {'text', 'img', 'image', 'final', 'low', 'high', 'input', 'output', 'query', 'local', 'global', 'mask', 'judge',
+              'tokens', 'token', 'matched', 'ground', 'train', 'test', 'max', 'min', 'mean', 'total', 'base', 'head', 'enc', 'dec',
+              'cls', 'question', 'answer', 'pred', 'true', 'model', 'loss', 'layer'}
+SYM_OPENERS = {'this', 'that', 'these', 'those', 'here', 'there', 'then', 'thus', 'hence', 'they', 'one', 'two', 'all', 'each',
+               'both', 'such', 'also', 'its', 'our', 'his', 'her', 'the', 'and', 'but', 'for', 'not', 'now', 'yet', 'who', 'how',
+               'why', 'see', 'use', 'data', 'fig', 'table', 'next', 'last', 'first', 'second', 'third'}
+SYM_STOP = {'a', 'i', 'an', 'as', 'at', 'be', 'by', 'do', 'go', 'he', 'if', 'in', 'is', 'it', 'me', 'my', 'no', 'of', 'on', 'or',
+            'so', 'to', 'up', 'us', 'we', 'ai', 'ml', 'dl'}
+
+
+def is_symbol(tok, loose=True):
+    """a formula symbol: a Greek letter (with a label), one or two letters with digits (L, d, xi, M1, SE1), a capital with a short
+    or known label (Fesm, Xtext, Hfinal); loose (after 'where'/'let'): also a capital + letters + digits (HC2, Lk1)"""
+    tok = tok.strip("(),.;:′'")
+    if re.match(r'^[\u0370-\u03ff\u2206]', tok):
+        return True
+    if re.fullmatch(r'[A-Za-z]{1,2}\d*', tok):
+        return tok.lower() not in SYM_STOP
+    if tok.lower() in ACTIVE_STOP or tok.lower() in SYM_OPENERS:
+        return False
+    m = re.fullmatch(r'([A-Z])([a-z]+)', tok)
+    if m:
+        return len(m.group(2)) <= 3 or m.group(2) in SYM_LABELS
+    return loose and bool(re.fullmatch(r'[A-Z][A-Za-z]{0,3}\d+|[A-Z][a-z]?[A-Z][a-z]{0,6}', tok))
+
+
+NOTATION_START = re.compile(r'^\W*(where|let)\s+(\S+?)[,\s]', re.I)
+NOTATION_HERE = re.compile(r'^\W*here\s+(\S+?)[,\s]', re.I)
+NOTATION_LOST = re.compile(r'^\W*(?:(?:here|where)\s*,?\s+(?:denotes?|represents?|refers to)\b|where\s*,?\s+(?:is|are)\b(?!\s+(?:a|an|the|some|no|it|we)\b))', re.I)
+NOTATION_SUBJ = re.compile(r'^\W*(\S+?)\s+(?:denotes|represents|is defined as|indicates(?!\s+that))\b')
+NOTATION_CLAUSE = re.compile(r'\bwhere\s+(\S+?)\s+(?:is|are|denotes?|represents?|indicates?(?!\s+that)|refers to)\b'
+                             r'|\bdenoted\s+(?:by|as)\s+(\S+?)[\s.,)]|\blet\s+(\S+?)\s+(?:be|denote)\b'
+                             r'|[,;]\s*(\S+?)\s+(?:denotes?|represents?)\b', re.I)
+
+
+def notation_definition(text):
+    """RL-181: the unit is a definition of formula symbols (where/let + symbol, here + a short symbol, or symbol + denotes)"""
+    m = NOTATION_START.match(text)
+    if m:
+        return is_symbol(m.group(2))
+    if NOTATION_LOST.match(text):                                      # 'Here, denotes ...': the symbol went with the formula
+        return True
+    m = NOTATION_HERE.match(text)
+    if m:
+        tok = m.group(1).strip("(),.;:")
+        return bool(re.fullmatch(r'[A-Za-z]{1,2}\d*|[\u0370-\u03ff\u2206]\w*', tok)) and is_symbol(tok)
+    m = NOTATION_SUBJ.match(text)
+    return bool(m) and is_symbol(m.group(1), loose=False)
+
+
+def defined_symbols(text):
+    """RL-181: symbols a definition clause names inside other prose (', where L is the length of ...', 'denoted by EG')"""
+    out = set()
+    for m in NOTATION_CLAUSE.finditer(text):
+        tok = next(g for g in m.groups() if g)
+        if is_symbol(tok):
+            out.add(tok.strip("(),.;:′'").lower())
+    return out
+
+
 def nonprose_kind(text):
-    """§6 item 8: 'heading', 'reference', 'pseudocode', 'panel_caption' or None"""
+    """§6 item 8: 'heading', 'reference', 'pseudocode', 'panel_caption', (RL-181) 'notation' or None"""
     words = re.findall(r"[A-Za-z][A-Za-z\-_']*", text)
     if PSEUDOCODE.search(text):
         return 'pseudocode'
@@ -327,6 +388,8 @@ def nonprose_kind(text):
     content = [w for w in words if w.lower() not in TITLE_SMALL]
     if len(words) <= 20 and content and not END_PUNCT.search(text) and sum(w[0].isupper() for w in content) / len(content) >= 0.6:
         return 'heading'
+    if notation_definition(text):
+        return 'notation'
     return None
 
 
@@ -1029,6 +1092,8 @@ class Ctx:
                     reason = 'stoplist'
             if reason is None and not t.startswith(KEEP_TYPES):
                 reason = 'type_' + t
+            if reason is None and word in getattr(self, 'notation_syms', ()):
+                reason = 'notation_symbol'; self.detail['notation_symbol'][word] += 1            # RL-181
             if reason is None and (clean_root(word) is None or len(clean_root(word)) == 1):
                 reason = 'single_letter_or_symbol'; self.detail['single_letter_or_symbol'][word] += 1     # §6 item 8
             if reason is None:
@@ -1307,6 +1372,7 @@ def atom_record(flat, ctx):
 
 def curate_unit(art, s, u, matcher, anchored, modals):
     ctx = Ctx(u, modals)
+    ctx.notation_syms = defined_symbols(u["text"])                    # RL-181: symbols defined inside prose ('where L is ...')
     edge = hedge(u["main_edge"])
     try:                                    # §6 item 3: lexical modal + complement = one clause, on the parse as G2 gave it
         edge, ctx.able = modal_merge.merge_unit(edge, u, ctx.stats)

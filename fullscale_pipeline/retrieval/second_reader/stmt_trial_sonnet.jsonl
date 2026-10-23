@@ -1,0 +1,10 @@
+{"qid": "R001", "verdict": "statement", "note": "ChatGPT used to proofread this manuscript"}
+{"qid": "R002", "verdict": "statement", "note": "ChatGPT used to improve clarity of text"}
+{"qid": "R003", "verdict": "research", "note": "definition of GenAI-supported MOOC environment"}
+{"qid": "R004", "verdict": "research", "note": "recommendation from study findings about ChatGPT"}
+{"qid": "R005", "verdict": "research", "note": "study's own Llama quantization methods"}
+{"qid": "R006", "verdict": "research", "note": "study's replication design using language models"}
+{"qid": "R007", "verdict": "statement", "note": "AI tools used for linguistic improvements in writing"}
+{"qid": "R008", "verdict": "statement", "note": "declares ChatGPT-4.0 use in preparing this work"}
+{"qid": "R009", "verdict": "research", "note": "proposed framework combining DiffuSETS with LLMs"}
+{"qid": "R010", "verdict": "unsure", "note": "figure caption of study's generated samples, also discloses ChatGPT"}

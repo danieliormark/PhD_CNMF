@@ -1,0 +1,6 @@
+[
+ {"id": "F-01", "text": "As a measure for evaluating LLM performance, we consider the signed error, where μLLM is the estimated grand mean and μHuman is the actual grand mean.", "expect": ["llm/C/focal", "error/"], "forbid": ["human/", "%CE%BC"], "note": "RL-181: the definition clause's symbols are dropped, the prose kept"},
+ {"id": "F-02", "text": "The per-residue embeddings of ESM-2 have size 1024 times L, where Dp represents the feature dimension of each residue.", "expect": ["esm_2/C/focal", "embedding/"], "forbid": ["dp/"], "note": "RL-181: a two-letter symbol defined inside prose is dropped"},
+ {"id": "F-03", "text": "Saprot represents the inaugural universal PLM developed with BERT on predicted structures.", "expect": ["saprot/", "bert/C/focal"], "note": "RL-181: a method name is not a symbol: the sentence stays"},
+ {"id": "F-04", "text": "M3 indicates that the adaptive fusion module can filter the useful information in BERT.", "expect": ["bert/C/focal", "fusion/"], "note": "RL-181: 'indicates that' is a claim, not a definition"}
+]

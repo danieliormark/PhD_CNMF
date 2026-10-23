@@ -292,3 +292,38 @@ of these articles have no other focal sentence and are excluded as statement-onl
 
 **Cost.** Agents' completion reports: 121,004, 120,029, 118,993 and 58,291 tokens (418k in all); about 1.5 minutes per
 run, all four in parallel.
+
+## 8. Second, independent reading of the three manual checks (2026-10-23, RL-181)
+
+**Why.** Owner: how reliable are the assistant's manual decisions and the gold sets the Haiku readers were calibrated on?
+The gold labels had a single annotator (the assistant); Haiku agreement with them shows that the readers follow that
+reading, not that it is right. A reader that never sees the assistant's labels re-reads a random sample.
+
+**Reader.** Agent type `general-purpose`, model Sonnet (`sonnet`, not used for any gold set or reading before), no effort
+level set; the same rubrics and item blocks the Haiku readers had (copied exactly, renumbered R001 …); the final
+verdicts kept in a separate folder the reader is not pointed to. Sampler `retrieval/second_reader_sample.py` (seed
+20261023): per list a trial of 5 + 5 and a main sample of 50 + 50, stratified by the final decision (F2: focal / not
+focal; statements: statement / research; group-4 names: model / not model), disjoint. Items: `PG/second_reader/`
+(corpus text, RDS only); verdicts and keys (ids and labels only): `retrieval/second_reader/`.
+Prompt (verbatim apart from list name and count): "You are a careful reader doing a narrow classification task. Work only
+with the files named here; do not search, list directories, explore, or open any other file, and do not run code or shell
+commands. Judge only from the text shown for each item. … 1. Read the rubric … 2. Read the items … 3. Answer every
+QUESTION line by the rubric. Use "unsure" when the shown text does not decide it; do not force a choice. 4. Write all
+answers to <list>_main_sonnet.jsonl …". One breach: the F2 reader wrote its answer file with a short Python script run
+through the shell instead of the Write tool; its transcript shows the script held the reader's own verdicts inline and
+opened no other file, and its only file reads were the rubric and the items, so the answers stay blind.
+
+**Results.** Trial: 29 of 30 agree (one figure caption answered unsure). Main samples:
+
+| List | Decisive answers | Agreement | Cohen's κ | Unsure |
+|---|---|---|---|---|
+| F2 word sense | 97 | 95 (97.9%) | 0.959 | 3 |
+| AI-use statements | 100 | 99 (99.0%) | 0.980 | 0 |
+| Group-4 model names | 97 | 95 (97.9%) | 0.959 | 3 |
+
+The 5 disagreements and 6 unsure answers were read by the assistant (cases and reading in RUN_LOG RL-181) and go to the
+owner: likely errors of the final labels R061 (F2: "language models" of an EFL narrative, probably models of language use,
+not neural) and R040 (group 4: UTR+BERT-derived, inconsistent with the "<model>-derived" mapping); borderline R005, R080
+(F2), R054 (RegulatoryGPT, a proposed tool). Rough error rate of the final labels on items drawn evenly from both
+decisions: 0.5–1%; rule-of-three upper bound about 3% per list. Cost: agents' reports 54k (trial) and 120k, 65k, 61k
+tokens; about 1 minute each, run in parallel.

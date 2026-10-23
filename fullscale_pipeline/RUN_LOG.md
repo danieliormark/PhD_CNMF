@@ -2242,3 +2242,19 @@ parents 905,530 (−55), cousins 2,082,395 (−174), occurrence rows 5,998,581. 
 (no rejected term kept). Checkpoint settings left in focal names: 2,279 mentions → 145 (esm_msa_1b 82, protected on
 purpose; gpt_4b 23; about 40 one-offs such as `mistral_7b`, `bertbase_plus…`). Most frequent focal atoms now include the
 tiers: gpt_4o_mini 2,499, deepseek_r1 6,983 (was 5,922), deepseek_v3 2,950 (was 2,329). G3 is ready for M1. [LOG]
+
+**RL-181 · 2026-10-23 · Second reading (Sonnet) of the manual checks + G3 notation rule (trial) · CHECK + CODE · LIVE**
+Owner: a separate model reader for the manual decisions and gold sets; and formula-notation sentences. (1) Sonnet re-read
+300 items blind (STAGE_AB_METHOD.md §8): κ 0.959 / 0.980 / 0.959 for F2 senses / statements / group-4 names; 5
+disagreements + 6 unsure read. Assistant's reading: F2 R061 (EFL narrative, "wide access to resources and language
+models") likely wrong as yes; R005 (connectionist language models) yes by the neural rule, borderline; R080
+(neuro-computational language models) no, borderline; R036 (speech-recognition LM) no; R082 (molecular LMs) yes;
+statement R073 (Gemini translation as the study's method) research; group-4 R054 RegulatoryGPT (proposed GPT-based tool)
+borderline, R040 UTR+BERT-derived should map to BERT, R069 CamemBertForSequenceClassification mapped by the RL-173 rule,
+R001 WatchOverGPT and R028 QuantGPT not models. Decisions to the owner. (2) G3 `notation_definition` / `defined_symbols`:
+units that only define formula symbols ("where μLLM is the estimated grand mean …", "Let Ri denote …", "Here, denotes …")
+are non-prose (`notation`); inside other prose, the symbols a definition clause names are dropped in that unit only.
+First version dropped prose ("This represents a significant gap …", "Here we present …"): "This"/"we" counted as symbols;
+fixed (stop words and openers are never symbols; after "here" only 1–2-letter or Greek symbols). Corpus: 343 units
+(0.044%), random 60 read: 58–60 notation (borderline: abbreviation legends, a survey construct); 783 symbol occurrences
+defined inside prose. Hard set `hard/hard_rl181_notation.json` 4/4; self-test 113/113, hard cases 244/255. [LOG]

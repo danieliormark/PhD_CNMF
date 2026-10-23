@@ -1,0 +1,52 @@
+{
+ "R001": {
+  "item": "stmt_check:B06.265",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R002": {
+  "item": "stmt_check:B10.338",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R003": {
+  "item": "stmt_check:B05.452",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R004": {
+  "item": "stmt_check:B09.087",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R005": {
+  "item": "stmt_check:B03.190",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R006": {
+  "item": "stmt_check:B02.226",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R007": {
+  "item": "stmt_check:B11.404",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R008": {
+  "item": "stmt_check:B07.216",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R009": {
+  "item": "stmt_check:B05.204",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R010": {
+  "item": "stmt_check:B10.164",
+  "final": "statement",
+  "stratum": "statement"
+ }
+}

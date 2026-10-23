@@ -1,0 +1,52 @@
+{
+ "R001": {
+  "item": "f2_b05:A007.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R002": {
+  "item": "f2_b04:A047.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R003": {
+  "item": "f2_b08:A014.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R004": {
+  "item": "f2_b08:A042.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R005": {
+  "item": "f2_b11:A061.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R006": {
+  "item": "f2_b08:A050.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R007": {
+  "item": "f2_b12:A064.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R008": {
+  "item": "f2_b01:A053.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R009": {
+  "item": "f2_b05:A011.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R010": {
+  "item": "f2_b05:A088.1",
+  "final": "no",
+  "stratum": "not_focal"
+ }
+}

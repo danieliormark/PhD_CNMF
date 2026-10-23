@@ -1,0 +1,52 @@
+{
+ "R001": {
+  "item": "batch_15:G15.003",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R002": {
+  "item": "batch_01:G01.007",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R003": {
+  "item": "batch_12:G12.100",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R004": {
+  "item": "batch_08:G08.172",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R005": {
+  "item": "batch_12:G12.066",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R006": {
+  "item": "batch_13:G13.021",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R007": {
+  "item": "batch_11:G11.003",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R008": {
+  "item": "batch_17:G17.016",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R009": {
+  "item": "batch_12:G12.107",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R010": {
+  "item": "batch_12:G12.224",
+  "final": "not_model",
+  "stratum": "not_model"
+ }
+}

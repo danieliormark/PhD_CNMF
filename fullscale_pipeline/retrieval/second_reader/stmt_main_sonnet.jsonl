@@ -1,0 +1,100 @@
+{"qid":"R001","verdict":"research","note":"article's stance on LLM use in testing"}
+{"qid":"R002","verdict":"statement","note":"ChatGPT for language refinement"}
+{"qid":"R003","verdict":"statement","note":"AI-assisted search used for this review"}
+{"qid":"R004","verdict":"research","note":"PPO agent in case studies"}
+{"qid":"R005","verdict":"research","note":"Gemini translation for robustness experiment"}
+{"qid":"R006","verdict":"research","note":"reviewer comment on study design"}
+{"qid":"R007","verdict":"research","note":"comparison to prior work"}
+{"qid":"R008","verdict":"statement","note":"Claude used in manuscript preparation"}
+{"qid":"R009","verdict":"research","note":"model fine-tuning method"}
+{"qid":"R010","verdict":"research","note":"manual inspection of ChatGPT usage instances"}
+{"qid":"R011","verdict":"research","note":"BERT experiments planned"}
+{"qid":"R012","verdict":"statement","note":"ChatGPT for language and readability"}
+{"qid":"R013","verdict":"research","note":"figure caption of LLM benchmark results"}
+{"qid":"R014","verdict":"statement","note":"ChatGPT-4o for organization and language"}
+{"qid":"R015","verdict":"research","note":"discussion of another paper's ethics"}
+{"qid":"R016","verdict":"statement","note":"ChatGPT for language refinement"}
+{"qid":"R017","verdict":"statement","note":"ChatGPT-4 only for language"}
+{"qid":"R018","verdict":"statement","note":"Deepseek R1 for linguistic refinement"}
+{"qid":"R019","verdict":"statement","note":"ChatGPT only for spelling and grammar"}
+{"qid":"R020","verdict":"research","note":"Word2Vec model training in study"}
+{"qid":"R021","verdict":"statement","note":"ChatGPT for translating and refining paragraphs"}
+{"qid":"R022","verdict":"statement","note":"Claude for drafting and editing"}
+{"qid":"R023","verdict":"statement","note":"Claude 3.5 for grammar proofreading"}
+{"qid":"R024","verdict":"research","note":"proposed model description"}
+{"qid":"R025","verdict":"statement","note":"Gemini as writing tool"}
+{"qid":"R026","verdict":"statement","note":"no AI used in writing the paper"}
+{"qid":"R027","verdict":"research","note":"findings about LLM-generated consent forms"}
+{"qid":"R028","verdict":"research","note":"study result on LLM usefulness"}
+{"qid":"R029","verdict":"research","note":"study implication on ChatGPT-5"}
+{"qid":"R030","verdict":"statement","note":"Claude helped write code"}
+{"qid":"R031","verdict":"statement","note":"ChatGPT for editorial support"}
+{"qid":"R032","verdict":"research","note":"dataset generation with ChatGPT"}
+{"qid":"R033","verdict":"statement","note":"ChatGPT for coding and language editing"}
+{"qid":"R034","verdict":"statement","note":"ChatGPT for polishing and references"}
+{"qid":"R035","verdict":"statement","note":"LLM for language editing only"}
+{"qid":"R036","verdict":"statement","note":"figure generated with Gemini 3"}
+{"qid":"R037","verdict":"research","note":"study's explainability framework"}
+{"qid":"R038","verdict":"research","note":"reviewer comment on a paper"}
+{"qid":"R039","verdict":"research","note":"GPT-4 rating in study methods"}
+{"qid":"R040","verdict":"research","note":"developed counseling LLM"}
+{"qid":"R041","verdict":"research","note":"study's methodological contribution"}
+{"qid":"R042","verdict":"research","note":"statistical test description"}
+{"qid":"R043","verdict":"statement","note":"ChatGPT/Gemini for readability and code"}
+{"qid":"R044","verdict":"statement","note":"ChatGPT for proofreading"}
+{"qid":"R045","verdict":"research","note":"quantification framework method"}
+{"qid":"R046","verdict":"research","note":"survey study limitation"}
+{"qid":"R047","verdict":"research","note":"study aims on GPT use"}
+{"qid":"R048","verdict":"research","note":"study result about ChatGPT"}
+{"qid":"R049","verdict":"statement","note":"ChatGPT not used for writing"}
+{"qid":"R050","verdict":"research","note":"proposed approach description"}
+{"qid":"R051","verdict":"statement","note":"Grammarly and GPT-4 for language"}
+{"qid":"R052","verdict":"research","note":"research hypothesis"}
+{"qid":"R053","verdict":"statement","note":"ChatGPT for drafting and plot"}
+{"qid":"R054","verdict":"research","note":"model pretraining setup"}
+{"qid":"R055","verdict":"statement","note":"ChatGPT 4o assisted drafting"}
+{"qid":"R056","verdict":"research","note":"review finding about included studies"}
+{"qid":"R057","verdict":"statement","note":"ChatGPT3.5 for proofreading"}
+{"qid":"R058","verdict":"statement","note":"ChatGPT improved structure and readability"}
+{"qid":"R059","verdict":"statement","note":"ChatGPT created figure element"}
+{"qid":"R060","verdict":"research","note":"error analysis of BERT"}
+{"qid":"R061","verdict":"statement","note":"Claude for literature searching"}
+{"qid":"R062","verdict":"statement","note":"ChatGPT for grammar correction"}
+{"qid":"R063","verdict":"statement","note":"GPT-4 for language refinement"}
+{"qid":"R064","verdict":"research","note":"discussion of journal policies"}
+{"qid":"R065","verdict":"research","note":"ChatGPT risk-of-bias assessment method"}
+{"qid":"R066","verdict":"statement","note":"figure generated with Gemini"}
+{"qid":"R067","verdict":"research","note":"system contribution discussion"}
+{"qid":"R068","verdict":"statement","note":"ChatGPT for clarity and readability"}
+{"qid":"R069","verdict":"statement","note":"ChatGPT for LaTeX and text"}
+{"qid":"R070","verdict":"research","note":"student quotes about AI use"}
+{"qid":"R071","verdict":"statement","note":"ChatGPT for language checking"}
+{"qid":"R072","verdict":"statement","note":"ChatGPT for language correction"}
+{"qid":"R073","verdict":"statement","note":"Gemini translation in disclosure context"}
+{"qid":"R074","verdict":"research","note":"review of scholars' views"}
+{"qid":"R075","verdict":"research","note":"RSA results"}
+{"qid":"R076","verdict":"research","note":"model fine-tuning method"}
+{"qid":"R077","verdict":"research","note":"embedding analysis in study"}
+{"qid":"R078","verdict":"statement","note":"AI used to develop manuscript"}
+{"qid":"R079","verdict":"statement","note":"Gemini for figures"}
+{"qid":"R080","verdict":"statement","note":"ChatGPT generated Figure 1"}
+{"qid":"R081","verdict":"research","note":"implementation example of ChatGPT use"}
+{"qid":"R082","verdict":"statement","note":"ChatGPT-4 for writing clarity"}
+{"qid":"R083","verdict":"research","note":"model pretraining method"}
+{"qid":"R084","verdict":"research","note":"background on LLM translation"}
+{"qid":"R085","verdict":"research","note":"future research suggestions"}
+{"qid":"R086","verdict":"statement","note":"LLMs did not generate article"}
+{"qid":"R087","verdict":"research","note":"experiment with ChatGPT in study"}
+{"qid":"R088","verdict":"statement","note":"ChatGPT-5 only for language"}
+{"qid":"R089","verdict":"research","note":"GPT-2 used as study model"}
+{"qid":"R090","verdict":"statement","note":"pointer declaration of AI use"}
+{"qid":"R091","verdict":"research","note":"model feature initialization"}
+{"qid":"R092","verdict":"statement","note":"ChatGPT-4o for readability"}
+{"qid":"R093","verdict":"statement","note":"ChatGPT brainstorming and figure recreation"}
+{"qid":"R094","verdict":"research","note":"discussion of study findings"}
+{"qid":"R095","verdict":"statement","note":"GPT-4 refined language"}
+{"qid":"R096","verdict":"research","note":"extraction methods scope"}
+{"qid":"R097","verdict":"research","note":"topic analysis result"}
+{"qid":"R098","verdict":"statement","note":"ChatGPT for grammar and drafting"}
+{"qid":"R099","verdict":"statement","note":"ChatGPT for readability only"}
+{"qid":"R100","verdict":"statement","note":"figure generated with ChatGPT"}

@@ -1,0 +1,502 @@
+{
+ "R001": {
+  "item": "f2_b12:A089.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R002": {
+  "item": "f2_b09:A061.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R003": {
+  "item": "f2_b10:A014.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R004": {
+  "item": "f2_b04:A060.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R005": {
+  "item": "f2_b11:A044.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R006": {
+  "item": "f2_b04:A079.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R007": {
+  "item": "f2_b01:A081.2",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R008": {
+  "item": "f2_b05:A036.2",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R009": {
+  "item": "f2_b12:A020.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R010": {
+  "item": "f2_b06:A112.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R011": {
+  "item": "f2_b08:A016.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R012": {
+  "item": "f2_b10:A027.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R013": {
+  "item": "f2_b08:A038.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R014": {
+  "item": "f2_b05:A079.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R015": {
+  "item": "f2_b01:A090.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R016": {
+  "item": "f2_b05:A019.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R017": {
+  "item": "f2_b05:A010.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R018": {
+  "item": "f2_b06:A078.1",
+  "final": "statement",
+  "stratum": "not_focal"
+ },
+ "R019": {
+  "item": "f2_b05:A112.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R020": {
+  "item": "f2_b06:A043.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R021": {
+  "item": "f2_b03:A065.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R022": {
+  "item": "f2_b01:A052.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R023": {
+  "item": "f2_b11:A012.2",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R024": {
+  "item": "f2_b09:A024.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R025": {
+  "item": "f2_b08:A025.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R026": {
+  "item": "f2_b04:A075.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R027": {
+  "item": "f2_b09:A043.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R028": {
+  "item": "f2_b09:A014.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R029": {
+  "item": "f2_b01:A083.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R030": {
+  "item": "f2_b02:A076.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R031": {
+  "item": "f2_b10:A067.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R032": {
+  "item": "f2_b11:A015.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R033": {
+  "item": "f2_b02:A062.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R034": {
+  "item": "f2_b11:A041.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R035": {
+  "item": "f2_b07:A048.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R036": {
+  "item": "f2_b02:A065.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R037": {
+  "item": "f2_b10:A045.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R038": {
+  "item": "f2_b12:A043.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R039": {
+  "item": "f2_b10:A039.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R040": {
+  "item": "f2_b09:A006.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R041": {
+  "item": "f2_b06:A018.2",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R042": {
+  "item": "f2_b12:A081.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R043": {
+  "item": "f2_b01:A057.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R044": {
+  "item": "f2_b02:A106.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R045": {
+  "item": "f2_b04:A031.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R046": {
+  "item": "f2_b07:A072.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R047": {
+  "item": "f2_b12:A106.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R048": {
+  "item": "f2_b08:A112.3",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R049": {
+  "item": "f2_b10:A060.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R050": {
+  "item": "f2_b03:A083.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R051": {
+  "item": "f2_b01:A046.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R052": {
+  "item": "f2_b06:A063.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R053": {
+  "item": "f2_b04:A088.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R054": {
+  "item": "f2_b12:A050.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R055": {
+  "item": "f2_b11:A055.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R056": {
+  "item": "f2_b04:A092.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R057": {
+  "item": "f2_b01:A081.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R058": {
+  "item": "f2_b04:A084.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R059": {
+  "item": "f2_b05:A079.2",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R060": {
+  "item": "f2_b06:A105.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R061": {
+  "item": "f2_b05:A062.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R062": {
+  "item": "f2_b03:A050.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R063": {
+  "item": "f2_b05:A039.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R064": {
+  "item": "f2_b08:A056.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R065": {
+  "item": "f2_b06:A045.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R066": {
+  "item": "f2_b04:A071.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R067": {
+  "item": "f2_b04:A024.1",
+  "final": "statement",
+  "stratum": "not_focal"
+ },
+ "R068": {
+  "item": "f2_b05:A107.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R069": {
+  "item": "f2_b01:A104.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R070": {
+  "item": "f2_b09:A085.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R071": {
+  "item": "f2_b04:A019.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R072": {
+  "item": "f2_b11:A038.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R073": {
+  "item": "f2_b03:A103.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R074": {
+  "item": "f2_b11:A016.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R075": {
+  "item": "f2_b06:A020.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R076": {
+  "item": "f2_b09:A028.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R077": {
+  "item": "f2_b03:A045.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R078": {
+  "item": "f2_b12:A098.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R079": {
+  "item": "f2_b05:A078.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R080": {
+  "item": "f2_b07:A046.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R081": {
+  "item": "f2_b10:A097.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R082": {
+  "item": "f2_b03:A047.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R083": {
+  "item": "f2_b01:A093.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R084": {
+  "item": "f2_b05:A055.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R085": {
+  "item": "f2_b12:A095.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R086": {
+  "item": "f2_b07:A070.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R087": {
+  "item": "f2_b04:A011.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R088": {
+  "item": "f2_b05:A101.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R089": {
+  "item": "f2_b10:A033.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R090": {
+  "item": "f2_b09:A075.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R091": {
+  "item": "f2_b01:A049.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R092": {
+  "item": "f2_b06:A103.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R093": {
+  "item": "f2_b12:A068.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R094": {
+  "item": "f2_b01:A021.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R095": {
+  "item": "f2_b10:A063.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R096": {
+  "item": "f2_b10:A105.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R097": {
+  "item": "f2_b03:A061.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R098": {
+  "item": "f2_b10:A053.1",
+  "final": "yes",
+  "stratum": "focal"
+ },
+ "R099": {
+  "item": "f2_b12:A012.1",
+  "final": "no",
+  "stratum": "not_focal"
+ },
+ "R100": {
+  "item": "f2_b08:A074.1",
+  "final": "no",
+  "stratum": "not_focal"
+ }
+}

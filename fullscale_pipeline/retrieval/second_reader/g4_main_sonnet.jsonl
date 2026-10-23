@@ -1,0 +1,100 @@
+{"qid": "R001", "verdict": "unsure", "note": "Context does not show what WatchOverGPT is."}
+{"qid": "R002", "verdict": "not_model", "note": "Python file name."}
+{"qid": "R003", "verdict": "not_model", "note": "Attention visualization tool."}
+{"qid": "R004", "verdict": "model", "note": "BERT-based GCN classification model."}
+{"qid": "R005", "verdict": "model", "note": "AraBERT-based architectures."}
+{"qid": "R006", "verdict": "model", "note": "Llama-based ultrasound model variant."}
+{"qid": "R007", "verdict": "model", "note": "BioMistral variant."}
+{"qid": "R008", "verdict": "model", "note": "GPT-based navigation agent."}
+{"qid": "R009", "verdict": "model", "note": "Domain-adapted ALBERT."}
+{"qid": "R010", "verdict": "model", "note": "Medical vision-language GPT model."}
+{"qid": "R011", "verdict": "not_model", "note": "Formula subscript notation for BERT parameters."}
+{"qid": "R012", "verdict": "model", "note": "HuatuoGPT-o1 with citation number glued."}
+{"qid": "R013", "verdict": "not_model", "note": "Mapping catheter product."}
+{"qid": "R014", "verdict": "model", "note": "BERT-based epitope prediction tool."}
+{"qid": "R015", "verdict": "not_model", "note": "Taxonomy style descriptor."}
+{"qid": "R016", "verdict": "model", "note": "BERT-based peptide-MHC predictor."}
+{"qid": "R017", "verdict": "not_model", "note": "BERTopic topic modelling library."}
+{"qid": "R018", "verdict": "model", "note": "SapBERT embedding variant."}
+{"qid": "R019", "verdict": "model", "note": "BI-RADS BERT variant with auxiliary data."}
+{"qid": "R020", "verdict": "not_model", "note": "GitHub repository of evaluation code."}
+{"qid": "R021", "verdict": "model", "note": "Arabic BERT hybrid model."}
+{"qid": "R022", "verdict": "not_model", "note": "Plant gene co-expression."}
+{"qid": "R023", "verdict": "not_model", "note": "Feature sequence symbol from ChemBERTa."}
+{"qid": "R024", "verdict": "model", "note": "finBERT financial model."}
+{"qid": "R025", "verdict": "not_model", "note": "Matrix symbol in formula."}
+{"qid": "R026", "verdict": "not_model", "note": "BERTScore evaluation metric."}
+{"qid": "R027", "verdict": "not_model", "note": "Journal title artifact."}
+{"qid": "R028", "verdict": "unsure", "note": "Compression technique for GPT; not clearly a model."}
+{"qid": "R029", "verdict": "model", "note": "Transformer promoter prediction model."}
+{"qid": "R030", "verdict": "not_model", "note": "Plasmid."}
+{"qid": "R031", "verdict": "model", "note": "BERT fine-tuned on COVID literature."}
+{"qid": "R032", "verdict": "not_model", "note": "Embedding variable symbol."}
+{"qid": "R033", "verdict": "model", "note": "Domain-adaptive pretrained RoBERTa."}
+{"qid": "R034", "verdict": "not_model", "note": "CNN architecture, not a language model."}
+{"qid": "R035", "verdict": "not_model", "note": "Rice gene."}
+{"qid": "R036", "verdict": "not_model", "note": "Image file name."}
+{"qid": "R037", "verdict": "not_model", "note": "Gemini surfactant chemical."}
+{"qid": "R038", "verdict": "model", "note": "Genome BERT language model."}
+{"qid": "R039", "verdict": "model", "note": "ProtTrans BERT protein model."}
+{"qid": "R040", "verdict": "unsure", "note": "Fragment, feature derived from UTR BERT; unclear."}
+{"qid": "R041", "verdict": "model", "note": "GPT-based radiology assistant."}
+{"qid": "R042", "verdict": "model", "note": "Domain BERT combined with NER layers."}
+{"qid": "R043", "verdict": "not_model", "note": "Subreddit name."}
+{"qid": "R044", "verdict": "model", "note": "XLM-RoBERTa base."}
+{"qid": "R045", "verdict": "model", "note": "Arabic BERT model."}
+{"qid": "R046", "verdict": "not_model", "note": "Variable notation for SBERT vector."}
+{"qid": "R047", "verdict": "not_model", "note": "BERTScore metric."}
+{"qid": "R048", "verdict": "model", "note": "Hebrew pretrained language model."}
+{"qid": "R049", "verdict": "not_model", "note": "BERTScore metric."}
+{"qid": "R050", "verdict": "model", "note": "BERT-Tiny pretrained baseline."}
+{"qid": "R051", "verdict": "not_model", "note": "Scoring function based on TorsionBERT."}
+{"qid": "R052", "verdict": "not_model", "note": "BERTScore metric."}
+{"qid": "R053", "verdict": "not_model", "note": "Dataset name."}
+{"qid": "R054", "verdict": "model", "note": "Proposed GPT-based policy tool."}
+{"qid": "R055", "verdict": "model", "note": "Sentence-BERT model."}
+{"qid": "R056", "verdict": "not_model", "note": "Recombinant antibody reagent."}
+{"qid": "R057", "verdict": "model", "note": "DriveGPT4 driving model version."}
+{"qid": "R058", "verdict": "not_model", "note": "Parameter-inheritance method."}
+{"qid": "R059", "verdict": "model", "note": "Custom ChatGPT judge assistant."}
+{"qid": "R060", "verdict": "not_model", "note": "Test score variable, GPT is a test."}
+{"qid": "R061", "verdict": "model", "note": "IndicBERT pretrained model."}
+{"qid": "R062", "verdict": "not_model", "note": "Visualization tool."}
+{"qid": "R063", "verdict": "model", "note": "ProkBERT genomic model."}
+{"qid": "R064", "verdict": "model", "note": "ChatGPT o1."}
+{"qid": "R065", "verdict": "model", "note": "BioClinicalBERT multimodal model."}
+{"qid": "R066", "verdict": "not_model", "note": "Gluten protein types."}
+{"qid": "R067", "verdict": "model", "note": "Portuguese legal BERT."}
+{"qid": "R068", "verdict": "not_model", "note": "Pipeline configuration label."}
+{"qid": "R069", "verdict": "not_model", "note": "Code class name in library."}
+{"qid": "R070", "verdict": "model", "note": "Social media pretrained BERT."}
+{"qid": "R071", "verdict": "model", "note": "HuatuoGPT-o1-8B with citation number."}
+{"qid": "R072", "verdict": "model", "note": "GPT-based antibody sequence model."}
+{"qid": "R073", "verdict": "model", "note": "DistilBERT checkpoint."}
+{"qid": "R074", "verdict": "not_model", "note": "Hordein protein fraction."}
+{"qid": "R075", "verdict": "model", "note": "BlueBERT checkpoint."}
+{"qid": "R076", "verdict": "not_model", "note": "Data file name."}
+{"qid": "R077", "verdict": "model", "note": "Fine-tuned RobBERT."}
+{"qid": "R078", "verdict": "not_model", "note": "Score derived from DNABERT, a quantity."}
+{"qid": "R079", "verdict": "model", "note": "GPT-based diagnosis system."}
+{"qid": "R080", "verdict": "not_model", "note": "Zero-shot detector method."}
+{"qid": "R081", "verdict": "not_model", "note": "Dataset name."}
+{"qid": "R082", "verdict": "model", "note": "RoBERTa-large run submission."}
+{"qid": "R083", "verdict": "not_model", "note": "BERTopic library."}
+{"qid": "R084", "verdict": "model", "note": "ProtBert variant."}
+{"qid": "R085", "verdict": "not_model", "note": "Random forest sub-Golgi classifier, not transformer."}
+{"qid": "R086", "verdict": "model", "note": "Pipeline combining KazRoBERTa."}
+{"qid": "R087", "verdict": "model", "note": "Llama fine-tuned for mental health."}
+{"qid": "R088", "verdict": "model", "note": "Mental health RoBERTa."}
+{"qid": "R089", "verdict": "not_model", "note": "Topic trend detection method."}
+{"qid": "R090", "verdict": "model", "note": "COVID-Twitter-BERT variant."}
+{"qid": "R091", "verdict": "model", "note": "Table-BERT with Fig glued on."}
+{"qid": "R092", "verdict": "model", "note": "ClinBioBERT seq2seq fine-tuning variant."}
+{"qid": "R093", "verdict": "not_model", "note": "BERTopic library."}
+{"qid": "R094", "verdict": "not_model", "note": "Dataset name."}
+{"qid": "R095", "verdict": "not_model", "note": "Embedding variable symbol."}
+{"qid": "R096", "verdict": "not_model", "note": "Pea gene."}
+{"qid": "R097", "verdict": "not_model", "note": "BERTopic-based topic modelling."}
+{"qid": "R098", "verdict": "not_model", "note": "BERTScore metric."}
+{"qid": "R099", "verdict": "not_model", "note": "BERTopic library."}
+{"qid": "R100", "verdict": "model", "note": "Clinical BioBERT."}

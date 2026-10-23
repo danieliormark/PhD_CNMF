@@ -1,0 +1,502 @@
+{
+ "R001": {
+  "item": "batch_14:G14.132",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R002": {
+  "item": "batch_04:G04.225",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R003": {
+  "item": "batch_09:G09.247",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R004": {
+  "item": "batch_09:G09.015",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R005": {
+  "item": "batch_05:G05.046",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R006": {
+  "item": "batch_04:G04.071",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R007": {
+  "item": "batch_05:G05.227",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R008": {
+  "item": "batch_04:G04.083",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R009": {
+  "item": "batch_13:G13.157",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R010": {
+  "item": "batch_11:G11.004",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R011": {
+  "item": "batch_08:G08.073",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R012": {
+  "item": "batch_03:G03.101",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R013": {
+  "item": "batch_04:G04.041",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R014": {
+  "item": "batch_02:G02.178",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R015": {
+  "item": "batch_02:G02.233",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R016": {
+  "item": "batch_12:G12.002",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R017": {
+  "item": "batch_12:G12.090",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R018": {
+  "item": "batch_03:G03.225",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R019": {
+  "item": "batch_16:G16.084",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R020": {
+  "item": "batch_13:G13.006",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R021": {
+  "item": "batch_02:G02.211",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R022": {
+  "item": "batch_03:G03.014",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R023": {
+  "item": "batch_17:G17.023",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R024": {
+  "item": "batch_11:G11.136",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R025": {
+  "item": "batch_01:G01.203",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R026": {
+  "item": "batch_06:G06.029",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R027": {
+  "item": "batch_16:G16.195",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R028": {
+  "item": "batch_17:G17.038",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R029": {
+  "item": "batch_08:G08.120",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R030": {
+  "item": "batch_03:G03.218",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R031": {
+  "item": "batch_06:G06.099",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R032": {
+  "item": "batch_10:G10.078",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R033": {
+  "item": "batch_09:G09.007",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R034": {
+  "item": "batch_10:G10.039",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R035": {
+  "item": "batch_17:G17.057",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R036": {
+  "item": "batch_11:G11.110",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R037": {
+  "item": "batch_05:G05.052",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R038": {
+  "item": "batch_12:G12.092",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R039": {
+  "item": "batch_07:G07.084",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R040": {
+  "item": "batch_09:G09.157",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R041": {
+  "item": "batch_02:G02.088",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R042": {
+  "item": "batch_11:G11.183",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R043": {
+  "item": "batch_11:G11.062",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R044": {
+  "item": "batch_16:G16.004",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R045": {
+  "item": "batch_14:G14.049",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R046": {
+  "item": "batch_01:G01.154",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R047": {
+  "item": "batch_11:G11.075",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R048": {
+  "item": "batch_02:G02.071",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R049": {
+  "item": "batch_05:G05.188",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R050": {
+  "item": "batch_06:G06.160",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R051": {
+  "item": "batch_12:G12.101",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R052": {
+  "item": "batch_09:G09.187",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R053": {
+  "item": "batch_02:G02.006",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R054": {
+  "item": "batch_12:G12.051",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R055": {
+  "item": "batch_13:G13.011",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R056": {
+  "item": "batch_10:G10.232",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R057": {
+  "item": "batch_10:G10.111",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R058": {
+  "item": "batch_09:G09.206",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R059": {
+  "item": "batch_06:G06.173",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R060": {
+  "item": "batch_08:G08.122",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R061": {
+  "item": "batch_13:G13.075",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R062": {
+  "item": "batch_03:G03.191",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R063": {
+  "item": "batch_09:G09.127",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R064": {
+  "item": "batch_09:G09.207",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R065": {
+  "item": "batch_03:G03.092",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R066": {
+  "item": "batch_15:G15.033",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R067": {
+  "item": "batch_12:G12.119",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R068": {
+  "item": "batch_06:G06.202",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R069": {
+  "item": "batch_12:G12.247",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R070": {
+  "item": "batch_10:G10.240",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R071": {
+  "item": "batch_07:G07.186",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R072": {
+  "item": "batch_14:G14.168",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R073": {
+  "item": "batch_16:G16.127",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R074": {
+  "item": "batch_02:G02.147",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R075": {
+  "item": "batch_09:G09.018",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R076": {
+  "item": "batch_12:G12.128",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R077": {
+  "item": "batch_16:G16.089",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R078": {
+  "item": "batch_04:G04.108",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R079": {
+  "item": "batch_09:G09.050",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R080": {
+  "item": "batch_07:G07.131",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R081": {
+  "item": "batch_07:G07.172",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R082": {
+  "item": "batch_05:G05.095",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R083": {
+  "item": "batch_04:G04.128",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R084": {
+  "item": "batch_10:G10.096",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R085": {
+  "item": "batch_08:G08.090",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R086": {
+  "item": "batch_11:G11.246",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R087": {
+  "item": "batch_08:G08.004",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R088": {
+  "item": "batch_06:G06.245",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R089": {
+  "item": "batch_07:G07.158",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R090": {
+  "item": "batch_14:G14.045",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R091": {
+  "item": "batch_11:G11.063",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R092": {
+  "item": "batch_06:G06.046",
+  "final": "model",
+  "stratum": "model"
+ },
+ "R093": {
+  "item": "batch_12:G12.089",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R094": {
+  "item": "batch_13:G13.142",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R095": {
+  "item": "batch_01:G01.223",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R096": {
+  "item": "batch_03:G03.099",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R097": {
+  "item": "batch_05:G05.224",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R098": {
+  "item": "batch_17:G17.081",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R099": {
+  "item": "batch_12:G12.146",
+  "final": "not_model",
+  "stratum": "not_model"
+ },
+ "R100": {
+  "item": "batch_07:G07.038",
+  "final": "model",
+  "stratum": "model"
+ }
+}

@@ -1,0 +1,10 @@
+{"qid": "R001", "verdict": "yes", "reason": "LM_PROTEIN", "note": "protein language models as variant predictors"}
+{"qid": "R002", "verdict": "yes", "reason": "LM_PROTEIN", "note": "SignalP 6.0 based on protein language models"}
+{"qid": "R003", "verdict": "no", "reason": "OTHER_MISC", "note": "Llm-CoP is a polymer name abbreviation"}
+{"qid": "R004", "verdict": "yes", "reason": "TRANSFORMER_ML", "note": "deep-learning transformer models for de novo sequencing"}
+{"qid": "R005", "verdict": "yes", "reason": "LM_MODEL", "note": "LLM gemma:12b used for scoring and descriptions"}
+{"qid": "R006", "verdict": "no", "reason": "OTHER_PERSON", "note": "LLM is a researcher's initials"}
+{"qid": "R007", "verdict": "no", "reason": "OTHER_ABBREV", "note": "GPT means group phylotype"}
+{"qid": "R008", "verdict": "no", "reason": "OTHER_ABBREV", "note": "LLM is legs lean mass in VO2max"}
+{"qid": "R009", "verdict": "yes", "reason": "LM_PROTEIN", "note": "variant effect prediction using protein language models"}
+{"qid": "R010", "verdict": "no", "reason": "OTHER_LINGUISTIC", "note": "psycholinguistic interactive language models of brain processing"}

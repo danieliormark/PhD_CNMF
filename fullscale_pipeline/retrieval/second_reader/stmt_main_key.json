@@ -1,0 +1,502 @@
+{
+ "R001": {
+  "item": "stmt_check:B02.027",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R002": {
+  "item": "stmt_check:B05.172",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R003": {
+  "item": "stmt_check:B05.190",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R004": {
+  "item": "stmt_check:B01.347",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R005": {
+  "item": "stmt_check:B01.484",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R006": {
+  "item": "stmt_check:B07.129",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R007": {
+  "item": "stmt_check2:S01.043",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R008": {
+  "item": "stmt_check:B04.267",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R009": {
+  "item": "stmt_check:B07.093",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R010": {
+  "item": "stmt_check:B10.247",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R011": {
+  "item": "stmt_check:B11.261",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R012": {
+  "item": "stmt_check:B03.347",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R013": {
+  "item": "stmt_check:B04.414",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R014": {
+  "item": "stmt_check:B09.071",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R015": {
+  "item": "stmt_check:B05.474",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R016": {
+  "item": "stmt_check:B09.155",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R017": {
+  "item": "stmt_check:B01.433",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R018": {
+  "item": "stmt_check:B12.316",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R019": {
+  "item": "stmt_check:B03.404",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R020": {
+  "item": "stmt_check:B05.233",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R021": {
+  "item": "stmt_check:B11.491",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R022": {
+  "item": "stmt_check:B04.062",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R023": {
+  "item": "stmt_check:B10.299",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R024": {
+  "item": "stmt_check:B12.020",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R025": {
+  "item": "stmt_check:B05.061",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R026": {
+  "item": "stmt_check:B04.321",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R027": {
+  "item": "stmt_check:B01.215",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R028": {
+  "item": "stmt_check:B09.173",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R029": {
+  "item": "stmt_check:B01.192",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R030": {
+  "item": "stmt_check:B01.052",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R031": {
+  "item": "stmt_check:B03.134",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R032": {
+  "item": "stmt_check:B07.473",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R033": {
+  "item": "stmt_check:B08.303",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R034": {
+  "item": "stmt_check:B05.200",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R035": {
+  "item": "stmt_check:B09.156",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R036": {
+  "item": "stmt_check:B10.475",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R037": {
+  "item": "stmt_check:B12.160",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R038": {
+  "item": "stmt_check:B01.366",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R039": {
+  "item": "stmt_check:B08.423",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R040": {
+  "item": "stmt_check:B04.339",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R041": {
+  "item": "stmt_check:B07.480",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R042": {
+  "item": "stmt_check:B08.271",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R043": {
+  "item": "stmt_check:B11.099",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R044": {
+  "item": "stmt_check:B07.481",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R045": {
+  "item": "stmt_check:B11.473",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R046": {
+  "item": "stmt_check:B05.222",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R047": {
+  "item": "stmt_check:B10.061",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R048": {
+  "item": "stmt_check:B06.228",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R049": {
+  "item": "stmt_check:B13.018",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R050": {
+  "item": "stmt_check:B01.143",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R051": {
+  "item": "stmt_check:B05.243",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R052": {
+  "item": "stmt_check:B05.183",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R053": {
+  "item": "stmt_check:B04.171",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R054": {
+  "item": "stmt_check:B09.479",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R055": {
+  "item": "stmt_check:B03.090",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R056": {
+  "item": "stmt_check2:S02.206",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R057": {
+  "item": "stmt_check:B07.148",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R058": {
+  "item": "stmt_check:B09.407",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R059": {
+  "item": "stmt_check:B06.318",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R060": {
+  "item": "stmt_check:B11.320",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R061": {
+  "item": "stmt_check:B02.011",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R062": {
+  "item": "stmt_check:B04.338",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R063": {
+  "item": "stmt_check:B01.248",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R064": {
+  "item": "stmt_check2:S03.093",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R065": {
+  "item": "stmt_check:B07.114",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R066": {
+  "item": "stmt_check:B11.108",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R067": {
+  "item": "stmt_check:B06.355",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R068": {
+  "item": "stmt_check:B12.347",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R069": {
+  "item": "stmt_check:B10.046",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R070": {
+  "item": "stmt_check:B03.197",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R071": {
+  "item": "stmt_check:B03.367",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R072": {
+  "item": "stmt_check:B12.453",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R073": {
+  "item": "stmt_check:B09.102",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R074": {
+  "item": "stmt_check2:S03.039",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R075": {
+  "item": "stmt_check:B11.163",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R076": {
+  "item": "stmt_check2:S01.237",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R077": {
+  "item": "stmt_check:B08.240",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R078": {
+  "item": "stmt_check:B07.411",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R079": {
+  "item": "stmt_check:B01.222",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R080": {
+  "item": "stmt_check:B02.394",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R081": {
+  "item": "stmt_check:B07.019",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R082": {
+  "item": "stmt_check:B05.083",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R083": {
+  "item": "stmt_check:B04.251",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R084": {
+  "item": "stmt_check:B01.382",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R085": {
+  "item": "stmt_check:B11.388",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R086": {
+  "item": "stmt_check:B09.186",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R087": {
+  "item": "stmt_check:B09.492",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R088": {
+  "item": "stmt_check:B05.070",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R089": {
+  "item": "stmt_check:B07.456",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R090": {
+  "item": "stmt_check:B07.440",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R091": {
+  "item": "stmt_check:B06.229",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R092": {
+  "item": "stmt_check:B11.064",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R093": {
+  "item": "stmt_check:B07.491",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R094": {
+  "item": "stmt_check:B07.171",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R095": {
+  "item": "stmt_check2:S01.118",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R096": {
+  "item": "stmt_check:B03.363",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R097": {
+  "item": "stmt_check:B02.378",
+  "final": "research",
+  "stratum": "research"
+ },
+ "R098": {
+  "item": "stmt_check:B04.341",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R099": {
+  "item": "stmt_check2:S03.063",
+  "final": "statement",
+  "stratum": "statement"
+ },
+ "R100": {
+  "item": "stmt_check:B09.477",
+  "final": "statement",
+  "stratum": "statement"
+ }
+}

@@ -1,0 +1,10 @@
+{"qid": "R001", "verdict": "model", "note": "BERT-based model trained on EHR notes"}
+{"qid": "R002", "verdict": "model", "note": "GPT-based molecule generator name with suffix generated"}
+{"qid": "R003", "verdict": "not_model", "note": "gene panel derived from GPT-4, not a model"}
+{"qid": "R004", "verdict": "not_model", "note": "BERTScore is an evaluation metric tool"}
+{"qid": "R005", "verdict": "model", "note": "TinyLLaMA is a small LLaMA language model"}
+{"qid": "R006", "verdict": "not_model", "note": "comparison label heading, not a model name"}
+{"qid": "R007", "verdict": "not_model", "note": "pseudocode function identifier"}
+{"qid": "R008", "verdict": "model", "note": "BioPubMedBERT fine-tuned BERT models"}
+{"qid": "R009", "verdict": "model", "note": "PhenoBERT, a deep learning BERT-style method"}
+{"qid": "R010", "verdict": "not_model", "note": "GPT1 is a gene/protein phosphorylation site"}
