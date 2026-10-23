@@ -174,6 +174,7 @@ GPTCelltype,,keep,,boundary review: outputs produced by a language model,read (R
 AugBERT,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 BERTprepend,,keep,,boundary review: outputs produced by a language model,read (RL-174)
 MICC-GPTs,,keep,,boundary review: outputs produced by a language model,read (RL-174)
+RegulatoryGPT,,keep,,"proposed GPT-based tool, a family of LLM tools (owner after the second reading, item R054)",owner (RL-181)
 bert2BERT,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 bert2BERT-like,,reject,,boundary review: outputs not produced by a language model,read (RL-174)
 BERTal,,reject,,boundary review: outputs not produced by a language model,read (RL-174)

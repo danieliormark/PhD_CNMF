@@ -152,7 +152,7 @@ INPUT_SHA[PP + "focal_terms.py"] = "892f98bb986e"     # P2's matcher with the RL
 INPUT_SHA[PP + "focal_terms_v3.py"] = "49f38796e655"                      # RL-171: the v3 matcher and its group-4 rule
 INPUT_SHA[focal_terms.RULES + "focal_group4_rule.py"] = "70d88dcdf8e4"
 INPUT_SHA[TERM_REJECTIONS] = "1dcd13352f6a"
-INPUT_SHA[G4_DECISIONS] = "7e3732cb0cdb"                     # RL-174 (RL-173 05a32cbad7ce, RL-172 326130aeba60)
+INPUT_SHA[G4_DECISIONS] = "08b623b537a7"                     # RL-181: RegulatoryGPT kept (RL-174 7e3732cb0cdb, RL-173 05a32cbad7ce, RL-172 326130aeba60)
 INPUT_SHA[STATEMENT_SENTENCES] = "bfcb97d7b479"
 INPUT_SHA[COMPOUND_FORMS] = "1d1bc8c84b8a"                 # RL-180 (built from the RL-178 output)
 # §6 item 8 (owner 2026-10-09): junk atoms, labels, numbers

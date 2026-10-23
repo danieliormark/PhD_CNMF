@@ -4245,7 +4245,7 @@ BioM-ALBERT,,keep,,Biomedical ALBERT transformer model,haiku
 LlamaAttention.forward,,map,LLaMA,the model's own code class,read (Haiku: not_model)
 DNABERT2-CAMP,,keep,,Hybrid model built on DNABERT-2 transformer,haiku
 RoBERTaFT,,map,RoBERTa,boundary review: use or configuration of the model,read (RL-174)
-RegulatoryGPT,,reject,,read: Hypothetical future tool; not clearly a model,read (Haiku: unsure)
+RegulatoryGPT,,keep,,"proposed GPT-based tool, a family of LLM tools (owner after the second reading, item R054)",owner (RL-181)
 SpanBERT,,keep,,SpanBERT transformer model for QA and extraction,haiku
 NDABERT,,keep,,Nucleotide DNA BERT model,haiku
 AceGPT-13B,,keep,,Arabic LLM compared with Jais-13B,haiku

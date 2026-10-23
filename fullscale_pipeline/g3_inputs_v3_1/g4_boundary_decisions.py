@@ -62,14 +62,17 @@ MAP = {   # spelling -> underlying model
 }
 KEEP = ("OntoGPT ontoGPT OntoGPT16 ontoGPT21 GPTArticleExtractor GPTArticleExtractor50 TopicGPT TopicGPT59 StructGPT AugGPT AugGPT38 "
         "FrugalGPT FrugalGPT15 FrugalGPT57 ZoteroGPT tpGPT GPT4Designer IoTGemini GPTSwarm147 ViperGPT GPTCelltype AugBERT "
-        "BERTprepend MICC-GPTs").split()     # outputs produced by an LLM (formerly rejected as method/tool/framework)
+        "BERTprepend MICC-GPTs RegulatoryGPT").split()     # outputs produced by an LLM (formerly rejected as method/tool/framework);
+# RegulatoryGPT: owner 2026-10-23 after the second reading (RL-181, item R054): a proposed GPT-based tool, a family of LLM tools
 REJECT = ("bert2BERT bert2BERT-like BERTal GPTNeXt GPTNeXt-based GPTZip InfoBERT VisBERT visBERT exBERT38 KnGPT18 QuantGPT17 "
           "SparseGPT19 SparseGPT23").split()   # procedures on models, visual tools, non-language networks
 
 
 def main():
     rows = [(k, "", "map", v, "boundary review: use or configuration of the model", "read (RL-174)") for k, v in sorted(MAP.items())]
-    rows += [(k, "", "keep", "", "boundary review: outputs produced by a language model", "read (RL-174)") for k in KEEP]
+    rows += [(k, "", "keep", "", "boundary review: outputs produced by a language model", "read (RL-174)") if k != "RegulatoryGPT" else
+             (k, "", "keep", "", "proposed GPT-based tool, a family of LLM tools (owner after the second reading, item R054)", "owner (RL-181)")
+             for k in KEEP]
     rows += [(k, "", "reject", "", "boundary review: outputs not produced by a language model", "read (RL-174)") for k in REJECT]
     seen = set()
     for r in rows:

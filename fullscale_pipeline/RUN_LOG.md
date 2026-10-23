@@ -2262,3 +2262,10 @@ defined inside prose. Hard set `hard/hard_rl181_notation.json` 4/4; self-test 11
 R080 (neuro-computational language models) stays no. R040 (UTR+BERT-derived) is a stand-alone table/list cell that G3
 already removes as non-prose (heading), so it does not reach the corpus. Reader-agent rule added to SESSION_PROTOCOL.md §K
 (tools limited to Read/Write; prompts forbid code; transcripts checked).]*
+*[2026-10-23, owner: RegulatoryGPT kept as a model (a family of LLM tools): `g4_boundary_decisions.py` KEEP, source "owner
+(RL-181)"; `g4_decisions.csv` 08b623b537a7 (one row changed). Reader-agent specification documented in SESSION_PROTOCOL.md
+§K, not created. Tables (owner: see first whether G3 removes them): in the four trial shards 202 table/row-like units (no
+end punctuation and ≤15 words or no verb): 59 removed as headings, 46 removed for having no parent, 1 as pseudocode, 4
+skipped, 92 kept; all 92 read: questionnaire items with a verb, sentences ending in a citation number or a colon before a
+removed formula, about 7 table residues ("Number of parameter(s) of the LLM involved", "Tool description: …", one
+abbreviation legend) — about 100 corpus-wide (0.01%). No table, bullet or end-punctuation rule added (owner).]*

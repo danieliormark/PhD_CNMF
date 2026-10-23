@@ -336,3 +336,9 @@ the full-scale pipeline only. The pipeline is expected to change, so the record 
   agent: (1) give it only the Read and Write tools (a custom agent definition with a `tools:` list, no Bash); (2) state in
   the prompt "you have no permission to write, create or run code or scripts of any kind; write the answers only with the
   Write tool"; (3) before using its answers, list the tool calls in its transcript and report any breach.
+  *Specification of a dedicated reader agent (owner 2026-10-23: document, do not create until needed; propose it when the
+  owner asks for reading agents):* file `.claude/agents/blind-reader.md` with frontmatter `name: blind-reader`, a
+  description ("reads item files against a rubric and writes one JSONL answer file; no search, no code"),
+  `tools: Read, Write` (no Bash, Glob, Grep, Edit, web or agent tools), `model:` the reader model chosen for the check
+  (e.g. `sonnet`, `haiku`); body: work only with the files named in the prompt; never open folders, keys or other files;
+  never write or run code; one answer line per question in the rubric's format; reply with the counts per verdict.
