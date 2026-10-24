@@ -949,3 +949,16 @@ cross-checked against NLM's journal Broad Subject Terms; no filtering on author-
 and 2025 papers disproportionately), author linking instead; before choosing, an OpenAlex fetch for all valid articles
 (topic hierarchy, authorships with institutions) and the NLM catalog subjects, to tabulate candidate subsets with their
 coverage. Open for the owner: field or family; the discipline source; the fetch; the size.
+
+## Addendum 2026-10-24 — author and institution merging rules (owner, after RL-188)
+
+Decided (owner): (1a) a person split over several OpenAlex author IDs is merged through a shared ORCID; (1d) where the
+ORCID PubMed gives (publisher-supplied) and the OpenAlex ORCID of the aligned authorship differ (892 bylines), PubMed's
+is used; (2) institutions are climbed to the nearest university parent (never above it, rule (1) of §8.3 B); the hand
+review and the treatment of bylines without an institution ID are decided after the trial subset is chosen. Open:
+(1b) OpenAlex IDs carrying 2+ PubMed ORCIDs (102 IDs, 522 bylines, 485 articles, 5 articles with only such authors):
+owner's proposal to drop these authors and the articles where they are the only authors, against splitting the ID by
+ORCID (sample read 2026-10-24: mostly OpenAlex merging different people, several on the same article; a few one person
+with two ORCIDs); (1c) linking of the 12,106 bylines without ID or ORCID, option B (step 1 of author_links_trial.py:
+to an identified person, 1,424 bylines) or C (steps 1 and 2: also among unidentified bylines, +548), measured on the
+working corpus v2 (scratch, read-only).
