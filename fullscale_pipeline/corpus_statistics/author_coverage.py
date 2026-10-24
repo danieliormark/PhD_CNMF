@@ -19,6 +19,15 @@ H = json.load(open(D + "headers.json"))
 V = json.load(open(D + "openalex_verified.json"))
 PM = json.load(open(OD + "pubmed_authors.json"))
 TYPES = {r["pmcid"]: r["primary_type"] for r in csv.DictReader(open(FP + "corpus_statistics/article_types_valid.csv"))}
+# RL-188: --corpus v2 = working_corpus_v2_pmcids.txt (RL-186 G3 valid minus retracted), headers and OpenAlex matches
+# of the current and the new articles merged; outputs carry "_v2". New articles have no primary type (article_types
+# _valid.csv covers the RL-130 corpus only): "not classified".
+import sys as _s
+V2CORPUS = "--corpus" in _s.argv and _s.argv[_s.argv.index("--corpus") + 1] == "v2"
+if V2CORPUS:
+    wc = [l.strip() for l in open(FP + "corpus_statistics/working_corpus_v2_pmcids.txt") if l.strip()]
+    H.update(json.load(open(D + "headers_new.json"))); V.update(json.load(open(D + "openalex_verified_new.json")))
+    TYPES = collections.defaultdict(lambda: "not classified", TYPES)
 
 SAME_VERSION = {"pmid+doi", "doi", "pmid_only_no_header_doi", "doi_differs_from_pmid_hit"}
 OTHER_VERSION = {"pmid_doi_mismatch_no_doi_hit"}   # OpenAlex record is another publication (abstract, chapter)
@@ -28,6 +37,7 @@ OTHER_VERSION = {"pmid_doi_mismatch_no_doi_hit"}   # OpenAlex record is another 
 import sys
 REFRESH = "--openalex" in sys.argv and sys.argv[sys.argv.index("--openalex") + 1] == "refresh"
 SUFFIX = "_refresh" if REFRESH else ""
+SUFFIX = ("_v2" if V2CORPUS else "") + SUFFIX
 if REFRESH:
     OW = json.load(open(OD + "openalex_works.json"))
     as_old = lambda w: dict(id=w["id"], doi=w["doi"], authors=[dict(id=a["id"], orcid=a["orcid"], raw=a["raw"] or a["name"])

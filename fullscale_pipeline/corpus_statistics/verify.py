@@ -1,10 +1,15 @@
 # Verified OpenAlex match: every work returned per PMID is kept, then checked against the
 # DOI in the article's own PMC header; unmatched articles retried by DOI. Key read from the
 # OPENALEX_API_KEY environment variable (never written to disk).
-import json, os, time, urllib.parse, urllib.request, collections
+import json, os, sys, time, urllib.parse, urllib.request, collections
+# RL-188: optional --headers FILE --out FILE (the new articles, headers_new.json -> openalex_verified_new.json); the raw
+# cache is shared (keyed by PMID / DOI, new keys added). Without arguments the run is the original one.
 
 D = "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/diagnostics/openalex_authors/"
 H = json.load(open(D + "headers.json"))
+VOUT = D + "openalex_verified.json"
+if "--headers" in sys.argv:
+    H = json.load(open(sys.argv[sys.argv.index("--headers") + 1])); VOUT = sys.argv[sys.argv.index("--out") + 1]
 KEY = os.environ["OPENALEX_API_KEY"]
 RAW = D + "openalex_raw.json"
 raw = json.load(open(RAW)) if os.path.exists(RAW) else {"by_pmid": {}, "by_doi": {}}
@@ -76,7 +81,7 @@ for pmcid, hd, cands in need_doi:
     else:
         choice[pmcid] = ("unmatched", None)
 
-json.dump({k: (m, w) for k, (m, w) in choice.items()}, open(D + "openalex_verified.json", "w"))
+json.dump({k: (m, w) for k, (m, w) in choice.items()}, open(VOUT, "w"))
 multi = sum(1 for v in raw["by_pmid"].values() if len(v) > 1)
 print("PMIDs returning >1 OpenAlex work:", multi, "of", len(raw["by_pmid"]))
 print("match types:", dict(collections.Counter(m for m, _ in choice.values())))

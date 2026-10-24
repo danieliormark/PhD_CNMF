@@ -2413,3 +2413,33 @@ an NLM journal ID; no author list marked incomplete; publication types for all 1
 Publication** (to be removed at the working-corpus layer, as the 46 of `working_corpus.py`). Years (PubMed electronic or
 print): 2015–2019 281, 2020 202, 2021 524, 2022 933, 2023 1,321, 2024 2,120, 2025 3,763, 2026 5,228. OpenAlex matching
 and works (author and institution IDs) not run: the OpenAlex key is not in this session's environment. [LOG]
+
+**RL-188 · 2026-10-24 · Retracted papers removed (working corpus v2) + OpenAlex for the new articles + coverage and duplicate checks · CODE + CORPUS DATA (read-only OpenAlex, Entrez) · LIVE**
+Owner (2026-10-24): retracted papers are removed; OpenAlex key given in the dialog (used only through the environment
+of the commands, written to no file, git or memory). **Working corpus v2** (`corpus_statistics/working_corpus_v2.py`,
+same rule as `working_corpus.py`): the 41,753 RL-186 G3-valid articles minus the 113 MEDLINE tags as "Retracted
+Publication" (the 46 of the RL-130 corpus, all still valid, plus 67 new) = **41,640** (`working_corpus_v2_pmcids.txt`;
+exclusions with reasons in `corpus_exclusions_post_g3_v2.csv`); 146 without a PMID kept, retraction status unknown; no
+retraction notice among valid articles. G3's output is not changed. **OpenAlex** (scripts extended with optional
+arguments, defaults unchanged): `verify.py --headers headers_new.json` -> `openalex_verified_new.json`: 14,144 PMID with
+agreeing DOI, 279 by DOI, 20 DOI record kept over a differing PMID record, 21 PMID only (no header DOI), 3 PMID record of
+another publication, 15 unmatched; no PMID returned two works. `openalex_works_fetch.py` (same version rule; also the 13
+current-corpus articles first valid in RL-186): works cache 42,479 refreshed, 8 gone. New `openalex_topics_fetch.py`:
+primary topic (topic, subfield, field, domain) and topic list for every cached work, 42,456 with a primary topic
+(`diagnostics/author_coverage/openalex_topics.json`). The 13 RL-186-only current articles also got their PubMed byline
+records. **Coverage of the 41,640** (`author_coverage.py --openalex refresh --corpus v2`; per-article counts in
+`author_coverage_by_article_v2_refresh.csv`): PubMed record 41,494 (146 no PMID); OpenAlex record of the same version
+41,443, another version 15, none 36; 254,986 personal bylines, 254,400 aligned to an OpenAlex authorship, 238,675
+(93.6%) with an OpenAlex author ID, 198,099 with an ORCID (PubMed or OpenAlex), **242,880 (95.3%) identified by ID or
+ORCID**, 12,106 by neither; articles with every byline identified 33,428, none identified 158, first or last author
+unidentified 2,756. Distinct people: 188,729 OpenAlex IDs, 149,135 ORCIDs, 190,294 after merging IDs and ORCIDs, upper
+bound 202,400. Disambiguation signals: 734 ORCIDs split over several OpenAlex IDs, 102 OpenAlex IDs with several ORCIDs,
+892 bylines whose PubMed and OpenAlex ORCIDs differ. Affiliations: PubMed affiliation text on 99.6% (current) / 99.8%
+(new) of bylines, an OpenAlex institution ID on 94.1% / 94.5%, either on 99.9%; 35,303 articles with an institution ID on
+every byline, 629 with none; 16,659 distinct OpenAlex institutions (6,960 on one article only; education 7,018,
+healthcare 4,048, facility 2,712, company 946). Journals: every article with a PMID has an NLM journal ID, 3,280
+journals (1,295 with one article); no ISSN or journal title on two NLM IDs; OpenAlex's primary location is a repository
+for 109 articles (journal identity is taken from NLM, not OpenAlex). **Duplicates:** no PMID, DOI or OpenAlex work shared
+by two articles; header version 1 (41,617) or 2 (23, journal revisions), no preprint; two identical normalised OpenAlex
+titles, both different papers (PMC12507154 / PMC12947111, known; PMC12698311 / PMC13662672: different journals, PMIDs,
+DOIs and PMC titles). [LOG]

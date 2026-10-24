@@ -5,7 +5,9 @@
 # record or another publication, and works with 100 authorships (the list endpoint's cut) are re-read
 # one by one. Key and contact e-mail come from the environment only (never written to disk):
 #   OPENALEX_API_KEY=... OPENALEX_MAILTO=... python3 openalex_works_fetch.py
-import json, os, time, urllib.parse, urllib.request
+#   RL-188: optional --headers FILE --verified FILE (the new articles: headers_new.json, openalex_verified_new.json);
+#   same cache, new keys added. Without arguments the run is the original one.
+import json, os, sys, time, urllib.parse, urllib.request
 
 FP = "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/"
 D = FP + "diagnostics/openalex_authors/"
@@ -14,6 +16,10 @@ KEY, MAIL = os.environ["OPENALEX_API_KEY"], os.environ.get("OPENALEX_MAILTO", ""
 H = json.load(open(D + "headers.json"))
 V = json.load(open(D + "openalex_verified.json"))
 wc = [l.strip() for l in open(FP + "corpus_statistics/working_corpus_pmcids.txt") if l.strip()]
+if "--headers" in sys.argv:
+    H = json.load(open(sys.argv[sys.argv.index("--headers") + 1]))
+    V = json.load(open(sys.argv[sys.argv.index("--verified") + 1]))
+    wc = sorted(H)
 SELECT = "id,doi,ids,title,publication_year,type,primary_location,locations,authorships"
 norm_doi = lambda d: (d or "").lower().replace("https://doi.org/", "").strip()
 
