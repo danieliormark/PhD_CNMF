@@ -2443,3 +2443,35 @@ for 109 articles (journal identity is taken from NLM, not OpenAlex). **Duplicate
 by two articles; header version 1 (41,617) or 2 (23, journal revisions), no preprint; two identical normalised OpenAlex
 titles, both different papers (PMC12507154 / PMC12947111, known; PMC12698311 / PMC13662672: different journals, PMIDs,
 DOIs and PMC titles). [LOG]
+
+**RL-189 · 2026-10-24 · Author identity on the working corpus v2: ORCID and OpenAlex conflicts, linking rule verified · AUDIT (read-only, no network) · LIVE**
+Scripts `corpus_statistics/author_linking_v2/` (README there). Owner decisions this day: (1a) a person split over
+several OpenAlex IDs is merged through a shared ORCID; (1d) where PubMed's and OpenAlex's ORCID differ (892 bylines),
+PubMed's is used; (1b) OpenAlex IDs carrying 2+ PubMed ORCIDs are **dropped, with articles left with no author, unless
+it is very certainly one person**; (1c) bylines without ID or ORCID are linked by **strict option B** only; (2)
+institutions climbed to the nearest university parent (the rest after the subset choice). **1b:** 102 such IDs (522
+bylines). Sample of 20 read: mostly OpenAlex merging different people (often co-authors of the same paper: Na Liu /
+Hao Yan; Yi-Ying / Yen-Pin Chen) or same-name people (two Xiao Luos), a few one person with two ORCIDs (George Church).
+"Very certainly one person" = every byline's name compatible (transliteration, compound surnames, joined given names;
+initials only when one side is initials) and the bylines of each ORCID share an institution or an identified co-author:
+41 IDs kept (all read: one person with two ORCIDs, or a co-author's ORCID copied onto them, e.g. Cocco / Monasson; a
+first version also kept Lee Miji / Lee Minjae, the initials rule was too loose and was fixed), **61 dropped: 323 bylines
+in 291 articles; 2 articles left with no author (PMC13447246, PMC13216025)**. **ORCIDs with 2+ names:** 1,611 ORCIDs
+with 2+ name forms; after the compatibility test 457 carry incompatible names (618 bylines in the minority name; 126 on
+the same article); sample of 16 read: 12 different people (the ORCID copied onto a co-author or onto someone else), 4 one
+person (name change Kühnel / Langnickel; misspellings). Treatment open (owner). **1c, strict B:** same name key (surname
++ first given name, written out); exactly one corroborated identified candidate; evidence at least 2 shared identified
+co-authors, or 1 co-author and a shared OpenAlex institution; for name keys held by 5+ identified people, 2+ co-authors
+and an institution; a co-author whose ID is one of the 1b suspects does not count. On the 12,106 unidentified bylines:
+**961 linked** (key held by 1 person 730, by 2–4 166, by 5+ 65), 115 ambiguous, 182 initials only, 10,848 stay their own
+person (the trial rule would have linked 1,424 + 548). Verification: (a) hide-and-recover, 20,000 identified bylines of
+people on 2+ articles: 13,361 recovered, 128 linked to another ID (precision 0.9905; 1.0 where one person holds the key,
+by construction; 0.922 / 0.920 for keys held by 2–4 / 5+ people, where most "wrong" links read as one person split by
+OpenAlex into two IDs: same name and affiliation); (b) false merges, 20,000 single-article identified people hidden and
+removed as candidates: 412 linked to another ID (2.06%, an upper bound: the cases shown are mostly OpenAlex splits of one
+person, e.g. Harri Lähdesmäki, Aalto); (c) 30 strict-B links on unidentified bylines read, stratified by name
+commonness: 30 plausible, 27 clear (same department, 2–3 shared co-authors), 3 probable (a company acquisition; a
+county hospital co-affiliation with the same group). Earlier in the day 21 links of the 2+-co-author or
+co-author+institution kind read: all right; 10 weak links (institution only / one co-author): about half doubtful
+(CSIRO Data61 vs CSIRO Herston; Penn genomics vs Penn medicine) — the reason for the strict rule. Nothing applied to any
+data yet: the author table for M1 is built after the subset choice. [LOG]
