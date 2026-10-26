@@ -992,3 +992,8 @@ Open for the owner: (1) research organisations as umbrellas or as one institutio
 experimental universities; (4) bylines without an institution ID (proposed: no affiliation tie); (5) the 4 no-PMID
 articles; A3 part 2 proposed deferred (14 Psychology articles affected). Next after these: weighting inside each matrix
 (§5 item 3), then the chunk12v3 builder.
+*[2026-10-26, owner: question (4) decided — bylines without an institution ID get no affiliation tie, provided the model
+does not read the absence as similarity. Requirement for chunk12v3/chunk13: unknown affiliation cells are missing
+(excluded from the loss, the same mechanism as the hold-out's hidden cells, §6.8), not observed zeros; chunk13's
+squared-error loss over all cells would otherwise treat them as "no tie" and pull such entities towards
+low-affiliation communities. Psychology: 578 persons (approach 1), 32 articles (approach 2) wholly unknown.]*

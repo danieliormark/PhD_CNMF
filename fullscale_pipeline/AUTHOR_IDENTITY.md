@@ -278,6 +278,14 @@ the parent categories in `institution_parent_categories.csv`. Alternatives, for 
    Lishui" → Xian Yang Central Hospital, "Fralin Biomedical Research Institute" → a generic one); matching by the full
    name of an institution already in the corpus finds 27 strings (32 bylines, 0.3%), about 25 correct. Proposed: no
    affiliation tie for these bylines (they keep their article and author ties).
+   *[Decided 2026-10-26 (owner): no affiliation tie for these bylines, provided the model does not treat the absence as
+   similarity. Measured requirement for M1: chunk13's loss is the squared error over every cell (the trace form), so an
+   unknown affiliation would enter as an observed zero, "no tie to any institution"; all-zero rows are best fit by
+   profiles with little affiliation mass, a weak shared pull towards the same communities. Therefore unknown affiliation
+   cells are treated as **missing** (excluded from the loss, like the hidden cells of the hold-out, design doc §6.8),
+   not as zeros: approach 1, the author×affiliation rows of the 578 Psychology persons with no institution on any byline;
+   approach 2, the article×affiliation rows of the 32 articles with no affiliated byline. A partly unaffiliated entity
+   (272 articles, 18 persons) keeps its known ties; the unknown part is simply not counted.]*
 
 ## 10. The author table built (2026-10-26)
 
