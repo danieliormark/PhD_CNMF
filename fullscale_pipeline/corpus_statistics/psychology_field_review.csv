@@ -16,7 +16,7 @@ PMC10149941,2023,keep,,,Multi-task learning to detect suicide ideation and menta
 PMC10173019,2023,keep,,,Investigating Social Media to Evaluate Emergency Medicine Physicians’ Emotional Well-being During COVID-19,JAMA network open,COVID-19 and Mental Health
 PMC10173706,2023,keep,,,The Effects of Expressing Empathy/Autonomy Support Using a COVID-19 Vaccination Chatbot: Experimental Study in a Sample of Belgian Adults,JMIR formative research,Social Robot Interaction and HRI
 PMC10176127,2023,keep,,,The Validation of Automated Social Skills Training in Members of the General Population Over 4 Weeks: Comparative Study,JMIR formative research,Social Robot Interaction and HRI
-PMC10181376,2023,flag,A,ergonomics: wearable motion capture for musculoskeletal disorders,"Wearable Motion Capture Devices for the Prevention of Work-Related Musculoskeletal Disorders in Ergonomics—An Overview of Current Applications, Challenges, and Future Opportunities","Sensors (Basel, Switzerland)",Ergonomics and Musculoskeletal Disorders
+PMC10181376,2023,drop,A,ergonomics: wearable motion capture for musculoskeletal disorders,"Wearable Motion Capture Devices for the Prevention of Work-Related Musculoskeletal Disorders in Ergonomics—An Overview of Current Applications, Challenges, and Future Opportunities","Sensors (Basel, Switzerland)",Ergonomics and Musculoskeletal Disorders
 PMC10192703,2023,keep,,,GCF2-Net: global-aware cross-modal feature fusion network for speech emotion recognition,Frontiers in neuroscience,Emotion and Mood Recognition
 PMC10193040,2023,keep,,,A chatbot for mental health support: exploring the impact of Emohaa on reducing mental distress in China,Frontiers in digital health,Digital Mental Health Interventions
 PMC10198496,2023,keep,,,Offloading under cognitive load: Humans are willing to offload parts of an attentionally demanding task to an algorithm,PloS one,Human-Automation Interaction and Safety
@@ -59,7 +59,7 @@ PMC10435742,2023,keep,,,Don’t forget the boundary problem! How EM field topolo
 PMC10436524,2023,keep,,,Human-AI teaming: leveraging transactive memory and speaking up for enhanced team effectiveness,Frontiers in psychology,Team Dynamics and Performance
 PMC10452404,2023,keep,,,Facial Anthropomorphic Trustworthiness Scale for Social Robots: A Hybrid Approach,"Biomimetics (Basel, Switzerland)",Social Robot Interaction and HRI
 PMC10455872,2023,keep,,,Individuals with High Metacognitive Ability Are Better at Divergent and Convergent Thinking,Journal of Intelligence,Creativity in Education and Neuroscience
-PMC10477491,2023,flag,B,"medical, veterinary or other education tools",A learning ecology-based approach for enhancing Digital Holocaust Memory in European cultural heritage education,Heliyon,"Memory, Trauma, and Commemoration"
+PMC10477491,2023,keep,B,"medical, veterinary or other education tools",A learning ecology-based approach for enhancing Digital Holocaust Memory in European cultural heritage education,Heliyon,"Memory, Trauma, and Commemoration"
 PMC10482772,2023,keep,,,An interpretable measure of semantic similarity for predicting eye movements in reading,Psychonomic bulletin & review,Reading and Literacy Development
 PMC10483682,2023,keep,,,A framework for multi-faceted content analysis of social media chatter regarding non-medical use of prescription medications,BMC digital health,Mental Health via Writing
 PMC10485275,2023,keep,,,"Can digital health researchers make a difference during the pandemic? Results of the single-arm, chatbot-led Elena+: Care for COVID-19 interventional study",Frontiers in public health,Digital Mental Health Interventions
@@ -81,7 +81,7 @@ PMC10561554,2023,keep,,,Psychological assessment of AI-based decision support sy
 PMC10565103,2023,keep,,,Human-AI teams—Challenges for a team-centered AI at work,Frontiers in artificial intelligence,Human-Automation Interaction and Safety
 PMC10566739,2023,keep,,,The psychological impacts of the COVID-19 pandemic on business leadership,PloS one,Mental Health via Writing
 PMC10575561,2023,keep,,,Lexical Processing Strongly Affects Reading Times But Not Skipping During Natural Reading,Open mind : discoveries in cognitive science,Reading and Literacy Development
-PMC10577182,2023,flag,B,"medical, veterinary or other education tools","Gamification in Biomedical Science Education: The Successful Implementation of Resimion, a Scenario-Based Learning Tool",British journal of biomedical science,Educational Games and Gamification
+PMC10577182,2023,keep,B,"medical, veterinary or other education tools","Gamification in Biomedical Science Education: The Successful Implementation of Resimion, a Scenario-Based Learning Tool",British journal of biomedical science,Educational Games and Gamification
 PMC10579608,2023,keep,,,First impressions of a financial AI assistant: differences between high trust and low trust users,Frontiers in artificial intelligence,Social Robot Interaction and HRI
 PMC10606253,2023,keep,,,"A Survey of Deep Learning-Based Multimodal Emotion Recognition: Speech, Text, and Face","Entropy (Basel, Switzerland)",Emotion and Mood Recognition
 PMC10613607,2023,keep,,,A Korean emotion-factor dataset for extracting emotion and factors in Korean conversations,Scientific reports,Emotion and Mood Recognition
@@ -92,7 +92,7 @@ PMC10628686,2023,keep,,,"Objectively Quantifying Pediatric Psychiatric Severity 
 PMC10646176,2023,keep,,,What is critical for human-centered AI at work? – Toward an interdisciplinary theory,Frontiers in artificial intelligence,Human-Automation Interaction and Safety
 PMC10646310,2023,keep,,,A comprehensive review for machine learning on neuroimaging in obsessive-compulsive disorder,Frontiers in human neuroscience,Obsessive-Compulsive Spectrum Disorders
 PMC10654961,2023,keep,,,Identifying mental health discussion topic in social media community: subreddit of bipolar disorder analysis,Frontiers in research metrics and analytics,Mental Health via Writing
-PMC10661764,2023,flag,B,health informatics or social media outside mental health,What can we learn from a Chinese social media used by glaucoma patients?,BMC ophthalmology,Mental Health via Writing
+PMC10661764,2023,keep,B,health informatics or social media outside mental health,What can we learn from a Chinese social media used by glaucoma patients?,BMC ophthalmology,Mental Health via Writing
 PMC10663264,2023,keep,,,Your robot therapist is not your therapist: understanding the role of AI-powered mental health chatbots,Frontiers in digital health,Digital Mental Health Interventions
 PMC10663535,2023,keep,,,Natural language processing system for rapid detection and intervention of mental health crisis chat messages,NPJ digital medicine,Mental Health via Writing
 PMC10682756,2023,keep,,,Zero-shot personalization of speech foundation models for depressed mood monitoring,"Patterns (New York, N.Y.)",Emotion and Mood Recognition
@@ -113,7 +113,7 @@ PMC10725721,2023,keep,,,Neurotechnological solutions for post‐traumatic stress
 PMC10725971,2023,keep,,,Safe physical interaction with cobots: a multi-modal fusion approach for health monitoring,Frontiers in neurorobotics,Emotion and Mood Recognition
 PMC10727113,2023,keep,,,Safety of Large Language Models in Addressing Depression,Cureus,Digital Mental Health Interventions
 PMC10730549,2023,keep,,,Systematic review and meta-analysis of AI-based conversational agents for promoting mental health and well-being,NPJ digital medicine,Digital Mental Health Interventions
-PMC10730685,2023,flag,B,sleep or pain medicine,Transformer encoder with multiscale deep learning for pain classification using physiological signals,Frontiers in physiology,Emotion and Mood Recognition
+PMC10730685,2023,drop,B,sleep or pain medicine,Transformer encoder with multiscale deep learning for pain classification using physiological signals,Frontiers in physiology,Emotion and Mood Recognition
 PMC10733821,2023,keep,,,"The Impact of Generative Conversational Artificial Intelligence on the Lesbian, Gay, Bisexual, Transgender, and Queer Community: Scoping Review",Journal of medical Internet research,"LGBTQ Health, Identity, and Policy"
 PMC10734686,2023,keep,,,RISE: an open-source architecture for interdisciplinary and reproducible human–robot interaction research,Frontiers in robotics and AI,Social Robot Interaction and HRI
 PMC10739690,2023,keep,,,The emotion prediction of college students with attention LSTM during the COVID19 epidemic,Scientific reports,Emotion and Mood Recognition
@@ -125,12 +125,12 @@ PMC10748510,2023,keep,,,Toward explainable AI (XAI) for mental health detection 
 PMC10753156,2023,keep,,,"AI-Powered Mental Health Virtual Assistants' Acceptance: An Empirical Study on Influencing Factors Among Generations X, Y, and Z",Cureus,Digital Mental Health Interventions
 PMC10757980,2023,keep,,,Psychosocial interventions for suicidal and self-injurious-related behaviors among adolescents: a systematic review and meta-analysis of Chinese practices,Frontiers in public health,Suicide and Self-Harm Studies
 PMC10758408,2023,keep,,,The characteristics of online gerontophobia expressions in South Korea,Frontiers in psychology,Aging and Gerontology Research
-PMC10759218,2023,flag,B,LGBTQ+ sexual health and health services,Developing technology-based interventions for infectious diseases: ethical considerations for young sexual and gender minority people,Frontiers in reproductive health,"LGBTQ Health, Identity, and Policy"
+PMC10759218,2023,drop,B,LGBTQ+ sexual health and health services,Developing technology-based interventions for infectious diseases: ethical considerations for young sexual and gender minority people,Frontiers in reproductive health,"LGBTQ Health, Identity, and Policy"
 PMC10762606,2023,keep,,,Evaluation of the Current State of Chatbots for Digital Health: Scoping Review,Journal of medical Internet research,Digital Mental Health Interventions
 PMC10766703,2023,keep,,,"Digital technology and mental health during the COVID-19 pandemic: a narrative review with a focus on depression, anxiety, stress, and trauma",Frontiers in psychiatry,Digital Mental Health Interventions
 PMC10778607,2024,keep,,,Engagement with mHealth Alcohol Interventions: User Perspectives on an App or Chatbot-Delivered Program to Reduce Drinking,"Healthcare (Basel, Switzerland)",Digital Mental Health Interventions
 PMC10781259,2023,keep,,,Understanding Naturalistic Facial Expressions with Deep Learning and Multimodal Large Language Models,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
-PMC10782493,2024,flag,A,sleep medicine method: automated sleep scoring,The pros and cons of using automated sleep scoring in sleep research,Sleep,Sleep and related disorders
+PMC10782493,2024,drop,A,sleep medicine method: automated sleep scoring,The pros and cons of using automated sleep scoring in sleep research,Sleep,Sleep and related disorders
 PMC10788443,2023,keep,,,Understanding reminiscence and its negative functions in the everyday conversations of young adults: A machine learning approach,Heliyon,"Identity, Memory, and Therapy"
 PMC10794597,2024,keep,,,Taxonomic structure in a set of abstract concepts,Frontiers in psychology,"Categorization, perception, and language"
 PMC10794729,2024,keep,,,Development of depression detection algorithm using text scripts of routine psychiatric interview,Frontiers in psychiatry,Mental Health via Writing
@@ -149,7 +149,7 @@ PMC10845804,2024,keep,,,Multimedia design for learner interest and achievement: 
 PMC10847524,2024,keep,,,The relationship between ostracism and negative risk-taking behavior: the role of ego depletion and physical exercise,Frontiers in psychology,Death Anxiety and Social Exclusion
 PMC10850600,2024,keep,,,The impact of chatbots based on large language models on second language vocabulary acquisition,Heliyon,Second Language Acquisition and Learning
 PMC10851123,2024,keep,,,Development and Evaluation of a Smartphone-Based Chatbot Coach to Facilitate a Balanced Lifestyle in Individuals With Headaches (BalanceUP App): Randomized Controlled Trial,Journal of medical Internet research,Digital Mental Health Interventions
-PMC10852024,2023,flag,B,sleep or pain medicine,#ChronicPain: Automated Building of a Chronic Pain Cohort from Twitter Using Machine Learning,Health data science,Mental Health via Writing
+PMC10852024,2023,drop,B,sleep or pain medicine,#ChronicPain: Automated Building of a Chronic Pain Cohort from Twitter Using Machine Learning,Health data science,Mental Health via Writing
 PMC10855257,2024,keep,,,The Modernization of Oriental Music Therapy: Five-Element Music Therapy Combined with Artificial Intelligence,"Healthcare (Basel, Switzerland)",Music Therapy and Health
 PMC10858891,2024,keep,,,The current state of artificial intelligence generative language models is more creative than humans on divergent thinking tasks,Scientific reports,Creativity in Education and Neuroscience
 PMC10864620,2024,keep,,,Attachment to robots and therapeutic efficiency in mental health,Frontiers in psychology,Social Robot Interaction and HRI
@@ -171,7 +171,7 @@ PMC10930454,2024,keep,,,The Effects of Artificial Intelligence Chatbots on Women
 PMC10932588,2024,keep,,,Signal Smoothing and Syntactic Choices: A Critical Reflection on the UID Hypothesis,Open mind : discoveries in cognitive science,Phonetics and Phonology Research
 PMC10932590,2024,keep,,,Word Frequency and Predictability Dissociate in Naturalistic Reading,Open mind : discoveries in cognitive science,Reading and Literacy Development
 PMC10936766,2024,keep,,,Large language models are able to downplay their cognitive abilities to fit the persona they simulate,PloS one,Child and Animal Learning Development
-PMC10941794,2024,flag,B,sleep or pain medicine,Scoping Review: The Role of Psychedelics in the Management of Chronic Pain,Journal of pain research,Psychedelics and Drug Studies
+PMC10941794,2024,drop,B,sleep or pain medicine,Scoping Review: The Role of Psychedelics in the Management of Chronic Pain,Journal of pain research,Psychedelics and Drug Studies
 PMC10945118,2024,keep,,,Moral universals: A machine-reading analysis of 256 societies,Heliyon,Cultural Differences and Values
 PMC10949372,2024,keep,,,Exploring the Association Between Textual Parameters and Psychological and Cognitive Factors,Psychology research and behavior management,Mental Health via Writing
 PMC10952123,2024,keep,,,On the relationship between mind perception and social support of chatbots,Frontiers in psychology,Social Robot Interaction and HRI
@@ -210,7 +210,7 @@ PMC11044523,2023,keep,,,"It’s Not Only What You Say, But Also How You Say It: 
 PMC11045867,2024,keep,,,Improving speech depression detection using transfer learning with wav2vec 2.0 in low-resource environments,Scientific reports,Emotion and Mood Recognition
 PMC11046489,2024,keep,,,Wildfires and social media discourse: exploring mental health and emotional wellbeing through Twitter,Frontiers in public health,Mental Health via Writing
 PMC11046636,2024,keep,,,Spontaneous eye movements reflect the representational geometries of conceptual spaces,Proceedings of the National Academy of Sciences of the United States of America,"Categorization, perception, and language"
-PMC11060209,2024,flag,B,other,"Healthcare workers’ knowledge and risk perception regarding the first wave of COVID-19 in Khyber Pakhtunkhwa, Pakistan: an online cross-sectional survey",Annals of medicine and surgery (2012),COVID-19 and Mental Health
+PMC11060209,2024,keep,B,other,"Healthcare workers’ knowledge and risk perception regarding the first wave of COVID-19 in Khyber Pakhtunkhwa, Pakistan: an online cross-sectional survey",Annals of medicine and surgery (2012),COVID-19 and Mental Health
 PMC11061529,2024,keep,,,"Developing trustworthy artificial intelligence: insights from research on interpersonal, human-automation, and human-AI trust",Frontiers in psychology,Human-Automation Interaction and Safety
 PMC11065872,2024,keep,,,Robust language-based mental health assessments in time and space through social media,NPJ digital medicine,Mental Health via Writing
 PMC11079185,2024,keep,,,Evaluation of co-speech gestures grounded in word-distributed representation,Frontiers in robotics and AI,Social Robot Interaction and HRI
@@ -224,7 +224,7 @@ PMC11102489,2024,keep,,,Predicting recurrent chat contact in a psychological int
 PMC11106393,2024,keep,,,"Examining the role of AI technology in online mental healthcare: opportunities, challenges, and implications, a mixed-methods review",Frontiers in psychiatry,Digital Mental Health Interventions
 PMC11112053,2024,keep,,,Using Large Language Models to Understand Suicidality in a Social Media–Based Taxonomy of Mental Health Disorders: Linguistic Analysis of Reddit Posts,JMIR mental health,Mental Health via Writing
 PMC11112344,2024,keep,,,Bored to death: Artificial Intelligence research reveals the role of boredom in suicide behavior,Frontiers in psychiatry,Suicide and Self-Harm Studies
-PMC11117131,2024,flag,B,health informatics or social media outside mental health,"Differing Content and Language Based on Poster-Patient Relationships on the Chinese Social Media Platform Weibo: Text Classification, Sentiment Analysis, and Topic Modeling of Posts on Breast Cancer",JMIR cancer,Mental Health via Writing
+PMC11117131,2024,keep,B,health informatics or social media outside mental health,"Differing Content and Language Based on Poster-Patient Relationships on the Chinese Social Media Platform Weibo: Text Classification, Sentiment Analysis, and Topic Modeling of Posts on Breast Cancer",JMIR cancer,Mental Health via Writing
 PMC11127131,2024,keep,,,A Comparison of Personalized and Generalized Approaches to Emotion Recognition Using Consumer Wearable Devices: Machine Learning Study,JMIR AI,Emotion and Mood Recognition
 PMC11129781,2024,keep,,,User Dynamics and Thematic Exploration in r/Depression During the COVID-19 Pandemic: Insights From Overlapping r/SuicideWatch Users,Journal of medical Internet research,Mental Health via Writing
 PMC11130371,2024,keep,,,Executive function rehabilitation and evaluation based on brain-computer interface and virtual reality: our opinion,Frontiers in neuroscience,Cognitive Functions and Memory
@@ -233,7 +233,7 @@ PMC11133150,2023,keep,,,AuDrA: An automated drawing assessment platform for eval
 PMC11137391,2024,keep,,,Predicting life satisfaction using machine learning and explainable AI,Heliyon,Psychological Well-being and Life Satisfaction
 PMC11137430,2024,keep,,,The Artificial Third: A Broad View of the Effects of Introducing Generative Artificial Intelligence on Psychotherapy,JMIR mental health,Digital Mental Health Interventions
 PMC11137547,2024,keep,,,EEG-based emotion recognition systems; comprehensive study,Heliyon,Emotion and Mood Recognition
-PMC11139794,2024,flag,B,"medical, veterinary or other education tools",ChatGPT: bridging the gap on mentorship for International Medical Graduates in low enrolment specialties,Canadian medical education journal,Mentoring and Academic Development
+PMC11139794,2024,keep,B,"medical, veterinary or other education tools",ChatGPT: bridging the gap on mentorship for International Medical Graduates in low enrolment specialties,Canadian medical education journal,Mentoring and Academic Development
 PMC11139884,2024,keep,,,Interdisciplinary approach to identify language markers for post-traumatic stress disorder using machine learning and deep learning,Scientific reports,Mental Health via Writing
 PMC11140154,2024,keep,,,Bringing together multimodal and multilevel approaches to study the emergence of social bonds between children and improve social AI,Frontiers in neuroergonomics,Action Observation and Synchronization
 PMC11141359,2024,keep,,,Analyzing the packaging design evaluation based on image emotion perception computing,Heliyon,Emotion and Mood Recognition
@@ -268,7 +268,7 @@ PMC11224701,2024,keep,,,The Value of a Virtual Assistant to Improve Engagement i
 PMC11225703,2024,keep,,,Longitudinal associations between language network characteristics in the infant brain and school-age reading abilities are mediated by early-developing phonological skills,Developmental cognitive neuroscience,Reading and Literacy Development
 PMC11226238,2024,keep,,,The Wise Mind Balances the Abstract and the Concrete,Open mind : discoveries in cognitive science,Aging and Gerontology Research
 PMC11227208,2024,keep,,,Efficacy of relational agents for loneliness across age groups: a systematic review and meta-analysis,BMC public health,Social Robot Interaction and HRI
-PMC11227228,2024,flag,B,"medical, veterinary or other education tools",A practice-based approach to teaching antimicrobial therapy using artificial intelligence and gamified learning,JAC-antimicrobial resistance,Educational Games and Gamification
+PMC11227228,2024,keep,B,"medical, veterinary or other education tools",A practice-based approach to teaching antimicrobial therapy using artificial intelligence and gamified learning,JAC-antimicrobial resistance,Educational Games and Gamification
 PMC11231450,2024,keep,,,The Role of Humanization and Robustness of Large Language Models in Conversational Artificial Intelligence for Individuals With Depression: A Critical Analysis,JMIR mental health,Digital Mental Health Interventions
 PMC11232613,2024,keep,,,Deep learning-based dimensional emotion recognition for conversational agent-based cognitive behavioral therapy,PeerJ. Computer science,Emotion and Mood Recognition
 PMC11237038,2024,keep,,,Gromov–Wasserstein unsupervised alignment reveals structural correspondences between the color similarity structures of humans and large language models,Scientific reports,"Categorization, perception, and language"
@@ -306,11 +306,11 @@ PMC11332215,2023,keep,,,A computational text analysis investigation of the relat
 PMC11333023,2024,keep,,,Research Status of the Knowledge-Attitude-Practice Theory Model in Gastric Cancer Prevention,Cureus,Behavioral Health and Interventions
 PMC11335796,2024,keep,,,Can large language models help augment English psycholinguistic datasets?,Behavior research methods,"Categorization, perception, and language"
 PMC11341445,2024,keep,,,A high-frequency sense list,Frontiers in psychology,Second Language Acquisition and Learning
-PMC11344235,2024,flag,B,LGBTQ+ sexual health and health services,Using AI and Social Media to Understand Health Disparities for Transgender Cancer Care,JAMA network open,"LGBTQ Health, Identity, and Policy"
-PMC11350314,2024,flag,B,LGBTQ+ sexual health and health services,Mpox Discourse on Twitter by Sexual Minority Men and Gender-Diverse Individuals: Infodemiological Study Using BERTopic,JMIR public health and surveillance,"LGBTQ Health, Identity, and Policy"
+PMC11344235,2024,drop,B,LGBTQ+ sexual health and health services,Using AI and Social Media to Understand Health Disparities for Transgender Cancer Care,JAMA network open,"LGBTQ Health, Identity, and Policy"
+PMC11350314,2024,keep,B,LGBTQ+ sexual health and health services,Mpox Discourse on Twitter by Sexual Minority Men and Gender-Diverse Individuals: Infodemiological Study Using BERTopic,JMIR public health and surveillance,"LGBTQ Health, Identity, and Policy"
 PMC11351274,2024,keep,,,"Mate Choice Plurality, Choice Overload, and Singlehood: Are More Options Always Better?","Behavioral sciences (Basel, Switzerland)",Attachment and Relationship Dynamics
 PMC11352316,2024,keep,,,Telerehabilitation of Developmental Dyslexia: Critical Considerations on Intervention Methods and Their Effectiveness,Brain sciences,Reading and Literacy Development
-PMC11358958,2024,flag,A,vehicle engineering: intelligent cockpit taxonomy,"Intelligent Cockpits for Connected Vehicles: Taxonomy, Architecture, Interaction Technologies, and Future Directions","Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
+PMC11358958,2024,kep,A,vehicle engineering: intelligent cockpit taxonomy,"Intelligent Cockpits for Connected Vehicles: Taxonomy, Architecture, Interaction Technologies, and Future Directions","Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
 PMC11359300,2024,keep,,,EmotionCast: An Emotion-Driven Intelligent Broadcasting System for Dynamic Camera Switching,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
 PMC11359526,2024,keep,,,An Explainable Deep Learning Approach for Stress Detection in Wearable Sensor Measurements,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
 PMC11362029,2024,keep,,,Impact of media dependence: how emotional interactions between users and chat robots affect human socialization?,Frontiers in psychology,Social Robot Interaction and HRI
@@ -319,10 +319,10 @@ PMC11362422,2024,keep,,,A natural language model to automate scoring of autobiog
 PMC11375382,2024,keep,,,Self-Administered Interventions Based on Natural Language Processing Models for Reducing Depressive and Anxiety Symptoms: Systematic Review and Meta-Analysis,JMIR mental health,Digital Mental Health Interventions
 PMC11376366,2024,keep,,,Transforming text to music using artificial intelligence improves the frontal lobe function of normal older adults,Brain and behavior,Music Therapy and Health
 PMC11376467,2024,keep,,,Silent Screams: A Narrative Review of Cyberbullying Among Indian Adolescents,Cureus,"Bullying, Victimization, and Aggression"
-PMC11378377,2024,flag,B,LGBTQ+ sexual health and health services,Sexual and Gender-Diverse Individuals Face More Health Challenges during COVID-19: A Large-Scale Social Media Analysis with Natural Language Processing,Health data science,"LGBTQ Health, Identity, and Policy"
+PMC11378377,2024,keep,B,LGBTQ+ sexual health and health services,Sexual and Gender-Diverse Individuals Face More Health Challenges during COVID-19: A Large-Scale Social Media Analysis with Natural Language Processing,Health data science,"LGBTQ Health, Identity, and Policy"
 PMC11379836,2024,keep,,,Explainable depression symptom detection in social media,Health information science and systems,Mental Health via Writing
 PMC11379851,2024,keep,,,A behavioral signature for quantifying the social value of interpersonal relationships with specific others,Communications psychology,Attachment and Relationship Dynamics
-PMC11381592,2024,flag,B,driving and vehicle technology,Driving assistant using generative AI pre-generated messages in simulator-based driving assessment: A step towards low-cost simulator-based driving assessment,Heliyon,Human-Automation Interaction and Safety
+PMC11381592,2024,keep,B,driving and vehicle technology,Driving assistant using generative AI pre-generated messages in simulator-based driving assessment: A step towards low-cost simulator-based driving assessment,Heliyon,Human-Automation Interaction and Safety
 PMC11391090,2024,keep,,,Natural Language Processing for Depression Prediction on Sina Weibo: Method Study and Analysis,JMIR mental health,Mental Health via Writing
 PMC11396848,2024,keep,,,Adapting an Online Guided Self-Help CBT Programme Targeting Disordered Eating for Students in Aotearoa New Zealand: A Qualitative Study,Nutrients,Eating Disorders and Behaviors
 PMC11399123,2024,keep,,,Large language models predict human sensory judgments across six modalities,Scientific reports,"Categorization, perception, and language"
@@ -356,7 +356,7 @@ PMC11470124,2024,keep,,,An investigation of the direct and indirect effects of d
 PMC11471859,2024,keep,,,A natural language processing approach to detect inconsistencies in death investigation notes attributing suicide circumstances,Communications medicine,Suicide and Self-Harm Studies
 PMC11478833,2024,keep,,,Probing the link between vision and language in material perception using psychophysics and unsupervised learning,PLoS computational biology,"Categorization, perception, and language"
 PMC11489796,2024,keep,,,Establishing the Foundations of Emotional Intelligence in Care Companion Robots to Mitigate Agitation Among High-Risk Patients With Dementia: Protocol for an Empathetic Patient-Robot Interaction Study,JMIR research protocols,Social Robot Interaction and HRI
-PMC11493768,2024,flag,B,"medical, veterinary or other education tools",Navigating STEM careers with AI mentors: a new IDP journey,Frontiers in artificial intelligence,Mentoring and Academic Development
+PMC11493768,2024,drop,B,"medical, veterinary or other education tools",Navigating STEM careers with AI mentors: a new IDP journey,Frontiers in artificial intelligence,Mentoring and Academic Development
 PMC11494261,2024,keep,,,The Feasibility and Acceptability of Using a Digital Conversational Agent (Chatbot) for Delivering Parenting Interventions: Systematic Review,JMIR pediatrics and parenting,Digital Mental Health Interventions
 PMC11496287,2024,keep,,,The SocialAI school: a framework leveraging developmental psychology toward artificial socio-cultural agents,Frontiers in neurorobotics,Child and Animal Learning Development
 PMC11496789,2024,keep,,,Humanoid patient robot for diagnostic training in medical and psychiatric education,Frontiers in robotics and AI,Social Robot Interaction and HRI
@@ -434,7 +434,7 @@ PMC11671368,2024,keep,,,Fostering children’s creativity through LLM-driven sto
 PMC11673989,2024,keep,,,Clinical Questions and Psychological Change: How Can Artificial Intelligence Support Mental Health Practitioners?,"Behavioral sciences (Basel, Switzerland)",Mental Health via Writing
 PMC11675629,2024,keep,,,Improving Child and Adolescent Mental Health: A Bibliometric Analysis of Related Intervention Studies,International journal of environmental research and public health,Psychology Research and Bibliometrics
 PMC11678044,2024,keep,,,GenAI Creativity in Narrative Tasks: Exploring New Forms of Creativity,Journal of Intelligence,Creativity in Education and Neuroscience
-PMC11679248,2024,flag,B,driving and vehicle technology,Semantically-Enhanced Feature Extraction with CLIP and Transformer Networks for Driver Fatigue Detection,"Sensors (Basel, Switzerland)",Sleep and Work-Related Fatigue
+PMC11679248,2024,keep,B,driving and vehicle technology,Semantically-Enhanced Feature Extraction with CLIP and Transformer Networks for Driver Fatigue Detection,"Sensors (Basel, Switzerland)",Sleep and Work-Related Fatigue
 PMC11680777,2024,keep,,,Finding deceivers in social context with large language models and how to find them: the case of the Mafia game,Scientific reports,Deception detection and forensic psychology
 PMC11683562,2024,keep,,,"Multiuser design of an architecture for social robots in education: teachers, students, and researchers perspectives",Frontiers in robotics and AI,Social Robot Interaction and HRI
 PMC11685247,2024,keep,,,"Evaluating of BERT-based and Large Language Mod for Suicide Detection, Prevention, and Risk Assessment: A Systematic Review",Journal of medical systems,Mental Health via Writing
@@ -446,7 +446,7 @@ PMC11695923,2025,keep,,,Evaluating the ability of large language models to emula
 PMC11701115,2025,keep,,,Pathogen stress heightens sensorimotor dimensions in the human collective semantic space,Communications psychology,"Language, Metaphor, and Cognition"
 PMC11701978,2024,keep,,,Lyrics do matter: how “coping songs” relate to well-being goals. The COVID pandemic case,Frontiers in psychology,Music Therapy and Health
 PMC11707005,2025,keep,,,Explainable AI-based suicidal and non-suicidal ideations detection from social media text with enhanced ensemble technique,Scientific reports,Mental Health via Writing
-PMC11722838,2024,flag,B,driving and vehicle technology,Cockpit-Llama: Driver Intent Prediction in Intelligent Cockpit via Large Language Model,"Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
+PMC11722838,2024,keep,B,driving and vehicle technology,Cockpit-Llama: Driver Intent Prediction in Intelligent Cockpit via Large Language Model,"Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
 PMC11723910,2025,keep,,,Third-party evaluators perceive AI as more compassionate than expert humans,Communications psychology,Social Robot Interaction and HRI
 PMC11729794,2025,keep,,,Infinite Mixture Chaining: An Efficiency-Based Framework for the Dynamic Construction of Word Meaning,Open mind : discoveries in cognitive science,"Categorization, perception, and language"
 PMC11729953,2025,keep,,,Critical behavioral traits foster peer engagement in Online Mental Health Communities,PloS one,Mental Health via Writing
@@ -489,7 +489,7 @@ PMC11822111,2025,keep,,,AI can outperform humans in predicting correlations betw
 PMC11822322,2025,keep,,,An Explainable Artificial Intelligence Text Classifier for Suicidality Prediction in Youth Crisis Text Line Users: Development and Validation Study,JMIR public health and surveillance,Mental Health via Writing
 PMC11825740,2025,keep,,,Compositional depths of cognitive semantics: bridging perceptual experiences and conceptual structures,Frontiers in psychology,Phenomenology and Existential Philosophy
 PMC11826059,2025,keep,,,"Artificial intelligence conversational agents in mental health: Patients see potential, but prefer humans in the loop",Frontiers in psychiatry,Digital Mental Health Interventions
-PMC11826943,2025,flag,B,health informatics or social media outside mental health,Using Large Language Models to Detect and Understand Drug Discontinuation Events in Web-Based Forums: Development and Validation Study,Journal of medical Internet research,Mental Health via Writing
+PMC11826943,2025,keep,B,health informatics or social media outside mental health,Using Large Language Models to Detect and Understand Drug Discontinuation Events in Web-Based Forums: Development and Validation Study,Journal of medical Internet research,Mental Health via Writing
 PMC11827041,2025,keep,,,Individuals’ positive gains from the COVID-19 pandemic: a qualitative study across 30 countries,Journal of global health,COVID-19 and Mental Health
 PMC11829003,2025,keep,,,MemoCMT: multimodal emotion recognition using cross-modal transformer-based feature fusion,Scientific reports,Emotion and Mood Recognition
 PMC11829440,2025,keep,,,The application of artificial intelligence in the field of mental health: a systematic review,BMC psychiatry,Digital Mental Health Interventions
@@ -500,8 +500,8 @@ PMC11836185,2024,keep,,,What we mean when we say semantic: Toward a multidiscipl
 PMC11839144,2024,keep,,,From stable teamwork to dynamic teaming in the ambulatory care diagnostic process,"Diagnosis (Berlin, Germany)",Team Dynamics and Performance
 PMC11839766,2025,keep,,,Leveraging on large language model to classify sentences: a case study applying STAGES scoring methodology for sentence completion test on ego development,Frontiers in psychology,Ego Development and Educational Practices
 PMC11840361,2025,keep,,,Evaluation of a Guided Chatbot Intervention for Young People in Jordan: Feasibility Randomized Controlled Trial,JMIR mental health,Digital Mental Health Interventions
-PMC11844052,2025,flag,B,"medical, veterinary or other education tools",A scoping review of gamified applications in English language teaching: a comparative discussion with medical education,BMC medical education,Educational Games and Gamification
-PMC11845042,2025,flag,A,health informatics: topic-modelling pipeline for biomedical terms,Improving topic modeling performance on social media through semantic relationships within biomedical terminology,PloS one,Mental Health via Writing
+PMC11844052,2025,keep,B,"medical, veterinary or other education tools",A scoping review of gamified applications in English language teaching: a comparative discussion with medical education,BMC medical education,Educational Games and Gamification
+PMC11845042,2025,keep,A,health informatics: topic-modelling pipeline for biomedical terms,Improving topic modeling performance on social media through semantic relationships within biomedical terminology,PloS one,Mental Health via Writing
 PMC11845887,2025,keep,,,The Efficacy of Conversational AI in Rectifying the Theory-of-Mind and Autonomy Biases: Comparative Analysis,JMIR mental health,Digital Mental Health Interventions
 PMC11845891,2025,keep,,,Unraveling Online Mental Health Through the Lens of Early Maladaptive Schemas: AI-Enabled Content Analysis of Online Mental Health Communities,Journal of medical Internet research,Mental Health via Writing
 PMC11850274,2025,keep,,,Microblog discourse analysis for parenting style assessment,Frontiers in public health,Mental Health via Writing
@@ -514,7 +514,7 @@ PMC11854793,2025,keep,,,Why Uncertainty Is Essential for Consciousness: Local Pr
 PMC11855165,2025,keep,,,Promises and Pitfalls of Internet Search Data in Mental Health: Critical Review,JMIR mental health,Mental Health via Writing
 PMC11858965,2025,keep,,,Advancing Emotionally Aware Child–Robot Interaction with Biophysical Data and Insight-Driven Affective Computing,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
 PMC11860529,2025,keep,,,Early Athletic Identity Formation and Development: Perceptions of Elite Gaelic Athletes,"Sports (Basel, Switzerland)",Sport Psychology and Performance
-PMC11860683,2025,flag,B,"medical, veterinary or other education tools",Choose Your Own Adventure: Using Twine for Gamified Interactive Learning in Veterinary Anaesthesia †,Veterinary sciences,Educational Games and Gamification
+PMC11860683,2025,keep,B,"medical, veterinary or other education tools",Choose Your Own Adventure: Using Twine for Gamified Interactive Learning in Veterinary Anaesthesia †,Veterinary sciences,Educational Games and Gamification
 PMC11861744,2025,keep,,,HGF-MiLaG: Hierarchical Graph Fusion for Emotion Recognition in Conversation with Mid-Late Gender-Aware Strategy,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
 PMC11864926,2025,keep,,,The effect of COVID-19 on completed suicide rate in Iran: an Interrupted Time Series study (ITS),Frontiers in public health,Suicide and Self-Harm Studies
 PMC11865037,2025,keep,,,On the emergent capabilities of ChatGPT 4 to estimate personality traits,Frontiers in artificial intelligence,Mental Health via Writing
@@ -531,7 +531,7 @@ PMC11894350,2025,keep,,,The Feasibility of Large Language Models in Verbal Compr
 PMC11894886,2024,keep,,,Using an AI-based avatar for interviewer training at Children’s Advocacy Centers: Proof of Concept,Child maltreatment,Deception detection and forensic psychology
 PMC11897672,2025,keep,,,Exploring the Impact of Digital Peer Support Services on Meeting Unmet Needs Within an Employee Assistance Program: Retrospective Cohort Study,JMIR human factors,Digital Mental Health Interventions
 PMC11898439,2025,keep,,,AI Applications to Reduce Loneliness Among Older Adults: A Systematic Review of Effectiveness and Technologies,"Healthcare (Basel, Switzerland)",Social Robot Interaction and HRI
-PMC11902561,2025,flag,B,driving and vehicle technology,Joint Driver State Classification Approach: Face Classification Model Development and Facial Feature Analysis Improvement,"Sensors (Basel, Switzerland)",Sleep and Work-Related Fatigue
+PMC11902561,2025,drop,B,driving and vehicle technology,Joint Driver State Classification Approach: Face Classification Model Development and Facial Feature Analysis Improvement,"Sensors (Basel, Switzerland)",Sleep and Work-Related Fatigue
 PMC11904377,2025,keep,,,Automated Digital Safety Planning Interventions for Young Adults: Qualitative Study Using Online Co-design Methods,JMIR formative research,Digital Mental Health Interventions
 PMC11905647,2025,keep,,,Theoretical background of the game design element “chatbot” in serious games for medical education,"Advances in simulation (London, England)",Educational Games and Gamification
 PMC11906115,2025,keep,,,Comparison of an AI Chatbot With a Nurse Hotline in Reducing Anxiety and Depression Levels in the General Population: Pilot Randomized Controlled Trial,JMIR human factors,Digital Mental Health Interventions
@@ -547,7 +547,7 @@ PMC11926447,2025,keep,,,Using Natural Language Processing Methods to Build the H
 PMC11926686,2025,keep,,,Is my “red” your “red”?: Evaluating structural correspondences between color similarity judgments using unsupervised alignment,iScience,"Categorization, perception, and language"
 PMC11928068,2025,keep,,,Competency of Large Language Models in Evaluating Appropriate Responses to Suicidal Ideation: Comparative Study,Journal of medical Internet research,Suicide and Self-Harm Studies
 PMC11929925,2025,keep,,,Human cooperation with artificial agents varies across countries,Scientific reports,Social Robot Interaction and HRI
-PMC11931958,2025,flag,A,health services: nurse-led primary care for refugees,Primary healthcare models for refugees involving nurses: a systematic review and narrative synthesis,BMJ global health,"Migration, Health and Trauma"
+PMC11931958,2025,keep,A,health services: nurse-led primary care for refugees,Primary healthcare models for refugees involving nurses: a systematic review and narrative synthesis,BMJ global health,"Migration, Health and Trauma"
 PMC11932972,2023,keep,,,Theory-Driven Analysis of Natural Language Processing Measures of Thought Disorder Using Generative Language Modeling,Biological psychiatry. Cognitive neuroscience and neuroimaging,Mental Health via Writing
 PMC11933774,2025,keep,,,Generative AI–Enabled Therapy Support Tool for Improved Clinical Outcomes and Patient Engagement in Group Therapy: Real-World Observational Study,Journal of medical Internet research,Digital Mental Health Interventions
 PMC11936487,2025,keep,,,Leveraging natural language processing and machine learning to characterize psychological stress and life meaning and purpose in pediatric cancer survivors: a preliminary validation study,JAMIA open,Mental Health via Writing
@@ -555,7 +555,7 @@ PMC11936828,2025,keep,,,Social avoidance can be quantified as navigation in abst
 PMC11939020,2025,keep,,,AI Chatbots for Psychological Health for Health Professionals: Scoping Review,JMIR human factors,Digital Mental Health Interventions
 PMC11939175,2025,keep,,,Deep Learning-Based Detection of Depression and Suicidal Tendencies in Social Media Data with Feature Selection,"Behavioral sciences (Basel, Switzerland)",Mental Health via Writing
 PMC11939552,2025,keep,,,AI as the Therapist: Student Insights on the Challenges of Using Generative AI for School Mental Health Frameworks,"Behavioral sciences (Basel, Switzerland)",Digital Mental Health Interventions
-PMC11940971,2025,flag,B,design aesthetics (Kansei),Generative Large Model-Driven Methodology for Color Matching and Shape Design in IP Products,"Entropy (Basel, Switzerland)",Color perception and design
+PMC11940971,2025,keep,B,design aesthetics (Kansei),Generative Large Model-Driven Methodology for Color Matching and Shape Design in IP Products,"Entropy (Basel, Switzerland)",Color perception and design
 PMC11941195,2025,keep,,,Conversational AI in Pediatric Mental Health: A Narrative Review,"Children (Basel, Switzerland)",Digital Mental Health Interventions
 PMC11945465,2025,keep,,,Cultural Variation in Attitudes Toward Social Chatbots,Journal of cross-cultural psychology,Social Robot Interaction and HRI
 PMC11947638,2025,keep,,,Perceived Trauma Among Nurses During the COVID‐19 Pandemic: A Qualitative Descriptive Study,International journal of mental health nursing,COVID-19 and Mental Health
@@ -595,7 +595,7 @@ PMC12022524,2025,keep,,,Development of a Mobile Intervention for Procrastination
 PMC12023818,2025,keep,,,The parent–child relationship and child shame and guilt: A meta‐analytic systematic review,Child development,Emotions and Moral Behavior
 PMC12028077,2025,keep,,,Automated Graphic Divergent Thinking Assessment: A Multimodal Machine Learning Approach,Journal of Intelligence,Creativity in Education and Neuroscience
 PMC12032126,2025,keep,,,Trade-offs between machine learning and deep learning for mental illness detection on social media,Scientific reports,Mental Health via Writing
-PMC12038115,2025,flag,B,"medical, veterinary or other education tools",Future-ready healthcare leadership: the revised International Hospital Federation competency model,BMJ leader,Competency Development and Evaluation
+PMC12038115,2025,keep,B,"medical, veterinary or other education tools",Future-ready healthcare leadership: the revised International Hospital Federation competency model,BMJ leader,Competency Development and Evaluation
 PMC12038295,2025,keep,,,Health Care Social Robots in the Age of Generative AI: Protocol for a Scoping Review,JMIR research protocols,Social Robot Interaction and HRI
 PMC12038297,2025,keep,,,The EmpkinS-EKSpression Reappraisal Training Augmented With Kinesthesia in Depression: One-Armed Feasibility Study,JMIR formative research,Digital Mental Health Interventions
 PMC12038631,2025,keep,,,Beyond Grades: Harnessing Self-Regulated Learning to Empower Underperforming Students,Nigerian medical journal : journal of the Nigeria Medical Association,Innovative Teaching and Learning Methods
@@ -631,7 +631,7 @@ PMC12089884,2025,keep,,,The Applications of Large Language Models in Mental Heal
 PMC12092423,2025,keep,,,Agentive linguistic framing affects responsibility assignments toward AIs and their creators,Frontiers in psychology,Social Robot Interaction and HRI
 PMC12092606,2025,keep,,,Modeling rapid language learning by distilling Bayesian priors into artificial neural networks,Nature communications,Language Development and Disorders
 PMC12093075,2025,keep,,,"Co-Designing, Developing, and Testing a Mental Health Platform for Young People Using a Participatory Design Methodology in Colombia: Mixed Methods Study",JMIR human factors,Digital Mental Health Interventions
-PMC12093076,2025,flag,B,sleep or pain medicine,Wearable Artificial Intelligence for Sleep Disorders: Scoping Review,Journal of medical Internet research,Sleep and related disorders
+PMC12093076,2025,keep,B,sleep or pain medicine,Wearable Artificial Intelligence for Sleep Disorders: Scoping Review,Journal of medical Internet research,Sleep and related disorders
 PMC12093450,2025,keep,,,Turing Jest: Distributional Semantics and One‐Line Jokes,Cognitive science,Humor Studies and Applications
 PMC12093911,2023,keep,,,Fostering Collective Intelligence in Human–AI Collaboration: Laying the Groundwork for COHUMAIN,Topics in cognitive science,Human-Automation Interaction and Safety
 PMC12095572,2025,keep,,,Large language models are proficient in solving and creating emotional intelligence tests,Communications psychology,Emotional Intelligence and Performance
@@ -647,7 +647,7 @@ PMC12106531,2025,keep,,,Neuroimaging correlates of psychological resilience: an 
 PMC12106601,2025,keep,,,Cortical circuits for cross-modal generalization,Nature communications,Multisensory perception and integration
 PMC12107671,2025,keep,,,Cyberdelics: Virtual reality hallucinations modulate cognitive-affective processes,Dialogues in clinical neuroscience,Psychedelics and Drug Studies
 PMC12110772,2025,keep,,,"A Scoping Review of AI-Driven Digital Interventions in Mental Health Care: Mapping Applications Across Screening, Support, Monitoring, Prevention, and Clinical Education","Healthcare (Basel, Switzerland)",Digital Mental Health Interventions
-PMC12112496,2025,flag,B,health informatics or social media outside mental health,Unveiling the Ultimate Meme Recipe: Image Embeddings for Identifying Top Meme Templates from r/Memes,Journal of imaging,Humor Studies and Applications
+PMC12112496,2025,keep,B,health informatics or social media outside mental health,Unveiling the Ultimate Meme Recipe: Image Embeddings for Identifying Top Meme Templates from r/Memes,Journal of imaging,Humor Studies and Applications
 PMC12112869,2025,keep,,,When ChatGPT Writes Your Research Proposal: Scientific Creativity in the Age of Generative AI,Journal of Intelligence,Creativity in Education and Neuroscience
 PMC12117275,2025,keep,,,Combining Artificial Intelligence and Human Support in Mental Health: Digital Intervention With Comparable Effectiveness to Human-Delivered Care,Journal of medical Internet research,Digital Mental Health Interventions
 PMC12118909,2025,keep,,,Artificial intelligence for contextual well-being: Protocol for an exploratory sequential mixed methods study with medical students as a social microcosm,PloS one,Digital Mental Health Interventions
@@ -884,7 +884,7 @@ PMC12459122,2025,keep,,,Object-scene semantics correlation analysis for image em
 PMC12460309,2025,keep,,,Explainable AI-driven depression detection from social media using natural language processing and black box machine learning models,Frontiers in artificial intelligence,Mental Health via Writing
 PMC12460501,2025,keep,,,Coping with Emotional Distress via Self-Disclosure to Robots: An Intervention with Caregivers,International journal of social robotics,Social Robot Interaction and HRI
 PMC12460983,2025,keep,,,Recommendations for Mental Health Chatbot Conversations: An Integrative Review,Journal of advanced nursing,Digital Mental Health Interventions
-PMC12461082,2025,flag,A,occupational ophthalmology: computer vision syndrome prediction,Exploratory machine learning models for computer vision syndrome in occupational health,Digital health,Ergonomics and Musculoskeletal Disorders
+PMC12461082,2025,drop,A,occupational ophthalmology: computer vision syndrome prediction,Exploratory machine learning models for computer vision syndrome in occupational health,Digital health,Ergonomics and Musculoskeletal Disorders
 PMC12462215,2025,keep,,,2025 position statement on active outdoor play: process and methodology,The international journal of behavioral nutrition and physical activity,Outdoor and Experiential Education
 PMC12466438,2025,keep,,,"The ChatGPT Effect: Investigating Shifting Discourse Patterns, Sentiment, and Benefit–Challenge Framing in AI Mental Health Support","Behavioral sciences (Basel, Switzerland)",Digital Mental Health Interventions
 PMC12467208,2025,keep,,,Mobile Mental Health Screening in EmotiZen via the Novel Brain-Inspired MCoG-LDPSNet,"Biomimetics (Basel, Switzerland)",Mental Health via Writing
@@ -892,8 +892,8 @@ PMC12468426,2025,keep,,,"The Psychology of EdTech Nudging: Persuasion, Cognitive
 PMC12471117,2025,keep,,,Measuring Emotion Perception Ability Using AI-Generated Stimuli: Development and Validation of the PAGE Test,Journal of Intelligence,Emotional Intelligence and Performance
 PMC12472369,2025,keep,,,Effectiveness of a Gamification-Based Intervention for Learning a Structured Handover System Among Undergraduate Nursing Students: A Quasi-Experimental Study,"Nursing reports (Pavia, Italy)",Educational Games and Gamification
 PMC12473391,2025,keep,,,PMMCT: A Parallel Multimodal CNN-Transformer Model to Detect Slow Eye Movement for Recognizing Driver Sleepiness,"Sensors (Basel, Switzerland)",Sleep and Work-Related Fatigue
-PMC12473767,2025,flag,B,driving and vehicle technology,From Concept to Representation: Modeling Driving Capability and Task Demand with a Multimodal Large Language Model,"Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
-PMC12477408,2025,flag,A,theoretical computing: genomic blockchain and AGI security,Gödelian embodied self-referential genomic intelligence: lessons for AI and AGI from the genomic blockchain,Frontiers in robotics and AI,Philosophy and Theoretical Science
+PMC12473767,2025,keep,B,driving and vehicle technology,From Concept to Representation: Modeling Driving Capability and Task Demand with a Multimodal Large Language Model,"Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
+PMC12477408,2025,drop,A,theoretical computing: genomic blockchain and AGI security,Gödelian embodied self-referential genomic intelligence: lessons for AI and AGI from the genomic blockchain,Frontiers in robotics and AI,Philosophy and Theoretical Science
 PMC12479293,2025,keep,,,PTSD assessment in Ukrainian refugees using the PCL-5: linguistic and cultural challenges,Frontiers in psychology,"Migration, Health and Trauma"
 PMC12480040,2025,keep,,,A Multimodal Depression Consultation Dataset of Speech and Text with HAMD-17 Assessments,Scientific data,Emotion and Mood Recognition
 PMC12480878,2025,keep,,,A multi-stage large language model framework for extracting suicide-related social determinants of health,Communications medicine,Mental Health via Writing
@@ -988,7 +988,7 @@ PMC12578359,2025,keep,,,What Does Text Mining of Reddit Forums Reveal About Fact
 PMC12579794,2025,keep,,,Can Support for Homosexuality Reduce the Prevalence of Mental Health Problems among LGBTQ+ Individuals to Levels Comparable to the General Population? A Second-Order Systematic Review with Thematic Analysis,Iranian journal of psychiatry,"LGBTQ Health, Identity, and Policy"
 PMC12582511,2025,keep,,,Effectiveness of Communication Competence in AI Conversational Agents for Health: Systematic Review and Meta-Analysis,Journal of medical Internet research,Social Robot Interaction and HRI
 PMC12582524,2025,keep,,,Group Cognitive Behavioral Therapy With Virtual Reality Exposure Versus In-Vivo Exposure for Social Anxiety Disorder and Agoraphobia: Underpowered Results From the SoREAL Pragmatic Randomized Clinical Trial,JMIR mental health,"Anxiety, Depression, Psychometrics, Treatment, Cognitive Processes"
-PMC12582912,2025,flag,A,data-science curriculum competencies for voice AI,Adapting data science competencies by role and purpose: Voice AI,Frontiers in digital health,Competency Development and Evaluation
+PMC12582912,2025,drop,A,data-science curriculum competencies for voice AI,Adapting data science competencies by role and purpose: Voice AI,Frontiers in digital health,Competency Development and Evaluation
 PMC12582947,2025,keep,,,A psycholinguistic NLP framework for forensic text analysis of deception and emotion,Frontiers in artificial intelligence,Deception detection and forensic psychology
 PMC12582962,2025,keep,,,"Machine learning approaches to anxiety detection: trends, model evaluation, and future directions",Frontiers in artificial intelligence,Emotion and Mood Recognition
 PMC12586272,2025,keep,,,Challenges and opportunities of psychological aging research,European journal of ageing,Aging and Gerontology Research
@@ -1007,7 +1007,7 @@ PMC12593273,2025,keep,,,Apologies in Crisis: The Link Between Perceived Burdenso
 PMC12593464,2025,keep,,,Between the lines: investigating health beliefs and emotional expressions in online mental health communities,Frontiers in psychology,Mental Health via Writing
 PMC12594504,2025,keep,,,A Prompt Engineering Framework for Large Language Model–Based Mental Health Chatbots: Conceptual Framework,JMIR mental health,Digital Mental Health Interventions
 PMC12595529,2025,keep,,,Use of Generative AI for Mental Health Advice Among US Adolescents and Young Adults,JAMA network open,Digital Mental Health Interventions
-PMC12597679,2025,flag,A,sleep research methods: unsupervised machine learning review,Unsupervised machine learning in sleep research: a scoping review,Sleep,Sleep and related disorders
+PMC12597679,2025,drop,A,sleep research methods: unsupervised machine learning review,Unsupervised machine learning in sleep research: a scoping review,Sleep,Sleep and related disorders
 PMC12599162,2025,keep,,,Exploring self-compassion among men seeking weight loss: a thematic analysis,International journal of qualitative studies on health and well-being,Eating Disorders and Behaviors
 PMC12603332,2025,keep,,,Large language model performance versus human expert ratings in automated suicide risk assessment,Scientific reports,Mental Health via Writing
 PMC12603917,2025,keep,,,Bridging the service gap in cognitive behavioral therapy from a user perspective: Findings from a web‐based survey in Japan,PCN reports : psychiatry and clinical neurosciences,Mental Health Treatment and Access
@@ -1041,7 +1041,7 @@ PMC12645413,2025,keep,,,"The relationship between digital technostress and cyber
 PMC12645649,2025,keep,,,Mixed-methods psychosocial autopsy study of suicide in young and middle-aged individuals in the Netherlands,BMJ public health,Suicide and Self-Harm Studies
 PMC12645830,2025,keep,,,Artificial intelligence-based psychotherapy: focusing on common psychotherapeutic factors,Frontiers in psychiatry,Digital Mental Health Interventions
 PMC12649323,2025,keep,,,Creative Work as Seen Through the ATHENA Competency Model,"Behavioral sciences (Basel, Switzerland)",Creativity in Education and Neuroscience
-PMC12649923,2025,flag,B,other,Vocabulary at the Living–Machine Interface: A Narrative Review of Shared Lexicon for Hybrid AI,"Biomimetics (Basel, Switzerland)",Social Robot Interaction and HRI
+PMC12649923,2025,keep,B,other,Vocabulary at the Living–Machine Interface: A Narrative Review of Shared Lexicon for Hybrid AI,"Biomimetics (Basel, Switzerland)",Social Robot Interaction and HRI
 PMC12650323,2025,keep,,,"Recent Advancements in Humanoid Robot Heads: Mechanics, Perception, and Computational Systems","Biomimetics (Basel, Switzerland)",Social Robot Interaction and HRI
 PMC12651002,2025,keep,,,StressSpeak: A Speech-Driven Framework for Real-Time Personalized Stress Detection and Adaptive Psychological Support,"Diagnostics (Basel, Switzerland)",Emotion and Mood Recognition
 PMC12653222,2025,keep,,,Mapping the Scaffolding of Metacognition and Learning by AI Tools in STEM Classrooms: A Bibliometric–Systematic Review Approach (2005–2025),Journal of Intelligence,Innovative Teaching and Learning Methods
@@ -1087,7 +1087,7 @@ PMC12696486,2025,keep,,,Depression diagnosis from patient interviews using multi
 PMC12696575,2025,keep,,,Comparative performance of large language models in emotional safety classification across sizes and tasks,Frontiers in artificial intelligence,Mental Health via Writing
 PMC12696927,2025,keep,,,The impact of social exclusion and interpersonal trust on aggressive behavior among left-behind middle school students,BMC psychology,"Bullying, Victimization, and Aggression"
 PMC12697914,2025,keep,,,Observer-Independent Assessment of Content Overlap in Mental Health Questionnaires: Large Language Model–Based Study,JMIR AI,Mental Health Research Topics
-PMC12697920,2025,flag,A,sleep measurement: actigraphy algorithm validation,Comparison and Validation of Actigraphy Algorithms Using a Large Community Dataset: Algorithm Validation Study,JMIR formative research,Sleep and related disorders
+PMC12697920,2025,drop,A,sleep measurement: actigraphy algorithm validation,Comparison and Validation of Actigraphy Algorithms Using a Large Community Dataset: Algorithm Validation Study,JMIR formative research,Sleep and related disorders
 PMC12697965,2025,keep,,,Whom do we prefer to learn from in observational reinforcement learning?,PLoS computational biology,Child and Animal Learning Development
 PMC12698557,2025,keep,,,AI-driven dynamic psychological measurement: correcting university student mental health scales using daily behavioral and cognitive data,Frontiers in digital health,Digital Mental Health Interventions
 PMC12702588,2025,keep,,,Artificial Intelligence Reshapes Creativity: A Multidimensional Evaluation,PsyCh journal,Creativity in Education and Neuroscience
@@ -1131,7 +1131,7 @@ PMC12747908,2025,keep,,,Evaluating human perceptions of android robot facial exp
 PMC12748242,2025,keep,,,Consensus derived client outcomes and clinician actions for youth online chat mental health services: a Delphi study,Frontiers in digital health,Digital Mental Health Interventions
 PMC12748249,2025,keep,,,Public perceptions and emotional trends of psychotherapy: a 15-year analysis across English and Spanish language communities on X (twitter),Frontiers in digital health,Mental Health via Writing
 PMC12748339,2025,keep,,,Investigating mental wellbeing self-care in higher education using BERTopic modeling,Discover mental health,Student Stress and Coping
-PMC12749106,2025,flag,B,design aesthetics (Kansei),Research on morphology optimization of heavy-duty industrial robots based on Kansei engineering and artificial intelligence generated content technology,Scientific reports,Color perception and design
+PMC12749106,2025,keep,B,design aesthetics (Kansei),Research on morphology optimization of heavy-duty industrial robots based on Kansei engineering and artificial intelligence generated content technology,Scientific reports,Color perception and design
 PMC12750463,2025,keep,,,The effects of mindfulness on psychological thriving among urban park visitors: evidence from three experimental studies,Frontiers in public health,Mindfulness and Compassion Interventions
 PMC12750634,2025,keep,,,Perceiving minds in machines: how perceived theory of mind in robots influences human–robot empathy through the lens of mind perception theory,BMC psychology,Social Robot Interaction and HRI
 PMC12752181,2025,keep,,,Mood states recognition based on Mandarin speech and deep learning in patients with bipolar disorder,BMC psychiatry,Emotion and Mood Recognition
@@ -1140,7 +1140,7 @@ PMC12753886,2025,keep,,,"Bibliometric analysis of trends, innovations, and the f
 PMC12755833,2025,keep,,,Rates and temporal onset of mental health disorders during inpatient rehabilitation after acute physical injury or illness: An observational cohort study,PloS one,Posttraumatic Stress Disorder Research
 PMC12757713,2025,keep,,,"A Hybrid Rule- and Large Language Model–Based Embodied Voice Assistant (GRACE) for Cognitive Stimulation in Older Adults: Usability Study Assessing Technical Feasibility, Technology Acceptance, and Working Alliance",JMIR aging,Social Robot Interaction and HRI
 PMC12758732,2026,keep,,,Understanding and assessing personality across cultures: A scoping review,PloS one,Personality Traits and Psychology
-PMC12759280,2025,flag,B,sleep or pain medicine,Imbalances in the Content of Sleep and Pain Assessments in Patients with Chronic Pain: A Scoping Review,F1000Research,Sleep and related disorders
+PMC12759280,2025,keep,B,sleep or pain medicine,Imbalances in the Content of Sleep and Pain Assessments in Patients with Chronic Pain: A Scoping Review,F1000Research,Sleep and related disorders
 PMC12764474,2025,keep,,,Empowering emotional intelligence through deep learning techniques,Scientific reports,Emotion and Mood Recognition
 PMC12768553,2025,keep,,,Shape Guides Visual Pretense,Open mind : discoveries in cognitive science,"Categorization, perception, and language"
 PMC12769545,2026,keep,,,The unity of sense and mind: A review of cross-domain mapping,Psychonomic bulletin & review,"Language, Metaphor, and Cognition"
@@ -1158,7 +1158,7 @@ PMC12798473,2025,keep,,,"The efficacy, feasibility, and technical outcomes of a 
 PMC12800177,2026,keep,,,Stability of value perception: minimal influence of framing on moral attributions to a humanoid robot,Scientific reports,Social Robot Interaction and HRI
 PMC12800267,2025,keep,,,Hippocampal-prefrontal orchestration supports higher-order learning for creative ideation,Nature communications,Creativity in Education and Neuroscience
 PMC12800557,2025,keep,,,Why large language models cannot possess consciousness: an integrated information theory perspective,Journal of Yeungnam medical science,Philosophy and Theoretical Science
-PMC12801783,2025,flag,B,LGBTQ+ sexual health and health services,Do I need to know my patient’s sexual orientation and gender identity? Insights from Swiss primary care physicians,BMC primary care,"LGBTQ Health, Identity, and Policy"
+PMC12801783,2025,keep,B,LGBTQ+ sexual health and health services,Do I need to know my patient’s sexual orientation and gender identity? Insights from Swiss primary care physicians,BMC primary care,"LGBTQ Health, Identity, and Policy"
 PMC12804192,2025,keep,,,Neural mechanisms underpinning the association between visual arts education and creativity,NPJ science of learning,Creativity in Education and Neuroscience
 PMC12807888,2026,keep,,,Adapting virtual agent interaction style with reinforcement learning to enhance affective engagement,Frontiers in digital health,Social Robot Interaction and HRI
 PMC12807912,2026,keep,,,Embarrassment in HRI: remediation and the role of robot responses in emotion control,Frontiers in robotics and AI,Social Robot Interaction and HRI
@@ -1211,7 +1211,7 @@ PMC12864212,2025,keep,,,Investigating age-related differences in semantic contro
 PMC12864368,2026,keep,,,How well do large language models mirror human cognition of word concepts?: A comparison of psychological ratings for early-acquired English words,Behavior research methods,"Categorization, perception, and language"
 PMC12865665,2025,keep,,,Human Experts and AI Models in Offender Risk Assessment: A Comparative Pilot Study Using the HCR‐20V3,Behavioral sciences & the law,"Psychopathy, Forensic Psychiatry, Sexual Offending"
 PMC12865673,2025,keep,,,Large Language Model (LLM) and Human Performance in Child Investigative Interviewing Question Formulation Tasks,Behavioral sciences & the law,Deception detection and forensic psychology
-PMC12866940,2026,flag,B,"medical, veterinary or other education tools",Bakterion: development of a serious game for microbiology education,Brazilian journal of medical and biological research = Revista brasileira de pesquisas medicas e biologicas,Educational Games and Gamification
+PMC12866940,2026,keep,B,"medical, veterinary or other education tools",Bakterion: development of a serious game for microbiology education,Brazilian journal of medical and biological research = Revista brasileira de pesquisas medicas e biologicas,Educational Games and Gamification
 PMC12868732,2026,keep,,,Interactive graph emotion recognition based on multi-modal data enhancement,Scientific reports,Emotion and Mood Recognition
 PMC12869829,2026,keep,,,Clinical and psychological changes associated with music listening in haemodialysis patients: A prospective study,The South African journal of psychiatry : SAJP : the journal of the Society of Psychiatrists of South Africa,Music Therapy and Health
 PMC12870236,2026,keep,,,Unpacking the relationship between self-control and academic engagement: the mediating role of meaning in life and the moderating role of GenAI dependence,BMC psychology,"Education, Achievement, and Giftedness"
@@ -1282,7 +1282,7 @@ PMC12938559,2026,keep,,,Leveraging Student-Athlete Mental Health Through an AI-A
 PMC12939045,2026,keep,,,"Artificial Intelligence in the Evaluation and Intervention of Developmental Coordination Disorder: A Scoping Review of Methods, Clinical Purposes, and Future Directions","Children (Basel, Switzerland)",Children's Physical and Motor Development
 PMC12939205,2026,keep,,,Learnable Feature Disentanglement with Temporal-Complemented Motion Enhancement for Micro-Expression Recognition,"Entropy (Basel, Switzerland)",Emotion and Mood Recognition
 PMC12939750,2026,keep,,,Mapping Heterogeneity in Psychological Risk Among University Students Using Explainable Machine Learning,"Entropy (Basel, Switzerland)",Mental Health via Writing
-PMC12940669,2026,flag,A,infectious-disease care cascade in refugees,The Cascade of Care for Infectious Diseases in Newly Arrived Refugees,International journal of environmental research and public health,"Migration, Health and Trauma"
+PMC12940669,2026,drop,A,infectious-disease care cascade in refugees,The Cascade of Care for Infectious Diseases in Newly Arrived Refugees,International journal of environmental research and public health,"Migration, Health and Trauma"
 PMC12942112,2026,keep,,,Human vs. LLM Creativity: A Comparative Analysis of Task-Dependent Asymmetry and Linguistic Mechanisms,Journal of Intelligence,Creativity in Education and Neuroscience
 PMC12944184,2026,keep,,,A Multimodal Adaptive Framework for Social Interaction with the MiRo-E Robot,"Sensors (Basel, Switzerland)",Social Robot Interaction and HRI
 PMC12946069,2026,keep,,,The impact of intention to adopt generative AI for exercise information on exercise adherence among Chinese college students: the mediating role of autonomous motivation and network analysis,Frontiers in public health,Motivation and Self-Concept in Sports
@@ -1385,7 +1385,7 @@ PMC13040165,2026,keep,,,Investigating Placebos and Controls Used in Large Langua
 PMC13040471,2026,keep,,,How academic stress leads to artificial intelligence-generated design dependency: the roles of academic procrastination and help-seeking behavior,Frontiers in psychology,"Perfectionism, Procrastination, Anxiety Studies"
 PMC13043011,2026,keep,,,"A Conversational Platform (Okaya) for Multimodal Digital Biomarkers of Fatigue, Cognition, and Mental Health: Feasibility Observational Study",JMIR formative research,Emotion and Mood Recognition
 PMC13043413,2026,keep,,,Informing robot design through early public engagement: lay perceptions of soft versus rigid socially assistive and rescue robots,Frontiers in robotics and AI,Social Robot Interaction and HRI
-PMC13043820,2026,flag,B,"medical, veterinary or other education tools",Catalysts of Change: Using AI To Lower the Activation Energy for Developing Gamified Learning Experiences in Health Profession Education,Medical science educator,Educational Games and Gamification
+PMC13043820,2026,keep,B,"medical, veterinary or other education tools",Catalysts of Change: Using AI To Lower the Activation Energy for Developing Gamified Learning Experiences in Health Profession Education,Medical science educator,Educational Games and Gamification
 PMC13046095,2026,keep,,,AI Chatbots for Mental Health Self-Management: Lived Experience–Centered Qualitative Study,JMIR mental health,Digital Mental Health Interventions
 PMC13047153,2026,keep,,,AI-based early mental health screening for local public officials,Frontiers in public health,Digital Mental Health Interventions
 PMC13048375,2026,keep,,,"Technology-mediated screening interviews for youth mental health: Content validation, randomized controlled trial, and expert evaluation",PLOS digital health,Digital Mental Health Interventions
@@ -1445,7 +1445,7 @@ PMC13111394,2026,keep,,,Effects of gamification on the engagement and translatio
 PMC13111637,2026,keep,,,Interpretable machine learning with SHAP predicts honest behavior from personality traits and physiological data,Scientific reports,Deception detection and forensic psychology
 PMC13113849,2026,keep,,,Moral Disengagement and Unethical Generative AI Use as the Chain Mediators Between Antagonistic Personality and Problematic Generative AI Use,"Behavioral sciences (Basel, Switzerland)",Personality Traits and Psychology
 PMC13114157,2026,keep,,,Random Forest Predicts Human Ratings of Creative Stories Using Very Small Training Samples,"Behavioral sciences (Basel, Switzerland)",Creativity in Education and Neuroscience
-PMC13114286,2026,flag,A,computer science: human-in-the-loop AI review,"Human-in-the-Loop Artificial Intelligence: A Systematic Review of Concepts, Methods, and Applications","Entropy (Basel, Switzerland)",Human-Automation Interaction and Safety
+PMC13114286,2026,keep,A,computer science: human-in-the-loop AI review,"Human-in-the-Loop Artificial Intelligence: A Systematic Review of Concepts, Methods, and Applications","Entropy (Basel, Switzerland)",Human-Automation Interaction and Safety
 PMC13114621,2026,keep,,,Using N400 Event-Related Potential to Detect Differences in Design-Mode and Belief-Mode Scaffold Use,Brain sciences,Innovative Teaching and Learning Methods
 PMC13114729,2026,keep,,,Neuropsychological Mechanisms Associated with the Effectiveness of AI-Delivered Health Promotion Programs: A Comprehensive Meta-Analysis,Brain sciences,Digital Mental Health Interventions
 PMC13115347,2026,keep,,,Interaction-Driven Dynamic Fusion for Multimodal Depression Detection: A Controlled Analysis of Gating and Cross-Attention Under Class Imbalance,Brain sciences,Emotion and Mood Recognition
@@ -1459,7 +1459,7 @@ PMC13124480,2026,keep,,,"What drives emotional escalation in crisis talk? Collec
 PMC13127675,2025,keep,,,Mindset Variations Among Undergraduate Neuroscience Students,"Journal of undergraduate neuroscience education : JUNE : a publication of FUN, Faculty for Undergraduate Neuroscience","Education, Achievement, and Giftedness"
 PMC13128734,2026,keep,,,Centroid analysis: Inferring concept representations from open-ended word responses,Behavior research methods,"Categorization, perception, and language"
 PMC13128876,2026,keep,,,A transdiagnostic model for how general purpose AI chatbots can perpetuate OCD and anxiety disorders,NPJ digital medicine,Digital Mental Health Interventions
-PMC13131008,2026,flag,A,microbiology outreach: microbial art at an expo,"Taking microbial art beyond the laboratory: safe, simple, and scalable public engagement at the Osaka Expo",Journal of microbiology & biology education,Animal and Plant Science Education
+PMC13131008,2026,drop,A,microbiology outreach: microbial art at an expo,"Taking microbial art beyond the laboratory: safe, simple, and scalable public engagement at the Osaka Expo",Journal of microbiology & biology education,Animal and Plant Science Education
 PMC13132230,2026,keep,,,Differences in the impact of leisure consumption spaces on urban residents’ life satisfaction: An empirical analysis based on social media big data,PloS one,"Recreation, Leisure, Wilderness Management"
 PMC13132591,2026,keep,,,Current Landscape of Mental Health Conversational Agents From a Trauma-Informed Care Lens: Scoping Review,JMIR mental health,Digital Mental Health Interventions
 PMC13133013,2026,keep,,,Multimodal AI-based systems in major depressive disorder: a review of clinical and translational applications,Frontiers in digital health,Emotion and Mood Recognition
@@ -1476,7 +1476,7 @@ PMC13144704,2026,keep,,,"Rarity-Weighted Change Score: An Integrative, Distribut
 PMC13145394,2026,keep,,,Comparing personalized and population-based models for predicting momentary negative affect in internalizing disorders: A digital phenotyping study,Neuroscience applied,Mental Health Research Topics
 PMC13146459,2026,keep,,,Predictors of emotional well-being in university professors using Machine Learning,F1000Research,Psychological Well-being and Life Satisfaction
 PMC13148127,2026,keep,,,Use of Digital Peer Support for Employee Well-Being: Retrospective Analysis Across Five Large Employers,JMIR human factors,Digital Mental Health Interventions
-PMC13148713,2026,flag,B,"medical, veterinary or other education tools",Ten simple rules for an effective mentor–mentee writing partnership,PLoS computational biology,Mentoring and Academic Development
+PMC13148713,2026,kep,B,"medical, veterinary or other education tools",Ten simple rules for an effective mentor–mentee writing partnership,PLoS computational biology,Mentoring and Academic Development
 PMC13152182,2026,keep,,,SleepDepNet: A multi-task transformer model for assessing sleep quality and depression risk from social media narratives,PLOS digital health,Mental Health via Writing
 PMC13154727,2026,keep,,,"Efficacy, User Engagement, and Acceptability of Cognitive Behavioral Therapy–Oriented Psychological Chatbots for Adults With Depressive and/or Anxiety Symptoms: Systematic Review and Meta-Analysis of Randomized Controlled Trials",Journal of medical Internet research,Digital Mental Health Interventions
 PMC13155441,2025,keep,,,Advancing minority stress detection with transformers: insights from the social media datasets,Social network analysis and mining,Mental Health via Writing
@@ -1503,7 +1503,7 @@ PMC13183351,2026,keep,,,Child-Directed Speech Facilitates Semantic Role Learning
 PMC13183849,2026,keep,,,Adaptive emotion-aware chatbot for mental health diagnosis using recurrent reinforcement learning and transformer models,Frontiers in artificial intelligence,Digital Mental Health Interventions
 PMC13184138,2026,keep,,,Personalized machine learning guided intervention for optimizing lifestyle behaviors in depression: a pilot study,NPP - digital psychiatry and neuroscience,Digital Mental Health Interventions
 PMC13184595,2026,keep,,,Addressing the Psychological Needs of Adolescents During the Wait Time for Mental Health Treatment: Service Design Study,JMIR formative research,Digital Mental Health Interventions
-PMC13185044,2026,flag,A,paediatric primary-care access in refugee camps,Factors influencing access to primary healthcare services for refugee children under five in the Palestinian West Bank: a qualitative study with female caregivers,BMJ global health,"Migration, Health and Trauma"
+PMC13185044,2026,keep,A,paediatric primary-care access in refugee camps,Factors influencing access to primary healthcare services for refugee children under five in the Palestinian West Bank: a qualitative study with female caregivers,BMJ global health,"Migration, Health and Trauma"
 PMC13187702,2026,keep,,,"Empathy in AI for Health and Care Settings—Definition, Expression, and Measurement: Protocol for a Scoping Review",JMIR research protocols,Social Robot Interaction and HRI
 PMC13189666,2026,keep,,,Do all components of psychological well-being predict cognitive function?,"The journals of gerontology. Series B, Psychological sciences and social sciences",Psychological Well-being and Life Satisfaction
 PMC13194039,2026,keep,,,Speech-touch integration for affective human–robot interaction: a scoping review,Frontiers in robotics and AI,Social Robot Interaction and HRI
@@ -1620,7 +1620,7 @@ PMC13297900,2026,keep,,,Automated Working Alliance Assessment in Psychological C
 PMC13298678,2025,keep,,,Human Mentalizing as Rational Probabilistic Inference,Computational brain & behavior,Child and Animal Learning Development
 PMC13298971,2026,keep,,,Feasibility and user evaluation of HopeBot: An LLM-powered conversational chatbot for depression screening,PLOS digital health,Digital Mental Health Interventions
 PMC13305600,2026,keep,,,Current status and challenges of artificial intelligence application in managing Children’s emotions and attention,Digital health,Emotion and Mood Recognition
-PMC13306607,2026,flag,A,industrial IoT: safety-sign optimisation,Smart Optimization Method for Safety Signs in Innovative Manufacturing Environments Integrating Industrial Field IoT Sensors and Knowledge Graphs,"Sensors (Basel, Switzerland)",Safety Warnings and Signage
+PMC13306607,2026,keep,A,industrial IoT: safety-sign optimisation,Smart Optimization Method for Safety Signs in Innovative Manufacturing Environments Integrating Industrial Field IoT Sensors and Knowledge Graphs,"Sensors (Basel, Switzerland)",Safety Warnings and Signage
 PMC13308690,2026,keep,,,"A Geospatially Customizable Culturally Tailored Just-in-Time Adaptive Intervention for Violence-Affected People Living With HIV: Mixed Methods Acceptability, Feasibility, and User Experience Study",JMIR human factors,Digital Mental Health Interventions
 PMC13310295,2025,keep,,,Relationships Between Subjective Iconicity Ratings and Phonological Variables in English and Spanish,Quarterly journal of experimental psychology (2006),"Categorization, perception, and language"
 PMC13317676,2026,keep,,,Understanding University Students’ Experiences of Engaging With AI and Apps for Their Mental Health and Well-Being: Qualitative Study,Journal of medical Internet research,Digital Mental Health Interventions
@@ -1637,7 +1637,7 @@ PMC13333983,2026,keep,,,Cognitive graph transformer: integrating emotional seman
 PMC13335179,2026,keep,,,Deep learning driven clustering of post-traumatic stress disorder (PTSD) profiles in student-athletes: implications for precision and stratified mental health support,BMC psychology,Posttraumatic Stress Disorder Research
 PMC13335415,2026,keep,,,"Landscape, Evidence, Gaps, and Opportunities in Digital Mental Health Interventions for Older Adults: Scoping Review",Interactive journal of medical research,Digital Mental Health Interventions
 PMC13336328,2026,keep,,,Structured Large Language Model Workflows for Motivational Interviewing in Health Behavior Change: Proof-of-Concept Study,JMIR formative research,Digital Mental Health Interventions
-PMC13337333,2026,flag,B,other,Mapping of oxytocin‐ and arginine vasopressin‐expressing neurons with calbindin 1 or reelin in the male mouse brain,Journal of neuroendocrinology,Neuroendocrine regulation and behavior
+PMC13337333,2026,keep,B,other,Mapping of oxytocin‐ and arginine vasopressin‐expressing neurons with calbindin 1 or reelin in the male mouse brain,Journal of neuroendocrinology,Neuroendocrine regulation and behavior
 PMC13337784,2026,keep,,,A fair lexical decision task for monolingual and multilingual Spanish-speakers,Frontiers in psychology,Reading and Literacy Development
 PMC13337845,2026,keep,,,Rethinking directiveness in AI coaching chatbots,Frontiers in psychology,Coaching Methods and Impact
 PMC13337866,2026,keep,,,TIC-XNet: a structured evidence translation framework for interpretable multimodal pediatric tic event detection with improved temporal alignment and fidelity,Frontiers in psychiatry,Obsessive-Compulsive Spectrum Disorders
@@ -1683,9 +1683,9 @@ PMC13377504,2026,keep,,,Sleep disturbances and their relationship with anxiety�
 PMC13379306,2026,keep,,,Word Trigram Frequency Predicts Failure to Detect Word Transpositions: Implications for Rational Inference in Reading,Open mind : discoveries in cognitive science,Reading and Literacy Development
 PMC13379617,2025,keep,,,Natural Language Response Formats for Assessing Depression and Worry With Large Language Models: A Sequential Evaluation With Model Pre-Registration,Assessment,Mental Health via Writing
 PMC13379693,2026,keep,,,Digitalization of Intervention Delivery and Its Impact on the Effects of Interventions for Mental Well-Being in Higher Education Students: Systematic Review and Meta-Analysis Protocol,JMIR research protocols,Digital Mental Health Interventions
-PMC13380250,2026,flag,B,"medical, veterinary or other education tools",Integrating Artificial Intelligence with Gamification in Medical Education: A Pedagogically Grounded Framework and Critical Review,Advances in medical education and practice,Educational Games and Gamification
+PMC13380250,2026,keep,B,"medical, veterinary or other education tools",Integrating Artificial Intelligence with Gamification in Medical Education: A Pedagogically Grounded Framework and Critical Review,Advances in medical education and practice,Educational Games and Gamification
 PMC13380439,2026,keep,,,MindTS-Net: A multimodal mindfulness-based intervention framework for children with Tourette syndrome,iScience,Obsessive-Compulsive Spectrum Disorders
-PMC13381238,2026,flag,B,sleep or pain medicine,A multimodal multi-agent LLM framework for identifying key drivers of sleep disorders,Frontiers in neurology,Sleep and related disorders
+PMC13381238,2026,keep,B,sleep or pain medicine,A multimodal multi-agent LLM framework for identifying key drivers of sleep disorders,Frontiers in neurology,Sleep and related disorders
 PMC13384355,2026,keep,,,Analyzing Social Media to Infer Mental Health Status and Affective States for Crisis and Disaster Management: Scoping Review,Journal of medical Internet research,Mental Health via Writing
 PMC13384424,2026,keep,,,"Body Image and Eating Disorder Education Chatbot, JEM, in Australia and Canada: First 6-Month Real-World Survey Evaluation",JMIR human factors,Eating Disorders and Behaviors
 PMC13385508,2026,keep,,,‘She lifted me up’: kinship construction in human-AI resilient communication among Chinese users,Frontiers in psychology,Social Robot Interaction and HRI
@@ -1735,7 +1735,7 @@ PMC13414918,2026,keep,,,Collaboration scripts in computer-supported collaborativ
 PMC13415908,2026,keep,,,Speech markers of psychological change following a psychedelic 5-MeO-DMT retreat,"Journal of psychopharmacology (Oxford, England)",Psychedelics and Drug Studies
 PMC13416237,2026,keep,,,"Human-like conversational agents as social partners: a scoping review of socioaffective mechanisms, well-being outcomes, risks and governance in the post-Turing era",Frontiers in artificial intelligence,Social Robot Interaction and HRI
 PMC13419850,2026,keep,,,Intrusive Mental Images Resembling Psychosis in a Patient With Obsessive-Compulsive Disorder,Cureus,Obsessive-Compulsive Spectrum Disorders
-PMC13421195,2026,flag,B,other,Partnering With Caregivers and Clinicians to Determine Research Priorities in Pediatric Migrant Health,JAMA network open,"Migration, Health and Trauma"
+PMC13421195,2026,keep,B,other,Partnering With Caregivers and Clinicians to Determine Research Priorities in Pediatric Migrant Health,JAMA network open,"Migration, Health and Trauma"
 PMC13422554,2026,keep,,,Research on factors affecting trust formation of generative AI agents in human–AI interaction contexts,Frontiers in psychology,Human-Automation Interaction and Safety
 PMC13423963,2026,keep,,,The impact of perceived human and computer interaction on collaborative learning: insights from the Map Task,Cognitive processing,Social Robot Interaction and HRI
 PMC13424345,2026,keep,,,I’m trying to read here! How does irrelevant speech affect how you read?,Cognitive processing,Reading and Literacy Development
@@ -1765,11 +1765,11 @@ PMC13454123,2026,keep,,,Refugee-centered framework for design of digital health 
 PMC13454280,2026,keep,,,Large language model empowered explainable and interpretable mental health analysis,Scientific reports,Mental Health via Writing
 PMC13454429,2026,keep,,,A deep learning-based model for automatic syntactic complexity assessment in L2 English writing: development and pedagogical application,Scientific reports,Second Language Acquisition and Learning
 PMC13455145,2026,keep,,,The association between cognitive flexibility and creativity across childhood and adolescence: a scoping review,BMC psychology,Creativity in Education and Neuroscience
-PMC13457559,2026,flag,B,health informatics or social media outside mental health,Using social media data to improve specific urban park activities: the case of park camping,Scientific reports,"Recreation, Leisure, Wilderness Management"
+PMC13457559,2026,drop,B,health informatics or social media outside mental health,Using social media data to improve specific urban park activities: the case of park camping,Scientific reports,"Recreation, Leisure, Wilderness Management"
 PMC13457727,2026,keep,,,Comparative sentiment and thematic analysis of depression-related discourse between healthcare professionals and non-healthcare individuals on Chinese social media: a computational text analysis study,Frontiers in psychology,Mental Health via Writing
 PMC13458938,2026,keep,,,Brief speech samples reveal emotional states in daily life,PNAS nexus,Emotion and Mood Recognition
 PMC13460794,2026,keep,,,Therapist-Facilitated Virtual Reality Intervention for Social Anxiety Among Youth: Protocol for a Randomized Controlled Trial,JMIR research protocols,"Anxiety, Depression, Psychometrics, Treatment, Cognitive Processes"
-PMC13461082,2026,flag,A,ophthalmology: ocular health of children using devices,Status of ocular health and binocular vision among children using digital devices: a cross-sectional study,Annals of medicine and surgery (2012),Ergonomics and Musculoskeletal Disorders
+PMC13461082,2026,drop,A,ophthalmology: ocular health of children using devices,Status of ocular health and binocular vision among children using digital devices: a cross-sectional study,Annals of medicine and surgery (2012),Ergonomics and Musculoskeletal Disorders
 PMC13461485,2026,keep,,,Hybrid artificial intelligence framework for patient emotion recognition in dentistry,Frontiers in oral health,Emotion and Mood Recognition
 PMC13461574,2026,keep,,,"Information bubble and skill evolution: a theoretical framework for integrating distributed cognition, cognition offloading, and metacognitive regulation based on AIOE",Frontiers in artificial intelligence,Technostress in Professional Settings
 PMC13462000,2026,keep,,,Why do we forget?—A mixed-method investigation of reasons for everyday prospective memory failures,Cognitive research: principles and implications,Cognitive Functions and Memory
@@ -1802,7 +1802,7 @@ PMC13484895,2026,keep,,,From Locus of Control to Fear: How Intolerance of Uncert
 PMC13485899,2026,keep,,,Techno-stress and teaching innovation among university teachers in the intelligent era: a path analysis of job burnout and AI self-efficacy,Frontiers in psychology,Technostress in Professional Settings
 PMC13486216,2026,keep,,,Neuro-semantic graph fusion for explainable depression risk trajectory mapping using a graph-enhanced RoBERTa framework,Frontiers in artificial intelligence,Mental Health via Writing
 PMC13486980,2026,keep,,,Altered neural processing of evaluative feedback from presumed conscious AI,iScience,Social Robot Interaction and HRI
-PMC13488236,2026,flag,B,sleep or pain medicine,The association between low back pain and sleep quality in adults 60 years and older: a systematic review,Chiropractic & manual therapies,Sleep and related disorders
+PMC13488236,2026,keep,B,sleep or pain medicine,The association between low back pain and sleep quality in adults 60 years and older: a systematic review,Chiropractic & manual therapies,Sleep and related disorders
 PMC13489541,2026,keep,,,Suggestions for Culturally Adapted Interventions to Treat Substance Use in Immigrants,Cureus,"Migration, Health and Trauma"
 PMC13490061,2026,keep,,,Emotion recognition from body movement through interpretable motion-aware sequential modeling,Frontiers in artificial intelligence,Emotion and Mood Recognition
 PMC13490529,2026,keep,,,Depression detection from multimodalities based on LeNet with hunter-geese optimization,Scientific reports,Emotion and Mood Recognition
@@ -1814,7 +1814,7 @@ PMC13493293,2026,keep,,,Linguistic perspective-taking in verbal communication wi
 PMC13493897,2026,keep,,,A scoping review on the mental health harms of LLM-based chatbots,NPJ digital medicine,Digital Mental Health Interventions
 PMC13498575,2026,keep,,,"An empirical study of digital competence, technostress, and job satisfaction among college physical education teachers in China",Scientific reports,Technostress in Professional Settings
 PMC13499352,2026,keep,,,"Internet-delivered unguided psychodynamic vs. cognitive behavior therapy for anxiety and depression symptoms: A large, full factorial randomized controlled trial on treatment length and peer support",Internet interventions,Digital Mental Health Interventions
-PMC13501724,2026,flag,A,physiotherapy: ChatGPT photographic posture evaluation,AI assisted photographic posture evaluation: a comparative study of ChatGPT and expert physiotherapists,"BMC sports science, medicine & rehabilitation",Ergonomics and Musculoskeletal Disorders
+PMC13501724,2026,drop,A,physiotherapy: ChatGPT photographic posture evaluation,AI assisted photographic posture evaluation: a comparative study of ChatGPT and expert physiotherapists,"BMC sports science, medicine & rehabilitation",Ergonomics and Musculoskeletal Disorders
 PMC13502379,2026,keep,,,Nurse-Led Design and Prototype Development of a Smart Care Robot to Support Mental Well-Being in Nursing and Health Care Students: A Proof-of-Concept,Nurse educator,Social Robot Interaction and HRI
 PMC13503911,2026,keep,,,"Effectiveness of AI and rule-based conversational agents for depression, anxiety and stress: A meta-analysis",NPJ digital medicine,Digital Mental Health Interventions
 PMC13504430,2026,keep,,,Prevalence of Mental Health Discussions in Publicly Available Generative AI Conversations,JAMA network open,Digital Mental Health Interventions
@@ -1859,7 +1859,7 @@ PMC13527328,2026,keep,,,Persistent Psychological Distress and Shifting Subjectiv
 PMC13528329,2025,keep,,,"INSIGHTFUL: insight generation through clinical annotation, analysis and modelling of suicide-related factors towards understanding and lifesaving",BMJ digital health & AI,Suicide and Self-Harm Studies
 PMC13528364,2025,keep,,,Can generative AI assess PTSD? A clinical validation study of transcribed and direct audio input modalities,BMJ digital health & AI,Posttraumatic Stress Disorder Research
 PMC13529850,2026,keep,,,Minimal symbol grounding through language statistics: An information theoretic approach quantifying uncertainty,Psychonomic bulletin & review,"Categorization, perception, and language"
-PMC13530209,2026,flag,B,design aesthetics (Kansei),A Kansei-mediated protocol for transforming painting palettes into product aesthetics,Scientific reports,Color perception and design
+PMC13530209,2026,keep,B,design aesthetics (Kansei),A Kansei-mediated protocol for transforming painting palettes into product aesthetics,Scientific reports,Color perception and design
 PMC13531844,2026,keep,,,Absolutist word usage in spoken language as a marker of depression: an ecological momentary assessment study,BMC psychiatry,Mental Health via Writing
 PMC13533316,2026,keep,,,Large Language Model–Based Behavioral Activation Chatbot for Young People With Depression Using Artificial Users and Clinical Experts: Mixed Methods Evaluation,JMIR mental health,Digital Mental Health Interventions
 PMC13533653,2026,keep,,,Sentient AI in robots and agents: prolegomena for an evidence-based research program,Frontiers in psychology,Philosophy and Theoretical Science
@@ -1868,8 +1868,8 @@ PMC13535764,2026,keep,,,Editorial: Advancing biostatistics and informatics appli
 PMC13536227,2026,keep,,,Benchmarking Generative Artificial Intelligence Against Human Judgment in Eating Disorder Case Recognition and Treatment Recommendations,The International journal of eating disorders,Eating Disorders and Behaviors
 PMC13539175,2026,keep,,,Generative AI in Youth Mental Health Apps: Rapid Review,JMIR mental health,Digital Mental Health Interventions
 PMC13542163,2026,keep,,,Generative AI emotion recognition from bodily gestures and vocal tone reveals modality-specific performance and positivity bias,Scientific reports,Emotion and Mood Recognition
-PMC13543288,2026,flag,B,LGBTQ+ sexual health and health services,Rapid review of gender-affirming healthcare for children and adolescents: Evidence synthesis (2021–2025) and recommendations for South Africa,Southern African journal of HIV medicine,"LGBTQ Health, Identity, and Policy"
-PMC13544693,2026,flag,B,LGBTQ+ sexual health and health services,"Web-Based, Open-Source LGBTQ+ Affirming Care Education for Primary Health Care Providers: Descriptive Analysis",Journal of medical Internet research,"LGBTQ Health, Identity, and Policy"
+PMC13543288,2026,keep,B,LGBTQ+ sexual health and health services,Rapid review of gender-affirming healthcare for children and adolescents: Evidence synthesis (2021–2025) and recommendations for South Africa,Southern African journal of HIV medicine,"LGBTQ Health, Identity, and Policy"
+PMC13544693,2026,keep,B,LGBTQ+ sexual health and health services,"Web-Based, Open-Source LGBTQ+ Affirming Care Education for Primary Health Care Providers: Descriptive Analysis",Journal of medical Internet research,"LGBTQ Health, Identity, and Policy"
 PMC13547093,2026,keep,,,Construction of a personality trait prediction model based on color perception preference and personalized cognitive intervention pathways in art education,Frontiers in psychology,Color perception and design
 PMC13547324,2026,keep,,,An algorithm for optimizing psychological regulation strategies for college students based on image recognition and reinforcement learning,Scientific reports,Emotion and Mood Recognition
 PMC13548420,2026,keep,,,Profiles and Temporal Dynamics of Personality-Related Language in a 16-year Professional Email Archive: A Subject-Specific Study (2008-2024),Journal for person-oriented research,Mental Health via Writing
@@ -1944,7 +1944,7 @@ PMC13603263,2026,keep,,,A Meta-Analysis of the Acceptance of Artificial Intellig
 PMC13603366,2026,keep,,,Emotional Dependency and Parasocial Grief Following the Alteration or Loss of Companion Artificial Intelligences: A Systematic Review,"Behavioral sciences (Basel, Switzerland)",Social Robot Interaction and HRI
 PMC13603568,2026,keep,,,AI Use for Mental Health Information and Professional Psychological Help-Seeking Intentions Among Saudi Women: A Cross-Sectional Study,"Behavioral sciences (Basel, Switzerland)",Mental Health Treatment and Access
 PMC13603825,2026,keep,,,Factors Influencing the Prevalence of PTSD Tendencies on Social Media During Emergencies,"Behavioral sciences (Basel, Switzerland)",COVID-19 and Mental Health
-PMC13605253,2026,flag,B,driving and vehicle technology,Explaining Driver Behavior in Sim Racing with Shannon Entropy and LLM Feedback,"Entropy (Basel, Switzerland)",Sport Psychology and Performance
+PMC13605253,2026,keep,B,driving and vehicle technology,Explaining Driver Behavior in Sim Racing with Shannon Entropy and LLM Feedback,"Entropy (Basel, Switzerland)",Sport Psychology and Performance
 PMC13606634,2026,keep,,,The Role of Emotion Regulation in Trauma Processing During Eye Movement Desensitization and Reprocessing (EMDR) Therapy,"Healthcare (Basel, Switzerland)",Posttraumatic Stress Disorder Research
 PMC13606950,2026,keep,,,How Generative Artificial Intelligence (GAI) reshapes students’ creativity in higher education: A chain path modeling Study from “Exploration–Exploitation” to “Co-Creation–Reflection”,PloS one,Creativity in Education and Neuroscience
 PMC13607497,2026,keep,,,The Patient–AI Relationship in Obsessive–Compulsive and Related Disorders: A Cognitive-Behavioral Framework,Journal of clinical medicine,Obsessive-Compulsive Spectrum Disorders
@@ -2010,8 +2010,8 @@ PMC13661949,2026,keep,,,"AI-enabled and comparator digital interventions for ado
 PMC13661996,2026,keep,,,Responsible use of generative AI in Chinese vocational education: eye-tracking evidence on source verification and immediate near-transfer across three information-seeking conditions,Frontiers in psychology,Educational Strategies and Epistemologies
 PMC13662918,2026,keep,,,From direct scoring to cue integration: big five prediction from spoken responses to a picture-based self-projection task,Frontiers in psychology,Personality Traits and Psychology
 PMC13667423,2026,keep,,,From Raw Signals to Understood States: A Perspective on Neuro-Symbolic and LLM-Driven Intelligent Sensing of Human Affective and Cognitive States,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
-PMC13667475,2026,flag,A,aviation engineering: pilot deviations from flight data,Quantifying Pilot Operational Deviations Based on Flight Data via Inverse Reinforcement Learning and Conformal Prediction,"Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
-PMC13667710,2026,flag,A,computer vision: badminton shot anticipation algorithm,Continuous-Time Event-Driven Temporal–Causal Attention for Intention-Driven Anticipation in Badminton,"Sensors (Basel, Switzerland)",Sport Psychology and Performance
+PMC13667475,2026,keep,A,aviation engineering: pilot deviations from flight data,Quantifying Pilot Operational Deviations Based on Flight Data via Inverse Reinforcement Learning and Conformal Prediction,"Sensors (Basel, Switzerland)",Human-Automation Interaction and Safety
+PMC13667710,2026,keep,A,computer vision: badminton shot anticipation algorithm,Continuous-Time Event-Driven Temporal–Causal Attention for Intention-Driven Anticipation in Badminton,"Sensors (Basel, Switzerland)",Sport Psychology and Performance
 PMC13668686,2026,keep,,,A clinically validated framework for auditing AI chatbot behavior in mental health interactions,Nature medicine,Digital Mental Health Interventions
 PMC13669378,2026,keep,,,Identifying suicide-related language in smartphone keyboard entries among high-risk adolescents,NPJ digital medicine,Mental Health via Writing
 PMC13675308,2026,keep,,,Text difficulty modulates the surprisal effect in self-paced reading,Reading and writing,Reading and Literacy Development
@@ -2044,7 +2044,7 @@ PMC8309914,2021,keep,,,Multi-Modal Adaptive Fusion Transformer Network for the E
 PMC8309929,2021,keep,,,Robust Multimodal Emotion Recognition from Conversation with Transformer-Based Crossmodality Fusion,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
 PMC8330892,2021,keep,,,Monitoring Depression Trends on Twitter During the COVID-19 Pandemic: Observational Study,JMIR infodemiology,Mental Health via Writing
 PMC8339965,2021,keep,,,Automated Scoring of Tablet-Administered Expressive Language Tests,Frontiers in psychology,Language Development and Disorders
-PMC8371035,2021,flag,B,health informatics or social media outside mental health,Classifying patient and professional voice in social media health posts,BMC medical informatics and decision making,Mental Health via Writing
+PMC8371035,2021,keep,B,health informatics or social media outside mental health,Classifying patient and professional voice in social media health posts,BMC medical informatics and decision making,Mental Health via Writing
 PMC8416081,2021,keep,,,Distant Supervision for Mental Health Management in Social Media: Suicide Risk Classification System Development Study,Journal of medical Internet research,Mental Health via Writing
 PMC8426553,2021,keep,,,Multi-Head Attention-Based Long Short-Term Memory for Depression Detection From Speech,Frontiers in neurorobotics,Emotion and Mood Recognition
 PMC8446189,2021,keep,,,Identifying Silver Linings During the Pandemic Through Natural Language Processing,Frontiers in psychology,COVID-19 and Mental Health
@@ -2112,7 +2112,7 @@ PMC9319580,2022,keep,,,Modeling Subjective Affect Annotations with Multi-Task Le
 PMC9364970,2022,keep,,,Increased Online Aggression During COVID-19 Lockdowns: Two-Stage Study of Deep Text Mining and Difference-in-Differences Analysis,Journal of medical Internet research,Mental Health via Writing
 PMC9370911,2022,keep,,,Multidimensional Latent Semantic Networks for Text Humor Recognition,"Sensors (Basel, Switzerland)",Humor Studies and Applications
 PMC9371125,2022,keep,,,SMaTE: A Segment-Level Feature Mixing and Temporal Encoding Framework for Facial Expression Recognition,"Sensors (Basel, Switzerland)",Emotion and Mood Recognition
-PMC9374171,2022,flag,A,traditional East Asian medicine: sleep-disturbance pattern identification,Deep autoencoder-powered pattern identification of sleep disturbance using multi-site cross-sectional survey data,Frontiers in medicine,Sleep and related disorders
+PMC9374171,2022,drop,A,traditional East Asian medicine: sleep-disturbance pattern identification,Deep autoencoder-powered pattern identification of sleep disturbance using multi-site cross-sectional survey data,Frontiers in medicine,Sleep and related disorders
 PMC9399877,2022,keep,,,Emotion-Based Reinforcement Attention Network for Depression Detection on Social Media: Algorithm Development and Validation,JMIR medical informatics,Mental Health via Writing
 PMC9407719,2022,keep,,,Leveraging Reddit for Suicidal Ideation Detection: A Review of Machine Learning and Natural Language Processing Techniques,International journal of environmental research and public health,Mental Health via Writing
 PMC9411628,2022,keep,,,Human preferences toward algorithmic advice in a word association task,Scientific reports,Human-Automation Interaction and Safety
