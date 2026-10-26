@@ -63,8 +63,11 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    through shared ORCIDs; R4 strict linking of the 12,150 unidentified bylines; R5 institutions to the nearest
    university parent. Simulated, not yet applied: the author table is built after the subset choice. The OpenAlex key is
    given by the owner in the dialog when needed, never stored.
-   **Next:** the trial subset (field or model family; table of candidates from OpenAlex topics + NLM journals; size),
-   then A3 part 2 (lost sentences), then the M1 author table and matrices.
+   **Trial subset (RL-193, 2026-10-26):** owner chose a discipline-based subset; candidate table built
+   (`corpus_statistics/subset_candidates.py`, `subset_candidates.json`, per-article CSV; NLM Catalog cache). NLM Broad
+   Subject Terms unusable as the source (54% coverage, megajournal "Science"); OpenAlex primary-topic field used. Coverage
+   flat across fields; model diversity vs subfield structure trade off. Waiting for the owner's choice of field and size.
+   **Next:** then A3 part 2 (lost sentences), then the M1 author table and matrices.
 1d. **G3 RL-186 rerun — DONE (2026-10-24).** G2 positions pass (`PG/g2_v3_2_pos/`, 825,554 of 825,698 units exact):
    provenance per hyperedge; focal names replaced and placed by their own positions (two pre-existing errors fixed);
    contrast words kept (without, versus, than, unlike, in_contrast). `PG/g3_v2/` 41,753 valid, 640 invalid, 6,953

@@ -2518,3 +2518,34 @@ articles without author); R6 844 bylines removed (5 articles without author); 24
 persons, 1 cross-ID join with different names left (158 without R3 and R6); 12,150 bylines to R4. In total 1,150
 bylines (0.45%) removed, 7 articles leave the working corpus. AUTHOR_IDENTITY.md §7–§8. Nothing applied to data: the
 author table is built after the trial subset is chosen. [LOG]
+
+**RL-193 · 2026-10-26 · M1 trial subset: candidate disciplinary subsets tabulated · CODE + METADATA (read-only Entrez) · LIVE**
+Owner (2026-10-26): the trial subset is discipline-based (it may show both model-based and subdiscipline-based
+communities); explore disciplines, fields, subfields. New `corpus_statistics/nlm_journals_fetch.py`: NLM Catalog data
+for all 3,330 NLM journal IDs of the PubMed records (esummary Broad Subject Terms, efetch catalog MeSH; cache
+`diagnostics/author_coverage/nlm_journals.json`, untracked): all resolved; 1,686 journals with a Broad Subject Term,
+2,994 with MeSH. Two faults of the first version found by the counts and fixed before use: MeSH not parsed (record tag
+has attributes) and 605 IDs not resolved (IDs with a leading 0 and the 16-digit 9918…6676 form are not catalog UIDs;
+now resolved by esearch [nlmid], like the "R" IDs). New `corpus_statistics/subset_candidates.py`: per article of the
+41,640 (`subset_candidates_by_article.csv`, no names) the OpenAlex primary topic (topic/subfield/field/domain), the
+fields of its other topics, NLM journal and Broad Subject Terms, year, model families named in its G3 units, byline
+coverage (ID or ORCID, OpenAlex institution ID); per candidate (OpenAlex field, subfield with 300+ articles, NLM Broad
+Subject Term) `subset_candidates.json`. Model families: `family_map` covers the v2 names only; the v3 matcher's 7,299
+term forms and the hub spellings are folded for this table only (vendor lines to their family, BERT/RoBERTa spellings
+and checkpoints to bare BERT/RoBERTa, other named models their own family, case and a hyphenated version ignored: ESM-1b,
+ESM-2 -> esm); a first count split names on ":" and was corrected before reporting. **Findings.** (1) NLM Broad Subject
+Terms are not a usable discipline source: 54% of articles have one, and the largest terms are "Science" (6,132,
+megajournals) and "Medicine" (3,050); they serve as a cross-check only. (2) OpenAlex primary-topic fields (all but 65
+articles): Medicine 13,120, Computer Science 9,661, Biochemistry/Genetics/Molecular Biology 5,797, Social Sciences
+2,495, Psychology 2,255, Health Professions 1,657, Engineering 1,180, Decision Sciences 1,079, Neuroscience 921, others
+<500. Boundaries are soft: only 21–58% of an article's other topics fall in its primary field. Medicine is dominated by
+one catch-all topic ("Artificial Intelligence in Healthcare", 7,765 articles = subfield Health Informatics, GPT the main
+family in 70%). (3) Byline coverage does not separate fields: ID or ORCID 0.95–0.97, OpenAlex institution ID 0.93–0.97
+for every field with 300+ articles; so "cleaner data" does not discriminate between disciplines. (4) Model diversity
+(effective number of main families, generic-only articles excluded) and subdiscipline structure (effective number of
+subfields) pull in opposite directions: Biochemistry/Genetics/MolBio 33.9 families but 1.9 subfields (Molecular Biology
+85%; 25 topics with 30+ articles); Computer Science 17.9 / 4.1 (9,661 articles); Psychology 6.9 / 4.5 (2,255; five
+subfields of 221–861); Social Sciences 5.5 / 7.8 (2,495); Psychology + Neuroscience 7.5 / 6.4 (3,176); Medicine without
+Health Informatics 9.0 / 21.2 (5,355, 7.0 units per article). NLM agreement for Psychology is weak (of articles with a
+Broad Subject Term, 19% "Psychology", 26% "Science"); for Biochemistry/Genetics/MolBio stronger (72% have a term,
+mostly Computational Biology, Biochemistry, Genetics, Molecular Biology). No subset chosen; options put to the owner. [LOG]

@@ -1,0 +1,7510 @@
+{
+ "corpus": {
+  "articles": 41640,
+  "units": 784727,
+  "parents": 903858,
+  "years": {
+   "": 1,
+   "2015": 22,
+   "2016": 38,
+   "2017": 44,
+   "2018": 72,
+   "2019": 123,
+   "2020": 357,
+   "2021": 903,
+   "2022": 1634,
+   "2023": 3159,
+   "2024": 6864,
+   "2025": 13569,
+   "2026": 14854
+  },
+  "share_2024_on": 0.847,
+  "main_family_top": [
+   [
+    "GPT (OpenAI)",
+    15122
+   ],
+   [
+    "(generic terms only)",
+    9672
+   ],
+   [
+    "BERT (bare/unspecified)",
+    5622
+   ],
+   [
+    "GPT (bare/unspecified)",
+    1020
+   ],
+   [
+    "Gemini (Google)",
+    950
+   ],
+   [
+    "esm",
+    829
+   ]
+  ],
+  "families_with_30_articles": 107,
+  "gpt_main_share": 0.363,
+  "generic_only_share": 0.232,
+  "bylines": 254986,
+  "byline_id_or_orcid": 0.953,
+  "byline_inst_id": 0.943,
+  "articles_all_identified": 0.803,
+  "oa_persons": 188729,
+  "oa_persons_2plus_articles": 27191,
+  "journals": 3280,
+  "journals_5plus": 946,
+  "subfields": 223,
+  "subfield_top": [
+   [
+    "Health Informatics",
+    7765
+   ],
+   [
+    "Artificial Intelligence",
+    5202
+   ],
+   [
+    "Molecular Biology",
+    4917
+   ],
+   [
+    "Computational Theory and Mathematics",
+    1422
+   ],
+   [
+    "Information Systems",
+    1228
+   ],
+   [
+    "Computer Vision and Pattern Recognition",
+    1158
+   ]
+  ],
+  "median_topic_score": 0.959,
+  "other_topics_same_field": 0.38,
+  "nlm_broad_any": 0.541,
+  "nlm_broad_top": [
+   [
+    "Science",
+    6132
+   ],
+   [
+    "Medicine",
+    3050
+   ],
+   [
+    "Medical Informatics",
+    2442
+   ],
+   [
+    "Computational Biology",
+    2173
+   ],
+   [
+    "Technology",
+    1597
+   ]
+  ]
+ },
+ "field": {
+  "Medicine": {
+   "articles": 13120,
+   "units": 344513,
+   "parents": 402884,
+   "years": {
+    "2015": 2,
+    "2016": 1,
+    "2017": 1,
+    "2018": 7,
+    "2019": 5,
+    "2020": 23,
+    "2021": 86,
+    "2022": 111,
+    "2023": 776,
+    "2024": 2231,
+    "2025": 4610,
+    "2026": 5267
+   },
+   "share_2024_on": 0.923,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     7523
+    ],
+    [
+     "(generic terms only)",
+     2352
+    ],
+    [
+     "BERT (bare/unspecified)",
+     612
+    ],
+    [
+     "Gemini (Google)",
+     443
+    ],
+    [
+     "DeepSeek",
+     351
+    ],
+    [
+     "GPT (bare/unspecified)",
+     329
+    ]
+   ],
+   "families_with_30_articles": 36,
+   "gpt_main_share": 0.573,
+   "generic_only_share": 0.179,
+   "bylines": 91381,
+   "byline_id_or_orcid": 0.953,
+   "byline_inst_id": 0.935,
+   "articles_all_identified": 0.793,
+   "oa_persons": 71176,
+   "oa_persons_2plus_articles": 8161,
+   "journals": 1993,
+   "journals_5plus": 449,
+   "subfields": 40,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     7765
+    ],
+    [
+     "Public Health, Environmental and Occupational Health",
+     737
+    ],
+    [
+     "Radiology, Nuclear Medicine and Imaging",
+     622
+    ],
+    [
+     "Psychiatry and Mental health",
+     428
+    ],
+    [
+     "Epidemiology",
+     418
+    ],
+    [
+     "Physiology",
+     371
+    ]
+   ],
+   "median_topic_score": 0.98,
+   "other_topics_same_field": 0.352,
+   "nlm_broad_any": 0.473,
+   "nlm_broad_top": [
+    [
+     "Medicine",
+     1061
+    ],
+    [
+     "Medical Informatics",
+     831
+    ],
+    [
+     "Science",
+     685
+    ],
+    [
+     "Education",
+     628
+    ],
+    [
+     "Public Health",
+     379
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Computer Science": {
+   "articles": 9661,
+   "units": 191725,
+   "parents": 219053,
+   "years": {
+    "2015": 11,
+    "2016": 15,
+    "2017": 16,
+    "2018": 33,
+    "2019": 49,
+    "2020": 197,
+    "2021": 385,
+    "2022": 734,
+    "2023": 909,
+    "2024": 1558,
+    "2025": 2939,
+    "2026": 2815
+   },
+   "share_2024_on": 0.757,
+   "main_family_top": [
+    [
+     "BERT (bare/unspecified)",
+     2547
+    ],
+    [
+     "(generic terms only)",
+     2203
+    ],
+    [
+     "GPT (OpenAI)",
+     1964
+    ],
+    [
+     "Llama (Meta)",
+     288
+    ],
+    [
+     "RoBERTa (generic/base)",
+     219
+    ],
+    [
+     "GPT (bare/unspecified)",
+     216
+    ]
+   ],
+   "families_with_30_articles": 53,
+   "gpt_main_share": 0.203,
+   "generic_only_share": 0.228,
+   "bylines": 51546,
+   "byline_id_or_orcid": 0.948,
+   "byline_inst_id": 0.949,
+   "articles_all_identified": 0.8,
+   "oa_persons": 41637,
+   "oa_persons_2plus_articles": 4246,
+   "journals": 919,
+   "journals_5plus": 197,
+   "subfields": 11,
+   "subfield_top": [
+    [
+     "Artificial Intelligence",
+     5202
+    ],
+    [
+     "Computational Theory and Mathematics",
+     1422
+    ],
+    [
+     "Information Systems",
+     1228
+    ],
+    [
+     "Computer Vision and Pattern Recognition",
+     1158
+    ],
+    [
+     "Computer Networks and Communications",
+     214
+    ],
+    [
+     "Human-Computer Interaction",
+     155
+    ]
+   ],
+   "median_topic_score": 0.957,
+   "other_topics_same_field": 0.451,
+   "nlm_broad_any": 0.547,
+   "nlm_broad_top": [
+    [
+     "Science",
+     2460
+    ],
+    [
+     "Technology",
+     749
+    ],
+    [
+     "Medicine",
+     745
+    ],
+    [
+     "Biotechnology",
+     743
+    ],
+    [
+     "Medical Informatics",
+     622
+    ]
+   ],
+   "field": "Computer Science"
+  },
+  "Biochemistry, Genetics and Molecular Biology": {
+   "articles": 5797,
+   "units": 75934,
+   "parents": 85208,
+   "years": {
+    "2015": 4,
+    "2016": 8,
+    "2017": 13,
+    "2018": 15,
+    "2019": 36,
+    "2020": 66,
+    "2021": 169,
+    "2022": 303,
+    "2023": 539,
+    "2024": 1052,
+    "2025": 1806,
+    "2026": 1786
+   },
+   "share_2024_on": 0.801,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     1595
+    ],
+    [
+     "BERT (bare/unspecified)",
+     704
+    ],
+    [
+     "GPT (OpenAI)",
+     643
+    ],
+    [
+     "esm",
+     602
+    ],
+    [
+     "dnabert",
+     180
+    ],
+    [
+     "biobert",
+     172
+    ]
+   ],
+   "families_with_30_articles": 42,
+   "gpt_main_share": 0.111,
+   "generic_only_share": 0.275,
+   "bylines": 38902,
+   "byline_id_or_orcid": 0.954,
+   "byline_inst_id": 0.951,
+   "articles_all_identified": 0.778,
+   "oa_persons": 29880,
+   "oa_persons_2plus_articles": 3737,
+   "journals": 726,
+   "journals_5plus": 156,
+   "subfields": 14,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     4917
+    ],
+    [
+     "Genetics",
+     486
+    ],
+    [
+     "Cancer Research",
+     149
+    ],
+    [
+     "Biophysics",
+     66
+    ],
+    [
+     "Molecular Medicine",
+     46
+    ],
+    [
+     "Cell Biology",
+     39
+    ]
+   ],
+   "median_topic_score": 0.953,
+   "other_topics_same_field": 0.578,
+   "nlm_broad_any": 0.717,
+   "nlm_broad_top": [
+    [
+     "Computational Biology",
+     1402
+    ],
+    [
+     "Science",
+     715
+    ],
+    [
+     "Biochemistry",
+     572
+    ],
+    [
+     "Biology",
+     416
+    ],
+    [
+     "Genetics",
+     375
+    ]
+   ],
+   "field": "Biochemistry, Genetics and Molecular Biology"
+  },
+  "Social Sciences": {
+   "articles": 2495,
+   "units": 44904,
+   "parents": 52287,
+   "years": {
+    "2016": 1,
+    "2017": 1,
+    "2019": 5,
+    "2020": 13,
+    "2021": 89,
+    "2022": 155,
+    "2023": 251,
+    "2024": 448,
+    "2025": 751,
+    "2026": 781
+   },
+   "share_2024_on": 0.794,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     1133
+    ],
+    [
+     "(generic terms only)",
+     458
+    ],
+    [
+     "BERT (bare/unspecified)",
+     454
+    ],
+    [
+     "Gemini (Google)",
+     70
+    ],
+    [
+     "RoBERTa (generic/base)",
+     56
+    ],
+    [
+     "GPT (bare/unspecified)",
+     53
+    ]
+   ],
+   "families_with_30_articles": 19,
+   "gpt_main_share": 0.454,
+   "generic_only_share": 0.184,
+   "bylines": 12022,
+   "byline_id_or_orcid": 0.96,
+   "byline_inst_id": 0.95,
+   "articles_all_identified": 0.861,
+   "oa_persons": 10355,
+   "oa_persons_2plus_articles": 709,
+   "journals": 558,
+   "journals_5plus": 83,
+   "subfields": 20,
+   "subfield_top": [
+    [
+     "Sociology and Political Science",
+     780
+    ],
+    [
+     "Safety Research",
+     598
+    ],
+    [
+     "Health",
+     260
+    ],
+    [
+     "Education",
+     180
+    ],
+    [
+     "Communication",
+     160
+    ],
+    [
+     "General Social Sciences",
+     138
+    ]
+   ],
+   "median_topic_score": 0.899,
+   "other_topics_same_field": 0.34,
+   "nlm_broad_any": 0.517,
+   "nlm_broad_top": [
+    [
+     "Science",
+     540
+    ],
+    [
+     "Medicine",
+     272
+    ],
+    [
+     "Medical Informatics",
+     181
+    ],
+    [
+     "Public Health",
+     164
+    ],
+    [
+     "Psychology",
+     62
+    ]
+   ],
+   "field": "Social Sciences"
+  },
+  "Psychology": {
+   "articles": 2255,
+   "units": 33436,
+   "parents": 38185,
+   "years": {
+    "2015": 1,
+    "2016": 6,
+    "2017": 4,
+    "2018": 3,
+    "2019": 6,
+    "2020": 18,
+    "2021": 53,
+    "2022": 89,
+    "2023": 176,
+    "2024": 338,
+    "2025": 733,
+    "2026": 828
+   },
+   "share_2024_on": 0.842,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     881
+    ],
+    [
+     "(generic terms only)",
+     554
+    ],
+    [
+     "BERT (bare/unspecified)",
+     364
+    ],
+    [
+     "GPT (bare/unspecified)",
+     77
+    ],
+    [
+     "RoBERTa (generic/base)",
+     57
+    ],
+    [
+     "Gemini (Google)",
+     47
+    ]
+   ],
+   "families_with_30_articles": 14,
+   "gpt_main_share": 0.391,
+   "generic_only_share": 0.246,
+   "bylines": 11768,
+   "byline_id_or_orcid": 0.957,
+   "byline_inst_id": 0.944,
+   "articles_all_identified": 0.844,
+   "oa_persons": 9938,
+   "oa_persons_2plus_articles": 805,
+   "journals": 410,
+   "journals_5plus": 70,
+   "subfields": 6,
+   "subfield_top": [
+    [
+     "Social Psychology",
+     861
+    ],
+    [
+     "Experimental and Cognitive Psychology",
+     497
+    ],
+    [
+     "Applied Psychology",
+     397
+    ],
+    [
+     "Clinical Psychology",
+     273
+    ],
+    [
+     "Developmental and Educational Psychology",
+     221
+    ],
+    [
+     "Neuropsychology and Physiological Psychology",
+     6
+    ]
+   ],
+   "median_topic_score": 0.933,
+   "other_topics_same_field": 0.336,
+   "nlm_broad_any": 0.466,
+   "nlm_broad_top": [
+    [
+     "Science",
+     275
+    ],
+    [
+     "Psychology",
+     197
+    ],
+    [
+     "Medicine",
+     135
+    ],
+    [
+     "Medical Informatics",
+     131
+    ],
+    [
+     "Health Services Research",
+     89
+    ]
+   ],
+   "field": "Psychology"
+  },
+  "Health Professions": {
+   "articles": 1657,
+   "units": 12051,
+   "parents": 13341,
+   "years": {
+    "2015": 2,
+    "2017": 2,
+    "2018": 1,
+    "2019": 2,
+    "2020": 6,
+    "2021": 15,
+    "2022": 26,
+    "2023": 82,
+    "2024": 248,
+    "2025": 562,
+    "2026": 711
+   },
+   "share_2024_on": 0.918,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     731
+    ],
+    [
+     "(generic terms only)",
+     514
+    ],
+    [
+     "BERT (bare/unspecified)",
+     140
+    ],
+    [
+     "Gemini (Google)",
+     55
+    ],
+    [
+     "GPT (bare/unspecified)",
+     35
+    ],
+    [
+     "DeepSeek",
+     24
+    ]
+   ],
+   "families_with_30_articles": 9,
+   "gpt_main_share": 0.441,
+   "generic_only_share": 0.31,
+   "bylines": 10649,
+   "byline_id_or_orcid": 0.956,
+   "byline_inst_id": 0.929,
+   "articles_all_identified": 0.826,
+   "oa_persons": 9434,
+   "oa_persons_2plus_articles": 429,
+   "journals": 478,
+   "journals_5plus": 56,
+   "subfields": 11,
+   "subfield_top": [
+    [
+     "General Health Professions",
+     871
+    ],
+    [
+     "Health Information Management",
+     549
+    ],
+    [
+     "Emergency Medical Services",
+     75
+    ],
+    [
+     "Occupational Therapy",
+     63
+    ],
+    [
+     "Physical Therapy, Sports Therapy and Rehabilitation",
+     35
+    ],
+    [
+     "Pharmacy",
+     20
+    ]
+   ],
+   "median_topic_score": 0.849,
+   "other_topics_same_field": 0.21,
+   "nlm_broad_any": 0.559,
+   "nlm_broad_top": [
+    [
+     "Medical Informatics",
+     236
+    ],
+    [
+     "Public Health",
+     137
+    ],
+    [
+     "Medicine",
+     135
+    ],
+    [
+     "Health Services Research",
+     115
+    ],
+    [
+     "Science",
+     108
+    ]
+   ],
+   "field": "Health Professions"
+  },
+  "Engineering": {
+   "articles": 1180,
+   "units": 13081,
+   "parents": 14628,
+   "years": {
+    "2016": 2,
+    "2017": 3,
+    "2018": 1,
+    "2019": 1,
+    "2020": 2,
+    "2021": 14,
+    "2022": 27,
+    "2023": 72,
+    "2024": 183,
+    "2025": 407,
+    "2026": 468
+   },
+   "share_2024_on": 0.897,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     433
+    ],
+    [
+     "GPT (OpenAI)",
+     326
+    ],
+    [
+     "BERT (bare/unspecified)",
+     157
+    ],
+    [
+     "Gemini (Google)",
+     34
+    ],
+    [
+     "Llama (Meta)",
+     25
+    ],
+    [
+     "GPT (bare/unspecified)",
+     23
+    ]
+   ],
+   "families_with_30_articles": 6,
+   "gpt_main_share": 0.276,
+   "generic_only_share": 0.367,
+   "bylines": 6574,
+   "byline_id_or_orcid": 0.946,
+   "byline_inst_id": 0.963,
+   "articles_all_identified": 0.779,
+   "oa_persons": 5897,
+   "oa_persons_2plus_articles": 193,
+   "journals": 204,
+   "journals_5plus": 29,
+   "subfields": 15,
+   "subfield_top": [
+    [
+     "Biomedical Engineering",
+     235
+    ],
+    [
+     "Electrical and Electronic Engineering",
+     221
+    ],
+    [
+     "Control and Systems Engineering",
+     189
+    ],
+    [
+     "Media Technology",
+     73
+    ],
+    [
+     "Automotive Engineering",
+     69
+    ],
+    [
+     "Industrial and Manufacturing Engineering",
+     64
+    ]
+   ],
+   "median_topic_score": 0.955,
+   "other_topics_same_field": 0.406,
+   "nlm_broad_any": 0.629,
+   "nlm_broad_top": [
+    [
+     "Biotechnology",
+     333
+    ],
+    [
+     "Technology",
+     326
+    ],
+    [
+     "Science",
+     301
+    ],
+    [
+     "Biology",
+     65
+    ],
+    [
+     "Medicine",
+     49
+    ]
+   ],
+   "field": "Engineering"
+  },
+  "Decision Sciences": {
+   "articles": 1079,
+   "units": 20749,
+   "parents": 23866,
+   "years": {
+    "2019": 2,
+    "2020": 6,
+    "2021": 24,
+    "2022": 40,
+    "2023": 76,
+    "2024": 161,
+    "2025": 357,
+    "2026": 413
+   },
+   "share_2024_on": 0.863,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     461
+    ],
+    [
+     "(generic terms only)",
+     225
+    ],
+    [
+     "BERT (bare/unspecified)",
+     143
+    ],
+    [
+     "GPT (bare/unspecified)",
+     42
+    ],
+    [
+     "Gemini (Google)",
+     29
+    ],
+    [
+     "DeepSeek",
+     23
+    ]
+   ],
+   "families_with_30_articles": 9,
+   "gpt_main_share": 0.427,
+   "generic_only_share": 0.209,
+   "bylines": 5963,
+   "byline_id_or_orcid": 0.957,
+   "byline_inst_id": 0.95,
+   "articles_all_identified": 0.825,
+   "oa_persons": 5209,
+   "oa_persons_2plus_articles": 337,
+   "journals": 319,
+   "journals_5plus": 44,
+   "subfields": 4,
+   "subfield_top": [
+    [
+     "Statistics, Probability and Uncertainty",
+     563
+    ],
+    [
+     "Information Systems and Management",
+     276
+    ],
+    [
+     "Management Science and Operations Research",
+     211
+    ],
+    [
+     "General Decision Sciences",
+     29
+    ]
+   ],
+   "median_topic_score": 0.922,
+   "other_topics_same_field": 0.117,
+   "nlm_broad_any": 0.541,
+   "nlm_broad_top": [
+    [
+     "Science",
+     237
+    ],
+    [
+     "Medicine",
+     168
+    ],
+    [
+     "Medical Informatics",
+     75
+    ],
+    [
+     "Computational Biology",
+     32
+    ],
+    [
+     "Statistics as Topic",
+     25
+    ]
+   ],
+   "field": "Decision Sciences"
+  },
+  "Neuroscience": {
+   "articles": 921,
+   "units": 11508,
+   "parents": 13046,
+   "years": {
+    "2015": 1,
+    "2016": 2,
+    "2017": 4,
+    "2018": 4,
+    "2019": 6,
+    "2020": 10,
+    "2021": 24,
+    "2022": 44,
+    "2023": 77,
+    "2024": 153,
+    "2025": 295,
+    "2026": 301
+   },
+   "share_2024_on": 0.813,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     345
+    ],
+    [
+     "GPT (OpenAI)",
+     288
+    ],
+    [
+     "BERT (bare/unspecified)",
+     102
+    ],
+    [
+     "GPT (bare/unspecified)",
+     37
+    ],
+    [
+     "Llama (Meta)",
+     21
+    ],
+    [
+     "Gemini (Google)",
+     20
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.313,
+   "generic_only_share": 0.375,
+   "bylines": 5192,
+   "byline_id_or_orcid": 0.959,
+   "byline_inst_id": 0.974,
+   "articles_all_identified": 0.841,
+   "oa_persons": 4378,
+   "oa_persons_2plus_articles": 356,
+   "journals": 261,
+   "journals_5plus": 47,
+   "subfields": 8,
+   "subfield_top": [
+    [
+     "Cognitive Neuroscience",
+     780
+    ],
+    [
+     "Neurology",
+     70
+    ],
+    [
+     "Cellular and Molecular Neuroscience",
+     38
+    ],
+    [
+     "Endocrine and Autonomic Systems",
+     16
+    ],
+    [
+     "Sensory Systems",
+     12
+    ],
+    [
+     "Biological Psychiatry",
+     2
+    ]
+   ],
+   "median_topic_score": 0.939,
+   "other_topics_same_field": 0.252,
+   "nlm_broad_any": 0.534,
+   "nlm_broad_top": [
+    [
+     "Science",
+     173
+    ],
+    [
+     "Neurology",
+     72
+    ],
+    [
+     "Biology",
+     62
+    ],
+    [
+     "Psychology",
+     42
+    ],
+    [
+     "Brain",
+     37
+    ]
+   ],
+   "field": "Neuroscience"
+  },
+  "Agricultural and Biological Sciences": {
+   "articles": 473,
+   "units": 3530,
+   "parents": 3915,
+   "years": {
+    "2018": 4,
+    "2019": 3,
+    "2021": 3,
+    "2022": 10,
+    "2023": 20,
+    "2024": 69,
+    "2025": 161,
+    "2026": 203
+   },
+   "share_2024_on": 0.915,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     152
+    ],
+    [
+     "(generic terms only)",
+     150
+    ],
+    [
+     "BERT (bare/unspecified)",
+     52
+    ],
+    [
+     "GPT (bare/unspecified)",
+     13
+    ],
+    [
+     "Gemini (Google)",
+     13
+    ],
+    [
+     "Qwen",
+     7
+    ]
+   ],
+   "families_with_30_articles": 3,
+   "gpt_main_share": 0.321,
+   "generic_only_share": 0.317,
+   "bylines": 2844,
+   "byline_id_or_orcid": 0.953,
+   "byline_inst_id": 0.962,
+   "articles_all_identified": 0.797,
+   "oa_persons": 2557,
+   "oa_persons_2plus_articles": 95,
+   "journals": 161,
+   "journals_5plus": 15,
+   "subfields": 9,
+   "subfield_top": [
+    [
+     "Plant Science",
+     327
+    ],
+    [
+     "Food Science",
+     66
+    ],
+    [
+     "Ecology, Evolution, Behavior and Systematics",
+     23
+    ],
+    [
+     "Animal Science and Zoology",
+     20
+    ],
+    [
+     "Agronomy and Crop Science",
+     13
+    ],
+    [
+     "Insect Science",
+     13
+    ]
+   ],
+   "median_topic_score": 0.979,
+   "other_topics_same_field": 0.281,
+   "nlm_broad_any": 0.421,
+   "nlm_broad_top": [
+    [
+     "Science",
+     65
+    ],
+    [
+     "Biotechnology",
+     27
+    ],
+    [
+     "Technology",
+     27
+    ],
+    [
+     "Medicine",
+     18
+    ],
+    [
+     "Botany",
+     16
+    ]
+   ],
+   "field": "Agricultural and Biological Sciences"
+  },
+  "Materials Science": {
+   "articles": 429,
+   "units": 7005,
+   "parents": 7876,
+   "years": {
+    "2019": 1,
+    "2020": 2,
+    "2021": 3,
+    "2022": 10,
+    "2023": 44,
+    "2024": 75,
+    "2025": 132,
+    "2026": 162
+   },
+   "share_2024_on": 0.86,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     134
+    ],
+    [
+     "GPT (OpenAI)",
+     110
+    ],
+    [
+     "BERT (bare/unspecified)",
+     31
+    ],
+    [
+     "GPT (bare/unspecified)",
+     21
+    ],
+    [
+     "polybert",
+     13
+    ],
+    [
+     "Gemini (Google)",
+     13
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.256,
+   "generic_only_share": 0.312,
+   "bylines": 2791,
+   "byline_id_or_orcid": 0.967,
+   "byline_inst_id": 0.962,
+   "articles_all_identified": 0.834,
+   "oa_persons": 2418,
+   "oa_persons_2plus_articles": 174,
+   "journals": 118,
+   "journals_5plus": 26,
+   "subfields": 6,
+   "subfield_top": [
+    [
+     "Materials Chemistry",
+     349
+    ],
+    [
+     "Biomaterials",
+     50
+    ],
+    [
+     "Electronic, Optical and Magnetic Materials",
+     21
+    ],
+    [
+     "Polymers and Plastics",
+     7
+    ],
+    [
+     "Surfaces, Coatings and Films",
+     1
+    ],
+    [
+     "Ceramics and Composites",
+     1
+    ]
+   ],
+   "median_topic_score": 0.944,
+   "other_topics_same_field": 0.176,
+   "nlm_broad_any": 0.476,
+   "nlm_broad_top": [
+    [
+     "Science",
+     74
+    ],
+    [
+     "Chemistry",
+     55
+    ],
+    [
+     "Biology",
+     48
+    ],
+    [
+     "Biomedical Engineering",
+     30
+    ],
+    [
+     "Medical Informatics",
+     18
+    ]
+   ],
+   "field": "Materials Science"
+  },
+  "Environmental Science": {
+   "articles": 392,
+   "units": 2658,
+   "parents": 2928,
+   "years": {
+    "2019": 1,
+    "2021": 1,
+    "2022": 9,
+    "2023": 15,
+    "2024": 53,
+    "2025": 143,
+    "2026": 170
+   },
+   "share_2024_on": 0.934,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     125
+    ],
+    [
+     "GPT (OpenAI)",
+     111
+    ],
+    [
+     "BERT (bare/unspecified)",
+     38
+    ],
+    [
+     "esm",
+     12
+    ],
+    [
+     "dnabert",
+     10
+    ],
+    [
+     "Gemini (Google)",
+     10
+    ]
+   ],
+   "families_with_30_articles": 2,
+   "gpt_main_share": 0.283,
+   "generic_only_share": 0.319,
+   "bylines": 2969,
+   "byline_id_or_orcid": 0.955,
+   "byline_inst_id": 0.952,
+   "articles_all_identified": 0.791,
+   "oa_persons": 2650,
+   "oa_persons_2plus_articles": 105,
+   "journals": 167,
+   "journals_5plus": 15,
+   "subfields": 11,
+   "subfield_top": [
+    [
+     "Ecology",
+     161
+    ],
+    [
+     "Health, Toxicology and Mutagenesis",
+     53
+    ],
+    [
+     "Global and Planetary Change",
+     38
+    ],
+    [
+     "Environmental Engineering",
+     33
+    ],
+    [
+     "Pollution",
+     32
+    ],
+    [
+     "Environmental Chemistry",
+     20
+    ]
+   ],
+   "median_topic_score": 0.958,
+   "other_topics_same_field": 0.288,
+   "nlm_broad_any": 0.61,
+   "nlm_broad_top": [
+    [
+     "Science",
+     86
+    ],
+    [
+     "Biology",
+     35
+    ],
+    [
+     "Medicine",
+     32
+    ],
+    [
+     "Environmental Health",
+     32
+    ],
+    [
+     "Microbiology",
+     25
+    ]
+   ],
+   "field": "Environmental Science"
+  },
+  "Arts and Humanities": {
+   "articles": 391,
+   "units": 5948,
+   "parents": 6800,
+   "years": {
+    "2016": 1,
+    "2019": 1,
+    "2020": 4,
+    "2021": 3,
+    "2022": 7,
+    "2023": 31,
+    "2024": 53,
+    "2025": 109,
+    "2026": 182
+   },
+   "share_2024_on": 0.88,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     231
+    ],
+    [
+     "(generic terms only)",
+     79
+    ],
+    [
+     "BERT (bare/unspecified)",
+     23
+    ],
+    [
+     "GPT (bare/unspecified)",
+     19
+    ],
+    [
+     "Gemini (Google)",
+     13
+    ],
+    [
+     "DeepSeek",
+     5
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.591,
+   "generic_only_share": 0.202,
+   "bylines": 1548,
+   "byline_id_or_orcid": 0.95,
+   "byline_inst_id": 0.953,
+   "articles_all_identified": 0.836,
+   "oa_persons": 1392,
+   "oa_persons_2plus_articles": 49,
+   "journals": 145,
+   "journals_5plus": 12,
+   "subfields": 11,
+   "subfield_top": [
+    [
+     "Language and Linguistics",
+     178
+    ],
+    [
+     "History and Philosophy of Science",
+     118
+    ],
+    [
+     "Literature and Literary Theory",
+     33
+    ],
+    [
+     "Visual Arts and Performing Arts",
+     13
+    ],
+    [
+     "Archeology",
+     13
+    ],
+    [
+     "Philosophy",
+     13
+    ]
+   ],
+   "median_topic_score": 0.795,
+   "other_topics_same_field": 0.18,
+   "nlm_broad_any": 0.409,
+   "nlm_broad_top": [
+    [
+     "Science",
+     73
+    ],
+    [
+     "Medicine",
+     59
+    ],
+    [
+     "Psychology",
+     13
+    ],
+    [
+     "Education",
+     11
+    ],
+    [
+     "Biology",
+     6
+    ]
+   ],
+   "field": "Arts and Humanities"
+  },
+  "Immunology and Microbiology": {
+   "articles": 298,
+   "units": 2103,
+   "parents": 2289,
+   "years": {
+    "2020": 2,
+    "2021": 1,
+    "2022": 6,
+    "2023": 14,
+    "2024": 49,
+    "2025": 85,
+    "2026": 141
+   },
+   "share_2024_on": 0.923,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     77
+    ],
+    [
+     "GPT (OpenAI)",
+     58
+    ],
+    [
+     "BERT (bare/unspecified)",
+     43
+    ],
+    [
+     "esm",
+     27
+    ],
+    [
+     "prottrans",
+     11
+    ],
+    [
+     "protbert",
+     10
+    ]
+   ],
+   "families_with_30_articles": 3,
+   "gpt_main_share": 0.195,
+   "generic_only_share": 0.258,
+   "bylines": 2115,
+   "byline_id_or_orcid": 0.958,
+   "byline_inst_id": 0.943,
+   "articles_all_identified": 0.785,
+   "oa_persons": 1891,
+   "oa_persons_2plus_articles": 75,
+   "journals": 142,
+   "journals_5plus": 11,
+   "subfields": 5,
+   "subfield_top": [
+    [
+     "Microbiology",
+     150
+    ],
+    [
+     "Immunology",
+     81
+    ],
+    [
+     "Applied Microbiology and Biotechnology",
+     34
+    ],
+    [
+     "Virology",
+     21
+    ],
+    [
+     "Parasitology",
+     12
+    ]
+   ],
+   "median_topic_score": 0.986,
+   "other_topics_same_field": 0.057,
+   "nlm_broad_any": 0.641,
+   "nlm_broad_top": [
+    [
+     "Science",
+     39
+    ],
+    [
+     "Computational Biology",
+     36
+    ],
+    [
+     "Microbiology",
+     22
+    ],
+    [
+     "Biology",
+     21
+    ],
+    [
+     "Biochemistry",
+     18
+    ]
+   ],
+   "field": "Immunology and Microbiology"
+  },
+  "Business, Management and Accounting": {
+   "articles": 250,
+   "units": 1978,
+   "parents": 2208,
+   "years": {
+    "2019": 1,
+    "2020": 1,
+    "2021": 6,
+    "2022": 11,
+    "2023": 12,
+    "2024": 37,
+    "2025": 77,
+    "2026": 105
+   },
+   "share_2024_on": 0.876,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     87
+    ],
+    [
+     "(generic terms only)",
+     66
+    ],
+    [
+     "BERT (bare/unspecified)",
+     60
+    ],
+    [
+     "RoBERTa (generic/base)",
+     6
+    ],
+    [
+     "DeepSeek",
+     5
+    ],
+    [
+     "GPT (bare/unspecified)",
+     4
+    ]
+   ],
+   "families_with_30_articles": 2,
+   "gpt_main_share": 0.348,
+   "generic_only_share": 0.264,
+   "bylines": 923,
+   "byline_id_or_orcid": 0.927,
+   "byline_inst_id": 0.959,
+   "articles_all_identified": 0.772,
+   "oa_persons": 820,
+   "oa_persons_2plus_articles": 14,
+   "journals": 72,
+   "journals_5plus": 6,
+   "subfields": 8,
+   "subfield_top": [
+    [
+     "Organizational Behavior and Human Resource Management",
+     93
+    ],
+    [
+     "Management of Technology and Innovation",
+     51
+    ],
+    [
+     "Strategy and Management",
+     36
+    ],
+    [
+     "Management Information Systems",
+     28
+    ],
+    [
+     "Marketing",
+     22
+    ],
+    [
+     "Accounting",
+     17
+    ]
+   ],
+   "median_topic_score": 0.883,
+   "other_topics_same_field": 0.254,
+   "nlm_broad_any": 0.496,
+   "nlm_broad_top": [
+    [
+     "Science",
+     93
+    ],
+    [
+     "Medicine",
+     52
+    ],
+    [
+     "Public Health",
+     7
+    ],
+    [
+     "Health Services Research",
+     4
+    ],
+    [
+     "Psychology",
+     3
+    ]
+   ],
+   "field": "Business, Management and Accounting"
+  },
+  "Pharmacology, Toxicology and Pharmaceutics": {
+   "articles": 234,
+   "units": 3844,
+   "parents": 4362,
+   "years": {
+    "2015": 1,
+    "2016": 1,
+    "2018": 1,
+    "2019": 2,
+    "2020": 3,
+    "2021": 12,
+    "2022": 21,
+    "2023": 17,
+    "2024": 32,
+    "2025": 59,
+    "2026": 85
+   },
+   "share_2024_on": 0.752,
+   "main_family_top": [
+    [
+     "BERT (bare/unspecified)",
+     67
+    ],
+    [
+     "(generic terms only)",
+     50
+    ],
+    [
+     "GPT (OpenAI)",
+     49
+    ],
+    [
+     "GPT (bare/unspecified)",
+     10
+    ],
+    [
+     "biobert",
+     9
+    ],
+    [
+     "RoBERTa (generic/base)",
+     6
+    ]
+   ],
+   "families_with_30_articles": 4,
+   "gpt_main_share": 0.209,
+   "generic_only_share": 0.214,
+   "bylines": 1581,
+   "byline_id_or_orcid": 0.956,
+   "byline_inst_id": 0.919,
+   "articles_all_identified": 0.774,
+   "oa_persons": 1328,
+   "oa_persons_2plus_articles": 111,
+   "journals": 112,
+   "journals_5plus": 9,
+   "subfields": 3,
+   "subfield_top": [
+    [
+     "Toxicology",
+     175
+    ],
+    [
+     "Pharmacology",
+     47
+    ],
+    [
+     "Pharmaceutical Science",
+     12
+    ]
+   ],
+   "median_topic_score": 0.948,
+   "other_topics_same_field": 0.062,
+   "nlm_broad_any": 0.585,
+   "nlm_broad_top": [
+    [
+     "Medical Informatics",
+     33
+    ],
+    [
+     "Drug Therapy",
+     27
+    ],
+    [
+     "Medicine",
+     22
+    ],
+    [
+     "Toxicology",
+     21
+    ],
+    [
+     "Science",
+     21
+    ]
+   ],
+   "field": "Pharmacology, Toxicology and Pharmaceutics"
+  },
+  "Dentistry": {
+   "articles": 214,
+   "units": 2640,
+   "parents": 2959,
+   "years": {
+    "2023": 9,
+    "2024": 20,
+    "2025": 73,
+    "2026": 112
+   },
+   "share_2024_on": 0.958,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     132
+    ],
+    [
+     "(generic terms only)",
+     33
+    ],
+    [
+     "Gemini (Google)",
+     15
+    ],
+    [
+     "BERT (bare/unspecified)",
+     7
+    ],
+    [
+     "GPT (bare/unspecified)",
+     5
+    ],
+    [
+     "DeepSeek",
+     4
+    ]
+   ],
+   "families_with_30_articles": 2,
+   "gpt_main_share": 0.617,
+   "generic_only_share": 0.154,
+   "bylines": 1265,
+   "byline_id_or_orcid": 0.949,
+   "byline_inst_id": 0.907,
+   "articles_all_identified": 0.804,
+   "oa_persons": 1116,
+   "oa_persons_2plus_articles": 56,
+   "journals": 84,
+   "journals_5plus": 10,
+   "subfields": 4,
+   "subfield_top": [
+    [
+     "Oral Surgery",
+     112
+    ],
+    [
+     "Orthodontics",
+     52
+    ],
+    [
+     "Periodontics",
+     45
+    ],
+    [
+     "General Dentistry",
+     5
+    ]
+   ],
+   "median_topic_score": 0.961,
+   "other_topics_same_field": 0.339,
+   "nlm_broad_any": 0.425,
+   "nlm_broad_top": [
+    [
+     "Dentistry",
+     68
+    ],
+    [
+     "Science",
+     9
+    ],
+    [
+     "Medicine",
+     8
+    ],
+    [
+     "Orthodontics",
+     3
+    ],
+    [
+     "Health Services Research",
+     2
+    ]
+   ],
+   "field": "Dentistry"
+  },
+  "Physics and Astronomy": {
+   "articles": 167,
+   "units": 1502,
+   "parents": 1740,
+   "years": {
+    "2018": 2,
+    "2019": 1,
+    "2020": 2,
+    "2021": 3,
+    "2022": 8,
+    "2023": 9,
+    "2024": 21,
+    "2025": 54,
+    "2026": 67
+   },
+   "share_2024_on": 0.85,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     72
+    ],
+    [
+     "GPT (OpenAI)",
+     27
+    ],
+    [
+     "BERT (bare/unspecified)",
+     18
+    ],
+    [
+     "GPT (bare/unspecified)",
+     10
+    ],
+    [
+     "Llama (Meta)",
+     8
+    ],
+    [
+     "Gemini (Google)",
+     6
+    ]
+   ],
+   "families_with_30_articles": 1,
+   "gpt_main_share": 0.162,
+   "generic_only_share": 0.431,
+   "bylines": 1014,
+   "byline_id_or_orcid": 0.953,
+   "byline_inst_id": 0.959,
+   "articles_all_identified": 0.82,
+   "oa_persons": 937,
+   "oa_persons_2plus_articles": 5,
+   "journals": 72,
+   "journals_5plus": 5,
+   "subfields": 8,
+   "subfield_top": [
+    [
+     "Statistical and Nonlinear Physics",
+     76
+    ],
+    [
+     "Radiation",
+     41
+    ],
+    [
+     "Atomic and Molecular Physics, and Optics",
+     29
+    ],
+    [
+     "Nuclear and High Energy Physics",
+     8
+    ],
+    [
+     "Condensed Matter Physics",
+     6
+    ],
+    [
+     "Astronomy and Astrophysics",
+     5
+    ]
+   ],
+   "median_topic_score": 0.92,
+   "other_topics_same_field": 0.144,
+   "nlm_broad_any": 0.575,
+   "nlm_broad_top": [
+    [
+     "Science",
+     60
+    ],
+    [
+     "Biology",
+     19
+    ],
+    [
+     "Medicine",
+     10
+    ],
+    [
+     "Biophysics",
+     8
+    ],
+    [
+     "Physics",
+     7
+    ]
+   ],
+   "field": "Physics and Astronomy"
+  },
+  "Economics, Econometrics and Finance": {
+   "articles": 133,
+   "units": 1036,
+   "parents": 1169,
+   "years": {
+    "2021": 3,
+    "2022": 8,
+    "2023": 11,
+    "2024": 19,
+    "2025": 41,
+    "2026": 51
+   },
+   "share_2024_on": 0.835,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     44
+    ],
+    [
+     "GPT (OpenAI)",
+     43
+    ],
+    [
+     "BERT (bare/unspecified)",
+     21
+    ],
+    [
+     "Claude (Anthropic)",
+     3
+    ],
+    [
+     "Gemini (Google)",
+     2
+    ],
+    [
+     "finbert",
+     2
+    ]
+   ],
+   "families_with_30_articles": 1,
+   "gpt_main_share": 0.323,
+   "generic_only_share": 0.331,
+   "bylines": 680,
+   "byline_id_or_orcid": 0.937,
+   "byline_inst_id": 0.903,
+   "articles_all_identified": 0.782,
+   "oa_persons": 615,
+   "oa_persons_2plus_articles": 12,
+   "journals": 61,
+   "journals_5plus": 5,
+   "subfields": 3,
+   "subfield_top": [
+    [
+     "Economics and Econometrics",
+     114
+    ],
+    [
+     "Finance",
+     18
+    ],
+    [
+     "General Economics, Econometrics and Finance",
+     1
+    ]
+   ],
+   "median_topic_score": 0.884,
+   "other_topics_same_field": 0.222,
+   "nlm_broad_any": 0.549,
+   "nlm_broad_top": [
+    [
+     "Science",
+     41
+    ],
+    [
+     "Medicine",
+     22
+    ],
+    [
+     "Public Health",
+     10
+    ],
+    [
+     "Drug Therapy",
+     5
+    ],
+    [
+     "Pharmacology",
+     4
+    ]
+   ],
+   "field": "Economics, Econometrics and Finance"
+  },
+  "Chemistry": {
+   "articles": 127,
+   "units": 857,
+   "parents": 929,
+   "years": {
+    "2019": 1,
+    "2020": 1,
+    "2021": 1,
+    "2022": 3,
+    "2023": 5,
+    "2024": 22,
+    "2025": 45,
+    "2026": 49
+   },
+   "share_2024_on": 0.913,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     48
+    ],
+    [
+     "GPT (OpenAI)",
+     30
+    ],
+    [
+     "BERT (bare/unspecified)",
+     11
+    ],
+    [
+     "GPT (bare/unspecified)",
+     8
+    ],
+    [
+     "Gemini (Google)",
+     3
+    ],
+    [
+     "Llama (Meta)",
+     3
+    ]
+   ],
+   "families_with_30_articles": 1,
+   "gpt_main_share": 0.236,
+   "generic_only_share": 0.378,
+   "bylines": 903,
+   "byline_id_or_orcid": 0.963,
+   "byline_inst_id": 0.95,
+   "articles_all_identified": 0.803,
+   "oa_persons": 802,
+   "oa_persons_2plus_articles": 52,
+   "journals": 66,
+   "journals_5plus": 5,
+   "subfields": 5,
+   "subfield_top": [
+    [
+     "Spectroscopy",
+     72
+    ],
+    [
+     "Organic Chemistry",
+     20
+    ],
+    [
+     "Analytical Chemistry",
+     19
+    ],
+    [
+     "Inorganic Chemistry",
+     11
+    ],
+    [
+     "Physical and Theoretical Chemistry",
+     5
+    ]
+   ],
+   "median_topic_score": 0.883,
+   "other_topics_same_field": 0.248,
+   "nlm_broad_any": 0.583,
+   "nlm_broad_top": [
+    [
+     "Biochemistry",
+     20
+    ],
+    [
+     "Science",
+     17
+    ],
+    [
+     "Biology",
+     13
+    ],
+    [
+     "Chemistry",
+     13
+    ],
+    [
+     "Computational Biology",
+     9
+    ]
+   ],
+   "field": "Chemistry"
+  },
+  "Nursing": {
+   "articles": 102,
+   "units": 822,
+   "parents": 931,
+   "years": {
+    "2020": 1,
+    "2021": 1,
+    "2022": 3,
+    "2023": 3,
+    "2024": 10,
+    "2025": 39,
+    "2026": 45
+   },
+   "share_2024_on": 0.922,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     48
+    ],
+    [
+     "(generic terms only)",
+     26
+    ],
+    [
+     "BERT (bare/unspecified)",
+     8
+    ],
+    [
+     "umamibert",
+     3
+    ],
+    [
+     "bert4bitter",
+     3
+    ],
+    [
+     "Gemini (Google)",
+     3
+    ]
+   ],
+   "families_with_30_articles": 1,
+   "gpt_main_share": 0.471,
+   "generic_only_share": 0.255,
+   "bylines": 612,
+   "byline_id_or_orcid": 0.964,
+   "byline_inst_id": 0.938,
+   "articles_all_identified": 0.853,
+   "oa_persons": 551,
+   "oa_persons_2plus_articles": 16,
+   "journals": 57,
+   "journals_5plus": 4,
+   "subfields": 4,
+   "subfield_top": [
+    [
+     "Nutrition and Dietetics",
+     63
+    ],
+    [
+     "Issues, ethics and legal aspects",
+     25
+    ],
+    [
+     "Research and Theory",
+     8
+    ],
+    [
+     "Leadership and Management",
+     6
+    ]
+   ],
+   "median_topic_score": 0.897,
+   "other_topics_same_field": 0.064,
+   "nlm_broad_any": 0.451,
+   "nlm_broad_top": [
+    [
+     "Nutritional Sciences",
+     11
+    ],
+    [
+     "Nursing",
+     8
+    ],
+    [
+     "Medical Informatics",
+     6
+    ],
+    [
+     "Biochemistry",
+     4
+    ],
+    [
+     "Medicine",
+     4
+    ]
+   ],
+   "field": "Nursing"
+  },
+  "Mathematics": {
+   "articles": 92,
+   "units": 652,
+   "parents": 722,
+   "years": {
+    "2021": 5,
+    "2022": 8,
+    "2023": 5,
+    "2024": 13,
+    "2025": 27,
+    "2026": 34
+   },
+   "share_2024_on": 0.804,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     35
+    ],
+    [
+     "GPT (OpenAI)",
+     28
+    ],
+    [
+     "BERT (bare/unspecified)",
+     13
+    ],
+    [
+     "Claude (Anthropic)",
+     6
+    ],
+    [
+     "Llama (Meta)",
+     2
+    ],
+    [
+     "camembert",
+     1
+    ]
+   ],
+   "families_with_30_articles": 1,
+   "gpt_main_share": 0.304,
+   "generic_only_share": 0.38,
+   "bylines": 511,
+   "byline_id_or_orcid": 0.965,
+   "byline_inst_id": 0.92,
+   "articles_all_identified": 0.848,
+   "oa_persons": 487,
+   "oa_persons_2plus_articles": 4,
+   "journals": 60,
+   "journals_5plus": 3,
+   "subfields": 6,
+   "subfield_top": [
+    [
+     "Statistics and Probability",
+     55
+    ],
+    [
+     "Modeling and Simulation",
+     27
+    ],
+    [
+     "Geometry and Topology",
+     4
+    ],
+    [
+     "Applied Mathematics",
+     3
+    ],
+    [
+     "Computational Mathematics",
+     2
+    ],
+    [
+     "Discrete Mathematics and Combinatorics",
+     1
+    ]
+   ],
+   "median_topic_score": 0.926,
+   "other_topics_same_field": 0.158,
+   "nlm_broad_any": 0.587,
+   "nlm_broad_top": [
+    [
+     "Science",
+     20
+    ],
+    [
+     "Medicine",
+     15
+    ],
+    [
+     "Computational Biology",
+     6
+    ],
+    [
+     "Statistics as Topic",
+     6
+    ],
+    [
+     "Public Health",
+     4
+    ]
+   ],
+   "field": "Mathematics"
+  },
+  "(no OpenAlex topic)": {
+   "articles": 65,
+   "units": 1703,
+   "parents": 1949,
+   "years": {
+    "": 1,
+    "2016": 1,
+    "2021": 1,
+    "2022": 1,
+    "2023": 1,
+    "2024": 3,
+    "2025": 23,
+    "2026": 34
+   },
+   "share_2024_on": 0.923,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     20
+    ],
+    [
+     "(generic terms only)",
+     17
+    ],
+    [
+     "BERT (bare/unspecified)",
+     4
+    ],
+    [
+     "GPT (bare/unspecified)",
+     4
+    ],
+    [
+     "RoBERTa (generic/base)",
+     3
+    ],
+    [
+     "sbert",
+     2
+    ]
+   ],
+   "families_with_30_articles": 0,
+   "gpt_main_share": 0.308,
+   "generic_only_share": 0.262,
+   "bylines": 490,
+   "byline_id_or_orcid": 0.712,
+   "byline_inst_id": 0.541,
+   "articles_all_identified": 0.492,
+   "oa_persons": 251,
+   "oa_persons_2plus_articles": 0,
+   "journals": 43,
+   "journals_5plus": 3,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "",
+     65
+    ]
+   ],
+   "median_topic_score": null,
+   "other_topics_same_field": null,
+   "nlm_broad_any": 0.631,
+   "nlm_broad_top": [
+    [
+     "Science",
+     12
+    ],
+    [
+     "Medical Informatics",
+     9
+    ],
+    [
+     "Biology",
+     6
+    ],
+    [
+     "Psychology",
+     4
+    ],
+    [
+     "Medicine",
+     3
+    ]
+   ],
+   "field": ""
+  },
+  "Veterinary": {
+   "articles": 40,
+   "units": 208,
+   "parents": 224,
+   "years": {
+    "2024": 6,
+    "2025": 15,
+    "2026": 19
+   },
+   "share_2024_on": 1.0,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     22
+    ],
+    [
+     "(generic terms only)",
+     11
+    ],
+    [
+     "Gemini (Google)",
+     2
+    ],
+    [
+     "BERT (bare/unspecified)",
+     1
+    ],
+    [
+     "metallama",
+     1
+    ],
+    [
+     "GPT (bare/unspecified)",
+     1
+    ]
+   ],
+   "families_with_30_articles": 0,
+   "gpt_main_share": 0.55,
+   "generic_only_share": 0.275,
+   "bylines": 315,
+   "byline_id_or_orcid": 0.962,
+   "byline_inst_id": 0.895,
+   "articles_all_identified": 0.85,
+   "oa_persons": 287,
+   "oa_persons_2plus_articles": 13,
+   "journals": 28,
+   "journals_5plus": 1,
+   "subfields": 2,
+   "subfield_top": [
+    [
+     "Small Animals",
+     39
+    ],
+    [
+     "Equine",
+     1
+    ]
+   ],
+   "median_topic_score": 0.881,
+   "other_topics_same_field": 0.163,
+   "nlm_broad_any": 0.4,
+   "nlm_broad_top": [
+    [
+     "Veterinary Medicine",
+     7
+    ],
+    [
+     "Internal Medicine",
+     2
+    ],
+    [
+     "Science",
+     2
+    ],
+    [
+     "Toxicology",
+     2
+    ],
+    [
+     "Zoology",
+     1
+    ]
+   ],
+   "field": "Veterinary"
+  },
+  "Earth and Planetary Sciences": {
+   "articles": 31,
+   "units": 127,
+   "parents": 136,
+   "years": {
+    "2018": 1,
+    "2021": 1,
+    "2023": 3,
+    "2024": 3,
+    "2025": 11,
+    "2026": 12
+   },
+   "share_2024_on": 0.839,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     11
+    ],
+    [
+     "(generic terms only)",
+     11
+    ],
+    [
+     "Llama (Meta)",
+     3
+    ],
+    [
+     "bert100",
+     1
+    ],
+    [
+     "BERT (bare/unspecified)",
+     1
+    ],
+    [
+     "DeepSeek",
+     1
+    ]
+   ],
+   "families_with_30_articles": 0,
+   "gpt_main_share": 0.355,
+   "generic_only_share": 0.355,
+   "bylines": 166,
+   "byline_id_or_orcid": 0.94,
+   "byline_inst_id": 0.958,
+   "articles_all_identified": 0.742,
+   "oa_persons": 154,
+   "oa_persons_2plus_articles": 1,
+   "journals": 15,
+   "journals_5plus": 2,
+   "subfields": 7,
+   "subfield_top": [
+    [
+     "Atmospheric Science",
+     10
+    ],
+    [
+     "Paleontology",
+     7
+    ],
+    [
+     "Geology",
+     5
+    ],
+    [
+     "Geophysics",
+     3
+    ],
+    [
+     "Geochemistry and Petrology",
+     2
+    ],
+    [
+     "Oceanography",
+     2
+    ]
+   ],
+   "median_topic_score": 0.931,
+   "other_topics_same_field": 0.194,
+   "nlm_broad_any": 0.839,
+   "nlm_broad_top": [
+    [
+     "Science",
+     16
+    ],
+    [
+     "Biotechnology",
+     6
+    ],
+    [
+     "Technology",
+     6
+    ],
+    [
+     "Biology",
+     5
+    ],
+    [
+     "Medicine",
+     3
+    ]
+   ],
+   "field": "Earth and Planetary Sciences"
+  },
+  "Energy": {
+   "articles": 22,
+   "units": 103,
+   "parents": 104,
+   "years": {
+    "2023": 2,
+    "2024": 4,
+    "2025": 9,
+    "2026": 7
+   },
+   "share_2024_on": 0.909,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     9
+    ],
+    [
+     "(generic terms only)",
+     9
+    ],
+    [
+     "BERT (bare/unspecified)",
+     1
+    ],
+    [
+     "catberta",
+     1
+    ],
+    [
+     "molgpt",
+     1
+    ],
+    [
+     "GPT (bare/unspecified)",
+     1
+    ]
+   ],
+   "families_with_30_articles": 0,
+   "gpt_main_share": 0.409,
+   "generic_only_share": 0.409,
+   "bylines": 168,
+   "byline_id_or_orcid": 0.97,
+   "byline_inst_id": 0.994,
+   "articles_all_identified": 0.818,
+   "oa_persons": 156,
+   "oa_persons_2plus_articles": 7,
+   "journals": 18,
+   "journals_5plus": 0,
+   "subfields": 2,
+   "subfield_top": [
+    [
+     "Renewable Energy, Sustainability and the Environment",
+     20
+    ],
+    [
+     "Energy Engineering and Power Technology",
+     2
+    ]
+   ],
+   "median_topic_score": 0.989,
+   "other_topics_same_field": 0.25,
+   "nlm_broad_any": 0.455,
+   "nlm_broad_top": [
+    [
+     "Chemistry",
+     4
+    ],
+    [
+     "Science",
+     3
+    ],
+    [
+     "Biophysics",
+     3
+    ],
+    [
+     "Biomedical Engineering",
+     1
+    ],
+    [
+     "Biotechnology",
+     1
+    ]
+   ],
+   "field": "Energy"
+  },
+  "Chemical Engineering": {
+   "articles": 15,
+   "units": 110,
+   "parents": 119,
+   "years": {
+    "2024": 3,
+    "2025": 6,
+    "2026": 6
+   },
+   "share_2024_on": 1.0,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     6
+    ],
+    [
+     "GPT (OpenAI)",
+     4
+    ],
+    [
+     "RoBERTa (generic/base)",
+     1
+    ],
+    [
+     "smilesbert14",
+     1
+    ],
+    [
+     "largelanguagemodel",
+     1
+    ],
+    [
+     "GPT (bare/unspecified)",
+     1
+    ]
+   ],
+   "families_with_30_articles": 0,
+   "gpt_main_share": 0.267,
+   "generic_only_share": 0.4,
+   "bylines": 94,
+   "byline_id_or_orcid": 1.0,
+   "byline_inst_id": 0.968,
+   "articles_all_identified": 1.0,
+   "oa_persons": 94,
+   "oa_persons_2plus_articles": 0,
+   "journals": 14,
+   "journals_5plus": 0,
+   "subfields": 4,
+   "subfield_top": [
+    [
+     "Catalysis",
+     9
+    ],
+    [
+     "Fluid Flow and Transfer Processes",
+     3
+    ],
+    [
+     "Chemical Health and Safety",
+     2
+    ],
+    [
+     "Bioengineering",
+     1
+    ]
+   ],
+   "median_topic_score": 0.908,
+   "other_topics_same_field": 0.067,
+   "nlm_broad_any": 0.667,
+   "nlm_broad_top": [
+    [
+     "Science",
+     4
+    ],
+    [
+     "Biology",
+     3
+    ],
+    [
+     "Biomedical Engineering",
+     2
+    ],
+    [
+     "Chemistry",
+     1
+    ],
+    [
+     "Medical Informatics",
+     1
+    ]
+   ],
+   "field": "Chemical Engineering"
+  }
+ },
+ "subfield": {
+  "Health Informatics": {
+   "articles": 7765,
+   "units": 307158,
+   "parents": 361118,
+   "years": {
+    "2020": 5,
+    "2021": 13,
+    "2022": 16,
+    "2023": 522,
+    "2024": 1450,
+    "2025": 2801,
+    "2026": 2958
+   },
+   "share_2024_on": 0.928,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     5448
+    ],
+    [
+     "(generic terms only)",
+     756
+    ],
+    [
+     "Gemini (Google)",
+     318
+    ],
+    [
+     "DeepSeek",
+     254
+    ],
+    [
+     "GPT (bare/unspecified)",
+     217
+    ],
+    [
+     "Llama (Meta)",
+     155
+    ]
+   ],
+   "families_with_30_articles": 26,
+   "gpt_main_share": 0.702,
+   "generic_only_share": 0.097,
+   "bylines": 51634,
+   "byline_id_or_orcid": 0.952,
+   "byline_inst_id": 0.937,
+   "articles_all_identified": 0.807,
+   "oa_persons": 38950,
+   "oa_persons_2plus_articles": 5100,
+   "journals": 1285,
+   "journals_5plus": 246,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     7765
+    ]
+   ],
+   "median_topic_score": 0.99,
+   "other_topics_same_field": 0.258,
+   "nlm_broad_any": 0.463,
+   "nlm_broad_top": [
+    [
+     "Medicine",
+     678
+    ],
+    [
+     "Medical Informatics",
+     620
+    ],
+    [
+     "Education",
+     498
+    ],
+    [
+     "Science",
+     327
+    ],
+    [
+     "Public Health",
+     220
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Artificial Intelligence": {
+   "articles": 5202,
+   "units": 126513,
+   "parents": 145452,
+   "years": {
+    "2015": 9,
+    "2016": 14,
+    "2017": 7,
+    "2018": 22,
+    "2019": 33,
+    "2020": 139,
+    "2021": 257,
+    "2022": 515,
+    "2023": 559,
+    "2024": 851,
+    "2025": 1493,
+    "2026": 1303
+   },
+   "share_2024_on": 0.701,
+   "main_family_top": [
+    [
+     "BERT (bare/unspecified)",
+     1786
+    ],
+    [
+     "(generic terms only)",
+     993
+    ],
+    [
+     "GPT (OpenAI)",
+     982
+    ],
+    [
+     "Llama (Meta)",
+     206
+    ],
+    [
+     "RoBERTa (generic/base)",
+     169
+    ],
+    [
+     "GPT (bare/unspecified)",
+     114
+    ]
+   ],
+   "families_with_30_articles": 35,
+   "gpt_main_share": 0.189,
+   "generic_only_share": 0.191,
+   "bylines": 29041,
+   "byline_id_or_orcid": 0.949,
+   "byline_inst_id": 0.953,
+   "articles_all_identified": 0.798,
+   "oa_persons": 23856,
+   "oa_persons_2plus_articles": 2219,
+   "journals": 641,
+   "journals_5plus": 117,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Artificial Intelligence",
+     5202
+    ]
+   ],
+   "median_topic_score": 0.933,
+   "other_topics_same_field": 0.484,
+   "nlm_broad_any": 0.53,
+   "nlm_broad_top": [
+    [
+     "Science",
+     1361
+    ],
+    [
+     "Medicine",
+     471
+    ],
+    [
+     "Medical Informatics",
+     471
+    ],
+    [
+     "Technology",
+     269
+    ],
+    [
+     "Biotechnology",
+     263
+    ]
+   ],
+   "field": "Computer Science"
+  },
+  "Molecular Biology": {
+   "articles": 4917,
+   "units": 69444,
+   "parents": 78091,
+   "years": {
+    "2015": 4,
+    "2016": 8,
+    "2017": 13,
+    "2018": 14,
+    "2019": 32,
+    "2020": 61,
+    "2021": 161,
+    "2022": 279,
+    "2023": 481,
+    "2024": 914,
+    "2025": 1514,
+    "2026": 1436
+   },
+   "share_2024_on": 0.786,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     1291
+    ],
+    [
+     "BERT (bare/unspecified)",
+     662
+    ],
+    [
+     "esm",
+     540
+    ],
+    [
+     "GPT (OpenAI)",
+     442
+    ],
+    [
+     "dnabert",
+     160
+    ],
+    [
+     "biobert",
+     159
+    ]
+   ],
+   "families_with_30_articles": 40,
+   "gpt_main_share": 0.09,
+   "generic_only_share": 0.263,
+   "bylines": 31964,
+   "byline_id_or_orcid": 0.952,
+   "byline_inst_id": 0.952,
+   "articles_all_identified": 0.775,
+   "oa_persons": 24101,
+   "oa_persons_2plus_articles": 3261,
+   "journals": 587,
+   "journals_5plus": 128,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     4917
+    ]
+   ],
+   "median_topic_score": 0.953,
+   "other_topics_same_field": 0.582,
+   "nlm_broad_any": 0.729,
+   "nlm_broad_top": [
+    [
+     "Computational Biology",
+     1306
+    ],
+    [
+     "Science",
+     630
+    ],
+    [
+     "Biochemistry",
+     500
+    ],
+    [
+     "Biology",
+     357
+    ],
+    [
+     "Molecular Biology",
+     299
+    ]
+   ],
+   "field": "Biochemistry, Genetics and Molecular Biology"
+  },
+  "Computational Theory and Mathematics": {
+   "articles": 1422,
+   "units": 16187,
+   "parents": 17982,
+   "years": {
+    "2017": 4,
+    "2018": 2,
+    "2019": 3,
+    "2020": 10,
+    "2021": 47,
+    "2022": 63,
+    "2023": 125,
+    "2024": 272,
+    "2025": 447,
+    "2026": 449
+   },
+   "share_2024_on": 0.821,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     372
+    ],
+    [
+     "BERT (bare/unspecified)",
+     155
+    ],
+    [
+     "chemberta",
+     104
+    ],
+    [
+     "GPT (OpenAI)",
+     103
+    ],
+    [
+     "esm",
+     92
+    ],
+    [
+     "molformer",
+     60
+    ]
+   ],
+   "families_with_30_articles": 18,
+   "gpt_main_share": 0.072,
+   "generic_only_share": 0.262,
+   "bylines": 8392,
+   "byline_id_or_orcid": 0.948,
+   "byline_inst_id": 0.934,
+   "articles_all_identified": 0.782,
+   "oa_persons": 6537,
+   "oa_persons_2plus_articles": 766,
+   "journals": 218,
+   "journals_5plus": 47,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Computational Theory and Mathematics",
+     1422
+    ]
+   ],
+   "median_topic_score": 0.995,
+   "other_topics_same_field": 0.105,
+   "nlm_broad_any": 0.557,
+   "nlm_broad_top": [
+    [
+     "Computational Biology",
+     245
+    ],
+    [
+     "Science",
+     195
+    ],
+    [
+     "Chemistry",
+     163
+    ],
+    [
+     "Biology",
+     132
+    ],
+    [
+     "Medical Informatics",
+     92
+    ]
+   ],
+   "field": "Computer Science"
+  },
+  "Information Systems": {
+   "articles": 1228,
+   "units": 26731,
+   "parents": 30658,
+   "years": {
+    "2015": 1,
+    "2017": 5,
+    "2018": 5,
+    "2019": 7,
+    "2020": 26,
+    "2021": 35,
+    "2022": 46,
+    "2023": 77,
+    "2024": 167,
+    "2025": 384,
+    "2026": 475
+   },
+   "share_2024_on": 0.836,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     533
+    ],
+    [
+     "(generic terms only)",
+     240
+    ],
+    [
+     "BERT (bare/unspecified)",
+     205
+    ],
+    [
+     "GPT (bare/unspecified)",
+     29
+    ],
+    [
+     "Gemini (Google)",
+     24
+    ],
+    [
+     "Llama (Meta)",
+     22
+    ]
+   ],
+   "families_with_30_articles": 11,
+   "gpt_main_share": 0.434,
+   "generic_only_share": 0.195,
+   "bylines": 5453,
+   "byline_id_or_orcid": 0.947,
+   "byline_inst_id": 0.944,
+   "articles_all_identified": 0.806,
+   "oa_persons": 4871,
+   "oa_persons_2plus_articles": 181,
+   "journals": 199,
+   "journals_5plus": 34,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Information Systems",
+     1228
+    ]
+   ],
+   "median_topic_score": 0.929,
+   "other_topics_same_field": 0.475,
+   "nlm_broad_any": 0.488,
+   "nlm_broad_top": [
+    [
+     "Science",
+     348
+    ],
+    [
+     "Medicine",
+     107
+    ],
+    [
+     "Technology",
+     60
+    ],
+    [
+     "Biotechnology",
+     58
+    ],
+    [
+     "Computational Biology",
+     40
+    ]
+   ],
+   "field": "Computer Science"
+  },
+  "Computer Vision and Pattern Recognition": {
+   "articles": 1158,
+   "units": 14705,
+   "parents": 16518,
+   "years": {
+    "2015": 1,
+    "2018": 2,
+    "2019": 1,
+    "2020": 17,
+    "2021": 33,
+    "2022": 62,
+    "2023": 101,
+    "2024": 186,
+    "2025": 402,
+    "2026": 353
+   },
+   "share_2024_on": 0.813,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     377
+    ],
+    [
+     "BERT (bare/unspecified)",
+     250
+    ],
+    [
+     "GPT (OpenAI)",
+     212
+    ],
+    [
+     "Llama (Meta)",
+     31
+    ],
+    [
+     "GPT (bare/unspecified)",
+     25
+    ],
+    [
+     "Qwen",
+     21
+    ]
+   ],
+   "families_with_30_articles": 9,
+   "gpt_main_share": 0.183,
+   "generic_only_share": 0.326,
+   "bylines": 5864,
+   "byline_id_or_orcid": 0.942,
+   "byline_inst_id": 0.95,
+   "articles_all_identified": 0.79,
+   "oa_persons": 5190,
+   "oa_persons_2plus_articles": 163,
+   "journals": 203,
+   "journals_5plus": 29,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Computer Vision and Pattern Recognition",
+     1158
+    ]
+   ],
+   "median_topic_score": 0.955,
+   "other_topics_same_field": 0.586,
+   "nlm_broad_any": 0.592,
+   "nlm_broad_top": [
+    [
+     "Science",
+     336
+    ],
+    [
+     "Biotechnology",
+     241
+    ],
+    [
+     "Technology",
+     240
+    ],
+    [
+     "Medicine",
+     85
+    ],
+    [
+     "Biology",
+     23
+    ]
+   ],
+   "field": "Computer Science"
+  },
+  "General Health Professions": {
+   "articles": 871,
+   "units": 6339,
+   "parents": 6985,
+   "years": {
+    "2017": 1,
+    "2020": 4,
+    "2021": 6,
+    "2022": 12,
+    "2023": 37,
+    "2024": 133,
+    "2025": 288,
+    "2026": 390
+   },
+   "share_2024_on": 0.931,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     450
+    ],
+    [
+     "(generic terms only)",
+     221
+    ],
+    [
+     "BERT (bare/unspecified)",
+     61
+    ],
+    [
+     "Gemini (Google)",
+     31
+    ],
+    [
+     "GPT (bare/unspecified)",
+     17
+    ],
+    [
+     "DeepSeek",
+     17
+    ]
+   ],
+   "families_with_30_articles": 6,
+   "gpt_main_share": 0.517,
+   "generic_only_share": 0.254,
+   "bylines": 5456,
+   "byline_id_or_orcid": 0.96,
+   "byline_inst_id": 0.939,
+   "articles_all_identified": 0.855,
+   "oa_persons": 4842,
+   "oa_persons_2plus_articles": 215,
+   "journals": 307,
+   "journals_5plus": 31,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "General Health Professions",
+     871
+    ]
+   ],
+   "median_topic_score": 0.866,
+   "other_topics_same_field": 0.233,
+   "nlm_broad_any": 0.592,
+   "nlm_broad_top": [
+    [
+     "Medical Informatics",
+     120
+    ],
+    [
+     "Public Health",
+     104
+    ],
+    [
+     "Health Services Research",
+     78
+    ],
+    [
+     "Medicine",
+     77
+    ],
+    [
+     "Science",
+     35
+    ]
+   ],
+   "field": "Health Professions"
+  },
+  "Social Psychology": {
+   "articles": 861,
+   "units": 13957,
+   "parents": 15928,
+   "years": {
+    "2016": 2,
+    "2017": 3,
+    "2018": 2,
+    "2019": 3,
+    "2020": 12,
+    "2021": 28,
+    "2022": 42,
+    "2023": 88,
+    "2024": 143,
+    "2025": 258,
+    "2026": 280
+   },
+   "share_2024_on": 0.791,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     287
+    ],
+    [
+     "(generic terms only)",
+     191
+    ],
+    [
+     "BERT (bare/unspecified)",
+     186
+    ],
+    [
+     "RoBERTa (generic/base)",
+     32
+    ],
+    [
+     "GPT (bare/unspecified)",
+     26
+    ],
+    [
+     "Llama (Meta)",
+     21
+    ]
+   ],
+   "families_with_30_articles": 10,
+   "gpt_main_share": 0.333,
+   "generic_only_share": 0.222,
+   "bylines": 4350,
+   "byline_id_or_orcid": 0.95,
+   "byline_inst_id": 0.952,
+   "articles_all_identified": 0.835,
+   "oa_persons": 3762,
+   "oa_persons_2plus_articles": 215,
+   "journals": 218,
+   "journals_5plus": 31,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Social Psychology",
+     861
+    ]
+   ],
+   "median_topic_score": 0.919,
+   "other_topics_same_field": 0.318,
+   "nlm_broad_any": 0.429,
+   "nlm_broad_top": [
+    [
+     "Science",
+     116
+    ],
+    [
+     "Medical Informatics",
+     64
+    ],
+    [
+     "Psychology",
+     53
+    ],
+    [
+     "Medicine",
+     47
+    ],
+    [
+     "Public Health",
+     32
+    ]
+   ],
+   "field": "Psychology"
+  },
+  "Sociology and Political Science": {
+   "articles": 780,
+   "units": 11299,
+   "parents": 13080,
+   "years": {
+    "2019": 2,
+    "2020": 5,
+    "2021": 47,
+    "2022": 78,
+    "2023": 87,
+    "2024": 131,
+    "2025": 230,
+    "2026": 200
+   },
+   "share_2024_on": 0.719,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     278
+    ],
+    [
+     "BERT (bare/unspecified)",
+     232
+    ],
+    [
+     "(generic terms only)",
+     127
+    ],
+    [
+     "RoBERTa (generic/base)",
+     34
+    ],
+    [
+     "GPT (bare/unspecified)",
+     16
+    ],
+    [
+     "Llama (Meta)",
+     8
+    ]
+   ],
+   "families_with_30_articles": 8,
+   "gpt_main_share": 0.356,
+   "generic_only_share": 0.163,
+   "bylines": 3785,
+   "byline_id_or_orcid": 0.958,
+   "byline_inst_id": 0.95,
+   "articles_all_identified": 0.847,
+   "oa_persons": 3347,
+   "oa_persons_2plus_articles": 175,
+   "journals": 222,
+   "journals_5plus": 31,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Sociology and Political Science",
+     780
+    ]
+   ],
+   "median_topic_score": 0.987,
+   "other_topics_same_field": 0.358,
+   "nlm_broad_any": 0.546,
+   "nlm_broad_top": [
+    [
+     "Science",
+     208
+    ],
+    [
+     "Medicine",
+     87
+    ],
+    [
+     "Medical Informatics",
+     64
+    ],
+    [
+     "Public Health",
+     58
+    ],
+    [
+     "Psychology",
+     23
+    ]
+   ],
+   "field": "Social Sciences"
+  },
+  "Cognitive Neuroscience": {
+   "articles": 780,
+   "units": 10877,
+   "parents": 12357,
+   "years": {
+    "2015": 1,
+    "2016": 2,
+    "2017": 4,
+    "2018": 4,
+    "2019": 6,
+    "2020": 10,
+    "2021": 24,
+    "2022": 42,
+    "2023": 71,
+    "2024": 130,
+    "2025": 248,
+    "2026": 238
+   },
+   "share_2024_on": 0.79,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     297
+    ],
+    [
+     "GPT (OpenAI)",
+     238
+    ],
+    [
+     "BERT (bare/unspecified)",
+     93
+    ],
+    [
+     "GPT (bare/unspecified)",
+     35
+    ],
+    [
+     "Llama (Meta)",
+     17
+    ],
+    [
+     "Gemini (Google)",
+     13
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.305,
+   "generic_only_share": 0.381,
+   "bylines": 4078,
+   "byline_id_or_orcid": 0.96,
+   "byline_inst_id": 0.977,
+   "articles_all_identified": 0.854,
+   "oa_persons": 3344,
+   "oa_persons_2plus_articles": 344,
+   "journals": 209,
+   "journals_5plus": 39,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Cognitive Neuroscience",
+     780
+    ]
+   ],
+   "median_topic_score": 0.936,
+   "other_topics_same_field": 0.262,
+   "nlm_broad_any": 0.535,
+   "nlm_broad_top": [
+    [
+     "Science",
+     153
+    ],
+    [
+     "Neurology",
+     64
+    ],
+    [
+     "Biology",
+     56
+    ],
+    [
+     "Psychology",
+     42
+    ],
+    [
+     "Brain",
+     36
+    ]
+   ],
+   "field": "Neuroscience"
+  },
+  "Public Health, Environmental and Occupational Health": {
+   "articles": 737,
+   "units": 4825,
+   "parents": 5381,
+   "years": {
+    "2020": 2,
+    "2021": 4,
+    "2022": 8,
+    "2023": 35,
+    "2024": 122,
+    "2025": 227,
+    "2026": 339
+   },
+   "share_2024_on": 0.934,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     369
+    ],
+    [
+     "(generic terms only)",
+     204
+    ],
+    [
+     "BERT (bare/unspecified)",
+     30
+    ],
+    [
+     "Gemini (Google)",
+     26
+    ],
+    [
+     "GPT (bare/unspecified)",
+     15
+    ],
+    [
+     "Claude (Anthropic)",
+     15
+    ]
+   ],
+   "families_with_30_articles": 4,
+   "gpt_main_share": 0.501,
+   "generic_only_share": 0.277,
+   "bylines": 5231,
+   "byline_id_or_orcid": 0.962,
+   "byline_inst_id": 0.936,
+   "articles_all_identified": 0.821,
+   "oa_persons": 4801,
+   "oa_persons_2plus_articles": 152,
+   "journals": 315,
+   "journals_5plus": 28,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Public Health, Environmental and Occupational Health",
+     737
+    ]
+   ],
+   "median_topic_score": 0.91,
+   "other_topics_same_field": 0.434,
+   "nlm_broad_any": 0.567,
+   "nlm_broad_top": [
+    [
+     "Education",
+     92
+    ],
+    [
+     "Medicine",
+     75
+    ],
+    [
+     "Medical Informatics",
+     43
+    ],
+    [
+     "Public Health",
+     41
+    ],
+    [
+     "Science",
+     35
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Radiology, Nuclear Medicine and Imaging": {
+   "articles": 622,
+   "units": 5305,
+   "parents": 5847,
+   "years": {
+    "2020": 2,
+    "2021": 13,
+    "2022": 22,
+    "2023": 43,
+    "2024": 111,
+    "2025": 215,
+    "2026": 216
+   },
+   "share_2024_on": 0.871,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     205
+    ],
+    [
+     "GPT (OpenAI)",
+     152
+    ],
+    [
+     "BERT (bare/unspecified)",
+     95
+    ],
+    [
+     "esm",
+     28
+    ],
+    [
+     "DeepSeek",
+     11
+    ],
+    [
+     "GPT (bare/unspecified)",
+     10
+    ]
+   ],
+   "families_with_30_articles": 6,
+   "gpt_main_share": 0.244,
+   "generic_only_share": 0.33,
+   "bylines": 4797,
+   "byline_id_or_orcid": 0.951,
+   "byline_inst_id": 0.904,
+   "articles_all_identified": 0.76,
+   "oa_persons": 4165,
+   "oa_persons_2plus_articles": 259,
+   "journals": 258,
+   "journals_5plus": 24,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Radiology, Nuclear Medicine and Imaging",
+     622
+    ]
+   ],
+   "median_topic_score": 0.947,
+   "other_topics_same_field": 0.49,
+   "nlm_broad_any": 0.471,
+   "nlm_broad_top": [
+    [
+     "Science",
+     58
+    ],
+    [
+     "Allergy and Immunology",
+     40
+    ],
+    [
+     "Diagnostic Imaging",
+     35
+    ],
+    [
+     "Medicine",
+     30
+    ],
+    [
+     "Computational Biology",
+     25
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Safety Research": {
+   "articles": 598,
+   "units": 17483,
+   "parents": 20725,
+   "years": {
+    "2020": 5,
+    "2021": 10,
+    "2022": 15,
+    "2023": 57,
+    "2024": 124,
+    "2025": 182,
+    "2026": 205
+   },
+   "share_2024_on": 0.855,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     383
+    ],
+    [
+     "(generic terms only)",
+     96
+    ],
+    [
+     "BERT (bare/unspecified)",
+     27
+    ],
+    [
+     "Gemini (Google)",
+     23
+    ],
+    [
+     "GPT (bare/unspecified)",
+     15
+    ],
+    [
+     "Claude (Anthropic)",
+     15
+    ]
+   ],
+   "families_with_30_articles": 8,
+   "gpt_main_share": 0.64,
+   "generic_only_share": 0.161,
+   "bylines": 2877,
+   "byline_id_or_orcid": 0.96,
+   "byline_inst_id": 0.95,
+   "articles_all_identified": 0.875,
+   "oa_persons": 2529,
+   "oa_persons_2plus_articles": 149,
+   "journals": 196,
+   "journals_5plus": 29,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Safety Research",
+     598
+    ]
+   ],
+   "median_topic_score": 0.835,
+   "other_topics_same_field": 0.241,
+   "nlm_broad_any": 0.433,
+   "nlm_broad_top": [
+    [
+     "Science",
+     121
+    ],
+    [
+     "Medicine",
+     43
+    ],
+    [
+     "Ethics",
+     31
+    ],
+    [
+     "Psychology",
+     20
+    ],
+    [
+     "Medical Informatics",
+     19
+    ]
+   ],
+   "field": "Social Sciences"
+  },
+  "Statistics, Probability and Uncertainty": {
+   "articles": 563,
+   "units": 11337,
+   "parents": 13096,
+   "years": {
+    "2019": 2,
+    "2020": 3,
+    "2021": 14,
+    "2022": 20,
+    "2023": 34,
+    "2024": 89,
+    "2025": 197,
+    "2026": 204
+   },
+   "share_2024_on": 0.87,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     238
+    ],
+    [
+     "(generic terms only)",
+     110
+    ],
+    [
+     "BERT (bare/unspecified)",
+     72
+    ],
+    [
+     "GPT (bare/unspecified)",
+     24
+    ],
+    [
+     "Gemini (Google)",
+     21
+    ],
+    [
+     "biobert",
+     15
+    ]
+   ],
+   "families_with_30_articles": 7,
+   "gpt_main_share": 0.423,
+   "generic_only_share": 0.195,
+   "bylines": 3420,
+   "byline_id_or_orcid": 0.962,
+   "byline_inst_id": 0.945,
+   "articles_all_identified": 0.833,
+   "oa_persons": 2940,
+   "oa_persons_2plus_articles": 236,
+   "journals": 227,
+   "journals_5plus": 20,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Statistics, Probability and Uncertainty",
+     563
+    ]
+   ],
+   "median_topic_score": 0.938,
+   "other_topics_same_field": 0.134,
+   "nlm_broad_any": 0.565,
+   "nlm_broad_top": [
+    [
+     "Medicine",
+     112
+    ],
+    [
+     "Science",
+     95
+    ],
+    [
+     "Medical Informatics",
+     67
+    ],
+    [
+     "Statistics as Topic",
+     24
+    ],
+    [
+     "Health Services Research",
+     14
+    ]
+   ],
+   "field": "Decision Sciences"
+  },
+  "Health Information Management": {
+   "articles": 549,
+   "units": 4264,
+   "parents": 4764,
+   "years": {
+    "2015": 1,
+    "2017": 1,
+    "2019": 1,
+    "2020": 2,
+    "2021": 8,
+    "2022": 12,
+    "2023": 35,
+    "2024": 90,
+    "2025": 187,
+    "2026": 212
+   },
+   "share_2024_on": 0.891,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     231
+    ],
+    [
+     "GPT (OpenAI)",
+     164
+    ],
+    [
+     "BERT (bare/unspecified)",
+     62
+    ],
+    [
+     "GPT (bare/unspecified)",
+     15
+    ],
+    [
+     "Gemini (Google)",
+     12
+    ],
+    [
+     "Llama (Meta)",
+     10
+    ]
+   ],
+   "families_with_30_articles": 3,
+   "gpt_main_share": 0.299,
+   "generic_only_share": 0.421,
+   "bylines": 3802,
+   "byline_id_or_orcid": 0.949,
+   "byline_inst_id": 0.918,
+   "articles_all_identified": 0.774,
+   "oa_persons": 3369,
+   "oa_persons_2plus_articles": 138,
+   "journals": 188,
+   "journals_5plus": 26,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Health Information Management",
+     549
+    ]
+   ],
+   "median_topic_score": 0.76,
+   "other_topics_same_field": 0.187,
+   "nlm_broad_any": 0.525,
+   "nlm_broad_top": [
+    [
+     "Medical Informatics",
+     103
+    ],
+    [
+     "Science",
+     50
+    ],
+    [
+     "Medicine",
+     42
+    ],
+    [
+     "Health Services Research",
+     28
+    ],
+    [
+     "Public Health",
+     17
+    ]
+   ],
+   "field": "Health Professions"
+  },
+  "Genetics": {
+   "articles": 529,
+   "units": 4186,
+   "parents": 4599,
+   "years": {
+    "2020": 1,
+    "2021": 1,
+    "2022": 8,
+    "2023": 31,
+    "2024": 81,
+    "2025": 189,
+    "2026": 218
+   },
+   "share_2024_on": 0.922,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     180
+    ],
+    [
+     "GPT (OpenAI)",
+     121
+    ],
+    [
+     "esm",
+     49
+    ],
+    [
+     "enformer",
+     38
+    ],
+    [
+     "BERT (bare/unspecified)",
+     25
+    ],
+    [
+     "dnabert",
+     12
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.229,
+   "generic_only_share": 0.34,
+   "bylines": 4262,
+   "byline_id_or_orcid": 0.963,
+   "byline_inst_id": 0.958,
+   "articles_all_identified": 0.794,
+   "oa_persons": 3829,
+   "oa_persons_2plus_articles": 182,
+   "journals": 221,
+   "journals_5plus": 27,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Genetics",
+     529
+    ]
+   ],
+   "median_topic_score": 0.96,
+   "other_topics_same_field": 0.633,
+   "nlm_broad_any": 0.664,
+   "nlm_broad_top": [
+    [
+     "Genetics",
+     61
+    ],
+    [
+     "Science",
+     57
+    ],
+    [
+     "Computational Biology",
+     54
+    ],
+    [
+     "Genetics, Medical",
+     41
+    ],
+    [
+     "Molecular Biology",
+     37
+    ]
+   ],
+   "field": "Biochemistry, Genetics and Molecular Biology"
+  },
+  "Experimental and Cognitive Psychology": {
+   "articles": 497,
+   "units": 7148,
+   "parents": 8229,
+   "years": {
+    "2016": 1,
+    "2019": 1,
+    "2020": 4,
+    "2021": 9,
+    "2022": 28,
+    "2023": 33,
+    "2024": 76,
+    "2025": 173,
+    "2026": 172
+   },
+   "share_2024_on": 0.847,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     157
+    ],
+    [
+     "(generic terms only)",
+     123
+    ],
+    [
+     "BERT (bare/unspecified)",
+     101
+    ],
+    [
+     "GPT (bare/unspecified)",
+     21
+    ],
+    [
+     "RoBERTa (generic/base)",
+     16
+    ],
+    [
+     "Gemini (Google)",
+     13
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.316,
+   "generic_only_share": 0.247,
+   "bylines": 2435,
+   "byline_id_or_orcid": 0.951,
+   "byline_inst_id": 0.956,
+   "articles_all_identified": 0.825,
+   "oa_persons": 2171,
+   "oa_persons_2plus_articles": 78,
+   "journals": 139,
+   "journals_5plus": 21,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Experimental and Cognitive Psychology",
+     497
+    ]
+   ],
+   "median_topic_score": 0.931,
+   "other_topics_same_field": 0.233,
+   "nlm_broad_any": 0.501,
+   "nlm_broad_top": [
+    [
+     "Science",
+     103
+    ],
+    [
+     "Biotechnology",
+     41
+    ],
+    [
+     "Technology",
+     40
+    ],
+    [
+     "Psychology",
+     40
+    ],
+    [
+     "Medicine",
+     35
+    ]
+   ],
+   "field": "Psychology"
+  },
+  "Psychiatry and Mental health": {
+   "articles": 428,
+   "units": 4217,
+   "parents": 4763,
+   "years": {
+    "2015": 1,
+    "2018": 2,
+    "2019": 3,
+    "2020": 5,
+    "2021": 12,
+    "2022": 16,
+    "2023": 27,
+    "2024": 60,
+    "2025": 132,
+    "2026": 170
+   },
+   "share_2024_on": 0.846,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     116
+    ],
+    [
+     "(generic terms only)",
+     115
+    ],
+    [
+     "BERT (bare/unspecified)",
+     107
+    ],
+    [
+     "GPT (bare/unspecified)",
+     15
+    ],
+    [
+     "Llama (Meta)",
+     8
+    ],
+    [
+     "Claude (Anthropic)",
+     7
+    ]
+   ],
+   "families_with_30_articles": 3,
+   "gpt_main_share": 0.271,
+   "generic_only_share": 0.269,
+   "bylines": 3002,
+   "byline_id_or_orcid": 0.963,
+   "byline_inst_id": 0.949,
+   "articles_all_identified": 0.799,
+   "oa_persons": 2602,
+   "oa_persons_2plus_articles": 143,
+   "journals": 174,
+   "journals_5plus": 23,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Psychiatry and Mental health",
+     428
+    ]
+   ],
+   "median_topic_score": 0.964,
+   "other_topics_same_field": 0.278,
+   "nlm_broad_any": 0.493,
+   "nlm_broad_top": [
+    [
+     "Neurology",
+     63
+    ],
+    [
+     "Science",
+     39
+    ],
+    [
+     "Psychiatry",
+     35
+    ],
+    [
+     "Medical Informatics",
+     26
+    ],
+    [
+     "Medicine",
+     23
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Epidemiology": {
+   "articles": 418,
+   "units": 3296,
+   "parents": 3714,
+   "years": {
+    "2015": 1,
+    "2018": 3,
+    "2019": 1,
+    "2020": 2,
+    "2021": 10,
+    "2022": 12,
+    "2023": 21,
+    "2024": 45,
+    "2025": 146,
+    "2026": 177
+   },
+   "share_2024_on": 0.88,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     145
+    ],
+    [
+     "(generic terms only)",
+     130
+    ],
+    [
+     "BERT (bare/unspecified)",
+     48
+    ],
+    [
+     "esm",
+     9
+    ],
+    [
+     "RoBERTa (generic/base)",
+     9
+    ],
+    [
+     "Llama (Meta)",
+     7
+    ]
+   ],
+   "families_with_30_articles": 3,
+   "gpt_main_share": 0.347,
+   "generic_only_share": 0.311,
+   "bylines": 2956,
+   "byline_id_or_orcid": 0.95,
+   "byline_inst_id": 0.926,
+   "articles_all_identified": 0.756,
+   "oa_persons": 2655,
+   "oa_persons_2plus_articles": 82,
+   "journals": 221,
+   "journals_5plus": 15,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Epidemiology",
+     418
+    ]
+   ],
+   "median_topic_score": 0.954,
+   "other_topics_same_field": 0.406,
+   "nlm_broad_any": 0.533,
+   "nlm_broad_top": [
+    [
+     "Public Health",
+     35
+    ],
+    [
+     "Medicine",
+     31
+    ],
+    [
+     "Medical Informatics",
+     29
+    ],
+    [
+     "Science",
+     24
+    ],
+    [
+     "Communicable Diseases",
+     13
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Applied Psychology": {
+   "articles": 397,
+   "units": 6245,
+   "parents": 7127,
+   "years": {
+    "2016": 1,
+    "2021": 2,
+    "2022": 2,
+    "2023": 20,
+    "2024": 58,
+    "2025": 140,
+    "2026": 174
+   },
+   "share_2024_on": 0.937,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     212
+    ],
+    [
+     "(generic terms only)",
+     110
+    ],
+    [
+     "GPT (bare/unspecified)",
+     19
+    ],
+    [
+     "BERT (bare/unspecified)",
+     13
+    ],
+    [
+     "Claude (Anthropic)",
+     8
+    ],
+    [
+     "Gemini (Google)",
+     8
+    ]
+   ],
+   "families_with_30_articles": 6,
+   "gpt_main_share": 0.534,
+   "generic_only_share": 0.277,
+   "bylines": 2346,
+   "byline_id_or_orcid": 0.974,
+   "byline_inst_id": 0.925,
+   "articles_all_identified": 0.884,
+   "oa_persons": 1985,
+   "oa_persons_2plus_articles": 188,
+   "journals": 91,
+   "journals_5plus": 19,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Applied Psychology",
+     397
+    ]
+   ],
+   "median_topic_score": 0.963,
+   "other_topics_same_field": 0.443,
+   "nlm_broad_any": 0.511,
+   "nlm_broad_top": [
+    [
+     "Health Services Research",
+     54
+    ],
+    [
+     "Psychology",
+     49
+    ],
+    [
+     "Medical Informatics",
+     44
+    ],
+    [
+     "Health Services",
+     37
+    ],
+    [
+     "Medicine",
+     23
+    ]
+   ],
+   "field": "Psychology"
+  },
+  "Physiology": {
+   "articles": 373,
+   "units": 2749,
+   "parents": 3081,
+   "years": {
+    "2021": 4,
+    "2022": 4,
+    "2023": 17,
+    "2024": 48,
+    "2025": 138,
+    "2026": 162
+   },
+   "share_2024_on": 0.933,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     144
+    ],
+    [
+     "(generic terms only)",
+     111
+    ],
+    [
+     "BERT (bare/unspecified)",
+     24
+    ],
+    [
+     "hubert",
+     15
+    ],
+    [
+     "GPT (bare/unspecified)",
+     11
+    ],
+    [
+     "Gemini (Google)",
+     7
+    ]
+   ],
+   "families_with_30_articles": 3,
+   "gpt_main_share": 0.386,
+   "generic_only_share": 0.298,
+   "bylines": 2585,
+   "byline_id_or_orcid": 0.962,
+   "byline_inst_id": 0.943,
+   "articles_all_identified": 0.81,
+   "oa_persons": 2322,
+   "oa_persons_2plus_articles": 93,
+   "journals": 183,
+   "journals_5plus": 13,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Physiology",
+     373
+    ]
+   ],
+   "median_topic_score": 0.952,
+   "other_topics_same_field": 0.436,
+   "nlm_broad_any": 0.523,
+   "nlm_broad_top": [
+    [
+     "Medicine",
+     28
+    ],
+    [
+     "Public Health",
+     22
+    ],
+    [
+     "Medical Informatics",
+     22
+    ],
+    [
+     "Science",
+     22
+    ],
+    [
+     "Education",
+     19
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Surgery": {
+   "articles": 358,
+   "units": 2136,
+   "parents": 2388,
+   "years": {
+    "2016": 1,
+    "2020": 3,
+    "2021": 1,
+    "2022": 2,
+    "2023": 16,
+    "2024": 50,
+    "2025": 129,
+    "2026": 156
+   },
+   "share_2024_on": 0.936,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     182
+    ],
+    [
+     "(generic terms only)",
+     118
+    ],
+    [
+     "BERT (bare/unspecified)",
+     13
+    ],
+    [
+     "Gemini (Google)",
+     10
+    ],
+    [
+     "DeepSeek",
+     7
+    ],
+    [
+     "Claude (Anthropic)",
+     5
+    ]
+   ],
+   "families_with_30_articles": 1,
+   "gpt_main_share": 0.508,
+   "generic_only_share": 0.33,
+   "bylines": 2648,
+   "byline_id_or_orcid": 0.95,
+   "byline_inst_id": 0.946,
+   "articles_all_identified": 0.782,
+   "oa_persons": 2364,
+   "oa_persons_2plus_articles": 87,
+   "journals": 179,
+   "journals_5plus": 11,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Surgery",
+     358
+    ]
+   ],
+   "median_topic_score": 0.974,
+   "other_topics_same_field": 0.668,
+   "nlm_broad_any": 0.313,
+   "nlm_broad_top": [
+    [
+     "General Surgery",
+     25
+    ],
+    [
+     "Medicine",
+     21
+    ],
+    [
+     "Science",
+     15
+    ],
+    [
+     "Technology",
+     8
+    ],
+    [
+     "Medical Informatics",
+     7
+    ]
+   ],
+   "field": "Medicine"
+  },
+  "Materials Chemistry": {
+   "articles": 349,
+   "units": 6436,
+   "parents": 7244,
+   "years": {
+    "2019": 1,
+    "2020": 2,
+    "2021": 3,
+    "2022": 9,
+    "2023": 41,
+    "2024": 68,
+    "2025": 104,
+    "2026": 121
+   },
+   "share_2024_on": 0.84,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     101
+    ],
+    [
+     "GPT (OpenAI)",
+     86
+    ],
+    [
+     "BERT (bare/unspecified)",
+     30
+    ],
+    [
+     "GPT (bare/unspecified)",
+     17
+    ],
+    [
+     "polybert",
+     12
+    ],
+    [
+     "Gemini (Google)",
+     11
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.246,
+   "generic_only_share": 0.289,
+   "bylines": 2311,
+   "byline_id_or_orcid": 0.969,
+   "byline_inst_id": 0.963,
+   "articles_all_identified": 0.842,
+   "oa_persons": 1990,
+   "oa_persons_2plus_articles": 160,
+   "journals": 96,
+   "journals_5plus": 23,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Materials Chemistry",
+     349
+    ]
+   ],
+   "median_topic_score": 0.949,
+   "other_topics_same_field": 0.156,
+   "nlm_broad_any": 0.479,
+   "nlm_broad_top": [
+    [
+     "Science",
+     62
+    ],
+    [
+     "Chemistry",
+     55
+    ],
+    [
+     "Biology",
+     41
+    ],
+    [
+     "Biomedical Engineering",
+     24
+    ],
+    [
+     "Medical Informatics",
+     18
+    ]
+   ],
+   "field": "Materials Science"
+  },
+  "Plant Science": {
+   "articles": 327,
+   "units": 2929,
+   "parents": 3270,
+   "years": {
+    "2018": 2,
+    "2019": 1,
+    "2021": 2,
+    "2022": 9,
+    "2023": 14,
+    "2024": 46,
+    "2025": 117,
+    "2026": 136
+   },
+   "share_2024_on": 0.914,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     103
+    ],
+    [
+     "GPT (OpenAI)",
+     99
+    ],
+    [
+     "BERT (bare/unspecified)",
+     48
+    ],
+    [
+     "Gemini (Google)",
+     10
+    ],
+    [
+     "GPT (bare/unspecified)",
+     7
+    ],
+    [
+     "Qwen",
+     6
+    ]
+   ],
+   "families_with_30_articles": 2,
+   "gpt_main_share": 0.303,
+   "generic_only_share": 0.315,
+   "bylines": 1939,
+   "byline_id_or_orcid": 0.946,
+   "byline_inst_id": 0.961,
+   "articles_all_identified": 0.774,
+   "oa_persons": 1735,
+   "oa_persons_2plus_articles": 59,
+   "journals": 100,
+   "journals_5plus": 10,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Plant Science",
+     327
+    ]
+   ],
+   "median_topic_score": 0.985,
+   "other_topics_same_field": 0.24,
+   "nlm_broad_any": 0.416,
+   "nlm_broad_top": [
+    [
+     "Science",
+     53
+    ],
+    [
+     "Technology",
+     23
+    ],
+    [
+     "Biotechnology",
+     22
+    ],
+    [
+     "Botany",
+     14
+    ],
+    [
+     "Medicine",
+     11
+    ]
+   ],
+   "field": "Agricultural and Biological Sciences"
+  },
+  "Oncology": {
+   "articles": 311,
+   "units": 2000,
+   "parents": 2295,
+   "years": {
+    "2021": 4,
+    "2022": 3,
+    "2023": 12,
+    "2024": 53,
+    "2025": 97,
+    "2026": 142
+   },
+   "share_2024_on": 0.939,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     96
+    ],
+    [
+     "(generic terms only)",
+     96
+    ],
+    [
+     "BERT (bare/unspecified)",
+     28
+    ],
+    [
+     "GPT (bare/unspecified)",
+     11
+    ],
+    [
+     "Gemini (Google)",
+     8
+    ],
+    [
+     "DeepSeek",
+     6
+    ]
+   ],
+   "families_with_30_articles": 2,
+   "gpt_main_share": 0.309,
+   "generic_only_share": 0.309,
+   "bylines": 2557,
+   "byline_id_or_orcid": 0.958,
+   "byline_inst_id": 0.941,
+   "articles_all_identified": 0.733,
+   "oa_persons": 2347,
+   "oa_persons_2plus_articles": 50,
+   "journals": 158,
+   "journals_5plus": 11,
+   "subfields": 1,
+   "subfield_top": [
+    [
+     "Oncology",
+     311
+    ]
+   ],
+   "median_topic_score": 0.94,
+   "other_topics_same_field": 0.424,
+   "nlm_broad_any": 0.563,
+   "nlm_broad_top": [
+    [
+     "Neoplasms",
+     44
+    ],
+    [
+     "Medicine",
+     23
+    ],
+    [
+     "Science",
+     19
+    ],
+    [
+     "Allergy and Immunology",
+     18
+    ],
+    [
+     "Molecular Biology",
+     16
+    ]
+   ],
+   "field": "Medicine"
+  }
+ },
+ "nlm_broad": {
+  "(no Broad Subject Term)": {
+   "articles": 19122,
+   "units": 368848,
+   "parents": 424762,
+   "years": {
+    "": 1,
+    "2015": 4,
+    "2016": 11,
+    "2017": 11,
+    "2018": 23,
+    "2019": 38,
+    "2020": 168,
+    "2021": 381,
+    "2022": 785,
+    "2023": 1513,
+    "2024": 3182,
+    "2025": 5954,
+    "2026": 7051
+   },
+   "share_2024_on": 0.847,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     7832
+    ],
+    [
+     "(generic terms only)",
+     4314
+    ],
+    [
+     "BERT (bare/unspecified)",
+     2438
+    ],
+    [
+     "Gemini (Google)",
+     508
+    ],
+    [
+     "GPT (bare/unspecified)",
+     458
+    ],
+    [
+     "Llama (Meta)",
+     345
+    ]
+   ],
+   "families_with_30_articles": 60,
+   "gpt_main_share": 0.41,
+   "generic_only_share": 0.226,
+   "bylines": 111138,
+   "byline_id_or_orcid": 0.947,
+   "byline_inst_id": 0.937,
+   "articles_all_identified": 0.791,
+   "oa_persons": 89358,
+   "oa_persons_2plus_articles": 9148,
+   "journals": 1630,
+   "journals_5plus": 477,
+   "subfields": 212,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     4168
+    ],
+    [
+     "Artificial Intelligence",
+     2445
+    ],
+    [
+     "Molecular Biology",
+     1333
+    ],
+    [
+     "Computational Theory and Mathematics",
+     630
+    ],
+    [
+     "Information Systems",
+     629
+    ],
+    [
+     "Social Psychology",
+     492
+    ]
+   ],
+   "median_topic_score": 0.959,
+   "other_topics_same_field": 0.356,
+   "nlm_broad_any": 0.0,
+   "nlm_broad_top": [],
+   "oa_field_top": [
+    [
+     "Medicine",
+     6917
+    ],
+    [
+     "Computer Science",
+     4381
+    ],
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     1638
+    ],
+    [
+     "Social Sciences",
+     1205
+    ]
+   ]
+  },
+  "Science": {
+   "articles": 6132,
+   "units": 127519,
+   "parents": 146718,
+   "years": {
+    "2015": 11,
+    "2016": 7,
+    "2017": 7,
+    "2018": 13,
+    "2019": 21,
+    "2020": 44,
+    "2021": 111,
+    "2022": 165,
+    "2023": 404,
+    "2024": 944,
+    "2025": 2343,
+    "2026": 2062
+   },
+   "share_2024_on": 0.872,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     1606
+    ],
+    [
+     "(generic terms only)",
+     1403
+    ],
+    [
+     "BERT (bare/unspecified)",
+     1288
+    ],
+    [
+     "Llama (Meta)",
+     165
+    ],
+    [
+     "RoBERTa (generic/base)",
+     157
+    ],
+    [
+     "GPT (bare/unspecified)",
+     147
+    ]
+   ],
+   "families_with_30_articles": 33,
+   "gpt_main_share": 0.262,
+   "generic_only_share": 0.229,
+   "bylines": 36359,
+   "byline_id_or_orcid": 0.945,
+   "byline_inst_id": 0.949,
+   "articles_all_identified": 0.774,
+   "oa_persons": 31053,
+   "oa_persons_2plus_articles": 2055,
+   "journals": 22,
+   "journals_5plus": 16,
+   "subfields": 188,
+   "subfield_top": [
+    [
+     "Artificial Intelligence",
+     1361
+    ],
+    [
+     "Molecular Biology",
+     630
+    ],
+    [
+     "Information Systems",
+     348
+    ],
+    [
+     "Computer Vision and Pattern Recognition",
+     336
+    ],
+    [
+     "Health Informatics",
+     327
+    ],
+    [
+     "Sociology and Political Science",
+     208
+    ]
+   ],
+   "median_topic_score": 0.96,
+   "other_topics_same_field": 0.458,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Science",
+     6132
+    ],
+    [
+     "Medicine",
+     1590
+    ],
+    [
+     "Biology",
+     778
+    ],
+    [
+     "Computational Biology",
+     25
+    ],
+    [
+     "Medical Informatics",
+     24
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Computer Science",
+     2460
+    ],
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     715
+    ],
+    [
+     "Medicine",
+     685
+    ],
+    [
+     "Social Sciences",
+     540
+    ]
+   ]
+  },
+  "Medicine": {
+   "articles": 3050,
+   "units": 63152,
+   "parents": 73153,
+   "years": {
+    "2015": 10,
+    "2016": 7,
+    "2017": 8,
+    "2018": 12,
+    "2019": 14,
+    "2020": 33,
+    "2021": 67,
+    "2022": 100,
+    "2023": 227,
+    "2024": 542,
+    "2025": 986,
+    "2026": 1044
+   },
+   "share_2024_on": 0.843,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     1252
+    ],
+    [
+     "(generic terms only)",
+     595
+    ],
+    [
+     "BERT (bare/unspecified)",
+     539
+    ],
+    [
+     "Gemini (Google)",
+     63
+    ],
+    [
+     "Llama (Meta)",
+     62
+    ],
+    [
+     "GPT (bare/unspecified)",
+     56
+    ]
+   ],
+   "families_with_30_articles": 23,
+   "gpt_main_share": 0.41,
+   "generic_only_share": 0.195,
+   "bylines": 18997,
+   "byline_id_or_orcid": 0.957,
+   "byline_inst_id": 0.947,
+   "articles_all_identified": 0.828,
+   "oa_persons": 16488,
+   "oa_persons_2plus_articles": 967,
+   "journals": 103,
+   "journals_5plus": 46,
+   "subfields": 155,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     678
+    ],
+    [
+     "Artificial Intelligence",
+     471
+    ],
+    [
+     "Molecular Biology",
+     151
+    ],
+    [
+     "Statistics, Probability and Uncertainty",
+     112
+    ],
+    [
+     "Information Systems",
+     107
+    ],
+    [
+     "Sociology and Political Science",
+     87
+    ]
+   ],
+   "median_topic_score": 0.961,
+   "other_topics_same_field": 0.385,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Medicine",
+     3050
+    ],
+    [
+     "Science",
+     1590
+    ],
+    [
+     "Education",
+     264
+    ],
+    [
+     "Technology",
+     262
+    ],
+    [
+     "Biology",
+     81
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     1061
+    ],
+    [
+     "Computer Science",
+     745
+    ],
+    [
+     "Social Sciences",
+     272
+    ],
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     190
+    ]
+   ]
+  },
+  "Medical Informatics": {
+   "articles": 2442,
+   "units": 61465,
+   "parents": 71339,
+   "years": {
+    "2015": 2,
+    "2016": 3,
+    "2017": 7,
+    "2018": 3,
+    "2019": 24,
+    "2020": 70,
+    "2021": 133,
+    "2022": 139,
+    "2023": 185,
+    "2024": 424,
+    "2025": 769,
+    "2026": 683
+   },
+   "share_2024_on": 0.768,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     842
+    ],
+    [
+     "BERT (bare/unspecified)",
+     538
+    ],
+    [
+     "(generic terms only)",
+     453
+    ],
+    [
+     "Llama (Meta)",
+     59
+    ],
+    [
+     "DeepSeek",
+     58
+    ],
+    [
+     "GPT (bare/unspecified)",
+     53
+    ]
+   ],
+   "families_with_30_articles": 22,
+   "gpt_main_share": 0.345,
+   "generic_only_share": 0.186,
+   "bylines": 16221,
+   "byline_id_or_orcid": 0.981,
+   "byline_inst_id": 0.943,
+   "articles_all_identified": 0.919,
+   "oa_persons": 13008,
+   "oa_persons_2plus_articles": 1321,
+   "journals": 36,
+   "journals_5plus": 26,
+   "subfields": 87,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     620
+    ],
+    [
+     "Artificial Intelligence",
+     471
+    ],
+    [
+     "Molecular Biology",
+     259
+    ],
+    [
+     "General Health Professions",
+     120
+    ],
+    [
+     "Health Information Management",
+     103
+    ],
+    [
+     "Computational Theory and Mathematics",
+     92
+    ]
+   ],
+   "median_topic_score": 0.939,
+   "other_topics_same_field": 0.219,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Medical Informatics",
+     2442
+    ],
+    [
+     "Chemistry",
+     163
+    ],
+    [
+     "Public Health",
+     135
+    ],
+    [
+     "Geriatrics",
+     42
+    ],
+    [
+     "Diagnostic Imaging",
+     32
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     831
+    ],
+    [
+     "Computer Science",
+     622
+    ],
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     269
+    ],
+    [
+     "Health Professions",
+     236
+    ]
+   ]
+  },
+  "Computational Biology": {
+   "articles": 2173,
+   "units": 30659,
+   "parents": 34688,
+   "years": {
+    "2015": 5,
+    "2016": 10,
+    "2017": 11,
+    "2018": 16,
+    "2019": 20,
+    "2020": 26,
+    "2021": 73,
+    "2022": 211,
+    "2023": 211,
+    "2024": 446,
+    "2025": 553,
+    "2026": 591
+   },
+   "share_2024_on": 0.732,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     541
+    ],
+    [
+     "BERT (bare/unspecified)",
+     321
+    ],
+    [
+     "esm",
+     245
+    ],
+    [
+     "GPT (OpenAI)",
+     159
+    ],
+    [
+     "biobert",
+     78
+    ],
+    [
+     "dnabert",
+     71
+    ]
+   ],
+   "families_with_30_articles": 20,
+   "gpt_main_share": 0.073,
+   "generic_only_share": 0.249,
+   "bylines": 12642,
+   "byline_id_or_orcid": 0.954,
+   "byline_inst_id": 0.96,
+   "articles_all_identified": 0.798,
+   "oa_persons": 9939,
+   "oa_persons_2plus_articles": 1156,
+   "journals": 27,
+   "journals_5plus": 16,
+   "subfields": 76,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     1306
+    ],
+    [
+     "Computational Theory and Mathematics",
+     245
+    ],
+    [
+     "Artificial Intelligence",
+     182
+    ],
+    [
+     "Genetics",
+     54
+    ],
+    [
+     "Information Systems",
+     40
+    ],
+    [
+     "Microbiology",
+     29
+    ]
+   ],
+   "median_topic_score": 0.967,
+   "other_topics_same_field": 0.511,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Computational Biology",
+     2173
+    ],
+    [
+     "Neurology",
+     134
+    ],
+    [
+     "Genetics",
+     64
+    ],
+    [
+     "Science",
+     25
+    ],
+    [
+     "Molecular Biology",
+     19
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     1402
+    ],
+    [
+     "Computer Science",
+     489
+    ],
+    [
+     "Medicine",
+     87
+    ],
+    [
+     "Immunology and Microbiology",
+     36
+    ]
+   ]
+  },
+  "Technology": {
+   "articles": 1597,
+   "units": 27005,
+   "parents": 30782,
+   "years": {
+    "2015": 1,
+    "2016": 2,
+    "2017": 3,
+    "2018": 3,
+    "2019": 9,
+    "2020": 21,
+    "2021": 72,
+    "2022": 107,
+    "2023": 202,
+    "2024": 259,
+    "2025": 420,
+    "2026": 498
+   },
+   "share_2024_on": 0.737,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     493
+    ],
+    [
+     "GPT (OpenAI)",
+     435
+    ],
+    [
+     "BERT (bare/unspecified)",
+     314
+    ],
+    [
+     "Llama (Meta)",
+     34
+    ],
+    [
+     "DeepSeek",
+     28
+    ],
+    [
+     "GPT (bare/unspecified)",
+     27
+    ]
+   ],
+   "families_with_30_articles": 11,
+   "gpt_main_share": 0.272,
+   "generic_only_share": 0.309,
+   "bylines": 7668,
+   "byline_id_or_orcid": 0.969,
+   "byline_inst_id": 0.965,
+   "articles_all_identified": 0.875,
+   "oa_persons": 6701,
+   "oa_persons_2plus_articles": 346,
+   "journals": 13,
+   "journals_5plus": 8,
+   "subfields": 93,
+   "subfield_top": [
+    [
+     "Artificial Intelligence",
+     269
+    ],
+    [
+     "Computer Vision and Pattern Recognition",
+     240
+    ],
+    [
+     "Health Informatics",
+     215
+    ],
+    [
+     "Computer Networks and Communications",
+     89
+    ],
+    [
+     "Control and Systems Engineering",
+     80
+    ],
+    [
+     "Information Systems",
+     60
+    ]
+   ],
+   "median_topic_score": 0.976,
+   "other_topics_same_field": 0.534,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Technology",
+     1597
+    ],
+    [
+     "Biotechnology",
+     1285
+    ],
+    [
+     "Medicine",
+     262
+    ],
+    [
+     "Education",
+     255
+    ],
+    [
+     "Health Services Research",
+     20
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Computer Science",
+     749
+    ],
+    [
+     "Engineering",
+     326
+    ],
+    [
+     "Medicine",
+     288
+    ],
+    [
+     "Psychology",
+     69
+    ]
+   ]
+  },
+  "Biotechnology": {
+   "articles": 1409,
+   "units": 18595,
+   "parents": 20677,
+   "years": {
+    "2016": 3,
+    "2017": 2,
+    "2018": 4,
+    "2019": 9,
+    "2020": 22,
+    "2021": 76,
+    "2022": 107,
+    "2023": 178,
+    "2024": 203,
+    "2025": 373,
+    "2026": 432
+   },
+   "share_2024_on": 0.715,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     508
+    ],
+    [
+     "BERT (bare/unspecified)",
+     312
+    ],
+    [
+     "GPT (OpenAI)",
+     238
+    ],
+    [
+     "Llama (Meta)",
+     32
+    ],
+    [
+     "GPT (bare/unspecified)",
+     26
+    ],
+    [
+     "DeepSeek",
+     23
+    ]
+   ],
+   "families_with_30_articles": 8,
+   "gpt_main_share": 0.169,
+   "generic_only_share": 0.361,
+   "bylines": 6653,
+   "byline_id_or_orcid": 0.96,
+   "byline_inst_id": 0.962,
+   "articles_all_identified": 0.845,
+   "oa_persons": 5878,
+   "oa_persons_2plus_articles": 276,
+   "journals": 30,
+   "journals_5plus": 10,
+   "subfields": 99,
+   "subfield_top": [
+    [
+     "Artificial Intelligence",
+     263
+    ],
+    [
+     "Computer Vision and Pattern Recognition",
+     241
+    ],
+    [
+     "Computer Networks and Communications",
+     89
+    ],
+    [
+     "Control and Systems Engineering",
+     81
+    ],
+    [
+     "Molecular Biology",
+     61
+    ],
+    [
+     "Information Systems",
+     58
+    ]
+   ],
+   "median_topic_score": 0.971,
+   "other_topics_same_field": 0.548,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Biotechnology",
+     1409
+    ],
+    [
+     "Technology",
+     1285
+    ],
+    [
+     "Microbiology",
+     23
+    ],
+    [
+     "Molecular Biology",
+     20
+    ],
+    [
+     "Nanotechnology",
+     16
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Computer Science",
+     743
+    ],
+    [
+     "Engineering",
+     333
+    ],
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     71
+    ],
+    [
+     "Psychology",
+     68
+    ]
+   ]
+  },
+  "Biology": {
+   "articles": 1203,
+   "units": 18852,
+   "parents": 21346,
+   "years": {
+    "2017": 1,
+    "2018": 4,
+    "2019": 1,
+    "2020": 8,
+    "2021": 24,
+    "2022": 42,
+    "2023": 95,
+    "2024": 217,
+    "2025": 406,
+    "2026": 405
+   },
+   "share_2024_on": 0.855,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     364
+    ],
+    [
+     "GPT (OpenAI)",
+     256
+    ],
+    [
+     "BERT (bare/unspecified)",
+     104
+    ],
+    [
+     "esm",
+     83
+    ],
+    [
+     "GPT (bare/unspecified)",
+     34
+    ],
+    [
+     "Llama (Meta)",
+     27
+    ]
+   ],
+   "families_with_30_articles": 9,
+   "gpt_main_share": 0.213,
+   "generic_only_share": 0.303,
+   "bylines": 10407,
+   "byline_id_or_orcid": 0.96,
+   "byline_inst_id": 0.956,
+   "articles_all_identified": 0.779,
+   "oa_persons": 9146,
+   "oa_persons_2plus_articles": 476,
+   "journals": 42,
+   "journals_5plus": 18,
+   "subfields": 114,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     357
+    ],
+    [
+     "Computational Theory and Mathematics",
+     132
+    ],
+    [
+     "Artificial Intelligence",
+     108
+    ],
+    [
+     "Cognitive Neuroscience",
+     56
+    ],
+    [
+     "Materials Chemistry",
+     41
+    ],
+    [
+     "Health Informatics",
+     39
+    ]
+   ],
+   "median_topic_score": 0.968,
+   "other_topics_same_field": 0.448,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Biology",
+     1203
+    ],
+    [
+     "Science",
+     778
+    ],
+    [
+     "Medicine",
+     81
+    ],
+    [
+     "Environmental Health",
+     44
+    ],
+    [
+     "Molecular Biology",
+     18
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     416
+    ],
+    [
+     "Computer Science",
+     278
+    ],
+    [
+     "Medicine",
+     125
+    ],
+    [
+     "Engineering",
+     65
+    ]
+   ]
+  },
+  "Public Health": {
+   "articles": 979,
+   "units": 14663,
+   "parents": 16885,
+   "years": {
+    "2019": 2,
+    "2020": 7,
+    "2021": 26,
+    "2022": 62,
+    "2023": 71,
+    "2024": 110,
+    "2025": 300,
+    "2026": 401
+   },
+   "share_2024_on": 0.828,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     417
+    ],
+    [
+     "(generic terms only)",
+     207
+    ],
+    [
+     "BERT (bare/unspecified)",
+     156
+    ],
+    [
+     "DeepSeek",
+     35
+    ],
+    [
+     "Gemini (Google)",
+     29
+    ],
+    [
+     "GPT (bare/unspecified)",
+     17
+    ]
+   ],
+   "families_with_30_articles": 8,
+   "gpt_main_share": 0.426,
+   "generic_only_share": 0.211,
+   "bylines": 6015,
+   "byline_id_or_orcid": 0.936,
+   "byline_inst_id": 0.919,
+   "articles_all_identified": 0.768,
+   "oa_persons": 5286,
+   "oa_persons_2plus_articles": 236,
+   "journals": 70,
+   "journals_5plus": 22,
+   "subfields": 79,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     220
+    ],
+    [
+     "Artificial Intelligence",
+     106
+    ],
+    [
+     "General Health Professions",
+     104
+    ],
+    [
+     "Sociology and Political Science",
+     58
+    ],
+    [
+     "Health",
+     41
+    ],
+    [
+     "Public Health, Environmental and Occupational Health",
+     41
+    ]
+   ],
+   "median_topic_score": 0.943,
+   "other_topics_same_field": 0.276,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Public Health",
+     979
+    ],
+    [
+     "Medical Informatics",
+     135
+    ],
+    [
+     "Environmental Health",
+     108
+    ],
+    [
+     "Epidemiology",
+     42
+    ],
+    [
+     "Health Services",
+     35
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     379
+    ],
+    [
+     "Social Sciences",
+     164
+    ],
+    [
+     "Health Professions",
+     137
+    ],
+    [
+     "Computer Science",
+     129
+    ]
+   ]
+  },
+  "Biochemistry": {
+   "articles": 840,
+   "units": 6757,
+   "parents": 7506,
+   "years": {
+    "2018": 1,
+    "2020": 7,
+    "2021": 22,
+    "2022": 34,
+    "2023": 79,
+    "2024": 143,
+    "2025": 272,
+    "2026": 282
+   },
+   "share_2024_on": 0.83,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     293
+    ],
+    [
+     "GPT (OpenAI)",
+     104
+    ],
+    [
+     "esm",
+     76
+    ],
+    [
+     "BERT (bare/unspecified)",
+     59
+    ],
+    [
+     "dnabert",
+     25
+    ],
+    [
+     "enformer",
+     22
+    ]
+   ],
+   "families_with_30_articles": 7,
+   "gpt_main_share": 0.124,
+   "generic_only_share": 0.349,
+   "bylines": 5623,
+   "byline_id_or_orcid": 0.957,
+   "byline_inst_id": 0.953,
+   "articles_all_identified": 0.801,
+   "oa_persons": 4825,
+   "oa_persons_2plus_articles": 354,
+   "journals": 52,
+   "journals_5plus": 16,
+   "subfields": 62,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     500
+    ],
+    [
+     "Computational Theory and Mathematics",
+     84
+    ],
+    [
+     "Genetics",
+     35
+    ],
+    [
+     "Cancer Research",
+     22
+    ],
+    [
+     "Spectroscopy",
+     19
+    ],
+    [
+     "Microbiology",
+     12
+    ]
+   ],
+   "median_topic_score": 0.961,
+   "other_topics_same_field": 0.551,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Biochemistry",
+     840
+    ],
+    [
+     "Molecular Biology",
+     382
+    ],
+    [
+     "Chemistry",
+     292
+    ],
+    [
+     "Genetics",
+     83
+    ],
+    [
+     "Computational Biology",
+     16
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     572
+    ],
+    [
+     "Computer Science",
+     105
+    ],
+    [
+     "Medicine",
+     70
+    ],
+    [
+     "Chemistry",
+     20
+    ]
+   ]
+  },
+  "Education": {
+   "articles": 763,
+   "units": 20644,
+   "parents": 24251,
+   "years": {
+    "2020": 1,
+    "2022": 1,
+    "2023": 58,
+    "2024": 134,
+    "2025": 287,
+    "2026": 282
+   },
+   "share_2024_on": 0.921,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     591
+    ],
+    [
+     "(generic terms only)",
+     72
+    ],
+    [
+     "DeepSeek",
+     25
+    ],
+    [
+     "GPT (bare/unspecified)",
+     20
+    ],
+    [
+     "Gemini (Google)",
+     19
+    ],
+    [
+     "BERT (bare/unspecified)",
+     10
+    ]
+   ],
+   "families_with_30_articles": 8,
+   "gpt_main_share": 0.775,
+   "generic_only_share": 0.094,
+   "bylines": 4421,
+   "byline_id_or_orcid": 0.961,
+   "byline_inst_id": 0.97,
+   "articles_all_identified": 0.849,
+   "oa_persons": 3829,
+   "oa_persons_2plus_articles": 225,
+   "journals": 29,
+   "journals_5plus": 16,
+   "subfields": 46,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     498
+    ],
+    [
+     "Public Health, Environmental and Occupational Health",
+     92
+    ],
+    [
+     "Information Systems",
+     20
+    ],
+    [
+     "General Health Professions",
+     20
+    ],
+    [
+     "Physiology",
+     19
+    ],
+    [
+     "Education",
+     15
+    ]
+   ],
+   "median_topic_score": 0.971,
+   "other_topics_same_field": 0.435,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Education",
+     763
+    ],
+    [
+     "Medicine",
+     264
+    ],
+    [
+     "Technology",
+     255
+    ],
+    [
+     "Dentistry",
+     24
+    ],
+    [
+     "Anatomy",
+     12
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     628
+    ],
+    [
+     "Social Sciences",
+     36
+    ],
+    [
+     "Computer Science",
+     29
+    ],
+    [
+     "Health Professions",
+     23
+    ]
+   ]
+  },
+  "Molecular Biology": {
+   "articles": 681,
+   "units": 6670,
+   "parents": 7537,
+   "years": {
+    "2017": 1,
+    "2018": 2,
+    "2019": 2,
+    "2020": 1,
+    "2021": 13,
+    "2022": 23,
+    "2023": 54,
+    "2024": 118,
+    "2025": 208,
+    "2026": 259
+   },
+   "share_2024_on": 0.859,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     207
+    ],
+    [
+     "GPT (OpenAI)",
+     116
+    ],
+    [
+     "esm",
+     62
+    ],
+    [
+     "BERT (bare/unspecified)",
+     37
+    ],
+    [
+     "dnabert",
+     16
+    ],
+    [
+     "GPT (bare/unspecified)",
+     15
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.17,
+   "generic_only_share": 0.304,
+   "bylines": 4644,
+   "byline_id_or_orcid": 0.956,
+   "byline_inst_id": 0.953,
+   "articles_all_identified": 0.796,
+   "oa_persons": 4180,
+   "oa_persons_2plus_articles": 150,
+   "journals": 67,
+   "journals_5plus": 23,
+   "subfields": 72,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     299
+    ],
+    [
+     "Computational Theory and Mathematics",
+     88
+    ],
+    [
+     "Genetics",
+     37
+    ],
+    [
+     "Health Informatics",
+     24
+    ],
+    [
+     "Cancer Research",
+     18
+    ],
+    [
+     "Artificial Intelligence",
+     18
+    ]
+   ],
+   "median_topic_score": 0.972,
+   "other_topics_same_field": 0.471,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Molecular Biology",
+     681
+    ],
+    [
+     "Biochemistry",
+     382
+    ],
+    [
+     "Chemistry",
+     276
+    ],
+    [
+     "Cell Biology",
+     91
+    ],
+    [
+     "Medicine",
+     37
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     368
+    ],
+    [
+     "Medicine",
+     120
+    ],
+    [
+     "Computer Science",
+     108
+    ],
+    [
+     "Immunology and Microbiology",
+     16
+    ]
+   ]
+  },
+  "Health Services Research": {
+   "articles": 620,
+   "units": 12633,
+   "parents": 14667,
+   "years": {
+    "2017": 1,
+    "2021": 3,
+    "2022": 13,
+    "2023": 36,
+    "2024": 99,
+    "2025": 216,
+    "2026": 252
+   },
+   "share_2024_on": 0.915,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     319
+    ],
+    [
+     "(generic terms only)",
+     125
+    ],
+    [
+     "BERT (bare/unspecified)",
+     61
+    ],
+    [
+     "GPT (bare/unspecified)",
+     17
+    ],
+    [
+     "RoBERTa (generic/base)",
+     12
+    ],
+    [
+     "Gemini (Google)",
+     12
+    ]
+   ],
+   "families_with_30_articles": 8,
+   "gpt_main_share": 0.515,
+   "generic_only_share": 0.202,
+   "bylines": 3773,
+   "byline_id_or_orcid": 0.99,
+   "byline_inst_id": 0.929,
+   "articles_all_identified": 0.953,
+   "oa_persons": 3381,
+   "oa_persons_2plus_articles": 113,
+   "journals": 26,
+   "journals_5plus": 11,
+   "subfields": 63,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     157
+    ],
+    [
+     "General Health Professions",
+     78
+    ],
+    [
+     "Applied Psychology",
+     54
+    ],
+    [
+     "Artificial Intelligence",
+     50
+    ],
+    [
+     "Public Health, Environmental and Occupational Health",
+     31
+    ],
+    [
+     "Health Information Management",
+     28
+    ]
+   ],
+   "median_topic_score": 0.918,
+   "other_topics_same_field": 0.28,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Health Services Research",
+     620
+    ],
+    [
+     "Public Health",
+     26
+    ],
+    [
+     "Technology",
+     20
+    ],
+    [
+     "Medical Informatics",
+     19
+    ],
+    [
+     "Health Services",
+     13
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     246
+    ],
+    [
+     "Health Professions",
+     115
+    ],
+    [
+     "Psychology",
+     89
+    ],
+    [
+     "Computer Science",
+     68
+    ]
+   ]
+  },
+  "Chemistry": {
+   "articles": 558,
+   "units": 6384,
+   "parents": 7138,
+   "years": {
+    "2019": 1,
+    "2020": 1,
+    "2021": 11,
+    "2022": 21,
+    "2023": 50,
+    "2024": 101,
+    "2025": 188,
+    "2026": 185
+   },
+   "share_2024_on": 0.849,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     172
+    ],
+    [
+     "GPT (OpenAI)",
+     73
+    ],
+    [
+     "esm",
+     49
+    ],
+    [
+     "BERT (bare/unspecified)",
+     45
+    ],
+    [
+     "unimol",
+     15
+    ],
+    [
+     "chemberta",
+     14
+    ]
+   ],
+   "families_with_30_articles": 6,
+   "gpt_main_share": 0.131,
+   "generic_only_share": 0.308,
+   "bylines": 3102,
+   "byline_id_or_orcid": 0.964,
+   "byline_inst_id": 0.935,
+   "articles_all_identified": 0.841,
+   "oa_persons": 2748,
+   "oa_persons_2plus_articles": 141,
+   "journals": 30,
+   "journals_5plus": 11,
+   "subfields": 59,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     168
+    ],
+    [
+     "Computational Theory and Mathematics",
+     163
+    ],
+    [
+     "Materials Chemistry",
+     55
+    ],
+    [
+     "Artificial Intelligence",
+     20
+    ],
+    [
+     "Genetics",
+     13
+    ],
+    [
+     "Cancer Research",
+     11
+    ]
+   ],
+   "median_topic_score": 0.976,
+   "other_topics_same_field": 0.331,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Chemistry",
+     558
+    ],
+    [
+     "Biochemistry",
+     292
+    ],
+    [
+     "Molecular Biology",
+     276
+    ],
+    [
+     "Medical Informatics",
+     163
+    ],
+    [
+     "Biophysics",
+     18
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     201
+    ],
+    [
+     "Computer Science",
+     187
+    ],
+    [
+     "Materials Science",
+     55
+    ],
+    [
+     "Medicine",
+     44
+    ]
+   ]
+  },
+  "Neurology": {
+   "articles": 511,
+   "units": 6053,
+   "parents": 6894,
+   "years": {
+    "2015": 3,
+    "2016": 4,
+    "2018": 3,
+    "2019": 6,
+    "2020": 6,
+    "2021": 18,
+    "2022": 97,
+    "2023": 28,
+    "2024": 75,
+    "2025": 123,
+    "2026": 148
+   },
+   "share_2024_on": 0.677,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     169
+    ],
+    [
+     "GPT (OpenAI)",
+     136
+    ],
+    [
+     "BERT (bare/unspecified)",
+     103
+    ],
+    [
+     "GPT (bare/unspecified)",
+     17
+    ],
+    [
+     "Gemini (Google)",
+     9
+    ],
+    [
+     "biobert",
+     7
+    ]
+   ],
+   "families_with_30_articles": 4,
+   "gpt_main_share": 0.266,
+   "generic_only_share": 0.331,
+   "bylines": 3400,
+   "byline_id_or_orcid": 0.956,
+   "byline_inst_id": 0.956,
+   "articles_all_identified": 0.812,
+   "oa_persons": 3055,
+   "oa_persons_2plus_articles": 138,
+   "journals": 110,
+   "journals_5plus": 22,
+   "subfields": 59,
+   "subfield_top": [
+    [
+     "Artificial Intelligence",
+     119
+    ],
+    [
+     "Cognitive Neuroscience",
+     64
+    ],
+    [
+     "Psychiatry and Mental health",
+     63
+    ],
+    [
+     "Health Informatics",
+     54
+    ],
+    [
+     "Neurology",
+     31
+    ],
+    [
+     "Information Systems",
+     12
+    ]
+   ],
+   "median_topic_score": 0.964,
+   "other_topics_same_field": 0.45,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Neurology",
+     511
+    ],
+    [
+     "Computational Biology",
+     134
+    ],
+    [
+     "Psychiatry",
+     46
+    ],
+    [
+     "Brain",
+     28
+    ],
+    [
+     "Psychophysiology",
+     26
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     195
+    ],
+    [
+     "Computer Science",
+     148
+    ],
+    [
+     "Neuroscience",
+     72
+    ],
+    [
+     "Psychology",
+     30
+    ]
+   ]
+  },
+  "Psychology": {
+   "articles": 472,
+   "units": 9054,
+   "parents": 10482,
+   "years": {
+    "2016": 2,
+    "2019": 1,
+    "2020": 1,
+    "2021": 5,
+    "2022": 8,
+    "2023": 26,
+    "2024": 80,
+    "2025": 169,
+    "2026": 180
+   },
+   "share_2024_on": 0.909,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     237
+    ],
+    [
+     "(generic terms only)",
+     112
+    ],
+    [
+     "BERT (bare/unspecified)",
+     35
+    ],
+    [
+     "GPT (bare/unspecified)",
+     26
+    ],
+    [
+     "Llama (Meta)",
+     12
+    ],
+    [
+     "Gemini (Google)",
+     9
+    ]
+   ],
+   "families_with_30_articles": 6,
+   "gpt_main_share": 0.502,
+   "generic_only_share": 0.237,
+   "bylines": 2322,
+   "byline_id_or_orcid": 0.959,
+   "byline_inst_id": 0.967,
+   "articles_all_identified": 0.864,
+   "oa_persons": 2011,
+   "oa_persons_2plus_articles": 96,
+   "journals": 70,
+   "journals_5plus": 18,
+   "subfields": 48,
+   "subfield_top": [
+    [
+     "Social Psychology",
+     53
+    ],
+    [
+     "Applied Psychology",
+     49
+    ],
+    [
+     "Cognitive Neuroscience",
+     42
+    ],
+    [
+     "Experimental and Cognitive Psychology",
+     40
+    ],
+    [
+     "Clinical Psychology",
+     34
+    ],
+    [
+     "Health Informatics",
+     30
+    ]
+   ],
+   "median_topic_score": 0.867,
+   "other_topics_same_field": 0.319,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Psychology",
+     472
+    ],
+    [
+     "Health Services",
+     114
+    ],
+    [
+     "Behavioral Sciences",
+     31
+    ],
+    [
+     "Psychiatry",
+     25
+    ],
+    [
+     "Psychophysiology",
+     10
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Psychology",
+     197
+    ],
+    [
+     "Social Sciences",
+     62
+    ],
+    [
+     "Computer Science",
+     58
+    ],
+    [
+     "Medicine",
+     51
+    ]
+   ]
+  },
+  "Genetics": {
+   "articles": 463,
+   "units": 6588,
+   "parents": 7376,
+   "years": {
+    "2016": 1,
+    "2019": 1,
+    "2020": 1,
+    "2021": 9,
+    "2022": 16,
+    "2023": 49,
+    "2024": 76,
+    "2025": 163,
+    "2026": 147
+   },
+   "share_2024_on": 0.834,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     126
+    ],
+    [
+     "GPT (OpenAI)",
+     50
+    ],
+    [
+     "esm",
+     37
+    ],
+    [
+     "BERT (bare/unspecified)",
+     35
+    ],
+    [
+     "enformer",
+     35
+    ],
+    [
+     "dnabert",
+     31
+    ]
+   ],
+   "families_with_30_articles": 6,
+   "gpt_main_share": 0.108,
+   "generic_only_share": 0.272,
+   "bylines": 3274,
+   "byline_id_or_orcid": 0.951,
+   "byline_inst_id": 0.938,
+   "articles_all_identified": 0.79,
+   "oa_persons": 2899,
+   "oa_persons_2plus_articles": 123,
+   "journals": 30,
+   "journals_5plus": 15,
+   "subfields": 34,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     299
+    ],
+    [
+     "Genetics",
+     61
+    ],
+    [
+     "Plant Science",
+     10
+    ],
+    [
+     "Computational Theory and Mathematics",
+     9
+    ],
+    [
+     "Health Informatics",
+     9
+    ],
+    [
+     "Information Systems",
+     9
+    ]
+   ],
+   "median_topic_score": 0.95,
+   "other_topics_same_field": 0.697,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Genetics",
+     463
+    ],
+    [
+     "Biochemistry",
+     83
+    ],
+    [
+     "Computational Biology",
+     64
+    ],
+    [
+     "Microbiology",
+     16
+    ],
+    [
+     "Molecular Biology",
+     10
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     375
+    ],
+    [
+     "Computer Science",
+     25
+    ],
+    [
+     "Medicine",
+     23
+    ],
+    [
+     "Agricultural and Biological Sciences",
+     11
+    ]
+   ]
+  },
+  "Biomedical Engineering": {
+   "articles": 368,
+   "units": 5953,
+   "parents": 6828,
+   "years": {
+    "2017": 2,
+    "2018": 2,
+    "2019": 1,
+    "2021": 8,
+    "2022": 6,
+    "2023": 35,
+    "2024": 56,
+    "2025": 132,
+    "2026": 126
+   },
+   "share_2024_on": 0.853,
+   "main_family_top": [
+    [
+     "(generic terms only)",
+     104
+    ],
+    [
+     "GPT (OpenAI)",
+     64
+    ],
+    [
+     "BERT (bare/unspecified)",
+     41
+    ],
+    [
+     "GPT (bare/unspecified)",
+     31
+    ],
+    [
+     "Llama (Meta)",
+     10
+    ],
+    [
+     "Gemini (Google)",
+     10
+    ]
+   ],
+   "families_with_30_articles": 4,
+   "gpt_main_share": 0.174,
+   "generic_only_share": 0.283,
+   "bylines": 2909,
+   "byline_id_or_orcid": 0.944,
+   "byline_inst_id": 0.962,
+   "articles_all_identified": 0.753,
+   "oa_persons": 2649,
+   "oa_persons_2plus_articles": 47,
+   "journals": 33,
+   "journals_5plus": 15,
+   "subfields": 75,
+   "subfield_top": [
+    [
+     "Molecular Biology",
+     76
+    ],
+    [
+     "Computational Theory and Mathematics",
+     31
+    ],
+    [
+     "Artificial Intelligence",
+     29
+    ],
+    [
+     "Materials Chemistry",
+     24
+    ],
+    [
+     "Health Informatics",
+     21
+    ],
+    [
+     "Computer Vision and Pattern Recognition",
+     17
+    ]
+   ],
+   "median_topic_score": 0.971,
+   "other_topics_same_field": 0.363,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Biomedical Engineering",
+     368
+    ],
+    [
+     "Biophysics",
+     28
+    ],
+    [
+     "Ophthalmology",
+     20
+    ],
+    [
+     "Statistics as Topic",
+     15
+    ],
+    [
+     "Neurology",
+     13
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     84
+    ],
+    [
+     "Computer Science",
+     80
+    ],
+    [
+     "Medicine",
+     63
+    ],
+    [
+     "Engineering",
+     39
+    ]
+   ]
+  },
+  "Neoplasms": {
+   "articles": 343,
+   "units": 6555,
+   "parents": 7544,
+   "years": {
+    "2019": 1,
+    "2021": 3,
+    "2022": 5,
+    "2023": 13,
+    "2024": 64,
+    "2025": 130,
+    "2026": 127
+   },
+   "share_2024_on": 0.936,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     160
+    ],
+    [
+     "(generic terms only)",
+     67
+    ],
+    [
+     "BERT (bare/unspecified)",
+     28
+    ],
+    [
+     "GPT (bare/unspecified)",
+     11
+    ],
+    [
+     "Llama (Meta)",
+     11
+    ],
+    [
+     "Mistral",
+     7
+    ]
+   ],
+   "families_with_30_articles": 5,
+   "gpt_main_share": 0.466,
+   "generic_only_share": 0.195,
+   "bylines": 3094,
+   "byline_id_or_orcid": 0.962,
+   "byline_inst_id": 0.954,
+   "articles_all_identified": 0.749,
+   "oa_persons": 2711,
+   "oa_persons_2plus_articles": 167,
+   "journals": 74,
+   "journals_5plus": 19,
+   "subfields": 38,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     120
+    ],
+    [
+     "Oncology",
+     44
+    ],
+    [
+     "Artificial Intelligence",
+     32
+    ],
+    [
+     "Molecular Biology",
+     28
+    ],
+    [
+     "General Health Professions",
+     20
+    ],
+    [
+     "Pulmonary and Respiratory Medicine",
+     11
+    ]
+   ],
+   "median_topic_score": 0.967,
+   "other_topics_same_field": 0.297,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Neoplasms",
+     343
+    ],
+    [
+     "Therapeutics",
+     16
+    ],
+    [
+     "Palliative Care",
+     11
+    ],
+    [
+     "Radiotherapy",
+     9
+    ],
+    [
+     "Endocrinology",
+     9
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     211
+    ],
+    [
+     "Biochemistry, Genetics and Molecular Biology",
+     42
+    ],
+    [
+     "Computer Science",
+     39
+    ],
+    [
+     "Health Professions",
+     25
+    ]
+   ]
+  },
+  "Dentistry": {
+   "articles": 321,
+   "units": 11924,
+   "parents": 14385,
+   "years": {
+    "2020": 1,
+    "2021": 1,
+    "2023": 6,
+    "2024": 30,
+    "2025": 135,
+    "2026": 148
+   },
+   "share_2024_on": 0.975,
+   "main_family_top": [
+    [
+     "GPT (OpenAI)",
+     222
+    ],
+    [
+     "(generic terms only)",
+     24
+    ],
+    [
+     "Gemini (Google)",
+     24
+    ],
+    [
+     "GPT (bare/unspecified)",
+     13
+    ],
+    [
+     "DeepSeek",
+     13
+    ],
+    [
+     "BERT (bare/unspecified)",
+     6
+    ]
+   ],
+   "families_with_30_articles": 7,
+   "gpt_main_share": 0.692,
+   "generic_only_share": 0.075,
+   "bylines": 1508,
+   "byline_id_or_orcid": 0.962,
+   "byline_inst_id": 0.945,
+   "articles_all_identified": 0.891,
+   "oa_persons": 1265,
+   "oa_persons_2plus_articles": 121,
+   "journals": 41,
+   "journals_5plus": 7,
+   "subfields": 26,
+   "subfield_top": [
+    [
+     "Health Informatics",
+     199
+    ],
+    [
+     "Oral Surgery",
+     37
+    ],
+    [
+     "Orthodontics",
+     17
+    ],
+    [
+     "Periodontics",
+     14
+    ],
+    [
+     "Artificial Intelligence",
+     7
+    ],
+    [
+     "Public Health, Environmental and Occupational Health",
+     6
+    ]
+   ],
+   "median_topic_score": 0.986,
+   "other_topics_same_field": 0.195,
+   "nlm_broad_any": 1.0,
+   "nlm_broad_top": [
+    [
+     "Dentistry",
+     321
+    ],
+    [
+     "Education",
+     24
+    ],
+    [
+     "Orthodontics",
+     7
+    ],
+    [
+     "Traumatology",
+     7
+    ],
+    [
+     "General Surgery",
+     7
+    ]
+   ],
+   "oa_field_top": [
+    [
+     "Medicine",
+     207
+    ],
+    [
+     "Dentistry",
+     68
+    ],
+    [
+     "Health Professions",
+     11
+    ],
+    [
+     "Computer Science",
+     10
+    ]
+   ]
+  }
+ }
+}
