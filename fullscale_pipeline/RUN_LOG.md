@@ -2624,3 +2624,18 @@ longer written: the demoted units and 6 focal-free siblings that were cousins of
 detection is psychology; field review of the 2,162 to be done in two steps (assistant judges on title, keywords, journal,
 abstract when unsure; owner reviews the assistant's false positives). Rest of the corpus not treated (the same matcher
 gap exists there, RL-194). [LOG]
+
+**RL-197 · 2026-10-26 · Psychology field review, step 1 (assistant) · AUDIT (read-only) · LIVE**
+Owner (2026-10-26): two-step review of articles misassigned to Psychology; step 1 the assistant judges each article on
+title, keywords and journal, reading the abstract (first 150 words, `retrieval/gap_f2_excerpts.header_parts`) when
+unsure; step 2 the owner reviews the assistant's flags. Owner rulings applied: HRI / social robotics, emotion recognition
+and mental-health detection are psychology. Criterion fixed before reading (inclusive): psychology when the subject
+involves human or animal mind, behaviour, cognition, emotion, mental health, development, learning, perception, social
+interaction or health behaviour, whatever the methods. All 2,162 Psychology articles left after RL-196 read in 8 batches;
+99 unsure read with abstracts. **2,095 keep; 67 flagged** (`corpus_statistics/psychology_field_review.csv`): tier A, 20 with
+no psychological subject visible (e.g. ergonomics motion capture, cockpit taxonomy, actigraphy and sleep-scoring
+methods, flight-data deviations, refugee infectious-disease care); tier B, 47 borderline (sleep/pain medicine 8,
+medical/veterinary education tools 12, driving technology 6, LGBTQ+ sexual-health services 7, health informatics
+outside mental health 6, Kansei design 3, other 5). 191 articles had no abstract and 160 no keywords. Supersedes the
+RL-194 50-title estimate (≈13%, judged before the owner's rulings): now 0.9% clear, 2.2% borderline. Nothing removed;
+awaiting the owner's review. [LOG]
