@@ -2573,3 +2573,25 @@ sampled before 2022 are not psychology, 4 of the 37 from 2022 on; weighted by ye
 psychology (small sample, wide uncertainty). Definition recorded on request: a G3 unit is one G2 parse unit (a
 sentence, or one clause-piece of it; 2% of sentences have 2+ units) of an article, mentioning a focal model term (98%
 of units in shard 7; why the other 2% carry no recorded mention is not checked), with its curated parent and cousin hyperedges. [LOG]
+
+**RL-195 · 2026-10-26 · Psychology: "language model" false positives at sentence level; units without a focal mention explained · AUDIT (read-only) · LIVE**
+(0) Units without a recorded focal mention: 11,006 of 785,999 G3 units (1.4%); every one has no parent of its own, sits in
+a sentence (sid) whose other unit carries the focal term, and holds only cousins attached to that unit's parents: the
+owner's 2026-10-21 decision "cousins scoped by sentence" (G3_POSTPROCESSING item 11), not a fault. (1) Owner: false
+positives are **demoted** (the mention stops being focal), not removed; an article is removed only if no focal unit
+remains. Measured at unit level: in Psychology 2,077 units in 777 articles hold bare "language model(s)", 1,503 with no
+other focal mention. Units sorted by context cues (computational: trained, neural, transformer, embedding, ASR, chatbot,
+AI, ...; human/statistical: child, caregiver, peer, provide, predicted, covariate, ...); read by the assistant: all 556
+units without a computational cue, all 192 with both cues, a random 100 of the 1,329 with computational cues only (0
+false positives among the 100). **54 false-positive units in 32 articles** (`corpus_statistics/psychology_lm_false_
+positive_units.csv`): people as language models for children; theories ("integrative language model", "cascading
+level of language model", a "conceptual language model" of well-being); regression or classification models named by
+language ("the Chinese language model", "each individual language model"); "language models the physical world"
+(verb); LIWC called a language model; a discrete-event "HMI DES language model". All 54 are units whose only focal
+mention is "language model". After demotion **28 articles keep no focal unit** (leave the corpus) and 4 keep other
+focal units. Not applied: the targeted G3 rerun waits for the owner's decision on older (non-transformer) language
+models, so that demotion is run once. (3) Owner: emotion recognition is psychology and computer science, not a
+misassignment; the 50-title tally becomes 41 / 9 (about 10% outside psychology, weighted by year). (4) Field
+misassignment: OpenAlex topic `score` does not separate the misassigned sample titles (6 of 9 have ≥ 0.97); the error
+sits in the topic -> field mapping (e.g. "Social Robot Interaction and HRI" -> Social Psychology), not in the
+work -> topic assignment. Options studied, none implemented (owner). [LOG]
