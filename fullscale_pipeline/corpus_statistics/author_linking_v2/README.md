@@ -20,5 +20,6 @@ folder: `python3 <script>.py`.
 | `oa_name_conflicts.py` | problem C: OpenAlex IDs whose bylines carry different names (and the rejected R6 variant) |
 | `c_delete.py` | problem C: deletion variants D1 (decided) and D2 |
 | `pipeline_sim.py` | the whole sequence in order: `python3 pipeline_sim.py B_then_A pubmed --C` |
+| `author_table.py` | **production (RL-200):** the decided sequence applied, R4 included; one row per byline in `diagnostics/author_coverage/author_table_v2.jsonl` (untracked), counts in `author_table_v2_summary.json`; reproduces `pipeline_sim.py` |
 
 Rules, decisions and results: `fullscale_pipeline/AUTHOR_IDENTITY.md`; log RL-189 to RL-192.

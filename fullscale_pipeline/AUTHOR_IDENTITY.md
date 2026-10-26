@@ -2,7 +2,8 @@
 
 Written as a methods / appendix section. It states how bylines become persons for the M1 author facet. Rules marked
 **decided** were set by the owner on 2026-10-24; rules marked **proposed** await the owner's decision. Nothing here has
-been applied to data yet: the author table is built after the trial subset is chosen. Scripts:
+been applied to data yet: the author table is built after the trial subset is chosen. *[2026-10-26: applied — the author table is built
+(§10) and R5 is made operational at the organisation level (§9); RUN_LOG RL-200.]* Scripts:
 `corpus_statistics/author_linking_v2/` (read-only analyses); log: RUN_LOG RL-188 to RL-190.
 
 ## 1. Terms
@@ -226,3 +227,70 @@ R1 (merge through shared ORCIDs) → R4 (strict linking) → R5 (institutions).
 
 R6 removes fewer bylines here (844) than standalone (976) because R2 has already removed some of the same IDs. In total
 1,150 bylines (0.45%) are removed and 7 articles leave the working corpus for lack of an author.
+
+## 9. R5 applied: institutions merged at the organisation level (2026-10-26, Psychology trial)
+
+**Owner (2026-10-26):** units of one university become that university (decided earlier: never above it); likewise the
+units of a research institute and the departments of a corporation. OpenAlex's parent links mix the organisation a unit
+belongs to with umbrellas above it, so a plain "climb to the parent" would merge UCLA into the University of California
+System, UCL into the University of London, every Max Planck Institute into the Max Planck Society, NIH into the US
+Department of Health and Human Services, and Madrid hospitals into the Comunidad de Madrid. The rule therefore classifies
+each **parent entity** and lets only some kinds absorb their units (`corpus_statistics/institution_organisations.py`;
+records from `institutions_fetch.py`, all 17,328 institutions and ancestors of the working corpus).
+
+| Parent category | Examples | Absorbs |
+|---|---|---|
+| University, company, research institute, other organisation | Cornell (Weill Cornell, Cornell Tech), MIT (McGovern Institute, CSAIL), Radboud (Donders Institute), Stanford (Stanford Medicine), Alphabet (Google, Google DeepMind), IBM (IBM Research labs), SINTEF (SINTEF Digital), Broad Institute (Stanley Center) | every unit |
+| Hospital or health organisation | Mayo Clinic (Mayo Clinic in Arizona), Erasmus MC (Sophia Children's Hospital), CAMH (Campbell Institute), Charité (Berlin Institute of Health, Stiftung Charité) | its research institutes and foundations, and its sites (a hospital whose name contains the parent's name); never a university, school or company, nor a separately named hospital |
+| University system / federation / grouping of establishments | University of California System, University of London, State University of New York, Normandie Université, Université de Lyon, Université PSL, Université Paris-Saclay, Université Grenoble Alpes, Institut Polytechnique de Paris, Islamic Azad University | nothing |
+| National research organisation, society, academy, research network | CNRS, Inserm, Chinese Academy of Sciences, NIH, Max Planck Society, Leibniz, Helmholtz, Fraunhofer, Italian CNR, CSIC, academies of sciences, CIBER, RIKEN | nothing (**question 1**, below) |
+| Government | ministries, governments, regions, VA, CDC, armed forces | nothing |
+| Status labels, funders, owner foundations, company groups, data errors | IRCCS, Wellcome Trust, NIHR, Novo Holdings, Toyota Group, Samsung (conglomerate) | nothing |
+
+Further rules: an institution whose absorbing parents lead to **two or more organisations** is a joint unit and stays
+itself (Munich Center for Machine Learning: LMU and TUM; Duke-NUS Medical School); a research unit of one university and
+national research organisations merges into the university (Institut du Cerveau: CNRS, Inserm, Sorbonne → Sorbonne
+Université; the toy-trial rule JOINT1), since those organisations absorb nothing. A **teaching hospital** with both a
+university parent and a health-system parent is affiliated, not owned, and stays itself (Brigham and Women's: Tufts and
+Mass General Brigham; John Peter Smith; Policlinico Milano). Two read cases of a false parent stay themselves (AP-HM is
+not a unit of Aix-Marseille Université; CHRU Brest is listed under one of its own laboratories). Errors found while
+building the rule and fixed: a health system absorbing a medical school (Baylor College of Medicine → Harris Health
+System) and the teaching hospitals above.
+
+**Result (Psychology trial):** 2,716 institutions on the bylines → **2,570 organisations** (165 merged, 31 joint units,
+7 teaching hospitals, 2 hand); the per-institution mapping in `corpus_statistics/institution_organisations_psychology_trial.csv`,
+the parent categories in `institution_parent_categories.csv`. Alternatives, for the owner's questions:
+`--merge-societies` (research organisations absorb their institutes) → 2,532 organisations; `--merge-health-systems`
+(health systems absorb their hospitals) → 2,520.
+
+**Open questions (owner):**
+1. *Research organisations.* Default: each institute is its own institution (a Max Planck Institute, a CAS institute,
+   an NIH institute), parallel to a university inside a system. Alternative: the organisation (Max Planck Society, CAS,
+   NIH, CNRS) is one institution — denser, but large nodes joining unrelated research.
+2. *Health systems.* Default: separately named hospitals stay separate (MGH and Brigham, the hospitals of AP-HP, VA
+   medical centres). Alternative: the health system or trust is one institution.
+3. *French "experimental" universities* (PSL, Paris-Saclay, Grenoble Alpes). Default: grouping (their constituent schools
+   — ENS, EPHE, CentraleSupélec, UVSQ, Grenoble INP — keep their identity). Side effect: a joint lab of Grenoble INP and
+   UGA lands on Grenoble INP (LIG, GIPSA-Lab). Alternative: these three are universities and absorb their components.
+4. *Bylines without an institution ID* (628 kept Psychology bylines, 5.6%; mostly companies, start-ups, local hospitals
+   and services unknown to OpenAlex, nearly all on one article). Tested (`corpus_statistics/affiliation_text_match_test.py`):
+   ROR affiliation matching finds 44 of 413 strings with about 70% precision (wrong: "Second People's Hospital of
+   Lishui" → Xian Yang Central Hospital, "Fralin Biomedical Research Institute" → a generic one); matching by the full
+   name of an institution already in the corpus finds 27 strings (32 bylines, 0.3%), about 25 correct. Proposed: no
+   affiliation tie for these bylines (they keep their article and author ties).
+
+## 10. The author table built (2026-10-26)
+
+`corpus_statistics/author_linking_v2/author_table.py` applies 1d, R3, R2, R6, R1 and R4 to the whole working corpus v2
+(the step code of `pipeline_sim.py`, unchanged; R4 is the verified strict rule with persons from the cleaned bylines),
+and writes one row per byline (`diagnostics/author_coverage/author_table_v2.jsonl`, untracked: holds identifiers;
+counts in `author_linking_v2/author_table_v2_summary.json`). Every count reproduces the simulation of §8: R3 482; R2
+89 / 57 IDs, 306 bylines; R6 438 IDs, 844 bylines; 241,686 identified bylines, 190,129 persons; 12,150 to R4; 7 articles
+left with no author. R4: 970 linked (§3 counted 961 with all 102 R2 IDs untrusted), 111 ambiguous, 182 initials only,
+10,887 own persons; 201,309 persons in all.
+
+**Psychology trial** (2,139 articles): 11,181 bylines, 11,136 kept (R2 10, R6 35 removed); 10,645 identified, 36 linked
+by R4, 455 own persons; **10,051 persons**, 799 on 2+ articles; 2,564 organisations on kept bylines, 1,037 on 2+ articles.
+PMC12548980 lost its only author (R6) and leaves (`psychology_trial_subset.py` stage 3). **Pending (owner):** 4
+articles without a PubMed record (no PMID: PMC10062685, PMC11815263, PMC13355595, PMC13443809) have no byline backbone;
+options: bylines from OpenAlex authorships, from the PMC header, or no social ties.

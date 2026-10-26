@@ -2660,3 +2660,35 @@ G3 row, design doc addendum 2026-10-26 (trial subset). [LOG]
 Owner (2026-10-26): PMC13523860 (sleep measurement in arthritis) and PMC13601330 (retired medical manikins as a
 platform for assistive robots) drop; set in `psychology_field_review.csv`, `psychology_trial_subset.py` rerun: 22 field-
 review drops, **trial list 2,140** (`psychology_trial_pmcids.txt`), 115 exclusions, none pending. [LOG]
+
+**RL-200 · 2026-10-26 · Data preparation for the Psychology trial: institutions to organisations, the author table · CODE + METADATA (read-only OpenAlex, ROR) · LIVE**
+Owner (2026-10-26): proceed with data preparation in the order judged expedient; affiliations are merged at the
+university / institution level, units of one university becoming that university, likewise research institutes and
+departments of a corporation. OpenAlex key given in the dialog, used only in the environment of the commands, written
+to no file, git or memory. **Institutions:** new `corpus_statistics/institutions_fetch.py`: OpenAlex records of all
+16,708 institutions on working-corpus authorships plus ancestors and named parents (17,328 records, 2 gone; cache
+`diagnostics/author_coverage/institutions_openalex.json`, untracked). In Psychology 2,716 institutions, 589 with an
+OpenAlex parent; OpenAlex parents mix the organisation with umbrellas (UCLA → University of California System, UCL →
+University of London, Max Planck Institutes → Max Planck Society, NIH → HHS, hospitals → regional governments). New
+`corpus_statistics/institution_organisations.py`: each parent entity (449 in Psychology) put in a category (organisation
+/ healthcare / system / research society / government / umbrella) by type and name rules plus read hand lists; only
+organisations absorb all units, hospitals absorb their research institutes, foundations and same-name sites; joint units
+(2+ organisations) and teaching hospitals (university + health-system parents) stay themselves; two read false parents
+(AP-HM, CHRU Brest). Two faults of the first version found by reading every merge and fixed: a health system absorbing a
+medical school (Baylor → Harris Health) and affiliated teaching hospitals read as owned (Brigham and Women's → Tufts,
+JPS, Policlinico Milano, GHU Paris Nord). **Result: 2,716 institutions → 2,570 organisations** (165 merged, 31 joint units,
+7 teaching hospitals, 2 hand); mapping `institution_organisations_psychology_trial.csv`, parent categories
+`institution_parent_categories.csv`; alternatives for the owner `--merge-societies` (2,532) and `--merge-health-systems`
+(2,520). **Bylines without an institution ID** (Psychology: 632 of 11,181, 627 with text): `affiliation_text_match_test.py`
+(read-only): ROR affiliation matching 44 of 413 strings, about 70% precise (13 wrong, read); in-corpus full-name match 27
+strings, 32 bylines (0.3%), about 25 correct; proposed: no affiliation tie for them (owner). **Author table:** new
+`corpus_statistics/author_linking_v2/author_table.py` applies 1d, R3, R2, R6/D1, R1, R4 to the whole working corpus v2
+(pipeline_sim.py step code unchanged; R4 strict rule with persons of the cleaned bylines); reproduces the simulation
+exactly (R3 482; R2 89/57 IDs, 306 bylines; R6 438 IDs, 844 bylines; 241,686 identified, 190,129 persons; 12,150 to R4;
+7 articles without author); R4 970 linked (961 when all 102 R2 IDs were treated as untrusted), 111 ambiguous, 182 initials,
+10,887 own persons; 201,309 persons. Table `diagnostics/author_coverage/author_table_v2.jsonl` (untracked, identifiers),
+summary `author_table_v2_summary.json`. Psychology: 11,136 kept bylines, 10,051 persons (799 on 2+ articles), 2,564
+organisations (1,037 on 2+ articles). `psychology_trial_subset.py` stage 3: PMC12548980 lost its only author (R6) and
+leaves → **trial list 2,139**; 4 articles without a PMID (no byline backbone) pending. **A3 part 2 deferred (proposed):**
+`retrieval/hub_spelling_scan.py --dump` rerun (same counts as RL-184): 689 lost sentences in 307 valid articles, of which
+14 in the Psychology trial. Methods: AUTHOR_IDENTITY.md §9 (R5 operational, open questions 1–4) and §10 (the table). [LOG]

@@ -68,8 +68,11 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    Subject Terms unusable as the source (54% coverage, megajournal "Science"); OpenAlex primary-topic field used. Coverage
    flat across fields; model diversity vs subfield structure trade off. **Chosen: Psychology (primary topic).** Non-LLM "language model" mentions demoted (RL-196, targeted G3 rerun into
    `PG/g3_v2_lm_demotion/demoted/`, 93 articles out); field review (RL-197/198, owner dropped 20, 2 pending):
-   **trial list `corpus_statistics/psychology_trial_pmcids.txt`, 2,140 articles** (RL-199). Next:
-   institution review, M1 author table for the subset, A3 part 2, matrices.
+   **trial list `corpus_statistics/psychology_trial_pmcids.txt`, 2,139 articles** (RL-199/200).
+   **Data preparation (RL-200):** institutions → organisations (`institution_organisations.py`, 2,716 → 2,570); author
+   table (`author_linking_v2/author_table.py`, reproduces the simulation; Psychology 10,051 persons). Open for the owner:
+   research organisations, health systems, French experimental universities, no-ID bylines, 4 no-PMID articles; A3 part 2
+   proposed deferred (14 Psychology articles). Next: weighting inside each matrix, then the chunk12v3 builder.
    **Next:** then A3 part 2 (lost sentences), then the M1 author table and matrices.
 1d. **G3 RL-186 rerun — DONE (2026-10-24).** G2 positions pass (`PG/g2_v3_2_pos/`, 825,554 of 825,698 units exact):
    provenance per hyperedge; focal names replaced and placed by their own positions (two pre-existing errors fixed);

@@ -983,3 +983,12 @@ needed for a trial. Article list **`fullscale_pipeline/corpus_statistics/psychol
 Owner rulings for "Psychology": HRI and social robotics, emotion recognition and mental-health detection belong to it.
 Not yet done for the subset: the institution hand review and bylines without an institution ID (§ author addendum),
 the M1 author table (AUTHOR_IDENTITY.md R1–R6 applied to data), A3 part 2 (lost sentences).
+
+## Addendum 2026-10-26 (2) — data preparation for the Psychology trial (RL-200)
+
+Done: institutions merged at the organisation level (AUTHOR_IDENTITY.md §9; 2,716 → 2,570 for Psychology); the author
+table built by the decided rules (§10; 10,051 persons in Psychology); trial list 2,139 (one article lost its only author).
+Open for the owner: (1) research organisations as umbrellas or as one institution; (2) health systems; (3) the French
+experimental universities; (4) bylines without an institution ID (proposed: no affiliation tie); (5) the 4 no-PMID
+articles; A3 part 2 proposed deferred (14 Psychology articles affected). Next after these: weighting inside each matrix
+(§5 item 3), then the chunk12v3 builder.
