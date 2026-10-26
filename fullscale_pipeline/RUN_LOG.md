@@ -2610,7 +2610,7 @@ LLM-sense; it also let "parameters", "state of the art" and "pretrained word emb
 and let generic words ("word embeddings", "acoustic") demote pretrained-LM sentences; all corrected before the run (0
 LLM-sense articles lost, 1 older-type article kept: a masked LM, transformer under the rule). One more false positive
 found through the article label ("the trained receptive language model" = a teaching framework): 55 false-positive
-units in total. Units: 2,102 in Psychology; demote 307 sentences (55 false positives, 252 older type), keep 1,790; no
+units in total. Units: 2,096 in Psychology; demote 307 units in 307 sentences (55 false positives, 252 older type), keep 1,789; no
 sentence mixes decisions. List `PG/g3_inputs_v3_1/lm_demotions_psychology.tsv` (7ff49e888f70; tracked copy). **G3:**
 `g3_curation_v2.py` gains `--extra-rejections FILE` (rows added to term_rejections.tsv's, sha recorded in the report;
 without it unchanged: self-test 179/179; script 87dd1a3a4143, mirrored to PG/scripts/g3_v2/). **Targeted rerun**
