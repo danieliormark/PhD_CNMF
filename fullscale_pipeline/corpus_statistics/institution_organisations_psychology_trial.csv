@@ -39,7 +39,7 @@ I108108428,Thammasat University,education,TH,9,I108108428,Thammasat University,i
 I108192572,HEC Montréal,education,CA,1,I108192572,HEC Montréal,itself
 I10824318,Universidade Federal de Ouro Preto,education,BR,5,I10824318,Universidade Federal de Ouro Preto,itself
 I108290504,University of Pisa,education,IT,10,I108290504,University of Pisa,itself
-I108403487,Warsaw University of Technology,education,PL,2,I108403487,Warsaw University of Technology,itself
+I108403487,Warsaw University of Technology,education,PL,3,I108403487,Warsaw University of Technology,itself
 I108468826,Stevens Institute of Technology,education,US,1,I108468826,Stevens Institute of Technology,itself
 I108688024,Qingdao University,education,CN,9,I108688024,Qingdao University,itself
 I10899854,Jiangxi University of Traditional Chinese Medicine,education,CN,1,I10899854,Jiangxi University of Traditional Chinese Medicine,itself
@@ -83,7 +83,7 @@ I113825674,Handong Global University,education,KR,1,I113825674,Handong Global Un
 I11385950,Conselho Nacional de Desenvolvimento Científico e Tecnológico,government,BR,3,I11385950,Conselho Nacional de Desenvolvimento Científico e Tecnológico,itself
 I113940042,Shanghai University,education,CN,21,I113940042,Shanghai University,itself
 I113979818,Graceland University,education,US,1,I113979818,Graceland University,itself
-I114017466,University of Technology Sydney,education,AU,4,I114017466,University of Technology Sydney,itself
+I114017466,University of Technology Sydney,education,AU,5,I114017466,University of Technology Sydney,itself
 I114027177,University of North Carolina at Chapel Hill,education,US,8,I114027177,University of North Carolina at Chapel Hill,itself
 I11406153,Shanghai International Studies University,education,CN,4,I11406153,Shanghai International Studies University,itself
 I114090438,Goethe University Frankfurt,education,DE,19,I114090438,Goethe University Frankfurt,itself
@@ -211,7 +211,7 @@ I1289784979,University College Hospital,healthcare,GB,2,I1340918713,University C
 I128993996,University of South Wales,education,GB,1,I128993996,University of South Wales,itself
 I1290206253,Microsoft (United States),company,US,6,I1290206253,Microsoft (United States),itself
 I1290900354,Tufts Medical Center,healthcare,US,1,I1290900354,Tufts Medical Center,itself
-I12912129,Northeastern University,education,US,19,I12912129,Northeastern University,itself
+I12912129,Northeastern University,education,US,20,I12912129,Northeastern University,itself
 I1291357265,Ministry of Health,government,SG,2,I1291357265,Ministry of Health,itself
 I1291425158,Google (United States),company,US,19,I4210128969,Alphabet (United States),merged
 I129192303,Universidade Federal do Recôncavo da Bahia,education,BR,1,I129192303,Universidade Federal do Recôncavo da Bahia,itself
@@ -260,7 +260,7 @@ I132053463,Université Libre de Bruxelles,education,BE,3,I132053463,Université 
 I1321014770,Association for Computing Machinery,nonprofit,US,1,I1321014770,Association for Computing Machinery,itself
 I132157203,Barwon Health,healthcare,AU,1,I132157203,Barwon Health,itself
 I1321649718,Royal Children's Hospital,healthcare,AU,1,I1321649718,Royal Children's Hospital,itself
-I1322437667,Oregon Research Institute,nonprofit,US,1,I1322437667,Oregon Research Institute,itself
+I1322437667,Oregon Research Institute,nonprofit,US,3,I1322437667,Oregon Research Institute,itself
 I1322918889,United States Department of Veterans Affairs,government,US,7,I1322918889,United States Department of Veterans Affairs,itself
 I1323121030,Bialystok University of Technology,education,PL,3,I1323121030,Bialystok University of Technology,itself
 I1323252656,Information Technology University,education,PK,1,I1323252656,Information Technology University,itself
@@ -401,7 +401,7 @@ I148297040,Netherlands Organisation for Applied Scientific Research,nonprofit,NL
 I148366613,National Yang Ming Chiao Tung University,education,TW,4,I148366613,National Yang Ming Chiao Tung University,itself
 I149213910,University of Antwerp,education,BE,9,I149213910,University of Antwerp,itself
 I149218525,Ankara University,education,TR,2,I149218525,Ankara University,itself
-I149251103,Thomas Jefferson University,education,US,1,I149251103,Thomas Jefferson University,itself
+I149251103,Thomas Jefferson University,education,US,2,I149251103,Thomas Jefferson University,itself
 I149481174,Tamagawa University,education,JP,1,I149481174,Tamagawa University,itself
 I149594827,Xidian University,education,CN,6,I149594827,Xidian University,itself
 I149672521,Federation University,education,AU,2,I149672521,Federation University,itself
@@ -541,6 +541,7 @@ I165859042,Huaibei Normal University,education,CN,2,I165859042,Huaibei Normal Un
 I165932596,National University of Singapore,education,SG,35,I165932596,National University of Singapore,itself
 I165951966,The University of Texas at San Antonio Health Science Center,education,US,2,I45438204,The University of Texas at San Antonio,merged
 I16609230,Hunan University,education,CN,5,I16609230,Hunan University,itself
+I166182418,Medical University of Silesia,education,PL,1,I166182418,Medical University of Silesia,itself
 I166337079,Queen Mary University of London,education,GB,13,I166337079,Queen Mary University of London,itself
 I166416128,DEVCOM Army Research Laboratory,government,US,3,I166416128,DEVCOM Army Research Laboratory,itself
 I166455938,University of Babylon,education,IQ,2,I166455938,University of Babylon,itself
@@ -924,7 +925,7 @@ I243586174,Keiser University,education,US,1,I243586174,Keiser University,itself
 I24359323,Robert Koch Institute,government,DE,1,I24359323,Robert Koch Institute,itself
 I243754102,Universidade Federal do Ceará,education,BR,1,I243754102,Universidade Federal do Ceará,itself
 I24402780,Danylo Halytsky Lviv National Medical University,education,UA,1,I24402780,Danylo Halytsky Lviv National Medical University,itself
-I244572783,Symbiosis International University,education,IN,18,I244572783,Symbiosis International University,itself
+I244572783,Symbiosis International University,education,IN,21,I244572783,Symbiosis International University,itself
 I24542750,Khyber Medical University,education,PK,10,I24542750,Khyber Medical University,itself
 I24603500,University of Massachusetts Amherst,education,US,7,I24603500,University of Massachusetts Amherst,itself
 I24897511,Hellenic Military Academy,education,GR,1,I24897511,Hellenic Military Academy,itself
@@ -1245,7 +1246,7 @@ I3923682,Soochow University,education,CN,5,I3923682,Soochow University,itself
 I39333907,Yanshan University,education,CN,1,I39333907,Yanshan University,itself
 I39343248,Humboldt-Universität zu Berlin,education,DE,47,I39343248,Humboldt-Universität zu Berlin,itself
 I39387349,University of Chieti-Pescara,education,IT,1,I39387349,University of Chieti-Pescara,itself
-I39422238,University of Illinois Chicago,education,US,1,I39422238,University of Illinois Chicago,itself
+I39422238,University of Illinois Chicago,education,US,2,I39422238,University of Illinois Chicago,itself
 I39470171,Ontario Tech University,education,CA,9,I39470171,Ontario Tech University,itself
 I39534123,Gwangju Institute of Science and Technology,education,KR,6,I39534123,Gwangju Institute of Science and Technology,itself
 I39555362,University of Warwick,education,GB,4,I39555362,University of Warwick,itself
@@ -2448,7 +2449,7 @@ I71999127,Universitat de Barcelona,education,ES,17,I71999127,Universitat de Barc
 I72253084,Saitama University,education,JP,3,I72253084,Saitama University,itself
 I72341708,University of Mohaghegh Ardabili,education,IR,3,I72341708,University of Mohaghegh Ardabili,itself
 I72541430,Lakehead University,education,CA,1,I72541430,Lakehead University,itself
-I72816309,Drexel University,education,US,6,I72816309,Drexel University,itself
+I72816309,Drexel University,education,US,13,I72816309,Drexel University,itself
 I73443619,University of Southern Maine,education,US,1,I73443619,University of Southern Maine,itself
 I73613424,National Institute of Advanced Industrial Science and Technology,government,JP,4,I73613424,National Institute of Advanced Industrial Science and Technology,itself
 I73779912,Manipal University Jaipur,education,,3,I73779912,Manipal University Jaipur,itself

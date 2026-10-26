@@ -29,7 +29,7 @@
 #   python3 institution_organisations.py --pmcids psychology_trial_pmcids.txt [--merge-societies] [--separate-hospitals]
 # Writes corpus_statistics/institution_organisations_<name>.csv (institution -> organisation, rule) and
 # institution_parent_categories.csv (every parent entity met, its category and the rule that set it).
-import argparse, collections, csv, json, re
+import argparse, collections, csv, json, os, re
 
 FP = "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/"
 HERE, D, OD = FP + "corpus_statistics/", FP + "diagnostics/openalex_authors/", FP + "diagnostics/author_coverage/"
@@ -146,6 +146,8 @@ def main():
     a = ap.parse_args()
     pm = {l.strip() for l in open(HERE + a.pmcids) if l.strip()}
     B = [json.loads(l) for l in open(OD + "bylines_v2_refresh.jsonl")]
+    if os.path.exists(OD + "bylines_v2_pmc_header.jsonl"):          # RL-202: bylines of articles without a PMID
+        B += [json.loads(l) for l in open(OD + "bylines_v2_pmc_header.jsonl")]
     H = json.load(open(D + "headers.json")); H.update(json.load(open(D + "headers_new.json")))
     V = json.load(open(D + "openalex_verified.json")); V.update(json.load(open(D + "openalex_verified_new.json")))
     OW = json.load(open(OD + "openalex_works.json"))

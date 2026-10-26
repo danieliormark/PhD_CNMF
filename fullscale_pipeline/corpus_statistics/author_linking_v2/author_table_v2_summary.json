@@ -1,6 +1,6 @@
 {
- "bylines at start": 254986,
- "articles with bylines": 41489,
+ "bylines at start": 255007,
+ "articles with bylines": 41493,
  "R3: bylines whose ORCID label is removed": 482,
  "R2: OpenAlex IDs with 2+ PubMed ORCIDs": 89,
  "R2: OpenAlex IDs not deduplicable": 57,
@@ -16,8 +16,8 @@
   "PMC13447246",
   "PMC13525273"
  ],
- "R1: identified bylines": 241686,
- "R1: distinct persons": 190129,
+ "R1: identified bylines": 241707,
+ "R1: distinct persons": 190145,
  "R4: bylines without identifier": 12150,
  "R4: outcomes": {
   "no corroborated candidate": 10887,
@@ -25,5 +25,5 @@
   "ambiguous: 2+ corroborated candidates": 111,
   "no name key (initial only)": 182
  },
- "persons in the author facet (incl. own persons)": 201309
+ "persons in the author facet (incl. own persons)": 201325
 }

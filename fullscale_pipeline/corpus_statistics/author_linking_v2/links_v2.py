@@ -6,6 +6,9 @@ H = json.load(open(D + "headers.json")); H.update(json.load(open(D + "headers_ne
 V = json.load(open(D + "openalex_verified.json")); V.update(json.load(open(D + "openalex_verified_new.json")))
 OW = json.load(open(OD + "openalex_works.json")); PM = json.load(open(OD + "pubmed_authors.json"))
 B = [json.loads(l) for l in open(OD + "bylines_v2_refresh.jsonl")]
+# RL-202: articles without a PMID take their bylines from the PMC header (../pmc_header_bylines.py), when built
+if __import__("os").path.exists(OD + "bylines_v2_pmc_header.jsonl"):
+    B += [json.loads(l) for l in open(OD + "bylines_v2_pmc_header.jsonl")]
 def work(p):
     m, w = V.get(p) or ["unmatched", None]
     fresh = OW["by_id"].get(w["id"].rsplit("/", 1)[-1]) if w else None
@@ -20,7 +23,8 @@ for b in B:
         if i.get("id"): iname[i["id"]] = i.get("name")
     pmr = PM.get((H.get(b["pmcid"]) or {}).get("pmid")) or {}
     pers = [x for x in pmr.get("authors", []) if x["valid"] == "Y" and x["last"]]
-    b["afftext"] = (pers[b["pos"]]["affs"][0]["text"] if b["pos"] < len(pers) and pers[b["pos"]]["affs"] else "") or ""
+    b["afftext"] = (pers[b["pos"]]["affs"][0]["text"] if b["pos"] < len(pers) and pers[b["pos"]]["affs"] else "") or \
+        b.get("afftext", "")                                       # PMC-header bylines carry their own (RL-202)
     # 1d (owner): where PubMed and OpenAlex ORCIDs differ, PubMed's (publisher's) is used
     if b["pm_orcid"] and b["oa_orcid"] and b["pm_orcid"] != b["oa_orcid"]: b["oa_orcid"] = None
 norm = lambda s: "".join(c for c in unicodedata.normalize("NFKD", s or "") if not unicodedata.combining(c)).lower()

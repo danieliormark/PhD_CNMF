@@ -2713,3 +2713,16 @@ against the PMC header (author count and ORCIDs, cached in headers.json; no name
 authorships, PMC11815263 2 / 2, PMC13355595 13 in PMC / 11 in OpenAlex, PMC13443809 5 / 4 (and no institutions on any
 OpenAlex authorship); the cached OpenAlex authorships carry no ORCIDs to compare. Two of four disagree in number with the
 publisher's record: question back to the owner before they enter the author table. Methods: AUTHOR_IDENTITY.md §9. [LOG]
+
+**RL-202 · 2026-10-26 · Bylines of the 4 no-PMID trial articles from the PMC header · CODE + METADATA (Entrez efetch db=pmc, 4 requests) · LIVE**
+Owner: option (a), authors from OpenAlex, checked against the publisher's record. New `corpus_statistics/pmc_header_bylines.py`:
+the PMC header's personal authors (JATS contrib-type="author") take PubMed's place as bylines, aligned in order with the
+OpenAlex authorships by author_coverage.py's own align(); the header's ORCIDs are the publisher's (pm_orcid, rule 1d);
+affiliation text without labels and grid IDs. Result: **21 of 21 authors aligned, all with an OpenAlex ID; 12 publisher
+ORCIDs, all equal to OpenAlex's, none differing; 17 with an OpenAlex institution** (PMC13443809's 4 have none: no
+affiliation tie, as decided). RL-201's count gap (13 vs 11, 5 vs 4) was an artefact of headers.json's n_author_lines,
+not missing authors: the full headers list 11 and 4 authors. Wired in (when the file exists): `author_linking_v2/links_v2.py`
+(so author_table.py) and `institution_organisations.py`. Rebuilt: author table 255,007 bylines (+21; the first 254,986 rows
+byte-identical), every rule count unchanged, R1 241,707 identified, 201,325 persons (+16: 5 of the 21 are persons already on
+other articles); organisations 2,717 institutions → 2,520; trial list 2,139, nothing pending. Files untracked (names):
+`diagnostics/author_coverage/bylines_v2_pmc_header.jsonl`, `pmc_header_xml/`. [LOG]

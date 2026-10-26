@@ -305,7 +305,7 @@ the parent categories in `institution_parent_categories.csv`. Alternatives, for 
 - *Question 3: the French experimental universities stay groupings (default kept): ENS, EPHE, UVSQ, CentraleSupélec and
   Évry keep their own identity. Known side effect kept: two joint labs of Grenoble INP and UGA (LIG, GIPSA-Lab; 3 bylines)
   land on Grenoble INP.*
-- *The 4 articles without a PMID: option (a), authors from OpenAlex (see RL-201 for the check against the PMC header).*
+- *The 4 articles without a PMID: option (a), authors from OpenAlex, checked against the PMC header, which takes PubMed's place (`corpus_statistics/pmc_header_bylines.py`, RL-202): 21 of 21 aligned, 12 ORCIDs all equal; 2,717 institutions → 2,520 organisations with them.*
 
 ## 10. The author table built (2026-10-26)
 
