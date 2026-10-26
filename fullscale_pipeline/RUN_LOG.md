@@ -2572,4 +2572,4 @@ one per year 2015–2026, rest in proportion (`corpus_statistics/psychology_titl
 sampled before 2022 are not psychology, 4 of the 37 from 2022 on; weighted by year about 13% of the field is outside
 psychology (small sample, wide uncertainty). Definition recorded on request: a G3 unit is one G2 parse unit (a
 sentence, or one clause-piece of it; 2% of sentences have 2+ units) of an article, mentioning a focal model term (98%
-of units; the rest lost their mention in curation), with its curated parent and cousin hyperedges. [LOG]
+of units in shard 7; why the other 2% carry no recorded mention is not checked), with its curated parent and cousin hyperedges. [LOG]
