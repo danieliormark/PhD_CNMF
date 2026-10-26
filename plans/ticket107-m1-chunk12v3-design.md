@@ -966,3 +966,20 @@ working corpus v2 (scratch, read-only).
 OpenAlex ID on different names) were found and decided. The full rule set R1–R6, the name test, examples, checks, bias
 and the simulated result are in `fullscale_pipeline/AUTHOR_IDENTITY.md` (RUN_LOG RL-189 to RL-192); that file supersedes
 this addendum on author identity.]*
+
+## Addendum 2026-10-26 — the first-trial subset: Psychology (owner)
+
+Owner decisions (2026-10-26, RL-193 to RL-198): the first M1 trial runs on one discipline, **Psychology**, defined by the
+OpenAlex primary-topic field (not by any of an article's topics; NLM Broad Subject Terms rejected as the source: 54%
+coverage, megajournal "Science"). Reason: few texts, several model families, general and possibly subfield-specific
+models; Biochemistry (model-rich, narrow models tied to subfields — an expected finding, not a defect) is larger than
+needed for a trial. Article list **`fullscale_pipeline/corpus_statistics/psychology_trial_pmcids.txt`, 2,142 articles**
+(`psychology_trial_subset.py`; each exclusion with its stage and reason in `psychology_trial_exclusions.csv`):
+- 2,255 working-corpus-v2 articles with primary field Psychology;
+- −93: no focal unit left after the demotion of non-LLM "language model" mentions (G3_POSTPROCESSING.md §8 item 12;
+  their G3 records for M1 come from `PG/g3_v2_lm_demotion/demoted/` for the 120 rerun articles, `PG/g3_v2/` otherwise);
+- −20: dropped by the owner in the field review (assistant flagged 67 of 2,162 on title, keywords, journal, abstract
+  when unsure; owner kept 45, dropped 20, 2 not yet decided and kept for now: `psychology_trial_pending.csv`).
+Owner rulings for "Psychology": HRI and social robotics, emotion recognition and mental-health detection belong to it.
+Not yet done for the subset: the institution hand review and bylines without an institution ID (§ author addendum),
+the M1 author table (AUTHOR_IDENTITY.md R1–R6 applied to data), A3 part 2 (lost sentences).

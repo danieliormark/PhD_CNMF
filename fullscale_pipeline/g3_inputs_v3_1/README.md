@@ -149,3 +149,38 @@ plate in PMC11320226. That article's other term, "Bard", is C. R. Bard (Marlex m
 (`decisions/manual_homonyms_rl174.csv`). The same Bard sense, searched in all 1,026 kept articles with Bard: 2 more
 sentences ("BD Bard" in a disclosure, PMC12492233; "Bard Electrophysiology Division", PMC11066324), rejected at sentence
 level; the other 52 pattern hits are the chatbot. Exclusions 7,159; term rejections 703.
+
+## RL-196 addition (2026-10-26): "language model" demotion, Psychology trial subset
+
+| File | What | Built by |
+|---|---|---|
+| `lm_demotions_psychology.tsv` (copy `PG/g3_inputs_v3_1/lm_demotions_psychology.tsv`) | 307 sentence-scope rows (term_rejections.tsv's form: scope, key = sid, term, reason) that demote bare "language model(s)" mentions (and the v3 hyphenated form `v3:A6:language-model`) in the Psychology articles: 55 false positives (not a computational model) and 252 older-type (non-transformer) language models. Read by `g3_curation_v2.py --extra-rejections`; **not** part of `term_rejections.tsv` and not used by the production run of `PG/g3_v2/` | `build_lm_demotions.py` (rule below; per-unit decisions in `corpus_statistics/psychology_lm_unit_decisions.csv`) |
+
+**Why.** The focal matcher (`focal_terms.py`, GENERIC class) accepts "language model(s)" with exact capitalisation and
+rejects it near n-gram / statistical-LM / speech-recognition patterns, but, unlike GPT or Gemini, needs no article
+evidence. In Psychology the phrase also means a person modelling language for a child, a theory of language, or a
+regression model named by a language. **Owner rules (2026-10-26):** such mentions are *demoted* (the mention stops being
+focal), never whole articles removed; an article leaves only when no focal unit remains; a language model counts when it
+is a pretrained neural language model, transformer or comparable (older types — n-gram, ASR language models, word2vec,
+LSTM, ELMo, Flair, spaCy pipelines — are demoted). Cousins in a sentence with focal hyperedges are kept though they are
+in no parent (owner 2026-10-26; G3_POSTPROCESSING.md §8 item 11).
+
+**Rule** (`build_lm_demotions.py`), per G3 unit of a Psychology article whose focal mentions include the term, first
+match wins:
+1. on the hand-read false-positive list (`corpus_statistics/psychology_lm_false_positive_units.csv`, RL-195) → demote;
+2. another focal mention in the same unit → keep;
+3. strong transformer-era signal in the unit (a named model, transformer, LLM, large language, generative, chatbot,
+   prompt, few-shot, hallucination, PLM, masked language model, vision-language ...) → keep;
+4. specific older-type signal (n-gram, unigram/bigram/trigram, smoothing, HMM, word2vec, LSTM, ELMo, Flair, spaCy,
+   Stanza, GloVe, fastText, LSA, open-vocabulary ...) → demote, except the hand exception `PMC9198501`;
+5. hand exception `PMC13136401` (pretrained static word embeddings) → demote;
+6. weak signal (pretrained, fine-tuned, contextual language model) → keep;
+7. the article names a model or "LLM" elsewhere → keep;
+8. the RL-194 reading of the 190 articles with the term as their only focal evidence
+   (`corpus_statistics/psychology_lm_only_reading.csv`): A (LLM sense) → keep, B or C → demote.
+
+No sentence mixes keep and demote (checked; the script stops otherwise), so rows have sentence scope. Corrections made
+while building it (RL-196): an earlier fallback (demote every unresolved mention without article evidence) would have
+lost 49 articles read as LLM-sense; "parameters", "state of the art" and "pretrained word embeddings" were counted as
+transformer signals; generic words ("word embeddings", "acoustic") demoted pretrained-LM sentences; the hyphenated form
+was missed; the PMC13136401 exception came after the weak signal. Result: 2,096 units, 307 demoted, 1,789 kept.

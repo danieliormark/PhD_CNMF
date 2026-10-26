@@ -1246,3 +1246,33 @@ unit of the corpus, 0 errors and 0 problems (RL-078).
    holds a focal atom. Shards 0 and 20: cousins 47,082 → 37,015 and 49,221 → 38,876 (the focal clauses that came back as
    other parents' cousins are gone); 203 and 207 units kept only for their cousins; 60 and 52 cousins folded; 89 and 77
    sentences with parents in two or more units; 1,313 and 1,315 embedded parents; 0 problems.]*
+   *[2026-10-26, owner: given how sentences are parsed (G2 may cut one sentence into several units), keeping a
+   unit's clauses that hold no focal term as cousins of the sentence's other parents, though they lie in no parent, is
+   fine. Measured on the RL-186 output: 11,006 of 785,999 units (1.4%) are such units; every one has no parent of its own,
+   a focal sibling unit in its sentence, and only cousins attached to that sibling's parents.]*
+
+12. **Demotion of non-LLM "language model" mentions, Psychology trial subset — DONE 2026-10-26 (owner; RL-195, RL-196).**
+   The matcher accepts bare "language model(s)" without article evidence; in Psychology it can mean a person modelling
+   language for a child, a theory, a regression model, or an older (non-transformer) language model. Owner: such
+   mentions are demoted (the mention is no longer focal), not their articles removed; an article leaves only if no focal
+   unit remains; a language model counts when it is a pretrained neural language model, transformer or comparable.
+   - **Rule and list:** `g3_inputs_v3_1/build_lm_demotions.py` → `PG/g3_inputs_v3_1/lm_demotions_psychology.tsv`
+     (307 sentence-scope rows, the form of `term_rejections.tsv`); the rule, its order and its corrections are in
+     `g3_inputs_v3_1/README.md` (RL-196 addition); per-unit decisions `corpus_statistics/psychology_lm_unit_decisions.csv`;
+     hand readings `psychology_lm_only_reading.csv` (190 articles) and `psychology_lm_false_positive_units.csv` (54 units).
+   - **Mechanism:** `g3_curation_v2.py --extra-rejections FILE` adds the file's rows to `term_rejections.tsv`'s (same
+     comparison without case) and records its path and sha256 in the report; without the flag the script behaves as
+     before (self-test 179/179). A unit whose only focal mention is demoted gets no parent; the sentence-scoped cousin rule
+     (item 11) then keeps its clauses only if another unit of the sentence has a parent; an article with no parent left
+     gets status `invalid_no_parent`.
+   - **Targeted rerun** (`g3_v2/lm_demotion_run.py`): the 120 Psychology articles holding a demoted sentence, taken from
+     their 44 G2 shards (`PG/g3_v2_lm_demotion/input/`), curated twice with each shard's positions file into
+     `PG/g3_v2_lm_demotion/control/` (no extra rejections) and `.../demoted/`. Checks (`g3_v2/lm_demotion_check.json`):
+     control equals production `PG/g3_v2/` in every unit, article and occurrence row of these articles in all 44 shards;
+     demoted differs from control only in the 307 demoted sentences (313 units no longer written: the demoted units and
+     6 focal-free units that were cousins of them); **93 articles valid → invalid_no_parent**, 27 keep other focal units.
+   - **Production `PG/g3_v2/` is unchanged.** For the Psychology trial the M1 builder takes the 120 articles from
+     `PG/g3_v2_lm_demotion/demoted/` and every other article from `PG/g3_v2/`; the article list is
+     `corpus_statistics/psychology_trial_pmcids.txt` (RL-198). The same matcher gap exists in the rest of the corpus
+     (3,573 articles whose only focal evidence is the bare term, RL-194); not treated.
+

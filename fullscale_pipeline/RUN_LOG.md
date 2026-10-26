@@ -2639,3 +2639,19 @@ medical/veterinary education tools 12, driving technology 6, LGBTQ+ sexual-healt
 outside mental health 6, Kansei design 3, other 5). 191 articles had no abstract and 160 no keywords. Supersedes the
 RL-194 50-title estimate (≈13%, judged before the owner's rulings): now 0.9% clear, 2.2% borderline. Nothing removed;
 awaiting the owner's review. [LOG]
+
+**RL-198 · 2026-10-26 · Psychology trial list; demotion documented · CODE + DOCS · LIVE**
+Owner (2026-10-26): (1) document the demotion and its rules in the pipeline; (2) keeping, as cousins, clauses of a
+sentence that has focal hyperedges although they lie in no parent is fine (recorded at G3_POSTPROCESSING.md §8 item 11);
+(3) field review step 2: owner's decisions pushed to GitHub (commit d8fcbae, `psychology_field_review.csv`): of the 67
+flags, **20 drop** (tier A 12: ergonomics motion capture, automated sleep scoring, unsupervised ML in sleep research,
+actigraphy algorithms, sleep pattern identification, computer vision syndrome, children's ocular health, posture
+evaluation, genomic blockchain, voice-AI competencies, refugee infectious-disease care, microbial art; tier B 8: pain
+classification from physiological signals, chronic-pain Twitter cohort, psychedelics for chronic pain, STI-intervention
+ethics, transgender cancer care, STEM AI mentors, driver drowsiness classification, urban park camping), 45 keep
+(two spelled "kep", read as keep), **2 still "flag"** (PMC13523860 sleep in arthritis, PMC13601330 manikin robots:
+kept for now, `psychology_trial_pending.csv`). New `corpus_statistics/psychology_trial_subset.py` → **trial list
+`psychology_trial_pmcids.txt`: 2,255 − 93 (demotion) − 20 (field review) = 2,142**; `psychology_trial_exclusions.csv`
+(113 rows, stage and reason). Documentation: `g3_inputs_v3_1/README.md` (RL-196 addition: file, why, owner rules, rule
+order, corrections), G3_POSTPROCESSING.md §8 item 12 (mechanism, targeted rerun, checks, how M1 reads it), PIPELINE.md
+G3 row, design doc addendum 2026-10-26 (trial subset). [LOG]
