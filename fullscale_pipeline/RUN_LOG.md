@@ -2505,3 +2505,16 @@ pipeline B then A: 482 ORCID labels removed, 57 IDs / 306 bylines deleted, 190,4
 different names. Problem C: 470 OpenAlex IDs, 656 minority bylines; proposed R6 (minority name keeps the ID only if tied
 to the main name by institution or co-author; else loses the ID, nothing deleted): 386 keep, 590 lose, of the losers
 71.7% at Chinese institutions. Methods updated (§2 additions, §7). [LOG]
+
+**RL-192 · 2026-10-26 · Author identity: problem C decided (deletion D1); full sequence simulated · AUDIT + DOCS · LIVE**
+Owner (2026-10-26): R6 as proposed (keep minority names tied by institution or co-author) is vulnerable to false
+positives (Aaron Y / Cecilia S Lee: same department and co-authors) and the post-hoc analysis uses author metadata, so
+**D1**: per OpenAlex ID with 2+ names that are different people, bylines of every name other than the most frequent are
+removed (on a tie, all), the main-name bylines stay. D2 (delete every byline under such IDs, 1,608) rejected: it would
+remove researchers with many consistent bylines because of one attached byline (Eyal Klang 44, because of one "E, Klang").
+D1 standalone: 976 bylines, 827 articles, 6 left without author; 49% at Chinese institutions. Full sequence
+(`author_linking_v2/pipeline_sim.py B_then_A pubmed --C`): R3 482 ORCID labels removed; R2 306 bylines removed (2
+articles without author); R6 844 bylines removed (5 articles without author); 241,686 identified bylines, 190,129
+persons, 1 cross-ID join with different names left (158 without R3 and R6); 12,150 bylines to R4. In total 1,150
+bylines (0.45%) removed, 7 articles leave the working corpus. AUTHOR_IDENTITY.md §7–§8. Nothing applied to data: the
+author table is built after the trial subset is chosen. [LOG]

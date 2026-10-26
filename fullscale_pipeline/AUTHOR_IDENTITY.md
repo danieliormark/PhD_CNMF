@@ -196,3 +196,33 @@ both sides; e.g. Mario S / Mario E Valdés-Tresanco, two people; "Müller, Beat 
 a conservative miss). Who loses the ID: China 71.7%, US 4.9%, Korea 2.9%: OpenAlex joins different people most often under
 frequent Chinese names; losing the ID splits such a person rather than deleting them.
 Alternative: delete these bylines, as in R2.
+
+**Decided (owner, 2026-10-26): deletion D1, replacing the proposed R6.** R6's "keep if tied by institution or
+co-author" is weak exactly where the risk is highest (Aaron Y and Cecilia S Lee share a department and co-authors), and
+the post-hoc analysis uses author metadata, so uncertain attributions are not kept. **R6 (decided): per OpenAlex ID whose
+bylines carry 2+ names that are different people by §2, the bylines of every name other than the most frequent are
+removed from the author facet; on a tie (no most frequent name) all its bylines are removed.** The main-name bylines stay
+under the ID: for Eyal Klang the single "E, Klang" byline is removed and his 44 bylines stay; deleting the whole ID (D2,
+as in R2) would also have removed researchers with many consistent bylines because one other byline was attached
+(Gonzalez-Hernandez 25, Jiangning Song 23). Standalone count: 976 bylines removed in 827 articles, 6 articles left
+without author; 49% of them at Chinese institutions (21% of all bylines), 13% US — a known limitation of the author facet.
+
+## 8. Final order and result (simulation, 2026-10-26; `pipeline_sim.py B_then_A pubmed --C`)
+
+1d (PubMed ORCID preferred) → R3 (problem B, ORCID labels) → R2 (problem A, deletion) → R6 (problem C, D1 deletion) →
+R1 (merge through shared ORCIDs) → R4 (strict linking) → R5 (institutions).
+
+| Step | Result |
+|---|---|
+| bylines at start | 254,986 (41,489 articles with PubMed bylines) |
+| R3: bylines whose ORCID label is removed | 482 |
+| R2: OpenAlex IDs not deduplicable / bylines removed / articles left without author | 57 / 306 / 2 |
+| R6: OpenAlex IDs with 2+ names / bylines removed / articles left without author | 438 / 844 / 5 |
+| identified bylines (OpenAlex ID or ORCID) | 241,686 |
+| distinct persons | 190,129 |
+| OpenAlex IDs joined into another person through a shared ORCID | 2,248 |
+| persons joined across OpenAlex IDs whose names are different people | 1 (was 158 without R3, R6) |
+| bylines without identifier, input to R4 | 12,150 |
+
+R6 removes fewer bylines here (844) than standalone (976) because R2 has already removed some of the same IDs. In total
+1,150 bylines (0.45%) are removed and 7 articles leave the working corpus for lack of an author.

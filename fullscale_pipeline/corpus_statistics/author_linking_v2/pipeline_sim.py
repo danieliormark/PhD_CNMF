@@ -61,7 +61,25 @@ else:
     kept, nm, nd = step_A(B)
     r = step_B(kept); log.append(("B (after A): bylines whose ORCID label is removed", r, None))
 lost_arts = art_n - len({b["pmcid"] for b in kept})
-log.append((f"A: OpenAlex IDs with 2+ ORCIDs {nm}, not deduplicable {nd}; bylines removed", len(B) - len(kept), lost_arts))
+if "--C" in sys.argv:                     # problem C, rule D1 (owner 2026-10-26), after A
+    oa_by = collections.defaultdict(list)
+    for b in kept:
+        if b["oa_id"]: oa_by[b["oa_id"]].append(b)
+    delC = set(); nC = 0
+    for a, bs in oa_by.items():
+        groups = []
+        for b in bs:
+            for g in groups:
+                if compatible(g[0], b): g.append(b); break
+            else: groups.append([b])
+        if len(groups) < 2: continue
+        nC += 1; groups.sort(key=len, reverse=True)
+        delC |= {id(b) for g in (groups if len(groups[0]) == len(groups[1]) else groups[1:]) for b in g}
+    before = len({b["pmcid"] for b in kept}); kept = [b for b in kept if id(b) not in delC]
+    log.append((f"A: OpenAlex IDs with 2+ ORCIDs {nm}, not deduplicable {nd}; bylines removed", len(B) - len(kept) - len(delC), lost_arts))
+    log.append((f"C (D1): OpenAlex IDs with 2+ names {nC}; bylines removed", len(delC), before - len({b["pmcid"] for b in kept})))
+    lost_arts = None
+if lost_arts is not None: log.append((f"A: OpenAlex IDs with 2+ ORCIDs {nm}, not deduplicable {nd}; bylines removed", len(B) - len(kept), lost_arts))
 # R1: persons = union of OpenAlex ID and ORCID per byline
 parent = {}
 def find(x):
