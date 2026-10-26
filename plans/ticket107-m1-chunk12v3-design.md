@@ -997,3 +997,9 @@ does not read the absence as similarity. Requirement for chunk12v3/chunk13: unkn
 (excluded from the loss, the same mechanism as the hold-out's hidden cells, §6.8), not observed zeros; chunk13's
 squared-error loss over all cells would otherwise treat them as "no tie" and pull such entities towards
 low-affiliation communities. Psychology: 578 persons (approach 1), 32 articles (approach 2) wholly unknown.]*
+*[2026-10-26, owner, to discuss with the missingness technique: an alternative to missing cells is **placeholder
+organisations** — each unknown affiliation becomes its own placeholder ("organisation placeholder 1, 2, … n"), which
+behaves like an ordinary affiliation tie to a one-member organisation; two bylines share a placeholder only where there is
+evidence of the same unknown organisation (e.g. the same organisation named in the affiliation text, or co-authors of one
+article with an identical affiliation). Psychology: 627 no-ID bylines with affiliation text, 413 distinct strings. The
+exact technique (missing cells vs placeholders) is decided later.]*
