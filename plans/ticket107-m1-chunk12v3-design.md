@@ -978,8 +978,8 @@ needed for a trial. Article list **`fullscale_pipeline/corpus_statistics/psychol
 - 2,255 working-corpus-v2 articles with primary field Psychology;
 - −93: no focal unit left after the demotion of non-LLM "language model" mentions (G3_POSTPROCESSING.md §8 item 12;
   their G3 records for M1 come from `PG/g3_v2_lm_demotion/demoted/` for the 120 rerun articles, `PG/g3_v2/` otherwise);
-- −20: dropped by the owner in the field review (assistant flagged 67 of 2,162 on title, keywords, journal, abstract
-  when unsure; owner kept 45, dropped 20, 2 not yet decided and kept for now: `psychology_trial_pending.csv`).
+- −22: dropped by the owner in the field review (assistant flagged 67 of 2,162 on title, keywords, journal, abstract
+  when unsure; owner kept 45, dropped 22; RL-199).
 Owner rulings for "Psychology": HRI and social robotics, emotion recognition and mental-health detection belong to it.
 Not yet done for the subset: the institution hand review and bylines without an institution ID (§ author addendum),
 the M1 author table (AUTHOR_IDENTITY.md R1–R6 applied to data), A3 part 2 (lost sentences).

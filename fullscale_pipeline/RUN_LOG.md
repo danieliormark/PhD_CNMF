@@ -2655,3 +2655,8 @@ kept for now, `psychology_trial_pending.csv`). New `corpus_statistics/psychology
 (113 rows, stage and reason). Documentation: `g3_inputs_v3_1/README.md` (RL-196 addition: file, why, owner rules, rule
 order, corrections), G3_POSTPROCESSING.md §8 item 12 (mechanism, targeted rerun, checks, how M1 reads it), PIPELINE.md
 G3 row, design doc addendum 2026-10-26 (trial subset). [LOG]
+
+**RL-199 · 2026-10-26 · Field review: the 2 pending articles dropped · CORPUS LIST · LIVE**
+Owner (2026-10-26): PMC13523860 (sleep measurement in arthritis) and PMC13601330 (retired medical manikins as a
+platform for assistive robots) drop; set in `psychology_field_review.csv`, `psychology_trial_subset.py` rerun: 22 field-
+review drops, **trial list 2,140** (`psychology_trial_pmcids.txt`), 115 exclusions, none pending. [LOG]

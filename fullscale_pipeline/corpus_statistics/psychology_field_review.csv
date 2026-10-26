@@ -1852,7 +1852,7 @@ PMC13522213,2026,keep,,,Feasibility study on a noninvasive assessment of ALS pat
 PMC13522811,2026,keep,,,Exploring Applications of AI in the Crisis Line Sector: Protocol for a Scoping Review,JMIR research protocols,Suicide and Self-Harm Studies
 PMC13523765,2026,keep,,,Developing metacognitive knowledge for effective AI-supported study behaviors in undergraduate biology: recommendations for instructors,Journal of microbiology & biology education,Educational Strategies and Epistemologies
 PMC13523836,2026,keep,,,Generating and analyzing personality questionnaires using large language models,iScience,Personality Traits and Psychology
-PMC13523860,2026,flag,B,sleep or pain medicine,Sleep measurement and clinical impact in osteoarthritis and inflammatory arthritis: a scoping review,"Rheumatology (Oxford, England)",Sleep and related disorders
+PMC13523860,2026,drop,B,sleep or pain medicine,Sleep measurement and clinical impact in osteoarthritis and inflammatory arthritis: a scoping review,"Rheumatology (Oxford, England)",Sleep and related disorders
 PMC13525460,2026,keep,,,Prediction of Treatment Benefit With Internet-Based Cognitive Behavioral Therapy for Depression,JAMA network open,Digital Mental Health Interventions
 PMC13526666,2026,keep,,,Evaluating the robustness of specialized and general-purpose facial expression recognition systems across varied scenarios,Frontiers in artificial intelligence,Emotion and Mood Recognition
 PMC13527328,2026,keep,,,Persistent Psychological Distress and Shifting Subjective Burden Among Hospital Nursing Professionals During the COVID-19 Pandemic: A Repeated Cross-Sectional Study,SAGE open nursing,COVID-19 and Mental Health
@@ -1932,7 +1932,7 @@ PMC13596826,2026,keep,,,"Relationship among motivation, vocabulary learning stra
 PMC13597320,2026,keep,,,LLM-powered socially assistive robot-delivered cognitive behavioral therapy exercises: an exploratory study with university students,Frontiers in robotics and AI,Digital Mental Health Interventions
 PMC13597663,2026,keep,,,Understanding emotional responses to music using machine learning: evidence from a public dataset,Frontiers in psychology,Music Therapy and Health
 PMC13598090,2026,keep,,,Development and validation of the AI-assisted psychoemotional regulation scale (ERP-IA-6),Frontiers in psychology,Digital Mental Health Interventions
-PMC13601330,2026,flag,B,other,Retired medical simulation manikins as a development platform for physically assistive robots: a staged roadmap,Frontiers in robotics and AI,Social Robot Interaction and HRI
+PMC13601330,2026,drop,B,other,Retired medical simulation manikins as a development platform for physically assistive robots: a staged roadmap,Frontiers in robotics and AI,Social Robot Interaction and HRI
 PMC13601342,2026,keep,,,"Persuasion, pride and prejudice: factors associated with students’ resistance to a social robot’s incorrect mathematical solution",Frontiers in robotics and AI,Social Robot Interaction and HRI
 PMC13602181,2026,keep,,,Generative AI Chatbots Could Take Over Our Emotional Lives: The Potential and Challenges of Generative AI for Health Globally,Clinical psychology in Europe,Digital Mental Health Interventions
 PMC13603094,2026,keep,,,"Leakage-Free Multimodal Depression Screening: Controlled Evaluation of Text, Facial Behavior, and Prosodic Fusion","Bioengineering (Basel, Switzerland)",Emotion and Mood Recognition
