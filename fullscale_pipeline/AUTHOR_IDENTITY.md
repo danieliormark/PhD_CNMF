@@ -287,6 +287,26 @@ the parent categories in `institution_parent_categories.csv`. Alternatives, for 
    approach 2, the article×affiliation rows of the 32 articles with no affiliated byline. A partly unaffiliated entity
    (272 articles, 18 persons) keeps its known ties; the unknown part is simply not counted.]*
 
+*[Decided 2026-10-26 (owner) on questions 1–3; RUN_LOG RL-201.]*
+- *Question 1: research organisations are not merged (default kept): an institute of the Max Planck Society, CAS, NIH or
+  CNRS stays its own organisation, since its sub-institution can signal a sub-disciplinary identity and ties.*
+- *Question 2: health systems are merged (alternative taken): unlike research organisations with separate agendas, a
+  health system or trust is one body with branches. A health-system parent now absorbs its hospitals (child type
+  healthcare) as well as its research institutes and foundations; never a university, medical school, company or government
+  body (Icahn School of Medicine stays itself, not Mount Sinai Health System; NIHR Oxford Biomedical Research Centre stays
+  itself). A teaching hospital (university and health-system parents) goes to its health system, the university being
+  an affiliation, not the owner (Brigham and Women's → Mass General Brigham); one with no absorbing health-system parent
+  stays itself (Policlinico Milano: University of Milan plus the IRCCS label). Two VA centres whose parents lead to two
+  bodies stay themselves as joint units (White River Junction: VA New England and Dartmouth Health; Durham VA: two VA
+  levels not linked in OpenAlex; 5 bylines). Regional public health services that OpenAlex lists as parents are one body
+  too and absorb their hospitals (Osakidetza, Institut Català de la Salut, Helsinki and Uusimaa; NHS Wales, 1 byline).
+  Result: **2,716 institutions → 2,519 organisations** (239 merged, 32 joint units, 2 hand), 77 institutions and 267
+  bylines changed from the earlier proposal; `--separate-hospitals` reproduces the earlier proposal byte for byte.*
+- *Question 3: the French experimental universities stay groupings (default kept): ENS, EPHE, UVSQ, CentraleSupélec and
+  Évry keep their own identity. Known side effect kept: two joint labs of Grenoble INP and UGA (LIG, GIPSA-Lab; 3 bylines)
+  land on Grenoble INP.*
+- *The 4 articles without a PMID: option (a), authors from OpenAlex (see RL-201 for the check against the PMC header).*
+
 ## 10. The author table built (2026-10-26)
 
 `corpus_statistics/author_linking_v2/author_table.py` applies 1d, R3, R2, R6, R1 and R4 to the whole working corpus v2

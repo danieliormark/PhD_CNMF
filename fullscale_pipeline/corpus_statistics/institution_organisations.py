@@ -10,17 +10,23 @@
 #                 unless --merge-societies
 #   GOVERNMENT    ministry, government, region, other public body                                 -> absorbs nothing
 #   UMBRELLA      status label (IRCCS), funder, owner foundation or holding, company group, data error -> absorbs nothing
-#   HEALTHCARE    a hospital or health organisation: absorbs its research institutes and foundations (child type
-#                 facility, nonprofit, other) and its sites (a healthcare child whose name contains the parent's name:
-#                 "Mayo Clinic in Arizona"); never a university, school or company, nor a separately named hospital
-#                 (question 2; --merge-health-systems lets it absorb every child)
-# Teaching hospitals: a healthcare institution with both a university parent and a healthcare parent is affiliated, not
-# owned (Brigham and Women's: Tufts + Mass General Brigham), and stays itself. KEEP_SELF: read cases of a false parent.
+#   HEALTHCARE    a hospital, health system or trust: absorbs its hospitals and sites (child type healthcare), its
+#                 research institutes and foundations (facility, nonprofit, other); never a university, medical school,
+#                 company or government body (Icahn School of Medicine stays itself, not Mount Sinai Health System).
+#                 Owner 2026-10-26 (question 2): a health system is one body with branches, unlike a research
+#                 organisation, so its hospitals merge (MGH -> Mass General Brigham, Pitie-Salpetriere -> AP-HP).
+#                 --separate-hospitals restores the earlier proposal: only facility/nonprofit/other children and sites
+#                 whose name contains the parent's name ("Mayo Clinic in Arizona"); separately named hospitals stay.
+# Teaching hospitals (a hospital with both a university parent and a health-system parent): owned by the health system,
+# affiliated with the university, so the hospital goes to its health system and the university parent is ignored for it
+# (Brigham and Women's: Mass General Brigham, not Tufts); with no absorbing health-system parent it stays itself
+# (Policlinico Milano: University of Milan and the IRCCS label). With --separate-hospitals they stay themselves.
+# KEEP_SELF: read cases of a false parent.
 #   ORG           university, company, research institute or other organisation               -> absorbs every child
 # An institution's organisation: the organisations of the parents that absorb it (recursively); itself if none; if they
 # lead to two or more different organisations it is a joint unit and stays itself (the toy-trial rule: a joint unit of
 # one university and research bodies merges into the university, since research bodies absorb nothing here).
-#   python3 institution_organisations.py --pmcids psychology_trial_pmcids.txt [--merge-societies] [--merge-health-systems]
+#   python3 institution_organisations.py --pmcids psychology_trial_pmcids.txt [--merge-societies] [--separate-hospitals]
 # Writes corpus_statistics/institution_organisations_<name>.csv (institution -> organisation, rule) and
 # institution_parent_categories.csv (every parent entity met, its category and the rule that set it).
 import argparse, collections, csv, json, re
@@ -89,7 +95,7 @@ def category(p, args):
     if t == "funder":
         return "UMBRELLA", "funder (type rule)"
     if t == "healthcare":
-        return ("ORG" if args.merge_health_systems else "HEALTHCARE"), "hospital or health organisation (type rule)"
+        return "HEALTHCARE", "hospital or health organisation (type rule)"
     if t == "other" and re.search(r"(?i)landschaftsverband|office of the director|command", n):
         return "GOVERNMENT", "public body (name rule)"
     return "ORG", f"{t} organisation (default)"
@@ -100,6 +106,8 @@ def absorbs(p, child, args):
     if cat == "ORG":
         return True
     if cat == "HEALTHCARE":
+        if not args.separate_hospitals:
+            return ty(child) in ("healthcare", "facility", "nonprofit", "other")
         core = re.sub(r"(?i)\b(the|nhs|foundation|trust)\b", "", nm(p)).strip(" ,-").lower()
         return ty(child) in ("facility", "nonprofit", "other") or \
             (ty(child) == "healthcare" and len(core) >= 4 and core in nm(child).lower())
@@ -115,15 +123,17 @@ def organisation(i, args, path=()):
     if i in KEEP_SELF:
         memo[i] = (i, "hand: " + KEEP_SELF[i]); return memo[i]
     ps = parents(i)
-    if ty(i) == "healthcare" and any(ty(p) == "education" for p in ps) and any(ty(p) == "healthcare" for p in ps) \
-            and not args.merge_health_systems:
+    teaching = ty(i) == "healthcare" and any(ty(p) == "education" for p in ps) and any(ty(p) == "healthcare" for p in ps)
+    if teaching and args.separate_hospitals:
         memo[i] = (i, "teaching hospital (university and health-system parents)"); return memo[i]
     ups = [p for p in ps if p not in path and absorbs(p, i, args)]
+    if teaching:                         # owned by the health system, not the university: the university never absorbs it
+        ups = [p for p in ups if ty(p) == "healthcare"]
     if not ups:
         res = (i, "itself")
     else:
         orgs = {organisation(p, args, path + (i,))[0] for p in ups}
-        res = (orgs.pop(), "merged") if len(orgs) == 1 else (i, "joint unit (" + "; ".join(sorted(nm(o) for o in orgs)) + ")")
+        res = (orgs.pop(), "merged (teaching hospital to its health system)" if teaching else "merged") if len(orgs) == 1 else (i, "joint unit (" + "; ".join(sorted(nm(o) for o in orgs)) + ")")
     memo[i] = res
     return res
 
@@ -132,7 +142,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pmcids", default="psychology_trial_pmcids.txt")
     ap.add_argument("--merge-societies", action="store_true")
-    ap.add_argument("--merge-health-systems", action="store_true")
+    ap.add_argument("--separate-hospitals", action="store_true")
     a = ap.parse_args()
     pm = {l.strip() for l in open(HERE + a.pmcids) if l.strip()}
     B = [json.loads(l) for l in open(OD + "bylines_v2_refresh.jsonl")]
@@ -166,7 +176,7 @@ def main():
             if p not in seen_par:
                 seen_par[p] = category(p, a); stack += parents(p)
     tag = a.pmcids.replace("_pmcids.txt", "").replace(".txt", "") + ("_societies" if a.merge_societies else "") + \
-        ("_healthsystems" if a.merge_health_systems else "")
+        ("_separatehospitals" if a.separate_hospitals else "")
     with open(HERE + f"institution_organisations_{tag}.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
     with open(HERE + "institution_parent_categories.csv", "w", newline="") as f:

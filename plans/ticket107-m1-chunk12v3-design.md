@@ -1003,3 +1003,7 @@ behaves like an ordinary affiliation tie to a one-member organisation; two bylin
 evidence of the same unknown organisation (e.g. the same organisation named in the affiliation text, or co-authors of one
 article with an identical affiliation). Psychology: 627 no-ID bylines with affiliation text, 413 distinct strings. The
 exact technique (missing cells vs placeholders) is decided later.]*
+*[2026-10-26, owner (RL-201): research organisations not merged; health systems merged (hospitals into their system,
+teaching hospitals into their system, never into the university); French experimental universities stay groupings;
+Psychology trial 2,716 institutions → 2,519 organisations. No-PMID articles: authors from OpenAlex, pending a check
+against the PMC header (2 of 4 differ in author count).]*

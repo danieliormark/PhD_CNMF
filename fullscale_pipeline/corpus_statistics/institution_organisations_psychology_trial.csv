@@ -191,13 +191,13 @@ I127077003,IMT School for Advanced Studies Lucca,education,IT,10,I127077003,IMT 
 I12708293,SIB Swiss Institute of Bioinformatics,nonprofit,CH,1,I12708293,SIB Swiss Institute of Bioinformatics,itself
 I127110123,Universidade Estadual de Londrina,education,BR,1,I127110123,Universidade Estadual de Londrina,itself
 I1280414376,United States Air Force Research Laboratory,facility,US,3,I1280414376,United States Air Force Research Laboratory,itself
-I1281027232,Lincoln Medical Center,healthcare,US,1,I1281027232,Lincoln Medical Center,itself
+I1281027232,Lincoln Medical Center,healthcare,US,1,I1283621791,New York City Health and Hospitals Corporation,merged
 I1281400175,Oslo University Hospital,healthcare,NO,4,I1281400175,Oslo University Hospital,itself
 I1282776028,German Institute for Economic Research,nonprofit,DE,1,I1282776028,German Institute for Economic Research,itself
 I1282927834,Cedars-Sinai Medical Center,healthcare,US,25,I1282927834,Cedars-Sinai Medical Center,itself
 I1283155146,Panasonic (Japan),company,JP,3,I1283155146,Panasonic (Japan),itself
 I12832649,Gachon University,education,KR,14,I12832649,Gachon University,itself
-I1283280774,Brigham and Women's Hospital,healthcare,US,5,I1283280774,Brigham and Women's Hospital,teaching hospital (university and health-system parents)
+I1283280774,Brigham and Women's Hospital,healthcare,US,5,I48633490,Mass General Brigham,merged (teaching hospital to its health system)
 I1283613182,Universidade Tecnológica Federal do Paraná,education,BR,2,I1283613182,Universidade Tecnológica Federal do Paraná,itself
 I1285301757,Rush University Medical Center,healthcare,US,27,I1285301757,Rush University Medical Center,itself
 I1286960001,Parkland Health & Hospital System,healthcare,US,1,I1286960001,Parkland Health & Hospital System,itself
@@ -207,7 +207,7 @@ I1289490764,Centers for Disease Control and Prevention,government,US,12,I1289490
 I1289530486,BC Cancer Agency,healthcare,CA,1,I1289530486,BC Cancer Agency,itself
 I1289550199,Dorset HealthCare University NHS Foundation Trust,healthcare,GB,2,I1289550199,Dorset HealthCare University NHS Foundation Trust,itself
 I128956969,Texas Christian University,education,US,3,I128956969,Texas Christian University,itself
-I1289784979,University College Hospital,healthcare,GB,2,I1289784979,University College Hospital,itself
+I1289784979,University College Hospital,healthcare,GB,2,I1340918713,University College London Hospitals NHS Foundation Trust,merged
 I128993996,University of South Wales,education,GB,1,I128993996,University of South Wales,itself
 I1290206253,Microsoft (United States),company,US,6,I1290206253,Microsoft (United States),itself
 I1290900354,Tufts Medical Center,healthcare,US,1,I1290900354,Tufts Medical Center,itself
@@ -222,7 +222,7 @@ I129627893,University of Molise,education,IT,1,I129627893,University of Molise,i
 I129643931,Berliner Hochschule für Technik,education,DE,2,I129643931,Berliner Hochschule für Technik,itself
 I12970578,University of North Alabama,education,US,3,I12970578,University of North Alabama,itself
 I129708740,Fujian Medical University,education,CN,7,I129708740,Fujian Medical University,itself
-I1297363086,St. Michael's Hospital,healthcare,CA,9,I1297363086,St. Michael's Hospital,itself
+I1297363086,St. Michael's Hospital,healthcare,CA,9,I4399598460,Unity Health Toronto,merged
 I129774422,University of Vienna,education,AT,9,I129774422,University of Vienna,itself
 I1297971548,International Computer Science Institute,nonprofit,US,1,I1297971548,International Computer Science Institute,itself
 I129801699,University of Tasmania,education,AU,5,I129801699,University of Tasmania,itself
@@ -246,7 +246,7 @@ I130769515,Pennsylvania State University,education,US,31,I130769515,Pennsylvania
 I130785548,Clark University,education,US,1,I130785548,Clark University,itself
 I1309849503,RAND Corporation,nonprofit,US,23,I1309849503,RAND Corporation,itself
 I1312995270,Karachi Medical and Dental College,education,PK,2,I1312995270,Karachi Medical and Dental College,itself
-I1313298211,St. Jude Children's Research Hospital,healthcare,US,6,I1313298211,St. Jude Children's Research Hospital,itself
+I1313298211,St. Jude Children's Research Hospital,healthcare,US,6,I2802152183,Novant Health,merged
 I1313323035,Russian Academy of Sciences,government,RU,5,I1313323035,Russian Academy of Sciences,itself
 I1314135232,Nationwide Children's Hospital,healthcare,US,1,I1314135232,Nationwide Children's Hospital,itself
 I1314466530,Tokai University,education,JP,1,I1314466530,Tokai University,itself
@@ -265,9 +265,9 @@ I1322918889,United States Department of Veterans Affairs,government,US,7,I132291
 I1323121030,Bialystok University of Technology,education,PL,3,I1323121030,Bialystok University of Technology,itself
 I1323252656,Information Technology University,education,PK,1,I1323252656,Information Technology University,itself
 I1323843004,Sunnybrook Health Science Centre,healthcare,CA,1,I1323843004,Sunnybrook Health Science Centre,itself
-I1324220072,Mount Sinai Hospital,healthcare,US,1,I1324220072,Mount Sinai Hospital,itself
+I1324220072,Mount Sinai Hospital,healthcare,US,1,I1320796813,Mount Sinai Health System,merged
 I1324252669,NHS Lothian,healthcare,GB,1,I1324252669,NHS Lothian,itself
-I1324766304,Barrow Neurological Institute,healthcare,US,1,I1324766304,Barrow Neurological Institute,itself
+I1324766304,Barrow Neurological Institute,healthcare,US,1,I2802827176,Dignity Health,merged
 I132586189,Zhongyuan University of Technology,education,CN,1,I132586189,Zhongyuan University of Technology,itself
 I1325899441,University Health Network,healthcare,CA,19,I1325899441,University Health Network,itself
 I1326498283,Institut national de recherche en sciences et technologies du numérique,government,FR,10,I1326498283,Institut national de recherche en sciences et technologies du numérique,itself
@@ -850,7 +850,7 @@ I204730241,Université Paris Cité,education,FR,27,I204730241,Université Paris 
 I204778367,Norwegian University of Science and Technology,education,NO,7,I204778367,Norwegian University of Science and Technology,itself
 I204824540,University of Wollongong,education,AU,6,I204824540,University of Wollongong,itself
 I204831749,Southwestern University of Finance and Economics,education,CN,2,I204831749,Southwestern University of Finance and Economics,itself
-I204866599,VA Palo Alto Health Care System,healthcare,US,18,I204866599,VA Palo Alto Health Care System,itself
+I204866599,VA Palo Alto Health Care System,healthcare,US,18,I4210125474,VA Sierra Pacific Network,merged
 I204974687,Dong-Eui University,education,KR,3,I204974687,Dong-Eui University,itself
 I204983213,Harbin Institute of Technology,education,CN,26,I204983213,Harbin Institute of Technology,itself
 I205016115,Hubei University of Chinese Medicine,education,CN,4,I205016115,Hubei University of Chinese Medicine,itself
@@ -874,7 +874,7 @@ I207399273,Utsunomiya University,education,JP,1,I207399273,Utsunomiya University
 I207527440,Al-Aqsa University,education,PS,1,I207527440,Al-Aqsa University,itself
 I207624831,Slovak Academy of Sciences,government,SK,2,I207624831,Slovak Academy of Sciences,itself
 I20942203,Hainan University,education,CN,2,I20942203,Hainan University,itself
-I210557978,Lunenfeld-Tanenbaum Research Institute,facility,CA,1,I1291836623,Mount Sinai Hospital,merged
+I210557978,Lunenfeld-Tanenbaum Research Institute,facility,CA,1,I4210130843,Sinai Health System,merged
 I21067949,Adolfo Ibáñez University,education,CL,5,I21067949,Adolfo Ibáñez University,itself
 I21193070,Beijing Jiaotong University,education,CN,3,I21193070,Beijing Jiaotong University,itself
 I21250087,Charles University,education,CZ,10,I21250087,Charles University,itself
@@ -976,14 +976,14 @@ I2799391451,University Hospital Bonn,healthcare,DE,15,I2799391451,University Hos
 I2799425052,Guangdong General Hospital,healthcare,CN,1,I2799425052,Guangdong General Hospital,itself
 I2799434747,Douglas Mental Health University Institute,healthcare,CA,7,I2799434747,Douglas Mental Health University Institute,itself
 I2799503643,Columbia University Irving Medical Center,healthcare,US,4,I2799503643,Columbia University Irving Medical Center,itself
-I2799505622,Wrexham Maelor Hospital,healthcare,GB,1,I2799505622,Wrexham Maelor Hospital,itself
+I2799505622,Wrexham Maelor Hospital,healthcare,GB,1,I4210144625,National Health Service Wales,merged
 I2799532815,Madan Mohan Malaviya University of Technology,education,IN,1,I2799532815,Madan Mohan Malaviya University of Technology,itself
 I2799535320,Catholic University of the Maule,education,CL,2,I2799535320,Catholic University of the Maule,itself
 I2799582683,Sussex Partnership NHS Foundation Trust,healthcare,GB,1,I2799582683,Sussex Partnership NHS Foundation Trust,itself
 I2799614505,University of Perpetual Help System DALTA,education,PH,1,I2799614505,University of Perpetual Help System DALTA,itself
 I2799716270,Palestine Technical University - Kadoorie,education,PS,2,I2799716270,Palestine Technical University - Kadoorie,itself
 I2799725268,Manchester Academic Health Science Centre,healthcare,GB,13,I2799725268,Manchester Academic Health Science Centre,itself
-I2799739429,John Peter Smith Hospital,healthcare,US,4,I2799739429,John Peter Smith Hospital,teaching hospital (university and health-system parents)
+I2799739429,John Peter Smith Hospital,healthcare,US,4,I2802662748,JPS Health Network,merged (teaching hospital to its health system)
 I2799784675,University Hospitals of the Ruhr-University of Bochum,healthcare,DE,3,I2799784675,University Hospitals of the Ruhr-University of Bochum,itself
 I2799804706,Alexandra Hospital,healthcare,SG,2,I2799804706,Alexandra Hospital,itself
 I2799850029,Dongguan University of Technology,education,CN,3,I2799850029,Dongguan University of Technology,itself
@@ -994,39 +994,39 @@ I2799899409,Hadassah Medical Center,healthcare,IL,1,I2799899409,Hadassah Medical
 I2799903593,Georgetown University Medical Center,healthcare,US,1,I2799903593,Georgetown University Medical Center,itself
 I2799950915,Wright-Patterson Air Force Base,other,US,3,I2799950915,Wright-Patterson Air Force Base,itself
 I2799958217,Konya Food and Agriculture University,education,TR,1,I2799958217,Konya Food and Agriculture University,itself
-I2799967250,Royal Bournemouth Hospital,healthcare,GB,1,I2799967250,Royal Bournemouth Hospital,itself
-I2799970807,Severance Hospital,healthcare,KR,4,I2799970807,Severance Hospital,itself
+I2799967250,Royal Bournemouth Hospital,healthcare,GB,1,I4387155041,University Hospitals Dorset NHS Foundation Trust,merged
+I2799970807,Severance Hospital,healthcare,KR,4,I193775966,Yonsei University,merged
 I2799976261,Aalborg University Hospital,healthcare,DK,1,I2799976261,Aalborg University Hospital,itself
 I2799980853,Korea University Medical Center,healthcare,KR,2,I197347611,Korea University,merged
 I2800006345,Leiden University Medical Center,funder,NL,4,I2800006345,Leiden University Medical Center,itself
 I2800024560,ZBW – Leibniz-Informationszentrum Wirtschaft,facility,DE,2,I2800024560,ZBW – Leibniz-Informationszentrum Wirtschaft,itself
 I2800030865,Sunnaas sykehus,healthcare,NO,4,I2800030865,Sunnaas sykehus,itself
 I2800102685,Santosh University,education,IN,1,I2800102685,Santosh University,itself
-I2800129641,Great Ormond Street Hospital,healthcare,GB,10,I2800129641,Great Ormond Street Hospital,itself
+I2800129641,Great Ormond Street Hospital,healthcare,GB,10,I2800349819,Great Ormond Street Hospital for Children NHS Foundation Trust,merged
 I2800132241,Stavanger University Hospital,healthcare,NO,1,I2800132241,Stavanger University Hospital,itself
 I2800156163,German National Academy of Sciences Leopoldina,other,DE,1,I2800156163,German National Academy of Sciences Leopoldina,itself
 I2800200783,Lady Reading Hospital,healthcare,PK,1,I2800200783,Lady Reading Hospital,itself
 I2800232565,"Beijing Chao-Yang Hospital, Capital Medical University",healthcare,CN,1,I2800232565,"Beijing Chao-Yang Hospital, Capital Medical University",itself
-I2800300635,Edith Nourse Rogers Memorial Veterans Hospital,healthcare,US,2,I2800300635,Edith Nourse Rogers Memorial Veterans Hospital,itself
+I2800300635,Edith Nourse Rogers Memorial Veterans Hospital,healthcare,US,2,I4210095851,VA New England Healthcare System,merged
 I2800310992,Rutland Regional Medical Center,healthcare,US,1,I2800310992,Rutland Regional Medical Center,itself
 I2800349819,Great Ormond Street Hospital for Children NHS Foundation Trust,healthcare,GB,3,I2800349819,Great Ormond Street Hospital for Children NHS Foundation Trust,itself
 I2800370534,Sheng Jing Hospital,healthcare,CN,2,I2800370534,Sheng Jing Hospital,itself
 I2800387288,European Commission,government,BE,1,I2800387288,European Commission,itself
-I2800394112,Helsinki University Hospital,healthcare,FI,3,I2800394112,Helsinki University Hospital,itself
-I2800453128,Austin Hospital,healthcare,AU,1,I2800453128,Austin Hospital,itself
-I2800516725,Royal Victoria Infirmary,healthcare,GB,1,I2800516725,Royal Victoria Infirmary,itself
+I2800394112,Helsinki University Hospital,healthcare,FI,3,I4210166427,Hospital District of Helsinki and Uusimaa,merged
+I2800453128,Austin Hospital,healthcare,AU,1,I4210163497,Austin Health,merged
+I2800516725,Royal Victoria Infirmary,healthcare,GB,1,I2801663869,Newcastle upon Tyne Hospitals NHS Foundation Trust,merged
 I2800523819,Piedmont Community College,education,US,1,I2800523819,Piedmont Community College,itself
 I2800555055,Centre Hospitalier Universitaire de Grenoble,healthcare,FR,1,I2800555055,Centre Hospitalier Universitaire de Grenoble,itself
 I28006308,Shandong Normal University,education,CN,1,I28006308,Shandong Normal University,itself
 I2800664555,RISE Research Institutes of Sweden,other,SE,1,I2800664555,RISE Research Institutes of Sweden,itself
-I2800713138,Sheppard and Enoch Pratt Hospital,healthcare,US,1,I2800713138,Sheppard and Enoch Pratt Hospital,itself
+I2800713138,Sheppard and Enoch Pratt Hospital,healthcare,US,1,I4210091865,Sheppard Pratt Health System,merged
 I2800717037,University of Florida Health,education,US,2,I33213144,University of Florida,merged
-I2800728469,Fiona Stanley Hospital,healthcare,AU,1,I2800728469,Fiona Stanley Hospital,itself
+I2800728469,Fiona Stanley Hospital,healthcare,AU,1,I4388446375,South Metropolitan Health Service,merged
 I2800770947,Rashid Hospital,healthcare,AE,1,I2800770947,Rashid Hospital,itself
 I2800794739,Universidade Europeia,education,PT,2,I2800794739,Universidade Europeia,itself
 I2800810863,Queen Mary Hospital,healthcare,CN,5,I2800810863,Queen Mary Hospital,itself
 I2800852108,Universidad Abierta Interamericana,education,AR,1,I2800852108,Universidad Abierta Interamericana,itself
-I2800875313,Mental Health Services,healthcare,DK,8,I2800875313,Mental Health Services,itself
+I2800875313,Mental Health Services,healthcare,DK,8,I2802567020,Copenhagen University Hospital,merged
 I2800915623,Police Scotland,government,GB,1,I2800915623,Police Scotland,itself
 I2800917498,Northeastern University London,education,GB,1,I12912129,Northeastern University,merged
 I2800920820,Istituto Universitario di Studi Superiori di Pavia,education,IT,7,I2800920820,Istituto Universitario di Studi Superiori di Pavia,itself
@@ -1051,7 +1051,7 @@ I2801518632,Jinnah Sindh Medical University,education,PK,2,I2801518632,Jinnah Si
 I2801556517,Ruijin Hospital,healthcare,CN,1,I2801556517,Ruijin Hospital,itself
 I2801564471,Niuvanniemi Hospital,healthcare,FI,2,I2801564471,Niuvanniemi Hospital,itself
 I2801628138,Frankfurt Institute for Advanced Studies,facility,DE,2,I114090438,Goethe University Frankfurt,merged
-I2801671727,VA Boston Healthcare System,healthcare,US,2,I2801671727,VA Boston Healthcare System,itself
+I2801671727,VA Boston Healthcare System,healthcare,US,2,I4210095851,VA New England Healthcare System,merged
 I2801680663,Asan Medical Center,healthcare,KR,1,I2801680663,Asan Medical Center,itself
 I2801713749,Anna Freud Centre,nonprofit,GB,3,I2801713749,Anna Freud Centre,itself
 I2801724371,Spanish Biomedical Research Centre in Physiopathology of Obesity and Nutrition,facility,ES,4,I2801724371,Spanish Biomedical Research Centre in Physiopathology of Obesity and Nutrition,itself
@@ -1060,9 +1060,9 @@ I2801766299,Medisch Spectrum Twente,healthcare,NL,3,I2801766299,Medisch Spectrum
 I2801769982,First Affiliated Hospital of Wenzhou Medical University,healthcare,CN,3,I2801769982,First Affiliated Hospital of Wenzhou Medical University,itself
 I2801798185,Connecticut Valley Hospital,healthcare,US,1,I2801798185,Connecticut Valley Hospital,itself
 I2801834177,Taipei City Government,government,TW,1,I2801834177,Taipei City Government,itself
-I2801880889,McMaster Children's Hospital,healthcare,CA,2,I2801880889,McMaster Children's Hospital,itself
+I2801880889,McMaster Children's Hospital,healthcare,CA,2,I76442945,Hamilton Health Sciences,merged
 I2801939835,Region Stockholm,government,SE,20,I2801939835,Region Stockholm,itself
-I2801942218,Hvidovre Hospital,healthcare,DK,1,I2801942218,Hvidovre Hospital,itself
+I2801942218,Hvidovre Hospital,healthcare,DK,1,I2802567020,Copenhagen University Hospital,merged
 I2801952686,Erasmus MC,healthcare,NL,11,I2801952686,Erasmus MC,itself
 I2802067006,Research Foundation - Flanders,government,BE,1,I2802067006,Research Foundation - Flanders,itself
 I2802112877,Ruppin Academic Center,education,IL,6,I2802112877,Ruppin Academic Center,itself
@@ -1082,14 +1082,14 @@ I2802393258,Sefako Makgatho Health Sciences University,education,ZA,1,I280239325
 I2802408685,Tan Tock Seng Hospital,healthcare,SG,3,I2802408685,Tan Tock Seng Hospital,itself
 I2802488147,School of Advanced Study,education,GB,3,I2802488147,School of Advanced Study,itself
 I2802506851,Economic and Social Research Council,government,GB,1,I2802506851,Economic and Social Research Council,itself
-I2802534011,MedStar Georgetown University Hospital,healthcare,US,1,I2802534011,MedStar Georgetown University Hospital,itself
+I2802534011,MedStar Georgetown University Hospital,healthcare,US,1,I86755215,MedStar Health,merged
 I2802542264,University Hospital of Basel,healthcare,CH,6,I2802542264,University Hospital of Basel,itself
 I2802567020,Copenhagen University Hospital,healthcare,DK,15,I2802567020,Copenhagen University Hospital,itself
-I2802582725,Gentofte Hospital,healthcare,DK,6,I2802582725,Gentofte Hospital,itself
+I2802582725,Gentofte Hospital,healthcare,DK,6,I2802567020,Copenhagen University Hospital,merged
 I2802587341,Kaohsiung Medical University Chung-Ho Memorial Hospital,healthcare,TW,7,I2802587341,Kaohsiung Medical University Chung-Ho Memorial Hospital,itself
 I2802612298,The Wallace H. Coulter Department of Biomedical Engineering,education,US,1,I2802612298,The Wallace H. Coulter Department of Biomedical Engineering,joint unit (Emory University; Georgia Institute of Technology)
 I2802619606,TUM Klinikum,healthcare,DE,4,I62916508,Technical University of Munich,merged
-I2802654988,Princess Margaret Cancer Centre,healthcare,CA,1,I2802654988,Princess Margaret Cancer Centre,itself
+I2802654988,Princess Margaret Cancer Centre,healthcare,CA,1,I1325899441,University Health Network,merged
 I2802656227,Universidad César Vallejo,education,PE,4,I2802656227,Universidad César Vallejo,itself
 I2802681329,Wekerle Business School,education,HU,1,I2802681329,Wekerle Business School,itself
 I2802690428,Shanghai Mental Health Center,healthcare,CN,17,I2802690428,Shanghai Mental Health Center,itself
@@ -1099,14 +1099,14 @@ I2802835388,Seoul National University Hospital,healthcare,KR,6,I139264467,Seoul 
 I2802841181,Caritas Hospital,healthcare,IN,1,I2802841181,Caritas Hospital,itself
 I2802841409,Norwegian Armed Forces,government,NO,1,I2802841409,Norwegian Armed Forces,itself
 I2802841970,The Ohio State University Wexner Medical Center,healthcare,US,3,I2802841970,The Ohio State University Wexner Medical Center,itself
-I2802928900,Amsterdam UMC Location University of Amsterdam,healthcare,NL,2,I2802928900,Amsterdam UMC Location University of Amsterdam,itself
+I2802928900,Amsterdam UMC Location University of Amsterdam,healthcare,NL,2,I4210151833,Amsterdam University Medical Centers,merged
 I2802931824,Institut Pprime,facility,FR,2,I2802931824,Institut Pprime,joint unit (Université de Poitiers; École Nationale Supérieure de Mécanique et d'Aérotechnique)
 I2802934949,Radboud University Medical Center,funder,NL,7,I2802934949,Radboud University Medical Center,itself
 I2802946424,Johns Hopkins University Applied Physics Laboratory,facility,US,1,I145311948,Johns Hopkins University,merged
-I2802992464,University Hospital Limerick,healthcare,IE,1,I2802992464,University Hospital Limerick,itself
+I2802992464,University Hospital Limerick,healthcare,IE,1,I37076085,Health Service Executive,merged
 I2802999273,Wisconsin Institutes for Discovery,nonprofit,US,3,I2802999273,Wisconsin Institutes for Discovery,itself
-I2803066834,Fondazione IRCCS Ca' Granda Ospedale Maggiore Policlinico,healthcare,IT,1,I2803066834,Fondazione IRCCS Ca' Granda Ospedale Maggiore Policlinico,teaching hospital (university and health-system parents)
-I2803066836,Warneford Hospital,healthcare,GB,15,I2803066836,Warneford Hospital,itself
+I2803066834,Fondazione IRCCS Ca' Granda Ospedale Maggiore Policlinico,healthcare,IT,1,I2803066834,Fondazione IRCCS Ca' Granda Ospedale Maggiore Policlinico,itself
+I2803066836,Warneford Hospital,healthcare,GB,15,I2802171185,Oxford Health NHS Foundation Trust,merged
 I2803079837,American University of the Middle East,education,KW,1,I2803079837,American University of the Middle East,itself
 I28046988,Kwame Nkrumah University of Science and Technology,education,GH,1,I28046988,Kwame Nkrumah University of Science and Technology,itself
 I28166907,Karolinska Institutet,education,SE,41,I28166907,Karolinska Institutet,itself
@@ -1279,14 +1279,14 @@ I4210086768,Max Planck Institute for Empirical Aesthetics,facility,DE,5,I4210086
 I4210086892,Education University of Hong Kong,education,HK,2,I4210086892,Education University of Hong Kong,itself
 I4210086900,National Center for Complementary and Integrative Health,facility,US,3,I4210086900,National Center for Complementary and Integrative Health,itself
 I4210086933,NYU Langone Health,healthcare,US,1,I4210086933,NYU Langone Health,itself
-I4210086971,VA Connecticut Healthcare System,healthcare,US,7,I4210086971,VA Connecticut Healthcare System,itself
+I4210086971,VA Connecticut Healthcare System,healthcare,US,7,I4210095851,VA New England Healthcare System,merged
 I4210087077,Institut des Maladies Neurodégénératives,facility,FR,1,I4210087077,Institut des Maladies Neurodégénératives,joint unit (Centre Hospitalier Universitaire de Bordeaux; Université de Bordeaux)
 I4210087266,Institute of Computer Science,facility,PL,1,I4210087266,Institute of Computer Science,itself
 I4210087348,National Cancer Centre Japan,healthcare,JP,4,I4210087348,National Cancer Centre Japan,itself
 I4210087487,Assistance Publique Hôpitaux de Marseille,healthcare,FR,3,I4210087487,Assistance Publique Hôpitaux de Marseille,"hand: AP-HM is Marseille's own university hospital trust, not a unit of Aix-Marseille Université"
 I4210087768,Ospedale Antonio Cardarelli,healthcare,IT,1,I4210087768,Ospedale Antonio Cardarelli,itself
 I4210087849,University of Rwanda,education,RW,4,I4210087849,University of Rwanda,itself
-I4210087915,Massachusetts General Hospital,healthcare,US,26,I4210087915,Massachusetts General Hospital,itself
+I4210087915,Massachusetts General Hospital,healthcare,US,26,I48633490,Mass General Brigham,merged
 I4210088053,Universitätsklinikum Erlangen,healthcare,DE,1,I4210088053,Universitätsklinikum Erlangen,itself
 I4210088099,National Center for Injury Prevention and Control,other,US,11,I4210088099,National Center for Injury Prevention and Control,itself
 I4210088164,"Changchun Institute of Optics, Fine Mechanics and Physics",facility,CN,5,I4210088164,"Changchun Institute of Optics, Fine Mechanics and Physics",itself
@@ -1311,7 +1311,7 @@ I4210090411,Google DeepMind (United Kingdom),company,GB,4,I4210128969,Alphabet (
 I4210090433,GGZ Noord-Holland-Noord,healthcare,NL,1,I4210090433,GGZ Noord-Holland-Noord,itself
 I4210090490,National University,education,PH,1,I4210090490,National University,itself
 I4210090508,Azienda Sanitaria Unità Locale di Reggio Emilia,healthcare,IT,1,I4210090508,Azienda Sanitaria Unità Locale di Reggio Emilia,itself
-I4210090554,Helsinki Children's Hospital,healthcare,FI,1,I4210090554,Helsinki Children's Hospital,itself
+I4210090554,Helsinki Children's Hospital,healthcare,FI,1,I4210166427,Hospital District of Helsinki and Uusimaa,merged
 I4210090703,Centro de Investigación Biomédica en Red de Salud Mental,facility,ES,32,I4210090703,Centro de Investigación Biomédica en Red de Salud Mental,itself
 I4210090927,Universidad Estatal de Milagro,education,EC,4,I4210090927,Universidad Estatal de Milagro,itself
 I4210090965,"Islamic Azad University, Marvdasht",education,IR,1,I4210090965,"Islamic Azad University, Marvdasht",itself
@@ -1326,7 +1326,7 @@ I4210092058,Zhengzhou Normal University,education,CN,4,I4210092058,Zhengzhou Nor
 I4210092215,Johns Hopkins Berman Institute of Bioethics,facility,US,1,I145311948,Johns Hopkins University,merged
 I4210092408,Toulouse School of Economics,education,FR,1,I4210092408,Toulouse School of Economics,itself
 I4210092427,IRDES Institut de Recherche et Documentation en Économie de la Santé,education,FR,2,I4210092427,IRDES Institut de Recherche et Documentation en Économie de la Santé,itself
-I4210092871,Hospital de Basurto,healthcare,ES,3,I4210092871,Hospital de Basurto,itself
+I4210092871,Hospital de Basurto,healthcare,ES,3,I4210125364,Osakidetza,merged
 I4210093049,Leibniz Institute for Resilience Research,facility,DE,7,I4210093049,Leibniz Institute for Resilience Research,itself
 I4210093092,Monash Alfred Psychiatry Research centre,facility,AU,1,I4210093092,Monash Alfred Psychiatry Research centre,itself
 I4210093282,Institut de Robòtica i Informàtica Industrial,facility,ES,1,I9617848,Universitat Politècnica de Catalunya,merged
@@ -1343,7 +1343,7 @@ I4210094138,University of West Attica,education,GR,4,I4210094138,University of W
 I4210094218,Xuan Wu Hospital of the Capital Medical University,healthcare,CN,3,I4210094218,Xuan Wu Hospital of the Capital Medical University,itself
 I4210094226,Mi̇lli̇ Eği̇ti̇m Bakanliği,government,TR,1,I4210094226,Mi̇lli̇ Eği̇ti̇m Bakanliği,itself
 I4210094363,Azienda Ospedaliera Universitaria Integrata Verona,healthcare,IT,1,I4210094363,Azienda Ospedaliera Universitaria Integrata Verona,itself
-I4210094549,VA Puget Sound Health Care System,healthcare,US,1,I4210094549,VA Puget Sound Health Care System,itself
+I4210094549,VA Puget Sound Health Care System,healthcare,US,1,I4210138024,VA Northwest Network,merged
 I4210094609,Akademia Ignatianum w Krakowie,education,PL,1,I4210094609,Akademia Ignatianum w Krakowie,itself
 I4210094798,Rajamangala University of Technology Krungthep,education,TH,2,I4210094798,Rajamangala University of Technology Krungthep,itself
 I4210094836,Ganzhou People's Hospital,healthcare,CN,2,I4210094836,Ganzhou People's Hospital,itself
@@ -1353,7 +1353,7 @@ I4210095346,OSF HealthCare,healthcare,US,1,I4210095346,OSF HealthCare,itself
 I4210095444,Saint Camillus International University of Health and Medical Sciences,education,IT,1,I4210095444,Saint Camillus International University of Health and Medical Sciences,itself
 I4210095477,Centre Hospitalier Universitaire de Tours,healthcare,FR,1,I4210095477,Centre Hospitalier Universitaire de Tours,itself
 I4210095597,King Abdullah International Medical Research Center,facility,SA,1,I4210095597,King Abdullah International Medical Research Center,itself
-I4210095628,Mann-Grandstaff VA Medical Center,healthcare,US,1,I4210095628,Mann-Grandstaff VA Medical Center,itself
+I4210095628,Mann-Grandstaff VA Medical Center,healthcare,US,1,I4210138024,VA Northwest Network,merged
 I4210095701,Fondazione Istituto Neurologico Nazionale Casimiro Mondino,facility,IT,1,I4210095701,Fondazione Istituto Neurologico Nazionale Casimiro Mondino,itself
 I4210095705,Region Västra Götaland,government,SE,16,I4210095705,Region Västra Götaland,itself
 I4210095851,VA New England Healthcare System,healthcare,US,2,I4210095851,VA New England Healthcare System,itself
@@ -1367,7 +1367,7 @@ I4210096899,Jiangsu University of Science and Technology,education,CN,6,I4210096
 I4210097113,Ernst Strüngmann Institute for Neuroscience,facility,DE,3,I4210097113,Ernst Strüngmann Institute for Neuroscience,itself
 I4210097146,Hospital de Clínicas de Porto Alegre,healthcare,BR,5,I4210097146,Hospital de Clínicas de Porto Alegre,itself
 I4210097159,Assistance Publique – Hôpitaux de Paris,healthcare,FR,29,I4210097159,Assistance Publique – Hôpitaux de Paris,itself
-I4210097409,SingHealth Duke-NUS Academic Medical Centre,healthcare,SG,3,I4210097409,SingHealth Duke-NUS Academic Medical Centre,teaching hospital (university and health-system parents)
+I4210097409,SingHealth Duke-NUS Academic Medical Centre,healthcare,SG,3,I157582758,SingHealth,merged (teaching hospital to its health system)
 I4210097554,Center for Excellence in Brain Science and Intelligence Technology,education,CN,1,I4210097554,Center for Excellence in Brain Science and Intelligence Technology,itself
 I4210097904,Pacira (United States),company,US,1,I4210097904,Pacira (United States),itself
 I4210097920,Complejo Hospitalario de Navarra,healthcare,ES,1,I4210097920,Complejo Hospitalario de Navarra,itself
@@ -1378,7 +1378,7 @@ I4210099081,Songho University,education,KR,1,I4210099081,Songho University,itsel
 I4210099329,Tianjin Anding Hospital,healthcare,CN,6,I4210099329,Tianjin Anding Hospital,itself
 I4210099375,Institute for Globally Distributed Open Research and Education,facility,SE,3,I4210099375,Institute for Globally Distributed Open Research and Education,itself
 I4210099383,Abu Dhabi Health Services,company,AE,1,I4210099383,Abu Dhabi Health Services,itself
-I4210099595,VA San Diego Healthcare System,healthcare,US,3,I4210099595,VA San Diego Healthcare System,itself
+I4210099595,VA San Diego Healthcare System,healthcare,US,3,I4210138663,VA Desert Pacific Healthcare Network,merged
 I4210099681,Kantonsspital Winterthur,healthcare,CH,1,I4210099681,Kantonsspital Winterthur,itself
 I4210099699,University of Jeddah,education,SA,3,I4210099699,University of Jeddah,itself
 I4210099973,CeNTech,other,DE,2,I4210099973,CeNTech,itself
@@ -1389,7 +1389,7 @@ I4210100171,"The European Institute for Crime Prevention and Control, affiliated
 I4210100185,Okayama University Hospital,healthcare,JP,13,I4210100185,Okayama University Hospital,itself
 I4210100225,Satou Hospital,healthcare,JP,1,I4210100225,Satou Hospital,itself
 I4210100430,Google (Switzerland),company,CH,2,I4210128969,Alphabet (United States),merged
-I4210100437,SNUH SMG-SNU Boramae Medical Center,healthcare,KR,8,I4210100437,SNUH SMG-SNU Boramae Medical Center,itself
+I4210100437,SNUH SMG-SNU Boramae Medical Center,healthcare,KR,8,I139264467,Seoul National University,merged
 I4210100468,University Hospital Zurich,healthcare,CH,16,I4210100468,University Hospital Zurich,itself
 I4210100596,Hospices Civils de Lyon,healthcare,FR,1,I4210100596,Hospices Civils de Lyon,itself
 I4210100650,Hong Kong Jockey Club,nonprofit,HK,9,I4210100650,Hong Kong Jockey Club,itself
@@ -1409,7 +1409,7 @@ I4210103248,Child Mind Institute,nonprofit,US,1,I4210103248,Child Mind Institute
 I4210103252,Ajou University Hospital,healthcare,KR,2,I57664883,Ajou University,merged
 I4210103346,Nanfang Hospital,healthcare,CN,21,I4210103346,Nanfang Hospital,itself
 I4210103477,Hospital La Paz Institute for Health Research,facility,ES,1,I4210103477,Hospital La Paz Institute for Health Research,itself
-I4210103535,Kangbuk Samsung Hospital,healthcare,KR,1,I4210103535,Kangbuk Samsung Hospital,itself
+I4210103535,Kangbuk Samsung Hospital,healthcare,KR,1,I2802194831,Samsung Medical Center,merged
 I4210103621,Fujian Jiangxia University,education,CN,1,I4210103621,Fujian Jiangxia University,itself
 I4210103659,Laboratoire des Sciences de l'Ingénieur pour l'Environnement,facility,FR,1,I78744979,La Rochelle Université,merged
 I4210103698,Centre de recherche en Epidémiologie et Santé des Populations,facility,FR,5,I4210103698,Centre de recherche en Epidémiologie et Santé des Populations,joint unit (Assistance Publique – Hôpitaux de Paris; Hôpital Paul-Brousse; Université de Versailles Saint-Quentin-en-Yvelines)
@@ -1441,7 +1441,7 @@ I4210106192,Technische Hochschule Ingolstadt,education,DE,2,I4210106192,Technisc
 I4210106405,Fourth Hospital of Hebei Medical University,healthcare,CN,1,I4210106405,Fourth Hospital of Hebei Medical University,itself
 I4210106477,Shanghai Institutes for Biological Sciences,facility,CN,2,I4210106477,Shanghai Institutes for Biological Sciences,itself
 I4210106490,All India Institute of Medical Sciences Bhopal,education,IN,4,I4210106490,All India Institute of Medical Sciences Bhopal,itself
-I4210106537,Hôpital Broca,healthcare,FR,9,I4210106537,Hôpital Broca,itself
+I4210106537,Hôpital Broca,healthcare,FR,9,I4210097159,Assistance Publique – Hôpitaux de Paris,merged
 I4210106572,Hospital Universitario Príncipe de Asturias,healthcare,ES,6,I4210106572,Hospital Universitario Príncipe de Asturias,itself
 I4210106615,Novo Nordisk (United States),company,US,2,I189090001,Novo Nordisk (Denmark),merged
 I4210107012,Vanha Vaasa hospital,healthcare,FI,1,I4210107012,Vanha Vaasa hospital,itself
@@ -1461,7 +1461,7 @@ I4210108594,Amsterdam Neuroscience,facility,NL,2,I4210108594,Amsterdam Neuroscie
 I4210108685,Centre of Registers Vastra Gotaland,other,SE,2,I4210108685,Centre of Registers Vastra Gotaland,itself
 I4210108711,University Medical Center Hamburg-Eppendorf,healthcare,DE,44,I159176309,Universität Hamburg,merged
 I4210108865,Zhejiang Institute of Communications,education,CN,4,I4210108865,Zhejiang Institute of Communications,itself
-I4210108873,Hospital Universitario Araba,healthcare,ES,2,I4210108873,Hospital Universitario Araba,itself
+I4210108873,Hospital Universitario Araba,healthcare,ES,2,I4210125364,Osakidetza,merged
 I4210109289,PFH Private University of Applied Sciences,education,DE,6,I4210109289,PFH Private University of Applied Sciences,itself
 I4210109379,HES-SO Fribourg,education,CH,8,I173439891,HES-SO University of Applied Sciences and Arts Western Switzerland,merged
 I4210109446,Amsterdam Institute for Addiction Research,facility,NL,4,I887064364,University of Amsterdam,merged
@@ -1473,7 +1473,7 @@ I4210110362,Evaluation et recherche en services et politiques en santé pour les
 I4210110558,Xi'an Technological University,education,CN,1,I4210110558,Xi'an Technological University,itself
 I4210110609,Chongqing University of Arts and Sciences,education,CN,3,I4210110609,Chongqing University of Arts and Sciences,itself
 I4210110652,RIKEN,facility,JP,14,I4210110652,RIKEN,itself
-I4210111460,National Center for Tumor Diseases,healthcare,DE,2,I4210111460,National Center for Tumor Diseases,teaching hospital (university and health-system parents)
+I4210111460,National Center for Tumor Diseases,healthcare,DE,2,I2802164966,University Hospital Heidelberg,merged (teaching hospital to its health system)
 I4210111543,Harvard Pilgrim Health Care,healthcare,US,11,I4210111543,Harvard Pilgrim Health Care,itself
 I4210111603,Keelung Chang Gung Memorial Hospital,healthcare,TW,1,I4210111603,Keelung Chang Gung Memorial Hospital,itself
 I4210111616,Wuhan Business University,education,CN,2,I4210111616,Wuhan Business University,itself
@@ -1487,9 +1487,9 @@ I4210112203,CECOS University,education,PK,3,I4210112203,CECOS University,itself
 I4210112317,Schulthess-Klinik,healthcare,CH,1,I4210112317,Schulthess-Klinik,itself
 I4210112337,University of Hafr Al-Batin,education,SA,1,I4210112337,University of Hafr Al-Batin,itself
 I4210112448,Beijing Anding Hospital,healthcare,CN,13,I4210112448,Beijing Anding Hospital,itself
-I4210112503,Kyung Hee University Medical Center,healthcare,KR,1,I4210112503,Kyung Hee University Medical Center,itself
+I4210112503,Kyung Hee University Medical Center,healthcare,KR,1,I35928602,Kyung Hee University,merged
 I4210112678,Universidad de la Costa,education,CO,1,I4210112678,Universidad de la Costa,itself
-I4210112727,Hôpital Pellegrin,healthcare,FR,4,I4210112727,Hôpital Pellegrin,itself
+I4210112727,Hôpital Pellegrin,healthcare,FR,4,I3018323443,Centre Hospitalier Universitaire de Bordeaux,merged
 I4210112759,Realistic Education in Action Coalition to Foster Health,healthcare,US,4,I4210112759,Realistic Education in Action Coalition to Foster Health,itself
 I4210112801,Orygen,other,AU,22,I4210112801,Orygen,itself
 I4210113153,Neuroscience Institute,facility,IT,1,I4210113153,Neuroscience Institute,itself
@@ -1527,7 +1527,7 @@ I4210116054,BLDE (Deemed to be University),education,IN,1,I4210116054,BLDE (Deem
 I4210116130,Physiologie de la Reproduction et des Comportements,facility,FR,9,I4210116130,Physiologie de la Reproduction et des Comportements,joint unit (Muséum national d'Histoire naturelle; Université de Tours)
 I4210116144,Chongqing University of Education,education,CN,2,I4210116144,Chongqing University of Education,itself
 I4210116208,Linkou Chang Gung Memorial Hospital,healthcare,TW,4,I3020100970,Chang Gung Memorial Hospital,merged
-I4210116369,James J. Peters VA Medical Center,healthcare,US,2,I4210116369,James J. Peters VA Medical Center,itself
+I4210116369,James J. Peters VA Medical Center,healthcare,US,2,I4210094901,New York/New Jersey VA Health Care Network,merged
 I4210116526,Laboratoire de Psychologie Sociale et Cognitive,facility,FR,1,I198244214,Université Clermont Auvergne,merged
 I4210116528,Swiss Distance University of Applied Sciences,education,CH,1,I4210116528,Swiss Distance University of Applied Sciences,itself
 I4210116730,Universitätsmedizin Göttingen,healthcare,DE,2,I4210116730,Universitätsmedizin Göttingen,itself
@@ -1538,7 +1538,7 @@ I4210117471,Ajloun National University,education,JO,1,I4210117471,Ajloun Nationa
 I4210117574,First People’s Hospital of Zunyi,healthcare,CN,4,I4210117574,First People’s Hospital of Zunyi,itself
 I4210117903,Institut des Neurosciences Cellulaires et Intégratives,facility,FR,1,I68947357,Université de Strasbourg,merged
 I4210117906,Northwest General Hospital and Research Center,healthcare,PK,3,I4210117906,Northwest General Hospital and Research Center,itself
-I4210118357,White River Junction VA Medical Center,healthcare,US,3,I4210118357,White River Junction VA Medical Center,itself
+I4210118357,White River Junction VA Medical Center,healthcare,US,3,I4210118357,White River Junction VA Medical Center,joint unit (Dartmouth College; VA New England Healthcare System)
 I4210118397,Sichuan Academy of Medical Sciences & Sichuan Provincial People's Hospital,healthcare,CN,1,I4210118397,Sichuan Academy of Medical Sciences & Sichuan Provincial People's Hospital,itself
 I4210118628,Joint Research Center,government,BE,1,I4210118628,Joint Research Center,itself
 I4210118689,Joint Research Centre,government,IT,1,I4210118689,Joint Research Centre,itself
@@ -1568,12 +1568,12 @@ I4210121283,Shanghai Hospital Development Center,healthcare,CN,4,I4210121283,Sha
 I4210121333,Istinye University,education,TR,1,I4210121333,Istinye University,itself
 I4210121532,Ministry of Health and Welfare,government,TW,1,I4210121532,Ministry of Health and Welfare,itself
 I4210121586,Dongzhimen Hospital Affiliated to Beijing University of Chinese Medicine,healthcare,CN,1,I4210121586,Dongzhimen Hospital Affiliated to Beijing University of Chinese Medicine,itself
-I4210121705,Pitié-Salpêtrière Hospital,healthcare,FR,6,I4210121705,Pitié-Salpêtrière Hospital,itself
+I4210121705,Pitié-Salpêtrière Hospital,healthcare,FR,6,I4210097159,Assistance Publique – Hôpitaux de Paris,merged
 I4210121739,Ministério da Saúde,government,BR,2,I4210121739,Ministério da Saúde,itself
 I4210121838,Laboratoire Lorrain de Recherche en Informatique et ses Applications,facility,FR,3,I4210121838,Laboratoire Lorrain de Recherche en Informatique et ses Applications,joint unit (CentraleSupélec; Université de Lorraine)
 I4210122251,Finnish Youth Research Society,nonprofit,FI,2,I4210122251,Finnish Youth Research Society,itself
 I4210122369,Universidad Santo Tomás,education,CL,1,I4210122369,Universidad Santo Tomás,itself
-I4210122458,University Children’s Hospital Bern,healthcare,CH,2,I4210122458,University Children’s Hospital Bern,itself
+I4210122458,University Children’s Hospital Bern,healthcare,CH,2,I2801112126,University Hospital of Bern,merged
 I4210122520,Mental Health America,nonprofit,US,5,I4210122520,Mental Health America,itself
 I4210122543,Guangdong Polytechnic Normal University,education,CN,4,I4210122543,Guangdong Polytechnic Normal University,itself
 I4210122684,Sony Computer Science Laboratories,facility,JP,1,I4210122684,Sony Computer Science Laboratories,itself
@@ -1608,13 +1608,13 @@ I4210126463,UK Dementia Research Institute,facility,GB,3,I4210126463,UK Dementia
 I4210126505,Amity University,education,AE,1,I4210126505,Amity University,itself
 I4210126580,RIKEN Center for Advanced Intelligence Project,facility,JP,1,I4210126580,RIKEN Center for Advanced Intelligence Project,itself
 I4210126587,Center for Behavioral Brain Sciences,education,DE,2,I95793202,Otto-von-Guericke-Universität Magdeburg,merged
-I4210126712,Hôpital Robert-Debré,healthcare,FR,4,I4210126712,Hôpital Robert-Debré,itself
+I4210126712,Hôpital Robert-Debré,healthcare,FR,4,I4210097159,Assistance Publique – Hôpitaux de Paris,merged
 I4210127220,Centre for Interdisciplinary Research in Rehabilitation,facility,CA,4,I4210127220,Centre for Interdisciplinary Research in Rehabilitation,itself
 I4210127475,Instituto Ramón y Cajal de Investigación Sanitaria,healthcare,ES,8,I4210127475,Instituto Ramón y Cajal de Investigación Sanitaria,itself
 I4210127509,Vector Institute,facility,CA,8,I4210127509,Vector Institute,itself
 I4210127572,IMT Atlantique,education,FR,2,I4210127572,IMT Atlantique,itself
 I4210127607,Office of Research Services,government,US,1,I4210127607,Office of Research Services,itself
-I4210127641,Vall d'Hebron Hospital Universitari,healthcare,ES,6,I4210127641,Vall d'Hebron Hospital Universitari,itself
+I4210127641,Vall d'Hebron Hospital Universitari,healthcare,ES,6,I4210153292,Institut Català de la Salut,merged
 I4210127821,"Mackay Junior College of Medicine, Nursing and Management",education,TW,1,I4210127821,"Mackay Junior College of Medicine, Nursing and Management",itself
 I4210128418,Nanjing Xiaozhuang University,education,CN,2,I4210128418,Nanjing Xiaozhuang University,itself
 I4210128482,Jiangsu Cancer Hospital,healthcare,CN,5,I4210128482,Jiangsu Cancer Hospital,itself
@@ -1630,7 +1630,7 @@ I4210129906,Xi’an International University,education,CN,1,I4210129906,Xi’an 
 I4210130076,Lero,other,IE,2,I4210130076,Lero,itself
 I4210130152,Institut de Psychiatrie et Neurosciences de Paris,facility,FR,3,I204730241,Université Paris Cité,merged
 I4210130157,Institute of Informatics and Telematics,facility,IT,3,I4210130157,Institute of Informatics and Telematics,itself
-I4210130325,Hôpitaux Universitaires Henri-Mondor,healthcare,FR,1,I4210130325,Hôpitaux Universitaires Henri-Mondor,itself
+I4210130325,Hôpitaux Universitaires Henri-Mondor,healthcare,FR,1,I4210097159,Assistance Publique – Hôpitaux de Paris,merged
 I4210130445,Max Planck Institute for Human Cognitive and Brain Sciences,facility,DE,13,I4210130445,Max Planck Institute for Human Cognitive and Brain Sciences,itself
 I4210130461,Institut universitaire en santé mentale de Montréal,healthcare,CA,3,I4210130461,Institut universitaire en santé mentale de Montréal,itself
 I4210130704,University of Michigan–Dearborn,education,US,5,I4210130704,University of Michigan–Dearborn,itself
@@ -1644,14 +1644,14 @@ I4210131605,Vistula University,education,PL,1,I4210131605,Vistula University,its
 I4210131870,"Institute of Psychology, Chinese Academy of Sciences",facility,CN,15,I4210131870,"Institute of Psychology, Chinese Academy of Sciences",itself
 I4210131919,Xi'an University of Technology,education,CN,6,I4210131919,Xi'an University of Technology,itself
 I4210132011,Hangzhou Seventh Peoples Hospital,facility,CN,9,I4210132011,Hangzhou Seventh Peoples Hospital,itself
-I4210132125,Hôpital Lapeyronie,healthcare,FR,1,I4210132125,Hôpital Lapeyronie,itself
+I4210132125,Hôpital Lapeyronie,healthcare,FR,1,I4210093292,Centre Hospitalier Universitaire de Montpellier,merged
 I4210132193,National Center For Child Health and Development,government,JP,1,I4210132193,National Center For Child Health and Development,itself
 I4210132231,International University of Business Agriculture and Technology,education,BD,1,I4210132231,International University of Business Agriculture and Technology,itself
 I4210132355,Shanxi Eye Hospital,healthcare,CN,1,I4210132355,Shanxi Eye Hospital,itself
 I4210132431,Centro de Investigación Biomédica en Red de Enfermedades Hepáticas y Digestivas,facility,ES,2,I4210132431,Centro de Investigación Biomédica en Red de Enfermedades Hepáticas y Digestivas,itself
 I4210132578,University Hospital Frankfurt,healthcare,DE,9,I4210132578,University Hospital Frankfurt,itself
 I4210132604,Centre Hospitalier Régional Universitaire de Brest,healthcare,FR,4,I4210132604,Centre Hospitalier Régional Universitaire de Brest,hand: CHRU Brest: OpenAlex lists it under one of its own laboratories (inverted parent)
-I4210133078,Hôtel-Dieu de Paris,healthcare,FR,1,I4210133078,Hôtel-Dieu de Paris,itself
+I4210133078,Hôtel-Dieu de Paris,healthcare,FR,1,I4210097159,Assistance Publique – Hôpitaux de Paris,merged
 I4210133106,Parc de Salut,healthcare,ES,3,I4210133106,Parc de Salut,itself
 I4210133214,IRCCS Ospedale San Raffaele,healthcare,IT,1,I4210133214,IRCCS Ospedale San Raffaele,itself
 I4210133467,Xi'an Aeronautical University,education,CN,1,I4210133467,Xi'an Aeronautical University,itself
@@ -1663,7 +1663,7 @@ I4210134201,IRCCS Istituto Auxologico Italiano,healthcare,IT,5,I4210134201,IRCCS
 I4210134521,UniDistance Suisse,education,CH,2,I4210134521,UniDistance Suisse,itself
 I4210134523,State Forestry and Grassland Administration,government,CN,6,I4210134523,State Forestry and Grassland Administration,itself
 I4210134673,The Institute of Statistical Mathematics,facility,JP,2,I4210134673,The Institute of Statistical Mathematics,itself
-I4210134769,University of Pittsburgh Medical Center,healthcare,US,6,I4210134769,University of Pittsburgh Medical Center,itself
+I4210134769,University of Pittsburgh Medical Center,healthcare,US,6,I4210098814,UPMC Health System,merged
 I4210134855,Nagano University of Health and Medicine,education,JP,1,I4210134855,Nagano University of Health and Medicine,itself
 I4210134900,Jena University Hospital,healthcare,DE,6,I4210134900,Jena University Hospital,itself
 I4210135003,Clinica Universidad de Navarra,healthcare,ES,8,I4210135003,Clinica Universidad de Navarra,itself
@@ -1688,7 +1688,7 @@ I4210136512,Instituto de Investigación Sanitaria Aragón,other,ES,1,I4210136512
 I4210136627,Jellinek,nonprofit,NL,1,I4210136627,Jellinek,itself
 I4210136793,Peng Cheng Laboratory,facility,CN,4,I4210136793,Peng Cheng Laboratory,itself
 I4210137155,Toulouse School of Management Research,facility,FR,2,I4405259414,Université Toulouse Capitole,merged
-I4210137227,Queen's Medical Centre,healthcare,GB,2,I4210137227,Queen's Medical Centre,itself
+I4210137227,Queen's Medical Centre,healthcare,GB,2,I1334287468,Nottingham University Hospitals NHS Trust,merged
 I4210137306,Stanford Medicine,healthcare,US,51,I97018004,Stanford University,merged
 I4210137484,Wroclaw University of Health and Sport Sciences,education,PL,1,I4210137484,Wroclaw University of Health and Sport Sciences,itself
 I4210137640,Centre Hospitalier Le Vinatier,healthcare,FR,1,I4210137640,Centre Hospitalier Le Vinatier,itself
@@ -1698,7 +1698,7 @@ I4210139110,Hangzhou Hospital of Traditional Chinese Medicine,healthcare,CN,2,I4
 I4210139202,GGZ inGeest,funder,NL,1,I4210139202,GGZ inGeest,itself
 I4210139217,Institute for Advanced Study in Toulouse,education,FR,1,I4210139217,Institute for Advanced Study in Toulouse,itself
 I4210139483,GREYC,facility,FR,4,I4210139483,GREYC,joint unit (Université de Caen Normandie; École Nationale Supérieure d'Ingénieurs de Caen)
-I4210139568,Durham VA Medical Center,healthcare,US,2,I4210139568,Durham VA Medical Center,itself
+I4210139568,Durham VA Medical Center,healthcare,US,2,I4210139568,Durham VA Medical Center,joint unit (Durham VA Health Care System; VA Mid-Atlantic Health Care Network)
 I4210139777,Berlin Institute of Health at Charité - Universitätsmedizin Berlin,facility,DE,3,I7877124,Charité – Universitätsmedizin Berlin,merged
 I4210139825,"Bases, Corpus, Langage",facility,FR,1,I201841394,Université Côte d'Azur,merged
 I4210140151,Institute of Mental Health,healthcare,SG,4,I4210140151,Institute of Mental Health,itself
@@ -1723,13 +1723,13 @@ I4210142620,Erasmus MC - Sophia Children’s Hospital,healthcare,NL,7,I280195268
 I4210142622,Wuhan Children's Hospital,healthcare,CN,1,I4210142622,Wuhan Children's Hospital,itself
 I4210142748,Shandong Academy of Sciences,education,CN,1,I4210142748,Shandong Academy of Sciences,itself
 I4210142782,University of Iowa Health Care,healthcare,US,1,I126307644,University of Iowa,merged
-I4210142845,Hanyang University Seoul Hospital,healthcare,KR,2,I4210142845,Hanyang University Seoul Hospital,itself
+I4210142845,Hanyang University Seoul Hospital,healthcare,KR,2,I4575257,Hanyang University,merged
 I4210143392,University of Pennsylvania Health System,healthcare,US,4,I4210143392,University of Pennsylvania Health System,itself
 I4210143550,Taylor's University,education,MY,1,I4210143550,Taylor's University,itself
 I4210143588,Ningbo College of Health Sciences,education,CN,2,I4210143588,Ningbo College of Health Sciences,itself
 I4210143597,Instituto Superior de Educação e Ciências,education,PT,1,I4210143597,Instituto Superior de Educação e Ciências,itself
 I4210143857,Karamay Central Hospital,healthcare,CN,1,I4210143857,Karamay Central Hospital,itself
-I4210144108,Gangnam Severance Hospital,healthcare,KR,2,I4210144108,Gangnam Severance Hospital,itself
+I4210144108,Gangnam Severance Hospital,healthcare,KR,2,I193775966,Yonsei University,merged
 I4210144177,Cognition Behaviour Technology,facility,FR,1,I201841394,Université Côte d'Azur,merged
 I4210144214,Jiangsu University of Technology,education,CN,1,I4210144214,Jiangsu University of Technology,itself
 I4210144289,Research Center for Eco-Environmental Sciences,facility,CN,5,I4210144289,Research Center for Eco-Environmental Sciences,itself
@@ -1740,7 +1740,7 @@ I4210144729,Universidade do Vale do Itajaí,education,BR,1,I4210144729,Universid
 I4210144839,Hamad bin Khalifa University,education,QA,1,I4210144839,Hamad bin Khalifa University,itself
 I4210144925,Technological University Dublin,education,IE,5,I4210144925,Technological University Dublin,itself
 I4210145102,Institut Polytechnique de Paris,education,FR,2,I4210145102,Institut Polytechnique de Paris,itself
-I4210145170,Hôpital Bichat-Claude-Bernard,healthcare,FR,2,I4210145170,Hôpital Bichat-Claude-Bernard,itself
+I4210145170,Hôpital Bichat-Claude-Bernard,healthcare,FR,2,I4210097159,Assistance Publique – Hôpitaux de Paris,merged
 I4210145235,Parkview Health,healthcare,US,10,I4210145235,Parkview Health,itself
 I4210145292,Shenzhen University Health Science Center,education,CN,10,I4210145292,Shenzhen University Health Science Center,itself
 I4210145369,Arkin,healthcare,NL,5,I4210145369,Arkin,itself
@@ -1763,7 +1763,7 @@ I4210147393,"Cognition, Action, and Sensorimotor Plasticity",facility,FR,1,I4405
 I4210147601,Anhui Provincial Children's Hospital,healthcare,CN,2,I4210147601,Anhui Provincial Children's Hospital,itself
 I4210147816,Instituto Federal do Maranhão,education,BR,3,I4210147816,Instituto Federal do Maranhão,itself
 I4210147955,Bangladesh University of Business and Technology,education,BD,1,I4210147955,Bangladesh University of Business and Technology,itself
-I4210148121,Chonnam National University Hwasun Hospital,healthcare,KR,2,I4210148121,Chonnam National University Hwasun Hospital,itself
+I4210148121,Chonnam National University Hwasun Hospital,healthcare,KR,2,I111277659,Chonnam National University,merged
 I4210148209,University of Bahri,education,SD,1,I4210148209,University of Bahri,itself
 I4210148250,Pakistan Institute of Learning and Living,other,PK,5,I4210148250,Pakistan Institute of Learning and Living,itself
 I4210148678,National Medical Center,government,KR,1,I4210148678,National Medical Center,itself
@@ -1771,7 +1771,7 @@ I4210148850,National Science Library,archive,CN,1,I4210148850,National Science L
 I4210148968,Metal Industries Research & Development Centre,nonprofit,TW,1,I4210148968,Metal Industries Research & Development Centre,itself
 I4210149079,Thomas More Kempen,education,BE,8,I4210149079,Thomas More Kempen,itself
 I4210149211,Institute of Semiconductors,facility,CN,1,I4210149211,Institute of Semiconductors,itself
-I4210149289,Atlanta VA Health Care System,healthcare,US,1,I4210149289,Atlanta VA Health Care System,itself
+I4210149289,Atlanta VA Health Care System,healthcare,US,1,I4210131075,VA Southeast Network,merged
 I4210149574,St. Joseph-Krankenhaus,healthcare,DE,1,I4210149574,St. Joseph-Krankenhaus,itself
 I4210149618,Guangdong University of Finance,education,CN,3,I4210149618,Guangdong University of Finance,itself
 I4210149656,Yeungnam University Medical Center,healthcare,KR,2,I55240360,Yeungnam University,merged
@@ -1805,13 +1805,13 @@ I4210152429,University Hospital in Halle,healthcare,DE,4,I4210152429,University 
 I4210152466,Hanyang University Medical Center,healthcare,KR,2,I4575257,Hanyang University,merged
 I4210152471,Weill Cornell Medical College in Qatar,education,QA,12,I4210152471,Weill Cornell Medical College in Qatar,itself
 I4210152533,Lanzhou University of Finance and Economics,education,CN,1,I4210152533,Lanzhou University of Finance and Economics,itself
-I4210152539,Atlanta VA Medical Center,healthcare,US,1,I4210152539,Atlanta VA Medical Center,itself
+I4210152539,Atlanta VA Medical Center,healthcare,US,1,I4210131075,VA Southeast Network,merged
 I4210152596,Nagoya Medical Center,healthcare,JP,1,I4210152596,Nagoya Medical Center,itself
 I4210152724,Institut du Cerveau,facility,FR,6,I39804081,Sorbonne Université,merged
 I4210152783,King Hussein Foundation,nonprofit,JO,11,I4210152783,King Hussein Foundation,itself
-I4210152922,LWL-Universitätsklinikum Bochum,healthcare,DE,3,I4210152922,LWL-Universitätsklinikum Bochum,itself
+I4210152922,LWL-Universitätsklinikum Bochum,healthcare,DE,3,I2799784675,University Hospitals of the Ruhr-University of Bochum,merged
 I4210153200,BC Children's Hospital,healthcare,CA,5,I4210153200,BC Children's Hospital,itself
-I4210153460,Hospital Universitari Germans Trias i Pujol,healthcare,ES,1,I4210153460,Hospital Universitari Germans Trias i Pujol,itself
+I4210153460,Hospital Universitari Germans Trias i Pujol,healthcare,ES,1,I4210153292,Institut Català de la Salut,merged
 I4210153474,Simula Metropolitan Center for Digital Engineering,nonprofit,NO,6,I4210153474,Simula Metropolitan Center for Digital Engineering,joint unit (OsloMet – Oslo Metropolitan University; Simula Research Laboratory)
 I4210153482,Changzhou University,education,CN,7,I4210153482,Changzhou University,itself
 I4210153522,South Eastern Finland University of Applied Sciences,education,FI,1,I4210153522,South Eastern Finland University of Applied Sciences,itself
@@ -1825,7 +1825,7 @@ I4210154361,Shanghai Jian Qiao University,education,CN,1,I4210154361,Shanghai Ji
 I4210154397,Suzhou Chien-Shiung Institute of Technology,facility,CN,2,I4210154397,Suzhou Chien-Shiung Institute of Technology,itself
 I4210154782,Favaloro Foundation,facility,AR,1,I4210154782,Favaloro Foundation,itself
 I4210154820,Institut Supérieur du Sport et de l’Éducation Physique de Sfax,education,TN,1,I4210154820,Institut Supérieur du Sport et de l’Éducation Physique de Sfax,itself
-I4210154891,Washington DC VA Medical Center,healthcare,US,2,I4210154891,Washington DC VA Medical Center,itself
+I4210154891,Washington DC VA Medical Center,healthcare,US,2,I4210111569,VA Capitol Health Care Network,merged
 I4210154894,Centro de Investigación Biomédica en Red de Epidemiología y Salud Pública,facility,ES,5,I4210154894,Centro de Investigación Biomédica en Red de Epidemiología y Salud Pública,itself
 I4210155144,University Hospital Ulm,healthcare,DE,1,I4210155144,University Hospital Ulm,itself
 I4210155236,National Research Council,nonprofit,IT,18,I4210155236,National Research Council,itself
@@ -1859,7 +1859,7 @@ I4210159460,NIHR Manchester Biomedical Research Centre,facility,GB,4,I4210159460
 I4210159521,Laureate Institute for Brain Research,facility,US,1,I4210159521,Laureate Institute for Brain Research,itself
 I4210159778,National Research Council Canada,government,CA,1,I4210159778,National Research Council Canada,itself
 I4210159865,Xiangya Hospital Central South University,healthcare,CN,3,I4210159865,Xiangya Hospital Central South University,itself
-I4210160144,The Catholic University of Korea Seoul St. Mary's Hospital,healthcare,KR,8,I4210160144,The Catholic University of Korea Seoul St. Mary's Hospital,itself
+I4210160144,The Catholic University of Korea Seoul St. Mary's Hospital,healthcare,KR,8,I87111246,Catholic University of Korea,merged
 I4210160192,Consorci Institut D'Investigacions Biomediques August Pi I Sunyer,facility,ES,14,I4210160192,Consorci Institut D'Investigacions Biomediques August Pi I Sunyer,itself
 I4210160205,Landesfachhochschule für Gesundheitsberufe Claudiana,healthcare,IT,2,I4210160205,Landesfachhochschule für Gesundheitsberufe Claudiana,itself
 I4210160263,Institute of Psychology,facility,RU,5,I4210160263,Institute of Psychology,itself
@@ -1877,7 +1877,7 @@ I4210161321,Universal Music Group (United States),company,US,3,I4210161321,Unive
 I4210161352,Queen Elizabeth Hospital,healthcare,BB,1,I4210161352,Queen Elizabeth Hospital,itself
 I4210161542,Istituto Nazionale di Riposo e Cura per Anziani,healthcare,IT,6,I4210161542,Istituto Nazionale di Riposo e Cura per Anziani,itself
 I4210162037,General University Hospital in Prague,funder,CZ,1,I4210162037,General University Hospital in Prague,itself
-I4210162047,Kings Park Hospital,healthcare,GB,4,I4210162047,Kings Park Hospital,itself
+I4210162047,Kings Park Hospital,healthcare,GB,4,I1289550199,Dorset HealthCare University NHS Foundation Trust,merged
 I4210162051,University Hospital Carl Gustav Carus,healthcare,DE,7,I4210162051,University Hospital Carl Gustav Carus,itself
 I4210162058,Capital University of Physical Education and Sports,education,CN,7,I4210162058,Capital University of Physical Education and Sports,itself
 I4210162215,Naval Aeronautical and Astronautical University,education,CN,1,I4210162215,Naval Aeronautical and Astronautical University,itself
@@ -1922,7 +1922,7 @@ I43439940,University of Southampton,education,GB,10,I43439940,University of Sout
 I43579087,University of Wisconsin–Milwaukee,education,US,2,I43579087,University of Wisconsin–Milwaukee,itself
 I4387152155,Warszawska Akademia Medyczna Nauk Stosowanych,education,PL,4,I4387152155,Warszawska Akademia Medyczna Nauk Stosowanych,itself
 I4387152169,Institute of Informatics & Telecommunications,facility,,7,I203474044,"National Centre of Scientific Research ""Demokritos""",merged
-I4387152181,NIHR Great Ormond Street Hospital Biomedical Research Centre,facility,GB,2,I2800129641,Great Ormond Street Hospital,merged
+I4387152181,NIHR Great Ormond Street Hospital Biomedical Research Centre,facility,GB,2,I2800349819,Great Ormond Street Hospital for Children NHS Foundation Trust,merged
 I4387152388,GHU Paris psychiatrie & neurosciences,healthcare,,3,I4387152388,GHU Paris psychiatrie & neurosciences,itself
 I4387152675,Rheinland-Pfälzische Technische Universität Kaiserslautern-Landau,education,DE,14,I4387152675,Rheinland-Pfälzische Technische Universität Kaiserslautern-Landau,itself
 I4387152804,Technological University of the Shannon: Midlands Midwest,education,,2,I4387152804,Technological University of the Shannon: Midlands Midwest,itself
@@ -1967,9 +1967,9 @@ I4387156359,South East Technological University,education,IE,1,I4387156359,South
 I4387156389,Interdisciplinarité en Santé Publique Interventions et Instruments de mesure complexes – Région Est,facility,FR,1,I90183372,Université de Lorraine,merged
 I4387930215,SINTEF Digital,facility,,2,I173888879,SINTEF,merged
 I4388446366,Indiana University Indianapolis,education,US,8,I592451,Indiana University,merged
-I4388446386,Krembil Research Institute,facility,,1,I4388446386,Krembil Research Institute,joint unit (Toronto Western Hospital; University Health Network)
+I4388446386,Krembil Research Institute,facility,,1,I1325899441,University Health Network,merged
 I4388482649,711th Human Performance Wing,government,,3,I1280414376,United States Air Force Research Laboratory,merged
-I4388482656,Ottawa Hospital Research Institute,healthcare,CA,1,I4388482656,Ottawa Hospital Research Institute,teaching hospital (university and health-system parents)
+I4388482656,Ottawa Hospital Research Institute,healthcare,CA,1,I2800722420,Ottawa Hospital,merged (teaching hospital to its health system)
 I4388482679,USC Institute for Creative Technologies,facility,,2,I1174212,University of Southern California,merged
 I4388482690,Wright Laboratory,facility,,3,I4388482690,Wright Laboratory,itself
 I4388482696,Naval Research Laboratory Information Technology Division,facility,,2,I1288214837,United States Naval Research Laboratory,merged
@@ -2027,7 +2027,7 @@ I4401726934,IFlyTek (China),company,,5,I4401726934,IFlyTek (China),itself
 I4402554026,The Sense Innovation and Research Center,facility,CH,1,I4402554026,The Sense Innovation and Research Center,itself
 I4402554184,Moscow Institute of Psychoanalysis,education,,1,I4402554184,Moscow Institute of Psychoanalysis,itself
 I4403386519,Shandong University of Arts,education,,1,I4403386519,Shandong University of Arts,itself
-I4403386527,Groupe Hospitalo-Universitaire Paris Nord,healthcare,,1,I4403386527,Groupe Hospitalo-Universitaire Paris Nord,teaching hospital (university and health-system parents)
+I4403386527,Groupe Hospitalo-Universitaire Paris Nord,healthcare,,1,I4210097159,Assistance Publique – Hôpitaux de Paris,merged (teaching hospital to its health system)
 I4403386539,Software Engineering Institute of Guangzhou,education,,1,I4403386539,Software Engineering Institute of Guangzhou,itself
 I4403386549,Munich Center for Machine Learning,education,,8,I4403386549,Munich Center for Machine Learning,joint unit (Ludwig-Maximilians-Universität München; Technical University of Munich)
 I4403386600,Faculté de médecine de Tunis,education,,1,I63596082,Tunis El Manar University,merged
@@ -2083,9 +2083,9 @@ I4405259498,Rabdan Academy,education,AE,2,I4405259498,Rabdan Academy,itself
 I4405259533,Beijing Polytechnic University,education,CN,3,I4405259533,Beijing Polytechnic University,itself
 I4405259582,Gyeongbuk Development Institute,facility,KR,2,I4405259582,Gyeongbuk Development Institute,itself
 I4405259936,Wuxi University,education,CN,2,I4405259936,Wuxi University,itself
-I4405260051,Yongin Severance Hospital,healthcare,KR,4,I4405260051,Yongin Severance Hospital,itself
+I4405260051,Yongin Severance Hospital,healthcare,KR,4,I193775966,Yonsei University,merged
 I4405260085,Université de Bretagne Occidentale,education,FR,4,I4405260085,Université de Bretagne Occidentale,itself
-I4405260259,Albany Medical College,healthcare,US,1,I4405260259,Albany Medical College,itself
+I4405260259,Albany Medical College,healthcare,US,1,I4405259726,Albany Med Health System,merged
 I4405260289,"Ulster University, Derry-Londonderry Campus",education,GB,5,I138801177,University of Ulster,merged
 I4405260292,Hrvatski institut za istraživanje mozga,facility,HR,1,I181343428,University of Zagreb,merged
 I4405260330,Hotchkiss Brain Institute,education,CA,1,I168635309,University of Calgary,merged
@@ -2096,7 +2096,7 @@ I4405260628,"University of British Columbia, Okanagan Campus",education,CA,1,I14
 I4405260631,Bridgetown International University,education,BB,2,I4405260631,Bridgetown International University,itself
 I4405260691,Kirsehir Training and Research Hospital,healthcare,TR,2,I4405260691,Kirsehir Training and Research Hospital,itself
 I4405260920,National School of Computer Science,education,TN,1,I4405260920,National School of Computer Science,itself
-I4405260934,Korea University Anam Hospital,healthcare,KR,2,I4405260934,Korea University Anam Hospital,itself
+I4405260934,Korea University Anam Hospital,healthcare,KR,2,I197347611,Korea University,merged
 I4405261024,ZURZACH Care AG,healthcare,CH,1,I4405261024,ZURZACH Care AG,itself
 I4405261073,Cornell Tech,education,US,1,I205783295,Cornell University,merged
 I4405261154,Sickkids Research Institute,facility,CA,1,I2801317318,Hospital for Sick Children,merged
@@ -2120,7 +2120,7 @@ I4405265188,Hospital Universitario General de Villalba,healthcare,ES,1,I44052651
 I4405265380,Institute of Food and Agricultural Sciences,facility,US,1,I33213144,University of Florida,merged
 I4405265933,United Imaging Intelligence (China),company,CN,4,I4210135459,United Imaging Healthcare (China),merged
 I4405265995,"Emerson University, Multan",education,PK,1,I4405265995,"Emerson University, Multan",itself
-I4405266018,Foundry Vancouver-Granville,healthcare,CA,1,I4405266018,Foundry Vancouver-Granville,itself
+I4405266018,Foundry Vancouver-Granville,healthcare,CA,1,I1301114164,Providence Health Care,merged
 I4405266176,UNIE Universidad,education,ES,1,I4405266176,UNIE Universidad,itself
 I4405266407,Alan J Flisher Centre for Public Mental Health,education,ZA,1,I4405266407,Alan J Flisher Centre for Public Mental Health,joint unit (Stellenbosch University; University of Cape Town)
 I4405266438,Azienda ULSS n. 1 Dolomiti,healthcare,IT,1,I4405266438,Azienda ULSS n. 1 Dolomiti,itself
@@ -2486,7 +2486,7 @@ I76571253,Imam Abdulrahman Bin Faisal University,education,SA,14,I76571253,Imam 
 I76766440,University of San Francisco,education,US,2,I76766440,University of San Francisco,itself
 I76835614,University of Missouri,education,US,4,I76835614,University of Missouri,itself
 I76903346,University of Coimbra,education,PT,1,I76903346,University of Coimbra,itself
-I77920804,Albany Medical Center Hospital,healthcare,US,1,I77920804,Albany Medical Center Hospital,itself
+I77920804,Albany Medical Center Hospital,healthcare,US,1,I4405259726,Albany Med Health System,merged
 I78037679,UiT The Arctic University of Norway,education,NO,10,I78037679,UiT The Arctic University of Norway,itself
 I78577930,Columbia University,education,US,69,I78577930,Columbia University,itself
 I78650965,Technische Universität Dresden,education,DE,17,I78650965,Technische Universität Dresden,itself
@@ -2636,7 +2636,7 @@ I91045830,Texas A&M University,education,US,2,I91045830,Texas A&M University,its
 I91125648,Wuhan Institute of Technology,education,CN,5,I91125648,Wuhan Institute of Technology,itself
 I91136226,University of Sheffield,education,GB,5,I91136226,University of Sheffield,itself
 I91138267,Islamic Azad University of Shiraz,education,IR,1,I91138267,Islamic Azad University of Shiraz,itself
-I911458345,Amsterdam UMC Location Vrije Universiteit Amsterdam,healthcare,NL,9,I911458345,Amsterdam UMC Location Vrije Universiteit Amsterdam,itself
+I911458345,Amsterdam UMC Location Vrije Universiteit Amsterdam,healthcare,NL,9,I4210151833,Amsterdam University Medical Centers,merged
 I911468752,Lebanese International University,education,LB,2,I911468752,Lebanese International University,itself
 I91203450,University of Haifa,education,IL,22,I91203450,University of Haifa,itself
 I913481162,Wageningen University & Research,education,NL,3,I913481162,Wageningen University & Research,itself

@@ -2692,3 +2692,24 @@ organisations (1,037 on 2+ articles). `psychology_trial_subset.py` stage 3: PMC1
 leaves → **trial list 2,139**; 4 articles without a PMID (no byline backbone) pending. **A3 part 2 deferred (proposed):**
 `retrieval/hub_spelling_scan.py --dump` rerun (same counts as RL-184): 689 lost sentences in 307 valid articles, of which
 14 in the Psychology trial. Methods: AUTHOR_IDENTITY.md §9 (R5 operational, open questions 1–4) and §10 (the table). [LOG]
+
+**RL-201 · 2026-10-26 · Owner decisions on the organisation merge; the 4 no-PMID articles checked · CODE (no network) · LIVE**
+Owner: (1) national research organisations are not merged (an institute can signal a sub-disciplinary identity);
+(2) health systems are merged (one body with branches); (3) the French experimental universities (PSL, Paris-Saclay, UGA)
+stay groupings; (4) the 4 Psychology articles without a PMID take their authors from OpenAlex (option a).
+`corpus_statistics/institution_organisations.py`: a health-system parent now absorbs its hospitals (child type
+healthcare) besides its institutes and foundations, never a university, school, company or government body; a teaching
+hospital goes to its health system and is never absorbed by its university (none: stays itself); the earlier rule kept
+as `--separate-hospitals` (reproduces the earlier `institution_organisations_psychology_trial.csv` byte for byte, checked).
+The crude earlier alternative `--merge-health-systems` (health care as an ordinary organisation) is removed: read, it
+merged Icahn School of Medicine into Mount Sinai Health System, Baylor College of Medicine into Harris Health, NIHR
+Oxford BRC (government) into its trust, and Policlinico Milano into the University of Milan. **Result: 2,716
+institutions → 2,519 organisations** (239 merged, 32 joint units, 2 hand); 77 institutions, 267 bylines changed. Largest:
+AP-HP (7 hospitals), Yonsei (3 Severance sites, via its health system), VA New England, Copenhagen University Hospital
+(3 each); teaching hospitals: Brigham and Women's → Mass General Brigham, JPS → JPS Health Network, GHU Paris Nord →
+AP-HP, SingHealth Duke-NUS AMC → SingHealth, NCT → University Hospital Heidelberg, Ottawa Hospital Research Institute →
+Ottawa Hospital; two VA centres with parents in two bodies stay themselves (5 bylines). **No-PMID articles, checked
+against the PMC header (author count and ORCIDs, cached in headers.json; no names cached):** PMC10062685 4 / 4 OpenAlex
+authorships, PMC11815263 2 / 2, PMC13355595 13 in PMC / 11 in OpenAlex, PMC13443809 5 / 4 (and no institutions on any
+OpenAlex authorship); the cached OpenAlex authorships carry no ORCIDs to compare. Two of four disagree in number with the
+publisher's record: question back to the owner before they enter the author table. Methods: AUTHOR_IDENTITY.md §9. [LOG]
