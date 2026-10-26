@@ -1,0 +1,191 @@
+pmcid,year,openalex_topic,class,class_meaning
+PMC4668058,2015,Psychotherapy Techniques and Applications,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC4809489,2016,Phonetics and Phonology Research,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC4812272,2016,Social Robot Interaction and HRI,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC4919341,2016,Child and Animal Learning Development,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC4946379,2016,Social Robot Interaction and HRI,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC5073325,2016,Reading and Literacy Development,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC5143469,2016,Digital Mental Health Interventions,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC5399225,2017,Attachment and Relationship Dynamics,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC5742219,2017,Social Robot Interaction and HRI,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC5888187,2017,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC6407889,2017,Reading and Literacy Development,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC5969226,2018,Reading and Literacy Development,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC5998765,2018,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC6094963,2018,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC6556014,2019,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC6695118,2019,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC6697505,2019,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC6712629,2019,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7065131,2019,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7093465,2020,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7229753,2020,Psychological Well-being and Life Satisfaction,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7243708,2020,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7381008,2020,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7688182,2020,Language Development and Disorders,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7732714,2020,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7766942,2020,Social Robot Interaction and HRI,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7795329,2020,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC7816238,2021,"Categorization, perception, and language",B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC7842903,2021,Reading and Literacy Development,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8042786,2021,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8044305,2021,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC8066842,2021,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8155541,2021,Social Robot Interaction and HRI,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8212927,2021,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC8255381,2021,COVID-19 and Mental Health,A,LLM / pretrained neural LM sense
+PMC8295984,2021,Language Development and Disorders,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8309929,2021,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC8380581,2021,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8418099,2021,Primate Behavior and Ecology,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8426595,2021,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8521996,2021,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC8612669,2021,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC8663675,2021,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC8674943,2021,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC8893217,2021,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC8844448,2022,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8847793,2022,Reading and Literacy Development,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8922153,2022,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC8956571,2022,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8965550,2022,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC8984258,2022,Language Development and Disorders,A,LLM / pretrained neural LM sense
+PMC9022676,2022,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC9027805,2022,Hearing Impairment and Communication,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC9038841,2022,Child and Animal Learning Development,A,LLM / pretrained neural LM sense
+PMC9077496,2022,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC9097574,2022,"Categorization, perception, and language",A,LLM / pretrained neural LM sense
+PMC9378835,2022,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9393527,2022,Hearing Impairment and Communication,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC9411740,2022,"Categorization, perception, and language",B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9460701,2022,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9541009,2022,Phonetics and Phonology Research,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9568455,2022,"Categorization, perception, and language",B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9635266,2022,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC9649813,2022,Hearing Impairment and Communication,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC9664217,2022,Second Language Acquisition and Learning,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC9666539,2022,"Categorization, perception, and language",B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9733871,2022,Human-Automation Interaction and Safety,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9813586,2022,"Anxiety, Depression, Psychometrics, Treatment, Cognitive Processes",A,LLM / pretrained neural LM sense
+PMC10007272,2023,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC10046258,2023,Psychological Testing and Assessment,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC10088863,2023,Mental Health via Writing,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC10138781,2023,Phonetics and Phonology Research,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC10173019,2023,COVID-19 and Mental Health,A,LLM / pretrained neural LM sense
+PMC10193040,2023,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC10210148,2023,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC10264688,2023,Healthcare Decision-Making and Restraints,A,LLM / pretrained neural LM sense
+PMC10398365,2023,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC10502591,2023,COVID-19 and Mental Health,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC10557512,2023,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC10646310,2023,Obsessive-Compulsive Spectrum Disorders,A,LLM / pretrained neural LM sense
+PMC10680434,2023,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC10682756,2023,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC10687833,2023,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC10694203,2023,"Categorization, perception, and language",A,LLM / pretrained neural LM sense
+PMC10694506,2023,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC10717976,2023,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC10725721,2023,Posttraumatic Stress Disorder Research,A,LLM / pretrained neural LM sense
+PMC10753156,2023,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC10845840,2023,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC10955843,2023,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC12226623,2023,Psychedelics and Drug Studies,A,LLM / pretrained neural LM sense
+PMC9897548,2023,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC9931194,2023,"LGBTQ Health, Identity, and Policy",A,LLM / pretrained neural LM sense
+PMC10804269,2024,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC10826664,2024,"Grit, Self-Efficacy, and Motivation",A,LLM / pretrained neural LM sense
+PMC10870574,2024,Psychotherapy Techniques and Applications,A,LLM / pretrained neural LM sense
+PMC10927738,2024,Stuttering Research and Treatment,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC10930454,2024,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC11042717,2024,Mental Health via Writing,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC11074920,2024,Digital Mental Health Interventions,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11130182,2024,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11141359,2024,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC11151516,2024,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC11225703,2024,Reading and Literacy Development,A,LLM / pretrained neural LM sense
+PMC11249710,2024,Reading and Literacy Development,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC11254594,2024,Human-Automation Interaction and Safety,A,LLM / pretrained neural LM sense
+PMC11280528,2024,"Categorization, perception, and language",B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11290095,2024,Educational Games and Gamification,A,LLM / pretrained neural LM sense
+PMC11296674,2024,Action Observation and Synchronization,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11420135,2024,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC11451268,2024,Child and Adolescent Psychosocial and Emotional Development,A,LLM / pretrained neural LM sense
+PMC11522189,2024,Reading and Literacy Development,A,LLM / pretrained neural LM sense
+PMC11524796,2024,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC11554535,2024,Humor Studies and Applications,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11559157,2024,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11576212,2024,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC11623090,2024,Educational Games and Gamification,A,LLM / pretrained neural LM sense
+PMC11639376,2024,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC11650168,2024,Healthcare Decision-Making and Restraints,A,LLM / pretrained neural LM sense
+PMC11836100,2024,Phonetics and Phonology Research,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC11836185,2024,"Categorization, perception, and language",A,LLM / pretrained neural LM sense
+PMC12283487,2024,Behavioral and Psychological Studies,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC12588161,2024,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11749006,2025,Psychiatric care and mental health services,A,LLM / pretrained neural LM sense
+PMC11775490,2025,Language Development and Disorders,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC11781663,2025,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC11787301,2025,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC11829440,2025,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC11855165,2025,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC11939020,2025,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC11965910,2025,Phonetics and Phonology Research,A,LLM / pretrained neural LM sense
+PMC12017333,2025,Creativity in Education and Neuroscience,A,LLM / pretrained neural LM sense
+PMC12092297,2025,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC12095813,2025,Evolutionary Psychology and Human Behavior,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC12118909,2025,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC12135024,2025,Language Development and Disorders,A,LLM / pretrained neural LM sense
+PMC12216660,2025,"Grief, Bereavement, and Mental Health",A,LLM / pretrained neural LM sense
+PMC12223686,2025,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC12267863,2025,Reading and Literacy Development,A,LLM / pretrained neural LM sense
+PMC12287077,2025,Family and Disability Support Research,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC12351866,2025,Psychotherapy Techniques and Applications,A,LLM / pretrained neural LM sense
+PMC12358507,2025,Reading and Literacy Development,A,LLM / pretrained neural LM sense
+PMC12365354,2025,Phonetics and Phonology Research,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC12461082,2025,Ergonomics and Musculoskeletal Disorders,A,LLM / pretrained neural LM sense
+PMC12467700,2025,Behavioral and Psychological Studies,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC12497510,2025,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC12511783,2025,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC12516975,2025,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC12542454,2025,Creativity in Education and Neuroscience,A,LLM / pretrained neural LM sense
+PMC12578359,2025,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC12586272,2025,Aging and Gerontology Research,A,LLM / pretrained neural LM sense
+PMC12618715,2025,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC12660901,2025,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC12685835,2025,Body Image and Dysmorphia Studies,A,LLM / pretrained neural LM sense
+PMC12718303,2025,Language Development and Disorders,A,LLM / pretrained neural LM sense
+PMC12723588,2025,Hearing Impairment and Communication,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC12729299,2025,Team Dynamics and Performance,A,LLM / pretrained neural LM sense
+PMC12768553,2025,"Categorization, perception, and language",A,LLM / pretrained neural LM sense
+PMC12798180,2025,Mental Health via Writing,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC13009235,2025,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC12833002,2026,COVID-19 and Mental Health,A,LLM / pretrained neural LM sense
+PMC12962254,2026,"Categorization, perception, and language",A,LLM / pretrained neural LM sense
+PMC12971440,2026,Social Robot Interaction and HRI,A,LLM / pretrained neural LM sense
+PMC13115347,2026,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC13128734,2026,"Categorization, perception, and language",A,LLM / pretrained neural LM sense
+PMC13136401,2026,"Categorization, perception, and language",B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC13149460,2026,"Language, Metaphor, and Cognition",B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC13186437,2026,Mental Health Treatment and Access,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC13262020,2026,Mentoring and Academic Development,A,LLM / pretrained neural LM sense
+PMC13284561,2026,Posttraumatic Stress Disorder Research,A,LLM / pretrained neural LM sense
+PMC13295652,2026,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC13337866,2026,Obsessive-Compulsive Spectrum Disorders,A,LLM / pretrained neural LM sense
+PMC13346804,2026,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC13365382,2026,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC13404416,2026,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC13439860,2026,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC13443033,2026,"Counseling, Therapy, and Family Dynamics",A,LLM / pretrained neural LM sense
+PMC13457727,2026,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC13473440,2026,Mental Health via Writing,A,LLM / pretrained neural LM sense
+PMC13495444,2026,Emotion and Mood Recognition,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC13511123,2026,Language Development and Disorders,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)
+PMC13514036,2026,Phonetics and Phonology Research,B,"computational language model, not LLM sense (n-gram, ASR, word embeddings, spaCy/Flair pipelines, LSTM, open-vocabulary regression)"
+PMC13527328,2026,COVID-19 and Mental Health,A,LLM / pretrained neural LM sense
+PMC13547093,2026,Color perception and design,A,LLM / pretrained neural LM sense
+PMC13558022,2026,Stress and Burnout Research,A,LLM / pretrained neural LM sense
+PMC13567904,2026,Emotion and Mood Recognition,A,LLM / pretrained neural LM sense
+PMC13608232,2026,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC13620155,2026,Digital Mental Health Interventions,A,LLM / pretrained neural LM sense
+PMC13623005,2026,Cultural Differences and Values,A,LLM / pretrained neural LM sense
+PMC13633051,2026,Reading and Literacy Development,C,not a computational model (a person modelling language for a child; a theory of language; a statistical model of language scores)

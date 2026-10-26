@@ -2549,3 +2549,27 @@ subfields of 221–861); Social Sciences 5.5 / 7.8 (2,495); Psychology + Neurosc
 Health Informatics 9.0 / 21.2 (5,355, 7.0 units per article). NLM agreement for Psychology is weak (of articles with a
 Broad Subject Term, 19% "Psychology", 26% "Science"); for Biochemistry/Genetics/MolBio stronger (72% have a term,
 mostly Computational Biology, Biochemistry, Genetics, Molecular Biology). No subset chosen; options put to the owner. [LOG]
+
+**RL-194 · 2026-10-26 · Trial subset: Psychology chosen; "language model" exposure read; 50-title check · AUDIT (read-only) · LIVE**
+Owner (2026-10-26): the trial runs on **Psychology, primary OpenAlex topic only (2,255 articles)**; Biochemistry's
+coupling of narrow models to subdisciplines is an expected finding, not a defect, but too large for the trial. Owner's
+concern: "language model" in psychology may mean a model of language, not an LLM. Mechanism: in the v2 matcher
+"language model(s)" is GENERIC (exact capitalisation, rejected near n-gram / statistical LM / speech recognition /
+KenLM-type patterns) but, unlike GPT or Gemini, needs no article evidence, so an article whose only focal hit is this
+term enters the corpus. **Exposure:** 190 of the 2,255 Psychology articles (8.4%) have bare "language model(s)" (with
+or without "Transformer model") as their only focal evidence, incl. 19 of the 20 Psychology articles before 2020;
+corpus-wide 3,573 of 41,640 (CS 1,090, Biochemistry 983, Medicine 435). All 190 read (assistant; context of up to two
+units per article; `corpus_statistics/psychology_lm_only_reading.csv`): **A, LLM or pretrained neural LM sense: 96;
+B, a computational language model in an older sense (n-gram, ASR language model, word2vec, spaCy/Flair pipelines,
+LSTM, open-vocabulary regression on social-media language): 66; C, not a computational model at all: 28** (a parent,
+peer or book as a "language model" for a child; a theory such as the EIF "integrative language model"; a regression
+"receptive language model" or "single-factor language model"; LIWC called a language model). C are false positives
+of the matcher; B are true language models outside the LLM sense (a scope question for the owner). Exposure inside
+articles that also name an LLM (single non-LLM units) was not measured. **Field check:** 50 Psychology titles, at least
+one per year 2015–2026, rest in proportion (`corpus_statistics/psychology_title_sample.csv`, assistant's reading):
+39 psychology or adjacent (clinical, cognitive neuroscience, psycholinguistics, mental-health research), 11 not
+(robotics 4, NLP / affective computing / computer vision 5, pharmacovigilance 1, science education 1); 7 of the 13
+sampled before 2022 are not psychology, 4 of the 37 from 2022 on; weighted by year about 13% of the field is outside
+psychology (small sample, wide uncertainty). Definition recorded on request: a G3 unit is one G2 parse unit (a
+sentence, or one clause-piece of it; 2% of sentences have 2+ units) of an article, mentioning a focal model term (98%
+of units; the rest lost their mention in curation), with its curated parent and cousin hyperedges. [LOG]
