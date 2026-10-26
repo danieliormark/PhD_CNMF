@@ -1,0 +1,15 @@
+{
+ "articles": 120,
+ "sentences": 307,
+ "shards": 44,
+ "counts": {
+  "control = production, units": 44,
+  "control = production, articles": 44,
+  "control = production, occurrences": 44,
+  "units changed in demoted sentences": 313,
+  "  of which left without a focal term": 0,
+  "  of which no longer written": 313,
+  "article status valid -> invalid_no_parent": 93
+ },
+ "other": []
+}

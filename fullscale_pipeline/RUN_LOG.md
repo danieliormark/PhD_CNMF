@@ -2595,3 +2595,32 @@ misassignment; the 50-title tally becomes 41 / 9 (about 10% outside psychology, 
 misassignment: OpenAlex topic `score` does not separate the misassigned sample titles (6 of 9 have ≥ 0.97); the error
 sits in the topic -> field mapping (e.g. "Social Robot Interaction and HRI" -> Social Psychology), not in the
 work -> topic assignment. Options studied, none implemented (owner). [LOG]
+
+**RL-196 · 2026-10-26 · Psychology: "language model" mentions demoted (targeted G3 rerun) · CODE + CORPUS DATA · LIVE**
+Owner (2026-10-26): demote, don't remove; an article leaves only if no focal unit remains; a language model counts when it
+is a pretrained neural language model, transformer or comparable ("proceed as you planned"). **Rule**
+(`g3_inputs_v3_1/build_lm_demotions.py`, 7abbc386b766), per Psychology G3 unit holding bare "language model(s)" or the v3
+hyphenated form (`v3:A6:language-model`, missed by `family_of_term` in RL-195 and found here by an article that kept a
+parent): hand-read false positive -> demote; another focal mention in the unit -> keep; strong transformer-era signal ->
+keep; specific older-type signal (n-gram, smoothing, HMM, word2vec, LSTM, ELMo, Flair, spaCy, Stanza, GloVe, LSA,
+open-vocabulary...) -> demote; weak signal (pretrained, fine-tuned, contextual) -> keep; the article names a model or
+LLM -> keep; otherwise the RL-194 article reading (A keep, B/C demote); two hand exceptions recorded in the script. A
+first version demoted every unresolved mention without article evidence and would have lost 49 articles read as
+LLM-sense; it also let "parameters", "state of the art" and "pretrained word embeddings" count as transformer signals,
+and let generic words ("word embeddings", "acoustic") demote pretrained-LM sentences; all corrected before the run (0
+LLM-sense articles lost, 1 older-type article kept: a masked LM, transformer under the rule). One more false positive
+found through the article label ("the trained receptive language model" = a teaching framework): 55 false-positive
+units in total. Units: 2,102 in Psychology; demote 307 sentences (55 false positives, 252 older type), keep 1,790; no
+sentence mixes decisions. List `PG/g3_inputs_v3_1/lm_demotions_psychology.tsv` (7ff49e888f70; tracked copy). **G3:**
+`g3_curation_v2.py` gains `--extra-rejections FILE` (rows added to term_rejections.tsv's, sha recorded in the report;
+without it unchanged: self-test 179/179; script 87dd1a3a4143, mirrored to PG/scripts/g3_v2/). **Targeted rerun**
+(`g3_v2/lm_demotion_run.py`, b618da64655e): the 120 affected articles from their 44 G2 shards, curated twice into
+`PG/g3_v2_lm_demotion/{control,demoted}/` with each shard's positions file; **control = production** for every unit,
+article and occurrence row of these articles in all 44 shards; demoted differs only in the 307 sentences (313 units no
+longer written: the demoted units and 6 focal-free siblings that were cousins of them; none left as a focal-free unit),
+**93 articles valid -> invalid_no_parent** (64 older-type, 28 false-positive, 1 hand), as predicted
+(`g3_v2/lm_demotion_check.json`). Production `PG/g3_v2/` unchanged; the M1 trial builder takes the 120 articles from
+`PG/g3_v2_lm_demotion/demoted/`. Psychology after demotion: 2,162 articles. Owner also (2026-10-26): mental-health
+detection is psychology; field review of the 2,162 to be done in two steps (assistant judges on title, keywords, journal,
+abstract when unsure; owner reviews the assistant's false positives). Rest of the corpus not treated (the same matcher
+gap exists there, RL-194). [LOG]

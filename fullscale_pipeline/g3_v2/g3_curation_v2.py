@@ -1787,6 +1787,9 @@ def run(a):
     excluded, llm_out, corrections = load_lists()
     global REJECT, G4D, FORMS
     REJECT = load_rejections()
+    if a.extra_rejections:                                              # RL-196: demotions added to term_rejections.tsv's
+        for r in csv.DictReader(open(a.extra_rejections, encoding="utf-8"), delimiter="\t"):
+            REJECT[0 if r["scope"] == "sentence" else 1].setdefault(r["key"], set()).add(r["term"].lower())
     G4D = load_g4()
     FORMS = {r['key']: r['form'] for r in csv.DictReader(open(COMPOUND_FORMS, encoding='utf-8'), delimiter='\t')}
     HUB_FAMS.update(l.strip() for l in open(HUB_FAMILIES, encoding='utf-8') if l.strip() and not l.startswith('#'))
@@ -1948,6 +1951,7 @@ def run(a):
                   host=os.uname().nodename, job=os.environ.get("SLURM_ARRAY_JOB_ID") or os.environ.get("SLURM_JOB_ID"),
                   task=os.environ.get("SLURM_ARRAY_TASK_ID"), inputs={p: h for p, h in INPUT_SHA.items()},
                   positions=dict(file=pos_p, sha=sha(pos_p) if pos_p else None, units_exact=len(positions)),
+                  extra_rejections=dict(file=a.extra_rejections, sha=sha(a.extra_rejections)) if a.extra_rejections else None,
                   limit=a.limit, seconds=round(secs, 1), seconds_per_unit=round(secs / max(stats['units'], 1), 4), counts=dict(stats),
                   focal_surface_to_canonical=[[s, c, n] for (s, c), n in surfaces.most_common()],
                   detail={k: dict(v.most_common(60)) for k, v in detail.items()}, problems=problems[:200], n_problems=len(problems))
@@ -2155,6 +2159,8 @@ def main():
     ap.add_argument("--modals", choices=("keep", "tag", "drop"), default="keep")
     ap.add_argument("--db", action="store_true", help="also write the graphbrain database in chunk12's form")
     ap.add_argument("--show", type=int, default=8, help="random curated units printed for reading")
+    ap.add_argument("--extra-rejections", help="RL-196: a TSV in term_rejections.tsv's form (scope, key, term, reason) "
+                    "whose rows are added to it; recorded with its sha256 in the report")
     a = ap.parse_args()
     if a.selftest:
         sys.exit(1 if selftest() else 0)
