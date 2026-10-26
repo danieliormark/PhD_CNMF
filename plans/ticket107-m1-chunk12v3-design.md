@@ -973,7 +973,7 @@ Owner decisions (2026-10-26, RL-193 to RL-198): the first M1 trial runs on one d
 OpenAlex primary-topic field (not by any of an article's topics; NLM Broad Subject Terms rejected as the source: 54%
 coverage, megajournal "Science"). Reason: few texts, several model families, general and possibly subfield-specific
 models; Biochemistry (model-rich, narrow models tied to subfields — an expected finding, not a defect) is larger than
-needed for a trial. Article list **`fullscale_pipeline/corpus_statistics/psychology_trial_pmcids.txt`, 2,142 articles**
+needed for a trial. Article list **`fullscale_pipeline/corpus_statistics/psychology_trial_pmcids.txt`, 2,140 articles** (RL-199)
 (`psychology_trial_subset.py`; each exclusion with its stage and reason in `psychology_trial_exclusions.csv`):
 - 2,255 working-corpus-v2 articles with primary field Psychology;
 - −93: no focal unit left after the demotion of non-LLM "language model" mentions (G3_POSTPROCESSING.md §8 item 12;
