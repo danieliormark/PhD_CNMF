@@ -962,3 +962,7 @@ ORCID (sample read 2026-10-24: mostly OpenAlex merging different people, several
 with two ORCIDs); (1c) linking of the 12,106 bylines without ID or ORCID, option B (step 1 of author_links_trial.py:
 to an identified person, 1,424 bylines) or C (steps 1 and 2: also among unidentified bylines, +548), measured on the
 working corpus v2 (scratch, read-only).
+*[2026-10-26: the open points above (1b, 1c) are decided, and two further cases (an ORCID on different people; an
+OpenAlex ID on different names) were found and decided. The full rule set R1–R6, the name test, examples, checks, bias
+and the simulated result are in `fullscale_pipeline/AUTHOR_IDENTITY.md` (RUN_LOG RL-189 to RL-192); that file supersedes
+this addendum on author identity.]*

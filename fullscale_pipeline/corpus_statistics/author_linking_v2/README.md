@@ -15,3 +15,10 @@ folder: `python3 <script>.py`.
 | `hide_recover.py` | strict B rule (owner-approved): hide identified bylines of people on 2+ articles, measure recovery and precision |
 | `false_merge.py` | strict B: hide single-article people and remove them as candidates; every link is to another ID (upper bound of false merges) |
 | `strict_sample.py` | strict B on the unidentified bylines, with a stratified sample for reading |
+| `orcid_conflicts.py` | R3: ORCIDs on bylines with different names, outcome of the decided rule |
+| `bias_check.py` | who R2 and R3 affect: country of the byline's institution, team size |
+| `oa_name_conflicts.py` | problem C: OpenAlex IDs whose bylines carry different names (and the rejected R6 variant) |
+| `c_delete.py` | problem C: deletion variants D1 (decided) and D2 |
+| `pipeline_sim.py` | the whole sequence in order: `python3 pipeline_sim.py B_then_A pubmed --C` |
+
+Rules, decisions and results: `fullscale_pipeline/AUTHOR_IDENTITY.md`; log RL-189 to RL-192.
