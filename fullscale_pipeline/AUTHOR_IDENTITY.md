@@ -149,3 +149,26 @@ R2's drop falls on Chinese bylines at 2.7 times their share (about 185 of ~53,80
 0.05% of US bylines): OpenAlex joins different people most often under frequent Chinese names. R3 removes no byline; it
 also affects Chinese bylines more than their share, but those bylines stay in the author facet with their own OpenAlex
 ID. Deleting R3's bylines instead would add a second drop with the same skew.
+
+## 6. The rules together (simulation, 2026-10-26)
+
+Owner (2026-10-26): Problem A (R2) stays a deletion: bylines under an OpenAlex ID that cannot be deduplicated with
+certainty are removed. Simulation of the whole sequence on the working corpus v2, read-only
+(`author_linking_v2/pipeline_sim.py ORDER pubmed`; problem A defined by PubMed ORCIDs, as decided):
+
+| Step | Without B | B before A (proposed) |
+|---|---|---|
+| bylines at start | 254,986 | 254,986 |
+| B (R3): bylines whose ORCID label is removed (incl. an ORCID on 2+ bylines of one article) | — | 500 |
+| A (R2): OpenAlex IDs with 2+ ORCIDs / not deduplicable | 102 / 61 | 89 / 57 |
+| A: bylines removed (articles left without any author) | 323 (2) | 306 (2) |
+| R1: identified bylines | 242,557 | 242,526 |
+| distinct persons | 190,283 | 190,416 |
+| OpenAlex IDs joined into another person through a shared ORCID | 2,427 | 2,254 |
+| persons joined across OpenAlex IDs whose names are different people | **158** | **31** |
+| bylines without any identifier, input to R4 | 12,106 | 12,154 |
+
+Order: B before A, because some OpenAlex IDs carry two ORCIDs only because a publisher copied one onto a co-author;
+cleaning the ORCIDs first leaves 4 fewer IDs and 17 fewer bylines to delete. The remaining 31 joined persons with
+different names are, by the name test's conservative errors, partly nicknames and changed surnames; to be read before
+the author table is built.
