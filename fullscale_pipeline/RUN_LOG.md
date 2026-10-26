@@ -2475,3 +2475,18 @@ county hospital co-affiliation with the same group). Earlier in the day 21 links
 co-author+institution kind read: all right; 10 weak links (institution only / one co-author): about half doubtful
 (CSIRO Data61 vs CSIRO Herston; Penn genomics vs Penn medicine) — the reason for the strict rule. Nothing applied to any
 data yet: the author table for M1 is built after the subset choice. [LOG]
+
+**RL-190 · 2026-10-26 · Author identity: name test corrected, methods written (AUTHOR_IDENTITY.md) · AUDIT + DOCS · LIVE**
+Owner (2026-10-26): the previous report was too vague; explain the procedures as a methods section, with examples. While
+writing it, three faults of the name-compatibility test of RL-189 (`author_linking_v2/orcid_names2.py`) were found and
+fixed: (1) a surname found anywhere inside the other's full name counted as agreeing, so "Li, Chen" matched "Liu,
+Chen" — now only for surnames of 4+ letters that are at least 60% of the longer one; (2) a fallback accepted any shared
+given-name part ("Zhang, Wei" = "Zhang, Wen Wei") — removed; (3) initials were accepted only when one side was all
+initials ("C Raina" ≠ "Chandini Raina") — now given names are compared part by part, each pair identical or one the
+initial of the other; and names made of the same parts divided differently between the fields ("Varas Pardo, Pablo" /
+"Pardo, Pablo Varas") count as one person. Effect: R2 (1b) unchanged (41 IDs kept, 61 dropped, 323 bylines, 291 articles,
+2 articles without author); ORCIDs on incompatible names 609 (RL-189's 457 and the earlier 202 superseded). Proposed R3
+for them (`author_linking_v2/orcid_conflicts.py`): one person when every name group shares an OpenAlex ID (435 ORCIDs);
+else the ORCID stays with the largest name group (68) or, on a tie, with nobody (106); 311 bylines lose the ORCID, 232
+keep their own OpenAlex ID, 32 fall under R2, 47 are left without ID (R4 or own person); none dropped by R3 itself.
+Methods with all rules (R1–R5), terms, the name test and examples: `fullscale_pipeline/AUTHOR_IDENTITY.md`. [LOG]

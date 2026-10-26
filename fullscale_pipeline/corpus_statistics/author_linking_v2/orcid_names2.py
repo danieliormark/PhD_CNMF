@@ -3,17 +3,20 @@ import random, itertools
 TR = str.maketrans({"æ": "ae", "ø": "o", "ı": "i", "ß": "ss", "đ": "d", "ł": "l", "œ": "oe", "Æ": "ae", "Ø": "o", "Ł": "l"})
 def tk(z): return re.findall(r"[a-z]+", norm((z or "").translate(TR)))
 def compatible(x, y):
+    if sorted(tk(x["last"]) + tk(x["fore"])) == sorted(tk(y["last"]) + tk(y["fore"])): return True   # same parts, other split
     lx, ly = "".join(tk(x["last"])), "".join(tk(y["last"]))
     fx, fy = tk(x["fore"]), tk(y["fore"])
     allx, ally = "".join(tk(x["last"]) + fx), "".join(tk(y["last"]) + fy)
-    sur = lx == ly or lx in ally or ly in allx
+    # a surname may sit inside the other's full name (particles or compound parts written elsewhere: "Momi, Elena De" /
+    # "Demomi, Elena"), but only if it has 4+ letters and is at least 60% of the longer surname, so "Li" is never "Liu"
+    inside = lambda s, full, other: len(s) >= 4 and len(s) >= 0.6 * max(len(s), len(other)) and s in full
+    sur = lx == ly or inside(lx, ally, ly) or inside(ly, allx, lx)
     if not sur: return False
     if not fx or not fy: return True
-    ix, iy = "".join(t[0] for t in fx), "".join(t[0] for t in fy)
-    only_init = lambda f: all(len(t) == 1 for t in f) or (len(f) > 1 and len(f[0]) > 1 and all(len(t) == 1 for t in f[1:]) and False)
-    if fx[0] == fy[0] or "".join(fx) == "".join(fy): return True
-    if (only_init(fx) or only_init(fy)) and (ix.startswith(iy) or iy.startswith(ix)): return True
-    return bool(set(fx) & set(fy + tk(y["last"]))) or bool(set(fy) & set(fx + tk(x["last"])))
+    if "".join(fx) == "".join(fy): return True                    # Zheng-Hao / Zhenghao, An'an / Anan
+    # given names part by part from the left: equal, or one part is the other's initial; one may have fewer parts
+    # (Andrew J E / Andrew John Ervine; C Raina / Chandini Raina; A M B / Ana M B); Miji / Minjae and Wei / Wen Wei fail
+    return all(p == q or (len(p) == 1 and q.startswith(p)) or (len(q) == 1 and p.startswith(q)) for p, q in zip(fx, fy))
 o2b = collections.defaultdict(list)
 for b in B:
     o = b["pm_orcid"] or b["oa_orcid"]
