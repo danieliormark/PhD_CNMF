@@ -82,6 +82,10 @@ P = collections.defaultdict(list)
 for b in ident: P[find(("A", b["oa_id"]) if b["oa_id"] else ("O", b["orc"]))].append(b)
 bad = [p for p, bs in P.items() if len({x["oa_id"] for x in bs if x["oa_id"]}) > 1 and not all(compatible(bs[0], x) for x in bs)]
 log.append(("    persons joined across OpenAlex IDs whose names are different people", len(bad), None))
+if "--show" in sys.argv:
+    for p in bad:
+        bs = P[p]
+        print("JOIN", sorted({(f"{x['last']}, {x['fore']}", (x['oa_id'] or '-').rsplit('/',1)[-1], x['orc'] or '-', (x['afftext'] or '')[:55]) for x in bs})[:6])
 U = [b for b in kept if not (b["oa_id"] or b["orc"])]
 log.append(("unidentified bylines before R4", len(U), None))
 for name, v, a in log: print(f"{name:95s} {v:>9,}" + (f"   (articles left without any author: {a:,})" if a is not None and "removed" in name else ""))

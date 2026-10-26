@@ -51,6 +51,11 @@ only splits one person's ties in two.
 | Brooksbank, Catherine / Brooksbank, Cath | different | a nickname is not an initial (known conservative error) |
 | Kühnel, Lisa / Langnickel, Lisa | different | a changed surname (known conservative error) |
 
+Additions of 2026-10-26: (5) German umlauts: each name is compared in two forms, umlauts dropped (ü → u) and written
+out (ü → ue); two names agree if they agree in either form ("Muehlensiepen" = "Mühlensiepen", "Muller" = "Müller"), and
+an "ue" already in a name is never shortened ("Xue" ≠ "Xu", "Jae" ≠ "Ja"); (6) a compound surname written in full or in
+part counts as the same surname when the given names are identical ("León-Mateos, Leticia" = "Leon, Leticia").
+
 Known conservative errors: nicknames, changed surnames and misspelt surnames count as different people. Their effect
 is a missed merge, never a wrong one.
 
@@ -78,7 +83,7 @@ stays with its other authors. An article left with no author is removed from the
 Result: 41 IDs kept, 61 dropped: 323 bylines in 291 articles; 2 articles left with no author (PMC13216025,
 PMC13447246).
 
-**R3 (proposed). One ORCID on bylines with different names.** 609 ORCIDs appear on bylines whose names are different
+**R3 (decided 2026-10-26, applied before R2). One ORCID on bylines with different names.** 609 ORCIDs appear on bylines whose names are different
 people by §2 (783 bylines in the less frequent name; 129 on one article). Without a check, R1 would merge them: the ORCID
 of Jianlin Cheng (12 bylines) also appears on one byline of his co-author Shreya Basnet, so they would become one person.
 Many cases, however, are malformed name fields of one person ("E, Klang" for "Klang, Eyal"; "J, Andrew" for
@@ -172,3 +177,22 @@ Order: B before A, because some OpenAlex IDs carry two ORCIDs only because a pub
 cleaning the ORCIDs first leaves 4 fewer IDs and 17 fewer bylines to delete. The remaining 31 joined persons with
 different names are, by the name test's conservative errors, partly nicknames and changed surnames; to be read before
 the author table is built.
+
+## 7. Problem C: one OpenAlex ID on bylines with different names (found 2026-10-26)
+
+Reading the 31 joins left in §6: about 15 one person (naming conventions, nicknames, transliteration, misspellings), about
+14 two people, 2 unclear. The two-person cases share one cause not covered by R2: one OpenAlex ID holds bylines whose
+names are different people while carrying at most one ORCID (Jiang Yongxiang / Jiang Yuqin; Kim Kwang Gi / Kim Bong Chul;
+Aaron Y Lee / Cecilia S Lee). Corpus-wide (`author_linking_v2/oa_name_conflicts.py`, final name test): 470 of 188,729
+OpenAlex IDs hold 2+ name groups, 1,608 bylines, 656 in a name other than the most frequent. Sample of 20 read: about 12
+different people (mostly at different institutions: Liu Dianbo / Li Yue; Zhou Xuezhong / Zhu Qiang), about 8 one person
+(mostly at the same institution: Rama / Ramalingam Chellappa; Jankovski / Jankowski).
+**R6 (proposed).** Per such ID: the largest name group keeps the ID; a byline of another name group keeps it only if it
+shares an OpenAlex institution or a co-author's OpenAlex ID with a byline of the largest group, on another article; a
+tie keeps the ID only for groups tied this way to another group. A byline that loses the ID keeps its own ORCID if it has
+one (113), else it is a byline without identifier (R4 or its own person). Nothing is deleted. Count: 386 minority bylines
+keep the ID (e.g. "E, Klang" with "Klang, Eyal"; "Hancock, Jeff" with "Hancock, Jeffrey"), 590 lose it (ties counted on
+both sides; e.g. Mario S / Mario E Valdés-Tresanco, two people; "Müller, Beat Peter" / "Müller-Stich, Beat P", one person,
+a conservative miss). Who loses the ID: China 71.7%, US 4.9%, Korea 2.9%: OpenAlex joins different people most often under
+frequent Chinese names; losing the ID splits such a person rather than deleting them.
+Alternative: delete these bylines, as in R2.

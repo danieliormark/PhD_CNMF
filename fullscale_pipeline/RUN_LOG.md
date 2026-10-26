@@ -2490,3 +2490,18 @@ for them (`author_linking_v2/orcid_conflicts.py`): one person when every name gr
 else the ORCID stays with the largest name group (68) or, on a tie, with nobody (106); 311 bylines lose the ORCID, 232
 keep their own OpenAlex ID, 32 fall under R2, 47 are left without ID (R4 or own person); none dropped by R3 itself.
 Methods with all rules (R1–R5), terms, the name test and examples: `fullscale_pipeline/AUTHOR_IDENTITY.md`. [LOG]
+
+**RL-191 · 2026-10-26 · Author identity: R3 decided; the 31 remaining joins read; problem C found; name test extended · AUDIT + DOCS · LIVE**
+Owner (2026-10-26): problem A (R2) stays a deletion; problem B (R3) accepted, applied before R2, with OpenAlex's rule (an
+ORCID on 2+ bylines of one article is not trusted on that article). The 31 persons left joined across OpenAlex IDs with
+different names (pipeline simulation, AUTHOR_IDENTITY.md §6) read: about 15 one person (Duraisamy / "Hemanth, D Jude";
+"E, Klang"; Jeff / Jeffrey Hancock; Yuri / Yuriy Vasilev; Duevel / Düvel), about 14 two people, 2 unclear; the two-person
+cases come from a case not covered by R2: an OpenAlex ID holding different names with at most one ORCID (**problem C**).
+Name test extended: umlauts compared in two forms (dropped and written out; an existing "ue" never shortened, so Xue ≠ Xu,
+Jae ≠ Ja — a first version collapsed every "ae/oe/ue" and wrongly joined Wang Mae / Wang Ma, caught by the test pairs
+before any count was reported); compound surname in full or in part with identical given names. Recounts: ORCIDs on
+different names 554 (722 minority bylines); R2 unchanged (102 / 41 kept / 61 dropped / 323 bylines / 2 articles);
+pipeline B then A: 482 ORCID labels removed, 57 IDs / 306 bylines deleted, 190,409 persons, 30 cross-ID joins with
+different names. Problem C: 470 OpenAlex IDs, 656 minority bylines; proposed R6 (minority name keeps the ID only if tied
+to the main name by institution or co-author; else loses the ID, nothing deleted): 386 keep, 590 lose, of the losers
+71.7% at Chinese institutions. Methods updated (§2 additions, §7). [LOG]
