@@ -54,6 +54,17 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    **Open, waiting for the owner:** A3 part 2 — 688 distinct sentences (833 spellings) in 307 valid articles lost upstream
    because the v3 matcher missed lower-case spellings; needs P2 with the extended matcher -> P6 -> P7 (frozen REF ids) ->
    G2 -> merge `g2_v3_3` -> G3. Then B3 (author dedup stats, 2026 decision), B5 housekeeping, M1 discussion.
+1e. **Metadata and author identity — DONE up to the subset choice (RL-187 to RL-192, 2026-10-24/26).** Working corpus v2
+   = RL-186 valid minus 113 retracted = 41,640 (`corpus_statistics/working_corpus_v2_pmcids.txt`); PubMed and OpenAlex
+   metadata for all (bylines, affiliations, NLM journals, OpenAlex works, institutions, topics); B5 housekeeping
+   (RL-155b; `LCS/article_whitelist_v3_1.txt`). Author rules decided (owner), methods in
+   `fullscale_pipeline/AUTHOR_IDENTITY.md`: 1d PubMed ORCID preferred; R3 faulty ORCID labels removed; R2 and R6 delete
+   bylines under OpenAlex IDs that cannot be deduplicated with certainty (306 + 844 bylines, 7 articles leave); R1 merge
+   through shared ORCIDs; R4 strict linking of the 12,150 unidentified bylines; R5 institutions to the nearest
+   university parent. Simulated, not yet applied: the author table is built after the subset choice. The OpenAlex key is
+   given by the owner in the dialog when needed, never stored.
+   **Next:** the trial subset (field or model family; table of candidates from OpenAlex topics + NLM journals; size),
+   then A3 part 2 (lost sentences), then the M1 author table and matrices.
 1d. **G3 RL-186 rerun — DONE (2026-10-24).** G2 positions pass (`PG/g2_v3_2_pos/`, 825,554 of 825,698 units exact):
    provenance per hyperedge; focal names replaced and placed by their own positions (two pre-existing errors fixed);
    contrast words kept (without, versus, than, unlike, in_contrast). `PG/g3_v2/` 41,753 valid, 640 invalid, 6,953
