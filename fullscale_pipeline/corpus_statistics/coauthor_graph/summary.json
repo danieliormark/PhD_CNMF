@@ -1,0 +1,213 @@
+{
+ "articles": 2139,
+ "IN": {
+  "edges": 1108,
+  "articles_with_a_tie": 741,
+  "articles_without": 1398,
+  "mean_degree_all_articles": 1.036,
+  "mean_degree_tied": 2.991,
+  "components": 208,
+  "largest_components": [
+   159,
+   31,
+   13,
+   12,
+   11,
+   9,
+   9,
+   8,
+   7,
+   7
+  ],
+  "giant_share_of_tied": 0.2146,
+  "leiden": {
+   "n_communities": 215,
+   "largest": [
+    39,
+    31,
+    29,
+    29,
+    24,
+    13,
+    13,
+    12,
+    11,
+    10
+   ],
+   "singletons_or_pairs": 144,
+   "modularity": 0.9736,
+   "weight_inside": 0.9916,
+   "conductance_median": 0.0,
+   "conductance_weighted_by_size": 0.0069
+  },
+  "louvain": {
+   "n_communities": 215,
+   "largest": [
+    39,
+    31,
+    30,
+    28,
+    22,
+    13,
+    13,
+    12,
+    11,
+    10
+   ],
+   "singletons_or_pairs": 144,
+   "modularity": 0.9734,
+   "weight_inside": 0.9918,
+   "conductance_median": 0.0,
+   "conductance_weighted_by_size": 0.0064
+  },
+  "giant_component": {
+   "size": 159,
+   "leiden_communities_inside": 8,
+   "leiden_sizes_inside": [
+    39,
+    29,
+    29,
+    24,
+    13,
+    10,
+    9,
+    6
+   ]
+  },
+  "purity_topic": {
+   "random_pairs": 0.0828,
+   "tied_pairs": 0.4468,
+   "components": 0.2677,
+   "giant_component": 0.2669,
+   "leiden": 0.3426
+  },
+  "purity_subfield": {
+   "random_pairs": 0.2497,
+   "tied_pairs": 0.509,
+   "components": 0.3301,
+   "giant_component": 0.3154,
+   "leiden": 0.4633
+  }
+ },
+ "EXT": {
+  "edges": 2153,
+  "articles_with_a_tie": 874,
+  "articles_without": 1265,
+  "mean_degree_all_articles": 2.013,
+  "mean_degree_tied": 4.927,
+  "components": 174,
+  "largest_components": [
+   430,
+   11,
+   10,
+   9,
+   8,
+   7,
+   6,
+   6,
+   5,
+   5
+  ],
+  "giant_share_of_tied": 0.492,
+  "leiden": {
+   "n_communities": 202,
+   "largest": [
+    45,
+    43,
+    40,
+    36,
+    28,
+    26,
+    23,
+    21,
+    19,
+    18
+   ],
+   "singletons_or_pairs": 128,
+   "modularity": 0.9479,
+   "weight_inside": 0.9708,
+   "conductance_median": 0.0,
+   "conductance_weighted_by_size": 0.0265
+  },
+  "louvain": {
+   "n_communities": 198,
+   "largest": [
+    51,
+    51,
+    46,
+    41,
+    26,
+    23,
+    22,
+    18,
+    18,
+    16
+   ],
+   "singletons_or_pairs": 126,
+   "modularity": 0.9452,
+   "weight_inside": 0.9727,
+   "conductance_median": 0.0,
+   "conductance_weighted_by_size": 0.0234
+  },
+  "giant_component": {
+   "size": 430,
+   "leiden_communities_inside": 29,
+   "leiden_sizes_inside": [
+    45,
+    43,
+    40,
+    36,
+    28,
+    26,
+    23,
+    21,
+    19,
+    18
+   ]
+  },
+  "purity_topic": {
+   "random_pairs": 0.0828,
+   "tied_pairs": 0.3363,
+   "components": 0.136,
+   "giant_component": 0.1346,
+   "leiden": 0.2547
+  },
+  "purity_subfield": {
+   "random_pairs": 0.2497,
+   "tied_pairs": 0.4203,
+   "components": 0.2438,
+   "giant_component": 0.2427,
+   "leiden": 0.3566
+  }
+ },
+ "hymmsbm_IN_K4": {
+  "hyperedges_persons": 496,
+  "nodes": 741,
+  "loglik": -2613.7,
+  "community_sizes_argmax": [
+   213,
+   189,
+   173,
+   166
+  ],
+  "max_share_median": 1.0,
+  "share_of_articles_max_share_ge_0_9": 0.937,
+  "normalised_entropy_median": 0.0,
+  "giant_component_argmax_sizes": [
+   52,
+   51,
+   35,
+   21
+  ],
+  "components_split_across_communities": 11,
+  "tied_pairs_same_argmax": 0.6986,
+  "w_diagonal": [
+   0.00088,
+   0.00129,
+   0.00221,
+   0.0023
+  ],
+  "purity_topic": 0.144,
+  "purity_subfield": 0.2619
+ }
+}

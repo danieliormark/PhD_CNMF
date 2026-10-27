@@ -1,0 +1,742 @@
+pmcid,component,leiden,louvain,hymmsbm_argmax,hymmsbm_max_share,subfield,topic
+PMC10076638,0,6,33,0,1.0,Social Psychology,Mental Health via Writing
+PMC10131846,8,16,5,1,1.0,Social Psychology,Mental Health via Writing
+PMC10133273,28,42,7,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10146352,16,29,113,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC10173019,0,0,34,0,0.0,Clinical Psychology,COVID-19 and Mental Health
+PMC10176127,28,42,7,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10193040,6,11,133,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10198496,68,138,12,3,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC10210148,69,77,13,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10218357,70,115,14,2,1.0,Social Psychology,Mental Health via Writing
+PMC10227700,30,58,15,1,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC10233432,71,139,16,1,1.0,Social Psychology,Mental Health via Writing
+PMC10239682,17,28,17,2,1.0,Developmental and Educational Psychology,Child and Animal Learning Development
+PMC10254409,0,3,18,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC10265411,2,5,24,2,1.0,Clinical Psychology,Child Abuse and Trauma
+PMC10267322,0,3,18,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10276193,72,116,20,3,1.0,Social Psychology,Mental Health via Writing
+PMC10276317,18,27,21,0,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC10308283,73,117,22,2,1.0,Social Psychology,Mental Health via Writing
+PMC10320821,74,71,23,2,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC10395525,75,118,25,0,1.0,Developmental and Educational Psychology,Children's Physical and Motor Development
+PMC10403793,0,2,42,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10413073,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10427505,0,3,18,0,0.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC10482772,78,141,28,0,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC10483682,2,5,24,3,1.0,Social Psychology,Mental Health via Writing
+PMC10485275,3,7,29,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10503434,0,3,18,2,0.0,Clinical Psychology,Personality Disorders and Psychopathology
+PMC10506600,79,142,30,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10510804,2,5,24,0,1.0,Social Psychology,Mental Health via Writing
+PMC10514249,80,143,32,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10551796,0,3,18,0,0.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC10556019,0,6,33,0,1.0,Social Psychology,Mental Health via Writing
+PMC10566739,0,6,33,1,1.0,Social Psychology,Mental Health via Writing
+PMC10575561,14,21,35,3,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC10606253,82,145,37,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC10615993,19,24,38,2,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC10620349,0,2,18,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10625083,32,62,39,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10663535,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC10682756,0,12,180,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC10687833,84,146,43,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10704018,85,147,44,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10718481,34,48,45,1,1.0,Social Psychology,Mental Health via Writing
+PMC10722371,86,119,46,3,1.0,Social Psychology,Mental Health via Writing
+PMC10722897,14,21,35,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10730549,0,4,47,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10733821,29,33,11,2,1.0,Social Psychology,"LGBTQ Health, Identity, and Policy"
+PMC10739834,35,55,48,3,1.0,Social Psychology,Deception detection and forensic psychology
+PMC10740653,36,60,49,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10762606,9,15,50,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10766703,87,120,51,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10788443,88,148,52,3,1.0,Developmental and Educational Psychology,"Identity, Memory, and Therapy"
+PMC10794729,89,87,53,2,1.0,Social Psychology,Mental Health via Writing
+PMC10799551,37,38,54,2,1.0,Social Psychology,Mental Health via Writing
+PMC10804269,0,6,33,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10820860,90,149,55,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC10821954,91,109,56,1,1.0,Experimental and Cognitive Psychology,Cognitive Functions and Memory
+PMC10834405,0,0,34,3,1.0,Social Psychology,Psychological Well-being and Life Satisfaction
+PMC10835279,0,2,42,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10851123,3,7,29,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10870574,30,58,15,1,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC10879976,0,3,18,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC10902768,39,50,60,3,1.0,Social Psychology,Mental Health via Writing
+PMC10917141,94,88,61,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC10932590,1,1,99,1,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC10949372,96,79,63,1,1.0,Social Psychology,Mental Health via Writing
+PMC10954708,65,135,2,3,1.0,Clinical Psychology,Personality Traits and Psychology
+PMC10955843,0,0,34,0,0.0,Social Psychology,Mental Health via Writing
+PMC10955894,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC10955977,8,16,5,1,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC10956846,13,22,31,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC10967986,34,48,45,1,1.0,Social Psychology,Mental Health via Writing
+PMC10979340,28,42,7,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC10990988,14,21,35,3,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC10991023,27,47,6,3,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC10998627,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC11002203,99,110,66,1,1.0,Social Psychology,Mental Health via Writing
+PMC11008499,102,154,69,0,1.0,Experimental and Cognitive Psychology,Philosophy and Theoretical Science
+PMC11008604,103,89,70,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11024752,0,2,42,1,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC11039595,68,138,12,3,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC11041488,0,6,33,0,1.0,Clinical Psychology,COVID-19 and Mental Health
+PMC11045867,104,90,72,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11065872,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC11085041,2,5,24,3,0.916,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11090870,0,2,42,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC11091805,41,64,74,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11092373,33,56,40,1,1.0,Social Psychology,Mental Health Treatment and Access
+PMC11093288,83,86,41,1,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11102489,0,3,18,0,1.0,Social Psychology,Mental Health via Writing
+PMC11106393,107,157,76,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11112053,64,85,0,1,1.0,Social Psychology,Mental Health via Writing
+PMC11112344,0,3,18,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11117131,7,13,8,0,1.0,Social Psychology,Mental Health via Writing
+PMC11127131,39,50,60,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11129781,42,34,78,3,1.0,Social Psychology,Mental Health via Writing
+PMC11133150,19,24,38,2,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC11137430,0,3,18,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11139884,109,91,79,0,1.0,Social Psychology,Mental Health via Writing
+PMC11143969,0,3,18,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11150354,111,159,81,2,1.0,Social Psychology,Mental Health via Writing
+PMC11163135,14,21,35,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11174507,112,160,82,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11175349,113,74,83,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11176871,38,49,57,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11196307,5,10,84,1,1.0,Social Psychology,Mental Health via Writing
+PMC11199861,40,63,71,2,1.0,Social Psychology,Mental Health via Writing
+PMC11207438,114,161,85,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11211928,67,137,10,3,1.0,Social Psychology,Mental Health via Writing
+PMC11222080,89,87,53,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11227208,94,88,61,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11231450,88,148,52,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11237038,44,41,88,1,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11237786,3,7,29,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11255531,2,5,24,2,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11272575,103,89,70,3,1.0,Developmental and Educational Psychology,Child and Animal Learning Development
+PMC11291691,0,0,34,0,1.0,Social Psychology,Mental Health via Writing
+PMC11292167,11,19,91,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11301110,118,92,92,0,1.0,Social Psychology,Mental Health via Writing
+PMC11301767,119,112,93,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11304096,95,121,62,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11324482,121,165,95,2,1.0,Social Psychology,Mental Health via Writing
+PMC11327060,122,93,96,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11327631,12,18,97,1,1.0,Social Psychology,Mental Health via Writing
+PMC11332055,0,0,34,0,0.0,Social Psychology,Mental Health via Writing
+PMC11332215,72,116,20,3,1.0,Social Psychology,Mental Health via Writing
+PMC11335796,25,46,1,0,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11350314,2,5,24,0,1.0,Social Psychology,"LGBTQ Health, Identity, and Policy"
+PMC11351274,123,166,98,2,1.0,Social Psychology,Attachment and Relationship Dynamics
+PMC11358958,116,163,89,2,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC11362362,1,1,99,1,0.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC11375382,124,123,100,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11378377,125,80,101,0,1.0,Social Psychology,"LGBTQ Health, Identity, and Policy"
+PMC11379836,45,65,102,1,1.0,Social Psychology,Mental Health via Writing
+PMC11391090,46,32,103,1,1.0,Social Psychology,Mental Health via Writing
+PMC11399123,5,10,84,2,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11417326,47,35,104,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11421659,0,0,34,0,0.0,Social Psychology,Social Robot Interaction and HRI
+PMC11427852,20,25,106,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11433454,127,168,107,0,1.0,Social Psychology,Mental Health via Writing
+PMC11447422,49,66,109,1,1.0,Social Psychology,Mental Health via Writing
+PMC11450360,0,17,175,1,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC11462105,0,4,47,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11464935,0,6,33,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11467604,12,18,97,1,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11470124,123,166,98,2,1.0,Social Psychology,Attachment and Relationship Dynamics
+PMC11471859,18,27,21,2,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11502974,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11514275,129,94,111,3,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC11514308,0,4,175,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11522189,129,94,111,3,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC11530715,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11530718,128,81,110,2,1.0,Social Psychology,Mental Health via Writing
+PMC11530720,47,35,104,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11530740,79,142,30,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11533405,3,7,29,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11540419,39,50,60,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11543720,130,169,112,3,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11544339,16,29,113,1,1.0,Social Psychology,Mental Health via Writing
+PMC11549579,21,30,114,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11551352,65,135,2,3,1.0,Developmental and Educational Psychology,Child and Animal Learning Development
+PMC11574504,8,16,5,1,1.0,Social Psychology,Mental Health via Writing
+PMC11576212,4,8,9,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11582598,38,49,57,2,1.0,Social Psychology,Mental Health via Writing
+PMC11602467,92,78,58,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11607554,131,170,115,0,1.0,Social Psychology,Mental Health via Writing
+PMC11609076,98,152,65,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11612277,76,108,26,3,1.0,Social Psychology,Mental Health via Writing
+PMC11612388,10,14,174,2,1.0,Social Psychology,Mental Health via Writing
+PMC11618586,1,1,99,3,1.0,Experimental and Cognitive Psychology,Mental Health Research Topics
+PMC11635025,1,1,99,1,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11638238,109,91,79,0,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC11654116,132,171,117,3,1.0,Social Psychology,Mental Health via Writing
+PMC11663973,0,2,42,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11666580,0,12,180,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11669470,134,95,120,1,1.0,Social Psychology,Mental Health via Writing
+PMC11673989,108,158,77,2,1.0,Social Psychology,Mental Health via Writing
+PMC11678044,135,173,121,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC11685247,0,3,18,0,0.0,Social Psychology,Mental Health via Writing
+PMC11701115,1,1,99,1,1.0,Experimental and Cognitive Psychology,"Language, Metaphor, and Cognition"
+PMC11722838,116,163,89,2,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC11723910,136,75,122,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11742816,75,118,25,0,1.0,Developmental and Educational Psychology,Children's Physical and Motor Development
+PMC11748074,137,76,123,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11748427,20,25,106,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11764365,36,60,49,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11775481,53,36,125,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11782557,139,124,127,2,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC11787301,140,174,128,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11809463,0,9,160,2,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11822322,0,3,18,0,1.0,Social Psychology,Mental Health via Writing
+PMC11826059,54,44,129,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11827041,141,125,130,0,1.0,Clinical Psychology,COVID-19 and Mental Health
+PMC11832554,142,175,131,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11832678,0,3,18,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11832893,0,6,33,1,0.773,Social Psychology,Mental Health via Writing
+PMC11836185,1,1,99,1,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11840361,143,176,132,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11850274,6,11,133,2,1.0,Social Psychology,Mental Health via Writing
+PMC11850819,104,90,72,1,1.0,Social Psychology,Mental Health via Writing
+PMC11854694,144,177,134,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11861744,4,8,9,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC11870212,0,9,160,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11870376,55,40,135,2,1.0,Social Psychology,Deception detection and forensic psychology
+PMC11888103,0,3,18,0,1.0,Social Psychology,Mental Health via Writing
+PMC11890151,146,179,137,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11893593,147,180,138,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11894350,0,3,18,2,1.0,Applied Psychology,Psychological Testing and Assessment
+PMC11897672,21,30,114,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11898439,9,15,50,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11904377,0,4,47,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11905647,101,153,68,3,1.0,Developmental and Educational Psychology,Educational Games and Gamification
+PMC11909484,2,5,24,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11911012,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC11912425,27,47,6,3,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11926447,148,126,139,2,1.0,Social Psychology,Mental Health via Writing
+PMC11926686,44,41,88,1,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC11928068,15,20,140,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC11929925,149,97,141,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11932972,23,26,142,0,1.0,Social Psychology,Mental Health via Writing
+PMC11933774,151,181,144,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11939020,32,62,39,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11939175,144,177,134,0,1.0,Social Psychology,Mental Health via Writing
+PMC11939552,152,182,145,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11941195,127,168,107,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11945465,154,183,147,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11947638,155,184,148,0,1.0,Clinical Psychology,COVID-19 and Mental Health
+PMC11952273,8,16,5,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11954822,56,53,149,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC11960934,145,178,136,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC11996879,156,185,150,3,1.0,Experimental and Cognitive Psychology,Philosophy and Theoretical Science
+PMC11997174,1,1,99,1,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC12004015,0,3,18,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12017333,1,1,99,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12021536,0,0,34,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12022524,53,36,125,2,1.0,Clinical Psychology,"Perfectionism, Procrastination, Anxiety Studies"
+PMC12023818,3,7,29,2,1.0,Social Psychology,Emotions and Moral Behavior
+PMC12038297,0,12,180,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12040702,105,155,73,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12040941,4,8,9,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12044221,4,8,9,3,0.0,Social Psychology,Social Robot Interaction and HRI
+PMC12046268,42,34,78,3,1.0,Social Psychology,Mental Health via Writing
+PMC12049518,73,117,22,2,1.0,Social Psychology,Mental Health via Writing
+PMC12056427,7,13,8,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC12067846,117,122,90,0,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12081631,64,85,0,1,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC12083711,0,4,47,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12084333,112,160,82,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12092606,5,10,84,2,1.0,Developmental and Educational Psychology,Language Development and Disorders
+PMC12093075,52,52,124,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12093076,31,59,19,2,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC12093450,25,46,1,0,1.0,Social Psychology,Humor Studies and Applications
+PMC12093911,106,156,75,0,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC12098529,5,10,84,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12104094,102,154,69,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12105352,3,7,29,2,1.0,Social Psychology,"LGBTQ Health, Identity, and Policy"
+PMC12107671,22,31,152,1,1.0,Clinical Psychology,Psychedelics and Drug Studies
+PMC12112869,159,128,154,3,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12117275,54,44,129,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12119569,160,129,155,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12120367,6,11,133,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12128417,143,176,132,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12133835,40,63,71,2,1.0,Social Psychology,Mental Health via Writing
+PMC12134697,48,57,108,3,1.0,Social Psychology,Mental Health via Writing
+PMC12138294,0,0,34,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC12141341,0,0,34,2,1.0,Experimental and Cognitive Psychology,Philosophy and Theoretical Science
+PMC12144468,0,4,47,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12145134,1,1,99,0,0.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC12158938,57,67,157,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12165445,9,15,50,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12167270,0,0,34,2,1.0,Clinical Psychology,Obsessive-Compulsive Spectrum Disorders
+PMC12170534,159,128,154,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12178214,0,4,175,0,0.0,Clinical Psychology,Psychiatric care and mental health services
+PMC12181428,0,3,18,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12183517,5,10,84,1,1.0,Social Psychology,Mental Health via Writing
+PMC12187690,0,3,18,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12188334,0,3,18,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12190728,76,108,26,3,1.0,Social Psychology,Mental Health via Writing
+PMC12191316,162,186,158,3,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12199846,58,37,159,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12203671,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12204239,0,9,160,3,0.635,Social Psychology,Mental Health via Writing
+PMC12208991,161,99,156,3,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC12216660,164,187,162,3,1.0,Clinical Psychology,"Grief, Bereavement, and Mental Health"
+PMC12219615,1,1,99,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12223045,0,4,175,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12226623,11,19,91,2,1.0,Clinical Psychology,Psychedelics and Drug Studies
+PMC12230148,0,2,42,0,0.0,Social Psychology,Mental Health via Writing
+PMC12233285,24,23,163,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12235868,43,51,87,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12239686,165,188,164,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12240306,24,23,163,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12243968,117,122,90,0,1.0,Social Psychology,Mental Health via Writing
+PMC12246224,97,151,64,1,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC12254646,166,189,165,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12258155,167,190,166,0,1.0,Experimental and Cognitive Psychology,Phonetics and Phonology Research
+PMC12259700,168,191,167,2,1.0,Social Psychology,Paranormal Experiences and Beliefs
+PMC12262148,42,34,78,3,1.0,Social Psychology,Mental Health via Writing
+PMC12267514,100,111,67,2,1.0,Social Psychology,Mental Health via Writing
+PMC12268218,0,12,180,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12268945,0,9,160,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12271524,4,8,9,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12276349,0,9,160,2,1.0,Social Psychology,Mental Health via Writing
+PMC12278142,169,192,168,3,1.0,Clinical Psychology,"Grief, Bereavement, and Mental Health"
+PMC12280142,35,55,48,3,1.0,Social Psychology,Deception detection and forensic psychology
+PMC12288250,1,1,99,0,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12296748,71,139,16,1,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC12298605,1,1,99,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12303271,8,16,5,1,1.0,Social Psychology,Mental Health via Writing
+PMC12303554,3,7,29,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12310149,43,51,87,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12310568,6,11,133,2,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC12312989,48,57,108,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12326588,133,172,119,1,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC12336790,0,4,175,3,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC12341355,146,179,137,3,1.0,Social Psychology,Mental Health via Writing
+PMC12343565,87,120,51,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12343679,11,19,91,2,1.0,Experimental and Cognitive Psychology,Mental Health Research Topics
+PMC12343941,5,10,84,1,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC12349093,2,5,24,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12357123,170,130,169,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12358507,171,193,170,0,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC12361297,19,24,38,2,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12362262,138,96,126,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12368470,0,4,175,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12371134,120,164,94,2,1.0,Clinical Psychology,Psychedelics and Drug Studies
+PMC12378698,1,1,99,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12383806,50,43,116,1,1.0,Social Psychology,Mental Health via Writing
+PMC12402258,44,41,88,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12405795,31,59,19,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12413188,38,49,57,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12417593,142,175,131,3,1.0,Social Psychology,Mental Health via Writing
+PMC12418042,0,3,18,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12427617,0,6,33,2,1.0,Social Psychology,Mental Health via Writing
+PMC12433451,0,3,18,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12435988,17,28,17,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12440320,57,67,157,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12443347,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12446991,16,29,113,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12453799,172,83,171,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12454144,97,151,64,1,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC12459122,1,1,99,1,0.57,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12460501,80,143,32,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12460983,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12480878,18,27,21,2,1.0,Social Psychology,Mental Health via Writing
+PMC12484779,1,1,99,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12485036,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC12489038,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12491209,174,195,173,2,1.0,Developmental and Educational Psychology,Student Stress and Coping
+PMC12492891,48,57,108,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12497510,120,164,94,2,1.0,Social Psychology,Mental Health via Writing
+PMC12500695,138,96,126,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12500800,1,1,99,1,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC12501027,160,129,155,3,1.0,Experimental and Cognitive Psychology,Mental Health Research Topics
+PMC12504582,3,7,29,0,1.0,Social Psychology,Mental Health via Writing
+PMC12505784,141,125,130,0,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC12506926,51,39,118,2,1.0,Developmental and Educational Psychology,Language Development and Disorders
+PMC12516975,158,98,153,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12518126,10,14,174,2,1.0,Experimental and Cognitive Psychology,Mental Health Research Topics
+PMC12521853,163,100,161,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12533096,13,22,31,3,1.0,Social Psychology,Mental Health via Writing
+PMC12533101,0,4,175,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12540625,1,1,99,1,0.0,Developmental and Educational Psychology,Educational Games and Gamification
+PMC12540829,100,111,67,2,1.0,Clinical Psychology,Mindfulness and Compassion Interventions
+PMC12540830,154,183,147,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12542454,59,68,178,0,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12550022,27,47,6,3,1.0,Social Psychology,Action Observation and Synchronization
+PMC12551617,0,0,34,2,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC12551936,30,58,15,1,1.0,Social Psychology,Mental Health via Writing
+PMC12552810,0,3,18,2,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC12558650,1,1,99,1,1.0,Experimental and Cognitive Psychology,Phonetics and Phonology Research
+PMC12560996,158,98,153,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12562079,174,195,173,2,1.0,Developmental and Educational Psychology,Educational Games and Gamification
+PMC12568598,177,197,179,3,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC12568696,0,12,180,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12572119,0,0,34,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12574741,41,64,74,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12582524,0,4,175,3,1.0,Experimental and Cognitive Psychology,"Anxiety, Depression, Psychometrics, Treatment, Cognitive Processes"
+PMC12589491,6,11,133,0,1.0,Social Psychology,Mental Health via Writing
+PMC12592706,5,10,84,1,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC12595529,15,20,140,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12603332,0,3,18,0,1.0,Social Psychology,Mental Health via Writing
+PMC12605455,178,198,181,2,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC12615300,133,172,119,1,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC12624874,107,157,76,0,1.0,Social Psychology,Mental Health via Writing
+PMC12624923,0,4,175,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC12627969,54,44,129,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12643404,32,62,39,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12643844,6,11,133,2,1.0,Social Psychology,Mental Health via Writing
+PMC12645649,12,18,97,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12649323,135,173,121,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12650323,69,77,13,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12651002,179,199,182,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12655262,180,200,183,1,1.0,Social Psychology,Stress and Burnout Research
+PMC12661908,166,189,165,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12662888,10,14,174,1,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC12664658,149,97,141,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12669686,1,1,99,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12670058,14,21,35,3,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC12672561,93,150,59,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12672715,10,14,174,2,1.0,Social Psychology,Mental Health via Writing
+PMC12673981,181,131,184,2,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC12677879,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12680127,13,22,31,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12680128,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12680905,164,187,162,3,1.0,Clinical Psychology,"Grief, Bereavement, and Mental Health"
+PMC12685116,15,20,140,3,1.0,Social Psychology,Psychological Well-being and Life Satisfaction
+PMC12694945,165,188,164,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12696575,150,107,143,0,1.0,Social Psychology,Mental Health via Writing
+PMC12702588,169,192,168,3,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12703225,0,4,175,3,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC12706453,0,2,42,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12707440,0,4,47,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12708696,178,198,181,2,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC12711846,137,76,123,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12712314,60,61,185,0,1.0,Social Psychology,Mental Health via Writing
+PMC12712570,170,130,169,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12715464,49,66,109,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12718303,1,1,99,1,1.0,Developmental and Educational Psychology,Language Development and Disorders
+PMC12727754,182,201,186,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12729542,183,202,187,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12730220,113,74,83,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12747401,7,13,8,1,1.0,Social Psychology,Psychological Well-being and Life Satisfaction
+PMC12747908,4,8,9,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12748242,0,9,160,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12748249,33,56,40,1,1.0,Social Psychology,Mental Health via Writing
+PMC12752181,125,80,101,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12753769,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12757713,3,7,29,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12768553,17,28,17,2,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC12769545,1,1,99,1,1.0,Experimental and Cognitive Psychology,"Language, Metaphor, and Cognition"
+PMC12777369,155,184,148,0,1.0,Clinical Psychology,Psychiatric care and mental health services
+PMC12779158,24,23,163,2,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12789071,6,11,133,2,1.0,Social Psychology,Mental Health via Writing
+PMC12797492,139,124,127,2,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC12798195,61,69,189,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12798473,61,69,189,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12800267,1,1,99,3,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12815307,13,22,31,3,1.0,Social Psychology,Mental Health via Writing
+PMC12823577,24,23,163,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12829926,37,38,54,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12847414,81,144,36,2,1.0,Social Psychology,Mental Health via Writing
+PMC12851998,0,3,18,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12855936,0,4,175,2,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC12863077,13,22,31,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12864212,1,1,99,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC12865673,55,40,135,2,1.0,Social Psychology,Deception detection and forensic psychology
+PMC12872445,136,75,122,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12881907,2,5,24,2,1.0,Social Psychology,Mental Health via Writing
+PMC12883671,185,203,190,2,1.0,Social Psychology,Mental Health via Writing
+PMC12887073,23,26,142,0,0.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12887521,3,7,29,0,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12894341,57,67,157,3,1.0,Social Psychology,Social Representations and Identity
+PMC12902091,45,65,102,1,1.0,Social Psychology,Mental Health via Writing
+PMC12904903,134,95,120,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12909584,179,199,182,2,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC12912910,11,19,91,2,1.0,Clinical Psychology,Psychedelics and Drug Studies
+PMC12913933,0,6,33,2,1.0,Social Psychology,Mental Health via Writing
+PMC12914229,9,15,50,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12916813,35,55,48,3,1.0,Social Psychology,Mental Health via Writing
+PMC12916832,52,52,124,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12917275,34,48,45,1,1.0,Social Psychology,Mental Health via Writing
+PMC12932095,180,200,183,1,1.0,Applied Psychology,Behavioral Health and Interventions
+PMC12933282,108,158,77,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12936666,114,161,85,2,1.0,Social Psychology,Mental Health via Writing
+PMC12937711,186,204,191,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC12937751,187,205,192,3,1.0,Social Psychology,Psychological Well-being and Life Satisfaction
+PMC12938416,188,206,193,2,1.0,Social Psychology,Stress and Burnout Research
+PMC12939045,36,60,49,1,1.0,Developmental and Educational Psychology,Children's Physical and Motor Development
+PMC12949398,189,207,194,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12953147,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC12953620,151,181,144,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12953750,0,17,175,1,1.0,Social Psychology,Mental Health via Writing
+PMC12954588,190,132,195,0,1.0,Social Psychology,Technostress in Professional Settings
+PMC12955585,115,162,86,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12970072,110,73,80,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC12974183,0,2,42,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC12979969,5,10,84,1,0.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC12981376,157,82,151,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12983458,106,156,75,0,1.0,Social Psychology,Human-Automation Interaction and Safety
+PMC12986059,21,30,114,2,1.0,Social Psychology,Mental Health via Writing
+PMC12988633,62,45,196,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12990127,177,197,179,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC12996161,150,107,143,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC12996298,10,14,174,2,1.0,Social Psychology,Mental Health via Writing
+PMC12998281,90,149,55,2,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC12998858,124,123,100,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13006915,147,180,138,3,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC13009235,84,146,43,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13010328,1,1,99,1,0.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13017824,191,208,197,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13018879,0,2,42,0,1.0,Clinical Psychology,Psychiatric care and mental health services
+PMC13022409,0,3,18,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13023058,192,102,198,2,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC13023460,162,186,158,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13023856,171,193,170,0,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC13024659,193,133,199,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13027982,1,1,99,0,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13031957,1,1,99,1,0.0,Developmental and Educational Psychology,Educational Strategies and Epistemologies
+PMC13035447,152,182,145,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13037981,140,174,128,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13038065,5,10,84,1,0.588,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC13040165,0,4,175,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13046095,0,17,175,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13048375,93,150,59,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13051022,182,201,186,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13051289,31,59,19,2,1.0,Social Psychology,Mental Health via Writing
+PMC13051544,105,155,73,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13055325,0,4,175,2,1.0,Experimental and Cognitive Psychology,Psychology Research and Bibliometrics
+PMC13058530,0,4,175,3,0.519,Clinical Psychology,Eating Disorders and Behaviors
+PMC13068511,56,53,149,3,1.0,Social Psychology,"Bullying, Victimization, and Aggression"
+PMC13069367,0,12,180,2,0.0,Social Psychology,Mental Health via Writing
+PMC13079513,51,39,118,2,1.0,Experimental and Cognitive Psychology,Phonetics and Phonology Research
+PMC13079574,58,37,159,3,1.0,Clinical Psychology,Psychedelics and Drug Studies
+PMC13091784,8,16,5,1,0.0,Social Psychology,Mental Health via Writing
+PMC13094381,194,209,200,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13107104,33,56,40,1,1.0,Social Psychology,Mental Health Treatment and Access
+PMC13110360,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13113849,63,70,201,2,1.0,Clinical Psychology,Personality Traits and Psychology
+PMC13114157,19,24,38,2,0.151,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13114621,195,210,202,3,1.0,Developmental and Educational Psychology,Innovative Teaching and Learning Methods
+PMC13117997,196,103,203,2,1.0,Developmental and Educational Psychology,Second Language Acquisition and Learning
+PMC13128734,130,169,112,3,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC13128876,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13132591,197,113,204,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13138788,0,2,42,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC13145394,0,3,18,0,0.0,Experimental and Cognitive Psychology,Mental Health Research Topics
+PMC13148127,21,30,114,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13154727,56,53,149,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13170875,198,104,205,0,1.0,Social Psychology,Mental Health via Writing
+PMC13183351,199,114,206,2,1.0,Developmental and Educational Psychology,Language Development and Disorders
+PMC13184595,0,9,160,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13187702,176,84,177,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13194039,176,84,177,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13200468,29,33,11,2,1.0,Developmental and Educational Psychology,Sport Psychology and Performance
+PMC13203178,61,69,189,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13203300,22,31,152,1,1.0,Social Psychology,Music Therapy and Health
+PMC13205439,37,38,54,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13206094,62,45,196,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13206696,145,178,136,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13210981,3,7,29,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13216137,1,1,99,1,1.0,Developmental and Educational Psychology,Second Language Acquisition and Learning
+PMC13219520,0,4,175,1,1.0,Social Psychology,Mental Health via Writing
+PMC13222020,0,6,33,1,1.0,Social Psychology,Mental Health via Writing
+PMC13226825,0,2,42,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC13227335,15,20,140,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13229841,110,73,80,3,1.0,Social Psychology,Mental Health via Writing
+PMC13231103,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13232919,0,17,175,1,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC13236030,0,9,160,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13245432,0,17,175,1,0.0,Social Psychology,Mental Health via Writing
+PMC13247147,0,3,18,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13249113,20,25,106,2,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC13254357,11,19,91,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13263249,188,206,193,2,1.0,Social Psychology,Psychological Well-being and Life Satisfaction
+PMC13266229,0,2,42,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC13269565,9,15,50,0,1.0,Experimental and Cognitive Psychology,"Anxiety, Depression, Psychometrics, Treatment, Cognitive Processes"
+PMC13271906,190,132,195,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13272814,4,8,9,2,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13276469,200,134,207,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13279657,22,31,152,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13284561,49,66,109,1,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC13287071,8,16,5,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13291057,197,113,204,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13292244,0,2,42,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13293476,186,204,191,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13293560,175,196,176,3,1.0,Clinical Psychology,Mindfulness and Compassion Interventions
+PMC13295219,50,43,116,1,1.0,Social Psychology,Mental Health via Writing
+PMC13295698,187,205,192,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13297841,183,202,187,1,1.0,Social Psychology,Mental Health via Writing
+PMC13297900,62,45,196,1,1.0,Social Psychology,Mental Health via Writing
+PMC13298971,128,81,110,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13310295,1,1,99,1,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC13327789,51,39,118,2,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC13333308,0,4,175,2,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC13335415,9,15,50,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC13336328,3,7,29,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13337866,201,211,208,3,1.0,Clinical Psychology,Obsessive-Compulsive Spectrum Disorders
+PMC13346111,98,152,65,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13347889,43,51,87,2,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC13350872,67,137,10,3,1.0,Social Psychology,Attachment and Relationship Dynamics
+PMC13353240,193,133,199,2,1.0,Social Psychology,Psychological Well-being and Life Satisfaction
+PMC13354120,0,4,47,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13355966,101,153,68,3,1.0,Developmental and Educational Psychology,Educational Games and Gamification
+PMC13363100,29,33,11,2,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC13365878,194,209,200,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13366645,96,79,63,1,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC13367319,0,9,160,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13370903,192,102,198,2,1.0,Clinical Psychology,Psychotherapy Techniques and Applications
+PMC13371545,12,18,97,1,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC13373273,202,212,209,0,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC13374114,168,191,167,2,1.0,Experimental and Cognitive Psychology,Philosophy and Theoretical Science
+PMC13375210,92,78,58,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13375805,203,105,210,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13379306,204,213,211,2,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC13379617,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC13380439,201,211,208,3,1.0,Clinical Psychology,Obsessive-Compulsive Spectrum Disorders
+PMC13387219,175,196,176,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13388895,157,82,151,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13391510,0,12,180,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13394852,10,14,174,1,1.0,Clinical Psychology,Mindfulness and Compassion Interventions
+PMC13396074,202,212,209,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13396917,200,134,207,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13400936,45,65,102,1,1.0,Social Psychology,Mental Health via Writing
+PMC13401167,20,25,106,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13408468,0,2,42,0,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC13413021,63,70,201,2,1.0,Developmental and Educational Psychology,Educational Strategies and Epistemologies
+PMC13413292,1,1,99,1,0.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13413378,196,103,203,2,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13413385,156,185,150,3,1.0,Developmental and Educational Psychology,Innovative Teaching and Learning Methods
+PMC13415908,11,19,91,2,1.0,Clinical Psychology,Psychedelics and Drug Studies
+PMC13423963,1,1,99,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13430600,167,190,166,0,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13433583,161,99,156,3,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC13455145,195,210,202,3,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13462000,91,109,56,1,1.0,Experimental and Cognitive Psychology,Cognitive Functions and Memory
+PMC13469423,25,46,1,0,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC13473440,12,18,97,3,1.0,Social Psychology,Mental Health via Writing
+PMC13476434,0,0,34,2,0.0,Applied Psychology,Digital Mental Health Interventions
+PMC13490061,153,127,146,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13491676,63,70,201,2,1.0,Clinical Psychology,Personality Traits and Psychology
+PMC13493897,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13499352,0,2,42,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13504430,15,20,140,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13504747,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13505971,7,13,8,1,1.0,Social Psychology,Mental Health via Writing
+PMC13514528,6,11,133,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13514563,205,214,212,0,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13514692,59,68,178,0,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13517821,4,8,9,1,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13518072,17,28,17,2,1.0,Developmental and Educational Psychology,Child and Animal Learning Development
+PMC13518078,204,213,211,2,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC13521909,40,63,71,2,1.0,Social Psychology,Mental Health via Writing
+PMC13525460,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13528364,0,0,34,2,1.0,Clinical Psychology,Posttraumatic Stress Disorder Research
+PMC13531844,0,12,180,2,1.0,Social Psychology,Mental Health via Writing
+PMC13533316,58,37,159,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13536227,0,4,175,3,1.0,Clinical Psychology,Eating Disorders and Behaviors
+PMC13542163,0,3,18,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC13551726,203,105,210,1,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC13553821,0,4,47,3,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC13557404,18,27,21,0,1.0,Experimental and Cognitive Psychology,Sleep and related disorders
+PMC13559157,16,29,113,1,1.0,Clinical Psychology,"Migration, Health and Trauma"
+PMC13563032,2,5,24,2,1.0,Social Psychology,"LGBTQ Health, Identity, and Policy"
+PMC13563375,0,12,180,2,1.0,Social Psychology,Mental Health via Writing
+PMC13572600,47,35,104,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13578735,0,0,34,2,1.0,Social Psychology,Deception detection and forensic psychology
+PMC13579130,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13580604,0,9,160,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13597320,119,112,93,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13598090,191,208,197,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13601342,85,147,44,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC13602181,115,162,86,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13603214,206,106,213,3,1.0,Clinical Psychology,"Perfectionism, Procrastination, Anxiety Studies"
+PMC13603263,206,106,213,3,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13603825,60,61,185,0,1.0,Clinical Psychology,COVID-19 and Mental Health
+PMC13608022,205,214,212,0,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13608232,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13608707,59,68,178,0,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC13612589,0,0,34,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13614472,41,64,74,1,1.0,Clinical Psychology,Personality Disorders and Psychopathology
+PMC13617639,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC13618754,199,114,206,2,1.0,Developmental and Educational Psychology,Language Development and Disorders
+PMC13620155,6,11,133,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13626072,9,15,50,0,1.0,Experimental and Cognitive Psychology,Mental Health Research Topics
+PMC13627714,10,14,174,2,0.584,Social Psychology,Mental Health via Writing
+PMC13639063,52,52,124,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13639969,0,2,42,0,0.936,Applied Psychology,Digital Mental Health Interventions
+PMC13647095,181,131,184,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13651679,0,2,42,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13654682,53,36,125,2,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13668686,23,26,142,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC13669378,0,17,175,1,1.0,Social Psychology,Mental Health via Writing
+PMC7400076,26,54,3,1,1.0,Social Psychology,Mental Health via Writing
+PMC7424493,198,104,205,0,1.0,Social Psychology,Mental Health via Writing
+PMC7506856,4,8,9,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC7542168,0,3,18,3,1.0,Social Psychology,Mental Health via Writing
+PMC7614849,131,170,115,0,1.0,Social Psychology,Mental Health via Writing
+PMC7618964,23,26,142,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC7795329,4,8,9,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC7835447,2,5,24,0,1.0,Social Psychology,Mental Health via Writing
+PMC8080853,0,0,34,0,0.0,Social Psychology,Mental Health via Writing
+PMC8212927,0,0,34,2,0.0,Social Psychology,Mental Health via Writing
+PMC8255381,66,136,4,2,1.0,Clinical Psychology,COVID-19 and Mental Health
+PMC8304127,77,140,27,0,1.0,Social Psychology,Mental Health via Writing
+PMC8330892,66,136,4,2,1.0,Social Psychology,Mental Health via Writing
+PMC8416081,50,43,116,1,1.0,Social Psychology,Mental Health via Writing
+PMC8426553,82,145,37,2,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC8446189,0,0,34,0,0.661,Clinical Psychology,COVID-19 and Mental Health
+PMC8495422,78,141,28,0,1.0,Developmental and Educational Psychology,Second Language Acquisition and Learning
+PMC8524253,26,54,3,1,1.0,Social Psychology,Mental Health via Writing
+PMC8535177,0,6,33,0,1.0,Social Psychology,Mental Health via Writing
+PMC8618559,153,127,146,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC8663675,2,5,24,2,1.0,Social Psychology,Mental Health via Writing
+PMC8700837,26,54,3,1,1.0,Social Psychology,Mental Health via Writing
+PMC8704110,173,194,172,2,1.0,Social Psychology,Mental Health via Writing
+PMC8751545,122,93,96,2,1.0,Clinical Psychology,COVID-19 and Mental Health
+PMC8777059,7,13,8,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC8803736,60,61,185,0,1.0,Social Psychology,Mental Health via Writing
+PMC8913644,0,0,34,2,1.0,Social Psychology,Mental Health via Writing
+PMC8930480,12,18,97,1,1.0,Clinical Psychology,Suicide and Self-Harm Studies
+PMC8979705,126,167,105,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC8989588,126,167,105,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC9016321,99,110,66,1,1.0,Social Psychology,Mental Health via Writing
+PMC9022676,121,165,95,2,1.0,Social Psychology,Mental Health via Writing
+PMC9027872,173,194,172,2,1.0,Social Psychology,Mental Health via Writing
+PMC9029105,46,32,103,1,1.0,Social Psychology,Mental Health via Writing
+PMC9029735,132,171,117,3,1.0,Social Psychology,Mental Health via Writing
+PMC9077496,148,126,139,2,1.0,Social Psychology,Mental Health via Writing
+PMC9148050,118,92,92,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC9206207,7,13,8,0,1.0,Social Psychology,Mental Health via Writing
+PMC9232132,0,0,34,3,1.0,Social Psychology,Psychological Well-being and Life Satisfaction
+PMC9236841,184,101,188,1,1.0,Social Psychology,Mental Health via Writing
+PMC9399877,77,140,27,0,1.0,Social Psychology,Mental Health via Writing
+PMC9425293,0,6,33,0,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC9434391,83,86,41,1,1.0,Social Psychology,Mental Health via Writing
+PMC9490531,163,100,161,1,1.0,Social Psychology,Mental Health via Writing
+PMC9491270,86,119,46,3,1.0,Social Psychology,Mental Health via Writing
+PMC9526111,2,5,24,0,1.0,Social Psychology,Mental Health via Writing
+PMC9568455,185,203,190,2,1.0,Experimental and Cognitive Psychology,"Categorization, perception, and language"
+PMC9618797,4,8,9,3,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC9656668,95,121,62,1,1.0,Social Psychology,Social Robot Interaction and HRI
+PMC9659415,0,6,33,1,1.0,Developmental and Educational Psychology,"Identity, Memory, and Therapy"
+PMC9692049,74,71,23,2,1.0,Developmental and Educational Psychology,Reading and Literacy Development
+PMC9743120,184,101,188,1,1.0,Social Psychology,Mental Health via Writing
+PMC9802071,22,31,152,1,1.0,Experimental and Cognitive Psychology,Creativity in Education and Neuroscience
+PMC9810253,81,144,36,2,1.0,Social Psychology,Mental Health via Writing
+PMC9810434,7,13,8,0,1.0,Social Psychology,Mental Health via Writing
+PMC9824564,172,83,171,3,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC9845826,207,72,214,3,1.0,Developmental and Educational Psychology,Innovative Teaching and Learning Methods
+PMC9846704,46,32,103,1,1.0,Social Psychology,Mental Health via Writing
+PMC9879964,1,1,99,1,1.0,Developmental and Educational Psychology,Language Development and Disorders
+PMC9896352,189,207,194,1,1.0,Applied Psychology,Digital Mental Health Interventions
+PMC9898637,70,115,14,2,1.0,Neuropsychology and Physiological Psychology,Aging and Gerontology Research
+PMC9925661,111,159,81,2,1.0,Social Psychology,Mental Health via Writing
+PMC9931093,0,0,34,2,0.0,Social Psychology,Mental Health via Writing
+PMC9971220,7,13,8,0,1.0,Experimental and Cognitive Psychology,Emotion and Mood Recognition
+PMC9984755,207,72,214,3,1.0,Developmental and Educational Psychology,Innovative Teaching and Learning Methods
+PMC9994427,0,0,34,0,1.0,Social Psychology,Mental Health via Writing
+PMC9995382,55,40,135,2,1.0,Social Psychology,Deception detection and forensic psychology

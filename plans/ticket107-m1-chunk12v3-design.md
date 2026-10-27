@@ -1026,3 +1026,12 @@ approach 1 author×article, author×affiliation; approach 2 article×affiliation
   bound d·λ² > 1 (d mean degree, λ ≤ 1 the community signal), so d ≈ 1 is at the limit even for perfectly separated
   communities; low-rank recovery needs of the order of n·K·log n observed entries (≈ 65,600 for K = 4). Discussion with
   the owner pending.
+*[2026-10-27, owner-requested check of option (b), `corpus_statistics/coauthor_graph_check.py`, outputs in
+`corpus_statistics/coauthor_graph/`: the in-subset shared-author graph is not one giant component (largest 159 of 741
+tied articles, 208 components); Leiden and Louvain agree (215 communities, modularity 0.97, 99% of tie weight inside
+communities); inside the largest component Leiden finds 8 groups joined by single bridges. Tied articles share an
+OpenAlex topic 45% of the time against 8% at random. Two-hop ties through off-subset corpus articles (owner's option 1):
+874 tied articles (+133), mean degree 2.01, but one component of 430 articles, topic agreement of tied pairs 34%, and 62%
+of the two-hop pairs come from a few outside articles with 10+ trial neighbours. Hy-MMSBM (K = 4, persons as
+hyperedges): memberships nearly hard (93.7% of articles ≥ 0.9 on one community); with only 4 communities it must lump
+unrelated groups (topic agreement within a community 14%, near random 8%).]*
