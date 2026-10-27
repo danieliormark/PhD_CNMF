@@ -81,7 +81,13 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    (`PG/g2_v3_3/`, G3 rerun: audit 0, no status change; RL-186 output kept as `PG/g3_v2_rl186/`, old demotion run as
    `g3_v2_lm_demotion_rl196/`); trial +33 sentences in 11 articles, trial list and LM demotion unchanged. Error found and
    fixed during the run (9 cleaned sentences re-added by P6; G2 joined 7 hub spellings). **Next:** weighting inside each
-   matrix (design doc §5 item 3), then the chunk12v3 builder. Pending owner: missingness technique (missing cells vs
+   matrix (design doc §5 item 3), then the chunk12v3 builder.
+   **2026-10-27 relations and regularisers (design doc addenda 2026-10-27):** matrices child×parent, child×article,
+   article×journal (+ author×article, author×affiliation in approach 1; article×affiliation in approach 2);
+   child×child = regulariser (idf-weighted Jaccard, τ 0.4, ≥5 ties); article×article = regulariser in the trial (density too
+   low for a matrix; damped Jaccard weight); no affiliation×affiliation. Penalty (λ/N)ΣΣ(W_ij/d_i)‖p_i−p_j‖², λ outside
+   Optuna, calibrated on held-out ties at every K (one λ if the optima agree, else nested hold-outs). Open: distance (squared
+   Euclidean proposed), dividing by N, calibration arm; then the data-matrix weights. Pending owner: missingness technique (missing cells vs
    placeholders), later.
 1d. **G3 RL-186 rerun — DONE (2026-10-24).** G2 positions pass (`PG/g2_v3_2_pos/`, 825,554 of 825,698 units exact):
    provenance per hyperedge; focal names replaced and placed by their own positions (two pre-existing errors fixed);

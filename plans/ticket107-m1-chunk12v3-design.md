@@ -1068,3 +1068,7 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   32%, partial 62%, no 7%. Share of hyperedges with at least one tie of their own (Jaccard, 1,500 sampled): τ 0.5 53%
   (1.2 ties each), 0.4 69% (2.3), 0.3 85% (3.5). Numbers were still in the vocabulary here (the builder removes them).
   One reader; the owner may re-read the files.
+- **child×child tie selection — DECIDED (owner, 2026-10-27, after the reading check):** idf-weighted Jaccard, threshold
+  τ = 0.4 (replaces 0.5). For each child hyperedge: the 5 most similar hyperedges reaching τ, plus every further one with
+  exactly the 5th value (5 is a minimum whenever 5 candidates pass τ; if fewer pass, only those); a tie also counts when
+  only the other hyperedge selected it. Numbers excluded from the vocabulary, model names included.
