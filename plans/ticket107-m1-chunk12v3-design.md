@@ -1055,3 +1055,7 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
 - **λ calibration — DECIDED (owner, 2026-10-27):** outside Optuna; target = prediction of held-out ties (child×article,
   child×parent). The check on hidden similarity ties is deferred to the robustness checks, with the planted worlds.
   Open: one λ for all K or a λ per K (see the reply of 2026-10-27); which similarity measure.
+- **child×child similarity measure — DECIDED (owner, 2026-10-27): idf-weighted Jaccard** (Σ idf over shared words ÷ Σ idf
+  over all words of the two sets; model names included). idf-weighted cosine kept as the comparison arm. Its strictness
+  with a short set contained in a longer one is either accepted or offset by a lower τ, to be judged in the blind reading
+  check (pairs between 0.4 and 0.5 shown).
