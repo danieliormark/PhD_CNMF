@@ -1059,3 +1059,12 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   over all words of the two sets; model names included). idf-weighted cosine kept as the comparison arm. Its strictness
   with a short set contained in a longer one is either accepted or offset by a lower τ, to be judged in the blind reading
   check (pairs between 0.4 and 0.5 shown).
+- **Reading check of the similarity measures (2026-10-27, assistant read first, owner's request;
+  `corpus_statistics/child_similarity_check.py`, outputs and judgements in `corpus_statistics/child_similarity_check/`).**
+  50 random child hyperedges (2+ words), each one's own selection (5 most similar, ≥ 0.5, ties at the 5th kept), the two
+  measures in unlabelled random order; judgements written before unblinding (blinding partial: cosine values run higher).
+  Per tie: idf-weighted Jaccard 42 ties, same idea 57%, partial 33%, no 10%, 27/50 hyperedges without a tie;
+  idf-weighted cosine 197 ties, 30% / 51% / 19%, 4/50 without. 60 pairs with idf-weighted Jaccard 0.4–0.5: same idea
+  32%, partial 62%, no 7%. Share of hyperedges with at least one tie of their own (Jaccard, 1,500 sampled): τ 0.5 53%
+  (1.2 ties each), 0.4 69% (2.3), 0.3 85% (3.5). Numbers were still in the vocabulary here (the builder removes them).
+  One reader; the owner may re-read the files.

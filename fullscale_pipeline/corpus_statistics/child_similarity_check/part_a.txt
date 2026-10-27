@@ -1,0 +1,439 @@
+
+[1] activity/C electrodermal/M heart/C probability/C rate/C soft/M
+   X: (no tie)
+   Y: 
+      0.53  heart/C rate/C
+      0.52  probability/C soft/M
+
+[2] multimodal/M processing/C
+   X: 
+      0.72  multimodal/M
+      0.69  processing/C
+      0.67  capability/C incorporate/P multimodal/M processing/C
+      0.67  llm/C multimodal/M
+      0.64  model/C multimodal/M
+   Y: 
+      0.51  multimodal/M
+
+[3] not/M number/C
+   X: 
+      0.57  number/C
+   Y: 
+      0.80  number/C
+      0.74  llm/C number/C
+      0.71  model/C number/C
+      0.65  number/C response/C
+      0.63  analysis/C number/C
+
+[4] clinically/M input/C meaningful/M space/C
+   X: 
+      0.70  clinically/M meaningful/M response/C
+      0.66  clinically/M meaningful/M pattern/C
+      0.66  clinically/M framework/C meaningful/M
+      0.63  input/C llm/C space/C
+      0.62  clinically/M meaningful/M summary/C
+   Y: (no tie)
+
+[5] cross_modal/M emotion/C recognition/C version/C wav2vec/C
+   X: 
+      0.65  version/C wav2vec/C
+      0.54  classification/C cross_modal/M emotion/C task/C
+      0.53  wav2vec/C
+      0.52  emotion/C recognition/C
+   Y: (no tie)
+
+[6] characteristic/C quantization/C runtime/C
+   X: 
+      0.65  runtime/C
+      0.62  quantization/C
+      0.60  llm/C quantization/C
+      0.54  llm/C quantization/C use/C
+      0.54  cost/C runtime/C
+   Y: (no tie)
+
+[7] agentic/M dissimilarity/C human/C llm/C
+   X: 
+      0.70  agentic/M dissimilarity/C
+   Y: 
+      0.91  agentic/M dissimilarity/C
+      0.53  cultural/M dissimilarity/C
+
+[8] robot/C social/M text_to_speech/C
+   X: 
+      0.78  module/C robot/C text_to_speech/C
+      0.76  text_to_speech/C
+      0.69  response/C text_to_speech/C
+      0.65  robot/C social/M
+      0.62  module/C text_to_speech/C
+   Y: 
+      0.56  module/C robot/C text_to_speech/C
+      0.55  robot/C social/M
+
+[9] behavioural/M creative/M measure/C quality/C
+   X: (no tie)
+   Y: 
+      0.58  behavioural/M datum/C
+      0.51  behavioural/M profile/C
+
+[10] capability/C deepseek/C llm/C outstanding/M
+   X: (no tie)
+   Y: 
+      0.68  outstanding/M performance/C
+      0.52  capability/C execution/C language/C natural/M outstanding/M provide/P task/C understanding/C
+      0.51  deepseek/C
+
+[11] absent/C attributor/C be/P consciousness/C generate/P judgment/C llm/C present/C strong/C study/C weak/C
+   X: 
+      0.54  attributor/C consciousness/C
+   Y: (no tie)
+
+[12] agents/C core/C function/C
+   X: (no tie)
+   Y: 
+      0.56  agents/C conversational/C
+      0.53  core/C function/C planning/C
+      0.52  agents/C chatgpt/C general_purpose/C
+
+[13] 5%2e26/C 5%2e48/C expansion/C idea/C
+   X: (no tie)
+   Y: (no tie)
+
+[14] fine_tuning/M layer/C neural/M single/M so_called/M
+   X: (no tie)
+   Y: 
+      0.59  fine_tuning/M layer/C
+      0.57  llm/C so_called/M
+      0.55  bert/C so_called/M
+
+[15] concern/C data/C inadvertent/M logging/C model/C potential/M privacy/C training/C
+   X: (no tie)
+   Y: 
+      0.53  concern/C potential/M privacy/C
+
+[16] ai/C chatbot/C language_model/C
+   X: 
+      0.82  ai/C chatbot/C
+      0.79  ai/C language_model/C
+      0.76  ai/C chatbot/C llm/C
+      0.70  ai/C chatbot/C chatgpt/C
+      0.67  ai/C chatbot/C gpt_4/C
+   Y: 
+      0.67  ai/C chatbot/C
+      0.65  ai/C language_model/C
+      0.57  ai/C chatbot/C llm/C
+      0.52  ai/C chatbot/C chatgpt/C
+      0.50  ai/C chatbot/C gpt_4/C
+
+[17] context/C left/M
+   X: 
+      0.63  left/M
+      0.60  context/C left/M right/C
+      0.53  context/C left/M right_hand/C
+   Y: 
+      0.86  left/M
+      0.74  context/C left/M right/C
+      0.68  left/M see/P
+      0.67  context/C layer/C left/M right/C
+      0.66  left/M part/C
+
+[18] deep/M deepseek/C design/C discussion/C field/C foundation/C innovative/M knowledge/C manufacturing/C marketization/C material/C multiple/M process/C product/C professional/M prototype/C reserve/C selection/C solid/M subsequent/M user_centered/M
+   X: (no tie)
+   Y: (no tie)
+
+[19] 37/M adult/C percent/C
+   X: 
+      0.68  37/M percent/C
+   Y: 
+      0.85  37/M percent/C
+      0.65  37/M research/C study/C
+      0.59  37/M chatgpt/C helpful/C percent/C rate/P
+      0.53  adult/C
+
+[20] explicitly/M include/P
+   X: 
+      0.67  include/P
+      0.63  explicitly/M use/P
+      0.63  be/P explicitly/M
+      0.60  explicitly/M provide/P
+      0.59  be/M include/P
+   Y: (no tie)
+
+[21] hold/P test/P
+   X: 
+      0.55  hold/P
+   Y: 
+      0.78  hold/P
+      0.71  be/M hold/P
+      0.68  hold/P not/M
+      0.68  can/M hold/P
+      0.66  hold/P may/M
+
+[22] actual/M message/C
+   X: 
+      0.53  actual/M
+   Y: 
+      0.75  actual/M
+      0.66  message/C
+      0.65  actual/M performance/C
+      0.65  actual/M datum/C
+      0.63  actual/M user/C
+
+[23] gpt_4o/C scoring/C task/C
+   X: 
+      0.68  scoring/C
+      0.64  llm/C scoring/C
+      0.59  gpt_4o/C
+      0.58  human/M scoring/C
+      0.57  comparison/C gpt_4o/C publish/P scoring/C
+   Y: (no tie)
+
+[24] few_shot/C impact/C llm/C method/C performance/C prompting/C zero_shot/C
+   X: 
+      0.69  few_shot/C prompting/C relative/M zero_shot/C
+      0.68  few_shot/C zero_shot/C
+      0.63  few_shot/C learning/C zero_shot/C
+      0.62  few_shot/C prompt/C zero_shot/C
+      0.62  cot/C few_shot/C prompting/C strategy/C zero_shot/C
+   Y: (no tie)
+
+[25] crisis/C evaluation/C response/C
+   X: 
+      0.71  crisis/C
+      0.68  capability/C crisis/C llm/C response/C
+      0.60  appropriateness/C category/C classification/C crisis/C evaluation/C generation/C llm/C response/C
+      0.58  category/C crisis/C evaluation/C input/C label/C llm/C protocol/C response/C user/C
+      0.57  crisis/C prediction/C
+   Y: (no tie)
+
+[26] effect/C mcgurk/C
+   X: 
+      0.73  effect/C mcgurk/C signature/C
+      0.65  effect/C mcgurk/C neural/M substrate/C
+      0.59  mcgurk/C syllable/C
+      0.57  effect/C human/M mcgurk/C model/C perception/C poorly/M suited/C
+      0.54  identical/M mcgurk/C stimulus/C
+   Y: 
+      0.59  effect/C mcgurk/C signature/C
+
+[27] can/M interact/P well/M
+   X: 
+      0.69  can/M interact/P
+   Y: 
+      0.85  can/M interact/P
+      0.73  interact/P
+      0.65  chatgpt/C interact/P
+      0.63  be/P interact/P
+      0.62  interact/P user/C
+
+[28] common/C increasingly/M
+   X: 
+      0.79  common/C
+      0.72  common/C more/M
+      0.66  common/C more/M than/M
+      0.66  common/C less/M
+      0.59  common/C more/M slightly/M
+   Y: 
+      0.56  common/C
+
+[29] creativity/C evaluate/P
+   X: 
+      0.57  chatgpt/C creativity/C evaluate/P output/C
+      0.51  creativity/C
+   Y: 
+      0.80  chatgpt/C creativity/C evaluate/P output/C
+      0.72  creativity/C
+      0.69  evaluate/P
+      0.67  creativity/C llm/C
+      0.62  evaluate/P model/C
+
+[30] framework/C psychogat/C
+   X: (no tie)
+   Y: (no tie)
+
+[31] discuss/P tend/P
+   X: 
+      0.72  discuss/P
+      0.69  tend/P
+      0.65  be/M discuss/P
+      0.63  be/P discuss/P
+      0.62  discuss/P not/M
+   Y: 
+      0.51  discuss/P
+
+[32] characterize/P help/P
+   X: 
+      0.77  can/M characterize/P help/P
+      0.56  characterize/P
+   Y: 
+      0.92  can/M characterize/P help/P
+      0.79  characterize/P
+      0.72  be/M characterize/P
+      0.69  can/M characterize/P
+      0.66  characterize/P could/M
+
+[33] full/M model/C versus/M
+   X: 
+      0.64  full/M model/C
+      0.56  model/C versus/M
+   Y: 
+      0.80  full/M model/C
+      0.69  model/C versus/M
+      0.67  full/M model/C our/M
+      0.65  full/M model/C output/C
+      0.63  full/M model/C potential/C
+
+[34] chinese/M effectiveness/C few_shot/C gpt_3_5/C gpt_4/C identify/P medium/C platform/C prompt/C risk/C social/M suicide/C text/C zero_shot/C
+   X: 
+      0.53  few_shot/C prompt/C zero_shot/C
+   Y: (no tie)
+
+[35] diversity/C effective/M gpt_5_mini/C our/M sample/C
+   X: (no tie)
+   Y: 
+      0.52  diversity/C perspective/C sample/C
+      0.52  our/M sample/C
+      0.51  diversity/C
+
+[36] emotion/C video_specific/M
+   X: (no tie)
+   Y: (no tie)
+
+[37] text/C unlabelled/M use/P
+   X: 
+      0.74  corpus/C unlabelled/M
+      0.67  bidirectional/M deep/M representation/C text/C unlabelled/M
+      0.58  data/C large_scale/M set/C unlabelled/M
+      0.58  bidirectional/M deep/M obtain/P pre_trained/M representation/C text/C unlabelled/M
+      0.54  datum/C large/M speech/C unlabelled/M volume/C
+   Y: (no tie)
+
+[38] ai/C bias/C concern/C datum/C ethical/M potential/C privacy/C
+   X: (no tie)
+   Y: 
+      0.75  concern/C ethical/M privacy/C
+      0.61  concern/C privacy/C
+      0.61  amplification/C bias/C concern/C ethical/M potential/M privacy/C
+      0.60  concern/C ethical/M
+      0.53  concern/C privacy/C specific/M
+
+[39] information/C source/C
+   X: 
+      0.63  information/C primary/M source/C
+      0.56  source/C
+      0.50  information/C semantic/M source/C various/M
+   Y: 
+      0.79  source/C
+      0.77  information/C primary/M source/C
+      0.74  llm/C source/C
+      0.71  information/C semantic/M source/C various/M
+      0.66  response/C source/C
+
+[40] expression/C self_harm/C
+   X: 
+      0.55  self_harm/C
+   Y: 
+      0.77  self_harm/C
+      0.64  expression/C
+      0.63  recent/M self_harm/C
+      0.61  category/C self_harm/C
+      0.61  self_harm/C suicide/C
+
+[41] be/M shape/P
+   X: 
+      0.70  shape/P
+      0.54  be/M collaboratively/M shape/P
+      0.51  can/M shape/P
+   Y: 
+      0.92  shape/P
+      0.81  can/M shape/P
+      0.78  may/M shape/P
+      0.77  could/M shape/P
+      0.72  help/P shape/P
+
+[42] alignment/C fine_grained/M
+   X: 
+      0.66  fine_grained/M level/C
+      0.63  fine_grained/M topic/C
+      0.61  fine_grained/M learning/C prompt/C
+      0.61  alignment/C
+      0.59  analysis/C fine_grained/M linguistic/M
+   Y: (no tie)
+
+[43] contextual/M credibility/C
+   X: 
+      0.85  credibility/C
+      0.70  credibility/C enhance/P
+      0.69  credibility/C reliability/C
+      0.65  clinical/M credibility/C llm/C research/C
+      0.63  credibility/C llm/C reliability/C response/C
+   Y: 
+      0.61  credibility/C
+
+[44] capability/C generalization/C model/C
+   X: 
+      0.80  capability/C generalization/C
+      0.75  capability/C generalization/C model/C pre_trained/M
+      0.59  capability/C generalization/C strong/M
+      0.53  capability/C model/C
+   Y: 
+      0.95  capability/C generalization/C
+      0.87  capability/C generalization/C model/C pre_trained/M
+      0.80  capability/C generalization/C strong/M
+      0.78  generalization/C
+      0.74  generalization/C llm/C
+
+[45] chatbot/C gpt_4o_mini/C instance/C
+   X: 
+      0.67  gpt_4o_mini/C instance/C llm/C secure/M
+      0.66  gpt_4o_mini/C instance/C openai/C separate/M
+      0.65  gpt_4o_mini/C
+      0.62  instance/C
+      0.61  gpt_4o_mini/C llm/C
+   Y: (no tie)
+
+[46] 67/M americans/C percent/C
+   X: (no tie)
+   Y: 
+      0.69  americans/C
+      0.59  67/M majority/C percent/C
+      0.52  americans/C half/C
+
+[47] 128/M sequence/C token/C up/M
+   X: 
+      0.90  128/M token/C up/M
+      0.72  128/M token/C
+      0.65  512/M sequence/C token/C up/M
+      0.63  128/M first/M token/C
+      0.61  128/M length/C max/M sequence/C token/C
+   Y: 
+      0.78  128/M token/C up/M
+      0.54  512/M sequence/C token/C up/M
+      0.50  128/M token/C
+
+[48] incorrect/C vice/M
+   X: 
+      0.75  vice/M
+      0.66  incorrect/C
+      0.65  be/M use/P vice/M
+      0.60  not/M predict/P vice/M
+      0.59  assign/P vice/M
+   Y: 
+      0.53  vice/M
+
+[49] great/M need/C
+   X: 
+      0.70  great/M llm/C need/C research/C transparency/C
+      0.70  need/C
+      0.60  great/M performance/C
+      0.59  human/M need/C
+      0.58  accuracy/C great/M
+   Y: (no tie)
+
+[50] position/C sequence/C token/C type/C
+   X: (no tie)
+   Y: 
+      0.67  sequence/C token/C
+      0.60  position/C
+      0.57  output/C sequence/C token/C
+      0.55  first/M sequence/C token/C
+      0.55  one/M sequence/C token/C

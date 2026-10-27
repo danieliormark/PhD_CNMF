@@ -1,0 +1,60 @@
+[1] 0.44   bert/C like/M lm/C   ||   bert/C like/M procedure/C
+[2] 0.48   bard/C chatbot/C chatgpt/C gemini/C llama/C   ||   bard/C gemini/C
+[3] 0.49   negative/M predictive/M value/C   ||   positive/M predictive/M value/C
+[4] 0.40   daily/M interact/P   ||   chatgpt/C interact/P
+[5] 0.40   baseline/C section/C   ||   baseline/C llm/C
+[6] 0.46   8b/C llama_3/C   ||   8b/C llama_3/C provo/C tfd/C
+[7] 0.44   multiple/M study/C   ||   study/C
+[8] 0.40   message/C only/M text/C therapist/C use/P   ||   therapist/C use/P
+[9] 0.45   crowd/C online/M worker/C   ||   coder/C crowd/C expert/C worker/C
+[10] 0.43   mcgurk/C present/P syllable/C   ||   incongruent/M mcgurk/C syllable/C visual/M
+[11] 0.43   important/M model/C requirement/C   ||   requirement/C
+[12] 0.45   data/C our/M set/C   ||   collection/C data/C our/M
+[13] 0.46   application/C one/M   ||   application/C
+[14] 0.45   colleague/C lee/C   ||   colleague/C
+[15] 0.40   be/M can/M fine_tune/P use/P   ||   be/M can/M create/P tool/C use/P
+[16] 0.44   approach/C ensemble/C proposed/M voting/C   ||   approach/C voting/C
+[17] 0.49   be/M label/P sequentially/M   ||   be/M sequentially/M train/P
+[18] 0.40   propensity/C story/C well/M   ||   llm/C propensity/C
+[19] 0.49   gpt_4/C mentalllama/C r10@1/C score/C wsw/C   ||   gpt_4/C mentalllama/C model/C three/M wsw/C
+[20] 0.46   language_model/C network/C neural/M   ||   language_model/C neural/M surprisal/C
+[21] 0.46   generate/P instruct/P learn/P   ||   define/P generate/P instruct/P
+[22] 0.47   advantage/C gpt_5_mini/C overall/M   ||   advantage/C gpt_5_mini/C mrmet/C
+[23] 0.41   difference/C experience/C expertise/C individual/M language/C   ||   difference/C human/M individual/M language/C processing/C
+[24] 0.41   map/C seven/M   ||   model/C seven/M
+[25] 0.42   14/M participant/C total/C   ||   human/M participant/C sample/C total/C
+[26] 0.47   future/M llm/C progress/C   ||   progress/C
+[27] 0.41   convert/P embedding/C word/C   ||   embedding/C roberta/C word/C
+[28] 0.43   resilience/C underestimate/P   ||   be/M underestimate/P
+[29] 0.45   dataset/C effect/C erowid/C sentence/C visual/M   ||   effect/C not/M sentence/C visual/M
+[30] 0.46   behavioral/M participant_level/C reliance/C   ||   behavioral/M perceive/P reliance/C
+[31] 0.45   iterative/M process/C single/M   ||   iterative/M multi_stage/M process/C
+[32] 0.49   10/M idea/C   ||   idea/C
+[33] 0.44   functionality/C key/M   ||   functionality/C language_model/C
+[34] 0.46   could/M produce/P   ||   could/M
+[35] 0.40   dialog/C function/C generative/M llm/C   ||   function/C llm/C
+[36] 0.48   anxiety/C child/C social/M   ||   anxiety/C social/M symptom/C
+[37] 0.50   advance/C capability/C llm/C major/M previous/M raw/M term/C   ||   advance/C base/C capability/C chatgpt/C constitute/P gpt_3_5/C llm/C major/M model/C not/M previous/M raw/M term/C underlying/M
+[38] 0.44   form/C text/C token/C   ||   form/C speak/P text/C
+[39] 0.40   ask/P differ/P   ||   differ/P may/M
+[40] 0.43   agent/C conversational/M health/C llm/C mental/M proliferation/C recent/M support/C   ||   context/C health/C llm/C mental/M proliferation/C
+[41] 0.47   can/M expand/P   ||   expand/P use/P
+[42] 0.40   backbone/C classification/C   ||   albert/C backbone/C
+[43] 0.41   agreement/C ai_bvct/C score/C strong/M vci/C   ||   ai_bvct/C association/C claude_2/C gpt_4/C score/C vci/C
+[44] 0.45   consistent/C first/M second/M sentence/C   ||   first/M sentence/C
+[45] 0.40   enhance/P llm/C performance/C specific/M task/C   ||   llm/C our/M performance/C task/C
+[46] 0.48   be/P cluster/C common/C five/M word/C   ||   be/P category/C common/C word/C
+[47] 0.41   attention/C bidirectional/M mechanism/C   ||   attention/C mechanism/C multi_head/C
+[48] 0.46   embedding/C employ/P   ||   be/M employ/P
+[49] 0.44   assess/P imply/P not/M   ||   imply/P
+[50] 0.45   augmentation/C data/C strategy/C   ||   augmentation/C data/C explanation/C generation/C
+[51] 0.48   change/P entirely/M   ||   change/P
+[52] 0.48   concern/C first/M   ||   first/M
+[53] 0.40   obtain/P show/P   ||   obtain/P use/P
+[54] 0.46   condition/C participant/C robot/C   ||   condition/C control/C participant/C
+[55] 0.41   chatgpt/C reasoning/C   ||   chatgpt/C
+[56] 0.41   can/M meet/P   ||   fail/P meet/P
+[57] 0.50   empirical/M idea/C support/C   ||   empirical/M strong/M support/C
+[58] 0.41   high/M improve/P low_to_moderate/C performance/C precision/C scoring/C system/C   ||   precision/C scoring/C system/C
+[59] 0.42   fundamental/M question/C   ||   architecture/C fundamental/M
+[60] 0.50   start/P use/P   ||   be/P start/P
