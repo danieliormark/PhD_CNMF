@@ -1010,3 +1010,19 @@ against the PMC header (2 of 4 differ in author count).]*
 *[2026-10-27, owner confirmed A3 part 2 and its inclusion in the trial (RL-203): 379 lost sentences recovered in 180
 articles (G2 v3.3, G3 rerun, no article status change); the Psychology trial gains 33 sentences in 11 articles; the
 trial list (2,139) and the language-model demotion are unchanged.]*
+
+## Addendum 2026-10-27 — relations versus regularisers for the trial (owner)
+
+Matrices in both approaches (owner): child×parent, child×article (child = the merged child/cousin layer), article×journal;
+approach 1 author×article, author×affiliation; approach 2 article×affiliation (and article×article, below).
+- **child×child (shared words): regulariser** (confirms §1). The weighting of the similarity is to be discussed.
+- **affiliation×affiliation (shared people, moves): neither a matrix nor a regulariser** for now. Measured in the
+  Psychology trial: of organisation pairs linked through one person, only 65 are not already on a common article.
+- **article×article (approach 2): open — sparsity.** Psychology trial: 2,139 articles; 1,108 article pairs share at
+  least one person (2,216 non-zero cells of 4.57 million, 0.05%); mean degree 1.04 (2.99 among the 741 articles with any
+  tie); 1,398 articles (65%) have none; 208 separate groups, the largest 159 articles, 144 of them a single pair. Full
+  corpus for comparison: mean degree 4.14, 62% of articles tied (the discipline subset cuts collaborators' other papers).
+  Reference points: a block-model community structure is detectable from a graph alone only above the Kesten–Stigum
+  bound d·λ² > 1 (d mean degree, λ ≤ 1 the community signal), so d ≈ 1 is at the limit even for perfectly separated
+  communities; low-rank recovery needs of the order of n·K·log n observed entries (≈ 65,600 for K = 4). Discussion with
+  the owner pending.
