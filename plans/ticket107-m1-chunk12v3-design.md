@@ -1049,3 +1049,9 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   Laplacian tr(PᵀL_sym P) was dropped because it penalises equal memberships of entities with different tie totals).
 - Open: the distance, the scaling of the penalty by the number of
   regularised entities, k and τ for child×child, λ calibration (held-out ties).
+- **child×child tie selection — DECIDED (owner, 2026-10-27):** for each child hyperedge keep the 5 most similar
+  hyperedges with similarity ≥ 0.5, all candidates tied at the 5th value kept (5 is a minimum); a tie is kept if either
+  side selects the other. Be ready to switch to k ≈ 11 (order of log n for 98,949 hyperedges, von Luxburg 2007).
+- **λ calibration — DECIDED (owner, 2026-10-27):** outside Optuna; target = prediction of held-out ties (child×article,
+  child×parent). The check on hidden similarity ties is deferred to the robustness checks, with the planted worlds.
+  Open: one λ for all K or a λ per K (see the reply of 2026-10-27); which similarity measure.
