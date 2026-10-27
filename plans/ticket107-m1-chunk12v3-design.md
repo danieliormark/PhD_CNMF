@@ -1007,3 +1007,6 @@ exact technique (missing cells vs placeholders) is decided later.]*
 teaching hospitals into their system, never into the university); French experimental universities stay groupings;
 Psychology trial 2,716 institutions → 2,519 organisations. No-PMID articles: authors from OpenAlex, pending a check
 against the PMC header (2 of 4 differ in author count).]*
+*[2026-10-27, owner confirmed A3 part 2 and its inclusion in the trial (RL-203): 379 lost sentences recovered in 180
+articles (G2 v3.3, G3 rerun, no article status change); the Psychology trial gains 33 sentences in 11 articles; the
+trial list (2,139) and the language-model demotion are unchanged.]*

@@ -28,7 +28,7 @@ g3_nonprose_v2.jsonl, g3_errors_v2.jsonl, g3_occurrences_v2.jsonl, g3_v2_summary
 import argparse, collections, hashlib, importlib.util, json, os, sys
 
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
-G2_SHARDS = PG + "g2_v3_2/shards/"
+G2_SHARDS = PG + "g2_v3_3/shards/"                                     # RL-203 (was g2_v3_2)
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 

@@ -4,7 +4,10 @@ research sentences), P7 itself, its REF remap and its comparison. Two things dif
   * in the articles with an addition (a3p2_prepare.py, P6 rerun by a3p2_p6.py) the new sentences are added to the existing
     P6 record; existing sentences are never touched (their text, resolved text, focal flag and block stay as they were).
     Added: a sentence of the new P6 record that is focal there and was either absent from the old record or not focal in it
-    (made focal by a hub antecedent through coreference). Absent ones go into one extra block per region,
+    (made focal by a hub antecedent through coreference), and only if it is one of the accepted P2 additions
+    (a3p2_prepare.py's additions.jsonl minus --reject): a sentence the earlier cleaning had un-flagged (AI-use statements,
+    Stage B hit rules) and that the P6 rerun, starting from uncleaned P2 flags, made focal again is not added (first run:
+    9 such sentences, 7 of them statements). Absent ones go into one extra block per region,
     "<PMCID>.r<N>.A3B1" (block ids are not read by G2 or G3); sentences rejected on reading (--reject) are not added.
   * ids are frozen against the merged corpus (PG/g2_v3_1/citation_works_v2.jsonl, the p7b ids), and the comparison is with
     PG/g2_v3_1/focal_sentences_v2.jsonl.
@@ -26,6 +29,7 @@ def load(name, path):
 
 
 def add_new(stage, reject):
+    accepted = {json.loads(l)["sid"] for l in open(A + "additions.jsonl")} - reject
     new = {}
     for unit in ("current", "gap"):
         f = A + f"p6_{unit}/coref_resolved_v2.jsonl"
@@ -42,7 +46,7 @@ def add_new(stage, reject):
             extra = collections.defaultdict(list)
             for b in new[pm]["blocks"]:
                 for s in b["sentences"]:
-                    if not s["focal"] or s["sid"] in reject or (s["sid"] in old and old[s["sid"]]["focal"]):
+                    if not s["focal"] or s["sid"] not in accepted or (s["sid"] in old and old[s["sid"]]["focal"]):
                         continue
                     if s["sid"] in old:
                         old[s["sid"]].clear(); old[s["sid"]].update(s); c["made focal in an existing block"] += 1

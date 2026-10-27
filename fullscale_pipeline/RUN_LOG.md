@@ -2726,3 +2726,46 @@ not missing authors: the full headers list 11 and 4 authors. Wired in (when the 
 byte-identical), every rule count unchanged, R1 241,707 identified, 201,325 persons (+16: 5 of the 21 are persons already on
 other articles); organisations 2,717 institutions → 2,520; trial list 2,139, nothing pending. Files untracked (names):
 `diagnostics/author_coverage/bylines_v2_pmc_header.jsonl`, `pmc_header_xml/`. [LOG]
+
+**RL-203 · 2026-10-26/27 · A3 part 2: sentences lost upstream by the v3 matcher recovered (P2 → P6 → P7 → G2 → G3) · CODE + CORPUS DATA + PRODUCTION RERUN on incline + RE-AUDIT · LIVE**
+Owner (2026-10-26): "I confirm A3 part 2. I think we can include the relevant sentences/articles into the trial."
+**Re-measured first:** RL-184's scan ran the matcher without article evidence (anchored=False), so names that need it
+(GPT, Gemini, Llama …) counted as missed; checked against the merged corpus (`PG/g2_v3_2/focal_sentences_v2.jsonl`),
+223 of the 689 sentences were already in it; 466 were really missing (Psychology trial: 33 in 11 articles).
+**Matcher** `retrieval/focal_terms_v3_1.py` (c3141bb211ba; mirror in `pmc_preprocessing/`): v3 plus G3's own `hub_hits`
+and `hub_families.txt` (RL-185), loaded from g3_curation_v2.py, so P2 and G3 cannot diverge; hub spellings count as
+article evidence; self-test 30/30 (v3's 23 unchanged). G3's rule catches 383 of the 466; the other 83 are spellings G3
+does not read as model names either (hfl/chinese-roberta-wwm-ext, roberta_chinese_large, finbert-tone, but also
+www.google.com/gemini, an npm command, ESM feature names): left out, a possible later rule extension.
+**P2** with v3.1 on both corpora (`LCS/a3p2/run_p2.sh`, same launch as RL-165; 637 s + 16 min), compared by sentence id
+with the P2 v3 records (`retrieval/a3p2_prepare.py`, 5d35da4cf01f): **424 additions, 0 sentences lost**; 637 focal
+sentences only gained a hub term (no new sentence; G3 already reads those). **Read by the assistant, all 424:** 45
+rejected (`LCS/a3p2/rejected.tsv`): 43 false hits — 2-opt/3-opt route operators 20, "-optimized" compounds 12 (an error
+in `hub_families.txt`: "optimized" is listed; in the production G3 output it produced no mention, so no change there),
+chat-optimized 3, opt-in/opt-out 2, llama-index/llama-parse 2, bert-as-service, a stray "Bert" line, Grover (a person),
+GPN (graph pointer network) — and 2 AI-use statements (owner: statements are not analysed). **379 sentences, 180
+articles.** **P6** locally on incline (`retrieval/a3p2_p6.py`, 34ca4f2164f2, copy of inc_p6.py with the v3.1 matcher;
+`LCS/a3p2/run_p6.sh`, 10 shards, 25 min): 180 articles, no errors. **P7** (`retrieval/a3p2_p7.py`, edb1b4a5bd38):
+inc_p7.py reused unchanged (p7b assembly, P7, remap, comparison), ids frozen against `PG/g2_v3_1/`'s works; the new
+sentences are added to the existing P6 records, existing sentences untouched. Reproduction check first (no addition):
+12,690 of 12,690 REF ids kept, 816,678 existing sentences unchanged, 0 changed. Real run: 12,690 ids kept, 1 new work,
+816,678 unchanged. **Error found and fixed:** the first P7 run also re-added 9 sentences the earlier cleaning had
+un-flagged (7 AI-use statements, 2 Stage B), because the P6 rerun starts from uncleaned P2 flags; only the accepted P2
+additions are now added (first run kept as `LCS/a3p2/p7_first_run_9_cleaned_sentences_readded/`). One addition was
+already in the corpus through coreference with the same hash_final: existing parse kept. **G2** (`retrieval/a3p2_g2.py`,
+00db62c4bcb4; inc_g2_dash.py, the wrapper of every existing parse): 378 sentences; first parse: G2's hyphen rule joined
+7 hub spellings (deproberta-large-depression -> deproberta_large_depression) so G3 could not read them; fixed as RL-167
+did for v3 names: the keep-whole list is RL-167's plus the 162 hyphenated hub spellings of the additions
+(`LCS/a3p2/focal_surfaces_v3_1_hyphenated.txt`, through a new optional `INC_G2_SURF` override in inc_g2.py, 820eba61627d;
+default unchanged); reparse: 377 ok, 1 non-prose (a figure caption), 377 of 377 prose sentences keep their name.
+Positions (g2_positions.py unchanged): 383 of 383 units exact. **Merge `PG/g2_v3_3/` + `g2_v3_3_pos/`:** 49,346
+articles, 817,056 sentences (+378), 826,081 units (+383); checks 0 problems (`check_report.json`). **G3** (g3_curation_v2.py
+aed7ea878aaa: SHARDS and POSITIONS now g2_v3_3; merge_g3_v2.py and lm_demotion_run.py likewise; self-test 179/179):
+50 shards on incline (`PG/g3_v2_run_rl203.sh`, 10 parallel), all exit 0, merge OK, **audit 0 problems**; RL-186 output
+kept as `PG/g3_v2_rl186/`. Articles: valid 41,753, invalid 640, excluded 6,953 — **no status change**; units 785,999 ->
+786,363; only articles of the 180 changed (176; no other article differs in any G3 file). **Psychology:** the
+language-model demotion list rebuilt on the new output is byte-identical (307 sentences, 120 articles; unit decisions
+identical); the targeted demotion rerun (old kept as `PG/g3_v2_lm_demotion_rl196/`) reproduces its report (313 units,
+93 articles out); trial list unchanged, 2,139. **The trial gains 33 sentences in 11 articles** (units 486 -> 518):
+claude_sonnet_4_5 19, grok_4_fast 17, claude_opus_4_5 7, grok_4 7, all_distilroberta_v1 4, gpt_oss 3, mental_bert 3,
+claude_sonnet_3_7 3 … The CSF check (check_csf_g3_v2.sh) pins the RL-186 script and reference; not renewed. [LOG]

@@ -15,7 +15,7 @@ R = "/mnt/hum01-rds/Basov/p91688di/"
 PG = R + "phase5_graphbrain/scripts/"
 LCS = R + "llm_corpus_staging/"
 P2S = [LCS + "p2_v3_current/focal_extractions_v2.jsonl", LCS + "gap_stage/llm_corpus_staging/focal_extractions_v2.jsonl"]
-SURF = LCS + "inc_run/focal_surfaces_v3_hyphenated.txt"
+SURF = __import__("os").environ.get("INC_G2_SURF") or LCS + "inc_run/focal_surfaces_v3_hyphenated.txt"   # RL-203: override for A3 part 2
 NORM = re.compile(r"(?<=[A-Za-z0-9])’")
 
 

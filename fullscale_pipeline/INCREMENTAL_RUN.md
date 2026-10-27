@@ -80,3 +80,12 @@ Inputs of record beside the shards: `focal_sentences_v2.jsonl` (P7, mapped REF i
 `citation_works_v2.jsonl`, `url_table_v3_1.json`, `check_report.json`. The existing `PG/g2_v3/` and `LCS/` outputs are
 untouched; the current corpus's article exclusions (`LCS/article_exclusions_stage_b.csv`, 980: 789 AI-use statement only, 104 all hits rejected, 87 F2 other sense) are applied in this
 output, not yet in `LCS/article_whitelist.txt` (only P0–P2 read the whitelist; nothing downstream needs it changed).
+
+## A3 part 2 (2026-10-26/27, RUN_LOG RL-203): sentences lost upstream by the v3 matcher
+
+Same principles, one more round: P2 with `focal_terms_v3_1.py` (v3 + G3's hub spellings) on both corpora, compared by
+sentence id (`retrieval/a3p2_prepare.py`): 424 additions, 0 lost; read by the assistant, 45 rejected → 379 sentences in
+180 articles. P6 locally (`a3p2_p6.py`), P7 with frozen ids (`a3p2_p7.py`; reproduction check first; only the accepted
+additions added, existing sentences untouched), G2 for the 378 new sentences with the hub spellings kept whole
+(`a3p2_g2.py`), positions, merge → **`PG/g2_v3_3/` + `g2_v3_3_pos/`** (817,056 sentences, 826,081 units; checks passed).
+G3 reads g2_v3_3 from RL-203 on.

@@ -12,7 +12,7 @@ demoted/ (--extra-rejections the demotion list). Checks:
 import argparse, collections, csv, glob, json, os, subprocess, sys
 
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
-G2 = PG + "g2_v3_2/shards/"
+G2 = PG + "g2_v3_3/shards/"                                            # RL-203 (was g2_v3_2)
 PROD = PG + "g3_v2/shards/"
 OUT = PG + "g3_v2_lm_demotion/"
 DEM = PG + "g3_inputs_v3_1/lm_demotions_psychology.tsv"

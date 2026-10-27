@@ -1,10 +1,13 @@
 """A3 part 2, step 5 (2026-10-26, RL-203): G2 for the added sentences and the merged G2 output PG/g2_v3_3/ (+ g2_v3_3_pos/).
     prepare   from the P7 output of a3p2_p7.py (LCS/a3p2/p7/out/focal_sentences_v2.mapped.jsonl) take the added sentences
-              (added_sentences.json) as P7 records holding only them -> LCS/a3p2/g2_in/focal_sentences_inc.jsonl. Every other
+              (added_sentences.json; one already in the corpus through coreference keeps its parse when its hash_final
+              is unchanged) as P7 records holding only them -> LCS/a3p2/g2_in/focal_sentences_inc.jsonl. Every other
               sentence of that P7 output must equal the merged corpus (PG/g2_v3_2/, sid and hash_final) or be one of the
               sentences the RL-169 merge removed after P7 (then it is not carried: not in g2_v3_2).
     parse     G2 v3 through inc_g2_dash.py (the wrapper of every existing parse: v3 hyphenated names, curly apostrophes, the
-              RL-185 dash rewrite), 8 shards in parallel -> PG/g2_v3_a3p2/shards/
+              RL-185 dash rewrite), 8 shards in parallel -> PG/g2_v3_a3p2/shards/. The hyphen rule's keep-whole list is
+              RL-167's v3 list plus the hyphenated hub spellings of the additions (LCS/a3p2/focal_surfaces_v3_1_hyphenated.txt):
+              without it G2 joins them (deproberta-large-depression -> deproberta_large_depression) and G3 cannot read them.
     positions g2_positions.py's run_shard (RL-186, unchanged) on those shards -> PG/g2_v3_a3p2/pos/
     merge     PG/g2_v3_3/: every article of g2_v3_2 in its own shard file and order; an article with additions gets its new
               sentences inserted in sentence-id order (region, raw line, k); g2_v3_3_pos/pos_NNN.jsonl = g2_v3_2_pos's plus
@@ -50,9 +53,11 @@ def prepare():
         for line in open(P7 + "focal_sentences_v2.mapped.jsonl", encoding="utf-8"):
             r = json.loads(line); keep = []
             for s in r["sentences"]:
-                if s["sid"] in added:
+                if s["sid"] in added and s["sid"] in old:      # already in the corpus through coreference: existing parse kept
+                    C["added, already in g2_v3_2 with the same hash_final (existing parse kept)" if old[s["sid"]] == s["hash_final"]
+                      else "ADDED SID ALREADY IN g2_v3_2 WITH OTHER TEXT (must be 0)"] += 1
+                elif s["sid"] in added:
                     C["added: to parse"] += 1; keep.append(s)
-                    if s["sid"] in old: C["ADDED SID ALREADY IN g2_v3_2 (must be 0)"] += 1
                 elif s["sid"] not in old:
                     C["not added, not in g2_v3_2 (removed by the RL-169 merge, not carried)"] += 1
                 elif old[s["sid"]] == s["hash_final"]:
@@ -61,16 +66,18 @@ def prepare():
                     C["EXISTING CHANGED (must be 0)"] += 1
             if keep:
                 fo.write(json.dumps(dict(r, sentences=keep, n_sentences=len(keep)), ensure_ascii=False) + "\n")
-    C["added sentences not found in P7 output (must be 0)"] = len(added) - C["added: to parse"]
+    C["added sentences not found in P7 output (must be 0)"] = len(added) - C["added: to parse"] - \
+        C["added, already in g2_v3_2 with the same hash_final (existing parse kept)"]
     json.dump(dict(C), open(GIN + "g2_prepare_summary.json", "w"), indent=1)
     print(json.dumps(dict(C), indent=1))
 
 
 def parse():
     os.makedirs(NEW + "shards", exist_ok=True)
-    env = dict(os.environ, PYTHONPATH=os.path.expanduser("~/np1_for_spacy"), OMP_NUM_THREADS="2")
+    env = dict(os.environ, PYTHONPATH=os.path.expanduser("~/np1_for_spacy"), OMP_NUM_THREADS="2",
+               INC_G2_SURF=A + "focal_surfaces_v3_1_hyphenated.txt")   # v3 list + the hub spellings of the additions (RL-167 rule)
     ps = [subprocess.Popen([sys.executable, "-u", HERE + "inc_g2_dash.py", "--shard", str(k), "--nshards", str(NSH),
-                            "--input", GIN + "focal_sentences_inc.jsonl", "--outdir", NEW + "shards/"],
+                            "--input", GIN + "focal_sentences_inc.jsonl", "--outdir", NEW],          # the parser writes into <outdir>shards/
                            stdout=open(NEW + f"parse_{k}.log", "w"), stderr=subprocess.STDOUT, env=env) for k in range(NSH)]
     print("exit codes", [p.wait() for p in ps])
 

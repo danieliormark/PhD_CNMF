@@ -77,15 +77,12 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    **2026-10-26/27 (RL-201 to RL-203):** owner decisions on organisations (research organisations not merged; health
    systems merged with safeguards; French experimental universities stay groupings) → 2,716 → 2,519 (+PMC header: 2,520);
    4 no-PMID articles' bylines from the PMC header aligned to OpenAlex (21/21, `pmc_header_bylines.py`); trial list
-   2,139, nothing pending. **A3 part 2 IN PROGRESS (owner confirmed, include in the trial):** the RL-184 scan overcounted
-   (anchored=False): 466 sentences really missing. Matcher `focal_terms_v3_1.py` = v3 + G3's own `hub_hits`; P2 rerun on
-   both corpora (`LCS/a3p2/p2_*`), `retrieval/a3p2_prepare.py`: 424 additions, 0 lost; assistant read all 424, 45
-   rejected (`LCS/a3p2/rejected.tsv`: 43 false hits — 2-opt/3-opt, "-optimized" from a hub_families error, chat-optimized,
-   opt-in/out, llama-index, Grover, GPN … — and 2 AI-use statements) → 379 sentences, 180 articles. P6 local
-   (`a3p2_p6.py`, `LCS/a3p2/run_p6.sh`); P7 `a3p2_p7.py` (reproduction check passed: 12,690 ids kept, 816,678 unchanged);
-   then `a3p2_g2.py prepare|parse|positions|merge` → `PG/g2_v3_3/` + `g2_v3_3_pos/`; then G3 rerun (constants to
-   g2_v3_3; keep old output as `PG/g3_v2_rl186/`), audit, LM demotion rerun for Psychology, trial list rebuild, RUN_LOG
-   RL-203, commit.
+   2,139, nothing pending. **A3 part 2 DONE (RL-203, 2026-10-27):** 379 recovered sentences in 180 articles
+   (`PG/g2_v3_3/`, G3 rerun: audit 0, no status change; RL-186 output kept as `PG/g3_v2_rl186/`, old demotion run as
+   `g3_v2_lm_demotion_rl196/`); trial +33 sentences in 11 articles, trial list and LM demotion unchanged. Error found and
+   fixed during the run (9 cleaned sentences re-added by P6; G2 joined 7 hub spellings). **Next:** weighting inside each
+   matrix (design doc §5 item 3), then the chunk12v3 builder. Pending owner: missingness technique (missing cells vs
+   placeholders), later.
 1d. **G3 RL-186 rerun — DONE (2026-10-24).** G2 positions pass (`PG/g2_v3_2_pos/`, 825,554 of 825,698 units exact):
    provenance per hyperedge; focal names replaced and placed by their own positions (two pre-existing errors fixed);
    contrast words kept (without, versus, than, unlike, in_contrast). `PG/g3_v2/` 41,753 valid, 640 invalid, 6,953

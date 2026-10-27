@@ -47,8 +47,8 @@ import argparse, collections, contextlib, csv, hashlib, itertools, json, os, ran
 sys.setrecursionlimit(20000)
 PG = "/mnt/hum01-rds/Basov/p91688di/phase5_graphbrain/"
 PP = "/mnt/hum01-rds/Basov/p91688di/pmc_preprocessing/"
-POSITIONS = PG + "g2_v3_2_pos/"                                       # RL-186: exact token position of every atom occurrence (g2_positions.py)
-SHARDS = PG + "g2_v3_2/shards/"                                       # RL-185: g2_v3_1 with the dash re-parses (RL-171: g2_v3_1)
+POSITIONS = PG + "g2_v3_3_pos/"                                       # RL-186: exact token position of every atom occurrence (g2_positions.py); RL-203: g2_v3_3_pos
+SHARDS = PG + "g2_v3_3/shards/"                                       # RL-203: g2_v3_2 plus the A3 part 2 sentences (RL-185: g2_v3_2, RL-171: g2_v3_1)
 STOPWORDS = PG + "nltk_abridged_stopwords_list.txt"
 sys.path.insert(0, PP)
 import focal_terms as focal_terms_v2                                   # noqa: E402  v2, loaded first: v3 extends it
