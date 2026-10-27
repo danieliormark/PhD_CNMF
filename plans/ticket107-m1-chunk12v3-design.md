@@ -1072,3 +1072,7 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   τ = 0.4 (replaces 0.5). For each child hyperedge: the 5 most similar hyperedges reaching τ, plus every further one with
   exactly the 5th value (5 is a minimum whenever 5 candidates pass τ; if fewer pass, only those); a tie also counts when
   only the other hyperedge selected it. Numbers excluded from the vocabulary, model names included.
+- **Regulariser form — DECIDED (owner, 2026-10-27):** R = λ · (1/N) · Σ_i Σ_j (W_ij / d_i) · ‖p_i − p_j‖², with p the
+  weighted membership shares, squared Euclidean distance (Hellinger as a check), d_i = Σ_j W_ij, N = number of entities of
+  the facet with at least one tie; W symmetric (a tie counts when either hyperedge selected the other). Calibration arm for
+  child×child: the same measure at τ = 0.5.
