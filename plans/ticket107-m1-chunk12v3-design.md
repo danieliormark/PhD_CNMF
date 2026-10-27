@@ -1035,3 +1035,14 @@ OpenAlex topic 45% of the time against 8% at random. Two-hop ties through off-su
 of the two-hop pairs come from a few outside articles with 10+ trial neighbours. Hy-MMSBM (K = 4, persons as
 hyperedges): memberships nearly hard (93.7% of articles ≥ 0.9 on one community); with only 4 communities it must lump
 unrelated groups (topic agreement within a community 14%, near random 8%).]*
+
+## Addendum 2026-10-27 (2) — weighting of the two regularisers (discussion; decided points marked)
+
+- **child×child similarity: model names included (owner):** model choice signals tasks and community or disciplinary
+  preferences. Measured (2,000 sampled child hyperedges, idf cosine, 5 nearest neighbours, similarity ≥ 0.5): ties 7,127
+  without model names, 7,054 with them; with them 638 ties (9%) involve a model name and 126 (1.8%) rest on a model name
+  alone. Word weights: a child hyperedge is a word set, so each word occurs once in it and tf-idf equals idf.
+- **article×article weight (owner):** Jaccard-type. Proposed form to confirm: Σ over shared persons of 1/(n_p − 1),
+  divided by the size of the union of the two author sets (prolific authors and team size both damped).
+- Open: the per-entity normalisation of the tie weights, the distance, the scaling of the penalty by the number of
+  regularised entities, k and τ for child×child, λ calibration (held-out ties).
