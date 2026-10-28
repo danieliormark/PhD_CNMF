@@ -1084,3 +1084,6 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   composition in the trial (distinct words / occurrences): concept 12,511 / 225,913; modifier 5,804 / 97,550; predicate
   2,167 / 41,616; model names 401 / 26,663; modal, auxiliary, negation and contrast words 25 / 13,524; numbers 2,594 /
   9,171; citation tokens 727 / 865; URL tokens 1 / 1; 898 hyperedges consist only of numbers, citation or URL tokens.
+- **Citation and URL tokens (owner, 2026-10-28):** masked for the statistics of the child×child similarity (no idf, not
+  counted in a hyperedge's weighted size, cannot create a tie), but kept in the factorisation (hyperedge identity and
+  matrices unchanged), where they help interpretation; placeholders (one shared token per kind) were the alternative.
