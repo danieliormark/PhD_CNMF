@@ -1074,5 +1074,5 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   only the other hyperedge selected it. Numbers excluded from the vocabulary, model names included.
 - **Regulariser form — DECIDED (owner, 2026-10-27):** R = λ · (1/N) · Σ_i Σ_j (W_ij / d_i) · ‖p_i − p_j‖², with p the
   weighted membership shares, squared Euclidean distance (Hellinger as a check), d_i = Σ_j W_ij, N = number of entities of
-  the facet with at least one tie; W symmetric (a tie counts when either hyperedge selected the other). Calibration arm for
+  the facet with at least one tie; W symmetric: a tie counts when either hyperedge selected the other (the "OR" rule, a symmetric k-nearest-neighbour graph; confirmed by the owner, rather than the mutual "AND" rule). Calibration arm for
   child×child: the same measure at τ = 0.5.
