@@ -1076,3 +1076,11 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   weighted membership shares, squared Euclidean distance (Hellinger as a check), d_i = Σ_j W_ij, N = number of entities of
   the facet with at least one tie; W symmetric: a tie counts when either hyperedge selected the other (the "OR" rule, a symmetric k-nearest-neighbour graph; confirmed by the owner, rather than the mutual "AND" rule). Calibration arm for
   child×child: the same measure at τ = 0.5.
+- **child×child regulariser, further points (owner, 2026-10-28):** starts after a warm-up of 300 epochs (as the
+  concentration floor and the temporal prior), to be re-examined once membership stability over the iterations is
+  measured; the concentration floor (λ 0.1, γ 0.8, calibrated on the toy corpus) is recalibrated on the Psychology trial
+  first, then λ_child is calibrated with the floor on, with a check that the floor's own measure does not shift; idf across
+  time slices decided later (cf. ticket 106). Numbers are not in the vocabulary, so they get no idf. Vocabulary
+  composition in the trial (distinct words / occurrences): concept 12,511 / 225,913; modifier 5,804 / 97,550; predicate
+  2,167 / 41,616; model names 401 / 26,663; modal, auxiliary, negation and contrast words 25 / 13,524; numbers 2,594 /
+  9,171; citation tokens 727 / 865; URL tokens 1 / 1; 898 hyperedges consist only of numbers, citation or URL tokens.
