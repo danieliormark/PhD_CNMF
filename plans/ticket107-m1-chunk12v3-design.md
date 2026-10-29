@@ -1130,3 +1130,25 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   article×affiliation; calibration order concentration floor → λ_child → λ_article (λ_child fixed), then one re-check of
   λ_child. (3) **idf is computed over the subcorpus the trial is run on** (the trial's child hyperedges). (4) **k ≈ 11**
   only as an extra calibration arm, run only if λ_child gives no held-out gain at k = 5.
+
+## Addendum 2026-10-29 — hold-out: decisions and open points (owner)
+
+- **Hidden share: 10%** (owner, 2026-10-29), drawn at random. The record before this said: compare 5-fold (20%),
+  10-fold (10%) and relation-by-relation (2026-10-17); repeated random 10% splits were proposed as an alternative.
+  Drawing is stratified by matrix and, within each matrix, separately for ties and empty cells, so every relation (and
+  through them every facet) is represented in proportion. Open: 10 folds (every cell hidden once, 10 fits per setting)
+  or about 5 repeated random 10% splits (5 fits; some cells hidden twice or never).
+- **Relation-by-relation scheme dropped** (owner, 2026-10-29): it multiplies the fits by the number of relations
+  (about 5 × 5 = 25 per setting against 5–10), and it answers a different question (predicting one layer from the
+  others, De Bacco et al. 2017).
+- **Weights rebuilt per fold from visible cells** (owner, 2026-10-29, accepted because the cost is small): matrix
+  scaling, document-frequency weights of the data matrices (to be decided in the weighting step), team-size and
+  person-article counts where those cells can be hidden. The hidden cells' true values are taken at the fold's weights.
+  W (child×child) is not affected: idf(v) counts child hyperedges containing a word, and hiding cells removes no child
+  hyperedge and no word.
+- **Scores:** mean squared error on hidden cells chooses K and λ, reported against the trivial prediction 0 and
+  separately for hidden ties and hidden empty cells; AUC reported alongside (proposed, awaiting owner).
+- **To measure once the builder exists:** the cost of the hidden empty cells (about 21 million in child×article at
+  10%); the effect of the per-entity cap (no entity loses more than one third of its ties, so an entity needs 3 ties
+  before one can be hidden) on which child hyperedges get hidden ties. Candidate remedy for the first: hide all sampled
+  ties plus a sample of empty cells (negative sampling, standard in link prediction).
