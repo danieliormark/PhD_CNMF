@@ -1099,3 +1099,7 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   reasoning applies to the "leak" measured for the concentration floor (T1g) and to the temporal prior's design claim
   that its gradient "reaches only the persisting entity's own raw row" (CLAUDE.md §4.25): true for the raw cells, not for
   the normalised values the model uses.
+- **Building W — DECIDED (owner, 2026-10-29):** for the trial, W is built by brute force (every pair of child hyperedges
+  sharing a word is compared). The prefix-filtering algorithm (Chaudhuri et al. 2006; Bayardo et al. 2007; one global
+  word order by idf) is run alongside; if both give the identical W (every pair, every value), the faster algorithm is
+  used from then on (full corpus).
