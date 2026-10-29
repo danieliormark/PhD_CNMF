@@ -1152,3 +1152,18 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   10%); the effect of the per-entity cap (no entity loses more than one third of its ties, so an entity needs 3 ties
   before one can be hidden) on which child hyperedges get hidden ties. Candidate remedy for the first: hide all sampled
   ties plus a sample of empty cells (negative sampling, standard in link prediction).
+- **Splits (owner's proposal, 2026-10-29, assistant concurs):** each matrix's cells (ties and empty cells drawn
+  separately) are divided at random into 10 groups; 5 of the 10 are used as the hidden sets of 5 fits, so no cell is
+  hidden twice. Each fit is a fold of 10-fold cross-validation; the mean over the 5 has the same expectation as the
+  10-fold mean, with more variance; the other 5 groups can be added later if the standard errors are too wide.
+- **AUC reported (owner, 2026-10-29).** Proposed (assistant): pre-declared as the first criterion inside the band of K
+  (or λ) values that MSE cannot tell apart, before inspection; awaiting the owner.
+- **Heterogeneous relations (owner's concern, 2026-10-29).** Held-out scores are reported per relation, never pooled
+  without weights: hiding article×journal asks "where was it published" (one tie per article), child×article "does
+  this article state this idea" (many-to-many), article×article "do these articles share a person". Consequence of the
+  cap and the last-tie rule: relations with one tie per entity on one side (article×journal; author×article for the 86%
+  of single-article authors) get almost no hidden ties, only hidden empty cells, so their score says little about ties.
+  Proposal: K and λ chosen on the combined score weighted as in training, over the relations where ties can be hidden;
+  the others reported descriptively. Leak check from multi-relational link prediction (inverse or duplicated relations,
+  Toutanova & Chen 2015; Dettmers et al. 2018): no matrix in either approach encodes another matrix's tie
+  deterministically; weights are rebuilt per fold.
