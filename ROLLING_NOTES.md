@@ -86,8 +86,11 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    article×journal (+ author×article, author×affiliation in approach 1; article×affiliation in approach 2);
    child×child = regulariser (idf-weighted Jaccard, τ 0.4, ≥5 ties); article×article = regulariser in the trial (density too
    low for a matrix; damped Jaccard weight); no affiliation×affiliation. Penalty (λ/N)ΣΣ(W_ij/d_i)‖p_i−p_j‖², λ outside
-   Optuna, calibrated on held-out ties at every K (one λ if the optima agree, else nested hold-outs). Open: distance (squared
-   Euclidean proposed), dividing by N, calibration arm; then the data-matrix weights. Pending owner: missingness technique (missing cells vs
+   Optuna, calibrated on held-out ties at every K (one λ if the optima agree, else nested hold-outs). Since decided (2026-10-27/29): squared
+   Euclidean, divide by N, τ 0.5 arm, warm-up 300, citation/URL tokens masked, full gradient (stop-gradient withdrawn),
+   GLOSSARY.md, W by brute force with prefix filtering alongside. Open (design doc, status 2026-10-29): λ per K (proposal
+   awaits confirmation), article×article regulariser settings and calibration order, idf corpus for the trial, k 5→11
+   trigger; then the data-matrix weights. Pending owner: missingness technique (missing cells vs
    placeholders), later.
 1d. **G3 RL-186 rerun — DONE (2026-10-24).** G2 positions pass (`PG/g2_v3_2_pos/`, 825,554 of 825,698 units exact):
    provenance per hyperedge; focal names replaced and placed by their own positions (two pre-existing errors fixed);

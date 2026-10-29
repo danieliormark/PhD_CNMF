@@ -1103,3 +1103,15 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   sharing a word is compared). The prefix-filtering algorithm (Chaudhuri et al. 2006; Bayardo et al. 2007; one global
   word order by idf) is run alongside; if both give the identical W (every pair, every value), the faster algorithm is
   used from then on (full corpus).
+- **Status of the regularisers (assistant, 2026-10-29, on the owner's question).** article×article is a regulariser in
+  the trial, approach 2 (owner, 2026-10-27; density too low for a matrix; damped Jaccard weight), recorded here because
+  only ROLLING_NOTES had it. W (child×child) and the article×article tie table are part of the chunk12v3 builder; the
+  builder's run is a computation and is started only with the owner's permission. Still open: (1) λ per K — proposed
+  2026-10-27 (calibrate λ at every K; one common λ unless the best λ of two K values differ by more than about 2 standard
+  errors of the paired seed-by-seed difference; otherwise λ and K chosen on separate held-out sets, Varma & Simon 2006),
+  not yet confirmed by the owner; (2) the article×article regulariser's own settings: same form, distance and warm-up as
+  child×child?, λ_article's held-out target, and the order of calibration (floor → λ_child → λ_article, or λ_child and
+  λ_article on a joint grid); (3) the corpus over which idf is computed for the trial (trial child hyperedges or the
+  whole corpus); (4) the trigger for switching from 5 to about 11 ties. Deferred by the owner: idf across time slices,
+  re-examining the warm-up of 300, the check of hidden similarity ties (robustness checks). Pending check (needs
+  permission, after the builder): the effect of column normalisation on hyperedges with no tie in W.
