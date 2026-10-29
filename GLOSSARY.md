@@ -187,7 +187,10 @@ collaboration weight applied to the article side of the article×person table (a
 each pair of them); the division by the union of the two author sets is a Jaccard-type normalisation (large teams add
 less). Equals plain Jaccard when every shared person has exactly 2 articles. Gives the cells of the article×article
 matrix (approach 2, main solution); the same weights would give W of the fallback regulariser.
-Example: A by {x, y, z}, B by {x, w}; x on 2 trial articles → 1/(2−1) / 4 = **0.25**; x on 6 → 1/5 / 4 = **0.05**.
+Example (invented authors): article A by Smith, Lee, Kim; article B by Smith, Patel. Shared person: Smith; distinct
+persons on A or B: 4. Smith on 2 trial articles (A and B only) → (1/(2−1)) / 4 = **0.25**; Smith on 6 trial articles →
+(1/5) / 4 = **0.05**. Two 20-author articles sharing Smith (on 2 trial articles) → 1 / 39 = **0.026**.
+Property: each person adds a total of exactly 1 to each of their articles, however many articles they have.
 (Corrected 2026-10-29: was called "damped Jaccard", and was wrongly marked as a regulariser in the trial.)
 
 ## Other penalty terms *(code, toy calibration)*
