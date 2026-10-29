@@ -181,8 +181,14 @@ versus 5.1 → (5.7 + 6.9) / (5.7 + 6.9 + 5.1) = **0.71**.
 one with exactly the 5th value; if fewer reach τ, only those. A tie counts when either hyperedge selected the other
 (the OR rule; a symmetric k-nearest-neighbour graph).
 
-**article×article similarity** — Σ over persons p shared by articles A and B of 1/(n_p − 1), divided by the number of
-distinct persons on A or B (damped Jaccard). In the trial a regulariser, not a data matrix.
+**article×article tie weight** — w(A,B) = Σ over persons p shared by articles A and B of 1/(n_p − 1), divided by the
+number of distinct persons on A or B; n_p = number of trial articles of person p. The numerator is Newman's (2001)
+collaboration weight applied to the article side of the article×person table (a person on many articles adds less to
+each pair of them); the division by the union of the two author sets is a Jaccard-type normalisation (large teams add
+less). Equals plain Jaccard when every shared person has exactly 2 articles. Gives the cells of the article×article
+matrix (approach 2, main solution); the same weights would give W of the fallback regulariser.
+Example: A by {x, y, z}, B by {x, w}; x on 2 trial articles → 1/(2−1) / 4 = **0.25**; x on 6 → 1/5 / 4 = **0.05**.
+(Corrected 2026-10-29: was called "damped Jaccard", and was wrongly marked as a regulariser in the trial.)
 
 ## Other penalty terms *(code, toy calibration)*
 
