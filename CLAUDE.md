@@ -8,7 +8,8 @@
 > proposing changes to the loss function, metrics, or interpretation of results) and
 > `SESSION_PROTOCOL.md` — standing conditions for diagnostic/patch sessions (standard run
 > settings, reporting rules, what's out of scope by default) so prompts don't need to
-> re-state them each time.
+> re-state them each time. `GLOSSARY.md` — agreed terms and notation for the factorisation (use them; extend
+> the glossary when a new concept arises).
 
 ---
 
