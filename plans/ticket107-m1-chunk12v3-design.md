@@ -1183,7 +1183,7 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   hyperedges of the same parent in the same article; this is prediction from visible data, not a leak.
 - **Role of the held-out score (as recorded, 2026-10-17 and 2026-10-27):** for K it defines the band (stability is the
   gate, inspection and the text check choose within the band); for λ_child and λ_article it is the calibration target.
-- **Eligibility threshold — proposed (assistant, 2026-10-29), awaiting the owner:** an entity is eligible from 2 ties;
+- **Eligibility threshold — DECIDED (owner, 2026-10-29, assistant's proposal):** an entity is eligible from 2 ties;
   per group it loses at most max(1, ⌊n/3⌋) of its n ties and never its last one. Reason: most child hyperedges have 1–2
   articles and are the ones the regulariser is for; from 3 ties they would never be tested. Held-out scores are
   reported by the tie count of the child hyperedge (2, 3–5, 6+), which needs no extra fits and shows whether the 2-tie
