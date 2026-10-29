@@ -1396,6 +1396,13 @@ the tests:
   share of such entities is a question for the data (is it the truth?) and for the model (is
   it stable?).
 
+**[CORRECTION 2026-10-29 — the stop-gradient claim above]** Detaching the column norms keeps the prior's gradient off the
+raw cells of non-persisting entities, but not off their normalised values: the persisting entities' update changes the
+column norms, and every entity's normalised value in that column changes by a common factor, by the same amount as under
+the full gradient (checked on a small example; design doc ticket 107, addendum 2026-10-27 (2)). T1(f) tested raw cells
+only. The temporal prior is no longer on the trial path (option 2, update 2026-10-17); recorded so the claim is not
+reused.
+
 **[UPDATE 2026-10-13 — facets change under ticket 107]** The new matrix builder (chunk12v3, ticket 107) drops
 words and merges child and cousin hyperedges, so the persisting entities this prior acts on change: atoms go,
 the merged child layer gets one ID per word set, parents carry no continuity (none in both toy slices), and in

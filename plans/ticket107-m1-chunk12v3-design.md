@@ -1087,3 +1087,15 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
 - **Citation and URL tokens (owner, 2026-10-28):** masked for the statistics of the child×child similarity (no idf, not
   counted in a hyperedge's weighted size, cannot create a tie), but kept in the factorisation (hyperedge identity and
   matrices unchanged), where they help interpretation; placeholders (one shared token per kind) were the alternative.
+- **Correction (assistant, 2026-10-29): stop-gradient on the column norms does not keep the regulariser away from
+  hyperedges with no non-zero similarity in W.** Checked on a 3-hyperedge example (one plain gradient step): with the full
+  gradient, a hyperedge C outside W gets a gradient on its own cells, and the gradient of every column is orthogonal to the
+  column (Σ value × gradient = 0, because the normalised factor matrix does not change when a column is rescaled); with
+  stop-gradient, C's cells are untouched but the tied hyperedges' update changes the column norms, and C's normalised
+  values change by the same amount (0.50508 → 0.50477 and 0.62017 → 0.62048 in both cases). Every hyperedge's
+  normalised values depend on its column's norm, so a change to any hyperedge's cells moves all others in that column,
+  by a factor common to the column, whatever the gradient path. Stop-gradient on the norms is therefore dropped from the
+  proposal: the full gradient is used (the community weights stay as computed in the code, without gradient). The same
+  reasoning applies to the "leak" measured for the concentration floor (T1g) and to the temporal prior's design claim
+  that its gradient "reaches only the persisting entity's own raw row" (CLAUDE.md §4.25): true for the raw cells, not for
+  the normalised values the model uses.
