@@ -1183,3 +1183,14 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   hyperedges of the same parent in the same article; this is prediction from visible data, not a leak.
 - **Role of the held-out score (as recorded, 2026-10-17 and 2026-10-27):** for K it defines the band (stability is the
   gate, inspection and the text check choose within the band); for λ_child and λ_article it is the calibration target.
+- **Eligibility threshold — proposed (assistant, 2026-10-29), awaiting the owner:** an entity is eligible from 2 ties;
+  per group it loses at most max(1, ⌊n/3⌋) of its n ties and never its last one. Reason: most child hyperedges have 1–2
+  articles and are the ones the regulariser is for; from 3 ties they would never be tested. Held-out scores are
+  reported by the tie count of the child hyperedge (2, 3–5, 6+), which needs no extra fits and shows whether the 2-tie
+  entities behave differently.
+- **λ calibration criterion — CONFIRMED (owner delegated, 2026-10-29; assistant's conclusion):** held-out prediction is
+  the main criterion for λ_child and λ_article. In-sample loss always prefers λ = 0 and stability tends to rise with
+  λ (tied hyperedges forced alike reproduce trivially), so neither can choose λ; held-out prediction measures the
+  regulariser's purpose, better placement of sparsely tied entities. Guard checks at the chosen λ: stability not worse
+  than at λ = 0, and the text check on W-tied hyperedges. Within one standard error of the best, the larger λ is taken
+  (the 1-SE rule as in glmnet).
