@@ -1115,3 +1115,18 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   whole corpus); (4) the trigger for switching from 5 to about 11 ties. Deferred by the owner: idf across time slices,
   re-examining the warm-up of 300, the check of hidden similarity ties (robustness checks). Pending check (needs
   permission, after the builder): the effect of column normalisation on hyperedges with no tie in W.
+- **CORRECTION (assistant, 2026-10-29): article×article was not decided as a regulariser.** The assistant recommended
+  option (b) on 2026-10-27, the owner did not choose it (the next message spoke of "the article×article matrix"), and the
+  assistant then wrote "you chose option (b)" and recorded it in ROLLING_NOTES and in the status point above. Owner
+  (2026-10-29): **article×article is a relation matrix in approach 2 (main solution); the regulariser is the fallback**,
+  as in the decision of 2026-10-13 (tried if the relation dominates or fragments the article communities). The damped
+  Jaccard weight (decided 2026-10-27) gives the matrix cells. Its sparsity in the Psychology trial (2,216 non-zero cells,
+  mean degree 1.04, 65% of articles untied) is therefore a point for the weighting of the data matrices (its share in the
+  loss) and for the missingness technique.
+- **Decisions (owner, 2026-10-29) on the open points above:** (1) **λ per K** approved: λ calibrated at every K; one
+  common λ unless the best values differ by more than about 2 standard errors of the paired seed-by-seed difference,
+  otherwise λ and K chosen on separate held-out sets. (2) **article×article fallback regulariser**, if used: same form,
+  distance and warm-up as child×child; λ_article targeted at the held-out ties of child×article, article×journal and
+  article×affiliation; calibration order concentration floor → λ_child → λ_article (λ_child fixed), then one re-check of
+  λ_child. (3) **idf is computed over the subcorpus the trial is run on** (the trial's child hyperedges). (4) **k ≈ 11**
+  only as an extra calibration arm, run only if λ_child gives no held-out gain at k = 5.
