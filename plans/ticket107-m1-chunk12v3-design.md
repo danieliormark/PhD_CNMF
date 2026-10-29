@@ -1167,3 +1167,19 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   the others reported descriptively. Leak check from multi-relational link prediction (inverse or duplicated relations,
   Toutanova & Chen 2015; Dettmers et al. 2018): no matrix in either approach encodes another matrix's tie
   deterministically; weights are rebuilt per fold.
+- **Decisions (owner, 2026-10-29, continued):** article×journal takes no part in the hold-out (no hidden cells of
+  either kind); matrices where almost no tie can be hidden get no hidden cells; K and λ are chosen on the combined
+  held-out score of the matrices with hidden cells, each weighted as in training (child×article, probably child×parent,
+  article×affiliation; author×affiliation in approach 1). All matrices stay fully in the training loss of every fit;
+  the restriction concerns only which hidden cells are scored. **AUC is reported as a consultative measure, not a
+  decision criterion.**
+- **Per-entity cap (owner's reformulation, 2026-10-29):** hidden ties are drawn only from ties whose two entities both
+  have at least 3 ties (the eligible population); the 10 groups are drawn so that no entity loses more than one third
+  of its ties in any group (an entity with 3 ties loses at most 1). The 10% is a share of eligible ties; empty cells
+  are drawn at 10% of the empty cells of the same matrices. Open: one third (eligible from 3 ties) or 30% (eligible
+  from 4 ties, since 1 of 3 is 33%).
+- **Leak check:** no separate check run; the structural argument above is documented (no duplicated relation, weights
+  per fold, W built from word sets only). Noted: a child×article tie can be inferred legitimately from sibling child
+  hyperedges of the same parent in the same article; this is prediction from visible data, not a leak.
+- **Role of the held-out score (as recorded, 2026-10-17 and 2026-10-27):** for K it defines the band (stability is the
+  gate, inspection and the text check choose within the band); for λ_child and λ_article it is the calibration target.
