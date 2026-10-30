@@ -1206,8 +1206,8 @@ Scripts: `plans/ticket107_layer1/` (Psychology trial, 2,139 articles; loader as 
   directly on them. Assistant's assessment: layer-1 *shapes* barely depend on it (share of child×article loss on
   single-article hyperedges under tf-idf: 0.65 under squared error, 0.60 under a KL-like linear weighting), but every
   *ratio* stated as influence does (value 0.5 = half the influence under KL, a quarter under squared error), as do the
-  between-matrix weights of layer 2 and the Frobenius normalisation of ticket 61. Proposed order: layer 1 → loss →
-  layer 2.
+  between-matrix weights of layer 2 and the Frobenius normalisation of ticket 61. **Order DECIDED (owner,
+  2026-10-30):** layer 1 → loss → layer 2; until then ratios are stated as influence.
 - **child×parent, one matrix or two — owner, 2026-10-30:** prefers one matrix (the child/cousin merge was made to
   reduce the number of relations) unless there is a fundamental objection; this revises the 2026-10-21 two-relation
   decision. Assistant's assessment: no fundamental objection. Consequences of one matrix: one core matrix, so nesting
@@ -1215,12 +1215,12 @@ Scripts: `plans/ticket107_layer1/` (Psychology trial, 2,139 articles; loader as 
   chosen as an influence (0.5 under squared error = ¼ of a nested tie; 1/√2 ≈ 0.71 = ½); a pair that is both nested
   and co-occurring takes the nested value (1,057 such pairs); the hold-out stratifies by tie kind. Counts: 120,666
   nested ties, 105,910 cousin ties; cousin share of the matrix's squared mass 0.18 at value 0.5, 0.30 at 0.71.
-  **Pending:** owner's confirmation, and the value convention.
-- **Middle-frequency weighting (4A):** owner sceptical (unknown mechanism, stronger assumption than tf-idf). Measured:
-  idf(df=1) = 7.97 and idf(df=2) = 7.57, so a ceiling at df = 2 would change nothing; any real effect needs a weight
-  that falls for df = 1, i.e. the strong assumption that single-article hyperedges are uninformative. Assistant
-  withdraws the proposal; classic tf-idf remains the candidate, the single-article hyperedges' voice coming through W.
-- **Article length (4B) — measured, owner to rethink:** the number of distinct child hyperedges of an article is
+  **DECIDED (owner, 2026-10-30):** one child×parent matrix with the details above; a cousin tie gets half the
+  influence of a nested tie, i.e. value 1/√2 under the current squared-error loss (0.5 if the loss becomes KL).
+- **Frequency weighting of child×article — DECIDED (owner, 2026-10-30):** classic log(1+tf)·idf, idf over the trial
+  subcorpus (idf 7.97 for a single-article hyperedge, 1.63 for "use"). Single-article hyperedges reach other
+  articles through W.
+- **Article length (4B) — measured:** the number of distinct child hyperedges of an article is
   uncorrelated with its total sentence count (Spearman −0.005; naive split of the pure-text files), so it measures
   how much of the article is about the focal terms, not its length. Reviews (MEDLINE tags; 318 of 2,125 typed) are
   longer (OR 1.59 per doubling of sentences) but *less* likely among articles with many hyperedges (OR 0.90 per
@@ -1230,3 +1230,13 @@ Scripts: `plans/ticket107_layer1/` (Psychology trial, 2,139 articles; loader as 
   percentile (1,414 articles; the 715 newer articles have no OpenAlex metrics yet). Top 5% band of research articles:
   0.99 within-corpus citations on average, 35% cited at all; bottom quarter 0.18 and 11%. Caveat: the corpus is
   recent (2025–26 dominate), so incoming citations are sparse (365 of 2,139 cited within the corpus).
+- **Article length — DECIDED (owner, 2026-10-30, conditional on the measure being established and pertinent;
+  assistant's assessment below):** partial normalisation of each article's row of child×article, so that an
+  article's influence (its row's total squared weight) grows with the square root of its unnormalised influence:
+  row ← row / ‖row‖^½ (after tf-idf; the whole-matrix Frobenius normalisation of ticket 61 follows and keeps the
+  ratios). Effect: the 90th-percentile article counts ≈3× the median instead of ≈10×, the longest ≈7× instead of
+  ≈45×. Established: partial length normalisation is standard in information retrieval (pivoted normalisation,
+  Singhal, Buckley & Mitra 1996; the length parameter b of BM25, Robertson et al. 1994), and 1/√length is the
+  classic Lucene length norm; full L2 normalisation is the usual choice in NMF on text. The exponent ½ is a
+  convention, not derived for our data. Pertinent: the measured facts above (focal-heavy articles are not reviews
+  and are somewhat more cited) argue against full normalisation, the 45× range against none.

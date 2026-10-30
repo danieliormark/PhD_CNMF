@@ -90,7 +90,7 @@ production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/
    Euclidean, divide by N, τ 0.5 arm, warm-up 300, citation/URL tokens masked, full gradient (stop-gradient withdrawn),
    GLOSSARY.md, W by brute force with prefix filtering alongside. Decided 2026-10-29: λ per K (paired ~2 SE test, else
    nested hold-outs); fallback article×article regulariser same form, order floor → λ_child → λ_article; idf over the trial
-   subcorpus; k≈11 only as an arm if λ_child gives no gain. Next: the data-matrix weights (incl. sparse article×article). Pending owner: missingness technique (missing cells vs
+   subcorpus; k≈11 only as an arm if λ_child gives no gain. Hold-out decided 2026-10-29 (design doc addendum 2026-10-29: 10%, stratified, 10 groups/5 used, eligible from 2 ties, article×journal excluded, held-out score = main λ criterion). Layer 1 decided 2026-10-30 (addendum 2026-10-30): child×article log(1+tf)·idf with row ← row/‖row‖^½; one child×parent matrix, cousin tie = half a nested tie's influence (1/√2 under squared error); order layer 1 → loss (squared error vs KL) → layer 2. Next: layer 1 for the remaining matrices (social team size, article×affiliation, article×journal, article×article). Pending owner: missingness technique (missing cells vs
    placeholders), later.
 1d. **G3 RL-186 rerun — DONE (2026-10-24).** G2 positions pass (`PG/g2_v3_2_pos/`, 825,554 of 825,698 units exact):
    provenance per hyperedge; focal names replaced and placed by their own positions (two pre-existing errors fixed);
