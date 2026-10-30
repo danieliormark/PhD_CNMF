@@ -1299,3 +1299,11 @@ journals; the top 10 hold 41% of articles; topic agreement 0.14 in the top 10, 0
 - *P2 **DECIDED** (owner): each person's author×affiliation row keeps its proportions and is scaled to influence 1
   (L2 row normalisation). No inflation: every value is ≤ 1 after the row scaling, and the whole matrix is normalised
   to Frobenius norm 1 afterwards (ticket 61); its weight against other matrices is set in layer 2.]*
+*[2026-10-30, P4 (idf on journal and organisation columns) re-examined at the owner's request. Measured on
+article×journal: top-10 journals hold 0.407 of the matrix's squared mass without idf, 0.213 with idf; single-article
+journals (whose ties link no two articles) 0.101 without, 0.198 with. Against idf: size is ambiguous for venues (a
+large journal can be a broad mega-journal or a community's core venue, owner's point P4.3), unlike frequent
+hyperedges such as "use", which are generic by meaning; weight then depends on the subset's boundaries; no
+established precedent known for idf on venue ties; the topic-agreement evidence (0.14 vs 0.24) is a weak proxy.
+Assistant's recommendation revised: no idf (binary journal ties; organisation ties as in P2/P3); the overall weight
+of each matrix is set in layer 2. Owner to decide.]*
