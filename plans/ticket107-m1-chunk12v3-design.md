@@ -1288,3 +1288,14 @@ journals; the top 10 hold 41% of articles; topic agreement 0.14 in the top 10, 0
   inside the corpus) and flag low-coverage entities in interpretation; external side information (journal subject
   categories, total output) as a prior or regulariser; judge such entities on the full corpus rather than the trial
   subset.]*
+*[2026-10-30, owner, social weights continued:*
+- *P1 **DECIDED** (owner): weights must change monotonically with team size; an article's influence is independent of
+  its number of authors. Under squared error: 1/√n per author×article tie (influence 1 per article; each author gets
+  1/n of it); 1/n if the loss becomes KL. Owner asked whether persons can still be down-weighted with 1/(n_p − 1):
+  in article×article n_p is the person's number of trial articles, not the team size; the within-article
+  down-weighting of authors of large teams is already in 1/√n; a productivity weight on persons would be compatible
+  only as a redistribution inside each article's row (renormalised to influence 1) — not proposed (topic agreement
+  of articles sharing a person does not fall with productivity).*
+- *P2 **DECIDED** (owner): each person's author×affiliation row keeps its proportions and is scaled to influence 1
+  (L2 row normalisation). No inflation: every value is ≤ 1 after the row scaling, and the whole matrix is normalised
+  to Frobenius norm 1 afterwards (ticket 61); its weight against other matrices is set in layer 2.]*
