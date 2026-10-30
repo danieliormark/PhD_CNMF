@@ -1259,17 +1259,13 @@ journals; the top 10 hold 41% of articles; topic agreement 0.14 in the top 10, 0
   every article has influence 1 whatever its team (fractional counting expressed as influence; Newman 2001;
   Perianes-Rodriguez, Waltman & van Eck 2016). Persons not damped (topic agreement does not fall with productivity).
 - **P2 author×affiliation (approach 1):** same per-person shares as now (bylines naming the organisation), but
-  normalised to influence 1 per person (L2 instead of L1: two equal organisations 0.71 each instead of 0.5), then
-  multiplied by the organisation's idf. Persons with no organisation: missing row (decided 2026-10-26).
+  normalised to influence 1 per person (L2 instead of L1: two equal organisations 0.71 each instead of 0.5). Persons with no organisation: missing row (decided 2026-10-26).
 - **P3 article×affiliation (approach 2):** share of the article's affiliated bylines from each organisation (a byline
   with k organisations gives 1/k to each; fractional institution counting, Waltman & van Eck 2015), influence 1 per
-  article, then the organisation's idf. Articles with no organisation: missing row.
-- **P4 article×journal:** binary × the journal's idf (184-article journal 3.45, 2-article journal 7.57). Articles
-  without a journal ID (4): missing row.
+  article. Articles with no organisation: missing row.
+- **P4 article×journal:** binary. Articles without a journal ID (4): missing row.
 - **P5 article×article (approach 2):** weight as decided (2026-10-29); the diagonal is masked (self-ties are
   undefined); articles with no tie keep observed zeros.
-- **Order inside P2–P4:** row normalisation first, then the column idf, so an article tied only to a large container
-  gets less influence (with idf first, a single-tie row would be renormalised back to 1).
 *[2026-10-30, owner, on the social proposals:*
 - *P1: the current log2(1+n)/n author×article weight is **rejected** (owner: "not acceptable", because articles with
   3–5 authors get the highest influence: 1.33–1.34 against 1.0 solo and 0.64 at n = 50). Replacement pending. Owner
@@ -1299,11 +1295,8 @@ journals; the top 10 hold 41% of articles; topic agreement 0.14 in the top 10, 0
 - *P2 **DECIDED** (owner): each person's author×affiliation row keeps its proportions and is scaled to influence 1
   (L2 row normalisation). No inflation: every value is ≤ 1 after the row scaling, and the whole matrix is normalised
   to Frobenius norm 1 afterwards (ticket 61); its weight against other matrices is set in layer 2.]*
-*[2026-10-30, P4 (idf on journal and organisation columns) re-examined at the owner's request. Measured on
-article×journal: top-10 journals hold 0.407 of the matrix's squared mass without idf, 0.213 with idf; single-article
-journals (whose ties link no two articles) 0.101 without, 0.198 with. Against idf: size is ambiguous for venues (a
-large journal can be a broad mega-journal or a community's core venue, owner's point P4.3), unlike frequent
-hyperedges such as "use", which are generic by meaning; weight then depends on the subset's boundaries; no
-established precedent known for idf on venue ties; the topic-agreement evidence (0.14 vs 0.24) is a weak proxy.
-Assistant's recommendation revised: no idf (binary journal ties; organisation ties as in P2/P3); the overall weight
-of each matrix is set in layer 2. Owner to decide.]*
+*[2026-10-30, **P4 DECIDED (owner): no frequency down-weighting of journals or organisations** — journal ties binary,
+organisation ties as in P2/P3. Owner's reasoning: large, popular journals can be expected to shape communities around
+them through selection (authors submit selectively, journals accept selectively), so their greater influence is a
+true signal; down-weighting by frequency would also make journals with few subset articles the most influential.
+Smoothing (e.g. a logarithm of journal size) may be considered later; for now ties stay as they are.]*
