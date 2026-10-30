@@ -1300,3 +1300,9 @@ organisation ties as in P2/P3. Owner's reasoning: large, popular journals can be
 them through selection (authors submit selectively, journals accept selectively), so their greater influence is a
 true signal; down-weighting by frequency would also make journals with few subset articles the most influential.
 Smoothing (e.g. a logarithm of journal size) may be considered later; for now ties stay as they are.]*
+*[2026-10-30, **P2 and P3 DECIDED (owner): a byline naming several organisations splits its vote equally (1/k to
+each)**, in author×affiliation (per person) and article×affiliation (per article). Owner's reasoning: we cannot tell
+which organisation's resources (equipment, social capital) the author drew on most for a given paper. Then each row
+is scaled so that the squares of its values sum to 1 (before the whole-matrix normalisation of ticket 61). Source of
+multiple organisations: the article's own affiliation lines as resolved by OpenAlex per authorship (one byline, several
+addresses); Psychology trial after the organisation merge: 0 organisations 5.7% of bylines, 1 73.8%, 2 15.2%, 3+ 5.3%.]*
