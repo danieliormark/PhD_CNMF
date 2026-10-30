@@ -1194,3 +1194,39 @@ unrelated groups (topic agreement within a community 14%, near random 8%).]*
   regulariser's purpose, better placement of sparsely tied entities. Guard checks at the chosen λ: stability not worse
   than at λ = 0, and the text check on W-tied hyperedges. Within one standard error of the best, the larger λ is taken
   (the 1-SE rule as in glmnet).
+
+## Addendum 2026-10-30 — layer 1 weighting: child-level facet (discussion; decided points marked)
+
+Scripts: `plans/ticket107_layer1/` (Psychology trial, 2,139 articles; loader as in `child_similarity_check.py`).
+
+- **Hidden share — DECIDED (owner, 2026-10-30):** 10% stays. The 90.7% of child hyperedges in one article can never
+  be tested at any share; 10% of the 86,122 ties of hyperedges with ≥2 articles gives ≈8,600 hidden ties per fold.
+- **Loss function — owner, 2026-10-30:** switching from squared error (Frobenius, inherited from v7/v8, never chosen
+  against KL/Poisson) to generalised KL is to be discussed once the layer-1 weights are agreed, unless it bears
+  directly on them. Assistant's assessment: layer-1 *shapes* barely depend on it (share of child×article loss on
+  single-article hyperedges under tf-idf: 0.65 under squared error, 0.60 under a KL-like linear weighting), but every
+  *ratio* stated as influence does (value 0.5 = half the influence under KL, a quarter under squared error), as do the
+  between-matrix weights of layer 2 and the Frobenius normalisation of ticket 61. Proposed order: layer 1 → loss →
+  layer 2.
+- **child×parent, one matrix or two — owner, 2026-10-30:** prefers one matrix (the child/cousin merge was made to
+  reduce the number of relations) unless there is a fundamental objection; this revises the 2026-10-21 two-relation
+  decision. Assistant's assessment: no fundamental objection. Consequences of one matrix: one core matrix, so nesting
+  and sentence co-occurrence are assumed to follow the same between-community pattern; the cousin value must be
+  chosen as an influence (0.5 under squared error = ¼ of a nested tie; 1/√2 ≈ 0.71 = ½); a pair that is both nested
+  and co-occurring takes the nested value (1,057 such pairs); the hold-out stratifies by tie kind. Counts: 120,666
+  nested ties, 105,910 cousin ties; cousin share of the matrix's squared mass 0.18 at value 0.5, 0.30 at 0.71.
+  **Pending:** owner's confirmation, and the value convention.
+- **Middle-frequency weighting (4A):** owner sceptical (unknown mechanism, stronger assumption than tf-idf). Measured:
+  idf(df=1) = 7.97 and idf(df=2) = 7.57, so a ceiling at df = 2 would change nothing; any real effect needs a weight
+  that falls for df = 1, i.e. the strong assumption that single-article hyperedges are uninformative. Assistant
+  withdraws the proposal; classic tf-idf remains the candidate, the single-article hyperedges' voice coming through W.
+- **Article length (4B) — measured, owner to rethink:** the number of distinct child hyperedges of an article is
+  uncorrelated with its total sentence count (Spearman −0.005; naive split of the pure-text files), so it measures
+  how much of the article is about the focal terms, not its length. Reviews (MEDLINE tags; 318 of 2,125 typed) are
+  longer (OR 1.59 per doubling of sentences) but *less* likely among articles with many hyperedges (OR 0.90 per
+  doubling; systematic reviews 0.81, narrative reviews 0.96 n.s.). Articles with more hyperedges are somewhat more
+  cited: Spearman 0.16 within the subset, 0.18 within the corpus (reference lists of 39,299 corpus articles,
+  `citation_dictionary_v2.jsonl`, matched by PMCID/PMID/DOI), 0.16 for the field- and year-normalised OpenAlex
+  percentile (1,414 articles; the 715 newer articles have no OpenAlex metrics yet). Top 5% band of research articles:
+  0.99 within-corpus citations on average, 35% cited at all; bottom quarter 0.18 and 11%. Caveat: the corpus is
+  recent (2025–26 dominate), so incoming citations are sparse (365 of 2,139 cited within the corpus).
