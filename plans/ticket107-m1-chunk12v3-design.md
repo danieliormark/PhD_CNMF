@@ -1270,3 +1270,21 @@ journals; the top 10 hold 41% of articles; topic agreement 0.14 in the top 10, 0
   undefined); articles with no tie keep observed zeros.
 - **Order inside P2–P4:** row normalisation first, then the column idf, so an article tied only to a large container
   gets less influence (with idf first, a single-tie row would be renormalised back to 1).
+*[2026-10-30, owner, on the social proposals:*
+- *P1: the current log2(1+n)/n author×article weight is **rejected** (owner: "not acceptable", because articles with
+  3–5 authors get the highest influence: 1.33–1.34 against 1.0 solo and 0.64 at n = 50). Replacement pending. Owner
+  asked for consistency with the team-size correction used elsewhere: article×article divides by the size of the
+  union of the two author sets and uses 1/(n_p − 1) per shared person (Newman 2001), i.e. linear fractional
+  counting. Linear 1/n per author×article tie gives an article influence 1/n under squared error (a 20-author
+  article 0.05); 1/√n is the same principle (each article one vote) under squared error, and becomes 1/n if the loss
+  becomes KL. Flagged: the article×article weight was decided as a value, not as an influence; to be revisited with
+  the loss.*
+- *P5: **DECIDED** — the article×article diagonal is masked (missing, not zero); the 1,398 articles without ties keep
+  observed zeros.*
+- *P4.3, **deferred** (owner): entities whose communities lie mostly outside the corpus or the subset (a journal,
+  organisation or person with a few corpus articles among a large off-corpus output) get memberships decided by the
+  little that is observed (the boundary specification problem, Laumann, Marsden & Prensky 1983). Options to discuss:
+  state memberships as relative to the corpus; report each entity's coverage (share of its total OpenAlex output
+  inside the corpus) and flag low-coverage entities in interpretation; external side information (journal subject
+  categories, total output) as a prior or regulariser; judge such entities on the full corpus rather than the trial
+  subset.]*
