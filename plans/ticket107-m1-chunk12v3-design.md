@@ -1240,3 +1240,33 @@ Scripts: `plans/ticket107_layer1/` (Psychology trial, 2,139 articles; loader as 
   classic Lucene length norm; full L2 normalisation is the usual choice in NMF on text. The exponent ½ is a
   convention, not derived for our data. Pertinent: the measured facts above (focal-heavy articles are not reviews
   and are somewhat more cited) argue against full normalisation, the 45× range against none.
+
+## Addendum 2026-10-30 (2) — layer 1 weighting: social matrices (assistant's proposals, owner to decide)
+
+Scripts: `plans/ticket107_layer1/social_stats.py`, `org_topic.py`. Influence = a row's or column's total squared
+weight (current squared-error loss). Topic agreement = share of article pairs with the same OpenAlex primary topic
+(random pairs 0.083).
+
+Facts (Psychology trial): 11,157 kept bylines; team size median 4, p90 9, p99 19, max 69; team size is unrelated to
+citations (Spearman −0.01 within the subset, −0.03 within the corpus, 0.02 normalised percentile). 10,072 persons,
+92% on one trial article, max 17; pairs of articles sharing a person agree on topic 0.53, the same for persons with
+2–5 and 6–15 articles. 2,519 organisations; articles per organisation median 1, max 56; topic agreement 0.17 (2–5
+articles), 0.15 (6–15), 0.12 (16+; 34 organisations holding 10,055 of 18,927 organisation-linked pairs). 384
+journals; the top 10 hold 41% of articles; topic agreement 0.14 in the top 10, 0.24 in journals with 2–10 articles.
+
+- **P1 author×article (approach 1):** the current log2(1+n)/n per tie was designed for linear mass; under squared
+  error it gives an article an influence of 1.0 (solo), 1.34 (n = 5), 0.64 (n = 50). Proposal: 1/√n per tie, so
+  every article has influence 1 whatever its team (fractional counting expressed as influence; Newman 2001;
+  Perianes-Rodriguez, Waltman & van Eck 2016). Persons not damped (topic agreement does not fall with productivity).
+- **P2 author×affiliation (approach 1):** same per-person shares as now (bylines naming the organisation), but
+  normalised to influence 1 per person (L2 instead of L1: two equal organisations 0.71 each instead of 0.5), then
+  multiplied by the organisation's idf. Persons with no organisation: missing row (decided 2026-10-26).
+- **P3 article×affiliation (approach 2):** share of the article's affiliated bylines from each organisation (a byline
+  with k organisations gives 1/k to each; fractional institution counting, Waltman & van Eck 2015), influence 1 per
+  article, then the organisation's idf. Articles with no organisation: missing row.
+- **P4 article×journal:** binary × the journal's idf (184-article journal 3.45, 2-article journal 7.57). Articles
+  without a journal ID (4): missing row.
+- **P5 article×article (approach 2):** weight as decided (2026-10-29); the diagonal is masked (self-ties are
+  undefined); articles with no tie keep observed zeros.
+- **Order inside P2–P4:** row normalisation first, then the column idf, so an article tied only to a large container
+  gets less influence (with idf first, a single-tie row would be renormalised back to 1).
