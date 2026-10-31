@@ -1384,3 +1384,10 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   Assistant: count article frequency (articles of the trial containing the child) for both child×article and
   child×parent, one idf per child hyperedge; within-article repetition stays in the number of ties, as centrality.
   Owner to decide. Note: `REFnnnnnn` one-word children are cited works, kept by the decision of 2026-10-28.
+- **child×parent idf basis, checked (`idf_basis.py`):** switching from parent frequency to article frequency moves
+  4.8% of the matrix's squared mass between children; the 286 children repeated within articles (5+ claims, 3+ claims
+  per article) hold 2.4% (parent basis) vs 2.7% (article basis); children in 100+ articles 8.0% vs 5.5%. The
+  conceptual case for the article basis (claims of one article are not independent evidence of genericness; one idf
+  per child for both matrices) is real but not decisive, and parent frequency is the standard construction (df over
+  the columns of the matrix being weighted). Assistant withdraws the article-basis proposal: **parent-frequency idf**
+  recommended. **DECIDED (owner, 2026-10-31):** no exemption of one-word children from idf.
