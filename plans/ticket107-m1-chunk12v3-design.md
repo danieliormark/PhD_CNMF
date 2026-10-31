@@ -1354,3 +1354,20 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   assistant's recommendation of 2026-10-31: missing cells (placeholders would be the missing-indicator method; the
   no-ID bylines are mostly companies and local services on one article, so placeholders would link almost nothing
   while taking row weight from known organisations).
+- **Soft model-name similarity in W — owner's ladder (2026-10-31):** same family, different tier 0.95; same family,
+  different version 0.8; bare family vs versioned 0.66; `chatgpt` vs other GPT names 0.66 or 0.5 (assistant to choose
+  from the data); domain-adapted vs base model about 0.5 (to check against τ). Measured (`soft_tau.py`, pairs identical
+  except for one model name; share reaching τ 0.4 / 0.5): tier 0.95 → 1.00 / 0.98 (49 pairs); version 0.8 → 0.98 / 0.87
+  (875); bare vs versioned 0.66 → 0.80 / 0.71 (238); chatgpt 0.5 → 0.62 / 0.44, 0.66 → 0.70 / 0.58 (650); domain-adapted
+  0.5 → 0.24 / 0.11 (699). A pair of hyperedges made of the model names alone has similarity s/(2 − s) (equal idf):
+  0.95 → 0.90, 0.8 → 0.67, 0.66 → 0.49, 0.5 → 0.33, so at τ = 0.4 a value of 0.5 links two names only when other words
+  are shared. Assistant: chatgpt 0.66 (the same relation as a bare family name: the product, version unspecified);
+  domain-adapted 0.5 kept (a tie needs support from shared words); the domain-adapted list must be hand-curated
+  (substring rules catch wrong names). **Data issue found:** 31 model atoms with a glued citation number (`bert28`,
+  `roberta34`; 43 mentions, 30 articles); proposed builder fix: family + 2–3 digits that is not a known version →
+  the family.
+- **Unknown affiliations — DECIDED (owner, 2026-10-31):** missing cells (confirms 2026-10-26); no placeholders.
+- **child×parent idf — reopened (owner, 2026-10-31).** Measured (`cp_idf.py`): 36,016 parents, 225,108 ties; a
+  (child, parent) pair recurs in 0.6% of ties (so tf-idf and idf are the same up to a constant); most frequent children
+  `be` 5,693 parents, `llm` 5,130, `use` 3,344, `chatgpt` 1,619; squared mass of children in 51+ parents 0.34 binary vs
+  0.13 with idf; children in one parent 0.39 vs 0.58; top 20 children 0.136 vs 0.026.
