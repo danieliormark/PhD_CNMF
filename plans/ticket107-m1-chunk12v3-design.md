@@ -1424,3 +1424,27 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   (cousin occurrences), value = idf · log(1 + n), idf counted over parents. Covers nested-and-cousin pairs (replaces
   "nested value, counted once"), parent hyperedges occurring in several sentence units of one article or of several
   articles, and child hyperedges nested twice in one parent hyperedge (log(1 + tf)·idf, owner-approved).
+- **DECIDED (owner, 2026-10-31):** glued citation numbers — the builder maps a family name followed by 2–3 digits that
+  is not a known version to the family (`bert28` → `bert`); real glued versions (GPT2 → `gpt_2`) are left alone.
+  Domain-adapted models: the assistant drafts the hand list from the trial's model atoms for the owner to check.
+
+## Addendum 2026-10-31 (3) — layer 1 review before the builder (`plans/ticket107_layer1/layer1_review.py`)
+
+- **article×article vs the team-size principle (tension).** P1 decided an article's influence is independent of its
+  number of authors; the article×article tie weight divides by the union of the two author sets, so large-team
+  articles have far weaker ties (two 20-author articles sharing one person: 0.026). The weight was also decided as a
+  value, not an influence. Owner to decide: keep (tie strength = share of shared authors), or rescale each article's
+  ties (e.g. symmetric normalisation) so that every article has the same influence.
+- **Parent hyperedges vary more than recorded (gap, assistant's error).** "2–9 children, no normalisation needed"
+  ignored cousin ties and parent hyperedges occurring in many sentence units. Ties per parent hyperedge p10 3, median
+  5, p90 10, max 759 (`use llm`: 154 sentence units in 105 articles); influence max/median 114. Aggregate effect small
+  (243 parent hyperedges with >20 ties hold 3.6% of the matrix's squared mass; 31 with >50 hold 1.6%). Option: the same
+  partial normalisation as article rows (row / ‖row‖^½: 1.5% and 0.4%).
+- **Article length: rationale vs implementation (checked, consistent).** The rationale counted distinct child
+  hyperedges; the implementation scales the tf-idf row. Actual influence relative to the median article: p90 3.4×,
+  max 8.4× (intended √count: 3.1×, 6.7×); Spearman with the count 0.994.
+- **Minor, accepted unless the owner objects:** total influence in child×article dips by about 4% for the three most
+  frequent hyperedges (`use`, `be`, `llm`, past the idf peak at about 786 articles); two idf bases for the same child
+  hyperedge (articles, parents) are deliberate; partly known affiliations put the whole article (or person) weight on
+  the known organisations (decided 2026-10-26); the whole-matrix normalisation is computed over observed cells only
+  (missing cells, masked diagonal and hidden cells excluded), and in every fold.
