@@ -1333,3 +1333,24 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   also to serve as an additional criterion when comparing K values and approach 1 vs approach 2 (and β = 1 vs 2). The
   background component is kept as a deferred robustness check (a later test arm, planted test first). Owner's caveat:
   it does not model unobserved or partially observed communities, so it does only part of that job.
+
+## Addendum 2026-10-31 (2) — remaining M1 points
+
+- **Model-name level — measured** (`plans/ticket107_layer1/model_levels.py`, `model_pairs.py`; numbers left out of
+  identity). Child hyperedges: tier level (G3) 97,931, version level 97,878, family level 97,349 (−0.6%); share in one
+  article 0.906 / 0.906 / 0.905; child×article density 8.36e-4 / 8.37e-4 / 8.39e-4; focal atoms 401 / 366 / 279;
+  hyperedges with a named model 11,866 / 11,813 / 11,284, 95% in one article at every level. Merging hardly changes
+  sparsity. Pairs of hyperedges identical except for the model: same version, different tier 49; same family,
+  different version 1,077; bare family vs versioned 287; different families 23,089. **Owner's proposal (2026-10-31):**
+  keep the atoms apart and give related model names partial similarity in W (e.g. 0.9 same family different version,
+  0.66 at family level; numbers not insisted on). Assistant: established as soft matching (soft cardinality, Jimenez,
+  Gonzalez & Gelbukh 2010; soft cosine, Sidorov et al. 2014); ladder of values to be agreed.
+- **child×parent frequency weighting — DECIDED (owner, 2026-10-31):** child side × idf counted over parents, with the
+  formula of chunk12/chunk12v2, ln(N/(df+1)) + 1 (N = parents in the trial, df = parents containing the child
+  hyperedge); ties otherwise binary. This revises ticket 84 D8 (child×parent left binary) for M1.
+- **M1 for squared error first — DECIDED (owner, 2026-10-31):** the builder writes the squared-error formulas; the KL
+  version of M1 is built later, for the β comparison, once the Optuna and penalty mechanisms are settled.
+- **Unknown affiliations:** the 2026-10-26 decision (missing cells) stands unless the owner chooses placeholders;
+  assistant's recommendation of 2026-10-31: missing cells (placeholders would be the missing-indicator method; the
+  no-ID bylines are mostly companies and local services on one article, so placeholders would link almost nothing
+  while taking row weight from known organisations).
