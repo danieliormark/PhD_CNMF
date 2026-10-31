@@ -1391,3 +1391,11 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   per child for both matrices) is real but not decisive, and parent frequency is the standard construction (df over
   the columns of the matrix being weighted). Assistant withdraws the article-basis proposal: **parent-frequency idf**
   recommended. **DECIDED (owner, 2026-10-31):** no exemption of one-word children from idf.
+- **child×parent idf — DECIDED (owner, 2026-10-31): parent frequency**, ln(N/(df+1)) + 1, N = trial parents, df =
+  parents containing the child; value of a tie = idf (nested) or idf/√2 (cousin); a recurring pair counts once.
+  Owner asked whether idf must be adjusted to squared error or to matrix normalisation. Assistant: no adjustment.
+  The whole-matrix normalisation divides every cell by one constant and leaves the ratios unchanged. Under squared
+  error a tie's influence is idf² (the generic/rare ratio 3.8 in value becomes about 14 in influence); this is the
+  standard tf-idf practice with squared-error NMF and the same as child×article, so both matrices keep idf on the
+  values. For the later KL version, idf on the values gives influence ∝ idf, a milder down-weighting; to be stated
+  when the β comparison is set up (part of what it compares).
