@@ -1320,3 +1320,12 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   problem, not only a computational one: the model sees only the corpus, so entities whose communities lie mostly
   outside it cannot be reconstructed well, and some misfit is inevitable. Literature and approaches, and the link to
   the loss, in the assistant's reply of 2026-10-31; to be continued.
+- **2026-10-31, explained to the owner (no decision):** (i) a *background component*: each cell is reconstructed as
+  community part + g_i·q_j, with g_i ≥ 0 a free background loading per entity and q_j a fixed profile (the other
+  entity's share of all ties), so entities whose ties scatter across communities are explained as "generic" instead
+  of distorting a community; its share of an entity's reconstruction is itself a diagnostic. Precedents: noise
+  component in model-based clustering (Banfield & Raftery 1993), degree-corrected null term (Karrer & Newman 2011),
+  background topics, affine NMF. A model change, to be tested on planted data. (ii) *per-entity fit and coverage*:
+  share of each entity's ties the model reconstructs (per relation and combined), against its coverage (share of
+  its output inside the subset / corpus; for articles, the share of sentences with a focal extraction); diagnostic
+  only, not used in training; needs OpenAlex counts for journals, organisations and persons.
