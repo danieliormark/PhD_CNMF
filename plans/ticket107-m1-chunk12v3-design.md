@@ -1399,3 +1399,11 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   standard tf-idf practice with squared-error NMF and the same as child×article, so both matrices keep idf on the
   values. For the later KL version, idf on the values gives influence ∝ idf, a milder down-weighting; to be stated
   when the β comparison is set up (part of what it compares).
+- **CORRECTION (assistant, 2026-10-31): "a recurring pair counts once" was the assistant's own proposal, not an owner
+  decision, and it was miscounted.** Recount (`pair_repeat.py`): of 225,108 child–parent pairs, 3,409 recur: 1,012 are
+  a child both nested in and co-occurring with the same parent (already decided: nested value, once); 1,259 come from
+  a claim repeated in several sentences of one article; 1,089 from a claim (same parent word set) made in several
+  articles (326 parents); 49 from a child written twice inside one parent. Genuine repetitions: about 2,400 pairs
+  (1.1%), not 0.6%. The last case is covered by the owner's decision of 2026-10-19 (a repeated hyperedge counts twice,
+  as the text was written), which "counts once" would have contradicted. Options to decide: binary, log(1 + tf)·idf as
+  in child×article, or raw tf·idf.
