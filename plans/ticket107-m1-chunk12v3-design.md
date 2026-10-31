@@ -1306,3 +1306,17 @@ which organisation's resources (equipment, social capital) the author drew on mo
 is scaled so that the squares of its values sum to 1 (before the whole-matrix normalisation of ticket 61). Source of
 multiple organisations: the article's own affiliation lines as resolved by OpenAlex per authorship (one byline, several
 addresses); Psychology trial after the organisation merge: 0 organisations 5.7% of bylines, 1 73.8%, 2 15.2%, 3+ 5.3%.]*
+
+## Addendum 2026-10-31 — loss function discussion (open; nothing decided)
+
+- **Candidates:** squared error (β = 2, current), generalised KL (β = 1), β-divergence in between (Févotte & Idier
+  2011). Both are maximum likelihood in disguise: squared error = Gaussian noise of equal spread, KL = Poisson noise.
+- **Owner (2026-10-31):** compare β = 1 and β = 2 on the M1 trial, but not by their final losses (different scales).
+  Loss-neutral criteria proposed by the assistant: agreement of the two solutions (if memberships agree, the choice
+  does not matter); held-out ties scored by a scale-free ranking measure and cross-scored under both losses; seed
+  stability; recovery of planted communities generated under both noise types; the text check; optionally held-out
+  Tweedie likelihood with β as a parameter (Şimşekli, Cemgil & Yılmaz 2013).
+- **Off-corpus / peripheral entities (owner, 2026-10-31; links to the deferred P4.3):** treated as a methodological
+  problem, not only a computational one: the model sees only the corpus, so entities whose communities lie mostly
+  outside it cannot be reconstructed well, and some misfit is inevitable. Literature and approaches, and the link to
+  the loss, in the assistant's reply of 2026-10-31; to be continued.
