@@ -1413,3 +1413,10 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   parent hyperedge and co-occurring with it as a cousin (the same word set twice in one sentence unit, e.g. "training
   BERT and RoBERTa … training XLNet": `train` nested in the parent hyperedge of the first clause, and a cousin from the
   second) keeps the nested value, counted once.
+- **Nested-and-cousin pairs, reopened (owner, 2026-10-31):** why count them once, when the child hyperedge occurs twice
+  in the sentence unit (the 2026-10-19 decision counts repeated hyperedges as written)? Assistant's proposal, one rule
+  for every cell: occurrence count n = (nested occurrences) + 0.632 × (cousin occurrences), value = idf · log(1 + n).
+  0.632 = 2^(1/√2) − 1 makes a lone cousin tie exactly half the influence of a lone nested tie; relative values:
+  nested once 1, cousin once 0.71, nested + cousin 1.40, nested twice 1.58, cousin twice 1.18. Owner to decide.
+  log(1 + tf)·idf is a standard sublinear tf-idf variant (log(1 + tf) as in Dumais's log weighting for LSI; SMART's
+  1 + log tf is the other common form; idf here is the smoothed form ln(N/(df + 1)) + 1 inherited from chunk12).
