@@ -1379,15 +1379,15 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   51+ parents are one word (`be`, `llm`, `use`, `chatgpt`, `show`…), so an exemption would undo most of idf's effect;
   rare one-word children (`empathy`, `anhedonia`) already keep a high idf. Assistant: no exemption. (2) Frequency
   basis: parent frequency and article frequency of a child agree largely (Spearman 0.78; 459 of the 500 most
-  down-weighted children are the same), but differ for children used in many claims of one article (`gpt_5_mini` 37
-  claims in 1 article, `cbs llm` 35 in 1): parent frequency treats such within-article repetition as genericness.
+  down-weighted children are the same), but differ for children found in many parent hyperedges of one article (`gpt_5_mini` in
+  37 parent hyperedges of 1 article, `cbs llm` 35 in 1): parent frequency treats such within-article repetition as genericness.
   Assistant: count article frequency (articles of the trial containing the child) for both child×article and
   child×parent, one idf per child hyperedge; within-article repetition stays in the number of ties, as centrality.
   Owner to decide. Note: `REFnnnnnn` one-word children are cited works, kept by the decision of 2026-10-28.
 - **child×parent idf basis, checked (`idf_basis.py`):** switching from parent frequency to article frequency moves
-  4.8% of the matrix's squared mass between children; the 286 children repeated within articles (5+ claims, 3+ claims
-  per article) hold 2.4% (parent basis) vs 2.7% (article basis); children in 100+ articles 8.0% vs 5.5%. The
-  conceptual case for the article basis (claims of one article are not independent evidence of genericness; one idf
+  4.8% of the matrix's squared mass between children; the 286 children repeated within articles (5+ parent hyperedges, 3+ per
+  article) hold 2.4% (parent basis) vs 2.7% (article basis); children in 100+ articles 8.0% vs 5.5%. The
+  conceptual case for the article basis (parent hyperedges of one article are not independent evidence of genericness; one idf
   per child for both matrices) is real but not decisive, and parent frequency is the standard construction (df over
   the columns of the matrix being weighted). Assistant withdraws the article-basis proposal: **parent-frequency idf**
   recommended. **DECIDED (owner, 2026-10-31):** no exemption of one-word children from idf.
@@ -1402,8 +1402,14 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
 - **CORRECTION (assistant, 2026-10-31): "a recurring pair counts once" was the assistant's own proposal, not an owner
   decision, and it was miscounted.** Recount (`pair_repeat.py`): of 225,108 child–parent pairs, 3,409 recur: 1,012 are
   a child both nested in and co-occurring with the same parent (already decided: nested value, once); 1,259 come from
-  a claim repeated in several sentences of one article; 1,089 from a claim (same parent word set) made in several
-  articles (326 parents); 49 from a child written twice inside one parent. Genuine repetitions: about 2,400 pairs
+  a parent hyperedge (same word set) occurring in several sentence units of one article; 1,089 from a parent
+  hyperedge occurring in sentence units of several articles (326 parent hyperedges); 49 from a child hyperedge nested
+  twice in one parent hyperedge. Genuine repetitions: about 2,400 pairs
   (1.1%), not 0.6%. The last case is covered by the owner's decision of 2026-10-19 (a repeated hyperedge counts twice,
   as the text was written), which "counts once" would have contradicted. Options to decide: binary, log(1 + tf)·idf as
   in child×article, or raw tf·idf.
+- **Recurring child–parent pairs — DECIDED (owner, 2026-10-31): log(1 + tf)·idf** (tf = number of occurrences of
+  the pair), consistent with child×article and with the decision of 2026-10-19. A child hyperedge both nested in a
+  parent hyperedge and co-occurring with it as a cousin (the same word set twice in one sentence unit, e.g. "training
+  BERT and RoBERTa … training XLNet": `train` nested in the parent hyperedge of the first clause, and a cousin from the
+  second) keeps the nested value, counted once.
