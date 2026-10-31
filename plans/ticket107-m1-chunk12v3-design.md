@@ -1420,3 +1420,7 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   nested once 1, cousin once 0.71, nested + cousin 1.40, nested twice 1.58, cousin twice 1.18. Owner to decide.
   log(1 + tf)·idf is a standard sublinear tf-idf variant (log(1 + tf) as in Dumais's log weighting for LSI; SMART's
   1 + log tf is the other common form; idf here is the smoothed form ln(N/(df + 1)) + 1 inherited from chunk12).
+- **child×parent cell rule — DECIDED (owner, 2026-10-31):** for every cell, n = (nested occurrences) + 0.633 ×
+  (cousin occurrences), value = idf · log(1 + n), idf counted over parents. Covers nested-and-cousin pairs (replaces
+  "nested value, counted once"), parent hyperedges occurring in several sentence units of one article or of several
+  articles, and child hyperedges nested twice in one parent hyperedge (log(1 + tf)·idf, owner-approved).
