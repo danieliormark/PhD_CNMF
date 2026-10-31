@@ -1371,3 +1371,6 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   (child, parent) pair recurs in 0.6% of ties (so tf-idf and idf are the same up to a constant); most frequent children
   `be` 5,693 parents, `llm` 5,130, `use` 3,344, `chatgpt` 1,619; squared mass of children in 51+ parents 0.34 binary vs
   0.13 with idf; children in one parent 0.39 vs 0.58; top 20 children 0.136 vs 0.026.
+- **`chatgpt` vs other GPT names — DECIDED (owner, 2026-10-31): 0.5**, because unlike other model names ChatGPT is also
+  used in a general sense. Ladder complete: tier 0.95, version 0.8, bare family vs versioned 0.66, chatgpt 0.5,
+  domain-adapted 0.5 (hand-curated list), different families 0.
