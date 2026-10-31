@@ -1329,3 +1329,7 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   share of each entity's ties the model reconstructs (per relation and combined), against its coverage (share of
   its output inside the subset / corpus; for articles, the share of sentences with a focal extraction); diagnostic
   only, not used in training; needs OpenAlex counts for journals, organisations and persons.
+- **DECIDED (owner, 2026-10-31):** per-entity fit and coverage reporting is implemented as a post-fit diagnostic; it is
+  also to serve as an additional criterion when comparing K values and approach 1 vs approach 2 (and β = 1 vs 2). The
+  background component is kept as a deferred robustness check (a later test arm, planted test first). Owner's caveat:
+  it does not model unobserved or partially observed communities, so it does only part of that job.
