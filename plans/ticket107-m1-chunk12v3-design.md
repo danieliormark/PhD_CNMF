@@ -1374,3 +1374,13 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
 - **`chatgpt` vs other GPT names — DECIDED (owner, 2026-10-31): 0.5**, because unlike other model names ChatGPT is also
   used in a general sense. Ladder complete: tier 0.95, version 0.8, bare family vs versioned 0.66, chatgpt 0.5,
   domain-adapted 0.5 (hand-curated list), different families 0.
+- **child×parent idf, continued (owner's questions, 2026-10-31; `one_word.py`).** (1) Exempting one-word child
+  hyperedges: they are 6.8% of the children in child×parent but hold 45% of its ties, and 84% of the children found in
+  51+ parents are one word (`be`, `llm`, `use`, `chatgpt`, `show`…), so an exemption would undo most of idf's effect;
+  rare one-word children (`empathy`, `anhedonia`) already keep a high idf. Assistant: no exemption. (2) Frequency
+  basis: parent frequency and article frequency of a child agree largely (Spearman 0.78; 459 of the 500 most
+  down-weighted children are the same), but differ for children used in many claims of one article (`gpt_5_mini` 37
+  claims in 1 article, `cbs llm` 35 in 1): parent frequency treats such within-article repetition as genericness.
+  Assistant: count article frequency (articles of the trial containing the child) for both child×article and
+  child×parent, one idf per child hyperedge; within-article repetition stays in the number of ties, as centrality.
+  Owner to decide. Note: `REFnnnnnn` one-word children are cited works, kept by the decision of 2026-10-28.
