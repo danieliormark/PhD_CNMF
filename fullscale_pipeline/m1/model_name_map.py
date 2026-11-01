@@ -1,9 +1,9 @@
-# Hand-curated model-name map for M1 (chunk12v3), ticket 107. DRAFT for the owner's check (2026-11-01).
+# Hand-curated model-name map for M1 (chunk12v3), ticket 107. Owner decisions 2026-10-31 and 2026-11-01; UNCHECKED_SIMILARITY pending.
 # Applied to the root of every focal atom (".../C/focal") before the model-name levels (tier / version / family).
 #   CANON:   same model, other spelling, glued citation number, or adjective form -> canonical root (identity).
-#   NOT_MODEL_ARTICLES: articles whose focal "GPT" atoms are not a language model (Grooved Pegboard Test).
-#   NOT_MODEL_ROOTS: roots that are not a model in any article (author name, weight symbol).
-#   ADAPTED: derived model family -> base family, soft similarity 0.5 in W (owner, 2026-10-31: domain-adapted 0.5).
+#   NOT_MODEL: (article, root) pairs where the focal atom is not a model ("Grover" as an author name).
+#   BY_ARTICLE: (article, root) pairs read as another model ("RoBERT" for RoBERTa).
+#   LINEAGE: derived model family -> (base family, relation); similarity 0.5 / 0.25 in W by relation.
 # Glued citation numbers not listed here are caught by the general rule in glued_citation(): a family name
 # followed by digits that are not a known version of that family -> the bare family (owner, 2026-10-31).
 import re
@@ -54,84 +54,111 @@ CANON = {
     "gemma_32": "gemma", "modernbert_base54": "modernbert", "llamaindex41": "llamaindex",
 }
 
-# Per-article readings. GROVER is a real model (Zellers et al. 2019) elsewhere in the corpus, so "Grover" as an author
-# is handled per article, not by removing the name. "RoBERT" has three readings (Recurrence over BERT, Pappagari et al.
-# 2019; the Romanian BERT, Masala et al. 2020; RoBERTa with the final "a" dropped); only articles where the text shows
-# which one is meant are mapped. The two Grooved Pegboard Test articles (PMC10395525, PMC11742816) were removed from the
-# trial (owner, 2026-11-01; corpus_statistics/psychology_trial_exclusions.csv).
-NOT_MODEL = {("PMC12961534", "grover"), ("PMC13318610", "grover")}   # "Grover et al.", "Grover and colleagues"
+# Per-article readings. GROVER is a real model in the corpus (the fake-news generator, Zellers et al. 2019; the molecular
+# graph model, Rong et al. 2020; the DNA model, Sanabria et al. 2024), so "Grover" that is not a model is handled per
+# article (owner, 2026-11-01: remove the false positives by hand, keep the model). All 362 corpus mentions were read; the
+# 11 articles below are every false positive (authors, acknowledged persons, Grover's quantum search algorithm); the
+# 15 sentence units are listed in corpus_statistics/focal_false_positive_units.csv. Rule for the builder: the atom is
+# removed; a focal child hyperedge left empty is removed; a sentence unit left with no focal atom is removed (14 of the
+# 15 units); an article left with no sentence unit would be removed (none is). "RoBERT" has three readings (Recurrence
+# over BERT, Pappagari et al. 2019; the Romanian BERT, Masala et al. 2020; RoBERTa with the final "a" dropped); only
+# articles where the text shows which one is meant are mapped. Articles where "GPT" is the Grooved Pegboard Test are
+# removed from the trial (RL-204, RL-205; corpus_statistics/psychology_trial_exclusions.csv).
+NOT_MODEL = {(p, "grover") for p in (
+    "PMC11681292", "PMC12748763", "PMC13433594", "PMC12961534", "PMC12957616", "PMC13318610",
+    "PMC12357839", "PMC10917319", "PMC11810639", "PMC12753390", "PMC12011883")}
 BY_ARTICLE = {("PMC12370911", "robert"): "roberta",                # "DistilBERT, RoBERT, ALBERT, BERT, and DistilRoBERT"
               ("PMC10308283", "robert_ft1"): "roberta"}            # "RoBERT-FT1 ... RoBERTa-FT2" in one sentence
 
-# derived family -> base family (0.5 in W). Kinds: domain = further training on domain data; language = trained
-# for one language; multimodal = text model extended to other inputs; system = an application built on the model.
-ADAPTED = {
-    # BERT
-    "mentalbert": ("bert", "domain"), "psychbert": ("bert", "domain"), "biobert": ("bert", "domain"),
-    "clinicalbert": ("bert", "domain"), "bioclinicalbert": ("bert", "domain"), "clinicalbert_zh": ("bert", "domain"),
-    "finbert": ("bert", "domain"), "covid_twitter_bert": ("bert", "domain"), "ct_bert": ("bert", "domain"),
-    "twhin_bert": ("bert", "domain"), "bertweet": ("bert", "domain"), "med_bert": ("bert", "domain"),
-    "madrs_bert": ("bert", "domain"), "therapistbert": ("bert", "domain"), "disorbert": ("bert", "domain"),
-    "anxibert": ("bert", "domain"), "corebert": ("bert", "domain"), "emobert": ("bert", "domain"),
-    "memobert": ("bert", "domain"), "tod_bert": ("bert", "domain"), "docbert": ("bert", "domain"),
-    "topicbert": ("bert", "domain"), "opinion_bert": ("bert", "domain"), "babyberta": ("roberta", "domain"),
-    "mbert": ("bert", "language"), "kobert": ("bert", "language"), "kcbert": ("bert", "language"),
-    "kr_bert": ("bert", "language"), "korbert": ("bert", "language"), "kpfbert": ("bert", "language"),
-    "klue_bert": ("bert", "language"), "kobigbird_bert": ("bert", "language"), "arabert": ("bert", "language"),
-    "marbert": ("bert", "language"), "bertimbau": ("bert", "language"), "banglabert": ("bert", "language"),
-    "hebert": ("bert", "language"), "alephbert": ("bert", "language"), "bertje": ("bert", "language"),
-    "gbert": ("bert", "language"), "german_bert": ("bert", "language"), "urdubert": ("bert", "language"),
-    "tohoku_bert": ("bert", "language"), "chinese_bert_wwm_ext": ("bert", "language"), "macbert": ("bert", "language"),
-    "sbert": ("bert", "domain"), "mm_bert": ("bert", "multimodal"), "mag_bert": ("bert", "multimodal"),
-    "videobert": ("bert", "multimodal"), "visualbert": ("bert", "multimodal"), "vilbert": ("bert", "multimodal"),
+# Lineage: derived model family -> (base family, relation). Similarity in W by relation (owner, 2026-11-01):
+#   weights = trained from the base's own weights (further pre-training on domain or language data, fine-tuning,
+#             distillation from it, the base inside a larger network, an application that runs it)       -> 0.5
+#   design  = same design as the base, trained anew from scratch (no weights inherited from it)           -> 0.25
+#   unchecked = the training was not checked; similarity UNCHECKED_SIMILARITY (owner to choose)
+# Only the listed pair gets the similarity; pairs are not chained (mentalroberta-bert is not derived from the table).
+SIMILARITY = {"weights": 0.5, "design": 0.25}
+UNCHECKED_SIMILARITY = None   # pending the owner's choice; the builder refuses to run while it is None
+W, D, U = "weights", "design", "unchecked"
+LINEAGE = {
+    # encoder families against BERT
+    "distilbert": ("bert", W),       # initialised from BERT's layers and distilled from it (Sanh et al. 2019)
+    "roberta": ("bert", D), "albert": ("bert", D), "deberta": ("bert", D), "electra": ("bert", D),
+    "modernbert": ("bert", D), "spanbert": ("bert", D), "mobilebert": ("bert", D), "hubert": ("bert", D),
+    "xlm_roberta": ("roberta", D), "distilroberta": ("roberta", W),
+    # BERT: further pre-training or fine-tuning from BERT's weights
+    "mentalbert": ("bert", W), "psychbert": ("bert", W), "biobert": ("bert", W), "clinicalbert": ("bert", W),
+    "bioclinicalbert": ("bert", W), "finbert": ("bert", W), "covid_twitter_bert": ("bert", W), "ct_bert": ("bert", W),
+    "madrs_bert": ("bert", W), "therapistbert": ("bert", W), "disorbert": ("bert", W), "anxibert": ("bert", W),
+    "corebert": ("bert", W), "tod_bert": ("bert", W), "docbert": ("bert", W), "sbert": ("bert", W),
+    "mpc_bert": ("bert", W), "sa_bert": ("bert", W), "sr_bert": ("bert", W), "tmbert": ("bert", W),
+    "bertagent": ("bert", W), "augbert": ("bert", W), "opinion_bert": ("bert", W),
+    "chinese_bert_wwm_ext": ("bert", W), "macbert": ("bert", W),   # initialised from Google's Chinese BERT
+    "mm_bert": ("bert", W), "mag_bert": ("bert", W), "videobert": ("bert", W), "visualbert": ("bert", W),
+    "vilbert": ("bert", W), "aobert": ("bert", W), "audibert": ("bert", W),
+    # BERT design trained from scratch (one language, tweets, structured health records)
+    "mbert": ("bert", D), "kobert": ("bert", D), "kcbert": ("bert", D), "kr_bert": ("bert", D), "korbert": ("bert", D),
+    "kpfbert": ("bert", D), "klue_bert": ("bert", D), "kobigbird_bert": ("bert", D), "arabert": ("bert", D),
+    "marbert": ("bert", D), "banglabert": ("bert", D), "hebert": ("bert", D), "alephbert": ("bert", D),
+    "bertje": ("bert", D), "gbert": ("bert", D), "german_bert": ("bert", D), "tohoku_bert": ("bert", D),
+    "bertimbau": ("bert", D),        # initialised from multilingual BERT, which is itself trained from scratch
+    "bertweet": ("bert", D), "med_bert": ("bert", D),
+    "micro_bert": ("bert", D), "micron_bert": ("bert", D),   # vision models pre-trained BERT-style on video frames
+    "graph_bert": ("bert", D),       # Graph-BERT: trained on graphs from scratch
     # RoBERTa
-    "mentalroberta": ("roberta", "domain"), "emoberta": ("roberta", "domain"), "emoroberta": ("roberta", "domain"),
-    "twitter_roberta": ("roberta", "domain"), "deproberta": ("roberta", "domain"),
-    "robertadepressiondetection": ("roberta", "domain"), "cd_roberta": ("roberta", "domain"),
-    "ear_roberta": ("roberta", "domain"), "s_roberta": ("roberta", "domain"),
-    "klue_roberta": ("roberta", "language"), "chinese_roberta_wwm_ext": ("roberta", "language"),
-    "erlangshen_roberta": ("roberta", "language"), "kosimcse_roberta": ("roberta", "language"),
-    "kobigbird_roberta": ("roberta", "language"), "roberta_beto": ("roberta", "language"),
-    "camembert": ("roberta", "language"), "gottbert": ("roberta", "language"), "umberto": ("roberta", "language"),
-    "robertuito": ("roberta", "language"), "wangchanberta": ("roberta", "language"), "robbert": ("roberta", "language"),
-    "twitter_xlm_roberta": ("xlm_roberta", "domain"),
+    "mentalroberta": ("roberta", W), "emoberta": ("roberta", W), "emoroberta": ("roberta", W),
+    "twitter_roberta": ("roberta", W), "deproberta": ("roberta", W), "robertadepressiondetection": ("roberta", W),
+    "cd_roberta": ("roberta", W), "ear_roberta": ("roberta", W), "s_roberta": ("roberta", W),
+    "multi_roberta": ("roberta", W), "all_roberta": ("roberta", W), "melbert": ("roberta", W),
+    "klue_roberta": ("roberta", D), "chinese_roberta_wwm_ext": ("roberta", D), "erlangshen_roberta": ("roberta", D),
+    "kosimcse_roberta": ("roberta", D), "kobigbird_roberta": ("roberta", D), "camembert": ("roberta", D),
+    "gottbert": ("roberta", D), "umberto": ("roberta", D), "robertuito": ("roberta", D),
+    "wangchanberta": ("roberta", D), "robbert": ("roberta", D), "babyberta": ("roberta", D),
+    "twitter_xlm_roberta": ("xlm_roberta", W),
+    "all_distilroberta": ("distilroberta", W), "nli_distilroberta": ("distilroberta", W),
+    "st_distilbert": ("distilbert", W), "multi_qa_distilbert_cos": ("distilbert", W), "distilkobert": ("distilbert", D),
+    "mdeberta": ("deberta", D), "nli_deberta": ("deberta", W),
     # GPT
-    "biogpt": ("gpt", "domain"), "medgpt": ("gpt", "domain"), "biomedgpt": ("gpt", "domain"),
-    "gatortrongpt": ("gpt", "domain"), "affectgpt": ("gpt", "domain"), "depgpt": ("gpt", "domain"),
-    "eeg_gpt": ("gpt", "domain"), "neuro_gpt": ("gpt", "domain"), "instructgpt": ("gpt", "domain"),
-    "kogpt2": ("gpt", "language"), "aragpt2": ("gpt", "language"), "czegpt": ("gpt", "language"), "bggpt": ("gpt", "language"),
-    "gptcoach": ("gpt", "system"), "safegpt": ("gpt", "system"), "warmgpt": ("gpt", "system"), "mindgpt": ("gpt", "system"),
-    "navgpt": ("gpt", "system"), "robotgpt": ("gpt", "system"), "creascoregpt": ("gpt", "system"),
-    "gptscreenr": ("gpt", "system"), "gpthistory": ("gpt", "system"), "doximitygpt": ("gpt", "system"),
-    "hivegpt": ("gpt", "system"), "mdteamgpt": ("gpt", "system"), "antgpt": ("gpt", "system"), "gesgpt": ("gpt", "system"),
-    "acoustics_gpt": ("gpt", "system"), "luminescence_gpt": ("gpt", "system"), "bp_gpt": ("gpt", "system"),
-    # others
-    "mentallama": ("llama", "domain"), "emotion_llama": ("llama", "domain"), "llamaguard": ("llama", "domain"),
-    "chinese_llama": ("llama", "language"), "cockpit_llama": ("llama", "system"), "video_llama": ("llama", "multimodal"),
-    "med_palm": ("palm", "domain"), "flan_palm": ("palm", "domain"), "palm_e": ("palm", "multimodal"),
-    "med_gemini": ("gemini", "domain"), "paligemma": ("gemma", "multimodal"), "embeddinggemma": ("gemma", "domain"),
-    "mentalmistral": ("mistral", "domain"), "mdeberta": ("deberta", "language"), "nli_deberta": ("deberta", "domain"),
-    "nli_distilroberta": ("distilroberta", "domain"), "distilkobert": ("distilbert", "language"),
-    "dialogpt": ("gpt", "domain"), "openllama": ("llama", "domain"),
-    "st_distilbert": ("distilbert", "domain"), "multi_qa_distilbert_cos": ("distilbert", "domain"),
-    "all_distilroberta": ("distilroberta", "domain"), "all_roberta": ("roberta", "domain"),
-    "german_roberta_sentence_transformer": ("roberta", "language"), "multi_roberta": ("roberta", "language"),
-    "micro_bert": ("bert", "multimodal"), "micron_bert": ("bert", "multimodal"), "aobert": ("bert", "multimodal"),
-    "audibert": ("bert", "multimodal"), "bertagent": ("bert", "system"), "augbert": ("bert", "domain"),
-    # hybrids: the model combined with another architecture ("DeBERTa-BiLSTM", "SBERT-CNN")
-    "fusion_convbert": ("bert", "hybrid"), "fusion_bert": ("bert", "hybrid"), "fusion_robustbert": ("bert", "hybrid"),
-    "concat_bert": ("bert", "hybrid"), "dual_contextbert": ("bert", "hybrid"), "graph_bert": ("bert", "hybrid"),
-    "lda_bert": ("bert", "hybrid"), "ensembert": ("bert", "hybrid"), "sbert_cnn": ("sbert", "hybrid"),
-    "albert_bilstm": ("albert", "hybrid"), "albert_plusbert_bilstm": ("albert", "hybrid"),
-    "deberta_bilstm": ("deberta", "hybrid"), "deberta_plusbilstm": ("deberta", "hybrid"),
-    "hubert_plusernie_health": ("hubert", "hybrid"), "hubert_pluslongformer": ("hubert", "hybrid"),
-    "hubert_clap": ("hubert", "hybrid"), "graph_roberta": ("roberta", "hybrid"), "graph_roberta_cl": ("roberta", "hybrid"),
-    "acs_plusllama": ("llama", "hybrid"),
-    # single-article BERT variants whose training was not checked
-    "mpc_bert": ("bert", "unchecked"), "sa_bert": ("bert", "unchecked"), "sr_bert": ("bert", "unchecked"),
-    "tmbert": ("bert", "unchecked"), "bhs_bert": ("bert", "unchecked"), "mabert": ("bert", "unchecked"),
-    "melbert": ("bert", "unchecked"), "bubert": ("bert", "unchecked"),
+    "instructgpt": ("gpt", W), "dialogpt": ("gpt", W),   # fine-tuned from GPT-3 / initialised from GPT-2
+    "biogpt": ("gpt", D), "gatortrongpt": ("gpt", D), "neuro_gpt": ("gpt", D),
+    "kogpt2": ("gpt", D), "aragpt2": ("gpt", D), "czegpt": ("gpt", D),
+    "gpt_neo": ("gpt", D), "gpt_j": ("gpt", D), "gpt_oss": ("gpt", D),   # GPT design, trained from scratch
+    "microsoft_copilot": ("gpt", W),   # a product that runs OpenAI GPT-4-class models
+    "bard": ("palm", W),               # Google's chatbot, run on LaMDA, then PaLM 2 (2023), renamed Gemini (2024)
+    # applications that run a GPT model (the text says so)
+    "gptcoach": ("gpt", W), "navgpt": ("gpt", W), "robotgpt": ("gpt", W), "gptscreenr": ("gpt", W),
+    "doximitygpt": ("gpt", W), "gpthistory": ("gpt", W), "creascoregpt": ("gpt", W),
+    # LLaMA, PaLM, Gemini, Gemma, Mistral
+    "mentallama": ("llama", W), "emotion_llama": ("llama", W), "llamaguard": ("llama", W), "chinese_llama": ("llama", W),
+    "cockpit_llama": ("llama", W), "video_llama": ("llama", W), "openllama": ("llama", D),
+    "minigpt": ("llama", W), "pandagpt": ("llama", W),   # built on Vicuna, a fine-tuned LLaMA (not on GPT)
+    "mixtral": ("mistral", D), "avhubert": ("hubert", D),
+    "med_palm": ("palm", W), "flan_palm": ("palm", W), "palm_e": ("palm", W), "med_gemini": ("gemini", W),
+    "paligemma": ("gemma", W), "embeddinggemma": ("gemma", W), "mentalmistral": ("mistral", W),
+    # the base model combined with another network ("DeBERTa-BiLSTM", "SBERT-CNN"): the base's weights are inside
+    "fusion_convbert": ("bert", W), "fusion_bert": ("bert", W), "fusion_robustbert": ("bert", W),
+    "concat_bert": ("bert", W), "dual_contextbert": ("bert", W), "lda_bert": ("bert", W), "ensembert": ("bert", W),
+    "sbert_cnn": ("sbert", W), "albert_bilstm": ("albert", W), "albert_plusbert_bilstm": ("albert", W),
+    "deberta_bilstm": ("deberta", W), "deberta_plusbilstm": ("deberta", W), "hubert_plusernie_health": ("hubert", W),
+    "hubert_pluslongformer": ("hubert", W), "hubert_clap": ("hubert", W), "graph_roberta": ("roberta", W),
+    "graph_roberta_cl": ("roberta", W), "acs_plusllama": ("llama", W),
+    # not checked: the text does not say how the model was trained, and no source was found
+    "clinicalbert_zh": ("bert", U), "twhin_bert": ("bert", U), "emobert": ("bert", U), "memobert": ("bert", U),
+    "topicbert": ("bert", U), "urdubert": ("bert", U), "bhs_bert": ("bert", U), "mabert": ("bert", U),
+    "bubert": ("bert", U), "roberta_beto": ("roberta", U),
+    "german_roberta_sentence_transformer": ("roberta", U),
+    "medgpt": ("gpt", U), "depgpt": ("gpt", U), "eeg_gpt": ("gpt", U), "bp_gpt": ("gpt", U), "mindgpt": ("gpt", U),
+    "safegpt": ("gpt", U), "warmgpt": ("gpt", U), "hivegpt": ("gpt", U), "mdteamgpt": ("gpt", U), "gesgpt": ("gpt", U),
+    "antgpt": ("gpt", U),
 }
+# Names that carry a base's name but are not derived from it: no lineage pair (similarity 0).
+#   biomedgpt (a vision-language model of another design, Zhang et al. 2024), affectgpt (built on other models),
+#   bggpt (continued pre-training of Mistral and Gemma, not GPT).
+
+def lineage_similarity(fam):
+    """(base family, similarity in W) for a derived family, or None."""
+    if fam not in LINEAGE: return None
+    base, rel = LINEAGE[fam]
+    return base, (UNCHECKED_SIMILARITY if rel == U else SIMILARITY[rel])
 
 _DIG = re.compile(r"^(?P<fam>[a-z_]*?[a-z])(?P<num>\d{1,3})$")
 
@@ -141,7 +168,7 @@ def glued_citation(root):
     if m and not m.group("fam").endswith("_"):
         fam, num = m.group("fam"), m.group("num")
         if num in KNOWN_VERSIONS.get(fam, set()) or (fam.endswith("gpt") and num == "2"): return root   # GPT2, kogpt2
-        if fam in KNOWN_VERSIONS or fam in ADAPTED or fam in BASES: return fam
+        if fam in KNOWN_VERSIONS or fam in LINEAGE or fam in BASES: return fam
         return root
     head, _, tail = root.rpartition("_")      # family_digits: gpt_9, gemini_8, gpt_111, gpt_44
     if head in KNOWN_VERSIONS and tail.isdigit() and tail not in KNOWN_VERSIONS[head]: return head
@@ -151,7 +178,7 @@ BASES = {"bert", "roberta", "distilbert", "albert", "deberta", "distilroberta", 
          "electra", "hubert", "gpt", "llama", "gemini", "gemma", "claude", "qwen", "deepseek", "mistral", "palm", "grok"}
 
 def canonical(root, pmcid=None):
-    """Canonical focal-model root, or None if the atom is not a model (then it is kept as an ordinary concept)."""
+    """Canonical focal-model root, or None if the atom is not a model in this article (the atom is then removed)."""
     if (pmcid, root) in NOT_MODEL: return None
     root = BY_ARTICLE.get((pmcid, root), root)
     root = CANON.get(root, root)

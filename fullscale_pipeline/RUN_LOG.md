@@ -2779,3 +2779,19 @@ Pegboard Test ("five consecutive trials of the GPT (i.e., GPT1, GPT2, …)"); no
 acted on:** a text search of `PG/g3_v2/g3_test_v2.jsonl` for "GPT1, GPT2" / "pegboard" also finds GPT as a gene
 (glutamic-pyruvic transaminase; PMC11300913, PMC8824882, PMC11070440, PMC13460857, PMC8675480) and the pegboard test
 (PMC13369993); a systematic homonym screen for "GPT" is needed before the full-scale M1. [LOG]
+
+### RL-205 — 2026-11-01 — third pegboard article removed; Grover false positives removed by hand
+
+- **PMC12999586** removed from the Psychology trial (2,137 -> **2,136**; `psychology_trial_exclusions.csv`): "Grooved
+  Pegboard Test (GPT)"; its other focal atoms, Acoustics-GPT and Luminescence-GPT, are regression variables. Owner rule
+  of 2026-11-01 (RL-204: drop articles where "GPT" means something else). A screen of all trial texts for
+  pegboard / transaminase / gene markers found no other case (PMC13284561 names transaminase but its focal atom is
+  "language models").
+- **Grover** (owner, 2026-11-01: remove false positives by hand, keep the model; remove sentence units / articles left
+  with no focal atom). All 362 corpus sentence units with a "grover" focal mention in `PG/g3_v2/g3_test_v2.jsonl` were
+  read (none in the demotion overlay). Upper-case GROVER is always a model (fake-news generator, molecular graph model,
+  DNA model). The false positives are 15 units in 11 articles: authors (Grover et al., Grover and Kar, Grover and
+  Leskovec, Grover Roos et al.), acknowledged persons, and Grover's quantum search algorithm / bound. Listed in
+  `corpus_statistics/focal_false_positive_units.csv`. Applied by the builder through `m1/model_name_map.py`
+  `NOT_MODEL`: 14 units lose their only focal atom and are removed; 1 unit (PMC11810639) keeps its other focal atoms;
+  no article is left without a unit. Trial: PMC12961534 and PMC13318610 lose one unit each. G3 output unchanged. [LOG]

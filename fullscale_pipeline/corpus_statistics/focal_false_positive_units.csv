@@ -1,0 +1,16 @@
+uid,pmcid,focal_root,reading,action,other_focal_atoms
+PMC10917319.r1.L2463.S2.U1,PMC10917319,grover,person (Sandeep Grover),drop the sentence unit (no other focal atom),
+PMC11681292.r1.L316.S2.U1,PMC11681292,grover,acknowledged person (Harsh Grover),drop the sentence unit (no other focal atom),
+PMC11810639.r1.L79.S2.U1,PMC11810639,grover,"author (Grover and Leskovec 2016, node2vec)",drop the focal atom,esm_1b;language_model
+PMC12011883.r1.L312.S12.U1,PMC12011883,grover,"author (Grover et al., node2vec)",drop the sentence unit (no other focal atom),
+PMC12357839.r2.L318.S1.U1,PMC12357839,grover,person (Dr Sandeep Grover),drop the sentence unit (no other focal atom),
+PMC12748763.r1.L1025.S2.U1,PMC12748763,grover,Grover's quantum search algorithm,drop the sentence unit (no other focal atom),
+PMC12748763.r1.L1254.S1.U1,PMC12748763,grover,Grover's quantum search algorithm,drop the sentence unit (no other focal atom),
+PMC12748763.r1.L689.S1.U1,PMC12748763,grover,Grover's quantum search algorithm,drop the sentence unit (no other focal atom),
+PMC12753390.r1.L195.S6.U1,PMC12753390,grover,"author (Grover Roos et al., 2025)",drop the sentence unit (no other focal atom),
+PMC12753390.r1.L67.S1.U1,PMC12753390,grover,"author (Grover Roos et al., 2025)",drop the sentence unit (no other focal atom),
+PMC12753390.r1.L67.S2.U1,PMC12753390,grover,"author (Grover Roos et al., 2025)",drop the sentence unit (no other focal atom),
+PMC12957616.r1.L270.S2.U1,PMC12957616,grover,author (Grover and Kar),drop the sentence unit (no other focal atom),
+PMC12961534.r1.L278.S3.U1,PMC12961534,grover,author (Grover et al.),drop the sentence unit (no other focal atom),
+PMC13318610.r1.L345.S2.U1,PMC13318610,grover,author (Grover and colleagues),drop the sentence unit (no other focal atom),
+PMC13433594.r1.L177.S4.U1,PMC13433594,grover,Grover bound (quantum search),drop the sentence unit (no other focal atom),

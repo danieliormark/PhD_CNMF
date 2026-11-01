@@ -1,7 +1,7 @@
-# Review table of the draft model-name map (model_name_map.py) over the trial's focal atoms -> model_name_review.csv
+# Review table of the model-name map (model_name_map.py) over the trial's focal atoms -> model_name_review.csv
 import collections, csv, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from model_name_map import canonical, ADAPTED, CANON
+from model_name_map import canonical, LINEAGE, CANON, lineage_similarity
 L1 = "/mnt/hum01-home01/p91688di/PhD_CNMF/plans/ticket107_layer1/"
 __file__ = L1 + "model_levels.py"
 exec(open(L1 + "model_levels.py").read().split("units = []")[0])
@@ -14,24 +14,26 @@ for r in recs:
 rows = []
 for root, arts in cnt.items():
     out = {canonical(root, a) for a in arts}
-    can = canonical(root)
+    can = canonical(root) if out != {None} else None
     fam = level(can, "family") if can else None
-    base = ADAPTED.get(fam, ("", ""))
+    base = LINEAGE.get(fam, ("", ""))
+    sim = lineage_similarity(fam)
+    sim = "" if sim is None else ("pending" if sim[1] is None else sim[1])
     if can != root or base[0] or len(out) > 1:
         kind = ("not a model" if can is None else "identity (spelling/citation/adjective)" if can != root else "")
         if len(out) > 1: kind = "not a model in some articles"
-        rows.append([root, len(arts), can or "", fam or "", kind, base[0], base[1], 0.5 if base[0] else ""])
+        rows.append([root, len(arts), can or "", fam or "", kind, base[0], base[1], sim])
 rows.sort(key=lambda r: (r[4] == "", r[5], -r[1]))
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_name_review.csv"), "w", newline="") as f:
-    w = csv.writer(f); w.writerow(["atom_root", "articles", "canonical_root", "family", "change", "adapted_from", "adapted_kind", "similarity_to_base"]); w.writerows(rows)
+    w = csv.writer(f); w.writerow(["atom_root", "articles", "canonical_root", "family", "change", "lineage_base", "lineage_relation", "similarity_to_base"]); w.writerows(rows)
 fams = collections.Counter(level(canonical(k) or k, "family") for k in cnt)
 print("roots", len(cnt), "rows in review", len(rows), "| identity changes", sum(1 for r in rows if r[4].startswith("identity")),
-      "| adapted", sum(1 for r in rows if r[5]), "| families before", len({level(k, 'family') for k in cnt}), "after", len(fams))
-print("adapted by kind", collections.Counter(r[6] for r in rows if r[6]))
+      "| with a lineage pair", sum(1 for r in rows if r[5]), "| families before", len({level(k, 'family') for k in cnt}), "after", len(fams))
+print("lineage relation", collections.Counter(r[6] for r in rows if r[6]))
 # leftovers: roots still containing a digit that are not a known version form
 import re
 left = sorted(k for k in cnt if canonical(k) and re.search(r"[a-z]\d", canonical(k)) and canonical(k) not in ("kogpt2", "aragpt2"))
 print("digit-glued roots left:", left)
-unl = sorted((len(cnt[k]), k) for k in cnt if canonical(k) and level(canonical(k), "family") not in ADAPTED
+unl = sorted((len(cnt[k]), k) for k in cnt if canonical(k) and level(canonical(k), "family") not in LINEAGE
              and level(canonical(k), "family") not in {"bert","roberta","gpt","llama","gemini","gemma","claude","qwen","deepseek","mistral","palm","grok","llm","language_model","transformer_model"})
-print("families neither base nor adapted (kept as their own family):", [k for _, k in unl[::-1]])
+print("families with no lineage pair (kept as their own family):", [k for _, k in unl[::-1]])

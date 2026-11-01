@@ -1515,3 +1515,20 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   2020). Proposal: 0.5 for a model trained from the base's weights (ChatGPT from GPT-3.5, MentalBERT, BioBERT,
   DistilBERT); a lower value to be chosen for a model of the same architecture trained from scratch (RoBERTa, ALBERT,
   DeBERTa, XLM-R, CamemBERT, KoBERT …); 0 otherwise. Under it some draft "language" rows move down a tier.
+
+### Addendum 2026-11-01 (4): lineage tiers decided; Grover false positives removed
+
+- **Owner decided (2026-11-01):** "models using bert own weights can have 0.5 similarity. For same design but
+  differently trained probably 0.25." Implemented in `fullscale_pipeline/m1/model_name_map.py` as `LINEAGE`
+  (derived family -> base family, relation) with `SIMILARITY = {weights: 0.5, design: 0.25}`; my kinds (domain,
+  language, hybrid, system, multimodal) are dropped. The encoder families now have pairs with BERT: DistilBERT 0.5;
+  RoBERTa, ALBERT, DeBERTa, ELECTRA, ModernBERT, SpanBERT, MobileBERT, HuBERT 0.25; XLM-R to RoBERTa 0.25.
+  Single-language models trained from scratch (KoBERT, CamemBERT, AraBERT …) move from 0.5 to 0.25. A base model
+  inside a larger network ("DeBERTa-BiLSTM") and an application that runs the model ("GPTCoach") count as weights.
+  Names that carry a base's name but are not derived from it get no pair (BiomedGPT, AffectGPT, BgGPT); MiniGPT-4 and
+  PandaGPT are paired with LLaMA (built on Vicuna). Pairs are not chained. Trial review (`model_name_review.csv`):
+  226 families with a pair, 124 weights, 80 design, 22 unchecked.
+- **Pending:** `UNCHECKED_SIMILARITY` for the 22 names whose training could not be checked (the builder refuses to run
+  while it is None). My recommendation: 0.25, the lower of the two tiers, because the name shows at least the base's
+  design family; not a decision.
+- **Grover and the third pegboard article:** RL-205.

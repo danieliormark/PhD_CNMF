@@ -1,12 +1,11 @@
-atom_root,articles,canonical_root,family,change,adapted_from,adapted_kind,similarity_to_base
-distillbert,7,distilbert,distilbert,identity (spelling/citation/adjective),,,
+atom_root,articles,canonical_root,family,change,lineage_base,lineage_relation,similarity_to_base
 berts,3,bert,bert,identity (spelling/citation/adjective),,,
 gpt_9,3,gpt,gpt,identity (spelling/citation/adjective),,,
 bert28,3,bert,bert,identity (spelling/citation/adjective),,,
 bert30,3,bert,bert,identity (spelling/citation/adjective),,,
 robert,2,robert,robert,not a model in some articles,,,
 llama_7,2,llama,llama,identity (spelling/citation/adjective),,,
-roberta34,2,roberta,roberta,identity (spelling/citation/adjective),,,
+grover,2,,,not a model,,,
 bert21,2,bert,bert,identity (spelling/citation/adjective),,,
 bert_2,2,bert,bert,identity (spelling/citation/adjective),,,
 bert79,1,bert,bert,identity (spelling/citation/adjective),,,
@@ -17,36 +16,22 @@ bert17,1,bert,bert,identity (spelling/citation/adjective),,,
 bert73,1,bert,bert,identity (spelling/citation/adjective),,,
 llamaindex41,1,llamaindex,llamaindex,identity (spelling/citation/adjective),,,
 bert11,1,bert,bert,identity (spelling/citation/adjective),,,
-xlm_roberta_l,1,xlm_roberta,xlm_roberta,identity (spelling/citation/adjective),,,
-ft_roberta_l,1,roberta,roberta,identity (spelling/citation/adjective),,,
-pt_roberta_l,1,roberta,roberta,identity (spelling/citation/adjective),,,
 chatgpts,1,chatgpt,gpt,identity (spelling/citation/adjective),,,
-gpt_j_6,1,gpt_j,gpt_j,identity (spelling/citation/adjective),,,
 berttiny_pretrained,1,bert,bert,identity (spelling/citation/adjective),,,
-roberta33,1,roberta,roberta,identity (spelling/citation/adjective),,,
-xlm_reberta,1,xlm_roberta,xlm_roberta,identity (spelling/citation/adjective),,,
-distilbert23,1,distilbert,distilbert,identity (spelling/citation/adjective),,,
 v_llama,1,llama,llama,identity (spelling/citation/adjective),,,
 v_mm_llama,1,llama,llama,identity (spelling/citation/adjective),,,
 bert43,1,bert,bert,identity (spelling/citation/adjective),,,
-roberta42,1,roberta,roberta,identity (spelling/citation/adjective),,,
-minigpt,1,minigpt_4,minigpt,identity (spelling/citation/adjective),,,
 chatgpt_v2,1,chatgpt,gpt,identity (spelling/citation/adjective),,,
 bert56,1,bert,bert,identity (spelling/citation/adjective),,,
-albert150,1,albert,albert,identity (spelling/citation/adjective),,,
-distilbert152,1,distilbert,distilbert,identity (spelling/citation/adjective),,,
-modernbert_base54,1,modernbert,modernbert,identity (spelling/citation/adjective),,,
 bert32,1,bert,bert,identity (spelling/citation/adjective),,,
 gpt_111,1,gpt,gpt,identity (spelling/citation/adjective),,,
 pgpt_3,1,gpt_3,gpt,identity (spelling/citation/adjective),,,
 geminipro,1,gemini_pro,gemini,identity (spelling/citation/adjective),,,
 gpt_44,1,gpt,gpt,identity (spelling/citation/adjective),,,
 wbert,1,bert,bert,identity (spelling/citation/adjective),,,
-debertav3,1,deberta_v3,deberta,identity (spelling/citation/adjective),,,
 gemma_32,1,gemma,gemma,identity (spelling/citation/adjective),,,
 bert13,1,bert,bert,identity (spelling/citation/adjective),,,
 bert20,1,bert,bert,identity (spelling/citation/adjective),,,
-roberta21,1,roberta,roberta,identity (spelling/citation/adjective),,,
 bert72,1,bert,bert,identity (spelling/citation/adjective),,,
 bert27,1,bert,bert,identity (spelling/citation/adjective),,,
 bert45,1,bert,bert,identity (spelling/citation/adjective),,,
@@ -54,14 +39,12 @@ chatgpt_v4,1,chatgpt,gpt,identity (spelling/citation/adjective),,,
 bert_1,1,bert,bert,identity (spelling/citation/adjective),,,
 bert14,1,bert,bert,identity (spelling/citation/adjective),,,
 deepseek_r171,1,deepseek_r1,deepseek,identity (spelling/citation/adjective),,,
-distilbert60,1,distilbert,distilbert,identity (spelling/citation/adjective),,,
 bert25,1,bert,bert,identity (spelling/citation/adjective),,,
 bert44,1,bert,bert,identity (spelling/citation/adjective),,,
 llama_powered,1,llama,llama,identity (spelling/citation/adjective),,,
 llama_338,1,llama_3,llama,identity (spelling/citation/adjective),,,
 gemma_60,1,gemma,gemma,identity (spelling/citation/adjective),,,
 bert33,1,bert,bert,identity (spelling/citation/adjective),,,
-hubert_emb,1,hubert,hubert,identity (spelling/citation/adjective),,,
 gemini_8,1,gemini,gemini,identity (spelling/citation/adjective),,,
 gpt_7,1,gpt,gpt,identity (spelling/citation/adjective),,,
 1_bert,1,bert,bert,identity (spelling/citation/adjective),,,
@@ -70,201 +53,235 @@ bert29,1,bert,bert,identity (spelling/citation/adjective),,,
 optimized_bert,1,bert,bert,identity (spelling/citation/adjective),,,
 llama_7bfinetuned,1,llama,llama,identity (spelling/citation/adjective),,,
 thegpt_3_5_turbozs_s,1,gpt_3_5_turbo,gpt,identity (spelling/citation/adjective),,,
-roberta48,1,roberta,roberta,identity (spelling/citation/adjective),,,
 deepseek_r128,1,deepseek_r1,deepseek,identity (spelling/citation/adjective),,,
 grok_4_fast_non_reasoning,1,grok_4,grok,identity (spelling/citation/adjective),,,
 grok_4_fast,1,grok_4,grok,identity (spelling/citation/adjective),,,
 bert37,1,bert,bert,identity (spelling/citation/adjective),,,
-sentence_bert,29,sbert,sbert,identity (spelling/citation/adjective),bert,domain,0.5
-mental_bert,4,mentalbert,mentalbert,identity (spelling/citation/adjective),bert,domain,0.5
-s_bert,2,sbert,sbert,identity (spelling/citation/adjective),bert,domain,0.5
-sentencebert,2,sbert,sbert,identity (spelling/citation/adjective),bert,domain,0.5
-bio_clinicalbert,1,bioclinicalbert,bioclinicalbert,identity (spelling/citation/adjective),bert,domain,0.5
-bertweet_sentiment,1,bertweet,bertweet,identity (spelling/citation/adjective),bert,domain,0.5
-bert_basemultilingual,1,mbert,mbert,identity (spelling/citation/adjective),bert,language,0.5
-kc_bert,1,kcbert,kcbert,identity (spelling/citation/adjective),bert,language,0.5
-m_bert,1,mbert,mbert,identity (spelling/citation/adjective),bert,language,0.5
-bangla_bert_1,1,banglabert,banglabert,identity (spelling/citation/adjective),bert,language,0.5
-bangla_bert_2,1,banglabert,banglabert,identity (spelling/citation/adjective),bert,language,0.5
-bioclinical_bert,1,bioclinicalbert,bioclinicalbert,identity (spelling/citation/adjective),bert,domain,0.5
-st_bert,1,sbert,sbert,identity (spelling/citation/adjective),bert,domain,0.5
-psycbert,1,psychbert,psychbert,identity (spelling/citation/adjective),bert,domain,0.5
-bio_plusclinicalbert,1,bioclinicalbert,bioclinicalbert,identity (spelling/citation/adjective),bert,domain,0.5
-dialogpt_enabled,1,dialogpt,dialogpt,identity (spelling/citation/adjective),gpt,domain,0.5
-mentalllama,6,mentallama,mentallama,identity (spelling/citation/adjective),llama,domain,0.5
-mental_llama,1,mentallama,mentallama,identity (spelling/citation/adjective),llama,domain,0.5
-mllama,1,mentallama,mentallama,identity (spelling/citation/adjective),llama,domain,0.5
-videollama,1,video_llama,video_llama,identity (spelling/citation/adjective),llama,multimodal,0.5
-med_palm2,2,med_palm_2,med_palm,identity (spelling/citation/adjective),palm,domain,0.5
-medpalm,1,med_palm,med_palm,identity (spelling/citation/adjective),palm,domain,0.5
-med_palmmultimodal,1,med_palm,med_palm,identity (spelling/citation/adjective),palm,domain,0.5
-mental_roberta,5,mentalroberta,mentalroberta,identity (spelling/citation/adjective),roberta,domain,0.5
-mental_roberta_base6,1,mentalroberta,mentalroberta,identity (spelling/citation/adjective),roberta,domain,0.5
-robberta,1,robbert,robbert,identity (spelling/citation/adjective),roberta,language,0.5
-graph_roberta_clscreenshot,1,graph_roberta_cl,graph_roberta_cl,identity (spelling/citation/adjective),roberta,hybrid,0.5
-deproberta_derived,1,deproberta,deproberta,identity (spelling/citation/adjective),roberta,domain,0.5
-deproberta_ensemble,1,deproberta,deproberta,identity (spelling/citation/adjective),roberta,domain,0.5
-albert_plusbert_bilstm,1,albert_plusbert_bilstm,albert_plusbert_bilstm,,albert,hybrid,0.5
-albert_bilstm,1,albert_bilstm,albert_bilstm,,albert,hybrid,0.5
-mentalbert,36,mentalbert,mentalbert,,bert,domain,0.5
-sbert,20,sbert,sbert,,bert,domain,0.5
-biobert,16,biobert,biobert,,bert,domain,0.5
-mbert,11,mbert,mbert,,bert,language,0.5
-clinicalbert,11,clinicalbert,clinicalbert,,bert,domain,0.5
-bertweet,9,bertweet,bertweet,,bert,domain,0.5
-kobert,8,kobert,kobert,,bert,language,0.5
-psychbert,6,psychbert,psychbert,,bert,domain,0.5
-kcbert,3,kcbert,kcbert,,bert,language,0.5
-bertimbau,3,bertimbau,bertimbau,,bert,language,0.5
-fusion_convbert,3,fusion_convbert,fusion_convbert,,bert,hybrid,0.5
-audibert,2,audibert,audibert,,bert,multimodal,0.5
-vilbert,2,vilbert,vilbert,,bert,multimodal,0.5
-ct_bert,2,ct_bert,ct_bert,,bert,domain,0.5
-banglabert,2,banglabert,banglabert,,bert,language,0.5
-disorbert,2,disorbert,disorbert,,bert,domain,0.5
-finbert,2,finbert,finbert,,bert,domain,0.5
-mm_bert,2,mm_bert,mm_bert,,bert,multimodal,0.5
-memobert,2,memobert,memobert,,bert,domain,0.5
-twhin_bert,2,twhin_bert,twhin_bert,,bert,domain,0.5
-arabert,2,arabert,arabert,,bert,language,0.5
-marbert,2,marbert,marbert,,bert,language,0.5
-kpfbert,2,kpfbert,kpfbert,,bert,language,0.5
-augbert,1,augbert,augbert,,bert,domain,0.5
-kr_bert,1,kr_bert,kr_bert,,bert,language,0.5
-tohoku_bert,1,tohoku_bert,tohoku_bert,,bert,language,0.5
-covid_twitter_bert,1,covid_twitter_bert,covid_twitter_bert,,bert,domain,0.5
-bertje,1,bertje,bertje,,bert,language,0.5
-concat_bert,1,concat_bert,concat_bert,,bert,hybrid,0.5
-mpc_bert,1,mpc_bert,mpc_bert,,bert,unchecked,0.5
-sa_bert,1,sa_bert,sa_bert,,bert,unchecked,0.5
-gbert,1,gbert,gbert,,bert,language,0.5
-german_bert,1,german_bert,german_bert,,bert,language,0.5
-ensembert,1,ensembert,ensembert,,bert,hybrid,0.5
-videobert,1,videobert,videobert,,bert,multimodal,0.5
-emobert,1,emobert,emobert,,bert,domain,0.5
-dual_contextbert,1,dual_contextbert,dual_contextbert,,bert,hybrid,0.5
-tmbert,1,tmbert,tmbert,,bert,unchecked,0.5
-graph_bert,1,graph_bert,graph_bert,,bert,hybrid,0.5
-madrs_bert,1,madrs_bert,madrs_bert,,bert,domain,0.5
-topicbert,1,topicbert,topicbert,,bert,domain,0.5
-korbert,1,korbert,korbert,,bert,language,0.5
-melbert,1,melbert,melbert,,bert,unchecked,0.5
-mag_bert,1,mag_bert,mag_bert,,bert,multimodal,0.5
-chinese_bert_wwm_ext,1,chinese_bert_wwm_ext,chinese_bert_wwm_ext,,bert,language,0.5
-aobert,1,aobert,aobert,,bert,multimodal,0.5
-macbert,1,macbert,macbert,,bert,language,0.5
-med_bert,1,med_bert,med_bert,,bert,domain,0.5
-alephbert,1,alephbert,alephbert,,bert,language,0.5
-bertagent,1,bertagent,bertagent,,bert,system,0.5
-micro_bert,1,micro_bert,micro_bert,,bert,multimodal,0.5
-fusion_bert,1,fusion_bert,fusion_bert,,bert,hybrid,0.5
-fusion_robustbert,1,fusion_robustbert,fusion_robustbert,,bert,hybrid,0.5
-bioclinicalbert,1,bioclinicalbert,bioclinicalbert,,bert,domain,0.5
-urdubert,1,urdubert,urdubert,,bert,language,0.5
-hebert,1,hebert,hebert,,bert,language,0.5
-sr_bert,1,sr_bert,sr_bert,,bert,unchecked,0.5
-klue_bert,1,klue_bert,klue_bert,,bert,language,0.5
-kobigbird_bert,1,kobigbird_bert,kobigbird_bert,,bert,language,0.5
-clinicalbert_zh,1,clinicalbert_zh,clinicalbert_zh,,bert,domain,0.5
-corebert,1,corebert,corebert,,bert,domain,0.5
-bhs_bert,1,bhs_bert,bhs_bert,,bert,unchecked,0.5
-bubert,1,bubert,bubert,,bert,unchecked,0.5
-opinion_bert,1,opinion_bert,opinion_bert,,bert,domain,0.5
-visualbert,1,visualbert,visualbert,,bert,multimodal,0.5
-lda_bert,1,lda_bert,lda_bert,,bert,hybrid,0.5
-therapistbert,1,therapistbert,therapistbert,,bert,domain,0.5
-docbert,1,docbert,docbert,,bert,domain,0.5
-tod_bert,1,tod_bert,tod_bert,,bert,domain,0.5
-micron_bert,1,micron_bert,micron_bert,,bert,multimodal,0.5
-mabert,1,mabert,mabert,,bert,unchecked,0.5
-anxibert,1,anxibert,anxibert,,bert,domain,0.5
-mdeberta_v3,2,mdeberta_v3,mdeberta,,deberta,language,0.5
-deberta_bilstm,1,deberta_bilstm,deberta_bilstm,,deberta,hybrid,0.5
-deberta_plusbilstm,1,deberta_plusbilstm,deberta_plusbilstm,,deberta,hybrid,0.5
-nli_deberta,1,nli_deberta,nli_deberta,,deberta,domain,0.5
-multi_qa_distilbert_cos_v1,1,multi_qa_distilbert_cos_v1,multi_qa_distilbert_cos,,distilbert,domain,0.5
-distilkobert,1,distilkobert,distilkobert,,distilbert,language,0.5
-st_distilbert,1,st_distilbert,st_distilbert,,distilbert,domain,0.5
-all_distilroberta_v1,3,all_distilroberta_v1,all_distilroberta,,distilroberta,domain,0.5
-nli_distilroberta,1,nli_distilroberta,nli_distilroberta,,distilroberta,domain,0.5
-med_gemini,2,med_gemini,med_gemini,,gemini,domain,0.5
-paligemma,2,paligemma,paligemma,,gemma,multimodal,0.5
-embeddinggemma,1,embeddinggemma,embeddinggemma,,gemma,domain,0.5
-paligemma_2,1,paligemma_2,paligemma,,gemma,multimodal,0.5
-paligemma_1,1,paligemma_1,paligemma,,gemma,multimodal,0.5
-dialogpt,6,dialogpt,dialogpt,,gpt,domain,0.5
-biogpt,3,biogpt,biogpt,,gpt,domain,0.5
-affectgpt,2,affectgpt,affectgpt,,gpt,domain,0.5
-instructgpt,2,instructgpt,instructgpt,,gpt,domain,0.5
-kogpt2,2,kogpt2,kogpt2,,gpt,language,0.5
-bp_gpt,2,bp_gpt,bp_gpt,,gpt,system,0.5
-biomedgpt,2,biomedgpt,biomedgpt,,gpt,domain,0.5
-medgpt,2,medgpt,medgpt,,gpt,domain,0.5
-gptscreenr,1,gptscreenr,gptscreenr,,gpt,system,0.5
-gpthistory,1,gpthistory,gpthistory,,gpt,system,0.5
-gesgpt,1,gesgpt,gesgpt,,gpt,system,0.5
-czegpt_2,1,czegpt_2,czegpt,,gpt,language,0.5
-robotgpt,1,robotgpt,robotgpt,,gpt,system,0.5
-gptcoach,1,gptcoach,gptcoach,,gpt,system,0.5
-acoustics_gpt,1,acoustics_gpt,acoustics_gpt,,gpt,system,0.5
-luminescence_gpt,1,luminescence_gpt,luminescence_gpt,,gpt,system,0.5
-depgpt,1,depgpt,depgpt,,gpt,domain,0.5
-gatortrongpt,1,gatortrongpt,gatortrongpt,,gpt,domain,0.5
-warmgpt,1,warmgpt,warmgpt,,gpt,system,0.5
-navgpt,1,navgpt,navgpt,,gpt,system,0.5
-creascoregpt,1,creascoregpt,creascoregpt,,gpt,system,0.5
-bggpt,1,bggpt,bggpt,,gpt,language,0.5
-eeg_gpt,1,eeg_gpt,eeg_gpt,,gpt,domain,0.5
-mdteamgpt,1,mdteamgpt,mdteamgpt,,gpt,system,0.5
-antgpt,1,antgpt,antgpt,,gpt,system,0.5
-doximitygpt,1,doximitygpt,doximitygpt,,gpt,system,0.5
-safegpt,1,safegpt,safegpt,,gpt,system,0.5
-hivegpt,1,hivegpt,hivegpt,,gpt,system,0.5
-neuro_gpt,1,neuro_gpt,neuro_gpt,,gpt,domain,0.5
-mindgpt,1,mindgpt,mindgpt,,gpt,system,0.5
-aragpt2,1,aragpt2,aragpt2,,gpt,language,0.5
-hubert_clap,2,hubert_clap,hubert_clap,,hubert,hybrid,0.5
-hubert_plusernie_health,1,hubert_plusernie_health,hubert_plusernie_health,,hubert,hybrid,0.5
-hubert_pluslongformer,1,hubert_pluslongformer,hubert_pluslongformer,,hubert,hybrid,0.5
-mentallama,9,mentallama,mentallama,,llama,domain,0.5
-emotion_llama,1,emotion_llama,emotion_llama,,llama,domain,0.5
-openllama,1,openllama,openllama,,llama,domain,0.5
-llamaguard,1,llamaguard,llamaguard,,llama,domain,0.5
-chinese_llama_2,1,chinese_llama_2,chinese_llama,,llama,language,0.5
-acs_plusllama,1,acs_plusllama,acs_plusllama,,llama,hybrid,0.5
-video_llama,1,video_llama,video_llama,,llama,multimodal,0.5
-cockpit_llama,1,cockpit_llama,cockpit_llama,,llama,system,0.5
-mentalmistral,1,mentalmistral,mentalmistral,,mistral,domain,0.5
-med_palm,3,med_palm,med_palm,,palm,domain,0.5
-flan_palm,2,flan_palm,flan_palm,,palm,domain,0.5
-palm_e,2,palm_e,palm_e,,palm,multimodal,0.5
-med_palm_2,2,med_palm_2,med_palm,,palm,domain,0.5
-mentalroberta,15,mentalroberta,mentalroberta,,roberta,domain,0.5
-emoberta,5,emoberta,emoberta,,roberta,domain,0.5
-twitter_roberta,4,twitter_roberta,twitter_roberta,,roberta,domain,0.5
-chinese_roberta_wwm_ext,3,chinese_roberta_wwm_ext,chinese_roberta_wwm_ext,,roberta,language,0.5
-deproberta,3,deproberta,deproberta,,roberta,domain,0.5
-klue_roberta,2,klue_roberta,klue_roberta,,roberta,language,0.5
-babyberta,2,babyberta,babyberta,,roberta,domain,0.5
-s_roberta,2,s_roberta,s_roberta,,roberta,domain,0.5
-erlangshen_roberta,2,erlangshen_roberta,erlangshen_roberta,,roberta,language,0.5
-camembert,2,camembert,camembert,,roberta,language,0.5
-wangchanberta,1,wangchanberta,wangchanberta,,roberta,language,0.5
-robbert,1,robbert,robbert,,roberta,language,0.5
-all_roberta,1,all_roberta,all_roberta,,roberta,domain,0.5
-umberto,1,umberto,umberto,,roberta,language,0.5
-emoroberta,1,emoroberta,emoroberta,,roberta,domain,0.5
-german_roberta_sentence_transformer_v2,1,german_roberta_sentence_transformer_v2,german_roberta_sentence_transformer,,roberta,language,0.5
-ear_roberta,1,ear_roberta,ear_roberta,,roberta,domain,0.5
-gottbert,1,gottbert,gottbert,,roberta,language,0.5
-graph_roberta_cl,1,graph_roberta_cl,graph_roberta_cl,,roberta,hybrid,0.5
-graph_roberta,1,graph_roberta,graph_roberta,,roberta,hybrid,0.5
-multi_roberta,1,multi_roberta,multi_roberta,,roberta,language,0.5
-robertuito,1,robertuito,robertuito,,roberta,language,0.5
-cd_roberta,1,cd_roberta,cd_roberta,,roberta,domain,0.5
-kobigbird_roberta,1,kobigbird_roberta,kobigbird_roberta,,roberta,language,0.5
-kosimcse_roberta,1,kosimcse_roberta,kosimcse_roberta,,roberta,language,0.5
-robertadepressiondetection,1,robertadepressiondetection,robertadepressiondetection,,roberta,domain,0.5
-roberta_beto,1,roberta_beto,roberta_beto,,roberta,language,0.5
-sbert_cnn,1,sbert_cnn,sbert_cnn,,sbert,hybrid,0.5
-twitter_xlm_roberta,2,twitter_xlm_roberta,twitter_xlm_roberta,,xlm_roberta,domain,0.5
+sentence_bert,29,sbert,sbert,identity (spelling/citation/adjective),bert,weights,0.5
+distillbert,7,distilbert,distilbert,identity (spelling/citation/adjective),bert,weights,0.5
+mental_bert,4,mentalbert,mentalbert,identity (spelling/citation/adjective),bert,weights,0.5
+s_bert,2,sbert,sbert,identity (spelling/citation/adjective),bert,weights,0.5
+roberta34,2,roberta,roberta,identity (spelling/citation/adjective),bert,design,0.25
+sentencebert,2,sbert,sbert,identity (spelling/citation/adjective),bert,weights,0.5
+ft_roberta_l,1,roberta,roberta,identity (spelling/citation/adjective),bert,design,0.25
+pt_roberta_l,1,roberta,roberta,identity (spelling/citation/adjective),bert,design,0.25
+roberta33,1,roberta,roberta,identity (spelling/citation/adjective),bert,design,0.25
+bio_clinicalbert,1,bioclinicalbert,bioclinicalbert,identity (spelling/citation/adjective),bert,weights,0.5
+distilbert23,1,distilbert,distilbert,identity (spelling/citation/adjective),bert,weights,0.5
+roberta42,1,roberta,roberta,identity (spelling/citation/adjective),bert,design,0.25
+albert150,1,albert,albert,identity (spelling/citation/adjective),bert,design,0.25
+distilbert152,1,distilbert,distilbert,identity (spelling/citation/adjective),bert,weights,0.5
+bertweet_sentiment,1,bertweet,bertweet,identity (spelling/citation/adjective),bert,design,0.25
+modernbert_base54,1,modernbert,modernbert,identity (spelling/citation/adjective),bert,design,0.25
+bert_basemultilingual,1,mbert,mbert,identity (spelling/citation/adjective),bert,design,0.25
+kc_bert,1,kcbert,kcbert,identity (spelling/citation/adjective),bert,design,0.25
+debertav3,1,deberta_v3,deberta,identity (spelling/citation/adjective),bert,design,0.25
+m_bert,1,mbert,mbert,identity (spelling/citation/adjective),bert,design,0.25
+bangla_bert_1,1,banglabert,banglabert,identity (spelling/citation/adjective),bert,design,0.25
+bangla_bert_2,1,banglabert,banglabert,identity (spelling/citation/adjective),bert,design,0.25
+roberta21,1,roberta,roberta,identity (spelling/citation/adjective),bert,design,0.25
+bioclinical_bert,1,bioclinicalbert,bioclinicalbert,identity (spelling/citation/adjective),bert,weights,0.5
+st_bert,1,sbert,sbert,identity (spelling/citation/adjective),bert,weights,0.5
+distilbert60,1,distilbert,distilbert,identity (spelling/citation/adjective),bert,weights,0.5
+hubert_emb,1,hubert,hubert,identity (spelling/citation/adjective),bert,design,0.25
+psycbert,1,psychbert,psychbert,identity (spelling/citation/adjective),bert,weights,0.5
+bio_plusclinicalbert,1,bioclinicalbert,bioclinicalbert,identity (spelling/citation/adjective),bert,weights,0.5
+roberta48,1,roberta,roberta,identity (spelling/citation/adjective),bert,design,0.25
+gpt_j_6,1,gpt_j,gpt_j,identity (spelling/citation/adjective),gpt,design,0.25
+dialogpt_enabled,1,dialogpt,dialogpt,identity (spelling/citation/adjective),gpt,weights,0.5
+mentalllama,6,mentallama,mentallama,identity (spelling/citation/adjective),llama,weights,0.5
+mental_llama,1,mentallama,mentallama,identity (spelling/citation/adjective),llama,weights,0.5
+minigpt,1,minigpt_4,minigpt,identity (spelling/citation/adjective),llama,weights,0.5
+mllama,1,mentallama,mentallama,identity (spelling/citation/adjective),llama,weights,0.5
+videollama,1,video_llama,video_llama,identity (spelling/citation/adjective),llama,weights,0.5
+med_palm2,2,med_palm_2,med_palm,identity (spelling/citation/adjective),palm,weights,0.5
+medpalm,1,med_palm,med_palm,identity (spelling/citation/adjective),palm,weights,0.5
+med_palmmultimodal,1,med_palm,med_palm,identity (spelling/citation/adjective),palm,weights,0.5
+mental_roberta,5,mentalroberta,mentalroberta,identity (spelling/citation/adjective),roberta,weights,0.5
+xlm_roberta_l,1,xlm_roberta,xlm_roberta,identity (spelling/citation/adjective),roberta,design,0.25
+mental_roberta_base6,1,mentalroberta,mentalroberta,identity (spelling/citation/adjective),roberta,weights,0.5
+xlm_reberta,1,xlm_roberta,xlm_roberta,identity (spelling/citation/adjective),roberta,design,0.25
+robberta,1,robbert,robbert,identity (spelling/citation/adjective),roberta,design,0.25
+graph_roberta_clscreenshot,1,graph_roberta_cl,graph_roberta_cl,identity (spelling/citation/adjective),roberta,weights,0.5
+deproberta_derived,1,deproberta,deproberta,identity (spelling/citation/adjective),roberta,weights,0.5
+deproberta_ensemble,1,deproberta,deproberta,identity (spelling/citation/adjective),roberta,weights,0.5
+albert_plusbert_bilstm,1,albert_plusbert_bilstm,albert_plusbert_bilstm,,albert,weights,0.5
+albert_bilstm,1,albert_bilstm,albert_bilstm,,albert,weights,0.5
+roberta,183,roberta,roberta,,bert,design,0.25
+distilbert,60,distilbert,distilbert,,bert,weights,0.5
+mentalbert,36,mentalbert,mentalbert,,bert,weights,0.5
+albert,31,albert,albert,,bert,design,0.25
+hubert,27,hubert,hubert,,bert,design,0.25
+sbert,20,sbert,sbert,,bert,weights,0.5
+biobert,16,biobert,biobert,,bert,weights,0.5
+deberta,16,deberta,deberta,,bert,design,0.25
+mbert,11,mbert,mbert,,bert,design,0.25
+clinicalbert,11,clinicalbert,clinicalbert,,bert,weights,0.5
+bertweet,9,bertweet,bertweet,,bert,design,0.25
+kobert,8,kobert,kobert,,bert,design,0.25
+psychbert,6,psychbert,psychbert,,bert,weights,0.5
+deberta_v3,5,deberta_v3,deberta,,bert,design,0.25
+kcbert,3,kcbert,kcbert,,bert,design,0.25
+bertimbau,3,bertimbau,bertimbau,,bert,design,0.25
+fusion_convbert,3,fusion_convbert,fusion_convbert,,bert,weights,0.5
+audibert,2,audibert,audibert,,bert,weights,0.5
+vilbert,2,vilbert,vilbert,,bert,weights,0.5
+ct_bert,2,ct_bert,ct_bert,,bert,weights,0.5
+banglabert,2,banglabert,banglabert,,bert,design,0.25
+disorbert,2,disorbert,disorbert,,bert,weights,0.5
+finbert,2,finbert,finbert,,bert,weights,0.5
+mm_bert,2,mm_bert,mm_bert,,bert,weights,0.5
+memobert,2,memobert,memobert,,bert,unchecked,pending
+twhin_bert,2,twhin_bert,twhin_bert,,bert,unchecked,pending
+modernbert,2,modernbert,modernbert,,bert,design,0.25
+arabert,2,arabert,arabert,,bert,design,0.25
+marbert,2,marbert,marbert,,bert,design,0.25
+kpfbert,2,kpfbert,kpfbert,,bert,design,0.25
+augbert,1,augbert,augbert,,bert,weights,0.5
+kr_bert,1,kr_bert,kr_bert,,bert,design,0.25
+tohoku_bert,1,tohoku_bert,tohoku_bert,,bert,design,0.25
+covid_twitter_bert,1,covid_twitter_bert,covid_twitter_bert,,bert,weights,0.5
+bertje,1,bertje,bertje,,bert,design,0.25
+concat_bert,1,concat_bert,concat_bert,,bert,weights,0.5
+mpc_bert,1,mpc_bert,mpc_bert,,bert,weights,0.5
+sa_bert,1,sa_bert,sa_bert,,bert,weights,0.5
+gbert,1,gbert,gbert,,bert,design,0.25
+german_bert,1,german_bert,german_bert,,bert,design,0.25
+ensembert,1,ensembert,ensembert,,bert,weights,0.5
+videobert,1,videobert,videobert,,bert,weights,0.5
+emobert,1,emobert,emobert,,bert,unchecked,pending
+dual_contextbert,1,dual_contextbert,dual_contextbert,,bert,weights,0.5
+tmbert,1,tmbert,tmbert,,bert,weights,0.5
+graph_bert,1,graph_bert,graph_bert,,bert,design,0.25
+madrs_bert,1,madrs_bert,madrs_bert,,bert,weights,0.5
+topicbert,1,topicbert,topicbert,,bert,unchecked,pending
+korbert,1,korbert,korbert,,bert,design,0.25
+mag_bert,1,mag_bert,mag_bert,,bert,weights,0.5
+chinese_bert_wwm_ext,1,chinese_bert_wwm_ext,chinese_bert_wwm_ext,,bert,weights,0.5
+aobert,1,aobert,aobert,,bert,weights,0.5
+macbert,1,macbert,macbert,,bert,weights,0.5
+spanbert,1,spanbert,spanbert,,bert,design,0.25
+med_bert,1,med_bert,med_bert,,bert,design,0.25
+alephbert,1,alephbert,alephbert,,bert,design,0.25
+bertagent,1,bertagent,bertagent,,bert,weights,0.5
+micro_bert,1,micro_bert,micro_bert,,bert,design,0.25
+fusion_bert,1,fusion_bert,fusion_bert,,bert,weights,0.5
+fusion_robustbert,1,fusion_robustbert,fusion_robustbert,,bert,weights,0.5
+bioclinicalbert,1,bioclinicalbert,bioclinicalbert,,bert,weights,0.5
+urdubert,1,urdubert,urdubert,,bert,unchecked,pending
+hebert,1,hebert,hebert,,bert,design,0.25
+sr_bert,1,sr_bert,sr_bert,,bert,weights,0.5
+klue_bert,1,klue_bert,klue_bert,,bert,design,0.25
+kobigbird_bert,1,kobigbird_bert,kobigbird_bert,,bert,design,0.25
+clinicalbert_zh,1,clinicalbert_zh,clinicalbert_zh,,bert,unchecked,pending
+corebert,1,corebert,corebert,,bert,weights,0.5
+bhs_bert,1,bhs_bert,bhs_bert,,bert,unchecked,pending
+deberta_v2,1,deberta_v2,deberta,,bert,design,0.25
+bubert,1,bubert,bubert,,bert,unchecked,pending
+opinion_bert,1,opinion_bert,opinion_bert,,bert,weights,0.5
+visualbert,1,visualbert,visualbert,,bert,weights,0.5
+lda_bert,1,lda_bert,lda_bert,,bert,weights,0.5
+therapistbert,1,therapistbert,therapistbert,,bert,weights,0.5
+docbert,1,docbert,docbert,,bert,weights,0.5
+tod_bert,1,tod_bert,tod_bert,,bert,weights,0.5
+micron_bert,1,micron_bert,micron_bert,,bert,design,0.25
+mabert,1,mabert,mabert,,bert,unchecked,pending
+anxibert,1,anxibert,anxibert,,bert,weights,0.5
+mobilebert,1,mobilebert,mobilebert,,bert,design,0.25
+mdeberta_v3,2,mdeberta_v3,mdeberta,,deberta,design,0.25
+deberta_bilstm,1,deberta_bilstm,deberta_bilstm,,deberta,weights,0.5
+deberta_plusbilstm,1,deberta_plusbilstm,deberta_plusbilstm,,deberta,weights,0.5
+nli_deberta,1,nli_deberta,nli_deberta,,deberta,weights,0.5
+multi_qa_distilbert_cos_v1,1,multi_qa_distilbert_cos_v1,multi_qa_distilbert_cos,,distilbert,weights,0.5
+distilkobert,1,distilkobert,distilkobert,,distilbert,design,0.25
+st_distilbert,1,st_distilbert,st_distilbert,,distilbert,weights,0.5
+all_distilroberta_v1,3,all_distilroberta_v1,all_distilroberta,,distilroberta,weights,0.5
+nli_distilroberta,1,nli_distilroberta,nli_distilroberta,,distilroberta,weights,0.5
+med_gemini,2,med_gemini,med_gemini,,gemini,weights,0.5
+paligemma,2,paligemma,paligemma,,gemma,weights,0.5
+embeddinggemma,1,embeddinggemma,embeddinggemma,,gemma,weights,0.5
+paligemma_2,1,paligemma_2,paligemma,,gemma,weights,0.5
+paligemma_1,1,paligemma_1,paligemma,,gemma,weights,0.5
+microsoft_copilot,18,microsoft_copilot,microsoft_copilot,,gpt,weights,0.5
+dialogpt,6,dialogpt,dialogpt,,gpt,weights,0.5
+gpt_j,4,gpt_j,gpt_j,,gpt,design,0.25
+gpt_neo,4,gpt_neo,gpt_neo,,gpt,design,0.25
+gpt_oss,3,gpt_oss,gpt_oss,,gpt,design,0.25
+biogpt,3,biogpt,biogpt,,gpt,design,0.25
+instructgpt,2,instructgpt,instructgpt,,gpt,weights,0.5
+kogpt2,2,kogpt2,kogpt2,,gpt,design,0.25
+bp_gpt,2,bp_gpt,bp_gpt,,gpt,unchecked,pending
+medgpt,2,medgpt,medgpt,,gpt,unchecked,pending
+gptscreenr,1,gptscreenr,gptscreenr,,gpt,weights,0.5
+gpthistory,1,gpthistory,gpthistory,,gpt,weights,0.5
+gesgpt,1,gesgpt,gesgpt,,gpt,unchecked,pending
+czegpt_2,1,czegpt_2,czegpt,,gpt,design,0.25
+robotgpt,1,robotgpt,robotgpt,,gpt,weights,0.5
+gptcoach,1,gptcoach,gptcoach,,gpt,weights,0.5
+depgpt,1,depgpt,depgpt,,gpt,unchecked,pending
+gatortrongpt,1,gatortrongpt,gatortrongpt,,gpt,design,0.25
+warmgpt,1,warmgpt,warmgpt,,gpt,unchecked,pending
+navgpt,1,navgpt,navgpt,,gpt,weights,0.5
+creascoregpt,1,creascoregpt,creascoregpt,,gpt,weights,0.5
+eeg_gpt,1,eeg_gpt,eeg_gpt,,gpt,unchecked,pending
+mdteamgpt,1,mdteamgpt,mdteamgpt,,gpt,unchecked,pending
+antgpt,1,antgpt,antgpt,,gpt,unchecked,pending
+doximitygpt,1,doximitygpt,doximitygpt,,gpt,weights,0.5
+safegpt,1,safegpt,safegpt,,gpt,unchecked,pending
+hivegpt,1,hivegpt,hivegpt,,gpt,unchecked,pending
+neuro_gpt,1,neuro_gpt,neuro_gpt,,gpt,design,0.25
+mindgpt,1,mindgpt,mindgpt,,gpt,unchecked,pending
+aragpt2,1,aragpt2,aragpt2,,gpt,design,0.25
+hubert_clap,2,hubert_clap,hubert_clap,,hubert,weights,0.5
+avhubert,1,avhubert,avhubert,,hubert,design,0.25
+hubert_plusernie_health,1,hubert_plusernie_health,hubert_plusernie_health,,hubert,weights,0.5
+hubert_pluslongformer,1,hubert_pluslongformer,hubert_pluslongformer,,hubert,weights,0.5
+mentallama,9,mentallama,mentallama,,llama,weights,0.5
+minigpt_4,2,minigpt_4,minigpt,,llama,weights,0.5
+emotion_llama,1,emotion_llama,emotion_llama,,llama,weights,0.5
+openllama,1,openllama,openllama,,llama,design,0.25
+llamaguard,1,llamaguard,llamaguard,,llama,weights,0.5
+chinese_llama_2,1,chinese_llama_2,chinese_llama,,llama,weights,0.5
+acs_plusllama,1,acs_plusllama,acs_plusllama,,llama,weights,0.5
+pandagpt,1,pandagpt,pandagpt,,llama,weights,0.5
+video_llama,1,video_llama,video_llama,,llama,weights,0.5
+cockpit_llama,1,cockpit_llama,cockpit_llama,,llama,weights,0.5
+mixtral,4,mixtral,mixtral,,mistral,design,0.25
+mentalmistral,1,mentalmistral,mentalmistral,,mistral,weights,0.5
+bard,31,bard,bard,,palm,weights,0.5
+med_palm,3,med_palm,med_palm,,palm,weights,0.5
+flan_palm,2,flan_palm,flan_palm,,palm,weights,0.5
+palm_e,2,palm_e,palm_e,,palm,weights,0.5
+med_palm_2,2,med_palm_2,med_palm,,palm,weights,0.5
+xlm_roberta,20,xlm_roberta,xlm_roberta,,roberta,design,0.25
+mentalroberta,15,mentalroberta,mentalroberta,,roberta,weights,0.5
+distilroberta,7,distilroberta,distilroberta,,roberta,weights,0.5
+emoberta,5,emoberta,emoberta,,roberta,weights,0.5
+twitter_roberta,4,twitter_roberta,twitter_roberta,,roberta,weights,0.5
+chinese_roberta_wwm_ext,3,chinese_roberta_wwm_ext,chinese_roberta_wwm_ext,,roberta,design,0.25
+deproberta,3,deproberta,deproberta,,roberta,weights,0.5
+klue_roberta,2,klue_roberta,klue_roberta,,roberta,design,0.25
+babyberta,2,babyberta,babyberta,,roberta,design,0.25
+s_roberta,2,s_roberta,s_roberta,,roberta,weights,0.5
+erlangshen_roberta,2,erlangshen_roberta,erlangshen_roberta,,roberta,design,0.25
+camembert,2,camembert,camembert,,roberta,design,0.25
+wangchanberta,1,wangchanberta,wangchanberta,,roberta,design,0.25
+robbert,1,robbert,robbert,,roberta,design,0.25
+all_roberta,1,all_roberta,all_roberta,,roberta,weights,0.5
+umberto,1,umberto,umberto,,roberta,design,0.25
+emoroberta,1,emoroberta,emoroberta,,roberta,weights,0.5
+german_roberta_sentence_transformer_v2,1,german_roberta_sentence_transformer_v2,german_roberta_sentence_transformer,,roberta,unchecked,pending
+ear_roberta,1,ear_roberta,ear_roberta,,roberta,weights,0.5
+gottbert,1,gottbert,gottbert,,roberta,design,0.25
+melbert,1,melbert,melbert,,roberta,weights,0.5
+graph_roberta_cl,1,graph_roberta_cl,graph_roberta_cl,,roberta,weights,0.5
+graph_roberta,1,graph_roberta,graph_roberta,,roberta,weights,0.5
+multi_roberta,1,multi_roberta,multi_roberta,,roberta,weights,0.5
+robertuito,1,robertuito,robertuito,,roberta,design,0.25
+cd_roberta,1,cd_roberta,cd_roberta,,roberta,weights,0.5
+kobigbird_roberta,1,kobigbird_roberta,kobigbird_roberta,,roberta,design,0.25
+kosimcse_roberta,1,kosimcse_roberta,kosimcse_roberta,,roberta,design,0.25
+robertadepressiondetection,1,robertadepressiondetection,robertadepressiondetection,,roberta,weights,0.5
+roberta_beto,1,roberta_beto,roberta_beto,,roberta,unchecked,pending
+sbert_cnn,1,sbert_cnn,sbert_cnn,,sbert,weights,0.5
+twitter_xlm_roberta,2,twitter_xlm_roberta,twitter_xlm_roberta,,xlm_roberta,weights,0.5
