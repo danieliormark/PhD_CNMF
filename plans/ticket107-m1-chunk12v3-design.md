@@ -1599,3 +1599,8 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   1.6 s per epoch, about 1 h per fit. Not feasible as decided for child×parent; heavy for child×article.
 - **Column normalisation for hyperedges with no tie in W:** cannot be measured from the matrices; it needs fitted
   factor matrices with and without the regulariser, i.e. the M1 fit code, not yet written.
+- **DECIDED (owner, 2026-11-01): author×article and article×article get no hidden cells** (neither ties nor empty
+  cells) in the Psychology trial; both stay fully in every fit's training loss. Reasons: author×article 83% of ties
+  never eligible, the eligible ones are the scarce multi-article persons, 186 hidden ties per group; article×article
+  mean degree ≈ 1 (near the detectability limit), 88 hidden ties per group. Their fit is reported in-sample (per-entity
+  fit diagnostic, 2026-10-31).
