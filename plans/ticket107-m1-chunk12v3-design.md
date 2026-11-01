@@ -1570,3 +1570,32 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   (cousin hyperedge × parent hyperedge of the same sentence, where the parent hyperedge lies in another unit of the
   sentence; same lookup error as the first builder draft); not re-run. (First recorded as 4,916, which counted only units
   without a parent of their own; corrected the same day.)
+
+## Addendum 2026-11-01 (6) — layer-1 scripts rerun; hold-out measurements on the built matrices
+
+- **Layer-1 scripts rerun with co-occurrence ties looked up across the sentence** (owner's permission; old vs new on the
+  same 2,136 articles): child×parent cells 225,036 → 231,292; parent-row partial normalisation table: share of the
+  matrix's squared mass, after normalisation, 1–3 ties 15.3% → 14.9%, 4–5 32.5% → 31.6%, 6–10 39.4% → 39.1%, 11–20
+  11.3% → 12.4%, 21–50 1.1% → 1.6%, 51+ 0.4% → 0.4%; idf statistics (one-word children 45.1% → 45.3% of ties; mass that
+  moves between idf bases 4.8% → 4.7%) and recurring pairs (3,408 → 3,518) change little. No decision rests on a
+  number that changed materially.
+- **Hold-out measurements** (`fullscale_pipeline/m1/holdout_measure.py`, build `psych_trial_v2`):
+  eligible ties (both entities ≥ 2 ties) and one random draw of the 10 groups under the cap:
+
+  | Matrix | Ties | Eligible | Hidden ties per group | Hidden empty cells at 10% |
+  |---|---|---|---|---|
+  | child×article | 175,086 | 86,463 (49.4%) | 8,646 | 20.9 M |
+  | child×parent | 231,223 | 148,763 (64.3%) | 14,876 | 352.1 M |
+  | article×affiliation (appr. 2) | 6,051 | 4,071 (67.3%) | 407 | 0.53 M |
+  | author×affiliation (appr. 1) | 12,512 | 4,741 (37.9%) | 474 | 2.4 M |
+  | author×article (appr. 1) | 11,131 | 1,858 (16.7%) | 186 | 2.1 M |
+  | article×article (appr. 2) | 1,107 | 876 (79.1%) | 88 | 0.23 M |
+
+  The cap never prevented a tie from being placed (100% of eligible ties placed). child×article: 9,227 child
+  hyperedges are eligible (9.4%); in one group 801 of the 4,176 with exactly 2 articles lose a tie.
+  **Cost of the hidden empty cells:** leaving them out of a squared-error loss means evaluating the reconstruction on
+  them every epoch (the trace trick covers only the full matrix): 0.08 s per million cells (forward + backward, one
+  thread, K 4–5), so child×parent 27–29 s per epoch, 15–16 h per 2,000-epoch fit, 2.8 GB of indices; child×article
+  1.6 s per epoch, about 1 h per fit. Not feasible as decided for child×parent; heavy for child×article.
+- **Column normalisation for hyperedges with no tie in W:** cannot be measured from the matrices; it needs fitted
+  factor matrices with and without the regulariser, i.e. the M1 fit code, not yet written.
