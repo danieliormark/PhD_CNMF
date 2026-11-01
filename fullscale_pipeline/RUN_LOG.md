@@ -2769,3 +2769,13 @@ identical); the targeted demotion rerun (old kept as `PG/g3_v2_lm_demotion_rl196
 93 articles out); trial list unchanged, 2,139. **The trial gains 33 sentences in 11 articles** (units 486 -> 518):
 claude_sonnet_4_5 19, grok_4_fast 17, claude_opus_4_5 7, grok_4 7, all_distilroberta_v1 4, gpt_oss 3, mental_bert 3,
 claude_sonnet_3_7 3 … The CSF check (check_csf_g3_v2.sh) pins the RL-186 script and reference; not renewed. [LOG]
+
+### RL-204 — 2026-11-01 — two Psychology trial articles removed: "GPT" = Grooved Pegboard Test
+
+PMC10395525 and PMC11742816: every focal atom is "GPT" (gpt, gpt_1 … gpt_5), and the text shows it is the Grooved
+Pegboard Test ("five consecutive trials of the GPT (i.e., GPT1, GPT2, …)"); no language-model content. Owner decision
+(2026-11-01): drop them. Removed from `corpus_statistics/psychology_trial_pmcids.txt` (2,139 -> **2,137**), added to
+`psychology_trial_exclusions.csv` (stage "3 focal false positive"). G3 output unchanged. **Found for the full corpus, not
+acted on:** a text search of `PG/g3_v2/g3_test_v2.jsonl` for "GPT1, GPT2" / "pegboard" also finds GPT as a gene
+(glutamic-pyruvic transaminase; PMC11300913, PMC8824882, PMC11070440, PMC13460857, PMC8675480) and the pegboard test
+(PMC13369993); a systematic homonym screen for "GPT" is needed before the full-scale M1. [LOG]

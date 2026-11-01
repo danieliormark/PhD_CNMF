@@ -1497,3 +1497,21 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   removing both articles from the trial is the owner's decision. `grover` is an author ("Grover et al.").
 - Open for the owner: distinct architectures (RoBERTa, DistilBERT, ALBERT, DeBERTa, XLM-R, ModernBERT…) stay
   separate families (0 to BERT); the kinds hybrid / system / multimodal / unchecked are all 0.5 in the draft.
+
+## Addendum 2026-11-01 (3) — owner's answers on the model-name draft
+
+- **Pegboard articles: DROPPED (owner, 2026-11-01)**, RL-204; trial now 2,137 articles. Full-corpus GPT homonyms
+  (gene, pegboard) flagged in RL-204.
+- **Grover:** the G3 term list holds GROVER because it is a real model (Zellers et al. 2019; e.g. PMC8118345), and the
+  matcher tags every "Grover". In the trial both cases are an author; the map now drops them per article (`NOT_MODEL`),
+  not by removing the name, which would lose the model elsewhere. Owner asked to drop it from the focal words if an
+  author; the global list change is pending the owner's answer.
+- **RoBERT** has three readings (Recurrence over BERT, Pappagari et al. 2019; Romanian BERT, Masala et al. 2020;
+  RoBERTa with the "a" dropped). Mapped to roberta only where the text shows it (PMC12370911, PMC10308283);
+  PMC12558493 stays `robert`.
+- **Owner's questions 2–3 (pending):** why separate architectures get 0 with BERT, and whether the kinds are established.
+  Assistant's answer: the kinds are its own labels; the established lineage criterion is weight inheritance (Hugging
+  Face `base_model_relation`: finetune / adapter / quantized / merge; domain-adaptive pre-training, Gururangan et al.
+  2020). Proposal: 0.5 for a model trained from the base's weights (ChatGPT from GPT-3.5, MentalBERT, BioBERT,
+  DistilBERT); a lower value to be chosen for a model of the same architecture trained from scratch (RoBERTa, ALBERT,
+  DeBERTa, XLM-R, CamemBERT, KoBERT …); 0 otherwise. Under it some draft "language" rows move down a tier.

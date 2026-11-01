@@ -1,7 +1,7 @@
 # Review table of the draft model-name map (model_name_map.py) over the trial's focal atoms -> model_name_review.csv
 import collections, csv, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from model_name_map import canonical, ADAPTED, CANON, NOT_MODEL_ROOTS
+from model_name_map import canonical, ADAPTED, CANON
 L1 = "/mnt/hum01-home01/p91688di/PhD_CNMF/plans/ticket107_layer1/"
 __file__ = L1 + "model_levels.py"
 exec(open(L1 + "model_levels.py").read().split("units = []")[0])

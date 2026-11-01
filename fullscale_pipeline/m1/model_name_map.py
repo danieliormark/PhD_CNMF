@@ -36,7 +36,7 @@ CANON = {
     "robberta": "robbert", "geminipro": "gemini_pro", "berts": "bert", "chatgpts": "chatgpt",
     "chatgpt_v2": "chatgpt", "chatgpt_v4": "chatgpt",        # "ChatGPT v2; OpenAI": not a model version
     "psycbert": "psychbert", "bangla_bert": "banglabert", "bangla_bert_1": "banglabert", "bangla_bert_2": "banglabert",
-    "videollama": "video_llama", "robert": "roberta", "robert_ft1": "roberta",   # "RoBERT" typed for RoBERTa
+    "videollama": "video_llama",
     "grok_4_fast": "grok_4", "grok_4_fast_non_reasoning": "grok_4",
     "thegpt_3_5_turbozs_s": "gpt_3_5_turbo", "pgpt3_5": "gpt_3_5", "pgpt_3": "gpt_3",   # p-value subscripts
     "v_llama": "llama", "v_mm_llama": "llama",               # "V-LLaMA": the paper's label for vanilla LLaMA 3.2
@@ -54,8 +54,14 @@ CANON = {
     "gemma_32": "gemma", "modernbert_base54": "modernbert", "llamaindex41": "llamaindex",
 }
 
-NOT_MODEL_ARTICLES = {"PMC10395525", "PMC11742816"}   # GPT = Grooved Pegboard Test (GPT1..GPT5 = trials)
-NOT_MODEL_ROOTS = {"grover"}                          # "Grover et al." (author)
+# Per-article readings. GROVER is a real model (Zellers et al. 2019) elsewhere in the corpus, so "Grover" as an author
+# is handled per article, not by removing the name. "RoBERT" has three readings (Recurrence over BERT, Pappagari et al.
+# 2019; the Romanian BERT, Masala et al. 2020; RoBERTa with the final "a" dropped); only articles where the text shows
+# which one is meant are mapped. The two Grooved Pegboard Test articles (PMC10395525, PMC11742816) were removed from the
+# trial (owner, 2026-11-01; corpus_statistics/psychology_trial_exclusions.csv).
+NOT_MODEL = {("PMC12961534", "grover"), ("PMC13318610", "grover")}   # "Grover et al.", "Grover and colleagues"
+BY_ARTICLE = {("PMC12370911", "robert"): "roberta",                # "DistilBERT, RoBERT, ALBERT, BERT, and DistilRoBERT"
+              ("PMC10308283", "robert_ft1"): "roberta"}            # "RoBERT-FT1 ... RoBERTa-FT2" in one sentence
 
 # derived family -> base family (0.5 in W). Kinds: domain = further training on domain data; language = trained
 # for one language; multimodal = text model extended to other inputs; system = an application built on the model.
@@ -146,6 +152,7 @@ BASES = {"bert", "roberta", "distilbert", "albert", "deberta", "distilroberta", 
 
 def canonical(root, pmcid=None):
     """Canonical focal-model root, or None if the atom is not a model (then it is kept as an ordinary concept)."""
-    if root in NOT_MODEL_ROOTS or (pmcid in NOT_MODEL_ARTICLES and "gpt" in root): return None
+    if (pmcid, root) in NOT_MODEL: return None
+    root = BY_ARTICLE.get((pmcid, root), root)
     root = CANON.get(root, root)
     return CANON.get(glued_citation(root), glued_citation(root))
