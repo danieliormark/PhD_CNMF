@@ -1604,3 +1604,9 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   never eligible, the eligible ones are the scarce multi-article persons, 186 hidden ties per group; article×article
   mean degree ≈ 1 (near the detectability limit), 88 hidden ties per group. Their fit is reported in-sample (per-entity
   fit diagnostic, 2026-10-31).
+- **DECIDED (owner, 2026-11-01): option B for hidden empty cells in the model-selection fits of the trial** — 10% of a
+  matrix's empty cells, at most 1 million per matrix (affects child×parent and child×article; drawn uniformly; the
+  score on them scaled to the matrix's full empty-cell count in the combined score). Departs from the 2026-10-17 rule
+  "empty cells hidden at the same share as ties" for those two matrices; consequence stated: the visible part is
+  slightly sparser, absolute scores on hidden ties slightly pessimistic, comparisons between K or λ unaffected.
+  Open, for later: final models refitted on all cells after the settings are chosen (standard practice, not yet decided).
