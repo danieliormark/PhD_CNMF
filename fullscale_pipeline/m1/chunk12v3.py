@@ -167,7 +167,7 @@ class WordSpace:
         df = collections.Counter(a for s in self.words for a in s)
         self.idf = {a: math.log(self.H / d) for a, d in df.items()}
         self.df = df
-        self.weight = np.array([sum(self.idf[a] for a in s) for s in self.words])
+        self.weight = np.array([math.fsum(self.idf[a] for a in s) for s in self.words])
         named = sorted({a for s in self.words for a in s if self.is_named(a)})
         self.named = named; self.ni = {a: i for i, a in enumerate(named)}
         roots = [a.split("/")[0] for a in named]
@@ -183,19 +183,22 @@ class WordSpace:
         return a.endswith("/C/focal") and a.split("/")[0] not in mnm.GENERIC
 
     def overlap(self, i, j):
-        """Σ idf of shared words + best one-to-one soft matching of the unmatched model names."""
+        """Σ idf of shared words + best one-to-one soft matching of the unmatched model names. Symmetric to the last
+        bit: the pair is taken in index order and the sums are exact (math.fsum)."""
+        if i > j: i, j = j, i
         wi, wj = self.words[i], self.words[j]
-        o = sum(self.idf[a] for a in wi & wj)
+        o = math.fsum(self.idf[a] for a in wi & wj)
         ui = [a for a in self.named_of[i] if a not in wj]; uj = [b for b in self.named_of[j] if b not in wi]
         if ui and uj:
             G = np.array([[self.S[self.ni[a], self.ni[b]] * min(self.idf[a], self.idf[b]) for b in uj] for a in ui])
             if G.max() > 0:
-                if len(ui) == 1 or len(uj) == 1: o += G.max()
+                if len(ui) == 1 or len(uj) == 1: o = math.fsum([o, G.max()])
                 else:
-                    r, c = linear_sum_assignment(-G); o += G[r, c].sum()
+                    r, c = linear_sum_assignment(-G); o = math.fsum([o] + list(G[r, c]))
         return o
 
     def sim(self, i, j):
+        if i > j: i, j = j, i
         den = self.weight[i] + self.weight[j]
         if den <= 0: return 0.0
         o = self.overlap(i, j)
@@ -430,7 +433,7 @@ def main():
                                             P4=frobenius_observed(soc["P4"], soc["P4_missing_rows"]),
                                             P5=frobenius_observed(soc["P5"], mask_diagonal=True)),
                     W={m: dict(ties=len(r["W"]), pairs_scored=r["scored"], seconds=r["seconds"]) for m, r in Wres.items()},
-                    W_identical=log.get("W_identical"), units_dropped=log["units_dropped"])
+                    W_identical=log.get("W_identical"), W_only_brute=log.get("W_only_brute"), W_only_prefix=log.get("W_only_prefix"), units_dropped=log["units_dropped"])
     json.dump(manifest, open(os.path.join(a.out, "manifest.json"), "w"), indent=1)
     print(f"done in {time.time() - t0:.0f}s -> {a.out}")
 

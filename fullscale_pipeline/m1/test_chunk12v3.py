@@ -124,6 +124,8 @@ for trial in range(3):
     Wn = naive(wsx); Wb, _ = B.w_brute_force(wsx, block=64); Wp, _ = B.w_prefix_filter(wsx)
     check(f"W brute force = naive (random set {trial}, {len(Wn)} ties)", Wb, Wn)
     check(f"W prefix filter = naive (random set {trial})", Wp, Wn)
+    check(f"similarity symmetric to the last bit (random set {trial})",
+          all(wsx.sim(i, j) == wsx.sim(j, i) for i in range(0, 700, 7) for j in range(700)), True)
 
 # ---------------------------------------------------------------- social side by hand
 tmp = tempfile.mkdtemp()

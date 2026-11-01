@@ -1565,3 +1565,6 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   inconsistency. Ladder shares reaching τ 0.4, smoothed → plain: tier 1.00 → 0.98; version 0.98 → 0.95; bare vs
   versioned 0.80 → 0.79; chatgpt 0.5 0.62 → 0.57; lineage 0.5 0.24 → 0.20. W on 603 articles: 35,127 ties (plain) vs
   35,141 (smoothed), 33,019 in common (94%); the others lie near τ. **DECIDED (owner, 2026-11-01): plain ln(H/df) for W.** Full build approved the same day.
+- **Full build done (2026-11-01, RL-206):** `PG/../m1_chunk12v3/psych_trial_v2/`; W identical by both algorithms after a
+  last-bit symmetry fix. The layer-1 child×parent measurements (`plans/ticket107_layer1/`) omitted 4,916 cousin pairs
+  of units without their own parent (same lookup error as the first builder draft); not re-run.

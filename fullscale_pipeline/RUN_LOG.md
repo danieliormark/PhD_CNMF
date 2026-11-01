@@ -2795,3 +2795,17 @@ acted on:** a text search of `PG/g3_v2/g3_test_v2.jsonl` for "GPT1, GPT2" / "peg
   `corpus_statistics/focal_false_positive_units.csv`. Applied by the builder through `m1/model_name_map.py`
   `NOT_MODEL`: 14 units lose their only focal atom and are removed; 1 unit (PMC11810639) keeps its other focal atoms;
   no article is left without a unit. Trial: PMC12961534 and PMC13318610 lose one unit each. G3 output unchanged. [LOG]
+
+### RL-206 — 2026-11-01 — chunk12v3 full build, Psychology trial (owner's permission)
+
+`fullscale_pipeline/m1/chunk12v3.py --w both`, incline37, output `/mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v2/`
+(manifest with input hashes inside). 254 s. Run 1 (`psych_trial_v1/`) found brute force and prefix filter with the same
+156,291 W ties but 16 values differing by ≤2.2e-16 (summation order made sim(i,j) ≠ sim(j,i) in the last bit); fixed
+(pair taken in index order, `math.fsum`; symmetry test added, 44 checks pass) and rerun: W identical. Every other matrix
+of v1 and v2 is identical; v1 kept for the record (may be deleted).
+Counts: 2,136 articles; 97,850 child hyperedges; 35,983 parent hyperedges; 2 units dropped (the trial's Grover units);
+595 units without a parent of their own kept for their cousins (4,916 child×parent pairs); child×article 175,086 ties;
+child×parent 231,223; W 156,291 ties, 68,755 child hyperedges (70.3%) with at least one; persons 10,052, bylines 11,131;
+organisations 2,511; journals 384; article×article 1,107 pairs; missing rows: author×affiliation 582 persons,
+article×affiliation 33 articles, article×journal 4. Earlier layer-1 scripts looked up cousin parents within the unit,
+so their child×parent figures (225,108 ties) left out the 4,916 pairs above. [LOG]
