@@ -2809,3 +2809,8 @@ child×parent 231,223; W 156,291 ties, 68,755 child hyperedges (70.3%) with at l
 organisations 2,511; journals 384; article×article 1,107 pairs; missing rows: author×affiliation 582 persons,
 article×affiliation 33 articles, article×journal 4. Earlier layer-1 scripts looked up cousin parents within the unit,
 so their child×parent figures (225,108 ties) left out the 4,916 pairs above. [LOG]
+*[CORRECTION 2026-11-01: the omission is larger. Recount with the earlier method on the 2,136 articles: 225,036 cells
+(−72 from the 3 removed articles); the same with co-occurrence ties looked up in the whole sentence: 231,292 (+6,256).
+The 4,916 are only the units without a parent of their own; the other 1,340 are cousin hyperedges whose sentence has
+parent hyperedges in another unit as well as in their own. The builder's 231,223 is 69 below 231,292 because of its
+identity rules (model-name map, parent keys rebuilt, the 2 Grover units).]*
