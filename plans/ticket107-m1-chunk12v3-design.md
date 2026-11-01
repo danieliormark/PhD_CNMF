@@ -1532,3 +1532,31 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   while it is None). My recommendation: 0.25, the lower of the two tiers, because the name shows at least the base's
   design family; not a decision.
 - **Grover and the third pegboard article:** RL-205.
+
+## Addendum 2026-11-01 (5) — chunk12v3 builder written and checked (owner's permission for code and prerequisite checks)
+
+- **Code:** `fullscale_pipeline/m1/chunk12v3.py` (builder; every rule cites its decision), `model_name_map.py`
+  (`model_level`, `model_similarity`: the soft ladder), `test_chunk12v3.py` (synthetic inputs with hand-computed cells,
+  41 checks), `trace_chunk12v3.py` (real trial records, nothing written). Output, when run: a directory on RDS (author
+  data stays on the cluster), sparse matrices, `index.json`, `missing.json` (missing rows; article×article diagonal),
+  `manifest.json` (input hashes, counts, Frobenius norms over observed cells). The whole-matrix normalisation and the
+  hold-out are left to the fit, per fold.
+- **Checks passed:** hand-computed cells of child×article, child×parent (nested, cousin, nested + cousin in one cell,
+  partial row normalisation), the soft Jaccard with one and two model names per side, P1–P5, missing rows; W by brute
+  force and by prefix filtering equal to a naive all-pairs computation on three random sets (≈1,800 ties each, ≈150
+  needing the soft match); the comparison catches a prefix that is too short and a prefix filter without model-name
+  components. Real records (603 articles): unchanged child and parent hyperedges keep G3's content key (33,655 and
+  9,785, no difference); cells recomputed independently agree to 1e-15; the two trial Grover units are removed;
+  RoBERT mapped in PMC12370911; W on 29,147 child hyperedges identical by both algorithms (35,131 ties; 28.5 million
+  pairs by brute force, 1.3 million by prefix filtering; 14 s vs 4 s).
+- **Bug found and fixed by the trace:** units with no parent of their own, kept by G3 for cousins tied to the parents of
+  another unit of their sentence (§6 item 11 of G3_POSTPROCESSING.md, owner 2026-10-26), were dropped because cousin
+  parents were looked up within the unit. Now looked up in the sentence; such a unit is dropped only if none of those
+  parents survives (603 articles: 20 units kept, 116 cousin ties).
+- **Implementation choices to note (not new decisions):** (1) idf of words in W is ln(H/df), the form of the reading
+  check on which τ = 0.4 was decided (soft_tau.py had used ln(H/(df+1)) + 1); (2) the cousin constant is computed as
+  2^(1/√2) − 1 = 0.6325 (recorded as 0.633); (3) unmatched model names of two hyperedges are paired one-to-one to
+  maximise Σ s · min(idf) (soft cardinality); generic class terms (`llm`, `language_model`, `transformer_model`) have no
+  soft match; (4) prefix filtering bounds the soft overlap by giving each model name the token of its component of the
+  model-similarity graph, so it is exact, not approximate.
+- **Estimated full trial build:** about 5–10 minutes, under 3 GB. Not yet run.

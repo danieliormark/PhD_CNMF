@@ -183,3 +183,34 @@ def canonical(root, pmcid=None):
     root = BY_ARTICLE.get((pmcid, root), root)
     root = CANON.get(root, root)
     return CANON.get(glued_citation(root), glued_citation(root))
+
+
+# ---- model-name levels and the soft similarity ladder in W (owner, 2026-10-31 and 2026-11-01) ----
+# Levels as measured in plans/ticket107_layer1/model_levels.py: tier = the canonical root; version = tier words removed
+# (gpt_4o_mini -> gpt_4o); family = tier words and every segment with a digit removed (gpt_4o -> gpt; chatgpt -> gpt).
+TIERS = {"sonnet", "opus", "haiku", "pro", "flash", "lite", "mini", "nano", "turbo", "ultra", "max"}
+GENERIC = {"llm", "language_model", "transformer_model"}   # generic class terms: no soft similarity with named models
+
+def model_level(root, lev):
+    if lev == "tier" or root in GENERIC: return root
+    seg = root.split("_")
+    if lev == "version": return "_".join(s for s in seg if s not in TIERS)
+    fam = [s for s in seg if s not in TIERS and not re.search(r"\d", s) and s != "v"]
+    f = "_".join(fam) or seg[0]
+    return {"chatgpt": "gpt", "gpts": "gpt"}.get(f, f)
+
+def model_similarity(a, b):
+    """Similarity in W between two canonical focal roots: 1 identical; same version, other tier 0.95; ChatGPT vs another
+    GPT name 0.5; same family, other version 0.8; bare family vs versioned 0.66; lineage pair 0.5 / 0.25; otherwise 0."""
+    if a == b: return 1.0
+    if a in GENERIC or b in GENERIC: return 0.0
+    if model_level(a, "version") == model_level(b, "version"): return 0.95
+    fa, fb = model_level(a, "family"), model_level(b, "family")
+    if "chatgpt" in (a, b) and fa == fb == "gpt": return 0.5
+    if fa == fb: return 0.66 if (a == fa or b == fb) else 0.8
+    for x, y in ((fa, fb), (fb, fa)):
+        ls = lineage_similarity(x)
+        if ls and ls[0] == y:
+            if ls[1] is None: raise ValueError("UNCHECKED_SIMILARITY is not set")
+            return ls[1]
+    return 0.0
