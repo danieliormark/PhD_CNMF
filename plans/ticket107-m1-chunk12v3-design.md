@@ -1560,3 +1560,8 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   soft match; (4) prefix filtering bounds the soft overlap by giving each model name the token of its component of the
   model-similarity graph, so it is exact, not approximate.
 - **Estimated full trial build:** about 5–10 minutes, under 3 GB. Not yet run.
+- **idf form in W, measured (owner's question, 2026-11-01).** Reading check (τ decided on it): ln(H/df). `soft_tau.py`
+  (ladder shares, 2026-10-31) used ln(H/(df+1)) + 1, copied by the assistant from the child×article formula — an
+  inconsistency. Ladder shares reaching τ 0.4, smoothed → plain: tier 1.00 → 0.98; version 0.98 → 0.95; bare vs
+  versioned 0.80 → 0.79; chatgpt 0.5 0.62 → 0.57; lineage 0.5 0.24 → 0.20. W on 603 articles: 35,127 ties (plain) vs
+  35,141 (smoothed), 33,019 in common (94%); the others lie near τ. Builder keeps ln(H/df); owner to confirm.
