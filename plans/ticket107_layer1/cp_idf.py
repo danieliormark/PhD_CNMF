@@ -3,13 +3,16 @@
 # (tier-level names, numbers left out); parents keyed by their record content_key. Cousin ties at 1/sqrt(2).
 import collections, math, os
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_levels.py")).read().split("units = []")[0])
+# Co-occurrence ties: a cousin hyperedge lists the parent hyperedges of its whole sentence, which may lie in another
+# part of the sentence (another G2 unit); look them up across the sentence (corrected 2026-11-01, RL-206).
+PK = {p["id"]: p["content_key"] for r in recs for p in r["parents"]}
 tf = collections.Counter(); kind = {}
 for r in recs:
     for p in r["parents"]:
         for c in p["children"]:
             k = key(c["atoms"], "tier")
             if k: tf[(k, p["content_key"])] += 1; kind[(k, p["content_key"])] = 1.0
-    pk = {p["id"]: p["content_key"] for p in r["parents"]}
+    pk = PK
     for c in r["cousins"]:
         k = key(c["atoms"], "tier")
         for pid in c.get("parents") or []:
