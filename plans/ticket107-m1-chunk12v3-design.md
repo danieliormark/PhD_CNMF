@@ -1481,3 +1481,19 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   1–3 ties (19.6% of parents) 0.67 → 0.82, 11.7% → 15.3%; 4–5 (34.0%) 0.95 → 0.97, 30.0% → 32.5%;
   6–10 (37.0%) 1.16 → 1.08, 40.6% → 39.4%; 11–20 (8.7%) 1.67 → 1.29, 14.2% → 11.3%; 21–50 (0.6%) 3.42 → 1.85,
   2.0% → 1.1%; 51+ (0.1%) 11.8 → 3.44, 1.6% → 0.4%.
+
+## Addendum 2026-11-01 (2) — draft model-name map for the owner's check
+
+- `fullscale_pipeline/m1/model_name_map.py` (the builder will import it) and `model_name_review.csv` (every changed
+  or derived focal model atom of the trial, with article counts; `model_name_review.py`). 401 focal roots, 279
+  families before, 199 after. 106 roots merged into another root (spelling variants, glued citation numbers,
+  adjective forms such as "LLaMA-generated", p-value subscripts such as "pGPT3.5"); 193 roots marked as derived from a
+  base family (0.5 in W): domain 83, language 48, hybrid 20, system 19, multimodal 15, unchecked 8.
+- The approved glued-citation rule is extended to G3's underscore form: "ChatGPT9" is written `gpt_9`, "Gemini8"
+  `gemini_8`, "ChatGPT111" `gpt_111`; any number that is not a known version of the family (list `KNOWN_VERSIONS`)
+  maps to the bare family. Known version + citation (`llama_338` = LLaMA3 + ref 38) are listed by hand.
+- **Found: two articles are not about language models** (PMC10395525, PMC11742816): "GPT" is the Grooved Pegboard
+  Test, "GPT1…GPT5" its trials; every focal atom in them is this test. Draft treats their GPT atoms as not a model;
+  removing both articles from the trial is the owner's decision. `grover` is an author ("Grover et al.").
+- Open for the owner: distinct architectures (RoBERTa, DistilBERT, ALBERT, DeBERTa, XLM-R, ModernBERT…) stay
+  separate families (0 to BERT); the kinds hybrid / system / multimodal / unchecked are all 0.5 in the draft.
