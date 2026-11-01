@@ -77,7 +77,7 @@ BY_ARTICLE = {("PMC12370911", "robert"): "roberta",                # "DistilBERT
 #   unchecked = the training was not checked; similarity UNCHECKED_SIMILARITY (owner to choose)
 # Only the listed pair gets the similarity; pairs are not chained (mentalroberta-bert is not derived from the table).
 SIMILARITY = {"weights": 0.5, "design": 0.25}
-UNCHECKED_SIMILARITY = None   # pending the owner's choice; the builder refuses to run while it is None
+UNCHECKED_SIMILARITY = 0.25   # owner, 2026-11-01 ("I agree with your proposal")
 W, D, U = "weights", "design", "unchecked"
 LINEAGE = {
     # encoder families against BERT

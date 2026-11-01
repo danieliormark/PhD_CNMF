@@ -1528,7 +1528,7 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   Names that carry a base's name but are not derived from it get no pair (BiomedGPT, AffectGPT, BgGPT); MiniGPT-4 and
   PandaGPT are paired with LLaMA (built on Vicuna). Pairs are not chained. Trial review (`model_name_review.csv`):
   226 families with a pair, 124 weights, 80 design, 22 unchecked.
-- **Pending:** `UNCHECKED_SIMILARITY` for the 22 names whose training could not be checked (the builder refuses to run
+- **DECIDED (owner, 2026-11-01, "I agree with your proposal"): `UNCHECKED_SIMILARITY` = 0.25** for the 22 names whose training could not be checked (the builder refuses to run
   while it is None). My recommendation: 0.25, the lower of the two tiers, because the name shows at least the base's
   design family; not a decision.
 - **Grover and the third pegboard article:** RL-205.
