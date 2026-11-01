@@ -7,7 +7,22 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-10-21, after RL-169)
+## State (2026-11-01, ticket 107 M1 builder)
+
+**Current work:** chunk12v3 builder for the Psychology trial (**2,136 articles** after RL-204/205) — written, checked,
+committed (b590d57); **full build not yet run: waiting for the owner's go** (estimate 5–10 min, < 3 GB; output to a new
+directory on RDS). Record: `plans/ticket107-m1-chunk12v3-design.md` addenda 2026-11-01 (1)–(5); RUN_LOG RL-204, RL-205.
+- Layer 1 all decided: article×article option (c); partial row normalisation of article and parent rows; two idf
+  (`idf_article`, `idf_parent`); child×parent n = nested + 0.6325·cousin; soft model-name ladder in W incl. lineage
+  tiers (weights 0.5, same design from scratch 0.25, unchecked 0.25); Grover false positives removed per article
+  (`corpus_statistics/focal_false_positive_units.csv`); pegboard "GPT" articles dropped.
+- Code: `fullscale_pipeline/m1/` — `chunk12v3.py`, `model_name_map.py`, `test_chunk12v3.py` (41 checks),
+  `trace_chunk12v3.py` (real records; brute force = prefix filter for W).
+- After the build (permission asked): measurements agreed earlier (cost of hidden empty cells; eligible hyperedges;
+  column normalisation for hyperedges with no tie in W); report new numbers next to the old (trial lost 3 articles and
+  15 Grover units). Then layer 2, §8.2 mechanisms, KL version of M1, full-corpus "GPT" homonym screen.
+
+## Earlier state (2026-10-21, after RL-169; history)
 
 **Current work:** ticket 107 P1 (data quality) — corpus extension and incremental pipeline **done**; next is the G3
 production rerun. Records: RUN_LOG RL-155 to RL-169; method `fullscale_pipeline/retrieval/STAGE_AB_METHOD.md`
