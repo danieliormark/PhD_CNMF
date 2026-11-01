@@ -1469,3 +1469,15 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   - (c) partial, w/(s_A s_B)^¼ (influence ∝ √ of (a), as for article length): p10 0.29, p90 3.2, max 5.5; team-size
     groups 1.53 / 1.06 / 0.88 / 0.65; the weakest isolated pair 0.012 → 0.11.
   Owner to decide.
+
+## Addendum 2026-11-01 — article×article (c) chosen; parent rows
+
+- **article×article: option (c) DECIDED (owner, 2026-11-01):** w'(A,B) = w(A,B) / (s_A s_B)^¼, s = row Euclidean norm
+  of the decided weight w; an article's influence ∝ √ of its influence under w.
+- **Partial normalisation of parent rows in child×parent: approved by the owner (2026-11-01)**, with the question of
+  where the boundary lies. Assistant's answer: no boundary; the rule is continuous and applies to every parent row
+  (row / ‖row‖^½), as for article rows. Measured (`parent_partial.py`, 36,016 parents), median influence relative to
+  the median parent and share of the matrix's squared mass, before → after:
+  1–3 ties (19.6% of parents) 0.67 → 0.82, 11.7% → 15.3%; 4–5 (34.0%) 0.95 → 0.97, 30.0% → 32.5%;
+  6–10 (37.0%) 1.16 → 1.08, 40.6% → 39.4%; 11–20 (8.7%) 1.67 → 1.29, 14.2% → 11.3%; 21–50 (0.6%) 3.42 → 1.85,
+  2.0% → 1.1%; 51+ (0.1%) 11.8 → 3.44, 1.6% → 0.4%.
