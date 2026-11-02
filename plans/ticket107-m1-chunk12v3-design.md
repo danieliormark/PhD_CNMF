@@ -1704,3 +1704,41 @@ seed variation; the text check favours A1. Terms fixed in the reply of the same 
 (weight × best share capturable by K communities on that matrix alone; an upper bound, used to derive A1's ratio at
 K = 4), realised share (weight × share captured in the fitted model), influence proper (change in communities when the
 matrix is removed or reweighted; measured only by ablation).]*
+
+## Addendum 2026-11-02 (3) — layer 2, element L2.4 (the two sparse matrices): decisions and pre-registration
+
+Measured (build `psych_trial_v2`): author×article 11,131 ties; 9,259 of 10,052 persons (92%) have one article and hold
+83% of its squared total; best share capturable at K = 4 0.0098 (0.0557 with only the 793 persons with 2+ articles).
+article×article 1,107 pairs, 739 tied articles, mean degree 1.04, top 10% of pairs hold 59% of its squared total; share
+at K = 4 0.026. Weight per effective tie (weight / exp of the cell entropy): child×parent 1.4e-6, child×article 2.0e-6,
+author×article 1.8e-5 (13×), article×article 2.4e-4 (172×); pull (weight × share at K = 4): 0.0031, 0.0078, 0.0016,
+0.0044. Single-paper persons carry 90% of author×affiliation's ties; without them 514 of 2,511 organisations and 1,970 of
+6,446 article–organisation links through persons would remain.
+
+- **DECIDED (owner, 2026-11-02): keep all persons in author×article** (approach 1); no sparsity adjustment of either
+  matrix's weight (the rule 0.5 / n_d applies).
+- **DECIDED (owner, 2026-11-02): the first fits include an arm "approach 2 without article×article"** (arm N, beside
+  approach 2 with it, arm W; the two remaining social matrices then get 1/4 each by the rule).
+- **DECIDED (owner, 2026-11-02): pre-registered outcomes of W vs N** ("outcome", not "scenario", which is kept for
+  community change types). Same 5 folds and hidden cells in both arms, S seeds each (e.g. 5).
+  - **M1, held-out prediction.** Squared error on hidden ties and on hidden empty cells (scaled to the full empty count),
+    lower is better. Primary: child×article and child×parent (training weight 0.25 in both arms). article×affiliation
+    reported separately (its weight rises from 1/6 to 1/4 in N; worse in N despite the higher weight is strong evidence
+    that article×article helps). Δ per fold = score(N) − score(W), arm means over seeds; δ = 95th percentile of the
+    absolute per-fold difference between two seed halves of the same arm, over all splits; 95% interval of mean Δ over
+    the 5 folds. Classes: **adds information** (interval > 0 and mean Δ ≥ +δ); **misleads** (interval < 0 and mean Δ ≤
+    −δ); **redundant** (interval within (−δ, +δ); equivalence by two one-sided tests, Schuirmann 1987, Lakens 2017);
+    **inconclusive** (otherwise).
+  - **M2, change in memberships.** Track A and Track B (CLAUDE.md §4.24: Hungarian matching on all shared facets, then
+    per-article comparison of membership profiles; chance-adjusted (real − chance)/(1 − chance) with row shuffles)
+    between W and N; "memberships changed" if below the 5th percentile of the within-arm seed-pair scores, per track.
+  - **M3, team-shaped communities.** Co-author group = connected group of article×article (208; largest 159 articles).
+    For community k: s_k = (its article membership mass in its largest co-author group) / (its total article mass),
+    with m_ik = article i's weighted membership (ticket 100; rows sum to 1; untied articles count in the total, in no
+    group). Team-shaped if s_k > 95th percentile of 200 shuffles of group labels among the 739 tied articles (sizes
+    kept) **and** s_k ≥ 0.25. Measured in both arms (N is the reference).
+  - **Actions:** adds information → keep (team-shaped communities, if any, reported as a finding, checked against N);
+    misleads → fallback, article×article becomes a regulariser (with or without team-shaped communities);
+    redundant without team shape → keep, reported as redundant; redundant with team shape → owner decides after the text
+    check, default keep; inconclusive → default keep, more seeds only on the owner's request. M2 qualifies every row
+    (unchanged memberships → little effect whatever the class). Classified at the chosen K and reported for the others.
