@@ -1665,3 +1665,27 @@ matching, shuffle chance level; arm 1 the reference); each matrix's captured sha
 association against a shuffled-journal baseline; prediction of the held-out ties of the other matrices. Cost to be
 estimated when the fit code exists; running it needs the owner's permission. Option (b) (σ₁ scaling) is not adopted;
 it may still serve as a robustness arm.
+
+## Addendum 2026-11-02 (2) — layer 2, element L2.2 (relation weights) with the placement of child×article (former L2.3)
+
+Matrices per approach (same shape in both): semantic child×parent; bridging child×article (a semantic and a social
+facet); social author×article, author×affiliation, article×journal (approach 1) or article×affiliation, article×article,
+article×journal (approach 2). Options presented: A 50/50 between domains, child×article semantic (v9.4 rule); B 50/50,
+child×article social; C child×article half in each domain; D thirds (semantic / bridging / social); E equal per matrix.
+Established practice weighed: equal per matrix (coupled factorisation, MFA); equal per group then per matrix
+(Hierarchical MFA, Le Dien & Pagès 2003); noise-based weights (Wilderjans et al. 2009 — rewards easily fitted matrices,
+so would strengthen the journal pull); cross-validated weights (optimise prediction, not the intended balance; small
+social held-out sets); Optuna tuning (excluded, CLAUDE.md §4.7).
+Pull indicator (weight × best share capturable at K = 4 alone, as % of the sum; upper bound): under A, with the journal
+matrix at arm-5 strength, child×parent / child×article / social = 15 / 37 / 49% (approach 1), 13 / 32 / 55%
+(approach 2); with the binary journal matrix the social side takes ~80% under A and the journal 58–74% under every
+option — relation weights cannot fix the journal pull (left to the ablation).
+
+**DECIDED (owner, 2026-11-02: "I agree with version A (50/50 split following the 13.9v4)"): option A** — semantic and
+social domains 0.5 each; child×article counted on the semantic side; equal weights within a domain: child×parent 0.25,
+child×article 0.25, each of the three social matrices 1/6 (both approaches). This makes former element L2.3
+(child×article) decided as part of L2.2.
+Open: in the journal ablation, (i) renormalise the other social matrices so the social half stays 0.5 (assistant's
+recommendation) or (ii) keep them at 1/6 and let the social half shrink. The weights assume squared error; if the
+β = 1 vs 2 comparison leads to KL, L2.1 and L2.2 are to be rechecked. Ablation arms 4–5 test, not overturn, P4
+(2026-10-30: no frequency down-weighting of journals).
