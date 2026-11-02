@@ -1610,3 +1610,58 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   "empty cells hidden at the same share as ties" for those two matrices; consequence stated: the visible part is
   slightly sparser, absolute scores on hidden ties slightly pessimistic, comparisons between K or λ unaffected.
   Open, for later: final models refitted on all cells after the settings are chosen (standard practice, not yet decided).
+
+## Addendum 2026-11-02 — layer 2, element L2.1 (scale basis of each matrix): provisional decision
+
+Measurements on build `psych_trial_v2` (read-only scratch scripts; layer-1 weights applied):
+
+- **Best share of each matrix that K communities could capture if it were fitted alone** = (σ₁²+…+σ_K²)/‖X‖²
+  (Eckart–Young upper bound; σ_m = singular values, the strengths of the matrix's best rank-1 layers). Checked by a
+  second exact method (agreement to ~1e-15), by the identity σ_m² = journal sizes in article×journal, and by a
+  single-matrix NMF at K = 4 (same shares to the third decimal).
+
+  | Matrix | K = 4 | K = 10 | Effective layers (‖X‖⁴/Σσ_m⁴) |
+  |---|---|---|---|
+  | child×parent | 0.0123 | 0.0210 | 6,903 |
+  | child×article | 0.0310 | 0.0448 | 800 |
+  | author×article | 0.0098 | 0.0182 | 1,862 |
+  | author×affiliation | 0.0281 | 0.0591 | 660 |
+  | article×affiliation | 0.0301 | 0.0629 | 575 |
+  | article×journal | 0.2298 | 0.4076 | 41.6 (= effective number of journals) |
+  | article×article | 0.0262 | 0.0573 | 366 |
+
+  article×journal's bound is 7–9× that of child×article, the affiliation matrices and article×article, 19× child×parent,
+  23× author×article. With equal relation weights under Frobenius scaling it holds 74% of the error that 4 communities
+  could remove at most (approach 1; 69% with a 50/50 domain split). That removable part is itself only ~6% of the total
+  loss; the 74% is an upper bound per matrix fitted alone, not a share of community content.
+- **What layer 1 (σ₁) is per matrix:** semantic matrices — the general level of frequent child hyperedges (llm, be, use,
+  chatgpt; centring lowers σ₁ by 14–25%); social matrices — the single largest group (one journal, one organisation,
+  ~3 authors; centring changes σ₁ ≤ 3%). So σ₁-based scaling (MFA, option b) measures different things in the two
+  domains, and a social matrix's weight would rest on one group.
+- **Entropy-based weights considered:** Shannon entropy over cells ≈ a tie count (article×journal has the most even cells,
+  1.00 of ties), blind to the partition structure; entropy over layers (effective layers, above) does detect it but needs
+  an arbitrary weight formula. No v9.4 step acts between relations except the 50/50 domain split (checked: Frobenius
+  scaling, Z off-diagonal penalty, concentration floor and doxa hoarding — the two entropy uses —, collapse check,
+  domain balance, coherence, sparsity).
+- **Journal alternatives (best share at K = 4):** same-journal article×article unweighted 0.626 (worse); Newman 1/(n−1)
+  0.016; article×journal with columns × 1/√n 0.010 (56% of the matrix on 215 singleton journals), the same with singleton
+  journals missing 0.024; journal column × idf 0.102.
+- **Evidence on journals:** same-subfield rate of within-journal pairs (OpenAlex subfield; random pair 0.25): journals of
+  2–3 articles 0.447, 4–9 0.424, 10–30 0.399, 31+ 0.341, the most popular journal 0.262 (OpenAlex topics use the venue
+  name, so inflated). **Owner's point: within-subset popularity, not size; journals differ qualitatively** (subfield key
+  journals, intersections of subfields, intersections with off-subset fields). Check, 2015–2025, journals with ≥ 10
+  working-corpus articles: pooled psychology-primary share 0.03 / 0.05 / 0.04 / 0.11 / 0.11 for journals with 1 / 2–3 /
+  4–9 / 10–30 / 31+ psychology-primary articles; psychology-majority journals only among the popular ones (6 of 29,
+  0 of 107). The popular group mixes psychology/psychiatry journals (37–61%) with multidisciplinary and technical
+  journals (5–11%), so popularity alone does not separate the kinds.
+
+**DECIDED (owner, 2026-11-02: "I agree with your L2.1 proposal"): option (a), Frobenius scaling (each matrix divided by
+its Frobenius norm, ‖X‖² = 1), is the provisional scale basis.** Reasons: the same meaning in every matrix and both
+domains; depends on all ties, not one group; independent of K; already in the code. **The weighting of article×journal
+stays open until an ablation in the first M1 fits** (owner's proposal), all arms under (a), several seeds each:
+(1) no article×journal; (2) binary; (3) binary with an overall multiplier (e.g. 1/4, 1/8); (4) journal column × idf;
+(5) columns × 1/√n with singleton-journal ties missing. Measures: agreement of article memberships between arms (Track A/B
+matching, shuffle chance level; arm 1 the reference); each matrix's captured share in the fitted model; journal–community
+association against a shuffled-journal baseline; prediction of the held-out ties of the other matrices. Cost to be
+estimated when the fit code exists; running it needs the owner's permission. Option (b) (σ₁ scaling) is not adopted;
+it may still serve as a robustness arm.
