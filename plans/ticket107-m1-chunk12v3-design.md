@@ -1689,3 +1689,10 @@ Open: in the journal ablation, (i) renormalise the other social matrices so the 
 recommendation) or (ii) keep them at 1/6 and let the social half shrink. The weights assume squared error; if the
 β = 1 vs 2 comparison leads to KL, L2.1 and L2.2 are to be rechecked. Ablation arms 4–5 test, not overturn, P4
 (2026-10-30: no frequency down-weighting of journals).
+*[2026-11-02, owner, on L2.2: **DECIDED — the weight is a rule, not a constant**: w_r = 0.5 / n_d, n_d = the number of
+active matrices of r's domain in that fit (as v9.4 `w_soc`/`w_sem`), so the weights follow any change in the matrix set
+(ablation arms, approach 1 vs 2, article×article falling back to a regulariser). Currently both approaches have 3 social
+matrices (1/6 each) and 2 semantic (1/4 each). **DECIDED — journal ablation: rescale (option i)**, by the same rule (no
+journal matrix → 1/4 for each remaining social matrix). **DECIDED — equal weights for child×parent and child×article**
+("I'd keep equal weight", A0). Pending the owner's answer: whether to add one test arm A1 (semantic half split 0.7/0.3,
+child×parent 0.35 / child×article 0.15) to the first fits, and the rule by which A1 would replace A0.]*
