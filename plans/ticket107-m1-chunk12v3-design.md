@@ -1696,3 +1696,11 @@ matrices (1/6 each) and 2 semantic (1/4 each). **DECIDED — journal ablation: r
 journal matrix → 1/4 for each remaining social matrix). **DECIDED — equal weights for child×parent and child×article**
 ("I'd keep equal weight", A0). Pending the owner's answer: whether to add one test arm A1 (semantic half split 0.7/0.3,
 child×parent 0.35 / child×article 0.15) to the first fits, and the rule by which A1 would replace A0.]*
+*[2026-11-02, **DECIDED (owner: "I think we can add A1 arm")**: the first fits include one arm A1 (semantic half split
+0.7/0.3: child×parent 0.35, child×article 0.15; social half unchanged), several seeds, beside A0. A1 never replaces A0
+automatically; proposed criteria for the owner's decision: A1 raises child×parent's captured share beyond seed variation;
+child×article's captured share, the share of communities drawing on both domains and held-out prediction stay within
+seed variation; the text check favours A1. Terms fixed in the reply of the same day: weight (the multiplier set), pull
+(weight × best share capturable by K communities on that matrix alone; an upper bound, used to derive A1's ratio at
+K = 4), realised share (weight × share captured in the fitted model), influence proper (change in communities when the
+matrix is removed or reweighted; measured only by ablation).]*
