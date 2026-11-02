@@ -1797,3 +1797,19 @@ Open: Part 1 (no correction for the difference in pull, stated as part of the co
 child×article and child×parent drawn once and shared by both approaches — already the 2026-10-15 rule "the same hidden
 cells of the shared relations are used in both approaches", now limited to the semantic matrices because article×journal
 has no hidden cells since 2026-10-29), Part 4 (pre-registered outcomes of the comparison), the arm plan.
+*[2026-11-02, owner, L2.5 continued. **DECIDED — Part 1:** no correction for the difference in pull between the
+approaches (approach 2's social side ~1.5×); stated as part of the comparison and read with the realised shares.
+**DECIDED — Part 2, "when applicable":** for the comparison *between* approaches, the hold-out groups of child×article and
+child×parent are drawn once and shared by both approaches (paired per fold); for comparisons *within* one approach (e.g.
+between K values) the approach's own non-semantic matrices with hidden cells (its affiliation matrix) stay pertinent and
+enter the combined score as decided 2026-10-29. **DECIDED — Part 4:** the pre-registered outcomes of the comparison:
+stability gate (Track A/B against chance; an approach that fails it is not ranked); M1 semantic held-out prediction with
+classes approach 1 better (interval > 0, mean Δ ≥ +δ, Δ = score(appr. 2) − score(appr. 1)) / approach 2 better
+(interval < 0, mean Δ ≤ −δ) / equivalent (interval within ±δ, two one-sided tests) / inconclusive; M2 membership
+agreement between the approaches on shared facets (Track A/B, chance-adjusted, vs within-approach seed pairs, 5th
+percentile); M3 per-entity fit and coverage; M4 authors' memberships (fitted in appr. 1 vs derived from articles in
+appr. 2, persons with 2+ articles); text check. Reading: equivalent + same communities → representation does not
+matter, choose by research aim (author memberships vs parsimony); equivalent + different → report both, text check and
+M3 decide which leads, owner's decision; one better → lead with it, other as robustness; inconclusive → report both,
+no ranking. Ranking always the owner's. Arm plan: assistant's staged proposal in `plans/ticket107_layer2/
+test_architecture.py` (output `test_architecture.txt`), awaiting the owner.]*
