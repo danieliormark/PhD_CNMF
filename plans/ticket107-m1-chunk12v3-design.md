@@ -1742,3 +1742,58 @@ author×article 1.8e-5 (13×), article×article 2.4e-4 (172×); pull (weight × 
     redundant without team shape → keep, reported as redundant; redundant with team shape → owner decides after the text
     check, default keep; inconclusive → default keep, more seeds only on the owner's request. M2 qualifies every row
     (unchanged memberships → little effect whatever the class). Classified at the chosen K and reported for the others.
+
+## Addendum 2026-11-02 (4) — layer 2, element L2.5 (comparing approach 1 and approach 2): pull across K; first decisions
+
+**Best share K communities could capture of each matrix fitted alone** ((σ₁²+…+σ_K²)/‖X‖², upper bound; build
+`psych_trial_v2`, layer-1 weights; `svds`, 31 values):
+
+| K | child×parent | child×article | author×article | author×affiliation | article×affiliation | article×article | article×journal |
+|---|---|---|---|---|---|---|---|
+| 2 | 0.0075 | 0.0249 | 0.0059 | 0.0153 | 0.0165 | 0.0154 | 0.1548 |
+| 3 | 0.0101 | 0.0280 | 0.0079 | 0.0222 | 0.0236 | 0.0208 | 0.1937 |
+| 4 | 0.0123 | 0.0310 | 0.0098 | 0.0281 | 0.0301 | 0.0262 | 0.2298 |
+| 5 | 0.0140 | 0.0336 | 0.0114 | 0.0338 | 0.0360 | 0.0316 | 0.2617 |
+| 6 | 0.0156 | 0.0361 | 0.0128 | 0.0394 | 0.0418 | 0.0370 | 0.2932 |
+| 8 | 0.0185 | 0.0406 | 0.0156 | 0.0495 | 0.0524 | 0.0479 | 0.3513 |
+| 10 | 0.0210 | 0.0448 | 0.0182 | 0.0591 | 0.0629 | 0.0587 | 0.4076 |
+| 12 | 0.0233 | 0.0490 | 0.0206 | 0.0679 | 0.0730 | 0.0695 | 0.4522 |
+| 15 | 0.0265 | 0.0551 | 0.0242 | 0.0809 | 0.0871 | 0.0858 | 0.4930 |
+| 20 | 0.0312 | 0.0649 | 0.0299 | 0.1020 | 0.1094 | 0.1121 | 0.5511 |
+| 25 | 0.0353 | 0.0743 | 0.0351 | 0.1202 | 0.1292 | 0.1369 | 0.5980 |
+| 30 | 0.0391 | 0.0833 | 0.0401 | 0.1372 | 0.1476 | 0.1602 | 0.6365 |
+
+**Pull** (weight × share; weights by the decided rule: child×parent and child×article 0.25, each social matrix 1/6;
+social totals exclude article×journal, which is the same in both approaches):
+
+| K | Semantic | Approach 1 social | Approach 2 social | Appr. 2 / appr. 1 | Semantic share of pull excl. journal, appr. 1 / appr. 2 | article×journal (binary) share of all pull, appr. 1 | child×article / child×parent share |
+|---|---|---|---|---|---|---|---|
+| 2 | 0.0081 | 0.0035 | 0.0053 | 1.50 | 70% / 60% | 69% | 3.31 |
+| 3 | 0.0095 | 0.0050 | 0.0074 | 1.48 | 66% / 56% | 69% | 2.78 |
+| 4 | 0.0108 | 0.0063 | 0.0094 | 1.48 | 63% / 53% | 69% | 2.53 |
+| 5 | 0.0119 | 0.0075 | 0.0113 | 1.50 | 61% / 51% | 69% | 2.40 |
+| 6 | 0.0129 | 0.0087 | 0.0131 | 1.51 | 60% / 50% | 69% | 2.32 |
+| 8 | 0.0148 | 0.0109 | 0.0167 | 1.54 | 58% / 47% | 70% | 2.19 |
+| 10 | 0.0165 | 0.0129 | 0.0203 | 1.57 | 56% / 45% | 70% | 2.14 |
+| 12 | 0.0181 | 0.0148 | 0.0237 | 1.61 | 55% / 43% | 70% | 2.10 |
+| 15 | 0.0204 | 0.0175 | 0.0288 | 1.64 | 54% / 41% | 68% | 2.08 |
+| 20 | 0.0240 | 0.0220 | 0.0369 | 1.68 | 52% / 39% | 67% | 2.08 |
+| 25 | 0.0274 | 0.0259 | 0.0443 | 1.71 | 51% / 38% | 65% | 2.10 |
+| 30 | 0.0306 | 0.0295 | 0.0513 | 1.74 | 51% / 37% | 64% | 2.13 |
+
+Readings: (1) approach 2's social side has ~1.5× approach 1's pull at any K in the likely range (1.48–1.64 for K 3–15);
+(2) as K grows the balance shifts to the social side (separable small groups — an organisation's people, a team's
+articles — can be picked up one per extra community; semantic structure is diffuse); in approach 2 the social side
+overtakes the semantic from K ≈ 8, so extra communities at high K are expected to be organisation- or team-shaped
+(watched by M3-type measures, per-K reporting and the share of communities drawing on both domains); (3) the journal
+pull stays at 64–70% at every K; (4) the equal-pull ratio behind A1 falls from 2.5 (K = 4) to ~2.1 (K ≥ 8), i.e. a split
+of ~0.68/0.32 instead of 0.7/0.3 — A1 kept as defined. Caveat: bounds per matrix alone; at high K part of each share is
+small isolated groups, which a joint fit uses only where several matrices agree.
+
+**DECIDED (owner, 2026-11-02): the approaches are compared at both K₁ and K₂** (each approach's own chosen K; each
+approach also fitted at the other's K), with the full curve over the searched K range as context; each approach's own K
+is reported as a finding (owner agreed to both proposals of Part 3 and chose "both K₁ and K₂" over the mean of K₁, K₂).
+Open: Part 1 (no correction for the difference in pull, stated as part of the comparison), Part 2 (hold-out groups of
+child×article and child×parent drawn once and shared by both approaches — already the 2026-10-15 rule "the same hidden
+cells of the shared relations are used in both approaches", now limited to the semantic matrices because article×journal
+has no hidden cells since 2026-10-29), Part 4 (pre-registered outcomes of the comparison), the arm plan.
