@@ -71,3 +71,25 @@ Proposed use: K_max ≈ 20 (order of the stable article-level counts), extended 
    corrected variant that should be preferred?
 4. Is binarisation acceptable for a rough range, given that the model is fitted on weighted matrices?
 5. Is it reasonable to use per-matrix counts as a rough upper end for a K shared by all matrices?
+
+## Update 2026-11-03 — checks after the external reviews (Gemini, ChatGPT)
+
+Script `bethe_hessian_checks.py`, output `bethe_hessian_checks.txt` (moment-based r unless stated):
+- **Factorisation residuals** ‖P_r H P_c − LU‖_F/‖H‖_F 5e-17 – 4e-14 and ‖U − diag(U) Lᵀ‖_F/‖U‖_F 1e-17 – 3e-14 in all
+  seven graphs; row and column permutations identical; smallest |pivot| / largest |diagonal of H| 2e-4 – 1.2e-1.
+- **Independent inertia** by dense LDLᵀ with Bunch–Kaufman pivoting (`scipy.linalg.ldl`, 2×2 blocks counted by their
+  eigenvalues) on the five graphs up to 12.2k nodes: identical counts (15, 0, 20, 41, 36). The two semantic graphs
+  (100k, 134k nodes) are too large for a dense factorisation and no sparse symmetric-indefinite solver (MUMPS) is
+  installed; for them the residual checks and the shifted checks hold.
+- **Shifted counts** H ± δI with δ = 1e-6 × max |diagonal|: unchanged in all seven graphs (no eigenvalue near zero).
+- **Sensitivity to r** (9 values from 1.1 to ~1.2 × the moment-based r): article×article 12–24; article×affiliation 5–23;
+  author×article 18–83; author×affiliation 27–108; child×article 1–7; child×parent 1–51; article×journal 0 throughout.
+  All r used satisfy r > 1.
+- **Corrections of wording** (reviewer's point, accepted): article×journal's 0 is not an artefact but a structural
+  property — a disjoint union of stars has no negative Bethe Hessian eigenvalues for r > 1 — so this diagnostic does not
+  register the kind of structure a partition carries. The per-matrix counts are exploratory diagnostics, not estimates
+  or upper bounds of the shared K (complementary matrices can support communities no single matrix shows; a matrix can
+  hold structure irrelevant to the shared communities). K_max = 20 is a motivated initial search range; its adequacy is
+  judged by held-out prediction and stability, with the grid extended if the optimum lies at 20.
+- Not done (proposed as optional): validation of the count on synthetic bipartite networks with planted blocks and
+  unequal degrees; a degree-corrected Bethe Hessian variant (Dall'Amico, Couillet & Tremblay 2019).

@@ -1861,3 +1861,14 @@ relative precision of a standard deviation from n runs is ≈ 1/√(2(n − 1)) 
 *[2026-11-03, **DECIDED (owner: "I approve the principle in general")**: K principle — K_min = 2, K_max ≈ 20, extended to
 25, 32 if the best coarse K is 20; ×~1.6 spacing for the coarse grid. Owner asked for a method note on the Bethe
 Hessian / inertia shortcut for an external check by another model: `plans/ticket107_layer2/bethe_hessian_method_note.md`.]*
+*[2026-11-03, after the owner's external triangulation (Gemini; ChatGPT, file `Triangulation on computational shortcut by
+ChatGPT`): checks run (`plans/ticket107_layer2/bethe_hessian_checks.py`/`.txt`; summary in `bethe_hessian_method_note.md`,
+"Update"): factorisation residuals ≤ 4e-14, identical counts from a Bunch–Kaufman LDLᵀ on the five graphs up to 12.2k
+nodes, shifted counts unchanged — the inertia counts are numerically sound. The counts depend strongly on r (child×parent
+1–51, author×affiliation 27–108, article×affiliation 5–23, child×article 1–7). Wording adopted: the counts are exploratory
+diagnostics, not estimates or upper bounds of the shared K; K_max = 20 is a motivated initial search range, judged by
+held-out prediction and stability and extended if the optimum is at 20; article×journal's 0 is a structural property of
+a union of stars, not an artefact. **Correction:** the note of commit 7e4f55d above (counts 33, 26, 16, 9, 3, child×parent
+unfinished; "no single matrix supports more than ~30") was written in another session and is not reproduced by the
+verified counts (`bethe_hessian_counts.txt`: 41, 36, 20, 15, 5, child×parent 4 at moment-based r; Lanczos and
+Bunch–Kaufman agree); the cause was not traced; the verified counts supersede it.]*
