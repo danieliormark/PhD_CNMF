@@ -1,0 +1,335 @@
+1. Is the SuperLU inertia shortcut mathematically valid?
+Conditionally valid; numerical safeguards are insufficient as reported
+This is the most technically delicate part of the method.
+
+The mathematical idea is correct. For a real symmetric matrix \(H\), Sylvester's law of inertia says that a congruent matrix has exactly the same numbers of positive, negative and zero eigenvalues.
+
+The required factorisation is:
+\[
+PHP^\top = LDL^\top
+\]
+
+where \(P\) is a permutation matrix, \(L\) is unit lower triangular, and \(D\) is diagonal. Because \(L\) is invertible, the inertia of \(H\) equals the inertia of \(D\). Consequently, counting negative diagonal entries of \(D\) gives the exact number of negative eigenvalues.
+
+The proposed SuperLU shortcut exploits the fact that, under symmetric ordering and without off-diagonal pivoting, an LU factorisation of a symmetric matrix can be expressed approximately as:
+\[
+PHP^\top = LU,\qquad U \approx DL^\top.
+\]
+
+SuperLU itself documents this property, while explicitly qualifying it as approximate up to round-off error. 
+
+portal.nersc.gov
++1
+
+
+
+
+The distinction is important: SuperLU is not a symmetric-indefinite LDLᵀ solver. It is a general sparse LU solver configured to behave in a way that preserves the symmetry structure.
+Are the reported checks sufficient?
+No. They are useful, but they do not establish numerical reliability.
+Existing check	My assessment
+Identical row and column permutations	Necessary for the intended symmetric congruence, assuming the permutation convention is correctly interpreted
+No zero pivots	Necessary for an unpivoted factorisation, but insufficient for numerical stability
+Minimum absolute pivot = 0.003	Not sufficient; its meaning depends on matrix scaling
+Symmetric ordering	Appropriate
+diag_pivot_thresh=0	Appropriate for encouraging diagonal pivoting
+SymmetricMode=True	Appropriate, but does not turn SuperLU into a symmetric-indefinite solver
+
+There are two additional checks I would require.
+
+A. Verify the factorisation itself. Check the relative residual of the reconstructed factorisation, accounting for SuperLU's permutation conventions and any equilibration:
+\[
+\frac{\|PHP^\top-LU\|_F}{\|H\|_F}.
+\]
+
+Also explicitly check:
+\[
+\frac{\|U-DL^\top\|_F}{\|U\|_F},
+\qquad D=\operatorname{diag}(U).
+\]
+
+The second check is particularly important: identical permutations do not demonstrate that the computed factors satisfy the required LDLᵀ structure.
+
+B. Check sensitivity to near-zero pivots. An absolute minimum pivot of 0.003 does not tell us whether the factorisation is well-conditioned. I would record the minimum pivot relative to a suitable matrix scale and examine whether any pivots are close to numerical precision.
+Should you switch to Bunch–Kaufman LDLᵀ?
+My recommendation is to use a proper symmetric-indefinite factorisation as an independent validation, preferably with a sparse solver such as MUMPS that supports symmetric-indefinite factorisation.
+
+One qualification: Bunch–Kaufman-type methods can use 2×2 diagonal blocks, not just 1×1 pivots. In that case, the inertia must be calculated from the eigenvalues of each diagonal block, rather than simply counting negative diagonal entries. 
+
+SIAM Publications Library
++1
+
+
+
+
+I would not necessarily discard SuperLU. At your graph sizes, its speed advantage may be substantial. But I would first establish agreement between SuperLU and an independent symmetric-indefinite solver on representative graphs, including graphs with substantial degree heterogeneity.
+
+I would also perform shifted checks on selected graphs, examining the inertia of \(H+\delta I\) and \(H-\delta I\) for small scale-relative \(\delta\). This helps reveal eigenvalues lying close to zero, where numerical sign decisions are most vulnerable.
+
+Verdict on Question 1: The shortcut is mathematically defensible under the stated factorisation conditions. The current checks are not enough to establish numerical reliability. I would retain it provisionally, but require factorisation-residual checks and independent LDLᵀ validation before trusting the large-graph counts.
+2. Does Bethe Hessian apply to the constructed bipartite graphs?
+Mathematical construction valid; community-count interpretation requires qualification
+There are two different things here.
+
+First, the construction itself is perfectly valid. Given a rectangular binary matrix \(X\), the matrix
+\[
+A=
+\begin{pmatrix}
+0 & X\\
+X^\top & 0
+\end{pmatrix}
+\]
+
+is a symmetric adjacency matrix of an undirected bipartite graph. Its degree matrix \(D\) is well-defined, and the resulting Bethe Hessian is a real symmetric matrix. There is no mathematical obstacle to calculating its inertia.
+
+Second, the interpretation of its negative eigenvalues is more complicated.
+
+The original Bethe Hessian community-detection argument was developed primarily for the ordinary stochastic block model. Saade et al. distinguish assortative and disassortative structures and use negative eigenvalues of \(H(r)\) and \(H(-r)\) to identify them. 
+
+papers.neurips.cc
+
+
+
+
+Your rectangular matrices represent two-mode networks. Their community structure is not necessarily the same as ordinary assortative community structure.
+
+For example, consider author × article. A meaningful community could consist of a group of authors and a group of articles that are strongly associated with each other. Two authors in that community are not directly connected in the bipartite graph. Their relationship is expressed through shared article connections.
+
+This is a different statistical structure. There is a dedicated literature on bipartite stochastic block models precisely because the community structure in bipartite networks differs from ordinary assortative communities. 
+
+PubMed Central (PMC)
++2
+
+
+
+Does the ±λ spectrum cause double-counting?
+There is an important mathematical observation here.
+
+For a bipartite graph, define a diagonal sign matrix \(S\) that assigns +1 to vertices on one side and −1 to vertices on the other.
+
+Then:
+\[
+SAS=-A,\qquad SDS=D.
+\]
+
+Consequently:
+\[
+SH(r)S=H(-r).
+\]
+
+This means that \(H(r)\) and \(H(-r)\) are orthogonally similar and therefore have identical eigenvalues and identical inertia.
+
+So the symmetric ±λ spectrum of the bipartite adjacency matrix does not automatically double the negative-eigenvalue count of one Bethe Hessian.
+
+However, it does mean that the usual distinction between the assortative information in \(H(r)\) and the disassortative information in \(H(-r)\) disappears at the level of their spectra for these bipartite constructions.
+
+That is a reason to be cautious about transferring the ordinary SBM interpretation.
+What I would do
+I would not reject Bethe Hessian for your bipartite matrices. Instead, I would treat its negative-eigenvalue count as a spectral diagnostic, rather than automatically interpreting it as the number of bipartite communities.
+
+A stronger validation would compare the counts against synthetic bipartite networks generated with known numbers of planted blocks, including unequal block sizes, unequal degrees and different levels of signal.
+
+The key question is whether the count recovers the number of planted bipartite blocks under conditions resembling your actual matrices.
+
+There is no evidence in the report yet that this has been tested.
+
+Verdict on Question 2: The construction is mathematically valid. The standard interpretation of negative eigenvalues as the number of communities is not automatically established for your bipartite graphs. The adjacency spectrum's symmetry does not itself cause double-counting, but the bipartite generative structure needs its own validation.
+3. Which r is appropriate for highly unequal degrees?
+Neither reported choice is universally justified
+This is particularly important for your data because the semantic matrices contain extreme degree heterogeneity: some phrase units occur in over 1,000 articles, while most occur only once.
+
+The two proposed choices are:
+\[
+r_{\mathrm{moment}}=
+\sqrt{\frac{\sum_i d_i^2}{\sum_i d_i}-1}
+\]
+
+and
+\[
+r_{\mathrm{mean}}=\sqrt{\bar d}.
+\]
+
+They represent different approximations to the relevant spectral scale.
+
+The moment-based expression is the square root of the mean excess degree. It is closely related to the branching factor of a configuration-model network and to the non-backtracking spectral scale. The mean-degree expression is the simpler homogeneous-network approximation.
+
+For a Poisson degree distribution, these quantities are approximately equivalent in the relevant asymptotic regime. For heterogeneous degree distributions, they can diverge considerably.
+
+The important complication is that the moment-based estimate is sensitive to high-degree nodes because it involves squared degrees. This is not necessarily a defect: degree heterogeneity genuinely affects the non-backtracking spectrum. But it can also make the resulting diagnostic sensitive to hubs.
+What does the degree-corrected literature suggest?
+I would specifically examine Dall'Amico, Couillet and Tremblay (2019), Revisiting the Bethe-Hessian: Improved Community Detection in Sparse Heterogeneous Graphs.
+
+Their paper explicitly investigates Bethe Hessian under a degree-corrected stochastic block model. They show that the conventional parameter choice can be suboptimal under degree heterogeneity and propose an alternative parameterisation intended to reduce the influence of degree heterogeneity on community recovery. 
+
+NeurIPS Proceedings
++1
+
+
+
+
+However, there is an important limitation: their theoretical setting is a degree-corrected SBM, initially developed for two communities, with subsequent generalisation to multiple classes. It is not a general solution for arbitrary heterogeneous bipartite graphs.
+
+I would therefore not simply substitute their parameter into all your matrices.
+My recommendation
+I would retain both existing choices, but add a third diagnostic based on the degree-corrected Bethe Hessian approach.
+
+More importantly, I would calculate the sensitivity of the negative-eigenvalue count to r over a reasonable interval rather than treating two particular choices as definitive.
+
+For each matrix, I would record:
+- Mean degree.
+- Mean excess degree.
+- Maximum degree.
+- Degree coefficient of variation.
+- Both existing r values.
+- Negative-eigenvalue counts across a small r grid.
+This would reveal whether the count is stable over a range of plausible spectral scales or whether it is highly parameter-dependent.
+
+One additional technical check: the standard Bethe Hessian community-detection construction generally uses \(|r|>1\). Verify that both selected values satisfy this condition. If not, the usual interpretation of the negative eigenvalues requires additional justification. 
+
+papers.neurips.cc
++1
+
+
+
+
+Verdict on Question 3: The moment-based parameter is theoretically motivated, but its sensitivity to hubs is a genuine concern. The mean-degree parameter is a useful comparison, not necessarily a better estimator. A degree-corrected alternative is worth testing, but its assumptions must be checked against your networks.
+4. Is binarisation acceptable?
+Reasonable for an initial diagnostic, with limitations
+I think this is a defensible methodological decision for your stated purpose.
+
+There is an important distinction between the two tasks:
+- Your collective factorisation operates on the original weighted matrices.
+- Your Bethe Hessian diagnostic is being used to obtain a rough indication of structural complexity.
+These do not necessarily need to use identical representations.
+
+Binarisation has several advantages:
+1. It prevents a small number of very frequent relationships from dominating the spectral diagnostic.
+2. It focuses on the existence of relationships rather than their magnitude.
+3. It makes the resulting graph compatible with the standard unweighted Bethe Hessian formulation.
+However, it also removes information.
+
+Consider the child × parent matrix. A phrase unit occurring once and a phrase unit occurring 1,000 times become indistinguishable at the level of an individual non-zero cell. Their degree distributions may still differ, but the intensity of each relationship disappears.
+
+This is particularly relevant because your factorisation is intended to distinguish different levels of semantic relevance, not merely the existence of connections.
+
+There is also a potential issue with the article × journal matrix. Since each article belongs to one journal, binarisation produces a collection of journal-centred stars. This is a structural consequence of the data, not evidence that the original weighted relationship contains no information.
+What I would add
+I would conduct a limited sensitivity analysis:
+- Binary representation: the current approach.
+- Original weighted representation: using a properly justified weighted spectral analogue, not blindly substituting weights into an unweighted formula.
+- Optionally, a degree-preserving binary transformation or thresholding sensitivity analysis if repeated counts are particularly influential.
+I would not require the weighted Bethe Hessian to be implemented immediately. The binary analysis is sufficient for an exploratory diagnostic, provided the conclusions are explicitly restricted to the binary topology.
+
+Verdict on Question 4: Binarisation is acceptable for obtaining a rough structural diagnostic. It is not sufficient to establish that the same structural complexity exists in the weighted matrices used by the factorisation.
+5. Can individual matrix counts inform the shared K?
+Not as a direct upper bound
+This is where I have the strongest methodological reservation about the proposed conclusion.
+
+Your model is not fitting seven independent community structures. It is fitting a collective factorisation with shared latent communities across multiple relations.
+
+That distinction matters.
+
+Consider the author × article and article × affiliation matrices. Both contain the article facet, but their respective Bethe Hessian counts are:
+Matrix	Moment-based r	Mean-degree r
+Author × article	41	82
+Author × affiliation	36	100
+Article × affiliation	20	23
+Article × article	15	21
+Child × article	5	1
+Child × parent	4	23
+Article × journal	0	0
+
+These are not estimates of one common quantity in the sense required by your factorisation.
+
+For example, the author × article graph may contain substantial author-level structure that is not equivalent to the latent epistemic communities you want to discover.
+
+Similarly, the child × parent graph may capture semantic structures that do not translate directly into the same number of article-level communities.
+
+The fact that all these matrices participate in the collective factorisation does not mean their individual spectral community counts should coincide.
+Why the proposed K_max ≈ 20 is problematic
+Claude's reasoning appears to be:
+1. Semantic counts are unstable across r.
+2. Article-level counts are more stable.
+3. The stable article-level counts are approximately 15–23.
+4. Therefore, K_max ≈ 20.
+I understand the reasoning, but I see two problems.
+
+First, the selection of which matrices count as article-level evidence needs justification. Author × article and author × affiliation also contain article-level or socially connected information, yet their counts are substantially higher. They cannot simply be excluded because they produce inconvenient values.
+
+There may be a substantive reason to give those matrices less weight when setting the search range, but that reason needs to be stated.
+
+Second, an individual matrix's spectral count is not an upper bound on the number of communities recoverable by a collective model. Different relations can provide complementary information. A structure that is difficult to detect in one matrix may become identifiable through the combined evidence of several matrices.
+
+The reverse is also possible: a matrix may contain many detectable structural modes that are irrelevant to the shared epistemic partition.
+
+Therefore, neither the maximum nor the minimum of the individual counts has a guaranteed relationship to the optimal shared K.
+What I would retain from this analysis
+I would preserve the individual counts as diagnostic information and use them to inform the search range, but I would not describe K ≈ 20 as a mathematically derived upper bound.
+
+There is a sensible argument for starting with a grid extending to 20, particularly given the relatively stable article × affiliation and article × article results.
+
+But I would explicitly describe it as a computationally motivated initial search range.
+
+Your proposed extension rule is sensible: if the best model is at K = 20, extend the grid rather than treating the boundary solution as the optimum.
+6. An additional observation: the article × journal result
+I want to flag one point in Claude's interpretation that I think should be corrected.
+
+The report says:
+We read article × journal's 0 as an artefact: the graph is a disjoint union of stars, one per journal.
+
+I would not call this a numerical artefact.
+
+In fact, a disjoint union of stars has no negative Bethe Hessian eigenvalues when \(r>1\).
+
+We can see this by considering one star with \(m\) leaves. Its Bethe Hessian has:
+- \(m-1\) eigenvalues equal to \(r^2\);
+- two remaining eigenvalues whose product is \(r^2(r^2-1)\) and whose sum is positive for \(r>1\).
+All these eigenvalues are positive. A disjoint union of such stars therefore also has zero negative eigenvalues.
+
+This is a structural consequence of the graph topology, not a failure of the inertia calculation.
+
+The interpretation should be:
+
+The article × journal relation, represented as a collection of stars, does not exhibit the type of community structure that this particular Bethe Hessian diagnostic detects.
+
+That is not equivalent to saying the relation contains no useful information for your factorisation.
+
+7. Overall assessment and recommended changes
+Here is my consolidated assessment.
+Question	Conclusion	Recommended action
+1. SuperLU inertia	Mathematically defensible, numerical reliability insufficiently established	Add residual checks and independent LDLᵀ validation
+2. Bipartite Bethe Hessian	Valid construction, but ordinary SBM interpretation does not transfer automatically	Validate on synthetic bipartite networks
+3. Choice of r	Both choices defensible, neither universally optimal	Add degree-corrected sensitivity analysis
+4. Binarisation	Acceptable for exploratory topology diagnostics	Preserve binary/weighted distinction
+5. Shared K	Individual counts are informative but not upper bounds	Use them as heuristics, not estimates of shared K
+
+What I would actually change before accepting this methodology
+I would prioritise four things:
+
+1. Numerical validation: Establish that SuperLU and an independent symmetric-indefinite factorisation produce matching inertia counts on representative graphs. This is a prerequisite for trusting the large-scale results.
+
+2. Synthetic bipartite validation: Generate bipartite networks with known planted community counts, including degree heterogeneity resembling your semantic matrices. Test whether the negative-eigenvalue count recovers the planted number of groups.
+
+3. Parameter sensitivity: Examine how the counts change over a range of r values, particularly for the child × parent and child × article matrices.
+
+4. Collective-model validation: Ultimately, evaluate whether the proposed K range is adequate using your actual collective factorisation, held-out prediction and stability assessment.
+My final judgement on K_max ≈ 20
+Reasonable provisional search limit
+I would allow the project to proceed with K_max = 20 as an initial computational choice, subject to the extension rule already proposed.
+
+However, I would make an important change to the methodological documentation.
+
+I would write:
+Bethe Hessian diagnostics were used to obtain an exploratory indication of structural complexity across individual relational networks. Because the networks differ in topology, degree heterogeneity and community structure, their negative-eigenvalue counts are not interpreted as direct estimates or upper bounds of the number of shared latent communities. The observed article-level counts motivated an initial search range extending to K = 20. The adequacy of this range is subsequently assessed through held-out prediction and model stability, with an extension of the search grid if the optimum occurs at its upper boundary.
+
+This is a defensible methodological position.
+
+One final distinction: I would not present the Bethe Hessian procedure as a successful replacement for the failed parallel analysis. It is a different diagnostic with different assumptions, and the bipartite setting introduces additional complications. Its contribution is to provide another source of information for designing the K search, not to determine K.
+
+My overall recommendation is therefore to retain the approach, but describe it as an exploratory, independently validated diagnostic rather than a formal estimator of the upper bound of K.
+References worth retaining
+- Saade, Krzakala & Zdeborová (2014), Spectral Clustering of Graphs with the Bethe Hessian. Original paper.
+- Dall'Amico, Couillet & Tremblay (2019), Revisiting the Bethe-Hessian: Improved Community Detection in Sparse Heterogeneous Graphs. Full paper.
+- Zhou & Amini (2019), Analysis of spectral clustering algorithms for community detection: the general bipartite setting. Full paper.
+- Larremore and colleagues' bipartite community-detection work: Efficiently inferring community structure in bipartite networks.
+The bipartite literature is particularly worth consulting before making the negative-eigenvalue count a central methodological justification for the eventual K grid.
