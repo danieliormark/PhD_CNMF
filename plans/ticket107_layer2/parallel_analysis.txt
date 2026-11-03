@@ -1,0 +1,7 @@
+child×parent         layers above shuffle (consecutive from 1st):   0 (total above: 0 of 80); ratio real/null at 1,5,10,20: 0.38, 0.50, 0.57, 0.58  [94s]
+child×article        layers above shuffle (consecutive from 1st):   0 (total above: 0 of 80); ratio real/null at 1,5,10,20: 0.57, 0.79, 0.79, 0.84  [8s]
+author×article       layers above shuffle (consecutive from 1st):   0 (total above: 0 of 80); ratio real/null at 1,5,10,20: 0.74, 0.71, 0.72, 0.75  [7s]
+author×affiliation   layers above shuffle (consecutive from 1st):   0 (total above: 63 of 80); ratio real/null at 1,5,10,20: 0.92, 1.06, 1.03, 1.06  [7s]
+article×affiliation  layers above shuffle (consecutive from 1st):   0 (total above: 78 of 80); ratio real/null at 1,5,10,20: 0.85, 1.03, 1.04, 1.07  [7s]
+article×article      layers above shuffle (consecutive from 1st):   0 (total above: 0 of 80); ratio real/null at 1,5,10,20: 0.61, 0.59, 0.67, 0.74  [7s]
+article×journal      layers above shuffle (consecutive from 1st):   0 (total above: 9 of 80); ratio real/null at 1,5,10,20: 1.00, 1.00, 1.00, 1.00  [7s]

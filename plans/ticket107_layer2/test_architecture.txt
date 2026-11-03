@@ -30,9 +30,9 @@ STAGE 1 — journal ablation (A0; approach 2 with article×article)
     ▼ DECISION D1 (owner): weighting of article×journal, from: agreement of article memberships between arms (Track A/B, chance-adjusted; J1 the reference); each matrix's realised share; journal–community association vs shuffled journals; held-out prediction of the other matrices. Pre-registration of these outcomes is still TO DO (as done for L2.4/L2.5). → chosen arm J* is used in stages 2–3.
 
 STAGE 2 — choice of K at J* (A0), coarse-to-fine
-├── approach 1 · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve (stage-1 cells at J*); extend to 25, 32 if the best coarse K is 20   K = ['~6 new K']
+├── approach 1 · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve (stage-1 cells at J*) + K = 32 always (owner 2026-11-03); extend to ~50 if 32 is best or in the band   K = ['~6 new K', 32]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
-└── approach 2 · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve (stage-1 cells at J*); extend to 25, 32 if the best coarse K is 20   K = ['~6 new K']
+└── approach 2 · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve (stage-1 cells at J*) + K = 32 always (owner 2026-11-03); extend to ~50 if 32 is best or in the band   K = ['~6 new K', 32]
         weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
     ▼ DECISION D2: K₁ (approach 1) and K₂ (approach 2) — out-of-sample fit on the combined held-out score of each approach's matrices with hidden cells (incl. its own affiliation matrix; owner 2026-11-02: non-semantic matrices stay pertinent within an approach), with Track A/B stability against chance as the gate (design doc §6). The band = K values within one standard error of the best held-out score; every interval between coarse points touching a band is filled in (several intervals if the band is split). (weights shown for J2 binary)
 
@@ -51,6 +51,6 @@ LATER STAGES (not yet designed):
   • final models refitted on all cells after settings are chosen (open)
   • background component (deferred robustness arm; planted test first)
 
-Fit counts (before reuse): stage 1 3,000, stage 2 600, stage 3 300; total 3,900
+Fit counts (before reuse): stage 1 3,000, stage 2 700, stage 3 300; total 4,000
 For comparison, a full grid K = 2-20 at J* in stage 2 instead of refinement (14 K beyond the coarse 5): 1,400 fits
-Total fits as a function of seeds S: S=10: 3,900, S=15: 5,850, S=20: 7,800
+Total fits as a function of seeds S: S=10: 4,000, S=15: 6,000, S=20: 8,000

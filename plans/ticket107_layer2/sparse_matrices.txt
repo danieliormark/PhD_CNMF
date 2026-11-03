@@ -1,0 +1,6 @@
+author×article: persons 10052, with 1 article 9259 (0.921), their share of the squared total 0.831, persons with 2+ 793
+  all persons: ties 11131, share at K = 4 0.0098, K = 10 0.0182
+  persons with 2+ articles: ties 1872, share at K = 4 0.0557, K = 10 0.1021
+author×affiliation ties 12512, of single-article persons 11295 (0.903); organisations tied 2511, reachable via 2+-article persons only 514; article–organisation links via persons 6446, via 2+-article persons only 1970
+article×article: pairs 1107, tied articles 739, mean degree 1.04 (3.00 among tied), degree 1: 374; top 1% / 10% of pairs hold 0.113 / 0.593
+weight per effective tie (relative to child×parent): child×parent 1.4e-06 (1×), child×article 2.0e-06 (1×), author×article 1.8e-05 (13×), author×affiliation 1.5e-05 (11×), article×affiliation 4.8e-05 (34×), article×journal 7.8e-05 (56×), article×article 2.4e-04 (173×)

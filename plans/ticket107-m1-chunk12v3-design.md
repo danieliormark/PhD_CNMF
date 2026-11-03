@@ -1872,3 +1872,11 @@ a union of stars, not an artefact. **Correction:** the note of commit 7e4f55d ab
 unfinished; "no single matrix supports more than ~30") was written in another session and is not reproduced by the
 verified counts (`bethe_hessian_counts.txt`: 41, 36, 20, 15, 5, child×parent 4 at moment-based r; Lanczos and
 Bunch–Kaufman agree); the cause was not traced; the verified counts supersede it.]*
+*[2026-11-03, **DECIDED (owner: "I agree with both of your proposals")**: (1) no synthetic bipartite validation of the
+Bethe Hessian count (its only use would be to refine the starting search range); (2) instead, **K = 32 is fitted in
+stage 2 unconditionally** for both approaches (≈ 100 fits at S = 10), and the grid is extended to about 50 if 32 is best
+or inside the band. **Documentation of the calculations** (owner's request): `plans/ticket107_layer2/README.md` (terms,
+one row per script, the Bethe Hessian shortcut and its checks); scripts and their outputs in the same folder
+(`capturable_shares`, `layer1_character`, `entropy_measures`, `journal_variants`, `journal_checks`, `weighting_options`,
+`sparse_matrices`, `parallel_analysis`, `bethe_hessian_counts`, `bethe_hessian_checks`, `test_architecture`), all
+re-run 2026-11-03 and reproducing the numbers recorded in the addenda.]*

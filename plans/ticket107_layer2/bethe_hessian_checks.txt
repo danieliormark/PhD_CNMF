@@ -1,9 +1,28 @@
-article×article      n=   739 r_mom  2.58 r_mean 1.73 | LU count  15  resid(PHP-LU) 9.3e-16  resid(U-DL^T) 1.6e-16  min|pivot|/max|diag| 1.4e-02  same perm True | Bunch–Kaufman LDL^T count  15 | shifted ±δ: 15/15 | r grid: 1.1:20 1.25:23 1.42:24 1.62:21 1.84:20 2.1:18 2.39:15 2.72:14 3.09:12  [0s]
-article×journal      n=  2516 r_mom  5.01 r_mean 1.30 | LU count   0  resid(PHP-LU) 5.2e-17  resid(U-DL^T) 3.2e-17  min|pivot|/max|diag| 1.2e-01  same perm True | Bunch–Kaufman LDL^T count   0 | shifted ±δ: 0/0 | r grid: 1.1:0 1.36:0 1.68:0 2.08:0 2.57:0 3.18:0 3.93:0 4.86:0 6.02:0  [1s]
-article×affiliation  n=  4614 r_mom  2.28 r_mean 1.62 | LU count  20  resid(PHP-LU) 4.2e-14  resid(U-DL^T) 2.8e-14  min|pivot|/max|diag| 3.1e-03  same perm True | Bunch–Kaufman LDL^T count  20 | shifted ±δ: 20/20 | r grid: 1.1:5 1.23:13 1.38:19 1.55:23 1.74:23 1.95:22 2.18:20 2.44:19 2.74:15  [23s]
-author×article       n= 12188 r_mom  1.94 r_mean 1.35 | LU count  41  resid(PHP-LU) 4.9e-17  resid(U-DL^T) 1.3e-17  min|pivot|/max|diag| 2.0e-04  same perm True | Bunch–Kaufman LDL^T count  41 | shifted ±δ: 41/41 | r grid: 1.1:80 1.21:83 1.34:82 1.47:62 1.62:61 1.79:50 1.97:36 2.18:27 2.4:18  [373s]
-author×affiliation   n= 11981 r_mom  2.94 r_mean 1.45 | LU count  36  resid(PHP-LU) 2.7e-16  resid(U-DL^T) 9.7e-17  min|pivot|/max|diag| 3.4e-04  same perm True | Bunch–Kaufman LDL^T count  36 | shifted ±δ: 36/36 | r grid: 1.1:83 1.27:108 1.47:100 1.7:89 1.97:77 2.28:62 2.64:48 3.05:34 3.53:27  [280s]
-child×article        n= 99986 r_mom 13.31 r_mean 1.87 | LU count   5  resid(PHP-LU) 1.5e-15  resid(U-DL^T) 1.2e-14  min|pivot|/max|diag| 2.3e-02  same perm True | shifted ±δ: 5/5 | r grid: 1.1:1 1.54:1 2.15:1 3:2 4.19:4 5.86:6 8.18:7 11.43:5 15.97:4  [23s]
-child×parent         n=133833 r_mom 14.83 r_mean 1.86 | LU count   4  resid(PHP-LU) 7.0e-16  resid(U-DL^T) 4.2e-16  min|pivot|/max|diag| 1.3e-02  same perm True | shifted ±δ: 4/4 | r grid: 1.1:1 1.56:9 2.21:36 3.12:51 4.42:46 6.27:28 8.87:11 12.57:5 17.8:2  [122s]
-
-[exited with code 0]
+== article×journal: nodes 2516, mean degree 1.69, max degree 184, degree CV 3.80, r_mean 1.30, r_moments 5.01 (both > 1: True)
+   r=moments count    0 | residual LU 5.2e-17, U vs D L^T 3.2e-17, min|pivot|/max|H_ii| 1.2e-01 | shifted -/+ 0/0 | Bunch-Kaufman 0
+   r=mean    count    0 | residual LU 1.6e-16, U vs D L^T 0.0e+00, min|pivot|/max|H_ii| 3.8e-03 | shifted -/+ 0/0 | Bunch-Kaufman 0
+   r grid: 1.30:0, 1.58:0, 1.91:0, 2.32:0, 2.81:0, 3.41:0, 4.13:0, 5.01:0  [7s]
+== article×article: nodes 739, mean degree 3.00, max degree 25, degree CV 1.25, r_mean 1.73, r_moments 2.58 (both > 1: True)
+   r=moments count   15 | residual LU 9.3e-16, U vs D L^T 1.6e-16, min|pivot|/max|H_ii| 1.4e-02 | shifted -/+ 15/15 | Bunch-Kaufman 15
+   r=mean    count   21 | residual LU 5.6e-16, U vs D L^T 1.8e-16, min|pivot|/max|H_ii| 1.6e-03 | shifted -/+ 21/21 | Bunch-Kaufman 21
+   r grid: 1.73:21, 1.83:20, 1.94:20, 2.05:18, 2.17:17, 2.30:16, 2.43:15, 2.58:15  [1s]
+== article×affiliation: nodes 4614, mean degree 2.62, max degree 56, degree CV 1.17, r_mean 1.62, r_moments 2.28 (both > 1: True)
+   r=moments count   20 | residual LU 4.2e-14, U vs D L^T 2.8e-14, min|pivot|/max|H_ii| 3.1e-03 | shifted -/+ 20/20 | Bunch-Kaufman 20
+   r=mean    count   23 | residual LU 2.3e-15, U vs D L^T 2.9e-15, min|pivot|/max|H_ii| 2.0e-03 | shifted -/+ 23/23 | Bunch-Kaufman 23
+   r grid: 1.62:23, 1.70:23, 1.79:23, 1.88:23, 1.97:22, 2.07:21, 2.17:20, 2.28:20  [62s]
+== author×article: nodes 12188, mean degree 1.83, max degree 69, degree CV 1.26, r_mean 1.35, r_moments 1.94 (both > 1: True)
+   r=moments count   41 | residual LU 4.9e-17, U vs D L^T 1.3e-17, min|pivot|/max|H_ii| 2.0e-04 | shifted -/+ 41/41 | Bunch-Kaufman 41
+   r=mean    count   82 | residual LU 5.2e-17, U vs D L^T 1.6e-17, min|pivot|/max|H_ii| 4.4e-05 | shifted -/+ 82/82 | Bunch-Kaufman 82
+   r grid: 1.35:82, 1.42:63, 1.50:62, 1.58:62, 1.66:60, 1.75:50, 1.84:46, 1.94:41  [831s]
+== author×affiliation: nodes 11981, mean degree 2.09, max degree 113, degree CV 1.90, r_mean 1.45, r_moments 2.94 (both > 1: True)
+   r=moments count   36 | residual LU 2.7e-16, U vs D L^T 9.7e-17, min|pivot|/max|H_ii| 3.4e-04 | shifted -/+ 36/36 | Bunch-Kaufman 36
+   r=mean    count  100 | residual LU 3.2e-16, U vs D L^T 4.0e-17, min|pivot|/max|H_ii| 3.3e-04 | shifted -/+ 100/100 | Bunch-Kaufman 100
+   r grid: 1.45:100, 1.60:96, 1.77:83, 1.96:78, 2.17:65, 2.40:60, 2.66:45, 2.94:36  [799s]
+== child×article: nodes 99986, mean degree 3.50, max degree 1142, degree CV 7.06, r_mean 1.87, r_moments 13.31 (both > 1: True)
+   r=moments count    5 | residual LU 1.5e-15, U vs D L^T 1.2e-14, min|pivot|/max|H_ii| 2.3e-02 | shifted -/+ 5/5
+   r=mean    count    1 | residual LU 1.2e-14, U vs D L^T 5.0e-15, min|pivot|/max|H_ii| 2.2e-03 | shifted -/+ 1/1
+   r grid: 1.87:1, 2.48:2, 3.28:3, 4.34:4, 5.74:6, 7.60:7, 10.06:7, 13.31:5  [28s]
+== child×parent: nodes 133833, mean degree 3.46, max degree 5877, degree CV 7.93, r_mean 1.86, r_moments 14.83 (both > 1: True)
+   r=moments count    4 | residual LU 7.0e-16, U vs D L^T 4.2e-16, min|pivot|/max|H_ii| 1.3e-02 | shifted -/+ 4/4
+   r=mean    count   23 | residual LU 3.7e-13, U vs D L^T 7.0e-14, min|pivot|/max|H_ii| 1.1e-05 | shifted -/+ 23/23
+   r grid: 1.86:23, 2.50:45, 3.36:53, 4.53:45, 6.09:29, 8.19:14, 11.02:6, 14.83:4  [155s]

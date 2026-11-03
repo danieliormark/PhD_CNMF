@@ -55,9 +55,9 @@ stages.append(("STAGE 1 — journal ablation (A0; approach 2 with article×artic
 
 # Stage 2 — K search at J*, both approaches
 s2 = [(f"approach {a} · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve "
-       f"(stage-1 cells at J*); extend to 25, 32 if the best coarse K is 20", weights(a), ["~" + str(K_REFINE) + " new K"])
+       f"(stage-1 cells at J*) + K = 32 always (owner 2026-11-03); extend to ~50 if 32 is best or in the band", weights(a), ["~" + str(K_REFINE) + " new K", 32])
       for a in (1, 2)]
-count["stage 2"] = 2 * K_REFINE * FITS_PER_CELL
+count["stage 2"] = 2 * (K_REFINE + 1) * FITS_PER_CELL   # + K = 32
 stages.append(("STAGE 2 — choice of K at J* (A0), coarse-to-fine", s2,
                "DECISION D2: K₁ (approach 1) and K₂ (approach 2) — out-of-sample fit on the combined held-out score of "
                "each approach's matrices with hidden cells (incl. its own affiliation matrix; owner 2026-11-02: non-semantic "

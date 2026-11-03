@@ -1,0 +1,12 @@
+(1) random pair of trial articles, same subfield: 0.25
+    pairs within journals of 2-3 trial articles: 0.447
+    pairs within journals of 4-9 trial articles: 0.424
+    pairs within journals of 10-30 trial articles: 0.399
+    pairs within journals of 31-9999 trial articles: 0.341
+    largest journal (184 articles): 0.262
+(2) journals with >= 10 corpus articles, 2015-2025: popularity bin | journals | pooled psychology share | psychology-majority journals
+    1-1: 46 | 0.03 | 0
+    2-3: 38 | 0.05 | 0
+    4-9: 23 | 0.04 | 0
+    10-30: 20 | 0.11 | 4
+    31-9999: 9 | 0.11 | 2

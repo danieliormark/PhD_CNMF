@@ -1,0 +1,8 @@
+journals 384, with >= 2 articles 169, singletons 215, sizes top 10 [184, 146, 83, 77, 68, 67, 63, 61, 61, 59]
+same-journal pairs 53571, of which 5 largest journals 36028
+(i) binary partition (current)                          K=4 0.2298  K=10 0.4076  effective layers    41.6 
+(ii) same-journal article×article, ties 1               K=4 0.6255  K=10 0.8425  effective layers     6.6 
+(iii) same-journal, ties 1/(n-1)                        K=4 0.0160  K=10 0.0400  effective layers   278.1 
+(iv) columns x 1/sqrt(n)                                K=4 0.0104  K=10 0.0260  effective layers   384.0 singleton share 0.56
+(iv') as (iv), singleton journals missing               K=4 0.0237  K=10 0.0592  effective layers   169.0 
+(v) column x idf                                        K=4 0.1024  K=10 0.2136  effective layers   118.0 singleton share 0.198

@@ -1,0 +1,7 @@
+child×parent         ties  231223  effective cells exp(H)    179081 (0.77 of ties)  effective layers  6903.2
+child×article        ties  175086  effective cells exp(H)    123266 (0.70 of ties)  effective layers   799.7
+author×article       ties   11131  effective cells exp(H)      9065 (0.81 of ties)  effective layers  1861.5
+author×affiliation   ties   12512  effective cells exp(H)     11351 (0.91 of ties)  effective layers   659.5
+article×affiliation  ties    6051  effective cells exp(H)      3469 (0.57 of ties)  effective layers   574.6
+article×journal      ties    2132  effective cells exp(H)      2132 (1.00 of ties)  effective layers    41.6
+article×article      ties    2214  effective cells exp(H)       691 (0.31 of ties)  effective layers   365.9

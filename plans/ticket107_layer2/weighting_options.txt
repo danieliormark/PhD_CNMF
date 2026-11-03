@@ -1,0 +1,48 @@
+--- approach 1, journal none
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 auart:0.250 auaff:0.250 | pull child×parent 15%, child×article 38%, social 47%
+  B 50/50, c×a social        cp:0.500 ca:0.167 auart:0.167 auaff:0.167 | pull child×parent 35%, child×article 29%, social 36%
+  C 50/50, c×a half each     cp:0.333 ca:0.267 auart:0.200 auaff:0.200 | pull child×parent 21%, child×article 41%, social 38%
+  D thirds                   cp:0.333 ca:0.333 auart:0.167 auaff:0.167 | pull child×parent 20%, child×article 50%, social 30%
+  E equal per matrix         cp:0.250 ca:0.250 auart:0.250 auaff:0.250 | pull child×parent 15%, child×article 38%, social 47%
+--- approach 1, journal binary
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 auart:0.167 auaff:0.167 j:0.167 | pull child×parent 6%, child×article 14%, social 80% (journal 69%)
+  B 50/50, c×a social        cp:0.500 ca:0.125 auart:0.125 auaff:0.125 j:0.125 | pull child×parent 14%, child×article 9%, social 77% (journal 66%)
+  C 50/50, c×a half each     cp:0.333 ca:0.238 auart:0.143 auaff:0.143 j:0.143 | pull child×parent 8%, child×article 15%, social 77% (journal 66%)
+  D thirds                   cp:0.333 ca:0.333 auart:0.111 auaff:0.111 j:0.111 | pull child×parent 9%, child×article 23%, social 67% (journal 58%)
+  E equal per matrix         cp:0.200 ca:0.200 auart:0.200 auaff:0.200 j:0.200 | pull child×parent 4%, child×article 10%, social 86% (journal 74%)
+--- approach 1, journal idf
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 auart:0.167 auaff:0.167 j:0.167 | pull child×parent 9%, child×article 23%, social 68% (journal 50%)
+  B 50/50, c×a social        cp:0.500 ca:0.125 auart:0.125 auaff:0.125 j:0.125 | pull child×parent 22%, child×article 14%, social 64% (journal 46%)
+  C 50/50, c×a half each     cp:0.333 ca:0.238 auart:0.143 auaff:0.143 j:0.143 | pull child×parent 13%, child×article 23%, social 64% (journal 46%)
+  D thirds                   cp:0.333 ca:0.333 auart:0.111 auaff:0.111 j:0.111 | pull child×parent 14%, child×article 34%, social 52% (journal 38%)
+  E equal per matrix         cp:0.200 ca:0.200 auart:0.200 auaff:0.200 j:0.200 | pull child×parent 7%, child×article 17%, social 76% (journal 56%)
+--- approach 1, journal 1/sqrt(n), singletons missing
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 auart:0.167 auaff:0.167 j:0.167 | pull child×parent 15%, child×article 37%, social 49% (journal 19%)
+  B 50/50, c×a social        cp:0.500 ca:0.125 auart:0.125 auaff:0.125 j:0.125 | pull child×parent 35%, child×article 22%, social 43% (journal 17%)
+  C 50/50, c×a half each     cp:0.333 ca:0.238 auart:0.143 auaff:0.143 j:0.143 | pull child×parent 20%, child×article 36%, social 43% (journal 17%)
+  D thirds                   cp:0.333 ca:0.333 auart:0.111 auaff:0.111 j:0.111 | pull child×parent 19%, child×article 49%, social 32% (journal 12%)
+  E equal per matrix         cp:0.200 ca:0.200 auart:0.200 auaff:0.200 j:0.200 | pull child×parent 12%, child×article 30%, social 59% (journal 23%)
+--- approach 2, journal none
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 artaff:0.250 art2:0.250 | pull child×parent 12%, child×article 31%, social 57%
+  B 50/50, c×a social        cp:0.500 ca:0.167 artaff:0.167 art2:0.167 | pull child×parent 30%, child×article 25%, social 45%
+  C 50/50, c×a half each     cp:0.333 ca:0.267 artaff:0.200 art2:0.200 | pull child×parent 17%, child×article 35%, social 48%
+  D thirds                   cp:0.333 ca:0.333 artaff:0.167 art2:0.167 | pull child×parent 17%, child×article 43%, social 39%
+  E equal per matrix         cp:0.250 ca:0.250 artaff:0.250 art2:0.250 | pull child×parent 12%, child×article 31%, social 57%
+--- approach 2, journal binary
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 artaff:0.167 art2:0.167 j:0.167 | pull child×parent 5%, child×article 13%, social 81% (journal 65%)
+  B 50/50, c×a social        cp:0.500 ca:0.125 artaff:0.125 art2:0.125 j:0.125 | pull child×parent 13%, child×article 8%, social 78% (journal 63%)
+  C 50/50, c×a half each     cp:0.333 ca:0.238 artaff:0.143 art2:0.143 j:0.143 | pull child×parent 8%, child×article 14%, social 78% (journal 63%)
+  D thirds                   cp:0.333 ca:0.333 artaff:0.111 art2:0.111 j:0.111 | pull child×parent 9%, child×article 22%, social 69% (journal 55%)
+  E equal per matrix         cp:0.200 ca:0.200 artaff:0.200 art2:0.200 j:0.200 | pull child×parent 4%, child×article 9%, social 87% (journal 70%)
+--- approach 2, journal idf
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 artaff:0.167 art2:0.167 j:0.167 | pull child×parent 8%, child×article 21%, social 71% (journal 46%)
+  B 50/50, c×a social        cp:0.500 ca:0.125 artaff:0.125 art2:0.125 j:0.125 | pull child×parent 21%, child×article 13%, social 66% (journal 43%)
+  C 50/50, c×a half each     cp:0.333 ca:0.238 artaff:0.143 art2:0.143 j:0.143 | pull child×parent 12%, child×article 22%, social 66% (journal 43%)
+  D thirds                   cp:0.333 ca:0.333 artaff:0.111 art2:0.111 j:0.111 | pull child×parent 13%, child×article 32%, social 55% (journal 35%)
+  E equal per matrix         cp:0.200 ca:0.200 artaff:0.200 art2:0.200 j:0.200 | pull child×parent 6%, child×article 15%, social 79% (journal 51%)
+--- approach 2, journal 1/sqrt(n), singletons missing
+  A 50/50, c×a semantic      cp:0.250 ca:0.250 artaff:0.167 art2:0.167 j:0.167 | pull child×parent 13%, child×article 32%, social 55% (journal 16%)
+  B 50/50, c×a social        cp:0.500 ca:0.125 artaff:0.125 art2:0.125 j:0.125 | pull child×parent 31%, child×article 19%, social 50% (journal 15%)
+  C 50/50, c×a half each     cp:0.333 ca:0.238 artaff:0.143 art2:0.143 j:0.143 | pull child×parent 18%, child×article 32%, social 50% (journal 15%)
+  D thirds                   cp:0.333 ca:0.333 artaff:0.111 art2:0.111 j:0.111 | pull child×parent 18%, child×article 44%, social 38% (journal 11%)
+  E equal per matrix         cp:0.200 ca:0.200 artaff:0.200 art2:0.200 j:0.200 | pull child×parent 10%, child×article 25%, social 65% (journal 19%)
