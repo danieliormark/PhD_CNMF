@@ -7,7 +7,23 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-01, ticket 107 M1 builder)
+## State (2026-11-03, ticket 107 M1 — layer 2 and first-fit architecture)
+
+**Done since 2026-11-01:** full build `psych_trial_v2` (RDS `m1_chunk12v3/`); hold-out measurements; layer 2 decided
+element by element — design doc addenda 2026-11-02 (1)–(4), 2026-11-03:
+- L2.1 scale basis: Frobenius (a), provisional; article×journal weighting open until the journal ablation (arms J1–J5).
+- L2.2 weights: rule w = 0.5 / n_domain, child×article semantic (A0, equal semantic weights); A1 arm (0.35/0.15).
+- L2.4: all persons kept; arm "approach 2 without article×article" with pre-registered outcomes.
+- L2.5: approaches compared at both K₁ and K₂, shared semantic hold-out groups, pre-registered outcomes.
+- Architecture `plans/ticket107_layer2/test_architecture.py`: stage 1 journal ablation at K = 3, 5, 8, 13, 20;
+  stage 2 coarse-to-fine K at J*; stage 3 comparisons. Seeds 10–20 within a 1–2 week budget. Bethe Hessian counts
+  in `plans/ticket107_layer2/bethe_hessian_counts.txt`.
+
+**Waiting / next:** owner's wording of the K principle (K_max ≈ 20, extend if best at 20); L2.6 (held-out score,
+per-fold weights); pre-registration of D1 (journal weighting); then §8.2 mechanisms (Optuna and λ), then the M1 fit
+code. Delete `psych_trial_v1`? (ask).
+
+## Earlier state (2026-11-01, ticket 107 M1 builder)
 
 **Current work:** chunk12v3 builder for the Psychology trial (**2,136 articles** after RL-204/205) — written, checked,
 committed (b590d57); **full build not yet run: waiting for the owner's go** (estimate 5–10 min, < 3 GB; output to a new
