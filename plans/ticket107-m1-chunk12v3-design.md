@@ -1822,3 +1822,39 @@ widely, so they bound rather than estimate K: no single matrix supports more tha
 degree-preserving shuffles failed as a tool here: layer-1 weights tie cell values to tie counts, the shuffle breaks
 that link, and every real matrix fell below its shuffles (ratios 0.4–1.0). Seeds: v9.4 used 10 stability seeds; the
 relative precision of a standard deviation from n runs is ≈ 1/√(2(n − 1)) (5 → ±35%, 10 → ±24%).]*
+
+## Addendum 2026-11-03 — first-fit architecture: seeds, K range, coarse-to-fine K search
+
+- **Seeds — owner (2026-11-03):** 10–20 seeds per hold-out group, as many as fit a total of 1–2 weeks of computation;
+  the number is set once the M1 fit code exists and one fit has been timed (at least 10). Fits ≈ 390 × S before reuse
+  (S = 10: 3,900; 20: 7,800). Reason for more than 5: δ is estimated from the seed spread, whose relative error is
+  ≈ 1/√(2(S−1)) (35% at 5, 24% at 10, 16% at 20).
+- **Hold-out schemes:** reminder given; settled 2026-10-29/11-01 (10%, 10 groups of which 5 used, relation-by-relation
+  dropped, cap and eligibility, option B); the 2026-10-17 three-scheme comparison is superseded.
+- **K range — measurements** (`plans/ticket107_layer2/bethe_hessian_counts.py`, output `bethe_hessian_counts.txt`):
+  (1) Horn's parallel analysis with degree-preserving shuffles fails here: real singular values fall below the shuffled
+  ones (child×parent 0.38 of the shuffle at layer 1), the known effect of very unequal tie counts in sparse matrices
+  (Krzakala et al. 2013). (2) Bethe Hessian counts of detectable communities in each matrix's tie pattern (Saade,
+  Krzakala & Zdeborová 2014; Le & Levina 2015), counted exactly by Sylvester's inertia (negative pivots of a symmetric
+  factorisation; identical to Lanczos on article×article 15, article×affiliation 20, article×journal 0), for two choices
+  of r (moment-based / mean-degree): child×parent 4 / 23; child×article 5 / 1; author×article 41 / 82; author×affiliation
+  36 / 100; article×affiliation 20 / 23; article×article 15 / 21; article×journal 0 / 0 (artefact: a partition into
+  separate stars; structurally it supports up to its 169 journals with ≥ 2 articles). The semantic counts depend
+  strongly on r (very unequal tie counts), so they are a rough range, not a point; article-level social counts 15–23;
+  person-level counts (36–100) reflect small teams and organisations finer than communities should resolve.
+- **K principle (assistant's proposal, owner's decision pending in its wording; grid accepted below):** K_min = 2;
+  K_max ≈ 20, the order of the article-level detectable counts and still readable for the text check, extended to 25,
+  32 if the best coarse K is 20; spacing ×~1.6. This widens the decided trial range 2–10 (2026-10-17).
+- **DECIDED (owner, 2026-11-03: "If you think that this approach is justified … lets follow it"; assistant judged it
+  justified): coarse-to-fine K search.** Stage 1 runs at the coarse grid K = 3, 5, 8, 13, 20; stage 2, at the chosen
+  journal arm J*, fills in every integer K inside the band(s) of the coarse curve (K values within one standard error of
+  the best held-out score; several intervals if the band is split; 2 added if the band reaches 3), about 6 new K values
+  per approach (≈ 600 fits at S = 10 against ≈ 1,400 for the full grid 2–20). Justification: held-out curves in K are
+  smooth (gains fall roughly with log K, as in the capturable shares of 2026-11-02 (4)), so a coarse grid locates the band
+  and refinement resolves it; the risk (a narrow optimum between coarse points outside the band) is covered by filling
+  every interval that touches the band. The 2026-10-17 rule "grid and coarse search both run" is replaced by this
+  procedure for K up to 20.
+- **Architecture** updated (`plans/ticket107_layer2/test_architecture.py`, `test_architecture.txt`): stage 1 journal
+  ablation at the coarse grid; stage 2 refinement at J*; stage 3 pre-registered comparisons at K₁ and K₂ (approaches;
+  A1 in both approaches; approach 2 without article×article). Owner: "the plan looks good overall". Prerequisites before
+  stage 1: the M1 fit code, the §8.2 mechanisms and their λ values, pre-registration of decision D1 (journal weighting).

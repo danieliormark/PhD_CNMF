@@ -4,9 +4,10 @@
 # rescaled to 0.5 — owner, 2026-11-02), counts fits, and prints the tree with the decision taken at each node.
 # Run: python3 test_architecture.py  (writes nothing; redirect to keep a copy)
 
-FOLDS, SEEDS = 5, 5                       # hold-out groups used (5 of 10) x seeds per group (S, proposed 5)
-K_PROBE = [4, 6, 8]                       # stage 1: a few K values (proposal; owner expects > 4 may be optimal)
-K_GRID = list(range(2, 11))               # stage 2: trial K range, decided 2026-10-17 (full grid K = 2-10)
+FOLDS = 5                                 # hold-out groups used (5 of 10)
+SEEDS = 10                                # per hold-out group; owner 2026-11-03: 10-20, as many as a 1-2 week budget allows
+K_PROBE = [3, 5, 8, 13, 20]               # stage 1 = the coarse grid (x~1.6 steps; K_max from Bethe Hessian counts)
+K_REFINE = 6                              # stage 2: about this many new K values, every integer inside the winning band(s)
 FITS_PER_CELL = FOLDS * SEEDS             # one "cell" = one arm at one K
 
 SEM = ["child×parent", "child×article"]   # child×article counted semantic (L2.2, decided)
@@ -53,13 +54,16 @@ stages.append(("STAGE 1 — journal ablation (A0; approach 2 with article×artic
                "these outcomes is still TO DO (as done for L2.4/L2.5). → chosen arm J* is used in stages 2–3."))
 
 # Stage 2 — K search at J*, both approaches
-s2 = [(f"approach {a} · J* (chosen in D1)", weights(a), K_GRID) for a in (1, 2)]
-count["stage 2"] = sum(len(k) for _, _, k in s2) * FITS_PER_CELL
-stages.append(("STAGE 2 — choice of K at J* (A0)", s2,
+s2 = [(f"approach {a} · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve "
+       f"(stage-1 cells at J*); extend to 25, 32 if the best coarse K is 20", weights(a), ["~" + str(K_REFINE) + " new K"])
+      for a in (1, 2)]
+count["stage 2"] = 2 * K_REFINE * FITS_PER_CELL
+stages.append(("STAGE 2 — choice of K at J* (A0), coarse-to-fine", s2,
                "DECISION D2: K₁ (approach 1) and K₂ (approach 2) — out-of-sample fit on the combined held-out score of "
                "each approach's matrices with hidden cells (incl. its own affiliation matrix; owner 2026-11-02: non-semantic "
                "matrices stay pertinent within an approach), with Track A/B stability against chance as the gate "
-               "(design doc §6). Cells of stage 1 at J* and K in K_PROBE are reused. (weights shown for J2 binary)"))
+               "(design doc §6). The band = K values within one standard error of the best held-out score; every interval between "
+               "coarse points touching a band is filled in (several intervals if the band is split). (weights shown for J2 binary)"))
 
 # Stage 3 — three pre-registered comparisons at J*, at K₁ and K₂
 s3 = [("3a approach 1 vs approach 2 — reuses stage-2 fits at K₁ and K₂", None, []),
@@ -94,5 +98,5 @@ for x in LATER[:3]:
     print("  • " + x)
 print("\nFit counts (before reuse): " + ", ".join(f"{k} {v:,}" for k, v in count.items())
       + f"; total {sum(count.values()):,}")
-print(f"For comparison, the unstaged plan (every journal arm × both approaches × full K grid, plus A1 and arm N at J2): "
-      f"{(2 * len(JOURNAL_ARMS) * len(K_GRID) + 2 * 2 + 2) * FITS_PER_CELL:,}")
+print(f"For comparison, a full grid K = 2-20 at J* in stage 2 instead of refinement (14 K beyond the coarse 5): {2 * 14 * FITS_PER_CELL:,} fits")
+print("Total fits as a function of seeds S: " + ", ".join(f"S={s_}: {sum(count.values()) // SEEDS * s_:,}" for s_ in (10, 15, 20)))

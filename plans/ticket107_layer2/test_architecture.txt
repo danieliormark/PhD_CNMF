@@ -1,40 +1,40 @@
-Fits per cell = 5 hold-out groups × 5 seeds = 25
+Fits per cell = 5 hold-out groups × 10 seeds = 50
 
 PREREQUISITES (before stage 1): M1 fit code; §8.2 mechanisms and λ; must be fixed BEFORE stage 1; the hold-out scheme comparison of 2026-10-17 to be confirmed as done or still needed
 
 STAGE 1 — journal ablation (A0; approach 2 with article×article)
-├── approach 1 · J1 no journal matrix   K = [4, 6, 8]
+├── approach 1 · J1 no journal matrix   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.250, author×affiliation 0.250
-├── approach 1 · J2 binary (current, P4)   K = [4, 6, 8]
+├── approach 1 · J2 binary (current, P4)   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
-├── approach 1 · J3a binary, multiplier 1/4   K = [4, 6, 8]
+├── approach 1 · J3a binary, multiplier 1/4   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.222, author×affiliation 0.222, article×journal 0.056
-├── approach 1 · J3b binary, multiplier 1/8   K = [4, 6, 8]
+├── approach 1 · J3b binary, multiplier 1/8   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.235, author×affiliation 0.235, article×journal 0.029
-├── approach 1 · J4 journal column × idf   K = [4, 6, 8]
+├── approach 1 · J4 journal column × idf   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
-├── approach 1 · J5 columns × 1/√n, singleton journals missing   K = [4, 6, 8]
+├── approach 1 · J5 columns × 1/√n, singleton journals missing   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
-├── approach 2 · J1 no journal matrix   K = [4, 6, 8]
+├── approach 2 · J1 no journal matrix   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.250, article×article 0.250
-├── approach 2 · J2 binary (current, P4)   K = [4, 6, 8]
+├── approach 2 · J2 binary (current, P4)   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
-├── approach 2 · J3a binary, multiplier 1/4   K = [4, 6, 8]
+├── approach 2 · J3a binary, multiplier 1/4   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.222, article×article 0.222, article×journal 0.056
-├── approach 2 · J3b binary, multiplier 1/8   K = [4, 6, 8]
+├── approach 2 · J3b binary, multiplier 1/8   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.235, article×article 0.235, article×journal 0.029
-├── approach 2 · J4 journal column × idf   K = [4, 6, 8]
+├── approach 2 · J4 journal column × idf   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
-└── approach 2 · J5 columns × 1/√n, singleton journals missing   K = [4, 6, 8]
+└── approach 2 · J5 columns × 1/√n, singleton journals missing   K = [3, 5, 8, 13, 20]
         weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
     ▼ DECISION D1 (owner): weighting of article×journal, from: agreement of article memberships between arms (Track A/B, chance-adjusted; J1 the reference); each matrix's realised share; journal–community association vs shuffled journals; held-out prediction of the other matrices. Pre-registration of these outcomes is still TO DO (as done for L2.4/L2.5). → chosen arm J* is used in stages 2–3.
 
-STAGE 2 — choice of K at J* (A0)
-├── approach 1 · J* (chosen in D1)   K = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+STAGE 2 — choice of K at J* (A0), coarse-to-fine
+├── approach 1 · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve (stage-1 cells at J*); extend to 25, 32 if the best coarse K is 20   K = ['~6 new K']
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
-└── approach 2 · J* (chosen in D1)   K = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+└── approach 2 · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve (stage-1 cells at J*); extend to 25, 32 if the best coarse K is 20   K = ['~6 new K']
         weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
-    ▼ DECISION D2: K₁ (approach 1) and K₂ (approach 2) — out-of-sample fit on the combined held-out score of each approach's matrices with hidden cells (incl. its own affiliation matrix; owner 2026-11-02: non-semantic matrices stay pertinent within an approach), with Track A/B stability against chance as the gate (design doc §6). Cells of stage 1 at J* and K in K_PROBE are reused. (weights shown for J2 binary)
+    ▼ DECISION D2: K₁ (approach 1) and K₂ (approach 2) — out-of-sample fit on the combined held-out score of each approach's matrices with hidden cells (incl. its own affiliation matrix; owner 2026-11-02: non-semantic matrices stay pertinent within an approach), with Track A/B stability against chance as the gate (design doc §6). The band = K values within one standard error of the best held-out score; every interval between coarse points touching a band is filled in (several intervals if the band is split). (weights shown for J2 binary)
 
 STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂
 ├── 3a approach 1 vs approach 2 — reuses stage-2 fits at K₁ and K₂
@@ -51,5 +51,6 @@ LATER STAGES (not yet designed):
   • final models refitted on all cells after settings are chosen (open)
   • background component (deferred robustness arm; planted test first)
 
-Fit counts (before reuse): stage 1 900, stage 2 450, stage 3 150; total 1,500
-For comparison, the unstaged plan (every journal arm × both approaches × full K grid, plus A1 and arm N at J2): 2,850
+Fit counts (before reuse): stage 1 3,000, stage 2 600, stage 3 300; total 3,900
+For comparison, a full grid K = 2-20 at J* in stage 2 instead of refinement (14 K beyond the coarse 5): 1,400 fits
+Total fits as a function of seeds S: S=10: 3,900, S=15: 5,850, S=20: 7,800
