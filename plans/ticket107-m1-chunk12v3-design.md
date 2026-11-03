@@ -1905,3 +1905,17 @@ evaluation criterion across the models compared): within an arm, that arm's rela
 approaches, the primary score is child×article and child×parent only (w_r = 0.25 in every arm), the affiliation matrix
 reported separately; this also applies to D1. Point 4 (standard error from the 5 hold-out-group means): illustrative
 example requested.]*
+*[2026-11-03, owner, L2.6 point 4 and the band. **DECIDED** ("point 0 agree with your proposal"; "for the rest I agree"):
+(0) a K's score is the **mean over the 5 hold-out groups** of each group's **mean over its S seeds** (not the minimum or
+maximum: they compare the easiest/hardest hidden-cell set, not K; choosing a seed by its held-out error would make the
+score optimistic); reported beside it, the held-out score of each group's **seed with the lowest training loss**, flagged
+if it gives a different band. SE = SD of the 5 group means / √5 (groups are the data-sampling units; seeds only sharpen
+each group's mean). Band = all K with mean ≤ best mean + SE of the best K (classic one-standard-error rule, ESL §7.10).
+Cases: band reaching the lowest coarse value (3) → add K = 2; split band → fill each interval; band too wide to decide →
+add the 5 unused hold-out groups (SE ≈ √2 smaller). Choice within the band after the stability gate by inspection and
+the text check, reasons recorded (the textbook rule's smallest K is reported). (1) **K = 32 stays unconditional.**
+**Owner's addition:** if a K above 13 beats 13 but 32 does not beat it, K = 20 (already on the coarse grid) locates the
+interval (13–20 or 20–32); **large intervals are searched coarse-to-fine as well**: when an interval touching the band
+spans more integers than the refinement budget (e.g. 20–32), first fit its approximate geometric midpoints (×~1.25
+steps, e.g. 25 between 20 and 32), recompute the band, then fill every integer of the interval(s) still touching it. The
+same applies to an extension beyond 32 (32 → 40 → 50).]*

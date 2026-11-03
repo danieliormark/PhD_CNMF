@@ -63,7 +63,9 @@ stages.append(("STAGE 2 — choice of K at J* (A0), coarse-to-fine", s2,
                "each approach's matrices with hidden cells (incl. its own affiliation matrix; owner 2026-11-02: non-semantic "
                "matrices stay pertinent within an approach), with Track A/B stability against chance as the gate "
                "(design doc §6). The band = K values within one standard error of the best held-out score; every interval between "
-               "coarse points touching a band is filled in (several intervals if the band is split). (weights shown for J2 binary)"))
+               "coarse points touching a band is filled in (several intervals if the band is split); an interval wider than the "
+               "refinement budget (e.g. 20–32) is first probed at its geometric midpoint(s), then filled (owner 2026-11-03). "
+               "(weights shown for J2 binary)"))
 
 # Stage 3 — three pre-registered comparisons at J*, at K₁ and K₂
 s3 = [("3a approach 1 vs approach 2 — reuses stage-2 fits at K₁ and K₂", None, []),
