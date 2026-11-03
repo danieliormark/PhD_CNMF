@@ -1813,3 +1813,12 @@ matter, choose by research aim (author memberships vs parsimony); equivalent + d
 M3 decide which leads, owner's decision; one better → lead with it, other as robustness; inconclusive → report both,
 no ranking. Ranking always the owner's. Arm plan: assistant's staged proposal in `plans/ticket107_layer2/
 test_architecture.py` (output `test_architecture.txt`), awaiting the owner.]*
+*[2026-11-03, spectral pre-estimates of K per matrix (scratch, build `psych_trial_v2`, not decisions). Bethe Hessian
+(Saade, Krzakala & Zdeborová 2014; Le & Levina 2015) on each matrix's binary tie pattern as a bipartite graph, number of
+negative eigenvalues: author×article 33, author×affiliation 26, article×affiliation 16, article×article 9, child×article 3,
+article×journal 0 (not applicable: a partition is a union of stars, which the method does not count), child×parent not
+finished (too slow at 134k nodes). These partly count disconnected groups (e.g. 208 co-author groups) and disagree
+widely, so they bound rather than estimate K: no single matrix supports more than ~30. Horn's parallel analysis with
+degree-preserving shuffles failed as a tool here: layer-1 weights tie cell values to tie counts, the shuffle breaks
+that link, and every real matrix fell below its shuffles (ratios 0.4–1.0). Seeds: v9.4 used 10 stability seeds; the
+relative precision of a standard deviation from n runs is ≈ 1/√(2(n − 1)) (5 → ±35%, 10 → ±24%).]*
