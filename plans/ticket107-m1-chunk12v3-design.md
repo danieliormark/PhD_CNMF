@@ -1858,3 +1858,6 @@ relative precision of a standard deviation from n runs is ≈ 1/√(2(n − 1)) 
   ablation at the coarse grid; stage 2 refinement at J*; stage 3 pre-registered comparisons at K₁ and K₂ (approaches;
   A1 in both approaches; approach 2 without article×article). Owner: "the plan looks good overall". Prerequisites before
   stage 1: the M1 fit code, the §8.2 mechanisms and their λ values, pre-registration of decision D1 (journal weighting).
+*[2026-11-03, **DECIDED (owner: "I approve the principle in general")**: K principle — K_min = 2, K_max ≈ 20, extended to
+25, 32 if the best coarse K is 20; ×~1.6 spacing for the coarse grid. Owner asked for a method note on the Bethe
+Hessian / inertia shortcut for an external check by another model: `plans/ticket107_layer2/bethe_hessian_method_note.md`.]*
