@@ -1894,3 +1894,14 @@ re-run 2026-11-03 and reproducing the numbers recorded in the addenda.]*
   cells' distribution; assistant to show how established it is and, if wanted, measure how much the weights move);
   scoring weights across arms (clarified as the relation weights w_r); standard error from the 5 hold-out-group means,
   with S = 10–20 seeds per group (decided 2026-11-03).
+*[2026-11-03, owner, L2.6 continued. **DECIDED — per-fold recomputation** as proposed (child×article: idf_article,
+partial row normalisation, Frobenius norm; child×parent: idf_parent, partial row normalisation, Frobenius norm;
+author×affiliation / article×affiliation: row normalisation, Frobenius norm; nothing for matrices without hidden cells,
+for W, or for the relation weights), with hidden ties' targets expressed at the fold's own weights — the standard rule
+against leakage (Hastie, Tibshirani & Friedman, ESL §7.10.2; Kaufman, Rosset & Perlich 2012; transforms fitted on the
+training part and applied to the held-out part). **DECIDED — term "held-out captured share"** (1 − hidden error /
+hidden error of the prediction 0). **DECIDED — scoring weights** ("as long as it follows established practices": a fixed
+evaluation criterion across the models compared): within an arm, that arm's relation weights w_r; across arms or
+approaches, the primary score is child×article and child×parent only (w_r = 0.25 in every arm), the affiliation matrix
+reported separately; this also applies to D1. Point 4 (standard error from the 5 hold-out-group means): illustrative
+example requested.]*
