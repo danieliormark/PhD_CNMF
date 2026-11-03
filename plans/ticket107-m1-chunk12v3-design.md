@@ -1880,3 +1880,17 @@ one row per script, the Bethe Hessian shortcut and its checks); scripts and thei
 (`capturable_shares`, `layer1_character`, `entropy_measures`, `journal_variants`, `journal_checks`, `weighting_options`,
 `sparse_matrices`, `parallel_analysis`, `bethe_hessian_counts`, `bethe_hessian_checks`, `test_architecture`), all
 re-run 2026-11-03 and reproducing the numbers recorded in the addenda.]*
+
+## Addendum 2026-11-03 (2) — layer 2, element L2.6 (held-out score): first decisions
+
+- **DECIDED (owner, 2026-11-03): selection on the weighted squared error of the hidden cells** (Σ_r w_r × hidden error of
+  matrix r, the training loss's own form), with a per-matrix readable score reported alongside. Owner asked not to call
+  it "skill" unless established; term proposed: **held-out captured share** = 1 − hidden error / hidden error of the
+  prediction 0 (the captured share used throughout, on hidden cells; in forecast verification the MSE skill score
+  relative to a zero reference, Murphy 1988). Precision/recall do not apply (they need a threshold on predictions).
+- **DECIDED (owner, 2026-11-03): final refit** on all cells with the chosen settings is part of the pipeline, but as a
+  separate, shorter script written once the settings are selected, not in the first-fit script.
+- Open: per-fold recomputation of layer-1 weights (owner's concern: hidden cells' targets then follow the visible
+  cells' distribution; assistant to show how established it is and, if wanted, measure how much the weights move);
+  scoring weights across arms (clarified as the relation weights w_r); standard error from the 5 hold-out-group means,
+  with S = 10–20 seeds per group (decided 2026-11-03).
