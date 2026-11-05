@@ -1982,3 +1982,9 @@ large enough (eligible entities, ~10% each)? Literature on held-out size answere
   stage 1. Accepted limitation: interactions between an in-loop term and the loss are not tested in stage 0. What
   depends on β: L2.1 scale basis, the units of L2.2's shares, the L2.6 held-out score, D1-M3 / pull, every λ.
   K values: owner asked whether the K rule applies; answered 2026-11-05 (proposal below, pending).
+*[2026-11-05, **DECIDED (owner: "I agree with your proposal")**: stage 0 uses the full coarse grid K = 3, 5, 8, 13, 20
+for both losses and both approaches, with the D1 reading rule (candidate K = coarse K inside the one-SE band of either
+loss; verdict = majority over candidates); each loss's best K reported as a finding; hold-out groups 1–5; ≈ 1,000 fits
+at S = 10 plus planted worlds. Stage-0 fits under the chosen loss are reused as stage 1's J2 cells (groups 1–5) only if
+steps 2–6 leave every in-loop term off. Owner then asked whether K = 32, 50 and higher can be fitted; answered the
+same day (proposal pending).]*
