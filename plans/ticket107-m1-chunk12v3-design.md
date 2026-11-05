@@ -2093,3 +2093,17 @@ restated: 0.05·(n + 1) integer, 999 usual (Davidson & MacKinnon 2000); Manly's 
 rationale now cites Kohavi 1995, Owen & Perry 2009 and Li, Levina & Zhu 2020. **Adaptations to state, not
 established:** the four-category coherence rating (Newman et al. used 3 points); matching intruders by tie-count band
 (Chang et al. matched only by prominence in another topic).
+*[2026-11-05, **S0-M5 DECIDED (owner): the intruder test and the coherence rating are optional** — not part of the
+stage-0 decision unless the owner chooses to run them; documented so they can be taken up later. Procedure, if run:
+only when S0-M1 says "different", and only for community pairs that differ between the losses; one K per approach (the
+candidate K with the best combined AUC averaged over both losses); per loss the medoid seed (by Track B) of hold-out
+group 1; per community 2–3 tasks, each showing 5 items drawn at random from the community's core (membership ≥ 0.8, or
+its top 10% if fewer) plus 1 intruder, separately for article titles and for child hyperedges in the authors' wording;
+intruder = random among items low in this community (< 0.05) and in the core of another, randomly chosen community
+(Chang et al. 2009), matched by tie-count band (our adaptation); blinded (losses, communities and item order shuffled,
+key sealed); the owner picks the intruder and rates each community coherent / broad but meaningful / mixed / incoherent
+with a one-line reason (Newman et al. 2010 used 3 points; 4 categories is our adaptation). Measures: share of intruders
+found and share rated coherent, per loss; Fisher's exact test (with ~30 tasks per loss only differences of ~30
+points are detectable). Not developed further: NPMI coherence on the non-trial corpus (needs child hyperedges for it);
+blind LLM readers (needs the owner's permission for agents). Without S0-M5, stage 0 rests on S0-M1–M4 and the per-entity
+fit.]*
