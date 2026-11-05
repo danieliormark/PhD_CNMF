@@ -2045,3 +2045,9 @@ matter for prediction; squared error better in a band → unexpected, inspect. E
 expected (Poisson-type models usually predict sparse ties better; plain KL-NMF reproduces degrees), so it counts only
 beyond the degree reference. Limit: tie count is a proxy for off-corpus belonging; coverage (OpenAlex counts) exists only
 for journals, organisations, persons. The same band split applies to the per-entity fit.]*
+*[2026-11-05, **S0-M3 DECIDED (owner: "I accept your ideas")** — cross-scoring, confirmatory: every fit scored on its
+hidden cells under both held-out squared error (L2.6 form) and held-out generalised KL (Σ x·ln(x/x̂) − x + x̂; empty-cell
+part scaled to the full empty count); per score Δ_g = score(squared-error fit) − score(KL fit), classes as S0-M2 (δ ÷ √2),
+3+ band classified, 2-tie band reported; scores compared only within themselves. Reading: split (each wins its own) → no
+weight, S0-M2 decides; one loss wins under both → dominance; equivalent on one, winner on the other → weak support;
+dominance against S0-M2 → flagged to the owner. Reported: share of the held-out KL from the 1% worst-predicted ties.]*
