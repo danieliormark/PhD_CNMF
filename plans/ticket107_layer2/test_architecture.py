@@ -41,6 +41,16 @@ def fmt(w):
 stages = []
 count = {}
 
+# Stage 0 — loss comparison (owner 2026-11-05): squared error (β = 2) vs generalised KL (β = 1), before the λ calibration
+s0 = [(f"approach {a} · J2 binary · loss {b}; in-loop terms and word-similarity regulariser off", weights(a), K_PROBE)
+      for a in (1, 2) for b in ("β = 2 (squared error)", "β = 1 (KL)")]
+count["stage 0"] = len(s0) * len(K_PROBE) * FITS_PER_CELL   # + planted worlds; + K = 32 if a band reaches 20 (proposed)
+stages.append(("STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)", s0,
+               "DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free "
+               "ranking measure, cross-scored; seed stability; planted recovery under both noise types; text check), read "
+               "at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. "
+               "→ the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; re-check at the final K₁, K₂ (proposed)."))
+
 # Stage 1 — journal ablation, both approaches, A0, with article×article, at K_PROBE
 s1 = []
 for a in (1, 2):
@@ -79,14 +89,13 @@ stages.append(("STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂",
                "(A1 never replaces A0 automatically); 3c L2.4 classes (adds information / misleads / redundant / "
                "inconclusive) × team-shaped communities → keep or fallback to a regulariser. (weights shown for J2 binary)"))
 
-LATER = ["loss β = 1 (KL) vs β = 2: pre-registered loss-neutral comparison (2026-10-31); if KL is chosen, L2.1/L2.2 are rechecked",
-         "final models refitted on all cells after settings are chosen (open)",
+LATER = ["final models refitted on all cells after settings are chosen (open)",
          "background component (deferred robustness arm; planted test first)",
          "mechanisms and λ values of §8.2 (regulariser, penalties, Optuna or grid) — must be fixed BEFORE stage 1; "
          "the hold-out scheme comparison of 2026-10-17 to be confirmed as done or still needed"]
 
 print(f"Fits per cell = {FOLDS} hold-out groups × {SEEDS} seeds = {FITS_PER_CELL}\n")
-print("PREREQUISITES (before stage 1): M1 fit code; §8.2 mechanisms and λ; " + LATER[3].split(" — ")[1] + "\n")
+print("PREREQUISITES: M1 fit code with both losses (before stage 0); §8.2 mechanisms and λ under the chosen loss (before stage 1); " + LATER[2].split(" — ")[1] + "\n")
 for title, arms, decision in stages:
     print(title)
     for i, (name, w, ks) in enumerate(arms):
@@ -96,7 +105,7 @@ for title, arms, decision in stages:
             print(("    " if last else "│   ") + "    weights: " + fmt(w))
     print("    ▼ " + decision + "\n")
 print("LATER STAGES (not yet designed):")
-for x in LATER[:3]:
+for x in LATER[:2]:
     print("  • " + x)
 print("\nFit counts (before reuse): " + ", ".join(f"{k} {v:,}" for k, v in count.items())
       + f"; total {sum(count.values()):,}")

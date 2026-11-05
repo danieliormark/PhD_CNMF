@@ -1,6 +1,17 @@
 Fits per cell = 5 hold-out groups × 10 seeds = 50
 
-PREREQUISITES (before stage 1): M1 fit code; §8.2 mechanisms and λ; must be fixed BEFORE stage 1; the hold-out scheme comparison of 2026-10-17 to be confirmed as done or still needed
+PREREQUISITES: M1 fit code with both losses (before stage 0); §8.2 mechanisms and λ under the chosen loss (before stage 1); must be fixed BEFORE stage 1; the hold-out scheme comparison of 2026-10-17 to be confirmed as done or still needed
+
+STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)
+├── approach 1 · J2 binary · loss β = 2 (squared error); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
+│       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
+├── approach 1 · J2 binary · loss β = 1 (KL); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
+│       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
+├── approach 2 · J2 binary · loss β = 2 (squared error); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
+│       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
+└── approach 2 · J2 binary · loss β = 1 (KL); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
+        weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
+    ▼ DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free ranking measure, cross-scored; seed stability; planted recovery under both noise types; text check), read at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. → the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; re-check at the final K₁, K₂ (proposed).
 
 STAGE 1 — journal ablation (A0; approach 2 with article×article)
 ├── approach 1 · J1 no journal matrix   K = [3, 5, 8, 13, 20]
@@ -47,10 +58,9 @@ STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂
     ▼ DECISIONS: 3a L2.5 classes (approach 1 better / approach 2 better / equivalent / inconclusive) × membership agreement → reading per the pre-registered table, ranking by the owner; 3b A1 criteria (A1 never replaces A0 automatically); 3c L2.4 classes (adds information / misleads / redundant / inconclusive) × team-shaped communities → keep or fallback to a regulariser. (weights shown for J2 binary)
 
 LATER STAGES (not yet designed):
-  • loss β = 1 (KL) vs β = 2: pre-registered loss-neutral comparison (2026-10-31); if KL is chosen, L2.1/L2.2 are rechecked
   • final models refitted on all cells after settings are chosen (open)
   • background component (deferred robustness arm; planted test first)
 
-Fit counts (before reuse): stage 1 3,000, stage 2 700, stage 3 300; total 4,000
+Fit counts (before reuse): stage 0 1,000, stage 1 3,000, stage 2 700, stage 3 300; total 5,000
 For comparison, a full grid K = 2-20 at J* in stage 2 instead of refinement (14 K beyond the coarse 5): 1,400 fits
-Total fits as a function of seeds S: S=10: 4,000, S=15: 6,000, S=20: 8,000
+Total fits as a function of seeds S: S=10: 5,000, S=15: 7,500, S=20: 10,000
