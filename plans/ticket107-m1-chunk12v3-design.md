@@ -2018,3 +2018,11 @@ overstate the noise of the full-sample D by about √2) — to apply to D1-M1 an
 decided 2026-10-31). The other descriptive distributions proposed (community sizes, membership concentration,
 reconstructed vs observed tie counts) are not in the pre-registration (owner doubted their use without ground truth;
 available as ad hoc diagnostics).]*
+*[2026-11-05, **DECIDED (owner: "if √2 is necessary, then please implement it when pertinent")**: every noise margin δ
+estimated from seed halves is **divided by √2** — L2.4-M1, the L2.5 approach comparison, D1-M1 (and the D1-M4 count
+margin built the same way) and S0-M1. Reason: Δ or D is built from full-sample means over S seeds per arm/loss, while δ
+compares two half-samples of S/2 seeds; with noise ∝ 1/√(seeds), Var(half₁ − half₂) = 4·Var(full mean) against
+2·Var(full mean) for Δ under no effect, so the unadjusted δ is about √2 too large (approximation: seed pairs share
+seeds). Effect: "same/redundant/equivalent" become harder to reach, borderline cases move to "different" or
+"inconclusive". Splits: 999 random splits throughout. No fit is ever run with S/2 seeds; the halves only re-group
+existing fits.]*

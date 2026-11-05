@@ -80,7 +80,10 @@ Every measure compares an arm Jx with J1 under the same hold-out groups. Measure
 (the training loss's own form: Σ_r w_r × hidden error of r). Both matrices have weight 0.25 in every arm, so the score is
 the same criterion in all arms (L2.6, DECIDED 2026-11-03). Per group g: Δ_g = score(J1) − score(Jx), each arm's score the
 mean over its S seeds; **positive Δ = Jx predicts the hidden semantic cells better**. The noise margin δ = 95th
-percentile of the absolute per-group difference between two halves of the same arm's seeds, over all splits.
+percentile of the absolute per-group difference between two halves of the same arm's seeds, over 999 random splits,
+**divided by √2** (owner, 2026-11-05): a half-sample mean over S/2 seeds is noisier than the full-sample mean over S
+seeds that Δ is built from; with noise ∝ 1/√(number of seeds), the half-split difference has a spread about √2 times
+that of Δ under no effect (an approximation, since seed pairs share seeds). Unadjusted, δ would favour *redundant*.
 
 **Classes** (L2.4 definitions): **adds information** — the 95% interval of the mean Δ lies above 0 and the mean Δ ≥ +δ;
 **misleads** — the interval lies below 0 and the mean Δ ≤ −δ; **redundant** — the mean Δ is shown to lie within ±δ by two
