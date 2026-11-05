@@ -111,7 +111,7 @@ already coincide with the communities), or be lightly fitted and change a lot.
 **Definition.** Realised share of article×journal (§3), mean over groups and seeds, reported beside its pull and beside
 the realised share of the semantic domain (child×parent + child×article). Not defined for J1.
 
-**Flag "journal-dominated" — threshold OPEN.** Proposed: the journal's realised share ≥ the semantic domain's realised
+**Flag "journal-dominated" — DECIDED (owner, 2026-11-05):** the journal's realised share ≥ the semantic domain's realised
 share (the journal alone carries as much of the achieved fit as the whole semantic side, which was given half of the
 weight). Alternatives: ≥ 1/3 (twice its weight share of 1/6); report without a flag.
 
@@ -179,15 +179,24 @@ sees journals, so its count shows how journal-aligned the communities are from m
 journal-shaped communities in Jx than in J1 means the journal matrix imposes journal structure; a similar count means
 the alignment was in the data anyway (journals as real research communities).
 
-### 4.5 Number of shuffles — PROPOSED: 999
+### 4.5 Number of shuffles — DECIDED (owner, 2026-11-05): 999
 
 The 200 used so far was carried over from earlier chance-level checks (ticket 95, the temporal matching), not derived
 for this test. With n shuffles the empirical 95th percentile corresponds to a true quantile with standard error
 √(0.05·0.95/n): 0.015 at n = 200 (true quantile ~0.92–0.98), 0.007 at n = 999 (0.936–0.964); the smallest attainable p
 is 1/(n + 1) (`d1_examples.txt`). Standard guidance for Monte Carlo tests at the 5% level is about 1,000 (Davison &
 Hinkley 1997, ch. 4; Manly 2007); p = (1 + r)/(1 + n) is the recommended estimate (North, Curtis & Sham 2002). The
-shuffles need no fitting (one weighted count per community per shuffle), so 999 costs seconds. The same change is
-proposed for L2.4-M3 (team-shaped communities), for consistency.
+shuffles need no fitting (one weighted count per community per shuffle), so 999 costs seconds. Timed: 999 shuffles for one fit at K = 20 take 0.6 s (journal sums by `np.add.at`), i.e. about 1 h over 6,000 fits —
+small beside the fits; the owner's condition ("as long as it does not take too much computation") is met. The same
+change applies to L2.4-M3 (team-shaped communities), for consistency.
+
+**To revisit elsewhere (owner, 2026-11-05):** other shuffle or resampling counts in the pipeline were also set without
+a derivation: (i) Track A/B chance level — one row-shuffle per seed pair, so 45 values at 10 seeds (`chunk13v9.py`
+`run_dual_track_stability_analysis`; CLAUDE.md §4.24); (ii) the temporal matching's 200 shuffles
+(`chunk13v10.py` `TEMPORAL_MATCH_SHUFFLES`, not on the trial path); (iii) the "5th percentile of within-arm seed-pair
+scores" used by D1-M2 and L2.4-M2 — at S = 10 there are 45 seed pairs per group, so this percentile rests on few values;
+(iv) the noise margin δ from seed halves (its 95th percentile over splits); (v) `parallel_analysis.py`. Each to be
+checked against the same Monte Carlo precision argument when the M1 fit code is written.
 
 ## 5. Decision rule — PROPOSED, except where marked
 
@@ -274,4 +283,7 @@ error with 10 groups; uncorrected intervals reported beside them.
 | singleton journals excluded from D1-M4, reported separately | DECIDED (owner, 2026-11-05) |
 | one J* per approach, with cross-fits | DECIDED (owner, 2026-11-05) |
 | D1-M1 classes, D1-M2, D1-M4 definitions, decision rule | PROPOSED |
-| D1-M3 flag threshold; K at which classes are read; multiplicity correction and error estimate; 999 shuffles | OPEN |
+| D1-M3 flag (journal realised share ≥ semantic domain's realised share) | DECIDED (owner, 2026-11-05) |
+| 999 shuffles (and for L2.4-M3); other counts to revisit (§4.5) | DECIDED (owner, 2026-11-05) |
+| Dunnett's procedure for the five comparisons with J1 | PRELIMINARILY APPROVED (owner, 2026-11-05) |
+| K at which classes are read; pooled block error vs each comparison's own error | OPEN |

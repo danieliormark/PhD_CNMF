@@ -1932,3 +1932,9 @@ approach** (J*₁, J*₂), each approach also fitted at the other's J* (cross-fi
 × 2 K). Proposed: the decision rule; 999 shuffles instead of 200 (also for L2.4-M3). Open: D1-M3 threshold; K at which
 classes are read (proposed 2 of K = 5, 8, 13); multiplicity correction (Dunnett vs Bonferroni) and error estimate
 (pooled block error vs 10 groups).
+*[2026-11-05, owner, D1 decisions: **DECIDED** — D1-M3 flag "journal-dominated" = journal realised share ≥ the semantic
+domain's realised share ("I approve your idea for the flag"); **DECIDED** — 999 shuffles for D1-M4 and L2.4-M3
+("as long as it does not take too much computations": timed 0.6 s per fit at K = 20); **to revisit** — the other
+shuffle/resampling counts of the pipeline (Track A/B chance level, seed-pair percentiles, δ, temporal matching; list in
+the D1 document §4.5); **preliminarily approved** — Dunnett's procedure. Open: K at which classes are read; pooled block
+error vs each comparison's own error.]*
