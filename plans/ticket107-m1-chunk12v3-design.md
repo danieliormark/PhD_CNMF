@@ -1988,3 +1988,8 @@ loss; verdict = majority over candidates); each loss's best K reported as a find
 at S = 10 plus planted worlds. Stage-0 fits under the chosen loss are reused as stage 1's J2 cells (groups 1–5) only if
 steps 2–6 leave every in-loop term off. Owner then asked whether K = 32, 50 and higher can be fitted; answered the
 same day (proposal pending).]*
+*[2026-11-05, **DECIDED (owner: "I approve this logic")** — stage 2 extension beyond 50: steps of about ×1.25
+(50 → 64 → 80 …) while the top value is best or inside the band; stop at the first value clearly worse; if the curve has
+not turned at an unaffordable size, report it (fit time grows roughly with K). Proposed for stage 0 (pending): a
+conditional K = 32 if either loss's band reaches 20 (≈ 200 fits at S = 10) and a required re-check of β at the final
+K₁, K₂ (≈ 100 fits); owner asked whether the full extension should apply to stage 0 as well.]*
