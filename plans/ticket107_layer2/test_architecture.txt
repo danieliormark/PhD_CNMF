@@ -11,7 +11,7 @@ STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
 └── approach 2 · J2 binary · loss β = 1 (KL); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
         weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
-    ▼ DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free ranking measure, cross-scored; seed stability; planted recovery under both noise types; text check), read at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. → the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; conditional K = 32 if a band reaches 20; re-check at the final K₁, K₂ (owner 2026-11-05).
+    ▼ DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free ranking measure, cross-scored; seed stability; text check; no planted-world test, owner 2026-11-05), read at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. → the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; conditional K = 32 if a band reaches 20; re-check at the final K₁, K₂ (owner 2026-11-05).
 
 STAGE 1 — journal ablation (A0; approach 2 with article×article; all 10 hold-out groups)
 ├── approach 1 · J1 no journal matrix   K = [3, 5, 8, 13, 20]

@@ -1999,3 +1999,10 @@ fitted without in-loop terms and at J2 only, so it does not predict stage 2's; l
 at the final K₁, K₂** (≈ 100 fits; a contradiction goes to the owner with both results); a still-falling curve at 32 is
 recorded as a finding for stage 2. (2) **Stage 1 uses all 10 hold-out groups** (≈ 6,000 fits at S = 10; S set after one
 fit is timed). Staged plan updated (`plans/ticket107_layer2/test_architecture.py`).]*
+*[2026-11-05, **DECIDED (owner: "I am so far against using planted world test for stage 0, given our target is to
+compare the loss functions")**: stage 0 has no planted-world test; the earlier scope ("plus planted worlds generated
+under both noise types") is superseded. Stage 0's evidence: agreement of the two solutions' memberships, held-out ties
+(scale-free ranking measure, cross-scored), seed stability, text check. Consequence stated to the owner: if the two
+solutions differ and the held-out evidence is mixed, no measure with a known truth remains; the decision then rests on
+held-out prediction, stability and the text check. (Estimate given before the decision: ≈ 240 trial-size fits,
+≈ 40–120 CPU-hours, 1–2 sessions to build the generator.)]*

@@ -44,10 +44,10 @@ count = {}
 # Stage 0 — loss comparison (owner 2026-11-05): squared error (β = 2) vs generalised KL (β = 1), before the λ calibration
 s0 = [(f"approach {a} · J2 binary · loss {b}; in-loop terms and word-similarity regulariser off", weights(a), K_PROBE)
       for a in (1, 2) for b in ("β = 2 (squared error)", "β = 1 (KL)")]
-count["stage 0"] = len(s0) * len(K_PROBE) * FITS_PER_CELL   # + planted worlds; + K = 32 if a band reaches 20 (owner 2026-11-05)
+count["stage 0"] = len(s0) * len(K_PROBE) * FITS_PER_CELL   # + K = 32 if a band reaches 20 (owner 2026-11-05); no planted worlds (owner)
 stages.append(("STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)", s0,
                "DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free "
-               "ranking measure, cross-scored; seed stability; planted recovery under both noise types; text check), read "
+               "ranking measure, cross-scored; seed stability; text check; no planted-world test, owner 2026-11-05), read "
                "at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. "
                "→ the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; conditional K = 32 if a band reaches 20; re-check at the final K₁, K₂ (owner 2026-11-05)."))
 
