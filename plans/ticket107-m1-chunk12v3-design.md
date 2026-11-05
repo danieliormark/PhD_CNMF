@@ -2051,3 +2051,9 @@ part scaled to the full empty count); per score Δ_g = score(squared-error fit) 
 3+ band classified, 2-tie band reported; scores compared only within themselves. Reading: split (each wins its own) → no
 weight, S0-M2 decides; one loss wins under both → dominance; equivalent on one, winner on the other → weak support;
 dominance against S0-M2 → flagged to the owner. Reported: share of the held-out KL from the 1% worst-predicted ties.]*
+*[2026-11-05, **S0-M4 DECIDED (owner: "I accept s0m4")** — seed stability per loss: W̄_loss,g = mean chance-adjusted
+Track A / Track B over that loss's seed pairs; Δ_g = W̄_KL − W̄_squared error; classes per track (δ from seed halves ÷ √2,
+TOST); a loss is "more stable" if one track says so and the other does not say the opposite, opposite verdicts →
+inconclusive; gate: each loss must pass the stability gate used for K at a candidate K, else it cannot be preferred
+there. Reported per facet and, for semantic facets, by tie-count band (2 / 3+). Proposed role (to be fixed in the
+decision rule): gate, and tie-breaker when S0-M2 is equivalent or inconclusive; never overrides a clear S0-M2 verdict.]*
