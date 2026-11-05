@@ -1,0 +1,55 @@
+build: /mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v2/
+
+== child×article: 2,136 × 97,850, observed cells 209,007,600, ties 175,086
+   eligible ties (both entities with >= 2 ties): 86,463 (49.4%)
+   ties placed in one of the 10 groups: 86,463 (100.0% of eligible); per group min 8,474 max 8,880 = 4.9% of all ties
+   group 1, row entities losing a tie, by their tie count: 2: 0 of 4 eligible, 3-5: 59 of 270 eligible, 6+: 1,418 of 1,847 eligible
+   group 1, column entities losing a tie, by their tie count: 2: 801 of 4,176 eligible, 3-5: 974 of 2,751 eligible, 6+: 1,690 of 2,300 eligible
+   hidden empty cells at 10%: 20,883,251 (vs hidden ties per group 8,646; ratio 2,415:1)
+
+== child×parent: 35,983 × 97,850, observed cells 3,520,936,550, ties 231,223
+   eligible ties (both entities with >= 2 ties): 148,763 (64.3%)
+   ties placed in one of the 10 groups: 148,763 (100.0% of eligible); per group min 14,705 max 15,088 = 6.4% of all ties
+   group 1, row entities losing a tie, by their tie count: 2: 148 of 1,176 eligible, 3-5: 3,798 of 17,280 eligible, 6+: 7,793 of 17,090 eligible
+   group 1, column entities losing a tie, by their tie count: 2: 1,644 of 8,017 eligible, 3-5: 1,565 of 4,420 eligible, 6+: 2,157 of 2,953 eligible
+   hidden empty cells at 10%: 352,070,533 (vs hidden ties per group 14,876; ratio 23,667:1)
+
+== article×affiliation (appr. 2): 2,136 × 2,511, observed cells 5,280,633, ties 6,051
+   eligible ties (both entities with >= 2 ties): 4,071 (67.3%)
+   ties placed in one of the 10 groups: 4,071 (100.0% of eligible); per group min 369 max 424 = 6.7% of all ties
+   group 1, row entities losing a tie, by their tie count: 2: 74 of 489 eligible, 3-5: 197 of 689 eligible, 6+: 99 of 201 eligible
+   group 1, column entities losing a tie, by their tie count: 2: 82 of 427 eligible, 3-5: 122 of 371 eligible, 6+: 122 of 211 eligible
+   hidden empty cells at 10%: 527,458 (vs hidden ties per group 407; ratio 1,296:1)
+
+== author×affiliation (appr. 1): 10,052 × 2,511, observed cells 23,779,170, ties 12,512
+   eligible ties (both entities with >= 2 ties): 4,741 (37.9%)
+   ties placed in one of the 10 groups: 4,741 (100.0% of eligible); per group min 445 max 529 = 3.8% of all ties
+   group 1, row entities losing a tie, by their tie count: 2: 282 of 1,495 eligible, 3-5: 150 of 529 eligible, 6+: 19 of 46 eligible
+   group 1, column entities losing a tie, by their tie count: 2: 28 of 192 eligible, 3-5: 71 of 348 eligible, 6+: 222 of 483 eligible
+   hidden empty cells at 10%: 2,376,666 (vs hidden ties per group 474; ratio 5,013:1)
+
+== author×article (appr. 1): 10,052 × 2,136, observed cells 21,471,072, ties 11,131
+   eligible ties (both entities with >= 2 ties): 1,858 (16.7%)
+   ties placed in one of the 10 groups: 1,858 (100.0% of eligible); per group min 171 max 202 = 1.7% of all ties
+   group 1, row entities losing a tie, by their tie count: 2: 128 of 634 eligible, 3-5: 44 of 143 eligible, 6+: 7 of 15 eligible
+   group 1, column entities losing a tie, by their tie count: 2: 9 of 70 eligible, 3-5: 61 of 320 eligible, 6+: 92 of 335 eligible
+   hidden empty cells at 10%: 2,145,994 (vs hidden ties per group 186; ratio 11,550:1)
+
+== article×article (appr. 2): 2,136 × 2,136, observed cells 2,280,180, ties 1,107
+   eligible ties (both entities with >= 2 ties): 876 (79.1%)
+   ties placed in one of the 10 groups: 876 (100.0% of eligible); per group min 81 max 95 = 7.9% of all ties
+   group 1, row entities losing a tie, by their tie count: 2: 14 of 92 eligible, 3-5: 22 of 86 eligible, 6+: 34 of 90 eligible
+   group 1, column entities losing a tie, by their tie count: 2: 17 of 100 eligible, 3-5: 18 of 77 eligible, 6+: 40 of 92 eligible
+   hidden empty cells at 10%: 227,907 (vs hidden ties per group 88; ratio 2,602:1)
+
+== cost of the hidden empty cells (single thread, as in production)
+   K=4: forward 39 ns per cell; forward+backward 0.076 s per million cells
+      child×article: 20.9 M cells -> 1.6 s per epoch, 0.9 h per 2,000-epoch fit; indices 0.17 GB (int32 pairs)
+      child×parent: 352.1 M cells -> 26.6 s per epoch, 14.8 h per 2,000-epoch fit; indices 2.82 GB (int32 pairs)
+      author×affiliation (appr. 1): 2.4 M cells -> 0.2 s per epoch, 0.1 h per 2,000-epoch fit; indices 0.02 GB (int32 pairs)
+      author×article (appr. 1): 2.1 M cells -> 0.2 s per epoch, 0.1 h per 2,000-epoch fit; indices 0.02 GB (int32 pairs)
+   K=5: forward 37 ns per cell; forward+backward 0.091 s per million cells
+      child×article: 20.9 M cells -> 1.9 s per epoch, 1.1 h per 2,000-epoch fit; indices 0.17 GB (int32 pairs)
+      child×parent: 352.1 M cells -> 31.9 s per epoch, 17.7 h per 2,000-epoch fit; indices 2.82 GB (int32 pairs)
+      author×affiliation (appr. 1): 2.4 M cells -> 0.2 s per epoch, 0.1 h per 2,000-epoch fit; indices 0.02 GB (int32 pairs)
+      author×article (appr. 1): 2.1 M cells -> 0.2 s per epoch, 0.1 h per 2,000-epoch fit; indices 0.02 GB (int32 pairs)
