@@ -2026,3 +2026,22 @@ compares two half-samples of S/2 seeds; with noise ∝ 1/√(seeds), Var(half₁
 seeds). Effect: "same/redundant/equivalent" become harder to reach, borderline cases move to "different" or
 "inconclusive". Splits: 999 random splits throughout. No fit is ever run with S/2 seeds; the halves only re-group
 existing fits.]*
+*[2026-11-05, **S0-M2 DECIDED (owner: "I accept option A"; AP: "I agree with your idea on reporting average
+precision")**. Held-out ranking by **AUC** (probability that a hidden tie gets a higher reconstruction than a hidden
+empty cell; scale-free, so comparable across losses; unaffected in expectation by the uniform sub-sampling of empty
+cells), **stratified by the visible tie count of the cell's sparser entity** (bands 2, 3–5, 6+; empty cells banded the
+same way). **Classified:** AUC of the pooled 3+ band, combined over the approach's matrices with hidden cells by their
+relation weights renormalised to 1 (child×article, child×parent, the approach's affiliation matrix); Δ_g = AUC(KL) −
+AUC(squared error), seed means; δ from seed halves ÷ √2; classes KL better / squared error better / equivalent /
+inconclusive (95% interval over 5 groups; TOST); no multiplicity correction (one comparison); K by the decided majority
+rule. **Reported:** the 2-tie band (periphery: one tie left in training); per-matrix AUCs; average precision (AP, the
+mean of the precisions at each hidden tie down the ranking; valid between losses on the same cells, not across matrices
+because it depends on the tie/empty ratio); a degree-only reference (product of the two entities' visible tie counts,
+Liben-Nowell & Kleinberg 2007); Spearman correlation of true and reconstructed values among hidden ties. **Owner's
+hypothesis, pre-registered:** KL fits rare, weakly connected entities harder, whose ties may reflect off-corpus
+communities, so it may predict less relevant ties. Readings: KL better in both bands → concern not supported; KL better
+in the 2-tie band only (3+ equivalent or squared error better) → hypothesis supported; equivalent in both → loss does not
+matter for prediction; squared error better in a band → unexpected, inspect. Expectation stated: a KL gain is partly
+expected (Poisson-type models usually predict sparse ties better; plain KL-NMF reproduces degrees), so it counts only
+beyond the degree reference. Limit: tie count is a proxy for off-corpus belonging; coverage (OpenAlex counts) exists only
+for journals, organisations, persons. The same band split applies to the per-entity fit.]*
