@@ -1993,3 +1993,9 @@ same day (proposal pending).]*
 not turned at an unaffordable size, report it (fit time grows roughly with K). Proposed for stage 0 (pending): a
 conditional K = 32 if either loss's band reaches 20 (≈ 200 fits at S = 10) and a required re-check of β at the final
 K₁, K₂ (≈ 100 fits); owner asked whether the full extension should apply to stage 0 as well.]*
+*[2026-11-05, **DECIDED (owner: "I approve your proposals")**: (1) no full K extension in stage 0 (its large-K curve is
+fitted without in-loop terms and at J2 only, so it does not predict stage 2's; large K is the costliest part); instead a
+**conditional K = 32** in stage 0 if either loss's band reaches 20 (≈ 200 fits at S = 10) and a **required re-check of β
+at the final K₁, K₂** (≈ 100 fits; a contradiction goes to the owner with both results); a still-falling curve at 32 is
+recorded as a finding for stage 2. (2) **Stage 1 uses all 10 hold-out groups** (≈ 6,000 fits at S = 10; S set after one
+fit is timed). Staged plan updated (`plans/ticket107_layer2/test_architecture.py`).]*

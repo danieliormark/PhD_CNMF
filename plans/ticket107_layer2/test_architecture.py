@@ -44,20 +44,20 @@ count = {}
 # Stage 0 — loss comparison (owner 2026-11-05): squared error (β = 2) vs generalised KL (β = 1), before the λ calibration
 s0 = [(f"approach {a} · J2 binary · loss {b}; in-loop terms and word-similarity regulariser off", weights(a), K_PROBE)
       for a in (1, 2) for b in ("β = 2 (squared error)", "β = 1 (KL)")]
-count["stage 0"] = len(s0) * len(K_PROBE) * FITS_PER_CELL   # + planted worlds; + K = 32 if a band reaches 20 (proposed)
+count["stage 0"] = len(s0) * len(K_PROBE) * FITS_PER_CELL   # + planted worlds; + K = 32 if a band reaches 20 (owner 2026-11-05)
 stages.append(("STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)", s0,
                "DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free "
                "ranking measure, cross-scored; seed stability; planted recovery under both noise types; text check), read "
                "at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. "
-               "→ the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; re-check at the final K₁, K₂ (proposed)."))
+               "→ the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; conditional K = 32 if a band reaches 20; re-check at the final K₁, K₂ (owner 2026-11-05)."))
 
 # Stage 1 — journal ablation, both approaches, A0, with article×article, at K_PROBE
 s1 = []
 for a in (1, 2):
     for name, j in JOURNAL_ARMS.items():
         s1.append((f"approach {a} · {name}", weights(a, j), K_PROBE))
-count["stage 1"] = sum(len(k) for _, _, k in s1) * FITS_PER_CELL
-stages.append(("STAGE 1 — journal ablation (A0; approach 2 with article×article)", s1,
+count["stage 1"] = sum(len(k) for _, _, k in s1) * FITS_PER_CELL * 2   # all 10 hold-out groups (owner 2026-11-05)
+stages.append(("STAGE 1 — journal ablation (A0; approach 2 with article×article; all 10 hold-out groups)", s1,
                "DECISION D1 (owner): weighting of article×journal, from: agreement of article memberships between arms "
                "(Track A/B, chance-adjusted; J1 the reference); each matrix's realised share; journal–community "
                "association vs shuffled journals; held-out prediction of the other matrices. Pre-registration of "

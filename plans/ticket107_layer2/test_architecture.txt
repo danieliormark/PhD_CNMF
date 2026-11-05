@@ -11,9 +11,9 @@ STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
 └── approach 2 · J2 binary · loss β = 1 (KL); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
         weights: child×parent 0.250, child×article 0.250, article×affiliation 0.167, article×article 0.167, article×journal 0.167
-    ▼ DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free ranking measure, cross-scored; seed stability; planted recovery under both noise types; text check), read at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. → the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; re-check at the final K₁, K₂ (proposed).
+    ▼ DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free ranking measure, cross-scored; seed stability; planted recovery under both noise types; text check), read at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. → the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; conditional K = 32 if a band reaches 20; re-check at the final K₁, K₂ (owner 2026-11-05).
 
-STAGE 1 — journal ablation (A0; approach 2 with article×article)
+STAGE 1 — journal ablation (A0; approach 2 with article×article; all 10 hold-out groups)
 ├── approach 1 · J1 no journal matrix   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.250, author×affiliation 0.250
 ├── approach 1 · J2 binary (current, P4)   K = [3, 5, 8, 13, 20]
@@ -61,6 +61,6 @@ LATER STAGES (not yet designed):
   • final models refitted on all cells after settings are chosen (open)
   • background component (deferred robustness arm; planted test first)
 
-Fit counts (before reuse): stage 0 1,000, stage 1 3,000, stage 2 700, stage 3 300; total 5,000
+Fit counts (before reuse): stage 0 1,000, stage 1 6,000, stage 2 700, stage 3 300; total 8,000
 For comparison, a full grid K = 2-20 at J* in stage 2 instead of refinement (14 K beyond the coarse 5): 1,400 fits
-Total fits as a function of seeds S: S=10: 5,000, S=15: 7,500, S=20: 10,000
+Total fits as a function of seeds S: S=10: 8,000, S=15: 12,000, S=20: 16,000
