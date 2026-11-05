@@ -2057,3 +2057,7 @@ TOST); a loss is "more stable" if one track says so and the other does not say t
 inconclusive; gate: each loss must pass the stability gate used for K at a candidate K, else it cannot be preferred
 there. Reported per facet and, for semantic facets, by tie-count band (2 / 3+). Proposed role (to be fixed in the
 decision rule): gate, and tie-breaker when S0-M2 is equivalent or inconclusive; never overrides a clear S0-M2 verdict.]*
+*[2026-11-05, **DECIDED (owner)**: no "held-out KL reduction relative to the degree baseline" in S0-M3 (proposed first
+as "deviance explained"; withdrawn: "explained" is an in-sample notion, out of sample the ratio can be negative; the
+degree check is already made by the degree-only AUC reference of S0-M2). S0-M3 compares raw held-out KL between fits on
+the same cells.]*
