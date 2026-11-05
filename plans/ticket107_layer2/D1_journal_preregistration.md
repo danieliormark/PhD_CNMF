@@ -207,8 +207,12 @@ the part due to the journal weighting and the part due to the social matrices. S
 every arm at the coarse K, so cross-fits are needed only at K₁, K₂ not on the coarse grid (≈ 200 fits at S = 10; none
 if J*₁ = J*₂).
 
-**At which K (OPEN).** Proposed: classes are read at K = 5, 8, 13 and an arm takes a class if it has it at ≥ 2 of the 3;
-K = 3 and 20 are reported. Optionally, J* is re-checked against J1 at the final K₁, K₂.
+**At which K — DECIDED (owner, 2026-11-05).** D1 is decided after stage 1, which fits the arms only at the coarse
+K = 3, 5, 8, 13, 20, before K₁, K₂ are known. Candidate K per approach = the coarse K values inside the one-standard-error
+band of any arm; an arm's class = the class it has at the majority of candidates (no majority → inconclusive; one
+candidate → its class). Required re-check after stage 2: J1, J* and the runner-up at the final K₁, K₂ on D1-M1, M2, M4;
+a contradiction is put to the owner with both results (free when K₁ is a coarse value; otherwise 300 fits at 5 groups,
+S = 10). This also covers a final K above 20.
 
 **Rule, per approach:**
 1. Exclude arms classified **misleads** (D1-M1).
@@ -271,8 +275,11 @@ at unchanged cost (fewer seeds for δ and the stability gate); (v) the corrected
 stricter in the same way, so more arms come out *inconclusive*; (vi) the 2-of-3-K requirement adds little protection
 against chance (the K values share groups and similar models) and is kept for substantive reasons.
 
-Proposed: Dunnett-adjusted intervals, pooled block error if the equal-noise check holds, otherwise each comparison's own
-error with 10 groups; uncorrected intervals reported beside them.
+**Update 2026-11-05.** An invented example (6 arms × 5 groups) showed the pooled error flattering a noisy arm (J2) and
+hiding a small but consistent effect (J3b); unequal noise is expected structurally (arms far from J1 differ more
+between groups) and cannot be checked with 5 groups (Hartley's F-max critical value ≈ 25 at 4 df). **DECIDED (owner,
+2026-11-05): Dunnett with each comparison's own error; the pooled version is not used.** Uncorrected intervals are
+reported beside the Dunnett ones. Proposed, open: all 10 drawn hold-out groups in stage 1.
 
 ## 7. Status summary
 
@@ -286,4 +293,6 @@ error with 10 groups; uncorrected intervals reported beside them.
 | D1-M3 flag (journal realised share ≥ semantic domain's realised share) | DECIDED (owner, 2026-11-05) |
 | 999 shuffles (and for L2.4-M3); other counts to revisit (§4.5) | DECIDED (owner, 2026-11-05) |
 | Dunnett's procedure for the five comparisons with J1 | PRELIMINARILY APPROVED (owner, 2026-11-05) |
-| K at which classes are read; pooled block error vs each comparison's own error | OPEN |
+| K at which classes are read: candidate K = coarse K inside the one-SE band of any arm of that approach; verdict = class at the majority of candidates (no majority → inconclusive); required re-check of J1, J* and the runner-up at the final K₁, K₂ (covers K above 20) | DECIDED (owner, 2026-11-05) |
+| Dunnett with each comparison's own error (estimated-correlation version, Hothorn, Bretz & Westfall 2008); the pooled block error is not used (owner: "I wouldn't assume equal noise") | DECIDED (owner, 2026-11-05) |
+| 10 hold-out groups in stage 1 (all 10 of the drawn groups) instead of 5; S chosen after one fit is timed | OPEN |

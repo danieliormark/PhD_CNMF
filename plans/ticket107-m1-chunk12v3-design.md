@@ -1938,3 +1938,7 @@ domain's realised share ("I approve your idea for the flag"); **DECIDED** — 99
 shuffle/resampling counts of the pipeline (Track A/B chance level, seed-pair percentiles, δ, temporal matching; list in
 the D1 document §4.5); **preliminarily approved** — Dunnett's procedure. Open: K at which classes are read; pooled block
 error vs each comparison's own error.]*
+*[2026-11-05, owner, D1 continued: **DECIDED** — K procedure (candidate K = coarse K inside any arm's one-SE band;
+majority class; required re-check of J1, J*, runner-up at the final K₁, K₂); **DECIDED** — Dunnett with each
+comparison's own error, pooled block error not used ("I wouldn't assume equal noise"). Open: all 10 drawn hold-out groups
+in stage 1 (the 2026-10-29 split draws 10 groups per matrix and uses 5), S after timing one fit.]*
