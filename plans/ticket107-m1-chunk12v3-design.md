@@ -2006,3 +2006,15 @@ under both noise types") is superseded. Stage 0's evidence: agreement of the two
 solutions differ and the held-out evidence is mixed, no measure with a known truth remains; the decision then rests on
 held-out prediction, stability and the text check. (Estimate given before the decision: ≈ 240 trial-size fits,
 ≈ 40–120 CPU-hours, 1–2 sessions to build the generator.)]*
+*[2026-11-05, stage-0 pre-registration in progress (one measure at a time; owner: the planted-world decision may be
+revisited if needed). Map: S0-M1 agreement of the two solutions; S0-M2 held-out ranking; S0-M3 cross-scoring; S0-M4
+seed stability; S0-M5 text check. **S0-M1** (owner: "mostly agree"; δ "accepted as explained"): per K and hold-out
+group, D_g = W̄_g (mean chance-adjusted Track score over within-loss seed pairs, both losses pooled) − C̄_g (mean over
+cross-loss pairs); δ = 95th percentile, over 999 random splits of each loss's seeds into halves, of |W̄_half1 −
+W̄_half2|; classes same (mean D within ±δ by two one-sided tests) / different (interval > 0 and mean D ≥ δ) /
+inconclusive; same needs both tracks, different either track; per-facet report. Open: δ divided by √2 (half-samples
+overstate the noise of the full-sample D by about √2) — to apply to D1-M1 and L2.4-M1 alike if adopted. **DECIDED
+(owner): per-entity fit by tie-count band (1, 2, 3–5, 6+ ties, per relation) is kept as a stage-0 criterion** (as
+decided 2026-10-31). The other descriptive distributions proposed (community sizes, membership concentration,
+reconstructed vs observed tie counts) are not in the pre-registration (owner doubted their use without ground truth;
+available as ad hoc diagnostics).]*
