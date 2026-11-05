@@ -1919,3 +1919,16 @@ interval (13–20 or 20–32); **large intervals are searched coarse-to-fine as 
 spans more integers than the refinement budget (e.g. 20–32), first fit its approximate geometric midpoints (×~1.25
 steps, e.g. 25 between 20 and 32), recompute the band, then fill every integer of the interval(s) still touching it. The
 same applies to an extension beyond 32 (32 → 40 → 50).]*
+
+## Addendum 2026-11-05 — D1 (journal weighting): pre-registration document
+
+Full text, with terms, notation, motivation and worked examples: `plans/ticket107_layer2/D1_journal_preregistration.md`
+(examples and power numbers: `d1_examples.py` / `.txt`). Measures: D1-M1 held-out prediction of the semantic hidden
+cells (classes adds information / misleads / redundant / inconclusive, as L2.4); D1-M2 change in article memberships vs
+J1 (Track A/B); D1-M3 realised share of article×journal (flag threshold open); D1-M4 journal-shaped communities
+(shuffle test with journal sizes kept, p < 0.05 and share ≥ 0.25; J1 the baseline). **DECIDED (owner, 2026-11-05):**
+singleton journals are not counted in D1-M4 and are reported separately (article-dominated communities); **one J* per
+approach** (J*₁, J*₂), each approach also fitted at the other's J* (cross-fits; approach comparison 2 approaches × 2 J
+× 2 K). Proposed: the decision rule; 999 shuffles instead of 200 (also for L2.4-M3). Open: D1-M3 threshold; K at which
+classes are read (proposed 2 of K = 5, 8, 13); multiplicity correction (Dunnett vs Bonferroni) and error estimate
+(pooled block error vs 10 groups).

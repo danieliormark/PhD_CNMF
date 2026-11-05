@@ -1,0 +1,23 @@
+(1) N = 2136 articles, 384 journals, largest 184 (0.086 of articles)
+  shuffles = 200
+    A spread over the corpus: j_k = 0.097 (journal of 184)  shuffles mean 0.086  95th pct 0.096  p = 0.040  journal-shaped: False
+    B 30% of its mass in one mid-size journal: j_k = 0.302 (journal of 8)  shuffles mean 0.101  95th pct 0.141  p = 0.005  journal-shaped: True
+    C over-represented in the largest journal: j_k = 0.219 (journal of 184)  shuffles mean 0.087  95th pct 0.098  p = 0.005  journal-shaped: False
+  shuffles = 999
+    A spread over the corpus: j_k = 0.097 (journal of 184)  shuffles mean 0.086  95th pct 0.097  p = 0.045  journal-shaped: False
+    B 30% of its mass in one mid-size journal: j_k = 0.302 (journal of 8)  shuffles mean 0.099  95th pct 0.139  p = 0.001  journal-shaped: True
+    C over-represented in the largest journal: j_k = 0.219 (journal of 184)  shuffles mean 0.086  95th pct 0.098  p = 0.001  journal-shaped: False
+(2) the empirical 95th percentile of n shuffles corresponds to a true quantile with SE sqrt(0.05*0.95/n):
+    n = 200: SE 0.0154; ~95% range of the true quantile 0.920-0.980; smallest attainable p = 0.0050
+    n = 999: SE 0.0069; ~95% range of the true quantile 0.936-0.964; smallest attainable p = 0.0010
+    n = 9999: SE 0.0022; ~95% range of the true quantile 0.946-0.954; smallest attainable p = 0.0001
+(3) critical values and power (true effect in units of the SE of the mean difference)
+    5 groups, own SE (df 4): critical single 2.78, Dunnett 3.98, Bonferroni 4.60
+        power at 2/3/4/5 SE: single 0.34 / 0.62 / 0.84 / 0.95 | Dunnett 0.15 / 0.34 / 0.58 / 0.78 | Bonferroni 0.10 / 0.25 / 0.45 / 0.65
+    5 groups, pooled block error (df 20): critical single 2.09, Dunnett 2.73, Bonferroni 2.85
+        power at 2/3/4/5 SE: single 0.48 / 0.81 / 0.97 / 1.00 | Dunnett 0.26 / 0.61 / 0.88 / 0.98 | Bonferroni 0.23 / 0.57 / 0.86 / 0.98
+    10 groups, own SE (df 9): critical single 2.26, Dunnett 3.06, Bonferroni 3.25
+        power at 2/3/4/5 SE: single 0.43 / 0.76 / 0.94 / 0.99 | Dunnett 0.21 / 0.51 / 0.80 / 0.95 | Bonferroni 0.18 / 0.45 / 0.75 / 0.93
+    10 groups, pooled block error (df 45): critical single 2.01, Dunnett 2.61, Bonferroni 2.69
+        power at 2/3/4/5 SE: single 0.50 / 0.84 / 0.97 / 1.00 | Dunnett 0.28 / 0.65 / 0.91 / 0.99 | Bonferroni 0.26 / 0.62 / 0.90 / 0.99
+    chance of >= 1 false finding among 5 independent tests at 5%: 0.226

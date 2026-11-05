@@ -36,7 +36,10 @@ Each script's output is saved beside it as `<script>.txt`.
 | `parallel_analysis.py` | Horn's parallel analysis: singular values against degree-preserving shuffles (each tie keeps its row and value, columns permuted across ties) | shows that plain spectra fail here (real below shuffled) |
 | `bethe_hessian_counts.py` | Bethe Hessian community counts (two choices of r) by the inertia shortcut | starting K range (K_max ≈ 20) |
 | `bethe_hessian_checks.py` | checks of the shortcut asked for by the external review: residuals, Bunch–Kaufman LDLᵀ, shifted counts, counts over a grid of r | numerical soundness; sensitivity to r |
+| `d1_examples.py` | D1 worked examples: the journal shuffle test with trial journal sizes and invented memberships (200 vs 999 shuffles); Monte Carlo precision of a shuffle percentile; critical values and power of single, Dunnett and Bonferroni tests (5 arms vs J1; 5 or 10 groups; own or pooled error) | `D1_journal_preregistration.md` |
 | `test_architecture.py` | the staged plan of the first fits: arms, their weights by the rule, fit counts | arm plan |
+
+**Pre-registration documents:** `D1_journal_preregistration.md` (journal weighting: arms, terms, measures D1-M1–M4, decision rule, multiplicity and power).
 
 ## The Bethe Hessian shortcut (details in `bethe_hessian_method_note.md`)
 
