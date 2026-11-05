@@ -1964,3 +1964,21 @@ in stage 1 (the 2026-10-29 split draws 10 groups per matrix and uses 5), S after
 groups' stage-1 results; refined K fitted on 5 groups; the reserve groups 6–10 added at band K only under case D). The
 use of all 10 groups in stage 1 itself awaits the owner's explicit confirmation. Owner's new question: are the groups
 large enough (eligible entities, ~10% each)? Literature on held-out size answered in the session of 2026-11-05.]*
+
+## Addendum 2026-11-05 (2) — §8.2 order and step 0 (timing of the β comparison)
+
+- **§8.2 order (proposed to the owner, 2026-11-05):** one element per turn (what it is with a worked example; purpose
+  and toy evidence; changes under ticket 107; options with practice and trade-offs; proposal; what the trial measures).
+  Sequence: 0 β timing; 1a/1b principles; 2 off-diagonal coupling; 3 word-similarity regulariser; 4 concentration
+  floor; 5 L1; 6 in-loop domain balance; 7 in-loop placement map and Optuna; 8–12 outer loop (mass-distribution check,
+  Penalty_A/B, coherence and outer domain balance, aggregation, trial test design). Outer penalties score archived fits,
+  so steps 8–12 can follow while stage 1 runs — provided Optuna (step 7) is not steered by them, every fit's U and Z are
+  archived on RDS (≈ 50–70 GB; quota to check), and any outer penalty that vetoes a decision is fixed before that
+  decision.
+- **DECIDED (owner, 2026-11-05: "I agree with point A and the scope"): the β comparison (squared error vs generalised
+  KL) runs as a stage 0, before the λ calibration and stage 1.** Scope: J2, A0, both approaches, in-loop terms and the
+  word-similarity regulariser off, hold-out groups 1–5, S seeds, plus planted worlds generated under both noise types.
+  Order: fit code with both losses → time one fit → stage 0 → β decided → steps 2–6 calibrated under the chosen loss →
+  stage 1. Accepted limitation: interactions between an in-loop term and the loss are not tested in stage 0. What
+  depends on β: L2.1 scale basis, the units of L2.2's shares, the L2.6 held-out score, D1-M3 / pull, every λ.
+  K values: owner asked whether the K rule applies; answered 2026-11-05 (proposal below, pending).
