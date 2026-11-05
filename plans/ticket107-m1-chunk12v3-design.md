@@ -1942,3 +1942,7 @@ error vs each comparison's own error.]*
 majority class; required re-check of J1, J*, runner-up at the final K₁, K₂); **DECIDED** — Dunnett with each
 comparison's own error, pooled block error not used ("I wouldn't assume equal noise"). Open: all 10 drawn hold-out groups
 in stage 1 (the 2026-10-29 split draws 10 groups per matrix and uses 5), S after timing one fit.]*
+*[2026-11-05, owner: **DECIDED — stage 2 uses hold-out groups 1–5 only** (option (i): coarse-K cells reuse only those
+groups' stage-1 results; refined K fitted on 5 groups; the reserve groups 6–10 added at band K only under case D). The
+use of all 10 groups in stage 1 itself awaits the owner's explicit confirmation. Owner's new question: are the groups
+large enough (eligible entities, ~10% each)? Literature on held-out size answered in the session of 2026-11-05.]*
