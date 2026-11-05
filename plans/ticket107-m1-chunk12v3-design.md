@@ -1593,6 +1593,24 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
 
   The cap never prevented a tie from being placed (100% of eligible ties placed). child×article: 9,227 child
   hyperedges are eligible (9.4%); in one group 801 of the 4,176 with exactly 2 articles lose a tie.
+  *[2026-11-05, owner's questions; script re-run, output saved as `fullscale_pipeline/m1/holdout_measure.txt`. **Each
+  group holds 10% of the eligible ties, not of all ties**: as a share of all ties, child×article 4.9%, child×parent 6.4%,
+  article×affiliation 6.7%, author×affiliation 3.8% (author×article 1.7%, article×article 7.9%, not hidden); across the
+  10 groups every eligible tie is hidden exactly once, ineligible ties never. Per-group range (min–max): child×article
+  8,474–8,880; child×parent 14,705–15,088; article×affiliation 369–424; author×affiliation 445–529. Entities losing a
+  tie in group 1 (rows / columns): child×article 1,477 of 2,121 eligible articles / 3,465 of 9,227 child hyperedges;
+  child×parent 11,739 of 35,546 parents / 5,366 of 15,390 children; article×affiliation 370 / 326; author×affiliation
+  451 / 321 — no group rests on a few entities. Empty cells follow option B (below): 10% capped at 1 million, so for the
+  two semantic matrices 1 M of 20.9 M (child×article) and of 352 M (child×parent) potential hidden empty cells.
+  **Whether the groups are large enough** has no textbook threshold: 10% per fit is standard 10-fold practice (ESL
+  §7.10; a smaller training share biases selection toward simpler models, a smaller held-out share raises the score's
+  variance, Arlot & Celisse 2010), and the precedent for collective factorisation uses cell-wise 10-fold CV (Held,
+  Lindbäck & Jörnsten 2024). The test is empirical: score differences between candidates against the standard error over
+  groups and the seed margin δ; if intervals are too wide with all 10 groups, the remedy is a repeated, independent
+  10-group split (repeated cross-validation), not a larger held-out share (more ties removed from sparse entities).
+  **Limitation to state with any held-out result:** only ties whose two entities have ≥ 2 ties can be hidden, so
+  held-out prediction measures how well ties of recurring entities are predicted (the cold-start exclusion of link
+  prediction). Owner (2026-11-05): agrees with this approach.]*
   **Cost of the hidden empty cells:** leaving them out of a squared-error loss means evaluating the reconstruction on
   them every epoch (the trace trick covers only the full matrix): 0.08 s per million cells (forward + backward, one
   thread, K 4–5), so child×parent 27–29 s per epoch, 15–16 h per 2,000-epoch fit, 2.8 GB of indices; child×article
