@@ -1603,9 +1603,11 @@ addresses); Psychology trial after the organisation merge: 0 organisations 5.7% 
   451 / 321 — no group rests on a few entities. Empty cells follow option B (below): 10% capped at 1 million, so for the
   two semantic matrices 1 M of 20.9 M (child×article) and of 352 M (child×parent) potential hidden empty cells.
   **Whether the groups are large enough** has no textbook threshold: 10% per fit is standard 10-fold practice (ESL
-  §7.10; a smaller training share biases selection toward simpler models, a smaller held-out share raises the score's
-  variance, Arlot & Celisse 2010), and the precedent for collective factorisation uses cell-wise 10-fold CV (Held,
-  Lindbäck & Jörnsten 2024). The test is empirical: score differences between candidates against the standard error over
+  §7.10; Kohavi 1995 recommends ten-fold for model selection; for matrices, larger held-out sets tend to under-fit and
+  smaller ones to over-fit, Owen & Perry 2009; survey: Arlot & Celisse 2010), the precedent for collective factorisation
+  uses cell-wise 10-fold CV (Held, Lindbäck & Jörnsten 2024), and edge-sampling cross-validation for choosing K in
+  networks keeps 90% of node pairs for training and reports stable accuracy for 85–100% (Li, Levina & Zhu 2020,
+  *Biometrika*). The test is empirical: score differences between candidates against the standard error over
   groups and the seed margin δ; if intervals are too wide with all 10 groups, the remedy is a repeated, independent
   10-group split (repeated cross-validation), not a larger held-out share (more ties removed from sparse entities).
   **Limitation to state with any held-out result:** only ties whose two entities have ≥ 2 ties can be hidden, so
@@ -2061,3 +2063,33 @@ decision rule): gate, and tie-breaker when S0-M2 is equivalent or inconclusive; 
 as "deviance explained"; withdrawn: "explained" is an in-sample notion, out of sample the ratio can be negative; the
 degree check is already made by the degree-only AUC reference of S0-M2). S0-M3 compares raw held-out KL between fits on
 the same cells.]*
+
+## Addendum 2026-11-05 (3) — reference check (owner's request)
+
+Rule agreed with the owner: definitions and derivable facts need no check; attributions, claims about what a paper
+recommends, software defaults, numbers from papers and recent work are checked before they enter the record. All
+references cited as established practice on 2026-11-05 (D1 document, addenda, stage-0 measures) were checked by web
+search (bibliographic record plus abstract or full text where readable). **Confirmed:** Dunnett 1955; Hsu 1996; Bretz,
+Hothorn & Westfall 2010; Hothorn, Bretz & Westfall 2008; Hartley's F-max 25.2 (k = 5, df = 4); North, Curtis & Sham 2002;
+MOFA (Argelaguet et al. 2018: R² per view and factor); JIVE (Lock et al. 2013); MFA group contributions summing to 100%
+per axis; Kohavi 1995 (ten-fold for model selection); Breiman & Spector 1992 (5-fold better than leave-one-out); Shao
+1993 (n_v/n → 1); Arlot & Celisse 2010 (survey; general only); Owen & Perry 2009 (larger hold-out → under-fit, smaller →
+over-fit); Li, Levina & Zhu 2020 (p = 0.9, stable for 0.85–1); Kim 2009 (repeated 10-fold CV); Bouckaert & Frank 2004
+(replicability across partitions); Murphy 1988 (MSE skill score; reference usually climatology — our reference 0 is an
+adaptation, as recorded); Liben-Nowell & Kleinberg 2007 (preferential attachment = product of degrees); Yang,
+Lichtenwalter & Chawla 2015 (PR preferred over ROC under extreme imbalance); Saito & Rehmsmeier 2015; Davis & Goadrich
+2006; Keilwagen, Grosse & Grau 2014 (weighted PR/ROC, R package PRROC); Gopalan, Hofman & Blei (HPF outperforms NMF and
+probabilistic MF; stated in the arXiv version); Ball, Karrer & Newman 2011 (edge counts Poisson about Σ θ_iz θ_jz); Ho &
+Van Dooren 2008 (stationary points of KL-NMF preserve row, column and total sums); Chang et al. 2009 (word intrusion:
+five top words plus an intruder "selected at random from a pool of words with low probability in the current topic ...
+but high probability in some other topic", verbatim from the paper); Newman et al. 2010 (topics rated on a 3-point
+scale from their top-10 words; via Lau, Newman & Baldwin 2014); Röder, Both & Hinneburg 2015; Hoyle et al. 2021 (automated
+coherence often declares winners where human judgements show no difference; combine with human evaluation); Lakens 2017
+(TOST, crediting Schuirmann 1987). **Corrected:** (1) Acar, Kolda & Dunlavy 2011 removed from the realised-share
+precedents (per-dataset fit report not confirmed); (2) unequal variances in the Dunnett-type procedure are supported by
+Herberich, Sikorski & Hothorn 2010 (robust covariance), not by Hothorn et al. 2008 alone; (3) shuffle-count guidance
+restated: 0.05·(n + 1) integer, 999 usual (Davidson & MacKinnon 2000); Manly's ~1,000 is second-hand (2nd ed. 1997, not
+"2007"); (r + 1)/(n + 1) is slightly conservative and its bias was debated (Broman & Caffo 2003); (4) hold-out size
+rationale now cites Kohavi 1995, Owen & Perry 2009 and Li, Levina & Zhu 2020. **Adaptations to state, not
+established:** the four-category coherence rating (Newman et al. used 3 points); matching intruders by tie-count band
+(Chang et al. matched only by prominence in another topic).

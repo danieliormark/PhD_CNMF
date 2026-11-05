@@ -139,9 +139,11 @@ flag alone never triggers a change of arm (§5).
 
 **Established use.** Explained variance per block is the standard report in multi-block factorisation: variance
 explained per view and factor in MOFA (Argelaguet et al. 2018, *Mol. Syst. Biol.*), joint and individual variance per
-block in JIVE (Lock et al. 2013, *Ann. Appl. Stat.*), fit per dataset in coupled matrix–tensor factorisation (Acar,
-Kolda & Dunlavy 2011). The weighted percentage is closest to the *contribution of a group* in Multiple Factor Analysis
-(Escofier & Pagès), weighted by the group weight and summing to 100%; ours is computed over the whole fit, not per axis.
+block in JIVE (Lock et al. 2013, *Ann. Appl. Stat.*). The weighted percentage is closest to the *contribution of a group* in Multiple Factor Analysis
+(Escofier & Pagès), weighted by the group weight and summing to 100% per axis; ours is computed over the whole fit, not
+per axis. *[References checked 2026-11-05: MOFA's per-view/per-factor R² and JIVE's quantification of joint variation
+confirmed; MFA group contributions summing to 100% per axis confirmed from the FactoMineR/PCAmixdata documentation;
+Acar, Kolda & Dunlavy 2011 removed — the paper exists but a per-dataset fit report was not confirmed.]*
 
 ### 4.4 D1-M4 — journal-shaped communities
 
@@ -187,8 +189,11 @@ the alignment was in the data anyway (journals as real research communities).
 The 200 used so far was carried over from earlier chance-level checks (ticket 95, the temporal matching), not derived
 for this test. With n shuffles the empirical 95th percentile corresponds to a true quantile with standard error
 √(0.05·0.95/n): 0.015 at n = 200 (true quantile ~0.92–0.98), 0.007 at n = 999 (0.936–0.964); the smallest attainable p
-is 1/(n + 1) (`d1_examples.txt`). Standard guidance for Monte Carlo tests at the 5% level is about 1,000 (Davison &
-Hinkley 1997, ch. 4; Manly 2007); p = (1 + r)/(1 + n) is the recommended estimate (North, Curtis & Sham 2002). The
+is 1/(n + 1) (`d1_examples.txt`). Standard guidance for Monte Carlo tests at the 5% level: choose n so that 0.05·(n + 1) is an integer, 999
+being the usual choice (Davidson & MacKinnon 2000, "Bootstrap tests: how many bootstraps?"; Davison & Hinkley 1997,
+ch. 4, for the p-value form); Manly's textbook is reported (second-hand, 2nd ed. 1997) to suggest about 1,000
+randomisations at 5%. p = (1 + r)/(1 + n) (North, Curtis & Sham 2002, who credit Davison & Hinkley) is slightly
+conservative; its bias was criticised in replies (Broman & Caffo 2003) — accepted here because it never gives p = 0. The
 shuffles need no fitting (one weighted count per community per shuffle), so 999 costs seconds. Timed: 999 shuffles for one fit at K = 20 take 0.6 s (journal sums by `np.add.at`), i.e. about 1 h over 6,000 fits —
 small beside the fits; the owner's condition ("as long as it does not take too much computation") is met. The same
 change applies to L2.4-M3 (team-shaped communities), for consistency.
@@ -256,7 +261,11 @@ would exclude one — both change the decision, so the error rate over the famil
 "several treatments against one control" under a normal model; it uses the correlation of the comparisons through the
 shared control and is therefore less conservative than Bonferroni while controlling the family error exactly; the
 standard choice for this design (Hsu 1996, *Multiple Comparisons*; Bretz, Hothorn & Westfall 2010). Its generalisation
-with an estimated correlation matrix (multivariate t; Hothorn, Bretz & Westfall 2008) covers unequal variances.
+with an estimated correlation matrix (multivariate t; Hothorn, Bretz & Westfall 2008) and a robust
+(heteroscedasticity-consistent) covariance covers unequal variances (Herberich, Sikorski & Hothorn 2010, *PLoS ONE*).
+*[Checked 2026-11-05: Dunnett 1955 (JASA 50:1096–1121), Hsu 1996, Bretz et al. 2010, Hothorn et al. 2008 confirmed;
+the unequal-variance claim is supported by Herberich et al. 2010, not by Hothorn et al. 2008 alone. Hartley's F-max
+critical value 25.2 (k = 5, df = 4) confirmed.]*
 
 **Power** (probability of detecting an effect that is really there; true effect in units of the standard error of the
 mean Δ; `d1_examples.txt`):
@@ -297,5 +306,5 @@ reported beside the Dunnett ones. Proposed, open: all 10 drawn hold-out groups i
 | 999 shuffles (and for L2.4-M3); other counts to revisit (§4.5) | DECIDED (owner, 2026-11-05) |
 | Dunnett's procedure for the five comparisons with J1 | PRELIMINARILY APPROVED (owner, 2026-11-05) |
 | K at which classes are read: candidate K = coarse K inside the one-SE band of any arm of that approach; verdict = class at the majority of candidates (no majority → inconclusive); required re-check of J1, J* and the runner-up at the final K₁, K₂ (covers K above 20) | DECIDED (owner, 2026-11-05) |
-| Dunnett with each comparison's own error (estimated-correlation version, Hothorn, Bretz & Westfall 2008); the pooled block error is not used (owner: "I wouldn't assume equal noise") | DECIDED (owner, 2026-11-05) |
+| Dunnett with each comparison's own error (estimated-correlation version with robust covariance: Hothorn, Bretz & Westfall 2008; Herberich, Sikorski & Hothorn 2010); the pooled block error is not used (owner: "I wouldn't assume equal noise") | DECIDED (owner, 2026-11-05) |
 | 10 hold-out groups in stage 1 (all 10 of the drawn groups) instead of 5; S chosen after one fit is timed | OPEN |
