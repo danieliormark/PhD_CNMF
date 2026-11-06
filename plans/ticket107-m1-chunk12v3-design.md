@@ -2122,3 +2122,12 @@ used in this comparison is loss-neutral — per-entity AUC** (within each entity
 one of its ties is reconstructed above one of its empty cells), averaged within tie-count bands 2 / 3–5 / 6+, compared
 between losses with the usual classes (δ ÷ √2). It describes what each loss explains in the training data, not
 prediction. Owner's request: tables must name the measures, not only their codes.]*
+*[2026-11-06, §8.2 step 1a in discussion. **Added to §8.2: item (l) "weak attribution and engagement"** — row-normalised
+(weighted) memberships make near-floor rows read as confident assignments (e.g. factor cells [1e-7, 1e-7, 5e-6] → 0.02 /
+0.02 / 0.96); ticket 100 solved dead columns and excluded fully unengaged entities, but weakly engaged entities were
+never surveyed; affected: measures giving each entity a full vote (D1 journal-shaped communities, L2.4 team-shaped
+communities, Track A). Raw normalised factor cells shrink with facet size (unit-norm columns: ≈ 1/√N, e.g. articles
+0.022, child hyperedges 0.0032), so absolute size is not the signal; candidate signal: per-entity reconstructed share of
+observed ties. **DECIDED (owner, agreeing with the assistant): postponed until the stage-0 fits give the distributions of
+factor-matrix loadings and engagement**; deadline: decided before stage-1 results are read (it changes how D1 measures
+read fits, not the fits).]*
