@@ -2192,3 +2192,13 @@ adaptation, because a goal term's question is its cost against having no term; t
 best-score reference). Known weakness (checked): the SE is often poorly estimated and the rule tends to predict worse
 than the minimum (Chen & Yang 2021, *Stats*); acceptable here because the aim is most of the property at no detectable
 cost; paired SE as stricter fallback if the stage-0 SE proves unstable.]*
+*[2026-11-06, §8.2 step 2 (off-diagonal coupling λ_z). **DECIDED (owner): reading R-A — a heterogeneous community is the
+same community index across facets** ("heterogeneous community presumes reading a. This is why it is heterogeneous and
+not social or semantic"). Owner: matrices differ in how much diagonal dominance matters — the semantic–article link most
+(owner wrote "author*child"; there is no author×child matrix — to be clarified), matrices with affiliations or journals
+less. **DECIDED (owner agrees): stage 0 adds a per-matrix diagnostic** — share of each core matrix's mass in
+between-community cells, Σ_{i≠j} z² ÷ Σ z² (unchanged by the scale freedom of ticket 79), per K and loss. Choice among
+O1 (λ_z = 0) and O3 (K-invariant redesign: penalise the off-diagonal share per relation, possibly weighted by matrix
+importance) after stage 0. Toy evidence recorded in the reply: size distortion (FINDINGS §2), misleading collapse reading
+(Test 4), collinearity 0.26/0.70/0.87, push against shared semantics (§9), strength growing with K (K² − K cells).
+Owner asked whether stage 0 with all λ = 0 is representative for the loss comparison — answered the same day.]*
