@@ -2131,3 +2131,11 @@ communities, Track A). Raw normalised factor cells shrink with facet size (unit-
 observed ties. **DECIDED (owner, agreeing with the assistant): postponed until the stage-0 fits give the distributions of
 factor-matrix loadings and engagement**; deadline: decided before stage-1 results are read (it changes how D1 measures
 read fits, not the fits).]*
+*[2026-11-06, **§8.2 step 1a (a) DECIDED (owner: "agree")**: outer-loop scores are used only as **vetoes** (a fit, K or
+arm crossing a pre-set threshold is excluded; otherwise no say) or **diagnostics** (reported), never as a ranking
+criterion competing with held-out prediction; which role each outer score gets is decided per score in steps 8–12; a
+veto must be decided before the decision it can veto. Terms clarified: inner loop (one fit), outer loop (scores of a
+finished fit), hyperparameter search (Optuna or a grid, which uses outer-loop scores); K is chosen by the grid and band,
+not by Optuna, whatever the number of tuned parameters (equal evidence per K needed); penalty weights and relation weights
+cannot be learned inside a fit (the fit would set them to 0 / onto the easiest matrix); Optuna's use for λ is decided at
+step 7. (b) in elaboration.]*
