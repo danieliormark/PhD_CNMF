@@ -2107,3 +2107,18 @@ found and share rated coherent, per loss; Fisher's exact test (with ~30 tasks pe
 points are detectable). Not developed further: NPMI coherence on the non-trial corpus (needs child hyperedges for it);
 blind LLM readers (needs the owner's permission for agents). Without S0-M5, stage 0 rests on S0-M1–M4 and the per-entity
 fit.]*
+*[2026-11-06, **stage-0 decision rule DECIDED (owner: "I accept the proposed evidence treatment approach or rule")**,
+per approach, at the candidate K by majority; one loss for the whole pipeline (approaches agree → that loss; they differ
+→ owner decides, failing that squared error). **Default: squared error (β = 2)** (every layer-2 decision was derived
+under it; KL carries the burden of proof). Steps: (1) gate — a loss failing the stability gate (seed stability, S0-M4)
+at the majority of candidate K is excluded; both fail → stage 0 cannot decide, to the owner; (2) membership agreement
+(S0-M1) "same" → squared error; (3) if "different" or "inconclusive": held-out ranking (S0-M2, AUC of the 3+ band) KL
+better → KL, squared error better → squared error; (4) if held-out ranking is equivalent or inconclusive: the more
+stable loss (S0-M4); if also equivalent/inconclusive → squared error; (5) flags to the owner, never automatic
+reversals: cross-scoring (S0-M3) dominance against the choice; the chosen loss's per-entity fit on the 3+ band worse
+beyond δ; KL chosen while its advantage lies only in the 2-tie band (owner's hypothesis); cross-scoring dominance in
+favour is reported as strengthening; (6) re-check at the final K₁, K₂ (decided). **DECIDED (owner): the per-entity fit
+used in this comparison is loss-neutral — per-entity AUC** (within each entity's row, on visible cells, probability that
+one of its ties is reconstructed above one of its empty cells), averaged within tie-count bands 2 / 3–5 / 6+, compared
+between losses with the usual classes (δ ÷ √2). It describes what each loss explains in the training data, not
+prediction. Owner's request: tables must name the measures, not only their codes.]*
