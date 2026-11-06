@@ -2202,3 +2202,10 @@ O1 (λ_z = 0) and O3 (K-invariant redesign: penalise the off-diagonal share per 
 importance) after stage 0. Toy evidence recorded in the reply: size distortion (FINDINGS §2), misleading collapse reading
 (Test 4), collinearity 0.26/0.70/0.87, push against shared semantics (§9), strength growing with K (K² − K cells).
 Owner asked whether stage 0 with all λ = 0 is representative for the loss comparison — answered the same day.]*
+*[2026-11-06, owner: the most important matrix for diagonal dominance is **child×article** (clarifying "author*child").
+**DECIDED (owner): the word-similarity regulariser (λ_child) is included in stage 0** — each loss with its own
+calibrated λ_child — **and the re-check at the final K₁, K₂ is run with the final terms on** (option (ii): the losing
+loss refitted with each term's λ transferred by matching the term's share of the total loss at convergence; a
+contradiction goes to the owner). λ_article does not enter stage 0 (it exists only for the article×article fallback
+regulariser). Stage 0 runs both approaches (as decided). Detail of the stage-0 λ_child calibration (which K) proposed
+the same day, pending.]*
