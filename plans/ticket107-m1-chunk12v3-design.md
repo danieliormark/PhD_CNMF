@@ -2236,3 +2236,17 @@ step 4: if the floor is kept and (c) is expected to differ substantially between
 (floor calibrated per loss at K*, then λ_child with the floor on; ≈ +600 fits; needs the re-specified floor and its
 independent check). Consequence: step 4 is decided before stage 0 starts. Otherwise the final re-check with terms on
 covers the floor × loss interaction.]*
+*[2026-11-06, **§8.2 step 4 (concentration floor) — partial decisions.** **DECIDED (owner: "I agree with the timing you
+proposed")**: the choice between no floor (shared-term concentration kept as an outer diagnostic) and a re-specified
+floor is made after stage-0 pass 1, from the diagnostic decided in (c); if a floor is kept and the losses differ
+substantially on that diagnostic, a floor pass is inserted between passes 1 and 2 (floor calibrated per loss at K*, then
+λ_child with the floor on). Pass 1 stays free of terms so that the loss comparison is not confounded. **DECIDED
+(owner)**: OpenAlex subfields are not used as the independent check or as ground truth (the owner's earlier manual check
+found false positives); they may be used as a comparison (how far the community structure reflects the subfield
+structure). Text matching of child hyperedges against their source sentences would re-read child×article and is not
+independent. Toy fact checked in code (chunk13v10.py `_conc_freeze`): s_i is the entropy of the tie-weighted sum of the
+articles' memberships, so a hyperedge used by a single mixed article inherits that article's spread in full and is
+pushed to spread. Open, under discussion: the owner's proposal that hyperedges in articles with more mixed membership
+should on average have more mixed membership (a population-level relation, not a per-entity floor); the split of s_i
+into within-article and between-article parts; the diversity measure; replacing the 0.9 cut-off by threshold-free
+measures (owner: the cut-off lacks ground truth and tuning it is questionable).]*
