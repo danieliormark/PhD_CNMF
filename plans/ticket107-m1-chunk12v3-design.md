@@ -2161,3 +2161,15 @@ majority of seeds); (4) measure on trial fits — stage-0 fits first (terms off)
 (5) fix before use, never tune (CLAUDE.md §4.7), record the derivation. Consequence: steps 2–12 fix each threshold's
 form; values wait for the stage-0 results. Toy lessons recorded: only the domain-balance tolerance (0.15, from seed
 noise) was derived; collapse 0.60 is 1.2× the fair share at K = 2 but 12× at K = 20 and fired only at K = 2.]*
+*[2026-11-06, **§8.2 step 1b part 2 DECIDED (owner: "I agree with the criteria")** — two kinds of in-loop term:
+**predictive regulariser** (purpose: better placement of sparsely tied entities; held-out prediction should improve;
+W regulariser, λ by held-out prediction, 1-SE larger λ, as decided 2026-10-29) and **goal term** (a research property
+possibly at a cost in prediction; concentration floor, in-loop domain balance, probably the off-diagonal coupling —
+step 2). A term **works** at a λ if, against the same fits at weight 0 (same groups and seeds, classes with δ ÷ √2):
+**W1 active** (share of loss and gradient at convergence; for dead-band terms the share of entities/communities it
+fires on); **W2 effective** (moves its target quantity beyond seed noise); **W3 valid** (goal terms: the independent
+check of decision (b); predictive regularisers: the held-out improvement plus the decided guard checks); **W4
+affordable** (convergence share and epochs, seed stability, side effects reported by the check, held-out prediction —
+part 3). Kept only at a λ where it works; failing W1 at every λ → dropped as inert; W2 → dropped as ineffective; W3 →
+dropped or property kept outside the fit; W4 limits the λ range. Measured in the calibration runs of steps 2–6 under
+the stage-0 loss.]*
