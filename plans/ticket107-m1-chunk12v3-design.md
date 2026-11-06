@@ -2185,3 +2185,10 @@ whether one λ works across them; per-K or K-scaled λ otherwise (per term, step
 values) or a small joint grid; a search algorithm (Optuna / Bayesian optimisation) only with ≥ 3 interacting continuous
 λ, followed by full evaluation of the candidates near the boundary; decided at step 7 (Optuna constraint support to be
 verified before relying on it).]*
+*[2026-11-06, owner's question on C1 answered: λ = 0 is the control (ablation) reference — the same fit with the term
+off; the stage-0 fits under the chosen loss already provide it at J2/A0, coarse K, groups 1–5. Standard one-SE rule
+(CART, Breiman et al. 1984; ESL §7.10; glmnet lambda.1se) uses the best score as reference; C1 uses λ = 0 (our
+adaptation, because a goal term's question is its cost against having no term; the W regulariser keeps the standard
+best-score reference). Known weakness (checked): the SE is often poorly estimated and the rule tends to predict worse
+than the minimum (Chen & Yang 2021, *Stats*); acceptable here because the aim is most of the property at no detectable
+cost; paired SE as stricter fallback if the stage-0 SE proves unstable.]*
