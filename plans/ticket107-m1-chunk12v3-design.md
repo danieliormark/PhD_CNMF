@@ -2219,3 +2219,13 @@ from pass 1; neighbouring coarse K added if pass 3's band reaches the edge) (≈
 by the decided rule; pass 1 reported beside it (a disagreement shows the W × loss interaction, and bears on the owner's
 periphery hypothesis). Total ≈ 2,200 fits plus the conditional K = 32. The final per-K calibration of λ_child (rule of
 2026-10-29) follows stage 0 under the chosen loss.]*
+*[2026-11-06, **§8.2 step 3 (word-similarity regulariser) — proposals 1–5 DECIDED (owner: "I agree with your proposals
+with 1 reservation")**: (1) order after stage 0: if step 4 keeps the concentration floor, it is recalibrated first, then
+λ_child per K with the floor on (checking that the floor's own measure does not shift); the stage-0 λ_child serves only
+the loss comparison; (2) target quantity (W2): held-out AUC of hidden ties in the 2-tie band, plus the membership
+distance between W-tied pairs (shows only that the term acts); (3) the guard "text check on W-tied hyperedges" becomes
+optional (blind reading of W-tied pairs with different vs same main community); decisive: held-out gain plus the
+stability guard; (4) side effect on hyperedges without a tie in W (≈ 30% at τ = 0.4) measured in stage-0 pass 2
+(their membership change and held-out AUC vs λ = 0; a W4 check); (5) membership stability over epochs logged in the
+stage-0 fits (every ~50 epochs) to re-examine the 300-epoch warm-up. Owner's reservation: should the concentration
+floor also enter stage 0? — answered the same day.]*
