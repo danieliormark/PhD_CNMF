@@ -2229,3 +2229,10 @@ stability guard; (4) side effect on hyperedges without a tie in W (≈ 30% at τ
 (their membership change and held-out AUC vs λ = 0; a W4 check); (5) membership stability over epochs logged in the
 stage-0 fits (every ~50 epochs) to re-examine the 300-epoch warm-up. Owner's reservation: should the concentration
 floor also enter stage 0? — answered the same day.]*
+*[2026-11-06, **DECIDED (owner: "I agree with your proposal C and b as potential addition")**: the concentration floor
+does not enter stage 0 now; **(c)** its target is measured as a diagnostic on the stage-0 fits (floor off, both losses):
+share of structurally shared child hyperedges placed above 0.9 in one community; **(b)** possible addition, decided in
+step 4: if the floor is kept and (c) is expected to differ substantially between losses, a floor pass is added to stage 0
+(floor calibrated per loss at K*, then λ_child with the floor on; ≈ +600 fits; needs the re-specified floor and its
+independent check). Consequence: step 4 is decided before stage 0 starts. Otherwise the final re-check with terms on
+covers the floor × loss interaction.]*
