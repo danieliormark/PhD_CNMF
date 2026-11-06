@@ -2,7 +2,7 @@ Fits per cell = 5 hold-out groups × 10 seeds = 50
 
 PREREQUISITES: M1 fit code with both losses (before stage 0); §8.2 mechanisms and λ under the chosen loss (before stage 1); must be fixed BEFORE stage 1; the hold-out scheme comparison of 2026-10-17 to be confirmed as done or still needed
 
-STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)
+STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5; pass 1 bare, pass 2 λ_child per loss at its K*, pass 3 verdict at each loss's best)
 ├── approach 1 · J2 binary · loss β = 2 (squared error); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
 │       weights: child×parent 0.250, child×article 0.250, author×article 0.167, author×affiliation 0.167, article×journal 0.167
 ├── approach 1 · J2 binary · loss β = 1 (KL); in-loop terms and word-similarity regulariser off   K = [3, 5, 8, 13, 20]
@@ -61,6 +61,6 @@ LATER STAGES (not yet designed):
   • final models refitted on all cells after settings are chosen (open)
   • background component (deferred robustness arm; planted test first)
 
-Fit counts (before reuse): stage 0 1,000, stage 1 6,000, stage 2 700, stage 3 300; total 8,000
+Fit counts (before reuse): stage 0 2,200, stage 1 6,000, stage 2 700, stage 3 300; total 9,200
 For comparison, a full grid K = 2-20 at J* in stage 2 instead of refinement (14 K beyond the coarse 5): 1,400 fits
-Total fits as a function of seeds S: S=10: 8,000, S=15: 12,000, S=20: 16,000
+Total fits as a function of seeds S: S=10: 9,200, S=15: 13,800, S=20: 18,400

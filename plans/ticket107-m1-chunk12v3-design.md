@@ -2209,3 +2209,13 @@ loss refitted with each term's λ transferred by matching the term's share of th
 contradiction goes to the owner). λ_article does not enter stage 0 (it exists only for the article×article fallback
 regulariser). Stage 0 runs both approaches (as decided). Detail of the stage-0 λ_child calibration (which K) proposed
 the same day, pending.]*
+*[2026-11-06, **DECIDED (owner: "Yes please record the updates stage 0")** — stage 0 in three passes: **pass 1, bare
+comparison**: both losses, both approaches, coarse K = 3, 5, 8, 13, 20, all terms off (≈ 1,000 fits at S = 10) → each
+loss's band and best K (K*), the per-matrix diagonal diagnostic, the bare comparison; **pass 2, λ_child per loss**: at
+each loss's own K*, λ_child ∈ {0.03, 0.1, 0.3} (scale adjusted per loss; λ = 0 from pass 1), chosen by the decided W
+rule (larger λ within one SE of the best held-out score; stability not worse than at λ = 0) (≈ 600 fits); **pass 3,
+comparison at each loss's best**: each loss with its own λ*_child at the candidate K (coarse K inside either loss's band
+from pass 1; neighbouring coarse K added if pass 3's band reaches the edge) (≈ 600 fits) → **the stage-0 verdict**, read
+by the decided rule; pass 1 reported beside it (a disagreement shows the W × loss interaction, and bears on the owner's
+periphery hypothesis). Total ≈ 2,200 fits plus the conditional K = 32. The final per-K calibration of λ_child (rule of
+2026-10-29) follows stage 0 under the chosen loss.]*
