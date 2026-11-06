@@ -2151,3 +2151,13 @@ freedom of ticket 79) vs ticket 102 (concentration floor confirmed by the abstra
 103's side effect). Consequences: the concentration floor needs a new check for child hyperedges (step 4); in-loop domain
 balance stays at 0 or is dropped unless a check is found (step 6); the W regulariser and off-diagonal coupling are not
 counterparts (judged by step 1b).]*
+*[2026-11-06, **§8.2 step 1b part 1 DECIDED (owner: "I agree with principles proposed")** — how thresholds are set (veto
+thresholds of outer scores, dead bands and cut-offs of in-loop terms, the engagement threshold of item (l)): (1) state
+the requirement first as a research statement, then as a measure meaning the same at every K (e.g. collapse as an
+effective number of communities 1/Σ s_k², the inverse Simpson index / Hill number of order 2 (Hill 1973, checked),
+at least a fixed fraction of K — illustration only, collapse is decided in step 8); (2) check against a null at each K
+(shuffled memberships or a degree-only model); (3) check against seed noise (a veto fires only beyond δ ÷ √2 or in the
+majority of seeds); (4) measure on trial fits — stage-0 fits first (terms off), re-checked in each term's calibration;
+(5) fix before use, never tune (CLAUDE.md §4.7), record the derivation. Consequence: steps 2–12 fix each threshold's
+form; values wait for the stage-0 results. Toy lessons recorded: only the domain-balance tolerance (0.15, from seed
+noise) was derived; collapse 0.60 is 1.2× the fair share at K = 2 but 12× at K = 20 and fired only at K = 2.]*
