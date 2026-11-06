@@ -7,21 +7,24 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-03, ticket 107 M1 — layer 2 and first-fit architecture)
+## State (2026-11-06, ticket 107 M1 — D1 and stage 0 pre-registered; §8.2 begins)
 
-**Done since 2026-11-01:** full build `psych_trial_v2` (RDS `m1_chunk12v3/`); hold-out measurements; layer 2 decided
-element by element — design doc addenda 2026-11-02 (1)–(4), 2026-11-03:
-- L2.1 scale basis: Frobenius (a), provisional; article×journal weighting open until the journal ablation (arms J1–J5).
-- L2.2 weights: rule w = 0.5 / n_domain, child×article semantic (A0, equal semantic weights); A1 arm (0.35/0.15).
-- L2.4: all persons kept; arm "approach 2 without article×article" with pre-registered outcomes.
-- L2.5: approaches compared at both K₁ and K₂, shared semantic hold-out groups, pre-registered outcomes.
-- Architecture `plans/ticket107_layer2/test_architecture.py`: stage 1 journal ablation at K = 3, 5, 8, 13, 20;
-  stage 2 coarse-to-fine K at J*; stage 3 comparisons. Seeds 10–20 within a 1–2 week budget. Bethe Hessian counts
-  in `plans/ticket107_layer2/bethe_hessian_counts.txt`.
+**Done 2026-11-03 to 11-06** (design doc addenda from 2026-11-03 (2) on; `plans/ticket107_layer2/`):
+- L2.6 complete: held-out captured share; per-fold recomputation; scoring weights; band = one-SE rule on the mean over
+  hold-out groups of seed means; K = 32 unconditional, coarse-to-fine inside wide intervals, extension beyond 50 by ×1.25.
+- D1 (journal weighting) pre-registered: `D1_journal_preregistration.md` (measures, rule, Dunnett with own error,
+  999 shuffles, K reading rule, one J* per approach with cross-fits). δ from seed halves ÷ √2 everywhere.
+- Hold-out: 10 groups drawn, stage 1 uses all 10, stage 2 groups 1–5; documentation clarified (10% of eligible ties).
+- Stage 0 (loss: squared error vs KL) decided and pre-registered: before λ calibration and stage 1; J2, A0, terms off,
+  coarse K, groups 1–5, conditional K = 32, re-check at final K; no planted worlds; measures membership agreement,
+  held-out ranking (AUC 3+ band; owner's periphery hypothesis), cross-scoring, seed stability, per-entity AUC; text
+  check optional; decision rule with squared error as default.
+- Reference check of all citations (addendum 2026-11-05 (3)); plan totals 8,000 fits at S = 10.
 
-**Waiting / next:** owner's wording of the K principle (K_max ≈ 20, extend if best at 20); L2.6 (held-out score,
-per-fold weights); pre-registration of D1 (journal weighting); then §8.2 mechanisms (Optuna and λ), then the M1 fit
-code. Delete `psych_trial_v1`? (ask).
+**Next:** §8.2 in the agreed order — step 1a (principles I: role of each layer under the new selection; when an outer
+penalty gets an in-loop counterpart), 1b, then in-loop mechanisms 2–6, placement map and Optuna (7); outer loop 8–12
+can follow while stage 1 runs (conditions in addendum 2026-11-05 (2)). Then the M1 fit code (both losses), time one
+fit, set S. Open: RDS quota for archiving U/Z (≈ 50–70 GB); delete `psych_trial_v1`? (ask).
 
 ## Earlier state (2026-11-01, ticket 107 M1 builder)
 
