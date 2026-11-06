@@ -2173,3 +2173,15 @@ affordable** (convergence share and epochs, seed stability, side effects reporte
 part 3). Kept only at a λ where it works; failing W1 at every λ → dropped as inert; W2 → dropped as ineffective; W3 →
 dropped or property kept outside the fit; W4 limits the λ range. Measured in the calibration runs of steps 2–6 under
 the stage-0 loss.]*
+*[2026-11-06, **§8.2 step 1b part 3 DECIDED (owner: "I accept your part 3 proposal")** — prediction cost of goal terms
+and the choice of λ: **C1** — a λ is allowed only if its held-out score (L2.6 score, under the stage-0 loss) is within
+one standard error of the score at λ = 0 (SE = SD over hold-out groups of the seed means ÷ √groups; a convention as
+glmnet's lambda.1se and our K band, not a formal test; reference-SE version kept for consistency, the paired version
+would be stricter); **choice** — the largest allowed λ at which the term works (W1–W4, side effects not beyond seed
+noise); **C2 exception** — if no λ > 0 is allowed but the property is a research requirement, the cost of the smallest
+working λ goes to the owner, who may accept it as a bounded cost with size and reason recorded; otherwise the term is
+not used and its property stays an outer veto or diagnostic. λ and K: calibrate at the stage-0 candidate K and check
+whether one λ works across them; per-K or K-scaled λ otherwise (per term, steps 2–6). Search: per-term grids (4–6
+values) or a small joint grid; a search algorithm (Optuna / Bayesian optimisation) only with ≥ 3 interacting continuous
+λ, followed by full evaluation of the candidates near the boundary; decided at step 7 (Optuna constraint support to be
+verified before relying on it).]*
