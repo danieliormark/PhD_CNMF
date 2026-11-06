@@ -2139,3 +2139,15 @@ finished fit), hyperparameter search (Optuna or a grid, which uses outer-loop sc
 not by Optuna, whatever the number of tuned parameters (equal evidence per K needed); penalty weights and relation weights
 cannot be learned inside a fit (the fit would set them to 0 / onto the easiest matrix); Optuna's use for λ is decided at
 step 7. (b) in elaboration.]*
+*[2026-11-06, **§8.2 step 1a (b) DECIDED (owner: "decision b makes sense, I agree")**: an in-loop term that copies an
+outer score's property (a counterpart) is allowed only with an **independent check** of the property — same property,
+different route, not computed from the quantity the term optimises (strong: external data or known truth, e.g. text not
+used to build the matrices, OpenAlex attributes, planted worlds; medium: held-out cells, if they can show the property;
+weak — the same quantity recomputed — not acceptable) — **pre-registered** before λ is calibrated (the check, what counts
+as improvement beyond seed noise δ ÷ √2, side effects it must report, the λ values, the acceptable cost in held-out
+prediction from step 1b). Without such a check the property stays outside the fit as a veto or diagnostic. Reason:
+ticket 82 (the term's own measure improved 30–40× while membership imbalance worsened in 3/12 cells, through the scale
+freedom of ticket 79) vs ticket 102 (concentration floor confirmed by the abstracts' text, which also revealed ticket
+103's side effect). Consequences: the concentration floor needs a new check for child hyperedges (step 4); in-loop domain
+balance stays at 0 or is dropped unless a check is found (step 6); the W regulariser and off-diagonal coupling are not
+counterparts (judged by step 1b).]*
