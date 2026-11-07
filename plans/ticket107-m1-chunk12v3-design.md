@@ -2290,3 +2290,10 @@ is recorded as an option, considered only if the stage-0 pass-1 diagnostic shows
 hyperedge more concentrated than its articles: freely within the margin γ leaves, and below the minimum at the price of
 the soft penalty when data, W or parents gain more; with β = 1, concentrated articles of W-similar hyperedges also lower
 the minimum itself.]*
+*[2026-11-07, **§8.2 step 5 (L1 sparsity) — S1 DECIDED (owner: "I agree with proposal S1. We indeed need to establish
+whether the intervention is needed")**: λ_l1 = 0 and the toy form (sum of U_norm entries, which concentrates columns,
+not rows; FINDINGS §6) is removed permanently. Whether a row-level intervention is needed is established on stage-0
+pass 1 (excess-spread diagnostic; definition under discussion). Redesign candidate S3 (a one-sided ceiling on spread
+that the entity's own ties do not support, mirroring the floor) to be tested in stage 0 if the diagnostic shows a
+problem; S2 (plain row sparsity, a target independent of the data that fights the floor) proposed for rejection;
+interactions with other mechanisms under discussion.]*
