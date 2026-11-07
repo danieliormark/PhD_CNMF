@@ -2435,3 +2435,14 @@ stated for TPESampler/GPSampler, `constraints_func` to be replaced in v5 — ver
 evaluation (all groups and seeds) of the candidates near the boundary. Reported (auto-accepted): the interaction-test
 outcome per pair of terms, read as whether sequential calibration was safe. Still open in step 7: the placement map as
 a whole; retiring the knee and Pareto-front selection for the trial.]*
+*[2026-11-07, **step 6 — combined reading DECIDED (owner: "I agree")**: a community is heterogeneous in the owner's sense
+if it has both **presence** in each domain (reconstructed tie weight, view (C)) and **sufficient members** in each domain
+(entities of that domain's facets with weighted membership in k ≥ q; at least m of them). The two can disagree (diffuse
+case: high presence, no member above q; narrow case: few strongly committed members, low presence). The membership
+cut-offs q, m are decided under item (l). Reported in stage 0 (auto-accepted): per community and facet, the effective
+number of members (2^spread of the entities' weighted memberships in k rescaled to sum to 1; no cut-off) and the number
+of entities whose largest membership is k, with q = 0.5 as a sensitivity reading only. **Step 7 — DECIDED (owner: "yes,
+I agree (no pareto or knee in stage 0)")**: the placement map as presented (outer rows filled in steps 8–12); the
+Pareto front and the knee (`select_models.py`) are not used in stage 0 and the trial; models are chosen by held-out
+score, the one-SE band, seed stability as gate and outer vetoes. Mono-domain rule still open (owner asked for the
+definition of presence).]*
