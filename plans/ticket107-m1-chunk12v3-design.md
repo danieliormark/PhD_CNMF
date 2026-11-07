@@ -2335,3 +2335,13 @@ share of the **reconstructed tie weight**, which splits exactly into community-p
 (A) membership means (postponed until item (l)), (B) column shape (description), (C) reconstructed tie weight per
 relation (proposed main view; variants presented the same day). Whether membership should be weighted by squared or
 summed size goes to item (l).]*
+*[2026-11-07, **step 6, view (C) — partial decisions.** Building block: part(k,l) of a relation's reconstructed tie
+weight (GLOSSARY.md). **DECIDED (owner: "I agree with equal weight per relation and relative presence as you proposed")**:
+relations combined with equal weight within a group (each relation also shown on its own); K-invariant form = relative
+presence = share × K (1 = average-sized community, 0 = absent). **DECIDED (owner: "agree with measures for stage 0")**:
+references in stage-0 pass 1 = seed noise (seed halves), relation fit (per-relation held-out score), distribution of
+presence across the communities of the same fit (descriptive); rewired-data and planted references decided after the fit
+is timed. The row-shuffle null does not apply to this view (row shuffles keep column sums, so every part is unchanged).
+Open: the split of between-community parts (owner questions 50/50), the domain groups (owner: social vs semantic with
+child×article semantic, no separate anchor group; child×parent auxiliary), and reporting the step-2 diagonal diagnostic
+in tie-weight units.]*
