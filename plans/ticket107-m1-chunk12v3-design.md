@@ -2446,3 +2446,30 @@ I agree (no pareto or knee in stage 0)")**: the placement map as presented (oute
 Pareto front and the knee (`select_models.py`) are not used in stage 0 and the trial; models are chosen by held-out
 score, the one-SE band, seed stability as gate and outer vetoes. Mono-domain rule still open (owner asked for the
 definition of presence).]*
+*[2026-11-07, **step 6 — presence definition and mono-domain rule DECIDED (owner: "Great explanation and I agree with
+0.1 and 0.5 values")**.
+**Presence, mathematically.** For relation matrix r between facets f (rows) and g (columns): reconstruction
+X̂_r = U_f Z_r U_gᵀ (same product from raw or normalised matrices); total reconstructed tie weight T_r = Σ cells of X̂_r;
+part(k,l) = Z_r[k,l] × a_k × b_l with a_k, b_l the column sums of U_f[:,k], U_g[:,l] (parts add up exactly to T_r);
+half-credit share h_k(r) = [part(k,k) + ½ Σ_{l≠k}(part(k,l) + part(l,k))] ÷ T_r (= mean of the two side readings;
+sums to 1 over k; the relation's overall scaling cancels); relative presence p_k(r) = K × h_k(r) (1 = average share 1/K,
+0 = absent, 2 = twice the average); presence of k in domain D: P_k(D) = mean of p_k(r) over D's relation matrices
+(equal weight). **Substantively:** the model builds its version of each relation's ties as a sum of community-pair
+blocks; presence is how much of that modelled version is built with community k (its within block plus half of every
+block shared with another community), compared with an average community. Correct reading: "community 3 accounts for
+0.4% of the modelled author–article ties, a twenty-fifth of an average community's share". Not a share of the data (the
+residual belongs to no community; each relation's fit is reported beside it), not member composition (the membership
+half of the combined reading), not explained variance.
+**Mono-domain rule.** Community k is **mono-domain** in a fit if P_k(D₁) < **0.1** and P_k(D₂) ≥ **0.5** for the two
+domains D₁, D₂, in the majority of seeds, and the low value does not come from relation matrices the model fits only at
+chance level (held-out score). **How to read the values:** 0.1 = the community carries less than a tenth of an average
+community's share of that domain's modelled ties (e.g. at K = 10 an average community carries 10% of a relation's
+reconstructed tie weight, so 0.1 means below 1%) — "nearly absent"; 0.5 = it carries at least half an average
+community's share of the other domain — "clearly present", which keeps small communities that are weak everywhere from
+being counted as mono-domain (they are a low-mass question, step 8). Both values are stated before any data, K-invariant
+(relative to 1/K) and not tuned; the full presence distribution is reported in stage 0 so the sensitivity of the count to
+them is visible. **Worked example** (K = 3, invented): social presence of community 3 = mean(0.012, 0.03, 0.15) =
+0.064 (author×article, author×affiliation, article×journal), semantic presence = mean(0.90, 0.60) = 0.75 (child×article,
+child×parent) → mono-domain, semantic only; communities 1 (social 2.06, semantic 1.35) and 2 (0.88, 0.90) present in
+both. The membership half then asks whether community 3 has social entities with membership ≥ q (no → confirms; yes →
+narrow case: committed members, few ties).]*

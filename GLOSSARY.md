@@ -254,3 +254,11 @@ for our collective tri-factorisation at most approximately).
 **social** — approach 1: author×article, author×affiliation, article×journal; approach 2: article×article,
 article×affiliation, article×journal. A community's presence in a domain = mean relative presence over that domain's
 relation matrices (equal weight). The toy classified only facets.
+
+**Presence (relative presence p_k(r); presence in a domain P_k(D))** — decided 2026-11-07. h_k(r) = community k's
+half-credit share of relation r's reconstructed tie weight; p_k(r) = K × h_k(r) (1 = average community, 0 = absent);
+P_k(D) = mean of p_k(r) over the domain's relation matrices. Reads as "how much of the modelled ties of that domain is
+built with community k, compared with an average community". **Mono-domain community:** P_k in one domain < 0.1 (less
+than a tenth of an average community's share: nearly absent) and ≥ 0.5 in the other (at least half an average share:
+clearly present), in most seeds, not caused by a relation fitted at chance. Full definition and example: design doc,
+step 6.
