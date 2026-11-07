@@ -2361,3 +2361,16 @@ auto-accepted and announced with their interpretation. Toy check (chunk13v10.py 
 `evaluate_domain_balance`): the toy's domain balance classified facets (articles social), never relations; child×article
 entered only indirectly, through the column weights that shape both articles' and hyperedges' memberships. Open: semantic
 group summary (child×article alone vs with child×parent at equal weight).]*
+*[2026-11-07, **step 6 — semantic group DECIDED (owner: "at least on stage 0 … we better have both child*article and
+child*parent")**: in stage 0 the semantic summary is the equal-weight mean of child×article and child×parent relative
+presence. Expected bias, checked on the toy (93 archived v9.4 models with both relations,
+`plans/ticket107_layer2/ca_cp_toy_check.py`, half-credit relative presence): the two relations agree only moderately
+(Spearman across communities, K > 2: median 0.50, IQR 0.12–0.80); |difference| median 0.19, 90th percentile 0.61;
+no community was nearly absent (< 0.25) from child×article, 14 of 323 were nearly absent from child×parent and 10 of
+those read ≥ 0.5 in the mean. Direction: the mean pulls towards presence, so it under-detects absence from one semantic
+relation (a community absent from one relation reads at least half its presence in the other); child×parent shares
+vary more across communities (SD 0.28 vs 0.22). Toy limits: 25 articles, atoms and cousins present, parents mostly in
+one article. **Reported (auto-accepted, owner rule 2026-11-07):** per-relation presence (already decided), the minimum
+over the semantic relations beside the mean (a community counts as semantically present in both only if the minimum is
+clear of seed noise), and the across-community rank correlation between child×article and child×parent presence per
+fit (high = the mean is safe; low = read the relations separately).]*
