@@ -248,3 +248,9 @@ weight of relation r" — a share of the model's reconstruction, not of the data
 orthogonal split, no reference model). Report it with the relation's fit (held-out score). Under generalised KL,
 stationary points of two-factor NMF preserve the data's row and column sums (Ho & Van Dooren 2008, statement checked;
 for our collective tri-factorisation at most approximately).
+
+**Domain of a facet / of a relation matrix** — facets: social (articles, authors, affiliations, journals) or semantic
+(hyperedges). Relation matrices (decided 2026-11-07, ticket 107 step 6): **semantic** — child×article, child×parent;
+**social** — approach 1: author×article, author×affiliation, article×journal; approach 2: article×article,
+article×affiliation, article×journal. A community's presence in a domain = mean relative presence over that domain's
+relation matrices (equal weight). The toy classified only facets.

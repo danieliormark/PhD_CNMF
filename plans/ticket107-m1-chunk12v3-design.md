@@ -2384,12 +2384,12 @@ Status marks: **[D]** decided by the owner (dated notes above), **[A]** auto-acc
    (GLOSSARY.md). Views (A) membership means — postponed until item (l); (B) column shape — description only. Not "explains
    x%"; "carries x% of the reconstructed tie weight of relation r".
 2. **Research property [P, from R-A].** Not equal amounts but presence: a heterogeneous community exists in both the
-   social and the semantic data. The property at risk is a **mono-domain community** (present in one group of relations,
+   social and the semantic data. The property at risk is a **mono-domain community** (present in the relation matrices of one domain,
    nearly absent from the other). No 50/50 target (owner's asymmetry view).
 3. **Measures [D].** Per relation: parts part(k,l); two side readings (each sums to 100%); half credit = their mean (main);
-   within-only share beside it. Relative presence = share × K. Groups: **social** (approach 1: author×article,
+   within-only share beside it. Relative presence = share × K. Domain of each relation matrix: **social** (approach 1: author×article,
    author×affiliation, article×journal; approach 2: article×article, article×affiliation, article×journal) and
-   **semantic** (child×article, child×parent), relations equally weighted within a group; in stage 0 both semantic
+   **semantic** (child×article, child×parent), relation matrices equally weighted within a domain; in stage 0 both semantic
    relations in the summary. Both losses read identically.
 4. **Reported [A].** Each relation separately; the gap between the two side readings per community (how a community
    connects, not an error); the minimum over the semantic relations beside the mean; the rank correlation between
@@ -2398,8 +2398,8 @@ Status marks: **[D]** decided by the owner (dated notes above), **[A]** auto-acc
 5. **References in stage-0 pass 1 [D].** Seed noise (seed halves), relation fit (per-relation held-out score),
    distribution across the fit's communities; rewired data or a planted check decided after the fit is timed. Row
    shuffles do not apply (column sums unchanged).
-6. **Mono-domain rule [P].** A community is mono-domain in a fit if its relative presence in one group is **below 0.1**
-   (a tenth of an average-sized community; K-invariant) **and** its relative presence in the other group is at least
+6. **Mono-domain rule [P].** A community is mono-domain in a fit if its relative presence in one domain (mean over that domain's relation matrices) is **below 0.1**
+   (a tenth of an average-sized community; K-invariant) **and** its relative presence in the other domain is at least
    0.5, in the majority of seeds, and the low value is not in a relation whose held-out score is at chance. The value 0.1
    is stated before any data and not tuned; it can be checked against the presence distribution of stage-0 pass 1
    (owner's attention: the value).
@@ -2410,3 +2410,9 @@ Status marks: **[D]** decided by the owner (dated notes above), **[A]** auto-acc
 8. **Response to a finding [P].** If pass 1 finds mono-domain communities beyond seed noise, the response goes to the
    outer loop (step 10: veto or report). An in-loop presence minimum (B2) only by the owner's explicit exception (C2),
    with its cost recorded. B3 (toy form recalibrated) rejected.
+*[2026-11-07, **step 6 point 7 DECIDED for stage 0 (owner: "for stage 0 I agree. then we will need to see whether the
+domain balance intervention is needed")**: no in-loop domain-balance term in stage 0 (B1); whether an intervention is
+needed is decided from the stage-0 results. **Terms corrected (owner)**: no "groups" were defined — the consolidated
+text now speaks of the **domain of a relation matrix** (social or semantic; decided 2026-11-07, child×article semantic)
+alongside facets and their domains (GLOSSARY.md). Points 6 and 8 still open; the reason for outer handling restated the
+same day.]*
