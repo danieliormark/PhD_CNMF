@@ -2510,3 +2510,8 @@ weight in f is then 0). References reported side by side: the median observed ti
 the result can be negative). In binary relations all references equal 1 and coincide. Which reference becomes the rule
 is chosen from the stage-0 data; the stage-0 default proposed the same day. The toy's 1e-3 × largest-weight cut-off is
 replaced.]*
+*[2026-11-07, **step 8 — collapse DECIDED (owner: "yes, on this stage we want to diagnose if we at all want to have a
+mechanism for collapse")**: in stage 0 collapse is a diagnostic only — per relation the effective number of communities
+N_eff = 1 / Σ_k h_k(r)² (Hill order 2), reported as N_eff ÷ K (near 1: modelled ties shared evenly; near 1/K: one
+community dominates); the toy's outer penalty (largest share > 0.60) is not used; whether any collapse mechanism is
+needed is decided from the stage-0 results.]*
