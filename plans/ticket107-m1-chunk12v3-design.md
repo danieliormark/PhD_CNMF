@@ -2416,3 +2416,22 @@ needed is decided from the stage-0 results. **Terms corrected (owner)**: no "gro
 text now speaks of the **domain of a relation matrix** (social or semantic; decided 2026-11-07, child×article semantic)
 alongside facets and their domains (GLOSSARY.md). Points 6 and 8 still open; the reason for outer handling restated the
 same day.]*
+*[2026-11-07, **step 6 point 8 — why outer handling (owner: "great explanation, probably may be worth documenting")**:
+(1) no independent check exists that an in-loop presence term does the right thing (decision 1a(b)): no external record
+says which communities should span both domains, and a planted world tests the measure, not the term; without a check
+a term can lower its own score without changing the substance (toy: the core-matrix version improved 30–40× in its own
+terms while real imbalance worsened in 3 of 12 cells); (2) a term could fabricate heterogeneity — a genuinely
+mono-domain cluster (e.g. a semantic theme with no distinct group of people) would get forced social presence and the
+finding would be hidden; the outer loop reports it and lets the owner judge defect vs result; (3) costs: an in-loop term
+changes every fit (toy: 1 of 20 settings effective, weight 5 broke convergence), an outer veto or report changes no fit
+and is reversible; (4) an in-loop presence minimum (B2) remains possible by the owner's explicit exception, cost
+recorded.]*
+*[2026-11-07, **§8.2 step 7 — Q2 DECIDED (owner: "I agree with Q2 proposal")**: no Optuna by default; every λ by its
+pre-registered grid rule in the decided order (cost rule for goal terms, one-SE rule for the regulariser), K by the grid
+and band. **Interaction test** after the floor slot: re-run each active term's best grid value with the other terms at
+their neighbouring grid values; if any term's best value moves by more than one grid step, a single-objective search
+runs (objective: held-out score; constraint: the cost rule; Optuna constraint support — documented for NSGAIISampler,
+stated for TPESampler/GPSampler, `constraints_func` to be replaced in v5 — verified before use), followed by full
+evaluation (all groups and seeds) of the candidates near the boundary. Reported (auto-accepted): the interaction-test
+outcome per pair of terms, read as whether sequential calibration was safe. Still open in step 7: the placement map as
+a whole; retiring the knee and Pareto-front selection for the trial.]*
