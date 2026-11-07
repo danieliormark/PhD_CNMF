@@ -2297,3 +2297,12 @@ pass 1 (excess-spread diagnostic; definition under discussion). Redesign candida
 that the entity's own ties do not support, mirroring the floor) to be tested in stage 0 if the diagnostic shows a
 problem; S2 (plain row sparsity, a target independent of the data that fights the floor) proposed for rejection;
 interactions with other mechanisms under discussion.]*
+*[2026-11-07, **step 5 DECIDED (owner: "I agree with all 4 points")**: (1) terms "relation mix" and "excess spread" as
+defined in GLOSSARY.md ("neighbours" not used); articles judged against their most spread relation mix (conservative:
+over-spread only if no relation supports the spread; no weights between relations needed), per-relation spreads
+reported; (2) S3 (one-sided ceiling, λ_up × mean excess², ρ ≥ 1, relation mix frozen at the warm-up epoch, β arms as
+the floor) is tested in the stage-0 slot between passes 1 and 2 only if pass 1 shows excess spread beyond seed noise;
+calibrated together with the floor (with γ ≤ 1 ≤ ρ and ω ≤ 1 the floor's minimum never exceeds the ceiling, so every
+hyperedge has an allowed band); (3) excess-spread diagnostic at λ_z = 0 in pass 1 (an off-diagonal penalty pushes
+cross-community ties into mixed memberships), re-measured if step 2 chooses λ_z > 0; rows below the weak-attribution
+cut-off (item (l), once decided) excluded; (4) S2 (plain row sparsity) rejected. Gate for S3 proposed the same day.]*

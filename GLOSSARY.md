@@ -199,3 +199,24 @@ Property: each person adds a total of exactly 1 to each of their articles, howev
 of the community distribution entity i receives from the articles that use it, frozen at warm-up; H = normalised
 entropy of p_i (lines 824–835; ticket 102). λ_conc = 0.1, γ = 0.8 were calibrated on the toy corpus; to be recalibrated
 on the Psychology trial.
+**[Ticket 107 re-specification, decided 2026-11-07]** Spread in bits (not normalised by log₂K); minimum = γ ×
+(between-article spread + ω × within-article spread) of the article mix; ω and β arms; see the design doc, step 4.
+
+**Spread** — entropy of a membership in bits (log base 2; the unit is Shannon's 1948 "bit", word credited by him to
+J. W. Tukey). 0 = all in one community; 1 bit = as spread as an even split between 2 communities; log₂K = even over all
+K. **Effective number of communities** = 2^spread (Hill number of order 1). Example: (0.9, 0.1, 0, 0) → 0.47 bits →
+1.38 communities.
+
+**Tie weight** — the value of a non-zero cell of a relation matrix. **Entities tied to entity i in relation r** — the
+entities with a non-zero cell in i's row (or column) of relation matrix r.
+
+**Relation mix (relation-r mix of entity i)** — the tie-weighted average of the weighted memberships (ticket 100) of the
+entities tied to i in relation r. Examples: a child hyperedge's article mix (child×article; the floor's mix); an
+article's hyperedge mix, author mix, journal membership. Not to be called "neighbours".
+
+**Within-article / between-article spread** — the article mix's spread splits exactly into the mean of the articles'
+own spreads (within) plus the rest (between; a generalised Jensen–Shannon divergence, never negative).
+
+**Excess spread** — max(0, own spread − ρ × the spread of the relation mix); for an article, against its most spread
+relation mix (an article is over-spread only if none of its relations supports its spread). Diagnostic of smearing;
+target of the possible ceiling term S3 (ticket 107 step 5, decided 2026-11-07).
