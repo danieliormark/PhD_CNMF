@@ -220,3 +220,31 @@ own spreads (within) plus the rest (between; a generalised Jensen–Shannon dive
 **Excess spread** — max(0, own spread − ρ × the spread of the relation mix); for an article, against its most spread
 relation mix (an article is over-spread only if none of its relations supports its spread). Diagnostic of smearing;
 target of the possible ceiling term S3 (ticket 107 step 5, decided 2026-11-07).
+
+## Column weights and reconstructed tie weight *(documented 2026-11-07, ticket 107 step 6)*
+
+**Column weight w_k(f)** (ticket 100; `_column_weights` / `compute_weighted_membership`, chunk13v10.py) — for facet f
+and community k: w_k² = Σ over relations r touching f of ‖slice_k‖², where slice_k = U_f[:,k] · (Z[k,:] · U_gᵀ) is the
+part of r's reconstruction U_f Z U_gᵀ that comes from column k of U_f (U column-normalised, L2 norm 1; Z = Z_scaled;
+g = r's other facet). Because ‖U_f[:,k]‖ = 1, ‖slice_k‖² = Z[k,:] (U_gᵀU_g) Z[k,:]ᵀ (U_gᵀU_g = Gram matrix of g's
+columns, cell (l,m) = cosine between columns l and m). Counts between-community core cells too (Z[k,l], l ≠ k).
+Example: K = 2, Z = [[0.8, 0.1], [0.2, 0.5]], Gram [[1, 0.3], [0.3, 1]] → w = (0.84, 0.59). **Cut-off:** w_k below
+1e-3 × the facet's largest weight is set to 0 (no derivation recorded; part of item (l), weak attribution).
+**Detached:** in in-loop terms the weights are recomputed each epoch but treated as constants in the gradient, so a term
+cannot be lowered by changing a community's weight. **Not a share:** community parts overlap, so squared weights do not
+add up to the reconstruction's squared norm. **Weighted membership** of entity i = its column-normalised row × w,
+rescaled to sum to 1 ≈ the share of i's reconstructed ties passing through each community (row i of slice_k has size
+u_ik · w_k per relation); counterpart of Lin et al.'s p(k|i) ∝ p(i|k) p(k). Why needed: every U column has norm 1 even
+when the community carries nothing in that facet; toy example (FINDINGS §30): atom "computational", raw row (0.0048,
+3e-7, 3e-6), read 0.999 in a community with zero reconstructed data. The cut-off does not remove the community (it stays
+in the fit, in K, and possibly alive in other facets); it removes it from that facet's membership reading. Entities whose
+weighted mass falls below 1e-3 × the live median are **unengaged** and are left out of membership-based measures (not
+reassigned). Squared size (these weights) leans towards the squared-error loss; summed size towards generalised KL.
+
+**Reconstructed tie weight** — the sum of the cells of a relation's reconstruction. It splits exactly into non-negative
+parts per community pair (k, l): part(k,l) = Z[k,l] × Σ_i U_f[i,k] × Σ_j U_g[j,l] (same value from raw or normalised
+matrices; unchanged by the scale freedom of ticket 79). **Wording:** "community k carries x% of the reconstructed tie
+weight of relation r" — a share of the model's reconstruction, not of the data, and not "explained variance" (no
+orthogonal split, no reference model). Report it with the relation's fit (held-out score). Under generalised KL,
+stationary points of two-factor NMF preserve the data's row and column sums (Ho & Van Dooren 2008, statement checked;
+for our collective tri-factorisation at most approximately).

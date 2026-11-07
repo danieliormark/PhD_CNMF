@@ -2317,3 +2317,21 @@ the floor if kept): keep S3 only if a setting passes** the cost rule (largest λ
 without excess at λ_up = 0, the share whose spread falls beyond their own seed variation is not above the seed-halves
 reference). Otherwise S3 is dropped and excess spread stays a diagnostic. Limits: gate 1 misses smearing invisible in
 held-out ties (left to the outer checks); its matched comparison is observational, gate 2 is the causal test.]*
+*[2026-11-07, **§8.2 step 6 (domain balance) — terms first (owner: "we need to agree about the definitions and measures
+first")**. Owner's concerns: raw factor values are never exactly 0 (clamp 1e-7), so near-floor rows still give
+plausible-looking memberships summing to 1; mean membership may reflect how memberships are distributed rather than
+presence. Clarified and **agreed (owner: "I agree with these points")**: (1) columns are L2-normalised, so under even
+spread each value is 1/√n (not 1/n; 1/n holds under L1, where the column mean is constant and uninformative); the
+column mean reflects concentration, not presence; size-adjusted larger values in one domain mean a community concentrated
+on fewer entities there — a description, not imbalance; (2) the core matrix (Z_scaled) is not sensitive to facet size as
+such (Frobenius-normalised inputs × L2 columns: a full even block gives core cell 1 for any n_f, n_g), but to block
+density (about √d), the spread of tie weight, and the relation normalisation; (3) column weights, cut-off, detaching and
+unengaged entities documented in GLOSSARY.md; the cut-off removes a community only from one facet's membership reading,
+not from the fit or K; (4) every membership- or mass-based quantity is computed identically for both losses; squared
+sizes lean towards squared error, summed sizes towards generalised KL (Ho & Van Dooren 2008) — both readings reported for
+both losses as a sensitivity check; (5) "community k explains x% of the reconstructed data" was a misuse of the
+explained-variance analogy (data vs reconstruction; squared parts do not add up; no reference model). Correct form:
+share of the **reconstructed tie weight**, which splits exactly into community-pair parts. Views of domain balance:
+(A) membership means (postponed until item (l)), (B) column shape (description), (C) reconstructed tie weight per
+relation (proposed main view; variants presented the same day). Whether membership should be weighted by squared or
+summed size goes to item (l).]*
