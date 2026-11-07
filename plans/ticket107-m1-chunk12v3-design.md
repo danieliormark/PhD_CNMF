@@ -2515,3 +2515,9 @@ mechanism for collapse")**: in stage 0 collapse is a diagnostic only — per rel
 N_eff = 1 / Σ_k h_k(r)² (Hill order 2), reported as N_eff ÷ K (near 1: modelled ties shared evenly; near 1/K: one
 community dominates); the toy's outer penalty (largest share > 0.60) is not used; whether any collapse mechanism is
 needed is decided from the stage-0 results.]*
+*[2026-11-07, **step 8 — empty-column default DECIDED (owner: "I agree with keeping 0.1th percentile as the main measure
+and looking into higher percentiles if needed")**: stage-0 default = 0.1th percentile of the relation's observed tie
+weights; reported per fit (auto-accepted): the columns each of the five references would zero and how many placed
+entities would change their largest membership under each (same columns → choice irrelevant; more columns, no entity
+changes → stricter reference safe; entities change → those columns carry members and stay). Higher percentiles are
+considered from that report. Step 8 complete.]*
