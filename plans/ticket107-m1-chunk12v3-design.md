@@ -2502,3 +2502,11 @@ coverage, accuracy (both metrics, both losses), per-entity held-out AUC; a globa
 Reasons: reproduced share is neutral between the losses (coverage is satisfied by generalised KL by construction),
 available for every entity (AUC needs hidden ties), and keeps smeared entities in so steps 4–5 can measure them. Column
 cut-off: one-tie rule preferred by the owner over a fixed p_k; its reference tie weight under discussion.]*
+*[2026-11-07, **step 8 — empty-column rule (owner: "I'd report both one-tie based and 5th, 1st percentiles. also
+optionally 0.5% or 0.1% percentile")**: community k is **empty in relation r** if its tie weight there (half credit ×
+T_r) is below a reference tie weight of r; empty in facet f if that holds in every relation touching f (its column
+weight in f is then 0). References reported side by side: the median observed tie weight of r (one-tie rule) and the
+5th, 1st, 0.5th and 0.1th percentiles (owner); the median − k·SD form was not used (tie weights are far from normal and
+the result can be negative). In binary relations all references equal 1 and coincide. Which reference becomes the rule
+is chosen from the stage-0 data; the stage-0 default proposed the same day. The toy's 1e-3 × largest-weight cut-off is
+replaced.]*
