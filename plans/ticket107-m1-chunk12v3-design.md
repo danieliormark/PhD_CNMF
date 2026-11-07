@@ -2280,3 +2280,13 @@ code exists. Also decided earlier the same step: timing (decision after stage-0 
 only). Owner's point (f): population-level expectations (mixed article → mixed hyperedges; mosaic vs blend) are
 measured, not enforced; the article-coherence and mosaic-vs-blend measure runs as a stage-0 pass-1 diagnostic, repeated
 on pass 3 and the final fits (proposed; owner agreed it is a good idea, stage proposed 2026-11-06).]*
+*[2026-11-07, **step 4 tie-break DECIDED (owner: "I agree with the tie breakdown rule")**: ω has two pre-registered
+arms because each is a testable reading of a mixed article (ω = 0 mosaic: pure hyperedges from different communities;
+ω = 1 blend: shared hyperedges), intermediate values would amount to tuning against a check of modest resolution, and
+each value adds a full λ × γ × β grid. If both arms pass and differ by less than δ, **ω = 1** (serves the owner's goal
+that general hyperedges are not over-concentrated); a third arm ω = 0.5 is added only if that goal and the
+false-positive check disagree. Per-article ω (blend articles contribute within-article spread, mosaic articles do not)
+is recorded as an option, considered only if the stage-0 pass-1 diagnostic shows a clear split. The model can make a
+hyperedge more concentrated than its articles: freely within the margin γ leaves, and below the minimum at the price of
+the soft penalty when data, W or parents gain more; with β = 1, concentrated articles of W-similar hyperedges also lower
+the minimum itself.]*
