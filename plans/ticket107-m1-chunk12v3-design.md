@@ -2374,3 +2374,39 @@ one article. **Reported (auto-accepted, owner rule 2026-11-07):** per-relation p
 over the semantic relations beside the mean (a community counts as semantically present in both only if the minimum is
 clear of seed noise), and the across-community rank correlation between child×article and child×parent presence per
 fit (high = the mean is safe; low = read the relations separately).]*
+
+### §8.2 step 6 — domain balance: full proposal (consolidated 2026-11-07)
+
+Status marks: **[D]** decided by the owner (dated notes above), **[A]** auto-accepted reporting (owner rule
+2026-11-07), **[P]** proposal awaiting the owner.
+
+1. **Terms [D].** Domain balance is spoken of in view (C): community presence in reconstructed tie weight per relation
+   (GLOSSARY.md). Views (A) membership means — postponed until item (l); (B) column shape — description only. Not "explains
+   x%"; "carries x% of the reconstructed tie weight of relation r".
+2. **Research property [P, from R-A].** Not equal amounts but presence: a heterogeneous community exists in both the
+   social and the semantic data. The property at risk is a **mono-domain community** (present in one group of relations,
+   nearly absent from the other). No 50/50 target (owner's asymmetry view).
+3. **Measures [D].** Per relation: parts part(k,l); two side readings (each sums to 100%); half credit = their mean (main);
+   within-only share beside it. Relative presence = share × K. Groups: **social** (approach 1: author×article,
+   author×affiliation, article×journal; approach 2: article×article, article×affiliation, article×journal) and
+   **semantic** (child×article, child×parent), relations equally weighted within a group; in stage 0 both semantic
+   relations in the summary. Both losses read identically.
+4. **Reported [A].** Each relation separately; the gap between the two side readings per community (how a community
+   connects, not an error); the minimum over the semantic relations beside the mean; the rank correlation between
+   child×article and child×parent presence per fit; the squared-size reading beside the summed one for both losses; the
+   step-2 off-diagonal diagnostic in tie-weight units with the squared core-cell form [D].
+5. **References in stage-0 pass 1 [D].** Seed noise (seed halves), relation fit (per-relation held-out score),
+   distribution across the fit's communities; rewired data or a planted check decided after the fit is timed. Row
+   shuffles do not apply (column sums unchanged).
+6. **Mono-domain rule [P].** A community is mono-domain in a fit if its relative presence in one group is **below 0.1**
+   (a tenth of an average-sized community; K-invariant) **and** its relative presence in the other group is at least
+   0.5, in the majority of seeds, and the low value is not in a relation whose held-out score is at chance. The value 0.1
+   is stated before any data and not tuned; it can be checked against the presence distribution of stage-0 pass 1
+   (owner's attention: the value).
+7. **In-loop term [P]: B1 — weight 0, toy form (50/50 with ±0.15 dead band) removed.** Reasons: the toy measure was
+   flat against the truth; no independent check of the property exists on real data (a planted world tests the measure,
+   not the term), so under decision 1a(b) a counterpart is not allowed; the 50/50 target conflicts with the owner's
+   asymmetry view.
+8. **Response to a finding [P].** If pass 1 finds mono-domain communities beyond seed noise, the response goes to the
+   outer loop (step 10: veto or report). An in-loop presence minimum (B2) only by the owner's explicit exception (C2),
+   with its cost recorded. B3 (toy form recalibrated) rejected.
