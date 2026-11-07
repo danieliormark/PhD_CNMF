@@ -2250,3 +2250,33 @@ pushed to spread. Open, under discussion: the owner's proposal that hyperedges i
 should on average have more mixed membership (a population-level relation, not a per-entity floor); the split of s_i
 into within-article and between-article parts; the diversity measure; replacing the 0.9 cut-off by threshold-free
 measures (owner: the cut-off lacks ground truth and tuning it is questionable).]*
+*[2026-11-07, **§8.2 step 4 (concentration floor) — re-specified form DECIDED (owner: "1. yes 2. yes 3. yes 4. yes"
+to the four proposals).** Purpose restated by the owner: niche hyperedges assigned correctly (concentrated, not too
+broad) **and** general hyperedges (used in articles with broad membership) not attributed too strongly to one community;
+their relation to diverse articles and possibly to diverse similar hyperedges respected. Terms: a hyperedge's spread =
+entropy of its membership in bits (effective number of communities = 2^bits); the articles' mix = tie-weighted average of
+its articles' weighted memberships, frozen at the warm-up epoch; its spread splits exactly into within-article spread
+(mean of the articles' own spreads) + between-article spread (the rest, generalised Jensen–Shannon divergence); γ = the
+fraction of that spread a hyperedge must keep at least (plain number); shortfall = max(0, minimum − own spread); penalty
+λ · mean shortfall². Decided: **(1) minimum = γ × (between-article spread + ω × within-article spread)**, measured in
+bits without division by log₂K (so λ means the same at every K; in the toy both sides were divided by log₂K, so the
+minimum did not depend on K but the penalty strength fell as 1/(log₂K)²); applies to hyperedges with ≥ 2 articles, and
+to single-article hyperedges with W ties when β = 1; one-sided and soft as in the toy; facet: child hyperedges, direct
+child×article path (no propagation through parents); **ω arms 0 and 1**, pre-registered, decided by the held-out check;
+pass-1 mosaic-vs-blend diagnostic reported beside it, not deciding. **(2) Primary check, held-out:** Jensen–Shannon
+distance between each hyperedge's membership and the mix of the memberships of its articles whose ties were hidden,
+per degree band (2 / 3–5 / 6+) and by W stratum (no W tie / W tie), against λ = 0, beyond the noise margin δ (medium
+independence: same fit's article memberships). Diagnostics: shortfall among hyperedges with high between-article
+spread (false negatives) and the share of hyperedges with low between-article spread whose spread rises beyond their
+own seed variation, against the same count between two halves of the λ = 0 seeds (false positives; no community
+matching needed). Threshold-free primary measures; 0.5/0.7/0.9 largest-share cut-offs reported as sensitivity only.
+**(3)** grid λ × γ ∈ {0.5, 0.8, 1.0} (toy tried only 0.5/0.8; 0.1/0.8 chosen there largely by the floor's own target),
+judged by the cost rule (largest λ with held-out score within one SE of λ = 0) and the checks; warm-up (freeze) epoch
+set from the stage-0 membership-stability logs, not tuned against the checks (toy: 100 worse, 300 ≈ 600). **(4) W
+included through the articles of W-similar hyperedges** (own articles weight 1, neighbours' articles weight similarity
+× β), not through their memberships (no feedback, articles frozen); **β arms 0 and 1**; hyperedges without W ties stay
+the clean reference. Floor pass cost: ω (2) × β (2) × λ (3) × γ (3) at one K* per loss — to count and time once the fit
+code exists. Also decided earlier the same step: timing (decision after stage-0 pass 1) and OpenAlex role (comparison
+only). Owner's point (f): population-level expectations (mixed article → mixed hyperedges; mosaic vs blend) are
+measured, not enforced; the article-coherence and mosaic-vs-blend measure runs as a stage-0 pass-1 diagnostic, repeated
+on pass 3 and the final fits (proposed; owner agreed it is a good idea, stage proposed 2026-11-06).]*
