@@ -2521,3 +2521,16 @@ weights; reported per fit (auto-accepted): the columns each of the five referenc
 entities would change their largest membership under each (same columns → choice irrelevant; more columns, no entity
 changes → stricter reference safe; entities change → those columns carry members and stay). Higher percentiles are
 considered from that report. Step 8 complete.]*
+*[2026-11-07, **§8.2 step 9 (Penalty_A / Penalty_B).** **DECIDED (owner: "I agree with your point on retiring penalty
+B")**: shared-term concentration (Penalty_B) is retired as a separate score; its question is answered by the step-4
+diagnostics (between-article spread, shortfall, false-positive check, hidden-tie match) on stage-0 pass 1; the 0.60/0.85
+monopoly thresholds go; the same diagnostics are reported for parents through child×parent (auto-accepted). **DECIDED
+(owner: "for penalty A reformulation I also agree")**: item attribution (Penalty_A) becomes **tie alignment** per
+relation r: Σ_{i,j} X[i,j] Σ_k m_i(k) m_j(k) ÷ Σ X over observed training ties, placed entities only (m = weighted
+membership; Σ_k m_i(k) m_j(k) = probability that the two ends fall in the same community); per community the k-term;
+reference: row shuffle of one facet's memberships within degree bands, reported as (observed − shuffled mean) ÷
+(1 − shuffled mean); computed for child×article (main), child×parent (covers parents, ticket 66) and every social
+relation (auto-accepted); compared with the reconstruction-side within share (same R-A question, modelled vs observed
+ties). Owner's caveat: a hyperedge's membership is also shaped by W and by its other articles with different
+memberships — how to account for it, and the role (diagnostic in stage 0; K veto in stage 1 proposed; owner asks why not
+an in-loop term in stages 1–2) answered the same day.]*
