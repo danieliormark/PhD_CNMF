@@ -2306,3 +2306,14 @@ calibrated together with the floor (with γ ≤ 1 ≤ ρ and ω ≤ 1 the floor'
 hyperedge has an allowed band); (3) excess-spread diagnostic at λ_z = 0 in pass 1 (an off-diagonal penalty pushes
 cross-community ties into mixed memberships), re-measured if step 2 chooses λ_z > 0; rows below the weak-attribution
 cut-off (item (l), once decided) excluded; (4) S2 (plain row sparsity) rejected. Gate for S3 proposed the same day.]*
+*[2026-11-07, **step 5 — gates for S3 DECIDED (owner: "I agree with the plan")**. **Gate 1 (after pass 1; per loss,
+facet, degree band; child hyperedges and articles first): test S3 only if both** (1) prevalence beyond noise: the share
+of entities whose excess spread (ρ = 1) exceeds their own seed-to-seed variation is above the same count between two
+halves of the λ = 0 seeds by more than its SE; and (2) harm to prediction: per-entity held-out AUC of entities with
+excess is below that of entities without excess, matched on facet and degree band, by more than δ. (1) without (2):
+reported, no S3. S3 is tested only for the loss(es) where the gate passed. **Gate 2 (stage-0 slot, grid λ_up × ρ, with
+the floor if kept): keep S3 only if a setting passes** the cost rule (largest λ_up with held-out score within one SE of
+λ_up = 0), the hidden-tie match (better than λ_up = 0 by more than δ), and the false-positive check (among entities
+without excess at λ_up = 0, the share whose spread falls beyond their own seed variation is not above the seed-halves
+reference). Otherwise S3 is dropped and excess spread stays a diagnostic. Limits: gate 1 misses smearing invisible in
+held-out ties (left to the outer checks); its matched comparison is observational, gate 2 is the causal test.]*
