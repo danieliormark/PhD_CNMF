@@ -2473,3 +2473,14 @@ them is visible. **Worked example** (K = 3, invented): social presence of commun
 child×parent) → mono-domain, semantic only; communities 1 (social 2.06, semantic 1.35) and 2 (0.88, 0.90) present in
 both. The membership half then asks whether community 3 has social entities with membership ≥ q (no → confirms; yes →
 narrow case: committed members, few ties).]*
+*[2026-11-07, **§8.2 step 8 (mass-distribution check) — partial.** **DECIDED (owner: "I agree with ghosts as a veto
+criterion")**: ghost communities act as a veto on candidate K in stage 1 (a K is excluded if most seeds contain at
+least one ghost); in stage 0 ghosts are only reported. Open: the ghost definition (owner: is 0.1 of an average share too
+large? look at practice). Literature checked the same day: sparse finite mixtures count **non-empty components**
+(components with at least one assigned observation; Malsiner-Walli, Frühwirth-Schnatter & Grün 2016, Statistics and
+Computing 26:303–324, via abstract and follow-ups); ARD-NMF (Tan & Févotte 2013) prunes components whose relevance
+falls to the prior's lower bound and counts components with (λ_k − B)/B ≥ τ (formula seen in a secondary source; the
+nmfkc R package uses 1e-3 as its own default); junk-topic ranking (AlSumait et al. 2009, ECML PKDD) judges a topic's
+shape against junk distributions, not its mass. No source uses a share of the average. Entity level: owner proposes
+distinguishing quality (cell-wise distance) and quantity (which cells, precision/recall) of reproduced ties; whether one
+measure suffices; whether measures differ by loss — answered the same day.]*
