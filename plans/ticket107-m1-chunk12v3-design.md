@@ -2484,3 +2484,9 @@ nmfkc R package uses 1e-3 as its own default); junk-topic ranking (AlSumait et a
 shape against junk distributions, not its mass. No source uses a share of the average. Entity level: owner proposes
 distinguishing quality (cell-wise distance) and quantity (which cells, precision/recall) of reproduced ties; whether one
 measure suffices; whether measures differ by loss — answered the same day.]*
+*[2026-11-07, **step 8 — ghost definition DECIDED (owner: "I agree with your proposal on defining ghost community and
+reporting the presence and presence distribution. We may need to revisit the threshold once we have the data")**: a
+**ghost** is a community with no member in any facet — no well-placed entity (entity criterion, item (l)) has k as its
+largest membership — in most seeds (following the "non-empty components" practice of sparse finite mixtures). No
+presence threshold enters the definition; presence and its distribution are reported beside it; to be revisited once
+stage-0 data exist.]*
