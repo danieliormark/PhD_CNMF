@@ -2345,3 +2345,19 @@ is timed. The row-shuffle null does not apply to this view (row shuffles keep co
 Open: the split of between-community parts (owner questions 50/50), the domain groups (owner: social vs semantic with
 child×article semantic, no separate anchor group; child×parent auxiliary), and reporting the step-2 diagonal diagnostic
 in tie-weight units.]*
+*[2026-11-07, **step 6, view (C) — more decisions.** **DECIDED (owner: "I agree with your proposal")**: the step-2
+diagonal diagnostic is reported mainly in tie-weight units, Σ_{k≠l} part(k,l) ÷ total per relation (includes community
+size through column sums; same units as domain presence; per community: within part ÷ half credit), with the squared
+core-cell form Σ_{i≠j} z² ÷ Σ z² beside it (example: 12.6% vs 2.7% for the same fit); if step 2 later chooses O3, the
+tie-weight share is a candidate penalised quantity (differentiable). **Accepted (owner: "If you are confident then we
+can accept your point 1 proposal"; assessment given)**: per relation, two exact **side readings** (community k's share
+of the tie weight on facet f's side, Σ_l part(k,l) ÷ total, and on facet g's side, Σ_l part(l,k) ÷ total; each sums to
+100% over k) and **half credit = their mean**. The 50/50 is a documented convention — equal say for the relation's two
+facets, also the symmetric (Shapley-type) attribution of a part that needs both communities — not an absence of
+convention; no proportional split (needs a chosen basis, counts size twice). Caveats: all community-level parts inherit
+the factorisation's non-uniqueness (rotation, CLAUDE.md §1); a large gap between the two side readings is reported as
+informative. **Owner rule (2026-11-07):** reporting items that are important and free or cheap (no extra fits) are
+auto-accepted and announced with their interpretation. Toy check (chunk13v10.py `FACET_DOMAIN`,
+`evaluate_domain_balance`): the toy's domain balance classified facets (articles social), never relations; child×article
+entered only indirectly, through the column weights that shape both articles' and hyperedges' memberships. Open: semantic
+group summary (child×article alone vs with child×parent at equal weight).]*
