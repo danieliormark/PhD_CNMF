@@ -2490,3 +2490,15 @@ reporting the presence and presence distribution. We may need to revisit the thr
 largest membership — in most seeds (following the "non-empty components" practice of sparse finite mixtures). No
 presence threshold enters the definition; presence and its distribution are reported beside it; to be revisited once
 stage-0 data exist.]*
+*[2026-11-07, **step 8 — entity level DECIDED.** (1) **Names (owner: "approve your proposal for renaming")**: for entity
+i over the training cells of the relation matrices touching it (tied cell: observed X[i,j] > 0; held-out cells
+excluded): **reproduced share** = Σ_j min(X̂, X) ÷ Σ_j X and **on-target share** = Σ_j min(X̂, X) ÷ Σ_j X̂ — weighted
+analogues of recall and precision (per cell, min(X̂, X) plays the true positive, X − min the false negative, X̂ − min the
+false positive); also coverage Σ X̂ ÷ Σ X and accuracy (entity error per unit of observed weight, under both losses'
+metrics). (2) **Rule (owner: "I approve Reproduced share as the rule …")**: entity i is **placed** if its reproduced
+share exceeds its reproduced share under the degree-only reference by more than its own seed-to-seed variation;
+otherwise poorly placed (excluded from membership-based measures, listed in interpretation). Reported: on-target share,
+coverage, accuracy (both metrics, both losses), per-entity held-out AUC; a global cut-off only as a sensitivity reading.
+Reasons: reproduced share is neutral between the losses (coverage is satisfied by generalised KL by construction),
+available for every entity (AUC needs hidden ties), and keeps smeared entities in so steps 4–5 can measure them. Column
+cut-off: one-tie rule preferred by the owner over a fixed p_k; its reference tie weight under discussion.]*
