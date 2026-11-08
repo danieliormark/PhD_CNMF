@@ -2534,3 +2534,11 @@ relation (auto-accepted); compared with the reconstruction-side within share (sa
 ties). Owner's caveat: a hyperedge's membership is also shaped by W and by its other articles with different
 memberships — how to account for it, and the role (diagnostic in stage 0; K veto in stage 1 proposed; owner asks why not
 an in-loop term in stages 1–2) answered the same day.]*
+*[2026-11-08, **step 9 DECIDED (owner: "1. approve 2. approve")**: tie alignment's shuffle reference is drawn within
+degree band × W stratum (with/without W ties); reported (auto-accepted) per hyperedge degree band (2 / 3–5 / 6+) and W
+stratum, and with two weightings — per tie and per hyperedge (each hyperedge's ties averaged first) — so that low
+alignment confined to high-degree, legitimately shared hyperedges is not read as failure. **Role:** diagnostic in stage
+0; **veto on candidate K in stage 1**: K excluded if child×article alignment is not above the stratified shuffle
+reference beyond seed noise in most seeds. No in-loop alignment term: the data term already rewards it; raw alignment
+is gamed by collapse; it would fight the floor on shared hyperedges; its placed-entity selection is not differentiable.
+Any in-loop response goes through step 2's O3 (low stage-0 alignment counts as evidence for O3). Step 9 complete.]*
