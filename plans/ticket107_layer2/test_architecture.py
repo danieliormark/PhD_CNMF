@@ -1,5 +1,5 @@
 # Ticket 107, layer 2: architecture of the first M1 fits (Psychology trial) as a staged decision tree.
-# Proposal for the owner, 2026-11-02; nothing here runs a fit. It enumerates the arms, computes each arm's relation
+# Proposal 2026-11-02; updated 2026-11-09 with §8.2 step 12 (mechanism checks placed by stage). Nothing here runs a fit. It enumerates the arms, computes each arm's relation
 # weights by the decided rule (w = 0.5 / n_domain; journal multiplier applied inside the social half, which is then
 # rescaled to 0.5 — owner, 2026-11-02), counts fits, and prints the tree with the decision taken at each node.
 # Run: python3 test_architecture.py  (writes nothing; redirect to keep a copy)
@@ -39,19 +39,64 @@ def fmt(w):
 
 
 stages = []
-count = {}
+count = {}      # fits that always run (at SEEDS)
+cond = {}       # fits that run only under a condition (label -> fits)
+ONE_GROUP = SEEDS  # graded swap: one hold-out group × S seeds
 
-# Stage 0 — loss comparison (owner 2026-11-05): squared error (β = 2) vs generalised KL (β = 1), before the λ calibration
-s0 = [(f"approach {a} · J2 binary · loss {b}; in-loop terms and word-similarity regulariser off", weights(a), K_PROBE)
+# Build step (§8.2 step 12, owner 2026-11-08/09)
+count["build"] = 16 + 1
+stages.append(("BUILD STEP — before any real-data fit", [
+    ("fit code with both losses, masked loss, new facets, logging every ~50 epochs", None, []),
+    ("unit tests (seconds, no fits): autograd vs finite differences (both losses, floor, W, S3 if built); masked-cell "
+     "invariance; tie-weight parts and presence unchanged under the scale freedom (ticket 79) — binding: failure = bug", None, []),
+    ("code-check world (~16 small fits): K* = 6 planted, noiseless + Poisson + Gaussian, real mask, floor and W off; "
+     "pass criteria recorded 2026-11-08 — binding: failure = bug or optimiser settings; never evidence about the method", None, []),
+    ("time one fit → set S (owner: 10–20); check the RDS archive quota (≈ 50–70 GB)", None, [])],
+    "DECISION: S from the timing; the deferred floor-pass grid (option a/b/c) is decided with it."))
+
+# Stage 0 — loss comparison (owner 2026-11-05/06)
+s0 = [(f"pass 1 · approach {a} · J2 binary · loss {b}; every in-loop term off", weights(a), K_PROBE)
       for a in (1, 2) for b in ("β = 2 (squared error)", "β = 1 (KL)")]
-count["stage 0"] = len(s0) * len(K_PROBE) * FITS_PER_CELL   # pass 1 (bare); + K = 32 if a band reaches 20; no planted worlds
-count["stage 0"] += 2 * 2 * 3 * FITS_PER_CELL               # pass 2: λ_child ∈ {0.03, 0.1, 0.3} at each loss's K* (owner 2026-11-06)
-count["stage 0"] += 2 * 2 * 3 * FITS_PER_CELL               # pass 3: each loss at its λ*_child, ~3 candidate K
-stages.append(("STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5; pass 1 bare, pass 2 λ_child per loss at its K*, pass 3 verdict at each loss's best)", s0,
-               "DECISION β: loss-neutral criteria (membership agreement of the two solutions; held-out ties by a scale-free "
-               "ranking measure, cross-scored; seed stability; text check; no planted-world test, owner 2026-11-05), read "
-               "at the coarse K inside either loss's one-SE band (majority); each loss's best K reported. Pre-registration TO DO. "
-               "→ the chosen loss is used for the λ calibration (§8.2 steps 2–6) and stages 1–3; conditional K = 32 if a band reaches 20; re-check at the final K₁, K₂ (owner 2026-11-05)."))
+s0 += [("pass 1 diagnostics (no extra fits): loss measures S0-M1–M5 and per-entity AUC; off-diagonal share (tie-weight units + squared "
+        "core-cell form; → O1/O3); membership stability every ~50 epochs (→ warm-up epoch); floor diagnostics (between/within-article "
+        "spread, mosaic vs blend, share of shared hyperedges > 0.9, shortfall; → keep/drop floor, floor pass?); excess spread and S3 gate 1 "
+        "(→ S3 slot?); presence, mono-domain and mono-facet communities with weight, size, seed recurrence, full distribution, cause split; "
+        "ghosts, N_eff ÷ K, reproduced/on-target share, placed entities, empty columns at 5 references; tie alignment by degree band × W "
+        "stratum; would-be vetoes and convergence counted at fractions 0.1/0.2/0.25/0.5, per-seed failure curves over K; loadings and "
+        "engagement distributions (→ item (l))", None, []),
+       ("graded cross-domain swap, bare (after pass 1): p = 0.25/0.5/0.75/1 (p = 0 = pass 1), each loss's best K, both approaches, "
+        "hold-out group 1 × S seeds, own random swap per seed (owner 2026-11-09)", None, ["best K per loss"]),
+       ("OPTIONAL slot between passes 1 and 2: floor pass (only if the floor is kept and the losses differ on its diagnostic; "
+        "grid deferred: a staged ≈ 3,000 / b approach 1 only ≈ 1,600 / c full 36 settings 7,200); S3 slot (only if gate 1 passes; "
+        "calibrated with the floor; grid sized then)", None, []),
+       ("pass 2 · λ_child ∈ {0.03, 0.1, 0.3} per loss at its best K", None, ["K*"]),
+       ("pass 3 · each loss at its own λ*_child at the candidate K (coarse K inside either loss's band)", None, ["~3 candidate K"])]
+count["stage 0"] = 4 * len(K_PROBE) * FITS_PER_CELL + 2 * 2 * 3 * FITS_PER_CELL + 2 * 2 * 3 * FITS_PER_CELL + 4 * 2 * 2 * ONE_GROUP
+cond["stage 0: K = 32 if a band reaches 20"] = 2 * 2 * FITS_PER_CELL
+cond["stage 0: graded swap at each further candidate K if the curve is ambiguous (per K)"] = 4 * 2 * 2 * ONE_GROUP
+cond["stage 0: floor pass (grid deferred; option a)"] = 3000
+stages.append(("STAGE 0 — loss comparison (J2, A0, hold-out groups 1–5)", s0,
+               "DECISION β (pre-registered 2026-11-06): gate (stability, counted per seed by the 0.2 rule) → membership agreement → "
+               "held-out ranking → stability → squared error by default; flags to the owner; re-check at the final K₁, K₂ with terms on. "
+               "Binding in stage 0: stability gate and convergence check for the loss choice only; ghost and alignment vetoes reported as "
+               "would-be. Decided from stage 0 by the owner: O1/O3; response to mono-domain communities; item (l); stage-1 fraction; "
+               "empty-column reference."))
+
+# λ calibration under the chosen loss (§8.2 steps 2–7)
+cal = [("floor, if kept: λ × γ with ω and β arms; cost rule (held-out within one SE of λ = 0), hidden-tie match, false-positive check", None, []),
+       ("S3, if gate 1 passed: gate 2 (cost rule, hidden-tie match, false-positive check)", None, []),
+       ("O3 (redesigned off-diagonal term), if chosen", None, []),
+       ("λ_child per coarse K with the floor on (W rule: larger λ within one SE of the best; stability not worse than at λ = 0)", None, K_PROBE),
+       ("graded swap per kept term at its chosen λ (W; floor if kept), λ = 0 reference from stage 0: a flatter curve = the term "
+        "manufactures heterogeneity → limits λ (W4)", None, ["best K"]),
+       ("interaction test: each active term's best value with the others at neighbouring grid values; a move > 1 grid step → "
+        "single-objective search with the cost rule as constraint", None, [])]
+count["λ calibration"] = 3 * len(K_PROBE) * FITS_PER_CELL * 2 + 4 * 2 * ONE_GROUP
+cond["λ calibration: floor recalibration, S3, O3, interaction test (sized after stage 0)"] = 3000
+cond["λ calibration: graded swap for the floor, if kept"] = 4 * 2 * ONE_GROUP
+stages.append(("λ CALIBRATION — chosen loss, J2, A0, groups 1–5 (order decided)", cal,
+               "DECISION: each λ by its pre-registered rule; a term failing W1–W4 at every λ is dropped. NOTE: W is on from here, so "
+               "stage-0 pass-1 fits are not reused as stage-1 J2 cells."))
 
 # Stage 1 — journal ablation, both approaches, A0, with article×article, at K_PROBE
 s1 = []
@@ -59,45 +104,44 @@ for a in (1, 2):
     for name, j in JOURNAL_ARMS.items():
         s1.append((f"approach {a} · {name}", weights(a, j), K_PROBE))
 count["stage 1"] = sum(len(k) for _, _, k in s1) * FITS_PER_CELL * 2   # all 10 hold-out groups (owner 2026-11-05)
-stages.append(("STAGE 1 — journal ablation (A0; approach 2 with article×article; all 10 hold-out groups)", s1,
-               "DECISION D1 (owner): weighting of article×journal, from: agreement of article memberships between arms "
-               "(Track A/B, chance-adjusted; J1 the reference); each matrix's realised share; journal–community "
-               "association vs shuffled journals; held-out prediction of the other matrices. Pre-registration of "
-               "these outcomes is still TO DO (as done for L2.4/L2.5). → chosen arm J* is used in stages 2–3."))
+stages.append(("STAGE 1 — journal ablation (chosen loss and λ's; A0; all 10 hold-out groups)", s1,
+               "DECISION D1 (pre-registered, D1_journal_preregistration.md): J* per approach; read at all candidate K, also reported "
+               "with vetoed K dropped and the veto outcome per journal arm (auto-accepted). BINDING on the coarse band: stability gate "
+               "(Track A/B on weighted memberships; A over placed entities), ghost veto, alignment veto, convergence check — each "
+               "counted: a group fails if > 20% of its seeds fail; K fails if > 20% of groups or > 20% of all fits fail (provisional, "
+               "fixed from stage 0 before stage-1 results are read); non-convergence alone → owner before exclusion."))
 
 # Stage 2 — K search at J*, both approaches
-s2 = [(f"approach {a} · J* (chosen in D1): refine every integer K inside the band(s) of the coarse curve "
-       f"(stage-1 cells at J*) + K = 32 always (owner 2026-11-03); extend to ~50 if 32 is best or in the band", weights(a), ["~" + str(K_REFINE) + " new K", 32])
-      for a in (1, 2)]
-count["stage 2"] = 2 * (K_REFINE + 1) * FITS_PER_CELL   # + K = 32
-stages.append(("STAGE 2 — choice of K at J* (A0), coarse-to-fine", s2,
-               "DECISION D2: K₁ (approach 1) and K₂ (approach 2) — out-of-sample fit on the combined held-out score of "
-               "each approach's matrices with hidden cells (incl. its own affiliation matrix; owner 2026-11-02: non-semantic "
-               "matrices stay pertinent within an approach), with Track A/B stability against chance as the gate "
-               "(design doc §6). The band = K values within one standard error of the best held-out score; every interval between "
-               "coarse points touching a band is filled in (several intervals if the band is split); an interval wider than the "
-               "refinement budget (e.g. 20–32) is first probed at its geometric midpoint(s), then filled (owner 2026-11-03). "
-               "(weights shown for J2 binary)"))
+s2 = [(f"approach {a} · J*: refine every integer K inside the band(s) of the coarse curve + K = 32 always; extend to ~50 if 32 is "
+       f"best or in the band", weights(a), ["~" + str(K_REFINE) + " new K", 32]) for a in (1, 2)]
+s2 += [("re-check of the loss at K₁, K₂ with final terms on (losing loss refitted, λ transferred by loss share)", None, ["K₁", "K₂"]),
+       ("re-check of D1 at K₁, K₂: J1 and runner-up (J* reused)", None, ["K₁", "K₂"])]
+count["stage 2"] = 2 * (K_REFINE + 1) * FITS_PER_CELL + 2 * FITS_PER_CELL + 2 * 2 * FITS_PER_CELL
+stages.append(("STAGE 2 — choice of K at J* (groups 1–5), coarse-to-fine", s2,
+               "DECISION D2 (K protocol §6.8 + step 11): band = all K with score ≤ best + SE of the best (computed from all K) → exclude "
+               "K failing the gate, a veto or convergence (0.2 counting) → inspection and text check choose among the rest → if none: "
+               "largest smaller K (below the band on the K axis) that passes everything, flagged → if none: 'no K qualifies' with the "
+               "status of every K above the band, owner decides. Contradictions in the re-checks go to the owner."))
 
-# Stage 3 — three pre-registered comparisons at J*, at K₁ and K₂
+# Stage 3 — comparisons at J*, at K₁ and K₂; final refit
 s3 = [("3a approach 1 vs approach 2 — reuses stage-2 fits at K₁ and K₂", None, []),
       ("3b A1 arm, approach 1", weights(1, semantic_split=(0.7, 0.3)), ["K₁", "K₂"]),
       ("3b A1 arm, approach 2", weights(2, semantic_split=(0.7, 0.3)), ["K₁", "K₂"]),
-      ("3c approach 2 without article×article (arm N)", weights(2, drop=("article×article",)), ["K₁", "K₂"])]
-count["stage 3"] = sum(len(k) for _, _, k in s3) * FITS_PER_CELL
-stages.append(("STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂", s3,
-               "DECISIONS: 3a L2.5 classes (approach 1 better / approach 2 better / equivalent / inconclusive) × "
-               "membership agreement → reading per the pre-registered table, ranking by the owner; 3b A1 criteria "
-               "(A1 never replaces A0 automatically); 3c L2.4 classes (adds information / misleads / redundant / "
-               "inconclusive) × team-shaped communities → keep or fallback to a regulariser. (weights shown for J2 binary)"))
+      ("3c approach 2 without article×article (arm N)", weights(2, drop=("article×article",)), ["K₁", "K₂"]),
+      ("final refit on all data (no hidden cells) at the chosen settings, S seeds per approach; reported model = converged seed with "
+       "the lowest training loss that passes both vetoes (else flagged, next seed); its Track A/B agreement with the other seeds and "
+       "the medoid seed reported (owner 2026-11-09)", None, ["K₁", "K₂"]),
+      ("OPTIONAL graded swap at the final settings (confirmation only)", None, ["K₁", "K₂"])]
+count["stage 3"] = 3 * 2 * FITS_PER_CELL + 2 * SEEDS
+cond["stage 3: optional graded swap"] = 4 * 2 * ONE_GROUP
+stages.append(("STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂; final models", s3,
+               "DECISIONS: 3a L2.5 classes × membership agreement (an approach failing the stability gate is not ranked); 3b A1 "
+               "criteria (A1 never replaces A0 automatically); 3c L2.4 classes × team-shaped communities. (weights shown for J2 binary)"))
 
-LATER = ["final models refitted on all cells after settings are chosen (open)",
-         "background component (deferred robustness arm; planted test first)",
-         "mechanisms and λ values of §8.2 (regulariser, penalties, Optuna or grid) — must be fixed BEFORE stage 1; "
-         "the hold-out scheme comparison of 2026-10-17 to be confirmed as done or still needed"]
+LATER = ["background component (deferred robustness arm; planted test first)",
+         "ticket 35 (reformulated): how several outer scores would be combined, only if stage 0 shows one is needed"]
 
-print(f"Fits per cell = {FOLDS} hold-out groups × {SEEDS} seeds = {FITS_PER_CELL}\n")
-print("PREREQUISITES: M1 fit code with both losses (before stage 0); §8.2 mechanisms and λ under the chosen loss (before stage 1); " + LATER[2].split(" — ")[1] + "\n")
+print(f"Fits per cell = {FOLDS} hold-out groups × {SEEDS} seeds = {FITS_PER_CELL} (stage 1: 10 groups)\n")
 for title, arms, decision in stages:
     print(title)
     for i, (name, w, ks) in enumerate(arms):
@@ -106,10 +150,11 @@ for title, arms, decision in stages:
         if w:
             print(("    " if last else "│   ") + "    weights: " + fmt(w))
     print("    ▼ " + decision + "\n")
-print("LATER STAGES (not yet designed):")
-for x in LATER[:2]:
+print("NOT YET DESIGNED:")
+for x in LATER:
     print("  • " + x)
-print("\nFit counts (before reuse): " + ", ".join(f"{k} {v:,}" for k, v in count.items())
-      + f"; total {sum(count.values()):,}")
-print(f"For comparison, a full grid K = 2-20 at J* in stage 2 instead of refinement (14 K beyond the coarse 5): {2 * 14 * FITS_PER_CELL:,} fits")
-print("Total fits as a function of seeds S: " + ", ".join(f"S={s_}: {sum(count.values()) // SEEDS * s_:,}" for s_ in (10, 15, 20)))
+fixed = sum(count.values())
+print("\nFits that always run: " + ", ".join(f"{k} {v:,}" for k, v in count.items()) + f"; total {fixed:,}")
+print("Conditional fits: " + "; ".join(f"{k} {v:,}" for k, v in cond.items()) + f"; all conditions {sum(cond.values()):,}")
+print(f"Range at S = {SEEDS}: {fixed:,} to {fixed + sum(cond.values()):,} (floor pass option c instead of a: +4,200)")
+print("Scaling with S (fits ∝ S): " + ", ".join(f"S={s_}: {fixed * s_ // SEEDS:,}–{(fixed + sum(cond.values())) * s_ // SEEDS:,}" for s_ in (10, 15, 20)))

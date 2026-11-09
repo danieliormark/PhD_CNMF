@@ -23,10 +23,13 @@
 - Writing checklist saved in memory (feedback-explanation-style): check record first, re-define terms, unit/stage/
   binding/edge cases, name the axis.
 
-**Next:** §8.2 step 12 (trial test design). Open for step 12: Track A/B input (factor-matrix rows vs weighted
-memberships); which seed's fit is the reported model; item (l) (membership weighting, q, m, empty-column reference).
-Then the M1 fit code (both losses), code-check world, time one fit, set S. Open: RDS quota (≈ 50–70 GB); delete
-`psych_trial_v1`? (ask).
+**2026-11-09, step 12 complete — §8.2 done.** Staged plan with every check placed: `plans/ticket107_layer2/test_architecture.txt`
+(build step; stage 0 passes 1–3 with diagnostics, optional floor/S3 slot, bare graded swap; λ calibration with swap per
+term; stage 1 binding gate/vetoes/convergence at 0.2; stage 2 K protocol; stage 3 comparisons + final refit on all data).
+Budget 11.3k–17.8k fits at S = 10. Gate reads weighted memberships. Floor-pass grid deferred until a fit is timed.
+
+**Next:** build the M1 fit code (both losses) + unit tests + code-check world → time one fit → set S and the floor-pass
+grid (owner). Item (l) due before stage-1 results. Open: RDS quota (≈ 50–70 GB); delete `psych_trial_v1`? (ask).
 
 ## Earlier state (2026-11-06, ticket 107 M1 — D1 and stage 0 pre-registered; §8.2 begins)
 
