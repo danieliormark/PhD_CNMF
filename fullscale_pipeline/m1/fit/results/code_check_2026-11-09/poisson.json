@@ -1,0 +1,492 @@
+{
+ "poisson_truth_start": {
+  "seed": 0,
+  "start": "given",
+  "beta": 1,
+  "converged": true,
+  "epochs": 1884,
+  "seconds": 138.59,
+  "final_data_loss": 202.01805544187422,
+  "relative_error_per_relation": {
+   "parent_child": 0.9558719203300143,
+   "child_article": 0.8546995607161632,
+   "author_article": 0.7097031623692421,
+   "author_affiliation": 0.6568638144241014,
+   "article_journal": 0.5502452831824695
+  },
+  "max_relative_error": 0.9558719203300143,
+  "matched_cosines": [
+   0.580837,
+   0.19708,
+   0.494468,
+   0.384921,
+   0.562609,
+   0.546851
+  ],
+  "min_cosine": 0.19707995957031949,
+  "child_article_within_share": {
+   "fit": 0.046,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    0.544,
+    0.637,
+    0.598,
+    1.643,
+    0.888,
+    1.689
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.0957,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    0.986,
+    0.086,
+    0.902,
+    1.393,
+    1.09,
+    1.543
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "poisson_nndsvd_seed1": {
+  "seed": 1,
+  "start": "nndsvd",
+  "beta": 1,
+  "converged": true,
+  "epochs": 494,
+  "seconds": 36.64,
+  "final_data_loss": 289.99649056214145,
+  "relative_error_per_relation": {
+   "parent_child": 1.5984926300370181,
+   "child_article": 0.8580044445413912,
+   "author_article": 0.7530364691362267,
+   "author_affiliation": 0.5342569276287076,
+   "article_journal": 0.748756587743719
+  },
+  "max_relative_error": 1.5984926300370181,
+  "matched_cosines": [
+   0.390482,
+   0.492009,
+   0.629191,
+   0.458076,
+   0.506975,
+   0.488562
+  ],
+  "min_cosine": 0.39048247816036824,
+  "child_article_within_share": {
+   "fit": 0.181,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.338,
+    0.771,
+    0.789,
+    1.406,
+    1.278,
+    0.418
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.4259,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    0.991,
+    1.069,
+    0.312,
+    1.373,
+    1.745,
+    0.51
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "poisson_nndsvd_seed2": {
+  "seed": 2,
+  "start": "nndsvd",
+  "beta": 1,
+  "converged": false,
+  "epochs": 2000,
+  "seconds": 148.31,
+  "final_data_loss": 178.26262673049553,
+  "relative_error_per_relation": {
+   "parent_child": 0.8149404491510603,
+   "child_article": 0.7208628340075347,
+   "author_article": 0.6431214930015067,
+   "author_affiliation": 0.6854095912988469,
+   "article_journal": 0.5348693358318274
+  },
+  "max_relative_error": 0.8149404491510603,
+  "matched_cosines": [
+   0.484193,
+   0.486721,
+   0.325477,
+   0.380713,
+   0.470513,
+   0.551232
+  ],
+  "min_cosine": 0.3254773447131635,
+  "child_article_within_share": {
+   "fit": 0.0,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.776,
+    0.587,
+    0.599,
+    0.821,
+    2.083,
+    0.135
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.3448,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    2.067,
+    0.0,
+    0.647,
+    1.339,
+    1.946,
+    0.0
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "poisson_nndsvd_seed3": {
+  "seed": 3,
+  "start": "nndsvd",
+  "beta": 1,
+  "converged": true,
+  "epochs": 1729,
+  "seconds": 127.25,
+  "final_data_loss": 248.6772460855451,
+  "relative_error_per_relation": {
+   "parent_child": 0.80323754010639,
+   "child_article": 1.0740201044374016,
+   "author_article": 1.0257029399623347,
+   "author_affiliation": 1.1065330270104867,
+   "article_journal": 1.1762729533750114
+  },
+  "max_relative_error": 1.1762729533750114,
+  "matched_cosines": [
+   0.359818,
+   0.354923,
+   0.372798,
+   0.408066,
+   0.55837,
+   0.524391
+  ],
+  "min_cosine": 0.3549233747960083,
+  "child_article_within_share": {
+   "fit": 0.1191,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    0.651,
+    0.802,
+    1.205,
+    0.127,
+    1.237,
+    1.978
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.2453,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    0.328,
+    0.596,
+    1.156,
+    1.341,
+    1.336,
+    1.244
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "poisson_random_seed1": {
+  "seed": 1,
+  "start": "random",
+  "beta": 1,
+  "converged": false,
+  "epochs": 2000,
+  "seconds": 146.75,
+  "final_data_loss": 279.83507642037955,
+  "relative_error_per_relation": {
+   "parent_child": 0.9148137355853744,
+   "child_article": 0.9236982995273427,
+   "author_article": 0.8647933716228015,
+   "author_affiliation": 0.8417498165983018,
+   "article_journal": 0.8546504456850601
+  },
+  "max_relative_error": 0.9236982995273427,
+  "matched_cosines": [
+   0.364855,
+   0.362835,
+   0.307168,
+   0.316501,
+   0.448122,
+   0.51472
+  ],
+  "min_cosine": 0.30716810168854597,
+  "child_article_within_share": {
+   "fit": 0.1662,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    0.97,
+    1.036,
+    1.052,
+    0.95,
+    1.015,
+    0.977
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.1667,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    0.999,
+    0.945,
+    0.989,
+    0.98,
+    1.066,
+    1.021
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "poisson_random_seed2": {
+  "seed": 2,
+  "start": "random",
+  "beta": 1,
+  "converged": false,
+  "epochs": 2000,
+  "seconds": 147.4,
+  "final_data_loss": 279.64814607534936,
+  "relative_error_per_relation": {
+   "parent_child": 0.9360940133972484,
+   "child_article": 0.9066131769366893,
+   "author_article": 0.8563968574577968,
+   "author_affiliation": 0.841779469685974,
+   "article_journal": 0.8457932069560447
+  },
+  "max_relative_error": 0.9360940133972484,
+  "matched_cosines": [
+   0.381487,
+   0.364668,
+   0.303619,
+   0.306648,
+   0.439339,
+   0.522462
+  ],
+  "min_cosine": 0.30361938726006693,
+  "child_article_within_share": {
+   "fit": 0.1663,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.014,
+    1.0,
+    1.025,
+    1.015,
+    0.94,
+    1.005
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.1667,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    0.972,
+    0.975,
+    0.967,
+    1.028,
+    1.055,
+    1.003
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "poisson_random_seed3": {
+  "seed": 3,
+  "start": "random",
+  "beta": 1,
+  "converged": true,
+  "epochs": 374,
+  "seconds": 27.56,
+  "final_data_loss": 278.5305182892971,
+  "relative_error_per_relation": {
+   "parent_child": 0.928964832267816,
+   "child_article": 0.9064669845250322,
+   "author_article": 0.858136303736616,
+   "author_affiliation": 0.8392055876403458,
+   "article_journal": 0.8486467142941173
+  },
+  "max_relative_error": 0.928964832267816,
+  "matched_cosines": [
+   0.377744,
+   0.367993,
+   0.304316,
+   0.296422,
+   0.434948,
+   0.515875
+  ],
+  "min_cosine": 0.2964221054385593,
+  "child_article_within_share": {
+   "fit": 0.1668,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    0.978,
+    0.995,
+    1.073,
+    0.928,
+    0.961,
+    1.065
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.1663,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    1.05,
+    0.931,
+    0.999,
+    0.956,
+    0.988,
+    1.075
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ }
+}

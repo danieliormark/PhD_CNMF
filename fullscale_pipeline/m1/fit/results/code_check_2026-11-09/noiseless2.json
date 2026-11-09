@@ -1,0 +1,422 @@
+{
+ "noiseless_beta2_nndsvd_seed1": {
+  "seed": 1,
+  "start": "nndsvd",
+  "beta": 2,
+  "converged": false,
+  "epochs": 2000,
+  "seconds": 246.77,
+  "final_data_loss": 0.00014716033375715767,
+  "relative_error_per_relation": {
+   "parent_child": 0.009158926372922444,
+   "child_article": 0.013634230844505683,
+   "author_article": 0.011835531119402975,
+   "author_affiliation": 0.01869597078489176,
+   "article_journal": 0.0020787950388011338
+  },
+  "max_relative_error": 0.01869597078489176,
+  "matched_cosines": [
+   0.799275,
+   0.999969,
+   0.843644,
+   0.861553,
+   0.670645,
+   0.280311
+  ],
+  "min_cosine": 0.2803113303825177,
+  "child_article_within_share": {
+   "fit": 0.8364,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.712,
+    1.128,
+    0.968,
+    0.963,
+    0.749,
+    0.479
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.9114,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    1.831,
+    1.051,
+    0.989,
+    1.05,
+    0.814,
+    0.266
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "noiseless_beta2_nndsvd_seed2": {
+  "seed": 2,
+  "start": "nndsvd",
+  "beta": 2,
+  "converged": true,
+  "epochs": 1675,
+  "seconds": 205.4,
+  "final_data_loss": 0.0006880020827463897,
+  "relative_error_per_relation": {
+   "parent_child": 0.01343035608974952,
+   "child_article": 0.024275452580868488,
+   "author_article": 0.020578659165181357,
+   "author_affiliation": 0.04714947593114201,
+   "article_journal": 0.02434074899792145
+  },
+  "max_relative_error": 0.04714947593114201,
+  "matched_cosines": [
+   0.633895,
+   0.839393,
+   0.843643,
+   0.84441,
+   0.737568,
+   0.358528
+  ],
+  "min_cosine": 0.35852772629014085,
+  "child_article_within_share": {
+   "fit": 0.7798,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.924,
+    1.119,
+    0.618,
+    0.967,
+    0.726,
+    0.645
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.9642,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    1.816,
+    1.057,
+    0.986,
+    1.054,
+    0.985,
+    0.102
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "noiseless_beta2_nndsvd_seed3": {
+  "seed": 3,
+  "start": "nndsvd",
+  "beta": 2,
+  "converged": false,
+  "epochs": 2000,
+  "seconds": 251.28,
+  "final_data_loss": 0.00022800016798330455,
+  "relative_error_per_relation": {
+   "parent_child": 0.010434620577463041,
+   "child_article": 0.01716159113681492,
+   "author_article": 0.007020908699011196,
+   "author_affiliation": 0.025108303095888327,
+   "article_journal": 0.010719527245535345
+  },
+  "max_relative_error": 0.025108303095888327,
+  "matched_cosines": [
+   0.721593,
+   0.739752,
+   0.999987,
+   0.843163,
+   0.823767,
+   0.274664
+  ],
+  "min_cosine": 0.27466354352117567,
+  "child_article_within_share": {
+   "fit": 0.8835,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.919,
+    1.122,
+    0.961,
+    0.962,
+    0.701,
+    0.336
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.8808,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    1.822,
+    1.058,
+    0.986,
+    1.049,
+    0.731,
+    0.353
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "noiseless_beta2_random_seed1": {
+  "seed": 1,
+  "start": "random",
+  "beta": 2,
+  "converged": true,
+  "epochs": 815,
+  "seconds": 98.29,
+  "final_data_loss": 0.5978031718957233,
+  "relative_error_per_relation": {
+   "parent_child": 0.9551158663975168,
+   "child_article": 0.8477284904804397,
+   "author_article": 0.6772044982549983,
+   "author_affiliation": 0.7772790663075861,
+   "article_journal": 0.34177289041186887
+  },
+  "max_relative_error": 0.9551158663975168,
+  "matched_cosines": [
+   0.577489,
+   0.52806,
+   0.499872,
+   0.38056,
+   0.582504,
+   0.650554
+  ],
+  "min_cosine": 0.3805600424232404,
+  "child_article_within_share": {
+   "fit": 0.1653,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.563,
+    0.852,
+    1.54,
+    0.896,
+    0.551,
+    0.599
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.2223,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    2.085,
+    0.366,
+    1.573,
+    0.515,
+    0.307,
+    1.153
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "noiseless_beta2_random_seed2": {
+  "seed": 2,
+  "start": "random",
+  "beta": 2,
+  "converged": true,
+  "epochs": 106,
+  "seconds": 12.61,
+  "final_data_loss": 0.8610655414376337,
+  "relative_error_per_relation": {
+   "parent_child": 0.9128684821264064,
+   "child_article": 0.9693101551237675,
+   "author_article": 0.9020529834025619,
+   "author_affiliation": 0.8928626198927373,
+   "article_journal": 0.8971999314721638
+  },
+  "max_relative_error": 0.9693101551237675,
+  "matched_cosines": [
+   0.44539,
+   0.41305,
+   0.409263,
+   0.399315,
+   0.580599,
+   0.741328
+  ],
+  "min_cosine": 0.3993148374930109,
+  "child_article_within_share": {
+   "fit": 0.1644,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.038,
+    1.07,
+    1.048,
+    1.061,
+    1.073,
+    0.71
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.176,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    0.94,
+    0.844,
+    1.223,
+    0.941,
+    0.825,
+    1.227
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ },
+ "noiseless_beta2_random_seed3": {
+  "seed": 3,
+  "start": "random",
+  "beta": 2,
+  "converged": true,
+  "epochs": 582,
+  "seconds": 69.28,
+  "final_data_loss": 0.7135328987465144,
+  "relative_error_per_relation": {
+   "parent_child": 1.0092901056657457,
+   "child_article": 0.87080367723321,
+   "author_article": 0.8080478747104012,
+   "author_affiliation": 0.8155665612750989,
+   "article_journal": 0.5796866317891719
+  },
+  "max_relative_error": 1.0092901056657457,
+  "matched_cosines": [
+   0.480282,
+   0.463475,
+   0.383248,
+   0.405742,
+   0.592678,
+   0.77484
+  ],
+  "min_cosine": 0.3832484779320843,
+  "child_article_within_share": {
+   "fit": 0.0849,
+   "planted": 0.8377
+  },
+  "child_article_presence": {
+   "fit": [
+    1.068,
+    1.933,
+    0.648,
+    1.351,
+    0.507,
+    0.493
+   ],
+   "planted": [
+    1.53,
+    1.137,
+    0.974,
+    0.957,
+    0.973,
+    0.428
+   ]
+  },
+  "parent_child_within_share": {
+   "fit": 0.1653,
+   "planted": 0.8531
+  },
+  "parent_child_presence": {
+   "fit": [
+    0.949,
+    0.929,
+    1.062,
+    1.014,
+    1.029,
+    1.017
+   ],
+   "planted": [
+    1.435,
+    1.052,
+    0.986,
+    1.04,
+    1.086,
+    0.401
+   ]
+  }
+ }
+}

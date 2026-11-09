@@ -1,0 +1,12 @@
+{
+ "noiseless_beta2_nndsvd": {
+  "passed_seeds": 0,
+  "pass": false
+ },
+ "noiseless_beta1_nndsvd": {
+  "passed_seeds": 0,
+  "pass": false
+ },
+ "poisson_nndsvd": {
+  "passed_seeds": 3,
+  "pass": 

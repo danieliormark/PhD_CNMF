@@ -32,14 +32,14 @@ def _trial_degrees(build, approach=1):
     return {f: d[d > 0] for f, d in deg.items()}
 
 
-def planted_truth(seed, build=None, K=6, sizes=WORLD_SIZES):
+def planted_truth(seed, build=None, K=6, sizes=WORLD_SIZES, child_only=True):
     rng = np.random.default_rng(seed)
     degs = _trial_degrees(build) if build is not None else None
     allowed = {f: list(range(K)) for f in sizes}
     for f in ("author", "organisation", "journal"):
         allowed[f] = [k for k in range(K) if k not in (SEMANTIC_ONLY, CHILD_ONLY)]
     for f in ("article", "parent"):
-        allowed[f] = [k for k in range(K) if k != CHILD_ONLY]
+        allowed[f] = [k for k in range(K) if k != CHILD_ONLY or not child_only]
     U = {}
     for f, n in sizes.items():
         ks = allowed[f]
@@ -62,8 +62,10 @@ def planted_truth(seed, build=None, K=6, sizes=WORLD_SIZES):
         if dom == "social":
             z[SEMANTIC_ONLY, :] = 0; z[:, SEMANTIC_ONLY] = 0
         z[CHILD_ONLY, :] = 0; z[:, CHILD_ONLY] = 0
-        if cf == "child":                                      # child-only community tied to community 0 rows
+        if cf == "child" and child_only:                       # child-only community tied to community 0 rows
             z[0, CHILD_ONLY] = 0.8
+        elif not child_only and dom == "semantic":            # variant: community CHILD_ONLY is an ordinary community
+            z[CHILD_ONLY, CHILD_ONLY] = 1.0
         Z[rel] = z
     return U, Z
 
@@ -94,9 +96,10 @@ def _relation_data(name, X, missing_rows, weight, rng, empty_cap):
     return rd
 
 
-def code_check_world(version, seed, build=None, K=6, sizes=WORLD_SIZES, poisson_scale=3.0, gauss_sd=0.1, empty_cap=20000):
+def code_check_world(version, seed, build=None, K=6, sizes=WORLD_SIZES, poisson_scale=3.0, gauss_sd=0.1, empty_cap=20000,
+                     child_only=True):
     """version: 'noiseless' | 'poisson' | 'gaussian'. Returns (rds, truth_U, truth_Z) with truth_Z scaled like the data."""
-    U, Z = planted_truth(seed, build, K, sizes)
+    U, Z = planted_truth(seed, build, K, sizes, child_only)
     rng = np.random.default_rng(seed + 1000)
     w = D.relation_weights(APPROACH1)
     miss_share = {"author_affiliation": 582 / 10052, "article_journal": 4 / 2136}
@@ -121,12 +124,33 @@ def code_check_world(version, seed, build=None, K=6, sizes=WORLD_SIZES, poisson_
     return rds, Ut, Zt
 
 
-def matched_cosines(U_fit, U_true, facets=None):
-    """Hungarian matching of fitted to planted communities on the membership columns stacked over facets (each facet's
-    columns L2-normalised first); returns per planted community the cosine with its matched fitted column, and the map."""
-    facets = facets or sorted(U_true)
+def _weighted_columns(U, Z, relations, f):
+    """U_norm[:, k] × column weight w_k(f) (GLOSSARY): zero for a community that carries nothing in facet f, so a
+    community absent from a facet does not appear as a uniform unit column."""
     norm = lambda u: u / np.maximum(np.linalg.norm(u, axis=0, keepdims=True), 1e-300)
-    A = np.vstack([norm(U_fit[f]) for f in facets]); B = np.vstack([norm(U_true[f]) for f in facets])
+    Un = {g: norm(U[g]) for g in U}
+    s = {g: np.linalg.norm(U[g], axis=0) for g in U}
+    w2 = np.zeros(U[f].shape[1])
+    for r, (a, b) in relations.items():
+        Zs = Z[r] * np.outer(s[a], s[b])
+        if a == f:
+            w2 += np.diag(Zs @ (Un[b].T @ Un[b]) @ Zs.T)
+        if b == f:
+            w2 += np.diag(Zs.T @ (Un[a].T @ Un[a]) @ Zs)
+    return Un[f] * np.sqrt(np.maximum(w2, 0.0))
+
+
+def matched_cosines(U_fit, U_true, Z_fit=None, Z_true=None, relations=None, facets=None):
+    """Hungarian matching of fitted to planted communities on the membership columns stacked over facets; each facet's
+    columns are U_norm × column weight (if Z and relations are given), so absent communities are zero columns.
+    Returns per planted community the cosine with its matched fitted column, and the map planted → fitted."""
+    facets = facets or sorted(U_true)
+    if relations is not None:
+        A = np.vstack([_weighted_columns(U_fit, Z_fit, relations, f) for f in facets])
+        B = np.vstack([_weighted_columns(U_true, Z_true, relations, f) for f in facets])
+    else:
+        norm = lambda u: u / np.maximum(np.linalg.norm(u, axis=0, keepdims=True), 1e-300)
+        A = np.vstack([norm(U_fit[f]) for f in facets]); B = np.vstack([norm(U_true[f]) for f in facets])
     A = A / np.linalg.norm(A, axis=0, keepdims=True); B = B / np.linalg.norm(B, axis=0, keepdims=True)
     C = B.T @ A                                           # planted × fitted cosines
     r, c = linear_sum_assignment(-C)

@@ -2829,3 +2829,19 @@ author×affiliation 4,741, 442–496; article×affiliation 4,071, 384–445); hi
 cover all but 2 of its empty cells); drawn uniformly without replacement (exact rank mapping; a first rejection-sampling
 version stalled on the affiliation matrix and was stopped before finishing, its partial output deleted). [LOG]
 *[2026-11-09, owner's permission: `psych_trial_v1/` and `psych_trial_v2/` deleted; v3 holds every v2 file unchanged plus the raw counts and the hold-out. v2's manifest (the only record of the brute-force W check, W identical) kept as `psych_trial_v3/manifest_v2_build.json`. Earlier references to `psych_trial_v2` paths in the design doc and `holdout_measure.txt` now point to deleted files; the same matrices are in v3.]*
+
+### RL-208 — 2026-11-09 — code-check world, first run (26 fits) and step-size / identifiability probes (incline35)
+
+`fit/run_code_check.py`, 4 parallel processes, ~20 min; results `fullscale_pipeline/m1/fit/results/code_check_2026-11-09/`
+(synthetic data only). Every pass criterion failed for both starts. Diagnosis by 14 probe fits (`probes/`):
+(1) the code is correct: started at the planted truth (noiseless, squared error) the fit stays there (relative error 1e-4,
+every matched cosine ≥ 0.99999); (2) the toy's single Adam learning rate (0.01 for every parameter) is too large for
+parameters of scale ~1e-3 (core matrices on Frobenius-normalised data): from the truth, the Poisson/KL fit drifts away
+(child×article within share 0.84 → 0.05); step sizes scaled to each block's RMS keep it there (0.83, cosine 0.98);
+(3) the planted child-only community was unidentifiable by construction (tied only to community 0's rows, so it equals
+an extension of community 0; NNDSVD merged it, cosine 0.009) — a flaw of the world, not of the code; (4) random starts
+reach low loss (relative error 0.008) with communities mixed across facets (cosines 0.4–0.8; child×article within
+share 0.31 vs 0.84 planted); NNDSVD starts recover the aligned communities (without the flawed community: cosines
+0.85–1.0, within share 0.99 vs 0.98) but had not converged by 2,000 epochs. The verdict step itself failed on a numpy
+boolean (fixed); the first run's cosine measure normalised each facet's columns, which made absent communities read as
+uniform columns (fixed: columns weighted by their column weights). [LOG]

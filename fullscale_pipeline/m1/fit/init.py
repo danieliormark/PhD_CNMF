@@ -96,3 +96,21 @@ def initialise(rds, K, seed):
     for f in facets:
         U[f] = U[f] + rng.random(U[f].shape) * (U[f].mean() / 10.0 + 1e-4)
     return U, Z
+
+
+def random_start(rds, K, seed):
+    """Random start per seed (comparison arm, 2026-11-09): uniform (0, 1) factor and core matrices from the seed, each
+    core matrix then rescaled so that its relation's reconstruction has Frobenius norm 1 over the observed rows, the
+    norm of the normalised data (as scikit-learn scales its random start to the data's mean)."""
+    rng = np.random.default_rng(seed)
+    sizes = {}
+    for rd in rds:
+        sizes[rd.row_facet] = rd.shape[0]; sizes[rd.col_facet] = rd.shape[1]
+    U = {f: rng.random((sizes[f], K)) + 1e-4 for f in sorted(sizes)}
+    Z = {}
+    for rd in sorted(rds, key=lambda r: r.name):
+        z = rng.random((K, K)) + 1e-4
+        A = U[rd.row_facet] * rd.obs_row_mask[:, None]; B = U[rd.col_facet]
+        n2 = float(np.sum((z.T @ (A.T @ A) @ z) * (B.T @ B)))
+        Z[rd.name] = z / np.sqrt(n2)
+    return U, Z

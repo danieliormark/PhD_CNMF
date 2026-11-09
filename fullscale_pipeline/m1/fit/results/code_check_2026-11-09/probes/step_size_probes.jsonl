@@ -1,0 +1,8 @@
+{"args": ["poisson", "1", "absolute", "0.01", "truth"], "conv": true, "epochs": 1884, "loss": 202.018055, "maxrelerr": 0.9559, "mincos": 0.255, "CA_within": {"fit": 0.046, "planted": 0.8377}, "CA_presence_min": 0.544}
+{"args": ["poisson", "1", "relative", "0.01", "truth"], "conv": true, "epochs": 138, "loss": 29.422191, "maxrelerr": 0.3337, "mincos": 0.98, "CA_within": {"fit": 0.8302, "planted": 0.8377}, "CA_presence_min": 0.477}
+{"args": ["poisson", "1", "absolute", "0.001", "truth"], "conv": true, "epochs": 476, "loss": 40.949522, "maxrelerr": 0.4749, "mincos": 0.87, "CA_within": {"fit": 0.7863, "planted": 0.8377}, "CA_presence_min": 0.574}
+{"args": ["noiseless", "2", "relative", "0.01", "nndsvd"], "conv": false, "epochs": 2000, "loss": 0.001392, "maxrelerr": 0.0757, "mincos": 0.009, "CA_within": {"fit": 0.9621, "planted": 0.8377}, "CA_presence_min": 0.158}
+{"args": ["noiseless", "1", "relative", "0.01", "nndsvd"], "conv": false, "epochs": 2000, "loss": 0.087461, "maxrelerr": 0.0433, "mincos": 0.01, "CA_within": {"fit": 0.9356, "planted": 0.8377}, "CA_presence_min": 0.255}
+{"args": ["noiseless", "2", "relative", "0.01", "random"], "conv": false, "epochs": 2000, "loss": 2.4e-05, "maxrelerr": 0.0079, "mincos": 0.02, "CA_within": {"fit": 0.3149, "planted": 0.8377}, "CA_presence_min": 0.587}
+{"args": ["noiseless", "1", "relative", "0.01", "random"], "conv": false, "epochs": 2000, "loss": 0.238289, "maxrelerr": 0.1173, "mincos": 0.352, "CA_within": {"fit": 0.2709, "planted": 0.8377}, "CA_presence_min": 0.614}
+{"args": ["gaussian", "2", "absolute", "0.01", "truth"], "conv": true, "epochs": 1158, "loss": 0.005948, "maxrelerr": 0.0842, "mincos": 0.995, "CA_within": {"fit": 0.8407, "planted": 0.8377}, "CA_presence_min": 0.444}

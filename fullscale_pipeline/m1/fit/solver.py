@@ -11,7 +11,7 @@ import torch
 
 from .loss import RelationTensors, total_loss
 from .model import Model
-from .init import initialise
+from .init import initialise, random_start
 from . import terms as T
 
 LR, MAX_EPOCHS, WINDOW, TOL, LOG_EVERY, WARMUP = 0.01, 2000, 20, 1e-4, 50, 300
@@ -40,7 +40,7 @@ def _snapshot_change(prev, cur):
 
 
 def fit(rds, K, beta, seed, terms=None, max_epochs=MAX_EPOCHS, lr=LR, warmup=WARMUP, dtype=torch.float64,
-        init_U=None, init_Z=None, log_every=LOG_EVERY, tol=TOL, window=WINDOW):
+        init_U=None, init_Z=None, log_every=LOG_EVERY, tol=TOL, window=WINDOW, start="nndsvd", lr_mode="absolute"):
     """One fit. rds: data.RelationData list; terms: list of (term object, λ) — λ = 0 terms are not built in;
     init_U/init_Z: start values (default: F3 initialisation from `seed`). Returns a result dict."""
     set_determinism(seed)
@@ -50,10 +50,15 @@ def fit(rds, K, beta, seed, terms=None, max_epochs=MAX_EPOCHS, lr=LR, warmup=WAR
     sizes = {}
     for rd in rds:
         sizes[rd.row_facet] = rd.shape[0]; sizes[rd.col_facet] = rd.shape[1]
+    start_label = start if init_U is None else "given"
     if init_U is None:
-        init_U, init_Z = initialise(rds, K, seed)
+        init_U, init_Z = (initialise if start == "nndsvd" else random_start)(rds, K, seed)
     model = Model(sizes, relations, K, init_U=init_U, init_Z=init_Z, dtype=dtype)
-    opt = torch.optim.Adam(model.parameters(), lr=lr)
+    if lr_mode == "absolute":                       # toy: one learning rate for every parameter
+        opt = torch.optim.Adam(model.parameters(), lr=lr)
+    else:                                           # "relative": each block's rate × the RMS of its starting entries
+        groups = [{"params": [p], "lr": lr * float(p.detach().pow(2).mean().sqrt())} for p in model.parameters()]
+        opt = torch.optim.Adam(groups, lr=lr)
     active = [(t, lam) for t, lam in (terms or []) if lam > 0]
     terms_on = bool(active)
     hist_total, hist_data, logs = [], [], []
@@ -109,5 +114,5 @@ def fit(rds, K, beta, seed, terms=None, max_epochs=MAX_EPOCHS, lr=LR, warmup=WAR
             "relations": relations, "K": K, "beta": beta, "seed": seed, "converged": converged, "epochs": epoch + 1,
             "loss_history": hist_total, "data_loss_history": hist_data, "final_relation_loss": final_parts,
             "logs": logs, "terms": [{"name": t.name, "lambda": lam, "info": getattr(t, "info", None)} for t, lam in active],
-            "settings": {"lr": lr, "max_epochs": max_epochs, "warmup": warmup, "tol": tol, "window": window,
+            "settings": {"start": start_label, "lr": lr, "lr_mode": lr_mode, "max_epochs": max_epochs, "warmup": warmup, "tol": tol, "window": window,
                          "dtype": str(dtype)}, "seconds": round(time.time() - t0, 2)}
