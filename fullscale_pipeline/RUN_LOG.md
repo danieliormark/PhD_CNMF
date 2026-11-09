@@ -2828,3 +2828,4 @@ author×affiliation 4,741, 442–496; article×affiliation 4,071, 384–445); hi
 (child×article, child×parent, author×affiliation) and 527,458 (article×affiliation, ⌊10%⌋ of 5,274,582, so the 10 groups
 cover all but 2 of its empty cells); drawn uniformly without replacement (exact rank mapping; a first rejection-sampling
 version stalled on the affiliation matrix and was stopped before finishing, its partial output deleted). [LOG]
+*[2026-11-09, owner's permission: `psych_trial_v1/` and `psych_trial_v2/` deleted; v3 holds every v2 file unchanged plus the raw counts and the hold-out. v2's manifest (the only record of the brute-force W check, W identical) kept as `psych_trial_v3/manifest_v2_build.json`. Earlier references to `psych_trial_v2` paths in the design doc and `holdout_measure.txt` now point to deleted files; the same matrices are in v3.]*
