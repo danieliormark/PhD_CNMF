@@ -7,7 +7,28 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-06, ticket 107 M1 — D1 and stage 0 pre-registered; §8.2 begins)
+## State (2026-11-09, ticket 107 M1 — §8.2 steps 1–11 decided; step 12 next)
+
+**Done 2026-11-06 to 11-09** (design doc notes dated 2026-11-07 to 11-09, end of `plans/ticket107-m1-chunk12v3-design.md`):
+- Steps 4–9: floor re-specified (spread in bits, ω/β arms, hidden-tie match), excess spread/S3 gates, column weights and
+  reconstructed tie weight, presence and mono-domain (0.1/0.5), ghost = no well-placed member (K veto), tie alignment
+  (stratified shuffle; K veto), Penalty_B retired.
+- Step 10: coherence retired; outer domain-balance response deferred to stage-0 evidence; mono-domain and mono-facet
+  reporting; objective kept (coauthor discussion pending); planted worlds replaced by graded cross-domain swap on real
+  data (p = 0, .25, .5, .75, 1); one model-form code-check world + unit tests at the build step.
+- Step 11: ticket 35 deferred/reformulated; vetoes act as gates in the §6.8 K protocol (fallback = largest smaller K that
+  passes, flagged; none → owner decides); would-be vetoes in stage 0; counting rule: fraction 0.2 at seeds-within-group,
+  groups and pooled fits, per-seed stability, non-convergence as fourth check (option c); stage 0 reports counts at
+  0.1/0.2/0.25/0.5.
+- Writing checklist saved in memory (feedback-explanation-style): check record first, re-define terms, unit/stage/
+  binding/edge cases, name the axis.
+
+**Next:** §8.2 step 12 (trial test design). Open for step 12: Track A/B input (factor-matrix rows vs weighted
+memberships); which seed's fit is the reported model; item (l) (membership weighting, q, m, empty-column reference).
+Then the M1 fit code (both losses), code-check world, time one fit, set S. Open: RDS quota (≈ 50–70 GB); delete
+`psych_trial_v1`? (ask).
+
+## Earlier state (2026-11-06, ticket 107 M1 — D1 and stage 0 pre-registered; §8.2 begins)
 
 **Done 2026-11-03 to 11-06** (design doc addenda from 2026-11-03 (2) on; `plans/ticket107_layer2/`):
 - L2.6 complete: held-out captured share; per-fold recomputation; scoring weights; band = one-SE rule on the mean over
