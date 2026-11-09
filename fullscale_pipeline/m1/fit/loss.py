@@ -28,7 +28,8 @@ class RelationTensors:
         self.hid_tie_x = F(rd.hid_tie_val)
         self.sum_x2 = float(np.sum(np.asarray(rd.tie_val) ** 2))
         x = np.asarray(rd.tie_val)
-        self.sum_xlogx_minus_x = float(np.sum(x * np.log(x) - x))
+        xp = np.where(x > 0, x, 1.0)                    # KL needs x ≥ 0; the constant is unused for squared error
+        self.sum_xlogx_minus_x = float(np.sum(np.where(x > 0, x * np.log(xp), 0.0) - x)) if np.all(x >= 0) else float('nan')
         if self.diag_masked:
             self.diag_idx = L(np.nonzero(rd.obs_row_mask)[0])
 
