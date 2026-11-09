@@ -29,6 +29,8 @@
 #                         w / (s_A s_B)^¼, s = Euclidean norm of the article's row of w (option (c), 2026-11-01);
 #                         diagonal missing; articles with no tie keep observed zeros (approach 2; 2026-10-30).
 # Not done here (done per fold in the fit): the whole-matrix normalisation over observed cells (2026-10-31), the hold-out.
+# Also saved (2026-11-09): raw counts (tf, nested, cousin) and the unnormalised affiliation shares, from which the fit
+# recomputes the weights per hold-out group from visible cells (2026-11-03).
 # Squared-error formulas only; the KL version is built later (2026-10-31).
 import argparse, collections, csv, glob, hashlib, json, math, os, re, sys, time
 import numpy as np
@@ -154,8 +156,16 @@ def build_semantic(units):
     idf_parent = np.array([math.log(len(parents) / (df_p[k] + 1)) + 1 if df_p[k] else 0.0 for k in children])
     r, c, v = zip(*((pi[p], ci[k], idf_parent[ci[k]] * math.log1p(nest[(k, p)] + COUSIN * cous[(k, p)])) for k, p in pairs))
     PC = partial_row_normalise(sp.csr_matrix((v, (r, c)), shape=(len(parents), len(children))))
+    # raw counts for the per-fold recomputation of the weights in the fit (2026-11-03): tf, nested, cousin occurrences
+    TF = sp.csr_matrix(([t for t in tf.values()], ([ai[a] for _, a in tf], [ci[k] for k, _ in tf])),
+                       shape=(len(articles), len(children)))
+    pl = sorted(pairs)
+    NEST = sp.csr_matrix(([nest[q] for q in pl], ([pi[p] for _, p in pl], [ci[k] for k, _ in pl])),
+                         shape=(len(parents), len(children)))
+    COUS = sp.csr_matrix(([cous[q] for q in pl], ([pi[p] for _, p in pl], [ci[k] for k, _ in pl])),
+                         shape=(len(parents), len(children)))
     return dict(children=children, child_sets=child_sets, articles=articles, parents=parents, CA=CA, PC=PC,
-                idf_article=idf_article, idf_parent=idf_parent)
+                idf_article=idf_article, idf_parent=idf_parent, TF=TF, NEST=NEST, COUS=COUS)
 
 
 # ------------------------------------------------------------------ W (child×child)
@@ -318,9 +328,9 @@ def build_social(articles, author_table=INPUTS["author_table"], organisations=IN
         M = sp.csr_matrix((list(acc.values()), tuple(zip(*acc))) if acc else ([], ([], [])), shape=(n_rows, len(organs)))
         n = np.sqrt(np.asarray(M.multiply(M).sum(axis=1)).ravel())
         f = np.zeros_like(n); f[n > 0] = 1 / n[n > 0]
-        return (sp.diags(f) @ M).tocsr(), np.nonzero(n == 0)[0]
-    P2, P2_missing = share(lambda r: pi[r["person"]], len(persons))
-    P3, P3_missing = share(lambda r: ai[r["pmcid"]], len(articles))
+        return (sp.diags(f) @ M).tocsr(), np.nonzero(n == 0)[0], M.tocsr()
+    P2, P2_missing, P2_raw = share(lambda r: pi[r["person"]], len(persons))
+    P3, P3_missing, P3_raw = share(lambda r: ai[r["pmcid"]], len(articles))
     # P4
     jn = {r["pmcid"]: r["nlm_id"] for r in csv.DictReader(open(journals)) if r["pmcid"] in A}
     journals_ = sorted({j for j in jn.values() if j}); ji = {j: i for i, j in enumerate(journals_)}
@@ -344,6 +354,7 @@ def build_social(articles, author_table=INPUTS["author_table"], organisations=IN
         r5 += [ai[x], ai[y]]; c5 += [ai[y], ai[x]]; v5 += [vc, vc]
     P5 = sp.csr_matrix((v5, (r5, c5)), shape=(len(articles), len(articles)))
     return dict(persons=persons, organisations=organs, journals=journals_, P1=P1, P2=P2, P2_missing_rows=P2_missing,
+                P2_raw=P2_raw, P3_raw=P3_raw,
                 P3=P3, P3_missing_rows=P3_missing, P4=P4, P4_missing_rows=P4_missing, P5=P5, bylines=len(B))
 
 
@@ -408,6 +419,11 @@ def main():
     for name, M in (("child_article", sem["CA"]), ("parent_child", sem["PC"]), ("P1_author_article", soc["P1"]),
                     ("P2_author_affiliation", soc["P2"]), ("P3_article_affiliation", soc["P3"]),
                     ("P4_article_journal", soc["P4"]), ("P5_article_article", soc["P5"])):
+        sp.save_npz(os.path.join(a.out, name + ".npz"), M.tocsr())
+    # raw ingredients (before idf, log, row normalisation) for the per-fold weights of the fit (2026-11-03)
+    for name, M in (("raw_child_article_tf", sem["TF"]), ("raw_parent_child_nested", sem["NEST"]),
+                    ("raw_parent_child_cousin", sem["COUS"]), ("raw_P2_author_affiliation", soc["P2_raw"]),
+                    ("raw_P3_article_affiliation", soc["P3_raw"])):
         sp.save_npz(os.path.join(a.out, name + ".npz"), M.tocsr())
     np.save(os.path.join(a.out, "idf_article.npy"), sem["idf_article"]); np.save(os.path.join(a.out, "idf_parent.npy"), sem["idf_parent"])
     idx = dict(articles=sem["articles"], children=sem["children"], parents=sem["parents"], persons=soc["persons"],

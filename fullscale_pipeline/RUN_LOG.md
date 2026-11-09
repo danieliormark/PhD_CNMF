@@ -2814,3 +2814,17 @@ so their child×parent figures (225,108 ties) left out the 4,916 pairs above. [L
 The 4,916 are only the units without a parent of their own; the other 1,340 are cousin hyperedges whose sentence has
 parent hyperedges in another unit as well as in their own. The builder's 231,223 is 69 below 231,292 because of its
 identity rules (model-name map, parent keys rebuilt, the 2 Grover units).]*
+
+### RL-207 — 2026-11-09 — chunk12v3 rebuild with raw counts (psych_trial_v3) and the hold-out draw
+
+`fullscale_pipeline/m1/chunk12v3.py --w prefix`, incline35, output `/mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v3/`,
+56 s. Builder extended to also save the raw ingredients the fit needs to recompute the weights per hold-out group from
+visible cells (decided 2026-11-03): `raw_child_article_tf`, `raw_parent_child_nested`, `raw_parent_child_cousin`,
+`raw_P2_author_affiliation`, `raw_P3_article_affiliation` (before idf, log and row normalisation). Every weighted matrix,
+W, idf vector, index and missing-row record is identical to v2 (max abs difference 0); builder tests: 44 pass.
+Hold-out drawn once by `fit/data.py draw_holdout` (seed 107), saved to `psych_trial_v3/holdout/` with a manifest, 49 s:
+eligible ties all placed (child×article 86,463, 8,392–8,855 per group; child×parent 148,763, 14,705–15,033;
+author×affiliation 4,741, 442–496; article×affiliation 4,071, 384–445); hidden empty cells per group 1,000,000
+(child×article, child×parent, author×affiliation) and 527,458 (article×affiliation, ⌊10%⌋ of 5,274,582, so the 10 groups
+cover all but 2 of its empty cells); drawn uniformly without replacement (exact rank mapping; a first rejection-sampling
+version stalled on the affiliation matrix and was stopped before finishing, its partial output deleted). [LOG]
