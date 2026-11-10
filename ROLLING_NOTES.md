@@ -23,13 +23,19 @@
 - Writing checklist saved in memory (feedback-explanation-style): check record first, re-define terms, unit/stage/
   binding/edge cases, name the axis.
 
-**2026-11-09, step 12 complete — §8.2 done.** Staged plan with every check placed: `plans/ticket107_layer2/test_architecture.txt`
-(build step; stage 0 passes 1–3 with diagnostics, optional floor/S3 slot, bare graded swap; λ calibration with swap per
-term; stage 1 binding gate/vetoes/convergence at 0.2; stage 2 K protocol; stage 3 comparisons + final refit on all data).
-Budget 11.3k–17.8k fits at S = 10. Gate reads weighted memberships. Floor-pass grid deferred until a fit is timed.
+**2026-11-09/10 — M1 fit code.** Package `fullscale_pipeline/m1/fit/`: data (per-fold weights, hold-out drawn once in
+`psych_trial_v3/holdout/`), loss (masked, squared error + KL, exact without the dense reconstruction), model, init
+(NNDSVD; random; subsample-NNDSVD hybrid), terms (W, floor, S3, O3 candidate), solver, worlds (code-check world, graded
+swap); tests checkpoint 1 and 2 pass. Code-check rounds 1–4 (RUN_LOG RL-208–RL-211). Decided: per-block learning rate
+recomputed every step (fraction × block RMS, floor 1e-3 × start); fraction per loss by the largest-stable rule
+(provisional squared error 0.03, KL 0.01; final from 36 real-data fits at checkpoint 3); default start = hybrid
+(confirm at checkpoint 3); known limitation: weak single-facet communities may be absorbed (K* + 1 test at checkpoint 3).
+Random starts mix communities across facets (owner's historical problem reproduced); O3 does not repair it.
 
-**Next:** build the M1 fit code (both losses) + unit tests + code-check world → time one fit → set S and the floor-pass
-grid (owner). Item (l) due before stage-1 results. Open: RDS quota (≈ 50–70 GB); delete `psych_trial_v1`? (ask).
+**Next:** F6 measures (presence, ghosts, alignment, Track A/B on weighted memberships per seed and between groups,
+held-out scores/AUC, empty columns, counting rule) + reporting-code check against the planted truth + K* + 1 fits;
+F8 stage runners/SLURM; checkpoint 3 on CSF3 (timing, cross-machine, float32 pairs, start comparison, fraction 36 fits)
+— ask permission before submitting. Item (l) due before stage-1 results. Open: RDS quota.
 
 ## Earlier state (2026-11-06, ticket 107 M1 — D1 and stage 0 pre-registered; §8.2 begins)
 
