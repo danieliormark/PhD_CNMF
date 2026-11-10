@@ -2895,3 +2895,13 @@ community empty in article×journal (and so in the journal facet). Planted commu
 0.70–1.0) and the child-only community is still not recovered (0.03 / 0.001). Reading: with a free core matrix per
 relation an extra column can split or extend a planted community and still fit exactly, so "the extra column is
 flagged empty" was not a well-posed pass criterion. [LOG]
+
+### RL-213 — 2026-11-10 — CSF3 rehearsal (owner submitted; jobs 24541040 [3 array tasks], 24541041 [aggregation])
+
+`fit/slurm/rehearsal.sh` from login3; 17 jobs (16 tiny real-data fits, K = 3, 21 epochs; 1 deliberate failure); all ran on
+node1282 (code e7280e5, clean), 20:22–20:25. 16 fits wrote spec/result/UZ/measures/entity to
+`/mnt/hum01-rds/Basov/p91688di/m1_fits/rehearsal/` (RDS mounted on compute nodes); the failure was caught and written to
+error.json, the other 7 fits of its task... (task 2 held only the failing job) — every other task finished; the dependent
+aggregation ran after the array and wrote `_aggregate.json` (16 finished, 1 failed, 0 unfinished; both loss cells with 2
+groups scored, every check counted, between-group stability). 54–57 s per fit (mostly loading and measures).
+Cross-machine: two of the fits re-run on incline35 give bit-identical loss histories (max difference 0). [LOG]
