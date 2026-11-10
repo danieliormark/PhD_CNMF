@@ -1,0 +1,480 @@
+[
+ {
+  "beta": 2,
+  "converged": true,
+  "epochs": 4441,
+  "final_data_loss": 1.3583662067590449e-05,
+  "floor_zero=None": {
+   "presence": {
+    "parent_child": [
+     1.0249,
+     0.7494,
+     1.2326,
+     1.3193,
+     1.2075,
+     1.225,
+     0.2413
+    ],
+    "child_article": [
+     0.8618,
+     1.6286,
+     1.315,
+     0.6635,
+     1.1172,
+     1.1065,
+     0.3073
+    ],
+    "author_article": [
+     0.78,
+     1.0919,
+     1.7993,
+     0.4744,
+     1.5175,
+     1.244,
+     0.0929
+    ],
+    "author_affiliation": [
+     1.3791,
+     0.1877,
+     2.1205,
+     0.4778,
+     1.4007,
+     1.1364,
+     0.2978
+    ],
+    "article_journal": [
+     0.598,
+     1.6904,
+     2.0123,
+     0.2965,
+     1.3727,
+     1.0222,
+     0.008
+    ]
+   },
+   "empty_p0.1": {
+    "parent_child": [],
+    "child_article": [],
+    "author_article": [],
+    "author_affiliation": [],
+    "article_journal": []
+   },
+   "empty_facets_p0.1": {
+    "article": [],
+    "author": [],
+    "child": [],
+    "journal": [],
+    "organisation": [],
+    "parent": []
+   },
+   "empty_all_refs": {
+    "median": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p0.5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p0.1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    }
+   }
+  },
+  "floor_zero=1e-07": {
+   "presence": {
+    "parent_child": [
+     1.0249,
+     0.7494,
+     1.2326,
+     1.3193,
+     1.2075,
+     1.225,
+     0.2413
+    ],
+    "child_article": [
+     0.8618,
+     1.6286,
+     1.315,
+     0.6635,
+     1.1172,
+     1.1065,
+     0.3073
+    ],
+    "author_article": [
+     0.78,
+     1.0919,
+     1.7993,
+     0.4744,
+     1.5175,
+     1.244,
+     0.0929
+    ],
+    "author_affiliation": [
+     1.3791,
+     0.1877,
+     2.1205,
+     0.4778,
+     1.4007,
+     1.1364,
+     0.2978
+    ],
+    "article_journal": [
+     0.598,
+     1.6904,
+     2.0123,
+     0.2965,
+     1.3727,
+     1.0222,
+     0.008
+    ]
+   },
+   "empty_p0.1": {
+    "parent_child": [],
+    "child_article": [],
+    "author_article": [],
+    "author_affiliation": [],
+    "article_journal": []
+   },
+   "empty_facets_p0.1": {
+    "article": [],
+    "author": [],
+    "child": [],
+    "journal": [],
+    "organisation": [],
+    "parent": []
+   },
+   "empty_all_refs": {
+    "median": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p0.5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    },
+    "p0.1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": []
+    }
+   }
+  },
+  "matched_cosines_planted": [
+   0.7025,
+   1.0,
+   0.8212,
+   0.996,
+   0.725,
+   0.0279
+  ],
+  "perm": {
+   "0": 1,
+   "1": 2,
+   "2": 3,
+   "3": 4,
+   "4": 0,
+   "5": 6,
+   "6": 5
+  }
+ },
+ {
+  "beta": 1,
+  "converged": true,
+  "epochs": 4395,
+  "final_data_loss": 0.041746961776496214,
+  "floor_zero=None": {
+   "presence": {
+    "parent_child": [
+     1.2673,
+     0.4579,
+     1.2304,
+     1.6118,
+     1.2168,
+     1.2081,
+     0.0078
+    ],
+    "child_article": [
+     0.9016,
+     1.6428,
+     1.3104,
+     0.5866,
+     1.1167,
+     1.1932,
+     0.2487
+    ],
+    "author_article": [
+     0.6316,
+     1.2466,
+     1.7964,
+     0.2586,
+     1.5852,
+     1.4605,
+     0.0211
+    ],
+    "author_affiliation": [
+     0.9811,
+     0.5859,
+     2.1113,
+     0.3728,
+     1.5148,
+     1.2554,
+     0.1788
+    ],
+    "article_journal": [
+     0.478,
+     1.8075,
+     2.0251,
+     0.1054,
+     1.3676,
+     1.2164,
+     0.0
+    ]
+   },
+   "empty_p0.1": {
+    "parent_child": [],
+    "child_article": [],
+    "author_article": [],
+    "author_affiliation": [],
+    "article_journal": [
+     6
+    ]
+   },
+   "empty_facets_p0.1": {
+    "article": [],
+    "author": [],
+    "child": [],
+    "journal": [
+     6
+    ],
+    "organisation": [],
+    "parent": []
+   },
+   "empty_all_refs": {
+    "median": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p0.5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p0.1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    }
+   }
+  },
+  "floor_zero=1e-07": {
+   "presence": {
+    "parent_child": [
+     1.2673,
+     0.4579,
+     1.2304,
+     1.6118,
+     1.2168,
+     1.2081,
+     0.0078
+    ],
+    "child_article": [
+     0.9016,
+     1.6428,
+     1.3104,
+     0.5866,
+     1.1167,
+     1.1932,
+     0.2487
+    ],
+    "author_article": [
+     0.6316,
+     1.2466,
+     1.7964,
+     0.2586,
+     1.5852,
+     1.4605,
+     0.0211
+    ],
+    "author_affiliation": [
+     0.9811,
+     0.5859,
+     2.1113,
+     0.3728,
+     1.5148,
+     1.2554,
+     0.1788
+    ],
+    "article_journal": [
+     0.478,
+     1.8075,
+     2.0251,
+     0.1054,
+     1.3676,
+     1.2164,
+     0.0
+    ]
+   },
+   "empty_p0.1": {
+    "parent_child": [],
+    "child_article": [],
+    "author_article": [],
+    "author_affiliation": [],
+    "article_journal": [
+     6
+    ]
+   },
+   "empty_facets_p0.1": {
+    "article": [],
+    "author": [],
+    "child": [],
+    "journal": [
+     6
+    ],
+    "organisation": [],
+    "parent": []
+   },
+   "empty_all_refs": {
+    "median": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p0.5": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    },
+    "p0.1": {
+     "parent_child": [],
+     "child_article": [],
+     "author_article": [],
+     "author_affiliation": [],
+     "article_journal": [
+      6
+     ]
+    }
+   }
+  },
+  "matched_cosines_planted": [
+   0.7737,
+   1.0,
+   0.7189,
+   0.9976,
+   0.8318,
+   0.001
+  ],
+  "perm": {
+   "0": 1,
+   "1": 2,
+   "2": 3,
+   "3": 4,
+   "4": 0,
+   "5": 6,
+   "6": 5
+  }
+ }
+]

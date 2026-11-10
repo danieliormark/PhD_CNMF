@@ -2884,3 +2884,14 @@ converges in 2,100–3,200 epochs) while KL degrades (noiseless relative error 0
 Poisson 0.48–0.52). Block sizes (RMS) end at nearly the same values under both losses (differences ≤ ~15%) and change
 during a fit by up to ~2× (child×article core 0.145 → 0.24–0.28; social cores and journal memberships × ~0.6).
 Which communities are recovered depends on the seed's start, not on the rate rule. [LOG]
+
+### RL-212 — 2026-11-10 — K* + 1 fits (2 fits, decided 2026-11-08/10; incline35)
+
+`fit/run_kplus1.py`; results `fullscale_pipeline/m1/fit/results/kplus1_2026-11-10/kplus1.json`. Noiseless world (6 planted
+communities) fitted at K = 7, hybrid start, recomputed per-block rate (squared error 0.03, KL 0.01); both converged
+(4,441 / 4,395 epochs; squared-error loss 1e-5). The extra column is **not** empty: all 7 communities carry child×article
+ties (presence of the smallest 0.25–0.31), with or without floor-level core cells read as 0; only under KL is one
+community empty in article×journal (and so in the journal facet). Planted communities matched as at K = 6 (cosines
+0.70–1.0) and the child-only community is still not recovered (0.03 / 0.001). Reading: with a free core matrix per
+relation an extra column can split or extend a planted community and still fit exactly, so "the extra column is
+flagged empty" was not a well-posed pass criterion. [LOG]
