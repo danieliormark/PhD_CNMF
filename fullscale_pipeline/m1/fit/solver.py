@@ -63,7 +63,9 @@ def fit(rds, K, beta, seed, terms=None, max_epochs=MAX_EPOCHS, lr=LR, warmup=WAR
         opt = torch.optim.Adam(model.parameters(), lr=lr)
     else:                                           # "relative": each block's rate × the RMS of its starting entries
         groups = [{"params": [p], "lr": lr * float(p.detach().pow(2).mean().sqrt())} for p in model.parameters()]
-        opt = torch.optim.Adam(groups, lr=lr)
+        opt = torch.optim.Adam(groups, lr=lr)       # "recompute": × the RMS of its current entries, every step
+        rms0 = [float(p.detach().pow(2).mean().sqrt()) for p in model.parameters()]   # (Adafactor-like; floor 1e-3 × start)
+    block_names = [f"U:{f}" for f in model.U] + [f"Z:{r}" for r in model.Z]
     active = [(t, lam) for t, lam in (terms or []) if lam > 0]
     terms_on = bool(active)
     hist_total, hist_data, logs = [], [], []
@@ -89,6 +91,10 @@ def fit(rds, K, beta, seed, terms=None, max_epochs=MAX_EPOCHS, lr=LR, warmup=WAR
                 term_vals[t.name] = v
                 total = total + lam * v
         total.backward()
+        if lr_mode == "recompute":
+            with torch.no_grad():
+                for g, p, r0 in zip(opt.param_groups, model.parameters(), rms0):
+                    g["lr"] = lr * max(1e-3 * r0, float(p.pow(2).mean().sqrt()))
         opt.step()
         model.clamp_()
         hist_total.append(float(total.item())); hist_data.append(float(data.item()))
@@ -100,6 +106,7 @@ def fit(rds, K, beta, seed, terms=None, max_epochs=MAX_EPOCHS, lr=LR, warmup=WAR
                          "relations": {k: float(v.item()) for k, v in parts.items()},
                          "terms": {k: float(v.item()) for k, v in term_vals.items()},
                          "membership_change": _snapshot_change(prev_snap, snap) if prev_snap is not None else None,
+                         "block_rms": {n: float(p.detach().pow(2).mean().sqrt()) for n, p in zip(block_names, model.parameters())},
                          "seconds": round(time.time() - t0, 2)})
             prev_snap = snap
         if epoch >= window and not (terms_on and epoch < warmup + window + 1):

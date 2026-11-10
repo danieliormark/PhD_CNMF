@@ -2872,3 +2872,15 @@ start values): 10.8% vs 2.6% for plain NNDSVD. Alignment kept: child×article wi
 community 0 and the child-only community share members (cosines 0.34–0.35 and 0.37–0.39) instead of the child-only
 community being absorbed (0.016) — an alternative solution plain NNDSVD seeds never showed. Noiseless criterion still
 not met (relative error 0.002–0.008; squared error not converged at 5,000 epochs). [LOG]
+
+### RL-211 — 2026-11-10 — code-check world, round 4: learning rate recomputed every step (24 fits, owner's approval; incline35, 23 min)
+
+`fit/run_code_check4.py` (nohup, setsid); results `fullscale_pipeline/m1/fit/results/code_check_round4_2026-11-10/`.
+Per-block rate = fraction × the block's current RMS, every step (floor 1e-3 × starting RMS), fractions 0.01 / 0.03,
+hybrid start, round-2 world. At 0.01 the recomputed rate behaves like the start-fixed rate of round 3 (same solutions
+per seed, within share 0.70–0.81; squared error slightly less precise in 5,000 epochs, relative error 0.009–0.013 vs
+0.005–0.008). At 0.03 squared error improves (noiseless relative error 0.0012–0.0041, the best so far; Gaussian
+converges in 2,100–3,200 epochs) while KL degrades (noiseless relative error 0.38–0.59, within share 0.41–0.51;
+Poisson 0.48–0.52). Block sizes (RMS) end at nearly the same values under both losses (differences ≤ ~15%) and change
+during a fit by up to ~2× (child×article core 0.145 → 0.24–0.28; social cores and journal memberships × ~0.6).
+Which communities are recovered depends on the seed's start, not on the rate rule. [LOG]
