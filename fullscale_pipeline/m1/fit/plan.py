@@ -39,11 +39,22 @@ def stage0_pass1(seeds):
             for a in (1, 2) for beta in (2, 1) for K in COARSE_K for g in range(5) for s in range(1, seeds + 1)]
 
 
+def rehearsal():
+    """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
+    epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
+    4 seeds, both losses — plus 1 fit that fails on purpose. Tests: environment and RDS on compute nodes, 8 parallel fits
+    per task, outputs, the failure caught and logged, re-submission skipping finished fits, the chained aggregation."""
+    out = [dict(job("rehearsal", 1, g, 3, beta, s, PROVISIONAL_FRACTION[beta], max_epochs=40), tol=1.0)
+           for beta in (2, 1) for g in (0, 1) for s in (1, 2, 3, 4)]
+    out.append(dict(job("rehearsal", 1, 0, 3, 2, 99, 0.03, max_epochs=40), tol=1.0, fail_on_purpose=True))
+    return out
+
+
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = checkpoint3() if a.which == "checkpoint3" else stage0_pass1(a.seeds)
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

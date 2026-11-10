@@ -91,7 +91,7 @@ def run_one(job, out_root):
     dtype = torch.float32 if job.get("dtype") == "float32" else torch.float64
     res = fit(rds, job["K"], job["beta"], seed=job["seed"], terms=build_terms(job, rds, build),
               max_epochs=job.get("max_epochs", 5000), lr=job["frac"], lr_mode=job.get("lr_mode", "recompute"),
-              warmup=job.get("warmup", 300), dtype=dtype, start=job.get("start", "nndsvd_sub0.8"))
+              warmup=job.get("warmup", 300), dtype=dtype, start=job.get("start", "nndsvd_sub0.8"), tol=job.get("tol", 1e-4))
     U = {f: u.astype(np.float64) for f, u in res["U"].items()}; Z = {r: z.astype(np.float64) for r, z in res["Z"].items()}
     np.savez_compressed(os.path.join(d, "UZ.npz"), **{f"U__{f}": u.astype(np.float32) for f, u in U.items()},
                         **{f"Z__{r}": z.astype(np.float32) for r, z in Z.items()})
@@ -138,6 +138,20 @@ def run_one(job, out_root):
     return jid, "done"
 
 
+def run_safe(job, out_root):
+    """run_one with the error caught and written to error.json, so one failing fit does not stop the others of its task."""
+    import traceback
+    try:
+        if job.get("fail_on_purpose"):
+            raise RuntimeError("deliberate failure (rehearsal)")
+        return run_one(job, out_root)
+    except Exception as e:
+        d = os.path.join(out_root, job["stage"], job_id(job)); os.makedirs(d, exist_ok=True)
+        json.dump({"job": job, "error": repr(e), "traceback": traceback.format_exc(), "host": socket.gethostname(),
+                   "time": time.strftime("%Y-%m-%d %H:%M:%S")}, open(os.path.join(d, "error.json"), "w"), indent=1)
+        return job_id(job), "error: " + repr(e)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--jobs", required=True); ap.add_argument("--out", required=True)
@@ -153,7 +167,7 @@ def main():
         sel = list(range(len(jobs)))
     from concurrent.futures import ProcessPoolExecutor
     with ProcessPoolExecutor(max(1, min(a.per_task, len(sel)))) as ex:
-        for jid, st in ex.map(run_one, [jobs[i] for i in sel], [a.out] * len(sel)):
+        for jid, st in ex.map(run_safe, [jobs[i] for i in sel], [a.out] * len(sel)):
             print(jid, st, flush=True)
 
 

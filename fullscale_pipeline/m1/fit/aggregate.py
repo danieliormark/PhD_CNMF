@@ -3,8 +3,8 @@
 #   per group   : placed entities (seed variation, 2026-11-07); per seed: stability gate (Track A/B on weighted memberships,
 #                 Track A over placed entities, per seed vs the maximum of its pairs' shuffled chance, 2026-11-09 (C1, E));
 #                 ghost veto (no placed entity has k as largest membership); alignment veto (child×article alignment over
-#                 placed entities not above its stratified shuffle mean by more than the group's seed SD of the observed
-#                 alignment — the decided "not above the stratified shuffle reference beyond seed noise"); convergence
+#                 placed entities not above its stratified shuffle's 95th percentile, or its gap over the shuffle mean
+#                 not larger than the group's seed SD of the observed alignment — option (c), owner 2026-11-10); convergence
 #                 (fourth check, option c); non-converged seeds are left out of the other three checks
 #   counting    : a group fails a check if > fraction of its seeds fail; K fails if > fraction of groups fail or > fraction
 #                 of all fits fail (fraction 0.2 provisional; also reported at 0.1/0.25/0.5) (2026-11-09)
@@ -102,8 +102,11 @@ def group_checks(fits, rds_child_article=None, W_has_tie=None, seed=0):
                               strata_extra=W_has_tie, n_shuffles=99, seed=seed) for wm in wms]
         obs = np.array([a["observed"] for a in al]); sd = obs.std(ddof=1)
         for j, i in enumerate(ok):
-            out["alignment_fails"][i] = not (al[j]["observed"] - al[j]["shuffled_mean"] > sd)
-        out["alignment"] = [{"observed": a["observed"], "shuffled_mean": a["shuffled_mean"], "adjusted": a["adjusted"]} for a in al]
+            # option (c) (owner 2026-11-10): above the shuffle's 95th percentile AND gap beyond the seed SD
+            out["alignment_fails"][i] = not (al[j]["observed"] > al[j]["shuffled_95"]
+                                             and al[j]["observed"] - al[j]["shuffled_mean"] > sd)
+        out["alignment"] = [{"observed": a["observed"], "shuffled_mean": a["shuffled_mean"], "shuffled_95": a["shuffled_95"],
+                             "adjusted": a["adjusted"], "seed_sd": float(sd)} for a in al]
     out["stability"] = {k: v for k, v in st.items() if k != "per_seed"}; out["stability_per_seed"] = st["per_seed"]
     out["placed_share"] = {f: float(m.mean()) for f, m in placed.items()}
     return out, (wms, placed, ok)
@@ -131,6 +134,11 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
     base = os.path.join(root, stage)
     fits = [load_fit(os.path.join(base, d)) for d in sorted(os.listdir(base))
             if os.path.exists(os.path.join(base, d, "measures.json"))]
+    errors = [json.load(open(os.path.join(base, d, "error.json"))) for d in sorted(os.listdir(base))
+              if os.path.exists(os.path.join(base, d, "error.json"))]
+    unfinished = [d for d in sorted(os.listdir(base)) if os.path.isdir(os.path.join(base, d))
+                  and not os.path.exists(os.path.join(base, d, "measures.json"))
+                  and not os.path.exists(os.path.join(base, d, "error.json"))]
     build = D.Build(build_path or D.BUILD)
     W = sp.load_npz(build.path + "W_child_child.npz")
     W_has_tie = (np.diff(W.tocsr().indptr) > 0).astype(int)
@@ -183,6 +191,8 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
                                    for c in ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails")}}
                             for K, e in scored.items()})
         report[ck] = {"cell": cinfo, "per_K": perK, "selection": sel}
+    report["_status"] = {"fits_finished": len(fits), "fits_failed": [{"job": e["job"], "error": e["error"], "host": e.get("host")} for e in errors],
+                         "fits_unfinished": unfinished}
     return report
 
 
