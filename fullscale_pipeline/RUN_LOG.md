@@ -2860,3 +2860,15 @@ communities mixed across facets (cosines 0.02–0.49; within share 0.12–0.42);
 1.00 without recovering the communities (cosines 0.01–0.64, some communities absent from child×article) and worsens
 the fit (relative error 0.2); fraction 0.03 destabilises the KL fits; NNDSVD with squared error needs ~2,700 epochs
 (0.03) to > 5,000 (0.01). [LOG]
+
+### RL-210 — 2026-11-10 — code-check world, round 3: hybrid start (12 fits, owner's approval; incline35, 17 min)
+
+`fit/run_code_check3.py` (nohup, setsid); results `fullscale_pipeline/m1/fit/results/code_check_round3_2026-11-10/`.
+Start = NNDSVD on a seed-specific 80% subsample of the visible anchor ties, propagation unchanged; round-2 world and
+settings (per-block steps, fraction 0.01, limit 5,000). Start diversity between seeds (mean relative difference of the
+start values): 10.8% vs 2.6% for plain NNDSVD. Alignment kept: child×article within share 0.73–0.91 (plain NNDSVD
+0.73–0.80; planted 0.84); four communities recovered as with plain NNDSVD (cosines 0.76–1.0). New: in 4 of 12 fits
+(seed 2 in three worlds, seed 1 in the noiseless squared-error world) the seeds land in a different solution where
+community 0 and the child-only community share members (cosines 0.34–0.35 and 0.37–0.39) instead of the child-only
+community being absorbed (0.016) — an alternative solution plain NNDSVD seeds never showed. Noiseless criterion still
+not met (relative error 0.002–0.008; squared error not converged at 5,000 epochs). [LOG]

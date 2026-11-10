@@ -52,7 +52,12 @@ def fit(rds, K, beta, seed, terms=None, max_epochs=MAX_EPOCHS, lr=LR, warmup=WAR
         sizes[rd.row_facet] = rd.shape[0]; sizes[rd.col_facet] = rd.shape[1]
     start_label = start if init_U is None else "given"
     if init_U is None:
-        init_U, init_Z = (initialise if start == "nndsvd" else random_start)(rds, K, seed)
+        if start == "nndsvd":
+            init_U, init_Z = initialise(rds, K, seed)
+        elif start.startswith("nndsvd_sub"):            # e.g. "nndsvd_sub0.8"
+            init_U, init_Z = initialise(rds, K, seed, subsample=float(start[len("nndsvd_sub"):]))
+        else:
+            init_U, init_Z = random_start(rds, K, seed)
     model = Model(sizes, relations, K, init_U=init_U, init_Z=init_Z, dtype=dtype)
     if lr_mode == "absolute":                       # toy: one learning rate for every parameter
         opt = torch.optim.Adam(model.parameters(), lr=lr)

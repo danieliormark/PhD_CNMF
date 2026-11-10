@@ -42,8 +42,10 @@ def visible_matrix(rd):
     return sp.csr_matrix((rd.tie_val, (rd.tie_row, rd.tie_col)), shape=rd.shape)
 
 
-def initialise(rds, K, seed):
-    """Starting U (facet → array) and Z (relation → array) for the relations rds (data.RelationData list)."""
+def initialise(rds, K, seed, subsample=None):
+    """Starting U (facet → array) and Z (relation → array) for the relations rds (data.RelationData list).
+    subsample: if set (e.g. 0.8), the anchor SVD uses a seed-specific random share of the visible anchor ties
+    (hybrid start, 2026-11-10: seed-varied, still aligned; propagation uses all visible ties)."""
     rng = np.random.default_rng(seed)
     sizes = {}
     for rd in rds:
@@ -58,6 +60,12 @@ def initialise(rds, K, seed):
         col = {by[a].col_facet for a in anchors}
         assert len(col) == 1, "joint anchor SVD needs one shared column facet"
         mats = [visible_matrix(by[a]) for a in anchors]
+        if subsample is not None:
+            sub = []
+            for M in mats:
+                C = M.tocoo(); keep = rng.random(C.nnz) < subsample
+                sub.append(sp.csr_matrix((C.data[keep], (C.row[keep], C.col[keep])), shape=M.shape))
+            mats = sub
         J = sp.vstack(mats).tocsc()
         k_svd = min(K, min(J.shape) - 1)
         v0 = rng.random(min(J.shape)) + 0.1
