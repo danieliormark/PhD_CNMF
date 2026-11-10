@@ -69,7 +69,7 @@ def entropy_bits(P):
 
 
 # ------------------------------------------------------------------------------------- tie-weight parts (step 6, view C)
-def parts(U, Z, rd, floor_zero=None):
+def parts(U, Z, rd, floor_zero=1e-7):
     """part(k,l) = Z[k,l] a_k b_l, a = column sums of the row facet over observed rows, b = column sums of the column
     facet; adds up exactly to the reconstructed tie weight T over observed rows × all columns (GLOSSARY).
     floor_zero: if given, raw core cells at or below it (the positivity floor, 1e-7) are read as 0 (option under
@@ -81,7 +81,7 @@ def parts(U, Z, rd, floor_zero=None):
     return P, float(P.sum())
 
 
-def presence(U, Z, rds, floor_zero=None):
+def presence(U, Z, rds, floor_zero=1e-7):
     """Per relation: side readings, half credit h_k, relative presence p_k = K h_k (2026-11-07), within share,
     off-diagonal share (tie-weight form) and the squared core-cell form (step 2 diagnostic), N_eff ÷ K (step 8),
     per-community within part ÷ half credit; and the squared-size reading of half credit (2026-11-07 (4))."""

@@ -151,7 +151,7 @@ check("counting rule: pooled 36% failing → K fails although only 2 groups fail
 # -------------------------------------------------- 8. reporting code against the planted truth (2026-11-08)
 rds, Ut, Zt = Wd.code_check_world("noiseless", seed=1, child_only="split")
 rel = {rd.name: (rd.row_facet, rd.col_facet) for rd in rds}
-pres = M.presence(Ut, Zt, rds)
+pres = M.presence(Ut, Zt, rds, floor_zero=None)
 dom = M.domain_presence(pres); fac = M.facet_presence(pres); fl = M.mono_flags(dom, fac)
 print("     planted: domain presence semantic", np.round(dom["semantic"]["mean"], 3), "social", np.round(dom["social"]["mean"], 3))
 print("     planted: facet presence", {f: np.round(v, 2).tolist() for f, v in fac.items()})
