@@ -2845,3 +2845,18 @@ share 0.31 vs 0.84 planted); NNDSVD starts recover the aligned communities (with
 0.85–1.0, within share 0.99 vs 0.98) but had not converged by 2,000 epochs. The verdict step itself failed on a numpy
 boolean (fixed); the first run's cosine measure normalised each facet's columns, which made absent communities read as
 uniform columns (fixed: columns weighted by their column weights). [LOG]
+
+### RL-209 — 2026-11-09/10 — code-check world, round 2 (56 fits, owner's approval; incline35, 37 min)
+
+`fit/run_code_check2.py`, 14 workers, nohup; results `fullscale_pipeline/m1/fit/results/code_check_round2_2026-11-09/fits.jsonl`.
+Corrected world (child-only community tied to articles of community 0 and parents of community 2); per-block step sizes
+(fraction × RMS of each block's start), fractions 0.01 / 0.03, epoch limit 5,000; arms NNDSVD start, random start,
+random start + O3 candidate (λ 0.1, 1, from epoch 0). A duplicate copy of the run was launched by mistake and stopped
+after ~3 min, before it wrote anything. Results: started at the planted truth, both noisy worlds stay there (cosine
+0.995 / 0.999, child×article within share 0.85 / 0.84 vs 0.84 planted); no arm passes the noiseless criterion: NNDSVD
+starts reach relative error 0.002–0.003 and recover 5 of 6 communities (cosines 0.75–1.0) but never the weak child-only
+community (cosine ≈ 0.016; child×article within share 0.73–0.80); random starts reach lower loss (0.0004) with
+communities mixed across facets (cosines 0.02–0.49; within share 0.12–0.42); O3 at λ = 1 drives the within share to
+1.00 without recovering the communities (cosines 0.01–0.64, some communities absent from child×article) and worsens
+the fit (relative error 0.2); fraction 0.03 destabilises the KL fits; NNDSVD with squared error needs ~2,700 epochs
+(0.03) to > 5,000 (0.01). [LOG]

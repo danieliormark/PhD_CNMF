@@ -62,8 +62,11 @@ def planted_truth(seed, build=None, K=6, sizes=WORLD_SIZES, child_only=True):
         if dom == "social":
             z[SEMANTIC_ONLY, :] = 0; z[:, SEMANTIC_ONLY] = 0
         z[CHILD_ONLY, :] = 0; z[:, CHILD_ONLY] = 0
-        if cf == "child" and child_only:                       # child-only community tied to community 0 rows
-            z[0, CHILD_ONLY] = 0.8
+        if cf == "child" and child_only == "split":            # identifiable child-only community (2026-11-09):
+            z[0 if rel == "child_article" else 2, CHILD_ONLY] = 0.8   # tied to articles of 0 but parents of 2, so it is
+                                                               # not an extension of any single community
+        elif cf == "child" and child_only:                     # first version: tied to community 0 in both relations
+            z[0, CHILD_ONLY] = 0.8                             # (unidentifiable: equals an extension of community 0)
         elif not child_only and dom == "semantic":            # variant: community CHILD_ONLY is an ordinary community
             z[CHILD_ONLY, CHILD_ONLY] = 1.0
         Z[rel] = z
