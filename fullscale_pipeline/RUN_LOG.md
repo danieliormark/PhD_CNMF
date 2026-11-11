@@ -2917,7 +2917,7 @@ the earlier estimate (≤ 2 h at K = 20) was too low. (2) Fraction rule: KL 0.02
 a lower loss and converges 3/3 at K = 20 where 0.01 does not converge in 5,000 epochs), contrary to the code-check world;
 squared error fails the held-out criterion (S3) at 0.02 and 0.03, at both K. (3) Starts: random start mixes communities
 across facets (child×article within share 0.04–0.16 vs 0.55–1.00 for NNDSVD and hybrid) with held-out AUC equal to or slightly
-above the hybrid's; hybrid seed-to-seed stability lower than plain NNDSVD (chance-adjusted Track B 0.28–0.50 vs 0.62–0.86);
+above the hybrid's; hybrid seed-to-seed stability lower than plain NNDSVD in 3 of 4 loss × K cells (chance-adjusted Track B hybrid 0.27–0.50, plain 0.18–0.86; the exception is squared error at K = 5: 0.27 vs 0.18);
 random-start KL fits at chance (0.06–0.07). (4) Held-out squared error: random-start fits equal the zero-prediction error
 (captured share ≈ 0.00), NNDSVD-type fits are above it (child×parent captured share −0.56 to −3.7), AUC 0.95–0.97 for all.
 (5) float32 vs float64: final loss ≤ 1e-5 relative, epochs equal ± 1, membership agreement 0.999–1.000 (raw) vs seed-to-seed
