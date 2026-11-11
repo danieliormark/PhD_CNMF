@@ -2905,3 +2905,20 @@ error.json, the other 7 fits of its task... (task 2 held only the failing job) �
 aggregation ran after the array and wrote `_aggregate.json` (16 finished, 1 failed, 0 unfinished; both loss cells with 2
 groups scored, every check counted, between-group stability). 54–57 s per fit (mostly loading and measures).
 Cross-machine: two of the fits re-run on incline35 give bit-identical loss histories (max difference 0). [LOG]
+
+### RL-214 — 2026-11-10/11 — checkpoint 3 on CSF3 (owner submitted; jobs 24541295 [9 array tasks × 8 fits], 24541296 [aggregation])
+
+`fit/slurm/checkpoint3.sh`: 72 real-data fits (approach 1, hold-out group 1, K = 5 and 20, 3 seeds, terms off), tasks ran
+20:34–01:18 (≈ 4.7 h wall), all 72 fits finished, no errors, memory 64 GB per task; outputs
+`/mnt/hum01-rds/Basov/p91688di/m1_fits/checkpoint3/`; analysis `fit/checkpoint3_analysis.py` →
+`fit/results/checkpoint3_analysis/checkpoint3_analysis.json`. Findings: (1) time per fit (hybrid, float64): K = 5 1,200–3,700 s,
+K = 20 11,300–15,800 s (≈ 3 s per epoch at K = 20, about twice the 1.4 s measured for the loss alone on incline; not diagnosed);
+the earlier estimate (≤ 2 h at K = 20) was too low. (2) Fraction rule: KL 0.02 and 0.03 stable at K = 5 and 20 (0.03 reaches
+a lower loss and converges 3/3 at K = 20 where 0.01 does not converge in 5,000 epochs), contrary to the code-check world;
+squared error fails the held-out criterion (S3) at 0.02 and 0.03, at both K. (3) Starts: random start mixes communities
+across facets (child×article within share 0.04–0.16 vs 0.55–1.00 for NNDSVD and hybrid) with held-out AUC equal to or slightly
+above the hybrid's; hybrid seed-to-seed stability lower than plain NNDSVD (chance-adjusted Track B 0.28–0.50 vs 0.62–0.86);
+random-start KL fits at chance (0.06–0.07). (4) Held-out squared error: random-start fits equal the zero-prediction error
+(captured share ≈ 0.00), NNDSVD-type fits are above it (child×parent captured share −0.56 to −3.7), AUC 0.95–0.97 for all.
+(5) float32 vs float64: final loss ≤ 1e-5 relative, epochs equal ± 1, membership agreement 0.999–1.000 (raw) vs seed-to-seed
+chance-adjusted 0.2–0.5, convergence counts equal, 27–46 % faster. [LOG]
