@@ -2922,3 +2922,19 @@ random-start KL fits at chance (0.06–0.07). (4) Held-out squared error: random
 (captured share ≈ 0.00), NNDSVD-type fits are above it (child×parent captured share −0.56 to −3.7), AUC 0.95–0.97 for all.
 (5) float32 vs float64: final loss ≤ 1e-5 relative, epochs equal ± 1, membership agreement 0.999–1.000 (raw) vs seed-to-seed
 chance-adjusted 0.2–0.5, convergence counts equal, 27–46 % faster. [LOG]
+
+### RL-215 — 2026-11-11 — held-out squared-error decomposition of the checkpoint-3 fits (owner's permission; incline35, no new fits)
+
+`fit/heldout_decomposition.py` → `fit/results/checkpoint3_analysis/heldout_decomposition.json`. The parts (hidden-tie error,
+scaled hidden-empty-cell error) reproduce the stored scores (max relative difference 7.6e-8). Scale factors of the empty-cell
+part: 20.9 (child×article), 352.1 (child×parent). Findings (group 1, approach 1, 3 seeds): (1) all fits predict ≈ 0 for
+most hidden ties (median x̂/x = 0.002, also under KL); Σx̂/Σx = 0.08–0.11 (child×article), 0.004–0.13 (child×parent); hidden-tie
+error is 0.91–0.92 (child×article) and 0.99 (child×parent) of the zero-prediction error although AUC is 0.95–0.97.
+(2) Squared-error NNDSVD/hybrid fits on child×parent exceed the baseline: hidden-tie error 1.46–3.28× and scaled empty-cell
+error 0.03–2.45× the baseline (K = 5 / 20); in the K = 20 hybrid fit 1.7–1.9 % of hidden ties are over-predicted (largest
+x̂/x 34 at fraction 0.01, 60 at 0.03; top 1 % of hidden ties carry 8 % / 24 % of the tie error), and the top 0.1 % of
+hidden empty cells (≈ 1,000 of 1 M) carry ≈ 99 % of the empty-cell Σx̂², the largest prediction (0.0052 / 0.0176) exceeding
+the largest hidden tie value (0.0076 at 0.03). Over-predicted ties belong to sparsely tied child hyperedges (median 4 ties
+vs 64). (3) KL fits: no such overshoot (largest x̂/x 3.8, largest empty-cell prediction 3e-4). (4) Squared-error held-out
+score by fraction (hybrid, mean ± SE): K = 5 0.0239 ± 0.0003 / 0.0248 ± 0.0003 / 0.0295 ± 0.0040; K = 20 0.0281 ± 0.0016 /
+0.0538 ± 0.0105 / 0.0699 ± 0.0154. Cause of the concentrated cells not established. [LOG]
