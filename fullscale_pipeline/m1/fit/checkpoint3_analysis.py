@@ -12,6 +12,7 @@ from . import measures as M
 from .aggregate import load_UZ, load_entity
 
 FRACTIONS = (0.01, 0.02, 0.03)
+FRACTIONS_BY_BETA = {2: (0.01, 0.02, 0.03), 1: (0.01, 0.02, 0.03, 0.05, 0.075, 0.1)}   # KL extended 2026-11-12
 PROV = {2: 0.03, 1: 0.01}
 
 
@@ -83,12 +84,13 @@ def main():
     for beta in (2, 1):
         for K in (5, 20):
             rows, ok_below = {}, True
-            for i, fr in enumerate(FRACTIONS):
+            fracs = [fr for fr in FRACTIONS_BY_BETA[beta] if (beta, K, "nndsvd_sub0.8", "float64", fr) in table]
+            for i, fr in enumerate(fracs):
                 t = table[(beta, K, "nndsvd_sub0.8", "float64", fr)]
                 if i == 0:
                     rows[fr] = {"reference": True}
                     continue
-                s = table[(beta, K, "nndsvd_sub0.8", "float64", FRACTIONS[i - 1])]
+                s = table[(beta, K, "nndsvd_sub0.8", "float64", fracs[i - 1])]
                 n = t["n"]
                 S2 = t["s2_gap"] <= 1e-3
                 S3a = t["final_loss"]["mean"] - s["final_loss"]["mean"] <= s["final_loss"]["max"] - s["final_loss"]["min"]
@@ -144,7 +146,7 @@ def main():
     for beta in (2, 1):
         for K in (5, 20):
             print(f"  β{beta} K{K}: " + ", ".join(f"frac {fr}: {table[(beta, K, 'nndsvd_sub0.8', 'float64', fr)]['seconds']['mean']:.0f}s/{table[(beta, K, 'nndsvd_sub0.8', 'float64', fr)]['epochs']['mean']:.0f}ep"
-                                                for fr in FRACTIONS))
+                                                for fr in FRACTIONS_BY_BETA[beta] if (beta, K, 'nndsvd_sub0.8', 'float64', fr) in table))
 
 
 if __name__ == "__main__":

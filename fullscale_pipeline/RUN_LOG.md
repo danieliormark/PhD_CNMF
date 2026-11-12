@@ -2938,3 +2938,7 @@ the largest hidden tie value (0.0076 at 0.03). Over-predicted ties belong to spa
 vs 64). (3) KL fits: no such overshoot (largest x̂/x 3.8, largest empty-cell prediction 3e-4). (4) Squared-error held-out
 score by fraction (hybrid, mean ± SE): K = 5 0.0239 ± 0.0003 / 0.0248 ± 0.0003 / 0.0295 ± 0.0040; K = 20 0.0281 ± 0.0016 /
 0.0538 ± 0.0105 / 0.0699 ± 0.0154. Cause of the concentrated cells not established. [LOG]
+*[CORRECTION 2026-11-12 to RL-214 point (4) and the dialog of 2026-11-11: random-start fits do not "equal the zero-prediction
+error". Combined semantic captured share (1 − score ÷ zero-prediction score 0.02288): random 0.015–0.023; KL fits from NNDSVD
+or hybrid starts 0.000–0.021 — the same level; only squared-error NNDSVD/hybrid fits fall below it (−0.29 to −2.06). The 0.004
+quoted was the child×parent captured share alone, where random fits are at the baseline. Checked from heldout_decomposition.json.]*

@@ -39,6 +39,14 @@ def stage0_pass1(seeds):
             for a in (1, 2) for beta in (2, 1) for K in COARSE_K for g in range(5) for s in range(1, seeds + 1)]
 
 
+def kl_fraction_extension():
+    """KL fraction grid extension (owner 2026-11-12: "write the test for KL at 0.05 and 0.1. Maybe also at 0.075"): KL,
+    fractions 0.05 / 0.075 / 0.1, K = 5 and 20, 3 seeds, hybrid start, float64 (to compare with checkpoint 3's float64
+    reference at 0.03 under the same arithmetic), hold-out group 1, approach 1, terms off. 18 fits; stage name
+    "checkpoint3" so the checkpoint-3 analysis reads them with the earlier fits."""
+    return [job("checkpoint3", 1, 0, K, 1, s, f) for f in (0.05, 0.075, 0.1) for K in (5, 20) for s in (1, 2, 3)]
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -51,10 +59,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)
