@@ -25,7 +25,7 @@ def load(root):
         ca, pc = m["heldout"]["child_article"], m["heldout"]["parent_child"]
         key = "squared_error" if spec["job"]["beta"] == 2 else "kl_error"
         fits.append(dict(dir=dd, job=spec["job"], res=res, m=m, final=h[-1], low=min(h),
-                         ho=m["heldout_combined"]["semantic_only_" + key],
+                         ho=m["heldout_combined"][key], ho_sem=m["heldout_combined"]["semantic_only_" + key],   # decided score: all relations with hidden cells (2026-10-29/11-03)
                          cs_ca=ca["captured_share"], cs_pc=pc["captured_share"],
                          auc_ca=ca["auc"], auc_pc=pc["auc"],
                          auc_ca_b=ca["auc_by_band"], within=m["presence"]["child_article"]["within_share"],

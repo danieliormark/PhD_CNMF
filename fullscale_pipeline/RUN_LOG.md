@@ -2942,3 +2942,22 @@ score by fraction (hybrid, mean ± SE): K = 5 0.0239 ± 0.0003 / 0.0248 ± 0.000
 error". Combined semantic captured share (1 − score ÷ zero-prediction score 0.02288): random 0.015–0.023; KL fits from NNDSVD
 or hybrid starts 0.000–0.021 — the same level; only squared-error NNDSVD/hybrid fits fall below it (−0.29 to −2.06). The 0.004
 quoted was the child×parent captured share alone, where random fits are at the baseline. Checked from heldout_decomposition.json.]*
+
+### RL-216 — 2026-11-12 — KL fraction extension on CSF3 (owner submitted; 18 fits) + two checks without fits (incline33)
+**KL fraction extension** (KL, fractions 0.05 / 0.075 / 0.1 × K = 5, 20 × seeds 1–3, hybrid start, float64, approach 1,
+hold-out group 1, terms off): all 18 finished, no error file. Fraction rule (S2–S4 against the next smaller fraction): every
+fraction 0.02–0.1 STABLE at both K — the top of the extended grid again passes. Mean seconds/epochs per fit, K = 20: 0.03
+11,291 s / 3,508; 0.05 9,320 / 3,152; 0.075 9,506 / 3,196; 0.1 10,929 / 3,479 (K = 5: 1,242–1,616 s, fastest 0.03–0.075).
+Combined held-out KL score (K = 20) 89.15 (0.03) → 89.07 / 88.84 / 88.78; author×affiliation AUC 0.856 → 0.850 / 0.844 /
+0.847. Fits of this run were started before the new held-out measures (average precision, Spearman among hidden ties,
+error concentration) were added; those can be computed afterwards from UZ.npz.
+**Correction — score used in S3:** `checkpoint3_analysis.py` used the semantic-only combined score (child×article +
+child×parent); the decided score (2026-10-29/11-03) also includes the approach's affiliation matrix (approach 1:
+author×affiliation, weight 1/6). Switched to the decided score; recomputed: no S3 verdict changes (squared error: 0.02 and
+0.03 fail at both K under both scores; KL: all pass under both).
+**Cap check (owner's question on capping predictions at the largest observed value; squared-error hybrid fits, float64, group 1):**
+largest visible tie value child×article 0.0112, child×parent 0.0059 (largest hidden tie child×parent 0.0076, i.e. above the
+visible maximum). Predictions above the visible maximum: child×article 0–1 hidden ties, 0 hidden empty cells; child×parent
+34–90 of 14,923 hidden ties (predictions up to 0.19) and 0–2 of 1,000,000 hidden empty cells. Clipping predictions at the
+visible maximum would remove 2–64 % of child×parent's hidden-tie squared error and 0–88 % of its hidden-empty-cell part;
+child×article ≤ 1.5 %. [LOG]
