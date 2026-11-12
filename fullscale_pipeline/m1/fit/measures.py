@@ -331,12 +331,29 @@ def heldout(U, Z, rd):
             return None
         rk = rankdata(np.concatenate([pv, nv]))
         return float((rk[:len(pv)].sum() - len(pv) * (len(pv) + 1) / 2) / (len(pv) * len(nv)))
+    def ap(pv, nv, w_neg):
+        # average precision (S0-M2, 2026-11-05), the sampled empty cells each counted w_neg times so that precision
+        # refers to all of the group's empty cells: mean over hidden ties of ties ranked at or above / (ties + w_neg ×
+        # empty cells ranked at or above); exact ties of prediction count as ranked above (pessimistic)
+        if len(pv) == 0:
+            return None
+        nv_sorted = np.sort(nv)
+        n_neg_ge = len(nv) - np.searchsorted(nv_sorted, pv, side="left")
+        pv_sorted = np.sort(pv)
+        n_pos_ge = len(pv) - np.searchsorted(pv_sorted, pv, side="left")
+        return float(np.mean(n_pos_ge / (n_pos_ge + w_neg * n_neg_ge)))
+    from scipy.stats import spearmanr
+    rho = float(spearmanr(xt, ht).correlation) if len(xt) > 2 and np.ptp(xt) > 0 else None
     bands = {}
     for lo, hi, name in TIE_BANDS:
         mt = (sparse_t >= lo) & (sparse_t <= hi); me = (sparse_e >= lo) & (sparse_e <= hi)
         bands[name] = {"auc": auc(ht[mt], he[me]), "hidden_ties": int(mt.sum())}
     return {"squared_error": sq, "squared_error_zero_prediction": sq0, "captured_share": 1 - sq / sq0 if sq0 > 0 else None,
             "kl_error": kl, "auc": auc(ht, he), "auc_by_band": bands, "empty_scale": scale,
+            "average_precision": ap(ht, he, scale), "spearman_hidden_ties": rho,
+            "top01_share_empty_error": (float(np.sort(he ** 2)[::-1][:max(1, len(he) // 1000)].sum() / (he ** 2).sum())
+                                        if len(he) and (he ** 2).sum() > 0 else None),
+            "max_overprediction_ratio": float(np.max(ht / xt)),
             "hidden_ties": int(len(xt)), "hidden_empty": int(len(he))}
 
 
