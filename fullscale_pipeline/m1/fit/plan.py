@@ -48,6 +48,28 @@ def kl_fraction_extension():
     return [job("checkpoint3", 1, 0, K, 1, s, f) for f in (0.05, 0.075, 0.1) for K in (5, 20) for s in (1, 2, 3)]
 
 
+TIMING_ARMS = {                                   # one value per term; values do not matter for the cost per epoch
+    "off": {},
+    "w_regulariser": {"lambda_child": 0.1},
+    "floor": {"floor": {"lambda": 0.1, "gamma": 0.8, "omega": 1.0, "beta_w": 0.0}},
+    "floor_with_W": {"floor": {"lambda": 0.1, "gamma": 0.8, "omega": 1.0, "beta_w": 0.5}},
+    "ceiling": {"ceiling": {"lambda": 0.1, "rho": 1.0, "beta_w": 0.0, "facets": ["child", "article"]}},
+    "o3": {"o3": {"lambda": 0.1}},
+    "all": {"lambda_child": 0.1, "floor": {"lambda": 0.1, "gamma": 0.8, "omega": 1.0, "beta_w": 0.5},
+            "ceiling": {"lambda": 0.1, "rho": 1.0, "beta_w": 0.5, "facets": ["child", "article"]}, "o3": {"lambda": 0.1}},
+}
+
+
+def timing_terms():
+    """Timing test with the in-fit terms on (owner 2026-11-13: "I am ready to submit the timing job"): cost per epoch of
+    each term, before (epochs < 300, terms off) and after the warm-up, at the stage settings (fraction 0.03, float32,
+    hybrid start, approach 1, hold-out group 1, seed 1); both losses × K = 5, 20 × 7 arms = 28 fits, each stopped at
+    900 epochs (300 warm-up + 600 with terms). Term values are placeholders: they set the cost, not a calibration."""
+    return [dict(job("timing_terms", 1, 0, K, beta, 1, FRACTION[beta], dtype="float32", terms=t, arm={"timing": name},
+                     max_epochs=900), tol=0.0)                     # tol 0: no early stop, every fit runs 900 epochs
+            for beta in (2, 1) for K in (5, 20) for name, t in TIMING_ARMS.items()]
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -60,10 +82,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)
