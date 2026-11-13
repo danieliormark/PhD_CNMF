@@ -3054,4 +3054,4 @@ mostly within the noise. Stage-0 pass 1 estimate (1,000 fits: 2 approaches × 2 
 ### RL-225 — 2026-11-13 — stage 0 pass 1 submitted (owner, CSF3)
 Fit array job 24693492 (1,000 fits, 125 tasks × 8; tasks 0–5 running at 19:50–19:51, the rest pending on priority).
 The aggregation submission was rejected (16 GB per core > the multicore limit of 8 GB); script fixed (8 GB × 2 cores)
-with an aggregation-only option (FIT_JOB=24693492). [LOG]
+with an aggregation-only option; aggregation job 24693626 submitted (afterany on 24693492). [LOG]
