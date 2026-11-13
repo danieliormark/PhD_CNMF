@@ -5,7 +5,7 @@
 import argparse, json, sys
 
 PROVISIONAL_FRACTION = {2: 0.03, 1: 0.01}            # largest-stable rule, provisional (2026-11-10); kept for checkpoint 3
-FRACTION = {2: 0.01, 1: 0.01}                        # DECIDED 2026-11-13 (owner: "I approve your proposal of taking the 0.01"), RL-218
+FRACTION = {2: 0.03, 1: 0.03}                        # DECIDED 2026-11-13 (owner: "I approve option b for the fraction rule/learning rate"): rule from the smallest fraction converging at every K (0.02), RL-218/219
 COARSE_K = (3, 5, 8, 13, 20)
 
 

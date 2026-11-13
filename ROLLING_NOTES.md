@@ -17,7 +17,7 @@
   weights 0.375/0.375/0.25 (affiliation matrix of the approach). Reported: uncorrected AP, AUC (overall, by band),
   degree-only rule (row ties × column ties), plain Spearman. Combining rule b: K band by existence, value only removes
   K values; S3 and C1 equal guards (each fails at a loss > 1 SE). Across approaches semantic-only score stays primary.
-- Training unchanged (no two-part model). Step-size fraction 0.01 for both losses (`fit/plan.py` FRACTION; stage 0
+- Training unchanged (no two-part model). Step-size fraction 0.03 for both losses (option b: rule from the smallest fraction converging at every K; 0.01 does not converge at K = 20) (`fit/plan.py` FRACTION; stage 0
   pass 1 now float32).
 - Findings: fits barely beat the degree-only rule on uncorrected existence; hidden-tie values fall with tie counts
   while predictions rise (plain Spearman −0.55 to −0.79) — revisit at λ_child calibration.
