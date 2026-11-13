@@ -610,6 +610,27 @@ def degree_correction_weights(rd, min_empty=20):
     return w, ess, float(1 - keep_t.mean()), keep_t
 
 
+def within_class_ap(pt, pe, rd, scale):
+    """Existence within tie-count classes (2026-11-13): hidden cells grouped by (row entity's visible ties band × column
+    entity's visible ties band), bands 1, 2–3, 4–7, … (_log2_band); within each class the AP of its hidden ties against
+    its sampled hidden empty cells, each empty cell counted `scale` times (the class's real share of empty cells); the
+    classes' APs averaged with weights = their numbers of hidden ties. Classes without a sampled empty cell are left out.
+    Returns (AP, share of hidden ties left out, chance level = the same average of the classes' tie shares)."""
+    nr = np.bincount(rd.tie_row, minlength=rd.shape[0]); nc = np.bincount(rd.tie_col, minlength=rd.shape[1])
+    hc = 64
+    lt = _log2_band(nr[rd.hid_tie_row]) * hc + _log2_band(nc[rd.hid_tie_col])
+    le = _log2_band(nr[rd.hid_empty_row]) * hc + _log2_band(nc[rd.hid_empty_col])
+    num = den = chance = 0.0; left = 0
+    for c in np.unique(lt):
+        mt, me = lt == c, le == c
+        if not me.any():
+            left += int(mt.sum()); continue
+        n = int(mt.sum())
+        num += n * _weighted_ap(pt[mt], pe[me], scale); den += n
+        chance += n * n / (n + scale * me.sum())
+    return (num / den if den else None), left / len(lt), (chance / den if den else None)
+
+
 def partial_spearman(x, p, covariates):
     """Partial Spearman correlation: ranks of x and p each regressed (least squares) on the covariates' ranks; Pearson
     correlation of the residuals; 0 when either residual has no variation."""
@@ -640,6 +661,9 @@ def heldout_two_part(U, Z, rd, value=True):
            "baseline_ap_corrected": _weighted_ap(dt[cov], de, w), "baseline_ap": _weighted_ap(dt, de, scale),
            "baseline_auc": _auc(dt, de), "prevalence": len(xt) / (len(xt) + math.floor(0.10 * n_empty_obs)),
            "correction_ess": ess, "ties_without_matching_empty": unc}
+    wc, wc_left, wc_chance = within_class_ap(ht, he, rd, scale)
+    out.update({"ap_within_class": wc, "ap_within_class_left_out": wc_left, "ap_within_class_chance": wc_chance,
+                "baseline_ap_within_class": within_class_ap(dt, de, rd, scale)[0]})
     if value:
         cr, cc = nr[rd.hid_tie_row], nc[rd.hid_tie_col]
         out["value_partial_spearman"] = partial_spearman(xt, ht, [cr, cc, cr.astype(float) * cc])

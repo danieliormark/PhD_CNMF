@@ -1,5 +1,5 @@
 # Two-part held-out criterion (ticket 107, 2026-11-13, option D) on the checkpoint-3 and KL-extension fits, from saved
-# factors (no fits): existence = degree-corrected AP (child×article 0.375, child×parent 0.375, author×affiliation 0.25),
+# factors (no fits): existence = within-tie-count-class AP (2026-11-13; replaced the re-weighted degree-corrected AP) (child×article 0.375, child×parent 0.375, author×affiliation 0.25),
 # value = partial Spearman among hidden ties (child×article 0.5, child×parent 0.5); fraction rule S2–S4 with S3 as two
 # equal guards (each: not worse than the next smaller fraction by more than one SE over seeds).
 # Usage: python -m fit.heldout_twopart_analysis --root /mnt/hum01-rds/Basov/p91688di/m1_fits --out DIR
@@ -31,7 +31,7 @@ def main():
         per = {n: M.heldout_two_part(U, Z, rds[key][n], value=n in VW) for n in EW}
         h = res["data_loss_history"]
         cells[(j["beta"], j["K"], j["frac"])].append(dict(
-            seed=j["seed"], per=per, existence=sum(EW[n] * per[n]["ap_corrected"] for n in EW),
+            seed=j["seed"], per=per, existence=sum(EW[n] * per[n]["ap_within_class"] for n in EW),
             value=sum(VW[n] * per[n]["value_partial_spearman"] for n in VW),
             final=h[-1], low=min(h), converged=res["converged"], seconds=res["seconds_total"], epochs=res["epochs"]))
         print(j["beta"], j["K"], j["frac"], j["seed"], round(cells[(j["beta"], j["K"], j["frac"])][-1]["existence"], 4),
@@ -65,13 +65,14 @@ def main():
                 ok_below = ok_below and not fails
                 rows[fr] = "STABLE" if ok_below else ("fails " + ",".join(fails) if fails else "passes, but a smaller fraction failed")
             rule[f"beta{beta}_K{K}"] = rows
-    json.dump({"summary": summary, "fraction_rule": rule}, open(os.path.join(a.out, "heldout_twopart.json"), "w"), indent=1)
+    json.dump({"existence_measure": "ap_within_class", "summary": summary, "fraction_rule": rule}, open(os.path.join(a.out, "heldout_twopart_withinclass.json"), "w"), indent=1)
     print(json.dumps(rule, indent=1))
     for k, v in summary.items():
         r = v["relations"]
         print(k, "exist %.4f±%.4f value %.4f±%.4f" % (*v["existence"], *v["value"]), "sec %.0f" % v["seconds"],
               "| AP corr ca/pc/aa %.4f %.4f %.4f" % tuple(r[n]["ap_corrected"] for n in EW),
               "| baseline AP corr %.4f %.4f %.4f" % tuple(r[n]["baseline_ap_corrected"] for n in EW),
+              "| AP within %.4f %.4f %.4f base %.4f %.4f %.4f chance %.5f %.5f %.5f left %.3f %.3f %.3f" % (*(r[n]["ap_within_class"] for n in EW), *(r[n]["baseline_ap_within_class"] for n in EW), *(r[n]["ap_within_class_chance"] for n in EW), *(r[n]["ap_within_class_left_out"] for n in EW)),
               "| AP %.4f %.4f %.4f" % tuple(r[n]["ap"] for n in EW), "| base AP %.4f %.4f %.4f" % tuple(r[n]["baseline_ap"] for n in EW),
               "| AUC %.3f %.3f %.3f" % tuple(r[n]["auc"] for n in EW), "| base AUC %.3f %.3f %.3f" % tuple(r[n]["baseline_auc"] for n in EW),
               "| val ps ca/pc %.3f %.3f sp %.3f %.3f base ps %.3f %.3f" % (r["child_article"]["value_partial_spearman"], r["parent_child"]["value_partial_spearman"],

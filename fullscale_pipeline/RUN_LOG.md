@@ -2979,3 +2979,15 @@ the weighted values fall with them; partial Spearman 0.03–0.13 (child×parent 
 (4) Fraction rule with the two equal guards (one SE over 3 seeds, one group): squared error K5 0.02 fails value, K20 0.02
 and 0.03 stable; KL K5 and K20: 0.02 fails value. KL K5 value falls steadily with the fraction (0.081 → 0.068). These
 verdicts rest on 3 seeds and one group and on the unreliable corrected AP; not used for a decision. [LOG]
+
+### RL-218 — 2026-11-13 — two-part criterion re-run with the within-tie-count-class AP (no fits; incline33)
+Existence = AP within tie-count classes (row entity's visible-ties band × column entity's, bands 1, 2–3, 4–7, …; each
+class's AP with its own hidden ties and sampled empty cells, empty cells × s; classes averaged by hidden ties), replacing
+the re-weighted AP of RL-217 (owner: "Within-band AP makes sense"). Check: one class reproduces the plain AP (0.583).
+Hidden ties left out (class without a sampled empty cell): 1.5 % child×article, 1.9 % child×parent, 0 author×affiliation.
+Seed SD 1–5 % of the mean (re-weighted AP: up to 40 %). Within-class AP, fits vs degree-only rule vs chance:
+child×article 0.156–0.178 / 0.155 / 0.109; child×parent 0.061–0.083 / 0.044 / 0.020; author×affiliation 0.0024–0.0105 /
+0.0033 / 0.0014. Fraction rule (equal guards, one SE over 3 seeds, group 1): squared error K5 0.02 fails value
+(0.1032 → 0.0997, limit 0.0026), K20 0.02 and 0.03 stable; KL K5 0.02 fails value (0.0807 → 0.0736, limit 0.0032),
+KL K20 0.02 fails value (0.0281 → 0.0238, limit 0.0039), KL K20 0.1 also fails existence. By the rule: 0.01 for both
+losses. Output `m1/fit/results/checkpoint3_analysis/heldout_twopart_withinclass.json`. [LOG]
