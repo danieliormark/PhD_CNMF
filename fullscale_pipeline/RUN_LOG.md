@@ -3028,3 +3028,11 @@ weighted membership ≥ 0.9: 5–71 % (squared error), 10–87 % (KL). Median ro
 0.03–0.55, KL 0.48–3.3; median reproduced share of not-placed ≈ 0 under squared error, near the placed entities' under
 KL. Reading: under squared error "not placed" is mostly weak engagement; under KL mostly reconstruction no better than
 the degree-only reference. Small design (3 seeds, one group, terms off). [LOG]
+
+### RL-222 — 2026-11-13 — tie weight held by entities regarded as placed (checkpoint-3 fits; no fits; incline33)
+Same fits as RL-221 (fraction 0.03, approach 1, group 1, 3 seeds). Per facet: share of entities regarded as placed /
+their share of the facet's observed tie weight (visible ties, all relations touching the facet) / their share of its
+reconstructed tie weight (seed 1). KL: the three nearly equal (e.g. K5 parent 0.57 / 0.55 / 0.55, journal 0.71 / 0.61 /
+0.62; K20 ≥ 0.63 throughout, child, author, organisation ≥ 0.98). Squared error: reconstructed weight concentrated on
+entities regarded as placed (K5 journal 0.03 / 0.16 / 0.63, author 0.10 / 0.10 / 0.32, organisation 0.18 / 0.10 / 0.46;
+K20 author 0.10 / 0.10 / 0.43, journal 0.18 / 0.05 / 0.54). [LOG]
