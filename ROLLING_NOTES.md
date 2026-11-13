@@ -7,35 +7,24 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-09, ticket 107 M1 — §8.2 steps 1–11 decided; step 12 next)
+## State (2026-11-13, ticket 107 M1 — held-out criterion and fractions decided; wiring next)
 
-**Done 2026-11-06 to 11-09** (design doc notes dated 2026-11-07 to 11-09, end of `plans/ticket107-m1-chunk12v3-design.md`):
-- Steps 4–9: floor re-specified (spread in bits, ω/β arms, hidden-tie match), excess spread/S3 gates, column weights and
-  reconstructed tie weight, presence and mono-domain (0.1/0.5), ghost = no well-placed member (K veto), tie alignment
-  (stratified shuffle; K veto), Penalty_B retired.
-- Step 10: coherence retired; outer domain-balance response deferred to stage-0 evidence; mono-domain and mono-facet
-  reporting; objective kept (coauthor discussion pending); planted worlds replaced by graded cross-domain swap on real
-  data (p = 0, .25, .5, .75, 1); one model-form code-check world + unit tests at the build step.
-- Step 11: ticket 35 deferred/reformulated; vetoes act as gates in the §6.8 K protocol (fallback = largest smaller K that
-  passes, flagged; none → owner decides); would-be vetoes in stage 0; counting rule: fraction 0.2 at seeds-within-group,
-  groups and pooled fits, per-seed stability, non-convergence as fourth check (option c); stage 0 reports counts at
-  0.1/0.2/0.25/0.5.
-- Writing checklist saved in memory (feedback-explanation-style): check record first, re-define terms, unit/stage/
-  binding/edge cases, name the axis.
+**Decided 2026-11-11 to 11-13** (end of `plans/ticket107-m1-chunk12v3-design.md`; RUN_LOG RL-214–RL-218):
+- float32 default; hybrid start (NNDSVD on a seed-specific 80 % of visible anchor ties), share stays 0.8.
+- Held-out criterion two-part (option D): existence = AP within tie-count classes (row band × column band of visible
+  ties, bands 1, 2–3, 4–7, …; empty cells × s; classes averaged by hidden ties); value = partial Spearman among hidden
+  ties controlling for the two tie counts and their product, child×article and child×parent only (0.5/0.5); existence
+  weights 0.375/0.375/0.25 (affiliation matrix of the approach). Reported: uncorrected AP, AUC (overall, by band),
+  degree-only rule (row ties × column ties), plain Spearman. Combining rule b: K band by existence, value only removes
+  K values; S3 and C1 equal guards (each fails at a loss > 1 SE). Across approaches semantic-only score stays primary.
+- Training unchanged (no two-part model). Step-size fraction 0.01 for both losses (`fit/plan.py` FRACTION; stage 0
+  pass 1 now float32).
+- Findings: fits barely beat the degree-only rule on uncorrected existence; hidden-tie values fall with tie counts
+  while predictions rise (plain Spearman −0.55 to −0.79) — revisit at λ_child calibration.
 
-**2026-11-09/10 — M1 fit code.** Package `fullscale_pipeline/m1/fit/`: data (per-fold weights, hold-out drawn once in
-`psych_trial_v3/holdout/`), loss (masked, squared error + KL, exact without the dense reconstruction), model, init
-(NNDSVD; random; subsample-NNDSVD hybrid), terms (W, floor, S3, O3 candidate), solver, worlds (code-check world, graded
-swap); tests checkpoint 1 and 2 pass. Code-check rounds 1–4 (RUN_LOG RL-208–RL-211). Decided: per-block learning rate
-recomputed every step (fraction × block RMS, floor 1e-3 × start); fraction per loss by the largest-stable rule
-(provisional squared error 0.03, KL 0.01; final from 36 real-data fits at checkpoint 3); default start = hybrid
-(confirm at checkpoint 3); known limitation: weak single-facet communities may be absorbed (K* + 1 test at checkpoint 3).
-Random starts mix communities across facets (owner's historical problem reproduced); O3 does not repair it.
-
-**Next:** F6 measures (presence, ghosts, alignment, Track A/B on weighted memberships per seed and between groups,
-held-out scores/AUC, empty columns, counting rule) + reporting-code check against the planted truth + K* + 1 fits;
-F8 stage runners/SLURM; checkpoint 3 on CSF3 (timing, cross-machine, float32 pairs, start comparison, fraction 36 fits)
-— ask permission before submitting. Item (l) due before stage-1 results. Open: RDS quota.
+**Next:** wire the two-part criterion into `run_fit.py` measures and `aggregate.py` (K band, S3, C1 currently read
+`heldout_combined` error scores); then stage-specific comparison modules, item (l), timing test with terms on,
+stage-0 pass 1 (needs owner's permission). Push via port 443 (memory reference-github-push-port443).
 
 ## Earlier state (2026-11-06, ticket 107 M1 — D1 and stage 0 pre-registered; §8.2 begins)
 
