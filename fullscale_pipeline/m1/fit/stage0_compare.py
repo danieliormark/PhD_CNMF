@@ -21,9 +21,12 @@
 # Decision rule (2026-11-06): (1) gate — a loss failing the stability gate at the majority of candidate K is excluded
 # (both → owner); (2) S0-M1 same → squared error; (3) S0-M2 winner; (4) S0-M4 more stable; else squared error;
 # majority over candidate K, a tie → squared error (default); (5) flags, never reversals.
-# S0-M1's margin splits both losses' seeds jointly, as decided. Implementation choices to confirm with the owner: candidate K = union of both losses' candidates (and fallbacks) from
-# aggregate.py, all commonly scored K if none; Track A's placed entities pooled over both losses' seeds of the group
-# (S0-M1) or per loss (S0-M4); the 3+ band of the per-entity fit = bands 3–5 and 6+ classified separately.
+# Details (2026-11-13): S0-M1's margin splits both losses' seeds jointly (as decided 2026-11-05); candidate K = union of
+# both losses' one-SE bands (decided 2026-11-05), all commonly scored K if none; Track A's placed entities pooled over
+# both losses' seeds of the group (S0-M1, owner approved) or per loss (S0-M4); the per-entity-fit flag classifies bands
+# 3–5 and 6+ separately (owner approved); periphery flag = sparser entity with 1 visible tie (2 ties, one hidden: the
+# measurable periphery; owner 2026-11-13). Open: the margin of S0-M2/M3/M4 and the per-entity fit (pooled half-splits
+# now; root-mean-square of the two losses' margins proposed).
 # Usage: python -m fit.stage0_compare --root ROOT --stage STAGE --aggregate AGG.json [--filter JSON] --out OUT.json
 import argparse, itertools, json, math, os
 from collections import defaultdict
@@ -99,6 +102,12 @@ def mean_pairs(pairs, idx_a, idx_b=None, track="A"):
 
 
 def placed_of(fits):
+    """Track A's entity set for one group (2026-11-07 rule applied to the given fits): placed if the mean reproduced share
+    over the fits minus the degree-only share exceeds the entity's SD over the fits. S0-M1 passes both losses' seeds
+    pooled (owner approved 2026-11-13; one entity set for within-loss and cross-loss pairs, so W̄ − C̄ compares like
+    with like and neither loss defines it; limitations: the SD includes the between-loss difference, so an entity the
+    losses reproduce differently is less likely to count as placed, and entities placed under one loss only can drop
+    out — Track B, over all entities, covers them); S0-M4 passes one loss's seeds."""
     ents = [load_entity(f["dir"]) for f in fits]
     return {fa: M.placed_entities([e[fa]["reproduced_share"] for e in ents], ents[0][fa]["reproduced_share_degree_only"])
             for fa in ents[0]}
@@ -277,9 +286,9 @@ def decide(perK, gate):
         if chosen == 1:
             rep = r["S0-M2 held-out (existence and value)"]["reported"]
             three = [c["class"] for k, c in rep.items() if k.endswith("_sparser_3+") and isinstance(c, dict) and "class" in c]
-            periph = [c["class"] for k, c in rep.items() if k.endswith(("_sparser_1", "_sparser_2")) and isinstance(c, dict) and "class" in c]
+            periph = [c["class"] for k, c in rep.items() if k.endswith("_sparser_1") and isinstance(c, dict) and "class" in c]
             if "KL better" in periph and "KL better" not in three:
-                out["flags"].append(f"K={K}: KL's advantage lies only in the periphery (sparser entity with 1–2 visible ties): owner's hypothesis")
+                out["flags"].append(f"K={K}: KL's advantage lies only in the measurable periphery (sparser entity with 1 visible tie = 2 ties, one hidden): owner's hypothesis")
     return out
 
 
@@ -312,10 +321,12 @@ def run(root, stage, aggregate_path, filt=None, seed=0, fraction="0.2"):
     report = {}
     for a, byK in sorted(by.items()):
         common = [K for K in sorted(byK) if 2 in byK[K] and 1 in byK[K]]
+        # candidate K = coarse K inside the one-SE band of either loss (decided 2026-11-05: both losses compared at each
+        # loss's band K, verdict by majority); the vetoes enter through the gate (step 1), not here
         cand = set()
         for b in (2, 1):
             sel = (agg.get(cellk.get((a, b)), {}) or {}).get("selection") or {}
-            cand |= set(sel.get("candidates") or []) | ({sel["fallback"]} if sel.get("fallback") else set())
+            cand |= set(sel.get("band") or [])
         cand = sorted(k for k in cand if k in common) or common
         perK = {K: compare_K(byK[K], rng) for K in cand}
         gate = {}
