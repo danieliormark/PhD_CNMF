@@ -3003,3 +3003,17 @@ vetoes and fallback unchanged); `two_part_guard` for S3 and C1 (equal guards). C
 on the squared-error K5 0.01 cell (existence 0.0897, value 0.1032); test_checkpoint3_f8 all pass (hand cases updated to
 higher-is-better, new cases for value removal and the guard; one new hand case first written with the wrong best K,
 corrected); test_checkpoint3_measures all pass. [LOG]
+
+### RL-220 — 2026-11-13 — stage-0 loss comparison code (S0-M1–M4, per-entity fit, decision rule) (code only; incline33)
+`m1/fit/stage0_compare.py` (new): classes over hold-out groups (95% interval and mean vs δ; equivalence by two one-sided
+tests, 90% interval within ±δ), δ from 999 half-splits of each loss's seeds ÷ √2; S0-M1 (D = W̄ − C̄ per track), S0-M2
+option B (existence and value, 2026-11-13), S0-M3 cross-scoring readings, S0-M4 (per track, combined), per-entity
+training AUC by band, decision rule (gate by majority of candidate K → S0-M1 same → S0-M2 → S0-M4 → squared error;
+majority over K, tie → squared error; flags never reverse). `measures.heldout_two_part` now also stores the within-class
+AP split by the sparser entity's visible ties (1 / 2 / 3+). Tests `fit/tests/test_stage0_compare.py` all pass (hand
+cases for classes, margin against its theoretical value, every step of the rule; one expectation first written wrongly
+— a positive Δ inside ±δ is "equivalent", corrected; smoke run on checkpoint-3 fits at fraction 0.03, one group, so
+classes are inconclusive by construction: K = 5, D (Track A, B) = 0.054, 0.003; KL seeds more stable by 0.15 (A and
+B, adjusted) — illustrative only). Implementation choices awaiting the owner: candidate K = union of both losses'
+candidates and fallbacks; δ pools both losses' half-splits; Track A placed entities pooled over both losses (S0-M1) or
+per loss (S0-M4); S0-M1/M4 margins need ≥ 4 seeds per loss and group. [LOG]
