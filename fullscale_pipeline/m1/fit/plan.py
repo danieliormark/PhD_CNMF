@@ -4,7 +4,8 @@
 # Usage: python -m fit.plan checkpoint3 > jobs_checkpoint3.jsonl   (or stage0_pass1 --seeds S)
 import argparse, json, sys
 
-PROVISIONAL_FRACTION = {2: 0.03, 1: 0.01}            # largest-stable rule, provisional (2026-11-10)
+PROVISIONAL_FRACTION = {2: 0.03, 1: 0.01}            # largest-stable rule, provisional (2026-11-10); kept for checkpoint 3
+FRACTION = {2: 0.01, 1: 0.01}                        # DECIDED 2026-11-13 (owner: "I approve your proposal of taking the 0.01"), RL-218
 COARSE_K = (3, 5, 8, 13, 20)
 
 
@@ -34,8 +35,8 @@ def checkpoint3():
 
 def stage0_pass1(seeds):
     """Stage 0 pass 1 (decided 2026-11-05/06): both losses × both approaches × coarse K × hold-out groups 1–5 (indices
-    0–4) × S seeds, J2, A0, every in-loop term off, hybrid start, fraction per loss (final values from checkpoint 3)."""
-    return [job("stage0_pass1", a, g, K, beta, s, PROVISIONAL_FRACTION[beta])
+    0–4) × S seeds, J2, A0, every in-loop term off, hybrid start, fraction per loss (FRACTION, 2026-11-13), float32 (decided 2026-11-11)."""
+    return [job("stage0_pass1", a, g, K, beta, s, FRACTION[beta], dtype="float32")
             for a in (1, 2) for beta in (2, 1) for K in COARSE_K for g in range(5) for s in range(1, seeds + 1)]
 
 
