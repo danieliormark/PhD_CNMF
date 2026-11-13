@@ -23,6 +23,10 @@ d = S.half_margin(per, lambda x: float(np.mean(x)), rng, n_splits=999)
 # theory: half-mean difference SD = sqrt(2/5) per group, mean over 5 groups → sqrt(2/25); 95th pct of |N| ≈ 1.96 SD; ÷ √2
 check("half margin ≈ 1.96·√(2/25)/√2 = 0.392 (±15%)", abs(d - 1.96 * math.sqrt(2 / 25) / math.sqrt(2)) < 0.06)
 
+# RMS margin: losses with seed SD 1 and 2, 10 seeds, 5 groups → V = σ²/50 → 1.96·√(0.02 + 0.08) = 0.620
+per2 = {2: {g: list(rng.normal(0, 1, 10)) for g in range(5)}, 1: {g: list(rng.normal(0, 2, 10)) for g in range(5)}}
+dm = S.loss_margin(per2, lambda x: float(np.mean(x)), rng)
+check("RMS margin ≈ 1.96·√(V₁ + V₂) = 0.620 with unequal noise (±15%)", abs(dm - 0.620) < 0.093)
 def res(m1="inconclusive", m2="inconclusive", m4="inconclusive", m3="no reading (inconclusive)"):
     return {"S0-M1 membership agreement": {"verdict": m1}, "S0-M2 held-out (existence and value)": {"verdict": m2, "reported": {}},
             "S0-M4 seed stability": {"verdict": m4}, "S0-M3 cross-scoring": {"reading": m3}, "per-entity fit (training AUC)": {}}

@@ -5,8 +5,9 @@
 #   second better  : 95% interval below 0 and mean Δ ≤ −δ
 #   equivalent     : two one-sided tests at 5% (the 90% interval within ±δ)
 #   inconclusive   : otherwise (also with fewer than 2 groups)
-#   δ (noise margin): 95th percentile over 999 random splits of each loss's seeds into halves (within every group) of
-#                     |mean over groups of (half₁ − half₂)|, both losses' splits pooled, divided by √2 (2026-11-05).
+#   δ (noise margin): per loss, 95th percentile over 999 random splits of its seeds into halves (within every group) of
+#                     |mean over groups of (half₁ − half₂)|, divided by √2 (2026-11-05); the two losses' margins combined
+#                     as their root-mean-square (2026-11-13). S0-M1: the decided joint split (below).
 # Measures:
 #   S0-M1 membership agreement: D_g = W̄_g (mean chance-adjusted Track score over within-loss seed pairs, both losses
 #         pooled) − C̄_g (over cross-loss pairs); "same" (equivalent) needs both tracks, "different" (D ≥ δ, interval > 0)
@@ -25,8 +26,8 @@
 # both losses' one-SE bands (decided 2026-11-05), all commonly scored K if none; Track A's placed entities pooled over
 # both losses' seeds of the group (S0-M1, owner approved) or per loss (S0-M4); the per-entity-fit flag classifies bands
 # 3–5 and 6+ separately (owner approved); periphery flag = sparser entity with 1 visible tie (2 ties, one hidden: the
-# measurable periphery; owner 2026-11-13). Open: the margin of S0-M2/M3/M4 and the per-entity fit (pooled half-splits
-# now; root-mean-square of the two losses' margins proposed).
+# measurable periphery; owner 2026-11-13); margins of S0-M2/M3/M4 and the per-entity fit = RMS of the two losses' own
+# half-split margins (owner 2026-11-13).
 # Usage: python -m fit.stage0_compare --root ROOT --stage STAGE --aggregate AGG.json [--filter JSON] --out OUT.json
 import argparse, itertools, json, math, os
 from collections import defaultdict
@@ -82,6 +83,20 @@ def half_margin(per_loss, stat, rng, n_splits=N_SPLITS):
 
 
 # ----------------------------------------------------------------------------------------------- pairwise Track scores
+def rms_margin(margins):
+    """Margin for Δ = mean(loss 1) − mean(loss 2) (owner 2026-11-13): root-mean-square of the two losses' own half-split
+    margins. Each δ_loss ≈ 1.96·√(2·V_loss) (V = noise variance of that loss's mean), so √((δ₁² + δ₂²)/2) =
+    1.96·√(V₁ + V₂), the spread of a difference of two independent means (standard error of a difference,
+    √(SE₁² + SE₂²)) — exact also when the losses differ in noise."""
+    m = [x for x in margins if x is not None]
+    return float(math.sqrt(sum(x * x for x in m) / len(m))) if len(m) == 2 else None
+
+
+def loss_margin(per, stat, rng):
+    """RMS of each loss's own half-split margin (half_margin applied to one loss at a time)."""
+    return rms_margin([half_margin({b: per[b]}, stat, rng) for b in per])
+
+
 def pair_scores(wms, placed, rng):
     """Chance-adjusted Track A and B for every pair of the given fits' weighted memberships."""
     out = {}
@@ -124,14 +139,14 @@ def compare_K(byloss, rng):
     for part in ("existence", "value"):
         per = {b: {g: [getm(f, "heldout_two_part_combined", part) for f in byloss[b][g]] for g in groups} for b in (2, 1)}
         d = [_mean(per[1][g]) - _mean(per[2][g]) for g in groups if _mean(per[1][g]) is not None and _mean(per[2][g]) is not None]
-        m2[part] = classify(d, half_margin(per, _mean, rng))
+        m2[part] = classify(d, loss_margin(per, _mean, rng))
     rep = {}
     for rel in ("child_article", "parent_child", "author_affiliation", "article_affiliation"):
         for key in ("1", "2", "3+"):
             per = {b: {g: [getm(f, "heldout_two_part", rel, "ap_within_class_by_sparser_ties", key) for f in byloss[b][g]] for g in groups} for b in (2, 1)}
             if any(v is not None for b in per for g in per[b] for v in per[b][g]):
                 d = [_mean(per[1][g]) - _mean(per[2][g]) for g in groups if _mean(per[1][g]) is not None and _mean(per[2][g]) is not None]
-                rep[f"{rel}_ap_within_class_sparser_{key}"] = classify(d, half_margin(per, _mean, rng))
+                rep[f"{rel}_ap_within_class_sparser_{key}"] = classify(d, loss_margin(per, _mean, rng))
         for band in ("2", "3-5", "6+"):
             per = {b: {g: [getm(f, "heldout", rel, "auc_by_band", band, "auc") for f in byloss[b][g]] for g in groups} for b in (2, 1)}
             if any(v is not None for b in per for g in per[b] for v in per[b][g]):
@@ -150,7 +165,7 @@ def compare_K(byloss, rng):
     for score in ("squared_error", "kl_error"):
         per = {b: {g: [getm(f, "heldout_combined", score) for f in byloss[b][g]] for g in groups} for b in (2, 1)}
         d = [_mean(per[2][g]) - _mean(per[1][g]) for g in groups]      # lower is better: Δ < 0 → squared-error fit better
-        c = classify(d, half_margin(per, _mean, rng), first="KL", second="squared error")
+        c = classify(d, loss_margin(per, _mean, rng), first="KL", second="squared error")
         m3[score] = c          # Δ = score(squared-error fit) − score(KL fit) > 0 means the KL fit scores lower = better
     wins = {s: ("KL" if m3[s]["class"] == "KL better" else "squared error" if m3[s]["class"] == "squared error better" else None) for s in m3}
     eqs = {s: m3[s]["class"] == "equivalent" for s in m3}
@@ -169,7 +184,7 @@ def compare_K(byloss, rng):
         for band in ("2", "3-5", "6+"):
             per = {b: {g: [getm(f, "training_auc_by_band", f"child_article_{side}", band, "mean") for f in byloss[b][g]] for g in groups} for b in (2, 1)}
             d = [_mean(per[1][g]) - _mean(per[2][g]) for g in groups if _mean(per[1][g]) is not None and _mean(per[2][g]) is not None]
-            pe[f"child_article_{side}_band_{band}"] = classify(d, half_margin(per, _mean, rng))
+            pe[f"child_article_{side}_band_{band}"] = classify(d, loss_margin(per, _mean, rng))
     res["per-entity fit (training AUC)"] = pe
     # ---- S0-M1 and S0-M4: Track scores over seed pairs
     m1 = {t: [] for t in ("A", "B")}; m4 = {t: [] for t in ("A", "B")}
@@ -206,8 +221,9 @@ def compare_K(byloss, rng):
                 vals.append(abs(np.mean(diffs)))
         d1 = float(np.percentile(vals, 95) / math.sqrt(2)) if vals else None
         out1[t] = classify(m1[t], d1, first="different", second="(negative D)")
-        vals = []
+        per_loss = []
         for b in (2, 1):
+            vals = []
             for _ in range(N_SPLITS):
                 diffs = []
                 for g, own in halves4.items():
@@ -218,7 +234,8 @@ def compare_K(byloss, rng):
                     diffs.append(mean_pairs(own[b], list(p[:h]), track=t) - mean_pairs(own[b], list(p[h:2 * h]), track=t))
                 if diffs:
                     vals.append(abs(np.mean(diffs)))
-        d4 = float(np.percentile(vals, 95) / math.sqrt(2)) if vals else None
+            per_loss.append(float(np.percentile(vals, 95) / math.sqrt(2)) if vals else None)
+        d4 = rms_margin(per_loss)
         out4[t] = classify(m4[t], d4, first="KL more stable", second="squared error more stable")
     out1["verdict"] = ("same" if out1["A"]["class"] == "equivalent" and out1["B"]["class"] == "equivalent" else
                        "different" if "different better" in (out1["A"]["class"], out1["B"]["class"]) else "inconclusive")
