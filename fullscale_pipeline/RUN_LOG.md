@@ -3036,3 +3036,8 @@ reconstructed tie weight (seed 1). KL: the three nearly equal (e.g. K5 parent 0.
 0.62; K20 ≥ 0.63 throughout, child, author, organisation ≥ 0.98). Squared error: reconstructed weight concentrated on
 entities regarded as placed (K5 journal 0.03 / 0.16 / 0.63, author 0.10 / 0.10 / 0.32, organisation 0.18 / 0.10 / 0.46;
 K20 author 0.10 / 0.10 / 0.43, journal 0.18 / 0.05 / 0.54). [LOG]
+
+### RL-223 — 2026-11-13 — timing test with the in-fit terms on submitted (owner, CSF3)
+`fit/slurm/timing_terms.sh`: array job 24691587, 28 fits in 4 tasks × 7 (both losses × K 5, 20 × 7 arms; 900 epochs;
+fraction 0.03; float32; approach 1, group 1, seed 1). Output `/mnt/hum01-rds/Basov/p91688di/m1_fits/timing_terms/`;
+read with `fit/timing_analysis.py`. [LOG]
