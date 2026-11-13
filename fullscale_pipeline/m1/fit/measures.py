@@ -666,6 +666,12 @@ def heldout_two_part(U, Z, rd, value=True):
            "baseline_auc": _auc(dt, de), "prevalence": len(xt) / (len(xt) + math.floor(0.10 * n_empty_obs)),
            "correction_ess": ess, "ties_without_matching_empty": unc}
     wc, wc_left, wc_chance = within_class_ap(ht, he, rd, scale)
+    # degree-only rule with tie weights (owner 2026-11-13, reported beside the tie-count rule above): row entity's summed
+    # visible tie values × column entity's summed visible tie values
+    sr = np.bincount(rd.tie_row, weights=rd.tie_val, minlength=rd.shape[0]); sc = np.bincount(rd.tie_col, weights=rd.tie_val, minlength=rd.shape[1])
+    wt, we = sr[rd.hid_tie_row] * sc[rd.hid_tie_col], sr[rd.hid_empty_row] * sc[rd.hid_empty_col]
+    out.update({"baseline_weights_ap_within_class": within_class_ap(wt, we, rd, scale)[0],
+                "baseline_weights_ap": _weighted_ap(wt, we, scale), "baseline_weights_auc": _auc(wt, we)})
     st_, se_ = np.minimum(nr[rd.hid_tie_row], nc[rd.hid_tie_col]), np.minimum(nr[rd.hid_empty_row], nc[rd.hid_empty_col])
     by_sparser = {}
     for name, lo, hi in (("1", 1, 1), ("2", 2, 2), ("3+", 3, 10**12)):
