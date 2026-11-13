@@ -3041,3 +3041,12 @@ K20 author 0.10 / 0.10 / 0.43, journal 0.18 / 0.05 / 0.54). [LOG]
 `fit/slurm/timing_terms.sh`: array job 24691587, 28 fits in 4 tasks × 7 (both losses × K 5, 20 × 7 arms; 900 epochs;
 fraction 0.03; float32; approach 1, group 1, seed 1). Output `/mnt/hum01-rds/Basov/p91688di/m1_fits/timing_terms/`;
 read with `fit/timing_analysis.py`. [LOG]
+
+### RL-224 — 2026-11-13 — timing test with the in-fit terms on: results (job 24691587)
+28/28 fits finished, no errors, 900 epochs each. Seconds per epoch, float32, fraction 0.03, 7 fits per node in
+parallel: K5 ≈ 0.45–0.53, K20 ≈ 1.76–2.07 before the warm-up (identical computation in every arm; spread between arms
+≈ ±6 %, i.e. node-to-node noise). After the warm-up, as a multiple of the terms-off arm: all terms 1.14–1.17; W
+regulariser 1.02–1.09; spread ceiling 1.01–1.08; floor 1.00–1.03; floor with W 0.99–1.07; O3 1.00–1.04 — single terms
+mostly within the noise. Stage-0 pass 1 estimate (1,000 fits: 2 approaches × 2 losses × K 3, 5, 8, 13, 20 × 5 groups ×
+10 seeds; epochs to convergence from checkpoint 3 at 0.03, interpolated for K 3, 8, 13; seconds per epoch ≈ 0.1 × K):
+≈ 740 CPU-hours. [LOG]
