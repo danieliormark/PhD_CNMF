@@ -1,0 +1,986 @@
+{
+ "summary": {
+  "beta1_K5_frac0.01": {
+   "n": 3,
+   "existence": [
+    0.0015269939786007195,
+    9.04582319983884e-05
+   ],
+   "value": [
+    0.08070821739589255,
+    0.005527925574781851
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.003076574449359966,
+     "ap": 0.18702375849357722,
+     "auc": 0.9562494649859944,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.1288510537799469,
+     "value_spearman": -0.6539153447115512,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.000781121387174526,
+     "ap": 0.03701069073284039,
+     "auc": 0.9526005481024816,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.032565381011838195,
+     "value_spearman": -0.7922603775470921,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0003214321596011404,
+     "ap": 0.0016265282185968285,
+     "auc": 0.8241673657694962,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 2049.6
+  },
+  "beta1_K5_frac0.02": {
+   "n": 3,
+   "existence": [
+    0.0018734806164091365,
+    0.0005153622430270957
+   ],
+   "value": [
+    0.07361528516406014,
+    0.005618783787896666
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.003993578916380018,
+     "ap": 0.19108363437434794,
+     "auc": 0.9562184891600477,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.11989818160196515,
+     "value_spearman": -0.6548386660795055,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0007811807677887547,
+     "ap": 0.03819408522147114,
+     "auc": 0.9529392060577632,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.02733238872615514,
+     "value_spearman": -0.7931365311406177,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0003317829393833861,
+     "ap": 0.0016522193076116403,
+     "auc": 0.8238907639751553,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 1537.8
+  },
+  "beta1_K5_frac0.03": {
+   "n": 3,
+   "existence": [
+    0.001951064925800566,
+    0.0004941206352014096
+   ],
+   "value": [
+    0.07120796825703778,
+    0.003758225764620357
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.004178720486745673,
+     "ap": 0.1922481475976947,
+     "auc": 0.9560955017842754,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.11608842969512782,
+     "value_spearman": -0.6551521568463802,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0008073719325252048,
+     "ap": 0.038084609726389496,
+     "auc": 0.9528766124103732,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.026327506818947705,
+     "value_spearman": -0.7928464967040778,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0003251210742959466,
+     "ap": 0.0016596666164911233,
+     "auc": 0.8145893995859214,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 1242.1
+  },
+  "beta1_K5_frac0.05": {
+   "n": 3,
+   "existence": [
+    0.002080005215089503,
+    0.0003268683788837441
+   ],
+   "value": [
+    0.06789032578758848,
+    0.004771999167319377
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.004481786808600056,
+     "ap": 0.19433739976179157,
+     "auc": 0.955487771037182,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.1100036290793475,
+     "value_spearman": -0.6560786206912786,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.000859736207772957,
+     "ap": 0.038315550143661205,
+     "auc": 0.9527802425115593,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.025777022495829457,
+     "value_spearman": -0.792696735113596,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0003077363357984943,
+     "ap": 0.0014428589523774657,
+     "auc": 0.811217198757764,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 1256.3666666666666
+  },
+  "beta1_K5_frac0.075": {
+   "n": 3,
+   "existence": [
+    0.0017483018662331478,
+    0.0002585595834312234
+   ],
+   "value": [
+    0.0683217257332145,
+    0.0033761698428520586
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.003492691719138016,
+     "ap": 0.1952141903420228,
+     "auc": 0.9517242487241472,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.1106811381010443,
+     "value_spearman": -0.6542943515925073,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0009648118909745935,
+     "ap": 0.037904935877100386,
+     "auc": 0.9525810161272309,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.02596231336538472,
+     "value_spearman": -0.792373930542072,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0003069520497636764,
+     "ap": 0.0015538723511414655,
+     "auc": 0.8062174216701173,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 1280.9666666666665
+  },
+  "beta1_K5_frac0.1": {
+   "n": 3,
+   "existence": [
+    0.001519371890533189,
+    0.00033651439521421487
+   ],
+   "value": [
+    0.06785241557171615,
+    0.004339617138872567
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.002852663520843714,
+     "ap": 0.19657781261883545,
+     "auc": 0.9497045104562373,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.11103080574457809,
+     "value_spearman": -0.6522815779548758,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0009909105576417874,
+     "ap": 0.03753750323344166,
+     "auc": 0.952381575018428,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.02467402539885419,
+     "value_spearman": -0.7923563766254453,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0003121264444045031,
+     "ap": 0.0014011521666214787,
+     "auc": 0.8086696922015183,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 1616.2666666666667
+  },
+  "beta1_K20_frac0.01": {
+   "n": 3,
+   "existence": [
+    0.002557992430662072,
+    0.0009595216306780047
+   ],
+   "value": [
+    0.028064045864304322,
+    0.006794748738806772
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.0014366994657683497,
+     "ap": 0.13248704275148426,
+     "auc": 0.9621910845324432,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08187576269079377,
+     "value_spearman": -0.5545830069647427,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.004017376517928477,
+     "ap": 0.0423689853209803,
+     "auc": 0.961528105005696,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": -0.025747670962185134,
+     "value_spearman": -0.7078462104956619,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.002050855747103048,
+     "ap": 0.003429918294387806,
+     "auc": 0.8606039855072464,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 14865.700000000003
+  },
+  "beta1_K20_frac0.02": {
+   "n": 3,
+   "existence": [
+    0.0025644000416709238,
+    0.0009806751890097452
+   ],
+   "value": [
+    0.023762415620673605,
+    0.008144309985362511
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.001610985615878295,
+     "ap": 0.14229204903074422,
+     "auc": 0.9624018101761251,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08139053330990452,
+     "value_spearman": -0.5495486342822695,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.00388740725608037,
+     "ap": 0.0416193767042005,
+     "auc": 0.9636671146105563,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": -0.0338657020685573,
+     "value_spearman": -0.7240681116137457,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.002010010858745698,
+     "ap": 0.003545620168340608,
+     "auc": 0.8593327087646653,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 13017.9
+  },
+  "beta1_K20_frac0.03": {
+   "n": 3,
+   "existence": [
+    0.0025534958779527524,
+    0.0008649800574301384
+   ],
+   "value": [
+    0.026797305096020397,
+    0.005705870136641922
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.0015213746481470148,
+     "ap": 0.14076474394162072,
+     "auc": 0.9616373423506389,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08245447458405698,
+     "value_spearman": -0.5506303724040081,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.003992389597753342,
+     "ap": 0.040821339421066534,
+     "auc": 0.9638487825950993,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": -0.028859864392016193,
+     "value_spearman": -0.7230488458902907,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0019433371429604742,
+     "ap": 0.0032725517302978117,
+     "auc": 0.85645833126294,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 11290.666666666666
+  },
+  "beta1_K20_frac0.05": {
+   "n": 3,
+   "existence": [
+    0.0022897993348390097,
+    0.00036827147764057183
+   ],
+   "value": [
+    0.025795432438512695,
+    0.0049013820809311525
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.001657468765813056,
+     "ap": 0.14230065357367871,
+     "auc": 0.9597341125820192,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08416765620835777,
+     "value_spearman": -0.5498551378572153,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.004045309310090138,
+     "ap": 0.038911608189604825,
+     "auc": 0.964130367955505,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": -0.03257679133133238,
+     "value_spearman": -0.7239892040260409,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0006050302255012472,
+     "ap": 0.002345886145685243,
+     "auc": 0.8498741670117322,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 9320.433333333334
+  },
+  "beta1_K20_frac0.075": {
+   "n": 3,
+   "existence": [
+    0.0024948205604244478,
+    0.00026375046675085274
+   ],
+   "value": [
+    0.024675017987431463,
+    0.004896472672950226
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.001638332355643525,
+     "ap": 0.14484544858899676,
+     "auc": 0.9585914102298454,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08385647636042161,
+     "value_spearman": -0.5491796578230574,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.004491562503040583,
+     "ap": 0.036858728671757914,
+     "auc": 0.9643817454488598,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": -0.03450644038555869,
+     "value_spearman": -0.7233905327968225,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0007844399536716274,
+     "ap": 0.0027972500873252953,
+     "auc": 0.8439173471359558,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 9506.266666666668
+  },
+  "beta1_K20_frac0.1": {
+   "n": 3,
+   "existence": [
+    0.002638455259845875,
+    0.0005001829521098075
+   ],
+   "value": [
+    0.024270256242364615,
+    0.0072644482222595395
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.0015161590400057318,
+     "ap": 0.14370142780325548,
+     "auc": 0.9577969381067496,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08407359857461605,
+     "value_spearman": -0.5472048054758967,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.004255143438488442,
+     "ap": 0.036223264378856555,
+     "auc": 0.9644316888248565,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": -0.03553308608988683,
+     "value_spearman": -0.7225500106972748,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.001896867321642238,
+     "ap": 0.0037145218506256026,
+     "auc": 0.8467176894409939,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 10928.866666666669
+  },
+  "beta2_K5_frac0.01": {
+   "n": 3,
+   "existence": [
+    0.003641814528048182,
+    0.0004257378787188294
+   ],
+   "value": [
+    0.10315310256709102,
+    0.004542420120400117
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.0065460296902566245,
+     "ap": 0.19437643853888065,
+     "auc": 0.958265689881432,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.09944463529595081,
+     "value_spearman": -0.7254148158120158,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0029841026661764814,
+     "ap": 0.05069513916743823,
+     "auc": 0.9053968971163081,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.10686156983823124,
+     "value_spearman": -0.7112915375323275,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0002720595775430708,
+     "ap": 0.0004210916493011709,
+     "auc": 0.6826690503795722,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 3695.9
+  },
+  "beta2_K5_frac0.02": {
+   "n": 3,
+   "existence": [
+    0.003553941370985988,
+    0.0004711889511703336
+   ],
+   "value": [
+    0.09973643860858515,
+    0.007291325578134717
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.006285730433655773,
+     "ap": 0.19526849304083393,
+     "auc": 0.9587180318099843,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.0925638210221847,
+     "value_spearman": -0.7261874668948053,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0030099471383847696,
+     "ap": 0.04865999904130957,
+     "auc": 0.9053213579932543,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.1069090561949856,
+     "value_spearman": -0.7094670610766901,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0002722491258831371,
+     "ap": 0.0004287025972537888,
+     "auc": 0.6850888840579709,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 2310.066666666667
+  },
+  "beta2_K5_frac0.03": {
+   "n": 3,
+   "existence": [
+    0.0033114830767830383,
+    0.0005429809996048641
+   ],
+   "value": [
+    0.10125101044421884,
+    0.0036236944513333503
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.00576773532056155,
+     "ap": 0.19726411012697484,
+     "auc": 0.9586962537891869,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08985632538467148,
+     "value_spearman": -0.7258952641779896,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0028782804184194293,
+     "ap": 0.04400760980155608,
+     "auc": 0.9047858599477318,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.11264569550376619,
+     "value_spearman": -0.7059973485768943,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.00027690869866068294,
+     "ap": 0.0005456144140197,
+     "auc": 0.6972379378881989,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 2045.6333333333332
+  },
+  "beta2_K20_frac0.01": {
+   "n": 3,
+   "existence": [
+    0.0009679185661212679,
+    0.0006370965443723745
+   ],
+   "value": [
+    0.06819344568607164,
+    0.00792925480477372
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.0011830339436437103,
+     "ap": 0.130795813850256,
+     "auc": 0.9458811979586356,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.05871981177192681,
+     "value_spearman": -0.6984432059260132,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0009184938802102182,
+     "ap": 0.026884061583587738,
+     "auc": 0.90451791675043,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.07766707960021646,
+     "value_spearman": -0.5999738938553992,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.0007193825287041787,
+     "ap": 0.0006714935703071981,
+     "auc": 0.5808968115942029,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 15786.4
+  },
+  "beta2_K20_frac0.02": {
+   "n": 3,
+   "existence": [
+    0.002368704391838295,
+    0.000841707657064104
+   ],
+   "value": [
+    0.08429142973158847,
+    0.007864514599502907
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.0015454940413670362,
+     "ap": 0.14810549289741173,
+     "auc": 0.95230021227121,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08084746987387532,
+     "value_spearman": -0.6858629707490795,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.0018086147343505056,
+     "ap": 0.021053357226665678,
+     "auc": 0.9063857362013893,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.08773538958930162,
+     "value_spearman": -0.5786956971236323,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.004443654403776867,
+     "ap": 0.0044755525341361015,
+     "auc": 0.6207944789510007,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 14505.333333333334
+  },
+  "beta2_K20_frac0.03": {
+   "n": 3,
+   "existence": [
+    0.002474786711120684,
+    0.0004290740779612015
+   ],
+   "value": [
+    0.08662832084329349,
+    0.006892790945185341
+   ],
+   "relations": {
+    "child_article": {
+     "ap_corrected": 0.0016433977735744976,
+     "ap": 0.1485981455199976,
+     "auc": 0.9531079942059014,
+     "baseline_ap_corrected": 0.0015707391025526207,
+     "baseline_ap": 0.19757204552535143,
+     "baseline_auc": 0.9649494035915737,
+     "prevalence": 0.00041580632682329424,
+     "correction_ess": 4414.031941795677,
+     "ties_without_matching_empty": 0.11833774605732705,
+     "value_partial_spearman": 0.08225781317784825,
+     "value_spearman": -0.6852020719246069,
+     "baseline_value_partial_spearman": 0.0
+    },
+    "parent_child": {
+     "ap_corrected": 0.00199169752226031,
+     "ap": 0.019620777629029446,
+     "auc": 0.9067789702249324,
+     "baseline_ap_corrected": 0.0029481189257758345,
+     "baseline_ap": 0.048624817304914913,
+     "baseline_auc": 0.9363244201232996,
+     "prevalence": 4.2384596659921665e-05,
+     "correction_ess": 6838.274408559548,
+     "ties_without_matching_empty": 0.14809354687395293,
+     "value_partial_spearman": 0.09099882850873871,
+     "value_spearman": -0.5750716058570334,
+     "baseline_value_partial_spearman": -0.008522774408950717
+    },
+    "author_affiliation": {
+     "ap_corrected": 0.004446503900730525,
+     "ap": 0.004480518334446281,
+     "auc": 0.6247657888198758,
+     "baseline_ap_corrected": 0.00023966350130867086,
+     "baseline_ap": 0.003078449943416064,
+     "baseline_auc": 0.8286590124223604,
+     "prevalence": 0.00020318465657165644,
+     "correction_ess": 140224.63511975954,
+     "ties_without_matching_empty": 0.0
+    }
+   },
+   "seconds": 11510.633333333333
+  }
+ },
+ "fraction_rule": {
+  "beta2_K5": {
+   "0.01": "ref",
+   "0.02": "fails S3_value",
+   "0.03": "passes, but a smaller fraction failed"
+  },
+  "beta2_K20": {
+   "0.01": "ref",
+   "0.02": "STABLE",
+   "0.03": "STABLE"
+  },
+  "beta1_K5": {
+   "0.01": "ref",
+   "0.02": "fails S3_value",
+   "0.03": "passes, but a smaller fraction failed",
+   "0.05": "fails S3_value",
+   "0.075": "fails S3_existence",
+   "0.1": "fails S3_existence"
+  },
+  "beta1_K20": {
+   "0.01": "ref",
+   "0.02": "fails S3_value",
+   "0.03": "passes, but a smaller fraction failed",
+   "0.05": "passes, but a smaller fraction failed",
+   "0.075": "passes, but a smaller fraction failed",
+   "0.1": "passes, but a smaller fraction failed"
+  }
+ }
+}

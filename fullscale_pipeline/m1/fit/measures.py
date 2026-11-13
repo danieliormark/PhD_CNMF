@@ -557,3 +557,93 @@ def count_rule(fails, fraction=0.2):
     return {"group_fails": g_fail.tolist(), "K_fails": bool(g_fail.mean() > fraction or F.mean() > fraction),
             "by_groups": bool(g_fail.mean() > fraction), "pooled": bool(F.mean() > fraction),
             "groups_with_any_failure": [int(i) for i in np.nonzero(F.any(1))[0]], "failures_per_group": F.sum(1).tolist()}
+
+
+# ------------------------------------------------------------------- two-part held-out criterion (2026-11-13, option D)
+def _log2_band(n):
+    """Tie-count band: 0, 1, 2–3, 4–7, 8–15, … (floor(log2(n + 1)))."""
+    return np.floor(np.log2(np.asarray(n, float) + 1)).astype(np.int64)
+
+
+def _weighted_ap(pv, nv, w_neg):
+    """Average precision with each empty cell weighted (w_neg array or scalar); equal scores count the empty cell above
+    the tie (pessimistic, as threshold-based AP)."""
+    if len(pv) == 0:
+        return None
+    w_neg = np.broadcast_to(np.asarray(w_neg, float), nv.shape)
+    o = np.argsort(nv); nv_s = nv[o]; cw = np.concatenate([[0.0], np.cumsum(w_neg[o])])
+    neg_ge = cw[-1] - cw[np.searchsorted(nv_s, pv, side="left")]
+    pv_s = np.sort(pv)
+    pos_ge = len(pv) - np.searchsorted(pv_s, pv, side="left")
+    return float(np.mean(pos_ge / (pos_ge + neg_ge)))
+
+
+def _auc(pv, nv):
+    if len(pv) == 0 or len(nv) == 0:
+        return None
+    rk = rankdata(np.concatenate([pv, nv]))
+    return float((rk[:len(pv)].sum() - len(pv) * (len(pv) + 1) / 2) / (len(pv) * len(nv)))
+
+
+def degree_correction_weights(rd, min_empty=20):
+    """Weights for the sampled hidden empty cells so that their distribution over joint tie-count bands (row entity's
+    band × column entity's band, visible ties, _log2_band) matches the hidden ties' (degree-corrected negatives, after
+    Aiyappa et al. 2025); total weight = the group's full share of empty cells (as the uncorrected AP). Joint bands
+    with fewer than min_empty sampled empty cells are left out (their hidden ties too; share reported).
+    Returns (weights per empty cell, effective sample size, share of hidden ties left out, mask of hidden ties kept)."""
+    nr = np.bincount(rd.tie_row, minlength=rd.shape[0]); nc = np.bincount(rd.tie_col, minlength=rd.shape[1])
+    br_t, bc_t = _log2_band(nr[rd.hid_tie_row]), _log2_band(nc[rd.hid_tie_col])
+    br_e, bc_e = _log2_band(nr[rd.hid_empty_row]), _log2_band(nc[rd.hid_empty_col])
+    hc = int(max(bc_t.max(), bc_e.max())) + 1
+    lt, le = br_t * hc + bc_t, br_e * hc + bc_e
+    L = int(max(lt.max(), le.max())) + 1
+    Ec = np.bincount(le, minlength=L).astype(float); Tc = np.bincount(lt, minlength=L).astype(float)
+    ok = Ec >= min_empty
+    keep_t = ok[lt]
+    n_empty_obs = int(rd.obs_row_mask.sum()) * rd.shape[1] - (rd.shape[0] if rd.diag_masked else 0) - len(rd.tie_row) - len(rd.hid_tie_row)
+    total = math.floor(0.10 * n_empty_obs)
+    Tk = Tc * ok
+    wb = np.zeros(L)
+    wb[ok] = total * (Tk[ok] / Tk.sum()) / Ec[ok]
+    w = wb[le]
+    ess = float(w.sum() ** 2 / (w ** 2).sum()) if (w ** 2).sum() > 0 else 0.0
+    return w, ess, float(1 - keep_t.mean()), keep_t
+
+
+def partial_spearman(x, p, covariates):
+    """Partial Spearman correlation: ranks of x and p each regressed (least squares) on the covariates' ranks; Pearson
+    correlation of the residuals; 0 when either residual has no variation."""
+    X = np.column_stack([np.ones(len(x))] + [rankdata(c) for c in covariates])
+    def res(v):
+        r = rankdata(v); b = np.linalg.lstsq(X, r, rcond=None)[0]; return r - X @ b
+    ex, ep = res(x), res(p)
+    if ex.std() < 1e-12 or ep.std() < 1e-12:
+        return 0.0
+    return float(np.corrcoef(ex, ep)[0, 1])
+
+
+def heldout_two_part(U, Z, rd, value=True):
+    """Existence (degree-corrected AP; reported: uncorrected AP, AUC, degree-only baseline) and value (partial Spearman
+    among hidden ties, controlling for the two entities' visible tie counts and their product) of one relation."""
+    A, B, Zr = U[rd.row_facet], U[rd.col_facet], Z[rd.name]
+    if len(rd.hid_tie_row) == 0:
+        return None
+    xt = rd.hid_tie_val
+    ht = ((A[rd.hid_tie_row] @ Zr) * B[rd.hid_tie_col]).sum(1)
+    he = ((A[rd.hid_empty_row] @ Zr) * B[rd.hid_empty_col]).sum(1)
+    nr = np.bincount(rd.tie_row, minlength=rd.shape[0]); nc = np.bincount(rd.tie_col, minlength=rd.shape[1])
+    dt = nr[rd.hid_tie_row].astype(float) * nc[rd.hid_tie_col]; de = nr[rd.hid_empty_row].astype(float) * nc[rd.hid_empty_col]
+    n_empty_obs = int(rd.obs_row_mask.sum()) * rd.shape[1] - (rd.shape[0] if rd.diag_masked else 0) - len(rd.tie_row) - len(rd.hid_tie_row)
+    scale = math.floor(0.10 * n_empty_obs) / len(he)
+    w, ess, unc, cov = degree_correction_weights(rd)
+    out = {"ap_corrected": _weighted_ap(ht[cov], he, w), "ap": _weighted_ap(ht, he, scale), "auc": _auc(ht, he),
+           "baseline_ap_corrected": _weighted_ap(dt[cov], de, w), "baseline_ap": _weighted_ap(dt, de, scale),
+           "baseline_auc": _auc(dt, de), "prevalence": len(xt) / (len(xt) + math.floor(0.10 * n_empty_obs)),
+           "correction_ess": ess, "ties_without_matching_empty": unc}
+    if value:
+        cr, cc = nr[rd.hid_tie_row], nc[rd.hid_tie_col]
+        out["value_partial_spearman"] = partial_spearman(xt, ht, [cr, cc, cr.astype(float) * cc])
+        from scipy.stats import spearmanr
+        out["value_spearman"] = float(spearmanr(xt, ht).correlation)
+        out["baseline_value_partial_spearman"] = partial_spearman(xt, dt, [cr, cc, cr.astype(float) * cc])
+    return out

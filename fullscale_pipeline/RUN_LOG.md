@@ -2961,3 +2961,21 @@ visible maximum). Predictions above the visible maximum: child×article 0–1 hi
 34–90 of 14,923 hidden ties (predictions up to 0.19) and 0–2 of 1,000,000 hidden empty cells. Clipping predictions at the
 visible maximum would remove 2–64 % of child×parent's hidden-tie squared error and 0–88 % of its hidden-empty-cell part;
 child×article ≤ 1.5 %. [LOG]
+
+### RL-217 — 2026-11-13 — two-part held-out criterion on the checkpoint-3 and KL-extension fits (no fits; incline33)
+`m1/fit/heldout_twopart_analysis.py` (new) with `measures.heldout_two_part` (new: degree-corrected AP, uncorrected AP,
+AUC, degree-only baseline, partial Spearman); hybrid start, float64, approach 1, hold-out group 1, 3 seeds, terms off;
+~1.5 min. Unit checks: weighted AP = AP with replicated empty cells; partial Spearman 0 for a degree-only predictor;
+toy example AP 0.83 / 0.58 (s = 10) reproduced. Output `m1/fit/results/checkpoint3_analysis/heldout_twopart.json`.
+**Findings.** (1) The degree-only rule (visible ties of row entity × column entity) matches or beats every fit on
+uncorrected existence in child×article (AP 0.198 vs fits 0.131–0.197; AUC 0.965 vs 0.946–0.962); child×parent: AUC
+baseline 0.936 vs KL fits 0.952–0.964 and squared-error fits 0.905–0.907, AP baseline 0.049 vs fits 0.020–0.051;
+author×affiliation AUC baseline 0.829 vs KL K20 0.844–0.861, KL K5 0.806–0.824, squared error 0.581–0.697.
+(2) Degree-corrected AP as specified (re-weighted empty cells) is unreliable here: effective sample size of the weights
+4,414 (child×article) and 6,838 (child×parent) of 1,000,000 sampled empty cells; 12 % / 15 % of hidden ties sit in joint
+bands with < 20 sampled empty cells and are left out; values 0.001–0.006 with seed SD up to 40 % of the mean.
+(3) Value: plain Spearman among hidden ties is negative (−0.55 to −0.79): predictions rise with the entities' tie counts,
+the weighted values fall with them; partial Spearman 0.03–0.13 (child×parent KL K20 slightly negative, −0.03).
+(4) Fraction rule with the two equal guards (one SE over 3 seeds, one group): squared error K5 0.02 fails value, K20 0.02
+and 0.03 stable; KL K5 and K20: 0.02 fails value. KL K5 value falls steadily with the fraction (0.081 → 0.068). These
+verdicts rest on 3 seeds and one group and on the unreliable corrected AP; not used for a decision. [LOG]
