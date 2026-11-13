@@ -38,6 +38,7 @@ from . import measures as M
 from .aggregate import load_fit, load_UZ, load_entity, cell_key
 
 N_SPLITS = 999
+H_FLAG = 0.2            # Cohen's h "small" (Cohen 1988), owner 2026-11-13
 LOSS_NAME = {2: "squared error", 1: "KL"}
 
 
@@ -250,7 +251,48 @@ def compare_K(byloss, rng):
         out4["verdict"] = "inconclusive"
     res["S0-M1 membership agreement"] = out1
     res["S0-M4 seed stability"] = out4
+    res["share of entities regarded as placed"] = placed_shares(byloss, groups, rng)
     return res
+
+
+def cohens_h(p1, p2):
+    """Cohen's h for two proportions (Cohen 1988): |2 arcsin √p₁ − 2 arcsin √p₂|."""
+    return float(abs(2 * math.asin(math.sqrt(p1)) - 2 * math.asin(math.sqrt(p2))))
+
+
+def placed_shares(byloss, groups, rng):
+    """Per facet: share of live entities regarded as placed (2026-11-07 rule over one loss's seeds of a group), per loss
+    and group; Δ_g = share(KL) − share(squared error) classified with the RMS noise margin (half-splits: the rule
+    re-applied to each half of a loss's seeds, ≥ 4 seeds); Cohen's h of the mean shares (owner 2026-11-13: flag input)."""
+    ents = {b: {g: [load_entity(f["dir"]) for f in byloss[b][g]] for g in groups} for b in (2, 1)}
+    facets = list(next(iter(ents[2][groups[0]] or ents[1][groups[0]]))) if groups else []
+    def share(es, f):
+        live = es[0][f]["ties"] > 0
+        pl = M.placed_entities([e[f]["reproduced_share"] for e in es], es[0][f]["reproduced_share_degree_only"])
+        return float(pl[live].mean()) if live.any() else None
+    out = {}
+    for f in facets:
+        sh = {b: {g: (share(ents[b][g], f) if len(ents[b][g]) >= 2 else None) for g in groups} for b in (2, 1)}
+        d = [sh[1][g] - sh[2][g] for g in groups if sh[1][g] is not None and sh[2][g] is not None]
+        margins = []
+        for b in (2, 1):
+            vals = []
+            for _ in range(N_SPLITS):
+                diffs = []
+                for g in groups:
+                    es = ents[b][g]
+                    if len(es) < 4:
+                        continue
+                    p = rng.permutation(len(es)); h = len(es) // 2
+                    diffs.append(share([es[i] for i in p[:h]], f) - share([es[i] for i in p[h:2 * h]], f))
+                if diffs:
+                    vals.append(abs(np.mean(diffs)))
+            margins.append(float(np.percentile(vals, 95) / math.sqrt(2)) if vals else None)
+        m = {b: _mean([sh[b][g] for g in groups]) for b in (2, 1)}
+        out[f] = {"squared error": m[2], "KL": m[1], "per_group": {LOSS_NAME[b]: sh[b] for b in (2, 1)},
+                  "class": classify(d, rms_margin(margins)),
+                  "cohens_h": cohens_h(m[1], m[2]) if m[1] is not None and m[2] is not None else None}
+    return out
 
 
 def decide_K(res, gate_fail):
@@ -297,6 +339,13 @@ def decide(perK, gate):
             out["flags"].append(f"K={K}: cross-scoring dominance against the choice ({reading})")
         elif reading.startswith("dominance"):
             out["flags"].append(f"K={K}: cross-scoring dominance in favour (strengthens; reported)")
+        # pre-registered flag (owner 2026-11-13): the chosen loss regards fewer entities of a facet as placed than the other
+        # loss, beyond the noise margin (class "other loss better") and by Cohen's h ≥ 0.2
+        for fa, v in (r.get("share of entities regarded as placed") or {}).items():
+            other_better = v["class"]["class"] == ("squared error better" if chosen == 1 else "KL better")
+            if other_better and v["cohens_h"] is not None and v["cohens_h"] >= H_FLAG:
+                out["flags"].append(f"K={K}: {LOSS_NAME[chosen]} regards fewer {fa} entities as placed "
+                                    f"({v[LOSS_NAME[chosen]]:.2f} vs {v[LOSS_NAME[3 - chosen]]:.2f}, Cohen's h {v['cohens_h']:.2f})")
         for key, c in r["per-entity fit (training AUC)"].items():
             if key.endswith(("3-5", "6+")) and c["class"] == ("squared error better" if chosen == 1 else "KL better"):
                 out["flags"].append(f"K={K}: chosen loss's per-entity fit worse beyond δ on {key}")

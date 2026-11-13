@@ -22,7 +22,12 @@
 - Findings: fits barely beat the degree-only rule on uncorrected existence; hidden-tie values fall with tie counts
   while predictions rise (plain Spearman −0.55 to −0.79) — revisit at λ_child calibration.
 
-**Next:** wire the two-part criterion into `run_fit.py` measures and `aggregate.py` (K band, S3, C1 currently read
+**2026-11-13 later:** two-part criterion wired (RL-219); fraction 0.03 both losses (0.01 does not converge at K = 20);
+S0-M2 = two-part (option B); stage-0 comparison code `fit/stage0_compare.py` (RL-220; margins RMS of the two losses' half-split
+margins; candidate K = union of both losses' bands; placed-share flag with Cohen's h ≥ 0.2); item (l) forms decided (placed
+rule is the criterion; exclusions only for equal-vote membership measures). Open: l4 sizing primary; stage 0 needs permission.
+
+**Next (older):** wire the two-part criterion into `run_fit.py` measures and `aggregate.py` (K band, S3, C1 currently read
 `heldout_combined` error scores); then stage-specific comparison modules, item (l), timing test with terms on,
 stage-0 pass 1 (needs owner's permission). Push via port 443 (memory reference-github-push-port443).
 

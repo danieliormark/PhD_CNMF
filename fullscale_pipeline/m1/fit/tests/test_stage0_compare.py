@@ -46,6 +46,13 @@ check("rule: both fail the gate → owner", r["loss"] is None)
 r = S.decide({5: res(m2="KL better", m3="dominance: squared error")}, {5: G()})
 check("rule: cross-scoring dominance against the choice is flagged, not reversed", r["loss"] == "KL" and any("against" in f for f in r["flags"]))
 
+check("Cohen's h: 0.10 vs 0.76 ≈ 1.47", abs(S.cohens_h(0.10, 0.76) - 1.47) < 0.01)
+rr = res(m2="KL better"); rr["share of entities regarded as placed"] = {"author": {"squared error": 0.76, "KL": 0.10, "cohens_h": 1.47,
+      "class": {"class": "squared error better"}}, "child": {"squared error": 0.80, "KL": 0.76, "cohens_h": 0.10, "class": {"class": "squared error better"}}}
+r = S.decide({5: rr}, {5: G()})
+check("flag: KL chosen, fewer authors placed beyond noise and h ≥ 0.2 → flagged; child (h 0.10) not",
+      r["loss"] == "KL" and any("author" in f for f in r["flags"]) and not any("child entities" in f for f in r["flags"]))
+
 # smoke run on real fits (checkpoint 3: approach 1, group 0, K 5 and 20, 3 seeds per loss at fraction 0.03, hybrid, float64)
 rep = S.run("/mnt/hum01-rds/Basov/p91688di/m1_fits", "checkpoint3", None,
             {"frac": 0.03, "start": "nndsvd_sub0.8", "dtype": "float64"})
@@ -54,6 +61,7 @@ check("smoke: both K compared", sorted(a1.get("per_K", {})) == [5, 20])
 k5 = a1["per_K"][5]
 check("smoke: S0-M1–M4 and per-entity fit present", all(k in k5 for k in ("S0-M1 membership agreement", "S0-M2 held-out (existence and value)",
       "S0-M3 cross-scoring", "S0-M4 seed stability", "per-entity fit (training AUC)")))
+check("smoke: shares of entities regarded as placed reported per facet", "author" in k5["share of entities regarded as placed"])
 check("smoke: one group → classes inconclusive, decision falls to the default", a1["decision"]["loss"] == "squared error")
 print("     S0-M1 D (A, B) at K=5:", [k5["S0-M1 membership agreement"][t]["mean"] for t in ("A", "B")],
       "| S0-M4 Δ:", [k5["S0-M4 seed stability"][t]["mean"] for t in ("A", "B")])
