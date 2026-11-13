@@ -3050,3 +3050,8 @@ regulariser 1.02–1.09; spread ceiling 1.01–1.08; floor 1.00–1.03; floor wi
 mostly within the noise. Stage-0 pass 1 estimate (1,000 fits: 2 approaches × 2 losses × K 3, 5, 8, 13, 20 × 5 groups ×
 10 seeds; epochs to convergence from checkpoint 3 at 0.03, interpolated for K 3, 8, 13; seconds per epoch ≈ 0.1 × K):
 ≈ 740 CPU-hours. [LOG]
+
+### RL-225 — 2026-11-13 — stage 0 pass 1 submitted (owner, CSF3)
+Fit array job 24693492 (1,000 fits, 125 tasks × 8; tasks 0–5 running at 19:50–19:51, the rest pending on priority).
+The aggregation submission was rejected (16 GB per core > the multicore limit of 8 GB); script fixed (8 GB × 2 cores)
+with an aggregation-only option (FIT_JOB=24693492). [LOG]
