@@ -21,7 +21,7 @@
 # Decision rule (2026-11-06): (1) gate — a loss failing the stability gate at the majority of candidate K is excluded
 # (both → owner); (2) S0-M1 same → squared error; (3) S0-M2 winner; (4) S0-M4 more stable; else squared error;
 # majority over candidate K, a tie → squared error (default); (5) flags, never reversals.
-# Implementation choices to confirm with the owner: candidate K = union of both losses' candidates (and fallbacks) from
+# S0-M1's margin splits both losses' seeds jointly, as decided. Implementation choices to confirm with the owner: candidate K = union of both losses' candidates (and fallbacks) from
 # aggregate.py, all commonly scored K if none; Track A's placed entities pooled over both losses' seeds of the group
 # (S0-M1) or per loss (S0-M4); the 3+ band of the per-entity fit = bands 3–5 and 6+ classified separately.
 # Usage: python -m fit.stage0_compare --root ROOT --stage STAGE --aggregate AGG.json [--filter JSON] --out OUT.json
@@ -180,19 +180,21 @@ def compare_K(byloss, rng):
         halves1[g] = (pooled, i2, i1); halves4[g] = own
     out1, out4 = {}, {}
     for t in ("A", "B"):
-        # δ for S0-M1: halves of each loss's seeds, W̄ = mean over within-loss pairs inside the half (pooled pair table)
+        # δ for S0-M1 as decided (2026-11-05): each loss's seeds split into halves; half h = that half of both losses;
+        # W̄_half = mean over within-loss pairs inside the half (both losses pooled); |mean_g(W̄_half1 − W̄_half2)|
         vals = []
-        for b in (2, 1):
-            for _ in range(N_SPLITS):
-                diffs = []
-                for g, (pooled, i2, i1) in halves1.items():
-                    idx = i2 if b == 2 else i1
-                    if len(idx) < 4:
-                        continue
-                    p = rng.permutation(idx); h = len(idx) // 2
-                    diffs.append(mean_pairs(pooled, list(p[:h]), track=t) - mean_pairs(pooled, list(p[h:2 * h]), track=t))
-                if diffs:
-                    vals.append(abs(np.mean(diffs)))
+        for _ in range(N_SPLITS):
+            diffs = []
+            for g, (pooled, i2, i1) in halves1.items():
+                if len(i2) < 4 or len(i1) < 4:
+                    continue
+                p2, p1 = rng.permutation(i2), rng.permutation(i1); h2, h1 = len(i2) // 2, len(i1) // 2
+                def wbar(a2, a1):
+                    v = [pooled[tuple(sorted(p))][t] for idx in (a2, a1) for p in itertools.combinations(idx, 2)]
+                    return float(np.mean(v))
+                diffs.append(wbar(list(p2[:h2]), list(p1[:h1])) - wbar(list(p2[h2:2 * h2]), list(p1[h1:2 * h1])))
+            if diffs:
+                vals.append(abs(np.mean(diffs)))
         d1 = float(np.percentile(vals, 95) / math.sqrt(2)) if vals else None
         out1[t] = classify(m1[t], d1, first="different", second="(negative D)")
         vals = []
