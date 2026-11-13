@@ -8,9 +8,14 @@
 #                 (fourth check, option c); non-converged seeds are left out of the other three checks
 #   counting    : a group fails a check if > fraction of its seeds fail; K fails if > fraction of groups fail or > fraction
 #                 of all fits fail (fraction 0.2 provisional; also reported at 0.1/0.25/0.5) (2026-11-09)
-#   held-out    : a K's score = mean over groups of each group's mean over converged seeds (the loss's own form; the
-#                 lowest-training-loss seed's score reported beside it); SE = SD of the group means / √groups; band = every
-#                 K with score ≤ best + SE of the best K (2026-11-03)
+#   held-out    : two parts (2026-11-13): existence = within-tie-count-class AP, value = partial Spearman among hidden
+#                 ties (measures.combined_two_part; higher better). A K's score per part = mean over groups of each
+#                 group's mean over converged seeds (lowest-training-loss seed reported beside it); SE = SD of the group
+#                 means / √groups (2026-11-03). Band = every K with existence ≥ best − SE of the best K; a band K is
+#                 removed when its value is below the best K's value by more than the best K's value SE (rule b,
+#                 2026-11-13). The loss's own error score (2026-11-03) is still reported, not used.
+#   guards      : S3 and C1 = two_part_guard: a setting passes against its reference if neither part is worse by more
+#                 than one SE of the reference (equal guards, 2026-11-13)
 #   K protocol  : band from all K → exclude K failing the gate, a veto (and convergence → owner, option c) → candidates
 #                 (inspection and the text check choose among them) → if none: the largest K below the band (smaller K)
 #                 passing everything, flagged → if none: "no K qualifies" with the status of every K above the band,
@@ -55,18 +60,23 @@ def load_entity(d):
 
 # ---------------------------------------------------------------------------------------------- K protocol (pure)
 def choose_k(cells):
-    """cells: {K: {"score": mean held-out score (lower better), "se": SE of that K's group means,
-    "gate_fails": bool, "ghost_fails": bool, "alignment_fails": bool, "convergence_fails": bool}}.
-    Returns the band, the candidates, the fallback and flags (§6.8 protocol with step-11 vetoes)."""
+    """cells: {K: {"existence", "se_existence", "value", "se_value": two-part held-out scores (higher better) and SEs of
+    that K's group means, "gate_fails", "ghost_fails", "alignment_fails", "convergence_fails": bool}}.
+    Returns the band, the value removals, the candidates, the fallback and flags (§6.8 protocol with the step-11 vetoes
+    and rule b of 2026-11-13: existence defines the band, value only removes K values)."""
     Ks = sorted(cells)
-    best = min(Ks, key=lambda k: cells[k]["score"])
-    cut = cells[best]["score"] + cells[best]["se"]
-    band = [k for k in Ks if cells[k]["score"] <= cut]
+    best = max(Ks, key=lambda k: cells[k]["existence"])
+    cut = cells[best]["existence"] - cells[best]["se_existence"]
+    band = [k for k in Ks if cells[k]["existence"] >= cut]
+    vb, vse = cells[best].get("value"), cells[best].get("se_value")
+    value_fails = lambda k: (vb is not None and vse is not None and cells[k].get("value") is not None
+                             and vb - cells[k]["value"] > vse)
     fails = lambda k, conv=True: (cells[k]["gate_fails"] or cells[k]["ghost_fails"] or cells[k]["alignment_fails"]
-                                  or (conv and cells[k]["convergence_fails"]))
+                                  or value_fails(k) or (conv and cells[k]["convergence_fails"]))
     cand = [k for k in band if not fails(k)]
     owner = [k for k in band if fails(k) and not fails(k, conv=False)]       # excluded by non-convergence alone
-    out = {"best": best, "cutoff": cut, "band": band, "candidates": cand, "convergence_only_to_owner": owner,
+    out = {"best": best, "cutoff": cut, "band": band, "removed_by_value": [k for k in band if value_fails(k)],
+           "value_reference": vb, "value_se": vse, "candidates": cand, "convergence_only_to_owner": owner,
            "fallback": None, "no_K_qualifies": False, "above_band_status": None}
     if not cand:
         below = [k for k in Ks if k < min(band) and not fails(k)]
@@ -76,6 +86,15 @@ def choose_k(cells):
             out["no_K_qualifies"] = True
             out["above_band_status"] = {k: {"passes_all": not fails(k)} for k in Ks if k > max(band)}
     return out
+
+
+def two_part_guard(ref, cand):
+    """S3 / C1 (2026-11-13): cand passes against ref if neither existence nor value is worse than ref's by more than
+    ref's SE. ref, cand: {"existence", "se_existence", "value", "se_value"} (SE: over groups, or over seeds where only
+    one group exists)."""
+    e_ok = ref["existence"] - cand["existence"] <= ref["se_existence"]
+    v_ok = (ref.get("value") is None or cand.get("value") is None or ref["value"] - cand["value"] <= ref["se_value"])
+    return {"existence_ok": bool(e_ok), "value_ok": bool(v_ok), "passes": bool(e_ok and v_ok)}
 
 
 # ------------------------------------------------------------------------------------------- one cell, one group
@@ -150,9 +169,11 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
     for ck, byK in cells.items():
         cinfo = json.loads(ck); beta = cinfo["beta"]
         score_key = "squared_error" if beta == 2 else "kl_error"
+        tp = lambda f, k: f["measures"].get("heldout_two_part_combined", {}).get(k)
         perK = {}
         for K, byG in sorted(byK.items()):
             groups, scores, best_seed_scores, between_fits = [], [], [], []
+            ex, va, ex_best, va_best = [], [], [], []
             for g, fs in sorted(byG.items(), key=lambda x: (x[0] is None, x[0])):
                 fs = sorted(fs, key=lambda f: f["job"]["seed"])
                 if (cinfo["approach"], g) not in ca_cache:
@@ -166,11 +187,21 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
                     bestf = min(conv, key=lambda f: f["result"]["data_loss_history"][-1])
                     best_seed_scores.append(bestf["measures"]["heldout_combined"][score_key])
                     between_fits.append(bestf)
+                    if all(tp(f, "existence") is not None for f in conv):
+                        ex.append(np.mean([tp(f, "existence") for f in conv])); ex_best.append(tp(bestf, "existence"))
+                    if all(tp(f, "value") is not None for f in conv):
+                        va.append(np.mean([tp(f, "value") for f in conv])); va_best.append(tp(bestf, "value"))
             G = len(scores)
             entry = {"groups": groups, "n_groups_scored": G,
                      "score": float(np.mean(scores)) if G else None,
                      "se": float(np.std(scores, ddof=1) / np.sqrt(G)) if G > 1 else None,
                      "score_lowest_loss_seed": float(np.mean(best_seed_scores)) if G else None,
+                     "existence": float(np.mean(ex)) if ex else None,
+                     "se_existence": float(np.std(ex, ddof=1) / np.sqrt(len(ex))) if len(ex) > 1 else None,
+                     "value": float(np.mean(va)) if va else None,
+                     "se_value": float(np.std(va, ddof=1) / np.sqrt(len(va))) if len(va) > 1 else None,
+                     "existence_lowest_loss_seed": float(np.mean(ex_best)) if ex_best else None,
+                     "value_lowest_loss_seed": float(np.mean(va_best)) if va_best else None,
                      "epochs_median": float(np.median([f["result"]["epochs"] for g in byG.values() for f in g])),
                      "seconds_median": float(np.median([f["result"]["seconds"] for g in byG.values() for f in g]))}
             for chk in ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails"):
@@ -182,11 +213,12 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
                 sb = M.stability(wmsb)
                 entry["between_groups"] = {k: v for k, v in sb.items() if k != "per_seed"}
             perK[K] = entry
-        scored = {K: e for K, e in perK.items() if e["score"] is not None and e["se"] is not None}
+        scored = {K: e for K, e in perK.items() if e["existence"] is not None and e["se_existence"] is not None}
         sel = None
         if len(scored) >= 2:
             fr = str(fraction)
-            sel = choose_k({K: {"score": e["score"], "se": e["se"],
+            sel = choose_k({K: {"existence": e["existence"], "se_existence": e["se_existence"],
+                                "value": e["value"], "se_value": e["se_value"],
                                 **{c: bool(e[c][fr]["K_fails"]) if e[c][fr] else False
                                    for c in ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails")}}
                             for K, e in scored.items()})

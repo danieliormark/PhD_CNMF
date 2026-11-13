@@ -671,3 +671,24 @@ def heldout_two_part(U, Z, rd, value=True):
         out["value_spearman"] = float(spearmanr(xt, ht).correlation)
         out["baseline_value_partial_spearman"] = partial_spearman(xt, dt, [cr, cc, cr.astype(float) * cc])
     return out
+
+
+SEMANTIC_HIDDEN = ("child_article", "parent_child")
+
+
+def combined_two_part(parts, weights):
+    """Combined two-part held-out score of one fit (2026-11-13, decided): existence = Σ w̃_r × within-class AP over the
+    relations with hidden cells, value = Σ w̃_r × partial Spearman over child×article and child×parent, w̃ = the fit's
+    relation weights rescaled to sum to 1 over the relations entering each part (A0: existence 0.375/0.375/0.25, value
+    0.5/0.5); the semantic-equal versions (child×article and child×parent at 0.5 each) are the primary score across
+    approaches and arms (2026-11-02). Higher is better for both."""
+    def avg(key, rels, w):
+        rels = [r for r in rels if parts.get(r) is not None and parts[r].get(key) is not None]
+        tot = sum(w[r] for r in rels)
+        return float(sum(w[r] * parts[r][key] for r in rels) / tot) if tot > 0 else None
+    hid = [r for r in parts if parts[r] is not None]
+    eq = {r: 1.0 for r in SEMANTIC_HIDDEN}
+    return {"existence": avg("ap_within_class", hid, weights),
+            "value": avg("value_partial_spearman", SEMANTIC_HIDDEN, weights),
+            "existence_semantic_equal": avg("ap_within_class", SEMANTIC_HIDDEN, eq),
+            "value_semantic_equal": avg("value_partial_spearman", SEMANTIC_HIDDEN, eq)}

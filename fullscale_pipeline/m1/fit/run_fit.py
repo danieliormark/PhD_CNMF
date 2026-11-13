@@ -102,6 +102,7 @@ def run_one(job, out_root):
     hos = {rd.name: M.heldout(U, Z, rd) for rd in rds}
     hos = {k: v for k, v in hos.items() if v is not None}
     w = {rd.name: rd.weight for rd in rds}
+    two = {rd.name: M.heldout_two_part(U, Z, rd, value=rd.name in M.SEMANTIC_HIDDEN) for rd in rds if rd.name in hos}
     em = M.entity_measures(U, Z, rds)
     np.savez_compressed(os.path.join(d, "entity.npz"), **{f"{f}__{k}": v for f, e in em.items()
                         for k, v in e.items() if k in ("reproduced_share", "reproduced_share_degree_only", "ties")})
@@ -118,6 +119,8 @@ def run_one(job, out_root):
             "mono_flags": M.mono_flags(dom, fac),
             "empty_columns": M.empty_columns(pres, rds, wm),
             "heldout": hos,
+            "heldout_two_part": two,
+            "heldout_two_part_combined": M.combined_two_part(two, w),     # decision score (2026-11-13)
             "heldout_combined": {"squared_error": M.combined_heldout(hos, w, "squared_error"),
                                  "kl_error": M.combined_heldout(hos, w, "kl_error"),
                                  "semantic_only_squared_error": M.combined_heldout({k: v for k, v in hos.items() if k in ("child_article", "parent_child")}, w, "squared_error"),

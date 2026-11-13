@@ -2991,3 +2991,15 @@ child×article 0.156–0.178 / 0.155 / 0.109; child×parent 0.061–0.083 / 0.04
 (0.1032 → 0.0997, limit 0.0026), K20 0.02 and 0.03 stable; KL K5 0.02 fails value (0.0807 → 0.0736, limit 0.0032),
 KL K20 0.02 fails value (0.0281 → 0.0238, limit 0.0039), KL K20 0.1 also fails existence. By the rule: 0.01 for both
 losses. Output `m1/fit/results/checkpoint3_analysis/heldout_twopart_withinclass.json`. [LOG]
+
+### RL-219 — 2026-11-13 — two-part criterion wired into the fit pipeline (code only; incline33)
+`measures.combined_two_part` (existence = within-class AP over the relations with hidden cells, value = partial
+Spearman over child×article and child×parent, both with the fit's relation weights rescaled to 1; semantic-equal
+versions for comparisons across approaches and arms). `run_fit.py` stores `heldout_two_part` (per relation) and
+`heldout_two_part_combined` (the decision score); the loss's own error scores are still stored, as reports.
+`aggregate.py`: per K existence and value (mean over groups of the seed means; SE over groups); `choose_k` = rule b
+(band by existence ≥ best − SE; a band K removed when its value is below the best K's by more than that K's value SE;
+vetoes and fallback unchanged); `two_part_guard` for S3 and C1 (equal guards). Checks: the wired score reproduces RL-218
+on the squared-error K5 0.01 cell (existence 0.0897, value 0.1032); test_checkpoint3_f8 all pass (hand cases updated to
+higher-is-better, new cases for value removal and the guard; one new hand case first written with the wrong best K,
+corrected); test_checkpoint3_measures all pass. [LOG]
