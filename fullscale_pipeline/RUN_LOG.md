@@ -3017,3 +3017,14 @@ classes are inconclusive by construction: K = 5, D (Track A, B) = 0.054, 0.003; 
 B, adjusted) — illustrative only). Implementation choices awaiting the owner: candidate K = union of both losses'
 candidates and fallbacks; δ pools both losses' half-splits; Track A placed entities pooled over both losses (S0-M1) or
 per loss (S0-M4); S0-M1/M4 margins need ≥ 4 seeds per loss and group. [LOG]
+
+### RL-221 — 2026-11-13 — item (l) evidence: placed vs not placed entities on checkpoint-3 fits (no fits; incline33)
+Hybrid start, float64, fraction 0.03, approach 1, hold-out group 1, 3 seeds; placed rule of 2026-11-07 (mean reproduced
+share over seeds − degree-only share > seed SD); weighted memberships and row totals (Σ_k Ũ_ik w_k) from seed 1.
+Share placed (live entities), squared error K5 / K20: parent 0.65 / 0.82, child 0.56 / 0.82, article 0.30 / 0.44,
+author 0.10 / 0.10, organisation 0.18 / 0.11, journal 0.03 / 0.18; KL K5 / K20: parent 0.57 / 0.67, child 0.95 / 1.00,
+article 0.77 / 0.86, author 0.76 / 0.99, organisation 0.83 / 0.99, journal 0.71 / 0.97. Not placed with largest
+weighted membership ≥ 0.9: 5–71 % (squared error), 10–87 % (KL). Median row total of not-placed ÷ placed: squared error
+0.03–0.55, KL 0.48–3.3; median reproduced share of not-placed ≈ 0 under squared error, near the placed entities' under
+KL. Reading: under squared error "not placed" is mostly weak engagement; under KL mostly reconstruction no better than
+the degree-only reference. Small design (3 seeds, one group, terms off). [LOG]
