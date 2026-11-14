@@ -3055,3 +3055,15 @@ mostly within the noise. Stage-0 pass 1 estimate (1,000 fits: 2 approaches × 2 
 Fit array job 24693492 (1,000 fits, 125 tasks × 8; tasks 0–5 running at 19:50–19:51, the rest pending on priority).
 The aggregation submission was rejected (16 GB per core > the multicore limit of 8 GB); script fixed (8 GB × 2 cores)
 with an aggregation-only option; aggregation job 24693626 submitted (afterany on 24693492). [LOG]
+
+### RL-226 — 2026-11-14 — stage 0 pass 1 finished (jobs 24693492, 24693626)
+1,000/1,000 fits finished, 0 errors; 737 CPU-hours (estimate 740); wall clock 19:50 → aggregation written 00:31.
+Convergence (≤ 5,000 epochs): KL 500/500; squared error approach 1 K13 37/50, K20 46/50; approach 2 K8 49/50; all other
+cells 50/50. K selection (two-part criterion, rule b; checks at fraction 0.2): approach 1 squared error — band {13, 20},
+best 20, candidate 20, K13 to the owner (convergence alone), K3 and K5 fail the alignment veto; approach 1 KL — band
+{5, 8, 13, 20}, best 13, K20 removed by value, candidates {5, 8, 13}; approach 2 squared error — band {13, 20}, best 20,
+candidates {13, 20}, K3 fails gate and alignment, K5 alignment; approach 2 KL — band {5, 8, 13, 20}, best 13, K20
+removed by value, candidates {5, 8, 13}. Existence 0.077–0.095 across all cells (SE ≈ 0.002–0.003); value: squared error
+0.083–0.112, KL falls with K from 0.091–0.092 (K3) to 0.030 (K20). Every loss's band reaches K = 20 → the pre-registered
+conditional K = 32 (2026-11-05) is triggered. One seed pair of Track A/B at K20 takes 0.2 s (loss comparison ≈ 1.5–2 h
+single process). [LOG]
