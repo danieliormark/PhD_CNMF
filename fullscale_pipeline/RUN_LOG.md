@@ -3067,3 +3067,9 @@ removed by value, candidates {5, 8, 13}. Existence 0.077–0.095 across all cell
 0.083–0.112, KL falls with K from 0.091–0.092 (K3) to 0.030 (K20). Every loss's band reaches K = 20 → the pre-registered
 conditional K = 32 (2026-11-05) is triggered. One seed pair of Track A/B at K20 takes 0.2 s (loss comparison ≈ 1.5–2 h
 single process). [LOG]
+
+### RL-227 — 2026-11-14 — unconverged squared-error fits of stage 0 pass 1: loss curves (no fits)
+All 18 fits that reached 5,000 epochs (approach 1 K13 ×13, K20 ×4; approach 2 K8 ×1) were still falling steadily:
+loss down 0.29–1.23 % over the last 500 epochs, 1.1–3.1e-4 over the last 20 (stopping tolerance 1e-4), at most 1 rising
+epoch in the last 500 — slow descent, not oscillation. Seeds recur across hold-out groups (K13: seeds 1, 2, 8 in 3–4
+groups each; K20: seed 6 in 4 of 5 groups), so the slow cases follow particular starts. [LOG]
