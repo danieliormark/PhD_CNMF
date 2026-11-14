@@ -3105,3 +3105,17 @@ loss × K (both approaches), child hyperedges / articles: at epoch 100: KL 0.03�
 K); squared error child 150–1,350, articles 675–1,200 and never in 43–78 % of fits at K 3–8. Below 0.1 %: KL 650–3,950;
 squared error never (K ≥ 5). Reading: the large early reshuffle ends by epochs 200–300; afterwards memberships keep
 drifting at ~1–3 % per 50 epochs, with no sharp break. [LOG]
+
+### RL-232 — 2026-11-14 — stage-0 bare loss comparison on pass-1 fits (incline37, 19:55–21:05)
+`python -m fit.stage0_compare` on the pass-1 + extension fits (reads saved fits; no fitting). Output
+`fit/results/stage0/stage0_compare_pass1.{json,log}`. Candidate K {5, 8, 13, 20, 32}, both approaches; no loss fails the
+stability gate. Per K (Δ = KL − squared error, classes over 5 hold-out groups): held-out existence KL better at K = 5,
+inconclusive elsewhere (|Δ| ≤ 0.004); held-out value squared error better at every K (Δ −0.03 to −0.07), so S0-M2 never
+decides; S0-M1 memberships differ at every K; S0-M4 seed stability: KL more stable at K = 5 (and 8 in approach 2),
+squared error more stable at K ≥ 13 (Track B Δ −0.15 to −0.32). Bare result by the decided rule: squared error
+(approach 1: 1 of 5 K for KL; approach 2: 2 of 5). Flags at every K: cross-scoring dominance by KL (KL fits have lower
+held-out squared error and KL error), squared error regards far fewer entities as placed (e.g. K = 13 approach 1:
+authors 0.08 vs 0.99, articles 0.46 vs 0.84, children 0.66 vs 1.00; Cohen's h 0.8–2.5), per-entity training AUC of
+child×article rows/columns worse under squared error in bands 3–5 and 6+ (row band 2 Δ +0.31 to +0.46). Caveat found:
+S0-M4 Track A is computed per loss over that loss's own placed entities, so squared error's stability is measured on a
+much smaller, better-connected set. Not the verdict (pass 3).
