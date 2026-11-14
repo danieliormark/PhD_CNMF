@@ -3096,3 +3096,12 @@ value; candidates {13, 20}, both approaches; approach-1 K = 13 now converged 50/
 K = 20, 32 removed by value; candidates {5, 8, 13}, both approaches). The existence curve peaks inside the grid, so no
 further extension. Loss comparison started on incline (`fit/results/stage0/stage0_compare_pass1.*`), candidate K =
 union of the bands {5, 8, 13, 20, 32} per approach. [LOG]
+
+### RL-231 — 2026-11-14 — warm-up re-examination from stage 0 pass 1 membership logs (no fits)
+Share of entities whose largest weighted membership changed over the previous 50 epochs, median over 100 fits per
+loss × K (both approaches), child hyperedges / articles: at epoch 100: KL 0.03–0.14 / 0.06–0.12, squared error
+0.02–0.17 / 0.07–0.17; at epoch 300: KL 0.011–0.028 / 0.010–0.044, squared error 0.005–0.034 / 0.022–0.025; at epoch
+600: 0.005–0.018 / 0.007–0.038. First epoch below 1 % per 50 epochs: KL child 350–500, articles 325–1,000 (rising with
+K); squared error child 150–1,350, articles 675–1,200 and never in 43–78 % of fits at K 3–8. Below 0.1 %: KL 650–3,950;
+squared error never (K ≥ 5). Reading: the large early reshuffle ends by epochs 200–300; afterwards memberships keep
+drifting at ~1–3 % per 50 epochs, with no sharp break. [LOG]
