@@ -3119,3 +3119,20 @@ authors 0.08 vs 0.99, articles 0.46 vs 0.84, children 0.66 vs 1.00; Cohen's h 0.
 child×article rows/columns worse under squared error in bands 3–5 and 6+ (row band 2 Δ +0.31 to +0.46). Caveat found:
 S0-M4 Track A is computed per loss over that loss's own placed entities, so squared error's stability is measured on a
 much smaller, better-connected set. Not the verdict (pass 3).
+
+### RL-233 — 2026-11-14 — seed stability re-read on the common set; pass-2 job prepared
+(1) `fit/stage0_m4_common.py` (owner approved): seed stability (S0-M4) with both tracks restricted, per hold-out group, to
+the entities placed under BOTH losses (Track B: mass weights outside the set 0). Common set ≈ squared error's own placed
+set (K = 13, approach 1: authors 868 of 878 / KL 9,969; articles 895 of 1,002 / 1,804; children 67,097 of 67,163 /
+97,691; parents 15,827 of 27,323 / 23,448). Outcome per K: KL more stable at K = 5 and 8 (both approaches; approach 1
+K = 8 changes from inconclusive to KL), squared error more stable at K = 13, 20, 32. Majority unchanged: squared error
+(2 of 5 K for KL in each approach). Track A on the common set falls with K under KL (0.50 → 0.16) and stays 0.29–0.39
+under squared error. Output `fit/results/stage0/stage0_m4_common_pass1.{json,log}` (incline37, 23:06–23:25).
+(2) λ_child basis (`fit/pass2_lambda.py`, hold-out group 1 = index 0; the first figures given to the owner used group
+index 1 by mistake, values within 1%): squared error data loss 0.986 / 0.988, R 0.520 / 0.518; KL 1,382 / 1,283, R 1.132
+/ 1.135 (approach 1 / 2). λ_child: squared error 0.057 / 0.19 / 0.57; KL 36.6 / 122 / 366 (ap. 1), 33.9 / 113 / 339
+(ap. 2). (3) `plan.py stage0_pass2` → `slurm/jobs_stage0_pass2.jsonl` (600 fits), `slurm/stage0_pass2.sh` (75 tasks ×
+8, 24 h, 8,000-epoch ceiling, aggregation chained). (4) Dry runs (340 epochs, approach 1, group 1, seed 1, r = 0.1):
+the term switches on at epoch 300 (λR = 0.106 squared error) and R falls fast — squared error 0.56 → 0.005 by epoch 339
+with data loss +0.1% vs the pass-1 fit at the same epoch; KL 1.19 → 0.20, data loss +1%. W-tied child hyperedges become
+almost identical in membership early in the fit, when the data loss is still far from converged.

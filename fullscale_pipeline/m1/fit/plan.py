@@ -85,6 +85,27 @@ def stage0_extension(root="/mnt/hum01-rds/Basov/p91688di/m1_fits"):
     return out
 
 
+def stage0_pass2(basis="/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/results/stage0/pass2_lambda_basis.json"):
+    """Stage 0 pass 2, λ_child per loss (decided 2026-11-06; scaling and grid decided by the owner 2026-11-14, decision a):
+    each loss at its own K* (squared error 20, KL 13; owner confirmed 2026-11-14), both approaches, λ_child = r × (data
+    loss ÷ R) from the pass-1 λ = 0 fits (pass2_lambda.py, hold-out group 1, mean over 10 seeds), r ∈ {0.03, 0.1, 0.3};
+    groups 1–5 × 10 seeds; fraction 0.03, float32, hybrid start, warm-up 300 (owner 2026-11-14), 8,000-epoch ceiling (as
+    the pass-1 extension, so the λ = 0 reference and pass 2 share the ceiling). 600 fits. r = 1 only if r = 0.3 is chosen
+    (owner told before submission)."""
+    b = json.load(open(basis))
+    kstar = {2: 20, 1: 13}
+    out = []
+    for a in (1, 2):
+        for beta in (2, 1):
+            e = b[f"{a}_{beta}"]
+            for r in (0.03, 0.1, 0.3):
+                lam = r * e["data_loss"] / e["R"]
+                out += [job("stage0_pass2", a, g, kstar[beta], beta, s, FRACTION[beta], dtype="float32",
+                            terms={"lambda_child": lam}, arm={"r": r}, max_epochs=8000)
+                        for g in range(5) for s in range(1, 11)]
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -97,10 +118,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

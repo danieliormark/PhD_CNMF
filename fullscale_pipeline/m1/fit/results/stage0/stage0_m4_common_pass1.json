@@ -1,0 +1,2166 @@
+{
+ "approach_1": {
+  "5": {
+   "A": {
+    "mean": 0.26795466896181747,
+    "groups": 5,
+    "delta": 0.04597400399039263,
+    "class": "KL more stable better",
+    "ci95": [
+     0.2067586922205813,
+     0.32915064570305363
+    ],
+    "ci90": [
+     0.22096636506641937,
+     0.31494297285721556
+    ],
+    "per_loss_mean": {
+     "squared error": 0.23562523234149188,
+     "KL": 0.5035799013033093
+    }
+   },
+   "B": {
+    "mean": 0.1935291725861752,
+    "groups": 5,
+    "delta": 0.03906815242559936,
+    "class": "KL more stable better",
+    "ci95": [
+     0.1680885885547406,
+     0.21896975661760978
+    ],
+    "ci90": [
+     0.17399504702102267,
+     0.2130632981513277
+    ],
+    "per_loss_mean": {
+     "squared error": 0.41301718734200066,
+     "KL": 0.606546359928176
+    }
+   },
+   "verdict": "KL more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 11599,
+      "squared error": 22741,
+      "KL": 21027,
+      "entities": 35983
+     },
+     "child": {
+      "common": 40389,
+      "squared error": 42763,
+      "KL": 93365,
+      "entities": 97850
+     },
+     "article": {
+      "common": 350,
+      "squared error": 525,
+      "KL": 1657,
+      "entities": 2136
+     },
+     "author": {
+      "common": 683,
+      "squared error": 697,
+      "KL": 7843,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 227,
+      "squared error": 265,
+      "KL": 2155,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 7,
+      "squared error": 8,
+      "KL": 259,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 11704,
+      "squared error": 22864,
+      "KL": 21089,
+      "entities": 35983
+     },
+     "child": {
+      "common": 51199,
+      "squared error": 54079,
+      "KL": 93631,
+      "entities": 97850
+     },
+     "article": {
+      "common": 490,
+      "squared error": 668,
+      "KL": 1663,
+      "entities": 2136
+     },
+     "author": {
+      "common": 692,
+      "squared error": 703,
+      "KL": 7912,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 189,
+      "squared error": 242,
+      "KL": 2160,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 4,
+      "squared error": 5,
+      "KL": 264,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 11588,
+      "squared error": 23107,
+      "KL": 20628,
+      "entities": 35983
+     },
+     "child": {
+      "common": 53807,
+      "squared error": 56273,
+      "KL": 94056,
+      "entities": 97850
+     },
+     "article": {
+      "common": 528,
+      "squared error": 697,
+      "KL": 1651,
+      "entities": 2136
+     },
+     "author": {
+      "common": 700,
+      "squared error": 714,
+      "KL": 7774,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 211,
+      "squared error": 245,
+      "KL": 2216,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 11,
+      "squared error": 12,
+      "KL": 257,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 11486,
+      "squared error": 22794,
+      "KL": 20746,
+      "entities": 35983
+     },
+     "child": {
+      "common": 49347,
+      "squared error": 52089,
+      "KL": 93550,
+      "entities": 97850
+     },
+     "article": {
+      "common": 459,
+      "squared error": 632,
+      "KL": 1678,
+      "entities": 2136
+     },
+     "author": {
+      "common": 707,
+      "squared error": 721,
+      "KL": 7902,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 182,
+      "squared error": 222,
+      "KL": 2198,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 4,
+      "squared error": 5,
+      "KL": 272,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 11233,
+      "squared error": 22910,
+      "KL": 20329,
+      "entities": 35983
+     },
+     "child": {
+      "common": 52401,
+      "squared error": 55190,
+      "KL": 93617,
+      "entities": 97850
+     },
+     "article": {
+      "common": 492,
+      "squared error": 673,
+      "KL": 1660,
+      "entities": 2136
+     },
+     "author": {
+      "common": 697,
+      "squared error": 710,
+      "KL": 7898,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 204,
+      "squared error": 257,
+      "KL": 2190,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 11,
+      "squared error": 12,
+      "KL": 260,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "8": {
+   "A": {
+    "mean": 0.07981258438272401,
+    "groups": 5,
+    "delta": 0.036118022703686456,
+    "class": "KL more stable better",
+    "ci95": [
+     0.052623798904890204,
+     0.10700136986055782
+    ],
+    "ci90": [
+     0.058936131671113376,
+     0.10068903709433465
+    ],
+    "per_loss_mean": {
+     "squared error": 0.33584465616997067,
+     "KL": 0.4156572405526947
+    }
+   },
+   "B": {
+    "mean": 0.022608239890095593,
+    "groups": 5,
+    "delta": 0.035946738451132464,
+    "class": "inconclusive",
+    "ci95": [
+     -0.0079614861034552,
+     0.053177965883646386
+    ],
+    "ci90": [
+     -0.0008642112656043373,
+     0.04608069104579553
+    ],
+    "per_loss_mean": {
+     "squared error": 0.497973906893872,
+     "KL": 0.5205821467839675
+    }
+   },
+   "verdict": "KL more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 13804,
+      "squared error": 25873,
+      "KL": 21860,
+      "entities": 35983
+     },
+     "child": {
+      "common": 62388,
+      "squared error": 62956,
+      "KL": 96844,
+      "entities": 97850
+     },
+     "article": {
+      "common": 673,
+      "squared error": 845,
+      "KL": 1704,
+      "entities": 2136
+     },
+     "author": {
+      "common": 1156,
+      "squared error": 1158,
+      "KL": 9120,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 318,
+      "squared error": 359,
+      "KL": 2376,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 34,
+      "squared error": 35,
+      "KL": 312,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 13890,
+      "squared error": 25740,
+      "KL": 22328,
+      "entities": 35983
+     },
+     "child": {
+      "common": 61187,
+      "squared error": 61764,
+      "KL": 96839,
+      "entities": 97850
+     },
+     "article": {
+      "common": 667,
+      "squared error": 825,
+      "KL": 1728,
+      "entities": 2136
+     },
+     "author": {
+      "common": 1177,
+      "squared error": 1181,
+      "KL": 9189,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 333,
+      "squared error": 368,
+      "KL": 2382,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 38,
+      "squared error": 41,
+      "KL": 320,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 13878,
+      "squared error": 26069,
+      "KL": 22078,
+      "entities": 35983
+     },
+     "child": {
+      "common": 58991,
+      "squared error": 59427,
+      "KL": 96950,
+      "entities": 97850
+     },
+     "article": {
+      "common": 529,
+      "squared error": 692,
+      "KL": 1704,
+      "entities": 2136
+     },
+     "author": {
+      "common": 1247,
+      "squared error": 1259,
+      "KL": 9028,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 295,
+      "squared error": 325,
+      "KL": 2389,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 30,
+      "squared error": 33,
+      "KL": 317,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 14284,
+      "squared error": 26459,
+      "KL": 22278,
+      "entities": 35983
+     },
+     "child": {
+      "common": 62475,
+      "squared error": 63095,
+      "KL": 96763,
+      "entities": 97850
+     },
+     "article": {
+      "common": 640,
+      "squared error": 797,
+      "KL": 1734,
+      "entities": 2136
+     },
+     "author": {
+      "common": 1272,
+      "squared error": 1273,
+      "KL": 9056,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 360,
+      "squared error": 414,
+      "KL": 2359,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 35,
+      "squared error": 36,
+      "KL": 316,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 13015,
+      "squared error": 25113,
+      "KL": 21788,
+      "entities": 35983
+     },
+     "child": {
+      "common": 59773,
+      "squared error": 60325,
+      "KL": 96880,
+      "entities": 97850
+     },
+     "article": {
+      "common": 678,
+      "squared error": 843,
+      "KL": 1727,
+      "entities": 2136
+     },
+     "author": {
+      "common": 1113,
+      "squared error": 1119,
+      "KL": 9137,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 281,
+      "squared error": 316,
+      "KL": 2374,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 31,
+      "squared error": 33,
+      "KL": 318,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "13": {
+   "A": {
+    "mean": 0.004285566602948954,
+    "groups": 5,
+    "delta": 0.021911355891880036,
+    "class": "inconclusive",
+    "ci95": [
+     -0.02988217181807016,
+     0.038453305023968064
+    ],
+    "ci90": [
+     -0.021949558021893897,
+     0.030520691227791802
+    ],
+    "per_loss_mean": {
+     "squared error": 0.3263042841835613,
+     "KL": 0.33058985078651026
+    }
+   },
+   "B": {
+    "mean": -0.058791447920195396,
+    "groups": 5,
+    "delta": 0.026899652957546906,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.11729480329609866,
+     -0.00028809254429212894
+    ],
+    "ci90": [
+     -0.10371226768139143,
+     -0.013870628158999365
+    ],
+    "per_loss_mean": {
+     "squared error": 0.49954240813102685,
+     "KL": 0.44075096021083154
+    }
+   },
+   "verdict": "squared error more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 15827,
+      "squared error": 27323,
+      "KL": 23448,
+      "entities": 35983
+     },
+     "child": {
+      "common": 67097,
+      "squared error": 67163,
+      "KL": 97691,
+      "entities": 97850
+     },
+     "article": {
+      "common": 895,
+      "squared error": 1002,
+      "KL": 1804,
+      "entities": 2136
+     },
+     "author": {
+      "common": 868,
+      "squared error": 878,
+      "KL": 9969,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 253,
+      "squared error": 299,
+      "KL": 2441,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 29,
+      "squared error": 30,
+      "KL": 370,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 15281,
+      "squared error": 26620,
+      "KL": 23284,
+      "entities": 35983
+     },
+     "child": {
+      "common": 64952,
+      "squared error": 65000,
+      "KL": 97677,
+      "entities": 97850
+     },
+     "article": {
+      "common": 819,
+      "squared error": 858,
+      "KL": 1783,
+      "entities": 2136
+     },
+     "author": {
+      "common": 821,
+      "squared error": 834,
+      "KL": 9956,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 240,
+      "squared error": 269,
+      "KL": 2459,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 20,
+      "squared error": 21,
+      "KL": 367,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 14717,
+      "squared error": 26075,
+      "KL": 23244,
+      "entities": 35983
+     },
+     "child": {
+      "common": 61654,
+      "squared error": 61700,
+      "KL": 97719,
+      "entities": 97850
+     },
+     "article": {
+      "common": 934,
+      "squared error": 1073,
+      "KL": 1801,
+      "entities": 2136
+     },
+     "author": {
+      "common": 821,
+      "squared error": 822,
+      "KL": 9943,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 304,
+      "squared error": 330,
+      "KL": 2446,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 34,
+      "squared error": 37,
+      "KL": 352,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 14477,
+      "squared error": 25589,
+      "KL": 23104,
+      "entities": 35983
+     },
+     "child": {
+      "common": 67038,
+      "squared error": 67094,
+      "KL": 97699,
+      "entities": 97850
+     },
+     "article": {
+      "common": 948,
+      "squared error": 1047,
+      "KL": 1793,
+      "entities": 2136
+     },
+     "author": {
+      "common": 823,
+      "squared error": 834,
+      "KL": 9924,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 244,
+      "squared error": 275,
+      "KL": 2451,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 26,
+      "squared error": 28,
+      "KL": 360,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 14511,
+      "squared error": 25683,
+      "KL": 23201,
+      "entities": 35983
+     },
+     "child": {
+      "common": 62843,
+      "squared error": 62938,
+      "KL": 97644,
+      "entities": 97850
+     },
+     "article": {
+      "common": 786,
+      "squared error": 889,
+      "KL": 1806,
+      "entities": 2136
+     },
+     "author": {
+      "common": 742,
+      "squared error": 748,
+      "KL": 9926,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 216,
+      "squared error": 257,
+      "KL": 2432,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 30,
+      "squared error": 31,
+      "KL": 366,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "20": {
+   "A": {
+    "mean": -0.1159201407066569,
+    "groups": 5,
+    "delta": 0.017069279199272463,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.14055440523440538,
+     -0.09128587617890842
+    ],
+    "ci90": [
+     -0.13483514737064056,
+     -0.09700513404267325
+    ],
+    "per_loss_mean": {
+     "squared error": 0.33720518769028934,
+     "KL": 0.22128504698363244
+    }
+   },
+   "B": {
+    "mean": -0.21692745286578874,
+    "groups": 5,
+    "delta": 0.019899044862355268,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.24945250678713835,
+     -0.18440239894443913
+    ],
+    "ci90": [
+     -0.2419012697611854,
+     -0.19195363597039208
+    ],
+    "per_loss_mean": {
+     "squared error": 0.5557262522853403,
+     "KL": 0.3387987994195516
+    }
+   },
+   "verdict": "squared error more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 17433,
+      "squared error": 28325,
+      "KL": 23796,
+      "entities": 35983
+     },
+     "child": {
+      "common": 79448,
+      "squared error": 79461,
+      "KL": 97817,
+      "entities": 97850
+     },
+     "article": {
+      "common": 931,
+      "squared error": 933,
+      "KL": 1849,
+      "entities": 2136
+     },
+     "author": {
+      "common": 726,
+      "squared error": 741,
+      "KL": 10032,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 145,
+      "squared error": 174,
+      "KL": 2476,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 57,
+      "squared error": 58,
+      "KL": 379,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 16561,
+      "squared error": 27593,
+      "KL": 23564,
+      "entities": 35983
+     },
+     "child": {
+      "common": 75762,
+      "squared error": 75782,
+      "KL": 97812,
+      "entities": 97850
+     },
+     "article": {
+      "common": 878,
+      "squared error": 880,
+      "KL": 1840,
+      "entities": 2136
+     },
+     "author": {
+      "common": 704,
+      "squared error": 718,
+      "KL": 10027,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 137,
+      "squared error": 179,
+      "KL": 2456,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 53,
+      "squared error": 53,
+      "KL": 376,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 16940,
+      "squared error": 28040,
+      "KL": 23742,
+      "entities": 35983
+     },
+     "child": {
+      "common": 78927,
+      "squared error": 78944,
+      "KL": 97811,
+      "entities": 97850
+     },
+     "article": {
+      "common": 930,
+      "squared error": 930,
+      "KL": 1837,
+      "entities": 2136
+     },
+     "author": {
+      "common": 744,
+      "squared error": 760,
+      "KL": 10031,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 145,
+      "squared error": 167,
+      "KL": 2474,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 54,
+      "squared error": 55,
+      "KL": 374,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 16670,
+      "squared error": 27865,
+      "KL": 23449,
+      "entities": 35983
+     },
+     "child": {
+      "common": 76568,
+      "squared error": 76591,
+      "KL": 97793,
+      "entities": 97850
+     },
+     "article": {
+      "common": 899,
+      "squared error": 900,
+      "KL": 1846,
+      "entities": 2136
+     },
+     "author": {
+      "common": 751,
+      "squared error": 765,
+      "KL": 10031,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 142,
+      "squared error": 165,
+      "KL": 2470,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 51,
+      "squared error": 53,
+      "KL": 379,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 16959,
+      "squared error": 28351,
+      "KL": 23460,
+      "entities": 35983
+     },
+     "child": {
+      "common": 80604,
+      "squared error": 80625,
+      "KL": 97811,
+      "entities": 97850
+     },
+     "article": {
+      "common": 900,
+      "squared error": 904,
+      "KL": 1841,
+      "entities": 2136
+     },
+     "author": {
+      "common": 689,
+      "squared error": 702,
+      "KL": 10029,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 121,
+      "squared error": 143,
+      "KL": 2470,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 52,
+      "squared error": 54,
+      "KL": 379,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "32": {
+   "A": {
+    "mean": -0.12488655641189968,
+    "groups": 5,
+    "delta": 0.011872060420965254,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.1368589232679277,
+     -0.11291418955587165
+    ],
+    "ci90": [
+     -0.13407933741051004,
+     -0.11569377541328933
+    ],
+    "per_loss_mean": {
+     "squared error": 0.2886076365046245,
+     "KL": 0.16372108009272482
+    }
+   },
+   "B": {
+    "mean": -0.266247955596418,
+    "groups": 5,
+    "delta": 0.016636831375544742,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.2825459853722726,
+     -0.2499499258205634
+    ],
+    "ci90": [
+     -0.27876212428502833,
+     -0.2537337869078077
+    ],
+    "per_loss_mean": {
+     "squared error": 0.523714293160633,
+     "KL": 0.2574663375642151
+    }
+   },
+   "verdict": "squared error more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 19313,
+      "squared error": 30465,
+      "KL": 24335,
+      "entities": 35983
+     },
+     "child": {
+      "common": 80055,
+      "squared error": 80088,
+      "KL": 97806,
+      "entities": 97850
+     },
+     "article": {
+      "common": 863,
+      "squared error": 863,
+      "KL": 1908,
+      "entities": 2136
+     },
+     "author": {
+      "common": 704,
+      "squared error": 709,
+      "KL": 10047,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 130,
+      "squared error": 145,
+      "KL": 2487,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 46,
+      "squared error": 46,
+      "KL": 382,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 18956,
+      "squared error": 30525,
+      "KL": 23905,
+      "entities": 35983
+     },
+     "child": {
+      "common": 80333,
+      "squared error": 80360,
+      "KL": 97808,
+      "entities": 97850
+     },
+     "article": {
+      "common": 855,
+      "squared error": 855,
+      "KL": 1897,
+      "entities": 2136
+     },
+     "author": {
+      "common": 687,
+      "squared error": 696,
+      "KL": 10041,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 126,
+      "squared error": 142,
+      "KL": 2492,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 40,
+      "squared error": 40,
+      "KL": 381,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 18874,
+      "squared error": 30506,
+      "KL": 23755,
+      "entities": 35983
+     },
+     "child": {
+      "common": 84249,
+      "squared error": 84273,
+      "KL": 97817,
+      "entities": 97850
+     },
+     "article": {
+      "common": 930,
+      "squared error": 930,
+      "KL": 1898,
+      "entities": 2136
+     },
+     "author": {
+      "common": 783,
+      "squared error": 790,
+      "KL": 10044,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 133,
+      "squared error": 152,
+      "KL": 2482,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 53,
+      "squared error": 55,
+      "KL": 381,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 19231,
+      "squared error": 30344,
+      "KL": 24382,
+      "entities": 35983
+     },
+     "child": {
+      "common": 81540,
+      "squared error": 81567,
+      "KL": 97815,
+      "entities": 97850
+     },
+     "article": {
+      "common": 886,
+      "squared error": 886,
+      "KL": 1916,
+      "entities": 2136
+     },
+     "author": {
+      "common": 790,
+      "squared error": 803,
+      "KL": 10037,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 97,
+      "squared error": 123,
+      "KL": 2473,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 46,
+      "squared error": 46,
+      "KL": 383,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 18356,
+      "squared error": 29697,
+      "KL": 23882,
+      "entities": 35983
+     },
+     "child": {
+      "common": 82390,
+      "squared error": 82412,
+      "KL": 97815,
+      "entities": 97850
+     },
+     "article": {
+      "common": 865,
+      "squared error": 866,
+      "KL": 1909,
+      "entities": 2136
+     },
+     "author": {
+      "common": 718,
+      "squared error": 724,
+      "KL": 10043,
+      "entities": 10052
+     },
+     "organisation": {
+      "common": 112,
+      "squared error": 135,
+      "KL": 2476,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 44,
+      "squared error": 45,
+      "KL": 381,
+      "entities": 384
+     }
+    }
+   }
+  }
+ },
+ "approach_2": {
+  "5": {
+   "A": {
+    "mean": 0.22807767917086194,
+    "groups": 5,
+    "delta": 0.06971958514215178,
+    "class": "KL more stable better",
+    "ci95": [
+     0.18938621490900304,
+     0.26676914343272085
+    ],
+    "ci90": [
+     0.19836908756554006,
+     0.2577862707761838
+    ],
+    "per_loss_mean": {
+     "squared error": 0.24887092936571245,
+     "KL": 0.47694860853657434
+    }
+   },
+   "B": {
+    "mean": 0.2166967446874728,
+    "groups": 5,
+    "delta": 0.08072848373814621,
+    "class": "KL more stable better",
+    "ci95": [
+     0.1819595396159042,
+     0.2514339497590414
+    ],
+    "ci90": [
+     0.19002436465044067,
+     0.24336912472450492
+    ],
+    "per_loss_mean": {
+     "squared error": 0.38640535007688187,
+     "KL": 0.6031020947643546
+    }
+   },
+   "verdict": "KL more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 11727,
+      "squared error": 22791,
+      "KL": 21073,
+      "entities": 35983
+     },
+     "child": {
+      "common": 41553,
+      "squared error": 44163,
+      "KL": 93088,
+      "entities": 97850
+     },
+     "article": {
+      "common": 321,
+      "squared error": 517,
+      "KL": 1520,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 293,
+      "squared error": 345,
+      "KL": 1657,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 12,
+      "squared error": 15,
+      "KL": 254,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 11817,
+      "squared error": 23142,
+      "KL": 21017,
+      "entities": 35983
+     },
+     "child": {
+      "common": 50976,
+      "squared error": 53844,
+      "KL": 93476,
+      "entities": 97850
+     },
+     "article": {
+      "common": 408,
+      "squared error": 611,
+      "KL": 1504,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 235,
+      "squared error": 292,
+      "KL": 1558,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 10,
+      "squared error": 14,
+      "KL": 240,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 11423,
+      "squared error": 22977,
+      "KL": 20516,
+      "entities": 35983
+     },
+     "child": {
+      "common": 51668,
+      "squared error": 54118,
+      "KL": 93972,
+      "entities": 97850
+     },
+     "article": {
+      "common": 429,
+      "squared error": 627,
+      "KL": 1490,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 314,
+      "squared error": 406,
+      "KL": 1607,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 9,
+      "squared error": 11,
+      "KL": 235,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 11331,
+      "squared error": 22743,
+      "KL": 20734,
+      "entities": 35983
+     },
+     "child": {
+      "common": 51286,
+      "squared error": 54645,
+      "KL": 92911,
+      "entities": 97850
+     },
+     "article": {
+      "common": 469,
+      "squared error": 672,
+      "KL": 1512,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 330,
+      "squared error": 387,
+      "KL": 1655,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 9,
+      "squared error": 10,
+      "KL": 252,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 11103,
+      "squared error": 22862,
+      "KL": 20215,
+      "entities": 35983
+     },
+     "child": {
+      "common": 51299,
+      "squared error": 54371,
+      "KL": 93239,
+      "entities": 97850
+     },
+     "article": {
+      "common": 398,
+      "squared error": 598,
+      "KL": 1491,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 242,
+      "squared error": 345,
+      "KL": 1562,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 17,
+      "squared error": 19,
+      "KL": 231,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "8": {
+   "A": {
+    "mean": 0.10868593840126181,
+    "groups": 5,
+    "delta": 0.036470098968501403,
+    "class": "KL more stable better",
+    "ci95": [
+     0.07047897514893779,
+     0.14689290165358582
+    ],
+    "ci90": [
+     0.07934936276636749,
+     0.13802251403615612
+    ],
+    "per_loss_mean": {
+     "squared error": 0.3080736330372219,
+     "KL": 0.4167595714384838
+    }
+   },
+   "B": {
+    "mean": 0.052407372813735496,
+    "groups": 5,
+    "delta": 0.039995133399208294,
+    "class": "KL more stable better",
+    "ci95": [
+     0.0429186372866034,
+     0.06189610834086759
+    ],
+    "ci90": [
+     0.04512160645662291,
+     0.059693139170848085
+    ],
+    "per_loss_mean": {
+     "squared error": 0.4768260414962964,
+     "KL": 0.5292334143100319
+    }
+   },
+   "verdict": "KL more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 13928,
+      "squared error": 25312,
+      "KL": 22536,
+      "entities": 35983
+     },
+     "child": {
+      "common": 60513,
+      "squared error": 61044,
+      "KL": 96839,
+      "entities": 97850
+     },
+     "article": {
+      "common": 556,
+      "squared error": 742,
+      "KL": 1585,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 392,
+      "squared error": 488,
+      "KL": 1825,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 24,
+      "squared error": 26,
+      "KL": 292,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 13350,
+      "squared error": 24698,
+      "KL": 22459,
+      "entities": 35983
+     },
+     "child": {
+      "common": 60364,
+      "squared error": 60892,
+      "KL": 96862,
+      "entities": 97850
+     },
+     "article": {
+      "common": 546,
+      "squared error": 738,
+      "KL": 1595,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 380,
+      "squared error": 474,
+      "KL": 1802,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 30,
+      "squared error": 33,
+      "KL": 285,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 13305,
+      "squared error": 25031,
+      "KL": 22034,
+      "entities": 35983
+     },
+     "child": {
+      "common": 58213,
+      "squared error": 58645,
+      "KL": 96881,
+      "entities": 97850
+     },
+     "article": {
+      "common": 504,
+      "squared error": 688,
+      "KL": 1580,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 329,
+      "squared error": 438,
+      "KL": 1815,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 23,
+      "squared error": 24,
+      "KL": 283,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 13429,
+      "squared error": 25004,
+      "KL": 22045,
+      "entities": 35983
+     },
+     "child": {
+      "common": 60875,
+      "squared error": 61426,
+      "KL": 96803,
+      "entities": 97850
+     },
+     "article": {
+      "common": 540,
+      "squared error": 731,
+      "KL": 1582,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 380,
+      "squared error": 495,
+      "KL": 1795,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 14,
+      "squared error": 18,
+      "KL": 280,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 12584,
+      "squared error": 25179,
+      "KL": 21315,
+      "entities": 35983
+     },
+     "child": {
+      "common": 58112,
+      "squared error": 58536,
+      "KL": 96958,
+      "entities": 97850
+     },
+     "article": {
+      "common": 468,
+      "squared error": 655,
+      "KL": 1592,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 323,
+      "squared error": 420,
+      "KL": 1845,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 21,
+      "squared error": 23,
+      "KL": 286,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "13": {
+   "A": {
+    "mean": -0.07638182608784258,
+    "groups": 5,
+    "delta": 0.017373302745832715,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.08835550626005981,
+     -0.06440814591562535
+    ],
+    "ci90": [
+     -0.08557561549425186,
+     -0.0671880366814333
+    ],
+    "per_loss_mean": {
+     "squared error": 0.3934933746478876,
+     "KL": 0.3171115485600451
+    }
+   },
+   "B": {
+    "mean": -0.15137340593628812,
+    "groups": 5,
+    "delta": 0.02092922868256998,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.16638085748431614,
+     -0.1363659543882601
+    ],
+    "ci90": [
+     -0.16289662578807668,
+     -0.13985018608449956
+    ],
+    "per_loss_mean": {
+     "squared error": 0.5826952011535242,
+     "KL": 0.4313217952172361
+    }
+   },
+   "verdict": "squared error more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 15074,
+      "squared error": 26288,
+      "KL": 23312,
+      "entities": 35983
+     },
+     "child": {
+      "common": 62912,
+      "squared error": 62966,
+      "KL": 97619,
+      "entities": 97850
+     },
+     "article": {
+      "common": 522,
+      "squared error": 524,
+      "KL": 1653,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 229,
+      "squared error": 257,
+      "KL": 2059,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 61,
+      "squared error": 62,
+      "KL": 318,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 14896,
+      "squared error": 26020,
+      "KL": 23311,
+      "entities": 35983
+     },
+     "child": {
+      "common": 57164,
+      "squared error": 57212,
+      "KL": 97653,
+      "entities": 97850
+     },
+     "article": {
+      "common": 508,
+      "squared error": 510,
+      "KL": 1663,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 227,
+      "squared error": 262,
+      "KL": 2081,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 37,
+      "squared error": 37,
+      "KL": 322,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 15130,
+      "squared error": 26949,
+      "KL": 23176,
+      "entities": 35983
+     },
+     "child": {
+      "common": 57818,
+      "squared error": 57891,
+      "KL": 97505,
+      "entities": 97850
+     },
+     "article": {
+      "common": 550,
+      "squared error": 555,
+      "KL": 1652,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 210,
+      "squared error": 234,
+      "KL": 2111,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 43,
+      "squared error": 46,
+      "KL": 316,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 14709,
+      "squared error": 26053,
+      "KL": 23247,
+      "entities": 35983
+     },
+     "child": {
+      "common": 61722,
+      "squared error": 61774,
+      "KL": 97408,
+      "entities": 97850
+     },
+     "article": {
+      "common": 501,
+      "squared error": 508,
+      "KL": 1667,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 261,
+      "squared error": 280,
+      "KL": 2128,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 55,
+      "squared error": 55,
+      "KL": 319,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 14524,
+      "squared error": 25779,
+      "KL": 23035,
+      "entities": 35983
+     },
+     "child": {
+      "common": 63603,
+      "squared error": 63691,
+      "KL": 97631,
+      "entities": 97850
+     },
+     "article": {
+      "common": 502,
+      "squared error": 508,
+      "KL": 1656,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 243,
+      "squared error": 262,
+      "KL": 2104,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 50,
+      "squared error": 51,
+      "KL": 317,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "20": {
+   "A": {
+    "mean": -0.10829830945303612,
+    "groups": 5,
+    "delta": 0.015578527139658311,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.12171211146778665,
+     -0.09488450743828558
+    ],
+    "ci90": [
+     -0.11859787225153438,
+     -0.09799874665453785
+    ],
+    "per_loss_mean": {
+     "squared error": 0.3381147431988142,
+     "KL": 0.22981643374577804
+    }
+   },
+   "B": {
+    "mean": -0.2174937411789482,
+    "groups": 5,
+    "delta": 0.019965533803451802,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.2365081737679365,
+     -0.1984793085899599
+    ],
+    "ci90": [
+     -0.2320936541874107,
+     -0.2028938281704857
+    ],
+    "per_loss_mean": {
+     "squared error": 0.549860164120643,
+     "KL": 0.33236642294169483
+    }
+   },
+   "verdict": "squared error more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 16791,
+      "squared error": 28027,
+      "KL": 23618,
+      "entities": 35983
+     },
+     "child": {
+      "common": 73594,
+      "squared error": 73617,
+      "KL": 97802,
+      "entities": 97850
+     },
+     "article": {
+      "common": 672,
+      "squared error": 674,
+      "KL": 1753,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 213,
+      "squared error": 240,
+      "KL": 2371,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 45,
+      "squared error": 47,
+      "KL": 369,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 16599,
+      "squared error": 27513,
+      "KL": 23739,
+      "entities": 35983
+     },
+     "child": {
+      "common": 71383,
+      "squared error": 71409,
+      "KL": 97806,
+      "entities": 97850
+     },
+     "article": {
+      "common": 722,
+      "squared error": 723,
+      "KL": 1754,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 249,
+      "squared error": 283,
+      "KL": 2365,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 51,
+      "squared error": 53,
+      "KL": 365,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 15905,
+      "squared error": 26885,
+      "KL": 23559,
+      "entities": 35983
+     },
+     "child": {
+      "common": 75039,
+      "squared error": 75061,
+      "KL": 97805,
+      "entities": 97850
+     },
+     "article": {
+      "common": 734,
+      "squared error": 737,
+      "KL": 1743,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 233,
+      "squared error": 271,
+      "KL": 2358,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 48,
+      "squared error": 49,
+      "KL": 367,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 16470,
+      "squared error": 27340,
+      "KL": 23742,
+      "entities": 35983
+     },
+     "child": {
+      "common": 76434,
+      "squared error": 76454,
+      "KL": 97805,
+      "entities": 97850
+     },
+     "article": {
+      "common": 683,
+      "squared error": 686,
+      "KL": 1756,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 225,
+      "squared error": 252,
+      "KL": 2377,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 43,
+      "squared error": 47,
+      "KL": 355,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 16307,
+      "squared error": 27503,
+      "KL": 23419,
+      "entities": 35983
+     },
+     "child": {
+      "common": 72074,
+      "squared error": 72102,
+      "KL": 97788,
+      "entities": 97850
+     },
+     "article": {
+      "common": 638,
+      "squared error": 642,
+      "KL": 1741,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 210,
+      "squared error": 250,
+      "KL": 2368,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 39,
+      "squared error": 40,
+      "KL": 368,
+      "entities": 384
+     }
+    }
+   }
+  },
+  "32": {
+   "A": {
+    "mean": -0.13270781034224127,
+    "groups": 5,
+    "delta": 0.010479587440753457,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.15411084523770535,
+     -0.1113047754467772
+    ],
+    "ci90": [
+     -0.1491417715518873,
+     -0.11627384913259524
+    ],
+    "per_loss_mean": {
+     "squared error": 0.297886244116677,
+     "KL": 0.16517843377443575
+    }
+   },
+   "B": {
+    "mean": -0.2829864813137485,
+    "groups": 5,
+    "delta": 0.014575054103049346,
+    "class": "squared error more stable better",
+    "ci95": [
+     -0.3179785048119696,
+     -0.24799445781552737
+    ],
+    "ci90": [
+     -0.30985451940392883,
+     -0.25611844322356814
+    ],
+    "per_loss_mean": {
+     "squared error": 0.5321026568915057,
+     "KL": 0.24911617557775725
+    }
+   },
+   "verdict": "squared error more stable",
+   "set_sizes": {
+    "0": {
+     "parent": {
+      "common": 19016,
+      "squared error": 29965,
+      "KL": 24521,
+      "entities": 35983
+     },
+     "child": {
+      "common": 79406,
+      "squared error": 79431,
+      "KL": 97810,
+      "entities": 97850
+     },
+     "article": {
+      "common": 666,
+      "squared error": 666,
+      "KL": 1855,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 228,
+      "squared error": 254,
+      "KL": 2469,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 48,
+      "squared error": 48,
+      "KL": 379,
+      "entities": 384
+     }
+    },
+    "1": {
+     "parent": {
+      "common": 19146,
+      "squared error": 29969,
+      "KL": 24470,
+      "entities": 35983
+     },
+     "child": {
+      "common": 78987,
+      "squared error": 79015,
+      "KL": 97797,
+      "entities": 97850
+     },
+     "article": {
+      "common": 668,
+      "squared error": 668,
+      "KL": 1871,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 229,
+      "squared error": 245,
+      "KL": 2483,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 53,
+      "squared error": 55,
+      "KL": 380,
+      "entities": 384
+     }
+    },
+    "2": {
+     "parent": {
+      "common": 18611,
+      "squared error": 29398,
+      "KL": 24556,
+      "entities": 35983
+     },
+     "child": {
+      "common": 79959,
+      "squared error": 79988,
+      "KL": 97801,
+      "entities": 97850
+     },
+     "article": {
+      "common": 670,
+      "squared error": 670,
+      "KL": 1868,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 232,
+      "squared error": 254,
+      "KL": 2469,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 39,
+      "squared error": 40,
+      "KL": 378,
+      "entities": 384
+     }
+    },
+    "3": {
+     "parent": {
+      "common": 18605,
+      "squared error": 29771,
+      "KL": 24199,
+      "entities": 35983
+     },
+     "child": {
+      "common": 77420,
+      "squared error": 77453,
+      "KL": 97801,
+      "entities": 97850
+     },
+     "article": {
+      "common": 606,
+      "squared error": 608,
+      "KL": 1880,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 217,
+      "squared error": 239,
+      "KL": 2475,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 48,
+      "squared error": 49,
+      "KL": 378,
+      "entities": 384
+     }
+    },
+    "4": {
+     "parent": {
+      "common": 19453,
+      "squared error": 30582,
+      "KL": 24416,
+      "entities": 35983
+     },
+     "child": {
+      "common": 81972,
+      "squared error": 81996,
+      "KL": 97806,
+      "entities": 97850
+     },
+     "article": {
+      "common": 645,
+      "squared error": 645,
+      "KL": 1854,
+      "entities": 2136
+     },
+     "organisation": {
+      "common": 217,
+      "squared error": 240,
+      "KL": 2473,
+      "entities": 2511
+     },
+     "journal": {
+      "common": 44,
+      "squared error": 45,
+      "KL": 380,
+      "entities": 384
+     }
+    }
+   }
+  }
+ }
+}

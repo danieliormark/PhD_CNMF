@@ -1,0 +1,10 @@
+1 5 KL more stable {'A': (0.268, 'KL more stable better', {'squared error': 0.236, 'KL': 0.504}), 'B': (0.194, 'KL more stable better', {'squared error': 0.413, 'KL': 0.607})}
+1 8 KL more stable {'A': (0.08, 'KL more stable better', {'squared error': 0.336, 'KL': 0.416}), 'B': (0.023, 'inconclusive', {'squared error': 0.498, 'KL': 0.521})}
+1 13 squared error more stable {'A': (0.004, 'inconclusive', {'squared error': 0.326, 'KL': 0.331}), 'B': (-0.059, 'squared error more stable better', {'squared error': 0.5, 'KL': 0.441})}
+1 20 squared error more stable {'A': (-0.116, 'squared error more stable better', {'squared error': 0.337, 'KL': 0.221}), 'B': (-0.217, 'squared error more stable better', {'squared error': 0.556, 'KL': 0.339})}
+1 32 squared error more stable {'A': (-0.125, 'squared error more stable better', {'squared error': 0.289, 'KL': 0.164}), 'B': (-0.266, 'squared error more stable better', {'squared error': 0.524, 'KL': 0.257})}
+2 5 KL more stable {'A': (0.228, 'KL more stable better', {'squared error': 0.249, 'KL': 0.477}), 'B': (0.217, 'KL more stable better', {'squared error': 0.386, 'KL': 0.603})}
+2 8 KL more stable {'A': (0.109, 'KL more stable better', {'squared error': 0.308, 'KL': 0.417}), 'B': (0.052, 'KL more stable better', {'squared error': 0.477, 'KL': 0.529})}
+2 13 squared error more stable {'A': (-0.076, 'squared error more stable better', {'squared error': 0.393, 'KL': 0.317}), 'B': (-0.151, 'squared error more stable better', {'squared error': 0.583, 'KL': 0.431})}
+2 20 squared error more stable {'A': (-0.108, 'squared error more stable better', {'squared error': 0.338, 'KL': 0.23}), 'B': (-0.217, 'squared error more stable better', {'squared error': 0.55, 'KL': 0.332})}
+2 32 squared error more stable {'A': (-0.133, 'squared error more stable better', {'squared error': 0.298, 'KL': 0.165}), 'B': (-0.283, 'squared error more stable better', {'squared error': 0.532, 'KL': 0.249})}

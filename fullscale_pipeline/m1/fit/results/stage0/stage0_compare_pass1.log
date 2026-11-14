@@ -1,0 +1,173 @@
+approach_1 {
+ "candidate_K": [
+  5,
+  8,
+  13,
+  20,
+  32
+ ],
+ "gate_fails_count": {
+  "squared error": 0,
+  "KL": 0
+ },
+ "per_K": {
+  "5": {
+   "loss": "KL",
+   "step": "S0-M4 KL more stable"
+  },
+  "8": {
+   "loss": "squared error",
+   "step": "default (no step decides) \u2192 squared error"
+  },
+  "13": {
+   "loss": "squared error",
+   "step": "S0-M4 squared error more stable"
+  },
+  "20": {
+   "loss": "squared error",
+   "step": "S0-M4 squared error more stable"
+  },
+  "32": {
+   "loss": "squared error",
+   "step": "S0-M4 squared error more stable"
+  }
+ },
+ "flags": [
+  "K=5: cross-scoring dominance against the choice (dominance: KL)",
+  "K=5: squared error regards fewer child entities as placed (0.53 vs 0.96, Cohen's h 1.09)",
+  "K=5: squared error regards fewer article entities as placed (0.30 vs 0.78, Cohen's h 1.00)",
+  "K=5: squared error regards fewer author entities as placed (0.07 vs 0.78, Cohen's h 1.63)",
+  "K=5: squared error regards fewer organisation entities as placed (0.10 vs 0.87, Cohen's h 1.77)",
+  "K=5: squared error regards fewer journal entities as placed (0.02 vs 0.68, Cohen's h 1.65)",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=8: cross-scoring dominance against the choice (dominance: KL)",
+  "K=8: squared error regards fewer child entities as placed (0.63 vs 0.99, Cohen's h 1.11)",
+  "K=8: squared error regards fewer article entities as placed (0.37 vs 0.80, Cohen's h 0.91)",
+  "K=8: squared error regards fewer author entities as placed (0.12 vs 0.91, Cohen's h 1.81)",
+  "K=8: squared error regards fewer organisation entities as placed (0.14 vs 0.95, Cohen's h 1.90)",
+  "K=8: squared error regards fewer journal entities as placed (0.09 vs 0.82, Cohen's h 1.66)",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=13: cross-scoring dominance against the choice (dominance: KL)",
+  "K=13: squared error regards fewer child entities as placed (0.66 vs 1.00, Cohen's h 1.16)",
+  "K=13: squared error regards fewer article entities as placed (0.46 vs 0.84, Cohen's h 0.84)",
+  "K=13: squared error regards fewer author entities as placed (0.08 vs 0.99, Cohen's h 2.35)",
+  "K=13: squared error regards fewer organisation entities as placed (0.11 vs 0.97, Cohen's h 2.13)",
+  "K=13: squared error regards fewer journal entities as placed (0.08 vs 0.95, Cohen's h 2.11)",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=20: cross-scoring dominance against the choice (dominance: KL)",
+  "K=20: squared error regards fewer child entities as placed (0.80 vs 1.00, Cohen's h 0.89)",
+  "K=20: squared error regards fewer article entities as placed (0.43 vs 0.86, Cohen's h 0.96)",
+  "K=20: squared error regards fewer author entities as placed (0.07 vs 1.00, Cohen's h 2.50)",
+  "K=20: squared error regards fewer organisation entities as placed (0.07 vs 0.98, Cohen's h 2.36)",
+  "K=20: squared error regards fewer journal entities as placed (0.14 vs 0.98, Cohen's h 2.11)",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=32: cross-scoring dominance against the choice (dominance: KL)",
+  "K=32: squared error regards fewer child entities as placed (0.84 vs 1.00, Cohen's h 0.80)",
+  "K=32: squared error regards fewer article entities as placed (0.41 vs 0.89, Cohen's h 1.08)",
+  "K=32: squared error regards fewer author entities as placed (0.07 vs 1.00, Cohen's h 2.53)",
+  "K=32: squared error regards fewer organisation entities as placed (0.06 vs 0.99, Cohen's h 2.45)",
+  "K=32: squared error regards fewer journal entities as placed (0.12 vs 0.99, Cohen's h 2.27)",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+"
+ ],
+ "loss": "squared error",
+ "reason": "majority over candidate K (1 of 5 for KL; tie \u2192 squared error)"
+}
+approach_2 {
+ "candidate_K": [
+  5,
+  8,
+  13,
+  20,
+  32
+ ],
+ "gate_fails_count": {
+  "squared error": 0,
+  "KL": 0
+ },
+ "per_K": {
+  "5": {
+   "loss": "KL",
+   "step": "S0-M4 KL more stable"
+  },
+  "8": {
+   "loss": "KL",
+   "step": "S0-M4 KL more stable"
+  },
+  "13": {
+   "loss": "squared error",
+   "step": "S0-M4 squared error more stable"
+  },
+  "20": {
+   "loss": "squared error",
+   "step": "S0-M4 squared error more stable"
+  },
+  "32": {
+   "loss": "squared error",
+   "step": "S0-M4 squared error more stable"
+  }
+ },
+ "flags": [
+  "K=5: cross-scoring dominance against the choice (dominance: KL)",
+  "K=5: squared error regards fewer child entities as placed (0.53 vs 0.95, Cohen's h 1.07)",
+  "K=5: squared error regards fewer article entities as placed (0.28 vs 0.70, Cohen's h 0.87)",
+  "K=5: squared error regards fewer organisation entities as placed (0.14 vs 0.64, Cohen's h 1.08)",
+  "K=5: squared error regards fewer journal entities as placed (0.04 vs 0.63, Cohen's h 1.45)",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=5: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=8: cross-scoring dominance against the choice (dominance: KL)",
+  "K=8: squared error regards fewer child entities as placed (0.61 vs 0.99, Cohen's h 1.14)",
+  "K=8: squared error regards fewer article entities as placed (0.33 vs 0.74, Cohen's h 0.85)",
+  "K=8: squared error regards fewer organisation entities as placed (0.18 vs 0.72, Cohen's h 1.15)",
+  "K=8: squared error regards fewer journal entities as placed (0.06 vs 0.74, Cohen's h 1.56)",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=8: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=13: cross-scoring dominance against the choice (dominance: KL)",
+  "K=13: squared error regards fewer child entities as placed (0.62 vs 1.00, Cohen's h 1.22)",
+  "K=13: squared error regards fewer article entities as placed (0.24 vs 0.78, Cohen's h 1.12)",
+  "K=13: squared error regards fewer organisation entities as placed (0.10 vs 0.83, Cohen's h 1.65)",
+  "K=13: squared error regards fewer journal entities as placed (0.13 vs 0.83, Cohen's h 1.55)",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=13: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=20: cross-scoring dominance against the choice (dominance: KL)",
+  "K=20: squared error regards fewer child entities as placed (0.75 vs 1.00, Cohen's h 0.99)",
+  "K=20: squared error regards fewer article entities as placed (0.32 vs 0.82, Cohen's h 1.05)",
+  "K=20: squared error regards fewer organisation entities as placed (0.10 vs 0.94, Cohen's h 2.01)",
+  "K=20: squared error regards fewer journal entities as placed (0.12 vs 0.95, Cohen's h 1.97)",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=20: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+",
+  "K=32: cross-scoring dominance against the choice (dominance: KL)",
+  "K=32: squared error regards fewer child entities as placed (0.81 vs 1.00, Cohen's h 0.85)",
+  "K=32: squared error regards fewer article entities as placed (0.30 vs 0.87, Cohen's h 1.24)",
+  "K=32: squared error regards fewer organisation entities as placed (0.10 vs 0.99, Cohen's h 2.26)",
+  "K=32: squared error regards fewer journal entities as placed (0.12 vs 0.99, Cohen's h 2.19)",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_3-5",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_row_band_6+",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_3-5",
+  "K=32: chosen loss's per-entity fit worse beyond \u03b4 on child_article_col_band_6+"
+ ],
+ "loss": "squared error",
+ "reason": "majority over candidate K (2 of 5 for KL; tie \u2192 squared error)"
+}
