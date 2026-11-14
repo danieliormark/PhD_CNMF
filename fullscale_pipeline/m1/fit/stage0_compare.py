@@ -35,7 +35,7 @@ import numpy as np
 from scipy import stats
 
 from . import measures as M
-from .aggregate import load_fit, load_UZ, load_entity, cell_key
+from .aggregate import load_fit, load_UZ, load_entity, cell_key, latest_fits
 
 N_SPLITS = 999
 H_FLAG = 0.2            # Cohen's h "small" (Cohen 1988), owner 2026-11-13
@@ -376,7 +376,7 @@ def run(root, stage, aggregate_path, filt=None, seed=0, fraction="0.2"):
     rng = np.random.default_rng(seed)
     base = os.path.join(root, stage)
     agg = json.load(open(aggregate_path)) if aggregate_path else {}
-    fits = [load_fit(os.path.join(base, d)) for d in sorted(os.listdir(base)) if os.path.exists(os.path.join(base, d, "measures.json"))]
+    fits = latest_fits([load_fit(os.path.join(base, d)) for d in sorted(os.listdir(base)) if os.path.exists(os.path.join(base, d, "measures.json"))])
     if filt:
         fits = [f for f in fits if all(f["job"].get(k) == v for k, v in filt.items())]
     by = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list))))   # approach → K → beta → group

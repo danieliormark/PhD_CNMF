@@ -2,7 +2,7 @@
 # A job is a dict of every setting of one fit; run_fit.job_id hashes it, so a job list can be re-submitted and finished
 # fits are skipped. Lists for later stages are added when their inputs (chosen loss, λ values, J*) are decided.
 # Usage: python -m fit.plan checkpoint3 > jobs_checkpoint3.jsonl   (or stage0_pass1 --seeds S)
-import argparse, json, sys
+import argparse, json, os, sys
 
 PROVISIONAL_FRACTION = {2: 0.03, 1: 0.01}            # largest-stable rule, provisional (2026-11-10); kept for checkpoint 3
 FRACTION = {2: 0.03, 1: 0.03}                        # DECIDED 2026-11-13 (owner: "I approve option b for the fraction rule/learning rate"): rule from the smallest fraction converging at every K (0.02), RL-218/219
@@ -70,6 +70,21 @@ def timing_terms():
             for beta in (2, 1) for K in (5, 20) for name, t in TIMING_ARMS.items()]
 
 
+def stage0_extension(root="/mnt/hum01-rds/Basov/p91688di/m1_fits"):
+    """Stage 0 pass 1 extension (owner 2026-11-14, decisions 1 and 2): (i) the pre-registered K = 32 (every loss's band
+    reached 20): both approaches × both losses × groups 1–5 × 10 seeds = 200 fits; (ii) the 13 squared-error approach-1
+    K = 13 fits that reached the 5,000-epoch ceiling, rerun from the same start. Both with an 8,000-epoch ceiling (a
+    ceiling only; aggregate.latest_fits lets a rerun replace its original)."""
+    import glob
+    out = [job("stage0_pass1", a, g, 32, beta, s, FRACTION[beta], dtype="float32", max_epochs=8000)
+           for a in (1, 2) for beta in (2, 1) for g in range(5) for s in range(1, 11)]
+    for d in sorted(glob.glob(os.path.join(root, "stage0_pass1", "*", "result.json"))):
+        r = json.load(open(d)); j = json.load(open(os.path.join(os.path.dirname(d), "spec.json")))["job"]
+        if (j["approach"], j["beta"], j["K"]) == (1, 2, 13) and not r["converged"]:
+            out.append(dict(j, max_epochs=8000))
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -82,10 +97,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

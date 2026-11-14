@@ -29,7 +29,19 @@ import numpy as np
 from . import measures as M
 
 FRACTIONS = (0.1, 0.2, 0.25, 0.5)
-CELL_KEYS = ("stage", "approach", "arm", "beta", "start", "frac", "dtype", "terms", "lr_mode", "max_epochs")
+CELL_KEYS = ("stage", "approach", "arm", "beta", "start", "frac", "dtype", "terms", "lr_mode")
+# max_epochs is a ceiling, not a model setting (2026-11-14: K = 32 and the K = 13 reruns use 8,000): not part of the cell
+
+
+def latest_fits(fits):
+    """One fit per (cell, K, group, seed): where a fit was rerun with a higher epoch ceiling (2026-11-14), the rerun
+    replaces the original."""
+    best = {}
+    for f in fits:
+        j = f["job"]; k = (cell_key(j), j["K"], j["group"], j["seed"])
+        if k not in best or j.get("max_epochs", 0) > best[k]["job"].get("max_epochs", 0):
+            best[k] = f
+    return list(best.values())
 
 
 def cell_key(job):
@@ -151,8 +163,8 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
     from . import data as D
     import scipy.sparse as sp
     base = os.path.join(root, stage)
-    fits = [load_fit(os.path.join(base, d)) for d in sorted(os.listdir(base))
-            if os.path.exists(os.path.join(base, d, "measures.json"))]
+    fits = latest_fits([load_fit(os.path.join(base, d)) for d in sorted(os.listdir(base))
+                        if os.path.exists(os.path.join(base, d, "measures.json"))])
     errors = [json.load(open(os.path.join(base, d, "error.json"))) for d in sorted(os.listdir(base))
               if os.path.exists(os.path.join(base, d, "error.json"))]
     unfinished = [d for d in sorted(os.listdir(base)) if os.path.isdir(os.path.join(base, d))
