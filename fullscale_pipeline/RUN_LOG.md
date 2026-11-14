@@ -3073,3 +3073,12 @@ All 18 fits that reached 5,000 epochs (approach 1 K13 ×13, K20 ×4; approach 2 
 loss down 0.29–1.23 % over the last 500 epochs, 1.1–3.1e-4 over the last 20 (stopping tolerance 1e-4), at most 1 rising
 epoch in the last 500 — slow descent, not oscillation. Seeds recur across hold-out groups (K13: seeds 1, 2, 8 in 3–4
 groups each; K20: seed 6 in 4 of 5 groups), so the slow cases follow particular starts. [LOG]
+
+### RL-228 — 2026-11-14 — value score on training vs hidden ties by K (stage 0 pass 1; no fits)
+Partial Spearman of observed vs reconstructed values controlling for tie counts (as the held-out value part), group 1,
+seeds 1–3. On all training ties it is lower than on hidden ties (e.g. KL K3 0.067 vs 0.090) — a population difference:
+hidden ties come only from entities with ≥ 2 ties. On training ties restricted to that population (47 % of child×article,
+62 % of child×parent training ties), approach 1: KL 0.133–0.148, flat across K, while hidden-tie value falls 0.090 →
+0.027 (gap 0.05 at K3 → 0.12 at K20: the in-sample/held-out gap widens with K — the pattern of over-fitting tie
+strengths); squared error 0.071–0.111 on training, 0.087–0.112 on hidden ties, no gap. Approach 2 (all training ties
+only) shows the same KL pattern. [LOG]
