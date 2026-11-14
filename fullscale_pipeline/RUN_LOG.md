@@ -3087,3 +3087,12 @@ only) shows the same KL pattern. [LOG]
 `fit/slurm/stage0_extension.sh`: fit array job 24719869 (213 fits: K = 32 × 200, squared-error approach-1 K = 13
 reruns × 13; 8,000-epoch ceiling; 27 tasks × 8, 24 h), aggregation job 24719871 (afterany). Expected ≈ 6–8 h wall clock
 if tasks start promptly; ≈ 1,000–1,100 CPU-hours. [LOG]
+
+### RL-230 — 2026-11-14 — stage 0 extension finished (jobs 24719869, 24719871)
+213/213 fits finished, all converged within 8,000 epochs: K = 32 median 4,331–5,166 epochs (max 5,429), 3.1–4.4 h per
+fit; the 13 squared-error K = 13 reruns 5,378 median (max 6,129). 783 CPU-hours. Aggregation over 1,200 fits (reruns
+replace originals), 0 failed. K = 32 is never the best K; bands — squared error {13, 20, 32} (best 20; K = 32 removed by
+value; candidates {13, 20}, both approaches; approach-1 K = 13 now converged 50/50); KL {5, 8, 13, 20, 32} (best 13;
+K = 20, 32 removed by value; candidates {5, 8, 13}, both approaches). The existence curve peaks inside the grid, so no
+further extension. Loss comparison started on incline (`fit/results/stage0/stage0_compare_pass1.*`), candidate K =
+union of the bands {5, 8, 13, 20, 32} per approach. [LOG]
