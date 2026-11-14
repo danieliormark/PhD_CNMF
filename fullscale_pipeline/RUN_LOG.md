@@ -3136,3 +3136,17 @@ index 1 by mistake, values within 1%): squared error data loss 0.986 / 0.988, R 
 the term switches on at epoch 300 (λR = 0.106 squared error) and R falls fast — squared error 0.56 → 0.005 by epoch 339
 with data loss +0.1% vs the pass-1 fit at the same epoch; KL 1.19 → 0.20, data loss +1%. W-tied child hyperedges become
 almost identical in membership early in the fit, when the data loss is still far from converged.
+
+### RL-234 — 2026-11-14 — the fast fall of R in the pass-2 test fits is a collapse of tied child memberships
+Test fits of RL-233 (approach 1, hold-out group 1, seed 1, 340 epochs, r = 0.1) against λ = 0 fits stopped at the same
+epoch (scratch script; weighted memberships of child hyperedges; "tied" = child hyperedges with ≥ 1 tie in W, 68,755):
+| fit | R (W ties) | mean squared distance, 200k random pairs of tied children | mean largest share, tied / untied | share of tied children in the most common main community | communities with > 1% of tied children |
+|---|---|---|---|---|---|
+| squared error, λ = 0 | 0.567 | 0.769 | 0.584 / 0.600 | 0.27 | 20 of 20 |
+| squared error, λ = 0.19 | 0.005 | 0.026 | 0.161 / 0.585 | 0.82 | 6 |
+| KL, λ = 0 | 1.186 | 1.564 | 0.892 / 0.927 | 0.11 | 13 of 13 |
+| KL, λ = 122 | 0.202 | 0.598 | 0.535 / 0.923 | 0.15 | 13 |
+R fell because tied children were flattened towards one common, nearly even split (squared error: largest share 0.16
+with K = 20, even split 0.05), not because similar pairs came to agree while unrelated ones stayed apart. This is the
+trivial minimiser of a graph-smoothness term (equal memberships on every connected child). KL is flattened too, less.
+Pass 2 not submitted; options to the owner.
