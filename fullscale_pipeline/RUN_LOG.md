@@ -3082,3 +3082,8 @@ hidden ties come only from entities with ≥ 2 ties. On training ties restricted
 0.027 (gap 0.05 at K3 → 0.12 at K20: the in-sample/held-out gap widens with K — the pattern of over-fitting tie
 strengths); squared error 0.071–0.111 on training, 0.087–0.112 on hidden ties, no gap. Approach 2 (all training ties
 only) shows the same KL pattern. [LOG]
+
+### RL-229 — 2026-11-14 — stage 0 extension submitted (owner, CSF3)
+`fit/slurm/stage0_extension.sh`: fit array job 24719869 (213 fits: K = 32 × 200, squared-error approach-1 K = 13
+reruns × 13; 8,000-epoch ceiling; 27 tasks × 8, 24 h), aggregation job 24719871 (afterany). Expected ≈ 6–8 h wall clock
+if tasks start promptly; ≈ 1,000–1,100 CPU-hours. [LOG]
