@@ -3162,3 +3162,9 @@ r = 0.1 (λ = 0.146): R 0.007, S 0.258 (λ = 0: 0.77), R ÷ S 0.027, largest sha
 50% of tied children in one main community, 14 communities main for > 1% — less flattened than option A at r = 0.1
 (0.16, 82%, 6), still strongly smoothed: the large component can be made nearly uniform while the small components
 keep S above 0. Test of A vs B: `plan.py w_form_test` (60 fits), `slurm/w_form_test.sh`, `fit/w_form_diagnostics.py`.
+
+### RL-236 — 2026-11-15 — W-term A/B test submitted (owner)
+CSF3 fit array job 24740567 (60 fits, 8 tasks × 8, 12 h per task), jobs `fit/slurm/jobs_w_form_test.jsonl`, outputs
+`/mnt/hum01-rds/Basov/p91688di/m1_fits/w_form_test/`. When finished: `python -m fit.w_form_diagnostics --root
+/mnt/hum01-rds/Basov/p91688di/m1_fits --stage w_form_test --out fit/results/stage0/w_form_test_diagnostics.json`
+(incline). Pass 2 on hold until the owner chooses between options A and B.
