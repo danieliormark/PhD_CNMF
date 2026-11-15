@@ -44,7 +44,7 @@ def manifest(build_path):
 
 def build_terms(job, rds, build):
     """Terms from the job's 'terms' dict: lambda_child (W regulariser), floor {lambda, gamma, omega, beta_w},
-    ceiling {lambda, rho, beta_w, facets}, o3 {lambda}. λ = 0 or missing → not built."""
+    ceiling {lambda, rho, beta_w, facets}, o3 {lambda}; w_form "contrast" → WordSimilarityContrast (test arm). λ = 0 or missing → not built."""
     import scipy.sparse as sp
     from . import terms as T
     t = job.get("terms") or {}
@@ -56,7 +56,8 @@ def build_terms(job, rds, build):
             W = sp.load_npz(build.path + "W_child_child.npz").tocsr()
         return W
     if t.get("lambda_child", 0) > 0:
-        out.append((T.WordSimilarity("child", getW()), t["lambda_child"]))
+        cls = T.WordSimilarityContrast if t.get("w_form") == "contrast" else T.WordSimilarity   # option B test arm (2026-11-15)
+        out.append((cls("child", getW()), t["lambda_child"]))
     fl = t.get("floor") or {}
     if fl.get("lambda", 0) > 0:
         ca = next(rd for rd in rds if rd.name == "child_article")

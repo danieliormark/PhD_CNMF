@@ -23,16 +23,19 @@ for sd in glob.glob("/mnt/hum01-rds/Basov/p91688di/m1_fits/stage0_*/*/spec.json"
     P = M.weighted_memberships(U, Z, res["relations"])["child"]["P"]
     diff = P[coo.row] - P[coo.col]
     R = float((v * (diff ** 2).sum(1)).sum() / N)
+    Pt = P[d > 0]; S = float(2 * ((Pt ** 2).sum(1).mean() - (Pt.mean(0) ** 2).sum()))   # option B denominator
+    top_t = float(P[d > 0].max(1).mean())
     dl = res["data_loss_history"][-1]; dl = dl[-1] if isinstance(dl, (list, tuple)) else dl
-    rows.append((j["approach"], j["beta"], j["seed"], dl, R, res.get("max_epochs", j.get("max_epochs"))))
+    rows.append((j["approach"], j["beta"], j["seed"], dl, R, S, top_t))
 import collections
 g = collections.defaultdict(list)
-for a, b, s, dl, R, me in rows: g[(a, b)].append((dl, R))
+for a, b, s, dl, R, S, tt in rows: g[(a, b)].append((dl, R, S, tt))
 for k in sorted(g):
     x = np.array(g[k]); print("approach", k[0], "loss", {2: "squared error", 1: "KL"}[k[1]], "n", len(x),
       "data loss mean %.4g sd %.2g" % (x[:, 0].mean(), x[:, 0].std(ddof=1)), "R mean %.4f sd %.4f" % (x[:, 1].mean(), x[:, 1].std(ddof=1)),
       "ratio data/R %.4g" % (x[:, 0].mean() / x[:, 1].mean()))
 out = {}
 for k in sorted(g):
-    x = np.array(g[k]); out[f"{k[0]}_{k[1]}"] = {"data_loss": float(x[:, 0].mean()), "R": float(x[:, 1].mean()), "n": len(x)}
+    x = np.array(g[k]); out[f"{k[0]}_{k[1]}"] = {"data_loss": float(x[:, 0].mean()), "R": float(x[:, 1].mean()), "n": len(x),
+        "S": float(x[:, 2].mean()), "Rc": float((x[:, 1] / x[:, 2]).mean()), "largest_share_tied": float(x[:, 3].mean())}
 json.dump(out, open(os.environ["OUT"], "w"), indent=1)

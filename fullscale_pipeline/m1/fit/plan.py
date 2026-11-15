@@ -106,6 +106,30 @@ def stage0_pass2(basis="/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m
     return out
 
 
+def w_form_test(basis="/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/results/stage0/pass2_lambda_basis_v2.json"):
+    """Test of the two remedies for the flattening of tied child hyperedges (RL-234; owner 2026-11-15: "test both options
+    a and b independently and separately"), each against the pass-1 λ = 0 fits with the same seed and group:
+    option A — decided form R, λ = r × data loss ÷ R;
+    option B — contrast form R_c = R ÷ S (terms.WordSimilarityContrast), λ = r × data loss ÷ R_c;
+    the same grid r ∈ {0.001, 0.003, 0.01, 0.03, 0.1} for both (r = the term's size relative to the data loss at the λ = 0
+    solution, so equal r means equal starting strength; 0.1 already flattened tied children under A in 340 epochs).
+    Approach 1, each loss at its K* (squared error 20, KL 13), hold-out group 1 (index 0), seeds 1–3, fraction 0.03,
+    float32, hybrid start, warm-up 300, 8,000-epoch ceiling. 60 fits. A test, not the pass-2 calibration."""
+    b = json.load(open(basis))
+    kstar = {2: 20, 1: 13}
+    out = []
+    for beta in (2, 1):
+        e = b[f"1_{beta}"]
+        grid = (0.001, 0.003, 0.01, 0.03, 0.1)
+        arms = [("A", r, r * e["data_loss"] / e["R"], {}) for r in grid]
+        arms += [("B", r, r * e["data_loss"] / e["Rc"], {"w_form": "contrast"}) for r in grid]
+        for opt, r, lam, extra in arms:
+            out += [job("w_form_test", 1, 0, kstar[beta], beta, s, FRACTION[beta], dtype="float32",
+                        terms=dict({"lambda_child": lam}, **extra), arm={"option": opt, "r": r}, max_epochs=8000)
+                    for s in (1, 2, 3)]
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -118,10 +142,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

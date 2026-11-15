@@ -3150,3 +3150,15 @@ R fell because tied children were flattened towards one common, nearly even spli
 with K = 20, even split 0.05), not because similar pairs came to agree while unrelated ones stayed apart. This is the
 trivial minimiser of a graph-smoothness term (equal memberships on every connected child). KL is flattened too, less.
 Pass 2 not submitted; options to the owner.
+
+### RL-235 — 2026-11-15 — option B (contrast form) built; W components; A/B test prepared
+`terms.WordSimilarityContrast` (R ÷ S; S = 2 (mean ‖p_i‖² − ‖mean p‖²) over child hyperedges with a W tie), switched by
+`terms.w_form = "contrast"` in a job; tests `fit/tests/test_w_contrast.py` (value vs brute force, unchanged when every
+membership is moved towards one common vector, gradient check) pass; `test_checkpoint2` still passes. λ = 0 basis
+(`pass2_lambda_basis_v2.json`, hold-out group 1, 10 seeds): R ÷ S = 0.67 / 0.70 squared error, 0.73 / 0.73 KL (approach
+1 / 2) — pairs tied in W differ about 30% less than pairs in general. Connected components of W over the 68,755 tied
+child hyperedges: 3,190; the largest holds 60,737 (88%); 2,319 have 2 members. 340-epoch test, squared error, option B
+r = 0.1 (λ = 0.146): R 0.007, S 0.258 (λ = 0: 0.77), R ÷ S 0.027, largest share of tied children 0.30 (λ = 0: 0.58),
+50% of tied children in one main community, 14 communities main for > 1% — less flattened than option A at r = 0.1
+(0.16, 82%, 6), still strongly smoothed: the large component can be made nearly uniform while the small components
+keep S above 0. Test of A vs B: `plan.py w_form_test` (60 fits), `slurm/w_form_test.sh`, `fit/w_form_diagnostics.py`.

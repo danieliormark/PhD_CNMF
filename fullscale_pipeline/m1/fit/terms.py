@@ -5,6 +5,11 @@
 #
 #   WordSimilarity (λ_child; λ_article for the fallback arm), 2026-10-27/29:
 #       R = (1/N) Σ_i Σ_j (W_ij / d_i) ‖p_i − p_j‖²,  p = weighted memberships, d_i = Σ_j W_ij, N = entities with a tie.
+#   WordSimilarityContrast (option B, 2026-11-15, TEST ARM — not decided): R_c = R ÷ S, S = mean ‖p_i − p_j‖² over all
+#       ordered pairs of the entities with a W tie = 2 (mean ‖p_i‖² − ‖mean p‖²) (exact, no sampling). Moving every p
+#       towards one common vector c (p → a p + (1 − a) c) scales R and S by a², so R_c is unchanged: the trivial minimum
+#       of R (all tied entities with the same membership, RL-234) gives no gain; R_c is lowered only by pairs tied in W
+#       being closer than pairs in general (cf. the normalisation constraint of Laplacian eigenmaps, Belkin & Niyogi).
 #   ConcentrationFloor (step 4, 2026-11-07): for each child hyperedge h, the mix of its articles' memberships, frozen at the
 #       warm-up epoch: q_h(a) ∝ x_ah + β_W Σ_j W_hj x_aj (own articles weight 1, articles of W-similar hyperedges weight
 #       similarity × β_W), mix_h = Σ_a q_h(a) m_a. Spread (bits) splits exactly: H(mix_h) = within_h + between_h,
@@ -97,6 +102,27 @@ class WordSimilarity:
         P = weighted_membership(Un, Zs, relations, self.facet)
         diff = P[self.i] - P[self.j]
         return (self.v.to(P.dtype) * (diff ** 2).sum(1)).sum() / self.N
+
+
+class WordSimilarityContrast(WordSimilarity):
+    name = "word_similarity_contrast"
+
+    def __init__(self, facet, W):
+        super().__init__(facet, W)
+        d = np.asarray(sp.csr_matrix(W).sum(axis=1)).ravel()
+        self.tied = torch.as_tensor(np.nonzero(d > 0)[0], dtype=torch.long)
+
+    def parts(self, Un, Zs, relations):
+        P = weighted_membership(Un, Zs, relations, self.facet)
+        diff = P[self.i] - P[self.j]
+        R = (self.v.to(P.dtype) * (diff ** 2).sum(1)).sum() / self.N
+        Pt = P[self.tied]
+        S = 2.0 * ((Pt ** 2).sum(1).mean() - (Pt.mean(0) ** 2).sum())
+        return R, S
+
+    def value(self, Un, Zs, relations):
+        R, S = self.parts(Un, Zs, relations)
+        return R / S.clamp(min=1e-12)
 
 
 class ConcentrationFloor:
