@@ -3168,3 +3168,24 @@ CSF3 fit array job 24740567 (60 fits, 8 tasks × 8, 12 h per task), jobs `fit/sl
 `/mnt/hum01-rds/Basov/p91688di/m1_fits/w_form_test/`. When finished: `python -m fit.w_form_diagnostics --root
 /mnt/hum01-rds/Basov/p91688di/m1_fits --stage w_form_test --out fit/results/stage0/w_form_test_diagnostics.json`
 (incline). Pass 2 on hold until the owner chooses between options A and B.
+
+### RL-237 — 2026-11-16 — W-term A/B test results (job 24740567)
+60/60 fits converged. `fit/results/stage0/w_form_test_diagnostics.{json,log}`. Approach 1, hold-out group 1, seeds 1–3,
+each arm paired with the λ = 0 pass-1 fit of the same seed. Mean over seeds (Δ = arm − λ = 0):
+Squared error (K = 20; λ = 0: existence 0.0936, value 0.0866, largest share of tied children 0.61, untied 0.62, top
+main-community share of tied 0.31, ~14 communities main for > 1%):
+- A (decided form): r 0.001 / 0.003 / 0.01 / 0.03 / 0.1 → Δ existence +0.0002 / +0.0010 / +0.0035 / +0.0020 / +0.0001;
+  Δ value −0.0090 / −0.0068 / −0.0047 / −0.0040 / −0.0068; largest share tied 0.41 / 0.37 / 0.33 / 0.29 / 0.26; top main
+  share 0.37 / 0.42 / 0.47 / 0.56 / 0.73. Flattening from the smallest strength; value worse at every r.
+- B (contrast form): Δ existence −0.0001 / +0.0009 / +0.0039 / −0.0000 / −0.0044; Δ value +0.0011 / +0.0015 / +0.0019 /
+  −0.0005 / −0.0080; largest share tied 0.63 / 0.59 / 0.51 / 0.37 / 0.32; top main share 0.30 / 0.34 / 0.37 / 0.49 / 0.83.
+  No flattening at r ≤ 0.003, moderate at 0.01 (best held-out: existence +0.0039, 3 of 3 seeds), strong from 0.03.
+KL (K = 13; λ = 0: existence 0.0924, value 0.0440, largest share tied 0.88, untied 0.92, top main share 0.10, 13
+communities):
+- A: Δ existence ≤ +0.0006; Δ value −0.0003 / −0.0010 / −0.0001 / +0.0112 / +0.0210; largest share tied 0.88 / 0.88 /
+  0.86 / 0.76 / 0.60; no concentration (13 communities, top 0.11).
+- B: Δ existence +0.0001 / +0.0002 / +0.0004 / +0.0014 / +0.0020 (3 of 3 seeds at 0.1); Δ value −0.0001 / +0.0001 /
+  +0.0008 / +0.0108 / +0.0296; largest share tied 0.88 / 0.88 / 0.88 / 0.83 / 0.68; no concentration; data loss +2.7% at
+  0.1. Gains still rising at the grid edge.
+Untied children's largest share unchanged in every arm. Limits: one hold-out group, 3 seeds, approach 1; seed stability
+not measured; existence Δ mostly below the group-level noise (SE over groups ≈ 0.002).
