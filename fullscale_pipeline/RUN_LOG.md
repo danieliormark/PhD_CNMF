@@ -3233,3 +3233,16 @@ Largest membership share of tied child hyperedges unchanged (squared error 0.60�
 Reading: fitting the values does not cost existence prediction under either loss; under squared error the weights help
 both existence and value prediction; under KL the fit predicts existence and value equally well with or without the
 values (its value ranking is no better than a value-blind fit's). No case for a two-part or existence-only model.
+
+### RL-241 — 2026-11-16 — binary follow-up: correction of "KL effectively ignores the tie values"
+`fit/binary_followup.py` (saved fits; approach 1, hold-out group 1, seeds 1–3, K*). (a) Membership agreement
+(chance-adjusted Track A / B): squared error binary vs weighted same seed 0.28 / 0.48, weighted vs weighted 0.28 / 0.51,
+binary vs binary 0.37 / 0.63; KL binary vs weighted 0.15 / 0.22, weighted vs weighted 0.24 / 0.32, binary vs binary 0.29
+/ 0.41. (b) Partial Spearman of x̂ with the real values at VISIBLE ties (controls: tie counts and product): KL weighted
+0.022 (child×article) / 0.065 (parent×child), binary −0.117 / −0.164; squared error weighted −0.022 / 0.030, binary
+−0.105 / −0.068. (c) Visible values: child×article CV 0.43, parent×child 0.38 (almost all distinct); author×affiliation
+64% at one value. Correction: KL does NOT ignore the values — they change its communities (binary and weighted KL fits
+agree less than two weighted seeds) and the weighted fit follows the visible values better than the binary fit; what it
+takes from them does not carry over to hidden ties (held-out value equal, RL-240), consistent with RL-228 (KL fits the
+strength of visible ties without predicting hidden ones). Under squared error the values change the communities little
+but improve held-out existence and value. Mechanism not established.
