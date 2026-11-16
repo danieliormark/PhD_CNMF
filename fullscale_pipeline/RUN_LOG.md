@@ -3299,3 +3299,14 @@ job-id overlap); stage name stage0_pass2 so the λ rule reads it with the other 
 (13 tasks, 24 h, chained aggregation of the whole pass-2 stage). Smoke test on incline (approach 1, group index 0, seed
 1, 360 epochs, 247 s): loss finite; at epoch 300 the term starts at 0.95 × the data loss (total 2,970 vs data 1,522),
 falls to 66 by epoch 359; data loss 1,522 → 1,631 (+7%) in the first 60 epochs with the term.
+
+### RL-246 — 2026-11-16 — squared error r = 0.1 prepared (owner: "I approve your proposal b for the values of r")
+Squared error chose its highest grid value r = 0.03 in pass 2 (RL-244); no highest-grid-value rule was decided for it,
+so the owner approved fitting r = 0.1. `plan.py stage0_pass2_se_r01` → `slurm/jobs_stage0_pass2_se_r01.jsonl` (100 fits:
+squared error, r = 0.1, λ_child 0.146 approach 1 / 0.141 approach 2, contrast form, K = 20, groups 1–5 × 10 seeds;
+identical to the pass-2 squared-error jobs except r and λ_child; no job-id overlap); stage name stage0_pass2.
+`slurm/stage0_pass2_se_r01.sh` (13 tasks, 24 h; pass-2 squared-error fits took mean 2.0 h, max 4.8 h; chained aggregation
+of the whole pass-2 stage). Smoke test on incline (approach 1, group index 0, seed 1, 360 epochs, 346 s): loss finite;
+at epoch 300 the term is 0.108 (2.5% of the data loss 4.33, which is still falling at that point), 0.0026 by epoch 359;
+the data loss keeps falling with the term on (4.33 → 3.27). Owner asked whether 0.03 → 0.1 is too large a step; answer
+and proposal in the design doc (2026-11-16, pass-2 follow-ups), pending.

@@ -5,7 +5,7 @@ submitted, finishes, or a decision changes what will run. Details live in the re
 `fullscale_pipeline/RUN_LOG.md` (RL-…, what was run and what came out) and `plans/ticket107-m1-chunk12v3-design.md`
 (design doc, what was decided and why). The staged plan with fit budgets: `plans/ticket107_layer2/test_architecture.txt`.
 
-**Last updated:** 2026-11-16, evening.
+**Last updated:** 2026-11-16, late evening.
 
 **Status words:** *Done* = finished and read; *Running* = on CSF3 now; *Submitted* = in the CSF3 queue; *Ready* =
 code and job written, waiting for submission; *Waiting for decision* = needs the owner's choice before it can be
@@ -24,6 +24,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 |---|---|---|---|---|
 | Bare graded cross-domain swap | Running | 24804741 | 160 | 14 of 160 finished (2026-11-16, 20:00) |
 | Pass 2, KL r = 1 (highest-grid-value rule) | Submitted | (ID once tasks start) | 100 | queued |
+| Pass 2, squared error r = 0.1 | Ready (owner submits) | — | 100 | `bash fit/slurm/stage0_pass2_se_r01.sh` |
 
 ## 1. Build step (before stage 0) — done
 
@@ -66,12 +67,14 @@ designs (with an author facet / articles linked to affiliations and to each othe
 |---|---|---|---|---|---|---|
 | Bare graded cross-domain swap | Running | 24804741 | 160 | Is heterogeneity found because the data have it, or produced regardless? Social identities of a fraction p = 0.25/0.5/0.75/1 of articles are swapped (p = 0 = pass 1), each loss at K\*, both approaches, group 1, 10 seeds. Feeds the decision on mono-domain communities | `fit/swap_analysis.py` (decided reading rule) | RL-243 |
 | Pass 2, KL r = 1 | Submitted | — | 100 | Highest-grid-value rule: KL chose its top value r = 0.3; check whether a stronger term still qualifies | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-245 |
+| Pass 2, squared error r = 0.1 | Ready | — | 100 | Squared error also chose its top value r = 0.03 (no rule was decided for it); owner approved fitting r = 0.1. If it qualifies the rule chooses it (flattening reported only) | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-246 |
 
 ### 2.4 Still to run or decide
 
 | Item | Status | Fits | Purpose | Blocks |
 |---|---|---|---|---|
-| Squared error at r = 0.1 | Waiting for decision | ≈ 100 | Squared error also chose its top value (r = 0.03); no rule was decided for it (A/B test evidence on r = 0.1 is one group, 3 seeds). If 0.1 qualifies it is chosen despite strong flattening | Pass 3 |
+| Intermediate r values (e.g. 0.055 between 0.03 and 0.1) | Waiting for decision | ≈ 100 per value | Owner asked whether 0.03 → 0.1 is too large a step. Proposed: none in stage 0; finer steps around the stage-0 choice in λ calibration | — |
+| What if r = 0.1 (squared error) or r = 1 (KL) is chosen again | Waiting for decision | — | Both would again be the highest grid value | Pass 3 |
 | Reading of "stability not worse than at λ = 0" | Waiting for decision | — | No margin was decided; proposed: the decided guard convention (one SE of λ = 0) | Reading KL r = 1 |
 | Pass 3 | Not started | ≈ 200–300 (sized when the candidate K are fixed) | The loss verdict: each loss at its own chosen r at the candidate K (decided rule: gate → membership agreement → held-out → stability → squared error by default) | Stage 0 decision |
 | Off-diagonal share (pass 1, no fits) | To analyse | — | Feeds the choice between the off-diagonal options O1/O3 (decided after stage 0) | λ calibration |
