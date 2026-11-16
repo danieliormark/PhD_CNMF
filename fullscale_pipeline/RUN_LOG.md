@@ -3201,3 +3201,23 @@ child hyperedges with ≥ 2 articles, n ≈ 8,400, whose largest membership shar
 error 0.051 / 0.044 (approach 1 / 2); > 0.7: 0.18–0.21 for both. Gate 1 not yet computed (`measures.excess_spread`
 exists; analysis on saved fits). Not blocking pass 2: graded cross-domain swap (bare, ≈ 160 fits), off-diagonal share
 (O3 decided after stage 0), binary existence test.
+
+### RL-239 — 2026-11-16 — S3 gate 1 on pass 1; floor shortfall
+(1) `fit/s3_gate1.py` (incline, 07:23–07:27; outputs `fit/results/stage0/s3_gate1_a{1,2}_b{1,2}.{json,log}`), both
+approaches × both losses at K*, 5 hold-out groups × 10 seeds, placed entities only. Prevalence = share of entities whose
+mean excess spread (ρ = 1) over seeds exceeds their seed SD, against the same count between seed halves (mean of 50
+halvings); harm = held-out AUC (hidden ties vs hidden empty cells, per entity) of entities with excess minus without,
+within tie-count bands, against δ (199 halvings). Child hyperedges: squared error 0.3–0.6% with excess vs reference
+5.7–8.0% (fails); KL approach 1 7.9% vs 4.7% (prevalence passes, from band 2: 8.9% vs 4.6%) but entities with excess
+predict BETTER (AUC +0.024 > 0; harm fails); KL approach 2 4.5% vs 5.1% (fails). Articles: 0.0% with excess everywhere
+(fails). Gate fails for child hyperedges and articles under both losses and approaches. Other facets: KL approach 1
+authors pass both parts (16.1% vs 5.4%, mostly authors with 2 ties 19.3%; AUC −0.018 vs δ 0.016, from author×affiliation
+hidden ties only); no other facet passes both. Mean excess of placed entities is negative almost everywhere (entities
+less spread than their relation mixes). Reference is lenient (halves differ more often than a mean of 10 exceeds its SD
+by chance), so the prevalence part is conservative.
+(2) `fit/floor_shortfall_pass1.py` (hold-out group 1, 10 seeds, K*): child hyperedges with ≥ 2 articles (≈ 8,400) below
+the floor minimum γ = 0.8: ω = 0 (between-article part only) KL 10.3% / 12.7%, squared error 3.9% / 3.3% (approach 1 /
+2), mean shortfall 0.01–0.02 bits; ω = 1 (between + within) KL 20.9% / 37.9%, squared error 79.6% / 74.1%, mean
+shortfall KL 0.05 / 0.12, squared error 0.49 / 0.43 bits. Median spread between articles KL 1.00, squared error 0.68–0.71
+bits; own spread KL 1.39–1.42, squared error 1.72–1.77 bits; squared error's articles are themselves widely spread
+(mean within-article spread 1.84–1.93 bits vs KL 0.13–0.31).
