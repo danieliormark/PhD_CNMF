@@ -107,6 +107,22 @@ def stage0_pass2(basis="/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m
     return out
 
 
+def stage0_pass2_kl_r1(basis="/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/results/stage0/pass2_lambda_basis_v2.json"):
+    """Highest-grid-value rule for KL (decided 2026-11-14; fired in pass 2, RL-244; owner 2026-11-16: "I approve the KL
+    r = 1 extension; prepare the job"): KL at r = 1, everything else as stage0_pass2 (contrast form, K* = 13, both
+    approaches, groups 1–5 × 10 seeds, fraction 0.03, float32, hybrid start, warm-up 300, 8,000-epoch ceiling). Stage name
+    stage0_pass2, so the λ rule reads it with the other r. 100 fits."""
+    b = json.load(open(basis))
+    out = []
+    for a in (1, 2):
+        e = b[f"{a}_1"]
+        lam = 1.0 * e["data_loss"] / e["Rc"]
+        out += [job("stage0_pass2", a, g, 13, 1, s, FRACTION[1], dtype="float32",
+                    terms={"lambda_child": lam, "w_form": "contrast"}, arm={"r": 1.0}, max_epochs=8000)
+                for g in range(5) for s in range(1, 11)]
+    return out
+
+
 def w_form_test(basis="/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/results/stage0/pass2_lambda_basis_v2.json"):
     """Test of the two remedies for the flattening of tied child hyperedges (RL-234; owner 2026-11-15: "test both options
     a and b independently and separately"), each against the pass-1 λ = 0 fits with the same seed and group:
@@ -168,10 +184,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

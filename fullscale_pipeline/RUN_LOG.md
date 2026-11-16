@@ -3291,3 +3291,11 @@ fits; owner to be told first). Flattening at the chosen r: squared error largest
 0.61 at λ = 0, share in the most common main community 0.41–0.43 vs 0.30, communities main for > 1% of them 10.6 vs 14.2;
 KL 0.61 vs 0.88, 0.13 vs 0.11, 13 vs 13; untied child hyperedges unchanged; data loss squared error unchanged, KL +0.2 /
 +2.7 / +5.4%. Convergence: all converged except squared error a1 r = 0.03 (48 of 49 finished).
+
+### RL-245 — 2026-11-16 — KL r = 1 extension prepared (owner: "I approve the KL r = 1 extension; prepare the job")
+`plan.py stage0_pass2_kl_r1` → `slurm/jobs_stage0_pass2_kl_r1.jsonl` (100 fits: KL, r = 1, λ_child 1,904 approach 1 /
+1,766 approach 2, contrast form, K = 13, groups 1–5 × 10 seeds; identical to the pass-2 KL jobs except r and λ_child; no
+job-id overlap); stage name stage0_pass2 so the λ rule reads it with the other r. `slurm/stage0_pass2_kl_r1.sh`
+(13 tasks, 24 h, chained aggregation of the whole pass-2 stage). Smoke test on incline (approach 1, group index 0, seed
+1, 360 epochs, 247 s): loss finite; at epoch 300 the term starts at 0.95 × the data loss (total 2,970 vs data 1,522),
+falls to 66 by epoch 359; data loss 1,522 → 1,631 (+7%) in the first 60 epochs with the term.
