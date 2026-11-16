@@ -3246,3 +3246,14 @@ agree less than two weighted seeds) and the weighted fit follows the visible val
 takes from them does not carry over to hidden ties (held-out value equal, RL-240), consistent with RL-228 (KL fits the
 strength of visible ties without predicting hidden ones). Under squared error the values change the communities little
 but improve held-out existence and value. Mechanism not established.
+
+### RL-242 — 2026-11-16 — mono-domain communities in pass 1 (read from saved measures, no fits)
+Read from `measures.json` of the converged λ = 0 pass-1 fits (5 groups × 10 seeds per cell), decided mono-domain rule
+(P_k(D₁) < 0.1 and P_k(D₂) ≥ 0.5) applied **per fit** (the "majority of seeds" step, which needs community matching across
+seeds, not yet applied). At K* (squared error 20, KL 13): squared error approach 1 0.65 mono-domain communities per fit
+(57% of fits have ≥ 1; 17 social-only, 13 semantic-only), approach 2 0.40 (34%; 14 social-only, 6 semantic-only); their
+mean half-credit share of a relation's reconstructed tie weight 0.9–3.4% (average community 5%). KL: **0 at every K ≤ 20**
+in both approaches (0.02 / 0.10 per fit at K = 32). Lowest presence of any community in either domain (median over
+fits): KL 0.445 / 0.321, squared error 0.057 / 0.085 (approach 1 / 2). Semantic presence, 5th–95th percentile over
+communities: KL 0.75–1.23 (every community near an average share of the modelled semantic ties), squared error
+0.08–3.9. Mono-facet: ≤ 0.04 per fit at K*. Used to motivate the bare graded cross-domain swap (presented 2026-11-16).
