@@ -3257,3 +3257,19 @@ in both approaches (0.02 / 0.10 per fit at K = 32). Lowest presence of any commu
 fits): KL 0.445 / 0.321, squared error 0.057 / 0.085 (approach 1 / 2). Semantic presence, 5th–95th percentile over
 communities: KL 0.75–1.23 (every community near an average share of the modelled semantic ties), squared error
 0.08–3.9. Mono-facet: ≤ 0.04 per fit at K*. Used to motivate the bare graded cross-domain swap (presented 2026-11-16).
+
+### RL-243 — 2026-11-16 — bare graded cross-domain swap prepared (owner: "You can run the csf code")
+Owner decisions 2026-11-16 (design doc): run alongside pass 2; per-fit counting; "present in both domains" = P_k ≥ 0.1 in
+both (0.5 reported); reading rule with corrections a–d. Code: `run_fit.py` hook (arm `swap_p`: `worlds.graded_swap` on
+the fit's data, swap seed = fit seed so chosen articles nest across p; permutation saved as `swap_perm.npy`, moved share
+in `spec.json`); `plan.py swap_bare` → `slurm/jobs_swap_bare.jsonl` (160 fits: p 0.25/0.5/0.75/1 × 2 approaches × 2 losses
+at K* × hold-out group 1 × seeds 1–10, terms off, fraction 0.03, float32, hybrid start, 8,000-epoch ceiling);
+`slurm/swap_bare.sh` (20 tasks × 8 fits, 24 h); `fit/swap_analysis.py` (measures, margins, decided rule; diagnostics for
+explanations 1/2 of a "no change": article overlap, band link). Tests `fit/tests/test_swap_bare.py` on the real trial
+data, both approaches: all pass (semantic relations untouched; social degree sequences, hidden-cell counts, values and
+norms kept; swaps within bands; one permutation across social relations; moved share 0.257/0.503/0.746/0.998; run_fit
+hook end-to-end). Reading rule checked on the worked-example curves. pass 2 at the time: 598/600 fits finished, all
+started (code change cannot reach it). p = 0 values (group 1, mean over seeds; squared error a1 9 converged fits):
+mono-domain 0.78 / 0.30 (squared error a1 / a2), 0 / 0 (KL); mixed share at 0.1: 0.977 / 0.989 / 1.000 / 1.000;
+weaker-domain median 0.358 / 0.411 / 0.801 / 0.751; ratio 0.512 / 0.581 / 0.674 / 0.582; article overlap 0.575 / 0.606 /
+0.925 / 0.829; band link (Cramér's V above shuffle) 0.018 / 0.024 / 0.030 / 0.035.

@@ -143,6 +143,19 @@ def binary_test():
                 max_epochs=8000) for beta in (2, 1) for s in (1, 2, 3)]
 
 
+def swap_bare():
+    """Bare graded cross-domain swap (decided 2026-11-08/09; run alongside pass 2, owner 2026-11-16): a fraction p of
+    articles has its identities permuted, within social-degree bands, in the social relations only (worlds.graded_swap;
+    swap seed = fit seed, so the articles chosen at a smaller p are a subset of those at a larger p). p ∈ {0.25, 0.5,
+    0.75, 1}; p = 0 = the pass-1 fits of the same group and seeds. Terms off, each loss at K* (squared error 20, KL 13),
+    both approaches, hold-out group 1 (index 0), seeds 1–10, fraction 0.03, float32, hybrid start, 8,000-epoch ceiling.
+    160 fits. Read by fit/swap_analysis.py."""
+    kstar = {2: 20, 1: 13}
+    return [job("swap_bare", a, 0, kstar[beta], beta, s, FRACTION[beta], dtype="float32", arm={"swap_p": p},
+                max_epochs=8000)
+            for a in (1, 2) for beta in (2, 1) for p in (0.25, 0.5, 0.75, 1.0) for s in range(1, 11)]
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -155,10 +168,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)
