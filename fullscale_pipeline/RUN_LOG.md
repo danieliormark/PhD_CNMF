@@ -3189,3 +3189,15 @@ communities):
   0.1. Gains still rising at the grid edge.
 Untied children's largest share unchanged in every arm. Limits: one hold-out group, 3 seeds, approach 1; seed stability
 not measured; existence Δ mostly below the group-level noise (SE over groups ≈ 0.002).
+
+### RL-238 — 2026-11-16 — pass 2 submitted by accident (job 24774361); prerequisites missed
+Owner submitted `slurm/stage0_pass2.sh` by accident (fit array 24774361; at 07:14 ~52 tasks started, 416 fit directories,
+0 finished; specs correct: contrast form, per-loss grid). Owner asks to cancel. Check of the record (assistant's
+omission when calling pass 2 "ready"): two post-pass-1 decisions precede pass 2 — (1) the concentration floor: keep or
+drop, from diagnostic (c); if kept and the losses differ substantially on (c), a floor pass goes between passes 1 and 2
+and λ_child is calibrated with the floor on (design doc 2026-11-06); (2) S3 gate 1 (excess spread beyond seed noise and
+harm to prediction; 2026-11-07); if it passes, S3 is tested in the same slot. Diagnostic (c) on pass 1 at K* (share of
+child hyperedges with ≥ 2 articles, n ≈ 8,400, whose largest membership share exceeds 0.9): KL 0.066 / 0.071, squared
+error 0.051 / 0.044 (approach 1 / 2); > 0.7: 0.18–0.21 for both. Gate 1 not yet computed (`measures.excess_spread`
+exists; analysis on saved fits). Not blocking pass 2: graded cross-domain swap (bare, ≈ 160 fits), off-diagonal share
+(O3 decided after stage 0), binary existence test.
