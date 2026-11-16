@@ -1,0 +1,540 @@
+{
+ "approach_1_squared_error": {
+  "best_by_existence": 0.01,
+  "band": [
+   0.0,
+   0.003,
+   0.01,
+   0.03
+  ],
+  "kept_after_value": [
+   0.003,
+   0.01,
+   0.03
+  ],
+  "passing_stability": [
+   0.003,
+   0.01,
+   0.03
+  ],
+  "chosen_r": 0.03,
+  "stability": {
+   "0.0": {
+    "stability": {
+     "A_adjusted": [
+      0.34282638370237056,
+      0.005487376859896316,
+      5
+     ],
+     "B_adjusted": [
+      0.545006352257271,
+      0.009197924383960141,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.01": {
+    "stability": {
+     "A_adjusted": [
+      0.35431226351376716,
+      0.011210406862616073,
+      5
+     ],
+     "B_adjusted": [
+      0.5442907107353752,
+      0.014484256668331441,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.003": {
+    "stability": {
+     "A_adjusted": [
+      0.3477442447430482,
+      0.008429612434413479,
+      5
+     ],
+     "B_adjusted": [
+      0.5371055832518133,
+      0.011572949065203647,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.03": {
+    "stability": {
+     "A_adjusted": [
+      0.36572313678736973,
+      0.007590353642827923,
+      5
+     ],
+     "B_adjusted": [
+      0.5532735858191392,
+      0.011195521271125539,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   }
+  },
+  "scores": {
+   "0.0": {
+    "existence": 0.09467714218595272,
+    "se_existence": 0.0028136959120931134,
+    "value": 0.09670087789108525,
+    "se_value": 0.002562875450080539,
+    "n_groups_scored": 5
+   },
+   "0.003": {
+    "existence": 0.09557448514365278,
+    "se_existence": 0.002800421020251722,
+    "value": 0.10118087981961132,
+    "se_value": 0.002238309244699613,
+    "n_groups_scored": 5
+   },
+   "0.01": {
+    "existence": 0.09613828877160846,
+    "se_existence": 0.0028949152013189802,
+    "value": 0.10300414962492208,
+    "se_value": 0.0023331110026379768,
+    "n_groups_scored": 5
+   },
+   "0.03": {
+    "existence": 0.09526843304200601,
+    "se_existence": 0.002610838884864808,
+    "value": 0.10483092525720612,
+    "se_value": 0.003206447456064705,
+    "n_groups_scored": 5
+   }
+  }
+ },
+ "approach_1_KL": {
+  "best_by_existence": 0.3,
+  "band": [
+   0.0,
+   0.03,
+   0.1,
+   0.3
+  ],
+  "kept_after_value": [
+   0.3
+  ],
+  "passing_stability": [
+   0.3
+  ],
+  "chosen_r": 0.3,
+  "stability": {
+   "0.0": {
+    "stability": {
+     "A_adjusted": [
+      0.2585700750545466,
+      0.002969751958133925,
+      5
+     ],
+     "B_adjusted": [
+      0.32754572419560385,
+      0.0038700418266354977,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.3": {
+    "stability": {
+     "A_adjusted": [
+      0.2704245129185584,
+      0.003432516705849747,
+      5
+     ],
+     "B_adjusted": [
+      0.3585452380078683,
+      0.004698159442393595,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.03": {
+    "stability": {
+     "A_adjusted": [
+      0.2593255559261355,
+      0.0033250296970312046,
+      5
+     ],
+     "B_adjusted": [
+      0.3386895956624983,
+      0.003952675264700504,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.1": {
+    "stability": {
+     "A_adjusted": [
+      0.2628215600970273,
+      0.0036296216210877346,
+      5
+     ],
+     "B_adjusted": [
+      0.35085197170825416,
+      0.004387786770310352,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   }
+  },
+  "scores": {
+   "0.0": {
+    "existence": 0.09461122231191914,
+    "se_existence": 0.002012557453214268,
+    "value": 0.044123278948138105,
+    "se_value": 0.004098375464328593,
+    "n_groups_scored": 5
+   },
+   "0.03": {
+    "existence": 0.09593682625325889,
+    "se_existence": 0.002111024588487661,
+    "value": 0.05600353956077523,
+    "se_value": 0.003994612774118549,
+    "n_groups_scored": 5
+   },
+   "0.1": {
+    "existence": 0.09498479548576226,
+    "se_existence": 0.0018558776002726351,
+    "value": 0.07457844504217283,
+    "se_value": 0.0035761587962814772,
+    "n_groups_scored": 5
+   },
+   "0.3": {
+    "existence": 0.09614683981702424,
+    "se_existence": 0.001684214539030414,
+    "value": 0.08544213023650864,
+    "se_value": 0.0030979717573590623,
+    "n_groups_scored": 5
+   }
+  },
+  "highest_grid_value_rule": "r = 0.3 chosen: fit r = 1 (tell the owner first)"
+ },
+ "approach_2_squared_error": {
+  "best_by_existence": 0.01,
+  "band": [
+   0.0,
+   0.003,
+   0.01,
+   0.03
+  ],
+  "kept_after_value": [
+   0.003,
+   0.01,
+   0.03
+  ],
+  "passing_stability": [
+   0.003,
+   0.01,
+   0.03
+  ],
+  "chosen_r": 0.03,
+  "stability": {
+   "0.0": {
+    "stability": {
+     "A_adjusted": [
+      0.34618291959165404,
+      0.007262771017175552,
+      5
+     ],
+     "B_adjusted": [
+      0.5420005133245379,
+      0.009753541950645433,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.003": {
+    "stability": {
+     "A_adjusted": [
+      0.3656695610526271,
+      0.010547909230745875,
+      5
+     ],
+     "B_adjusted": [
+      0.5581504398141813,
+      0.011730492391660949,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.03": {
+    "stability": {
+     "A_adjusted": [
+      0.37772859155692273,
+      0.008848816296537249,
+      5
+     ],
+     "B_adjusted": [
+      0.5698851951925551,
+      0.012370938939966663,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.01": {
+    "stability": {
+     "A_adjusted": [
+      0.36945504736054363,
+      0.011008692611322552,
+      5
+     ],
+     "B_adjusted": [
+      0.5617407129057194,
+      0.012267463345482486,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   }
+  },
+  "scores": {
+   "0.0": {
+    "existence": 0.09392004990202305,
+    "se_existence": 0.0025652909330101717,
+    "value": 0.08278695319595214,
+    "se_value": 0.0037316478790786582,
+    "n_groups_scored": 5
+   },
+   "0.003": {
+    "existence": 0.0952061083123403,
+    "se_existence": 0.002348875538497196,
+    "value": 0.08908614994066796,
+    "se_value": 0.004775056678990626,
+    "n_groups_scored": 5
+   },
+   "0.01": {
+    "existence": 0.09574497838505933,
+    "se_existence": 0.0025394725433465384,
+    "value": 0.09301654975410344,
+    "se_value": 0.00498541663947677,
+    "n_groups_scored": 5
+   },
+   "0.03": {
+    "existence": 0.09468979919430456,
+    "se_existence": 0.0023920077701343905,
+    "value": 0.09454028929585859,
+    "se_value": 0.00526501218213532,
+    "n_groups_scored": 5
+   }
+  }
+ },
+ "approach_2_KL": {
+  "best_by_existence": 0.3,
+  "band": [
+   0.0,
+   0.03,
+   0.1,
+   0.3
+  ],
+  "kept_after_value": [
+   0.3
+  ],
+  "passing_stability": [
+   0.3
+  ],
+  "chosen_r": 0.3,
+  "stability": {
+   "0.0": {
+    "stability": {
+     "A_adjusted": [
+      0.26573011474546815,
+      0.004065860957453156,
+      5
+     ],
+     "B_adjusted": [
+      0.3467468569901662,
+      0.0036924587313824832,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.1": {
+    "stability": {
+     "A_adjusted": [
+      0.2712905218721921,
+      0.003739602791275128,
+      5
+     ],
+     "B_adjusted": [
+      0.36723520104943647,
+      0.0025266606627253937,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.3": {
+    "stability": {
+     "A_adjusted": [
+      0.27923804048036327,
+      0.003912324802457354,
+      5
+     ],
+     "B_adjusted": [
+      0.3760786817008893,
+      0.002841254587612082,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   },
+   "0.03": {
+    "stability": {
+     "A_adjusted": [
+      0.2644870132422985,
+      0.004023915794623215,
+      5
+     ],
+     "B_adjusted": [
+      0.3529631029704679,
+      0.0037295248513035963,
+      5
+     ],
+     "gate_fails_0.2": false
+    },
+    "worse": {
+     "A_adjusted": false,
+     "B_adjusted": false
+    },
+    "gate_worse": false,
+    "passes": true
+   }
+  },
+  "scores": {
+   "0.0": {
+    "existence": 0.09540947848189811,
+    "se_existence": 0.0018352235453556528,
+    "value": 0.045696488410610844,
+    "se_value": 0.004450677663169672,
+    "n_groups_scored": 5
+   },
+   "0.03": {
+    "existence": 0.09636628520362767,
+    "se_existence": 0.0018989229507800308,
+    "value": 0.05376271588587424,
+    "se_value": 0.004578311527079882,
+    "n_groups_scored": 5
+   },
+   "0.1": {
+    "existence": 0.09522230274737915,
+    "se_existence": 0.0017205317597815287,
+    "value": 0.07046304129507096,
+    "se_value": 0.00526710238006304,
+    "n_groups_scored": 5
+   },
+   "0.3": {
+    "existence": 0.09645175340875564,
+    "se_existence": 0.0016813817429334717,
+    "value": 0.08338910188150782,
+    "se_value": 0.004420364607336218,
+    "n_groups_scored": 5
+   }
+  },
+  "highest_grid_value_rule": "r = 0.3 chosen: fit r = 1 (tell the owner first)"
+ }
+}

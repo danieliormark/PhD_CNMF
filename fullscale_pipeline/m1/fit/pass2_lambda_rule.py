@@ -1,0 +1,80 @@
+# Stage-0 pass 2: the λ_child rule per loss and approach (decided 2026-11-14, rule b; largest λ kept 2026-11-16).
+# Candidates: λ = 0 (pass-1 aggregate at K*) and the pass-2 grid (squared error r 0.003/0.01/0.03, KL 0.03/0.1/0.3).
+# 1. best = highest held-out existence (within-class AP, combined; mean over hold-out groups of the group's seed mean);
+#    band = candidates with existence ≥ best − SE(best) (SE = SD of group means / √groups).
+# 2. a band candidate is removed if its value (partial Spearman) < value(best) − SE_value(best).
+# 3. the largest remaining λ whose stability is not worse than at λ = 0 is chosen. "Not worse" (no margin was decided;
+#    the decided guard convention is used, 2026-11-13 two_part_guard): the stability gate does not fail at fraction 0.2
+#    when λ = 0 passes it, and neither Track A nor Track B (chance-adjusted, mean over groups) is below λ = 0's by more
+#    than λ = 0's SE over groups.
+# Highest-grid-value rule (2026-11-14): KL at r = 0.3 → fit r = 1 (owner told first). No lowest-grid-value rule (2026-11-16).
+# Usage: python -m fit.pass2_lambda_rule --pass1 P1.json --pass2 P2.json --out OUT.json
+import argparse, json, math
+import numpy as np
+
+KSTAR = {2: 20, 1: 13}
+
+
+def stab(entry):
+    out = {}
+    for t in ("A_adjusted", "B_adjusted"):
+        v = [g["stability"][t] for g in entry["groups"] if g.get("stability")]
+        out[t] = (float(np.mean(v)), float(np.std(v, ddof=1) / math.sqrt(len(v))) if len(v) > 1 else None, len(v))
+    out["gate_fails_0.2"] = bool((entry.get("gate_fails") or {}).get("0.2", {}) and entry["gate_fails"]["0.2"]["K_fails"])
+    return out
+
+
+def rule(cands):
+    """cands: {r: entry}; r = 0.0 is λ = 0."""
+    best = max(cands, key=lambda r: cands[r]["existence"])
+    b = cands[best]
+    band = [r for r in cands if cands[r]["existence"] >= b["existence"] - b["se_existence"]]
+    kept = [r for r in band if not (cands[r]["value"] is not None and b["value"] is not None
+                                    and cands[r]["value"] < b["value"] - b["se_value"])]
+    s0 = stab(cands[0.0])
+    st = {}
+    for r in cands:
+        s = stab(cands[r])
+        worse = {t: s[t][0] < s0[t][0] - (s0[t][1] or 0.0) for t in ("A_adjusted", "B_adjusted")}
+        gate_worse = s["gate_fails_0.2"] and not s0["gate_fails_0.2"]
+        st[r] = {"stability": s, "worse": worse, "gate_worse": gate_worse,
+                 "passes": not (gate_worse or any(worse.values()))}
+    ok = [r for r in kept if st[r]["passes"]]
+    chosen = max(ok) if ok else 0.0
+    return {"best_by_existence": best, "band": sorted(band), "kept_after_value": sorted(kept),
+            "passing_stability": sorted(ok), "chosen_r": chosen, "stability": st,
+            "scores": {r: {k: cands[r][k] for k in ("existence", "se_existence", "value", "se_value", "n_groups_scored")}
+                       for r in sorted(cands)}}
+
+
+def main():
+    ap = argparse.ArgumentParser(); ap.add_argument("--pass1", required=True); ap.add_argument("--pass2", required=True)
+    ap.add_argument("--out", required=True)
+    a = ap.parse_args()
+    p1 = json.load(open(a.pass1)); p2 = json.load(open(a.pass2))
+    rep = {}
+    for appr in (1, 2):
+        for beta in (2, 1):
+            c1 = next(v for k, v in p1.items() if not k.startswith("_") and v["cell"]["approach"] == appr and v["cell"]["beta"] == beta)
+            cands = {0.0: c1["per_K"][str(KSTAR[beta])]}
+            for k, v in p2.items():
+                if k.startswith("_") or v["cell"]["approach"] != appr or v["cell"]["beta"] != beta:
+                    continue
+                cands[float(v["cell"]["arm"]["r"])] = v["per_K"][str(KSTAR[beta])]
+            name = f"approach_{appr}_{'KL' if beta == 1 else 'squared_error'}"
+            rep[name] = rule(cands)
+            if beta == 1 and rep[name]["chosen_r"] == 0.3:
+                rep[name]["highest_grid_value_rule"] = "r = 0.3 chosen: fit r = 1 (tell the owner first)"
+            r = rep[name]
+            print(name, "chosen r =", r["chosen_r"], "| best by existence", r["best_by_existence"], "| band", r["band"],
+                  "| after value", r["kept_after_value"], "| stability ok", r["passing_stability"])
+            for rr, s in r["scores"].items():
+                sb = r["stability"][rr]
+                print(f"   r={rr:<6} existence {s['existence']:.4f} ± {s['se_existence']:.4f}  value {s['value']:.4f} ± {s['se_value']:.4f}"
+                      f"  A {sb['stability']['A_adjusted'][0]:.3f}  B {sb['stability']['B_adjusted'][0]:.3f}  gate fails {sb['stability']['gate_fails_0.2']}"
+                      f"  stability passes {sb['passes']}  groups {s['n_groups_scored']}")
+    json.dump(rep, open(a.out, "w"), indent=1)
+
+
+if __name__ == "__main__":
+    main()

@@ -3273,3 +3273,21 @@ started (code change cannot reach it). p = 0 values (group 1, mean over seeds; s
 mono-domain 0.78 / 0.30 (squared error a1 / a2), 0 / 0 (KL); mixed share at 0.1: 0.977 / 0.989 / 1.000 / 1.000;
 weaker-domain median 0.358 / 0.411 / 0.801 / 0.751; ratio 0.512 / 0.581 / 0.674 / 0.582; article overlap 0.575 / 0.606 /
 0.925 / 0.829; band link (Cramér's V above shuffle) 0.018 / 0.024 / 0.030 / 0.035.
+
+### RL-244 — 2026-11-16 — stage-0 pass 2 results and the λ rule (599 of 600 fits)
+Pass-2 array 24789580: 599/600 fits finished, 0 errors; 1 still running at the time (squared error, approach 1, r = 0.03,
+group index 3, seed 6; started 14:02; the chained CSF3 aggregation waits for it). Aggregated on incline with the decided
+code (`fit.aggregate`, scratch output), then `fit/pass2_lambda_rule.py` (new: rule b, largest λ; "stability not worse
+than λ = 0" operationalised as the gate not failing at 0.2 where λ = 0 passes and Track A/B chance-adjusted not below
+λ = 0's by more than λ = 0's SE over groups — assistant's reading of an undefined margin, to be confirmed) →
+`results/stage0/pass2_lambda_rule_599.json`; flattening `fit.w_form_diagnostics` → `results/stage0/pass2_flattening_599.json`.
+Existence (within-class AP, mean over 5 groups ± SE): every r within one SE of the best in all four cells (largest gap to
+λ = 0 +0.0014 vs SE 0.002–0.003). Value (partial Spearman): squared error a1 0.097 / 0.101 / 0.103 / 0.105 (λ = 0 / r 0.003
+/ 0.01 / 0.03), a2 0.083 / 0.089 / 0.093 / 0.095; KL a1 0.044 / 0.056 / 0.075 / 0.085 (λ = 0 / 0.03 / 0.1 / 0.3), a2 0.046 /
+0.054 / 0.071 / 0.083. Stability (chance-adjusted Track A/B) rises slightly with r everywhere; the gate passes everywhere.
+**Rule result: squared error r = 0.03 (λ_child 0.044 a1 / 0.042 a2), KL r = 0.3 (571 a1 / 530 a2) — both the highest
+grid value.** λ = 0 removed by the value guard in all four cells. Highest-grid-value rule fires for KL (fit r = 1, ≈ 100
+fits; owner to be told first). Flattening at the chosen r: squared error largest share of tied child hyperedges 0.36 vs
+0.61 at λ = 0, share in the most common main community 0.41–0.43 vs 0.30, communities main for > 1% of them 10.6 vs 14.2;
+KL 0.61 vs 0.88, 0.13 vs 0.11, 13 vs 13; untied child hyperedges unchanged; data loss squared error unchanged, KL +0.2 /
++2.7 / +5.4%. Convergence: all converged except squared error a1 r = 0.03 (48 of 49 finished).
