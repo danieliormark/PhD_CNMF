@@ -204,9 +204,13 @@ class RelationData:
     def hid_col(self): return np.concatenate([self.hid_tie_col, self.hid_empty_col])
 
 
-def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True):
+def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True, binary=False):
     """The relations of one fit. group: hold-out group 0..9 (None = final refit on all cells, 2026-11-03).
-    use_journal=False is arm J1 (no article×journal); journal_multiplier gives J3a/J3b; drop removes relations (arm N)."""
+    use_journal=False is arm J1 (no article×journal); journal_multiplier gives J3a/J3b; drop removes relations (arm N).
+    binary=True (binary test, owner 2026-11-16): every VISIBLE tie value set to 1 before the Frobenius normalisation, so
+    the fit sees only where ties are; hidden tie values keep their weighted values (scaled by the weighted visible norm),
+    so held-out value is still scored against the real weights (ranks only; the held-out error scores are then on a
+    different scale and not comparable with weighted fits)."""
     rels = [r for r in APPROACH[approach] if r not in drop and (use_journal or r != "article_journal")]
     w = relation_weights(rels, journal_multiplier, semantic_split)
     out = []
@@ -230,6 +234,9 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
             assert not np.any(r == c), "a tie on the masked diagonal"
         fro = float(np.sqrt(np.sum(v[vis] ** 2)))                 # visible observed cells (zeros add nothing)
         v = v / fro
-        out.append(RelationData(rel, rf, cf, shape, w[rel], dom, r[vis], c[vis], v[vis], obs, diag,
+        vt = v[vis]
+        if binary:
+            vt = np.full(int(vis.sum()), 1.0 / np.sqrt(vis.sum()))   # 1 per visible tie, Frobenius-normalised
+        out.append(RelationData(rel, rf, cf, shape, w[rel], dom, r[vis], c[vis], vt, obs, diag,
                                 r[hid], c[hid], v[hid], er, ec, fro))
     return out

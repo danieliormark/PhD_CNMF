@@ -131,6 +131,18 @@ def w_form_test(basis="/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1
     return out
 
 
+def binary_test():
+    """Binary test (owner 2026-11-16: "make the binary test first"; corrected reading 2026-11-16): fits on data where every
+    visible tie value is 1 (data.fit_data binary=True), all terms off, compared with the pass-1 weighted λ = 0 fits of the
+    same seed: held-out existence (does fitting the values cost existence prediction, and how much) and held-out value
+    (can a fit that never saw the values rank them as well as the weighted fit). Approach 1, both losses at K*
+    (squared error 20, KL 13), hold-out group 1 (index 0), seeds 1–3, fraction 0.03, float32, hybrid start, 8,000-epoch
+    ceiling. 6 fits."""
+    kstar = {2: 20, 1: 13}
+    return [job("binary_test", 1, 0, kstar[beta], beta, s, FRACTION[beta], dtype="float32", arm={"binary": True},
+                max_epochs=8000) for beta in (2, 1) for s in (1, 2, 3)]
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -143,10 +155,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)
