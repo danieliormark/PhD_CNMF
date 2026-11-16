@@ -3221,3 +3221,15 @@ the floor minimum γ = 0.8: ω = 0 (between-article part only) KL 10.3% / 12.7%,
 shortfall KL 0.05 / 0.12, squared error 0.49 / 0.43 bits. Median spread between articles KL 1.00, squared error 0.68–0.71
 bits; own spread KL 1.39–1.42, squared error 1.72–1.77 bits; squared error's articles are themselves widely spread
 (mean within-article spread 1.84–1.93 bits vs KL 0.13–0.31).
+
+### RL-240 — 2026-11-16 — binary test results
+6/6 fits converged (2,654–3,237 epochs). `fit/results/stage0/binary_test_diagnostics.{json,log}`. Binary fit (visible tie
+values 1) minus weighted λ = 0 pass-1 fit of the same seed, approach 1, hold-out group 1:
+squared error (K = 20): existence −0.0081 / −0.0088 / −0.0033 (mean −0.0067; weighted 0.0936), value −0.0307 / −0.0216 /
+−0.0388 (mean −0.030; weighted 0.087) — worse in every seed on both parts.
+KL (K = 13): existence +0.0013 / +0.0051 / −0.0030 (mean +0.0011; weighted 0.0924), value +0.0012 / +0.0072 / −0.0015
+(mean +0.0023; weighted 0.044) — no consistent difference.
+Largest membership share of tied child hyperedges unchanged (squared error 0.60–0.61, KL 0.87–0.88).
+Reading: fitting the values does not cost existence prediction under either loss; under squared error the weights help
+both existence and value prediction; under KL the fit predicts existence and value equally well with or without the
+values (its value ranking is no better than a value-blind fit's). No case for a two-part or existence-only model.
