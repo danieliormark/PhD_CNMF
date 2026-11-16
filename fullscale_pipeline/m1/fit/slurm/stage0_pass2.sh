@@ -1,7 +1,7 @@
 #!/bin/bash
-# Stage 0 pass 2 (ticket 107): λ_child per loss. Each loss at its own K* (squared error 20, KL 13), both approaches,
-# λ_child = r × (data loss ÷ R) at λ = 0 (fit/pass2_lambda.py → results/stage0/pass2_lambda_basis.json),
-# r ∈ {0.03, 0.1, 0.3}; hold-out groups 1–5 × 10 seeds; fraction 0.03, float32, hybrid start, warm-up 300, 8,000-epoch
+# Stage 0 pass 2 (ticket 107): λ_child per loss, contrast form R ÷ S (option B, owner 2026-11-16). Each loss at its K*,
+# λ_child = r × (data loss ÷ (R ÷ S)) at λ = 0 (fit/pass2_lambda.py → results/stage0/pass2_lambda_basis_v2.json),
+# r: squared error {0.003, 0.01, 0.03}, KL {0.03, 0.1, 0.3}; hold-out groups 1–5 × 10 seeds; fraction 0.03, float32, hybrid start, warm-up 300, 8,000-epoch
 # ceiling. 600 fits = 75 tasks × 8 fits, 24 h per task, then the aggregation of the pass-2 stage.
 # Owner decisions 2026-11-14 (scaling, grid, K*, permission to write the job). Run from a CSF3 login node.
 set -euo pipefail
