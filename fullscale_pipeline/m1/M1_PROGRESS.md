@@ -74,7 +74,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 | Item | Status | Fits | Purpose | Blocks |
 |---|---|---|---|---|
 | Intermediate r values (e.g. 0.055 between 0.03 and 0.1) | Decided: not fitted | — | Owner (2026-11-17): none in stage 0; finer steps around the stage-0 choice in λ calibration | — |
-| What if the highest grid value is chosen again | Waiting for decision | — | KL r = 1 is chosen in both approaches (RL-247); squared error r = 0.1 pending its fits. Proposed: stop, carry the open limit to λ calibration | Pass 3 |
+| What if the highest grid value is chosen again | Decided 2026-11-17 | — | Stop at the highest fitted r in stage 0 (KL r = 1); λ calibration establishes the upper limit of λ_child (grid above the top value, finer steps) | — |
 | Reading of "stability not worse than at λ = 0" | Decided 2026-11-17 | — | One SE of λ = 0 (reference SE), gate must not start failing; paired differences reported | — |
 | Pass 3 | Not started | ≈ 200–300 (sized when the candidate K are fixed) | The loss verdict: each loss at its own chosen r at the candidate K (decided rule: gate → membership agreement → held-out → stability → squared error by default) | Stage 0 decision |
 | Off-diagonal share (pass 1, no fits) | To analyse | — | Feeds the choice between the off-diagonal options O1/O3 (decided after stage 0) | λ calibration |
