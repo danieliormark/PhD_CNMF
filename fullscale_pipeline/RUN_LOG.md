@@ -3551,3 +3551,15 @@ mono in the same direction in at most 3 of 9–10 seeds → still **no mono-doma
 1.40 → 1.10, article → organisation 1.46 → 1.14. Recurring in the majority of seeds: 1 (squared error approach 1), 2 (KL
 approach 1), 0, 0. Stage-0 selection under the aligned numbering (stability gate, vetoes, K choice) running
 (`/mnt/hum01-rds/.../stage0_pass1/_aggregate_aligned.json`).
+
+### RL-262 — 2026-11-17 — why detachment remains after alignment: shared main partner (no fits)
+Aligned numbering, pass 1 at K*, per fit: number of organisation communities that are the **main partner** (largest
+reconstructed tie weight) of two or more author (approach 1) / article (approach 2) communities: median 1 (KL approach 1),
+5 (squared error approach 1), 2 (KL approach 2). Detached communities (row facet present ≥ 0.5, organisations under the
+same number < 0.1): KL approach 1 — 80 cases, 68 have a main partner that is also another row community's main partner
+(the one-to-one alignment gave it to the other), 74 have an essentially empty organisation column under their own number
+(organisation side < 0.001); squared error approach 1 — 73 / 68 / 62; KL approach 2 — 57 / 57 / 53. → Remaining
+detachment is mostly two row communities whose ties go mainly to the same organisation community, with the organisation
+facet using fewer distinct communities than K; the leftover organisation column carries almost nothing. Wording fixed for
+the owner: not "communities sharing a community". Aligned stage-0 selection restarted detached (previous run stopped
+with the session, no output).

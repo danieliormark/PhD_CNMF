@@ -366,6 +366,22 @@ Renaming organisation columns 2 → 1, 3 → 2, 1 → 3 (and the core's columns 
 changes no reconstructed value, and community 1 = physics authors + physics organisations. Real case: KL approach 1,
 author×affiliation, share on matching numbers 0.23 as fitted → 0.96 aligned, ≈ 1.04 partner communities.
 
+**Is the aligned numbering "the correct" one?** Not in the model's own terms: every numbering gives the same loss, so the
+fit has no correct or wrong numbering, and nothing in the fit is corrected. The error was in our *reading* of the fitted
+numbering as if one number were one group across facets (R-A). Alignment chooses, for each facet, the numbering under
+which community k is the community most strongly tied (by reconstructed tie weight) to community k of the facet it is
+matched to, ending at the articles. Where the structure is one-to-one (KL) this yields a numbering under which one number
+is one group in every facet; where it is spread (squared error) no numbering can do that, and the match strength shows
+how far it succeeds.
+
+**Main partner, shared main partner** (asked 2026-11-17). In the table of parts of author×affiliation (rows: author
+communities, columns: organisation communities), an author community's **main partner** is the organisation community
+with the largest part in its row. Two author communities have a **shared main partner** when both rows peak in the same
+column: the authors of both communities are tied mainly to organisations that belong to the same organisation community
+(e.g. two topic groups at the same set of universities). One-to-one alignment can give that column the number of only
+one of them; the other keeps its own number on an organisation column that carries almost nothing and reads as
+"detached". Measured (RL-262): KL approach 1, 68 of 80 detached author communities are of this kind.
+
 **How (decided):** entry "Alignment". **What it cannot do:** remove genuine spread (squared error: one author community
 tied to several organisation communities; the best match then carries only part of the weight — hence match strength
 is reported) or match two communities to one partner (one-to-one). **Relation to Hungarian matching elsewhere:** Track
@@ -397,3 +413,21 @@ noisy (a matched community's weak-domain presence went from 0.076 in one seed to
 "in the majority of seeds" in the mono-domain rule. **Model:** Σ_k p_k(r) = K for each relation — presence shows how the
 model divides each relation among communities (one gains, others lose), not how well it fits. Depends on the numbering
 across facets (E2).
+
+### E5. When does an arm "stay near one partner"? (the midpoint line of the diagonal-start test)
+
+*Asked 2026-11-17 (twice).* **Number of partner communities** (entry "Effective number of partner communities"): for one
+community of one facet, how many communities of the other facet its reconstructed ties go to — 1 if all to one, 2 if
+50/50, 4 if even over four; per relation averaged over communities weighted by tie weight; does not depend on numbering.
+**Two reference points:** 1 = the pattern of the owner's reading R-A (one community = one group across facets; each
+community has one partner); the **reference value** = the median number of partners in the existing pass-1 fits (random
+social start) for the same relation, loss and approach, hold-out group 1, seeds 1–10 (e.g. squared error approach 1
+author×affiliation 3.46). **Rule (proposed):** the diagonal arm "stays near one partner" if its median is closer to 1
+than to the reference value, i.e. below the midpoint (1 + 3.46) ÷ 2 = 2.23; otherwise it "returns to spread".
+**Worked example:** diagonal arm median 1.6 → below 2.23 → stays near one partner (outcome 1 or 3, depending on fit
+cost); median 3.1 → returns to spread (outcome 2). **Why a midpoint:** the question is whether the arm ends nearer the R-A
+pattern or nearer what the random start gave; the midpoint is the neutral line between the two, not a number chosen in
+advance. **Trade-off:** a median of 2.2 counts as "near one" although it is spread over about two communities (the
+number is always reported beside the verdict). **Alternatives:** an absolute line (e.g. 1.5, about where KL sits) —
+stricter, but chosen by eye; a paired 2-SE test on the number of partners — says whether the arms differ, not whether
+the arm is near one.
