@@ -3516,3 +3516,19 @@ author×article 0.44 as fitted vs 0.08 renumbered). Consistent with the toy's pe
 detachment, swap presence measures, Track A/B matching across stacked facets) are affected to the extent of the social
 drift; label-free readings (effective partners, held-out, loss) are not. The start test's primary reading (partners) is
 label-free.
+
+### RL-260 — 2026-11-17 — alignment of community numbering implemented (owner: "I approve the renumbering", "I agree with proposal a")
+`fit/align.py`: read-time alignment of every facet's numbering to the articles' (Hungarian on tie-weight parts, one facet
+at a time from the reference: children via child×article, parents via child×parent, then journals / authors /
+organisations); option (a) always applied, match strength (Σ_k part(k,k) ÷ T_r) reported as fitted and aligned; saved
+fits untouched; per fit `aligned.json` next to the fit on RDS (permutations, match strength, presence / domain / facet
+presence and mono flags under the aligned numbering). Tests `fit/tests/test_align.py` (real pass-1 fits at K*, both
+approaches × both losses): reconstructed values unchanged (≤ 5e-16); stored permutations reproduce the alignment
+exactly; scrambling every non-article facet and re-aligning gives the same result (independent of the fitted
+numbering); match strength never lower after alignment on chain relations. Example match strength as fitted → aligned:
+KL approach 1 author×affiliation 0.23 → 0.96, author×article 0.84 → 0.98; squared error approach 1 child×article 0.51 →
+0.86, author×article 0.09 → 0.43, author×affiliation 0.00 → 0.56, article×journal 0.06 → 0.43. **Correction to RL-259:**
+"semantic facets stay aligned" holds under KL only; under squared error children's numbering drifts too (child×article
+0.51 → 0.86). article×article (articles on both sides) is not renumbered: its off-diagonal part is structure. Precompute
+over stage0_pass1 + swap_bare started (`results/stage0/align_precompute.log`); re-reading of mono-domain, detachment,
+swap presence measures and Track A/B under the aligned numbering follows.

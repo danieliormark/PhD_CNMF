@@ -84,6 +84,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 | Link structure at K*: labelling vs spread; missing affiliations/journals (no fits) | Done 2026-11-17 (RL-255) | — | KL off-diagonal ≈ labelling of single-relation facets (≈ 1 partner after relabelling); squared error genuine spread (3–5 partners); missing data do not explain detachment | — |
 | Swap follow-ups (i) one band, (ii) larger K, at p = 1 | Submitted 2026-11-17 (RL-256) | 24848752 | 80 fits: `fit/slurm/swap_followup.sh` (owner: "I actually do not object testing in parallel different options") | — |
 | Diagonal-start test (social link matrices started diagonal) | Submitted 2026-11-17 (RL-258) | 24849355 | 40 fits: `fit/slurm/start_test.sh`; expected outcomes `plans/ticket107_start_test.md` — feeds O1/O3 and the start, before pass 3 | — |
+| Alignment of community numbering (read time, no fits) | Implemented 2026-11-17 (RL-260); precompute running | — | Re-read mono-domain, detachment, swap presence, Track A/B under aligned numbering | — |
 | Graded swap at a further K | Only if the swap curve is ambiguous | 160 per K | Decided 2026-11-09 | — |
 
 ### 2.5 Decisions taken after stage 0 (owner)
