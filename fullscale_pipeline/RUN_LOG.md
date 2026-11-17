@@ -3486,3 +3486,9 @@ Reading: `fit/start_test_analysis.py` (paired by seed, 2-SE rule; partner readin
 reference median; outcomes 1–4 for squared error, KL as control); dry run with the reference fits as both arms gives
 zero differences and outcome 2 as constructed. Expected outcomes and reading rule written before any fit:
 `plans/ticket107_start_test.md` (reading rule proposed, for the owner's confirmation). Not submitted.
+
+### RL-258 — 2026-11-17 — diagonal-start test submitted (owner), job 24849355
+Owner submitted `fit/slurm/start_test.sh` on CSF3: array job **24849355** (40 fits, 5 tasks × 8, 24 h), queued behind
+the swap follow-ups (24848752: tasks 0–2 running at submission, 3–9 pending). Read afterwards with
+`fit/start_test_analysis.py` against `plans/ticket107_start_test.md` (reading rule still awaiting the owner's
+confirmation).
