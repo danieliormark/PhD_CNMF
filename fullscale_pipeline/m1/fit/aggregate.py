@@ -48,9 +48,30 @@ def cell_key(job):
     return json.dumps({k: job.get(k) for k in CELL_KEYS}, sort_keys=True)
 
 
+# Aligned reading (decided 2026-11-17, RL-260): with M1_ALIGNED=1 every loader returns the fit under the aligned community
+# numbering (fit/align.py; aligned.json next to the fit): U and Z renumbered, and the numbering-dependent measures
+# (presence per relation, domain and facet presence, mono flags) replaced by their aligned versions. Everything else
+# (losses, held-out scores, entity measures) does not depend on the numbering and is read as saved.
+ALIGNED = os.environ.get("M1_ALIGNED") == "1"
+
+
+def _aligned(d):
+    p = os.path.join(d, "aligned.json")
+    if not os.path.exists(p):
+        raise FileNotFoundError(f"M1_ALIGNED=1 but no aligned.json in {d} (run python -m fit.align)")
+    return json.load(open(p))
+
+
 def load_fit(d):
     spec = json.load(open(os.path.join(d, "spec.json"))); res = json.load(open(os.path.join(d, "result.json")))
     meas = json.load(open(os.path.join(d, "measures.json")))
+    if ALIGNED:
+        al = _aligned(d)
+        for r, v in al["presence"].items():
+            meas["presence"][r].update(v)
+        for k in ("domain_presence", "facet_presence", "mono_flags"):
+            meas[k] = al[k]
+        meas["match_strength"] = {"fitted": al["match_strength_fitted"], "aligned": al["match_strength_aligned"]}
     return {"dir": d, "job": spec["job"], "result": res, "measures": meas}
 
 
@@ -58,6 +79,10 @@ def load_UZ(d):
     z = np.load(os.path.join(d, "UZ.npz"))
     U = {k[3:]: z[k].astype(np.float64) for k in z.files if k.startswith("U__")}
     Z = {k[3:]: z[k].astype(np.float64) for k in z.files if k.startswith("Z__")}
+    if ALIGNED:
+        from .align import apply
+        rel = {r: tuple(v) for r, v in json.load(open(os.path.join(d, "result.json")))["relations"].items()}
+        U, Z = apply(U, Z, rel, _aligned(d)["perms"])
     return U, Z
 
 
@@ -245,7 +270,7 @@ def main():
     ap.add_argument("--fraction", type=float, default=0.2); ap.add_argument("--out", default=None)
     a = ap.parse_args()
     rep = aggregate(a.root, a.stage, a.fraction)
-    out = a.out or os.path.join(a.root, a.stage, "_aggregate.json")
+    out = a.out or os.path.join(a.root, a.stage, "_aggregate_aligned.json" if ALIGNED else "_aggregate.json")
     json.dump(rep, open(out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
     print(f"wrote {out} ({len(rep)} cells)")
 

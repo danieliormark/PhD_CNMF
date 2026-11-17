@@ -45,6 +45,8 @@ def fits_for(approach, beta):
                 continue
             if j["seed"] not in range(1, 11) or not f["result"]["converged"]:
                 continue
+            if (j.get("arm") or {}).get("swap_single_band"):      # follow-up (i), read separately (RL-254)
+                continue
             p = float((j.get("arm") or {}).get("swap_p", 0.0))
             if stage == "stage0_pass1" and p != 0.0:
                 continue
