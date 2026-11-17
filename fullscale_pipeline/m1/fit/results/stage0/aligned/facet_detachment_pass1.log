@@ -1,0 +1,22 @@
+fits 1195
+part A done
+approach_1_squared_error group 0 instances so far 30
+approach_1_squared_error group 1 instances so far 68
+approach_1_squared_error group 2 instances so far 107
+approach_1_squared_error group 3 instances so far 150
+approach_1_squared_error group 4 instances so far 194
+approach_1_KL group 0 instances so far 25
+approach_1_KL group 1 instances so far 46
+approach_1_KL group 2 instances so far 77
+approach_1_KL group 3 instances so far 97
+approach_1_KL group 4 instances so far 124
+approach_2_squared_error group 0 instances so far 15
+approach_2_squared_error group 1 instances so far 30
+approach_2_squared_error group 2 instances so far 43
+approach_2_squared_error group 3 instances so far 62
+approach_2_squared_error group 4 instances so far 90
+approach_2_KL group 0 instances so far 23
+approach_2_KL group 1 instances so far 51
+approach_2_KL group 2 instances so far 69
+approach_2_KL group 3 instances so far 89
+approach_2_KL group 4 instances so far 112

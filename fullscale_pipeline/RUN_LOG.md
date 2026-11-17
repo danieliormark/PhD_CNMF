@@ -3532,3 +3532,22 @@ KL approach 1 author×affiliation 0.23 → 0.96, author×article 0.84 → 0.98; 
 0.51 → 0.86). article×article (articles on both sides) is not renumbered: its off-diagonal part is structure. Precompute
 over stage0_pass1 + swap_bare started (`results/stage0/align_precompute.log`); re-reading of mono-domain, detachment,
 swap presence measures and Track A/B under the aligned numbering follows.
+
+### RL-261 — 2026-11-17 — swap, mono-domain and detachment re-read under the aligned numbering (no fits)
+`M1_ALIGNED=1` loaders (RL-260) → `results/stage0/aligned/{swap_bare,mono_domain_pass1,facet_detachment_pass1}.{json,log}`;
+fitted-numbering swap reading re-run as a check (`aligned/swap_bare_fitted_check.json`): reproduces RL-248 exactly (swap
+reading now excludes the one-band follow-up fits, which share K* and p = 1). **Swap (decided reading rule unchanged):**
+squared error approach 1 — fitted "no change" → aligned **"heterogeneity follows the data"**: mono-domain per fit 0.67 →
+1.50 (effect +0.83, margin 0.71), mixed share at 0.1 0.965 → 0.862 (−0.103, margin 0.064; falls at every step to p = 0.75);
+weaker-domain median −0.059 (margin 0.088), ratio −0.013 (0.055) not beyond. KL approach 2 — fitted "heterogeneity follows
+the data" → aligned **"no change"** (near miss): weaker-domain median −0.078 vs margin 0.080, ratio −0.061 vs 0.069 (seed
+margins larger under alignment: 0.080 vs 0.045). Squared error approach 2 and KL approach 1: "no change" under both.
+Overlap and band link are article-side readings and do not change. **Mono-domain (pass 1, K*):** per-fit counts at the
+0.1 line 0.65 → 0.85 (squared error approach 1), 0.40 → 0.52 (approach 2), KL 0 → 0.02 / 0; instances 39 / 26 / 1 / 0;
+mono in the same direction in at most 3 of 9–10 seeds → still **no mono-domain community by the decided rule**.
+**Detachment (K*, per fit, fitted → aligned):** squared error approach 1 article → journal 1.11 → 0.52, child → article
+0.43 → 0.15, author → organisation 1.54 → 1.59; KL approach 1 author → organisation 2.40 → 1.60, article → journal 0.86 →
+0.74; approach 2 squared error article → journal 0.68 → 0.20, article → organisation 0.76 → 0.76; KL article → journal
+1.40 → 1.10, article → organisation 1.46 → 1.14. Recurring in the majority of seeds: 1 (squared error approach 1), 2 (KL
+approach 1), 0, 0. Stage-0 selection under the aligned numbering (stability gate, vetoes, K choice) running
+(`/mnt/hum01-rds/.../stage0_pass1/_aggregate_aligned.json`).
