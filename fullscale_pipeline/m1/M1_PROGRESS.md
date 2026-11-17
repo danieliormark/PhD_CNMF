@@ -5,7 +5,7 @@ submitted, finishes, or a decision changes what will run. Details live in the re
 `fullscale_pipeline/RUN_LOG.md` (RL-…, what was run and what came out) and `plans/ticket107-m1-chunk12v3-design.md`
 (design doc, what was decided and why). The staged plan with fit budgets: `plans/ticket107_layer2/test_architecture.txt`.
 
-**Last updated:** 2026-11-16, late evening.
+**Last updated:** 2026-11-17.
 
 **Status words:** *Done* = finished and read; *Running* = on CSF3 now; *Submitted* = in the CSF3 queue; *Ready* =
 code and job written, waiting for submission; *Waiting for decision* = needs the owner's choice before it can be
@@ -15,15 +15,15 @@ written or read; *Not started* = later stage.
 of 5 draws of hidden ties used to score prediction. *K* = number of communities; *K\** = the best K by held-out
 existence in pass 1 (squared error 20, KL 13). *Existence* = held-out within-class AP (are hidden ties ranked above
 hidden empty cells); *value* = held-out partial Spearman (are hidden ties ranked by their real strength). *r* = strength
-of the word-similarity term (the term's size relative to the data loss at the start). *Approach 1 / 2* = the two social
+of the word-similarity term: λ_child is set so that, evaluated on the fitted λ = 0 solution (pass 1, K\*), the term equals r × the data loss (the weighted reconstruction error on the cells used for fitting). With the term on, the fit makes tied child hyperedges more alike, so the term ends far smaller (about 0.1% of the data loss for squared error, 2–3% for KL). *Approach 1 / 2* = the two social
 designs (with an author facet / articles linked to affiliations and to each other by citations).
 
 ## Now
 
 | Run | Status | CSF3 job | Fits | Progress |
 |---|---|---|---|---|
-| Bare graded cross-domain swap | Running | 24804741 | 160 | 14 of 160 finished (2026-11-16, 20:00) |
-| Pass 2, KL r = 1 (highest-grid-value rule) | Submitted | (ID once tasks start) | 100 | queued |
+| Bare graded cross-domain swap | Done (presentation pending) | 24804741 | 160 | 160/160; read 2026-11-17 (RL-248) |
+| Pass 2, KL r = 1 (highest-grid-value rule) | Done | 24807473 | 100 | 100/100; KL r = 1 chosen (RL-247) |
 | Pass 2, squared error r = 0.1 | Ready (owner submits) | — | 100 | `bash fit/slurm/stage0_pass2_se_r01.sh` |
 
 ## 1. Build step (before stage 0) — done
@@ -65,16 +65,16 @@ designs (with an author facet / articles linked to affiliations and to each othe
 
 | Run | Status | CSF3 job | Fits | Purpose | Read by | Record |
 |---|---|---|---|---|---|---|
-| Bare graded cross-domain swap | Running | 24804741 | 160 | Is heterogeneity found because the data have it, or produced regardless? Social identities of a fraction p = 0.25/0.5/0.75/1 of articles are swapped (p = 0 = pass 1), each loss at K\*, both approaches, group 1, 10 seeds. Feeds the decision on mono-domain communities | `fit/swap_analysis.py` (decided reading rule) | RL-243 |
-| Pass 2, KL r = 1 | Submitted | — | 100 | Highest-grid-value rule: KL chose its top value r = 0.3; check whether a stronger term still qualifies | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-245 |
+| Bare graded cross-domain swap | Done | 24804741 | 160 | Is heterogeneity found because the data have it, or produced regardless? Social identities of a fraction p = 0.25/0.5/0.75/1 of articles are swapped (p = 0 = pass 1), each loss at K\*, both approaches, group 1, 10 seeds. Feeds the decision on mono-domain communities | `fit/swap_analysis.py` (decided reading rule) | RL-243 |
+| Pass 2, KL r = 1 | Done | 24807473 | 100 | Highest-grid-value rule: KL chose its top value r = 0.3; check whether a stronger term still qualifies | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-245 |
 | Pass 2, squared error r = 0.1 | Ready | — | 100 | Squared error also chose its top value r = 0.03 (no rule was decided for it); owner approved fitting r = 0.1. If it qualifies the rule chooses it (flattening reported only) | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-246 |
 
 ### 2.4 Still to run or decide
 
 | Item | Status | Fits | Purpose | Blocks |
 |---|---|---|---|---|
-| Intermediate r values (e.g. 0.055 between 0.03 and 0.1) | Waiting for decision | ≈ 100 per value | Owner asked whether 0.03 → 0.1 is too large a step. Proposed: none in stage 0; finer steps around the stage-0 choice in λ calibration | — |
-| What if r = 0.1 (squared error) or r = 1 (KL) is chosen again | Waiting for decision | — | Both would again be the highest grid value | Pass 3 |
+| Intermediate r values (e.g. 0.055 between 0.03 and 0.1) | Decided: not fitted | — | Owner (2026-11-17): none in stage 0; finer steps around the stage-0 choice in λ calibration | — |
+| What if the highest grid value is chosen again | Waiting for decision | — | KL r = 1 is chosen in both approaches (RL-247); squared error r = 0.1 pending its fits. Proposed: stop, carry the open limit to λ calibration | Pass 3 |
 | Reading of "stability not worse than at λ = 0" | Waiting for decision | — | No margin was decided; proposed: the decided guard convention (one SE of λ = 0) | Reading KL r = 1 |
 | Pass 3 | Not started | ≈ 200–300 (sized when the candidate K are fixed) | The loss verdict: each loss at its own chosen r at the candidate K (decided rule: gate → membership agreement → held-out → stability → squared error by default) | Stage 0 decision |
 | Off-diagonal share (pass 1, no fits) | To analyse | — | Feeds the choice between the off-diagonal options O1/O3 (decided after stage 0) | λ calibration |

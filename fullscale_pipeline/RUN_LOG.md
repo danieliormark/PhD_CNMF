@@ -3310,3 +3310,27 @@ of the whole pass-2 stage). Smoke test on incline (approach 1, group index 0, se
 at epoch 300 the term is 0.108 (2.5% of the data loss 4.33, which is still falling at that point), 0.0026 by epoch 359;
 the data loss keeps falling with the term on (4.33 → 3.27). Owner asked whether 0.03 → 0.1 is too large a step; answer
 and proposal in the design doc (2026-11-16, pass-2 follow-ups), pending.
+
+### RL-247 — 2026-11-17 — KL r = 1 results (job 24807473); λ rule on all 700 pass-2 fits
+100/100 fits converged; aggregation of the whole pass-2 stage written 2026-11-16 23:57 (700 fits, none failed).
+`fit.pass2_lambda_rule` → `results/stage0/pass2_lambda_rule_700.json`; flattening `fit.w_form_diagnostics` →
+`results/stage0/pass2_flattening_700.json`. KL, approach 1 (approach 2 the same pattern), r = 0 / 0.03 / 0.1 / 0.3 / 1:
+existence 0.0946 / 0.0959 / 0.0950 / 0.0961 / 0.0968 (SE 0.0016–0.0021); value 0.044 / 0.056 / 0.075 / 0.085 / 0.091
+(SE 0.003–0.004; approach 2 r = 1: 0.090); stability Track A 0.259 → 0.289, B 0.328 → 0.378 (gate passes everywhere);
+data loss +0.2 / +2.7 / +5.4 / +8.7%; largest share of tied child hyperedges 0.88 / 0.83 / 0.68 / 0.61 / 0.46 (untied
+0.92–0.93 throughout); top main-community share of tied 0.105 → 0.138; communities main for > 1% 13 → 12.6. λ rule:
+KL r = 1 chosen in both approaches (best by existence; after the value guard only r = 1 remains: r = 0.3's value is more
+than one SE below). Squared error unchanged (r = 0.03; the 600th fit moved approach-1 Track A 0.366 → 0.362). Paired
+per-group stability differences (reported): every chosen r is higher than λ = 0 in all 5 groups on both tracks except
+squared error approach 1 Track B (+0.002, 2 of 5 groups lower); among non-chosen r, squared error approach 1 r = 0.003
+Track B −0.008 (4/5 groups lower) and KL approach 2 r = 0.03 Track A −0.0012 (5/5) are below λ = 0 but within one SE of
+λ = 0. Term at convergence: squared error 0.03–0.07% of the data loss, KL 2–3% at every r (R ÷ S falls 0.73 → 0.023 at
+r = 1). The highest-grid-value rule fires again for KL; owner's decision pending (design doc 2026-11-17).
+
+### RL-248 — 2026-11-17 — bare graded swap results (job 24804741)
+160/160 fits converged. `python -m fit.swap_analysis` → `results/stage0/swap_bare.{json,log}` (p = 0 from pass 1; squared
+error approach 1 has 9 converged p = 0 fits). Decided reading: squared error approach 1, approach 2 and KL approach 1 —
+"no change" (no verdict measure moves beyond its margin); KL approach 2 — "heterogeneity follows the data" (weaker-domain
+median 0.751 → 0.666 and ratio 0.582 → 0.498, falling with p). Diagnostics: overlap falls with p under squared error
+(approach 1 0.575 → 0.500, approach 2 0.606 → 0.569), flat under KL approach 1 (0.925); band_link 0.02–0.04 throughout.
+Full presentation to the owner pending.

@@ -7,7 +7,16 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-13, ticket 107 M1 — held-out criterion and fractions decided; wiring next)
+## State (2026-11-17, ticket 107 M1 — stage 0, pass 2 read; swap read)
+
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md` (run / running / to-run table, kept current). Latest:
+pass 2 complete with KL r = 1 (RL-247: KL r = 1 chosen, squared error r = 0.03); bare swap read (RL-248: three cells
+"no change", KL approach 2 "heterogeneity follows the data"; presentation to the owner pending); squared error r = 0.1
+job ready for the owner to submit (`fit/slurm/stage0_pass2_se_r01.sh`, RL-246). Waiting for the owner: Q2 (highest
+grid value chosen again — proposed: stop, carry the open limit to λ calibration) and Q3 (stability "not worse" —
+proposed: one SE of λ = 0, both tracks); then pass 3.
+
+## Older state (2026-11-13, ticket 107 M1 — held-out criterion and fractions decided; wiring next)
 
 **Decided 2026-11-11 to 11-13** (end of `plans/ticket107-m1-chunk12v3-design.md`; RUN_LOG RL-214–RL-218):
 - float32 default; hybrid start (NNDSVD on a seed-specific 80 % of visible anchor ties), share stays 0.8.

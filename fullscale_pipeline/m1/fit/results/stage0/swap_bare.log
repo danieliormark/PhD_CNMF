@@ -1,0 +1,40 @@
+approach_1_squared_error {0.0: 9, 0.25: 10, 0.5: 10, 0.75: 10, 1.0: 10} no change
+   mono_domain           0.778  1.100  1.000  1.100  1.200 | none
+   mixed_0.1             0.977  0.965  0.960  0.956  0.955 | none
+   weaker_median         0.358  0.357  0.320  0.302  0.326 | none
+   ratio_median          0.512  0.524  0.468  0.450  0.497 | none
+   mixed_0.5             0.690  0.689  0.677  0.691  0.694 | reported
+   existence_social      0.006  0.006  0.005  0.003  0.004 | reported
+   existence_semantic    0.126  0.125  0.122  0.122  0.123 | reported
+   overlap               0.575  0.549  0.514  0.483  0.500 | reported
+   band_link             0.018  0.020  0.022  0.030  0.026 | reported
+approach_1_KL {0.0: 10, 0.25: 10, 0.5: 10, 0.75: 10, 1.0: 10} no change
+   mono_domain           0.000  0.000  0.000  0.000  0.000 | none
+   mixed_0.1             1.000  1.000  1.000  1.000  1.000 | none
+   weaker_median         0.801  0.797  0.795  0.783  0.781 | none
+   ratio_median          0.674  0.678  0.688  0.682  0.678 | none
+   mixed_0.5             0.950  0.940  0.938  0.949  0.949 | reported
+   existence_social      0.007  0.007  0.006  0.006  0.006 | reported
+   existence_semantic    0.119  0.119  0.119  0.119  0.119 | reported
+   overlap               0.925  0.928  0.931  0.931  0.925 | reported
+   band_link             0.030  0.031  0.031  0.032  0.031 | reported
+approach_2_squared_error {0.0: 10, 0.25: 10, 0.5: 10, 0.75: 10, 1.0: 10} no change
+   mono_domain           0.300  0.300  0.100  0.400  0.200 | none
+   mixed_0.1             0.989  0.989  0.988  0.985  0.988 | none
+   weaker_median         0.411  0.417  0.409  0.401  0.405 | none
+   ratio_median          0.581  0.569  0.549  0.552  0.563 | none
+   mixed_0.5             0.695  0.694  0.692  0.705  0.706 | reported
+   existence_social      0.010  0.010  0.009  0.009  0.009 | reported
+   existence_semantic    0.124  0.124  0.123  0.124  0.123 | reported
+   overlap               0.606  0.584  0.576  0.574  0.569 | reported
+   band_link             0.024  0.023  0.018  0.020  0.021 | reported
+approach_2_KL {0.0: 10, 0.25: 10, 0.5: 10, 0.75: 10, 1.0: 10} heterogeneity follows the data
+   mono_domain           0.000  0.000  0.000  0.000  0.000 | none
+   mixed_0.1             1.000  1.000  1.000  1.000  1.000 | none
+   weaker_median         0.751  0.717  0.686  0.683  0.666 | effect
+   ratio_median          0.582  0.572  0.522  0.515  0.498 | effect
+   mixed_0.5             0.877  0.828  0.810  0.810  0.801 | reported
+   existence_social      0.010  0.011  0.010  0.011  0.010 | reported
+   existence_semantic    0.118  0.118  0.118  0.117  0.118 | reported
+   overlap               0.829  0.826  0.820  0.817  0.819 | reported
+   band_link             0.036  0.039  0.042  0.042  0.044 | reported
