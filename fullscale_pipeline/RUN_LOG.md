@@ -3351,3 +3351,27 @@ common main community 0.42 → 0.80 (approach 1) / 0.43 → 0.83 (approach 2); c
 / 10.7 → 7.3; largest share 0.36 → 0.31; untied unchanged (0.58–0.59). λ rule: squared error r = 0.03 stays chosen in
 both approaches (no longer the highest fitted value). Stage-0 λ_child for pass 3: squared error r = 0.03 (0.0439 / 0.0423),
 KL r = 1 (1,904 / 1,766; upper limit to λ calibration).
+
+### RL-251 — 2026-11-17 — mono-domain communities in pass 1: recurrence, tie weight, members, chance check (no fits)
+`fit/mono_domain_pass1.py` → `results/stage0/mono_domain_pass1.{json,log}`; pass-1 λ = 0 fits at K* (converged: squared
+error approach 1 46, others 50). **Recurrence (decided "majority of seeds" step):** each mono-domain community was matched
+in the other seeds of its hold-out group (Hungarian on weighted membership columns stacked over facets, cosine; the
+Track A/B matching). None is mono-domain in the majority of seeds: squared error approach 1, 30 per-fit instances, mono
+in the same direction in 1 seed (22) or 2 seeds (8) of 9–10; approach 2, 20 instances, 1 (16) or 2 (4). Matched
+counterparts are present in both domains: their presence in the low domain, median 0.26 (social-only) / 0.32
+(semantic-only) in approach 1, 0.20 / 0.34 in approach 2; below 0.2 in a median 4 / 2 (approach 1) and 5 / 2 (approach
+2) of 9 seeds. Match cosine median 0.56 / 0.45 (approach 1), 0.38 / 0.59 (approach 2); all communities, group 1 seed 1 vs
+others: median 0.64 / 0.65 (quartiles 0.43–0.86 / 0.49–0.85). → By the decided rule, **no mono-domain community in
+pass 1** under either loss or approach (KL: none even per fit). **Tie weight:** present-domain presence median 0.64 /
+0.55 (approach 1 social-only / semantic-only), 0.69 / 0.58 (approach 2); other communities' median presence 0.55–0.63.
+**Members** (weighted membership, all entities, no placement filter): social-only communities, entities of semantic
+facets whose largest membership is k, median 987 (approach 1) / 960 (approach 2), ≥ 0.5: 775 / 723 (other communities:
+median 4,142 / 4,136 semantic entities largest in k); semantic-only, social entities largest in k 58 / 11, ≥ 0.5 33 /
+5.5 (others 258 / 88). **Which relation is low:** social-only — child×article 0.056 / 0.038, child×parent 0.092 / 0.113;
+semantic-only (approach 1) — author×affiliation 0.007, article×journal 0.05, author×article 0.10; (approach 2) —
+article×affiliation 0.08, article×article 0.06, article×journal 0.087. **Chance check:** every held-out relation is above
+its within-class chance AP in every fit (AP ÷ chance, minimum over fits: author×affiliation 3.0, article×affiliation 1.2,
+child×article 1.4, child×parent 2.1); author×article, article×journal and article×article have no held-out cells, so
+the check cannot be made for them. **Sensitivity of the per-fit count to the low line** (0.05 / 0.1 / 0.2): squared
+error approach 1 0.13 / 0.65 / 2.7 (fits with ≥ 1: 13 / 57 / 96%), approach 2 0 / 0.40 / 2.24 (0 / 34 / 92%); KL 0 / 0 /
+0 and 0 / 0 / 0.02. Lower of a community's two presences, 5th percentile: squared error 0.064 / 0.097, KL 0.44 / 0.33.

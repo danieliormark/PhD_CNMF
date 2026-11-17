@@ -22,7 +22,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 
 | Run | Status | CSF3 job | Fits | Progress |
 |---|---|---|---|---|
-| Bare graded cross-domain swap | Done (presentation pending) | 24804741 | 160 | 160/160; read 2026-11-17 (RL-248) |
+| Bare graded cross-domain swap | Done, presented 2026-11-17 | 24804741 | 160 | 160/160 (RL-248) |
 | Pass 2, KL r = 1 (highest-grid-value rule) | Done | 24807473 | 100 | 100/100; KL r = 1 chosen (RL-247) |
 | Pass 2, squared error r = 0.1 | Done | 24825747 | 100 | r = 0.1 outside the existence band; squared error stays at r = 0.03 (RL-250) |
 
@@ -78,7 +78,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 | Reading of "stability not worse than at λ = 0" | Decided 2026-11-17 | — | One SE of λ = 0 (reference SE), gate must not start failing; paired differences reported | — |
 | Pass 3 | Not started | ≈ 200–300 (sized when the candidate K are fixed) | The loss verdict: each loss at its own chosen r at the candidate K (decided rule: gate → membership agreement → held-out → stability → squared error by default) | Stage 0 decision |
 | Off-diagonal share (pass 1, no fits) | To analyse | — | Feeds the choice between the off-diagonal options O1/O3 (decided after stage 0) | λ calibration |
-| Mono-domain: seed recurrence, mass, cause split (no fits) | To analyse | — | Completes the decided stage-0 report on mono-domain communities | Mono-domain decision |
+| Mono-domain: seed recurrence, mass, cause split (no fits) | Done 2026-11-17 (RL-251) | — | None recurs in the majority of seeds → no mono-domain community by the decided rule; presented with the swap | — |
 | Conditional swap follow-ups | Only if the swap shows "no change" | ≈ 20–40 per arm | Single degree band at p = 1; larger K (owner's permission) | — |
 | Graded swap at a further K | Only if the swap curve is ambiguous | 160 per K | Decided 2026-11-09 | — |
 
