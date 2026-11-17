@@ -1,0 +1,230 @@
+{
+ "approach_1_KL": {
+  "parent_child": {
+   "within": 0.9999602169829029,
+   "within_relabelled": 0.9999602169829029,
+   "main_partner": 0.9999602169829029,
+   "effective_partners": 1.000538739382544,
+   "relabel_moves": 0.0,
+   "fits": 50,
+   "single_relation_facet": true
+  },
+  "child_article": {
+   "within": 0.9999913165931915,
+   "within_relabelled": 0.9999913165931915,
+   "main_partner": 0.9999913165931915,
+   "effective_partners": 1.0001310568356743,
+   "relabel_moves": 0.0,
+   "fits": 50,
+   "single_relation_facet": false
+  },
+  "author_article": {
+   "within": 0.6550423209924077,
+   "within_relabelled": 0.9286413453263749,
+   "main_partner": 0.9515866706230917,
+   "effective_partners": 1.134303130621329,
+   "relabel_moves": 0.38461538461538464,
+   "fits": 50,
+   "single_relation_facet": false
+  },
+  "author_affiliation": {
+   "within": 0.23138242445912208,
+   "within_relabelled": 0.9619806292135924,
+   "main_partner": 0.9889336254797914,
+   "effective_partners": 1.0434628024052213,
+   "relabel_moves": 0.6923076923076923,
+   "fits": 50,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 2.4,
+   "detached_relabelled_per_fit": 1.6,
+   "missing_share_detached_median": 0.04879010603155952,
+   "missing_share_others_median": 0.04755546451961335,
+   "missing_share_rows": 0.05789892558694787
+  },
+  "article_journal": {
+   "within": 0.3306414702921016,
+   "within_relabelled": 0.7273462487643975,
+   "main_partner": 0.780880839306946,
+   "effective_partners": 1.635777890714781,
+   "relabel_moves": 0.5384615384615384,
+   "fits": 50,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 0.86,
+   "detached_relabelled_per_fit": 0.74,
+   "missing_share_detached_median": 7.71937434088727e-08,
+   "missing_share_others_median": 1.0396607302833074e-07,
+   "missing_share_rows": 0.0018726591760299626
+  }
+ },
+ "approach_1_squared_error": {
+  "parent_child": {
+   "within": 0.9999415829090664,
+   "within_relabelled": 0.9999415829090664,
+   "main_partner": 0.9999415829090664,
+   "effective_partners": 1.0007569994948784,
+   "relabel_moves": 0.0,
+   "fits": 46,
+   "single_relation_facet": true
+  },
+  "child_article": {
+   "within": 0.5835807535915539,
+   "within_relabelled": 0.7593675847626323,
+   "main_partner": 0.8789834503474614,
+   "effective_partners": 1.6935546635808123,
+   "relabel_moves": 0.25,
+   "fits": 46,
+   "single_relation_facet": false
+  },
+  "author_article": {
+   "within": 0.1233403447877379,
+   "within_relabelled": 0.40260217394135606,
+   "main_partner": 0.5688023234510133,
+   "effective_partners": 3.0441871403030563,
+   "relabel_moves": 0.5,
+   "fits": 46,
+   "single_relation_facet": false
+  },
+  "author_affiliation": {
+   "within": 0.06737172457869006,
+   "within_relabelled": 0.4069227355642572,
+   "main_partner": 0.5557332168929224,
+   "effective_partners": 3.3219599344190405,
+   "relabel_moves": 0.8,
+   "fits": 46,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 1.5434782608695652,
+   "detached_relabelled_per_fit": 1.5869565217391304,
+   "missing_share_detached_median": 0.045573729240654025,
+   "missing_share_others_median": 0.050057158012982265,
+   "missing_share_rows": 0.05789892558694787
+  },
+  "article_journal": {
+   "within": 0.06477128659429726,
+   "within_relabelled": 0.3474350757061011,
+   "main_partner": 0.42896059334124315,
+   "effective_partners": 4.739159730308447,
+   "relabel_moves": 0.85,
+   "fits": 46,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 1.108695652173913,
+   "detached_relabelled_per_fit": 0.5217391304347826,
+   "missing_share_detached_median": 0.00031249693965318957,
+   "missing_share_others_median": 0.0002749892344877159,
+   "missing_share_rows": 0.0018726591760299626
+  }
+ },
+ "approach_2_KL": {
+  "parent_child": {
+   "within": 0.9999596044792235,
+   "within_relabelled": 0.9999596044792235,
+   "main_partner": 0.9999596044792235,
+   "effective_partners": 1.000546514529237,
+   "relabel_moves": 0.0,
+   "fits": 50,
+   "single_relation_facet": true
+  },
+  "child_article": {
+   "within": 0.9999913510728689,
+   "within_relabelled": 0.9999913510728689,
+   "main_partner": 0.9999913510728689,
+   "effective_partners": 1.000130672724723,
+   "relabel_moves": 0.0,
+   "fits": 50,
+   "single_relation_facet": false
+  },
+  "article_affiliation": {
+   "within": 0.37857172142615186,
+   "within_relabelled": 0.9141809455367713,
+   "main_partner": 0.9835494440481156,
+   "effective_partners": 1.062550914963078,
+   "relabel_moves": 0.6153846153846154,
+   "fits": 50,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 1.46,
+   "detached_relabelled_per_fit": 1.14,
+   "missing_share_detached_median": 0.011632101895468707,
+   "missing_share_others_median": 0.011805362059005552,
+   "missing_share_rows": 0.01544943820224719
+  },
+  "article_article": {
+   "within": 0.5534715439346205,
+   "within_relabelled": 0.9824932383769949,
+   "main_partner": 0.9855929583791414,
+   "effective_partners": 1.0470374830537632,
+   "relabel_moves": 0.46153846153846156,
+   "fits": 50,
+   "single_relation_facet": false
+  },
+  "article_journal": {
+   "within": 0.31690667297669906,
+   "within_relabelled": 0.6934418943107676,
+   "main_partner": 0.7601610082557392,
+   "effective_partners": 1.6787919315471707,
+   "relabel_moves": 0.5384615384615384,
+   "fits": 50,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 1.4,
+   "detached_relabelled_per_fit": 1.1,
+   "missing_share_detached_median": 8.623060888281077e-08,
+   "missing_share_others_median": 9.890857843861075e-08,
+   "missing_share_rows": 0.0018726591760299626
+  }
+ },
+ "approach_2_squared_error": {
+  "parent_child": {
+   "within": 0.9999371154782313,
+   "within_relabelled": 0.9999371154782313,
+   "main_partner": 0.9999371154782313,
+   "effective_partners": 1.0008047320831595,
+   "relabel_moves": 0.0,
+   "fits": 50,
+   "single_relation_facet": true
+  },
+  "child_article": {
+   "within": 0.5700958217831549,
+   "within_relabelled": 0.7383671441117979,
+   "main_partner": 0.8596072799364748,
+   "effective_partners": 1.8600990751968505,
+   "relabel_moves": 0.25,
+   "fits": 50,
+   "single_relation_facet": false
+  },
+  "article_affiliation": {
+   "within": 0.07395268571550194,
+   "within_relabelled": 0.38234472827844357,
+   "main_partner": 0.5163638828033315,
+   "effective_partners": 4.163362793314144,
+   "relabel_moves": 0.7,
+   "fits": 50,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 0.76,
+   "detached_relabelled_per_fit": 0.76,
+   "missing_share_detached_median": 0.014747551363325402,
+   "missing_share_others_median": 0.012169611892627483,
+   "missing_share_rows": 0.01544943820224719
+  },
+  "article_article": {
+   "within": 0.01235113155254683,
+   "within_relabelled": 0.3907893312351202,
+   "main_partner": 0.5330009840736211,
+   "effective_partners": 3.7372478391635466,
+   "relabel_moves": 0.75,
+   "fits": 50,
+   "single_relation_facet": false
+  },
+  "article_journal": {
+   "within": 0.030943096352221845,
+   "within_relabelled": 0.3547771268960292,
+   "main_partner": 0.45075646713338413,
+   "effective_partners": 4.451321318750548,
+   "relabel_moves": 0.9,
+   "fits": 50,
+   "single_relation_facet": true,
+   "detached_as_fitted_per_fit": 0.68,
+   "detached_relabelled_per_fit": 0.2,
+   "missing_share_detached_median": 9.868659420903924e-05,
+   "missing_share_others_median": 0.00012082221285500606,
+   "missing_share_rows": 0.0018726591760299626
+  }
+ }
+}

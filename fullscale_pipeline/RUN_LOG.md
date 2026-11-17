@@ -3438,3 +3438,32 @@ both approaches × both losses × seeds 1–10, terms off, hybrid start, float32
 social tie counts, hidden-cell counts and values kept; moved share 0.999 (single band) vs 0.998 (banded); the new social
 side has the same tie count for 11–13% of articles with one band vs 31–36% with bands. Existing job ids unchanged (the
 new arm key appears only in the new jobs). Not submitted (owner submits on CSF3).
+
+### RL-255 — 2026-11-17 — link structure at K*: labelling of single-relation facets vs genuine spread; missing affiliations / journals (no fits)
+Owner questions 2026-11-17: why is the off-diagonal share of author×affiliation / article×journal ≈ 1, why does
+article×journal differ between losses; owner's point that absence of organisations / journals may be a true result
+(authors with no known affiliation, articles with no journal). `fit/link_structure_pass1.py` →
+`results/stage0/link_structure_pass1.{json,log}`; converged pass-1 λ = 0 fits at K*, seeds 1–10, 5 groups (196 fits).
+**Labelling:** organisations, journals and parents each appear in one relation matrix only; for them U_a Z U_bᵀ =
+U_a (ZΠ)(U_bΠ)ᵀ for any permutation Π with nothing else in the loss changed, so their community numbers are not fixed
+by the loss. Relation-level within share (Σ_k part(k,k) ÷ total), as fitted → after relabelling the column facet
+one-to-one (Hungarian, maximal diagonal tie weight); effective number of partner communities per row community
+(label-free; exp of entropy, weighted): KL — author×affiliation 0.23 → 0.96, 1.04 partners; article×affiliation 0.38 →
+0.91, 1.06; article×journal 0.33 / 0.32 → 0.73 / 0.69, 1.64 / 1.68; author×article (not a single-relation facet) 0.66 →
+0.93, 1.13; article×article 0.55 → 0.98, 1.05. Squared error — author×affiliation 0.07 → 0.41, 3.32 partners;
+article×affiliation 0.07 → 0.38, 4.16; article×journal 0.07 / 0.03 → 0.35 / 0.36, 4.74 / 4.45; author×article 0.12 →
+0.40, 3.04; article×article 0.01 → 0.39, 3.74; child×article 0.58 / 0.57 → 0.76 / 0.74, 1.69 / 1.86. child×parent 1.0,
+1 partner everywhere (no relabelling needed). → Under KL the ≈ 1 off-diagonal share is **mostly labelling**: each
+author / article community links to about one organisation / journal community under another number. Under squared
+error a **genuine spread** remains after relabelling: each community's social ties go to ≈ 3–5 partner communities.
+The loss difference in article×journal is mainly spread (4.5–4.7 vs 1.6–1.7 partners), not labelling. (The per-community
+median of 1.0 in RL-253 reflects that most communities' own link entry is at the floor; the relation-level within share
+is carried by a few communities.) **Detachment after relabelling** (per fit): KL author → organisation 2.40 → 1.60,
+article → journal 0.86 → 0.74 (approach 1), article → organisation 1.46 → 1.14, article → journal 1.40 → 1.10
+(approach 2); squared error author → organisation 1.54 → 1.59, article → journal 1.11 → 0.52 / 0.68 → 0.20, article →
+organisation 0.76 → 0.76. Remaining cases are not explained by one-to-one relabelling (e.g. two row communities sharing
+one partner community). **Missing data (owner's point):** share of a community's row-facet membership weight carried by
+entities with no known affiliation / journal, detached (after relabelling) vs other communities: author×affiliation
+0.049 / 0.046 vs 0.048 / 0.050 (KL / squared error; 5.8% of authors lack an affiliation); article×affiliation 0.012 /
+0.015 vs 0.012 (1.5% of articles); article×journal ≈ 0 vs ≈ 0 (0.2% of articles lack a journal). → missing affiliations
+or journals do not account for the detached cases at this level. Not tested: why squared error spreads (start vs loss).
