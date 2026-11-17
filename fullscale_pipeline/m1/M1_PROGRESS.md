@@ -24,7 +24,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 |---|---|---|---|---|
 | Bare graded cross-domain swap | Done (presentation pending) | 24804741 | 160 | 160/160; read 2026-11-17 (RL-248) |
 | Pass 2, KL r = 1 (highest-grid-value rule) | Done | 24807473 | 100 | 100/100; KL r = 1 chosen (RL-247) |
-| Pass 2, squared error r = 0.1 | Done, not yet read | 24825747 | 100 | 100/100 converged, aggregated 2026-11-17 15:22 (RL-249) |
+| Pass 2, squared error r = 0.1 | Done | 24825747 | 100 | r = 0.1 outside the existence band; squared error stays at r = 0.03 (RL-250) |
 
 ## 1. Build step (before stage 0) — done
 
@@ -67,7 +67,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 |---|---|---|---|---|---|---|
 | Bare graded cross-domain swap | Done | 24804741 | 160 | Is heterogeneity found because the data have it, or produced regardless? Social identities of a fraction p = 0.25/0.5/0.75/1 of articles are swapped (p = 0 = pass 1), each loss at K\*, both approaches, group 1, 10 seeds. Feeds the decision on mono-domain communities | `fit/swap_analysis.py` (decided reading rule) | RL-243 |
 | Pass 2, KL r = 1 | Done | 24807473 | 100 | Highest-grid-value rule: KL chose its top value r = 0.3; check whether a stronger term still qualifies | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-245 |
-| Pass 2, squared error r = 0.1 | Done, not yet read | 24825747 | 100 | Squared error also chose its top value r = 0.03 (no rule was decided for it); owner approved fitting r = 0.1. If it qualifies the rule chooses it (flattening reported only) | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-246 |
+| Pass 2, squared error r = 0.1 | Done (RL-250: r = 0.03 stays) | 24825747 | 100 | Squared error also chose its top value r = 0.03 (no rule was decided for it); owner approved fitting r = 0.1. If it qualifies the rule chooses it (flattening reported only) | `fit/pass2_lambda_rule.py` after the chained aggregation | RL-246 |
 
 ### 2.4 Still to run or decide
 

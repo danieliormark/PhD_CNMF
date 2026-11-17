@@ -3339,3 +3339,15 @@ Full presentation to the owner pending.
 Submitted by the owner; 100/100 fits converged (max 5,728 epochs), last finished 14:37; chained aggregation (job
 24825748) rewrote `stage0_pass2/_aggregate.json` at 15:22 (800 fits, none failed or unfinished). λ rule and flattening
 not yet run; owner asked to be told first what is completed but unreported.
+
+### RL-250 — 2026-11-17 — squared error r = 0.1 read; λ rule on all 800 pass-2 fits
+`fit.pass2_lambda_rule` → `results/stage0/pass2_lambda_rule_800.json`; flattening → `results/stage0/pass2_flattening_800.json`.
+Squared error, r = 0.03 vs 0.1: existence approach 1 0.0953 → 0.0907 (band line 0.0932: best r = 0.01, 0.0961 − SE 0.0029),
+approach 2 0.0947 → 0.0915 (band line 0.0932); r = 0.1 lies outside the existence band in both approaches, lower than
+r = 0.03 in 5/5 hold-out groups and lower than λ = 0 in 5/5. Value 0.1048 → 0.0966 (approach 1), 0.0945 → 0.0890
+(approach 2), lower than r = 0.03 in 5/5 groups (it would also fail the value guard). Stability rises (Track A 0.362 →
+0.376 / 0.378 → 0.401); gate passes. Data loss 0.987 → 0.989. Flattening: share of tied child hyperedges in the most
+common main community 0.42 → 0.80 (approach 1) / 0.43 → 0.83 (approach 2); communities main for > 1% of them 10.6 → 7.9
+/ 10.7 → 7.3; largest share 0.36 → 0.31; untied unchanged (0.58–0.59). λ rule: squared error r = 0.03 stays chosen in
+both approaches (no longer the highest fitted value). Stage-0 λ_child for pass 3: squared error r = 0.03 (0.0439 / 0.0423),
+KL r = 1 (1,904 / 1,766; upper limit to λ calibration).
