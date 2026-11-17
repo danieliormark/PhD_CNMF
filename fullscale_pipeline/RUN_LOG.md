@@ -3424,7 +3424,10 @@ approach 1, K 5 / 20, 3 seeds per start, 12–21 hybrid): child×parent off-diag
 NNDSVD starts (both start the two semantic link matrices diagonal) but 0.86–1.0 under the random start (squared error
 0.863 / 0.951; KL 1.0); child×article 0.14–0.67 vs 0.97–1.0 (squared error), 0 vs 1.0 (KL). Social relations end
 off-diagonal under every start (author×affiliation 0.68–1.0). Limits: random start 3 seeds per cell, KL K = 20 random
-fits not converged; one group, approach 1. Feeds O1/O3 (off-diagonal share) and the start decision.
+fits not converged; one group, approach 1. Consistent with code-check rounds 1–3 (RL-208–210, design doc 2026-11-10): random
+starts mix communities across facets, the reason the NNDSVD-type (hybrid) start was chosen. New here: under the hybrid
+start the alignment holds on the semantic side but not on the social side. Feeds O1/O3 (off-diagonal share; this is the
+pending pass-1 off-diagonal share analysis) and the start decision.
 
 ### RL-254 — 2026-11-17 — swap follow-ups (i) and (ii) prepared (owner: "I actually do not object testing in parallel different options")
 `worlds.graded_swap(single_band=True)` (one band for all articles), `run_fit` arm key `swap_single_band`; `plan.py
