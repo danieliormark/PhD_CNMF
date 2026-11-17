@@ -345,6 +345,13 @@ organisation column 3, author community 1 has one partner community.
 - Trade-off: reading with w_r would show what the loss emphasised; reading without shows each relation on its own terms
   (the decided choice for presence).
 
+**The table of parts is not the core matrix** (asked 2026-11-17). Z_kl is the strength of the tie between community k of
+one facet and community l of the other **per unit of loading**; part(k,l) = Z_kl × (sum of the first facet's loadings on
+k) × (sum of the second facet's loadings on l) is how much reconstructed tie weight actually goes through the pair.
+Example: Z_13 = 0.5 but organisation community 3 has loadings summing to 0.01 → part(1,3) is small; Z_23 = 0.05 with
+loading sums 40 and 30 → part(2,3) = 60 is large. Z also depends on the scale freedom (a column of U multiplied by c,
+the matching row of Z divided by c, nothing reconstructed changes; ticket 79), the parts do not.
+
 **Limits.** The parts belong to the model's reconstruction, not to the observed ties; they are not "explained variance".
 They depend on the numbering of communities across facets (E2), except the effective number of partners.
 
@@ -381,6 +388,13 @@ column: the authors of both communities are tied mainly to organisations that be
 (e.g. two topic groups at the same set of universities). One-to-one alignment can give that column the number of only
 one of them; the other keeps its own number on an organisation column that carries almost nothing and reads as
 "detached". Measured (RL-262): KL approach 1, 68 of 80 detached author communities are of this kind.
+*Why "main partner" at all under a soft partition* (asked 2026-11-17): the substantive, soft quantity is a community's
+whole row of parts (how its tie weight divides over the other facet's communities; summarised by the number of partner
+communities). The main partner matters only because a numbering is hard — each community gets one number — so
+alignment must pick one partner per community. Under KL the main partner carries most of the row (≈ 0.96 of the weight
+for author×affiliation) and little is lost; under squared error it carries about 0.4–0.6 and the hard choice is lossy
+(low match strength). A shared main partner is a diagnostic of the alignment (and of a facet using fewer distinct
+communities than K), not a property of entities.
 
 **How (decided):** entry "Alignment". **What it cannot do:** remove genuine spread (squared error: one author community
 tied to several organisation communities; the best match then carries only part of the weight — hence match strength
@@ -416,18 +430,30 @@ across facets (E2).
 
 ### E5. When does an arm "stay near one partner"? (the midpoint line of the diagonal-start test)
 
-*Asked 2026-11-17 (twice).* **Number of partner communities** (entry "Effective number of partner communities"): for one
-community of one facet, how many communities of the other facet its reconstructed ties go to — 1 if all to one, 2 if
-50/50, 4 if even over four; per relation averaged over communities weighted by tie weight; does not depend on numbering.
-**Two reference points:** 1 = the pattern of the owner's reading R-A (one community = one group across facets; each
-community has one partner); the **reference value** = the median number of partners in the existing pass-1 fits (random
-social start) for the same relation, loss and approach, hold-out group 1, seeds 1–10 (e.g. squared error approach 1
-author×affiliation 3.46). **Rule (proposed):** the diagonal arm "stays near one partner" if its median is closer to 1
-than to the reference value, i.e. below the midpoint (1 + 3.46) ÷ 2 = 2.23; otherwise it "returns to spread".
-**Worked example:** diagonal arm median 1.6 → below 2.23 → stays near one partner (outcome 1 or 3, depending on fit
-cost); median 3.1 → returns to spread (outcome 2). **Why a midpoint:** the question is whether the arm ends nearer the R-A
-pattern or nearer what the random start gave; the midpoint is the neutral line between the two, not a number chosen in
-advance. **Trade-off:** a median of 2.2 counts as "near one" although it is spread over about two communities (the
-number is always reported beside the verdict). **Alternatives:** an absolute line (e.g. 1.5, about where KL sits) —
-stricter, but chosen by eye; a paired 2-SE test on the number of partners — says whether the arms differ, not whether
-the arm is near one.
+*Asked 2026-11-17 (three times; restructured to start from the problem).*
+**The problem.** The owner's reading R-A says one community is one group across facets: community 4's articles, authors,
+organisations and journals belong together. That can hold only if, in each relation, a community's reconstructed tie
+weight goes mostly to **one** community of the other facet (one partner). Pass 1 shows it does under KL (≈ 1–1.8 partner
+communities) but not under squared error (3–5 at K*, rising with K).
+**Two candidate mechanisms.** (a) The start: every social core matrix starts random, so from the first step each
+community is tied to many communities of the other facet, and squared error may simply not move away from that.
+(b) The loss and the data: squared error prefers to tie a community of one facet to several communities of the other,
+wherever it starts. (a) can be fixed by changing the start (O1 suffices); (b) needs a term (O3) or a revised R-A.
+**The test.** The diagonal-start arm changes only the start: each social core matrix starts diagonal, so every community
+starts with exactly one partner. If the arm ends near one partner, the start was the cause (a); if it spreads again, the
+loss and data are (b). The rule below is the line that classifies the arm's end state.
+**Number of partner communities** (entry "Effective number of partner communities"): for one community, how many
+communities of the other facet its reconstructed ties go to — 1 if all to one, 2 if 50/50, 4 if even over four;
+averaged over communities weighted by tie weight; does not depend on numbering.
+**Reference points:** 1 = the R-A pattern; the **reference value** = the median number of partners in the pass-1 fits
+(random social start) for the same relation, loss and approach, hold-out group 1, seeds 1–10 (e.g. squared error
+approach 1 author×affiliation 3.46).
+**Rule (proposed):** the arm "stays near one partner" if its median is closer to 1 than to the reference value, i.e.
+below the midpoint (1 + 3.46) ÷ 2 = 2.23; otherwise it "returns to spread".
+**Worked example:** arm median 1.6 → stays near one partner → mechanism (a) (outcome 1 if fit is not worse, 3 if
+worse); median 3.1 → returns to spread → mechanism (b) (outcome 2).
+**Why a midpoint:** the question is whether the arm ends nearer the R-A pattern or nearer the random-start pattern; the
+midpoint is the neutral line between the two. **Trade-off:** a median of 2.2 counts as "near one" although spread over
+about two communities (the number is reported beside the verdict). **Alternatives:** an absolute line (e.g. 1.5, about
+where KL sits) — stricter, but chosen by eye; a paired 2-SE test on the number of partners — says whether the arms
+differ, not whether the arm is near one.
