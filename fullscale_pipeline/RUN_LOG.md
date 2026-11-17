@@ -3472,3 +3472,17 @@ or journals do not account for the detached cases at this level. Not tested: why
 Owner submitted `fit/slurm/swap_followup.sh` on CSF3: array job **24848752** (80 fits, 10 tasks × 8, 24 h): (i) p = 1 with
 one band at K*, (ii) p = 1 with degree bands at K = 32 (squared error) / 20 (KL); both approaches, group 1, seeds 1–10
 (RL-254). Read afterwards with `fit/swap_analysis.py` beside the bare swap.
+
+### RL-257 — 2026-11-17 — diagonal-start test prepared (owner: "Please prepare the code and document the expected outcomes so we could compare the results with them")
+Arm: hybrid start of pass 1 with every social core matrix started as c·I + 1e-4 (`init.diagonal_social_links`; c keeps
+each relation's starting reconstruction norm over observed rows equal to the random core's); U and the semantic cores
+unchanged. `run_fit` job key `social_link_start: "diagonal"`; `plan.py start_test` → `slurm/jobs_start_test.jsonl`
+(40 fits: K* 20 / 13, both approaches × both losses, group 1, seeds 1–10, terms off, float32, 8,000-epoch ceiling);
+`slurm/start_test.sh` (5 tasks × 8, 24 h; run with bash from a CSF3 login node). Tests (`fit/tests/test_start_test.py`,
+real trial data, both approaches, K 13 / 20): U and anchor cores bitwise equal to the hybrid start of the same seed;
+social cores diagonal with off-diagonal 1e-4; reconstruction norm equal to the random core's (≤ 2e-16 relative); random
+cores put 0.04–0.09 of their mass on the diagonal (≈ 1/K); end-to-end K = 3, 30 epochs through `run_fit` passes.
+Reading: `fit/start_test_analysis.py` (paired by seed, 2-SE rule; partner reading by the midpoint between 1 and the
+reference median; outcomes 1–4 for squared error, KL as control); dry run with the reference fits as both arms gives
+zero differences and outcome 2 as constructed. Expected outcomes and reading rule written before any fit:
+`plans/ticket107_start_test.md` (reading rule proposed, for the owner's confirmation). Not submitted.

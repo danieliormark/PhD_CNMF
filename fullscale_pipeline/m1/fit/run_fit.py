@@ -98,7 +98,15 @@ def run_one(job, out_root):
             "swap": swap}
     json.dump(spec, open(os.path.join(d, "spec.json"), "w"), indent=1)
     dtype = torch.float32 if job.get("dtype") == "float32" else torch.float64
-    res = fit(rds, job["K"], job["beta"], seed=job["seed"], terms=build_terms(job, rds, build),
+    init_U = init_Z = None
+    if job.get("social_link_start") == "diagonal":   # diagonal-start test arm (2026-11-17): hybrid start, social cores diagonal
+        from .init import initialise, diagonal_social_links
+        st = job.get("start", "nndsvd_sub0.8")
+        assert st.startswith("nndsvd"), "the diagonal arm modifies an NNDSVD-type start"
+        sub = float(st[len("nndsvd_sub"):]) if st.startswith("nndsvd_sub") else None
+        init_U, init_Z = initialise(rds, job["K"], job["seed"], subsample=sub)
+        init_Z = diagonal_social_links(rds, init_U, init_Z)
+    res = fit(rds, job["K"], job["beta"], seed=job["seed"], terms=build_terms(job, rds, build), init_U=init_U, init_Z=init_Z,
               max_epochs=job.get("max_epochs", 5000), lr=job["frac"], lr_mode=job.get("lr_mode", "recompute"),
               warmup=job.get("warmup", 300), dtype=dtype, start=job.get("start", "nndsvd_sub0.8"), tol=job.get("tol", 1e-4))
     U = {f: u.astype(np.float64) for f, u in res["U"].items()}; Z = {r: z.astype(np.float64) for r, z in res["Z"].items()}

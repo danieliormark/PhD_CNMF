@@ -106,6 +106,25 @@ def initialise(rds, K, seed, subsample=None):
     return U, Z
 
 
+def diagonal_social_links(rds, U, Z):
+    """Diagonal-start test arm (ticket 107, owner 2026-11-17: "Please prepare the code"): every non-anchor (social) core
+    matrix is replaced by c·I + 1e-4 (off-diagonal 1e-4, as the anchors' start), with c chosen so that the relation's
+    starting reconstruction over the observed rows has the same Frobenius norm as with the random core it replaces
+    (keeps the starting size, and so the per-block learning rate's scale, comparable). U and the anchors are unchanged,
+    so the arm differs from the hybrid start of the same seed only in the social core matrices."""
+    Z = dict(Z)
+    for rd in rds:
+        if rd.name in ANCHORS:
+            continue
+        A = U[rd.row_facet] * rd.obs_row_mask[:, None]; B = U[rd.col_facet]
+        AtA, BtB = A.T @ A, B.T @ B
+        n2 = lambda z: float(np.sum((z.T @ AtA @ z) * BtB))
+        K = Z[rd.name].shape[0]
+        c = np.sqrt(n2(Z[rd.name]) / n2(np.eye(K)))
+        Z[rd.name] = c * np.eye(K) + 1e-4
+    return Z
+
+
 def random_start(rds, K, seed):
     """Random start per seed (comparison arm, 2026-11-09): uniform (0, 1) factor and core matrices from the seed, each
     core matrix then rescaled so that its relation's reconstruction has Frobenius norm 1 over the observed rows, the
