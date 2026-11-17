@@ -79,6 +79,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 | Pass 3 | Not started | ≈ 200–300 (sized when the candidate K are fixed) | The loss verdict: each loss at its own chosen r at the candidate K (decided rule: gate → membership agreement → held-out → stability → squared error by default) | Stage 0 decision |
 | Off-diagonal share (pass 1, no fits) | To analyse | — | Feeds the choice between the off-diagonal options O1/O3 (decided after stage 0) | λ calibration |
 | Mono-domain: seed recurrence, mass, cause split (no fits) | Done 2026-11-17 (RL-251) | — | None recurs in the majority of seeds → no mono-domain community by the decided rule; presented with the swap | — |
+| Follow-up checks for owner questions: members tie counts, value chance check, semantic held-out across swap (no fits) | Done 2026-11-17 (RL-252) | — | Weak-domain members have ordinary tie counts (corrects earlier inference); semantic held-out flat p = 0 → 1 in all four settings | — |
 | Conditional swap follow-ups | Only if the swap shows "no change" | ≈ 20–40 per arm | Single degree band at p = 1; larger K (owner's permission) | — |
 | Graded swap at a further K | Only if the swap curve is ambiguous | 160 per K | Decided 2026-11-09 | — |
 

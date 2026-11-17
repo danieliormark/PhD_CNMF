@@ -3375,3 +3375,24 @@ child×article 1.4, child×parent 2.1); author×article, article×journal and ar
 the check cannot be made for them. **Sensitivity of the per-fit count to the low line** (0.05 / 0.1 / 0.2): squared
 error approach 1 0.13 / 0.65 / 2.7 (fits with ≥ 1: 13 / 57 / 96%), approach 2 0 / 0.40 / 2.24 (0 / 34 / 92%); KL 0 / 0 /
 0 and 0 / 0 / 0.02. Lower of a community's two presences, 5th percentile: squared error 0.064 / 0.097, KL 0.44 / 0.33.
+
+### RL-252 — 2026-11-17 — follow-up checks to RL-248/RL-251 for the owner's questions (no fits)
+Scratch scripts on saved fits (pass 1 group 1 + `swap_bare`; λ = 0, K*). **(1) Members of the weak domain** (first 12
+mono-domain instances per squared-error setting): the semantic entities whose largest weighted membership is a social-only
+community have **ordinary tie counts** (median visible ties: child 2 vs 2 for other children; parent 5–6 vs 5) — this
+corrects the RL-251 presentation's inference "weakly tied hyperedges". They are mostly parent hyperedges (≈ 575–925 per
+instance, ≈ 1.6–2.6% of live parents, ≈ 45% of an average community's parent members) with few children (≈ 80–530,
+0.1–0.5% of live children). The community's share of the weighted membership columns: parent ≈ 0.03–0.045, child
+≈ 0.007–0.01 (average community 1/K = 0.05). Reading: the community holds a near-average parent side whose parents are
+tied mainly to children of other communities; it has almost no child side, and child×article is where its semantic
+presence is lowest. Semantic-only communities have 1–57 social members per facet (authors with 2 ties like other
+authors; a few articles, some with many ties). **(2) Value part of the chance check:** partial Spearman (chance 0)
+minimum over pass-1 fits, squared error: child×article 0.059 / 0.037, child×parent 0.081 / 0.068 (approach 1 / 2) —
+above 0 in every fit. Under **KL, child×parent value is ≈ −0.008 ± 0.009 at every p (at chance)**; no consequence for the
+mono-domain verdict (KL has no instances). **(3) Semantic held-out across the swap** (group 1, mean ± SD over seeds,
+p = 0 → 1): child×article existence (within-class AP) squared error 0.1802 ± 0.0028 → 0.1791 ± 0.0034 (approach 1),
+0.1732 → 0.1730 (approach 2); KL 0.1711 → 0.1703, 0.1700 → 0.1694; child×parent and the values equally flat (all
+changes < 1 SD). → Giving every article another article's social side does not change how well the model predicts the
+article's hidden child ties: in these fits the social side adds no detectable information for predicting ideas. Limit:
+articles with many visible child ties need no social help; a split by the article's visible child-tie count is not yet
+done (cheap, saved fits).
