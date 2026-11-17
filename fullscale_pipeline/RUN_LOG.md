@@ -3334,3 +3334,8 @@ error approach 1 has 9 converged p = 0 fits). Decided reading: squared error app
 median 0.751 → 0.666 and ratio 0.582 → 0.498, falling with p). Diagnostics: overlap falls with p under squared error
 (approach 1 0.575 → 0.500, approach 2 0.606 → 0.569), flat under KL approach 1 (0.925); band_link 0.02–0.04 throughout.
 Full presentation to the owner pending.
+
+### RL-249 — 2026-11-17 — squared error r = 0.1 finished (job 24825747), not yet read
+Submitted by the owner; 100/100 fits converged (max 5,728 epochs), last finished 14:37; chained aggregation (job
+24825748) rewrote `stage0_pass2/_aggregate.json` at 15:22 (800 fits, none failed or unfinished). λ rule and flattening
+not yet run; owner asked to be told first what is completed but unreported.
