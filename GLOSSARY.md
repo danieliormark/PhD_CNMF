@@ -44,6 +44,10 @@ Words not to use (owner, 2026-09-30 to 2026-10-29): "hub" (say "an entity with N
 | τ | similarity threshold for keeping a tie in W | Tie selection |
 | idf(v) | inverse document frequency of word v | idf |
 | n_p | number of articles of person p (in the subset) | article×article similarity |
+| part(k,l) | reconstructed tie weight of relation r attributed to the community pair (k, l) | Reconstructed tie weight |
+| T_r | total reconstructed tie weight of relation r (Σ_kl part(k,l)) | Reconstructed tie weight |
+| h_k(r), p_k(r), P_k(D), P_k(f) | half-credit share, relative presence, presence in domain D, facet presence | Presence |
+| π_f | renumbering (permutation) of facet f's communities | Numbering freedom; Alignment |
 
 **Resolved clash (2026-10-29):** "d" had been used both for the distance between membership shares and for an entity's
 total similarity. Now: the distance is written out, ‖p_i − p_j‖², and the total similarity is D_i. Core matrices are
@@ -262,3 +266,134 @@ built with community k, compared with an average community". **Mono-domain commu
 than a tenth of an average community's share: nearly absent) and ≥ 0.5 in the other (at least half an average share:
 clearly present), in most seeds, not caused by a relation fitted at chance. Full definition and example: design doc,
 step 6.
+
+## Community numbering and link structure *(2026-11-17, ticket 107, RL-253–RL-259)*
+
+**Numbering freedom** — with free core matrices, renumbering the communities of ANY one facet f (reordering the columns of
+U^(f) by a permutation π_f) and reordering the matching side of every core matrix touching f leaves every reconstructed
+value unchanged: (U^(f) P)(Pᵀ Z) = U^(f) Z, because P Pᵀ = I. So the loss never fixes that community k of one facet is
+community k of another (the owner's decided reading R-A, 2026-11-06); only the start (NNDSVD aligns children, parents and
+articles; propagation aligns authors, organisations and journals to articles) and the optimisation path do. Verified on
+a real fit (RL-259, max change 1e-16). What would fix it: a term that treats matching numbers specially (the toy's λ_z,
+O3, a diagonal-constrained core). Earlier wording "single-relation facets only" (RL-253/255) was wrong.
+
+**Alignment (renumbering)** — DECIDED 2026-11-17 (owner: "I approve the renumbering"; "I agree with proposal a"): after
+each fit, at read time (saved fits untouched), every facet's numbering is aligned to the articles' through the chain of
+relations (children → articles via child×article; parents → children via child×parent; authors → articles via
+author×article; organisations → authors via author×affiliation (approach 1) or → articles via article×affiliation
+(approach 2); journals → articles via article×journal). Each step: one-to-one assignment (Hungarian) maximising the tie
+weight on matching numbers. Always applied (option a), with the **match strength** reported beside every reading.
+Readings that combine facets by community number are reported aligned, with the fitted numbering beside them. History:
+chunk13v3/v4 relabelled leaf facets physically; chunk13v9 relabelled per relation at read time with a confidence rule
+(CLAUDE.md §4.20, FINDINGS §14/§16). Explanation E2.
+
+**Match strength** — after alignment, the share of a relation's reconstructed tie weight on matching numbers,
+Σ_k part(k,k) ÷ T_r (1 = one-to-one; low = genuinely spread, so the alignment is partial).
+
+**Off-diagonal share** — decided stage-0 diagnostic (2026-11-06/07): 1 − Σ_k part(k,k) ÷ T_r (tie-weight form, main),
+Σ_{k≠l} Z̃_kl² ÷ Σ Z̃² (core-cell form, beside it). Depends on the numbering: read it as fitted AND after alignment.
+Per community: 1 − part(k,k) ÷ (h_k(r) T_r).
+
+**Effective number of partner communities** — per relation: for each row community k, exp of the entropy of how its
+row of parts divides over the column communities (all in one → 1; 50/50 over two → 2; 90/10 → 1.4; even over four → 4),
+averaged over k weighted by the row's tie weight. Does not depend on numbering. Measures genuine spread: one community
+of one facet tied to several communities of another (pass 1: KL ≈ 1–1.8 at every K; squared error 3–5 at K* and rising
+with K; RL-259).
+
+**Detached community (facet detachment)** — facet presence P_k(f) ≥ 0.5 while a facet g tied to f directly has P_k(g) <
+0.1 (lines of the mono-domain rule). Depends on the numbering (RL-253, RL-255).
+
+**Paired 2-SE rule** — DECIDED 2026-11-17 for the diagonal-start test (owner: "I approve the 2se rule"): difference
+between arms per seed (same start per seed), mean over seeds, SE = SD ÷ √n; better / worse only beyond 2 SE.
+Explanation E3.
+
+## Explanations — answers to frequent questions *(started 2026-11-17 at the owner's request)*
+
+Fuller answers to questions that come up repeatedly. Before explaining one of these again, the assistant points to the
+entry to re-read and adds only what is new. Each entry: the question, the answer, a worked example, and its limits.
+
+### E1. Which community does a tie belong to? (attribution of reconstructed tie weight to community pairs)
+
+*Asked 2026-11-17 as "how do we know the tie × community membership?". Naming:* a tie does not belong to one community.
+What the model gives is a split of each **reconstructed** tie value over **pairs** of communities, one community from
+each facet of the relation. Name used here: **attribution of reconstructed tie weight to community pairs** (the parts
+part(k,l)).
+
+**How.** The reconstructed value of a cell (author i, organisation j) is a sum over community pairs:
+x̂_ij = Σ_k Σ_l U_ik × Z_kl × U'_jl (U = authors' factor matrix, U' = organisations', Z = the relation's core matrix). Each
+term is the part of that cell built through the pair (author community k, organisation community l). Summed over all
+cells of the relation (observed rows × all columns, with or without an observed tie, hidden cells included) this gives
+part(k,l) = Z_kl × Σ_i U_ik × Σ_j U'_jl, and Σ_kl part(k,l) = T_r. From the K × K table of parts: presence (half credit:
+own block + half of every shared block), off-diagonal share, effective number of partner communities.
+
+**Worked example** (made up, K = 3). Author i: loadings 0.8 on community 1, 0.2 on 2. Organisation j: 1.0 on community 3.
+Core: Z_13 = 0.5, Z_23 = 0.1, all other cells 0. x̂_ij = 0.8 × 0.5 × 1.0 + 0.2 × 0.1 × 1.0 = 0.40 + 0.02 = 0.42 → 0.40
+to the pair (1, 3), 0.02 to (2, 3). If, summed over all cells, author community 1's whole row of parts lies in
+organisation column 3, author community 1 has one partner community.
+
+**Weighting (asked 2026-11-17: "do we account for domain and/or facet weights, as well as other weighting?").**
+- *Indirectly, yes:* everything that shapes the fit shapes U and Z and so the parts — tie values from the build (tf,
+  damping and other weighting schemes), each relation's Frobenius normalisation, and the relation weights w_r in the
+  loss (0.5 ÷ number of relations per domain; journal multiplier). Example: a larger weight on article×journal makes the
+  fit spend more on journals, which changes U and Z.
+- *Directly, no:* the parts of a fit are computed from its U and Z for each relation on its own and read as shares of
+  that relation's T_r; w_r is not applied. Presence in a domain is the plain mean over the domain's relations (equal
+  weight, decided 2026-11-07); facet presence the plain mean over the relations touching the facet; weighted
+  memberships (column weights) sum over relations without w_r; no entity is weighted.
+- Other conventions: core cells at the positivity floor (≤ 1e-7) count as 0; rows with no data (missing affiliation or
+  journal) are left out of the row sums; the effective number of partners averages communities by their tie weight.
+- Trade-off: reading with w_r would show what the loss emphasised; reading without shows each relation on its own terms
+  (the decided choice for presence).
+
+**Limits.** The parts belong to the model's reconstruction, not to the observed ties; they are not "explained variance".
+They depend on the numbering of communities across facets (E2), except the effective number of partners.
+
+### E2. Why are communities renumbered after the fit, and how? (numbering freedom, alignment)
+
+*Asked 2026-11-17.* **Cause:** (1) the model leaves each facet's numbering free (entry "Numbering freedom"); (2) our
+readings and R-A treat the same number as one community in every facet (presence by domain, mono-domain rule,
+detachment, Track A/B matching of stacked facets); (3) the fit's numbering comes only from the start, and on the social
+side it is not kept: the social core matrices start random, so from the first step author community 4 is tied to a mix
+of article communities, and an author column can end closest to another article column (KL author×article: 44% of the
+tie weight off matching numbers as fitted, 8% after alignment). Result without alignment: "community 4" can combine one
+group's articles with another group's authors, differently in each seed.
+
+**Worked example** (made up, K = 3). Author communities 1 = physics, 2 = biology, 3 = economics. The fit puts physics
+organisations in organisation column 2, biology in 3, economics in 1; the core ties author 1 → organisation 2, 2 → 3,
+3 → 1, nothing on the diagonal. Reconstructed ties are right, but read by number "community 1" = physics authors +
+economics organisations, the off-diagonal share is 1 and every community looks detached from its organisations.
+Renaming organisation columns 2 → 1, 3 → 2, 1 → 3 (and the core's columns the same way) makes the core diagonal,
+changes no reconstructed value, and community 1 = physics authors + physics organisations. Real case: KL approach 1,
+author×affiliation, share on matching numbers 0.23 as fitted → 0.96 aligned, ≈ 1.04 partner communities.
+
+**How (decided):** entry "Alignment". **What it cannot do:** remove genuine spread (squared error: one author community
+tied to several organisation communities; the best match then carries only part of the weight — hence match strength
+is reported) or match two communities to one partner (one-to-one). **Relation to Hungarian matching elsewhere:** Track
+A/B uses it to match communities across seeds; alignment uses it to match facets within one fit.
+
+### E3. Why 2 SE and not 1 SE when comparing two arms?
+
+*Asked 2026-11-17 (diagonal-start test).* Paired design: each seed starts both arms from the same memberships; the
+difference per seed (arm − reference) isolates the arm's effect. SE = SD of the differences ÷ √n says how much their
+mean would move with other seeds; with no real effect the mean is noise around 0, mostly within ±1 SE. **Worked example**
+(made up): 10 differences in data loss, mean +0.0010, SD 0.0020 → SE 0.00063 → mean = 1.6 SE: "worse" under a 1-SE line,
+"within noise" under 2 SE. **Why 2 SE:** with no real effect and 10 seeds, the chance of crossing the line on the "worse"
+side by noise is ≈ 17% (1 SE) vs ≈ 4% (2 SE) per measure, ≈ 43% vs ≈ 11% for at least one of three measures
+(independence assumed). A false "worse" would turn a decision (start artefact → O3 needed), so the line is strict. The
+λ rule's one-SE line (Breiman) answers a different question — which settings are *not distinguishable* from the best —
+where erring towards "equivalent" is intended. **Trade-off:** a real effect below ≈ 2 SE is read as noise; paired
+differences are always reported in full.
+
+### E4. What does presence mean at the level of an entity, a fit, a set of seeds, and the model?
+
+*Asked 2026-11-17.* **Entity:** has no presence of its own; it contributes through its loadings (times how strongly its
+community is tied, through the core, to the other facet). Its own reading is the weighted membership (shares sum to 1),
+which can disagree with presence: membership gives every entity a full split however little weight it carries.
+**Community in one fit** (one hold-out group, one seed): p_k(r) = how much of relation r the model builds through k
+relative to an average community (1 = 1/K of T_r; 0.1 = a tenth). Example: K = 20, p = 0.056 → 0.28% of child×article's
+reconstructed tie weight vs 5% average. It counts reconstructed weight, including predictions in empty cells.
+**Across seeds / hold-out groups:** numbers are arbitrary across fits, so communities are matched; one fit's value is
+noisy (a matched community's weak-domain presence went from 0.076 in one seed to a median 0.26 in the others), hence
+"in the majority of seeds" in the mono-domain rule. **Model:** Σ_k p_k(r) = K for each relation — presence shows how the
+model divides each relation among communities (one gains, others lose), not how well it fits. Depends on the numbering
+across facets (E2).
