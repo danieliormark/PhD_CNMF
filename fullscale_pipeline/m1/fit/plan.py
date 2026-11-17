@@ -188,6 +188,21 @@ def swap_bare():
             for a in (1, 2) for beta in (2, 1) for p in (0.25, 0.5, 0.75, 1.0) for s in range(1, 11)]
 
 
+def swap_followup():
+    """Swap follow-ups at p = 1 (decided 2026-11-08 as conditional on "no change"; owner 2026-11-17: "I actually do not
+    object testing in parallel different options"). (i) one band for all articles (no degree bands), each loss at K*;
+    (ii) degree bands as before, at the next coarse K above K* (squared error 32, KL 20; their p = 0 references are the
+    pass-1 fits of hold-out group 1, seeds 1–10). Both approaches, hold-out group 1, seeds 1–10, terms off, as swap_bare.
+    80 fits. Stage "swap_bare", so swap_analysis reads them beside the bare swap."""
+    kstar = {2: 20, 1: 13}; kup = {2: 32, 1: 20}
+    out = [job("swap_bare", a, 0, kstar[beta], beta, s, FRACTION[beta], dtype="float32",
+               arm={"swap_p": 1.0, "swap_single_band": True}, max_epochs=8000)
+           for a in (1, 2) for beta in (2, 1) for s in range(1, 11)]
+    out += [job("swap_bare", a, 0, kup[beta], beta, s, FRACTION[beta], dtype="float32", arm={"swap_p": 1.0}, max_epochs=8000)
+            for a in (1, 2) for beta in (2, 1) for s in range(1, 11)]
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -200,10 +215,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

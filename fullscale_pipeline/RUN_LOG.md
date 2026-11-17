@@ -3396,3 +3396,42 @@ changes < 1 SD). → Giving every article another article's social side does not
 article's hidden child ties: in these fits the social side adds no detectable information for predicting ideas. Limit:
 articles with many visible child ties need no social help; a split by the article's visible child-tie count is not yet
 done (cheap, saved fits).
+
+### RL-253 — 2026-11-17 — facet detachment in pass 1; link-matrix structure and the start (no fits)
+Owner request (2026-11-17): how steady is a community whose semantic side is carried by parent hyperedges; do other
+facets show a similar dominance; are such fits concentrated (K, other settings) or dispersed. `fit/facet_detachment_pass1.py`
+→ `results/stage0/facet_detachment_pass1.{json,log}`; all converged λ = 0 pass-1 fits (1,195; K 3–32). **Detached** =
+facet presence P_k(f) ≥ 0.5 while a facet g tied to f directly is < 0.1 (lines of the mono-domain rule).
+**Parents without children: never** (0 in every fit, every K, both losses and approaches). Reason: child×parent's link
+matrix is diagonal in every fit (off-diagonal entries at the 1e-7 floor), so a community's parent-side and child-side
+readings in that relation are equal. The RL-251/252 "parents" observation is a membership count (≈ 800 parents with
+the community as their largest membership, beside ≈ 80–530 children) of a community with a small semantic side, not a
+detachment. **Other facets:** detachment is common and rises with K in every setting; at K*: author present /
+organisation absent 1.54 per fit (80% of fits) squared error approach 1, 2.40 (100%) KL approach 1; article / journal
+absent 1.11 (67%) and 0.86 (68%); approach 2 article / organisation absent 0.76 (62%) squared error, 1.46 (88%) KL,
+article / journal absent 0.68 (48%), 1.40 (88%). Squared error only: article ↔ child (0.2–0.43 per fit each direction),
+article ↔ author, journal → article. Spread evenly over hold-out groups; **no case recurs in the majority of seeds** at
+K* (1 of 405 squared-error cases: journal → article, 5 of 9 seeds); under KL the matched counterparts are fully
+present (median 0.79–0.90). → dispersed over seeds, concentrated by K (rises with K) and loss (KL: author →
+organisation in every fit). **Mechanism, measured:** share of a community's half credit in blocks shared with other
+communities (off-diagonal share), median over non-detached communities at K*: child×parent 0 (all settings);
+child×article 0.33 / 0.28 squared error, 0 KL; author×article 0.89 squared error, 0 KL; author×affiliation 1.0 (both
+losses); article×journal 1.0 squared error, 0.43 / 0.53 KL; article×affiliation 1.0 / 0.75; article×article 1.0 / 0.89.
+Detached cases have off-diagonal share 0.84–1.0 in the relation concerned. Where the link is off-diagonal, the tied facet
+(organisations, journals) is grouped in its own columns and linked to other columns through the link matrix, so column k
+does not denote the same group in both facets. **The start sets the semantic structure** (checkpoint-3 fits, group 1,
+approach 1, K 5 / 20, 3 seeds per start, 12–21 hybrid): child×parent off-diagonal share 0.0 under the plain and hybrid
+NNDSVD starts (both start the two semantic link matrices diagonal) but 0.86–1.0 under the random start (squared error
+0.863 / 0.951; KL 1.0); child×article 0.14–0.67 vs 0.97–1.0 (squared error), 0 vs 1.0 (KL). Social relations end
+off-diagonal under every start (author×affiliation 0.68–1.0). Limits: random start 3 seeds per cell, KL K = 20 random
+fits not converged; one group, approach 1. Feeds O1/O3 (off-diagonal share) and the start decision.
+
+### RL-254 — 2026-11-17 — swap follow-ups (i) and (ii) prepared (owner: "I actually do not object testing in parallel different options")
+`worlds.graded_swap(single_band=True)` (one band for all articles), `run_fit` arm key `swap_single_band`; `plan.py
+swap_followup` → `slurm/jobs_swap_followup.jsonl` (80 fits, stage "swap_bare": (i) p = 1, one band, K* (20 / 13);
+(ii) p = 1, degree bands, next coarse K above K* (squared error 32, KL 20; p = 0 references = pass-1 group 1 seeds 1–10);
+both approaches × both losses × seeds 1–10, terms off, hybrid start, float32, 8,000-epoch ceiling); `slurm/swap_followup.sh`
+(10 tasks × 8 fits, 24 h). Test on the real trial data, both approaches: permutation valid, semantic relations untouched,
+social tie counts, hidden-cell counts and values kept; moved share 0.999 (single band) vs 0.998 (banded); the new social
+side has the same tie count for 11–13% of articles with one band vs 31–36% with bands. Existing job ids unchanged (the
+new arm key appears only in the new jobs). Not submitted (owner submits on CSF3).

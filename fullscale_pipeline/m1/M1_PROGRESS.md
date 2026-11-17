@@ -80,7 +80,8 @@ designs (with an author facet / articles linked to affiliations and to each othe
 | Off-diagonal share (pass 1, no fits) | To analyse | — | Feeds the choice between the off-diagonal options O1/O3 (decided after stage 0) | λ calibration |
 | Mono-domain: seed recurrence, mass, cause split (no fits) | Done 2026-11-17 (RL-251) | — | None recurs in the majority of seeds → no mono-domain community by the decided rule; presented with the swap | — |
 | Follow-up checks for owner questions: members tie counts, value chance check, semantic held-out across swap (no fits) | Done 2026-11-17 (RL-252) | — | Weak-domain members have ordinary tie counts (corrects earlier inference); semantic held-out flat p = 0 → 1 in all four settings | — |
-| Conditional swap follow-ups | Only if the swap shows "no change" | ≈ 20–40 per arm | Single degree band at p = 1; larger K (owner's permission) | — |
+| Facet detachment in pass 1; link-matrix structure and start (no fits) | Done 2026-11-17 (RL-253) | — | Parents without children never occur (child×parent link diagonal); author/organisation, article/journal, article/organisation detachment common, rises with K, never recurs across seeds; semantic link structure set by the start (diagonal under NNDSVD starts, off-diagonal under random) | — |
+| Swap follow-ups (i) one band, (ii) larger K, at p = 1 | Prepared 2026-11-17 (RL-254), not submitted | — | 80 fits: `fit/slurm/swap_followup.sh` (owner: "I actually do not object testing in parallel different options") | — |
 | Graded swap at a further K | Only if the swap curve is ambiguous | 160 per K | Decided 2026-11-09 | — |
 
 ### 2.5 Decisions taken after stage 0 (owner)

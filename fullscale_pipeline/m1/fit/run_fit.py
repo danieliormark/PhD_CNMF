@@ -91,7 +91,7 @@ def run_one(job, out_root):
     swap = None
     if arm.get("swap_p"):            # bare graded cross-domain swap (owner 2026-11-16); swap seed = fit seed, so p values nest
         from .worlds import graded_swap
-        rds, perm = graded_swap(rds, float(arm["swap_p"]), seed=job["seed"])
+        rds, perm = graded_swap(rds, float(arm["swap_p"]), seed=job["seed"], single_band=bool(arm.get("swap_single_band")))
         swap = {"p": float(arm["swap_p"]), "moved_share": float((perm != np.arange(len(perm))).mean())}
         np.save(os.path.join(d, "swap_perm.npy"), perm)
     spec = {"job": job, "job_id": jid, "manifest": manifest(build.path), "started": time.strftime("%Y-%m-%d %H:%M:%S"),

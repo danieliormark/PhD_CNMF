@@ -164,9 +164,10 @@ def matched_cosines(U_fit, U_true, Z_fit=None, Z_true=None, relations=None, face
 SOCIAL_BANDS = (0, 1, 2, 4, 8, 16)            # social-degree band lower bounds (0, 1, 2–3, 4–7, 8–15, 16+); an assumption
 
 
-def graded_swap(rds, p, seed):
+def graded_swap(rds, p, seed, single_band=False):
     """Permute the identities of a random fraction p of articles among themselves, within social-degree bands, in the
-    social relations only (rows/columns of articles, their missing-row marks and hidden cells move with them)."""
+    social relations only (rows/columns of articles, their missing-row marks and hidden cells move with them).
+    single_band=True: one band for all articles (follow-up (i), 2026-11-17: removes what the bands could preserve)."""
     rng = np.random.default_rng(seed)
     soc = [rd for rd in rds if rd.domain == "social" and "article" in (rd.row_facet, rd.col_facet)]
     n = next(rd.shape[0] if rd.row_facet == "article" else rd.shape[1] for rd in soc)
@@ -176,6 +177,8 @@ def graded_swap(rds, p, seed):
             if (rd.row_facet if side == "row" else rd.col_facet) == "article":
                 deg += np.bincount(idx, minlength=n)
     band = np.searchsorted(np.array(SOCIAL_BANDS), deg, side="right") - 1
+    if single_band:
+        band = np.zeros(n, dtype=int)
     chosen = rng.random(n) < p
     perm = np.arange(n)
     for b in np.unique(band):
