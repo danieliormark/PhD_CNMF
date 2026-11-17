@@ -82,7 +82,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 | Follow-up checks for owner questions: members tie counts, value chance check, semantic held-out across swap (no fits) | Done 2026-11-17 (RL-252) | — | Weak-domain members have ordinary tie counts (corrects earlier inference); semantic held-out flat p = 0 → 1 in all four settings | — |
 | Facet detachment in pass 1; link-matrix structure and start (no fits) | Done 2026-11-17 (RL-253) | — | Parents without children never occur (child×parent link diagonal); author/organisation, article/journal, article/organisation detachment common, rises with K, never recurs across seeds; semantic link structure set by the start (diagonal under NNDSVD starts, off-diagonal under random) | — |
 | Link structure at K*: labelling vs spread; missing affiliations/journals (no fits) | Done 2026-11-17 (RL-255) | — | KL off-diagonal ≈ labelling of single-relation facets (≈ 1 partner after relabelling); squared error genuine spread (3–5 partners); missing data do not explain detachment | — |
-| Swap follow-ups (i) one band, (ii) larger K, at p = 1 | Prepared 2026-11-17 (RL-254); owner's first submission attempt failed (relative path from home; launcher runs with bash) | — | 80 fits: `fit/slurm/swap_followup.sh` (owner: "I actually do not object testing in parallel different options") | — |
+| Swap follow-ups (i) one band, (ii) larger K, at p = 1 | Submitted 2026-11-17 (RL-256) | 24848752 | 80 fits: `fit/slurm/swap_followup.sh` (owner: "I actually do not object testing in parallel different options") | — |
 | Graded swap at a further K | Only if the swap curve is ambiguous | 160 per K | Decided 2026-11-09 | — |
 
 ### 2.5 Decisions taken after stage 0 (owner)

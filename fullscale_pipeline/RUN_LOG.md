@@ -3467,3 +3467,8 @@ entities with no known affiliation / journal, detached (after relabelling) vs ot
 0.049 / 0.046 vs 0.048 / 0.050 (KL / squared error; 5.8% of authors lack an affiliation); article×affiliation 0.012 /
 0.015 vs 0.012 (1.5% of articles); article×journal ≈ 0 vs ≈ 0 (0.2% of articles lack a journal). → missing affiliations
 or journals do not account for the detached cases at this level. Not tested: why squared error spreads (start vs loss).
+
+### RL-256 — 2026-11-17 — swap follow-ups submitted (owner), job 24848752
+Owner submitted `fit/slurm/swap_followup.sh` on CSF3: array job **24848752** (80 fits, 10 tasks × 8, 24 h): (i) p = 1 with
+one band at K*, (ii) p = 1 with degree bands at K = 32 (squared error) / 20 (KL); both approaches, group 1, seeds 1–10
+(RL-254). Read afterwards with `fit/swap_analysis.py` beside the bare swap.
