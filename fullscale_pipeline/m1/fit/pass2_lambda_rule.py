@@ -3,10 +3,10 @@
 # 1. best = highest held-out existence (within-class AP, combined; mean over hold-out groups of the group's seed mean);
 #    band = candidates with existence ≥ best − SE(best) (SE = SD of group means / √groups).
 # 2. a band candidate is removed if its value (partial Spearman) < value(best) − SE_value(best).
-# 3. the largest remaining λ whose stability is not worse than at λ = 0 is chosen. "Not worse" (no margin was decided;
-#    the decided guard convention is used, 2026-11-13 two_part_guard): the stability gate does not fail at fraction 0.2
-#    when λ = 0 passes it, and neither Track A nor Track B (chance-adjusted, mean over groups) is below λ = 0's by more
-#    than λ = 0's SE over groups.
+# 3. the largest remaining λ whose stability is not worse than at λ = 0 is chosen. "Not worse" (DECIDED 2026-11-17,
+#    owner: "I agree with the proposal ii"): the stability gate does not fail at fraction 0.2 when λ = 0 passes it, and
+#    neither Track A nor Track B (chance-adjusted, mean over groups) is below λ = 0's by more than λ = 0's SE over groups
+#    (reference SE, as the band, the value guard and C1). Paired per-group differences are reported, not used.
 # Highest-grid-value rule (2026-11-14): KL at r = 0.3 → fit r = 1 (owner told first). No lowest-grid-value rule (2026-11-16).
 # Usage: python -m fit.pass2_lambda_rule --pass1 P1.json --pass2 P2.json --out OUT.json
 import argparse, json, math
