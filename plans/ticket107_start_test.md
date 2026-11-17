@@ -44,7 +44,7 @@ does not lock anything in.
 - **Presence:** mixed share at 0.1, weaker-domain median, and detached communities per fit (after renumbering
   single-relation facets).
 
-## 4. Reading rule (proposed, stated before the data)
+## 4. Reading rule (stated before the data; point 1 DECIDED 2026-11-17, owner: "I approve the 2se rule"; point 2 pending)
 
 1. **Paired by seed.** Both arms share the same membership start for each seed. For every measure: difference =
    diagonal − reference, over the seeds where both converged. Mean, and SE = SD ÷ √n. **"Better" / "worse"** means the
