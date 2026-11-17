@@ -3492,3 +3492,27 @@ Owner submitted `fit/slurm/start_test.sh` on CSF3: array job **24849355** (40 fi
 the swap follow-ups (24848752: tasks 0–2 running at submission, 3–9 pending). Read afterwards with
 `fit/start_test_analysis.py` against `plans/ticket107_start_test.md` (reading rule still awaiting the owner's
 confirmation).
+
+### RL-259 — 2026-11-17 — off-diagonal diagnostic across K (decided stage-0 diagnostic); every facet's numbering is free (correction)
+`fit/offdiag_diagnostic_pass1.py` → `results/stage0/offdiag_diagnostic_pass1.{json,log}`; all converged pass-1 λ = 0 fits
+(1,195), per relation × loss × approach × K, medians. **Effective number of partner communities** (label-free), K 3 → 32:
+squared error — article×journal 1.03 → 6.1 (approach 1) / 1.00 → 6.1 (approach 2); author×affiliation 1.4 → 4.8;
+article×affiliation 1.8 → 5.0; author×article 1.5 → 3.6; article×article 1.3 → 5.2; child×article 1.1–1.9; rising
+steadily with K (K* = 20: 3.0–4.7). KL — author×affiliation 1.00–1.11; article×affiliation 1.00–1.11; author×article
+1.00–1.22; article×article 1.05–1.16; article×journal 1.0–1.8; child×article 1.00 at every K. child×parent 1.00 everywhere.
+Off-diagonal share in tie-weight units as fitted vs after one-to-one renumbering of the column facet (K*): KL
+author×affiliation 0.85 → 0.04, author×article 0.44 → 0.08, article×affiliation 0.62 → 0.09, article×journal 0.67–0.71
+→ 0.26–0.29; squared error 0.88–0.99 → 0.59–0.65 (social), child×article 0.42–0.43 → 0.24–0.26. Core-cell form beside
+it (decided): same pattern. **Correction (supersedes RL-253/255 wording "single-relation facets" and the statement to the
+owner that renumbering articles would change the loss):** with free link matrices, renumbering ANY one facet's
+communities, with every link matrix touching it rearranged on that side, leaves every rebuilt value unchanged — checked
+on a KL approach-1 K = 13 fit (authors alone, authors + organisations, children + parents, journals: max relative change
+of rebuilt values at visible ties and hidden cells 5e-17–2e-16). So "community k is the same number across facets"
+(R-A) is not fixed by the loss for any facet; it is fixed only by the start (NNDSVD aligns children, parents and
+articles; propagation aligns authors, organisations and journals to articles) and kept or lost along the optimisation
+path. Measured drift as fitted: semantic facets stay aligned (child×article, child×parent); social facets drift (KL
+author×article 0.44 as fitted vs 0.08 renumbered). Consistent with the toy's per-relation permutation issue
+(FINDINGS §14). Consequence: readings that combine facets by community number (presence by domain, mono-domain rule,
+detachment, swap presence measures, Track A/B matching across stacked facets) are affected to the extent of the social
+drift; label-free readings (effective partners, held-out, loss) are not. The start test's primary reading (partners) is
+label-free.
