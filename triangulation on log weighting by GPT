@@ -1,0 +1,134 @@
+The central idea is mathematically sound: \(\log(1+d)/d\) is the correct per-tie multiplier if the intended result is to change an entity's total contribution from linear growth in its number of ties to logarithmic growth. I would, however, qualify the second part of the proposal. Applying damping to only one side avoids applying the same degree correction twice, but it does not guarantee that the entity's final contribution is exactly logarithmic when the opposite side also carries weights. There is also an important distinction between weighting the observed matrix entries and weighting the KL loss itself.
+1. Is \(\log(1+d)/d\) the right per-tie factor?
+Yes, for the stated objective.
+
+Suppose an entity has \(d\) ties, each initially carrying weight 1. Its total weight is \(d\). If you want the total to become \(\log(1+d)\), the common multiplier for each tie must be:
+\[
+f(d)=\frac{\log(1+d)}{d}.
+\]
+
+The resulting total is:
+\[
+d f(d)=\log(1+d).
+\]
+
+This has the desired properties:
+- Monotonicity: the total weight still increases with the number of ties.
+- Diminishing returns: each additional tie contributes less to the entity's total weight.
+- No reversal of ordering: entities with more ties retain greater total weight, but the differences are compressed.
+- Per-tie damping: \(f(d)\) decreases as \(d\) increases.
+Your numerical examples are correct using the natural logarithm:
+Number of ties \(d\)	Original total	New total	Per-tie multiplier
+1	1	0.693	0.693
+10	10	2.398	0.240
+1,000	1,000	6.909	0.0069
+
+One small design choice: this also reduces the total contribution of singleton entities from 1 to 0.693. If you wanted to preserve singleton entities at weight 1 while retaining logarithmic growth, you could use
+\[
+f^*(d)=\frac{\log(1+d)}{d\log 2}.
+\]
+
+That gives total weight \(\log_2(1+d)\). It changes the scale, not the underlying compression pattern. Since you subsequently apply whole-relation Frobenius normalisation, the choice between these two versions may have limited consequences for relative weights within a relation, but it is worth being explicit about the intended baseline.
+
+Verdict on (1): correct. This is a principled concave degree correction, although it is a design choice rather than a uniquely optimal correction. It encodes the assumption that an entity's importance should increase with its number of ties, but substantially less than proportionally.
+2. Does damping one side interact with damping on the other?
+This is the part where I would be more cautious.
+
+Let \(X_{ij}\) be a bipartite matrix, with entities \(i\) on one side and entities \(j\) on the other. Suppose you apply a degree correction \(f(d_i)\) to the first side and another correction \(g(e_j)\) to the second. The resulting entry is:
+\[
+X'_{ij}=X_{ij}f(d_i)g(e_j).
+\]
+
+If only the first side is corrected, an entity with \(d_i\) ties has total weight \(\log(1+d_i)\), assuming unit original tie weights. But if the other side is also corrected, its total becomes:
+\[
+\sum_j X_{ij}f(d_i)g(e_j)
+=
+f(d_i)\sum_j X_{ij}g(e_j).
+\]
+
+This is not generally equal to \(\log(1+d_i)\). It depends on the degrees and weights of the entities on the opposite side.
+
+That does not make the combination wrong. It means the interpretation changes: you are correcting the contribution of both endpoints, and their corrections interact multiplicatively.
+Applying this to your three social relations
+Article × journal. If journal is the only side receiving degree damping, then the logic is straightforward. Each journal's total contribution is compressed from \(d\) to \(\log(1+d)\), before the relation-wide normalisation. There is no second endpoint correction to complicate the interpretation, assuming articles are not weighted separately.
+
+Author × organisation. You say organisations already have rows scaled to norm 1. I would check precisely which norm is used here. If it is L1 normalisation, the row's total mass is already 1, so an additional correction to that same side would indeed be redundant or potentially counterproductive. If it is L2 normalisation, however, a binary row with \(d\) ties has L1 mass \(\sqrt d\), not 1. That distinction matters because the KL objective is sensitive to entry mass, not just the L2 norm. L2 normalisation does not make the total KL contribution independent of degree.
+
+So I would not describe the organisation side as already having total weight 1 unless the rows are specifically L1-normalised or you have verified the relevant quantity.
+
+Author × article. The \(1/\sqrt{\text{team size}}\) correction and the proposed author-degree correction operate on different dimensions of the relation. They are not automatically duplicate corrections. But they do compound.
+
+For example, if an author \(a\) has \(d_a\) articles, and article \(j\) has team size \(t_j\), then the total weight associated with that author becomes:
+\[
+\frac{\log(1+d_a)}{d_a}
+\sum_{j\in A(a)}\frac{1}{\sqrt{t_j}},
+\]
+
+assuming unit original ties and the stated team-size factor.
+
+This is not simply \(\log(1+d_a)\). It is logarithmic damping of the author's article count combined with a separate penalty for participation in larger teams. An author with many articles in large teams will therefore be downweighted more than an equally prolific author whose articles have smaller teams.
+
+That may be exactly what you want, but it is a substantive modelling assumption. I would report the two corrections separately and inspect their combined distribution. In particular, compare the resulting total weight by author-degree quantile and by team-size quantile. That will show whether the combined correction is excessively concentrated on authors with few articles and small teams.
+A further issue: Frobenius normalisation
+Keeping whole-relation Frobenius normalisation is reasonable if the goal is to preserve the existing relation-level scaling convention while changing the relative weights within each relation.
+
+But it does not make the resulting total KL contribution invariant. Frobenius normalisation fixes the L2 norm of the matrix, whereas KL loss depends on the entry values and their relationship to the reconstruction. Consequently, the normalisation can alter the overall relation contribution in ways that are not captured by simply comparing the sums of the edge weights.
+
+I would therefore distinguish two claims:
+- The correction changes the relative weighting of entities within a relation.
+- The correction leaves the overall contribution of that relation to the KL objective unchanged.
+The first is the intended effect. The second does not follow automatically from Frobenius normalisation.
+One important implementation distinction: weighted data or weighted loss?
+There is a further issue I would want to resolve before approving the implementation.
+
+For generalized KL divergence,
+\[
+D_{\mathrm{KL}}(x\Vert y)
+=
+x\log\frac{x}{y}-x+y.
+\]
+
+There are two different ways to introduce weights:
+1. Transform the observed matrix: replace \(X_{ij}\) with \(w_{ij}X_{ij}\), and factorise that transformed matrix.
+2. Weight the loss contributions: retain \(X\), but calculate \(\sum_{ij}w_{ij}D_{\mathrm{KL}}(X_{ij}\Vert\hat X_{ij})\).
+These are not equivalent. Multiplying an observed tie by \(w_{ij}\) changes the target value; multiplying its KL loss by \(w_{ij}\) changes how strongly the model is penalised for reconstructing it. In particular, the treatment of zero entries can differ substantially.
+
+If your implementation literally scales the nonzero entries of the adjacency matrix, I would describe this as a transformation of the observed tie weights, not simply as a weighted KL objective. That distinction matters when interpreting the robustness test.
+
+Verdict on (2): applying the correction to only the previously undamped side is a sensible starting rule. But the author × article relation has a genuine multiplicative interaction with the team-size correction, and the organisation-side claim depends on whether the existing normalisation is L1 or L2. I would verify both before describing the resulting entity weights as logarithmic.
+3. Does the argument against applying the same damping to semantic child hyperedges hold?
+Broadly, yes. I think this is a particularly important distinction in your setup.
+
+For a child hyperedge appearing in \(d\) articles, the proposed correction changes its total weight from \(d\) to \(\log(1+d)\). This compresses the contribution of frequently shared hyperedges relative to singleton hyperedges.
+
+The key point is that the degree distribution of child hyperedges is not merely a nuisance distribution. It is also directly related to their capacity to connect articles.
+- A hyperedge appearing in one article cannot, by itself, provide a cross-article connection.
+- A hyperedge appearing in multiple articles can contribute to shared semantic structure.
+- A hyperedge appearing in many articles may be particularly important for identifying common semantic patterns, although very frequent hyperedges may also be generic or uninformative.
+Your reported results are consistent with this distinction:
+Weighting scheme	Weight on singleton hyperedges	Weight on hyperedges shared by ≥10 articles
+None	51%	—
+IDF	62%	23%
+Log degree damping	80%	6%
+
+The log correction is not simply reducing the influence of frequent hyperedges. It is changing the composition of the semantic relation so that most of its weight is carried by hyperedges that cannot connect different articles. That is potentially counterproductive if the purpose of the child × article relation is to identify shared semantic structure.
+
+I would, however, qualify one part of the argument.
+
+A singleton hyperedge is not necessarily useless. It can still contribute information about an article's distinctive vocabulary or semantic composition. In a collective factorisation, that information might affect the article's latent representation indirectly, even though the hyperedge cannot directly link two articles. So the conclusion should not be that singleton hyperedges are intrinsically uninformative; it should be that they provide no direct cross-article co-occurrence signal through that particular hyperedge.
+
+There is also a useful distinction between the two corrections:
+- IDF generally gives more weight to rarer features, depending on its exact formulation.
+- Log degree damping gives each hyperedge a total weight that increases logarithmically with the number of articles in which it occurs.
+These are not interchangeable approaches to the same problem. The first is closer to rarity-based feature weighting; the second is a concave correction to the total contribution of a hyperedge.
+
+I agree with rejecting log degree damping as a replacement for IDF in the semantic relation, given the reported distribution and the goal of retaining shared semantic connections. I would retain the comparison as a useful negative robustness result rather than treating it as a universally invalid transformation.
+Overall assessment
+Question	Assessment	Main qualification
+1. Is \(\log(1+d)/d\) correct?	Yes	It produces the intended logarithmic total, but also downweights singletons below 1.
+2. Is one-sided damping safe?	Conditionally	Endpoint corrections multiply; the author × article correction interacts with team-size weighting. Organisation normalisation needs clarification.
+3. Is the semantic-side rejection justified?	Broadly yes	Singleton hyperedges lack direct cross-article linking power, but can still encode article-specific information.
+
+My main recommendation is to make one additional diagnostic before finalising the robustness arm: calculate the actual post-transformation total weight per entity for each social relation, both before and after Frobenius normalisation. For author × article, report it against both author article-count and article team-size quantiles. This will establish whether the combined correction behaves as intended, rather than relying on the isolated mathematical properties of its two components.
+
+One detail I would like to verify from your implementation: when you say organisations' rows are scaled to norm 1, do you mean L1 norm (row entries sum to 1) or L2 norm (sum of squared entries equals 1)? That determines whether the organisation side is already normalised in the sense relevant to KL loss.
