@@ -68,10 +68,15 @@ never decided) is withdrawn. All readings use the **aligned numbering** (RL-260)
    counts are reported beside it. article×article (articles linked through shared authors, chunk12v3 P5) is read under
    both losses like the others (owner, 2026-11-18: "If something does not work under one loss, it imho is not an excuse
    not to test under another loss"); its diagonal is fixed by the article numbering, so no renumbering is involved.
-3. **Anchor guard, child×article: > 0.5 within the community diagonal** (owner, 2026-11-18). Unit — **pending the
-   owner's choice**: (a) per fit, the within share Σ_k part(k,k) ÷ T > 0.5 in every converged fit of the arm; or
-   (b) per community, every community's own-numbered cell is more than half of its child×article tie weight (row and
-   column). Both are reported.
+3. **Anchor guard, child×article: > 0.5 per community — DECIDED 2026-11-18** (owner: "I think we should seek to have
+   0.5 per community. Otherwise the community becomes of low quality - its seantics is not consistent with its social
+   components, so semantics no longer sufficiently belongs to articles the community is associated with"). Every
+   community's own-numbered cell must be more than half of its child×article tie weight, on the row side (children) and
+   the column side (articles). The guard holds if every community passes in every converged fit of the diagonal arm.
+   Reported beside it: paired differences in the number of passing communities and in their share of tie weight, and
+   the within share Σ_k part(k,k) ÷ T. **Consequence stated before the data:** no squared-error pass-1 fit meets the
+   requirement at any K (RL-266), and the arm does not change the anchor's start, so under squared error outcome 1 is
+   reachable only if the diagonal social start also repairs the anchor.
 4. **Fit cost.** "Worse" if data loss is higher, or existence or value is lower, beyond 2 SE (paired).
 5. **Outcome per relation, squared error.**
    - **1, start artefact:** the rule share is higher in the diagonal arm beyond 2 SE, the fit is not worse, and the

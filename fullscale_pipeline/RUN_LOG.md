@@ -3637,3 +3637,24 @@ structure" was an unsupported aside (the relation is not renumbered because both
 self-cells (an article with itself) are 0.2 % (squared error) / 0.4 % (KL) of the reconstructed tie weight and change
 no reading. Under squared error, only 1.2 % of article×article tie weight lies on the diagonal (KL 0.55; 1/K would be
 0.05).
+
+### RL-266 — 2026-11-18 — child×article requirement per community (owner's decision), measured on pass 1 (no fits)
+Owner decided the anchor guard is per community (design doc 2026-11-18): in child×article, every community's
+own-numbered cell > half of its child×article tie weight, children side and articles side. `fit/start_test_analysis.py`:
+`ANCHOR_UNIT = "community"`, plus paired differences in the number of passing communities and their tie-weight share.
+All pass-1 fits, every K, aligned numbering (`fit/anchor_community_rule_by_k.py` →
+`results/stage0/aligned/anchor_community_rule_by_k.json`): fits in which every community passes; median failing
+communities; median share of child×article tie weight in failing communities.
+
+| K | SE a1 | SE a2 | KL a1 | KL a2 |
+|---|---|---|---|---|
+| 3 | 0/50; 2; 0.06 | 0/50; 2; 0.06 | 50/50 | 50/50 |
+| 5 | 0/50; 2; 0.02 | 0/50; 3; 0.04 | 50/50 | 50/50 |
+| 8 | 0/50; 3; 0.04 | 0/49; 3; 0.07 | 50/50 | 50/50 |
+| 13 | 0/50; 5; 0.09 | 0/50; 5; 0.17 | 50/50 | 50/50 |
+| 20 | 0/46; 8; 0.16 | 0/50; 8; 0.15 | 50/50 | 50/50 |
+| 32 | 0/50; 14; 0.05 | 0/50; 14; 0.09 | 38/50 | 34/50 |
+
+→ Squared error never meets the requirement; its failing communities carry little child×article tie weight (2–17 %).
+At K = 3, 2 of 3 communities fail with 6 % of the weight. KL meets it up to K = 20. Whether it becomes a veto in
+K choice / loss choice is put to the owner.

@@ -15,8 +15,9 @@
 #     share of the relation's reconstructed tie weight (half credit) in communities that meet it; row-only and
 #     column-only shares and counts beside it;
 #   - ANCHOR GUARD, child×article: within share Σ_k part(k,k) / T, and the communities whose own-numbered cell is more
-#     than half of their child×article tie weight on both sides (count, share of tie weight). Which of the two the
-#     ">0.5" requirement applies to is ANCHOR_UNIT (owner's choice);
+#     than half of their child×article tie weight on both sides (count, share of tie weight). The ">0.5" requirement
+#     applies per community (ANCHOR_UNIT = "community", owner 2026-11-18): the guard holds if every community passes in
+#     every converged fit of the diagonal arm; paired differences in the count and tie-weight share are reported;
 #   - FAILURES (owner: "it is interesting to study cases when row or column is not beaten"): every community that fails
 #     the rule in a direction, with its own share, its main partner (number and share) and its tie weight; and per
 #     community number the main partner in every relation (to read chains such as authors of k → organisations of l →
@@ -45,7 +46,8 @@ ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
 KSTAR = {2: 20, 1: 13}
 LOSS = {2: "squared_error", 1: "KL"}
 ANCHOR = "child_article"
-ANCHOR_UNIT = None          # "fit" (within share > 0.5 in every converged fit) or "community"; owner's choice pending
+ANCHOR_UNIT = "community"   # DECIDED 2026-11-18 (owner: "I think we should seek to have 0.5 per community"): every community
+                            # in every converged fit of the arm; "fit" (within share > 0.5) kept for dry runs only
 SINGLE = {"author_affiliation": "organisation", "article_affiliation": "organisation", "article_journal": "journal"}
 
 
@@ -194,6 +196,8 @@ def run(dry_run=False):
         for r in R[0]["relation_loss"]:
             cmp[f"loss_{r}"] = paired(R, A, lambda x, r=r: x["relation_loss"][r])
         cmp["anchor_within_share"] = paired(R, A, lambda x: x["anchor"]["within_share"])
+        cmp["anchor_communities_over_half"] = paired(R, A, lambda x: x["anchor"]["n_communities_over_half"])
+        cmp["anchor_share_communities_over_half"] = paired(R, A, lambda x: x["anchor"]["share_communities_over_half"])
         med = lambda L, g: float(np.median([g(x) for x in L if x["converged"]]))
         rel = {}
         for r in R[0]["rule"]:
