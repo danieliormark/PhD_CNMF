@@ -3803,3 +3803,21 @@ Weight held by the top 1 % of entities: journals 0.19 → 0.03, organisations 0.
 (author article counts ≤ 17 in the trial, so the author part changes little). (4) Data transformation vs weighted loss:
 like all current weighting, the arm transforms observed tie values (zeros unchanged). Not raised by GPT: d must be
 counted per fold on visible ties only (as the per-fold weights, 2026-11-03), or hidden ties leak into the weights.
+
+### RL-273 — 2026-11-18 — GPT review of the mass-restoration proposal; M1 code checked against its conditions (no fits)
+Review: `triangulation on log weighting by GPT`, from line 136 (pasted by the owner). Its verdicts: holding total mass
+fixed (not the Frobenius norm) is the right invariant for a relation's overall scale under KL — correct; restoring
+each damped relation to its undamped visible mass — recommended as the primary arm; data rescaling vs multiplying w_r —
+equal objectives and optima, conditionally; equal Adam trajectories — not established; "the relation's loss share is
+unchanged" — too strong (only the overall scale is held; the realised loss may change, which is the intended effect).
+Conditions checked in the code: (a) one core matrix per relation, each its own Adam group with step size × its current
+RMS (`solver.fit`, lr_mode "recompute", the production default) → rescaling Z_r by q rescales its steps by q:
+equivariant; (b) no weight decay, no gradient clipping, no penalty on the size of Z_r (stage-0 fits have no terms);
+(c) zero cells enter the KL loss through Σ x̂ over observed rows × all columns minus hidden and masked cells
+(`loss.relation_loss`) → scale with Z_r; (d) Z_r is a direct parameter (no softplus). Not exactly equivariant: the
+positivity floor (clamp at 1e-7, absolute), Adam's ε (1e-8, absolute), and the start (social core matrices are not
+scaled to the data) — small for q between 1.0 and 1.4. Not raised by the review: the weighted memberships
+(`terms.column_weights`, `measures.weighted_memberships`) add up the relations touching a facet by the size of their
+core matrices, so they read the relations' scale. Data rescaling keeps that reading on the undamped relation's scale;
+multiplying w_r would not (Z_r stays at the damped scale) — the two are not equivalent for the membership measures or
+for terms that read them. Open, not in the review: the values the hidden ties are scored against in this arm.
