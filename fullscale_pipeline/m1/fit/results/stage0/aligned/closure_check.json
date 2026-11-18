@@ -1,0 +1,418 @@
+{
+ "approach_1_KL": {
+  "reference": {
+   "fits": 10,
+   "converged": 10,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.3255095995148528,
+     "recon_between": 0.3390676246900296,
+     "chance_between": 0.9206364748436309,
+     "ratio_between": 1.0403240605206303,
+     "tie_ratio_within": 0.009753622392479795,
+     "tie_ratio_between": 0.010991096975041519,
+     "soft_within": 0.9999609326286717
+    },
+    "child_article": {
+     "data_between": 0.3488177669910226,
+     "recon_between": 0.33503898432321516,
+     "chance_between": 0.9202512174956515,
+     "ratio_between": 0.9613946017523984,
+     "tie_ratio_within": 0.04886439475594951,
+     "tie_ratio_between": 0.09994704378956266,
+     "soft_within": 0.9999915591349704
+    },
+    "author_article": {
+     "data_between": 0.4068972765038589,
+     "recon_between": 0.3841497486774658,
+     "chance_between": 0.9159939462731981,
+     "ratio_between": 0.9530435704327065,
+     "tie_ratio_within": 0.005790843115528939,
+     "tie_ratio_between": 0.0038991649780448986,
+     "soft_within": 0.9262796596251679
+    },
+    "author_affiliation": {
+     "data_between": 0.2953824445225103,
+     "recon_between": 0.32485690840357856,
+     "chance_between": 0.8882323936446893,
+     "ratio_between": 1.101873670721964,
+     "tie_ratio_within": 0.009378522185940815,
+     "tie_ratio_between": 0.007814806665272477,
+     "soft_within": 0.9716569091571149
+    },
+    "article_journal": {
+     "data_between": 0.7131801125703563,
+     "recon_between": 0.6678727193916527,
+     "chance_between": 0.9148189475833279,
+     "ratio_between": 0.9501066315047475,
+     "tie_ratio_within": 0.027133588694885843,
+     "tie_ratio_between": 0.03198801815874354,
+     "soft_within": 0.7600098165293507
+    }
+   }
+  },
+  "diagonal": {
+   "fits": 10,
+   "converged": 10,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.3258625358654892,
+     "recon_between": 0.3393850747198122,
+     "chance_between": 0.9204321529944326,
+     "ratio_between": 1.0417208075501718,
+     "tie_ratio_within": 0.008231224228397671,
+     "tie_ratio_between": 0.010599085013552847,
+     "soft_within": 0.9999563478223973
+    },
+    "child_article": {
+     "data_between": 0.34264293077633345,
+     "recon_between": 0.33489382325298345,
+     "chance_between": 0.9197230911158398,
+     "ratio_between": 0.9814604542594643,
+     "tie_ratio_within": 0.044865722081758416,
+     "tie_ratio_between": 0.10264006219720048,
+     "soft_within": 0.9999936347868843
+    },
+    "author_article": {
+     "data_between": 0.24096453571751641,
+     "recon_between": 0.2461339569730786,
+     "chance_between": 0.9157433990801325,
+     "ratio_between": 1.0380632522982334,
+     "tie_ratio_within": 0.007437741584023641,
+     "tie_ratio_between": 0.01258825356858222,
+     "soft_within": 0.999998026285699
+    },
+    "author_affiliation": {
+     "data_between": 0.22317883547289402,
+     "recon_between": 0.28850451423925894,
+     "chance_between": 0.913305448607727,
+     "ratio_between": 1.2921200111368782,
+     "tie_ratio_within": 0.020682403160865448,
+     "tie_ratio_between": 0.010604433348474907,
+     "soft_within": 0.9999987344898182
+    },
+    "article_journal": {
+     "data_between": 0.6648686679174485,
+     "recon_between": 0.6072653569400583,
+     "chance_between": 0.9148429277444743,
+     "ratio_between": 0.9127205540548257,
+     "tie_ratio_within": 0.04004303742619006,
+     "tie_ratio_between": 0.03387882776657085,
+     "soft_within": 0.9999988622910196
+    }
+   }
+  }
+ },
+ "approach_1_squared_error": {
+  "reference": {
+   "fits": 10,
+   "converged": 9,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.6528954105358424,
+     "recon_between": 0.691030102344816,
+     "chance_between": 0.9023726359214346,
+     "ratio_between": 1.0649608700083009,
+     "tie_ratio_within": 0.10673667862794264,
+     "tie_ratio_between": 0.016286775853356538,
+     "soft_within": 0.9999425272854828
+    },
+    "child_article": {
+     "data_between": 0.45323143574419844,
+     "recon_between": 0.676558503287535,
+     "chance_between": 0.8290590298218277,
+     "ratio_between": 1.4832588700942342,
+     "tie_ratio_within": 0.052617801705896534,
+     "tie_ratio_between": 0.07187839355038747,
+     "soft_within": 0.7816670265559948
+    },
+    "author_article": {
+     "data_between": 0.8969837811838132,
+     "recon_between": 0.8870917093909698,
+     "chance_between": 0.9428546396027876,
+     "ratio_between": 0.9934870411617316,
+     "tie_ratio_within": 0.006377524445542935,
+     "tie_ratio_between": 0.0020742518700304045,
+     "soft_within": 0.40797692431636484
+    },
+    "author_affiliation": {
+     "data_between": 0.8779525161415858,
+     "recon_between": 0.7815640296928599,
+     "chance_between": 0.9190640096367532,
+     "ratio_between": 0.8932935757994653,
+     "tie_ratio_within": 0.001590728329774031,
+     "tie_ratio_between": 0.0019144258287292514,
+     "soft_within": 0.40373358563716716
+    },
+    "article_journal": {
+     "data_between": 0.9104127579737333,
+     "recon_between": 0.8809116376122368,
+     "chance_between": 0.9465572408646592,
+     "ratio_between": 0.9609851628553301,
+     "tie_ratio_within": 0.007148507005952853,
+     "tie_ratio_between": 0.0036982914432037365,
+     "soft_within": 0.35465897077122366
+    }
+   }
+  },
+  "diagonal": {
+   "fits": 10,
+   "converged": 3,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.6447705287249945,
+     "recon_between": 0.6601518100415784,
+     "chance_between": 0.8566850779448685,
+     "ratio_between": 1.0310816564649787,
+     "tie_ratio_within": 0.1187724365665459,
+     "tie_ratio_between": 0.018896690902888213,
+     "soft_within": 0.9999569159023411
+    },
+    "child_article": {
+     "data_between": 0.5782394781010632,
+     "recon_between": 0.6647038004069059,
+     "chance_between": 0.796970119267646,
+     "ratio_between": 1.173351606691066,
+     "tie_ratio_within": 0.05010835841276784,
+     "tie_ratio_between": 0.06264833767473049,
+     "soft_within": 0.9421732623252954
+    },
+    "author_article": {
+     "data_between": 0.6087818689423614,
+     "recon_between": 0.453386559281353,
+     "chance_between": 0.9037931053290869,
+     "ratio_between": 0.7480721116516089,
+     "tie_ratio_within": 0.006361247245245387,
+     "tie_ratio_between": 0.0020717522023761935,
+     "soft_within": 0.9868478688136062
+    },
+    "author_affiliation": {
+     "data_between": 0.31901839408517685,
+     "recon_between": 0.4034542764676667,
+     "chance_between": 0.8600058308466338,
+     "ratio_between": 1.2347035646185733,
+     "tie_ratio_within": 0.03584847168704784,
+     "tie_ratio_between": 0.00224602156745883,
+     "soft_within": 0.9932709079677997
+    },
+    "article_journal": {
+     "data_between": 0.3447467166979362,
+     "recon_between": 0.34662244858660335,
+     "chance_between": 0.9121862998919357,
+     "ratio_between": 0.9810018579395982,
+     "tie_ratio_within": 0.48527825579367967,
+     "tie_ratio_between": 0.01993420541013047,
+     "soft_within": 0.9978496714209748
+    }
+   }
+  }
+ },
+ "approach_2_KL": {
+  "reference": {
+   "fits": 10,
+   "converged": 10,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.3280532701765604,
+     "recon_between": 0.3387839715770831,
+     "chance_between": 0.9207362220965256,
+     "ratio_between": 1.032668069109517,
+     "tie_ratio_within": 0.00922605314298221,
+     "tie_ratio_between": 0.010959279618551782,
+     "soft_within": 0.9999597301668446
+    },
+    "child_article": {
+     "data_between": 0.35969104318872247,
+     "recon_between": 0.37225916033824247,
+     "chance_between": 0.9207075881043367,
+     "ratio_between": 1.0267086885287147,
+     "tie_ratio_within": 0.04686270123400366,
+     "tie_ratio_between": 0.0990289975158877,
+     "soft_within": 0.999991351285482
+    },
+    "article_affiliation": {
+     "data_between": 0.45742729431745055,
+     "recon_between": 0.48117488939689473,
+     "chance_between": 0.9048690841445662,
+     "ratio_between": 1.04641456614782,
+     "tie_ratio_within": 0.010089713434207028,
+     "tie_ratio_between": 0.010641919665728871,
+     "soft_within": 0.8971334609781424
+    },
+    "article_article": {
+     "data_between": 0.6426490526898353,
+     "recon_between": 0.5396364522384502,
+     "chance_between": 0.878203341710156,
+     "ratio_between": 0.8397693418587409,
+     "tie_ratio_within": 0.00655507787017545,
+     "tie_ratio_between": 0.004744368835706937,
+     "soft_within": 0.594013400588069
+    },
+    "article_journal": {
+     "data_between": 0.7267823639774859,
+     "recon_between": 0.7035153021857863,
+     "chance_between": 0.9123867212387671,
+     "ratio_between": 0.9693655365591356,
+     "tie_ratio_within": 0.02154284717624832,
+     "tie_ratio_between": 0.0305904383030797,
+     "soft_within": 0.688429867894606
+    }
+   }
+  },
+  "diagonal": {
+   "fits": 10,
+   "converged": 10,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.32839853710906164,
+     "recon_between": 0.3388407076493987,
+     "chance_between": 0.9210423581897613,
+     "ratio_between": 1.0339379689150152,
+     "tie_ratio_within": 0.006709637902823993,
+     "tie_ratio_between": 0.010279766235690335,
+     "soft_within": 0.9999524012323685
+    },
+    "child_article": {
+     "data_between": 0.3464185361503027,
+     "recon_between": 0.3628203810817003,
+     "chance_between": 0.9207295728974131,
+     "ratio_between": 1.0456143878244744,
+     "tie_ratio_within": 0.042085254053821464,
+     "tie_ratio_between": 0.10203946969930881,
+     "soft_within": 0.9999941300435351
+    },
+    "article_affiliation": {
+     "data_between": 0.37249357512408554,
+     "recon_between": 0.37841740817617847,
+     "chance_between": 0.9114851026677777,
+     "ratio_between": 1.0126245388650825,
+     "tie_ratio_within": 0.019314402209261998,
+     "tie_ratio_between": 0.012535309224950233,
+     "soft_within": 0.9999985475916067
+    },
+    "article_article": {
+     "data_between": 0.39783853553964477,
+     "recon_between": 0.16519834783559545,
+     "chance_between": 0.905905642336716,
+     "ratio_between": 0.41115244487010505,
+     "tie_ratio_within": 0.0068238396739819865,
+     "tie_ratio_between": 0.005031263231317282,
+     "soft_within": 0.9999971633040357
+    },
+    "article_journal": {
+     "data_between": 0.6566604127579738,
+     "recon_between": 0.5975538338820692,
+     "chance_between": 0.910715810010243,
+     "ratio_between": 0.9060901221510074,
+     "tie_ratio_within": 0.03982667399297267,
+     "tie_ratio_between": 0.03408342112694539,
+     "soft_within": 0.9999989790500325
+    }
+   }
+  }
+ },
+ "approach_2_squared_error": {
+  "reference": {
+   "fits": 10,
+   "converged": 10,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.6518909113150481,
+     "recon_between": 0.7054013913331041,
+     "chance_between": 0.9036196979180315,
+     "ratio_between": 1.0906814831242615,
+     "tie_ratio_within": 0.10740433811207109,
+     "tie_ratio_between": 0.01612230396050869,
+     "soft_within": 0.9999371147909699
+    },
+    "child_article": {
+     "data_between": 0.5196752716543365,
+     "recon_between": 0.7123143091747919,
+     "chance_between": 0.8105082209501804,
+     "ratio_between": 1.3814355671940821,
+     "tie_ratio_within": 0.05266347685864407,
+     "tie_ratio_between": 0.06350108562549002,
+     "soft_within": 0.7304054405758562
+    },
+    "article_affiliation": {
+     "data_between": 0.9168964445379696,
+     "recon_between": 0.8351300076810073,
+     "chance_between": 0.94367118019435,
+     "ratio_between": 0.9003872421664605,
+     "tie_ratio_within": 0.004997492080689319,
+     "tie_ratio_between": 0.002049310076159452,
+     "soft_within": 0.372380780868089
+    },
+    "article_article": {
+     "data_between": 0.7034200408807878,
+     "recon_between": 0.8490388340482473,
+     "chance_between": 0.7631349853619678,
+     "ratio_between": 1.2089137926972158,
+     "tie_ratio_within": 0.000973736765542054,
+     "tie_ratio_between": 0.0014580998519786153,
+     "soft_within": 0.012277890960676809
+    },
+    "article_journal": {
+     "data_between": 0.9401969981238272,
+     "recon_between": 0.8665698134193858,
+     "chance_between": 0.9643109201693836,
+     "ratio_between": 0.9243024110132324,
+     "tie_ratio_within": 0.006418392571848594,
+     "tie_ratio_between": 0.003472394787620973,
+     "soft_within": 0.3442446155060649
+    }
+   }
+  },
+  "diagonal": {
+   "fits": 10,
+   "converged": 0,
+   "relations": {
+    "parent_child": {
+     "data_between": 0.6618938735470932,
+     "recon_between": 0.6798589181059898,
+     "chance_between": 0.8558709120003204,
+     "ratio_between": 1.0233765057071669,
+     "tie_ratio_within": 0.12323670850626225,
+     "tie_ratio_between": 0.018011468535777377,
+     "soft_within": 0.9999641123963046
+    },
+    "child_article": {
+     "data_between": 0.5387368836811184,
+     "recon_between": 0.6466352640963675,
+     "chance_between": 0.7516379122952692,
+     "ratio_between": 1.2271758945694788,
+     "tie_ratio_within": 0.04803774097190525,
+     "tie_ratio_between": 0.06396104890763306,
+     "soft_within": 0.8959349983090055
+    },
+    "article_affiliation": {
+     "data_between": 0.6059716521884901,
+     "recon_between": 0.5454033169435075,
+     "chance_between": 0.8821159726606331,
+     "ratio_between": 0.887577163858622,
+     "tie_ratio_within": 0.0105952674689437,
+     "tie_ratio_between": 0.004204696013876744,
+     "soft_within": 0.9268649416316321
+    },
+    "article_article": {
+     "data_between": 0.654956428398149,
+     "recon_between": 0.3548033905784057,
+     "chance_between": 0.871691992100619,
+     "ratio_between": 0.5335334012438753,
+     "tie_ratio_within": 0.004419013916646919,
+     "tie_ratio_between": 0.0017675584689933145,
+     "soft_within": 0.8831159969033507
+    },
+    "article_journal": {
+     "data_between": 0.3616322701688555,
+     "recon_between": 0.35245261568421044,
+     "chance_between": 0.9056300358338416,
+     "ratio_between": 0.9294180011993983,
+     "tie_ratio_within": 0.4598839915574786,
+     "tie_ratio_between": 0.02634542089006705,
+     "soft_within": 0.9967467715346622
+    }
+   }
+  }
+ }
+}

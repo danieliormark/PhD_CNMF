@@ -1,0 +1,106 @@
+{
+ "approach_1_KL": {
+  "K13_r0.03": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  },
+  "K13_r0.1": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  },
+  "K13_r0.3": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  },
+  "K13_r1.0": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  }
+ },
+ "approach_1_squared_error": {
+  "K20_r0.003": {
+   "fits": 50,
+   "fits_all_pass": 0,
+   "failing_median": 9.0,
+   "failing_weight_median": 0.18309807849480542
+  },
+  "K20_r0.01": {
+   "fits": 50,
+   "fits_all_pass": 0,
+   "failing_median": 9.0,
+   "failing_weight_median": 0.20513837967508547
+  },
+  "K20_r0.03": {
+   "fits": 49,
+   "fits_all_pass": 0,
+   "failing_median": 10.0,
+   "failing_weight_median": 0.210294273195395
+  },
+  "K20_r0.1": {
+   "fits": 50,
+   "fits_all_pass": 0,
+   "failing_median": 10.0,
+   "failing_weight_median": 0.20429522513428933
+  }
+ },
+ "approach_2_KL": {
+  "K13_r0.03": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  },
+  "K13_r0.1": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  },
+  "K13_r0.3": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  },
+  "K13_r1.0": {
+   "fits": 50,
+   "fits_all_pass": 50,
+   "failing_median": 0.0,
+   "failing_weight_median": 0.0
+  }
+ },
+ "approach_2_squared_error": {
+  "K20_r0.003": {
+   "fits": 50,
+   "fits_all_pass": 0,
+   "failing_median": 8.0,
+   "failing_weight_median": 0.16890513228470194
+  },
+  "K20_r0.01": {
+   "fits": 50,
+   "fits_all_pass": 0,
+   "failing_median": 9.0,
+   "failing_weight_median": 0.19630544947898226
+  },
+  "K20_r0.03": {
+   "fits": 50,
+   "fits_all_pass": 0,
+   "failing_median": 9.0,
+   "failing_weight_median": 0.20197228937968278
+  },
+  "K20_r0.1": {
+   "fits": 50,
+   "fits_all_pass": 0,
+   "failing_median": 9.5,
+   "failing_weight_median": 0.16048798099544953
+  }
+ }
+}

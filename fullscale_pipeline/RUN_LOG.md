@@ -3745,3 +3745,33 @@ by domain under the diagonal start.** Outcome by the pre-stated logic: 3 (trade-
 by held-out existence and the anchor guard, not by data loss (which favours the diagonal start); child×parent is 1.00
 in both arms (ceiling), so the setting label "4, mixed" is an artefact of the rule. Stability for the diagonal arm is
 not readable (3 / 0 converged fits).
+
+### RL-270 — 2026-11-18 — child×article requirement on pass-2 fits; closure check of the diagonal start (no fits)
+(1) Pass-2 fits aligned (`fit.align --stages stage0_pass2`, 800 fits). `fit/anchor_community_rule_by_k.py --stage
+stage0_pass2` → `results/stage0/aligned/anchor_community_rule_by_k_pass2.json`: with λ_child on, squared error fails
+the child×article requirement in **every** fit at every r (K 20: 0/49–50 fits pass per r; failing communities 8–10;
+their combined tie weight ÷ the fit's child×article tie weight 0.16–0.21); KL passes in every fit at every r (K 13).
+So λ_child does not repair squared error on this requirement; pass 3 (each loss at its λ*) cannot change it.
+(2) `fit/closure_check.py` → `results/stage0/aligned/closure_check.json` (owner's concern that the diagonal start may
+over-close communities). Start-test arms, group 1, seeds 1–10, aligned numbering; each entity's main community =
+largest weighted membership. Per relation: share of observed (visible) tie weight crossing main-community boundaries
+(data), the same share of the reconstructed tie weight over the loss cells (reconstruction), ratio reconstruction ÷ data
+(< 1 = more closed than the data), chance share. KL, reference → diagonal arm, medians over fits:
+
+| Relation | data | reconstruction | ratio | chance |
+|---|---|---|---|---|
+| a1 author×article | 0.41 → 0.24 | 0.38 → 0.25 | 0.95 → 1.04 | 0.92 |
+| a1 author×affiliation | 0.30 → 0.22 | 0.33 → 0.29 | 1.10 → 1.29 | 0.89–0.91 |
+| a1 article×journal | 0.71 → 0.67 | 0.67 → 0.61 | 0.95 → 0.91 | 0.92 |
+| a2 article×affiliation | 0.46 → 0.37 | 0.48 → 0.38 | 1.05 → 1.01 | 0.91 |
+| a2 **article×article** | 0.64 → 0.40 | 0.54 → **0.17** | 0.84 → **0.41** | 0.88–0.91 |
+| a2 article×journal | 0.73 → 0.66 | 0.70 → 0.60 | 0.97 → 0.91 | 0.91 |
+| child×article (both) | 0.34–0.36 | 0.34–0.37 | 0.96–1.05 | 0.92 |
+
+→ The parts table's 1.00 (all reconstructed tie weight on same-numbered community pairs) does not mean ties stay
+inside communities: entities keep mixed memberships, so the reconstruction still carries 25–60 % of the tie weight
+across main-community boundaries, close to the data's own share (ratio 0.9–1.3) in every relation except
+**article×article** (articles linked through shared authors, approach 2), where the diagonal arm rebuilds 0.17 against
+the data's 0.40 (over-closure; reference 0.84). The diagonal arm's partition itself puts more of the data within
+communities (data share falls, e.g. author×article 0.41 → 0.24) — both well below chance (≈ 0.9). Limit: the partition
+is the model's own.
