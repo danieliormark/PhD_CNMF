@@ -7,21 +7,42 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-18, ticket 107 M1 — stage 0: swap follow-ups and diagonal-start test read)
+## State (2026-11-18, ticket 107 M1 — loss chosen (KL), diagonal start approved)
 
-Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-269.
-- Alignment of numbering (decided, always) applied to all readings; K* unchanged (RL-263).
-- Owner decisions 2026-11-18: diagonal rule (part(k,k) > every other cell of row and column) for all relations but
-  child×article; child×article > 0.5 per community, counted by the counting rule, no seed picking; tolerance inside a
-  fit and veto status decided after the start test (design doc).
-- Swap follow-ups (RL-268): one band and larger K both "no change" → presence cannot show that heterogeneity follows
-  the data (GLOSSARY E6).
-- Diagonal-start test (RL-269): KL better on every reading with the diagonal start; squared error 3/10, 0/10 converged
-  at 8,000 epochs (supplementary: lower loss, one partner, but held-out existence lower, more child×article failures,
-  communities separate by domain).
-- Agreed sequence: (1) start test read → (2) decide whether the swap needs a measure of which people group with which
-  ideas, or close it → (3) joint discussion: start (diagonal for all cores?), O1/O3, child×article tolerance and veto,
-  whether squared-error diagonal fits are continued to convergence → mono-domain response, pass-3 sizing.
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-270; design doc entries of 2026-11-18.
+- **Decided 2026-11-18:** loss = KL (stage-0 rule overridden; child×article > 0.5 per community is one of the most
+  important rules); diagonal start for the core matrices under KL, article×article closure ratio as a standing reading;
+  the 17 unconverged squared-error start-test fits are not continued; child×article requirement counted by the counting
+  rule, no seed picking.
+- **Being settled now (owner returns to the rest afterwards):** (0) log-type weighting as a robustness check (owner's
+  idea; discussed, no code); (2b) main communities vs measures on the whole membership distribution.
+
+**Points to settle afterwards (owner: "I'll return to them once we settle points 0 and 2"):**
+1. Start details: does article×article keep a random start (closure ratio 0.41 under the diagonal start, RL-270)?
+   Are the stage-0 KL fits (passes 1–2) redone under the diagonal start before K / λ_child are fixed?
+2. The swap: run the measure below, or close the swap with RL-268 (GLOSSARY E6).
+3. O1 / O3 (with the diagonal start KL meets the diagonal rule without a penalty → O1 proposed).
+4. child×article requirement: tolerance inside a fit; veto in K choice.
+5. Pass 3's new role (K and λ_child under KL); then the mono-domain response (A: report only, proposed), pass-3 sizing.
+6. Older: item (l); the stage-1 counting fraction.
+
+**Swap proposal — which people group with which ideas** (proposed 2026-11-18, not decided):
+- *Purpose.* The swap showed that presence in both domains cannot tell whether heterogeneity follows the data (E6). The
+  link between people and ideas lives across articles: the same author, organisation or journal returns to similar
+  ideas. The swap breaks exactly that (at p = 1 one author's articles get unrelated contents). The measure asks whether
+  the model's communities carry that link.
+- *Method* (saved swap fits, p = 0 … 1, no fits, minutes). For pairs of articles sharing a social entity (author,
+  organisation, journal; approach 2: a co-author tie): (A) data — similarity of the two articles' child-hyperedge sets,
+  excess over random article pairs (does the link exist; at p = 1 it must fall to chance, which also checks the swap);
+  (B) model — the two articles' co-membership (Σ_k of the products of their weighted memberships), excess over random
+  pairs.
+- *Outcomes.* (A) clear, (B) falls with (A) → the model groups people's articles together as far as they share ideas:
+  heterogeneity follows the data. (A) clear, (B) stays high at p = 1 → the model keeps an entity's articles together
+  whatever their content: communities follow people; mixing comes partly from how articles are coupled. (A) clear, (B)
+  ≈ 0 even at p = 0 → articles grouped by ideas alone; people attach to their articles. (A) weak → the data hold little
+  cross-article link; the swap cannot test anything here.
+- *Limits.* Article pairs only, one shared entity type at a time; shows whether the link is carried, not whether it is
+  correct. (Whether to use co-membership or another distribution measure: see point 2b.)
 
 ## Older state (2026-11-13, ticket 107 M1 — held-out criterion and fractions decided; wiring next)
 
