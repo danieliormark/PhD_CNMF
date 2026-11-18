@@ -3786,3 +3786,20 @@ df = 1 / 10 / 100 / 1,000: none 1 / 10 / 100 / 1,000; idf 8 / 63 / 405 / 1,758; 
 Share of all child×article column weight on child hyperedges in one article: none 0.51, idf 0.62, **log-degree 0.80**;
 in ≥ 10 articles: 0.35 / 0.23 / **0.06**. → Log-degree damping on the child side would put 80 % of the semantic anchor's
 weight on child hyperedges that cannot link two articles (CLAUDE.md §4.21 (d)), and shrink shared ones to 6 %.
+
+### RL-272 — 2026-11-18 — GPT triangulation of the social log-damping arm reviewed; total-mass check (no fits)
+File `triangulation on log weighting by GPT` (repo root, owner's commit ca99a41). Checked against code and data:
+(1) log(1 + d) ÷ d correct (agreed); GPT's log₂ variant differs by a constant factor, removed exactly by the
+whole-relation normalisation → equivalent. (2) Correction of our own text: the Euclidean (L2) row scaling is on the
+other side of the affiliation relations (persons, approach 1; articles, approach 2), not on organisations; organisation
+columns are undamped; GPT's point stands that damping one side multiplies with the other side's weights, so an entity's
+total is log(1 + d) only for binary ties. (3) GPT's point on the KL loss confirmed: relations are scaled to Frobenius
+norm 1 over visible cells (`data.fit_data`) and the KL loss of a relation scales with its total mass (KL(cx‖cy) = c ·
+KL(x‖y)). Measured on the trial build (hold-out group 1, visible ties): total mass (sum of values) after the Frobenius
+scaling, undamped → damped: article×journal 46.2 → 32.9 (× 0.71), author×affiliation 107.0 → 90.8 (× 0.85),
+article×affiliation 63.2 → 58.4 (× 0.92), author×article 100.2 → 99.5 (× 0.99) — damping makes values less equal, so
+under a fixed L2 norm the relation loses mass and therefore weight in the KL loss: a confound with the relation weights.
+Weight held by the top 1 % of entities: journals 0.19 → 0.03, organisations 0.11 → 0.03–0.04, authors 0.04 → 0.03
+(author article counts ≤ 17 in the trial, so the author part changes little). (4) Data transformation vs weighted loss:
+like all current weighting, the arm transforms observed tie values (zeros unchanged). Not raised by GPT: d must be
+counted per fold on visible ties only (as the per-fold weights, 2026-11-03), or hidden ties leak into the weights.
