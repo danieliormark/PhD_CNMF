@@ -1,0 +1,52 @@
+{
+ "approach_1_squared_error": {
+  "passing": {
+   "communities": 562,
+   "ghosts": 0,
+   "size_x_K_median": 0.7545288351084128,
+   "below_half_fair_share": 194,
+   "main_article_median": 5.0,
+   "main_author_median": 8.0,
+   "main_child_median": 3618.0,
+   "main_journal_median": 1.0,
+   "main_organisation_median": 2.0,
+   "main_parent_median": 733.5
+  },
+  "failing": {
+   "communities": 358,
+   "ghosts": 0,
+   "size_x_K_median": 0.5063725704010964,
+   "below_half_fair_share": 179,
+   "main_article_median": 0.0,
+   "main_author_median": 5.5,
+   "main_child_median": 261.0,
+   "main_journal_median": 0.0,
+   "main_organisation_median": 3.0,
+   "main_parent_median": 969.0
+  }
+ },
+ "approach_2_squared_error": {
+  "passing": {
+   "communities": 621,
+   "ghosts": 0,
+   "size_x_K_median": 0.6681198958385354,
+   "below_half_fair_share": 218,
+   "main_article_median": 4.0,
+   "main_child_median": 3560.0,
+   "main_journal_median": 1.0,
+   "main_organisation_median": 2.0,
+   "main_parent_median": 702.0
+  },
+  "failing": {
+   "communities": 379,
+   "ghosts": 0,
+   "size_x_K_median": 0.5178832966833169,
+   "below_half_fair_share": 184,
+   "main_article_median": 0.0,
+   "main_child_median": 378.0,
+   "main_journal_median": 1.0,
+   "main_organisation_median": 2.0,
+   "main_parent_median": 1159.0
+  }
+ }
+}

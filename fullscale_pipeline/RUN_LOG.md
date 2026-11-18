@@ -3643,8 +3643,9 @@ Owner decided the anchor guard is per community (design doc 2026-11-18): in chil
 own-numbered cell > half of its child×article tie weight, children side and articles side. `fit/start_test_analysis.py`:
 `ANCHOR_UNIT = "community"`, plus paired differences in the number of passing communities and their tie-weight share.
 All pass-1 fits, every K, aligned numbering (`fit/anchor_community_rule_by_k.py` →
-`results/stage0/aligned/anchor_community_rule_by_k.json`): fits in which every community passes; median failing
-communities; median share of child×article tie weight in failing communities.
+`results/stage0/aligned/anchor_community_rule_by_k.json`). Each table cell: fits in which every community passes / fits;
+median number of failing communities per fit; failing communities' combined tie weight ÷ the fit's total child×article
+reconstructed tie weight, each community's tie weight being its half credit (median over fits).
 
 | K | SE a1 | SE a2 | KL a1 | KL a2 |
 |---|---|---|---|---|
@@ -3658,3 +3659,25 @@ communities; median share of child×article tie weight in failing communities.
 → Squared error never meets the requirement; its failing communities carry little child×article tie weight (2–17 %).
 At K = 3, 2 of 3 communities fail with 6 % of the weight. KL meets it up to K = 20. Whether it becomes a veto in
 K choice / loss choice is put to the owner.
+
+### RL-267 — 2026-11-18 — are the communities failing the child×article requirement ghosts? (no fits)
+`fit/anchor_failures_vs_ghosts.py` → `results/stage0/aligned/anchor_failures_vs_ghosts.json`. Pass 1, squared error,
+K* = 20, all groups, converged seeds, aligned numbering; failing = own-numbered child×article cell ≤ half of the
+community's child×article tie weight on either side (RL-266). **Ghosts by the M1 definition** (no placed entity in any
+facet has the community as its largest weighted membership; `measures.ghosts`, 2026-11-07): **0** of 358 failing
+communities (approach 1) and 0 of 379 (approach 2); also 0 among passing ones. Profile (medians per community, failing
+vs passing; "placed main members" = placed entities whose largest weighted membership is the community):
+
+| | Approach 1 failing | Approach 1 passing | Approach 2 failing | Approach 2 passing |
+|---|---|---|---|---|
+| placed main members: articles | 0 | 5 | 0 | 4 |
+| placed main members: child hyperedges | 261 | 3,618 | 378 | 3,560 |
+| placed main members: parent hyperedges | 969 | 734 | 1,159 | 702 |
+| placed main members: authors / organisations / journals | 5.5 / 3 / 0 | 8 / 2 / 1 | — / 2 / 1 | — / 2 / 1 |
+| size: community's half credit averaged over relations × K (1 = fair share) | 0.51 | 0.75 | 0.52 | 0.67 |
+| communities below 0.5 × fair share (toy-era low-mass line, CLAUDE.md §4.22) | 179 of 358 | 194 of 562 | 184 of 379 | 218 of 621 |
+
+→ Not ghosts. They are communities whose semantics (mainly parent hyperedges, fewer child hyperedges) is not matched by
+articles of their own: no placed article has them as its largest membership. Size separates them only weakly.
+"Placed" is the strict in-sample subset (reproduced share beyond the degree-only rule by more than the seed SD), so
+placed counts are small for articles.
