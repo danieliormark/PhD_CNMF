@@ -7,21 +7,21 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-18, ticket 107 M1 — stage 0: alignment of community numbering applied to all readings)
+## State (2026-11-18, ticket 107 M1 — stage 0: swap follow-ups and diagonal-start test read)
 
-Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`. Latest (RUN_LOG RL-252–RL-263):
-- **Alignment (decided, option a = always)** implemented (`fit/align.py`, `aligned.json` per fit; `M1_ALIGNED=1` loaders).
-- Under the aligned numbering: swap verdict flips (squared error approach 1 → heterogeneity follows the data; KL
-  approach 2 → no change, near miss); still no mono-domain community; detachment roughly halved, the rest mostly a
-  shared main partner (RL-262); **K* unchanged** (20 / 13). Under squared error the social facets' aligned numbering
-  agrees across seeds only at chance level, while each facet's own grouping is reproducible (RL-263).
-- Running on CSF3: swap follow-ups 24848752 (80 fits), diagonal-start test 24849355 (40 fits). When finished: `python -m
-  fit.align --stages swap_bare start_test`, then the follow-up reading and `python -m fit.start_test_analysis --out
-  fit/results/stage0/start_test.json`, compared with `plans/ticket107_start_test.md`.
-- Waiting for the owner: the "near one partner" line of the start test (midpoint rule, GLOSSARY E5); response to
-  mono-domain communities (A: report only, proposed); whether stability should also be reported with each facet matched
-  on its own (proposed as reporting only, RL-263); then O1/O3 and pass 3 after the start test.
-- Older pending: Q2/Q3 of pass 2 (see design doc 2026-11-16/17 entries); item (l); stage-1 counting fraction.
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-269.
+- Alignment of numbering (decided, always) applied to all readings; K* unchanged (RL-263).
+- Owner decisions 2026-11-18: diagonal rule (part(k,k) > every other cell of row and column) for all relations but
+  child×article; child×article > 0.5 per community, counted by the counting rule, no seed picking; tolerance inside a
+  fit and veto status decided after the start test (design doc).
+- Swap follow-ups (RL-268): one band and larger K both "no change" → presence cannot show that heterogeneity follows
+  the data (GLOSSARY E6).
+- Diagonal-start test (RL-269): KL better on every reading with the diagonal start; squared error 3/10, 0/10 converged
+  at 8,000 epochs (supplementary: lower loss, one partner, but held-out existence lower, more child×article failures,
+  communities separate by domain).
+- Agreed sequence: (1) start test read → (2) decide whether the swap needs a measure of which people group with which
+  ideas, or close it → (3) joint discussion: start (diagonal for all cores?), O1/O3, child×article tolerance and veto,
+  whether squared-error diagonal fits are continued to convergence → mono-domain response, pass-3 sizing.
 
 ## Older state (2026-11-13, ticket 107 M1 — held-out criterion and fractions decided; wiring next)
 
