@@ -3835,3 +3835,23 @@ masses reproduce RL-272; smoke run 30 epochs: matched A and B equal to float32 p
 92 % of core cells sit at the positivity floor (the setting most likely to break exact equivalence); gradients far
 above ε; step-size floor not reached. Entity totals (`damping_entity_totals.py`): totals still rise with d; largest
 journals' mass share 0.47 → 0.12, largest organisations' 0.17 → 0.05; author×article changes little in the trial.
+
+### RL-275 — 2026-11-18 — Damping test submitted (job 24899341); KL core matrices end exactly diagonal (saved fits, no new fits)
+Owner submitted `damping_test.sh` (18 fits, 3 tasks). Found while dry-running the reading script and checked on the
+saved KL fits at K = 13 (hold-out group 1, seeds 1–10; pass 1 = random social start, start test = diagonal social
+start): **share of off-diagonal core cells at the positivity floor (1e-7)** and **off-diagonal share of reconstructed
+tie weight (Σ_{k≠l} part(k,l) ÷ T)**, medians over fits.
+- Semantic relations (child×article, child×parent), both starts: 1.000 at the floor; off-diagonal share 0.0000. The
+  anchors start diagonal (NNDSVD singular values + 1e-4 off the diagonal) in both arms and stay exactly diagonal.
+- Social relations, random start: 0.91–0.99 at the floor; off-diagonal share approach 1 article×journal 0.24,
+  author×article 0.07, author×affiliation 0.03; approach 2 article×article 0.41, article×journal 0.31,
+  article×affiliation 0.10.
+- Social relations, diagonal start: 1.000 at the floor (min over fits 0.98–1.00); off-diagonal share 0.0000 in every
+  relation.
+First-order check (gradient of the training loss at the saved solution, float64): no floor cell has a negative
+gradient in any fit, either start — raising any single floor cell would raise the loss, so the diagonal cores are a
+genuine constrained local optimum, not the optimiser stuck at the clamp (and the diagonal start's training loss is
+lower, RL-269). Consequences: under KL (i) the child×article requirement and, under the diagonal start, the diagonal
+rule are met by construction (no off-diagonal weight exists), so they cannot fail as tests; (ii) under the diagonal
+start a tie between communities can be rebuilt only through the two entities' mixed memberships, never through a
+community-to-community link — the mechanism behind the article×article closure ratio 0.41 (RL-270).
