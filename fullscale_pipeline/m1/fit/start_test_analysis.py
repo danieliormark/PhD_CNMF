@@ -98,7 +98,8 @@ def effective_partners(P):
 
 def per_fit(f, rds):
     m = f["measures"]; r = f["result"]
-    out = {"seed": f["job"]["seed"], "converged": bool(r["converged"]), "epochs": r["epochs"],
+    out = {"seed": f["job"]["seed"], "converged": bool(r["converged"]) or INCLUDE_UNCONVERGED, "converged_actual": bool(r["converged"]),
+           "epochs": r["epochs"],
            "data_loss": float(r["data_loss_history"][-1]), "relation_loss": r["final_relation_loss"],
            "existence": m["heldout_two_part_combined"]["existence"], "value": m["heldout_two_part_combined"]["value"],
            "existence_by_relation": {k: v["ap_within_class"] for k, v in m["heldout_two_part"].items() if v}}
@@ -130,7 +131,10 @@ def per_fit(f, rds):
 def recurrence(F, W, rds):
     """F: per-fit dicts of one arm (converged only), W: their weighted memberships. Per relation: each failure's share of
     the other seeds in which it recurs (facets matched across seeds one at a time)."""
-    n = len(F); facets = sorted(W[0]); out = {}
+    n = len(F); out = {}
+    if n < 2:
+        return {"_note": f"recurrence needs at least 2 converged seeds; {n} available"}
+    facets = sorted(W[0])
     perm = {(s, t, fa): M.match(W[s], W[t], [fa]) for s in range(n) for t in range(n) if s != t for fa in facets}
     for name, rd in rds.items():
         if name == ANCHOR:
@@ -163,11 +167,17 @@ def paired(ref, arm, get):
 
 def anchor_ok(A):
     conv = [x for x in A if x["converged"]]
+    if not conv:
+        return None                                              # no converged fit: the guard cannot be read
     if ANCHOR_UNIT == "fit":
         return all(x["anchor"]["within_share"] > 0.5 for x in conv)
     if ANCHOR_UNIT == "community":
         return all(x["anchor"]["n_communities_over_half"] == x["anchor"]["K"] for x in conv)
     raise SystemExit("ANCHOR_UNIT not set: the owner's choice of unit for the child×article > 0.5 requirement is pending")
+
+
+INCLUDE_UNCONVERGED = False   # supplementary reading (2026-11-18): every fit at its last epoch counts as if converged;
+                              # NOT the decided rule (which pairs converged seeds only); output labelled as such
 
 
 def run(dry_run=False):
@@ -198,7 +208,7 @@ def run(dry_run=False):
         cmp["anchor_within_share"] = paired(R, A, lambda x: x["anchor"]["within_share"])
         cmp["anchor_communities_over_half"] = paired(R, A, lambda x: x["anchor"]["n_communities_over_half"])
         cmp["anchor_share_communities_over_half"] = paired(R, A, lambda x: x["anchor"]["share_communities_over_half"])
-        med = lambda L, g: float(np.median([g(x) for x in L if x["converged"]]))
+        med = lambda L, g: (float(np.median([g(x) for x in L if x["converged"]])) if any(x["converged"] for x in L) else None)
         rel = {}
         for r in R[0]["rule"]:
             rel[r] = {"rule_share": {"reference": med(R, lambda x: x["rule"][r]["both_share"]), "diagonal": med(A, lambda x: x["rule"][r]["both_share"])},
@@ -213,13 +223,18 @@ def run(dry_run=False):
         better = any(cmp[k].get(f) for k, f in (("data_loss", "lower_by_2se"), ("existence", "higher_by_2se"), ("value", "higher_by_2se")))
         guard = anchor_ok(A)
         if beta == 2:
-            per_rel = {}
-            for r, v in rel.items():
-                hi = v["paired_rule_share"].get("higher_by_2se")
-                per_rel[r] = 1 if (hi and not worse and guard) else (3 if hi else 2)
-            kinds = set(per_rel.values())
-            reading = {"outcome": 4 if len(kinds) > 1 else kinds.pop(), "per_relation": per_rel, "fit_worse": worse,
-                       "fit_better": better, "anchor_guard_met": guard}
+            n_pairs = cmp["data_loss"]["n"]
+            if n_pairs < 2:
+                reading = {"outcome": None, "note": f"not readable by the decided rule: {n_pairs} seed(s) converged in both arms",
+                           "anchor_guard_met": guard}
+            else:
+                per_rel = {}
+                for r, v in rel.items():
+                    hi = v["paired_rule_share"].get("higher_by_2se")
+                    per_rel[r] = 1 if (hi and not worse and guard) else (3 if hi else 2)
+                kinds = set(per_rel.values())
+                reading = {"outcome": 4 if len(kinds) > 1 else kinds.pop(), "per_relation": per_rel, "fit_worse": worse,
+                           "fit_better": better, "anchor_guard_met": guard, "seeds_paired": n_pairs}
         else:
             changed = worse or better or any(v["paired_rule_share"].get("lower_by_2se") or v["paired_rule_share"].get("higher_by_2se")
                                              for v in rel.values())
@@ -235,12 +250,17 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True)
     ap.add_argument("--dry-run", action="store_true", help="reference fits as both arms; checks the code without reading start-test fits")
     ap.add_argument("--anchor-unit", choices=("fit", "community"), default=None, help="dry run only")
+    ap.add_argument("--include-unconverged", action="store_true", help="supplementary reading, not the decided rule")
     a = ap.parse_args()
+    global INCLUDE_UNCONVERGED
+    INCLUDE_UNCONVERGED = a.include_unconverged
     if a.dry_run:
         ANCHOR_UNIT = a.anchor_unit or "fit"
     elif a.anchor_unit:
         raise SystemExit("--anchor-unit is for dry runs; the real reading uses ANCHOR_UNIT as decided by the owner")
-    json.dump(run(a.dry_run), open(a.out, "w"), indent=1, default=float)
+    rep = run(a.dry_run)
+    rep["_reading"] = "SUPPLEMENTARY: every fit at its last epoch, converged or not" if a.include_unconverged else "decided rule: converged seeds only"
+    json.dump(rep, open(a.out, "w"), indent=1, default=float)
 
 
 if __name__ == "__main__":

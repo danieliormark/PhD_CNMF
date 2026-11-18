@@ -472,3 +472,24 @@ midpoint is the neutral line between the two. **Trade-off:** a median of 2.2 cou
 about two communities (the number is reported beside the verdict). **Alternatives:** an absolute line (e.g. 1.5, about
 where KL sits) — stricter, but chosen by eye; a paired 2-SE test on the number of partners — says whether the arms
 differ, not whether the arm is near one.
+
+### E6. What does the cross-domain swap test, and what did its follow-ups show?
+
+*Asked 2026-11-18 (owner: "Great explanation!"). Record: RUN_LOG RL-248, RL-261, RL-268.*
+**Question.** Do communities that span both domains (people and ideas) reflect a real link in the data between who
+writes and what they write about, or does the model produce them regardless?
+**Mechanism.** With probability p, an article's social ties (its authors, organisations and journal; in approach 2
+also its co-author links) are exchanged with those of another article in the same social-degree band; semantic ties
+are left untouched. At p = 1 who wrote an article says nothing about what it says. If mixed-domain communities come
+from that link, they should break up as p rises: more mono-domain communities, a smaller share of tie weight in
+communities present in both domains (decided measures and margins, design doc 2026-11-16).
+**Bare swap:** mostly "no change". Two explanations were tested by follow-ups at p = 1: (1) the degree bands keep a link
+(articles only swap within their band, and the band is related to the semantic community) → swap with one band for
+all articles; (2) fixed K leaves no spare communities to separate the domains → swap at a larger K.
+**Follow-ups:** "no change" in every comparison (aligned numbering). One band removes the band link (0.02–0.04 → 0.006–0.011
+above chance) but adds nothing to the effect; a larger K does not let the swap separate the domains.
+**Reading.** Neither explanation holds. Each article's social ties are rebuilt through the article's own communities,
+whichever people it received, so a community is present in both domains whether or not people and ideas are linked in
+the data (under KL the article-side overlap stays 0.92 even with one band). Presence in both domains therefore cannot
+show that heterogeneity follows the data; what the link should change is *which* people group with which ideas.
+**Limit.** Hold-out group 1, 10 seeds, K* and one larger K; the decided presence measures only.

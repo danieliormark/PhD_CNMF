@@ -159,3 +159,17 @@ seed-dependent. KL: unchanged; its article×article failures recur in about half
 - **Read (incline):** `python -m fit.align --stages start_test`, then `python -m fit.start_test_analysis --out
   fit/results/stage0/start_test.json` (needs `ANCHOR_UNIT` set from the owner's choice; `--dry-run` checks the code on
   the reference fits only).
+
+## 9. Results (2026-11-18, RUN_LOG RL-269)
+
+- **KL (control): changed — the diagonal start is better on every reading** (data loss, held-out existence and value,
+  diagonal rule 1.00 in every relation, fewer detached communities, higher stability; anchor met).
+- **Squared error: not readable by the decided rule** — 3/10 (approach 1) and 0/10 (approach 2) fits converged within
+  8,000 epochs; all still descending slowly. Supplementary reading (all fits at their last epoch, labelled): lower data
+  loss, diagonal rule ≈ 1.00, but held-out existence lower, more communities failing the child×article requirement, and
+  communities separating by domain (weaker-domain median 0.43 → 0.12). By the pre-stated logic this is outcome 3, set
+  off by held-out existence and the anchor guard; the §5 explanation for outcome 3 ("the data fit the off-diagonal one
+  better") does not hold, since data loss favours the diagonal start.
+- **Defect of the rule, found when reading:** child×parent is at 1.00 in both arms, so it can never be "higher" and
+  turns every squared-error setting into "4, mixed"; the social relations are reported separately.
+

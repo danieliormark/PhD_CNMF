@@ -3711,3 +3711,37 @@ consistent change with the swap (e.g. SE a1 author×article 0.46 p = 0, 0.66 ban
 → Neither explanation of "no change" holds: removing the degree bands (explanation 1) adds nothing to the effect, and a
 larger K (explanation 2) does not let the swap separate the domains. The presence readings change little when people
 and ideas are unlinked; the article-side overlap stays high under KL even with one band.
+
+### RL-269 — 2026-11-18 — diagonal-start test read (job 24849355)
+40/40 fits finished, no errors; aligned (`fit.align --stages start_test`). **Convergence (8,000-epoch ceiling):** KL
+10/10 in both approaches (diagonal arm faster: median 2,304 vs 2,993 epochs approach 1; 1,850 vs 2,133 approach 2);
+**squared error 3/10 (approach 1) and 0/10 (approach 2)**. The unconverged squared-error fits are close to the stopping
+rule but still descending: relative change over the last 20 epochs 1.4–4.4e-4 (rule: < 1e-4), loss falling ≈ 0.01 per
+1,000 epochs; they pass the reference arm's final data loss (median 0.987) at about epoch 4,000 and end at 0.918–0.936.
+About 4 h per squared-error fit (KL 0.5–0.9 h).
+`fit/start_test_analysis.py` (decided rule, converged seeds paired) → `results/stage0/start_test.{json,log}`. Script
+change before reading: an arm with fewer than 2 seeds converged in both arms is reported "not readable" (was a crash);
+recurrence needs ≥ 2 converged seeds. Supplementary reading, **not the decided rule** (every fit at its last epoch
+counted, labelled): `--include-unconverged` → `results/stage0/start_test_supplementary.{json,log}`.
+**KL (control; decided rule, 10 paired seeds): "changed" — the diagonal start is better on every reading.** Data loss
+lower (approach 1 −5.96, SE 0.59, on ≈ 1,382; approach 2 −4.89, SE 0.33); held-out existence +0.0013 (SE 0.0005) /
++0.0006 (noise), value +0.0035 / +0.0086 (both beyond 2 SE); social relation losses lower, child×parent loss higher
+(+2.0 / +2.8). Diagonal rule share → 1.00 in every relation (approach 1: author×article 0.96, author×affiliation 0.99,
+article×journal 0.90 → 1.00; approach 2: article×affiliation 0.95, **article×article 0.60**, article×journal 0.76 →
+1.00); partner communities → 1.00; no rule failure left. Detached communities per fit −2.4 / −2.3. Stability (aligned,
+chance-adjusted Track B) 0.359 → 0.443 / 0.405 → 0.461; gate 10/10 both arms. Anchor requirement met in every fit, both
+arms. Note: KL approach 2 article×article failures in the reference recurred across seeds (0.51 of their weight) and
+vanish in the diagonal arm with a better fit → recurrence across seeds can come from a shared start, not only from a
+real practice.
+**Squared error, decided rule: not readable** (approach 1: 2 seeds converged in both arms; approach 2: none).
+**Squared error, supplementary (all 10 seeds, last epoch):** data loss −0.060 (SE 0.003) / −0.055 (0.001); held-out
+existence −0.008 / −0.011 (lower beyond 2 SE), value +0.012 / +0.023 (higher). Diagonal rule share in the social
+relations ≈ 0.5 → 0.96–1.00 (approach 2 article×article 0.00 → 0.96); partner communities 2.9–4.8 → 1.0–1.6.
+child×article: within share 0.78 → 0.94 / 0.73 → 0.90, but communities with more than half of their child×article tie
+weight on their own number 12.5 → 9 / 12.5 → 8.5 of 20 (more failing communities, each smaller: failing communities'
+combined tie weight ÷ the fit's child×article tie weight 0.16 → 0.04 / 0.15 → 0.08) → anchor guard not met. Presence:
+mixed share at 0.1 0.96 → 0.75 / 0.98 → 0.78; weaker-domain median 0.43 → 0.12 / 0.41 → 0.10: **communities separate
+by domain under the diagonal start.** Outcome by the pre-stated logic: 3 (trade-off) for every social relation, set off
+by held-out existence and the anchor guard, not by data loss (which favours the diagonal start); child×parent is 1.00
+in both arms (ceiling), so the setting label "4, mixed" is an artefact of the rule. Stability for the diagonal arm is
+not readable (3 / 0 converged fits).
