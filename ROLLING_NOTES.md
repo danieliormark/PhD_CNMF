@@ -7,14 +7,21 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-17, ticket 107 M1 — stage 0, pass 2 read; swap read)
+## State (2026-11-18, ticket 107 M1 — stage 0: alignment of community numbering applied to all readings)
 
-Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md` (run / running / to-run table, kept current). Latest:
-pass 2 complete with KL r = 1 (RL-247: KL r = 1 chosen, squared error r = 0.03); bare swap read (RL-248: three cells
-"no change", KL approach 2 "heterogeneity follows the data"; presentation to the owner pending); squared error r = 0.1
-job ready for the owner to submit (`fit/slurm/stage0_pass2_se_r01.sh`, RL-246). Waiting for the owner: Q2 (highest
-grid value chosen again — proposed: stop, carry the open limit to λ calibration) and Q3 (stability "not worse" —
-proposed: one SE of λ = 0, both tracks); then pass 3.
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`. Latest (RUN_LOG RL-252–RL-263):
+- **Alignment (decided, option a = always)** implemented (`fit/align.py`, `aligned.json` per fit; `M1_ALIGNED=1` loaders).
+- Under the aligned numbering: swap verdict flips (squared error approach 1 → heterogeneity follows the data; KL
+  approach 2 → no change, near miss); still no mono-domain community; detachment roughly halved, the rest mostly a
+  shared main partner (RL-262); **K* unchanged** (20 / 13). Under squared error the social facets' aligned numbering
+  agrees across seeds only at chance level, while each facet's own grouping is reproducible (RL-263).
+- Running on CSF3: swap follow-ups 24848752 (80 fits), diagonal-start test 24849355 (40 fits). When finished: `python -m
+  fit.align --stages swap_bare start_test`, then the follow-up reading and `python -m fit.start_test_analysis --out
+  fit/results/stage0/start_test.json`, compared with `plans/ticket107_start_test.md`.
+- Waiting for the owner: the "near one partner" line of the start test (midpoint rule, GLOSSARY E5); response to
+  mono-domain communities (A: report only, proposed); whether stability should also be reported with each facet matched
+  on its own (proposed as reporting only, RL-263); then O1/O3 and pass 3 after the start test.
+- Older pending: Q2/Q3 of pass 2 (see design doc 2026-11-16/17 entries); item (l); stage-1 counting fraction.
 
 ## Older state (2026-11-13, ticket 107 M1 — held-out criterion and fractions decided; wiring next)
 

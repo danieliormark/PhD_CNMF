@@ -1,0 +1,120 @@
+{
+ "approach_1_KL": {
+  "article": {
+   "joint_fitted": 0.39153105692333245,
+   "joint_aligned": 0.38915160811918464,
+   "per_facet": 0.390953956844003
+  },
+  "author": {
+   "joint_fitted": 0.2669427890771204,
+   "joint_aligned": 0.25209164439892334,
+   "per_facet": 0.2664678649427068
+  },
+  "child": {
+   "joint_fitted": 0.4730949006089137,
+   "joint_aligned": 0.4711828109731957,
+   "per_facet": 0.47071753162815433
+  },
+  "journal": {
+   "joint_fitted": 0.2854383004372669,
+   "joint_aligned": 0.3940303949058464,
+   "per_facet": 0.44556081306385587
+  },
+  "organisation": {
+   "joint_fitted": 0.11117110506710924,
+   "joint_aligned": 0.12651578140770647,
+   "per_facet": 0.17742926959876917
+  },
+  "parent": {
+   "joint_fitted": 0.4326752688891959,
+   "joint_aligned": 0.4307213712940853,
+   "per_facet": 0.4312743500509509
+  }
+ },
+ "approach_1_squared_error": {
+  "article": {
+   "joint_fitted": 0.5591899570159399,
+   "joint_aligned": 0.3686886338882493,
+   "per_facet": 0.6101321938796671
+  },
+  "author": {
+   "joint_fitted": 0.5449669575748348,
+   "joint_aligned": -0.0023835358789778723,
+   "per_facet": 0.5940032314004169
+  },
+  "child": {
+   "joint_fitted": 0.5053844866917118,
+   "joint_aligned": 0.515889141452901,
+   "per_facet": 0.5159852570490187
+  },
+  "journal": {
+   "joint_fitted": 0.4146268876462377,
+   "joint_aligned": -0.018443754319060344,
+   "per_facet": 0.4563689454360169
+  },
+  "organisation": {
+   "joint_fitted": 0.43509000840821715,
+   "joint_aligned": -0.013910998548939419,
+   "per_facet": 0.4711304036099097
+  },
+  "parent": {
+   "joint_fitted": 0.8105101329038551,
+   "joint_aligned": 0.8074249235673973,
+   "per_facet": 0.8099662155235358
+  }
+ },
+ "approach_2_KL": {
+  "article": {
+   "joint_fitted": 0.3802341799355514,
+   "joint_aligned": 0.37432259840263377,
+   "per_facet": 0.3802335418753719
+  },
+  "child": {
+   "joint_fitted": 0.47371249951062705,
+   "joint_aligned": 0.4680456045170192,
+   "per_facet": 0.4714660227881633
+  },
+  "journal": {
+   "joint_fitted": 0.27639143949805917,
+   "joint_aligned": 0.36730363407306643,
+   "per_facet": 0.4294657755452018
+  },
+  "organisation": {
+   "joint_fitted": 0.1664086282032488,
+   "joint_aligned": 0.3367052564798961,
+   "per_facet": 0.29367152856129664
+  },
+  "parent": {
+   "joint_fitted": 0.4289915234819414,
+   "joint_aligned": 0.4253101496165871,
+   "per_facet": 0.4276446393439055
+  }
+ },
+ "approach_2_squared_error": {
+  "article": {
+   "joint_fitted": 0.5423036566405555,
+   "joint_aligned": 0.37513361121329086,
+   "per_facet": 0.5916298987273169
+  },
+  "child": {
+   "joint_fitted": 0.4908923161966436,
+   "joint_aligned": 0.48677289436149446,
+   "per_facet": 0.49543608802425004
+  },
+  "journal": {
+   "joint_fitted": 0.3473184756658016,
+   "joint_aligned": -0.01809653705030423,
+   "per_facet": 0.4281927802375714
+  },
+  "organisation": {
+   "joint_fitted": 0.4981952699562142,
+   "joint_aligned": -0.002707199999983735,
+   "per_facet": 0.5565595848094682
+  },
+  "parent": {
+   "joint_fitted": 0.8023101984795413,
+   "joint_aligned": 0.7942925200518629,
+   "per_facet": 0.8135723571609528
+  }
+ }
+}

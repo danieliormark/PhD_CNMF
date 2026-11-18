@@ -396,6 +396,16 @@ for author×affiliation) and little is lost; under squared error it carries abou
 (low match strength). A shared main partner is a diagnostic of the alignment (and of a facet using fewer distinct
 communities than K), not a property of entities.
 
+**What alignment does to seed agreement** (measured 2026-11-17, RL-263). Track A/B match communities across two seeds
+with **one** matching for all facets together, so they read the numbering across facets. Under the aligned numbering
+this asks: do two seeds agree on which article community each organisation (author, journal) community is aligned to?
+Under KL, yes. Under squared error, only at chance level for the social facets (chance-adjusted Track B ≈ 0), although
+each social facet matched on its own agrees about as well as the semantic facets (≈ 0.45–0.6). Example: in seed 1,
+organisation community A is tied 40 % to article community 4 and 35 % to article community 9, so it is aligned to 4; in
+seed 2 the same organisations are tied 35 % / 40 %, so they are aligned to 9. The organisations' grouping is the same;
+their number is not. The higher agreement under the fitted numbering came from the start (social memberships propagated
+from articles keep the start's numbering), not from the data.
+
 **How (decided):** entry "Alignment". **What it cannot do:** remove genuine spread (squared error: one author community
 tied to several organisation communities; the best match then carries only part of the weight — hence match strength
 is reported) or match two communities to one partner (one-to-one). **Relation to Hungarian matching elsewhere:** Track

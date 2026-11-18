@@ -3563,3 +3563,32 @@ detachment is mostly two row communities whose ties go mainly to the same organi
 facet using fewer distinct communities than K; the leftover organisation column carries almost nothing. Wording fixed for
 the owner: not "communities sharing a community". Aligned stage-0 selection restarted detached (previous run stopped
 with the session, no output).
+
+### RL-263 — 2026-11-17 — stage-0 selection under the aligned numbering; seed agreement of social facets (no fits)
+`M1_ALIGNED=1 python -m fit.aggregate --root …/m1_fits --stage stage0_pass1` → `…/stage0_pass1/_aggregate_aligned.json`
+(log `results/stage0/aligned/aggregate_pass1.log`); compared with `_aggregate.json` (fitted numbering).
+**K choice unchanged in all four settings** (band, value removals, candidates, best K identical: squared error K* = 20,
+candidates 13/20; KL K* = 13, candidates 5/8/13). Held-out existence and value are identical (they read reconstructed
+values, which renumbering does not change). Ghost veto unchanged (0 everywhere). **Stability gate and child×article
+alignment veto** (both read community numbers across facets) change only below the band: squared error K = 3 and 5
+(e.g. approach 2 K = 3 gate failures 14 → 5 fits, K = 5 alignment failures 11 → 0; approach 1 K = 3 alignment failures
+20 → 33); no K inside the band fails either check under either numbering, at any counting fraction (0.1–0.5).
+**Seed agreement (Track A/B, chance-adjusted, mean over groups), K*:** KL rises slightly (approach 1 B 0.328 → 0.343;
+approach 2 0.347 → 0.395). Squared error falls: approach 1 A 0.343 → 0.189, B 0.545 → 0.277; approach 2 A 0.346 → 0.214,
+B 0.542 → 0.335. The fall is in the social facets (per-facet Track B, squared error approach 1: author 0.63 → 0.18,
+journal 0.52 → 0.17, organisation 0.53 → 0.15; child and parent unchanged).
+**Check (`fit/perfacet_stability_kstar.py` → `results/stage0/aligned/perfacet_stability_kstar.{json,log}`):** per-facet
+Track B, chance-adjusted, all groups at K*, three ways: (1) one matching across all facets (the decided method) under the
+fitted numbering; (2) the same under the aligned numbering; (3) each facet matched across seeds on its own (does not
+depend on numbering). Squared error approach 1: author 0.545 / −0.002 / 0.594; journal 0.415 / −0.018 / 0.456;
+organisation 0.435 / −0.014 / 0.471; article 0.559 / 0.369 / 0.610; child 0.505 / 0.516 / 0.516; parent 0.811 / 0.807 /
+0.810. Approach 2: journal 0.347 / −0.018 / 0.428; organisation 0.498 / −0.003 / 0.557. KL (both approaches): (2) ≈ (3)
+for every facet (e.g. approach 2 organisation 0.166 / 0.337 / 0.294).
+→ **Reading.** Under squared error, each social facet's own grouping of entities is as reproducible across seeds as the
+semantic facets' (3); what is not reproducible is **which article community a social community is aligned to**: under
+the aligned numbering it agrees across seeds at chance level (2 ≈ 0). The agreement under the fitted numbering (1) comes
+from the start (social memberships are propagated from articles and keep the start's numbering), not from the data.
+Under KL the aligned numbering is reproducible. This is the seed-level counterpart of the spread in RL-255/259 (3–5
+partner communities under squared error): with several partners, the one-to-one match picks a different partner in
+different seeds. Bears on R-A under squared error and on reading the diagonal-start test; does not change K*. The
+stability gate still passes under squared error because article, child and parent carry the mean over facets.
