@@ -3681,3 +3681,33 @@ vs passing; "placed main members" = placed entities whose largest weighted membe
 articles of their own: no placed article has them as its largest membership. Size separates them only weakly.
 "Placed" is the strict in-sample subset (reproduced share beyond the degree-only rule by more than the seed SD), so
 placed counts are small for articles.
+
+### RL-268 — 2026-11-18 — swap follow-ups (i) one band, (ii) larger K: read (no new fits)
+Job 24848752 finished: 80/80 converged, no errors; 62 fits newly aligned (`fit.align --stages swap_bare`; all 240 swap
+fits now have aligned.json). New `fit/swap_followup_analysis.py` → `results/stage0/swap_followup.{json,log}` (fitted
+numbering) and `results/stage0/aligned/swap_followup.{json,log}` (aligned, primary). Decided swap measures and margins;
+step 1 of the decided rule (p = 1 vs p = 0; no intermediate p, so no reversal check). Hold-out group 1, seeds 1–10
+(squared error approach 1, p = 0 at K*: 9 converged). Verdicts, aligned numbering (fitted in brackets where it differs):
+
+| Comparison | SE a1 | SE a2 | KL a1 | KL a2 |
+|---|---|---|---|---|
+| (i) one band p = 1 vs p = 0, K* | no change | no change | no change | no change |
+| bare swap: banded p = 1 vs p = 0, K* (as RL-261) | follows the data | no change | no change | no change (follows) |
+| one band vs banded, both p = 1, K* | no change (conflicting: mono-domain −0.60 vs margin 0.57) | no change | no change | no change |
+| (ii) banded p = 1 vs p = 0, larger K (SE 32, KL 20) | no change | no change | no change (follows: ratio −0.032 vs 0.029) | no change |
+
+Squared error approach 1, aligned, effect (margin): one band vs p = 0 mono-domain per fit +0.83 (1.03), mixed share at
+0.1 −0.097 (0.100) — the same size as the banded swap (+0.83 (0.71), −0.103 (0.063)), but the one-band arm's seeds vary
+more; one band vs banded: 0.00 (0.86), +0.006 (0.098). Larger K: mono-domain per fit already 2.2–2.6 at p = 0 under
+squared error (vs 0.6–0.7 at K = 20), and unchanged at p = 1 (+0.1 (1.2), +0.0 (1.0)). Band link (Cramér's V above
+shuffle) one band 0.006–0.011 vs banded 0.021–0.044: the one-band swap does remove the degree-band link. Overlap
+(article side): unchanged by one band (e.g. KL a1 0.925 at p = 0, banded and one band). The fitted-numbering banded K*
+result for SE a1 here (mixed share −0.022 vs margin 0.021, "follows") differs from RL-248 ("no change") only through the
+random seed halvings of the margin: a call at the margin.
+Reported beside (reporting only): child×article requirement per community — squared error fails in every fit of every
+arm (7–8 failing communities at K = 20, 14 at K = 32), KL passes in every fit; diagonal rule shares (aligned) show no
+consistent change with the swap (e.g. SE a1 author×article 0.46 p = 0, 0.66 banded, 0.46 one band; KL a2 article×article
+0.60 / 0.65 / 0.48 at K = 13, 0.19 / 0.01 at K = 20).
+→ Neither explanation of "no change" holds: removing the degree bands (explanation 1) adds nothing to the effect, and a
+larger K (explanation 2) does not let the swap separate the domains. The presence readings change little when people
+and ideas are unlinked; the article-side overlap stays high under KL even with one band.

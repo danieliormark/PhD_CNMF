@@ -1,0 +1,4672 @@
+{
+ "approach_1_squared_error": {
+  "K": {
+   "Kstar": 20,
+   "Kbig": 32
+  },
+  "means": {
+   "p0_Kbig": {
+    "mono_domain": 3.0,
+    "mixed_0.1": 0.937034820062204,
+    "weaker_median": 0.28809159807148255,
+    "ratio_median": 0.3692008762973866,
+    "mixed_0.5": 0.6459586439868235,
+    "existence_social": 0.006249331501516544,
+    "existence_semantic": 0.11870860972438906,
+    "overlap": 0.4698742085861761,
+    "band_link": 0.018186991424257233,
+    "anchor_failing": 18.1,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.03538113482619486,
+     "author_affiliation": 0.004106729701959384,
+     "article_journal": 0.0006188586654067433
+    },
+    "fits": 10
+   },
+   "p0_Kstar": {
+    "mono_domain": 0.7777777777777778,
+    "mixed_0.1": 0.9765797901598359,
+    "weaker_median": 0.35760580702961786,
+    "ratio_median": 0.5124024401223731,
+    "mixed_0.5": 0.6902820889753642,
+    "existence_social": 0.005938784354308536,
+    "existence_semantic": 0.12586316389620067,
+    "overlap": 0.5747896798070778,
+    "band_link": 0.017522896898996214,
+    "anchor_failing": 10.777777777777779,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.04591584761967333,
+     "author_affiliation": 0.0020087960087468884,
+     "article_journal": 0.0
+    },
+    "fits": 9
+   },
+   "banded_Kstar": {
+    "mono_domain": 1.2,
+    "mixed_0.1": 0.954819605600122,
+    "weaker_median": 0.32608388027200863,
+    "ratio_median": 0.49669039896386763,
+    "mixed_0.5": 0.6942776506501941,
+    "existence_social": 0.004147683370234555,
+    "existence_semantic": 0.12324825158815848,
+    "overlap": 0.49985918873404633,
+    "band_link": 0.02627135621684178,
+    "anchor_failing": 10.9,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.30278088181456536,
+     "author_affiliation": 0.03018308001828197,
+     "article_journal": 0.006476759286971667
+    },
+    "fits": 10
+   },
+   "banded_Kbig": {
+    "mono_domain": 2.4,
+    "mixed_0.1": 0.9429068775050409,
+    "weaker_median": 0.3031201468207288,
+    "ratio_median": 0.37681626122610795,
+    "mixed_0.5": 0.6434870373114195,
+    "existence_social": 0.0036570343656380545,
+    "existence_semantic": 0.11866138836010717,
+    "overlap": 0.45920974687178273,
+    "band_link": 0.011808771414130908,
+    "anchor_failing": 17.8,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.050690412476712764,
+     "author_affiliation": 0.021083232839638155,
+     "article_journal": 0.0
+    },
+    "fits": 10
+   },
+   "oneband_Kstar": {
+    "mono_domain": 0.6,
+    "mixed_0.1": 0.9693679925918957,
+    "weaker_median": 0.3157081991389976,
+    "ratio_median": 0.49558231693805493,
+    "mixed_0.5": 0.6884048774224251,
+    "existence_social": 0.004035708515229944,
+    "existence_semantic": 0.12340688728910691,
+    "overlap": 0.498216137257187,
+    "band_link": 0.006113104206511422,
+    "anchor_failing": 10.3,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.09183807202516804,
+     "author_affiliation": 0.022069399492251486,
+     "article_journal": 0.0021320063384233966
+    },
+    "fits": 10
+   }
+  },
+  "comparisons": {
+   "oneband_vs_p0_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": -0.1777777777777778,
+      "margin": 0.7420411039827914
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": -0.007211797567940215,
+      "margin": 0.02094445273543632
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.04189760789062025,
+      "margin": 0.04706851015986202
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.016820123184318192,
+      "margin": 0.08217087814369606
+     }
+    }
+   },
+   "banded_vs_p0_Kstar": {
+    "verdict": "heterogeneity follows the data",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.42222222222222217,
+      "margin": 0.6403124237432848
+     },
+     "mixed_0.1": {
+      "status": "effect",
+      "effect": -0.021760184559713847,
+      "margin": 0.021032078560654793
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.03152192675760923,
+      "margin": 0.05981113705210271
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.015712041158505496,
+      "margin": 0.0911846693699502
+     }
+    }
+   },
+   "oneband_vs_banded_Kstar": {
+    "verdict": "conflicting",
+    "measures": {
+     "mono_domain": {
+      "status": "opposite",
+      "effect": -0.6,
+      "margin": 0.565685424949238
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.014548386991773632,
+      "margin": 0.026601127913106544
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.010375681133011017,
+      "margin": 0.06172731807200008
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.0011080820258126955,
+      "margin": 0.08122794037012936
+     }
+    }
+   },
+   "banded_vs_p0_Kbig": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": -0.6000000000000001,
+      "margin": 1.2806248474865696
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.00587205744283692,
+      "margin": 0.015620907251812716
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": 0.015028548749246251,
+      "margin": 0.051841991446603175
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": 0.007615384928721325,
+      "margin": 0.059548882171863854
+     }
+    }
+   }
+  },
+  "per_fit": {
+   "p0_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9499438739958614,
+     "mixed_0.5": 0.6247954558564096,
+     "weaker_median": 0.32768239115660236,
+     "ratio_median": 0.3555342296221783,
+     "existence_social": 0.006351691390668323,
+     "existence_semantic": 0.12480039798061773,
+     "overlap": 0.5301169304319696,
+     "band_link": 0.016469892205738842,
+     "anchor_failing": 21,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.08353958074817623,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 4,
+     "mixed_0.1": 0.9200373594245074,
+     "mixed_0.5": 0.5173810088819291,
+     "weaker_median": 0.23652730227055413,
+     "ratio_median": 0.2534494601007866,
+     "existence_social": 0.006297117638826511,
+     "existence_semantic": 0.11955253618735459,
+     "overlap": 0.4838082007154175,
+     "band_link": 0.021141935065777398,
+     "anchor_failing": 18,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.05503797025470825,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0008726710972072702
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 5,
+     "mixed_0.1": 0.8962315314825013,
+     "mixed_0.5": 0.6853383839670006,
+     "weaker_median": 0.23355847504904098,
+     "ratio_median": 0.3358185100831712,
+     "existence_social": 0.005924751370478881,
+     "existence_semantic": 0.12408945782816558,
+     "overlap": 0.5382666818296344,
+     "band_link": 0.01772874845262594,
+     "anchor_failing": 21,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.0043190477670237235,
+      "author_affiliation": 0.040343621909217905,
+      "article_journal": 0.0415609043003118
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9432349988913651,
+     "mixed_0.5": 0.6380580426246492,
+     "weaker_median": 0.2719826955219261,
+     "ratio_median": 0.34376536532644253,
+     "existence_social": 0.005883385063962807,
+     "existence_semantic": 0.11696622098776951,
+     "overlap": 0.4000133804256831,
+     "band_link": 0.013093531198130406,
+     "anchor_failing": 15,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.02108426562594392,
+      "author_affiliation": 0.0033610433595573632,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9395384400247483,
+     "mixed_0.5": 0.5659997571240725,
+     "weaker_median": 0.3239351605884001,
+     "ratio_median": 0.29175170529073274,
+     "existence_social": 0.005738945051343515,
+     "existence_semantic": 0.11512024729675827,
+     "overlap": 0.4104807211436625,
+     "band_link": 0.000382247730975116,
+     "anchor_failing": 18,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.0035685126660989414,
+      "author_affiliation": 0.0,
+      "article_journal": 0.008293101742319328
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9359514169824024,
+     "mixed_0.5": 0.6099652638946366,
+     "weaker_median": 0.268557769889314,
+     "ratio_median": 0.4433725749307029,
+     "existence_social": 0.008121251601693516,
+     "existence_semantic": 0.11681841316289786,
+     "overlap": 0.42835600922014017,
+     "band_link": 0.025231792682926205,
+     "anchor_failing": 19,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.02132127885231337,
+      "author_affiliation": 0.004852416044361404,
+      "article_journal": 0.00036504623360621646
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9394112446310616,
+     "mixed_0.5": 0.6285735955414212,
+     "weaker_median": 0.28435486797566367,
+     "ratio_median": 0.4010717591762051,
+     "existence_social": 0.0060774377504740264,
+     "existence_semantic": 0.12219196132642181,
+     "overlap": 0.49537773273998914,
+     "band_link": 0.009872101801225774,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.11208873327158374,
+      "author_affiliation": 0.29047354748201815,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 4,
+     "mixed_0.1": 0.9246473238350336,
+     "mixed_0.5": 0.7120538336911166,
+     "weaker_median": 0.22212846001008518,
+     "ratio_median": 0.3653360743989326,
+     "existence_social": 0.005873051189846928,
+     "existence_semantic": 0.11785702369135546,
+     "overlap": 0.4451626378452413,
+     "band_link": 0.014863274995791265,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.02965197066756327,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9516514064768091,
+     "mixed_0.5": 0.7685587765625249,
+     "weaker_median": 0.4188661386462651,
+     "ratio_median": 0.4714083519791846,
+     "existence_social": 0.0060868890970406505,
+     "existence_semantic": 0.11562503357084318,
+     "overlap": 0.4604707256950371,
+     "band_link": 0.03513854730752844,
+     "anchor_failing": 16,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.10729185881806667,
+      "author_affiliation": 0.10569122327518976,
+      "article_journal": 0.0012790350969095544
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9697006048777498,
+     "mixed_0.5": 0.7088623217244748,
+     "weaker_median": 0.29332271960697376,
+     "ratio_median": 0.4305007320655297,
+     "existence_social": 0.0061387948608302755,
+     "existence_semantic": 0.11406480521170664,
+     "overlap": 0.5066890658149856,
+     "band_link": 0.027947842801852904,
+     "anchor_failing": 19,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.04111029898482644,
+      "author_affiliation": 0.1163733179530371,
+      "article_journal": 0.005274771407644457
+     }
+    }
+   ],
+   "p0_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9873889874624171,
+     "mixed_0.5": 0.6361955989792831,
+     "weaker_median": 0.3165271933510798,
+     "ratio_median": 0.4502212076860761,
+     "existence_social": 0.00570122695996333,
+     "existence_semantic": 0.12872211299268868,
+     "overlap": 0.6391356243990503,
+     "band_link": 0.010409609848589352,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.2643836577713399,
+      "author_affiliation": 0.178105662698048,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9931755999965858,
+     "mixed_0.5": 0.639408307400084,
+     "weaker_median": 0.37713948108253387,
+     "ratio_median": 0.5656779250051235,
+     "existence_social": 0.005922931550222025,
+     "existence_semantic": 0.12253244191936019,
+     "overlap": 0.5588578400507572,
+     "band_link": 0.005824956685425237,
+     "anchor_failing": 11,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.0,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9581753795548419,
+     "mixed_0.5": 0.7818449060542361,
+     "weaker_median": 0.3221700226403731,
+     "ratio_median": 0.4707516460990814,
+     "existence_social": 0.005930961670509787,
+     "existence_semantic": 0.11740688113804015,
+     "overlap": 0.5930785575312828,
+     "band_link": 0.010578756308288542,
+     "anchor_failing": 13,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.00926771701916123,
+      "author_affiliation": 0.2084562865356929,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.669091668256062,
+     "weaker_median": 0.3063605295141132,
+     "ratio_median": 0.6480294472180947,
+     "existence_social": 0.005946370828402941,
+     "existence_semantic": 0.12721708563897405,
+     "overlap": 0.6263571687654494,
+     "band_link": 0.016312004308532413,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.10015716094658102,
+      "author_affiliation": 0.0007213574274962491,
+      "article_journal": 0.0034709747095349203
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9876226491369783,
+     "mixed_0.5": 0.7622550031976605,
+     "weaker_median": 0.3668883606191935,
+     "ratio_median": 0.4833267513780082,
+     "existence_social": 0.006156239474105876,
+     "existence_semantic": 0.1231947602720176,
+     "overlap": 0.5788569596056697,
+     "band_link": 0.03224272619795754,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.010672998818624298,
+      "author_affiliation": 0.40914555984166034,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9862797170450793,
+     "mixed_0.5": 0.63209497943367,
+     "weaker_median": 0.3236181341378621,
+     "ratio_median": 0.39206828529163074,
+     "existence_social": 0.006016795545543472,
+     "existence_semantic": 0.124474786697189,
+     "overlap": 0.4946047128345944,
+     "band_link": 0.014749552587196138,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.05027029569234895,
+      "author_affiliation": 0.0,
+      "article_journal": 0.006825922019778087
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9564516031768044,
+     "mixed_0.5": 0.7615258749871437,
+     "weaker_median": 0.49295471794312296,
+     "ratio_median": 0.6667229373250588,
+     "existence_social": 0.006240563842256461,
+     "existence_semantic": 0.1319056975372786,
+     "overlap": 0.5929710816447363,
+     "band_link": 0.022274689832181768,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.04591584761967333,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9605496984768986,
+     "mixed_0.5": 0.6862816603472414,
+     "weaker_median": 0.3409357607275102,
+     "ratio_median": 0.42497805957019696,
+     "existence_social": 0.005694356197018858,
+     "existence_semantic": 0.12861160664681323,
+     "overlap": 0.603533508817962,
+     "band_link": 0.02760840902989299,
+     "anchor_failing": 11,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.047788757454088636,
+      "author_affiliation": 0.0020087960087468884,
+      "article_journal": 0.005218665107228465
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9595744765889164,
+     "mixed_0.5": 0.6438408021228982,
+     "weaker_median": 0.3718580632507722,
+     "ratio_median": 0.5098457015280874,
+     "existence_social": 0.00583961312075408,
+     "existence_semantic": 0.1287031022234447,
+     "overlap": 0.4857116646141985,
+     "band_link": 0.017705367292901966,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.02461831696027092,
+      "author_affiliation": 0.13203072129287075,
+      "article_journal": 0.0
+     }
+    }
+   ],
+   "banded_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9858135400894992,
+     "mixed_0.5": 0.6414024551147632,
+     "weaker_median": 0.3395543145933997,
+     "ratio_median": 0.6283902396414611,
+     "existence_social": 0.003249821612769564,
+     "existence_semantic": 0.12812281196177616,
+     "overlap": 0.548595066910728,
+     "band_link": 0.017185974371653784,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.2621137918172911,
+      "author_affiliation": 0.0,
+      "article_journal": 0.007662400043877364
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9796130769398755,
+     "mixed_0.5": 0.6623520760354971,
+     "weaker_median": 0.30248371270237256,
+     "ratio_median": 0.4370022159112061,
+     "existence_social": 0.002366939567412456,
+     "existence_semantic": 0.12547302532854168,
+     "overlap": 0.5312124140738229,
+     "band_link": 0.01157204321655729,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.0,
+      "author_affiliation": 0.0013821860634935128,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9639165833671998,
+     "mixed_0.5": 0.8344694584846001,
+     "weaker_median": 0.32528401110862265,
+     "ratio_median": 0.4091659005127025,
+     "existence_social": 0.0013115934874841913,
+     "existence_semantic": 0.12032628876497076,
+     "overlap": 0.5499970967727869,
+     "band_link": 0.016336173846386748,
+     "anchor_failing": 13,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.017543073172112296,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9260219627439529,
+     "mixed_0.5": 0.6984351743362882,
+     "weaker_median": 0.20580155169171993,
+     "ratio_median": 0.5473571033922109,
+     "existence_social": 0.009544390075575298,
+     "existence_semantic": 0.12345738644399405,
+     "overlap": 0.3880235093880602,
+     "band_link": 0.03319331540521493,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.6695515626184828,
+      "author_affiliation": 0.09978713045534315,
+      "article_journal": 0.0052911185300659695
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 0.993113456659835,
+     "mixed_0.5": 0.7737716611911841,
+     "weaker_median": 0.3654396468721257,
+     "ratio_median": 0.5599274782063688,
+     "existence_social": 0.00422982950484676,
+     "existence_semantic": 0.12540070707688228,
+     "overlap": 0.6100676960575684,
+     "band_link": 0.029176710422455912,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.0035066648673203684,
+      "author_affiliation": 0.19905884810645808,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 2,
+     "mixed_0.1": 0.907853798630032,
+     "mixed_0.5": 0.7207678564670341,
+     "weaker_median": 0.4001397410483558,
+     "ratio_median": 0.5579151463530995,
+     "existence_social": 0.002214912806601373,
+     "existence_semantic": 0.1207412329517153,
+     "overlap": 0.47894699468270463,
+     "band_link": 0.0394824884592721,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.41642837202426564,
+      "author_affiliation": 0.006906907629408515,
+      "article_journal": 0.013156839750617818
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9436734142720736,
+     "mixed_0.5": 0.6625190882201983,
+     "weaker_median": 0.2584872490654832,
+     "ratio_median": 0.4140343969915878,
+     "existence_social": 0.0043895890913109225,
+     "existence_semantic": 0.11591802088140271,
+     "overlap": 0.4577223562672709,
+     "band_link": 0.02393998936632931,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.6304870680907227,
+      "author_affiliation": 0.06955881119831026,
+      "article_journal": 0.058813808757204114
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9667870231145989,
+     "mixed_0.5": 0.801059369530633,
+     "weaker_median": 0.5213158557583242,
+     "ratio_median": 0.6061457106561168,
+     "existence_social": 0.00213465190465967,
+     "existence_semantic": 0.13179501698100116,
+     "overlap": 0.5660799703797854,
+     "band_link": 0.019291240904023704,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.050274449125903335,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0007670739676972311
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9156226033526442,
+     "mixed_0.5": 0.5905238427645224,
+     "weaker_median": 0.26596791173557166,
+     "ratio_median": 0.4598867735634339,
+     "existence_social": 0.0066858175345273965,
+     "existence_semantic": 0.12431343817263353,
+     "overlap": 0.4486388570314932,
+     "band_link": 0.03509925963686007,
+     "anchor_failing": 13,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.5333295564475228,
+      "author_affiliation": 0.053459252407155426,
+      "article_journal": 0.38708935669251116
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9657805968315117,
+     "mixed_0.5": 0.5574755243572213,
+     "weaker_median": 0.2763648081441107,
+     "ratio_median": 0.3470790244104884,
+     "existence_social": 0.005349288117157915,
+     "existence_semantic": 0.11693458731866722,
+     "overlap": 0.4193079257762428,
+     "band_link": 0.03743636653966395,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.3434479718118396,
+      "author_affiliation": 0.17759685861503913,
+      "article_journal": 0.04764131646408943
+     }
+    }
+   ],
+   "banded_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9559510990487354,
+     "mixed_0.5": 0.6862719233064977,
+     "weaker_median": 0.354925191728068,
+     "ratio_median": 0.3937810119094681,
+     "existence_social": 0.0030331947785558755,
+     "existence_semantic": 0.12172560080475452,
+     "overlap": 0.47573876110969254,
+     "band_link": 0.004426049887044453,
+     "anchor_failing": 19,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.08408993392982009,
+      "author_affiliation": 0.00022588832555646188,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9270057942534423,
+     "mixed_0.5": 0.6004439741577696,
+     "weaker_median": 0.20655427440506602,
+     "ratio_median": 0.22833047678887225,
+     "existence_social": 0.003315558637134493,
+     "existence_semantic": 0.11678767370426467,
+     "overlap": 0.4191339355591702,
+     "band_link": 0.00498204684824112,
+     "anchor_failing": 19,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.04896295903894937,
+      "author_affiliation": 0.12579571129822686,
+      "article_journal": 0.0007919190745607186
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 5,
+     "mixed_0.1": 0.9140850990695761,
+     "mixed_0.5": 0.6609951154261892,
+     "weaker_median": 0.3229660770648512,
+     "ratio_median": 0.37292690412581464,
+     "existence_social": 0.0015878863845536421,
+     "existence_semantic": 0.12544053307975078,
+     "overlap": 0.5123396356950419,
+     "band_link": 0.013547828867038259,
+     "anchor_failing": 20,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.01637455931367568,
+      "author_affiliation": 0.040841722771773226,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9629507500578252,
+     "mixed_0.5": 0.6444348354108804,
+     "weaker_median": 0.2585110419664718,
+     "ratio_median": 0.43234733704275685,
+     "existence_social": 0.00597624315837144,
+     "existence_semantic": 0.1171201704063527,
+     "overlap": 0.4255589423181903,
+     "band_link": 0.020929469035963433,
+     "anchor_failing": 16,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.027595535294491557,
+      "author_affiliation": 0.001324742907503081,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9375518156199538,
+     "mixed_0.5": 0.5599042553487663,
+     "weaker_median": 0.2441767412784709,
+     "ratio_median": 0.32970593195538567,
+     "existence_social": 0.004705199552290101,
+     "existence_semantic": 0.11532018949890092,
+     "overlap": 0.4116605471113217,
+     "band_link": 0.0030861850950540115,
+     "anchor_failing": 18,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.010521799716198443,
+      "author_affiliation": 0.0,
+      "article_journal": 0.006168843770006683
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9515937399331635,
+     "mixed_0.5": 0.5416936998918436,
+     "weaker_median": 0.39273470930235554,
+     "ratio_median": 0.40393401736062273,
+     "existence_social": 0.0025944628579119525,
+     "existence_semantic": 0.11544885427894425,
+     "overlap": 0.421434251874465,
+     "band_link": 0.013982894976613328,
+     "anchor_failing": 19,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.03684722971818207,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9370407932072885,
+     "mixed_0.5": 0.608624871647108,
+     "weaker_median": 0.3113794712782509,
+     "ratio_median": 0.43853602253150925,
+     "existence_social": 0.00438520950975644,
+     "existence_semantic": 0.12287729607544448,
+     "overlap": 0.5061505320427759,
+     "band_link": 0.005332577307172681,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.10017533326496697,
+      "author_affiliation": 0.1992265275553334,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 2,
+     "mixed_0.1": 0.940315101718482,
+     "mixed_0.5": 0.6851597518562316,
+     "weaker_median": 0.20312805652091095,
+     "ratio_median": 0.2893433270418647,
+     "existence_social": 0.0016586589521898401,
+     "existence_semantic": 0.11764701019810711,
+     "overlap": 0.41354359144773495,
+     "band_link": 0.014521712231753331,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.08720404118001061,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 5,
+     "mixed_0.1": 0.930703623716721,
+     "mixed_0.5": 0.7121614564893596,
+     "weaker_median": 0.3996870333408047,
+     "ratio_median": 0.42106709343820603,
+     "existence_social": 0.0018881345288386735,
+     "existence_semantic": 0.11701858049885253,
+     "overlap": 0.49637455107834233,
+     "band_link": 0.019890800754643223,
+     "anchor_failing": 15,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.09034186336579483,
+      "author_affiliation": 0.10250268238818286,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9718709584252218,
+     "mixed_0.5": 0.7351804895795501,
+     "weaker_median": 0.3371388713220375,
+     "ratio_median": 0.45819049006657875,
+     "existence_social": 0.007425795296778086,
+     "existence_semantic": 0.11722797505569973,
+     "overlap": 0.5101627204810921,
+     "band_link": 0.017388149137785233,
+     "anchor_failing": 18,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.052417865914476156,
+      "author_affiliation": 0.08909859635463756,
+      "article_journal": 0.0
+     }
+    }
+   ],
+   "oneband_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999997,
+     "mixed_0.5": 0.6512961765818631,
+     "weaker_median": 0.2972874611859517,
+     "ratio_median": 0.43870017876669176,
+     "existence_social": 0.004289907254319588,
+     "existence_semantic": 0.12687130741503572,
+     "overlap": 0.5682348767203577,
+     "band_link": 0.0033136274319234688,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.27212782425316123,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9934501042454796,
+     "mixed_0.5": 0.6176416267220625,
+     "weaker_median": 0.32255189184819655,
+     "ratio_median": 0.5262691859610793,
+     "existence_social": 0.002304756334225759,
+     "existence_semantic": 0.1253410727209476,
+     "overlap": 0.5194613141265243,
+     "band_link": 0.0189725050004753,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.0,
+      "author_affiliation": 0.16423265120266228,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9537480817437969,
+     "mixed_0.5": 0.8183407396238531,
+     "weaker_median": 0.24521769843254182,
+     "ratio_median": 0.37999900295284395,
+     "existence_social": 0.012233747813021138,
+     "existence_semantic": 0.12014863545132888,
+     "overlap": 0.3704399092637058,
+     "band_link": 0.009951035970685695,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.08918191487702577,
+      "author_affiliation": 0.23005038023397142,
+      "article_journal": 0.04187820166027154
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.6740620684927996,
+     "weaker_median": 0.29724135290212017,
+     "ratio_median": 0.5678055995155018,
+     "existence_social": 0.005784308191171023,
+     "existence_semantic": 0.12465991993235322,
+     "overlap": 0.5815556642967313,
+     "band_link": 0.0044945731717954684,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.09449422917331031,
+      "author_affiliation": 0.0,
+      "article_journal": 0.004264012676846793
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9818988260555063,
+     "mixed_0.5": 0.6702195156130589,
+     "weaker_median": 0.3011018380791744,
+     "ratio_median": 0.5438043707199098,
+     "existence_social": 0.002193533496567283,
+     "existence_semantic": 0.12488951728538923,
+     "overlap": 0.609942371003837,
+     "band_link": -0.003934712524671188,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.010176903420265202,
+      "author_affiliation": 0.40733243833995736,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 2,
+     "mixed_0.1": 0.8991064542106345,
+     "mixed_0.5": 0.6969425201528333,
+     "weaker_median": 0.3355826430466164,
+     "ratio_median": 0.4625339792227019,
+     "existence_social": 0.0039052232135867496,
+     "existence_semantic": 0.12194687366114551,
+     "overlap": 0.4880072176879243,
+     "band_link": 0.01946994333872412,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.396058526562339,
+      "author_affiliation": 0.009678306564294014,
+      "article_journal": 0.01866713488088727
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9759218996464443,
+     "mixed_0.5": 0.6889835520898648,
+     "weaker_median": 0.29948460080222583,
+     "ratio_median": 0.4891321926048803,
+     "existence_social": 0.002783599557708069,
+     "existence_semantic": 0.11930522122353196,
+     "overlap": 0.4241404777306265,
+     "band_link": -0.006003276558528392,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.3101995304160388,
+      "author_affiliation": 0.03446049242020896,
+      "article_journal": 0.015967231943706077
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 1,
+     "mixed_0.1": 0.957666094729636,
+     "mixed_0.5": 0.7753084184110043,
+     "weaker_median": 0.4867710192683009,
+     "ratio_median": 0.6861791902373052,
+     "existence_social": 0.001873191935692713,
+     "existence_semantic": 0.131074452433736,
+     "overlap": 0.5196564121452723,
+     "band_link": 0.007588798302581579,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.07065826505922439,
+      "author_affiliation": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9632900320943931,
+     "mixed_0.5": 0.7207504714691373,
+     "weaker_median": 0.3185834448048601,
+     "ratio_median": 0.5323681907822155,
+     "existence_social": 0.0030530147495406133,
+     "existence_semantic": 0.12188197528509387,
+     "overlap": 0.49804932912954397,
+     "band_link": 0.00038349076102592305,
+     "anchor_failing": 11,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.029046748578955787,
+      "author_affiliation": 0.0027172412848822493,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9685984331930664,
+     "mixed_0.5": 0.5705036850677747,
+     "weaker_median": 0.25326004101998856,
+     "ratio_median": 0.3290312786174199,
+     "existence_social": 0.0019358026064665,
+     "existence_semantic": 0.1179498974825071,
+     "overlap": 0.40267380046734663,
+     "band_link": 0.00689505717110224,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.33230888600619374,
+      "author_affiliation": 0.15901576596445616,
+      "article_journal": 0.03987387970573334
+     }
+    }
+   ]
+  }
+ },
+ "approach_1_KL": {
+  "K": {
+   "Kstar": 13,
+   "Kbig": 20
+  },
+  "means": {
+   "p0_Kbig": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.8041271709484503,
+    "ratio_median": 0.6799708478779087,
+    "mixed_0.5": 0.9272556045471931,
+    "existence_social": 0.006560398251057245,
+    "existence_semantic": 0.11771723168933534,
+    "overlap": 0.914646269035061,
+    "band_link": 0.021116278099727707,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.592085146947819,
+     "author_affiliation": 0.19154207844952553,
+     "article_journal": 0.297321716754168
+    },
+    "fits": 10
+   },
+   "p0_Kstar": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.8012224361802935,
+    "ratio_median": 0.6743393978798783,
+    "mixed_0.5": 0.9497507794032105,
+    "existence_social": 0.007272054814841474,
+    "existence_semantic": 0.11920571228574368,
+    "overlap": 0.9251902248381946,
+    "band_link": 0.029888688540157922,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.6470422479524094,
+     "author_affiliation": 0.20919136036944774,
+     "article_journal": 0.32967185967681456
+    },
+    "fits": 10
+   },
+   "banded_Kbig": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.8044748222425987,
+    "ratio_median": 0.6477119018433108,
+    "mixed_0.5": 0.9244933246692872,
+    "existence_social": 0.006346811467678843,
+    "existence_semantic": 0.1171852883508552,
+    "overlap": 0.910983258577575,
+    "band_link": 0.02182465421123598,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.580635343671315,
+     "author_affiliation": 0.22489142649900556,
+     "article_journal": 0.17748418902528118
+    },
+    "fits": 10
+   },
+   "banded_Kstar": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.7813816981663461,
+    "ratio_median": 0.6783338621563316,
+    "mixed_0.5": 0.9493269398544844,
+    "existence_social": 0.006035882016575226,
+    "existence_semantic": 0.11901229835464237,
+    "overlap": 0.9250017137191815,
+    "band_link": 0.031582823125129,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.6678075974444013,
+     "author_affiliation": 0.21671019303195435,
+     "article_journal": 0.2136902002500369
+    },
+    "fits": 10
+   },
+   "oneband_Kstar": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.7837837611792305,
+    "ratio_median": 0.6684738857010757,
+    "mixed_0.5": 0.945551164001109,
+    "existence_social": 0.007030480105032476,
+    "existence_semantic": 0.11889164327200792,
+    "overlap": 0.9254018690363456,
+    "band_link": 0.010662635968077146,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "author_article": 0.5934931683011213,
+     "author_affiliation": 0.23819784987148124,
+     "article_journal": 0.1922742391720093
+    },
+    "fits": 10
+   }
+  },
+  "comparisons": {
+   "oneband_vs_p0_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 1.1102230246250934e-17
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.017438675001062998,
+      "margin": 0.034200738278002185
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.005865512178802601,
+      "margin": 0.038397569335761994
+     }
+    }
+   },
+   "banded_vs_p0_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 1.1102230246251564e-16
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.01984073801394748,
+      "margin": 0.040718216922251776
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": 0.003994464276453336,
+      "margin": 0.041086747646145116
+     }
+    }
+   },
+   "oneband_vs_banded_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 1.115760330918745e-16
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": 0.002402063012884481,
+      "margin": 0.030175718776167846
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.009859976455255937,
+      "margin": 0.038869413357782184
+     }
+    }
+   },
+   "banded_vs_p0_Kbig": {
+    "verdict": "heterogeneity follows the data",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": 0.0003476512941483767,
+      "margin": 0.02545650763322935
+     },
+     "ratio_median": {
+      "status": "effect",
+      "effect": -0.03225894603459789,
+      "margin": 0.02893904573149984
+     }
+    }
+   }
+  },
+  "per_fit": {
+   "p0_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.8808264272142965,
+     "weaker_median": 0.8392350539710257,
+     "ratio_median": 0.6534153137071927,
+     "existence_social": 0.0036858757812357353,
+     "existence_semantic": 0.11675710777845447,
+     "overlap": 0.9097874994769216,
+     "band_link": 0.024912072471315647,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.49576957627287643,
+      "author_affiliation": 0.2489215113250192,
+      "article_journal": 0.1779349395226145
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8963327715798306,
+     "weaker_median": 0.8477350042334632,
+     "ratio_median": 0.7245328491976211,
+     "existence_social": 0.010866340463578617,
+     "existence_semantic": 0.12190336885256661,
+     "overlap": 0.9120308070200921,
+     "band_link": 0.029344981602772865,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5624066967413488,
+      "author_affiliation": 0.1139256608408953,
+      "article_journal": 0.41584341554579
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.8796939207364203,
+     "weaker_median": 0.8308662317362274,
+     "ratio_median": 0.6974672880849977,
+     "existence_social": 0.004338580238629652,
+     "existence_semantic": 0.1177434142748463,
+     "overlap": 0.9223727272520186,
+     "band_link": 0.020722671491878467,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.682050224266273,
+      "author_affiliation": 0.13786764847666724,
+      "article_journal": 0.3356573856124009
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.940756508470911,
+     "weaker_median": 0.7946837188559795,
+     "ratio_median": 0.6829566539509424,
+     "existence_social": 0.005204145348062754,
+     "existence_semantic": 0.11523340732616419,
+     "overlap": 0.874288711062379,
+     "band_link": 0.011678237269041311,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.6314665059597541,
+      "author_affiliation": 0.05271179157223654,
+      "article_journal": 0.29987743784832865
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9714116438098993,
+     "weaker_median": 0.7651933668159461,
+     "ratio_median": 0.6502754568930555,
+     "existence_social": 0.008753510183636421,
+     "existence_semantic": 0.12024365984781635,
+     "overlap": 0.9213435185582285,
+     "band_link": 0.02999993498482509,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.6593798255549931,
+      "author_affiliation": 0.2482342678734265,
+      "article_journal": 0.16283096134201533
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9417733043081369,
+     "weaker_median": 0.7749477241020617,
+     "ratio_median": 0.6917989797493751,
+     "existence_social": 0.007952289562447095,
+     "existence_semantic": 0.11747262147805768,
+     "overlap": 0.9196923028852321,
+     "band_link": 0.013672345633685051,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.6393965832247003,
+      "author_affiliation": 0.24169002785705074,
+      "article_journal": 0.18779434922897825
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.967517157717961,
+     "weaker_median": 0.7895269238424825,
+     "ratio_median": 0.7033056904574482,
+     "existence_social": 0.00471440879579158,
+     "existence_semantic": 0.11517654964187085,
+     "overlap": 0.9282427286847815,
+     "band_link": 0.015281294327909326,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.3644514153151426,
+      "author_affiliation": 0.0,
+      "article_journal": 0.1549200076009209
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8999975948864204,
+     "weaker_median": 0.8134831551817249,
+     "ratio_median": 0.6691296844728354,
+     "existence_social": 0.009194229240615744,
+     "existence_semantic": 0.11506982851472672,
+     "overlap": 0.9105091677802182,
+     "band_link": 0.016784355577976195,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.3723472265112451,
+      "author_affiliation": 0.3516209786431796,
+      "article_journal": 0.4780459955129536
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9647690506442493,
+     "weaker_median": 0.7484473439502737,
+     "ratio_median": 0.6273226860001726,
+     "existence_social": 0.005826764353148619,
+     "existence_semantic": 0.11979778258455498,
+     "overlap": 0.9143859264624711,
+     "band_link": 0.023078408099600184,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5977270324067355,
+      "author_affiliation": 0.14660263182887012,
+      "article_journal": 0.39937985878989285
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9294776661038056,
+     "weaker_median": 0.8371531867953185,
+     "ratio_median": 0.6995038762654462,
+     "existence_social": 0.0050678385434262275,
+     "existence_semantic": 0.11777457659429523,
+     "overlap": 0.9338093011682673,
+     "band_link": 0.025688479538272926,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5864432614889026,
+      "author_affiliation": 0.23648152507018097,
+      "article_journal": 0.2947659956600074
+     }
+    }
+   ],
+   "p0_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8683999147191854,
+     "weaker_median": 0.8978150942475946,
+     "ratio_median": 0.6554315023502142,
+     "existence_social": 0.003687421136430666,
+     "existence_semantic": 0.11856551752939204,
+     "overlap": 0.8863881803031005,
+     "band_link": 0.03534807230982674,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.7008232531207601,
+      "author_affiliation": 0.179505957395753,
+      "article_journal": 0.1740079182759681
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9436134159690965,
+     "weaker_median": 0.8199219801861156,
+     "ratio_median": 0.7313922243918716,
+     "existence_social": 0.00586706648340408,
+     "existence_semantic": 0.11951654006933876,
+     "overlap": 0.9375720555740267,
+     "band_link": 0.021227478890254378,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.7098496271509734,
+      "author_affiliation": 0.18348833572020934,
+      "article_journal": 0.3208161832267187
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 1.0,
+     "weaker_median": 0.7529473825353601,
+     "ratio_median": 0.6233709987333259,
+     "existence_social": 0.010039708507536441,
+     "existence_semantic": 0.12512935750940202,
+     "overlap": 0.9364346199401915,
+     "band_link": 0.03229979141178013,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.8362683593814246,
+      "author_affiliation": 0.2141166566998837,
+      "article_journal": 0.7898291457527825
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 1.0,
+     "weaker_median": 0.7287604009576221,
+     "ratio_median": 0.6333555296558298,
+     "existence_social": 0.008571572354750565,
+     "existence_semantic": 0.11296815494770704,
+     "overlap": 0.9304176085525403,
+     "band_link": 0.03973178587379188,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.5640084584236289,
+      "author_affiliation": 0.08964405517479199,
+      "article_journal": 0.5498936653579585
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 1.0,
+     "weaker_median": 0.7699529437928883,
+     "ratio_median": 0.7308770517005482,
+     "existence_social": 0.008131012685339806,
+     "existence_semantic": 0.11679418268106156,
+     "overlap": 0.9285713535588129,
+     "band_link": 0.018536635879683058,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.6014178168935299,
+      "author_affiliation": 0.2200805845793945,
+      "article_journal": 0.33852753612691044
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9542508532636108,
+     "weaker_median": 0.8061901406114139,
+     "ratio_median": 0.6718124865962933,
+     "existence_social": 0.0064278012671689444,
+     "existence_semantic": 0.11909403381178679,
+     "overlap": 0.9451577202348654,
+     "band_link": 0.03961263620049468,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.6563491929184069,
+      "author_affiliation": 0.21232562311373723,
+      "article_journal": 0.36868716935447726
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.953817558007567,
+     "weaker_median": 0.758849307890392,
+     "ratio_median": 0.6053870630546603,
+     "existence_social": 0.009099555476872096,
+     "existence_semantic": 0.123694320510403,
+     "overlap": 0.9257562349534468,
+     "band_link": 0.03494554330349106,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.7296073018327722,
+      "author_affiliation": 0.2097772535699276,
+      "article_journal": 0.34598694191461454
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9063633764753686,
+     "weaker_median": 0.8294884637476188,
+     "ratio_median": 0.6689703839551409,
+     "existence_social": 0.003546793875838636,
+     "existence_semantic": 0.11343524245004431,
+     "overlap": 0.9138778766821978,
+     "band_link": 0.039370793520627875,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.5554176108869091,
+      "author_affiliation": 0.25606194560972273,
+      "article_journal": 0.2300536166389534
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9570380120527233,
+     "weaker_median": 0.8187003700939223,
+     "ratio_median": 0.6888192068325326,
+     "existence_social": 0.008710623802592767,
+     "existence_semantic": 0.11997314304792783,
+     "overlap": 0.924603455513259,
+     "band_link": 0.013477080524629828,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.6377353029864119,
+      "author_affiliation": 0.18750001339466005,
+      "article_journal": 0.3151921466082157
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9140246635445518,
+     "weaker_median": 0.8295982777400089,
+     "ratio_median": 0.7339775315283656,
+     "existence_social": 0.008638992558480735,
+     "existence_semantic": 0.12288663030037342,
+     "overlap": 0.9231231430695048,
+     "band_link": 0.024337067486999556,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.48844790106378755,
+      "author_affiliation": 0.20860546716896788,
+      "article_journal": 0.2783042108211538
+     }
+    }
+   ],
+   "banded_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8802985494278539,
+     "weaker_median": 0.8226889682042391,
+     "ratio_median": 0.5853321878866573,
+     "existence_social": 0.006132911641983483,
+     "existence_semantic": 0.11719536185696589,
+     "overlap": 0.9061771237881127,
+     "band_link": 0.016396038586600395,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.603557432440619,
+      "author_affiliation": 0.20274222774150055,
+      "article_journal": 0.3301671077390296
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8998357381883947,
+     "weaker_median": 0.8305976192189641,
+     "ratio_median": 0.6928661736288569,
+     "existence_social": 0.006824364203833567,
+     "existence_semantic": 0.12103614594634061,
+     "overlap": 0.9075564567706224,
+     "band_link": 0.0214129848210364,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.5006386931952597,
+      "author_affiliation": 0.1516849202165152,
+      "article_journal": 0.17210546417117814
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9054162704605219,
+     "weaker_median": 0.8162245314038559,
+     "ratio_median": 0.6441899408310672,
+     "existence_social": 0.0061454472974509095,
+     "existence_semantic": 0.11704607174068082,
+     "overlap": 0.9322822081559884,
+     "band_link": 0.02297866242265864,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5714803936417915,
+      "author_affiliation": 0.2025066154783134,
+      "article_journal": 0.17106405695972268
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9108479920737306,
+     "weaker_median": 0.8185771293239197,
+     "ratio_median": 0.6444092368195136,
+     "existence_social": 0.006961675379763227,
+     "existence_semantic": 0.11145325717801127,
+     "overlap": 0.8981293815515154,
+     "band_link": 0.018965522669345897,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.664671191769688,
+      "author_affiliation": 0.09857519383253928,
+      "article_journal": 0.1364516863766474
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9370258524415018,
+     "weaker_median": 0.7803576417988238,
+     "ratio_median": 0.6313627375829959,
+     "existence_social": 0.008719731863561248,
+     "existence_semantic": 0.12013600819902265,
+     "overlap": 0.9218554793144619,
+     "band_link": 0.033010917325079395,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.6793760789989465,
+      "author_affiliation": 0.25472033160916674,
+      "article_journal": 0.18286291387938425
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9138674325557424,
+     "weaker_median": 0.7860361675075217,
+     "ratio_median": 0.6697619275976991,
+     "existence_social": 0.004915768960605814,
+     "existence_semantic": 0.11746068980612559,
+     "overlap": 0.9261469909512225,
+     "band_link": 0.013808040862701793,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.6676555657215587,
+      "author_affiliation": 0.2800157651668969,
+      "article_journal": 0.15120388033248464
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9365590870960232,
+     "weaker_median": 0.8290898337041395,
+     "ratio_median": 0.6412207605713087,
+     "existence_social": 0.007106791382596825,
+     "existence_semantic": 0.11454970478053517,
+     "overlap": 0.9321314150959911,
+     "band_link": 0.02244039467386781,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.47740195337268554,
+      "author_affiliation": 0.04283787718664853,
+      "article_journal": 0.201421737739817
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.9663515649750133,
+     "weaker_median": 0.7499696858487552,
+     "ratio_median": 0.6155819006003826,
+     "existence_social": 0.007376432978269187,
+     "existence_semantic": 0.11538190220823065,
+     "overlap": 0.892202723870965,
+     "band_link": 0.015443335444413564,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.34302889875127834,
+      "author_affiliation": 0.44049375287755865,
+      "article_journal": 0.23854180052381246
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9267661452502397,
+     "weaker_median": 0.823669008249301,
+     "ratio_median": 0.6532890479350726,
+     "existence_social": 0.004778768511090904,
+     "existence_semantic": 0.11890691753384226,
+     "overlap": 0.8640505217200778,
+     "band_link": 0.027992959738013634,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.425283205533308,
+      "author_affiliation": 0.24704062525651055,
+      "article_journal": 0.1308412745295584
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9679646142238508,
+     "weaker_median": 0.7875376371664677,
+     "ratio_median": 0.699105104979554,
+     "existence_social": 0.004506222457633262,
+     "existence_semantic": 0.11868682425879715,
+     "overlap": 0.9293002845567935,
+     "band_link": 0.02579768556864226,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5897902937008386,
+      "author_affiliation": 0.27639955292835605,
+      "article_journal": 0.24439722890595972
+     }
+    }
+   ],
+   "banded_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.85989461539771,
+     "weaker_median": 0.7979683987743076,
+     "ratio_median": 0.6630042415862778,
+     "existence_social": 0.005645306555367207,
+     "existence_semantic": 0.11893913122809782,
+     "overlap": 0.90981859667418,
+     "band_link": 0.03727553181611931,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.6858227283651493,
+      "author_affiliation": 0.44121616372262246,
+      "article_journal": 0.21201629800417293
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 1.0,
+     "weaker_median": 0.7864228610844316,
+     "ratio_median": 0.6794452737910494,
+     "existence_social": 0.005752750927532537,
+     "existence_semantic": 0.11751474705350384,
+     "overlap": 0.9195157792215727,
+     "band_link": 0.03557441112123691,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.7146165604361154,
+      "author_affiliation": 0.13640987390560666,
+      "article_journal": 0.18725453418683122
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9585735295022273,
+     "weaker_median": 0.6938975711430709,
+     "ratio_median": 0.6429961982441452,
+     "existence_social": 0.006126449094320134,
+     "existence_semantic": 0.12510773514069087,
+     "overlap": 0.9229407586327237,
+     "band_link": 0.02982528120422169,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.8441575080462047,
+      "author_affiliation": 0.052681721455966064,
+      "article_journal": 0.4713309855111177
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.889800657059724,
+     "weaker_median": 0.749284293199409,
+     "ratio_median": 0.6644832150197719,
+     "existence_social": 0.006490219936158323,
+     "existence_semantic": 0.11138450088706216,
+     "overlap": 0.9307482199738263,
+     "band_link": 0.03749444036916247,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.6762769397843333,
+      "author_affiliation": 0.21803135020134212,
+      "article_journal": 0.1336914558856807
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 1.0,
+     "weaker_median": 0.8090554441785056,
+     "ratio_median": 0.8052772270093117,
+     "existence_social": 0.006621665398654705,
+     "existence_semantic": 0.11820468975009549,
+     "overlap": 0.9251539199683391,
+     "band_link": 0.02407534611302263,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.6593382551044694,
+      "author_affiliation": 0.27703031412849705,
+      "article_journal": 0.17873852063622786
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9576696158323457,
+     "weaker_median": 0.8220114694731488,
+     "ratio_median": 0.6834020952394897,
+     "existence_social": 0.0039670545604477145,
+     "existence_semantic": 0.12063773978692358,
+     "overlap": 0.9402764099952479,
+     "band_link": 0.03964705807805444,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.6575893870140678,
+      "author_affiliation": 0.21538903586256658,
+      "article_journal": 0.2511545405805377
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9527804403977274,
+     "weaker_median": 0.7565548505360274,
+     "ratio_median": 0.6081823117613447,
+     "existence_social": 0.011466662324183577,
+     "existence_semantic": 0.12165387813676845,
+     "overlap": 0.9347096708580515,
+     "band_link": 0.04321556596297434,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "author_article": 0.7259483929049632,
+      "author_affiliation": 0.1688172998800095,
+      "article_journal": 0.21536410249590088
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999998,
+     "mixed_0.5": 0.9561335149099208,
+     "weaker_median": 0.8180611743894283,
+     "ratio_median": 0.6401878642712362,
+     "existence_social": 0.004181747659379674,
+     "existence_semantic": 0.11422393112233833,
+     "overlap": 0.9254304406427489,
+     "band_link": 0.03740605361091129,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5663020635892078,
+      "author_affiliation": 0.25795124333321373,
+      "article_journal": 0.21712196736873235
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 1.0000000000000002,
+     "weaker_median": 0.789222063709837,
+     "ratio_median": 0.7148661867014364,
+     "existence_social": 0.005750927365835573,
+     "existence_semantic": 0.12136074503597982,
+     "overlap": 0.9116890363245043,
+     "band_link": 0.014602322096453346,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.6538323492060115,
+      "author_affiliation": 0.17259197666947118,
+      "article_journal": 0.2853172318184894
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9184170254451868,
+     "weaker_median": 0.7913388551752942,
+     "ratio_median": 0.6814940079392535,
+     "existence_social": 0.004356036343872818,
+     "existence_semantic": 0.1210958854049633,
+     "overlap": 0.9297343049006201,
+     "band_link": 0.016712220879133627,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "author_article": 0.5029861888432192,
+      "author_affiliation": 0.227183381866996,
+      "article_journal": 0.11498810516116714
+     }
+    }
+   ],
+   "oneband_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9143607765044138,
+     "weaker_median": 0.7798894005144692,
+     "ratio_median": 0.6182093253165646,
+     "existence_social": 0.0049805892796259636,
+     "existence_semantic": 0.1195519987172114,
+     "overlap": 0.9129738885499998,
+     "band_link": 0.010345750862702105,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.754348776777317,
+      "author_affiliation": 0.41191637844203177,
+      "article_journal": 0.06283967272718848
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.9015593786300792,
+     "weaker_median": 0.8096763233011726,
+     "ratio_median": 0.7280349708582661,
+     "existence_social": 0.004310383044055681,
+     "existence_semantic": 0.11744181776232979,
+     "overlap": 0.9123638136980116,
+     "band_link": 0.013838512233968009,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.49077227374545734,
+      "author_affiliation": 0.16769127966858324,
+      "article_journal": 0.20122872899475702
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 1.0,
+     "weaker_median": 0.7282159014987765,
+     "ratio_median": 0.6976416586286794,
+     "existence_social": 0.005714690784241794,
+     "existence_semantic": 0.12340219793692067,
+     "overlap": 0.9348382641536541,
+     "band_link": 0.01341739716339635,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5888030860791866,
+      "author_affiliation": 0.35557990403554285,
+      "article_journal": 0.311703624276989
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 1.0,
+     "weaker_median": 0.758962177799865,
+     "ratio_median": 0.632078072836444,
+     "existence_social": 0.007504869914353805,
+     "existence_semantic": 0.11032607250629313,
+     "overlap": 0.9301552376089612,
+     "band_link": 0.02701128663784813,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.578389785669227,
+      "author_affiliation": 0.11214088557763979,
+      "article_journal": 0.1486070625329212
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.9119292970621472,
+     "weaker_median": 0.7487657380211812,
+     "ratio_median": 0.6009631013526299,
+     "existence_social": 0.003685982848879084,
+     "existence_semantic": 0.11693314614664732,
+     "overlap": 0.9077423465086851,
+     "band_link": 0.014539796053022247,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.635818404310837,
+      "author_affiliation": 0.22932101951171496,
+      "article_journal": 0.4547027014484434
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.9564229954125931,
+     "weaker_median": 0.8204140643811494,
+     "ratio_median": 0.7012434830903559,
+     "existence_social": 0.025986971250365077,
+     "existence_semantic": 0.11962128267836888,
+     "overlap": 0.9409889505807311,
+     "band_link": 0.006066546111857904,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.6628922494695826,
+      "author_affiliation": 0.24043563585562433,
+      "article_journal": 0.32862614190065786
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9525165631816872,
+     "weaker_median": 0.7608379630231624,
+     "ratio_median": 0.6290125075703638,
+     "existence_social": 0.0054843355533655816,
+     "existence_semantic": 0.12317446310274471,
+     "overlap": 0.9327895105246145,
+     "band_link": -0.001280265839977382,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "author_article": 0.7222077099748532,
+      "author_affiliation": 0.2609063459316434,
+      "article_journal": 0.18331974934926162
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9088117444828828,
+     "weaker_median": 0.8214557272169,
+     "ratio_median": 0.6551108394022314,
+     "existence_social": 0.0036307529022943054,
+     "existence_semantic": 0.11516454257766415,
+     "overlap": 0.9233140264203697,
+     "band_link": -0.0058057959581675755,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5291273664062186,
+      "author_affiliation": 0.23596006388733817,
+      "article_journal": 0.16340284867872523
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9999999999999999,
+     "weaker_median": 0.8199813299695915,
+     "ratio_median": 0.7370140060680836,
+     "existence_social": 0.003972351723678526,
+     "existence_semantic": 0.12070415978278995,
+     "overlap": 0.928914474661063,
+     "band_link": 0.007816686651165555,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.5981832505230561,
+      "author_affiliation": 0.21795239226029878,
+      "article_journal": 0.49344471591476785
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9099108847372861,
+     "weaker_median": 0.7896389860660378,
+     "ratio_median": 0.6854308918871389,
+     "existence_social": 0.005033873749464937,
+     "existence_semantic": 0.12259675150910916,
+     "overlap": 0.9299381776573665,
+     "band_link": 0.020676445764956114,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "author_article": 0.4934323352718516,
+      "author_affiliation": 0.24386392014117503,
+      "article_journal": 0.16998405039870354
+     }
+    }
+   ]
+  }
+ },
+ "approach_2_squared_error": {
+  "K": {
+   "Kstar": 20,
+   "Kbig": 32
+  },
+  "means": {
+   "p0_Kbig": {
+    "mono_domain": 2.3,
+    "mixed_0.1": 0.949067439398197,
+    "weaker_median": 0.32634768804804537,
+    "ratio_median": 0.4513817489464339,
+    "mixed_0.5": 0.6983396389391977,
+    "existence_social": 0.010317896762684495,
+    "existence_semantic": 0.11909932975974043,
+    "overlap": 0.5411951581781816,
+    "band_link": 0.014412025270162221,
+    "anchor_failing": 17.4,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.00405647287553027,
+     "article_article": 0.019108039721911628,
+     "article_journal": 0.0
+    },
+    "fits": 10
+   },
+   "p0_Kstar": {
+    "mono_domain": 0.3,
+    "mixed_0.1": 0.9893003982663909,
+    "weaker_median": 0.41110790271219316,
+    "ratio_median": 0.5814085496719645,
+    "mixed_0.5": 0.6946649127916756,
+    "existence_social": 0.010308912893455768,
+    "existence_semantic": 0.1240547092444638,
+    "overlap": 0.606179278000242,
+    "band_link": 0.023587470952659593,
+    "anchor_failing": 9.6,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.024554166815933396,
+     "article_article": 0.0,
+     "article_journal": 0.0
+    },
+    "fits": 10
+   },
+   "banded_Kbig": {
+    "mono_domain": 2.5,
+    "mixed_0.1": 0.9516683362258913,
+    "weaker_median": 0.32268237144385503,
+    "ratio_median": 0.4491716943845261,
+    "mixed_0.5": 0.6843517239080275,
+    "existence_social": 0.008387592612482352,
+    "existence_semantic": 0.11835710170042626,
+    "overlap": 0.5292062132099291,
+    "band_link": 0.012698208590879006,
+    "anchor_failing": 17.0,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.004369540715756866,
+     "article_article": 0.0,
+     "article_journal": 0.0
+    },
+    "fits": 10
+   },
+   "banded_Kstar": {
+    "mono_domain": 0.2,
+    "mixed_0.1": 0.9880050721644276,
+    "weaker_median": 0.40517735433245683,
+    "ratio_median": 0.5627303203743738,
+    "mixed_0.5": 0.7063023939110636,
+    "existence_social": 0.009319415918462548,
+    "existence_semantic": 0.12334804420881822,
+    "overlap": 0.5688165203302933,
+    "band_link": 0.021227441229430453,
+    "anchor_failing": 9.5,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.0011682430955852923,
+     "article_article": 0.0,
+     "article_journal": 0.0
+    },
+    "fits": 10
+   },
+   "oneband_Kstar": {
+    "mono_domain": 0.3,
+    "mixed_0.1": 0.9849738242287083,
+    "weaker_median": 0.3941250091966702,
+    "ratio_median": 0.5632108700229808,
+    "mixed_0.5": 0.7076946252594236,
+    "existence_social": 0.009159189452,
+    "existence_semantic": 0.1233690651756731,
+    "overlap": 0.5715598368167625,
+    "band_link": 0.009782790010028516,
+    "anchor_failing": 9.5,
+    "anchor_all_pass_fits": 0,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.013416290951795811,
+     "article_article": 0.0,
+     "article_journal": 0.0
+    },
+    "fits": 10
+   }
+  },
+  "comparisons": {
+   "oneband_vs_p0_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.42426406871192845
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": -0.004326574037682662,
+      "margin": 0.014253061469308905
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.016982893515522957,
+      "margin": 0.07339345280708658
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.018197679648983778,
+      "margin": 0.07870776825976791
+     }
+    }
+   },
+   "banded_vs_p0_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": -0.09999999999999998,
+      "margin": 0.3605551275463989
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": -0.0012953261019633677,
+      "margin": 0.013011192065705253
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.005930548379736333,
+      "margin": 0.06887574806849453
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.018678229297590776,
+      "margin": 0.08185778036027856
+     }
+    }
+   },
+   "oneband_vs_banded_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.09999999999999998,
+      "margin": 0.3605551275463989
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": -0.0030312479357192945,
+      "margin": 0.015152014421595281
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.011052345135786623,
+      "margin": 0.07529339781001826
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": 0.0004805496486069982,
+      "margin": 0.09115937199921789
+     }
+    }
+   },
+   "banded_vs_p0_Kbig": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.20000000000000018,
+      "margin": 0.9899494936611665
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0026008968276942657,
+      "margin": 0.01918804317918093
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.0036653166041903384,
+      "margin": 0.04339470135660986
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.002210054561907815,
+      "margin": 0.05868788455266254
+     }
+    }
+   }
+  },
+  "per_fit": {
+   "p0_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9701014202067795,
+     "mixed_0.5": 0.6982017151541032,
+     "weaker_median": 0.27197272364980346,
+     "ratio_median": 0.44711865971817033,
+     "existence_social": 0.009172082544468186,
+     "existence_semantic": 0.11982978666847195,
+     "overlap": 0.4935451237736157,
+     "band_link": 0.023977890434624116,
+     "anchor_failing": 14,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.07228689090154877,
+      "article_article": 0.01489687092604218,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9658792940345372,
+     "mixed_0.5": 0.7020294653904805,
+     "weaker_median": 0.3245342586051695,
+     "ratio_median": 0.44735582697848625,
+     "existence_social": 0.010972356660220513,
+     "existence_semantic": 0.11933928647647465,
+     "overlap": 0.5520581593109712,
+     "band_link": 0.0060262655138950405,
+     "anchor_failing": 16,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.0030237754201522878,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9478444966542938,
+     "mixed_0.5": 0.6643388094441239,
+     "weaker_median": 0.2525874786338248,
+     "ratio_median": 0.38598438634874044,
+     "existence_social": 0.00879478685849111,
+     "existence_semantic": 0.11700739628974041,
+     "overlap": 0.539094233139374,
+     "band_link": 0.027864966964210994,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.003306711624259599,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 3,
+     "mixed_0.1": 0.958682419299995,
+     "mixed_0.5": 0.6877773822003872,
+     "weaker_median": 0.3978479706024745,
+     "ratio_median": 0.6034451766466209,
+     "existence_social": 0.011883723961364454,
+     "existence_semantic": 0.11407808913717554,
+     "overlap": 0.5300113251962663,
+     "band_link": 0.0027282010824468544,
+     "anchor_failing": 19,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.004806234126800941,
+      "article_article": 0.4998587839180902,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9532643851233181,
+     "mixed_0.5": 0.691890031663603,
+     "weaker_median": 0.3198587215932197,
+     "ratio_median": 0.414660205939815,
+     "existence_social": 0.009894607490176573,
+     "existence_semantic": 0.11832332017621677,
+     "overlap": 0.5643775560192272,
+     "band_link": 0.01611268931348736,
+     "anchor_failing": 20,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.010672394235972094,
+      "article_article": 0.023319208517781076,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9398641757206362,
+     "mixed_0.5": 0.7359585533723819,
+     "weaker_median": 0.42628863532170336,
+     "ratio_median": 0.44590070743888116,
+     "existence_social": 0.010352826949153628,
+     "existence_semantic": 0.12180238106838004,
+     "overlap": 0.5470221971668666,
+     "band_link": 0.00897790933086888,
+     "anchor_failing": 16,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3491086381334468,
+      "article_article": 0.3733963994774113,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 5,
+     "mixed_0.1": 0.9162776067755715,
+     "mixed_0.5": 0.7043638589254944,
+     "weaker_median": 0.2863464466181611,
+     "ratio_median": 0.39818088510249416,
+     "existence_social": 0.01033979449336329,
+     "existence_semantic": 0.12349802455236673,
+     "overlap": 0.5385007874773124,
+     "band_link": -0.002485704011940079,
+     "anchor_failing": 16,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.0,
+      "article_article": 0.11241339250529665,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 1,
+     "mixed_0.1": 0.972258643013902,
+     "mixed_0.5": 0.7317251727486747,
+     "weaker_median": 0.2913738888240547,
+     "ratio_median": 0.602587050249522,
+     "existence_social": 0.011165936226052218,
+     "existence_semantic": 0.11834795876982224,
+     "overlap": 0.597439347115273,
+     "band_link": -0.0007385050217347117,
+     "anchor_failing": 21,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9314321867276811,
+     "mixed_0.5": 0.7059401360081451,
+     "weaker_median": 0.3212164084227217,
+     "ratio_median": 0.35265550123277567,
+     "existence_social": 0.011168076830184717,
+     "existence_semantic": 0.12364389238748799,
+     "overlap": 0.5487646169327787,
+     "band_link": 0.02081297711993564,
+     "anchor_failing": 18,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.008428100014176971,
+      "article_article": 0.05206933063069023,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9350697664252559,
+     "mixed_0.5": 0.6611712644845833,
+     "weaker_median": 0.3714503482093209,
+     "ratio_median": 0.4159290898088327,
+     "existence_social": 0.009434775613370257,
+     "existence_semantic": 0.11512316207126784,
+     "overlap": 0.5011382356501313,
+     "band_link": 0.04084356197582811,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    }
+   ],
+   "p0_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9711977502150962,
+     "mixed_0.5": 0.6877050904880249,
+     "weaker_median": 0.45355738973349125,
+     "ratio_median": 0.645773478882828,
+     "existence_social": 0.010102172253792577,
+     "existence_semantic": 0.12457722592007706,
+     "overlap": 0.5778037863966541,
+     "band_link": 0.033513041609494656,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.06890704482812597,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9637841526257304,
+     "mixed_0.5": 0.6780284273609395,
+     "weaker_median": 0.369518562289588,
+     "ratio_median": 0.5485006428705512,
+     "existence_social": 0.010492211500794048,
+     "existence_semantic": 0.12220833825985683,
+     "overlap": 0.5650063103849137,
+     "band_link": 0.038940492675122035,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "article_affiliation": 0.011551155176330041,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9940331242012271,
+     "mixed_0.5": 0.6848617176711113,
+     "weaker_median": 0.36304284104366263,
+     "ratio_median": 0.6246650646488807,
+     "existence_social": 0.011101827353297393,
+     "existence_semantic": 0.11959210518947613,
+     "overlap": 0.5828656595803987,
+     "band_link": 0.031844352187286235,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.28340556275054285,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9752292225160057,
+     "mixed_0.5": 0.7174559853644151,
+     "weaker_median": 0.2530349375861023,
+     "ratio_median": 0.4050214974443257,
+     "existence_social": 0.009366725465225979,
+     "existence_semantic": 0.12876541142932896,
+     "overlap": 0.6828123808661902,
+     "band_link": 0.014163769873024812,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.03755717845553675,
+      "article_article": 0.007667011178167614,
+      "article_journal": 0.0025685763607813145
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.555158619725407,
+     "weaker_median": 0.35471746883713173,
+     "ratio_median": 0.4905247819801044,
+     "existence_social": 0.012692602260289886,
+     "existence_semantic": 0.12447022614385472,
+     "overlap": 0.5424156309428367,
+     "band_link": 0.022921730305350538,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.10107569067872095,
+      "article_article": 0.0,
+      "article_journal": 0.07648525308703485
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7918493574952649,
+     "weaker_median": 0.4716029123090442,
+     "ratio_median": 0.6204207911485857,
+     "existence_social": 0.01128300671549518,
+     "existence_semantic": 0.1213127518039761,
+     "overlap": 0.6408890370475537,
+     "band_link": 0.016921221968094396,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.6565978286435308,
+     "weaker_median": 0.43468291414537635,
+     "ratio_median": 0.5636440149491655,
+     "existence_social": 0.008790589076034446,
+     "existence_semantic": 0.11970902782186997,
+     "overlap": 0.5990154905297963,
+     "band_link": 0.02624729389745889,
+     "anchor_failing": 7,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.00047827495863678995,
+      "article_article": 0.05186615470405424,
+      "article_journal": 0.014115183520562733
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9945091391557885,
+     "mixed_0.5": 0.7669314623039447,
+     "weaker_median": 0.5409923454738934,
+     "ratio_median": 0.6895512212593349,
+     "existence_social": 0.00943320228233913,
+     "existence_semantic": 0.12621967378622756,
+     "overlap": 0.6513637011712397,
+     "band_link": 0.01613490757468805,
+     "anchor_failing": 11,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.12166164419263834,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9942505939500624,
+     "mixed_0.5": 0.6944122837432843,
+     "weaker_median": 0.44313746563148626,
+     "ratio_median": 0.5535905791470981,
+     "existence_social": 0.011115010728430868,
+     "existence_semantic": 0.1267610366868642,
+     "overlap": 0.5761703282009013,
+     "band_link": 0.015184308302617883,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0,
+      "article_article": 0.10808152386366718,
+      "article_journal": 0.007316691484731358
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7136483551208341,
+     "weaker_median": 0.42679219007215563,
+     "ratio_median": 0.6723934243887708,
+     "existence_social": 0.008711781298858171,
+     "existence_semantic": 0.12693129540310666,
+     "overlap": 0.6434504548819346,
+     "band_link": 0.020003591133458426,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.0,
+      "article_article": 0.016389551379372445,
+      "article_journal": 0.0
+     }
+    }
+   ],
+   "banded_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9701166990221904,
+     "mixed_0.5": 0.731010206732567,
+     "weaker_median": 0.2890067465316636,
+     "ratio_median": 0.4483683987278705,
+     "existence_social": 0.006791021166271282,
+     "existence_semantic": 0.12066970486004745,
+     "overlap": 0.5054596734532499,
+     "band_link": 0.008129430282492064,
+     "anchor_failing": 14,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.06623907768668438,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 1,
+     "mixed_0.1": 0.977013225240887,
+     "mixed_0.5": 0.6782062925181919,
+     "weaker_median": 0.34202168071874506,
+     "ratio_median": 0.4842064110611336,
+     "existence_social": 0.009081023141657736,
+     "existence_semantic": 0.120139901269574,
+     "overlap": 0.558692252310455,
+     "band_link": 0.0016971859689957763,
+     "anchor_failing": 16,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 9.73215393963185e-05,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9748044442573078,
+     "mixed_0.5": 0.6520181658031823,
+     "weaker_median": 0.25388986809626113,
+     "ratio_median": 0.47067124265845994,
+     "existence_social": 0.01086090529495468,
+     "existence_semantic": 0.1180713789148426,
+     "overlap": 0.4740382761660398,
+     "band_link": 0.029847370379696467,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.07662747494750362
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9588186600368228,
+     "mixed_0.5": 0.5822012139965799,
+     "weaker_median": 0.37331617647604076,
+     "ratio_median": 0.4582513218191987,
+     "existence_social": 0.009169548220414193,
+     "existence_semantic": 0.11308511384182432,
+     "overlap": 0.5484141777054378,
+     "band_link": 0.012067075623998336,
+     "anchor_failing": 19,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0,
+      "article_article": 0.5232732205633218,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 3,
+     "mixed_0.1": 0.9439313023603849,
+     "mixed_0.5": 0.7176539254356483,
+     "weaker_median": 0.34026796406501825,
+     "ratio_median": 0.38125523793662597,
+     "existence_social": 0.007451087904715994,
+     "existence_semantic": 0.11724854596385281,
+     "overlap": 0.5002572613120787,
+     "band_link": 0.015007663290927467,
+     "anchor_failing": 20,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "article_affiliation": 0.009798201839781725,
+      "article_article": 0.0,
+      "article_journal": 0.017730550675351474
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 2,
+     "mixed_0.1": 0.9551966556041027,
+     "mixed_0.5": 0.7185601591478691,
+     "weaker_median": 0.3503087517610699,
+     "ratio_median": 0.4988578919201816,
+     "existence_social": 0.00945557243677399,
+     "existence_semantic": 0.12068607583559887,
+     "overlap": 0.543263914421872,
+     "band_link": 0.0035581411241165373,
+     "anchor_failing": 15,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3257309581014796,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 5,
+     "mixed_0.1": 0.9266351699200505,
+     "mixed_0.5": 0.6391577071385464,
+     "weaker_median": 0.25704659142628605,
+     "ratio_median": 0.43790255334718886,
+     "existence_social": 0.007120685531427145,
+     "existence_semantic": 0.12079225915304403,
+     "overlap": 0.5177766998998041,
+     "band_link": 0.016636667501312027,
+     "anchor_failing": 17,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.0,
+      "article_article": 0.11437346098348262,
+      "article_journal": 0.00705538585906653
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 1,
+     "mixed_0.1": 0.983097423873436,
+     "mixed_0.5": 0.6598091233503502,
+     "weaker_median": 0.2950606228553655,
+     "ratio_median": 0.510954861581266,
+     "existence_social": 0.00834384189317998,
+     "existence_semantic": 0.11525248612420037,
+     "overlap": 0.5888091429047625,
+     "band_link": 0.003858345277356054,
+     "anchor_failing": 18,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0012681616416179002,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 4,
+     "mixed_0.1": 0.8950012485392822,
+     "mixed_0.5": 0.758002390668927,
+     "weaker_median": 0.34529629256697447,
+     "ratio_median": 0.38076292324691624,
+     "existence_social": 0.007046237412914291,
+     "existence_semantic": 0.12261922737362274,
+     "overlap": 0.5614832056620764,
+     "band_link": 0.014511368182150375,
+     "anchor_failing": 18,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.010395290506159345,
+      "article_article": 0.03863159648247979,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 3,
+     "mixed_0.1": 0.932068533404448,
+     "mixed_0.5": 0.7068980542884118,
+     "weaker_median": 0.3806090199411257,
+     "ratio_median": 0.4204861015464197,
+     "existence_social": 0.008556003122514212,
+     "existence_semantic": 0.11500632366765544,
+     "overlap": 0.49386752826351427,
+     "band_link": 0.021668838277744976,
+     "anchor_failing": 16,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.007470919789895832,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    }
+   ],
+   "banded_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9874586380054634,
+     "mixed_0.5": 0.6889085911734123,
+     "weaker_median": 0.3904477230109384,
+     "ratio_median": 0.5966250756607414,
+     "existence_social": 0.006085089991322855,
+     "existence_semantic": 0.12449428542492624,
+     "overlap": 0.5313876145060521,
+     "band_link": 0.035855873723982745,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "article_affiliation": 0.05166540934525831,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9577572045615996,
+     "mixed_0.5": 0.7420886492658615,
+     "weaker_median": 0.37621319715194124,
+     "ratio_median": 0.5498235531778035,
+     "existence_social": 0.012129078972707288,
+     "existence_semantic": 0.12145506364552516,
+     "overlap": 0.5120030734424852,
+     "band_link": 0.00611683247091159,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.0017162241682674077,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9825097840275059,
+     "mixed_0.5": 0.6383372774602187,
+     "weaker_median": 0.4018557676438721,
+     "ratio_median": 0.5423688724320814,
+     "existence_social": 0.012480281796122145,
+     "existence_semantic": 0.11831872327219779,
+     "overlap": 0.530602716879418,
+     "band_link": 0.018661727067553535,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 1,
+     "mixed_0.1": 0.962837008519845,
+     "mixed_0.5": 0.7456682526864311,
+     "weaker_median": 0.19046306620476888,
+     "ratio_median": 0.3452262695384637,
+     "existence_social": 0.00834352195785626,
+     "existence_semantic": 0.12894378134330675,
+     "overlap": 0.6401448461380802,
+     "band_link": 0.01643139864938041,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.027773482079125132,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.597462345367968,
+     "weaker_median": 0.371687167062527,
+     "ratio_median": 0.548305974261829,
+     "existence_social": 0.009993992892040834,
+     "existence_semantic": 0.12433694564667308,
+     "overlap": 0.5359170327127701,
+     "band_link": 0.018876411696432477,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.09927466194735425,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.7363186374357195,
+     "weaker_median": 0.47379436231864835,
+     "ratio_median": 0.5548405409217951,
+     "existence_social": 0.010302702523736053,
+     "existence_semantic": 0.12259103501970513,
+     "overlap": 0.6232876383792773,
+     "band_link": 0.015073645516650844,
+     "anchor_failing": 8,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.6606522144643442,
+     "weaker_median": 0.4431149135517744,
+     "ratio_median": 0.5774486542693595,
+     "existence_social": 0.006096598982125055,
+     "existence_semantic": 0.11955052593902246,
+     "overlap": 0.5740323081303081,
+     "band_link": 0.042996235576408165,
+     "anchor_failing": 7,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0006202620229031768,
+      "article_article": 0.0,
+      "article_journal": 9.613515033861245e-05
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9953595310952517,
+     "mixed_0.5": 0.842271118789426,
+     "weaker_median": 0.5278601080022888,
+     "ratio_median": 0.7053637501510561,
+     "existence_social": 0.012653630600588975,
+     "existence_semantic": 0.12421092948820035,
+     "overlap": 0.5881593398037331,
+     "band_link": 0.025271851771981782,
+     "anchor_failing": 11,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.06861624845174615,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9941285554346095,
+     "mixed_0.5": 0.6692287633773922,
+     "weaker_median": 0.44602712113191423,
+     "ratio_median": 0.4927210510619251,
+     "existence_social": 0.006596230327640808,
+     "existence_semantic": 0.12321380629818257,
+     "overlap": 0.5265063008959913,
+     "band_link": 0.008600139714849298,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.025566288115459003
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7420880890898633,
+     "weaker_median": 0.43031011724589496,
+     "ratio_median": 0.714579462268683,
+     "existence_social": 0.008513031140485211,
+     "existence_semantic": 0.1263653460104428,
+     "overlap": 0.6261243324148165,
+     "band_link": 0.024390296106153703,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    }
+   ],
+   "oneband_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9858329333482319,
+     "mixed_0.5": 0.6830253263638857,
+     "weaker_median": 0.4338500426418661,
+     "ratio_median": 0.6517695721128807,
+     "existence_social": 0.006142248752821323,
+     "existence_semantic": 0.12446216168843907,
+     "overlap": 0.5102108552975426,
+     "band_link": 0.005939075691518497,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.05453054740939444,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9600952377042699,
+     "mixed_0.5": 0.7094717646479629,
+     "weaker_median": 0.35757194744731946,
+     "ratio_median": 0.47454882200510506,
+     "existence_social": 0.008016767146481472,
+     "existence_semantic": 0.12164273847089657,
+     "overlap": 0.5063940271251448,
+     "band_link": 0.030389758005219966,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.009961028600804802,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 1,
+     "mixed_0.1": 0.9818563694922766,
+     "mixed_0.5": 0.7071140074063988,
+     "weaker_median": 0.34456414957750336,
+     "ratio_median": 0.5938526830114017,
+     "existence_social": 0.011789326318705697,
+     "existence_semantic": 0.11786759760450669,
+     "overlap": 0.5508885706743335,
+     "band_link": 0.02593118366938439,
+     "anchor_failing": 12,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "article_affiliation": 0.2564053367407585,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 2,
+     "mixed_0.1": 0.932770896842398,
+     "mixed_0.5": 0.7473385564339882,
+     "weaker_median": 0.18107312421657096,
+     "ratio_median": 0.385264943377285,
+     "existence_social": 0.006451684349462535,
+     "existence_semantic": 0.1282967058857526,
+     "overlap": 0.641468039785157,
+     "band_link": -0.0032990577136663563,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.01687155330278682,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.6246661919762718,
+     "weaker_median": 0.3269241123778448,
+     "ratio_median": 0.5049308317646791,
+     "existence_social": 0.009971203211894646,
+     "existence_semantic": 0.12343101685568258,
+     "overlap": 0.5419917109649536,
+     "band_link": -0.001114788391556279,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.08955173607856973,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.7161286932597757,
+     "weaker_median": 0.4706772140803678,
+     "ratio_median": 0.6608887663112104,
+     "existence_social": 0.008449845814980933,
+     "existence_semantic": 0.12149649109492433,
+     "overlap": 0.598104298113139,
+     "band_link": -0.013133365484206766,
+     "anchor_failing": 8,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7076008514698722,
+     "weaker_median": 0.4249867886466928,
+     "ratio_median": 0.6533161136495256,
+     "existence_social": 0.0107361352686183,
+     "existence_semantic": 0.12076927767546565,
+     "overlap": 0.5600150811506204,
+     "band_link": 0.03409808537091086,
+     "anchor_failing": 7,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.002785304126236655
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9945238990323229,
+     "mixed_0.5": 0.8441688810293968,
+     "weaker_median": 0.5579745958898936,
+     "ratio_median": 0.5978715245260993,
+     "existence_social": 0.008392566035668568,
+     "existence_semantic": 0.12419839311985478,
+     "overlap": 0.5891015149529252,
+     "band_link": 0.0008220321741927161,
+     "anchor_failing": 11,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.07647560946017619,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9946589058675839,
+     "mixed_0.5": 0.6231502081073015,
+     "weaker_median": 0.39236406020700515,
+     "ratio_median": 0.45048392275887517,
+     "existence_social": 0.010461735057074895,
+     "existence_semantic": 0.12516204725648172,
+     "overlap": 0.5418853914372107,
+     "band_link": 0.014830855397482648,
+     "anchor_failing": 10,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7142817718993832,
+     "weaker_median": 0.4512640568816375,
+     "ratio_median": 0.6591815207127458,
+     "existence_social": 0.01118038256429161,
+     "existence_semantic": 0.12636422210472703,
+     "overlap": 0.6755388786665983,
+     "band_link": 0.003364121381005475,
+     "anchor_failing": 9,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0,
+      "article_article": 0.0,
+      "article_journal": 0.0
+     }
+    }
+   ]
+  }
+ },
+ "approach_2_KL": {
+  "K": {
+   "Kstar": 13,
+   "Kbig": 20
+  },
+  "means": {
+   "p0_Kstar": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.7509096964892183,
+    "ratio_median": 0.5820381212614597,
+    "mixed_0.5": 0.8766815210777841,
+    "existence_social": 0.01043330831279374,
+    "existence_semantic": 0.1183730858771546,
+    "overlap": 0.828917800455403,
+    "band_link": 0.03564173709952463,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.31992081046857324,
+     "article_article": 0.5970847101964574,
+     "article_journal": 0.27726493599431745
+    },
+    "fits": 10
+   },
+   "p0_Kbig": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.6902062382312455,
+    "ratio_median": 0.5400463126365385,
+    "mixed_0.5": 0.8155167428119754,
+    "existence_social": 0.009547003025119048,
+    "existence_semantic": 0.11978720781754144,
+    "overlap": 0.7851841849254303,
+    "band_link": 0.03073733489579234,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.2695243330088685,
+     "article_article": 0.19260041356357863,
+     "article_journal": 0.3354854284719604
+    },
+    "fits": 10
+   },
+   "oneband_Kstar": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.6648651523223907,
+    "ratio_median": 0.540950911389083,
+    "mixed_0.5": 0.7887516733307327,
+    "existence_social": 0.009684947150574,
+    "existence_semantic": 0.11701055241570404,
+    "overlap": 0.821734886932909,
+    "band_link": 0.0406391475321342,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 0.9999999999999999,
+     "article_affiliation": 0.31389292127726975,
+     "article_article": 0.48164449386070773,
+     "article_journal": 0.16144187736614754
+    },
+    "fits": 10
+   },
+   "banded_Kbig": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.6452302835281977,
+    "ratio_median": 0.49193033891384835,
+    "mixed_0.5": 0.7959863197113941,
+    "existence_social": 0.0091892106170046,
+    "existence_semantic": 0.11969503540840272,
+    "overlap": 0.7848604756555224,
+    "band_link": 0.03710066540963036,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.26854799885554603,
+     "article_article": 0.010653442997119181,
+     "article_journal": 0.16540541711970433
+    },
+    "fits": 10
+   },
+   "banded_Kstar": {
+    "mono_domain": 0.0,
+    "mixed_0.1": 1.0,
+    "weaker_median": 0.6664302222044723,
+    "ratio_median": 0.497598392951922,
+    "mixed_0.5": 0.8011957610020779,
+    "existence_social": 0.01037563502965932,
+    "existence_semantic": 0.11773645053578026,
+    "overlap": 0.8191168623793292,
+    "band_link": 0.044174858932649254,
+    "anchor_failing": 0.0,
+    "anchor_all_pass_fits": 10,
+    "diagonal_rule": {
+     "parent_child": 1.0,
+     "article_affiliation": 0.30727534146766977,
+     "article_article": 0.6479998475856511,
+     "article_journal": 0.18888946593218398
+    },
+    "fits": 10
+   }
+  },
+  "comparisons": {
+   "oneband_vs_p0_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 1.1102230246251564e-16
+     },
+     "weaker_median": {
+      "status": "effect (not counted: ratio unchanged, change is size)",
+      "effect": -0.08604454416682761,
+      "margin": 0.05818885969171215
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.041087209872376684,
+      "margin": 0.09251231948843228
+     }
+    }
+   },
+   "banded_vs_p0_Kstar": {
+    "verdict": "heterogeneity follows the data",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "weaker_median": {
+      "status": "effect",
+      "effect": -0.084479474284746,
+      "margin": 0.044964184333415626
+     },
+     "ratio_median": {
+      "status": "effect",
+      "effect": -0.08443972830953772,
+      "margin": 0.07115462065915433
+     }
+    }
+   },
+   "oneband_vs_banded_Kstar": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 1.1102230246251564e-16
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.0015650698820816045,
+      "margin": 0.08139287606311989
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": 0.043352518437161036,
+      "margin": 0.07940017239498692
+     }
+    }
+   },
+   "banded_vs_p0_Kbig": {
+    "verdict": "no change",
+    "measures": {
+     "mono_domain": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "mixed_0.1": {
+      "status": "none",
+      "effect": 0.0,
+      "margin": 0.0
+     },
+     "weaker_median": {
+      "status": "none",
+      "effect": -0.04497595470304783,
+      "margin": 0.06407997798032215
+     },
+     "ratio_median": {
+      "status": "none",
+      "effect": -0.04811597372269011,
+      "margin": 0.04933789603135865
+     }
+    }
+   }
+  },
+  "per_fit": {
+   "p0_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8897189833971004,
+     "weaker_median": 0.801917469732077,
+     "ratio_median": 0.6150630789703829,
+     "existence_social": 0.009531142896187535,
+     "existence_semantic": 0.11632864028860429,
+     "overlap": 0.8550921141398358,
+     "band_link": 0.036622208220825986,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.27813716555761603,
+      "article_article": 0.22924040284991776,
+      "article_journal": 0.5426512864655454
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.7487822594626495,
+     "weaker_median": 0.6387655207153747,
+     "ratio_median": 0.473399621196295,
+     "existence_social": 0.01235859797973956,
+     "existence_semantic": 0.11749632823104486,
+     "overlap": 0.8125943312469232,
+     "band_link": 0.03815133514860415,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.5841633902676703,
+      "article_article": 0.903337202715771,
+      "article_journal": 0.15881387400691716
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9066335834967042,
+     "weaker_median": 0.7064335502386442,
+     "ratio_median": 0.42629527716191307,
+     "existence_social": 0.011305229285808047,
+     "existence_semantic": 0.11865344057265287,
+     "overlap": 0.8251398890596265,
+     "band_link": 0.02360056837826255,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.21430772625201314,
+      "article_article": 0.7123798219459039,
+      "article_journal": 0.2971184929591324
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.805522443530701,
+     "weaker_median": 0.7560763873015428,
+     "ratio_median": 0.5694836470719646,
+     "existence_social": 0.01060235375211326,
+     "existence_semantic": 0.11532638650506459,
+     "overlap": 0.8309214088714252,
+     "band_link": 0.03885148344732457,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3967600634322821,
+      "article_article": 0.5155715187161124,
+      "article_journal": 0.3352496493643865
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9432935721438364,
+     "weaker_median": 0.7852734809259161,
+     "ratio_median": 0.6282752327165054,
+     "existence_social": 0.008893879413292404,
+     "existence_semantic": 0.11488866325281671,
+     "overlap": 0.8380153785938582,
+     "band_link": 0.022149145917157734,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.43195034597816095,
+      "article_article": 0.18730269354379037,
+      "article_journal": 0.18831026192975112
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8097613717645591,
+     "weaker_median": 0.7491170202825718,
+     "ratio_median": 0.5076130394003812,
+     "existence_social": 0.010733025009602099,
+     "existence_semantic": 0.12247435914453042,
+     "overlap": 0.7948379299898861,
+     "band_link": 0.03135713579151338,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.27934811891772104,
+      "article_article": 0.6785979016768023,
+      "article_journal": 0.4100923038812552
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0000000000000002,
+     "mixed_0.5": 0.9039364895195376,
+     "weaker_median": 0.7622361044650762,
+     "ratio_median": 0.7542865489093381,
+     "existence_social": 0.010126494724515383,
+     "existence_semantic": 0.12984850359751787,
+     "overlap": 0.829515366749538,
+     "band_link": 0.059211157039659734,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.357476869842276,
+      "article_article": 0.8363358410380334,
+      "article_journal": 0.17395665937277283
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.8961699357147552,
+     "weaker_median": 0.8027142638757331,
+     "ratio_median": 0.6413605389671105,
+     "existence_social": 0.009652109345700325,
+     "existence_semantic": 0.11196499244832875,
+     "overlap": 0.8204412446008803,
+     "band_link": 0.05295366953631685,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.23551498451360736,
+      "article_article": 0.4393032203363507,
+      "article_journal": 0.25741137902950256
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9130535389739667,
+     "weaker_median": 0.7839871023907394,
+     "ratio_median": 0.6860136862090399,
+     "existence_social": 0.01182304392106647,
+     "existence_semantic": 0.12189713426448207,
+     "overlap": 0.8469299746652744,
+     "band_link": 0.008389936563594907,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.34787408253598867,
+      "article_article": 0.31532597562425524,
+      "article_journal": 0.5001268150402057
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.9499430327740306,
+     "weaker_median": 0.7225760649645082,
+     "ratio_median": 0.5185905420116668,
+     "existence_social": 0.00930720679991231,
+     "existence_semantic": 0.11485241046650366,
+     "overlap": 0.835690366636782,
+     "band_link": 0.04513073095198644,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.29196753840115774,
+      "article_article": 0.9286781217258495,
+      "article_journal": 0.06677987828063657
+     }
+    }
+   ],
+   "p0_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999998,
+     "mixed_0.5": 0.792761736773194,
+     "weaker_median": 0.7360284372307664,
+     "ratio_median": 0.5280536171718863,
+     "existence_social": 0.009032471206871348,
+     "existence_semantic": 0.12178871426377949,
+     "overlap": 0.8052939147073215,
+     "band_link": 0.042341100814243096,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "article_affiliation": 0.4185564118842434,
+      "article_article": 0.2156213183719162,
+      "article_journal": 0.11412039133498972
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7491936274037369,
+     "weaker_median": 0.6602428258700102,
+     "ratio_median": 0.5394965468653201,
+     "existence_social": 0.010421439175551474,
+     "existence_semantic": 0.1230859018996585,
+     "overlap": 0.7529363727954264,
+     "band_link": 0.04413010345037745,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.13958161951929263,
+      "article_article": 0.5890579680467994,
+      "article_journal": 0.3656521757076796
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8601648471629952,
+     "weaker_median": 0.712430123498546,
+     "ratio_median": 0.5575100252298815,
+     "existence_social": 0.010722389579002718,
+     "existence_semantic": 0.11993316412180285,
+     "overlap": 0.7711388609315899,
+     "band_link": 0.054729071910282395,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.27461786760952783,
+      "article_article": 0.4532866693337657,
+      "article_journal": 0.34628446679228647
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8596287939521033,
+     "weaker_median": 0.6065400437230096,
+     "ratio_median": 0.5162548786343175,
+     "existence_social": 0.008273393689496408,
+     "existence_semantic": 0.1202231878716933,
+     "overlap": 0.7297719850390765,
+     "band_link": 0.011437746079875882,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.27318239762959384,
+      "article_article": 0.13172805004169288,
+      "article_journal": 0.3329229606160652
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8417499587209729,
+     "weaker_median": 0.6255713776257039,
+     "ratio_median": 0.49450623878054734,
+     "existence_social": 0.010153397535491509,
+     "existence_semantic": 0.12489548178182558,
+     "overlap": 0.8147602624550864,
+     "band_link": 0.043681562159708254,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3338113090022779,
+      "article_article": 0.16957950875524105,
+      "article_journal": 0.42925062488087723
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.8695822660570779,
+     "weaker_median": 0.8193348342190143,
+     "ratio_median": 0.5941117672420471,
+     "existence_social": 0.008672313638569948,
+     "existence_semantic": 0.116926027255673,
+     "overlap": 0.8241819424013467,
+     "band_link": 0.013374346675742638,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.2658662683881432,
+      "article_article": 0.1687885140462709,
+      "article_journal": 0.21610317997751372
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8402846867948714,
+     "weaker_median": 0.7364170227640863,
+     "ratio_median": 0.5301257324600348,
+     "existence_social": 0.009132067614760552,
+     "existence_semantic": 0.1220829694691078,
+     "overlap": 0.8122214208017331,
+     "band_link": 0.0302556614598683,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.07375873708540939,
+      "article_article": 0.0970547501427377,
+      "article_journal": 0.3380478963278556
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.8443375234407241,
+     "weaker_median": 0.7578212732104427,
+     "ratio_median": 0.6299058747148292,
+     "existence_social": 0.009029083803280461,
+     "existence_semantic": 0.11075339046237416,
+     "overlap": 0.81344178148186,
+     "band_link": 0.020005629148234408,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.14216388238955474,
+      "article_article": 0.12446287673161302,
+      "article_journal": 0.13802591592500865
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8282040798240091,
+     "weaker_median": 0.7432774070707214,
+     "ratio_median": 0.5618169819871626,
+     "existence_social": 0.011621332571972079,
+     "existence_semantic": 0.11550268622001296,
+     "overlap": 0.7831073929545533,
+     "band_link": 0.002831327630487643,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.12090812688565941,
+      "article_article": 0.721193345141193,
+      "article_journal": 0.3824013681101339
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.6692599079900676,
+     "weaker_median": 0.5043990371001545,
+     "ratio_median": 0.448681463279359,
+     "existence_social": 0.008412141436193985,
+     "existence_semantic": 0.12268055482948675,
+     "overlap": 0.7449879156863093,
+     "band_link": 0.04458679962910332,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.6094190089052148,
+      "article_article": 0.5258257139230426,
+      "article_journal": 0.21084727706010423
+     }
+    }
+   ],
+   "oneband_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8910259043921559,
+     "weaker_median": 0.7376218137997764,
+     "ratio_median": 0.6359307957936815,
+     "existence_social": 0.006997677555141744,
+     "existence_semantic": 0.11702567108588546,
+     "overlap": 0.8537147020864941,
+     "band_link": 0.033277623594104855,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.20491359398674192,
+      "article_article": 0.1366967838537031,
+      "article_journal": 0.6036916867539188
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.700905755717263,
+     "weaker_median": 0.5188802138524493,
+     "ratio_median": 0.4212233114227881,
+     "existence_social": 0.010234750215795705,
+     "existence_semantic": 0.11431886024845184,
+     "overlap": 0.8011657716886404,
+     "band_link": 0.04188368840019491,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.635791839310845,
+      "article_article": 0.8712326295724303,
+      "article_journal": 0.10763406361867872
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.6771055963800624,
+     "weaker_median": 0.5742824230417064,
+     "ratio_median": 0.41957591845926673,
+     "existence_social": 0.010506933655944222,
+     "existence_semantic": 0.11559062098969321,
+     "overlap": 0.8066574428376877,
+     "band_link": 0.032893292086371956,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.10717970296970775,
+      "article_article": 0.6895489130393233,
+      "article_journal": 0.07636091070050197
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7697386016308259,
+     "weaker_median": 0.5735738682190447,
+     "ratio_median": 0.392564910812865,
+     "existence_social": 0.008887921040173882,
+     "existence_semantic": 0.1127871211691256,
+     "overlap": 0.8158712392349333,
+     "band_link": 0.05434256230940024,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.347557051099087,
+      "article_article": 0.3505020830634795,
+      "article_journal": 0.2976071576529482
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7898318301769769,
+     "weaker_median": 0.7286179212939814,
+     "ratio_median": 0.5939090594088591,
+     "existence_social": 0.010734390208704547,
+     "existence_semantic": 0.11564028298664633,
+     "overlap": 0.8453091215895825,
+     "band_link": 0.02060343765332634,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.38195427500155643,
+      "article_article": 0.0,
+      "article_journal": 0.10867508331672342
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.7110626258579684,
+     "weaker_median": 0.5135081485842922,
+     "ratio_median": 0.43299733787387784,
+     "existence_social": 0.009241339967626955,
+     "existence_semantic": 0.12052482813634177,
+     "overlap": 0.7836189794155496,
+     "band_link": 0.04146970679915035,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "article_affiliation": 0.24223178259076505,
+      "article_article": 0.9835184522453163,
+      "article_journal": 0.4865954588459861
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.8019238502427805,
+     "weaker_median": 0.7407674017056896,
+     "ratio_median": 0.6784936781753931,
+     "existence_social": 0.00920787994108244,
+     "existence_semantic": 0.1258942290049207,
+     "overlap": 0.8118915089085159,
+     "band_link": 0.065952468807304,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.28340180454853564,
+      "article_article": 0.8218419086066059,
+      "article_journal": 0.10910685284592186
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8484769587728882,
+     "weaker_median": 0.7280399148753045,
+     "ratio_median": 0.6217796758818332,
+     "existence_social": 0.00925221993170909,
+     "existence_semantic": 0.11369816358598284,
+     "overlap": 0.8212166319591269,
+     "band_link": 0.06503153974334627,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.24287106971609018,
+      "article_article": 0.4218854373708511,
+      "article_journal": 0.04050893419133896
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999998,
+     "mixed_0.5": 0.8519139236570699,
+     "weaker_median": 0.7767056562526705,
+     "ratio_median": 0.6892169499046371,
+     "existence_social": 0.010046555868731159,
+     "existence_semantic": 0.11998065626220383,
+     "overlap": 0.8305175385111239,
+     "band_link": 0.03165771000208911,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999998,
+      "article_affiliation": 0.45279099455670446,
+      "article_article": 0.03206734312651593,
+      "article_journal": 0.420865867925874
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8455316864793372,
+     "weaker_median": 0.7566541615989916,
+     "ratio_median": 0.5238174761576287,
+     "existence_social": 0.011739803120830275,
+     "existence_semantic": 0.11464509068778882,
+     "overlap": 0.8473859330974353,
+     "band_link": 0.019279445926053976,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3443840380060038,
+      "article_article": 0.5414035503505644,
+      "article_journal": 0.21377690188637322
+     }
+    }
+   ],
+   "banded_Kbig": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7496889040459014,
+     "weaker_median": 0.6372291472515674,
+     "ratio_median": 0.5034791947870036,
+     "existence_social": 0.008400172623352794,
+     "existence_semantic": 0.12485049612988042,
+     "overlap": 0.8028217994480873,
+     "band_link": 0.03155540330933641,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3534325496893053,
+      "article_article": 0.0,
+      "article_journal": 0.07318511224480381
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8464999887619679,
+     "weaker_median": 0.6090421648674001,
+     "ratio_median": 0.530090333915233,
+     "existence_social": 0.00839851321465439,
+     "existence_semantic": 0.12354815146655437,
+     "overlap": 0.7753215197021475,
+     "band_link": 0.05514170817764276,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.08644335421315158,
+      "article_article": 0.6162510995202579,
+      "article_journal": 0.1188601303733536
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.829843216291683,
+     "weaker_median": 0.6237234029883876,
+     "ratio_median": 0.4890636885872365,
+     "existence_social": 0.008440491274421064,
+     "existence_semantic": 0.12071616240246835,
+     "overlap": 0.7486638902463915,
+     "band_link": 0.07359951329002891,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.23184892875049679,
+      "article_article": 0.007912024673704148,
+      "article_journal": 0.23810889668779212
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.7494798835232962,
+     "weaker_median": 0.5599550945448506,
+     "ratio_median": 0.3662706017562194,
+     "existence_social": 0.008502799835255665,
+     "existence_semantic": 0.11975625862735248,
+     "overlap": 0.7189076792719791,
+     "band_link": 0.009234439815217835,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3162277550375075,
+      "article_article": 0.1218095525512496,
+      "article_journal": 0.2815932938272729
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.7880637207839151,
+     "weaker_median": 0.6549840550617182,
+     "ratio_median": 0.48435955701255207,
+     "existence_social": 0.0076600125905931645,
+     "existence_semantic": 0.12477894224184924,
+     "overlap": 0.7962396242966155,
+     "band_link": 0.057202966577602835,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3730659067909959,
+      "article_article": 0.003404194821457392,
+      "article_journal": 0.46680630331799644
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.8468652872201993,
+     "weaker_median": 0.7309890115539766,
+     "ratio_median": 0.5291022096351623,
+     "existence_social": 0.012848108932343512,
+     "existence_semantic": 0.11571316921925848,
+     "overlap": 0.8005685399782582,
+     "band_link": 0.016747975827603942,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.29931718878621427,
+      "article_article": 0.0046312244915287445,
+      "article_journal": 0.16942083061866342
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7832679232578235,
+     "weaker_median": 0.7007762416444907,
+     "ratio_median": 0.5441802771193842,
+     "existence_social": 0.00975019970772685,
+     "existence_semantic": 0.1222128513362627,
+     "overlap": 0.8087197674492951,
+     "band_link": 0.041445864988813474,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 0.9999999999999999,
+      "article_affiliation": 0.12444384790419599,
+      "article_article": 0.0,
+      "article_journal": 0.2513476467557747
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8555271377834914,
+     "weaker_median": 0.7675978351841704,
+     "ratio_median": 0.588015847957603,
+     "existence_social": 0.008408219357183909,
+     "existence_semantic": 0.11187762704710791,
+     "overlap": 0.8261230765617417,
+     "band_link": 0.04774966200440943,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.0888549595589836,
+      "article_article": 0.34428476837375505,
+      "article_journal": 0.13492701806223392
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7149380529146709,
+     "weaker_median": 0.5897018441409709,
+     "ratio_median": 0.3950620824077854,
+     "existence_social": 0.010240324209727238,
+     "existence_semantic": 0.11193491156793414,
+     "overlap": 0.8030334013770609,
+     "band_link": 0.007747249391863054,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.23777880892487782,
+      "article_article": 0.21730704153525066,
+      "article_journal": 0.11052521511732435
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7956890825309919,
+     "weaker_median": 0.5783040380444439,
+     "ratio_median": 0.4896795959603037,
+     "existence_social": 0.009243264424787435,
+     "existence_semantic": 0.12156178404535911,
+     "overlap": 0.7682054582236484,
+     "band_link": 0.030581870713784973,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.5878144828551137,
+      "article_article": 0.013394861320534216,
+      "article_journal": 0.16139000362074524
+     }
+    }
+   ],
+   "banded_Kstar": [
+    {
+     "seed": 1,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.8024954250900395,
+     "weaker_median": 0.6465912343468897,
+     "ratio_median": 0.5222086395766661,
+     "existence_social": 0.008173043168971956,
+     "existence_semantic": 0.11886707436770688,
+     "overlap": 0.8235893235016034,
+     "band_link": 0.05175456449541607,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.18630622370409225,
+      "article_article": 0.6337912342893459,
+      "article_journal": 0.5485281601402812
+     }
+    },
+    {
+     "seed": 2,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.6993919733648759,
+     "weaker_median": 0.7051004994700606,
+     "ratio_median": 0.4195519332470509,
+     "existence_social": 0.010219090750488156,
+     "existence_semantic": 0.11996107722702351,
+     "overlap": 0.8100117471277125,
+     "band_link": 0.03817401724746204,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.33958144345255437,
+      "article_article": 0.9082675087559497,
+      "article_journal": 0.11108429419571521
+     }
+    },
+    {
+     "seed": 3,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7290525377202399,
+     "weaker_median": 0.6555541982216367,
+     "ratio_median": 0.45388666783600395,
+     "existence_social": 0.009461515785979802,
+     "existence_semantic": 0.1178832906380477,
+     "overlap": 0.8222914103059009,
+     "band_link": 0.031177451347514262,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.22482205600968336,
+      "article_article": 0.6622084608819563,
+      "article_journal": 0.08308206803311315
+     }
+    },
+    {
+     "seed": 4,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.7746266601478122,
+     "weaker_median": 0.6075964819939247,
+     "ratio_median": 0.43394136405259265,
+     "existence_social": 0.013124969344329598,
+     "existence_semantic": 0.11257248470543724,
+     "overlap": 0.8174965977563508,
+     "band_link": 0.05127063048297409,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.4436491345939264,
+      "article_article": 0.39008586739580464,
+      "article_journal": 0.30273402781948483
+     }
+    },
+    {
+     "seed": 5,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8304911670611385,
+     "weaker_median": 0.7480116955712779,
+     "ratio_median": 0.566213565131666,
+     "existence_social": 0.014161023026821718,
+     "existence_semantic": 0.11486747204039705,
+     "overlap": 0.827577743669341,
+     "band_link": 0.034484200254349506,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.3746197889107609,
+      "article_article": 0.07468964750340557,
+      "article_journal": 0.19970482973620707
+     }
+    },
+    {
+     "seed": 6,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.7472244239539066,
+     "weaker_median": 0.6472036066150186,
+     "ratio_median": 0.4385322451593551,
+     "existence_social": 0.00864395483459096,
+     "existence_semantic": 0.1213664997852685,
+     "overlap": 0.8016089582040173,
+     "band_link": 0.033874841581455595,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.2544999029625377,
+      "article_article": 0.48529960318725884,
+      "article_journal": 0.49563329851297827
+     }
+    },
+    {
+     "seed": 7,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.9207502259358331,
+     "weaker_median": 0.7226351264472461,
+     "ratio_median": 0.581952762877824,
+     "existence_social": 0.010578157168380857,
+     "existence_semantic": 0.12699128583058497,
+     "overlap": 0.818347999236442,
+     "band_link": 0.05500771015457899,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.29105835568627525,
+      "article_article": 0.8011108295461279,
+      "article_journal": 0.10221929017538879
+     }
+    },
+    {
+     "seed": 8,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8929931462159335,
+     "weaker_median": 0.7230973904048176,
+     "ratio_median": 0.5786071845007426,
+     "existence_social": 0.009947628091295934,
+     "existence_semantic": 0.11146623943794672,
+     "overlap": 0.8302052279808501,
+     "band_link": 0.06341554835106468,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.23028014624057946,
+      "article_article": 0.3292920372625285,
+      "article_journal": 0.17807410212816088
+     }
+    },
+    {
+     "seed": 9,
+     "mono_domain": 0,
+     "mixed_0.1": 1.0,
+     "mixed_0.5": 0.8199159176201001,
+     "weaker_median": 0.5326221186895337,
+     "ratio_median": 0.4649058466743256,
+     "existence_social": 0.010415156220540922,
+     "existence_semantic": 0.11985022262293826,
+     "overlap": 0.8176185815810281,
+     "band_link": 0.03289231908022788,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0000000000000002,
+      "article_affiliation": 0.40759846270779243,
+      "article_article": 0.7331769818836656,
+      "article_journal": 0.46055087101239767
+     }
+    },
+    {
+     "seed": 10,
+     "mono_domain": 0,
+     "mixed_0.1": 0.9999999999999999,
+     "mixed_0.5": 0.7950161329109002,
+     "weaker_median": 0.6758898702843172,
+     "ratio_median": 0.5161837204629927,
+     "existence_social": 0.009031811905193287,
+     "existence_semantic": 0.11353885870245171,
+     "overlap": 0.8224210344300464,
+     "band_link": 0.04969730633144945,
+     "anchor_failing": 0,
+     "diagonal_rule": {
+      "parent_child": 1.0,
+      "article_affiliation": 0.32349232724906424,
+      "article_article": 0.6978830491007493,
+      "article_journal": 0.10384470077059593
+     }
+    }
+   ]
+  }
+ },
+ "_numbering": "fitted"
+}
