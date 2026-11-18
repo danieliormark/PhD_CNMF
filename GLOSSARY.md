@@ -493,3 +493,23 @@ whichever people it received, so a community is present in both domains whether 
 the data (under KL the article-side overlap stays 0.92 even with one band). Presence in both domains therefore cannot
 show that heterogeneity follows the data; what the link should change is *which* people group with which ideas.
 **Limit.** Hold-out group 1, 10 seeds, K* and one larger K; the decided presence measures only.
+
+## Measures on membership distributions — preferred uses
+
+*Convention recorded 2026-11-18 at the owner's request ("record the preferred measures for how entities' community
+membership is distributed, so when you decide how to report or compare something you will consider which options will
+be the most suitable"). Proposed by the assistant; the owner noted that main communities may suit within/between counts
+but be insufficient for other purposes.* p, q: two entities' membership distributions over the K communities (e.g.
+weighted memberships, rows summing to 1).
+
+| Measure | What it says | Preferred use | Caution |
+|---|---|---|---|
+| main community (largest membership) | one label per entity | listing members; a yes/no partition where one is unavoidable (secondary reading of within/between ties) | discards mixing: 0.51/0.49 and 0.49/0.51 get different labels, 0.95 and 0.51 the same |
+| co-membership Σ_k p_k q_k | chance that both fall in the same community if each draws one from its own distribution | **ties**: soft within-community share of a tie (closure checks, swap measure B); pairs of articles | depends on concentration (two identical even spreads give 1/K): compare with chance |
+| overlap Σ_k min(p_k, q_k) | share of membership the two have in common, 0–1 (= weighted Jaccard numerator; weighted Jaccard = Σ min ÷ Σ max) | **similarity of two entities' profiles** (e.g. swap overlap of an article's social and semantic sides) | treats all communities alike |
+| Jensen–Shannon distance | bounded, symmetric difference of two distributions | agreement of the same entity across seeds or fits (Track A) | natural-log floor ≈ 0.17 between unrelated distributions in the toy convention |
+| cosine | similarity of direction, ignoring size | weighted memberships of different mass (Track B) | insensitive to how much mass an entity has |
+| Spearman rank over K | order of communities | **not recommended** over all K (ranks of many near-zero entries are noise); top-m Jaccard (overlap of the m largest communities) instead when order matters | — |
+
+Choose by the question: a tie or pair → co-membership; two profiles → overlap or Jensen–Shannon; one label → main
+community, reported beside a soft reading.

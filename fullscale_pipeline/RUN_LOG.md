@@ -3775,3 +3775,14 @@ across main-community boundaries, close to the data's own share (ratio 0.9–1.3
 the data's 0.40 (over-closure; reference 0.84). The diagonal arm's partition itself puts more of the data within
 communities (data share falls, e.g. author×article 0.41 → 0.24) — both well below chance (≈ 0.9). Limit: the partition
 is the model's own.
+
+### RL-271 — 2026-11-18 — idf vs log-degree weighting of child hyperedges: where the weight goes (no fits)
+Owner's idea (design doc 2026-11-18): replace idf by a log transform so that frequent entities stay more frequent but
+stand out less. Trial build (`psych_trial_v3`): 2,136 articles, 97,850 child hyperedges; articles per child hyperedge
+(df): median 1, 90th percentile 1, 99th 14, 99.9th 127, max 1,142; **91 % appear in one article**. A child hyperedge's
+total child×article weight (column sum; ignoring log(1 + tf) and the articles' partial row normalisation) under:
+no weighting = df; current idf = df · (ln(N/(df + 1)) + 1); log-degree = log(1 + df) (each tie × log(1 + df) ÷ df).
+df = 1 / 10 / 100 / 1,000: none 1 / 10 / 100 / 1,000; idf 8 / 63 / 405 / 1,758; log-degree 0.69 / 2.4 / 4.6 / 6.9.
+Share of all child×article column weight on child hyperedges in one article: none 0.51, idf 0.62, **log-degree 0.80**;
+in ≥ 10 articles: 0.35 / 0.23 / **0.06**. → Log-degree damping on the child side would put 80 % of the semantic anchor's
+weight on child hyperedges that cannot link two articles (CLAUDE.md §4.21 (d)), and shrink shared ones to 6 %.
