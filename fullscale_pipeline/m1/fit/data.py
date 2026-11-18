@@ -185,6 +185,36 @@ def fold_values(build, rel, rows, cols, vis):
     return np.asarray(build.load(RELATIONS[rel][0])[rows, cols]).ravel()
 
 
+# ------------------------------------------------------------------------------- social log-damping arm (2026-11-18)
+# Owner 2026-11-18: "adding the social log-damping arm to stage 1 ... careful to avoid overlapping of log damping with
+# other potential mechanisms"; d = the entity's number of ties ("n of ties"). Only sides with no entity-level damping
+# now: authors' number of articles (author×article rows), organisations (affiliation columns), journals (article×journal
+# columns). article×article and every semantic relation are not damped.
+DAMPED_SIDE = {"author_article": "row", "author_affiliation": "col", "article_affiliation": "col", "article_journal": "col"}
+
+
+def damp_values(rel, rows, cols, v, vis, shape, fro):
+    """Every tie of an entity on the damped side × log(1 + d) / d, d = the entity's VISIBLE ties in this fold (hidden
+    ties never set d; an entity whose ties are all hidden is read as d = 1). Hidden ties get the same factor, so the
+    held-out readings score what the fit is trained on. Mass restoration (GPT review, RL-272/273, order of its §F):
+    M_ref = visible mass of the undamped relation after its Frobenius scaling; M_damped = the same for the damped
+    relation after its own Frobenius scaling; q = M_ref / M_damped. Returns (damped values, divisor, info): dividing by
+    the divisor gives the "data" implementation (damped, Frobenius-scaled, × q: visible mass = M_ref); info["fro_damped"]
+    is the divisor of the "weight" implementation (Frobenius norm 1; w_r × q instead)."""
+    side = DAMPED_SIDE[rel]
+    ent, n = (rows, shape[0]) if side == "row" else (cols, shape[1])
+    d = np.bincount(ent[vis], minlength=n).astype(np.float64)
+    dd = np.maximum(d, 1.0)
+    f = np.log1p(dd) / dd
+    m_ref = float(v[vis].sum() / fro)
+    vd = v * f[ent]
+    fro_d = float(np.sqrt(np.sum(vd[vis] ** 2)))
+    m_d = float(vd[vis].sum() / fro_d)
+    q = m_ref / m_d
+    return vd, fro_d / q, {"side": side, "q": q, "mass_ref": m_ref, "mass_damped_frobenius": m_d, "fro_damped": fro_d,
+                           "entities_all_hidden": int(((d == 0) & (np.bincount(ent, minlength=n) > 0)).sum())}
+
+
 # ------------------------------------------------------------------------------------------------- one fit's relations
 class RelationData:
     """One relation matrix as the loss sees it (numpy; the loss converts to tensors).
@@ -197,6 +227,7 @@ class RelationData:
         self.obs_row_mask = obs_row_mask
         self.hid_tie_row, self.hid_tie_col, self.hid_tie_val = hid_tie_row, hid_tie_col, hid_tie_val
         self.hid_empty_row, self.hid_empty_col = hid_empty_row, hid_empty_col
+        self.damping = None                                       # set by fit_data in the log-damping arm
 
     @property
     def hid_row(self): return np.concatenate([self.hid_tie_row, self.hid_empty_row])
@@ -204,13 +235,17 @@ class RelationData:
     def hid_col(self): return np.concatenate([self.hid_tie_col, self.hid_empty_col])
 
 
-def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True, binary=False):
+def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True, binary=False,
+             log_damping=None):
     """The relations of one fit. group: hold-out group 0..9 (None = final refit on all cells, 2026-11-03).
     use_journal=False is arm J1 (no article×journal); journal_multiplier gives J3a/J3b; drop removes relations (arm N).
     binary=True (binary test, owner 2026-11-16): every VISIBLE tie value set to 1 before the Frobenius normalisation, so
     the fit sees only where ties are; hidden tie values keep their weighted values (scaled by the weighted visible norm),
     so held-out value is still scored against the real weights (ranks only; the held-out error scores are then on a
-    different scale and not comparable with weighted fits)."""
+    different scale and not comparable with weighted fits).
+    log_damping (social log-damping arm, decided 2026-11-18; see damp_values): None = off; "data" = damped values
+    rescaled to the undamped relation's visible mass (the arm); "weight" = damped values at Frobenius norm 1 and w_r × q
+    (comparison implementation for the equivalence test). Each RelationData gets .damping (None or a dict with q)."""
     rels = [r for r in APPROACH[approach] if r not in drop and (use_journal or r != "article_journal")]
     w = relation_weights(rels, journal_multiplier, semantic_split)
     out = []
@@ -233,10 +268,19 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
         if diag:
             assert not np.any(r == c), "a tie on the masked diagonal"
         fro = float(np.sqrt(np.sum(v[vis] ** 2)))                 # visible observed cells (zeros add nothing)
+        damping, wr = None, w[rel]
+        if log_damping is not None and rel in DAMPED_SIDE:
+            assert not binary, "the binary test and the log-damping arm are not combined"
+            v, fro, damping = damp_values(rel, r, c, v, vis, shape, fro)
+            if log_damping == "weight":
+                fro, wr = damping["fro_damped"], wr * damping["q"]
+            else:
+                assert log_damping == "data", log_damping
         v = v / fro
         vt = v[vis]
         if binary:
             vt = np.full(int(vis.sum()), 1.0 / np.sqrt(vis.sum()))   # 1 per visible tie, Frobenius-normalised
-        out.append(RelationData(rel, rf, cf, shape, w[rel], dom, r[vis], c[vis], vt, obs, diag,
-                                r[hid], c[hid], v[hid], er, ec, fro))
+        rd = RelationData(rel, rf, cf, shape, wr, dom, r[vis], c[vis], vt, obs, diag, r[hid], c[hid], v[hid], er, ec, fro)
+        rd.damping = damping
+        out.append(rd)
     return out

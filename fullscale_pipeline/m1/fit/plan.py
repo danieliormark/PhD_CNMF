@@ -215,6 +215,23 @@ def start_test():
             for a in (1, 2) for beta in (2, 1) for s in range(1, 11)]
 
 
+def damping_test():
+    """Equivalence test of the social log-damping arm (owner 2026-11-18: "shall we check first that rescaling and w_r
+    work same way?" and "shall we remeasure the positivity floor and adam ε ... so our work won't rely on bare
+    expectations?"). KL, K* = 13, both approaches, hold-out group 1 (index 0), seeds 1–3, terms off, fraction 0.03,
+    float32, 8,000-epoch ceiling, diagonal social start (as the start test, decided for KL). Three arms per seed:
+      weight        — damped values at Frobenius norm 1, relation weight w_r × q (implementation B);
+      data_matched  — damped values × q (the arm, implementation A), start = the weight arm's start with every damped
+                      core matrix × q (same point in the fit's terms);
+      data          — implementation A from the ordinary start (as the arm would run in stage 1).
+    18 fits; the undamped references are the start-test fits of the same seeds. Read by fit/damping_test_analysis.py."""
+    arms = {"weight": {"log_damping": "weight"}, "data_matched": {"log_damping": "data", "damping_start": "matched"},
+            "data": {"log_damping": "data"}}
+    return [dict(job("damping_test", a, 0, 13, 1, s, FRACTION[1], dtype="float32", arm=arm, max_epochs=8000),
+                 social_link_start="diagonal")
+            for a in (1, 2) for s in (1, 2, 3) for arm in arms.values()]
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -227,10 +244,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

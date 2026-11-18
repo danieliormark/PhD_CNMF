@@ -3821,3 +3821,17 @@ scaled to the data) — small for q between 1.0 and 1.4. Not raised by the revie
 core matrices, so they read the relations' scale. Data rescaling keeps that reading on the undamped relation's scale;
 multiplying w_r would not (Z_r stays at the damped scale) — the two are not equivalent for the membership measures or
 for terms that read them. Open, not in the review: the values the hidden ties are scored against in this arm.
+
+### RL-274 — 2026-11-18 — Social log-damping arm coded; equivalence test prepared (18 fits, not submitted); entity totals
+Owner: "shall we check first that rescaling and w_r work same way?", "shall we remeasure the positivity floor and adam
+ε as well as other parameters", "If you think there is nothing to discuss right now, please prepare the test" (pending
+points judged not to change the test: matched starts make the start question irrelevant to it; terms off). Code:
+`data.damp_values` / `fit_data(log_damping="data"|"weight")` (d = visible ties in the fold, d = 0 read as 1, hidden
+ties get the same factor, mass restored per GPT §F order); `run_fit` arm keys `log_damping`, `damping_start: matched`;
+spec.json records damping info and relation weights; `plan.damping_test` (18 jobs: KL, K 13, both approaches, group
+1, seeds 1–3, arms weight / data_matched / data, diagonal start); `slurm/damping_test.sh`; reading script
+`damping_test_analysis.py`; unit test `tests/test_damping.py`. Checks (no fits; plans/ticket107_damping_test.md §5):
+masses reproduce RL-272; smoke run 30 epochs: matched A and B equal to float32 precision; under the diagonal start
+92 % of core cells sit at the positivity floor (the setting most likely to break exact equivalence); gradients far
+above ε; step-size floor not reached. Entity totals (`damping_entity_totals.py`): totals still rise with d; largest
+journals' mass share 0.47 → 0.12, largest organisations' 0.17 → 0.05; author×article changes little in the trial.

@@ -1,0 +1,40 @@
+author_article q 1.007
+  d 1      n   9259  mean total 0.0090 → 0.0094  mass share 0.831 → 0.872
+  d 2-3    n    747  mean total 0.0194 → 0.0156  mass share 0.144 → 0.116
+  d 4-7    n     38  mean total 0.0420 → 0.0233  mass share 0.016 → 0.009
+  d 8-15   n      7  mean total 0.1056 → 0.0379  mass share 0.007 → 0.003
+  d 16-31  n      1  mean total 0.1754 → 0.0452  mass share 0.002 → 0.000
+  by team size:
+  team 1      n    118  mean total 0.0216 → 0.0220  mass share 0.025 → 0.026
+  team 2-3    n    670  mean total 0.0344 → 0.0343  mass share 0.230 → 0.230
+  team 4-7    n    956  mean total 0.0490 → 0.0489  mass share 0.467 → 0.466
+  team 8-15   n    353  mean total 0.0676 → 0.0677  mass share 0.238 → 0.238
+  team 16-31  n     34  mean total 0.0947 → 0.0965  mass share 0.032 → 0.033
+  team 32+    n      5  mean total 0.1439 → 0.1437  mass share 0.007 → 0.007
+  productivity band (rows) × team-size band (columns), share of mass, undamped / damped:
+  1      0.022/0.024  0.190/0.200  0.387/0.406  0.198/0.207  0.028/0.029  0.006/0.006
+  2-3    0.003/0.002  0.034/0.028  0.066/0.053  0.036/0.029  0.004/0.003  0.001/0.001
+  4-7    0.000/0.000  0.002/0.001  0.010/0.005  0.004/0.002  0.000/0.000  0.000/0.000
+  8-15   0.000/0.000  0.003/0.001  0.003/0.001  0.001/0.000  0.000/0.000  0.000/0.000
+  16-31  0.000/0.000  0.001/0.000  0.001/0.000  0.000/0.000  0.000/0.000  0.000/0.000
+author_affiliation q 1.178
+  d 1      n    962  mean total 0.0087 → 0.0211  mass share 0.079 → 0.189
+  d 2-3    n    668  mean total 0.0214 → 0.0374  mass share 0.133 → 0.234
+  d 4-7    n    472  mean total 0.0469 → 0.0573  mass share 0.207 → 0.253
+  d 8-15   n    248  mean total 0.0918 → 0.0745  mass share 0.213 → 0.173
+  d 16-31  n    116  mean total 0.1837 → 0.0944  mass share 0.199 → 0.102
+  d 32+    n     45  mean total 0.4033 → 0.1171  mass share 0.170 → 0.049
+article_journal q 1.404
+  d 1      n    215  mean total 0.0217 → 0.0687  mass share 0.101 → 0.320
+  d 2-3    n     84  mean total 0.0518 → 0.1202  mass share 0.094 → 0.219
+  d 4-7    n     37  mean total 0.1013 → 0.1710  mass share 0.081 → 0.137
+  d 8-15   n     19  mean total 0.2291 → 0.2411  mass share 0.094 → 0.099
+  d 16-31  n     16  mean total 0.4670 → 0.3076  mass share 0.162 → 0.107
+  d 32+    n     13  mean total 1.6610 → 0.4211  mass share 0.468 → 0.119
+article_affiliation q 1.083
+  d 1      n   1575  mean total 0.0104 → 0.0166  mass share 0.260 → 0.414
+  d 2-3    n    594  mean total 0.0262 → 0.0308  mass share 0.246 → 0.290
+  d 4-7    n    222  mean total 0.0573 → 0.0469  mass share 0.201 → 0.165
+  d 8-15   n     93  mean total 0.1232 → 0.0655  mass share 0.181 → 0.096
+  d 16-31  n     24  mean total 0.2446 → 0.0817  mass share 0.093 → 0.031
+  d 32+    n      3  mean total 0.3921 → 0.0867  mass share 0.019 → 0.004

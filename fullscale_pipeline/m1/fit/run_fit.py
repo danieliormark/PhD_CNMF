@@ -87,7 +87,7 @@ def run_one(job, out_root):
     arm = job.get("arm") or {}
     rds = D.fit_data(build, job["approach"], group=job["group"], journal_multiplier=arm.get("journal_multiplier", 1.0),
                      semantic_split=arm.get("semantic_split"), drop=tuple(arm.get("drop", ())), use_journal=arm.get("use_journal", True),
-                     binary=bool(arm.get("binary", False)))
+                     binary=bool(arm.get("binary", False)), log_damping=arm.get("log_damping"))
     swap = None
     if arm.get("swap_p"):            # bare graded cross-domain swap (owner 2026-11-16); swap seed = fit seed, so p values nest
         from .worlds import graded_swap
@@ -95,7 +95,8 @@ def run_one(job, out_root):
         swap = {"p": float(arm["swap_p"]), "moved_share": float((perm != np.arange(len(perm))).mean())}
         np.save(os.path.join(d, "swap_perm.npy"), perm)
     spec = {"job": job, "job_id": jid, "manifest": manifest(build.path), "started": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "swap": swap}
+            "swap": swap, "damping": {rd.name: rd.damping for rd in rds if getattr(rd, "damping", None)} or None,
+            "relation_weights": {rd.name: rd.weight for rd in rds}}
     json.dump(spec, open(os.path.join(d, "spec.json"), "w"), indent=1)
     dtype = torch.float32 if job.get("dtype") == "float32" else torch.float64
     init_U = init_Z = None
@@ -106,6 +107,10 @@ def run_one(job, out_root):
         sub = float(st[len("nndsvd_sub"):]) if st.startswith("nndsvd_sub") else None
         init_U, init_Z = initialise(rds, job["K"], job["seed"], subsample=sub)
         init_Z = diagonal_social_links(rds, init_U, init_Z)
+    if arm.get("damping_start") == "matched":        # equivalence test (2026-11-18): start of the "weight" arm × q on damped cores
+        assert arm.get("log_damping") == "data" and init_Z is not None, "matched start: data arm with an explicit start"
+        init_Z = {r: (z * next(rd for rd in rds if rd.name == r).damping["q"]
+                      if next(rd for rd in rds if rd.name == r).damping else z) for r, z in init_Z.items()}
     res = fit(rds, job["K"], job["beta"], seed=job["seed"], terms=build_terms(job, rds, build), init_U=init_U, init_Z=init_Z,
               max_epochs=job.get("max_epochs", 5000), lr=job["frac"], lr_mode=job.get("lr_mode", "recompute"),
               warmup=job.get("warmup", 300), dtype=dtype, start=job.get("start", "nndsvd_sub0.8"), tol=job.get("tol", 1e-4))
