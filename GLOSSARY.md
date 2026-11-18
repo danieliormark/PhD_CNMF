@@ -311,6 +311,8 @@ Explanation E3.
 
 Fuller answers to questions that come up repeatedly. Before explaining one of these again, the assistant points to the
 entry to re-read and adds only what is new. Each entry: the question, the answer, a worked example, and its limits.
+**These entries are explanations, not the record** (owner, 2026-11-18). Where an entry differs from the code, RUN_LOG,
+FINDINGS or the design doc, those are right and the entry is corrected.
 
 ### E1. Which community does a tie belong to? (attribution of reconstructed tie weight to community pairs)
 

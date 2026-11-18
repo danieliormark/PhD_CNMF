@@ -3592,3 +3592,27 @@ Under KL the aligned numbering is reproducible. This is the seed-level counterpa
 partner communities under squared error): with several partners, the one-to-one match picks a different partner in
 different seeds. Bears on R-A under squared error and on reading the diagonal-start test; does not change K*. The
 stability gate still passes under squared error because article, child and parent carry the mean over facets.
+
+### RL-264 — 2026-11-18 — reference values for the owner's relaxed diagonal rule (no fits)
+Owner (2026-11-18): "we demand higher main diagonal score for the anchor matrices (child*article) which makes the
+community socio-semantic. For the rest I would consider relaxing the assumption and requiring that main diagonal > any
+off diagonal value", with the caveat that true communities may have diverse practices (an ongoing split publishing in
+different journals; an emerging community whose members are at different universities and rarely collaborate).
+Read on pass-1 fits at K*, all groups, seeds 1–10, aligned numbering (`fit/relaxed_rule_reference.py` →
+`results/stage0/aligned/relaxed_rule_reference.json`). Per relation, median over fits: share of reconstructed tie weight
+in communities whose own-numbered cell of the parts table exceeds every other cell of its row and of its column ("both";
+weighted by half credit), and the number of such communities of K.
+
+| Relation | KL a1 (K 13) | SE a1 (K 20) | KL a2 (K 13) | SE a2 (K 20) |
+|---|---|---|---|---|
+| child×article | 1.00 (13) | 0.87 (13) | 1.00 (13) | 0.86 (13) |
+| child×parent | 1.00 (13) | 1.00 (20) | 1.00 (13) | 1.00 (20) |
+| author×article | 0.96 (11) | 0.46 (6) | — | — |
+| author×affiliation | 0.98 (10) | 0.56 (5) | — | — |
+| article×affiliation | — | — | 0.96 (11) | 0.54 (5) |
+| article×journal | 0.84 (10) | 0.57 (6) | 0.82 (9) | 0.50 (5) |
+| article×article | — | — | 0.55 (6) | 0.00 (0) |
+
+Row-only / column-only shares in the JSON (e.g. squared error approach 1 article×journal: row 0.83, column 0.47).
+→ Under KL the relaxed rule holds for most communities in every relation except article×article; under squared error
+it holds for about half the tie weight in the social relations (5–6 of 20 communities) and for 13 of 20 in the anchor.

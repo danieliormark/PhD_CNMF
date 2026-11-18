@@ -1,0 +1,430 @@
+{
+ "approach_1_KL": {
+  "parent_child": {
+   "all_groups": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 1.0,
+    "col_share": 0.9999999999999999,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "child_article": {
+   "all_groups": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "author_article": {
+   "all_groups": {
+    "row_share": 0.9863740641697125,
+    "col_share": 0.9542480693678203,
+    "both_share": 0.964576304137181,
+    "n_row": 11.5,
+    "n_col": 11.5,
+    "n_both": 11.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.9870497428353808,
+    "col_share": 0.9661938133490197,
+    "both_share": 0.9631434745210947,
+    "n_row": 11.5,
+    "n_col": 12.0,
+    "n_both": 11.5,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "author_affiliation": {
+   "all_groups": {
+    "row_share": 0.9963890299083962,
+    "col_share": 0.9999969446766874,
+    "both_share": 0.9810859660305462,
+    "n_row": 10.0,
+    "n_col": 10.0,
+    "n_both": 10.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.9889653500871642,
+    "col_share": 0.9999973004239778,
+    "both_share": 0.9944810295416803,
+    "n_row": 10.5,
+    "n_col": 10.0,
+    "n_both": 10.0,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "article_journal": {
+   "all_groups": {
+    "row_share": 0.8936501456377688,
+    "col_share": 0.80767143229579,
+    "both_share": 0.8377580034676206,
+    "n_row": 11.0,
+    "n_col": 11.0,
+    "n_both": 10.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.939089744744463,
+    "col_share": 0.9151343627200146,
+    "both_share": 0.8986527968712057,
+    "n_row": 11.5,
+    "n_col": 11.0,
+    "n_both": 11.0,
+    "fits": 10
+   },
+   "K": 13
+  }
+ },
+ "approach_1_squared_error": {
+  "parent_child": {
+   "all_groups": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 20.0,
+    "n_col": 20.0,
+    "n_both": 20.0,
+    "fits": 46
+   },
+   "group_0": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 0.9999999999999999,
+    "n_row": 20.0,
+    "n_col": 20.0,
+    "n_both": 20.0,
+    "fits": 9
+   },
+   "K": 20
+  },
+  "child_article": {
+   "all_groups": {
+    "row_share": 0.8104916407617977,
+    "col_share": 0.9531144435513142,
+    "both_share": 0.8709099286637325,
+    "n_row": 15.0,
+    "n_col": 14.0,
+    "n_both": 13.0,
+    "fits": 46
+   },
+   "group_0": {
+    "row_share": 0.8173251102000111,
+    "col_share": 0.9542755197157599,
+    "both_share": 0.8823025868347119,
+    "n_row": 15.0,
+    "n_col": 14.0,
+    "n_both": 13.0,
+    "fits": 9
+   },
+   "K": 20
+  },
+  "author_article": {
+   "all_groups": {
+    "row_share": 0.4910385793365226,
+    "col_share": 0.6683501139218382,
+    "both_share": 0.46167907343942083,
+    "n_row": 9.0,
+    "n_col": 11.0,
+    "n_both": 6.0,
+    "fits": 46
+   },
+   "group_0": {
+    "row_share": 0.5497015103425319,
+    "col_share": 0.5886318095766597,
+    "both_share": 0.45869855781018226,
+    "n_row": 8.0,
+    "n_col": 11.0,
+    "n_both": 6.0,
+    "fits": 9
+   },
+   "K": 20
+  },
+  "author_affiliation": {
+   "all_groups": {
+    "row_share": 0.6572692583702684,
+    "col_share": 0.6032879776991927,
+    "both_share": 0.5615800147103939,
+    "n_row": 7.0,
+    "n_col": 7.0,
+    "n_both": 5.0,
+    "fits": 46
+   },
+   "group_0": {
+    "row_share": 0.745983454680889,
+    "col_share": 0.601392387652229,
+    "both_share": 0.5587743268961355,
+    "n_row": 7.0,
+    "n_col": 7.0,
+    "n_both": 5.0,
+    "fits": 9
+   },
+   "K": 20
+  },
+  "article_journal": {
+   "all_groups": {
+    "row_share": 0.8304894545190649,
+    "col_share": 0.4696039643789379,
+    "both_share": 0.5748519698371095,
+    "n_row": 10.0,
+    "n_col": 7.0,
+    "n_both": 6.0,
+    "fits": 46
+   },
+   "group_0": {
+    "row_share": 0.8201700300845,
+    "col_share": 0.4491498018689802,
+    "both_share": 0.4703005878576935,
+    "n_row": 10.0,
+    "n_col": 6.0,
+    "n_both": 4.0,
+    "fits": 9
+   },
+   "K": 20
+  }
+ },
+ "approach_2_KL": {
+  "parent_child": {
+   "all_groups": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "child_article": {
+   "all_groups": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 13.0,
+    "n_col": 13.0,
+    "n_both": 13.0,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "article_affiliation": {
+   "all_groups": {
+    "row_share": 0.9316421187615815,
+    "col_share": 0.9999984935560555,
+    "both_share": 0.9628479128993201,
+    "n_row": 11.0,
+    "n_col": 11.0,
+    "n_both": 11.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.9227037162002869,
+    "col_share": 0.9999988624356722,
+    "both_share": 0.9543418629079333,
+    "n_row": 11.0,
+    "n_col": 11.5,
+    "n_both": 11.0,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "article_article": {
+   "all_groups": {
+    "row_share": 0.5528558257050777,
+    "col_share": 0.5528273954725285,
+    "both_share": 0.5528416105888032,
+    "n_row": 6.0,
+    "n_col": 6.0,
+    "n_both": 6.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.5970847040598063,
+    "col_share": 0.5970847163331086,
+    "both_share": 0.5970847101964574,
+    "n_row": 6.0,
+    "n_col": 6.0,
+    "n_both": 6.0,
+    "fits": 10
+   },
+   "K": 13
+  },
+  "article_journal": {
+   "all_groups": {
+    "row_share": 0.8453044672952108,
+    "col_share": 0.8679188973623939,
+    "both_share": 0.8150621887219137,
+    "n_row": 10.0,
+    "n_col": 11.0,
+    "n_both": 9.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.8261125259020683,
+    "col_share": 0.8708934235015151,
+    "both_share": 0.758531352689174,
+    "n_row": 9.0,
+    "n_col": 11.0,
+    "n_both": 9.0,
+    "fits": 10
+   },
+   "K": 13
+  }
+ },
+ "approach_2_squared_error": {
+  "parent_child": {
+   "all_groups": {
+    "row_share": 1.0,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 20.0,
+    "n_col": 20.0,
+    "n_both": 20.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.9999999999999999,
+    "col_share": 1.0,
+    "both_share": 1.0,
+    "n_row": 20.0,
+    "n_col": 20.0,
+    "n_both": 20.0,
+    "fits": 10
+   },
+   "K": 20
+  },
+  "child_article": {
+   "all_groups": {
+    "row_share": 0.7918141004145508,
+    "col_share": 0.9629455413938726,
+    "both_share": 0.8592858954243585,
+    "n_row": 15.0,
+    "n_col": 14.0,
+    "n_both": 13.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.8300156546023536,
+    "col_share": 0.9659779514538349,
+    "both_share": 0.8840188645532039,
+    "n_row": 14.0,
+    "n_col": 14.0,
+    "n_both": 13.0,
+    "fits": 10
+   },
+   "K": 20
+  },
+  "article_affiliation": {
+   "all_groups": {
+    "row_share": 0.7103838502710599,
+    "col_share": 0.5280571356594886,
+    "both_share": 0.5387642124557638,
+    "n_row": 9.0,
+    "n_col": 7.0,
+    "n_both": 5.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.7114209514000068,
+    "col_share": 0.5349406723014525,
+    "both_share": 0.5314681326965611,
+    "n_row": 9.0,
+    "n_col": 7.5,
+    "n_both": 4.5,
+    "fits": 10
+   },
+   "K": 20
+  },
+  "article_article": {
+   "all_groups": {
+    "row_share": 0.0,
+    "col_share": 0.0,
+    "both_share": 0.0,
+    "n_row": 0.0,
+    "n_col": 0.0,
+    "n_both": 0.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.0029389201515870765,
+    "col_share": 0.009652408337742214,
+    "both_share": 0.0,
+    "n_row": 0.5,
+    "n_col": 1.0,
+    "n_both": 0.0,
+    "fits": 10
+   },
+   "K": 20
+  },
+  "article_journal": {
+   "all_groups": {
+    "row_share": 0.7229539612644762,
+    "col_share": 0.44327399965544567,
+    "both_share": 0.5033716302295859,
+    "n_row": 8.0,
+    "n_col": 6.0,
+    "n_both": 5.0,
+    "fits": 50
+   },
+   "group_0": {
+    "row_share": 0.7642879701825704,
+    "col_share": 0.42209805143915335,
+    "both_share": 0.47665225707682435,
+    "n_row": 9.5,
+    "n_col": 6.0,
+    "n_both": 5.0,
+    "fits": 10
+   },
+   "K": 20
+  }
+ }
+}
