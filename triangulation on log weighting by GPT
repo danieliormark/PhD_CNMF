@@ -132,3 +132,217 @@ Question	Assessment	Main qualification
 My main recommendation is to make one additional diagnostic before finalising the robustness arm: calculate the actual post-transformation total weight per entity for each social relation, both before and after Frobenius normalisation. For author × article, report it against both author article-count and article team-size quantiles. This will establish whether the combined correction behaves as intended, rather than relying on the isolated mathematical properties of its two components.
 
 One detail I would like to verify from your implementation: when you say organisations' rows are scaled to norm 1, do you mean L1 norm (row entries sum to 1) or L2 norm (sum of squared entries equals 1)? That determines whether the organisation side is already normalised in the sense relevant to KL loss.
+
+Review of proposal 2
+
+The proposed fix is well motivated, and the central mathematical argument is correct: for a generalised KL objective, preserving the relation's total mass is the appropriate way to remove an unintended global change in its scale. Frobenius normalisation does not preserve that scale.
+
+There is, however, an important qualification to the claimed equivalence between mass-rescaling the data and adjusting the relation weight. They are equivalent at the level of the idealised objective and its optimum under identifiable conditions. They are not automatically equivalent as optimisation procedures, even with Adam. In particular, the way you group the \(Z_r\) parameter blocks and scale their learning rates matters.
+1. Is total mass the right quantity to preserve?
+Yes, with a qualification about what "relation weight" means.
+
+For a relation matrix \(X\), the generalised KL divergence is
+\[
+D(X\Vert\widehat X)
+=
+\sum_{ij}
+\left[
+X_{ij}\log\frac{X_{ij}}{\widehat X_{ij}}
+-X_{ij}+\widehat X_{ij}
+\right].
+\]
+
+If both the observed matrix and its reconstruction are multiplied by a positive scalar \(c\), then
+\[
+D(cX\Vert c\widehat X)=cD(X\Vert\widehat X).
+\]
+
+This holds for the entire matrix, including zero cells: when \(X_{ij}=0\), the contribution is \(\widehat X_{ij}\), which becomes \(c\widehat X_{ij}\).
+
+Consequently, if the factorisation can absorb a global scale change in its relation-specific core \(Z_r\), the total mass
+\[
+M(X)=\sum_{ij}X_{ij}
+\]
+
+is the relevant quantity for controlling this particular multiplicative effect on the KL objective.
+
+Frobenius normalisation instead fixes
+\[
+\|X\|_F=\sqrt{\sum_{ij}X_{ij}^2}.
+\]
+
+That is not the relevant homogeneity for generalised KL. Two matrices with the same Frobenius norm can have very different total masses, and hence different global scales in their KL objectives.
+
+Your proposed procedure can be written precisely as follows. Let \(X_0\) be the undamped, Frobenius-normalised matrix, and let \(X_d\) be the damped, Frobenius-normalised matrix. Define
+\[
+q_r=\frac{\sum_{ij}(X_0)_{ij}}
+{\sum_{ij}(X_d)_{ij}}.
+\]
+
+Then use
+\[
+X^*=q_rX_d.
+\]
+
+This ensures
+\[
+\sum_{ij}X^*_{ij}=\sum_{ij}(X_0)_{ij}.
+\]
+
+It is therefore a sensible correction for the unintended global mass reduction you observed.
+
+One qualification: preserving total mass does not preserve the relation's actual KL loss. The damping deliberately changes the distribution of weight across entities, and that changes how well the relation can be reconstructed. The correction removes the global scaling effect; it does not—and should not—remove the substantive effect of the robustness intervention.
+2. Are the two implementations equivalent?
+Let \(X_d\) be the damped matrix after Frobenius normalisation, and let \(q=M(X_0)/M(X_d)\).
+
+You propose two alternatives:
+
+A. Rescale the data and retain the original relation weight
+\[
+X_A=qX_d,\qquad
+L_A=w_rD(X_A\Vert\widehat X_A).
+\]
+
+B. Retain the damped, Frobenius-normalised data and adjust the relation weight
+\[
+X_B=X_d,\qquad
+L_B=q w_rD(X_B\Vert\widehat X_B).
+\]
+
+If the reconstruction in A is also scaled by \(q\), so that \(\widehat X_A=q\widehat X_B\), then
+\[
+D(qX_d\Vert q\widehat X_B)
+=qD(X_d\Vert\widehat X_B).
+\]
+
+Therefore,
+\[
+L_A=L_B.
+\]
+
+This is an exact equality of objective values under the corresponding transformation of the reconstruction. It includes zero cells, because their predicted values are also multiplied by \(q\).
+
+In your NMTF, the corresponding transformation is
+\[
+Z_{r,A}=q_r Z_{r,B},
+\]
+
+since
+\[
+U_a(q_rZ_r)U_b^\top
+=q_r(U_aZ_rU_b^\top).
+\]
+
+The shared \(U\) matrices need not change. This is an important advantage of having a separate core matrix for each relation.
+
+So, at the level of the objective and its global optima, the two formulations are equivalent provided that:
+1. Each relation has its own independently scalable \(Z_r\).
+2. There is no constraint fixing the scale or norm of \(Z_r\).
+3. There is no regularisation or penalty on \(Z_r\) that changes under rescaling.
+4. The same cells are included in the loss in both formulations.
+5. The reconstruction, including predictions at zero cells, is scaled along with the data.
+If these conditions hold, the two formulations have corresponding solutions with the same \(U\) and appropriately rescaled \(Z_r\).
+The Adam qualification
+The equivalence of the objectives does not automatically establish equivalence of the optimisation trajectories.
+
+Consider one relation and suppose the corresponding parameters are \(Z_A=qZ_B\). At corresponding predictions, the gradients have the following relationship:
+Parameter	Data rescaled (A)	Relation weight rescaled (B)
+Shared \(U\)	\(q\) times the baseline gradient	\(q\) times the baseline gradient
+Relation-specific \(Z\)	Baseline gradient	\(q\) times the baseline gradient
+
+The difference in the \(Z\) gradients is expected: the parameter itself has been rescaled in A.
+
+With idealised Adam, multiplying all gradients in a parameter block by a positive scalar leaves the normalised Adam update approximately unchanged. If your learning rate for each block is also proportional to that block's parameter RMS, the rescaling of \(Z_A=qZ_B\) can compensate for the difference in its gradient scale. This makes the two implementations plausibly equivalent in their update behaviour, not merely at their optima.
+
+But there are two caveats.
+
+First, parameter-block grouping matters. If each \(Z_r\) has its own RMS-scaled learning rate, the argument can work relation by relation. If all the \(Z_r\) matrices are grouped into one parameter block, their individual scale changes \(q_r\) will generally differ. A single block-level RMS adjustment cannot, in general, compensate for all those different rescalings simultaneously.
+
+Second, Adam is not perfectly scale invariant in every implementation. Its numerical \(\epsilon\), weight decay, gradient clipping, other regularisation, parameter constraints, and finite-precision effects can break exact scale equivariance. The result also depends on how the RMS-based learning rate is calculated and whether it is updated during training.
+
+My assessment is therefore:
+- Objective-level equivalence: yes, under the conditions above.
+- Equivalence of global optima: yes, under those same conditions.
+- Equivalence of Adam trajectories: plausible under your RMS-scaled scheme, but not established from the description alone.
+I would not claim exact optimisation equivalence without checking the implementation of the parameter-block RMS scaling and the grouping of the \(Z_r\) matrices.
+A useful practical test
+You can test this directly on a small dataset, using the same initial \(U\) matrices and corresponding initial \(Z\) matrices, with \(Z_A=q_rZ_B\). Compare the two formulations over several optimisation steps. After each step, compare:
+- the shared \(U\) matrices;
+- the effective relation reconstructions \(UZ_rU^\top\), with the appropriate facet subscripts;
+- the individual relation KL losses;
+- the total weighted objective.
+If the parameter updates are genuinely scale-equivariant, the shared \(U\) matrices and the appropriately rescaled reconstructions should remain close. This is more informative than comparing only final objective values, since two runs can reach similar minima along different trajectories.
+3. What else could still change the effective relation weight?
+There are several things worth checking. Some are inherent to the intervention; others are implementation risks.
+A. The relation's realised contribution to the objective can still change
+Suppose the social and semantic domains each receive half of the nominal objective weight. Within those domains, the \(w_r\) values determine the nominal relation weights.
+
+Your mass correction preserves the global scale of each relation relative to its undamped version. It does not guarantee that the relation contributes the same proportion of the realised loss.
+
+For example, after damping, a journal's ties are less dominant. The model may reconstruct the resulting article × journal matrix more or less successfully. Its KL loss can therefore change, even though its total mass and nominal \(w_r\) are preserved.
+
+This is not a defect. It is the intended robustness test: you want to find out whether the communities change when frequent entities no longer dominate the distribution of observed ties, without simultaneously changing the relation's global scale.
+
+I would phrase the methodological claim as:
+The intervention preserves each relation's total visible mass, thereby controlling for changes in the global scale of its KL contribution, while allowing its within-relation distribution and reconstruction loss to change.
+
+I would avoid saying that it keeps each relation's actual contribution to the loss unchanged.
+B. Make sure the KL implementation includes zero-cell contributions
+This is particularly important in your setting.
+
+For a dense generalised KL objective, zero cells contribute \(\widehat X_{ij}\). Consequently, the objective includes predicted mass over cells where no tie is observed.
+
+If your implementation computes the full KL correctly, then scaling \(Z_r\) by \(q_r\) scales these zero-cell contributions as well. The equivalence in Section 2 holds.
+
+But sparse implementations sometimes calculate the nonzero-cell terms separately and add the sum of all predicted values. That is fine, provided the prediction sum includes the full matrix, not just observed nonzero positions.
+
+If zero-cell prediction terms are omitted, or if they are treated differently between the two implementations, the claimed equivalence does not hold. I would explicitly verify this in M1.
+C. Check that the degree correction is calculated without held-out information
+You specify the number of ties as the number of visible ties in each fold. That is the correct direction for avoiding information leakage.
+
+The degree \(d\) used to calculate the damping factor should be calculated from the training-visible matrix, not from the full matrix before the ten-fold split. Otherwise, the weights assigned to visible ties indirectly depend on held-out ties.
+
+This also means the damping factor can vary between folds, even for the same entity. That is not inherently problematic, but it should be intentional and consistently implemented.
+
+I would also calculate the mass correction \(q_r\) separately within each fold, as you propose, rather than using one global correction calculated from the full dataset.
+D. Existing corrections on the opposite side still interact
+Your new arm applies damping only to sides that have not already received a correction. That is sensible, but it does not mean the resulting entity contributions are independent of the existing corrections.
+
+For example, in author × article, the new author-degree correction interacts with the existing team-size correction on the article side. The final tie weight is the product of the two factors, followed by relation-level normalisation and mass restoration.
+
+The mass restoration removes the overall scalar reduction, but it does not undo the interaction between the two endpoint corrections. That interaction changes the distribution of weights within the relation.
+
+This is consistent with the stated purpose, but I would retain the earlier recommendation to inspect the resulting entity-level weights by author productivity and team size.
+E. Check whether any other operation constrains the scale of \(Z_r\)
+The equivalence relies on \(Z_r\) being freely scalable. It can be broken or modified by, for example:
+- an explicit norm constraint or normalisation on \(Z_r\);
+- a penalty on the magnitude of \(Z_r\);
+- weight decay applied to \(Z_r\);
+- clipping or projection that prevents proportional rescaling;
+- an optimiser or parameterisation that makes the scale transformation inaccessible in practice.
+This is worth checking in M1, particularly if \(Z_r\) is represented through a constrained parameterisation such as softplus. Positivity alone does not prevent positive rescaling, but the raw parameters do not necessarily transform linearly when the effective \(Z_r\) is rescaled.
+F. Frobenius normalisation and mass restoration should be documented as two separate operations
+The sequence matters:
+1. Construct the visible matrix for the fold.
+2. Calculate its undamped Frobenius-normalised version.
+3. Apply the entity-level damping to the visible ties.
+4. Frobenius-normalise the damped matrix.
+5. Calculate the mass ratio \(q_r\).
+6. Multiply the damped matrix by \(q_r\).
+This makes clear that you are comparing two matrices on the same initial Frobenius-normalisation basis, then correcting the mass change induced by the damping.
+
+The final damped matrix will generally not have unit Frobenius norm. That is expected, not a problem. In fact, forcing it back to unit Frobenius norm after mass restoration would reintroduce the very mass difference you are trying to remove.
+
+Overall assessment
+Proposal	Assessment
+Preserve total mass rather than Frobenius norm	Correct
+Rescale each damped relation to its undamped visible mass	Recommended
+Treat mass-rescaling and relation-weight adjustment as equivalent at the objective level	Correct, conditionally
+Treat them as automatically equivalent under Adam	Not established
+Assume mass preservation keeps realised relation loss contributions unchanged	Too strong
+
+My recommendation: use the mass-restoration implementation as the primary robustness arm. It has the clearest interpretation: the observed relation retains the same total visible mass as its undamped counterpart, while the distribution of that mass across entities changes.
+
+I would not make the Adam-equivalence claim without inspecting M1's optimiser code. In particular, I would check whether each \(Z_r\) is treated as a separate RMS-scaled parameter block or whether the cores are grouped together. That is the most consequential unresolved detail in the proposed equivalence argument.
+
+One final distinction is worth preserving in the write-up: this arm controls for changes in the global scale of each relation, not for changes in its effective information content, reconstruction difficulty, or realised loss contribution. Those are precisely the things the intervention is intended to let change.
