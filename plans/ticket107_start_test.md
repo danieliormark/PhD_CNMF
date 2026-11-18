@@ -29,6 +29,9 @@ does not lock anything in.
 
 ## 3. Measures (all already defined; no new measure)
 
+*[2026-11-18: the effective number of partner communities is no longer the primary measure; the diagonal rule of
+§4 point 2 is. The list below is kept as first written.]*
+
 - **Effective number of partner communities**, per social relation. For each row community: exp of the entropy of
   how its rebuilt tie weight divides over the column communities. These values are averaged, weighted by each
   community's tie weight. 1 = one partner; 4 = spread evenly over four. It does not depend on community numbers, so it
@@ -44,56 +47,83 @@ does not lock anything in.
 - **Presence:** mixed share at 0.1, weaker-domain median, and detached communities per fit (after renumbering
   single-relation facets).
 
-## 4. Reading rule (stated before the data; point 1 DECIDED 2026-11-17, owner: "I approve the 2se rule"; point 2 pending)
+## 4. Reading rule — REVISED 2026-11-18 (before any start-test fit was read)
 
-1. **Paired by seed.** Both arms share the same membership start for each seed. For every measure: difference =
-   diagonal − reference, over the seeds where both converged. Mean, and SE = SD ÷ √n. **"Better" / "worse"** means the
-   mean difference lies beyond **2 SE** in that direction; otherwise "within noise".
-   - Why 2 SE and not 1 SE (the band convention): with 10 paired seeds, a 1-SE line would call about a third of
-     no-effect comparisons a difference.
-   - The trade-off: a small real cost in fit may be missed. The paired differences are reported in full either way.
-2. **Partner reading per social relation.** "Stays near one partner" if the diagonal arm's median effective number of
-   partners is below the midpoint between 1 and the reference median; otherwise "returns to spread".
-3. **Fit cost.** "Worse" if data loss is higher, or existence or value is lower, beyond 2 SE (paired).
-4. **Outcome under squared error** (per relation, then per setting): see §5. **KL is the control:** "changed" if any of
-   data loss, existence, value, or any social relation's number of partners differs beyond 2 SE.
+**Owner (2026-11-18):** "I approve your revised reading substituting the midpoint line; importantly for child*article
+we should still have >0.5 for within community main diagonal". Background: the owner's statement on the assumption
+(design doc, 2026-11-18): the anchor child×article must have a high within-community diagonal (this makes a community
+socio-semantic); for the other relations the assumption may be relaxed to "main diagonal > any off-diagonal value";
+true communities may still break it (an ongoing split publishing in different journals; an emerging community whose
+members are at different universities and rarely collaborate). The midpoint rule of the first version (§4 point 2,
+never decided) is withdrawn. All readings use the **aligned numbering** (RL-260).
 
-Reference values (hold-out group 1, median over seeds; from the analysis script's dry run):
+1. **Paired by seed** (DECIDED 2026-11-17, owner: "I approve the 2se rule"). Both arms share the same membership start
+   for each seed. For every measure: difference = diagonal − reference over the seeds where both converged; mean, SE =
+   SD ÷ √n; "better" / "worse" beyond **2 SE** in that direction, otherwise "within noise".
+2. **Diagonal rule, every relation except child×article** (approach 1: child×parent, author×article,
+   author×affiliation, article×journal; approach 2: child×parent, article×affiliation, **article×article**,
+   article×journal). Community k meets it in a relation if its own-numbered cell of the parts table, part(k,k), is
+   larger than every other cell of **its row and its column** (owner: "I agree that both"). Measure: share of the
+   relation's reconstructed tie weight (half credit) in communities that meet it. Row-only and column-only shares and
+   counts are reported beside it. article×article (articles linked through shared authors, chunk12v3 P5) is read under
+   both losses like the others (owner, 2026-11-18: "If something does not work under one loss, it imho is not an excuse
+   not to test under another loss"); its diagonal is fixed by the article numbering, so no renumbering is involved.
+3. **Anchor guard, child×article: > 0.5 within the community diagonal** (owner, 2026-11-18). Unit — **pending the
+   owner's choice**: (a) per fit, the within share Σ_k part(k,k) ÷ T > 0.5 in every converged fit of the arm; or
+   (b) per community, every community's own-numbered cell is more than half of its child×article tie weight (row and
+   column). Both are reported.
+4. **Fit cost.** "Worse" if data loss is higher, or existence or value is lower, beyond 2 SE (paired).
+5. **Outcome per relation, squared error.**
+   - **1, start artefact:** the rule share is higher in the diagonal arm beyond 2 SE, the fit is not worse, and the
+     anchor guard holds.
+   - **3, trade-off:** the rule share is higher beyond 2 SE, but the fit is worse or the anchor guard fails.
+   - **2, start not the cause:** otherwise.
+   - **4, mixed:** relations of one setting differ.
+   **KL is the control:** "changed" if data loss, existence, value or any relation's rule share differs beyond 2 SE.
+6. **Failures of the rule, studied in both arms** (owner: "it is interesting to study cases when row or column is not
+   beaten"). For every community that fails in a direction: its own share, its main partner (number, share) and its tie
+   weight. Per community number, the main partner in every relation is also saved, so that chains can be read (e.g.
+   authors of k, writing articles of k, mainly at organisations of community l, publishing in journals of k and l2).
+   **Recurrence across seeds:** each facet is matched across two seeds on its own (independent of numbering). A failure
+   of community k toward main partner l recurs in another seed if the matched community fails in the same direction
+   toward the matched partner. It "recurs" if it does so in more than half of the arm's other seeds. A recurring failure
+   is a candidate real practice (a split, a dispersed emerging community) to be inspected on named entities. A
+   non-recurring one depends on the seed. Recurrence is necessary, not sufficient, evidence of a real practice.
+7. **Also reported:** effective number of partner communities (no longer classifying); stability per arm, with one
+   matching across facets and with each facet matched on its own (RL-263); presence and detachment.
 
-| Setting | Relation | Partners (reference) | Midpoint |
-|---|---|---|---|
-| Squared error, approach 1 | author×article / author×affiliation / article×journal | 3.00 / 3.46 / 4.93 | 2.00 / 2.23 / 2.97 |
-| Squared error, approach 2 | article×affiliation / article×article / article×journal | 4.12 / 3.83 / 4.78 | 2.56 / 2.42 / 2.89 |
-| KL, approach 1 | author×article / author×affiliation / article×journal | 1.13 / 1.03 / 1.46 | control |
-| KL, approach 2 | article×affiliation / article×article / article×journal | 1.08 / 1.02 / 1.72 | control |
+**Reference values (pass 1, hold-out group 1, seeds 1–10, aligned numbering; from the dry run, which uses the
+reference as both arms; all groups in RUN_LOG RL-264).** Rule share in tie weight; failures per fit; share of failure
+weight that recurs across seeds:
 
-## 5. Expected outcomes, their explanations and consequences
+| Setting | Relation | Rule share | Failures per fit | Recurring weight |
+|---|---|---|---|---|
+| Squared error, approach 1 (K 20) | author×article / author×affiliation / article×journal / child×parent | 0.46 / 0.56 / 0.47 / 1.00 | 20 / 26 / 25 / 0 | 0 / 0 / 0 / — |
+| Squared error, approach 2 (K 20) | article×affiliation / article×article / article×journal / child×parent | 0.53 / 0.00 / 0.48 / 1.00 | 24 / 39 / 25 / 0 | 0 / 0.01 / 0.11 / — |
+| KL, approach 1 (K 13) | author×article / author×affiliation / article×journal / child×parent | 0.96 / 0.99 / 0.90 / 1.00 | 3 / 6 / 3 / 0 | 0 / 0 / 0 / — |
+| KL, approach 2 (K 13) | article×affiliation / article×article / article×journal / child×parent | 0.95 / 0.60 / 0.76 / 1.00 | 4 / 14 / 5 / 0 | 0 / 0.51 / 0.03 / — |
 
-The underlying choice is between two representations of the same reality. Take a university whose researchers belong
-to three topic communities:
-- **(R1)** its membership is split over the three communities, and the links are diagonal. This is R-A.
-- **(R2)** it sits in an organisation community of its own, linked to the three author communities: one-to-many.
+Anchor (child×article), reference: within share 0.78 (squared error approach 1), 0.73 (approach 2), 1.00 (KL); 12–13
+of 20 communities have more than half of their tie weight on their own number under squared error, all 13 under KL.
+
+## 5. Expected outcomes, their explanations and consequences (revised 2026-11-18)
 
 | Outcome (squared error) | What it looks like | Explanation | Consequence for decisions |
 |---|---|---|---|
-| **1. Start artefact** | Stays near one partner; data loss, existence and value not worse (or better) | The spread in pass 1 comes from the random social start; the data do not need R2 | R-A reachable without a penalty → **O1 + a diagonal start for all link matrices** (a start change, not a term). If the fit is *better*, the random start led to poorer solutions. Before pass 3: the squared-error stage-0 fits (passes 1–2, swap) were made with the old start; whether they must be redone is a decision for the owner (see §7). |
-| **2. Data / loss favour spread** | Returns to 3–5 partners | Squared error with these data prefers R2 whatever the start | R-A under squared error needs **O3** (penalise the off-diagonal share) at a measured cost in fit, or R-A is revised for social facets. Under the owner's principle (reproduce the data; our assumptions only as far as they are correct), imposing R1 needs evidence that it is correct, not only that it is wanted. Reported beside the pass-3 loss choice: KL meets R-A where squared error does not. |
-| **3. Start trap with a cost** | Stays near one partner, but data loss is higher or held-out lower beyond 2 SE | Both representations are reachable; the data fit R2 better | As in 2: holding to R-A costs fit, and the size of the cost is evidence on how much one-to-many social structure the data contain (e.g. universities and journals spanning topics). O3's cost can be read off this arm. |
-| **4. Mixed** | Relations differ (e.g. affiliations stay near one partner, journals return to spread) | Social relations differ in structure | A per-relation answer: O3 weighted by matrix (envisaged 2026-11-06) or R-A for some facets only. |
+| **1. Start artefact** | Rule share higher beyond 2 SE; fit not worse; anchor guard holds | The rule failures in pass 1 come from the random social start | **O1 + a diagonal start for all core matrices** (a start change, not a term). Before pass 3: whether the squared-error stage-0 fits must be redone is a decision for the owner (§7). |
+| **2. Start not the cause** | Rule share within noise (or lower) | Squared error with these data reaches the same structure from either start | Read the recurrence of failures. Recurring failures are candidate real practices (inspect named entities; no penalty). Non-recurring failures are seed-dependent: **O3** (a term on the off-diagonal parts), or counted against squared error in the loss choice. |
+| **3. Trade-off** | Rule share higher beyond 2 SE, but fit worse or anchor guard fails | Both structures are reachable; the data fit the off-diagonal one better | The cost of the rule in fit is measured directly; O3's cost can be read off this arm. |
+| **4. Mixed** | Relations differ | Social relations differ in structure | Per-relation answer: O3 weighted by relation, or the rule for some relations only. |
 
 | Outcome (KL, control) | Meaning |
 |---|---|
-| **Unchanged** (expected) | The KL solution does not depend on how the social links start → the start question concerns squared error only |
+| **Unchanged** (expected) | The KL solution does not depend on how the social cores start |
 | **Changed** | The start shapes KL solutions too → the start becomes a design question for both losses |
 
-**Also read, under every outcome:**
-- **Stability.** If one arm's seeds agree more, its solutions are better determined by the data. If both arms reach
-  equal fit with different structure, the data cannot decide between R1 and R2.
-- **Presence and detachment.** Under R1, community numbers mean the same group across facets, so detachment should
-  fall.
-
-**Prior expectation (stated before the data, weak).** Outcome 2 or 3 for squared error is somewhat more likely than
-outcome 1, because squared error already spreads child×article from a diagonal start. KL: unchanged.
+**Prior expectation (stated before the data, weak).** Squared error: outcome 2 or 3 somewhat more likely than 1, as
+before. In pass 1 squared-error failures almost never recur across seeds, so under outcome 2 they would read as
+seed-dependent. KL: unchanged; its article×article failures recur in about half their weight, a candidate real pattern
+(articles sharing authors across topic communities).
 
 ## 6. What the test cannot show
 
@@ -121,4 +151,6 @@ outcome 1, because squared error already spreads child×article from a diagonal 
 - **Tests:** `fit/tests/test_start_test.py`.
 - **Submit (CSF3 login node):** `bash /mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/slurm/start_test.sh`
   (5 tasks × 8 fits, 24 h).
-- **Read (incline):** `python -m fit.start_test_analysis --out fit/results/stage0/start_test.json`.
+- **Read (incline):** `python -m fit.align --stages start_test`, then `python -m fit.start_test_analysis --out
+  fit/results/stage0/start_test.json` (needs `ANCHOR_UNIT` set from the owner's choice; `--dry-run` checks the code on
+  the reference fits only).

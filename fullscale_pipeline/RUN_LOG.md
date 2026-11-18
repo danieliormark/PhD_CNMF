@@ -3616,3 +3616,24 @@ weighted by half credit), and the number of such communities of K.
 Row-only / column-only shares in the JSON (e.g. squared error approach 1 article×journal: row 0.83, column 0.47).
 → Under KL the relaxed rule holds for most communities in every relation except article×article; under squared error
 it holds for about half the tie weight in the social relations (5–6 of 20 communities) and for 13 of 20 in the anchor.
+
+### RL-265 — 2026-11-18 — diagonal-start test: reading revised to the owner's diagonal rule (no fits read)
+Owner approved the revised reading (design doc 2026-11-18). `fit/start_test_analysis.py` rewritten before any start-test
+fit was read (20 of 40 on RDS at the time):
+- aligned numbering throughout;
+- diagonal rule (part(k,k) > every other cell of its row and column) for every relation except child×article, including
+  article×article under both losses;
+- child×article guard > 0.5 (`ANCHOR_UNIT`, owner's choice pending; the script refuses to classify until it is set);
+- failures with main partners, per-community main partners in every relation, and recurrence of failures across seeds
+  (each facet matched across seeds on its own; recurs = in more than half of the other seeds);
+- outcomes 1 start artefact / 2 start not the cause / 3 trade-off / 4 mixed; KL control.
+`--dry-run` (reference as both arms) runs in 3 min on incline: every paired difference 0, outcome 2 everywhere, as
+expected. Reference values (pass 1, group 1): see `plans/ticket107_start_test.md` §4. Notable: rule failures almost never
+recur across seeds under squared error (recurring share of failure weight 0–0.11); under KL, article×article failures
+recur in 0.51 of their weight (articles sharing authors across topic communities, reproducibly).
+Checks: article×article is P5 of chunk12v3 (articles linked through shared persons), not citations — the assistant's
+description of it as citations (message of 2026-11-18) was wrong, and RL-260's phrase "its off-diagonal part is
+structure" was an unsupported aside (the relation is not renumbered because both sides are articles). Its masked
+self-cells (an article with itself) are 0.2 % (squared error) / 0.4 % (KL) of the reconstructed tie weight and change
+no reading. Under squared error, only 1.2 % of article×article tie weight lies on the diagonal (KL 0.55; 1/K would be
+0.05).

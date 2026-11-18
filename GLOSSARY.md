@@ -442,6 +442,9 @@ across facets (E2).
 
 ### E5. When does an arm "stay near one partner"? (the midpoint line of the diagonal-start test)
 
+*[WITHDRAWN 2026-11-18: the midpoint line was replaced by the owner's diagonal rule (owner: "I approve your revised
+reading substituting the midpoint line"); see `plans/ticket107_start_test.md` §4. Kept for the record.]*
+
 *Asked 2026-11-17 (three times; restructured to start from the problem).*
 **The problem.** The owner's reading R-A says one community is one group across facets: community 4's articles, authors,
 organisations and journals belong together. That can hold only if, in each relation, a community's reconstructed tie

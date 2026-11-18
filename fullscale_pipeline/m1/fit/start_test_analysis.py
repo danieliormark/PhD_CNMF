@@ -1,32 +1,51 @@
-# Diagonal-start test — reading (ticket 107; owner 2026-11-17). Expected outcomes and the reading rule are stated in
-# plans/ticket107_start_test.md BEFORE the fits return; this script applies them unchanged.
+# Diagonal-start test — reading (ticket 107; owner 2026-11-17/18). Expected outcomes and the reading rule are stated in
+# plans/ticket107_start_test.md BEFORE the fits are read; this script applies them unchanged.
+# Revision 2026-11-18 (owner: "I approve your revised reading substituting the midpoint line"; anchor: "for child*article
+# we should still have >0.5 for within community main diagonal"; both directions, failures studied; article×article
+# included under both losses). All readings use the ALIGNED numbering (GLOSSARY "Alignment"; RL-260) — run
+# `python -m fit.align --stages start_test` first.
 # Arms (same data, loss, K*, hold-out group 1, seeds 1–10, terms off, same membership start per seed):
 #   reference = stage-0 pass-1 fits (hybrid start: semantic cores diagonal, social cores random);
 #   diagonal  = start_test fits (hybrid start with every social core started diagonal, init.diagonal_social_links).
-# Per fit: convergence; data loss (total, weighted, final epoch) and per-relation loss; held-out two-part score
-# (existence, value; decided score) and existence per relation with hidden cells; per social relation the link
-# structure (effective number of partner communities — label-free; within share as fitted and after one-to-one
-# renumbering of the column facet; main-partner share); presence summaries (mixed share at 0.1, weaker-domain median)
-# and detachment per fit (after renumbering single-relation facets). Per arm: stability (aggregate.group_checks:
-# gate passes, Track A/B chance-adjusted).
-# Paired comparison by seed (both converged): difference diagonal − reference, mean, SE = SD/√n; "better"/"worse" if the
-# mean difference is beyond 2 SE in that direction, otherwise "within noise".
-# Outcome per social relation (pre-stated): "stays near one partner" if the diagonal arm's median effective number of
-# partners is below the midpoint between 1 and the reference median, otherwise "returns to spread". Fit cost: "worse"
-# if data loss, existence or value is worse beyond 2 SE (paired). Outcome 1 = stays and not worse; 2 = returns to spread;
-# 3 = stays and worse; 4 = relations of one setting differ (1/3 vs 2). KL is the control: "changed" if any paired
-# measure (data loss, existence, value, effective partners of any social relation) is beyond 2 SE.
-# Usage: python -m fit.start_test_analysis --out results/stage0/start_test.json
+# Per fit:
+#   - convergence; data loss (final epoch) and per-relation loss; held-out existence and value (decided two-part score),
+#     existence per relation with hidden cells;
+#   - DIAGONAL RULE, every relation except child×article (owner's relaxed rule): community k meets it in a relation if its
+#     own-numbered cell of the parts table, part(k,k), exceeds every other cell of its row AND of its column. Measure:
+#     share of the relation's reconstructed tie weight (half credit) in communities that meet it; row-only and
+#     column-only shares and counts beside it;
+#   - ANCHOR GUARD, child×article: within share Σ_k part(k,k) / T, and the communities whose own-numbered cell is more
+#     than half of their child×article tie weight on both sides (count, share of tie weight). Which of the two the
+#     ">0.5" requirement applies to is ANCHOR_UNIT (owner's choice);
+#   - FAILURES (owner: "it is interesting to study cases when row or column is not beaten"): every community that fails
+#     the rule in a direction, with its own share, its main partner (number and share) and its tie weight; and per
+#     community number the main partner in every relation (to read chains such as authors of k → organisations of l →
+#     journals of l2);
+#   - effective number of partner communities per relation (reported, no longer classifying);
+#   - presence summaries and detachment (as before).
+# Per arm: stability (aggregate.group_checks), and RECURRENCE of failures across seeds: each facet is matched across two
+# seeds on its own (measures.match on that facet's weighted memberships, independent of numbering); a failure of
+# community k toward main partner l recurs in another seed if the matched community fails in the same direction toward
+# the matched partner. A failure "recurs" if it does so in more than half of the arm's other converged seeds.
+# Paired comparison by seed (both converged): difference diagonal − reference, mean, SE = SD/√n; "better"/"worse" beyond
+# 2 SE (decided 2026-11-17), otherwise "within noise".
+# Outcome per relation, squared error (pre-stated): rule share higher beyond 2 SE in the diagonal arm and fit not worse
+# and anchor guard met → 1 "start artefact"; higher but fit worse or anchor guard not met → 3 "trade-off"; otherwise
+# → 2 "start not the cause" (recurrence of failures then reported per arm). Setting: 4 "mixed" if relations differ.
+# KL is the control: "changed" if data loss, existence, value or any relation's rule share differs beyond 2 SE.
+# Usage: python -m fit.start_test_analysis --out fit/results/stage0/start_test.json
 import argparse, glob, json, os
 from collections import defaultdict
 import numpy as np
-from scipy.optimize import linear_sum_assignment
+os.environ["M1_ALIGNED"] = "1"
 from . import data as D, measures as M
 from .aggregate import load_fit, load_UZ, latest_fits, group_checks
 
 ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
 KSTAR = {2: 20, 1: 13}
 LOSS = {2: "squared_error", 1: "KL"}
+ANCHOR = "child_article"
+ANCHOR_UNIT = None          # "fit" (within share > 0.5 in every converged fit) or "community"; owner's choice pending
 SINGLE = {"author_affiliation": "organisation", "article_affiliation": "organisation", "article_journal": "journal"}
 
 
@@ -42,14 +61,37 @@ def load(stage, diagonal):
     return out
 
 
-def link(U, Z, rd):
-    P, T = M.parts(U, Z, rd); P = P / T
-    r, c = linear_sum_assignment(-P)
-    perm = np.empty(len(c), dtype=int); perm[r] = c
-    rw = P.sum(1); Pr = P / np.maximum(rw[:, None], 1e-300)
+def diagonal_rule(P):
+    """Owner's relaxed rule on one parts table (aligned numbering)."""
+    K = P.shape[0]; T = P.sum(); d = np.diag(P)
+    off = P.copy(); np.fill_diagonal(off, -np.inf)
+    rmain, cmain = off.argmax(1), off.argmax(0)
+    row_ok = d > off.max(1); col_ok = d > off.max(0); both = row_ok & col_ok
+    rw, cw = P.sum(1), P.sum(0); h = 0.5 * (rw + cw) / T
+    fails = []
+    for k in range(K):
+        if not row_ok[k]:
+            fails.append({"k": k, "side": "row", "own": float(d[k] / max(rw[k], 1e-300)), "main": int(rmain[k]),
+                          "main_share": float(P[k, rmain[k]] / max(rw[k], 1e-300)), "weight": float(rw[k] / T)})
+        if not col_ok[k]:
+            fails.append({"k": k, "side": "column", "own": float(d[k] / max(cw[k], 1e-300)), "main": int(cmain[k]),
+                          "main_share": float(P[cmain[k], k] / max(cw[k], 1e-300)), "weight": float(cw[k] / T)})
+    return {"both_share": float(h[both].sum()), "row_share": float((rw / T)[row_ok].sum()),
+            "col_share": float((cw / T)[col_ok].sum()), "n_both": int(both.sum()), "n_row": int(row_ok.sum()),
+            "n_col": int(col_ok.sum()), "K": K}, fails
+
+
+def anchor_guard(P):
+    T = P.sum(); d = np.diag(P); rw, cw = P.sum(1), P.sum(0); h = 0.5 * (rw + cw) / T
+    ok = (d / np.maximum(rw, 1e-300) > 0.5) & (d / np.maximum(cw, 1e-300) > 0.5)
+    return {"within_share": float(d.sum() / T), "K": int(len(d)), "n_communities_over_half": int(ok.sum()),
+            "share_communities_over_half": float(h[ok].sum())}
+
+
+def effective_partners(P):
+    P = P / P.sum(); rw = P.sum(1); Pr = P / np.maximum(rw[:, None], 1e-300)
     ent = -(Pr * np.log(np.clip(Pr, 1e-300, None))).sum(1)
-    return {"effective_partners": float((rw * np.exp(ent)).sum() / rw.sum()), "within": float(np.trace(P)),
-            "within_renumbered": float(P[r, c].sum()), "main_partner": float(P.max(1).sum())}, P, perm
+    return float((rw * np.exp(ent)).sum() / rw.sum())
 
 
 def per_fit(f, rds):
@@ -63,18 +105,47 @@ def per_fit(f, rds):
     out["mixed_0.1"] = float(share[(S >= 0.1) & (O >= 0.1)].sum())
     out["weaker_median"] = float(np.median(np.minimum(S, O)))
     U, Z = load_UZ(f["dir"])
-    U = {k: v.astype(np.float64) for k, v in U.items()}; Z = {k: v.astype(np.float64) for k, v in Z.items()}
     fp = {x: np.array(v) for x, v in m["facet_presence"].items()}
-    out["link"] = {}; det = 0
+    out["rule"], out["failures"], out["partners"], out["main_partner"] = {}, {}, {}, {}
+    det = 0
     for name, rd in rds.items():
-        if rd.domain != "social":
-            continue
-        s, P, perm = link(U, Z, rd)
-        out["link"][name] = s
+        P, _ = M.parts(U, Z, rd)
+        out["partners"][name] = effective_partners(P)
+        off = P.copy(); np.fill_diagonal(off, -np.inf)
+        out["main_partner"][name] = {"row": P.argmax(1).tolist(), "column": P.argmax(0).tolist()}
+        if name == ANCHOR:
+            out["anchor"] = anchor_guard(P)
+        else:
+            out["rule"][name], out["failures"][name] = diagonal_rule(P)
         if name in SINGLE:
-            K = P.shape[0]; side = K * P.sum(0)
-            det += int(((fp[rd.row_facet] >= 0.5) & (side[perm] < 0.1)).sum())
-    out["detached_renumbered"] = det
+            side = P.shape[0] * P.sum(0) / P.sum()
+            det += int(((fp[rd.row_facet] >= 0.5) & (side < 0.1)).sum())
+    out["detached"] = det
+    rel = {k: tuple(v) for k, v in r["relations"].items()}
+    return out, M.weighted_memberships(U, Z, rel)
+
+
+def recurrence(F, W, rds):
+    """F: per-fit dicts of one arm (converged only), W: their weighted memberships. Per relation: each failure's share of
+    the other seeds in which it recurs (facets matched across seeds one at a time)."""
+    n = len(F); facets = sorted(W[0]); out = {}
+    perm = {(s, t, fa): M.match(W[s], W[t], [fa]) for s in range(n) for t in range(n) if s != t for fa in facets}
+    for name, rd in rds.items():
+        if name == ANCHOR:
+            continue
+        a, b = rd.row_facet, rd.col_facet
+        have = [{(x["k"], x["side"], x["main"]) for x in F[t]["failures"][name]} for t in range(n)]
+        rows = []
+        for s in range(n):
+            for x in F[s]["failures"][name]:
+                fk, fm = (a, b) if x["side"] == "row" else (b, a)
+                hits = sum((int(perm[(s, t, fk)][x["k"]]), x["side"], int(perm[(s, t, fm)][x["main"]])) in have[t]
+                           for t in range(n) if t != s)
+                rows.append(dict(x, seed=F[s]["seed"], recurs_in=hits / max(n - 1, 1)))
+        tot = sum(x["weight"] for x in rows)
+        out[name] = {"failures_per_fit": len(rows) / n,
+                     "weight_share_recurring": (sum(x["weight"] for x in rows if x["recurs_in"] > 0.5) / tot) if tot else None,
+                     "recurring": [x for x in rows if x["recurs_in"] > 0.5]}
     return out
 
 
@@ -88,57 +159,84 @@ def paired(ref, arm, get):
             "higher_by_2se": bool(d.mean() > 2 * se)}
 
 
-def run():
-    ref, arm = load("stage0_pass1", False), load("start_test", True)
+def anchor_ok(A):
+    conv = [x for x in A if x["converged"]]
+    if ANCHOR_UNIT == "fit":
+        return all(x["anchor"]["within_share"] > 0.5 for x in conv)
+    if ANCHOR_UNIT == "community":
+        return all(x["anchor"]["n_communities_over_half"] == x["anchor"]["K"] for x in conv)
+    raise SystemExit("ANCHOR_UNIT not set: the owner's choice of unit for the child×article > 0.5 requirement is pending")
+
+
+def run(dry_run=False):
+    ref = load("stage0_pass1", False)
+    arm = ref if dry_run else load("start_test", True)          # dry run: reference as both arms (code check only)
     build = D.Build(D.BUILD)
     rep = {}
     for (a, beta) in sorted(arm):
         rds = {rd.name: rd for rd in D.fit_data(build, a, group=0)}
         name = f"approach_{a}_{LOSS[beta]}"
-        R = [per_fit(f, rds) for f in sorted(ref[(a, beta)], key=lambda f: f["job"]["seed"])]
-        A = [per_fit(f, rds) for f in sorted(arm[(a, beta)], key=lambda f: f["job"]["seed"])]
-        st = {}
+        arms = {}
         for lab, fs in (("reference", ref[(a, beta)]), ("diagonal", arm[(a, beta)])):
-            g, _ = group_checks(sorted(fs, key=lambda f: f["job"]["seed"]))
-            st[lab] = {"gate_passes": int(sum(x is False for x in g["gate_fails"])), "converged": int(sum(not x for x in g["convergence_fails"])),
-                       **({k: g["stability"][k] for k in ("A_adjusted", "B_adjusted")} if "stability" in g else {})}
-        cmp = {"data_loss": paired(R, A, lambda x: x["data_loss"]), "existence": paired(R, A, lambda x: x["existence"]),
-               "value": paired(R, A, lambda x: x["value"]), "mixed_0.1": paired(R, A, lambda x: x["mixed_0.1"]),
-               "weaker_median": paired(R, A, lambda x: x["weaker_median"]),
-               "detached_renumbered": paired(R, A, lambda x: x["detached_renumbered"])}
+            fs = sorted(fs, key=lambda f: f["job"]["seed"])
+            res = [per_fit(f, rds) for f in fs]
+            g, _ = group_checks(fs)
+            conv = [i for i, (x, _) in enumerate(res) if x["converged"]]
+            arms[lab] = {"fits": [x for x, _ in res],
+                         "stability": {"gate_passes": int(sum(x is False for x in g["gate_fails"])),
+                                       "converged": len(conv),
+                                       **({k: g["stability"][k] for k in ("A_adjusted", "B_adjusted", "per_facet_B")} if "stability" in g else {})},
+                         "recurrence": recurrence([res[i][0] for i in conv], [res[i][1] for i in conv], rds)}
+        R, A = arms["reference"]["fits"], arms["diagonal"]["fits"]
+        cmp = {k: paired(R, A, lambda x, k=k: x[k]) for k in ("data_loss", "existence", "value", "mixed_0.1", "weaker_median", "detached")}
         for r in R[0]["existence_by_relation"]:
             cmp[f"existence_{r}"] = paired(R, A, lambda x, r=r: x["existence_by_relation"].get(r))
         for r in R[0]["relation_loss"]:
             cmp[f"loss_{r}"] = paired(R, A, lambda x, r=r: x["relation_loss"][r])
-        links = {}
-        for r in R[0]["link"]:
-            rv = [x["link"][r] for x in R if x["converged"]]; av = [x["link"][r] for x in A if x["converged"]]
-            med = lambda L, k: float(np.median([y[k] for y in L])) if L else None
-            ref_p, arm_p = med(rv, "effective_partners"), med(av, "effective_partners")
-            links[r] = {"reference": {k: med(rv, k) for k in rv[0]}, "diagonal": {k: med(av, k) for k in av[0]} if av else None,
-                        "paired_partners": paired(R, A, lambda x, r=r: x["link"][r]["effective_partners"]),
-                        "midpoint": (1 + ref_p) / 2,
-                        "reading": None if arm_p is None else ("stays near one partner" if arm_p < (1 + ref_p) / 2 else "returns to spread")}
+        cmp["anchor_within_share"] = paired(R, A, lambda x: x["anchor"]["within_share"])
+        med = lambda L, g: float(np.median([g(x) for x in L if x["converged"]]))
+        rel = {}
+        for r in R[0]["rule"]:
+            rel[r] = {"rule_share": {"reference": med(R, lambda x: x["rule"][r]["both_share"]), "diagonal": med(A, lambda x: x["rule"][r]["both_share"])},
+                      "paired_rule_share": paired(R, A, lambda x, r=r: x["rule"][r]["both_share"]),
+                      "row_col": {lab: {k: med(L, lambda x, k=k: x["rule"][r][k]) for k in ("row_share", "col_share", "n_both", "n_row", "n_col")}
+                                  for lab, L in (("reference", R), ("diagonal", A))},
+                      "partners": {"reference": med(R, lambda x: x["partners"][r]), "diagonal": med(A, lambda x: x["partners"][r])},
+                      "paired_partners": paired(R, A, lambda x, r=r: x["partners"][r])}
+        anchor = {lab: {k: med(L, lambda x, k=k: x["anchor"][k]) for k in ("within_share", "n_communities_over_half", "share_communities_over_half")}
+                  for lab, L in (("reference", R), ("diagonal", A))}
         worse = any(cmp[k].get(f) for k, f in (("data_loss", "higher_by_2se"), ("existence", "lower_by_2se"), ("value", "lower_by_2se")))
         better = any(cmp[k].get(f) for k, f in (("data_loss", "lower_by_2se"), ("existence", "higher_by_2se"), ("value", "higher_by_2se")))
+        guard = anchor_ok(A)
         if beta == 2:
-            per_rel = {r: (2 if v["reading"] == "returns to spread" else (3 if worse else 1)) for r, v in links.items() if v["reading"]}
+            per_rel = {}
+            for r, v in rel.items():
+                hi = v["paired_rule_share"].get("higher_by_2se")
+                per_rel[r] = 1 if (hi and not worse and guard) else (3 if hi else 2)
             kinds = set(per_rel.values())
-            outcome = (4 if len(kinds) > 1 else kinds.pop()) if kinds else None
-            reading = {"outcome": outcome, "per_relation": per_rel, "fit_worse": worse, "fit_better": better}
+            reading = {"outcome": 4 if len(kinds) > 1 else kinds.pop(), "per_relation": per_rel, "fit_worse": worse,
+                       "fit_better": better, "anchor_guard_met": guard}
         else:
-            changed = worse or better or any(v["paired_partners"].get("lower_by_2se") or v["paired_partners"].get("higher_by_2se") for v in links.values())
-            reading = {"control_changed": bool(changed), "fit_worse": worse, "fit_better": better}
-        rep[name] = {"fits": {"reference": len(R), "diagonal": len(A)}, "stability": st, "paired": cmp, "links": links,
-                     "reading": reading, "per_fit": {"reference": R, "diagonal": A}}
+            changed = worse or better or any(v["paired_rule_share"].get("lower_by_2se") or v["paired_rule_share"].get("higher_by_2se")
+                                             for v in rel.values())
+            reading = {"control_changed": bool(changed), "fit_worse": worse, "fit_better": better, "anchor_guard_met": guard}
+        rep[name] = {"n_fits": {k: len(v["fits"]) for k, v in arms.items()}, "paired": cmp, "relations": rel, "anchor": anchor,
+                     "reading": reading, "arms": arms}
         print(name, json.dumps(reading), flush=True)
     return rep
 
 
 def main():
+    global ANCHOR_UNIT
     ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True)
+    ap.add_argument("--dry-run", action="store_true", help="reference fits as both arms; checks the code without reading start-test fits")
+    ap.add_argument("--anchor-unit", choices=("fit", "community"), default=None, help="dry run only")
     a = ap.parse_args()
-    json.dump(run(), open(a.out, "w"), indent=1, default=float)
+    if a.dry_run:
+        ANCHOR_UNIT = a.anchor_unit or "fit"
+    elif a.anchor_unit:
+        raise SystemExit("--anchor-unit is for dry runs; the real reading uses ANCHOR_UNIT as decided by the owner")
+    json.dump(run(a.dry_run), open(a.out, "w"), indent=1, default=float)
 
 
 if __name__ == "__main__":
