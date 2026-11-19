@@ -1,0 +1,70 @@
+approach 1: 12 failing communities in 12 fits; median failing vs other communities of the same fits
+   main_hyperedges                 379.0     3235.0
+   df_median                         1.0        1.0
+   df_mean                    33.4673462 1.57150469
+   df1_share                  0.68893950 0.91468240
+   users_effective            25.9425838 1.00048378
+   own_share_child_side       0.16840820 0.99996708
+   child_side_weighted        0.04880120 0.02981814
+   child_side_raw             0.08512626 0.02919869
+   article_side_weighted      0.00833865 0.03085944
+   article_side_raw           0.00538181 0.03165044
+   half_credit_weighted       0.02876650 0.03043363
+   half_credit_raw            0.04593735 0.03048232
+   main_articles                   344.5       44.0
+   main_journals                     4.0       10.0
+   journal_size_median              59.0        1.0
+   journal_tie_share          0.10365853 0.01430581
+   main_authors                    180.5      234.5
+   main_organisations               80.0       74.0
+   top-100 hyperedge overlap across fits (Jaccard): failing 0.028, other 0.000
+   e.g. df 435 provide/P/en
+   e.g. df 325 generate/P/en
+   e.g. df 307 suggest/P/en
+   e.g. df 273 make/P/en
+   e.g. df 261 base/P/en
+   e.g. df 247 result/C/en
+   e.g. df 226 offer/P/en
+   e.g. df 219 develop/P/en
+   e.g. df 213 apply/P/en
+   e.g. df 212 combine/P/en
+   e.g. df 204 explore/P/en
+   e.g. df 199 improve/P/en
+   e.g. df 197 highlight/P/en
+   e.g. df 197 present/P/en
+   e.g. df 197 follow/P/en
+approach 2: 16 failing communities in 16 fits; median failing vs other communities of the same fits
+   main_hyperedges                 213.5     3226.0
+   df_median                       28.75        1.0
+   df_mean                    57.0636577 1.57047907
+   df1_share                  0.44466248 0.91441267
+   users_effective            28.2919245 1.00051046
+   own_share_child_side       0.11857842 0.99996516
+   child_side_weighted        0.04979886 0.02996969
+   child_side_raw             0.09320415 0.02863421
+   article_side_weighted      0.00577618 0.03142915
+   article_side_raw           0.00570493 0.03171422
+   half_credit_weighted       0.02770760 0.03071277
+   half_credit_raw            0.05088123 0.03018022
+   main_articles                   264.0       43.0
+   main_journals                     8.0       11.0
+   journal_size_median             15.75        1.0
+   journal_tie_share          0.15337711 0.01266416
+   main_authors                     None       None
+   main_organisations               97.0       73.0
+   top-100 hyperedge overlap across fits (Jaccard): failing 0.026, other 0.005
+   e.g. df 390 model/C/en
+   e.g. df 307 suggest/P/en
+   e.g. df 295 evaluate/P/en
+   e.g. df 278 example/C/en
+   e.g. df 261 base/P/en
+   e.g. df 247 result/C/en
+   e.g. df 226 offer/P/en
+   e.g. df 222 leverage/P/en
+   e.g. df 219 develop/P/en
+   e.g. df 213 apply/P/en
+   e.g. df 212 combine/P/en
+   e.g. df 207 employ/P/en
+   e.g. df 204 explore/P/en
+   e.g. df 199 improve/P/en
+   e.g. df 197 follow/P/en

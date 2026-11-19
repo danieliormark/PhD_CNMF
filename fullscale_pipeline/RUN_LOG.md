@@ -3973,3 +3973,30 @@ child×article tie weight. In the other fits at K = 32, and in every fit at K �
 diagonal (off-diagonal cells at the floor), so the requirement cannot fail there. Reading: at K = 32 KL forms one
 "shared vocabulary" child community linked to most article communities — the case the requirement exists to catch
 (semantics not belonging to the community's own articles). Not yet checked under the chosen start (S3 10 %).
+
+### RL-282 — 2026-11-19 — Profile of the child communities failing the child×article requirement at K = 32 (no fits)
+Owner: "You can make this analysis, but I'd notice that idf weighting reflects rather our assumptions than reality ...
+with no weighting applied most frequently used hyperedges ... should have larger values/weights". `fit/
+shared_child_community_profile.py` → `results/stage0/shared_child_community_profile.{json,log}`; pass-1 KL fits at
+K = 32, all groups, fitted numbering; failing community vs the median of the other communities of the same fits
+(approach 1 / approach 2; 12 / 16 failing communities, one per fit).
+- Its main hyperedges are few and widely used: 379 / 214 (others 3,235 / 3,226); mean document frequency 33 / 57
+  (others 1.6); share used by one article 0.69 / 0.44 (others 0.91). Most-used examples (single-atom hyperedges):
+  provide, generate, suggest, make, base, result, offer, develop, apply, combine, explore, improve, highlight, present,
+  follow; approach 2 also model, evaluate, example, leverage, employ — generic scholarly vocabulary.
+- Used evenly by the articles of almost every community: effective number of using article communities 26 / 28 of 32
+  (others 1.0); its own article community's share of its child-side tie weight 0.17 / 0.12 (others 1.00).
+- Size read two ways (each visible tie split among community pairs by the fitted model; summed with the weighted
+  values vs raw term frequencies): child side 4.9 % / 5.0 % weighted vs 8.5 % / 9.3 % raw; article side 0.8 % / 0.6 %
+  weighted, 0.5 % / 0.6 % raw; half credit 2.9 % / 2.8 % weighted vs 4.6 % / 5.1 % raw (others ≈ 3 % both ways).
+  Without idf the community would carry about twice the child-side weight — idf currently discounts it.
+- Social side: 4 / 8 main journals but large (median 59 / 16 visible articles per journal; others 1), holding 10 % /
+  15 % of article×journal ties (others 1.4 % / 1.3 %); main articles 345 / 264 (others 44 / 43) although its article-
+  side child×article weight is small; main authors / organisations about as other communities.
+- Same group across fits: overlap of the 100 hyperedges with the largest membership 0.03 (others ≈ 0) — a weak
+  measure (memberships near 1 for many generic hyperedges, ties broken arbitrarily); the most-used hyperedges listed
+  above recur in both approaches and in different fits.
+Reading: supports the catch-all reading (b) — generic academic language used by everyone plus a few very large
+journals, whose articles carry little semantics of their own in this community — rather than (a) a socially large
+community whose substantive vocabulary others borrow. Upstream question raised (not decided): single-atom generic
+predicate / concept hyperedges in the child facet are close to stopwords for scientific prose.

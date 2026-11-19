@@ -1,0 +1,926 @@
+{
+ "approach_1": {
+  "failing_communities": 12,
+  "fits_with_failure": 12,
+  "failing": {
+   "main_hyperedges": 379.0,
+   "df_median": 1.0,
+   "df_mean": 33.46734620241746,
+   "df1_share": 0.6889395032774069,
+   "users_effective": 25.942583826354674,
+   "own_share_child_side": 0.16840820524216166,
+   "child_side_weighted": 0.04880120100034399,
+   "child_side_raw": 0.08512626171000268,
+   "article_side_weighted": 0.008338655979956028,
+   "article_side_raw": 0.005381812830701042,
+   "half_credit_weighted": 0.028766506944837275,
+   "half_credit_raw": 0.04593735144775263,
+   "main_articles": 344.5,
+   "main_journals": 4.0,
+   "journal_size_median": 59.0,
+   "journal_tie_share": 0.10365853658536586,
+   "main_authors": 180.5,
+   "main_organisations": 80.0
+  },
+  "other_communities_same_fits": {
+   "main_hyperedges": 3235.0,
+   "df_median": 1.0,
+   "df_mean": 1.5715046927343994,
+   "df1_share": 0.9146824036126346,
+   "users_effective": 1.0004837810969172,
+   "own_share_child_side": 0.9999670851639266,
+   "child_side_weighted": 0.02981814391709515,
+   "child_side_raw": 0.029198696006136473,
+   "article_side_weighted": 0.030859442629886893,
+   "article_side_raw": 0.03165044950058386,
+   "half_credit_weighted": 0.030433635169318504,
+   "half_credit_raw": 0.03048232170341641,
+   "main_articles": 44.0,
+   "main_journals": 10.0,
+   "journal_size_median": 1.0,
+   "journal_tie_share": 0.014305816135084429,
+   "main_authors": 234.5,
+   "main_organisations": 74.0
+  },
+  "top100_jaccard_failing_across_fits": 0.028284430346286017,
+  "top100_jaccard_other_across_fits": 0.0,
+  "per_failing": [
+   {
+    "main_hyperedges": 261,
+    "df_median": 1.0,
+    "df_mean": 49.64367816091954,
+    "df1_share": 0.5708812260536399,
+    "users_effective": 28.228500055777126,
+    "own_share_child_side": 0.11386804709349405,
+    "child_side_weighted": 0.05128861190321434,
+    "child_side_raw": 0.09623523563646953,
+    "article_side_weighted": 0.005696148221543787,
+    "article_side_raw": 0.0034858514713828597,
+    "half_credit_weighted": 0.028492380062379065,
+    "half_credit_raw": 0.0498605435539262,
+    "main_articles": 363,
+    "main_journals": 4,
+    "journal_size_median": 60.0,
+    "journal_tie_share": 0.08911819887429644,
+    "main_authors": 193,
+    "main_organisations": 115,
+    "group": 0,
+    "seed": 6,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 503,
+    "df_median": 1.0,
+    "df_mean": 23.11530815109344,
+    "df1_share": 0.7793240556660039,
+    "users_effective": 23.691261928164312,
+    "own_share_child_side": 0.22061947794030254,
+    "child_side_weighted": 0.048688540725798146,
+    "child_side_raw": 0.0790046273412903,
+    "article_side_weighted": 0.010800810725581424,
+    "article_side_raw": 0.006085158990312963,
+    "half_credit_weighted": 0.029744675725689784,
+    "half_credit_raw": 0.04254489316580163,
+    "main_articles": 298,
+    "main_journals": 4,
+    "journal_size_median": 67.5,
+    "journal_tie_share": 0.17823639774859287,
+    "main_authors": 177,
+    "main_organisations": 101,
+    "group": 0,
+    "seed": 2,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 482,
+    "df_median": 1.0,
+    "df_mean": 24.456431535269708,
+    "df1_share": 0.7655601659751037,
+    "users_effective": 24.340750765664378,
+    "own_share_child_side": 0.210674608378118,
+    "child_side_weighted": 0.04891386127488984,
+    "child_side_raw": 0.07853416070719617,
+    "article_side_weighted": 0.010367640735620205,
+    "article_side_raw": 0.0068284449419729895,
+    "half_credit_weighted": 0.029640751005255025,
+    "half_credit_raw": 0.04268130282458458,
+    "main_articles": 215,
+    "main_journals": 26,
+    "journal_size_median": 2.5,
+    "journal_tie_share": 0.2518761726078799,
+    "main_authors": 99,
+    "main_organisations": 39,
+    "group": 1,
+    "seed": 2,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 556,
+    "df_median": 1.0,
+    "df_mean": 20.359712230215827,
+    "df1_share": 0.8057553956834532,
+    "users_effective": 16.294935503852408,
+    "own_share_child_side": 0.3582373112828599,
+    "child_side_weighted": 0.04865068385181126,
+    "child_side_raw": 0.07650970908464547,
+    "article_side_weighted": 0.017523207220891096,
+    "article_side_raw": 0.015188538657491734,
+    "half_credit_weighted": 0.03308694553635118,
+    "half_credit_raw": 0.0458491238710686,
+    "main_articles": 564,
+    "main_journals": 28,
+    "journal_size_median": 1.5,
+    "journal_tie_share": 0.042682926829268296,
+    "main_authors": 88,
+    "main_organisations": 77,
+    "group": 1,
+    "seed": 8,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 276,
+    "df_median": 1.0,
+    "df_mean": 42.47826086956522,
+    "df1_share": 0.6123188405797102,
+    "users_effective": 27.54441688704497,
+    "own_share_child_side": 0.12614180210620535,
+    "child_side_weighted": 0.05096822634171256,
+    "child_side_raw": 0.09624474223604454,
+    "article_side_weighted": 0.006309671224291852,
+    "article_side_raw": 0.004678466671089121,
+    "half_credit_weighted": 0.028638948783002206,
+    "half_credit_raw": 0.05046160445356683,
+    "main_articles": 326,
+    "main_journals": 4,
+    "journal_size_median": 5.0,
+    "journal_tie_share": 0.036585365853658534,
+    "main_authors": 191,
+    "main_organisations": 29,
+    "group": 1,
+    "seed": 7,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 677,
+    "df_median": 1.0,
+    "df_mean": 14.893648449039881,
+    "df1_share": 0.8596750369276218,
+    "users_effective": 14.381295473110727,
+    "own_share_child_side": 0.39764843273863776,
+    "child_side_weighted": 0.04603191297872835,
+    "child_side_raw": 0.06909486265244925,
+    "article_side_weighted": 0.01836934114565175,
+    "article_side_raw": 0.014683138686111773,
+    "half_credit_weighted": 0.03220062706219005,
+    "half_credit_raw": 0.041889000669280516,
+    "main_articles": 444,
+    "main_journals": 2,
+    "journal_size_median": 114.5,
+    "journal_tie_share": 0.10741088180112571,
+    "main_authors": 155,
+    "main_organisations": 101,
+    "group": 2,
+    "seed": 3,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 113,
+    "df_median": 98.0,
+    "df_mean": 107.49557522123894,
+    "df1_share": 0.0,
+    "users_effective": 30.20944939486817,
+    "own_share_child_side": 0.021171197534336963,
+    "child_side_weighted": 0.04777731648321243,
+    "child_side_raw": 0.09124789607871506,
+    "article_side_weighted": 0.0009909936023208765,
+    "article_side_raw": 0.0008032619701582581,
+    "half_credit_weighted": 0.024384155042766652,
+    "half_credit_raw": 0.04602557902443666,
+    "main_articles": 377,
+    "main_journals": 1,
+    "journal_size_median": 77.0,
+    "journal_tie_share": 0.036116322701688554,
+    "main_authors": 184,
+    "main_organisations": 83,
+    "group": 3,
+    "seed": 1,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 155,
+    "df_median": 78.0,
+    "df_mean": 82.89032258064516,
+    "df1_share": 0.24516129032258063,
+    "users_effective": 30.185802753832835,
+    "own_share_child_side": 0.044274916291895686,
+    "child_side_weighted": 0.05166223764836965,
+    "child_side_raw": 0.10024579623634867,
+    "article_side_weighted": 0.0019263164227116185,
+    "article_side_raw": 0.001246382945203714,
+    "half_credit_weighted": 0.026794277035540635,
+    "half_credit_raw": 0.05074608959077619,
+    "main_articles": 158,
+    "main_journals": 15,
+    "journal_size_median": 58.0,
+    "journal_tie_share": 0.38367729831144465,
+    "main_authors": 50,
+    "main_organisations": 39,
+    "group": 3,
+    "seed": 2,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 127,
+    "df_median": 94.0,
+    "df_mean": 105.5984251968504,
+    "df1_share": 0.0,
+    "users_effective": 28.62767569874255,
+    "own_share_child_side": 0.00043878890280644214,
+    "child_side_weighted": 0.054584567027309426,
+    "child_side_raw": 0.112481771283427,
+    "article_side_weighted": 2.38536897376102e-05,
+    "article_side_raw": 1.8081437226041825e-05,
+    "half_credit_weighted": 0.02730421035852352,
+    "half_credit_raw": 0.05624992636032652,
+    "main_articles": 170,
+    "main_journals": 18,
+    "journal_size_median": 1.0,
+    "journal_tie_share": 0.15150093808630394,
+    "main_authors": 193,
+    "main_organisations": 34,
+    "group": 3,
+    "seed": 7,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 611,
+    "df_median": 1.0,
+    "df_mean": 16.315875613747956,
+    "df1_share": 0.8428805237315876,
+    "users_effective": 15.66574335392541,
+    "own_share_child_side": 0.367371995091221,
+    "child_side_weighted": 0.04554168660180055,
+    "child_side_raw": 0.07357945537536778,
+    "article_side_weighted": 0.016828746994408016,
+    "article_side_raw": 0.015676942034036148,
+    "half_credit_weighted": 0.031185216798104286,
+    "half_credit_raw": 0.044628198704701964,
+    "main_articles": 473,
+    "main_journals": 2,
+    "journal_size_median": 106.5,
+    "journal_tie_share": 0.099906191369606,
+    "main_authors": 44,
+    "main_organisations": 91,
+    "group": 3,
+    "seed": 3,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 636,
+    "df_median": 1.0,
+    "df_mean": 15.400943396226415,
+    "df1_share": 0.8474842767295597,
+    "users_effective": 14.68246174032943,
+    "own_share_child_side": 0.387608061022354,
+    "child_side_weighted": 0.04164684253790611,
+    "child_side_raw": 0.06015401226591303,
+    "article_side_weighted": 0.016141287675438567,
+    "article_side_raw": 0.011841425060468307,
+    "half_credit_weighted": 0.02889406510667234,
+    "half_credit_raw": 0.03599771866319067,
+    "main_articles": 383,
+    "main_journals": 11,
+    "journal_size_median": 1.0,
+    "journal_tie_share": 0.07926829268292683,
+    "main_authors": 282,
+    "main_organisations": 21,
+    "group": 4,
+    "seed": 7,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 246,
+    "df_median": 1.0,
+    "df_mean": 50.857723577235774,
+    "df1_share": 0.532520325203252,
+    "users_effective": 28.741017835277493,
+    "own_share_child_side": 0.09846560071226053,
+    "child_side_weighted": 0.05123086377014,
+    "child_side_raw": 0.09747771527094297,
+    "article_side_weighted": 0.00500426104654001,
+    "article_side_raw": 0.0033537637128775413,
+    "half_credit_weighted": 0.028117562408340006,
+    "half_credit_raw": 0.05041573949191026,
+    "main_articles": 292,
+    "main_journals": 4,
+    "journal_size_median": 107.0,
+    "journal_tie_share": 0.21810506566604126,
+    "main_authors": 238,
+    "main_organisations": 130,
+    "group": 4,
+    "seed": 6,
+    "k": 0
+   }
+  ],
+  "example_hyperedges": [
+   {
+    "atoms": [
+     "provide/P/en"
+    ],
+    "df": 435
+   },
+   {
+    "atoms": [
+     "generate/P/en"
+    ],
+    "df": 325
+   },
+   {
+    "atoms": [
+     "suggest/P/en"
+    ],
+    "df": 307
+   },
+   {
+    "atoms": [
+     "make/P/en"
+    ],
+    "df": 273
+   },
+   {
+    "atoms": [
+     "base/P/en"
+    ],
+    "df": 261
+   },
+   {
+    "atoms": [
+     "result/C/en"
+    ],
+    "df": 247
+   },
+   {
+    "atoms": [
+     "offer/P/en"
+    ],
+    "df": 226
+   },
+   {
+    "atoms": [
+     "develop/P/en"
+    ],
+    "df": 219
+   },
+   {
+    "atoms": [
+     "apply/P/en"
+    ],
+    "df": 213
+   },
+   {
+    "atoms": [
+     "combine/P/en"
+    ],
+    "df": 212
+   },
+   {
+    "atoms": [
+     "explore/P/en"
+    ],
+    "df": 204
+   },
+   {
+    "atoms": [
+     "improve/P/en"
+    ],
+    "df": 199
+   },
+   {
+    "atoms": [
+     "highlight/P/en"
+    ],
+    "df": 197
+   },
+   {
+    "atoms": [
+     "present/P/en"
+    ],
+    "df": 197
+   },
+   {
+    "atoms": [
+     "follow/P/en"
+    ],
+    "df": 197
+   }
+  ]
+ },
+ "approach_2": {
+  "failing_communities": 16,
+  "fits_with_failure": 16,
+  "failing": {
+   "main_hyperedges": 213.5,
+   "df_median": 28.75,
+   "df_mean": 57.06365777080063,
+   "df1_share": 0.4446624803767661,
+   "users_effective": 28.291924549378425,
+   "own_share_child_side": 0.11857842778964352,
+   "child_side_weighted": 0.049798869812321324,
+   "child_side_raw": 0.09320415151233061,
+   "article_side_weighted": 0.005776187520907913,
+   "article_side_raw": 0.005704935252300099,
+   "half_credit_weighted": 0.02770760879018906,
+   "half_credit_raw": 0.05088123356412946,
+   "main_articles": 264.0,
+   "main_journals": 8.0,
+   "journal_size_median": 15.75,
+   "journal_tie_share": 0.15337711069418386,
+   "main_authors": null,
+   "main_organisations": 97.0
+  },
+  "other_communities_same_fits": {
+   "main_hyperedges": 3226.0,
+   "df_median": 1.0,
+   "df_mean": 1.5704790701900513,
+   "df1_share": 0.9144126753138759,
+   "users_effective": 1.0005104694046882,
+   "own_share_child_side": 0.9999651619885912,
+   "child_side_weighted": 0.02996969480196339,
+   "child_side_raw": 0.028634218968718338,
+   "article_side_weighted": 0.031429150258956866,
+   "article_side_raw": 0.03171422367442945,
+   "half_credit_weighted": 0.030712772352518944,
+   "half_credit_raw": 0.03018022451419757,
+   "main_articles": 43.0,
+   "main_journals": 11.0,
+   "journal_size_median": 1.0,
+   "journal_tie_share": 0.012664165103189493,
+   "main_authors": null,
+   "main_organisations": 73.0
+  },
+  "top100_jaccard_failing_across_fits": 0.02564102564102564,
+  "top100_jaccard_other_across_fits": 0.005025125628140704,
+  "per_failing": [
+   {
+    "main_hyperedges": 126,
+    "df_median": 97.5,
+    "df_mean": 112.35714285714286,
+    "df1_share": 0.0,
+    "users_effective": 29.90834321476357,
+    "own_share_child_side": 0.015555792606138676,
+    "child_side_weighted": 0.04991348835308647,
+    "child_side_raw": 0.10245159997443214,
+    "article_side_weighted": 0.0007868770227453813,
+    "article_side_raw": 0.0010411162177786364,
+    "half_credit_weighted": 0.025350182687915924,
+    "half_credit_raw": 0.05174635809610539,
+    "main_articles": 237,
+    "main_journals": 14,
+    "journal_size_median": 1.5,
+    "journal_tie_share": 0.03095684803001876,
+    "main_authors": null,
+    "main_organisations": 78,
+    "group": 0,
+    "seed": 4,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 132,
+    "df_median": 87.0,
+    "df_mean": 97.01515151515152,
+    "df1_share": 0.09848484848484848,
+    "users_effective": 30.442741382369395,
+    "own_share_child_side": 0.03642101112624321,
+    "child_side_weighted": 0.050708637493454514,
+    "child_side_raw": 0.10398077663618675,
+    "article_side_weighted": 0.001513389438265148,
+    "article_side_raw": 0.0014531914730357915,
+    "half_credit_weighted": 0.026111013465859832,
+    "half_credit_raw": 0.052716984054611275,
+    "main_articles": 193,
+    "main_journals": 7,
+    "journal_size_median": 63.0,
+    "journal_tie_share": 0.275797373358349,
+    "main_authors": null,
+    "main_organisations": 109,
+    "group": 0,
+    "seed": 10,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 182,
+    "df_median": 56.5,
+    "df_mean": 64.36813186813187,
+    "df1_share": 0.3791208791208791,
+    "users_effective": 28.48554399186041,
+    "own_share_child_side": 0.11911770164923803,
+    "child_side_weighted": 0.04968425127155618,
+    "child_side_raw": 0.09450722119844876,
+    "article_side_weighted": 0.005839838092267557,
+    "article_side_raw": 0.006849016101515415,
+    "half_credit_weighted": 0.027762044681911867,
+    "half_credit_raw": 0.05067811864998209,
+    "main_articles": 252,
+    "main_journals": 2,
+    "journal_size_median": 102.5,
+    "journal_tie_share": 0.09615384615384616,
+    "main_authors": null,
+    "main_organisations": 68,
+    "group": 0,
+    "seed": 6,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 124,
+    "df_median": 84.0,
+    "df_mean": 93.33870967741936,
+    "df1_share": 0.08870967741935484,
+    "users_effective": 30.270575431501683,
+    "own_share_child_side": 0.03953714980435329,
+    "child_side_weighted": 0.05123993300365842,
+    "child_side_raw": 0.10602126845653272,
+    "article_side_weighted": 0.0018024592176685682,
+    "article_side_raw": 0.0018939795945236307,
+    "half_credit_weighted": 0.026521196110663496,
+    "half_credit_raw": 0.05395762402552817,
+    "main_articles": 232,
+    "main_journals": 5,
+    "journal_size_median": 83.0,
+    "journal_tie_share": 0.1946529080675422,
+    "main_authors": null,
+    "main_organisations": 88,
+    "group": 1,
+    "seed": 10,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 162,
+    "df_median": 62.5,
+    "df_mean": 70.62345679012346,
+    "df1_share": 0.29012345679012347,
+    "users_effective": 29.71450515073351,
+    "own_share_child_side": 0.062065373401645016,
+    "child_side_weighted": 0.050618798782024896,
+    "child_side_raw": 0.10001096336678804,
+    "article_side_weighted": 0.0028067957151131644,
+    "article_side_raw": 0.0021577335897656155,
+    "half_credit_weighted": 0.02671279724856903,
+    "half_credit_raw": 0.05108434847827683,
+    "main_articles": 338,
+    "main_journals": 5,
+    "journal_size_median": 1.0,
+    "journal_tie_share": 0.09943714821763602,
+    "main_authors": null,
+    "main_organisations": 74,
+    "group": 1,
+    "seed": 3,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 447,
+    "df_median": 1.0,
+    "df_mean": 25.404921700223714,
+    "df1_share": 0.7449664429530202,
+    "users_effective": 23.338223801529935,
+    "own_share_child_side": 0.2233532505564799,
+    "child_side_weighted": 0.05083887802536562,
+    "child_side_raw": 0.09190108182621244,
+    "article_side_weighted": 0.011167845557165315,
+    "article_side_raw": 0.010802276034715213,
+    "half_credit_weighted": 0.03100336179126547,
+    "half_credit_raw": 0.05135167893046383,
+    "main_articles": 216,
+    "main_journals": 9,
+    "journal_size_median": 1.0,
+    "journal_tie_share": 0.07926829268292683,
+    "main_authors": null,
+    "main_organisations": 194,
+    "group": 1,
+    "seed": 7,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 119,
+    "df_median": 92.0,
+    "df_mean": 105.50420168067227,
+    "df1_share": 0.09243697478991597,
+    "users_effective": 30.7687775486914,
+    "own_share_child_side": 0.04422860613185397,
+    "child_side_weighted": 0.05280566913979718,
+    "child_side_raw": 0.1123654926963933,
+    "article_side_weighted": 0.002017298266001074,
+    "article_side_raw": 0.0020589470950856227,
+    "half_credit_weighted": 0.027411483702899128,
+    "half_credit_raw": 0.05721221989573946,
+    "main_articles": 225,
+    "main_journals": 5,
+    "journal_size_median": 67.0,
+    "journal_tie_share": 0.19277673545966229,
+    "main_authors": null,
+    "main_organisations": 108,
+    "group": 2,
+    "seed": 10,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 139,
+    "df_median": 74.0,
+    "df_mean": 83.85611510791367,
+    "df1_share": 0.15827338129496402,
+    "users_effective": 29.57348059477317,
+    "own_share_child_side": 0.06335052342714806,
+    "child_side_weighted": 0.04966817119252321,
+    "child_side_raw": 0.0989091504295052,
+    "article_side_weighted": 0.0031571284499438386,
+    "article_side_raw": 0.0036463576702065992,
+    "half_credit_weighted": 0.026412649821233525,
+    "half_credit_raw": 0.0512777540498559,
+    "main_articles": 276,
+    "main_journals": 11,
+    "journal_size_median": 1.0,
+    "journal_tie_share": 0.07551594746716699,
+    "main_authors": null,
+    "main_organisations": 34,
+    "group": 2,
+    "seed": 4,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 117,
+    "df_median": 98.0,
+    "df_mean": 111.4017094017094,
+    "df1_share": 0.0,
+    "users_effective": 30.2652713407912,
+    "own_share_child_side": 0.011610141411251622,
+    "child_side_weighted": 0.05242109239195561,
+    "child_side_raw": 0.11166195133100597,
+    "article_side_weighted": 0.0005131241076168696,
+    "article_side_raw": 0.00048400207695428846,
+    "half_credit_weighted": 0.02646710824978624,
+    "half_credit_raw": 0.05607297670398013,
+    "main_articles": 227,
+    "main_journals": 15,
+    "journal_size_median": 3.0,
+    "journal_tie_share": 0.1772983114446529,
+    "main_authors": null,
+    "main_organisations": 122,
+    "group": 2,
+    "seed": 3,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 408,
+    "df_median": 1.0,
+    "df_mean": 26.776960784313726,
+    "df1_share": 0.7573529411764706,
+    "users_effective": 22.819635947224658,
+    "own_share_child_side": 0.23431231477891715,
+    "child_side_weighted": 0.04843062565460344,
+    "child_side_raw": 0.0855410494350155,
+    "article_side_weighted": 0.011111520914238893,
+    "article_side_raw": 0.00869498166949174,
+    "half_credit_weighted": 0.029771073284421166,
+    "half_credit_raw": 0.047118015552253624,
+    "main_articles": 406,
+    "main_journals": 8,
+    "journal_size_median": 31.5,
+    "journal_tie_share": 0.1805816135084428,
+    "main_authors": null,
+    "main_organisations": 133,
+    "group": 3,
+    "seed": 5,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 675,
+    "df_median": 1.0,
+    "df_mean": 15.382222222222222,
+    "df1_share": 0.8385185185185186,
+    "users_effective": 11.30055489342932,
+    "own_share_child_side": 0.46653455948741224,
+    "child_side_weighted": 0.04795368052912439,
+    "child_side_raw": 0.07512622504133956,
+    "article_side_weighted": 0.02245117594166243,
+    "article_side_raw": 0.023580461402874574,
+    "half_credit_weighted": 0.03520242823539341,
+    "half_credit_raw": 0.04935334322210707,
+    "main_articles": 365,
+    "main_journals": 9,
+    "journal_size_median": 26.0,
+    "journal_tie_share": 0.20403377110694185,
+    "main_authors": null,
+    "main_organisations": 71,
+    "group": 3,
+    "seed": 2,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 498,
+    "df_median": 1.0,
+    "df_mean": 22.180722891566266,
+    "df1_share": 0.8012048192771084,
+    "users_effective": 23.3625433653086,
+    "own_share_child_side": 0.23045846546182505,
+    "child_side_weighted": 0.05035000386718592,
+    "child_side_raw": 0.08810524643308192,
+    "article_side_weighted": 0.011315277209962653,
+    "article_side_raw": 0.00894198123517586,
+    "half_credit_weighted": 0.030832640538574284,
+    "half_credit_raw": 0.048523613834128884,
+    "main_articles": 204,
+    "main_journals": 9,
+    "journal_size_median": 59.0,
+    "journal_tie_share": 0.2575046904315197,
+    "main_authors": null,
+    "main_organisations": 106,
+    "group": 3,
+    "seed": 10,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 437,
+    "df_median": 1.0,
+    "df_mean": 24.189931350114417,
+    "df1_share": 0.7757437070938215,
+    "users_effective": 20.285005540637062,
+    "own_share_child_side": 0.281744732593219,
+    "child_side_weighted": 0.04887729779989694,
+    "child_side_raw": 0.08465000703164252,
+    "article_side_weighted": 0.013624778252597808,
+    "article_side_raw": 0.011731240639248162,
+    "half_credit_weighted": 0.031251038026247374,
+    "half_credit_raw": 0.04819062383544534,
+    "main_articles": 533,
+    "main_journals": 8,
+    "journal_size_median": 5.5,
+    "journal_tie_share": 0.08348968105065666,
+    "main_authors": null,
+    "main_organisations": 19,
+    "group": 4,
+    "seed": 8,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 574,
+    "df_median": 1.0,
+    "df_mean": 17.299651567944252,
+    "df1_share": 0.8222996515679443,
+    "users_effective": 14.039178363340875,
+    "own_share_child_side": 0.41087051862600643,
+    "child_side_weighted": 0.045066247231509496,
+    "child_side_raw": 0.07147746290375903,
+    "article_side_weighted": 0.018380574123098143,
+    "article_side_raw": 0.018431016827513046,
+    "half_credit_weighted": 0.03172341067730382,
+    "half_credit_raw": 0.04495423986563604,
+    "main_articles": 346,
+    "main_journals": 12,
+    "journal_size_median": 3.0,
+    "journal_tie_share": 0.1294559099437148,
+    "main_authors": null,
+    "main_organisations": 165,
+    "group": 4,
+    "seed": 7,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 245,
+    "df_median": 1.0,
+    "df_mean": 49.75918367346939,
+    "df1_share": 0.5102040816326531,
+    "users_effective": 28.09830510689644,
+    "own_share_child_side": 0.118039153930049,
+    "child_side_weighted": 0.04959380884738425,
+    "child_side_raw": 0.09125749356770146,
+    "article_side_weighted": 0.005712536949548267,
+    "article_side_raw": 0.004560854403084781,
+    "half_credit_weighted": 0.027653172898466256,
+    "half_credit_raw": 0.04790917398539312,
+    "main_articles": 338,
+    "main_journals": 5,
+    "journal_size_median": 68.0,
+    "journal_tie_share": 0.24671669793621012,
+    "main_authors": null,
+    "main_organisations": 85,
+    "group": 4,
+    "seed": 3,
+    "k": 0
+   },
+   {
+    "main_hyperedges": 428,
+    "df_median": 1.0,
+    "df_mean": 25.934579439252335,
+    "df1_share": 0.75,
+    "users_effective": 21.844012910927244,
+    "own_share_child_side": 0.2529477435518805,
+    "child_side_weighted": 0.04696097621921094,
+    "child_side_raw": 0.0788946313439671,
+    "article_side_weighted": 0.011707665059572474,
+    "article_side_raw": 0.009607802488915062,
+    "half_credit_weighted": 0.02933432063939171,
+    "half_credit_raw": 0.04425121691644108,
+    "main_articles": 455,
+    "main_journals": 5,
+    "journal_size_median": 1.0,
+    "journal_tie_share": 0.037054409005628515,
+    "main_authors": null,
+    "main_organisations": 128,
+    "group": 4,
+    "seed": 1,
+    "k": 0
+   }
+  ],
+  "example_hyperedges": [
+   {
+    "atoms": [
+     "model/C/en"
+    ],
+    "df": 390
+   },
+   {
+    "atoms": [
+     "suggest/P/en"
+    ],
+    "df": 307
+   },
+   {
+    "atoms": [
+     "evaluate/P/en"
+    ],
+    "df": 295
+   },
+   {
+    "atoms": [
+     "example/C/en"
+    ],
+    "df": 278
+   },
+   {
+    "atoms": [
+     "base/P/en"
+    ],
+    "df": 261
+   },
+   {
+    "atoms": [
+     "result/C/en"
+    ],
+    "df": 247
+   },
+   {
+    "atoms": [
+     "offer/P/en"
+    ],
+    "df": 226
+   },
+   {
+    "atoms": [
+     "leverage/P/en"
+    ],
+    "df": 222
+   },
+   {
+    "atoms": [
+     "develop/P/en"
+    ],
+    "df": 219
+   },
+   {
+    "atoms": [
+     "apply/P/en"
+    ],
+    "df": 213
+   },
+   {
+    "atoms": [
+     "combine/P/en"
+    ],
+    "df": 212
+   },
+   {
+    "atoms": [
+     "employ/P/en"
+    ],
+    "df": 207
+   },
+   {
+    "atoms": [
+     "explore/P/en"
+    ],
+    "df": 204
+   },
+   {
+    "atoms": [
+     "improve/P/en"
+    ],
+    "df": 199
+   },
+   {
+    "atoms": [
+     "follow/P/en"
+    ],
+    "df": 197
+   }
+  ]
+ }
+}
