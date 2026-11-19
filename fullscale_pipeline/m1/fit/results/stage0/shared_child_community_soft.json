@@ -1,0 +1,48 @@
+{
+ "approach_1": {
+  "failing": {
+   "soft_hyperedges": 360.6384867433129,
+   "soft_articles": 336.8604327821678,
+   "soft_journals": 3.389535152608668,
+   "df_weighted_mean": 19.11438853269427,
+   "journal_size_weighted_mean": 44.533694460577536,
+   "user_overlap": 0.8342722384007841,
+   "co_membership_ties": 0.17585993746097223,
+   "co_membership_chance": 0.02703616013965032
+  },
+  "other": {
+   "soft_hyperedges": 3185.6761905612702,
+   "soft_articles": 44.42967166909679,
+   "soft_journals": 10.154495962591941,
+   "df_weighted_mean": 1.6465842678250722,
+   "journal_size_weighted_mean": 4.814534091404351,
+   "user_overlap": 0.7980567897458064,
+   "co_membership_ties": 0.5534985298010071,
+   "co_membership_chance": 0.02703616013965032
+  },
+  "n_failing": 12
+ },
+ "approach_2": {
+  "failing": {
+   "soft_hyperedges": 185.13599122388138,
+   "soft_articles": 261.30900468753026,
+   "soft_journals": 6.697784523759142,
+   "df_weighted_mean": 35.59577539522356,
+   "journal_size_weighted_mean": 25.696363755719304,
+   "user_overlap": 0.7480272753146933,
+   "co_membership_ties": 0.11655193948302534,
+   "co_membership_chance": 0.028059952496596353
+  },
+  "other": {
+   "soft_hyperedges": 3168.236748050665,
+   "soft_articles": 43.66397016519555,
+   "soft_journals": 10.514533237951074,
+   "df_weighted_mean": 1.6451246818430687,
+   "journal_size_weighted_mean": 4.61690649393532,
+   "user_overlap": 0.764879106032356,
+   "co_membership_ties": 0.5271765177435481,
+   "co_membership_chance": 0.028059952496596353
+  },
+  "n_failing": 16
+ }
+}

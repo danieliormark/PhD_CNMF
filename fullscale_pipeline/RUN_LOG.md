@@ -4000,3 +4000,20 @@ Reading: supports the catch-all reading (b) — generic academic language used b
 journals, whose articles carry little semantics of their own in this community — rather than (a) a socially large
 community whose substantive vocabulary others borrow. Upstream question raised (not decided): single-atom generic
 predicate / concept hyperedges in the child facet are close to stopwords for scientific prose.
+
+### RL-283 — 2026-11-19 — child×article requirement: T1 + V1 decided; soft readings of the K = 32 failing communities
+Owner: "I choose T1 + V1" (design doc). Owner on terminology: "article community" misleads (communities span all
+facets) → wording from now on: "community k read on the article side" / "the articles' memberships in k". Soft
+readings beside RL-282's argmax labels (`fit/shared_child_community_soft.py` → `results/stage0/
+shared_child_community_soft.{json,log}`; each entity counted with its weighted membership), failing vs other
+communities of the same fits, approach 1 / 2: soft number of hyperedges Σ_j p_jc 361 / 185 (others 3,186 / 3,168);
+soft number of articles 337 / 261 (others 44 / 44); soft number of journals 3.4 / 6.7 (others 10.2 / 10.5);
+membership-weighted mean document frequency of its hyperedges 19.1 / 35.6 (others 1.6); membership-weighted mean journal
+size 44.5 / 25.7 visible articles (others 4.8 / 4.6); co-membership Σ_k p_k q_k of the two ends of child×article ties
+reaching its hyperedges (tie-weighted, weight p_jc) 0.18 / 0.12 (others 0.55 / 0.53; chance 0.027 / 0.028); profile
+overlap between a hyperedge's membership and the mean membership of the articles using it, averaged over hyperedges
+(weight p_jc) 0.83 / 0.75 (others 0.80 / 0.76). Reading: soft sizes agree with the argmax labels; the tie-weighted
+co-membership confirms that the ties reaching this community's hyperedges mostly come from articles whose memberships
+lie elsewhere; the hyperedge-averaged overlap does not separate it, because most of its hyperedges by count are used
+by a single article (69 % / 44 %) while the few widely used ones carry the ties — counting hyperedges equally is the
+wrong unit for a question about usage (GLOSSARY: ties → co-membership).

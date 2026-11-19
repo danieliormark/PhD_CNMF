@@ -1,0 +1,18 @@
+approach 1 (12 failing communities): median failing vs other communities of the same fits
+   soft_hyperedges                   360.6       3186
+   soft_articles                     336.9      44.43
+   soft_journals                      3.39      10.15
+   df_weighted_mean                  19.11      1.647
+   journal_size_weighted_mean        44.53      4.815
+   user_overlap                     0.8343     0.7981
+   co_membership_ties               0.1759     0.5535
+   co_membership_chance            0.02704    0.02704
+approach 2 (16 failing communities): median failing vs other communities of the same fits
+   soft_hyperedges                   185.1       3168
+   soft_articles                     261.3      43.66
+   soft_journals                     6.698      10.51
+   df_weighted_mean                   35.6      1.645
+   journal_size_weighted_mean         25.7      4.617
+   user_overlap                      0.748     0.7649
+   co_membership_ties               0.1166     0.5272
+   co_membership_chance            0.02806    0.02806
