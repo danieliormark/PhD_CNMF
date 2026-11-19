@@ -2656,3 +2656,5 @@ Any in-loop response goes through step 2's O3 (low stage-0 alignment counts as e
 
 *[2026-11-19, **start test 2 — DECIDED design (owner: "I agree with S1–S3; test 3 levels, 5% 10 and 20%")**: S1 article×article random start (approach 2); S2 social cores with off-diagonal cells at 5 / 10 / 20 % of the diagonal; S3 as S2 plus the semantic cores; KL, K 13, group 1, 10 seeds; 130 fits. Plan, readings and expected outcomes: `plans/ticket107_start_test2.md`; the rule for choosing the start (§5 there) is a proposal for the owner to confirm when reading. RL-278.]*
 
+*[2026-11-19, **damping test read (RL-279) — owner: "I agree with your interpretation"**: mass restoration in the data (implementation A) acts as the intended relation-weight correction (measured equivalent to B); the damping arm runs from the ordinary start, the same as its undamped reference. Final status of the provisional wording not yet stated by the owner.]*
+
