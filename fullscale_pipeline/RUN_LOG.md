@@ -3929,3 +3929,34 @@ test fits, 3 seeds): held-out existence −0.0018 / −0.0004 / −0.0013 (appro
 uninformative. Consequences: the mass restoration acts exactly as the intended relation-weight correction (measured);
 the arm should run from the same start as its undamped reference (ordinary start), so the comparison differs only in
 the data; the result is expected to carry over to the start chosen by start test 2.
+
+### RL-280 — 2026-11-19 — Start test 2 read (130/130 converged, no errors)
+Aligned (`fit.align --stages start_test2`); `fit/start_test2_analysis.py` → `results/stage0/start_test2.{json,log}`.
+KL, K 13, group 1, seeds 1–10; paired by seed against the diagonal arm (start test) unless stated.
+**Off-diagonal links do not survive from structured starts.** S2 and S3 at 5 / 10 / 20 %: every off-diagonal core cell
+back at the positivity floor in every relation (median share 1.000; off-diagonal share of reconstructed tie weight
+1e-6–1e-5), including the semantic cores in S3 — except article×journal at 20 %: 0.3–2.2 % of its off-diagonal cells
+stay above the floor, off-diagonal share 0.002 (approach 1) / 0.021–0.026 (approach 2). Off-diagonal weight survives
+only from random starts: pass 1 (article×article 0.41, article×journal 0.24–0.31) and S1 (article×article 0.19).
+**Training loss (data loss, paired vs diagonal):** approach 1 S2 5 % −1.01 (SE 0.15), 10 % −0.76 (0.23), 20 % +0.57
+(0.29, within); S3 5 % −1.45 (0.22), 10 % −1.28 (0.22), 20 % −0.07 (0.28, within). Approach 2 S2 5 % −0.31 (0.11),
+10 % +0.19 (within), 20 % +0.82 (0.12, higher); S3 5 % −0.87 (0.10), 10 % −0.61 (0.19), 20 % −0.45 (within). S3 5 %
+vs S2 5 %: −0.45 (0.19) / −0.55 (0.15), lower; S3 5 % vs S3 10 %: −0.17 (0.18) / −0.26 (0.15), within. Loss ≈ 1,376 /
+1,278, so these are ≤ 0.1 %. Held-out existence: every arm within 2 SE of the diagonal arm. Held-out value: lower
+beyond 2 SE at 10–20 % in S2 and at 20 % in S3 (−0.0016 to −0.0042); 5 % within noise. Stability (chance-adjusted
+Track B; one number per arm, no SE): rises with the level — approach 1 diagonal 0.443, S2 0.451 / 0.458 / 0.466, S3
+0.447 / 0.453 / 0.460; approach 2 0.461, S2 0.471 / 0.477 / 0.482, S3 0.469 / 0.472 / 0.477; random 0.359 / 0.405.
+Child×article requirement: 13/13 communities in every fit of every arm (still met by construction: diagonal cores).
+**Closure ratio article×article:** diagonal 0.41; S2/S3 0.42–0.46 (+0.02 to +0.04, beyond 2 SE from 10 %); S1 0.66
+(+0.28, SE 0.03); random 0.84.
+**S1 (article×article random, approach 2):** data loss +1.18 (0.27, higher); article×article's own loss +4.34 (1.3,
+higher); child×article +3.14 (0.48), article×affiliation +1.32 (0.41) higher; child×parent −1.57, article×journal
+−0.92 lower; weighted changes: article×article +0.72, child×article +0.78, article×affiliation +0.22, child×parent
+−0.39, article×journal −0.15; held-out value −0.0061 (0.0007, lower); stability 0.452 vs 0.461.
+Reading against the pre-stated outcomes (plans/ticket107_start_test2.md §4): S2/S3 → outcome 1 (off-diagonal cells
+return to the floor; loss equal or slightly lower at 5–10 %); S1 → outcome 3 (off-diagonal survives, loss higher,
+article×article's own reconstruction worse) — S1 adoption criterion not met. No dose–response in off-diagonal share
+(only article×journal at 20 %); stability rises and held-out value falls with the level. Proposed start rule (§5, not
+yet confirmed by the owner): lowest training loss → S3 5 % and S3 10 % tied (within 2 SE); tie-break by closure ratios
+closer to 1 and higher stability → S3 10 % (article×article 0.43 vs 0.42, author×article 1.01 vs 1.02 in approach 1,
+stability +0.006 / +0.003); the two are practically equivalent.

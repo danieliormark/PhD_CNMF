@@ -51,5 +51,10 @@ Starts are model-design choices, not restarts. Proposal: among arms whose fits c
 requirement, prefer the lowest paired training loss; where arms are within 2 SE, prefer the one whose closure ratios
 are closest to 1 and whose stability is higher. Held-out existence and value are reported beside.
 
-## 6. Results
-(to be filled)
+## 6. Results (2026-11-19, RL-280)
+130/130 converged. S2/S3 → outcome 1: off-diagonal cells return to the floor at every level in every relation
+(exception: article×journal at 20 %, off-diagonal share 0.2–2.6 %); training loss equal or slightly lower than the
+diagonal arm at 5–10 % (≤ 0.1 %); existence unchanged; value lower at 10–20 % (S2) and 20 % (S3); stability rises with
+the level. S1 → outcome 3: article×article keeps 19 % off-diagonal weight (closure ratio 0.66) but every fit reading is
+worse, article×article's own loss included; not adopted by the §4 criterion. Start rule (§5, proposal): S3 5 % and
+10 % tied on loss; tie-break → S3 10 %.
