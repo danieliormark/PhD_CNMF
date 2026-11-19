@@ -3960,3 +3960,16 @@ article×article's own reconstruction worse) — S1 adoption criterion not met. 
 yet confirmed by the owner): lowest training loss → S3 5 % and S3 10 % tied (within 2 SE); tie-break by closure ratios
 closer to 1 and higher stability → S3 10 % (article×article 0.43 vs 0.42, author×article 1.01 vs 1.02 in approach 1,
 stability +0.006 / +0.003); the two are practically equivalent.
+
+### RL-281 — 2026-11-19 — O1 decided; why KL fits fail the child×article requirement at K = 32 (saved fits, no fits)
+Owner: "I think under KL O1 is indeed preffered" (design doc). Check before presenting the child×article tolerance /
+veto point: pass-1 KL fits at K = 32 (random social start, all 5 groups × 10 seeds) fail the requirement in 12/50
+(approach 1) and 16/50 (approach 2) fits, one community each (RL-266). Under the fitted numbering every such fit has
+one child community whose child×article core column carries non-floor off-diagonal cells (31 of 31): child hyperedges
+of that community are used by articles of nearly every other community. Example (approach 1, group 1, seed 6): the
+community's own cell 2.26 is its whole article-side row (2.26), but only 11 % of its child-side column (19.87); its
+next-largest column cells 0.95 and 0.92 come from other article communities. The community holds 2.5–3.2 % of the
+child×article tie weight. In the other fits at K = 32, and in every fit at K ≤ 20, the child×article core is exactly
+diagonal (off-diagonal cells at the floor), so the requirement cannot fail there. Reading: at K = 32 KL forms one
+"shared vocabulary" child community linked to most article communities — the case the requirement exists to catch
+(semantics not belonging to the community's own articles). Not yet checked under the chosen start (S3 10 %).
