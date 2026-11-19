@@ -9,7 +9,7 @@
 
 ## State (2026-11-18, ticket 107 M1 — loss chosen (KL), diagonal start approved)
 
-Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-274; design doc entries of 2026-11-18.
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-279; design doc entries of 2026-11-18.
 - **Decided 2026-11-18:** loss = KL (stage-0 rule overridden; child×article > 0.5 per community is one of the most
   important rules); diagonal start for the core matrices under KL, article×article closure ratio as a standing reading;
   the 17 unconverged squared-error start-test fits are not continued; child×article requirement counted by the counting
@@ -18,9 +18,12 @@ Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-
   (authors' article counts, organisations, journals; × log(1+d)/d, d = visible ties in the fold — owner: "n of ties");
   mass restored in the data (GPT reviews RL-272/273); wording approved provisionally until the test. (2b) preferred
   measures on membership distributions recorded in GLOSSARY.
-- **Waiting for the owner:** submit the log-damping equivalence test (`bash .../fit/slurm/damping_test.sh`, 18 fits,
-  plan `plans/ticket107_damping_test.md`, RL-274); then read with `python -m fit.damping_test_analysis`. Entity-total
-  diagnostic already run (RL-274). Points below to be discussed while the test runs.
+- **Settled 2026-11-19:** log-damping arm = implementation A (mass restored in the data), stage 1 robustness arm, ordinary
+  start as its undamped reference (RL-279, design doc); model class (ii): core matrices must allow links between
+  communities; passes 1–2 not redone, pass 3 re-chooses K and λ_child under the final start.
+- **Running:** start test 2 (130 fits, submitted 2026-11-19; RL-278; read with `fit.align --stages start_test2` then
+  `fit.start_test2_analysis`). Then: choose the start (plan §5 proposal), pass 3, stage 1.
+- **Open small item:** owner to confirm the log-damping arm's wording as final.
 
 **Points to settle afterwards (owner: "I'll return to them once we settle points 0 and 2"):**
 1. Start details: does article×article keep a random start (closure ratio 0.41 under the diagonal start, RL-270)?

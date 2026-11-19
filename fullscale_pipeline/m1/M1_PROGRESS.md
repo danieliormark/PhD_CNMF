@@ -99,6 +99,6 @@ empty-column reference.
 | Stage | Fits (staged plan, S = 10 seeds) | Purpose |
 |---|---|---|
 | λ calibration | ≈ 1,580 (+ conditional) | Strength of each kept term per K under the chosen loss; graded swap per kept term |
-| Stage 1 | ≈ 6,000 (+ social log-damping arm, decided 2026-11-18) | Journal weighting (J arms) per approach; social log-damping robustness arm (journals, organisations, authors' article counts; not crossed with J arms); binding gate, vetoes and convergence |
+| Stage 1 | ≈ 6,000 (+ social log-damping arm, decided 2026-11-18) | Journal weighting (J arms) per approach; social log-damping robustness arm (journals, organisations, authors' article counts; not crossed with J arms; implementation A = mass restored in the data, ordinary start as its undamped reference, under the start chosen by start test 2 — decided 2026-11-19, design doc); binding gate, vetoes and convergence |
 | Stage 2 | ≈ 1,000 | K protocol with vetoes and fallback; re-checks |
 | Stage 3 | ≈ 320 (+ optional swap 80) | Approach comparisons, final refit on all data |
