@@ -4193,3 +4193,9 @@ approach 1 K 5 / 8 / 13 / 20 = 2,227 / 2,078 / 1,904 / 1,773; approach 2 = 2,048
 0.3–0.8 %); K = 13 reproduces pass 2's basis exactly. Start S3 10 % (start test 2, K = 13): 1,898 / 1,766, i.e.
 0.997 / 1.000 × the pass-1 value. The basis falls about 20 % from K 5 to K 20 (data loss falls, R ÷ S rises); the start
 moves it by ≤ 0.3 %, so pass-1 fits give the per-K basis for pass 3 without new λ = 0 fits first.
+
+### RL-298 — 2026-11-19 — Pass 3 λ_child values (owner)
+Owner: "I think its better to fit option b with 3 values and occupy more cores/spend a bit more time now than
+discovering that we got into an unlikely case where fitting all three whould have been the best option" → pass 3 fits
+r ∈ {0, 0.3, 1} at every K, λ_child = r × the pass-1 basis of that K and approach (RL-297): 2 approaches × 4 K × 3 r ×
+5 groups × 10 seeds = 1,200 fits per study (≈ 900 CPU-hours).

@@ -2696,3 +2696,5 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-19, **pass 3 K grid — DECIDED** (owner: "I approve your K grid proposal"): K ∈ {5, 8, 13, 20}, both approaches, both studies; K = 32 only if K = 20 comes out best; the other study's chosen K added as a top-up (C3). RL-296.]*
 
+*[2026-11-19, **pass 3 λ_child — DECIDED** (owner: "I think its better to fit option b with 3 values and occupy more cores/spend a bit more time now than discovering that we got into an unlikely case where fitting all three whould have been the best option"): r ∈ {0, 0.3, 1} at every K; λ_child = r × basis, the basis (data loss ÷ (R ÷ S) on the λ = 0 solution, hold-out group 1, mean of 10 seeds) taken per K and approach from pass 1 (the start moves it by ≤ 0.3 %, RL-297). 1,200 fits per study. RL-298.]*
+
