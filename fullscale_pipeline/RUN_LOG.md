@@ -4229,3 +4229,7 @@ chains `slurm/submit_pass3_post.sh` (align → aggregate as fitted and aligned �
 for the code test only): alignment, both aggregations, choice and readings ran in both approaches (no errors); the
 S3 10 % start and λ_child reach the fits (spec). Study B's pass 3 uses the same code (`stage0_pass3("B")`) once B's
 pass-1 basis (`pass3_lambda_basis.py --build` B) exists.
+
+### RL-302 — 2026-11-19 — Pass 3 (study A) submitted (owner, CSF3)
+Fit array job 24948267 (1,200 fits, 150 tasks × 8); post-processing job 24948268 (afterany on 24948267: alignment,
+aggregation as fitted and aligned, readings, J1 choice). Study-B pass 1 submitted earlier the same day (job id not given).
