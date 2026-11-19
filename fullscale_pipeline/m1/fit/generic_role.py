@@ -19,7 +19,7 @@ from .aggregate import load_fit, load_UZ, latest_fits
 from .generic_hyperedges import labels
 
 ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
-CLASSES = ("G", "F", "S")          # "?" retired 2026-11-19 (owner: substantive)
+CLASSES = ("G", "S")                # "?" and "F" retired 2026-11-19 (owner: substantive)
 
 
 def bits(P):
@@ -43,15 +43,12 @@ def one(f, ca, lab, tf):
         g = (resp * (w * (cls == "G"))[:, None]).sum(0) / np.maximum(tot, 1e-300)
         out[f"G_share_median_{wname}"] = float(np.median(g)); out[f"G_share_max_{wname}"] = float(g.max())
         out[f"G_share_corpus_{wname}"] = float(w[cls == "G"].sum() / w.sum())
-        for k in ("F", "?"):
-            s = (resp * (w * (cls == k))[:, None]).sum(0) / np.maximum(tot, 1e-300)
-            out[f"{k}_share_max_{wname}"] = float(s.max())
     P = M.weighted_memberships(U, Z, rel)["child"]["P"]; H = bits(P)
     for k in CLASSES:
         m = cls == k
         out[f"entropy_{k}"] = float((H[c[m]] * v[m]).sum() / v[m].sum()) if m.any() else None
     use = np.zeros((K, ca.shape[1])); np.add.at(use.T, c, resp * v[:, None])
-    keepG = lab != "G"; keepS = lab == "S"
+    keepG = lab != "G"; keepS = lab == "S"   # with F and ? retired, "without G" and "S only" coincide
     out["cos_all"] = cos_mean(use); out["cos_without_G"] = cos_mean(use[:, keepG]); out["cos_S_only"] = cos_mean(use[:, keepS])
     ht = ((A[ca.hid_tie_row] @ z) * B[ca.hid_tie_col]).sum(1); he = ((A[ca.hid_empty_row] @ z) * B[ca.hid_empty_col]).sum(1)
     n_empty_obs = int(ca.obs_row_mask.sum()) * ca.shape[1] - len(ca.tie_row) - len(ca.hid_tie_row)
@@ -86,7 +83,7 @@ def run():
             rep[f"approach_{a}"][name] = {"fits": len(rows), "median": med}
             print(f"  {name} ({len(rows)} fits): G share of a community's child-side tie weight — median {med['G_share_median_weighted']:.3f}, "
                   f"largest {med['G_share_max_weighted']:.3f} (corpus {med['G_share_corpus_weighted']:.3f}); raw: median {med['G_share_median_raw']:.3f}, "
-                  f"largest {med['G_share_max_raw']:.3f} (corpus {med['G_share_corpus_raw']:.3f}); largest F {med['F_share_max_weighted']:.3f}")
+                  f"largest {med['G_share_max_raw']:.3f} (corpus {med['G_share_corpus_raw']:.3f})")
             print(f"     membership entropy (bits, tie-weighted): " + "  ".join(f"{k} {med['entropy_'+k]:.3f}" for k in CLASSES)
                   + f" | mean cosine between communities: all {med['cos_all']:.4f}, without G {med['cos_without_G']:.4f}, S only {med['cos_S_only']:.4f}")
             print(f"     held-out existence (within-class AP / chance): all {med['existence_all']:.4f}/{med['chance_all']:.4f}  "

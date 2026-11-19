@@ -4067,3 +4067,13 @@ alike): S membership entropy 0.68 bits (G 2.92); mean cosine between communities
 held-out existence within-class AP / chance: all 0.171 / 0.109, G 0.311 / 0.203 (3,795 hidden ties, 44 %), F 0.415 /
 0.151 (296), S 0.071 / 0.029 (4,596). Across K 8 / 13 / 20 / 32 (pass 1, approach 1): S 0.073 / 0.072 / 0.073 / 0.070
 (flat); G 0.301 / 0.313 / 0.296 / 0.292. Conclusions of RL-285 unchanged.
+
+### RL-287 — 2026-11-19 — Focal hyperedges classed substantive (owner); review list rebuilt for the owner
+Owner: "I agree to keep focal words cubstantive" → `generic_hyperedges.FOCAL_IS_SUBSTANTIVE = True`; classes now G
+(genre) 2,220 hyperedges / 20.4 % of ties / 25.8 % raw usage / 14.2 % weighted, S 95,630 / 79.6 / 74.2 / 85.8 %.
+Review list rebuilt in two tables (`plans/ticket107_generic_hyperedges_review.md`): G 213, S 59 (focal topic terms
+marked); 23 genre rows flagged "borderline: action by the authors?" (evaluate, compare, assess, outperform, examine,
+conduct, test, investigate, analyze, design, method, implement, validate, analysis, calculate, experiment, measure,
+collect, compute, and auxiliary forms) for the owner's decision. Step 2 re-run with two classes (decided setting, K 13,
+approach 1 / 2): S membership entropy 0.71 / 0.70 bits (G 2.92); mean cosine between communities 0.44 all, 0.24 S only;
+held-out existence within-class AP / chance: G 0.311 / 0.203 (3,795 hidden ties), S 0.078 / 0.035 (4,892) / 0.080.

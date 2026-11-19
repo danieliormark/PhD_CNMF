@@ -38,12 +38,19 @@ AMBIG_C = set("""model system performance ability dataset task feature input out
 # are endemic to the computational or model building/using articles but they denote substantive actions carried by
 # authors or someone they cite." → the ambiguous words count as substantive; class ? is no longer used.
 AMBIGUOUS_IS_SUBSTANTIVE = True
+# Owner 2026-11-19: "I agree to keep focal words cubstantive" → focal-only hyperedges are class S (marked "focal" in the
+# review list); class F is no longer used.
+FOCAL_IS_SUBSTANTIVE = True
+# Genre words that may denote actions carried out by the authors (by the owner's reasoning for the ambiguous words);
+# flagged "borderline" in the review list for the owner's decision, still class G until the owner moves them.
+BORDERLINE = set("""evaluate outperform measure test experiment assess compare analyze examine investigate validate conduct
+design calculate compute collect construct implement analysis method""".split())
 
 
 def classify(atoms):
     parts = [a.split("/") for a in atoms]
     if all(len(p) > 2 and p[2] == "focal" for p in parts):
-        return "F"
+        return "S" if FOCAL_IS_SUBSTANTIVE else "F"
     def kind(p):
         w, t = p[0], (p[1][:1] if len(p) > 1 else "")
         if (t == "P" and w in GENRE_P) or (t == "C" and w in GENRE_C) or (t == "M" and w in GENRE_M):
@@ -78,19 +85,33 @@ def run(review_path):
                               "single_word": int((m & (df > 0) & np.array([len(at[i]) == 1 for i in ids])).sum())}
     top = [i for i in np.argsort(-df) if df[i] >= 50]
     rep["review_list"] = [{"hyperedge": " ".join(at[ids[i]]), "articles": int(df[i]), "draft": lab[i]} for i in top]
+    def note(h):
+        parts = [a.split("/") for a in h.split()]
+        if all(len(p) > 2 and p[2] == "focal" for p in parts):
+            return "focal topic term"
+        if any(p[0] in BORDERLINE for p in parts):
+            return "borderline: action by the authors?"
+        return ""
+    for x in rep["review_list"]:
+        x["note"] = note(x["hyperedge"])
     with open(review_path, "w") as fh:
-        fh.write("# Generic child hyperedges — draft classification for the owner's review (ticket 107, 2026-11-19)\n\n")
-        fh.write("Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible ties). Draft class: "
-                 "**G** genre of scientific writing, **F** focal topic terms only, **?** ambiguous (generic in form, "
-                 "possibly a method or object of this corpus), **S** substantive. Rule and word lists: "
-                 "`fullscale_pipeline/m1/fit/generic_hyperedges.py`. To correct: change the class in the last column "
-                 "(or name words to move between lists); the rule is then re-run on all hyperedges.\n\n")
-        fh.write("| Class | Hyperedges | Single-word | Share of ties | Share of raw usage | Share of weighted values |\n|---|---|---|---|---|---|\n")
+        fh.write("# Generic child hyperedges — classification for the owner's review (ticket 107, updated 2026-11-19)\n\n")
+        fh.write("Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible ties), in two tables: "
+                 "**G** genre of scientific writing (candidates for exclusion) and **S** substantive. Decided so far "
+                 "(owner, 2026-11-19): methods and objects of model building / use are substantive (former class "
+                 "'ambiguous'); focal topic terms are substantive. Rows marked *borderline* are genre words that may "
+                 "denote actions carried out by the authors — please decide them. To correct: write G or S in the "
+                 "last column, or name words to move between lists; the rule is then re-applied to all child "
+                 "hyperedges (word lists: `fullscale_pipeline/m1/fit/generic_hyperedges.py`).\n\n")
+        fh.write("| Class (all child hyperedges) | Hyperedges | Single-word | Share of ties | Share of raw usage | Share of weighted values |\n|---|---|---|---|---|---|\n")
         for k, x in rep["by_class"].items():
-            fh.write(f"| {k} | {x['hyperedges']} | {x['single_word']} | {x['ties']:.1%} | {x['raw_usage']:.1%} | {x['weighted']:.1%} |\n")
-        fh.write("\n| # | Hyperedge (typed atoms) | Articles using it | Draft class | Owner's class |\n|---|---|---|---|---|\n")
-        for n, x in enumerate(rep["review_list"], 1):
-            fh.write(f"| {n} | `{x['hyperedge']}` | {x['articles']} | {x['draft']} | |\n")
+            if x["hyperedges"]:
+                fh.write(f"| {k} | {x['hyperedges']} | {x['single_word']} | {x['ties']:.1%} | {x['raw_usage']:.1%} | {x['weighted']:.1%} |\n")
+        for cl, title in (("G", "Genre (G)"), ("S", "Substantive (S)")):
+            rows = [x for x in rep["review_list"] if x["draft"] == cl]
+            fh.write(f"\n## {title} — {len(rows)} hyperedges\n\n| # | Hyperedge (typed atoms) | Articles using it | Note | Owner's class |\n|---|---|---|---|---|\n")
+            for n, x in enumerate(rows, 1):
+                fh.write(f"| {n} | `{x['hyperedge']}` | {x['articles']} | {x['note']} | |\n")
     for k, x in rep["by_class"].items():
         print(k, x)
     from collections import Counter

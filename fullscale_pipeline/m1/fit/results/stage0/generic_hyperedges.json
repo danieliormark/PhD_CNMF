@@ -8,11 +8,11 @@
    "single_word": 216
   },
   "F": {
-   "hyperedges": 404,
-   "ties": 0.01720563224538609,
-   "raw_usage": 0.05746078422012393,
-   "weighted": 0.018451506663759727,
-   "single_word": 176
+   "hyperedges": 0,
+   "ties": 0.0,
+   "raw_usage": 0.0,
+   "weighted": 0.0,
+   "single_word": 0
   },
   "?": {
    "hyperedges": 0,
@@ -22,1373 +22,1645 @@
    "single_word": 0
   },
   "S": {
-   "hyperedges": 95226,
-   "ties": 0.7787666993191065,
-   "raw_usage": 0.6843165522574732,
-   "weighted": 0.839661276998607,
-   "single_word": 6248
+   "hyperedges": 95630,
+   "ties": 0.7959723315644925,
+   "raw_usage": 0.7417773364775971,
+   "weighted": 0.8581127836623667,
+   "single_word": 6424
   }
  },
  "review_list": [
   {
    "hyperedge": "use/P/en",
    "articles": 1035,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/P/en",
    "articles": 984,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "llm/C/focal",
    "articles": 704,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "show/P/en",
    "articles": 483,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "study/C/en",
    "articles": 457,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "provide/P/en",
    "articles": 435,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "demonstrate/P/en",
    "articles": 418,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "model/C/en",
    "articles": 390,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "include/P/en",
    "articles": 353,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "have/P/en",
    "articles": 327,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "generate/P/en",
    "articles": 325,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en use/P/en",
    "articles": 315,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "suggest/P/en",
    "articles": 307,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "evaluate/P/en",
    "articles": 295,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "achieve/P/en",
    "articles": 290,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "compare/P/en",
    "articles": 289,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "indicate/P/en",
    "articles": 282,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "example/C/en",
    "articles": 278,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "make/P/en",
    "articles": 273,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "chatgpt/C/focal",
    "articles": 267,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "base/P/en",
    "articles": 261,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "result/C/en",
    "articles": 247,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "find/P/en",
    "articles": 240,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "train/P/en",
    "articles": 234,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "remain/P/en",
    "articles": 231,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "offer/P/en",
    "articles": 226,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "leverage/P/en",
    "articles": 222,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "develop/P/en",
    "articles": 219,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "bert/C/focal",
    "articles": 214,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "apply/P/en",
    "articles": 213,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "combine/P/en",
    "articles": 212,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "employ/P/en",
    "articles": 207,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "explore/P/en",
    "articles": 204,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "report/P/en",
    "articles": 200,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "improve/P/en",
    "articles": 199,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "language_model/C/focal",
    "articles": 198,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "follow/P/en",
    "articles": 197,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "highlight/P/en",
    "articles": 197,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "present/P/en",
    "articles": 197,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "represent/P/en",
    "articles": 195,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "integrate/P/en",
    "articles": 195,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "introduce/P/en",
    "articles": 191,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "see/P/en",
    "articles": 190,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "assess/P/en",
    "articles": 188,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "utilize/P/en",
    "articles": 183,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "perform/P/en",
    "articles": 178,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "identify/P/en",
    "articles": 178,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "outperform/P/en",
    "articles": 178,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "finding/C/en",
    "articles": 176,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "examine/P/en",
    "articles": 175,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "be/P/en not/M/en",
    "articles": 174,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "focus/P/en",
    "articles": 174,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "enhance/P/en",
    "articles": 170,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "fine_tune/P/en",
    "articles": 169,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "propose/P/en",
    "articles": 169,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en train/P/en",
    "articles": 169,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "require/P/en",
    "articles": 168,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "produce/P/en",
    "articles": 163,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "more/M/en",
    "articles": 159,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "conduct/P/en",
    "articles": 159,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "support/P/en",
    "articles": 158,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "participant/C/en",
    "articles": 157,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "address/P/en",
    "articles": 157,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "prompt/C/en",
    "articles": 153,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "align/P/en",
    "articles": 151,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "reveal/P/en",
    "articles": 150,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "involve/P/en",
    "articles": 147,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "gpt_4/C/focal",
    "articles": 147,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "user/C/en",
    "articles": 146,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "capture/P/en",
    "articles": 146,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "create/P/en",
    "articles": 143,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "test/P/en",
    "articles": 141,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "enable/P/en",
    "articles": 141,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "ensure/P/en",
    "articles": 138,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "incorporate/P/en",
    "articles": 136,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "predict/P/en",
    "articles": 134,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "instance/C/en",
    "articles": 134,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "exhibit/P/en",
    "articles": 133,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "aim/P/en",
    "articles": 133,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "approach/C/en",
    "articles": 133,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "addition/C/en",
    "articles": 132,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "consider/P/en",
    "articles": 131,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "response/C/en",
    "articles": 131,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "text/C/en",
    "articles": 131,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "become/P/en",
    "articles": 128,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "investigate/P/en",
    "articles": 127,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "build/P/en",
    "articles": 125,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "rely/P/en",
    "articles": 125,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "research/C/en",
    "articles": 124,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "emerge/P/en",
    "articles": 123,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "time/C/en",
    "articles": 123,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "increase/P/en",
    "articles": 120,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "reflect/P/en",
    "articles": 120,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "obtain/P/en",
    "articles": 119,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "observe/P/en",
    "articles": 117,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "extract/P/en",
    "articles": 117,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "our/M/en study/C/en",
    "articles": 116,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "well/M/en",
    "articles": 116,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "system/C/en",
    "articles": 116,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "select/P/en",
    "articles": 114,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "take/P/en",
    "articles": 111,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "analyze/P/en",
    "articles": 109,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "potential/C/en",
    "articles": 108,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "researcher/C/en",
    "articles": 108,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "relate/P/en",
    "articles": 107,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "reduce/P/en",
    "articles": 107,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "result/P/en",
    "articles": 107,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "bert/C/focal model/C/en",
    "articles": 107,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "understand/P/en",
    "articles": 105,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/P/en may/M/en",
    "articles": 103,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "work/C/en",
    "articles": 103,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "lead/P/en",
    "articles": 102,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "design/P/en",
    "articles": 102,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "human/C/en",
    "articles": 100,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "note/P/en",
    "articles": 100,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "exist/P/en",
    "articles": 99,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "datum/C/en",
    "articles": 98,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "lack/P/en",
    "articles": 98,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "context/C/en",
    "articles": 98,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "base/P/en be/M/en",
    "articles": 97,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "describe/P/en",
    "articles": 96,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "give/P/en",
    "articles": 96,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "case/C/en",
    "articles": 95,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "limitation/C/en",
    "articles": 94,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "contain/P/en",
    "articles": 93,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "word/C/en",
    "articles": 93,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "yield/P/en",
    "articles": 93,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "task/C/en",
    "articles": 92,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "adopt/P/en",
    "articles": 91,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "question/C/en",
    "articles": 91,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "associate/P/en",
    "articles": 90,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "method/C/en",
    "articles": 89,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "be/M/en generate/P/en",
    "articles": 89,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "contribute/P/en",
    "articles": 89,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "underscore/P/en",
    "articles": 88,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "way/C/en",
    "articles": 88,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "serve/P/en",
    "articles": 88,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "illustrate/P/en",
    "articles": 87,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en show/P/en",
    "articles": 86,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "learn/P/en",
    "articles": 85,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "refer/P/en",
    "articles": 85,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "recent/M/en study/C/en",
    "articles": 85,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "implement/P/en",
    "articles": 84,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "allow/P/en",
    "articles": 84,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "finding/C/en our/M/en",
    "articles": 84,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en conduct/P/en",
    "articles": 84,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "dataset/C/en",
    "articles": 82,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "ability/C/en",
    "articles": 82,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "raise/P/en",
    "articles": 81,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "extend/P/en",
    "articles": 81,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "gpt_4o/C/focal",
    "articles": 81,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "future/M/en research/C/en",
    "articles": 81,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "appear/P/en",
    "articles": 81,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "validate/P/en",
    "articles": 80,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "derive/P/en",
    "articles": 79,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en design/P/en",
    "articles": 79,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "process/C/en",
    "articles": 79,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "guide/P/en",
    "articles": 78,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "process/P/en",
    "articles": 78,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "adapt/P/en",
    "articles": 77,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "establish/P/en",
    "articles": 77,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "analysis/C/en",
    "articles": 76,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "consist/P/en",
    "articles": 76,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "paper/C/en",
    "articles": 76,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "performance/C/en",
    "articles": 75,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "important/C/en",
    "articles": 75,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "automate/P/en",
    "articles": 74,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "transformer_model/C/focal",
    "articles": 73,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "section/C/en",
    "articles": 72,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "fact/C/en",
    "articles": 72,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "information/C/en",
    "articles": 71,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "chatbot/C/en",
    "articles": 71,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "power/P/en",
    "articles": 71,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "perceive/P/en",
    "articles": 71,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "add/P/en",
    "articles": 71,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "author/C/en",
    "articles": 70,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "confirm/P/en",
    "articles": 70,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "simulate/P/en",
    "articles": 70,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "ai/C/en",
    "articles": 70,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "begin/P/en",
    "articles": 70,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "present/M/en study/C/en",
    "articles": 70,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "correspond/P/en",
    "articles": 69,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "underlie/P/en",
    "articles": 69,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "apply/P/en be/M/en",
    "articles": 68,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "determine/P/en",
    "articles": 68,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "detect/P/en",
    "articles": 68,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "language/C/en",
    "articles": 68,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "ability/C/en llm/C/focal",
    "articles": 68,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "maintain/P/en",
    "articles": 67,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en can/M/en use/P/en",
    "articles": 67,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "respond/P/en",
    "articles": 66,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "possible/C/en",
    "articles": 66,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "receive/P/en",
    "articles": 66,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "seek/P/en",
    "articles": 66,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "classify/P/en",
    "articles": 66,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "gpt_3_5/C/focal",
    "articles": 65,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "can/M/en generate/P/en",
    "articles": 65,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en evaluate/P/en",
    "articles": 65,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "know/P/en",
    "articles": 65,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "facilitate/P/en",
    "articles": 64,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "do/P/en",
    "articles": 64,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "our/M/en result/C/en",
    "articles": 64,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "prompt/P/en",
    "articles": 63,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "choose/P/en",
    "articles": 62,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "engage/P/en",
    "articles": 62,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "llm/C/focal output/C/en",
    "articles": 62,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "ask/P/en",
    "articles": 62,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "call/P/en",
    "articles": 61,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "roberta/C/focal",
    "articles": 61,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "deliver/P/en",
    "articles": 61,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "most/M/en",
    "articles": 61,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "emphasize/P/en",
    "articles": 60,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en need/P/en",
    "articles": 60,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "limit/P/en",
    "articles": 60,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "define/P/en",
    "articles": 60,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "calculate/P/en",
    "articles": 60,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "feature/C/en",
    "articles": 60,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "be/P/en would/M/en",
    "articles": 60,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "grow/P/en",
    "articles": 59,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "percent/C/en",
    "articles": 59,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "evidence/C/en",
    "articles": 59,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "interact/P/en",
    "articles": 59,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "regard/P/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en select/P/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "range/P/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "write/P/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "can/M/en provide/P/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "experiment/C/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "hand/C/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "extent/C/en",
    "articles": 58,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "gpt/C/focal",
    "articles": 58,
-   "draft": "F"
+   "draft": "S",
+   "note": "focal topic term"
   },
   {
    "hyperedge": "differ/P/en",
    "articles": 57,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "framework/C/en",
    "articles": 57,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "llm/C/focal performance/C/en",
    "articles": 57,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "order/C/en",
    "articles": 57,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "draw/P/en",
    "articles": 57,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "embed/P/en",
    "articles": 57,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "be/P/en can/M/en",
    "articles": 56,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "measure/P/en",
    "articles": 56,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "be/M/en develop/P/en",
    "articles": 56,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en provide/P/en",
    "articles": 56,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "output/C/en",
    "articles": 55,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "particular/C/en",
    "articles": 55,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "excel/P/en",
    "articles": 55,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "collect/P/en",
    "articles": 55,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "input/C/en",
    "articles": 55,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "label/P/en",
    "articles": 55,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "vary/P/en",
    "articles": 55,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "rate/P/en",
    "articles": 54,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "reach/P/en",
    "articles": 54,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "explain/P/en",
    "articles": 54,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en compare/P/en",
    "articles": 53,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "summarize/P/en",
    "articles": 53,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "seem/P/en",
    "articles": 53,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "pattern/C/en",
    "articles": 53,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "people/C/en",
    "articles": 53,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "mean/P/en",
    "articles": 52,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "future/M/en study/C/en",
    "articles": 52,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "pretraine/P/en",
    "articles": 52,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "operate/P/en",
    "articles": 51,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "comprise/P/en",
    "articles": 51,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "compute/P/en",
    "articles": 51,
-   "draft": "G"
+   "draft": "G",
+   "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "interpret/P/en",
    "articles": 50,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "challenge/C/en",
    "articles": 50,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en fine_tune/P/en",
    "articles": 50,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "optimize/P/en",
    "articles": 50,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "patient/C/en",
    "articles": 50,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "score/P/en",
    "articles": 50,
-   "draft": "S"
+   "draft": "S",
+   "note": ""
   },
   {
    "hyperedge": "be/M/en observe/P/en",
    "articles": 50,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "hold/P/en",
    "articles": 50,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "gap/C/en",
    "articles": 50,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   },
   {
    "hyperedge": "expand/P/en",
    "articles": 50,
-   "draft": "G"
+   "draft": "G",
+   "note": ""
   }
  ]
 }
