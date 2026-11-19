@@ -4207,3 +4207,8 @@ then compares the cells (K, r*(K)). All 12 cells per approach are reported besid
 stability, gate, vetoes), so a disagreement with choosing K at λ = 0 or at r = 1 is visible. Owner's question answered:
 pass 3 fits a fixed grid (no search between grid values); the coarse-to-fine K refinement is stage 2's (decided
 2026-11-03: every integer K inside the band(s) of the coarse curve at J*, large intervals first by geometric midpoints).
+
+### RL-300 — 2026-11-19 — Mono-domain communities in pass 3: report only (owner)
+Owner: "For this stage report only" → in stage 0 (pass 3) mono-domain communities (decided rule: P_k < 0.1 in one
+domain and ≥ 0.5 in the other, in most seeds) are counted and reported at every (K, r) cell, no veto; whether they
+become a veto from stage 2 on is open (to decide later).
