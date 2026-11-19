@@ -1,11 +1,11 @@
 {
  "by_class": {
   "G": {
-   "hyperedges": 1046,
-   "ties": 0.13063780431372785,
-   "raw_usage": 0.17852607861295958,
-   "weighted": 0.08793783685445536,
-   "single_word": 135
+   "hyperedges": 953,
+   "ties": 0.1210524101707342,
+   "raw_usage": 0.16441508100934688,
+   "weighted": 0.08167153323778073,
+   "single_word": 131
   },
   "F": {
    "hyperedges": 0,
@@ -22,11 +22,11 @@
    "single_word": 0
   },
   "S": {
-   "hyperedges": 96804,
-   "ties": 0.8693621956862722,
-   "raw_usage": 0.8214739213870405,
-   "weighted": 0.9120621631455446,
-   "single_word": 6505
+   "hyperedges": 96897,
+   "ties": 0.8789475898292658,
+   "raw_usage": 0.8355849189906531,
+   "weighted": 0.9183284667622191,
+   "single_word": 6509
   }
  },
  "review_list": [
@@ -57,13 +57,13 @@
   {
    "hyperedge": "study/C/en",
    "articles": 457,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "provide/P/en",
    "articles": 435,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -597,7 +597,7 @@
   {
    "hyperedge": "observe/P/en",
    "articles": 117,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -609,7 +609,7 @@
   {
    "hyperedge": "our/M/en study/C/en",
    "articles": 116,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -627,7 +627,7 @@
   {
    "hyperedge": "select/P/en",
    "articles": 114,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -879,7 +879,7 @@
   {
    "hyperedge": "recent/M/en study/C/en",
    "articles": 85,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1113,7 +1113,7 @@
   {
    "hyperedge": "present/M/en study/C/en",
    "articles": 70,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {

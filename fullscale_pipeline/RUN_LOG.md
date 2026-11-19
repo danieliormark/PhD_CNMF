@@ -4105,3 +4105,18 @@ output, measure, design. Merging the forms would add 2,297 article–hyperedge t
 hyperedges only +1.0 %, genre +0.15 %; of 2,280,180 pairs). Classification typed vs by bare word: 73 hyperedges differ
 (0.2 % of ties; e.g. study/P, use/C, need/C, present/C are S typed, G by bare word); G share of ties 13.8 % vs 14.0 %
 (full build). Effect on fits not measured (needs a rebuild and refits).
+
+### RL-289 — 2026-11-19 — Genre list final (owner); atom types stay distinct (owner); steps 1–2 re-run
+Owner: "move those words to S as well and I agree to keep words with different graphbrain-based roles as distinct
+entitied" → provide/P, select/P, observe/P, study/C added to `OWNER_S_ATOMS`; atom type stays part of an atom's identity
+(the build is unchanged; the typed genre rule is the one used; `typed_forms.py` stays as the record of the check).
+Final classes (visible ties, hold-out group 1): G 953 hyperedges / 12.1 % of ties / 16.4 % of raw usage / 8.2 % of
+weighted values; S 96,897 / 87.9 / 83.6 / 91.8 %. Final list: `plans/ticket107_generic_hyperedges_final.md` (of the
+272 hyperedges used by ≥ 50 articles: G 114, S 158); the owner's marked review stays in
+`plans/ticket107_generic_hyperedges_review.md`. Step 2 re-run, decided setting K 13, approach 1 (approach 2 alike):
+membership entropy G 3.03 bits, S 0.84; mean cosine between communities 0.44 all, 0.33 S only; held-out existence
+within-class AP / chance: G 0.330 / 0.201 (2,302 hidden ties, 26.5 %), S 0.129 / 0.074 (6,385). Substantive score
+across K 8 / 13 / 20 / 32 (pass 1): 0.127 / 0.128 / 0.125 / 0.126 (approach 1), 0.129 / 0.128 / 0.128 / 0.118
+(approach 2). Readings of RL-285 hold: genre spread evenly over communities, raises their similarity, and the held-out
+score's variation across K comes from genre ties; on substantive ties alone the score is flat over K 8–32 (approach 2
+lower at K 32).

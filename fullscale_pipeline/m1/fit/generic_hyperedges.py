@@ -46,21 +46,25 @@ FOCAL_IS_SUBSTANTIVE = True
 # Owner's review 2026-11-19 (commit 95b51e2, plans/ticket107_generic_hyperedges_review.md): 81 single-atom rows and
 # 10 two-atom rows marked S. The single-atom rows move the typed word out of the genre lists (so every hyperedge whose
 # other atoms are genre follows); the two-atom rows are exact-hyperedge overrides (5 of them are already implied by a
-# moved word; be/M select/P, be/M provide/P, can/M provide/P, be/M observe/P, future/M study/C are not — the single words
-# select/P, provide/P, observe/P, study/C stay genre unless the owner moves them).
+# moved word; for the other five the owner moved the single words too, below).
 OWNER_S_ATOMS = set("""evaluate/P achieve/P compare/P develop/P apply/P combine/P improve/P see/P assess/P utilize/P
 identify/P outperform/P examine/P focus/P enhance/P propose/P require/P conduct/P support/P align/P capture/P create/P
 test/P enable/P ensure/P aim/P investigate/P build/P rely/P increase/P analyze/P potential/C researcher/C reduce/P
 understand/P design/P exist/P lack/P describe/P case/C limitation/C question/C associate/P method/C contribute/P
 implement/P allow/P extend/P validate/P derive/P information/C power/P author/C possible/C seek/P ask/P call/P deliver/P
 limit/P define/P calculate/P grow/P evidence/C range/P experiment/C differ/P framework/C order/C measure/P excel/P
-collect/P vary/P explain/P summarize/P pattern/C mean/P operate/P compute/P interpret/P gap/C expand/P""".split())
+collect/P vary/P explain/P summarize/P pattern/C mean/P operate/P compute/P interpret/P gap/C expand/P
+provide/P select/P observe/P study/C""".split())
+# provide/P, select/P, observe/P, study/C added 2026-11-19 (owner: "move those words to S as well"), following the
+# two-atom rows be/M provide, can/M provide, be/M select, be/M observe, future/M study.
 OWNER_S_HYPEREDGES = {"be/M/en conduct/P/en", "be/M/en design/P/en", "be/M/en evaluate/P/en", "be/M/en select/P/en",
                       "can/M/en provide/P/en", "be/M/en develop/P/en", "be/M/en provide/P/en", "be/M/en compare/P/en",
                       "future/M/en study/C/en", "be/M/en observe/P/en"}
 # Atom type (P predicate, C concept, M modifier) is part of an atom's identity in the build (design doc §1: help/P ≠
 # help/C), so the word lists are typed. type_blind=True classifies by the bare word instead: a word is genre if it is in
-# any genre list under any type and was not moved by the owner under any type (sensitivity check, owner 2026-11-19).
+# any genre list under any type and was not moved by the owner under any type (sensitivity check only: the owner
+# decided 2026-11-19 to keep words with different atom types as distinct entities, "I agree to keep words with
+# different graphbrain-based roles as distinct entitied").
 GENRE_ANY = GENRE_P | GENRE_C | GENRE_M
 OWNER_S_WORDS = {a.split("/")[0] for a in OWNER_S_ATOMS}
 BORDERLINE = set("""evaluate outperform measure test experiment assess compare analyze examine investigate validate conduct
