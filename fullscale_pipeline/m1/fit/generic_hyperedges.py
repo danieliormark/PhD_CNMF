@@ -43,16 +43,44 @@ AMBIGUOUS_IS_SUBSTANTIVE = True
 FOCAL_IS_SUBSTANTIVE = True
 # Genre words that may denote actions carried out by the authors (by the owner's reasoning for the ambiguous words);
 # flagged "borderline" in the review list for the owner's decision, still class G until the owner moves them.
+# Owner's review 2026-11-19 (commit 95b51e2, plans/ticket107_generic_hyperedges_review.md): 81 single-atom rows and
+# 10 two-atom rows marked S. The single-atom rows move the typed word out of the genre lists (so every hyperedge whose
+# other atoms are genre follows); the two-atom rows are exact-hyperedge overrides (5 of them are already implied by a
+# moved word; be/M select/P, be/M provide/P, can/M provide/P, be/M observe/P, future/M study/C are not — the single words
+# select/P, provide/P, observe/P, study/C stay genre unless the owner moves them).
+OWNER_S_ATOMS = set("""evaluate/P achieve/P compare/P develop/P apply/P combine/P improve/P see/P assess/P utilize/P
+identify/P outperform/P examine/P focus/P enhance/P propose/P require/P conduct/P support/P align/P capture/P create/P
+test/P enable/P ensure/P aim/P investigate/P build/P rely/P increase/P analyze/P potential/C researcher/C reduce/P
+understand/P design/P exist/P lack/P describe/P case/C limitation/C question/C associate/P method/C contribute/P
+implement/P allow/P extend/P validate/P derive/P information/C power/P author/C possible/C seek/P ask/P call/P deliver/P
+limit/P define/P calculate/P grow/P evidence/C range/P experiment/C differ/P framework/C order/C measure/P excel/P
+collect/P vary/P explain/P summarize/P pattern/C mean/P operate/P compute/P interpret/P gap/C expand/P""".split())
+OWNER_S_HYPEREDGES = {"be/M/en conduct/P/en", "be/M/en design/P/en", "be/M/en evaluate/P/en", "be/M/en select/P/en",
+                      "can/M/en provide/P/en", "be/M/en develop/P/en", "be/M/en provide/P/en", "be/M/en compare/P/en",
+                      "future/M/en study/C/en", "be/M/en observe/P/en"}
+# Atom type (P predicate, C concept, M modifier) is part of an atom's identity in the build (design doc §1: help/P ≠
+# help/C), so the word lists are typed. type_blind=True classifies by the bare word instead: a word is genre if it is in
+# any genre list under any type and was not moved by the owner under any type (sensitivity check, owner 2026-11-19).
+GENRE_ANY = GENRE_P | GENRE_C | GENRE_M
+OWNER_S_WORDS = {a.split("/")[0] for a in OWNER_S_ATOMS}
 BORDERLINE = set("""evaluate outperform measure test experiment assess compare analyze examine investigate validate conduct
 design calculate compute collect construct implement analysis method""".split())
 
 
-def classify(atoms):
+def classify(atoms, type_blind=False):
     parts = [a.split("/") for a in atoms]
     if all(len(p) > 2 and p[2] == "focal" for p in parts):
         return "S" if FOCAL_IS_SUBSTANTIVE else "F"
+    if " ".join(sorted(atoms)) in OWNER_S_HYPEREDGES:
+        return "S"
     def kind(p):
         w, t = p[0], (p[1][:1] if len(p) > 1 else "")
+        if len(p) > 2 and p[2] == "focal":
+            return "S"
+        if type_blind:
+            return "G" if (w in GENRE_ANY and w not in OWNER_S_WORDS) else "S"
+        if f"{w}/{t}" in OWNER_S_ATOMS:
+            return "S"
         if (t == "P" and w in GENRE_P) or (t == "C" and w in GENRE_C) or (t == "M" and w in GENRE_M):
             return "G"
         if (t == "P" and w in AMBIG_P) or (t == "C" and w in AMBIG_C):
@@ -66,9 +94,9 @@ def classify(atoms):
     return "S"
 
 
-def labels(build):
+def labels(build, type_blind=False):
     ids = build.index["children"]; at = build.index["child_atoms"]
-    return np.array([classify(at[i]) for i in ids])
+    return np.array([classify(at[i], type_blind) for i in ids])
 
 
 def run(review_path):

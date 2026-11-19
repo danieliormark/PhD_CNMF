@@ -1,0 +1,1384 @@
+{
+ "used_hyperedges": 97850,
+ "bare_word_sets": 96883,
+ "word_sets_with_several_forms": 935,
+ "hyperedges_in_them": 1902,
+ "share_of_ties": 0.12212855396776441,
+ "share_of_raw_usage": 0.16236702545657025,
+ "articles_not_in_main_form_total": 2297,
+ "word_sets_top": [
+  {
+   "forms": [
+    "process/P/en",
+    "process/C/en"
+   ],
+   "df_forms": [
+    90,
+    84
+   ],
+   "df_merged": 155,
+   "articles_not_in_main_form": 65,
+   "classes_typed": [
+    "G"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "result/C/en",
+    "result/P/en"
+   ],
+   "df_forms": [
+    277,
+    123
+   ],
+   "df_merged": 341,
+   "articles_not_in_main_form": 64,
+   "classes_typed": [
+    "G"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "prompt/C/en",
+    "prompt/P/en",
+    "prompt/M/en"
+   ],
+   "df_forms": [
+    166,
+    69,
+    1
+   ],
+   "df_merged": 210,
+   "articles_not_in_main_form": 44,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "work/C/en",
+    "work/P/en"
+   ],
+   "df_forms": [
+    114,
+    52
+   ],
+   "df_merged": 152,
+   "articles_not_in_main_form": 38,
+   "classes_typed": [
+    "G"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "review/P/en",
+    "review/C/en"
+   ],
+   "df_forms": [
+    44,
+    44
+   ],
+   "df_merged": 78,
+   "articles_not_in_main_form": 34,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "score/P/en",
+    "score/C/en"
+   ],
+   "df_forms": [
+    53,
+    44
+   ],
+   "df_merged": 84,
+   "articles_not_in_main_form": 31,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "concern/C/en",
+    "concern/P/en"
+   ],
+   "df_forms": [
+    49,
+    33
+   ],
+   "df_merged": 76,
+   "articles_not_in_main_form": 27,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "experience/P/en",
+    "experience/C/en"
+   ],
+   "df_forms": [
+    48,
+    29
+   ],
+   "df_merged": 73,
+   "articles_not_in_main_form": 25,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "answer/P/en",
+    "answer/C/en"
+   ],
+   "df_forms": [
+    46,
+    30
+   ],
+   "df_merged": 70,
+   "articles_not_in_main_form": 24,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "detail/C/en",
+    "detail/P/en"
+   ],
+   "df_forms": [
+    29,
+    24
+   ],
+   "df_merged": 52,
+   "articles_not_in_main_form": 23,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "need/P/en",
+    "need/C/en",
+    "need/M/en"
+   ],
+   "df_forms": [
+    49,
+    28,
+    1
+   ],
+   "df_merged": 72,
+   "articles_not_in_main_form": 23,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "average/C/en",
+    "average/P/en",
+    "average/M/en"
+   ],
+   "df_forms": [
+    37,
+    25,
+    1
+   ],
+   "df_merged": 59,
+   "articles_not_in_main_form": 22,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "output/C/en",
+    "output/P/en"
+   ],
+   "df_forms": [
+    62,
+    22
+   ],
+   "df_merged": 83,
+   "articles_not_in_main_form": 21,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "measure/P/en",
+    "measure/C/en"
+   ],
+   "df_forms": [
+    62,
+    27
+   ],
+   "df_merged": 82,
+   "articles_not_in_main_form": 20,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "design/P/en",
+    "design/C/en"
+   ],
+   "df_forms": [
+    120,
+    25
+   ],
+   "df_merged": 140,
+   "articles_not_in_main_form": 20,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "contrast/C/en",
+    "contrast/P/en"
+   ],
+   "df_forms": [
+    34,
+    22
+   ],
+   "df_merged": 53,
+   "articles_not_in_main_form": 19,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "model/C/en",
+    "model/P/en"
+   ],
+   "df_forms": [
+    431,
+    42
+   ],
+   "df_merged": 449,
+   "articles_not_in_main_form": 18,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "support/P/en",
+    "support/C/en"
+   ],
+   "df_forms": [
+    174,
+    22
+   ],
+   "df_merged": 192,
+   "articles_not_in_main_form": 18,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "turn/P/en",
+    "turn/C/en"
+   ],
+   "df_forms": [
+    28,
+    18
+   ],
+   "df_merged": 45,
+   "articles_not_in_main_form": 17,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "challenge/C/en",
+    "challenge/P/en"
+   ],
+   "df_forms": [
+    57,
+    21
+   ],
+   "df_merged": 74,
+   "articles_not_in_main_form": 17,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "present/P/en",
+    "present/C/en",
+    "present/M/en"
+   ],
+   "df_forms": [
+    220,
+    19,
+    2
+   ],
+   "df_merged": 236,
+   "articles_not_in_main_form": 16,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "benefit/P/en",
+    "benefit/C/en"
+   ],
+   "df_forms": [
+    19,
+    18
+   ],
+   "df_merged": 34,
+   "articles_not_in_main_form": 15,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "account/P/en",
+    "account/C/en"
+   ],
+   "df_forms": [
+    27,
+    16
+   ],
+   "df_merged": 42,
+   "articles_not_in_main_form": 15,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "point/C/en",
+    "point/P/en"
+   ],
+   "df_forms": [
+    33,
+    17
+   ],
+   "df_merged": 47,
+   "articles_not_in_main_form": 14,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "attempt/P/en",
+    "attempt/C/en"
+   ],
+   "df_forms": [
+    22,
+    15
+   ],
+   "df_merged": 36,
+   "articles_not_in_main_form": 14,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "query/C/en",
+    "query/P/en"
+   ],
+   "df_forms": [
+    20,
+    15
+   ],
+   "df_merged": 34,
+   "articles_not_in_main_form": 14,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "experiment/C/en",
+    "experiment/P/en"
+   ],
+   "df_forms": [
+    67,
+    17
+   ],
+   "df_merged": 80,
+   "articles_not_in_main_form": 13,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "note/P/en",
+    "note/C/en"
+   ],
+   "df_forms": [
+    108,
+    16
+   ],
+   "df_merged": 121,
+   "articles_not_in_main_form": 13,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "code/P/en",
+    "code/C/en"
+   ],
+   "df_forms": [
+    21,
+    14
+   ],
+   "df_merged": 34,
+   "articles_not_in_main_form": 13,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "structure/P/en",
+    "structure/C/en"
+   ],
+   "df_forms": [
+    24,
+    13
+   ],
+   "df_merged": 37,
+   "articles_not_in_main_form": 13,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "label/P/en",
+    "label/C/en"
+   ],
+   "df_forms": [
+    55,
+    21
+   ],
+   "df_merged": 68,
+   "articles_not_in_main_form": 13,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "benchmark/C/en",
+    "benchmark/P/en"
+   ],
+   "df_forms": [
+    21,
+    15
+   ],
+   "df_merged": 33,
+   "articles_not_in_main_form": 12,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "be/M/en find/P/en",
+    "be/P/en find/P/en"
+   ],
+   "df_forms": [
+    50,
+    11
+   ],
+   "df_merged": 61,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "G"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "input/C/en",
+    "input/P/en"
+   ],
+   "df_forms": [
+    62,
+    14
+   ],
+   "df_merged": 73,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "state/P/en",
+    "state/C/en"
+   ],
+   "df_forms": [
+    22,
+    11
+   ],
+   "df_merged": 33,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "document/P/en",
+    "document/C/en"
+   ],
+   "df_forms": [
+    27,
+    11
+   ],
+   "df_merged": 38,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "approach/C/en",
+    "approach/P/en"
+   ],
+   "df_forms": [
+    150,
+    15
+   ],
+   "df_merged": 161,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "study/C/en",
+    "study/P/en"
+   ],
+   "df_forms": [
+    507,
+    41
+   ],
+   "df_merged": 518,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "evidence/C/en",
+    "evidence/P/en"
+   ],
+   "df_forms": [
+    64,
+    12
+   ],
+   "df_merged": 75,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "more/M/en",
+    "more/C/en"
+   ],
+   "df_forms": [
+    179,
+    12
+   ],
+   "df_merged": 190,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "test/P/en",
+    "test/C/en"
+   ],
+   "df_forms": [
+    158,
+    26
+   ],
+   "df_merged": 169,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "feature/C/en",
+    "feature/P/en"
+   ],
+   "df_forms": [
+    67,
+    12
+   ],
+   "df_merged": 78,
+   "articles_not_in_main_form": 11,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "risk/C/en",
+    "risk/P/en"
+   ],
+   "df_forms": [
+    48,
+    12
+   ],
+   "df_merged": 58,
+   "articles_not_in_main_form": 10,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "construct/P/en",
+    "construct/C/en"
+   ],
+   "df_forms": [
+    60,
+    11
+   ],
+   "df_merged": 70,
+   "articles_not_in_main_form": 10,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "view/P/en",
+    "view/C/en"
+   ],
+   "df_forms": [
+    18,
+    10
+   ],
+   "df_merged": 28,
+   "articles_not_in_main_form": 10,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "function/P/en",
+    "function/C/en"
+   ],
+   "df_forms": [
+    24,
+    10
+   ],
+   "df_merged": 34,
+   "articles_not_in_main_form": 10,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "form/P/en",
+    "form/C/en"
+   ],
+   "df_forms": [
+    30,
+    12
+   ],
+   "df_merged": 40,
+   "articles_not_in_main_form": 10,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "request/P/en",
+    "request/C/en"
+   ],
+   "df_forms": [
+    18,
+    10
+   ],
+   "df_merged": 28,
+   "articles_not_in_main_form": 10,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "search/P/en",
+    "search/C/en"
+   ],
+   "df_forms": [
+    17,
+    10
+   ],
+   "df_merged": 26,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "rise/C/en",
+    "rise/P/en"
+   ],
+   "df_forms": [
+    10,
+    9
+   ],
+   "df_merged": 19,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "be/M/en show/P/en",
+    "be/P/en show/P/en"
+   ],
+   "df_forms": [
+    98,
+    10
+   ],
+   "df_merged": 107,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "G"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "close/P/en",
+    "close/C/en",
+    "close/M/en"
+   ],
+   "df_forms": [
+    6,
+    5,
+    4
+   ],
+   "df_merged": 15,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "regard/P/en",
+    "regard/C/en"
+   ],
+   "df_forms": [
+    65,
+    11
+   ],
+   "df_merged": 74,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "G",
+    "S"
+   ],
+   "classes_type_blind": [
+    "G"
+   ]
+  },
+  {
+   "forms": [
+    "range/P/en",
+    "range/C/en"
+   ],
+   "df_forms": [
+    70,
+    9
+   ],
+   "df_merged": 79,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "place/P/en",
+    "place/C/en"
+   ],
+   "df_forms": [
+    11,
+    10
+   ],
+   "df_merged": 20,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "claim/P/en",
+    "claim/C/en"
+   ],
+   "df_forms": [
+    19,
+    12
+   ],
+   "df_merged": 28,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "weight/P/en",
+    "weight/C/en"
+   ],
+   "df_forms": [
+    12,
+    9
+   ],
+   "df_merged": 21,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "advance/P/en",
+    "advance/C/en"
+   ],
+   "df_forms": [
+    46,
+    11
+   ],
+   "df_merged": 55,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "reason/C/en",
+    "reason/P/en"
+   ],
+   "df_forms": [
+    38,
+    9
+   ],
+   "df_merged": 47,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  },
+  {
+   "forms": [
+    "fine_tuning/C/en",
+    "fine_tuning/P/en",
+    "fine_tuning/M/en"
+   ],
+   "df_forms": [
+    42,
+    10,
+    2
+   ],
+   "df_merged": 51,
+   "articles_not_in_main_form": 9,
+   "classes_typed": [
+    "S"
+   ],
+   "classes_type_blind": [
+    "S"
+   ]
+  }
+ ],
+ "pairs_all": {
+  "before": 1279004,
+  "after": 1283859,
+  "gain": 0.0037959224521580855
+ },
+ "pairs_substantive_typed_rule": {
+  "before": 723575,
+  "after": 731163,
+  "gain": 0.0104868189199461
+ },
+ "pairs_genre_typed_rule": {
+  "before": 1136549,
+  "after": 1138265,
+  "gain": 0.0015098337159242584
+ },
+ "article_pairs_total": 2280180,
+ "class_typed": {
+  "G_hyperedges": 1046,
+  "G_share_of_ties": 0.13826919342494545,
+  "G_share_of_raw_usage": 0.18726228484954624
+ },
+ "class_type_blind": {
+  "G_hyperedges": 1119,
+  "G_share_of_ties": 0.14030819140308193,
+  "G_share_of_raw_usage": 0.18909889399307567
+ },
+ "class_differs": {
+  "hyperedges": 73,
+  "share_of_ties": 0.002038997978136459,
+  "examples": [
+   {
+    "hyperedge": "study/P/en",
+    "articles": 41,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "future/C/en",
+    "articles": 41,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "need/C/en",
+    "articles": 28,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "use/C/en",
+    "articles": 24,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "challenge/P/en",
+    "articles": 21,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "present/C/en",
+    "articles": 19,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "note/C/en",
+    "articles": 16,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "approach/P/en",
+    "articles": 15,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "more/C/en",
+    "articles": 12,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "regard/C/en",
+    "articles": 11,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "construct/C/en",
+    "articles": 11,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "most/C/en",
+    "articles": 10,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "well/C/en",
+    "articles": 9,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "high/M/en",
+    "articles": 8,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "report/C/en",
+    "articles": 8,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "may/C/en",
+    "articles": 6,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "be/M/en study/P/en",
+    "articles": 4,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "recent/M/en report/C/en",
+    "articles": 3,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "base/C/en",
+    "articles": 3,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "gain/C/en",
+    "articles": 3,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "run/C/en",
+    "articles": 3,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "most/C/en study/C/en",
+    "articles": 3,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "would/P/en",
+    "articles": 2,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "extent/P/en",
+    "articles": 2,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "approach/P/en can/M/en",
+    "articles": 2,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "can/P/en",
+    "articles": 2,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "address/C/en",
+    "articles": 2,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "well/P/en",
+    "articles": 2,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "finding/C/en important/M/en",
+    "articles": 2,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "may/C/en time/C/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "difference/C/en important/M/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "can/M/en challenge/P/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "may/C/en study/C/en time/C/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "include/C/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "hand/P/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "run/C/en time/C/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "need/C/en result/P/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "most/C/en time/C/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "be/M/en can/M/en show/P/en study/P/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   },
+   {
+    "hyperedge": "recent/C/en",
+    "articles": 1,
+    "typed": "S",
+    "type_blind": "G"
+   }
+  ]
+ }
+}

@@ -4077,3 +4077,31 @@ conduct, test, investigate, analyze, design, method, implement, validate, analys
 collect, compute, and auxiliary forms) for the owner's decision. Step 2 re-run with two classes (decided setting, K 13,
 approach 1 / 2): S membership entropy 0.71 / 0.70 bits (G 2.92); mean cosine between communities 0.44 all, 0.24 S only;
 held-out existence within-class AP / chance: G 0.311 / 0.203 (3,795 hidden ties), S 0.078 / 0.035 (4,892) / 0.080.
+
+### RL-288 — 2026-11-19 — Owner's review of the genre list applied; same word under different atom types measured
+Owner's review (commit 95b51e2): 91 rows of the genre table marked S — 81 single-atom rows (all 23 borderline rows among
+them, plus achieve, develop, apply, improve, identify, propose, support, create, build, researcher, case, limitation,
+question, information, author, evidence, framework, pattern, gap, …) and 10 two-atom rows. Applied in
+`fit/generic_hyperedges.py`: the single-atom rows move the typed word out of the genre lists (`OWNER_S_ATOMS`); the
+two-atom rows are exact-hyperedge overrides (`OWNER_S_HYPEREDGES`). Five of the two-atom rows are not implied by a
+moved word (be select, be provide, can provide, be observe, future study): select/P, provide/P, observe/P and study/C
+alone stay genre — to confirm with the owner. Classes now (visible ties, hold-out group 1): G 1,046 hyperedges (was
+2,220) / 13.1 % of ties / 17.9 % of raw usage / 8.8 % of weighted values; S 96,804 / 86.9 / 82.1 / 91.2 %.
+Step 2 re-run (`results/stage0/generic_role.{json,log}`; the draft-rule run kept as `generic_role_draft_rule.*`),
+decided setting K 13, approach 1 (approach 2 alike): membership entropy G 3.02 bits, S 0.83; mean cosine between
+communities' child-side usage vectors 0.44 all hyperedges, 0.31 S only; held-out existence within-class AP / chance:
+G 0.339 / 0.212 (2,471 hidden ties, 28 %), S 0.118 / 0.066 (6,216). Across K 8 / 13 / 20 / 32 (pass 1): S 0.117 /
+0.118 / 0.116 / 0.116 (approach 1), 0.118 / 0.118 / 0.116 / 0.108 (approach 2) — flat except approach 2 at K 32.
+Conclusions of RL-285 hold with smaller magnitudes.
+Atom type (owner's question: "same word in different role is treated as separate entities?"): yes — the build keeps the
+atom type (P predicate, C concept, M modifier) in each atom's identity (design doc §1, 2026-10-13: help/P ≠ help/C), and
+W compares typed atoms too, so nothing links use/P and use/C. `fit/typed_forms.py` (full build, no fits;
+`results/stage0/typed_forms.{json,log}`): 935 of 96,883 bare word sets have more than one typed form (1,902 hyperedges,
+1.9 % of used hyperedges) but they carry 12.2 % of ties and 16.2 % of raw usage, because they are frequent words. In
+most the main form dominates (use/P 1,035 articles, use/C 23); real splits: process P 90 / C 84, result C 277 / P 123,
+prompt C 166 / P 69, work C 114 / P 52, review P 44 / C 44, score P 53 / C 44, answer, experience, concern, detail,
+output, measure, design. Merging the forms would add 2,297 article–hyperedge ties to the main form (of 175,086 ties,
+1.3 %), and article pairs sharing at least one hyperedge would rise 1,279,004 → 1,283,859 (+0.4 %; substantive
+hyperedges only +1.0 %, genre +0.15 %; of 2,280,180 pairs). Classification typed vs by bare word: 73 hyperedges differ
+(0.2 % of ties; e.g. study/P, use/C, need/C, present/C are S typed, G by bare word); G share of ties 13.8 % vs 14.0 %
+(full build). Effect on fits not measured (needs a rebuild and refits).

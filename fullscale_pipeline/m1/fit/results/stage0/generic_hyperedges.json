@@ -1,11 +1,11 @@
 {
  "by_class": {
   "G": {
-   "hyperedges": 2220,
-   "ties": 0.20402766843550743,
-   "raw_usage": 0.25822266352240286,
-   "weighted": 0.14188721633763324,
-   "single_word": 216
+   "hyperedges": 1046,
+   "ties": 0.13063780431372785,
+   "raw_usage": 0.17852607861295958,
+   "weighted": 0.08793783685445536,
+   "single_word": 135
   },
   "F": {
    "hyperedges": 0,
@@ -22,11 +22,11 @@
    "single_word": 0
   },
   "S": {
-   "hyperedges": 95630,
-   "ties": 0.7959723315644925,
-   "raw_usage": 0.7417773364775971,
-   "weighted": 0.8581127836623667,
-   "single_word": 6424
+   "hyperedges": 96804,
+   "ties": 0.8693621956862722,
+   "raw_usage": 0.8214739213870405,
+   "weighted": 0.9120621631455446,
+   "single_word": 6505
   }
  },
  "review_list": [
@@ -111,19 +111,19 @@
   {
    "hyperedge": "evaluate/P/en",
    "articles": 295,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "achieve/P/en",
    "articles": 290,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "compare/P/en",
    "articles": 289,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -195,7 +195,7 @@
   {
    "hyperedge": "develop/P/en",
    "articles": 219,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -207,13 +207,13 @@
   {
    "hyperedge": "apply/P/en",
    "articles": 213,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "combine/P/en",
    "articles": 212,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -237,7 +237,7 @@
   {
    "hyperedge": "improve/P/en",
    "articles": 199,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -285,19 +285,19 @@
   {
    "hyperedge": "see/P/en",
    "articles": 190,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "assess/P/en",
    "articles": 188,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "utilize/P/en",
    "articles": 183,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -309,13 +309,13 @@
   {
    "hyperedge": "identify/P/en",
    "articles": 178,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "outperform/P/en",
    "articles": 178,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -327,7 +327,7 @@
   {
    "hyperedge": "examine/P/en",
    "articles": 175,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -339,13 +339,13 @@
   {
    "hyperedge": "focus/P/en",
    "articles": 174,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "enhance/P/en",
    "articles": 170,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -357,7 +357,7 @@
   {
    "hyperedge": "propose/P/en",
    "articles": 169,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -369,7 +369,7 @@
   {
    "hyperedge": "require/P/en",
    "articles": 168,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -387,13 +387,13 @@
   {
    "hyperedge": "conduct/P/en",
    "articles": 159,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "support/P/en",
    "articles": 158,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -417,7 +417,7 @@
   {
    "hyperedge": "align/P/en",
    "articles": 151,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -447,31 +447,31 @@
   {
    "hyperedge": "capture/P/en",
    "articles": 146,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "create/P/en",
    "articles": 143,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "test/P/en",
    "articles": 141,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "enable/P/en",
    "articles": 141,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "ensure/P/en",
    "articles": 138,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -501,7 +501,7 @@
   {
    "hyperedge": "aim/P/en",
    "articles": 133,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -543,19 +543,19 @@
   {
    "hyperedge": "investigate/P/en",
    "articles": 127,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "build/P/en",
    "articles": 125,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "rely/P/en",
    "articles": 125,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -579,7 +579,7 @@
   {
    "hyperedge": "increase/P/en",
    "articles": 120,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -639,19 +639,19 @@
   {
    "hyperedge": "analyze/P/en",
    "articles": 109,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "potential/C/en",
    "articles": 108,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "researcher/C/en",
    "articles": 108,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -663,7 +663,7 @@
   {
    "hyperedge": "reduce/P/en",
    "articles": 107,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -681,7 +681,7 @@
   {
    "hyperedge": "understand/P/en",
    "articles": 105,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -705,7 +705,7 @@
   {
    "hyperedge": "design/P/en",
    "articles": 102,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -723,7 +723,7 @@
   {
    "hyperedge": "exist/P/en",
    "articles": 99,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -735,7 +735,7 @@
   {
    "hyperedge": "lack/P/en",
    "articles": 98,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -753,7 +753,7 @@
   {
    "hyperedge": "describe/P/en",
    "articles": 96,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -765,13 +765,13 @@
   {
    "hyperedge": "case/C/en",
    "articles": 95,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "limitation/C/en",
    "articles": 94,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -807,19 +807,19 @@
   {
    "hyperedge": "question/C/en",
    "articles": 91,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "associate/P/en",
    "articles": 90,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "method/C/en",
    "articles": 89,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -831,7 +831,7 @@
   {
    "hyperedge": "contribute/P/en",
    "articles": 89,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -885,13 +885,13 @@
   {
    "hyperedge": "implement/P/en",
    "articles": 84,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "allow/P/en",
    "articles": 84,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -903,7 +903,7 @@
   {
    "hyperedge": "be/M/en conduct/P/en",
    "articles": 84,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -927,7 +927,7 @@
   {
    "hyperedge": "extend/P/en",
    "articles": 81,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -951,19 +951,19 @@
   {
    "hyperedge": "validate/P/en",
    "articles": 80,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "derive/P/en",
    "articles": 79,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "be/M/en design/P/en",
    "articles": 79,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -1053,7 +1053,7 @@
   {
    "hyperedge": "information/C/en",
    "articles": 71,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1065,7 +1065,7 @@
   {
    "hyperedge": "power/P/en",
    "articles": 71,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1083,7 +1083,7 @@
   {
    "hyperedge": "author/C/en",
    "articles": 70,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1131,7 +1131,7 @@
   {
    "hyperedge": "apply/P/en be/M/en",
    "articles": 68,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1179,7 +1179,7 @@
   {
    "hyperedge": "possible/C/en",
    "articles": 66,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1191,7 +1191,7 @@
   {
    "hyperedge": "seek/P/en",
    "articles": 66,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1215,7 +1215,7 @@
   {
    "hyperedge": "be/M/en evaluate/P/en",
    "articles": 65,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -1269,13 +1269,13 @@
   {
    "hyperedge": "ask/P/en",
    "articles": 62,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "call/P/en",
    "articles": 61,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1287,7 +1287,7 @@
   {
    "hyperedge": "deliver/P/en",
    "articles": 61,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1311,19 +1311,19 @@
   {
    "hyperedge": "limit/P/en",
    "articles": 60,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "define/P/en",
    "articles": 60,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "calculate/P/en",
    "articles": 60,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -1341,7 +1341,7 @@
   {
    "hyperedge": "grow/P/en",
    "articles": 59,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1353,7 +1353,7 @@
   {
    "hyperedge": "evidence/C/en",
    "articles": 59,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1371,13 +1371,13 @@
   {
    "hyperedge": "be/M/en select/P/en",
    "articles": 58,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "range/P/en",
    "articles": 58,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1389,13 +1389,13 @@
   {
    "hyperedge": "can/M/en provide/P/en",
    "articles": 58,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "experiment/C/en",
    "articles": 58,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -1419,13 +1419,13 @@
   {
    "hyperedge": "differ/P/en",
    "articles": 57,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "framework/C/en",
    "articles": 57,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1437,7 +1437,7 @@
   {
    "hyperedge": "order/C/en",
    "articles": 57,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1461,19 +1461,19 @@
   {
    "hyperedge": "measure/P/en",
    "articles": 56,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "be/M/en develop/P/en",
    "articles": 56,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "be/M/en provide/P/en",
    "articles": 56,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1491,13 +1491,13 @@
   {
    "hyperedge": "excel/P/en",
    "articles": 55,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "collect/P/en",
    "articles": 55,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
@@ -1515,7 +1515,7 @@
   {
    "hyperedge": "vary/P/en",
    "articles": 55,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1533,19 +1533,19 @@
   {
    "hyperedge": "explain/P/en",
    "articles": 54,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "be/M/en compare/P/en",
    "articles": 53,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "summarize/P/en",
    "articles": 53,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1557,7 +1557,7 @@
   {
    "hyperedge": "pattern/C/en",
    "articles": 53,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1569,13 +1569,13 @@
   {
    "hyperedge": "mean/P/en",
    "articles": 52,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "future/M/en study/C/en",
    "articles": 52,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1587,7 +1587,7 @@
   {
    "hyperedge": "operate/P/en",
    "articles": 51,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1599,13 +1599,13 @@
   {
    "hyperedge": "compute/P/en",
    "articles": 51,
-   "draft": "G",
+   "draft": "S",
    "note": "borderline: action by the authors?"
   },
   {
    "hyperedge": "interpret/P/en",
    "articles": 50,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1641,7 +1641,7 @@
   {
    "hyperedge": "be/M/en observe/P/en",
    "articles": 50,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
@@ -1653,13 +1653,13 @@
   {
    "hyperedge": "gap/C/en",
    "articles": 50,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   },
   {
    "hyperedge": "expand/P/en",
    "articles": 50,
-   "draft": "G",
+   "draft": "S",
    "note": ""
   }
  ]

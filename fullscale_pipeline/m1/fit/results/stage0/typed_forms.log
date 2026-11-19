@@ -1,0 +1,85 @@
+used_hyperedges 97850
+bare_word_sets 96883
+word_sets_with_several_forms 935
+hyperedges_in_them 1902
+share_of_ties 0.12212855396776441
+share_of_raw_usage 0.16236702545657025
+articles_not_in_main_form_total 2297
+pairs_all {'before': 1279004, 'after': 1283859, 'gain': 0.0037959224521580855}
+pairs_substantive_typed_rule {'before': 723575, 'after': 731163, 'gain': 0.0104868189199461}
+pairs_genre_typed_rule {'before': 1136549, 'after': 1138265, 'gain': 0.0015098337159242584}
+article_pairs_total 2280180
+class_typed {'G_hyperedges': 1046, 'G_share_of_ties': 0.13826919342494545, 'G_share_of_raw_usage': 0.18726228484954624}
+class_type_blind {'G_hyperedges': 1119, 'G_share_of_ties': 0.14030819140308193, 'G_share_of_raw_usage': 0.18909889399307567}
+class differs: {'hyperedges': 73, 'share_of_ties': 0.002038997978136459}
+    {'hyperedge': 'study/P/en', 'articles': 41, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'future/C/en', 'articles': 41, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'need/C/en', 'articles': 28, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'use/C/en', 'articles': 24, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'challenge/P/en', 'articles': 21, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'present/C/en', 'articles': 19, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'note/C/en', 'articles': 16, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'approach/P/en', 'articles': 15, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'more/C/en', 'articles': 12, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'regard/C/en', 'articles': 11, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'construct/C/en', 'articles': 11, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'most/C/en', 'articles': 10, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'well/C/en', 'articles': 9, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'high/M/en', 'articles': 8, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'report/C/en', 'articles': 8, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'may/C/en', 'articles': 6, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'be/M/en study/P/en', 'articles': 4, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'recent/M/en report/C/en', 'articles': 3, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'base/C/en', 'articles': 3, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'gain/C/en', 'articles': 3, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'run/C/en', 'articles': 3, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'most/C/en study/C/en', 'articles': 3, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'would/P/en', 'articles': 2, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'extent/P/en', 'articles': 2, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'approach/P/en can/M/en', 'articles': 2, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'can/P/en', 'articles': 2, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'address/C/en', 'articles': 2, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'well/P/en', 'articles': 2, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'finding/C/en important/M/en', 'articles': 2, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'may/C/en time/C/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'difference/C/en important/M/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'can/M/en challenge/P/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'may/C/en study/C/en time/C/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'include/C/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'hand/P/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'run/C/en time/C/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'need/C/en result/P/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'most/C/en time/C/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'be/M/en can/M/en show/P/en study/P/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+    {'hyperedge': 'recent/C/en', 'articles': 1, 'typed': np.str_('S'), 'type_blind': np.str_('G')}
+word sets by articles not in the main form:
+    65 155 [90, 84] process/P/en | process/C/en [np.str_('G')] [np.str_('G')]
+    64 341 [277, 123] result/C/en | result/P/en [np.str_('G')] [np.str_('G')]
+    44 210 [166, 69, 1] prompt/C/en | prompt/P/en | prompt/M/en [np.str_('S')] [np.str_('S')]
+    38 152 [114, 52] work/C/en | work/P/en [np.str_('G')] [np.str_('G')]
+    34 78 [44, 44] review/P/en | review/C/en [np.str_('S')] [np.str_('S')]
+    31 84 [53, 44] score/P/en | score/C/en [np.str_('S')] [np.str_('S')]
+    27 76 [49, 33] concern/C/en | concern/P/en [np.str_('S')] [np.str_('S')]
+    25 73 [48, 29] experience/P/en | experience/C/en [np.str_('S')] [np.str_('S')]
+    24 70 [46, 30] answer/P/en | answer/C/en [np.str_('S')] [np.str_('S')]
+    23 52 [29, 24] detail/C/en | detail/P/en [np.str_('S')] [np.str_('S')]
+    23 72 [49, 28, 1] need/P/en | need/C/en | need/M/en [np.str_('G'), np.str_('S')] [np.str_('G')]
+    22 59 [37, 25, 1] average/C/en | average/P/en | average/M/en [np.str_('S')] [np.str_('S')]
+    21 83 [62, 22] output/C/en | output/P/en [np.str_('S')] [np.str_('S')]
+    20 82 [62, 27] measure/P/en | measure/C/en [np.str_('S')] [np.str_('S')]
+    20 140 [120, 25] design/P/en | design/C/en [np.str_('S')] [np.str_('S')]
+    19 53 [34, 22] contrast/C/en | contrast/P/en [np.str_('S')] [np.str_('S')]
+    18 449 [431, 42] model/C/en | model/P/en [np.str_('S')] [np.str_('S')]
+    18 192 [174, 22] support/P/en | support/C/en [np.str_('S')] [np.str_('S')]
+    17 45 [28, 18] turn/P/en | turn/C/en [np.str_('S')] [np.str_('S')]
+    17 74 [57, 21] challenge/C/en | challenge/P/en [np.str_('G'), np.str_('S')] [np.str_('G')]
+    16 236 [220, 19, 2] present/P/en | present/C/en | present/M/en [np.str_('G'), np.str_('S')] [np.str_('G')]
+    15 34 [19, 18] benefit/P/en | benefit/C/en [np.str_('S')] [np.str_('S')]
+    15 42 [27, 16] account/P/en | account/C/en [np.str_('S')] [np.str_('S')]
+    14 47 [33, 17] point/C/en | point/P/en [np.str_('S')] [np.str_('S')]
+    14 36 [22, 15] attempt/P/en | attempt/C/en [np.str_('S')] [np.str_('S')]
+    14 34 [20, 15] query/C/en | query/P/en [np.str_('S')] [np.str_('S')]
+    13 80 [67, 17] experiment/C/en | experiment/P/en [np.str_('S')] [np.str_('S')]
+    13 121 [108, 16] note/P/en | note/C/en [np.str_('G'), np.str_('S')] [np.str_('G')]
+    13 34 [21, 14] code/P/en | code/C/en [np.str_('S')] [np.str_('S')]
+    13 37 [24, 13] structure/P/en | structure/C/en [np.str_('S')] [np.str_('S')]
