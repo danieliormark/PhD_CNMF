@@ -57,5 +57,9 @@ Memberships as fitted differ between A and B by design (RL-273); the reading on 
   articles 0.025 → 0.012), team-size bands unchanged; productive authors on large teams: no band near zero relative
   to its size.
 
-## 6. Results
-(to be filled)
+## 6. Results (2026-11-19, RL-279)
+18/18 converged. (a) A vs B: total loss differs by 5e-6 relative (seed spread 1e-3; ratio ≤ 0.006); loss paths never
+differ by > 1e-4; reconstruction ratios ≤ 0.026; rules identical; memberships overlap ≥ 0.998 → outcome 1, equivalent
+in practice. Floor binding on all off-diagonal cells in both arms alike; ε and the step-size floor do not act.
+(b) Start scale: ratio 0.26–0.42 of seed spread → the arm runs from the same (ordinary) start as its reference.
+(d) Preview uninformative under diagonal cores (rules met by construction; existence changes ≤ 0.002).

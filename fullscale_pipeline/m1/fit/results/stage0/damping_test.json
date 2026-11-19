@@ -1,0 +1,1746 @@
+{
+ "approach_1": {
+  "q": {
+   "author_article": 1.0074716015352274,
+   "author_affiliation": 1.178321880247493,
+   "article_journal": 1.4042017201112666
+  },
+  "fits": {
+   "weight": 3,
+   "data_matched": 3,
+   "data": 3,
+   "undamped": 3
+  },
+  "a_implementations": {
+   "median": {
+    "total_rel": 4.908820413960826e-06,
+    "epochs": 1.0,
+    "first_epoch_total_differs_1e-4": 2322.0,
+    "relation_loss_rel": {
+     "parent_child": 3.2209967761043266e-07,
+     "child_article": 3.3595464490128508e-06,
+     "author_article": 1.4517913694709008e-05,
+     "author_affiliation": 5.6781053736297026e-05,
+     "article_journal": 1.2482699971098069e-05
+    },
+    "xhat_rel": {
+     "parent_child": 0.0003175158486646023,
+     "child_article": 0.0003402444822178657,
+     "author_article": 0.0008793802839803595,
+     "author_affiliation": 0.0007120204852557662,
+     "article_journal": 0.00038005144010463677
+    },
+    "rule_abs": {
+     "author_article": 2.220446049250313e-16,
+     "author_affiliation": 0.0,
+     "article_journal": 1.1102230246251565e-16
+    },
+    "membership_overlap": {
+     "article": 0.9988090949619569,
+     "author": 0.9982110907564214,
+     "child": 0.9999896589646254,
+     "journal": 0.9999622028031533,
+     "organisation": 0.9997494108307263,
+     "parent": 0.9999803693180087
+    },
+    "anchor_failing": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "membership_overlap_on_A_scale": {
+     "article": 0.9999723929291502,
+     "author": 0.9998162008993048,
+     "child": 0.9999896589646254,
+     "journal": 0.9999622028031533,
+     "organisation": 0.9997494108307263,
+     "parent": 0.9999803693180087
+    }
+   },
+   "ratio_to_seed_spread": {
+    "total_rel": 0.0027712094556319286,
+    "xhat_rel": {
+     "parent_child": 0.000530202636432085,
+     "child_article": 0.0005055832556942019,
+     "author_article": 0.0015402673452094015,
+     "author_affiliation": 0.0013310156569156075,
+     "article_journal": 0.0006396866988998842
+    },
+    "relation_loss_rel": {
+     "parent_child": 0.0006157636955509595,
+     "child_article": 0.000753839277043666,
+     "author_article": 0.0021434834439595426,
+     "author_affiliation": 0.009117699220321933,
+     "article_journal": 0.008599917590173551
+    },
+    "rule_abs": {
+     "author_article": 2.0,
+     "author_affiliation": 0.0,
+     "article_journal": null
+    }
+   },
+   "verdict": "equivalent in practice"
+  },
+  "b_start_scale": {
+   "median": {
+    "total_rel": 0.00045751568020241975,
+    "epochs": -87.0,
+    "first_epoch_total_differs_1e-4": 0.0,
+    "relation_loss_rel": {
+     "parent_child": 4.3211682121347576e-05,
+     "child_article": 8.105306721446373e-05,
+     "author_article": 0.0014815608547733142,
+     "author_affiliation": 0.001107054325128702,
+     "article_journal": 0.006746338868470288
+    },
+    "xhat_rel": {
+     "parent_child": 0.13326783089845093,
+     "child_article": 0.05485703590890106,
+     "author_article": 0.05740579001499502,
+     "author_affiliation": 0.06641939944934958,
+     "article_journal": 0.18565094154197673
+    },
+    "rule_abs": {
+     "author_article": 1.1102230246251565e-16,
+     "author_affiliation": 2.220446049250313e-16,
+     "article_journal": 0.0
+    },
+    "membership_overlap": {
+     "article": 0.949121170610509,
+     "author": 0.9273627405127484,
+     "child": 0.9866694042609638,
+     "journal": 0.9308463777281242,
+     "organisation": 0.9226687794577483,
+     "parent": 0.9827809722382619
+    },
+    "anchor_failing": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "ratio_to_seed_spread": {
+    "total_rel": 0.25828440891236426,
+    "xhat_rel": {
+     "parent_child": 0.22253678230903773,
+     "child_article": 0.08151432355866028,
+     "author_article": 0.1005483809414353,
+     "author_affiliation": 0.124161119547368,
+     "article_journal": 0.3124799051148065
+    },
+    "relation_loss_rel": {
+     "parent_child": 0.08260854301815197,
+     "child_article": 0.018187272156655717,
+     "author_article": 0.21874363150281836,
+     "author_affiliation": 0.17776683757856332,
+     "article_journal": 4.64786932623243
+    },
+    "rule_abs": {
+     "author_article": 1.0,
+     "author_affiliation": 1.0,
+     "article_journal": null
+    }
+   },
+   "verdict": "drift: check rules and memberships"
+  },
+  "c_seed_spread": {
+   "total_rel": 0.0017713639089909391,
+   "epochs": -101.0,
+   "first_epoch_total_differs_1e-4": 0.0,
+   "relation_loss_rel": {
+    "parent_child": 0.0005230897500740628,
+    "child_article": 0.004456581862101953,
+    "author_article": 0.0067730468064128545,
+    "author_affiliation": 0.006227563814535678,
+    "article_journal": 0.001451490649789606
+   },
+   "xhat_rel": {
+    "parent_child": 0.5988575439784213,
+    "child_article": 0.6729741904737049,
+    "author_article": 0.5709270450454214,
+    "author_affiliation": 0.5349452364112285,
+    "article_journal": 0.5941212170868003
+   },
+   "rule_abs": {
+    "author_article": 1.1102230246251565e-16,
+    "author_affiliation": 2.220446049250313e-16,
+    "article_journal": 0.0
+   },
+   "membership_overlap": {
+    "article": 0.44105899625967726,
+    "author": 0.42124925825323767,
+    "child": 0.4321839337899664,
+    "journal": 0.4649389350413882,
+    "organisation": 0.4139139558866288,
+    "parent": 0.43559179383151325
+   },
+   "anchor_failing": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     0
+    ]
+   ]
+  },
+  "d_preview": {
+   "1": {
+    "diagonal_rule": {
+     "damped": {
+      "author_article": 1.0,
+      "author_affiliation": 1.0,
+      "article_journal": 1.0
+     },
+     "undamped": {
+      "author_article": 1.0,
+      "author_affiliation": 0.9999999999999999,
+      "article_journal": 0.9999999999999998
+     }
+    },
+    "anchor_failing": {
+     "damped": 0,
+     "undamped": 0
+    },
+    "heldout_existence": {
+     "damped": 0.09045303671003355,
+     "undamped": 0.09228908806584882
+    }
+   },
+   "2": {
+    "diagonal_rule": {
+     "damped": {
+      "author_article": 1.0,
+      "author_affiliation": 1.0,
+      "article_journal": 1.0
+     },
+     "undamped": {
+      "author_article": 0.9999999999999999,
+      "author_affiliation": 0.9999999999999999,
+      "article_journal": 1.0000000000000002
+     }
+    },
+    "anchor_failing": {
+     "damped": 0,
+     "undamped": 0
+    },
+    "heldout_existence": {
+     "damped": 0.09309054110036964,
+     "undamped": 0.09352317717510233
+    }
+   },
+   "3": {
+    "diagonal_rule": {
+     "damped": {
+      "author_article": 0.9999999999999999,
+      "author_affiliation": 0.9999999999999998,
+      "article_journal": 1.0
+     },
+     "undamped": {
+      "author_article": 1.0,
+      "author_affiliation": 1.0,
+      "article_journal": 1.0
+     }
+    },
+    "anchor_failing": {
+     "damped": 0,
+     "undamped": 0
+    },
+    "heldout_existence": {
+     "damped": 0.09346813293711632,
+     "undamped": 0.09475049646809494
+    }
+   }
+  },
+  "fixed_size_settings": {
+   "weight": {
+    "2": {
+     "converged": true,
+     "epochs": 2301,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.9047824834341688,
+       "author": 0.8846536471884662,
+       "child": 0.8917228096379859,
+       "journal": 0.7926682692307693,
+       "organisation": 0.8890726955243085,
+       "parent": 0.9031273314962835
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.36154695635813,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.0711800595206442,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2865103327247722,
+       "share_below_10eps": 0.00010770016901851342
+      },
+      "U:journal": {
+       "rms": 0.9927550188378291,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.7567738895910938,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.46958650579498806,
+       "share_below_10eps": 9.833703522389847e-05
+      },
+      "Z:article_journal": {
+       "rms": 0.637154632268969,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.715141097271841,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.312135583033058,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 28.390471499601993,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 232.49889509220407,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.16071666910545723
+    },
+    "1": {
+     "converged": true,
+     "epochs": 2322,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.902009507346586,
+       "author": 0.8844011142061281,
+       "child": 0.8906206517039424,
+       "journal": 0.7934695512820513,
+       "organisation": 0.8883374689826302,
+       "parent": 0.9002135623873667
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.150114064423831,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.1608982757037216,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2959118884507624,
+       "share_below_10eps": 0.0006273338312173264
+      },
+      "U:journal": {
+       "rms": 0.900017128570533,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.7390013951414476,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.4739046097452689,
+       "share_below_10eps": 0.0004467921817781474
+      },
+      "Z:article_journal": {
+       "rms": 0.6975296830628547,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.6907680549581454,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.403163312497491,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 28.03896568696547,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 228.54759529530406,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.19899263118219562
+    },
+    "3": {
+     "converged": true,
+     "epochs": 2380,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.9047824834341688,
+       "author": 0.8813630659034559,
+       "child": 0.8896898706811839,
+       "journal": 0.7934695512820513,
+       "organisation": 0.8819042367429464,
+       "parent": 0.9012717543968413
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.441556758807208,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.1117700192861126,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2941676431791823,
+       "share_below_10eps": 0.0001257812192916945
+      },
+      "U:journal": {
+       "rms": 0.7835236661456519,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.8267421588026341,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.48337661703739676,
+       "share_below_10eps": 0.0001838475006359841
+      },
+      "Z:article_journal": {
+       "rms": 0.5372153909483365,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.628235398443995,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.1226590357748094,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 25.150810865692034,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 232.85365424928816,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.1618693985150809
+    }
+   },
+   "data_matched": {
+    "1": {
+     "converged": true,
+     "epochs": 2323,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.902009507346586,
+       "author": 0.8843705041476629,
+       "child": 0.8906198655713219,
+       "journal": 0.7934695512820513,
+       "organisation": 0.8883987378611035,
+       "parent": 0.900215700149002
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.1499927243515904,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.1612676481100874,
+       "share_below_10eps": 1.5305029232605835e-05
+      },
+      "U:child": {
+       "rms": 0.29594724797732336,
+       "share_below_10eps": 0.0004457371958649424
+      },
+      "U:journal": {
+       "rms": 0.8998676389753625,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.7389344677198116,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.47393360317156746,
+       "share_below_10eps": 0.0002843222974951847
+      },
+      "Z:article_journal": {
+       "rms": 0.49679061080021647,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.4350669767694386,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.3856845995201037,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 28.039476849249287,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 228.53919741540935,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.19899270422757434
+    },
+    "2": {
+     "converged": true,
+     "epochs": 2301,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.9047824834341688,
+       "author": 0.8846612997030824,
+       "child": 0.8917220235053653,
+       "journal": 0.7926682692307693,
+       "organisation": 0.8890726955243085,
+       "parent": 0.9031316070195541
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.361422456285652,
+       "share_below_10eps": 3.601267646211466e-05
+      },
+      "U:author": {
+       "rms": 1.0712164990822408,
+       "share_below_10eps": 7.652514616302917e-06
+      },
+      "U:child": {
+       "rms": 0.2865176228888562,
+       "share_below_10eps": 0.0005526512322628828
+      },
+      "U:journal": {
+       "rms": 0.9927577033338568,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.7567321323587227,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.46958404142316584,
+       "share_below_10eps": 9.833703522389847e-05
+      },
+      "Z:article_journal": {
+       "rms": 0.4537515092242656,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.4557215492346522,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.295101714002827,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 28.390366701242034,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 232.49957345607908,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.16071898857426015
+    },
+    "3": {
+     "converged": true,
+     "epochs": 2384,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.9047104580812446,
+       "author": 0.8813707184180721,
+       "child": 0.8896969458747691,
+       "journal": 0.7938701923076923,
+       "organisation": 0.8820267744998928,
+       "parent": 0.9012760299201118
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.440396834235148,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.1113747943534347,
+       "share_below_10eps": 7.652514616302917e-06
+      },
+      "U:child": {
+       "rms": 0.2942954159206217,
+       "share_below_10eps": 0.00018945796155811484
+      },
+      "U:journal": {
+       "rms": 0.7834470786653849,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.8272456829699414,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.48329389910183346,
+       "share_below_10eps": 0.00016246988428296268
+      },
+      "Z:article_journal": {
+       "rms": 0.3827817831902651,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.3818663703173308,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.1076450932983404,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 25.143964376824204,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 232.79771338118758,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.16190586018015896
+    }
+   },
+   "data": {
+    "2": {
+     "converged": true,
+     "epochs": 2214,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.905466724286949,
+       "author": 0.8844393767792097,
+       "child": 0.8917141621791597,
+       "journal": 0.8066907051282052,
+       "organisation": 0.8865913059461447,
+       "parent": 0.9029883769899889
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.227253571141176,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.0699619184062221,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2875679051973656,
+       "share_below_10eps": 1.8867182893754175e-05
+      },
+      "U:journal": {
+       "rms": 0.8418672110365728,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.6630925277706665,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.4627648978160675,
+       "share_below_10eps": 0.0001111636050357113
+      },
+      "Z:article_journal": {
+       "rms": 0.53186648660527,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.624219400718039,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.4726293465120905,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 29.358129673061285,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 231.61698040437048,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.17407865402722977
+    },
+    "1": {
+     "converged": true,
+     "epochs": 2197,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.9022976087582829,
+       "author": 0.8832226269552175,
+       "child": 0.8907464329232342,
+       "journal": 0.8072916666666666,
+       "organisation": 0.8848145084704224,
+       "parent": 0.9002563176200727
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.006145707342804,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.1738672226965188,
+       "share_below_10eps": 7.652514616302917e-06
+      },
+      "U:child": {
+       "rms": 0.296578982405185,
+       "share_below_10eps": 0.00020675287921072285
+      },
+      "U:journal": {
+       "rms": 0.8027058328046157,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.6399636114534452,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.470656734726117,
+       "share_below_10eps": 0.00014323002956524342
+      },
+      "Z:article_journal": {
+       "rms": 0.5645581843422859,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.599990180406132,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.529694102033519,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 29.020749036713454,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 228.62481830140996,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.2071868617660035
+    },
+    "3": {
+     "converged": true,
+     "epochs": 2315,
+     "floor": {
+      "core": {
+       "article_journal": 0.9230769230769231,
+       "author_affiliation": 0.9230769230769231,
+       "author_article": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.9044583693460098,
+       "author": 0.8814548960788515,
+       "child": 0.8898125073699933,
+       "journal": 0.8014823717948718,
+       "organisation": 0.8812302790797415,
+       "parent": 0.9011456264603585
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 3.3062528123772097,
+       "share_below_10eps": 0.0
+      },
+      "U:author": {
+       "rms": 1.1069493726641602,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.29583359099352596,
+       "share_below_10eps": 0.00014936519790888724
+      },
+      "U:journal": {
+       "rms": 0.6398686320514525,
+       "share_below_10eps": 0.00020032051282051281
+      },
+      "U:organisation": {
+       "rms": 0.7170471198764748,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.4796327408525917,
+       "share_below_10eps": 8.551046541208562e-05
+      },
+      "Z:article_journal": {
+       "rms": 0.45689946922259356,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_affiliation": {
+       "rms": 1.5673289174567882,
+       "share_below_10eps": 0.0
+      },
+      "Z:author_article": {
+       "rms": 2.2524436305085587,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 25.90772796210957,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 231.95115791197736,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.18108259631594403
+    }
+   }
+  }
+ },
+ "approach_2": {
+  "q": {
+   "article_affiliation": 1.0831823157480527,
+   "article_journal": 1.4042017201112666
+  },
+  "fits": {
+   "weight": 3,
+   "data_matched": 3,
+   "data": 3,
+   "undamped": 3
+  },
+  "a_implementations": {
+   "median": {
+    "total_rel": 4.4558243881868704e-06,
+    "epochs": 1.0,
+    "first_epoch_total_differs_1e-4": 1976.0,
+    "relation_loss_rel": {
+     "parent_child": 1.2062290633816278e-05,
+     "child_article": 7.742040082211357e-06,
+     "article_affiliation": 3.5291167975237904e-05,
+     "article_article": 1.7731944623921537e-05,
+     "article_journal": 5.528816582825889e-05
+    },
+    "xhat_rel": {
+     "parent_child": 0.015070965290649524,
+     "child_article": 0.004098851127394193,
+     "article_affiliation": 0.0013485340948258203,
+     "article_article": 0.004877010153725376,
+     "article_journal": 0.00797454234786178
+    },
+    "rule_abs": {
+     "article_affiliation": 1.1102230246251565e-16,
+     "article_article": 2.220446049250313e-16,
+     "article_journal": 2.220446049250313e-16
+    },
+    "membership_overlap": {
+     "article": 0.9979666920093111,
+     "child": 0.9997238594315292,
+     "journal": 0.9997581443693075,
+     "organisation": 0.9998148003178905,
+     "parent": 0.9994855665075251
+    },
+    "anchor_failing": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "membership_overlap_on_A_scale": {
+     "article": 0.9995526609872752,
+     "child": 0.9997238594315292,
+     "journal": 0.9997581443693075,
+     "organisation": 0.9998148003178905,
+     "parent": 0.9994855665075251
+    }
+   },
+   "ratio_to_seed_spread": {
+    "total_rel": 0.005949804539630973,
+    "xhat_rel": {
+     "parent_child": 0.026117044218785367,
+     "child_article": 0.006360266933713468,
+     "article_affiliation": 0.002208106090327133,
+     "article_article": 0.004595142077082948,
+     "article_journal": 0.009654546189848213
+    },
+    "relation_loss_rel": {
+     "parent_child": 0.01393961169875185,
+     "child_article": 0.008181361761932543,
+     "article_affiliation": 0.007430190452882069,
+     "article_article": 0.00982795046559927,
+     "article_journal": 0.007976924465854221
+    },
+    "rule_abs": {
+     "article_affiliation": 1.0,
+     "article_article": 1.0,
+     "article_journal": 1.0
+    }
+   },
+   "verdict": "equivalent in practice"
+  },
+  "b_start_scale": {
+   "median": {
+    "total_rel": 0.00031323636973837083,
+    "epochs": -126.0,
+    "first_epoch_total_differs_1e-4": 0.0,
+    "relation_loss_rel": {
+     "parent_child": 7.461301440924603e-05,
+     "child_article": 0.0002463809477544874,
+     "article_affiliation": 0.0010430400185800584,
+     "article_article": 0.0025045530193690876,
+     "article_journal": 0.007749808262618785
+    },
+    "xhat_rel": {
+     "parent_child": 0.13338465647129777,
+     "child_article": 0.0644432587422915,
+     "article_affiliation": 0.045051426664475175,
+     "article_article": 0.18300982252374667,
+     "article_journal": 0.20135848917884008
+    },
+    "rule_abs": {
+     "article_affiliation": 0.0,
+     "article_article": 0.0,
+     "article_journal": 2.220446049250313e-16
+    },
+    "membership_overlap": {
+     "article": 0.927728261182837,
+     "child": 0.9811499768051519,
+     "journal": 0.9137341195773817,
+     "organisation": 0.9258219941766678,
+     "parent": 0.9755543240617445
+    },
+    "anchor_failing": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "ratio_to_seed_spread": {
+    "total_rel": 0.41826046367263703,
+    "xhat_rel": {
+     "parent_child": 0.2311473023781507,
+     "child_article": 0.09999785670183955,
+     "article_affiliation": 0.07376775268600286,
+     "article_article": 0.1724327219938171,
+     "article_journal": 0.24377885898573426
+    },
+    "relation_loss_rel": {
+     "parent_child": 0.0862254508793249,
+     "child_article": 0.2603618223908123,
+     "article_affiliation": 0.2196012892932666,
+     "article_article": 1.388151358177589,
+     "article_journal": 1.1181350332328392
+    },
+    "rule_abs": {
+     "article_affiliation": 0.0,
+     "article_article": 0.0,
+     "article_journal": 1.0
+    }
+   },
+   "verdict": "drift: check rules and memberships"
+  },
+  "c_seed_spread": {
+   "total_rel": 0.0007489026502479417,
+   "epochs": 33.0,
+   "first_epoch_total_differs_1e-4": 0.0,
+   "relation_loss_rel": {
+    "parent_child": 0.0008653247231338827,
+    "child_article": 0.0009463021325171895,
+    "article_affiliation": 0.004749698974613624,
+    "article_article": 0.0018042362632970713,
+    "article_journal": 0.0069310128314394506
+   },
+   "xhat_rel": {
+    "parent_child": 0.5770547832441674,
+    "child_article": 0.6444463998307476,
+    "article_affiliation": 0.6107197931898434,
+    "article_article": 1.0613404486551505,
+    "article_journal": 0.8259883158720642
+   },
+   "rule_abs": {
+    "article_affiliation": 1.1102230246251565e-16,
+    "article_article": 2.220446049250313e-16,
+    "article_journal": 2.220446049250313e-16
+   },
+   "membership_overlap": {
+    "article": 0.4075032467371731,
+    "child": 0.4195057244450422,
+    "journal": 0.420969048052225,
+    "organisation": 0.3945801113724404,
+    "parent": 0.4322192488421443
+   },
+   "anchor_failing": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     0
+    ]
+   ]
+  },
+  "d_preview": {
+   "1": {
+    "diagonal_rule": {
+     "damped": {
+      "article_affiliation": 1.0,
+      "article_article": 1.0000000000000002,
+      "article_journal": 1.0
+     },
+     "undamped": {
+      "article_affiliation": 0.9999999999999999,
+      "article_article": 1.0,
+      "article_journal": 1.0000000000000002
+     }
+    },
+    "anchor_failing": {
+     "damped": 0,
+     "undamped": 0
+    },
+    "heldout_existence": {
+     "damped": 0.09000947540461489,
+     "undamped": 0.09025324009713559
+    }
+   },
+   "2": {
+    "diagonal_rule": {
+     "damped": {
+      "article_affiliation": 0.9999999999999999,
+      "article_article": 0.9999999999999999,
+      "article_journal": 1.0000000000000002
+     },
+     "undamped": {
+      "article_affiliation": 0.9999999999999999,
+      "article_article": 1.0,
+      "article_journal": 1.0
+     }
+    },
+    "anchor_failing": {
+     "damped": 0,
+     "undamped": 0
+    },
+    "heldout_existence": {
+     "damped": 0.09121970092690777,
+     "undamped": 0.0915837431012247
+    }
+   },
+   "3": {
+    "diagonal_rule": {
+     "damped": {
+      "article_affiliation": 1.0,
+      "article_article": 1.0,
+      "article_journal": 1.0000000000000002
+     },
+     "undamped": {
+      "article_affiliation": 1.0,
+      "article_article": 0.9999999999999999,
+      "article_journal": 0.9999999999999998
+     }
+    },
+    "anchor_failing": {
+     "damped": 0,
+     "undamped": 0
+    },
+    "heldout_existence": {
+     "damped": 0.09479804507748567,
+     "undamped": 0.09377577635458616
+    }
+   }
+  },
+  "fixed_size_settings": {
+   "weight": {
+    "3": {
+     "converged": true,
+     "epochs": 1967,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8910616537021031,
+       "child": 0.8907291380055815,
+       "journal": 0.7822516025641025,
+       "organisation": 0.8518518518518519,
+       "parent": 0.9025907533258226
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.325793749574206,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2609867711216252,
+       "share_below_10eps": 1.4936519790888722e-05
+      },
+      "U:journal": {
+       "rms": 0.7013407970231713,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.34473065411035175,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.54425647294633,
+       "share_below_10eps": 7.268389560027279e-05
+      },
+      "Z:article_affiliation": {
+       "rms": 1.0594264295087006,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.8486892714276428,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.539731288543478,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 25.0921324918324,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 251.91592707166552,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.1793993769733475
+    },
+    "2": {
+     "converged": true,
+     "epochs": 2021,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8914938058196485,
+       "child": 0.8913368185212845,
+       "journal": 0.805488782051282,
+       "organisation": 0.8534142082529179,
+       "parent": 0.9024902785289635
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.297969659602155,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2706070415262963,
+       "share_below_10eps": 3.9306631028654534e-05
+      },
+      "U:journal": {
+       "rms": 0.7671381754950788,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.3762320739316439,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.5555348208508357,
+       "share_below_10eps": 4.9168517611949234e-05
+      },
+      "Z:article_affiliation": {
+       "rms": 1.0033442530950314,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.9317704583292279,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.5460974449799031,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 26.167316516015436,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 246.29899030126302,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.16313974951215
+    },
+    "1": {
+     "converged": true,
+     "epochs": 1976,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8912057044079515,
+       "child": 0.8913651192956251,
+       "journal": 0.7864583333333334,
+       "organisation": 0.8492479245167417,
+       "parent": 0.9024325589648103
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.493155240810808,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.26208207652750176,
+       "share_below_10eps": 3.537596792578908e-05
+      },
+      "U:journal": {
+       "rms": 0.5633525759370386,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.37058747454757196,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.5648761085366676,
+       "share_below_10eps": 8.123494214148134e-05
+      },
+      "Z:article_affiliation": {
+       "rms": 1.0293451703790135,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.9252273174241852,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.5287617852163208,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 26.274201273240042,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 252.53495770219016,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.16020962868966646
+    }
+   },
+   "data_matched": {
+    "3": {
+     "converged": true,
+     "epochs": 1966,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8910616537021031,
+       "child": 0.8907417161275107,
+       "journal": 0.7822516025641025,
+       "organisation": 0.8517905829733786,
+       "parent": 0.9025822022792814
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.3272689284598975,
+       "share_below_10eps": 3.601267646211466e-05
+      },
+      "U:child": {
+       "rms": 0.26091873196897797,
+       "share_below_10eps": 2.3583978617192722e-05
+      },
+      "U:journal": {
+       "rms": 0.7013462009620619,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.34461410993726865,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.5441626543881348,
+       "share_below_10eps": 8.764822704738777e-05
+      },
+      "Z:article_affiliation": {
+       "rms": 0.9791024396178324,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.8491719567400137,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.38466087640835867,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 25.096228475429907,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 251.9457922623204,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.1793423799109699
+    },
+    "1": {
+     "converged": true,
+     "epochs": 1977,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8912417170844137,
+       "child": 0.8913666915608663,
+       "journal": 0.7864583333333334,
+       "organisation": 0.8492172900775051,
+       "parent": 0.902430421203175
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.493240582997067,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.26211198641739175,
+       "share_below_10eps": 4.1665028890373805e-05
+      },
+      "U:journal": {
+       "rms": 0.5632834312487196,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.3705521713961226,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.564878302114719,
+       "share_below_10eps": 0.00014323002956524342
+      },
+      "Z:article_affiliation": {
+       "rms": 0.9505424148373455,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.9254004152699746,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.37661622615360807,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 26.274257932036516,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 252.51698630949707,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.16021251266759928
+    },
+    "2": {
+     "converged": true,
+     "epochs": 2022,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8914577931431864,
+       "child": 0.8913226681341142,
+       "journal": 0.8052884615384616,
+       "organisation": 0.8534142082529179,
+       "parent": 0.9024881407673282
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.297497884052403,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2706299588463015,
+       "share_below_10eps": 6.524900750756652e-05
+      },
+      "U:journal": {
+       "rms": 0.7670156827879039,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.37614532463367484,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.555495681305866,
+       "share_below_10eps": 2.1377616353021405e-05
+      },
+      "Z:article_affiliation": {
+       "rms": 0.9265606915531218,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.931803695683121,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.3890272991512031,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 26.169506296023524,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 246.35161435583507,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.1631755870083289
+    }
+   },
+   "data": {
+    "2": {
+     "converged": true,
+     "epochs": 1850,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8908095649668684,
+       "child": 0.8914256515074093,
+       "journal": 0.8112980769230769,
+       "organisation": 0.8528627883466593,
+       "parent": 0.9026655749830582
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.184296404392988,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2664667757364111,
+       "share_below_10eps": 8.647458826303998e-06
+      },
+      "U:journal": {
+       "rms": 0.6117981000939613,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.36390369363650715,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.5549239483738709,
+       "share_below_10eps": 0.00010261255849450275
+      },
+      "Z:article_affiliation": {
+       "rms": 0.953607159428404,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.9647000271990622,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.4704317619717996,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 26.915138605729737,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 248.43291729636462,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.18398912117477176
+    },
+    "1": {
+     "converged": true,
+     "epochs": 1883,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8917098818784212,
+       "child": 0.8914429464250619,
+       "journal": 0.8026842948717948,
+       "organisation": 0.8481757191434611,
+       "parent": 0.9025800645176462
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.390397408814364,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.26144606598014064,
+       "share_below_10eps": 1.8867182893754175e-05
+      },
+      "U:journal": {
+       "rms": 0.49635544907026147,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.3516402586615379,
+       "share_below_10eps": 3.063443923658977e-05
+      },
+      "U:parent": {
+       "rms": 0.5659117473762425,
+       "share_below_10eps": 5.558180251785565e-05
+      },
+      "Z:article_affiliation": {
+       "rms": 1.006058967112798,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 1.0086386163544605,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.44979586873117783,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 27.27465282912754,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 253.2603293700483,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.17633425961350316
+    },
+    "3": {
+     "converged": true,
+     "epochs": 1840,
+     "floor": {
+      "core": {
+       "article_affiliation": 0.9230769230769231,
+       "article_article": 0.9230769230769231,
+       "article_journal": 0.9230769230769231,
+       "child_article": 0.9230769230769231,
+       "parent_child": 0.9230769230769231
+      },
+      "factor": {
+       "article": 0.8905934889080956,
+       "child": 0.8906583860697299,
+       "journal": 0.7990785256410257,
+       "organisation": 0.8494317311521613,
+       "parent": 0.90267840155287
+      }
+     },
+     "gradient": {
+      "U:article": {
+       "rms": 4.186008317365112,
+       "share_below_10eps": 0.0
+      },
+      "U:child": {
+       "rms": 0.2595324717307627,
+       "share_below_10eps": 1.257812192916945e-05
+      },
+      "U:journal": {
+       "rms": 0.5926357762788642,
+       "share_below_10eps": 0.0
+      },
+      "U:organisation": {
+       "rms": 0.33372662728102104,
+       "share_below_10eps": 0.0
+      },
+      "U:parent": {
+       "rms": 0.5483645691099709,
+       "share_below_10eps": 7.054613396497064e-05
+      },
+      "Z:article_affiliation": {
+       "rms": 1.0066599697442793,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_article": {
+       "rms": 0.8851914106657751,
+       "share_below_10eps": 0.0
+      },
+      "Z:article_journal": {
+       "rms": 0.4355056087450714,
+       "share_below_10eps": 0.0
+      },
+      "Z:child_article": {
+       "rms": 25.65268442668734,
+       "share_below_10eps": 0.0
+      },
+      "Z:parent_child": {
+       "rms": 252.40039052210702,
+       "share_below_10eps": 0.0
+      }
+     },
+     "block_size_vs_start_min": 0.1905913464397235
+    }
+   }
+  }
+ }
+}

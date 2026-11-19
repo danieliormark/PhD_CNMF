@@ -3908,3 +3908,24 @@ afterwards) and `fit.align` ran; dry run of the reading script on them. **Defect
 across all start-test-2 arms. Fixed: `START_KEYS` (social_link_start, random_links, offdiag_level, offdiag_semantic)
 enter the cell key only when set — keys of all existing fits unchanged (400/400 sampled identical); start-test-2 jobs
 130 distinct cells. Earlier stages unaffected (no stage mixed start variants; the start test had its own stage).
+
+### RL-279 — 2026-11-19 — Damping equivalence test read (job 24899341); start test 2 submitted by the owner
+Start test 2 submitted by the owner 2026-11-19 (job id not given). Damping test: 18/18 fits converged (approach 1:
+2,197–2,384 epochs; approach 2: 1,840–2,022), no errors. `fit/damping_test_analysis.py` →
+`results/stage0/damping_test.{json,log}`. (a) Implementations (data rescaling A vs relation weight B, matched start;
+3 seeds): total loss relative difference 4.9e-6 / 4.5e-6 (approach 1 / 2) vs seed-to-seed 1.8e-3 / 7.5e-4 (ratio
+0.003 / 0.006); total-loss paths never differ by > 1e-4 before the end; epochs differ by 0–4; reconstruction on visible
+ties A vs q·B relative 3e-4–9e-4 (approach 1), 1.4e-3–1.5e-2 (approach 2) vs seed-to-seed 0.53–1.06 (ratios ≤ 0.026);
+diagonal-rule shares and child×article failures identical; weighted memberships overlap 0.998–1.000 as fitted and
+0.999–1.000 with B's damped cores × q → **"equivalent in practice"**. The membership difference predicted in RL-273
+exists but is ≤ 0.002 at these q. Fixed-size settings: 92 % of every core matrix's cells at the floor in every arm
+(all off-diagonal cells, the diagonal start) — identical in A and B; no parameter block with ≥ 1 % of gradient entries
+below 10 ε; smallest block size 0.16–0.21 × its start (step-size floor 1e-3 not reached). (b) Start scale (A from the
+ordinary start vs A matched): total loss 3.1e-4–4.6e-4 relative (ratio to seed spread 0.26 / 0.42), reconstruction
+ratios 0.07–0.31, memberships overlap 0.91–0.99, ≈ 100 fewer epochs → "drift": the start's scale moves the solution
+by about a quarter to two-fifths of the seed-to-seed spread. (d) Preview (damped A, ordinary start, vs undamped start-
+test fits, 3 seeds): held-out existence −0.0018 / −0.0004 / −0.0013 (approach 1), −0.0003 / −0.0004 / +0.0010
+(approach 2); diagonal rule 1.00 and no child×article failures in both (met by construction under diagonal cores) —
+uninformative. Consequences: the mass restoration acts exactly as the intended relation-weight correction (measured);
+the arm should run from the same start as its undamped reference (ordinary start), so the comparison differs only in
+the data; the result is expected to carry over to the start chosen by start test 2.
