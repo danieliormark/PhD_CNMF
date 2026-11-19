@@ -4174,3 +4174,9 @@ identical to study A's 600 KL jobs of pass 1 + K = 32 extension except `stage: "
 submit with `bash fit/slurm/B_stage0_pass1.sh` (≈ 660 CPU-hours from study A's same fits). `aggregate.py` gained
 `--build` (submit_aggregate.sh passes `$BUILD`) and refuses fits from another build than the one it reads (checked
 both ways on a 30-epoch smoke fit of study B).
+
+### RL-295 — 2026-11-19 — Comparison of studies A and B: C3 (owner)
+Owner: "I approve C3" → each study chooses its own K and λ_child by the same rules (main result), and each is also
+fitted at the other study's choice (comparison at fixed settings). Pass 3 is one protocol for both studies; its K grid
+covers both studies' chosen K (study A runs first; B's K* is added as a top-up to A when B's pass 1 is read, and
+vice versa). Owner submitted study-B pass 1 (job id not given).

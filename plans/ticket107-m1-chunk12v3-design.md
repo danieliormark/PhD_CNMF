@@ -2692,3 +2692,5 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-19, **study B hold-out — DECIDED: fresh draw** (owner: "I think more rigorous will be to have a fresh sampling"): drawn on B's build with the same procedure and seed (107), not inherited from A; held-out comparisons between A and B include draw variation (RL-294).]*
 
+*[2026-11-19, **A vs B comparison — DECIDED: C3** (owner: "I approve C3"): each study chooses its own K and λ_child by the same rules (main result) and is also fitted at the other study's choice (fixed-setting comparison); communities compared through the shared entities (articles, authors, organisations, journals), e.g. by co-membership. Pass 3 = one protocol for both studies; its K grid covers both studies' chosen K (top-ups when the other study's choice is known). RL-295.]*
+
