@@ -4129,3 +4129,10 @@ list (RL-289); every run of one is run on the other. Open, to settle one by one:
 done on study A (passes 1–2, start test 2, damping test, swap) are repeated on study B, or only some; (2) the build
 rules of study B (parent hyperedges that lose genre children: merged or emptied parents; W; units and articles left
 empty); (3) whether choices made in study A (K, λ_child, start) may differ in study B, and how the two are compared.
+
+### RL-291 — 2026-11-19 — Study B repeats the KL runs of stage 0 (owner)
+Owner: "I approve repeating the KL runs" (option (b) of RL-290 question 1): on study B (build without genre) the KL runs
+done on study A are repeated — pass 1 KL with the K = 32 extension (≈ 600 fits), pass 2 KL with r = 1 (≈ 400), the
+swap and its follow-ups (KL), the KL half of the diagonal-start test, the damping test (18) and start test 2 (130);
+≈ 1,430 fits. The squared-error runs are not repeated (the loss choice is taken as shared). Then pass 3 in both studies.
+Next: study B's build rules.

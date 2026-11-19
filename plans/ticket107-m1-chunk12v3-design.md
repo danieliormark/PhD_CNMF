@@ -2686,3 +2686,5 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-19, **with and without genre — DECIDED: two separate full studies** (owner: "I think it is better to have with and without genre analysis to be separate full-fledge studies. whatever is tried on one should be tried and tested on another."). Study A: the current build; study B: the build without the 953 genre hyperedges (RL-289). Replaces R2/R3. Open (RL-290): which completed stage-0 runs are repeated on B; B's build rules for parents, W and emptied units; whether A and B may choose different K / λ_child / start, and how they are compared.]*
 
+*[2026-11-19, **study B stage 0 — DECIDED: repeat the KL runs** (owner: "I approve repeating the KL runs"): pass 1 KL (+ K = 32), pass 2 KL (+ r = 1), swap and follow-ups, diagonal-start test (KL), damping test, start test 2 — ≈ 1,430 fits; squared-error runs not repeated (RL-291).]*
+
