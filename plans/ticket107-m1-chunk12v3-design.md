@@ -2688,3 +2688,5 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-19, **study B stage 0 — DECIDED: repeat the KL runs** (owner: "I approve repeating the KL runs"): pass 1 KL (+ K = 32), pass 2 KL (+ r = 1), swap and follow-ups, diagonal-start test (KL), damping test, start test 2 — ≈ 1,430 fits; squared-error runs not repeated (RL-291).]*
 
+*[2026-11-19, **study B build rules — DECIDED** (owner: "I approve your proposal"): the same builder and rules with the 953 genre hyperedges left out of the input (as nested children and as cousins); parent identities recomputed from the surviving children (618 parents merge into 174; e.g. 88 "<genre verb> + llm" parents become "llm"); W rebuilt on study B's hyperedges; all weights recomputed by the existing formulas; social matrices identical to A. Built (`psych_trial_v3_nogenre`, RL-293). Hold-out draw for B: next question.]*
+

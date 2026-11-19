@@ -1,0 +1,4892 @@
+{
+"note": "Genre child hyperedges, final list after the owner's review (ticket 107, 2026-11-19, RL-289); rule: fit/generic_hyperedges.py; left out of study B's build (RL-290/293)",
+"keys": [
+"000011f72fdefc35",
+"004b473b8afe78fe",
+"00e38b582f418caf",
+"00ef6b8ab006e807",
+"01c47b75650a4924",
+"01f81fb658a41393",
+"01f9c8e6d671982e",
+"01fc53e1c574541e",
+"020cfde28dcb2b0e",
+"029535ea73b1c0ec",
+"029e1895fff74ffa",
+"02b45f92dc6ac178",
+"02f5b76ccdac4a4a",
+"02f8127ace889d57",
+"031e7f1198a0e486",
+"036f3a45149b27bc",
+"041763c1b02fdeec",
+"045834af5c243503",
+"046bceab91b654fe",
+"05147038a2d90fe0",
+"0518173bba9b672c",
+"05548093b811ed30",
+"055760a9f21689e6",
+"0580a56f4bb09aed",
+"062585b49fa0f9c3",
+"0689db5f15637bce",
+"069e8caa2bb10170",
+"06d702ec705b2a27",
+"07333960e19ce3b6",
+"07337543d47d6e8a",
+"07909af8556401a9",
+"07b5a41e1e806e31",
+"07ba3934875ea63d",
+"080cb1f1f506cbd3",
+"08327cdbef208ec3",
+"08a1c5bb159b564a",
+"093bc8f95cb2983f",
+"0950ad69e90bddf1",
+"097dc95169238fb1",
+"09d246fd034e3064",
+"09de5c090004e74f",
+"0a4be42b6d62f865",
+"0a7c6bacacc9eee0",
+"0abc3149757b5d34",
+"0acc1e22aa90eb78",
+"0b4b139388547f53",
+"0b4d8b4c069183a8",
+"0b59ea4abb37543b",
+"0b6539f1adc8fca4",
+"0b714e3b6bfe34a3",
+"0ba7da3eeaaeeea4",
+"0bc936be2e86c355",
+"0c050da2c0d9e631",
+"0c12a4ec23b13b40",
+"0d26c0897d006621",
+"0d3e856b29e437a0",
+"0e766c757ec9489e",
+"0ec87316bd726f11",
+"0ee7258661eec035",
+"0f734fce1e6bb431",
+"0fe2571c58faf100",
+"10e0dba177fe6c01",
+"117d56b0ee6f2990",
+"1185ae9086a9d5c1",
+"118e8dddb317b421",
+"11fc30328d364ef3",
+"1204464087e2e96e",
+"1238c461dc285f13",
+"128013e4dd9a00bd",
+"129c3521f7361db4",
+"12a66729d4e6e079",
+"12bef55d6476afa8",
+"12c50ed46719e998",
+"12effa4d04ca583d",
+"135103e985991e83",
+"139cd585ae5221d0",
+"1466480f5f732459",
+"1492ad1fa9e8ace1",
+"14e51f4a6cd18de8",
+"150cc30a075476e9",
+"1518058b3cc4365e",
+"1563b387ed7f9b1f",
+"1618687d30ff02fd",
+"166154d999f0b58e",
+"166999d39abe4d56",
+"167c13b6630636be",
+"1689d4f40d288d12",
+"16a3f53b3506f675",
+"16fe3b1752a914ba",
+"171f0e4577d8a678",
+"17be5b58a242d441",
+"17c4dbf62996f846",
+"17d9df0f12a23eca",
+"17da9516803faa91",
+"1839824b7388bdd3",
+"1868ffcb49720150",
+"18c369d19a23c3ad",
+"199a6d6fb0c3b459",
+"19cd3b5c2f224a86",
+"1a04d904ea5289cb",
+"1ae90a184355ddb1",
+"1b5ce6d649ed8989",
+"1c0794d0c5fb741f",
+"1cc75535288473f6",
+"1ceceb2e1c095a5b",
+"1d317ca177de6b71",
+"1d784f1f9563ff51",
+"1dc02f5ff5ffcd4f",
+"1e0b37fce2f91131",
+"1e0ebd0f05904ca3",
+"1e27cccfc8e72c76",
+"1e49df88b109739f",
+"1e662547262969d0",
+"1e689d949af115a9",
+"1e74d77125e196df",
+"1e9f82c77aa914e0",
+"1ebd5d06a0edd463",
+"1f1e97df9b9adfe1",
+"1f22ea21e0a1bd87",
+"1f6e3a899cb62f3c",
+"1fd85f317ea2fe94",
+"20d6d34020d7bf3b",
+"20e66016127fe570",
+"2146cb6d2ec4e105",
+"214948f3341809e0",
+"21aa9722b5089a57",
+"21aec0372aae2b02",
+"21c9c4c716022001",
+"21eeb29345ca97f6",
+"21fa9d7c6639ac68",
+"2291826630558b79",
+"22deb7ca0f501380",
+"2355bd7d2045d061",
+"23568f8132a1c2df",
+"23fe31364e79bee4",
+"2455bffb400f31c9",
+"246453a17726c90b",
+"248586704440a086",
+"24a29d5325dfb6bc",
+"24aba0562da1227a",
+"2518794e7440cdc5",
+"254da641569d1e06",
+"25ca3e69322cacd1",
+"26340d636313aba6",
+"269c37c14f066ae4",
+"26c796a2dc909b53",
+"27485eb733a67a53",
+"27695ebbff4ddf5a",
+"27922e1b44056e80",
+"288e94fa2b99e66f",
+"28a44e1d7f305cc0",
+"28bca96ecb1526dc",
+"299a8e6f494eb879",
+"29d331248aa4cb5a",
+"29ddb782b70cc5a2",
+"2a82a4b1553021e7",
+"2ae13bb20d8eb888",
+"2b4f9baf7e82f463",
+"2bc50d3a342d873c",
+"2bcba832e6d23213",
+"2bd947295cd0a821",
+"2bee51c160b79732",
+"2c2025f69b063b25",
+"2c4339e63a09705b",
+"2c4789f9c9ed22b0",
+"2cfffc673fb59d4a",
+"2d13998492166c6b",
+"2d29da9fbf92e068",
+"2da17d83534f27a7",
+"2e3c266bd509e17a",
+"2eb88cb6fb166193",
+"2edcd27c2d240e06",
+"2f056984e084b0b6",
+"2f619aa39f495af5",
+"2f62206210e6660a",
+"2f8bce545426d892",
+"2fb7c45a1e906da6",
+"300502a16f5c800a",
+"303a8952c7a08a4c",
+"3045831e455cc414",
+"3076ff0a94d7d2a3",
+"30a3be83af77fdd8",
+"3126cef84c026daf",
+"320a4baebc186c7c",
+"32776e09c94a4337",
+"32b0b2bb3e49ed0d",
+"335ef8d55e6a1166",
+"33ade900ffa479a1",
+"33fd78417084acc2",
+"340d9d9d5b19293b",
+"34162b9cf772a535",
+"344af74fe0c3cac3",
+"3469fa1b18727a72",
+"3488406d8ed236a0",
+"34927b0ab10156d9",
+"34b3fcb25aaf9ea3",
+"34b93de973a99afa",
+"3649c0be4a551cc8",
+"3781d53e7474e18f",
+"37fcc3b6ef16684a",
+"3813aac062613cbb",
+"38584d701aaa60cc",
+"38d342965dd83cef",
+"395a6dda80e36c66",
+"39832c226827a72f",
+"3a07926cb788406e",
+"3a132cb7c7fc9923",
+"3a145bb740450ac8",
+"3a2b912e523ebee4",
+"3a361cf62cb5bbf8",
+"3a5174b1cc21064c",
+"3a69f74eebfb641f",
+"3a824fa0f9118154",
+"3b6190ed7e5c6a3e",
+"3b63b908c4109e40",
+"3bc109b7f4ab18b0",
+"3c2daba1a0a46a5f",
+"3c4b3d4527ba6d94",
+"3caa1ab26af9be58",
+"3cb1bd0e12880a88",
+"3cdb372c520d0354",
+"3e0d30838e49d810",
+"3ea091ca2bc69b4b",
+"3f20817d5e249fdf",
+"3f2351438d840e1c",
+"3f23a96a8ae1319c",
+"3f5610adf44bd2ed",
+"3f9401fb44c95174",
+"3ff3cc96d3a3e2c5",
+"401280fe9fd787a8",
+"401deb4962d7aa2b",
+"40252ce7239eeec4",
+"409b3b5f5d03c495",
+"40dccfb2fd4f362e",
+"411ea662b03e1128",
+"4153b659960dbed6",
+"41cf7f34085215ea",
+"41e277c86133c531",
+"421086951b41ef8d",
+"4295f8bd89df5caf",
+"42a2f17055a353f1",
+"434eb6852339d1b9",
+"435546b273c385f3",
+"437f6582ba57b8e6",
+"438ef04aed10c2c5",
+"439be38047b8e21f",
+"43f7a4a7c8e12582",
+"441b85f88b6265ad",
+"443dce9962c52f17",
+"447047245a650dc4",
+"44824153427924d7",
+"44cfb8fcd4af14e9",
+"44e1a0ccc19fca4d",
+"4502b0d666890166",
+"451bb58c1d7402c4",
+"455c02b5654ba351",
+"46c9c368a5a24505",
+"47d99548e2bc8cf6",
+"47f14aa72493c1c9",
+"4824238c24a70adf",
+"4854ec232ae00546",
+"485687aeada53749",
+"485db48f7fe23ad6",
+"486c5ea8a78d5fee",
+"48eae292c2a153a0",
+"49974dbb72c54a3e",
+"49fb9ae0aff39dff",
+"4a2c10de83571a53",
+"4a485e170ca2d495",
+"4ad99af731f7c267",
+"4afdfe0a7512223e",
+"4b28ee11b317f6ad",
+"4b54fb41326dd588",
+"4bdf2b9466bd2507",
+"4c360964008e9c06",
+"4c99e2e2d1bc4d07",
+"4ca19eed03a6d904",
+"4d248523d4332bac",
+"4d4cd4f20b40e2c5",
+"4d9891d9cd939a02",
+"4db7e0a36c6661ff",
+"4e993e594347d541",
+"4ea79e57b65da096",
+"4f21c98c4e3154c3",
+"4f56f38e43a50f75",
+"4f6a5496be994985",
+"4ff2e50295527329",
+"50676f882e07c714",
+"506e5509fb2966e3",
+"5082a6ea77364734",
+"50e952792c908be2",
+"51491d3b5c1c2335",
+"517ae2ce125a547b",
+"51980026aea302a7",
+"51a7ef6f7601266c",
+"51f428713790f85f",
+"523affe241b3fe39",
+"524ce13a0fc86676",
+"5271eed5847253fc",
+"52869fc01b703778",
+"52e0fc2ca9b165be",
+"52e9340fe535d6d9",
+"53b988a680d1350c",
+"54037669857be54e",
+"549543f810af3480",
+"54aab1a1361c2867",
+"54c6f12b0034e2b3",
+"5517d98ada133b81",
+"55871728bff5828a",
+"55f2016d713c15bf",
+"563d015fa38ee62f",
+"5644b2a95bc63450",
+"56a8a5af9e813304",
+"56b338e533ea325c",
+"56b633890322a577",
+"56bad53758524171",
+"57a3f06c8d58fe16",
+"57c1b92d42d5f03a",
+"57d7d019ffdc8b43",
+"58a2a796851cd671",
+"58a3f1f9ba32645f",
+"58c7763e6e2704be",
+"58fcaec598061f4f",
+"59014621bee6f79d",
+"59096b73d16e804a",
+"5917800d700ac60e",
+"597c44683017d46d",
+"5a76df36a0ec6424",
+"5a7970627a652aa6",
+"5a94bc263c89cabe",
+"5b7f3a4c53bb37c2",
+"5cc556ad5bce3506",
+"5d06b1bcdabcfe9c",
+"5d1d45cfe69f5f1d",
+"5d3d773e44031d47",
+"5db48afe99f3a73d",
+"5dd628f1756a20b0",
+"5df74029ec34ee3c",
+"5e55a650f936a5ad",
+"5e85c33ed346427f",
+"5f0215436205344f",
+"5f8b8d3d45e7314e",
+"5fab231a5f45612e",
+"5fe72c7e26403326",
+"602ccf2abacb21c8",
+"603086e3d48b0486",
+"6035f30d615d3118",
+"603b73dc86e983d5",
+"60491a18df7fed71",
+"609f65246d3f324a",
+"61d48c7edc09634a",
+"6242064488f4c3e7",
+"624555d05a77504c",
+"62738bb625a93df6",
+"6299603c8c501aea",
+"62f0bb12412abfd0",
+"62f83c1b7533b1c5",
+"635f71eb68d9595e",
+"63a8af547ff433a9",
+"63ada8052e83d0e3",
+"63b63ccb60e48f3f",
+"640b4e9ba345de68",
+"64256ac93834dde0",
+"64270c86e128690c",
+"6497a2f859c033f9",
+"649d4e385fe8a1c2",
+"64c199f3bce24749",
+"64f4568d9eba5453",
+"653aca302e4f29c8",
+"65448ed79c835efa",
+"6566515664583c86",
+"65a5871cf8874108",
+"6627ae89636ae1ba",
+"664e77b956eb0394",
+"665940510a15bbf4",
+"666b8d039305b7d0",
+"67696ff2318d8b04",
+"678867705941bf36",
+"68383d034769bfc6",
+"684dd90d0e515a85",
+"6878017a46509714",
+"68ae28f564533aef",
+"68ff9ff60c9c02cd",
+"6904e33790470e2d",
+"69637ba6e6fa4a48",
+"6a4f19f9d198fedf",
+"6ad52265bb861294",
+"6c3c48682e8be913",
+"6c8e1f800ff6cb2d",
+"6d0656617655ec78",
+"6d06eb7e292775af",
+"6d0da58b5332d9d2",
+"6d1db2486626c0d2",
+"6d537ed12e363760",
+"6d59accff62b2420",
+"6e11937a76d54f94",
+"6e9cd12eb88c74d3",
+"6ef298fc68dd2c86",
+"6f06fda8b445320f",
+"6ff44c5d22c0a831",
+"6ffd8f5d5c8d140b",
+"7056b424d2364f08",
+"707d95b8725b8468",
+"70e3e51cd17d321b",
+"70e7e4c58b431d1a",
+"712f61827da61fdf",
+"71335f15395b254e",
+"7193977d12c8e682",
+"71a80460ae96af7f",
+"71b8990782abe65f",
+"71bd39855a2fd440",
+"71d56e8bc1f0f644",
+"71df111a1012ddec",
+"71fec98264e6632f",
+"720abbcfd2965120",
+"7264215a92d5e09c",
+"729e1a4ba26d5b8b",
+"72b12a76cf2e72f8",
+"72d9af7463c4419f",
+"73691cebe26b61cd",
+"738c97fc1e143133",
+"73b30b3aa69c0ddd",
+"73f6cef8c0b669fb",
+"7402af8c2edad5e6",
+"7427e80521a80113",
+"744b1a4baace6222",
+"74a08be5bb97521b",
+"74ea86e6d760bd9a",
+"74ed8208294f6ef8",
+"7530ab5ca66c1d0b",
+"75be4cd764a201f5",
+"75e0b7701cd3fd21",
+"75fa841927974135",
+"7603c461a731fa93",
+"760be31a7e1bc339",
+"764fe2c19b8867b5",
+"7667f690a759888a",
+"768f8327f8b48b44",
+"76f468dcae592805",
+"771fd6e18a5a8962",
+"77a021724db864fa",
+"77cea8e7ea3fcf77",
+"781a1e4f224c81be",
+"786942d9d881e9cd",
+"78a3462f8269180d",
+"78b00d3fc0dc8a8a",
+"78b1f750a87011d5",
+"7aac7795adf095d7",
+"7ad90ec3830958e2",
+"7b316126b943b5fb",
+"7b86cdd66a8c8262",
+"7ba8dac04520de19",
+"7c4f93c83522de75",
+"7d3f9d13d4d0a923",
+"7d4287610de6a9b4",
+"7d4a319cd5f77068",
+"7da03f38ff9482e8",
+"7dd511a867286217",
+"7ef106190c6943b2",
+"7ef402e19b8cd40d",
+"7f078d0b386486ee",
+"7f308b1e933ee61f",
+"7f8840d5d4111e93",
+"7fa6524bd9d57ac1",
+"801c7efea3059cba",
+"803f00319e879226",
+"8068dfa151b6881f",
+"806c3ae210f59ab7",
+"807b8c92e4b6deca",
+"80b5d29203bbc1cf",
+"80db4550c660c0f1",
+"8213353b6e37e3a0",
+"822b171517863e14",
+"828bc6846d57d3c7",
+"82c25b9442d438c6",
+"830e4a7cdc116ed0",
+"831872a8d36190ed",
+"83974bea36f3df4e",
+"8409d08887ae3fbc",
+"84a999b251745d41",
+"84f53e20687e425a",
+"84f8c3d6b29a54c5",
+"8528a87e78617ab3",
+"853ae9a1e93b0073",
+"8547da5394718f1f",
+"8593dde1e8edaa38",
+"85b3ad13882a048c",
+"860bc9bd7d36cc48",
+"86b391193d9ff361",
+"86f7e52471ce72b6",
+"87814a34d9dd9b61",
+"879049d67f1d3e27",
+"882c7bd648557be4",
+"88df4bdf537c5f57",
+"89280d43f55524bc",
+"8950a84ac28c1d10",
+"897a8e2ee8ee35ed",
+"89cb8663b60bcf5d",
+"8a009878b99f0f92",
+"8a91effc1b5983e1",
+"8ac3d0fcf261d338",
+"8acc036543b99fde",
+"8ae6f0285c47ff3e",
+"8bc2eedb94596207",
+"8c3c1812a14ad8c0",
+"8c8d9d7a45a4685e",
+"8cce1fe5ed354fd1",
+"8cd4383de8c33324",
+"8ce046fefdbf9f92",
+"8cf9d6f60cb457c4",
+"8cffd74a78262846",
+"8d11df8c5f37bdf1",
+"8d1f2be47b7b1afd",
+"8d9087f417763c2d",
+"8da6463b34514419",
+"8da99a07313f5f4c",
+"8e9ad6240f2ba0ed",
+"8e9f07dbc5856dc8",
+"8f13e6a89eba7da4",
+"8f1db21d3cf96d6f",
+"8f4184f56c64b3dc",
+"8f95bf9fea25b77b",
+"8f9afb2906ac6a71",
+"8f9c2e796fb6a08f",
+"8fa19e3e11ec525f",
+"8fdc4edc057d9ca9",
+"8ff3563742e11ad7",
+"90483fa6c2ce0583",
+"911e20d412d6fd03",
+"914a691a71f335e0",
+"91681e775fcc8a86",
+"91a9ae1edffcc030",
+"91f13096c02d985a",
+"9262070671facf84",
+"92a52ed40bf572f8",
+"935cf1372b358a36",
+"9404d7c1edb3bbaf",
+"9463e04eab16a3b1",
+"9476c4586e83eb13",
+"94a6ed517f97d26f",
+"94d278e2d2bbbded",
+"957bd35ae634a30c",
+"95890e6670321f49",
+"95e828b967e2d827",
+"95f6c0df76567a6f",
+"960a6c1e0c66569d",
+"9635f6615c8e5505",
+"963aadd1cb980072",
+"963c9c13f0f2dc55",
+"963f36e65e00e666",
+"9680fdfc3f037223",
+"968d9b217ac2aa92",
+"969cde0d32e3d1c0",
+"96ad53535fb0def8",
+"96e09647608c08f7",
+"97a34376b8fac882",
+"982f40cf65889fa7",
+"98a788dc00dd985e",
+"991fa81129ed2c84",
+"995651dfe1ddad86",
+"999cd7935e853268",
+"99bbad936c49613b",
+"9a2496ff3ae1c060",
+"9a53830b5c290d94",
+"9a6c797a70ee58aa",
+"9a7bf5c006a20c9d",
+"9a94d5b52150bc76",
+"9a996ab1d5988289",
+"9aaad9f3c85a46d0",
+"9ad6a621eeb310b5",
+"9bfa73ef35f06f17",
+"9c5fb856720abb81",
+"9c8df5309a024459",
+"9e5f0b3fb2eeae7b",
+"9ea1037bf77e2db9",
+"9ead151b1ec73a3e",
+"9f19691705ff4e91",
+"9f8f969df08da33c",
+"9fa7bca6f05f6b4d",
+"9fc22028f7021bbf",
+"a01519d922687869",
+"a027052514657c2b",
+"a08329f10727c695",
+"a0a07e1e55d8f4ab",
+"a0ba5e0d78245b45",
+"a0d16671e34fce94",
+"a10afc6ed1c15eb5",
+"a1296ec0ef03a828",
+"a19ea8554bb31200",
+"a263cf6a432a1fd4",
+"a27a27af1c7069c2",
+"a2a368008126f0c6",
+"a31044334695f53f",
+"a3631865636a1f17",
+"a36ec6dd4e4d33ba",
+"a4102f7340736689",
+"a49b7687d235811a",
+"a4c111ace1475d7d",
+"a4f261f6bf0e8233",
+"a6209a7314ba92e9",
+"a62283d196e293be",
+"a64d5db5db664ea0",
+"a678cdadf9d77ad9",
+"a68d25164ec21cba",
+"a7a1007d17dc7ecf",
+"a8439bedf71b785f",
+"a857f728c03ff274",
+"a86b060dc840d8f5",
+"a95d4b1d4ecbbf29",
+"a9646ca73233d50b",
+"a975a601ad3b6781",
+"a9b2bb11e0534b68",
+"a9cdcc79a47262ae",
+"aa48e5f3eda5d1d0",
+"aa84b8e40e2c04f5",
+"aaff499b43585127",
+"aba0b072dfa52fcc",
+"aba27773433ac21d",
+"aba9234fda7daa75",
+"abadf8b3865d119c",
+"abe61437abda41d6",
+"ac3424c742ffecaf",
+"ac7d423547917865",
+"acfa1af4a9829713",
+"ad47e17aab21285f",
+"adb3b618309a5772",
+"addd68aad85c80c3",
+"ae3bc26f8594adc3",
+"ae3f3e0968564cb6",
+"aeb3d2e88a3ccf82",
+"aef293d75e1b29f7",
+"af10349310c0883a",
+"af63356838048f9b",
+"af77467e1476df56",
+"af86a709ea2c15ce",
+"afb417964fa3dd89",
+"afe22c4f438a5718",
+"b070c27f8a7125a5",
+"b0760959b5c0ee58",
+"b0a49c10bc348c20",
+"b119b57bbb46a9c7",
+"b155ec70d9eb088f",
+"b15b195426424910",
+"b168290ad402d8c2",
+"b16bc9cdba5ba130",
+"b1f7b0f97cf5e0ff",
+"b222f9b5f2ad6f8b",
+"b242d7bc0d93a199",
+"b24aad01b2c9aa7c",
+"b257d2c181503b89",
+"b29e82483de6965c",
+"b2faf0d8e67cdbac",
+"b350d1d1d5f6dc37",
+"b374e0b456e0e080",
+"b3faba0b0c89d890",
+"b4488425dece8d81",
+"b45e29086604794c",
+"b4c59d6e692e97f9",
+"b5e64fcf410c750a",
+"b5e975b07ab29a01",
+"b601bebe86ffde8e",
+"b603209d4261245f",
+"b614e4bc664c0c0c",
+"b6ca4db6ffed32e4",
+"b71d19857d49be80",
+"b7572f6a187f1c16",
+"b7aeca62aa7f5ef0",
+"b7c0863f3263c82f",
+"b7e28692d888e05a",
+"b7f515c8323961b6",
+"b866c499e22c7431",
+"b880f5b9670b9f37",
+"b8d4e0d180777a32",
+"b9461ea966835121",
+"b95fd97a2cf565a9",
+"b9a9002c782f99fb",
+"b9c9805225ce12d3",
+"b9f81863544ef76b",
+"ba019828267f8f60",
+"ba93ac0ae5d18caa",
+"baad012c0782e971",
+"bac748e1aa952c6a",
+"bb0cc0b4094d4268",
+"bb331ce890f715ad",
+"bb454964e8ecf24c",
+"bc23c3f47614706a",
+"bcebce8010062651",
+"bd30ef7af3101014",
+"bd6045b4b6225a46",
+"bdbb5a9631aca6be",
+"bde463df110d730b",
+"bdf6ab9328a48493",
+"be47a81a4df0ab08",
+"be4833617a54174d",
+"bef57e339b9c4704",
+"bef6bc5a386f377e",
+"befa7054aa571f37",
+"bf33d1aa3f097041",
+"bf5536be12381ffd",
+"bf7bb77699aa0624",
+"bf9ce351b7dbc850",
+"c023cc01463f571c",
+"c024692a24f99922",
+"c02fc65e115862f6",
+"c047c946fc4b290d",
+"c08a16906e427d1c",
+"c12664d6d8441fc4",
+"c1549b160374f8ef",
+"c1751cf3a682742a",
+"c19333c0db5fffd0",
+"c1a0db78f4aa053a",
+"c1a846261f9ad449",
+"c290b7c187f5abbc",
+"c2bd01c17b40c963",
+"c2cf78170a68ecc4",
+"c3321447acf5516e",
+"c33f3ee4a2b39bf6",
+"c3593e99ef45393d",
+"c36de46ebebfc48f",
+"c37aba16ecf9b5ec",
+"c3abc5155d53306c",
+"c3ae9669bc7b06c9",
+"c3ee32b14ff39a8e",
+"c41f47f5aa832739",
+"c44a53e823932129",
+"c44cb0750020f6f9",
+"c478b5463abaf41d",
+"c47bccdea4379182",
+"c47e3ad54b42add5",
+"c4973fcd23d01627",
+"c5111205aed52241",
+"c5572912102c7e72",
+"c56f7dd5da790c78",
+"c58cbc52f08beb7c",
+"c5a14e937675136c",
+"c5ac4348611aa0aa",
+"c5c9118dd44ccff8",
+"c5ea7d8a10a8b23d",
+"c65799383b1fb989",
+"c72536e4163d84b0",
+"c77ccaba316faf09",
+"c7a1c82429b6f2b7",
+"c8a8978f086a2ca8",
+"c8ab1f8854b65381",
+"c8cd3f7e1d998b8b",
+"c8d3b79e67f7b17e",
+"c9771a87daf5c0d6",
+"c9b3eb18b8554a45",
+"c9e0b1c2aa643025",
+"ca16341cce841479",
+"ca260f6971f3b7b7",
+"ca8ceadfa71813db",
+"cb26ab7b2a6b7fe0",
+"cb7a976fbc73617e",
+"cb9ea373eb33dafc",
+"cbba9e37927dea2e",
+"cbddb818938165fb",
+"cc1b573bd227c9fa",
+"cc44e206f78ca975",
+"cc6b78cc3754a7b9",
+"cc71f27c197f3a43",
+"cc73a4acaac7c0e6",
+"cc786d42242883b4",
+"cc9364a22cd0195a",
+"ccaa51ea9bb8eab6",
+"cd441427a28e3553",
+"cd77083feb240956",
+"cddbbd321d11adf0",
+"ce0fa5278eda457e",
+"ce29600dd4650235",
+"ce4b88e759d15f13",
+"cf96c87d96dc40a4",
+"cfb03fbd3843270b",
+"cfb12b25f8804bfd",
+"cfb83ec95f4b937c",
+"cfc0b678a8f2ab00",
+"d00daa1a03368ddc",
+"d0311d69d8264bed",
+"d0eb08a0c47f7adb",
+"d1233c0aa8f04898",
+"d12b4d7dd87ca503",
+"d1700cf459c4d7b9",
+"d1d6bba2db1eb36b",
+"d211c7e3a0c4bd52",
+"d23716af2a01825b",
+"d2712caed34de18e",
+"d2be00c1cb7f50b4",
+"d2c28601edc1c83a",
+"d2fb55a9d3d0d755",
+"d333593b63c5823b",
+"d37adb0a9c2ba907",
+"d37da144df612776",
+"d3d7b559a5a9c3f4",
+"d3da804208d8a1ce",
+"d3f435732bf366f5",
+"d48766171a5d05e7",
+"d4c93de8ec0a38c4",
+"d583b3c817760275",
+"d6031db627c17632",
+"d64c7ac04a3e0d9e",
+"d66595f8f74ffa5b",
+"d6a2fde0db94aca7",
+"d71e5bd33a59c8e5",
+"d726e32d06b926da",
+"d79fe5b1a829fc41",
+"d7ac0b3c9a39baa0",
+"d8516525be644cba",
+"d85625966368e1e0",
+"d89aab341682fbee",
+"d8f611709f48e700",
+"d943bb9c9cb1b0a8",
+"d9c5a18cbc4e5a09",
+"d9d64b0bf8b0889d",
+"da0dd2d22bbed79c",
+"da32c42b92f81234",
+"da9895b48a8c413c",
+"daa4932d725a2399",
+"daa6e9cb11f28768",
+"db0909e44be0a113",
+"db0ba8933405b957",
+"db3e3a4d07e05378",
+"dba5165c468ff51f",
+"dbd02d3f2d534e91",
+"dc7554db9158724c",
+"dcbe014a28241cb4",
+"dcd9be403bf287cc",
+"dd33cf4f9f9a3b86",
+"dd8e14cf8ad122cf",
+"dda95a301414d08d",
+"de5448fc5c71ce79",
+"de63782ad05c10e2",
+"df1a258d71f0033f",
+"df29443532750c10",
+"df7283795470dc30",
+"dfbfc7e86a373ec0",
+"dfc1c02bfe75938c",
+"e04ade7830dd60cb",
+"e0f666a3f861e44c",
+"e15282b33c75a15d",
+"e16b4ecdeff166e0",
+"e25d950522dca693",
+"e25eb168df2f2e62",
+"e2b355f51f44b705",
+"e39d5aeb4a332447",
+"e420ef723c090abd",
+"e42c8cfb15c29c07",
+"e434ffcd38d0b97c",
+"e45e8834461150b3",
+"e485e793b562fcdb",
+"e4acbee2aa95f5b2",
+"e4bca183409fd146",
+"e4c2d4121c15fd5e",
+"e5185ed064a3d585",
+"e5776758e91eb8fd",
+"e62b6fe563484054",
+"e660a20b16cd2517",
+"e7ca3e3e02a2e4fd",
+"e7d5850ccfce38b2",
+"e7f18cbc6884bbb5",
+"e7f41db3990ac2a2",
+"e876ac0e69477b32",
+"e876c9413bd780ed",
+"e8ae5b6781af950e",
+"e936c6980406bc9f",
+"e942598b26b43b65",
+"e9592f38ec89ec37",
+"e9a729cd1dcdf5c2",
+"e9f9e1b416e8b503",
+"ea0d2d5fb5f16e4f",
+"ea371c263e764868",
+"ea8286de69a1e2ff",
+"ea928f5f8cc31193",
+"eab3648a428d4697",
+"eb159309271236f2",
+"eb2c42ee88fbc48c",
+"ebffedd50078aa60",
+"ec027fbd9717e44a",
+"ec31bc010d7fa30b",
+"ec48bd59ed44b965",
+"ec78aa09720bf8ae",
+"ec7e256a3737cbce",
+"ecbc1d9777c96050",
+"ecccdefee9021d34",
+"ece8b132304bd6d0",
+"ed6b1be5fdeab6f9",
+"ed7acb7d3d93d8c5",
+"edb14b50e03cc3b5",
+"edce7e6a2cfafe1d",
+"edddbcba1bb9ea73",
+"ee3d70b3e0782d80",
+"ee45f79011f8fffa",
+"ef51f65ed2296bbc",
+"ef732b7d4e4c366b",
+"f002505e1fd6e752",
+"f06fea55b24192b4",
+"f137148b0d5ce4e4",
+"f1508832e28a3d6f",
+"f15b9434e9878a08",
+"f1bc4379a1e61b43",
+"f236af2157856c2e",
+"f241c6ef5d0e59eb",
+"f266b935e3cec06b",
+"f26c303befe25e91",
+"f27bbb29207f4498",
+"f29ddf9c6d6108b4",
+"f3696aac7cd388e4",
+"f44087b780654d43",
+"f44218ead567ac72",
+"f4b688e8168f9b42",
+"f5646bc86e7830b7",
+"f56a03c214ebb990",
+"f5e32ad3b17ef24e",
+"f62b7403ffd2af85",
+"f6aa0e6259c960fe",
+"f71696ba4297e109",
+"f7349156cd8e18d3",
+"f73e80c4dd9768ef",
+"f74b5559f75dab2d",
+"f82f72cf5b2a7546",
+"f86330132b83ffd8",
+"f86a202804071a1a",
+"f8854b32994e9e54",
+"f88af8d023841dae",
+"f8a16d8b3a081d80",
+"f8c1dced48ddf2d8",
+"f9023a32691a2a8e",
+"f914963949a4abc5",
+"f9a80532a9fa3ba8",
+"f9b85dc702d5d223",
+"f9fafab13512010a",
+"fa1999a43b15aee8",
+"fa24f029d68a17fa",
+"faca883f6e968a69",
+"fb0b68aeb7f02bb8",
+"fbd9caa5bd8ca090",
+"fbfb4ac575e5659a",
+"fc04bdf2f72b1aaf",
+"fc0be183182b5e44",
+"fc73fb5ff8ed4899",
+"fce1b880969deb82",
+"fd777c3deec3d569",
+"fda029838e9f799b",
+"fdb65e40c4289621",
+"fe09cdc26f481fcb",
+"fe0ff0bd96b96cf7",
+"fe5dd562443cfa51",
+"fe86ad916b0f5882",
+"fe917f5a93c2a67c",
+"fee7d813336a39ef",
+"fefb54a40109a19e",
+"ff87eac7edafdd6e",
+"ff890d9e34d0ad5e",
+"ff97481e2dcb31aa"
+],
+"atoms": {
+"000011f72fdefc35": [
+"be/M/en",
+"establish/P/en"
+],
+"004b473b8afe78fe": [
+"consider/P/en",
+"have/P/en"
+],
+"00e38b582f418caf": [
+"address/P/en",
+"be/M/en"
+],
+"00ef6b8ab006e807": [
+"find/P/en",
+"reach/P/en"
+],
+"01c47b75650a4924": [
+"may/M/en",
+"raise/P/en"
+],
+"01f81fb658a41393": [
+"depend/P/en"
+],
+"01f9c8e6d671982e": [
+"do/P/en",
+"well/M/en"
+],
+"01fc53e1c574541e": [
+"approach/C/en",
+"research/C/en"
+],
+"020cfde28dcb2b0e": [
+"confirm/P/en",
+"show/P/en"
+],
+"029535ea73b1c0ec": [
+"can/M/en",
+"write/P/en"
+],
+"029e1895fff74ffa": [
+"be/M/en",
+"use/P/en"
+],
+"02b45f92dc6ac178": [
+"be/P/en",
+"engage/P/en",
+"will/M/en"
+],
+"02f5b76ccdac4a4a": [
+"suggest/P/en",
+"use/P/en"
+],
+"02f8127ace889d57": [
+"be/M/en",
+"process/P/en"
+],
+"031e7f1198a0e486": [
+"can/M/en",
+"process/P/en"
+],
+"036f3a45149b27bc": [
+"be/M/en",
+"need/P/en",
+"would/M/en"
+],
+"041763c1b02fdeec": [
+"analysis/C/en",
+"process/C/en"
+],
+"045834af5c243503": [
+"be/P/en",
+"find/P/en"
+],
+"046bceab91b654fe": [
+"present/M/en",
+"work/C/en"
+],
+"05147038a2d90fe0": [
+"be/M/en",
+"consider/P/en",
+"obtain/P/en",
+"would/M/en"
+],
+"0518173bba9b672c": [
+"present/P/en",
+"reveal/P/en"
+],
+"05548093b811ed30": [
+"can/M/en",
+"establish/P/en"
+],
+"055760a9f21689e6": [
+"discuss/P/en",
+"share/P/en"
+],
+"0580a56f4bb09aed": [
+"be/M/en",
+"reach/P/en"
+],
+"062585b49fa0f9c3": [
+"establish/P/en",
+"may/M/en"
+],
+"0689db5f15637bce": [
+"discuss/P/en",
+"present/P/en"
+],
+"069e8caa2bb10170": [
+"percent/C/en",
+"run/P/en"
+],
+"06d702ec705b2a27": [
+"high/C/en"
+],
+"07333960e19ce3b6": [
+"be/M/en",
+"can/M/en",
+"produce/P/en"
+],
+"07337543d47d6e8a": [
+"recent/M/en",
+"research/C/en"
+],
+"07909af8556401a9": [
+"show/P/en",
+"yield/P/en"
+],
+"07b5a41e1e806e31": [
+"assign/P/en",
+"be/P/en"
+],
+"07ba3934875ea63d": [
+"be/M/en",
+"drive/P/en",
+"may/M/en"
+],
+"080cb1f1f506cbd3": [
+"be/P/en",
+"can/M/en",
+"not/M/en"
+],
+"08327cdbef208ec3": [
+"adopt/P/en"
+],
+"08a1c5bb159b564a": [
+"be/M/en",
+"emphasize/P/en"
+],
+"093bc8f95cb2983f": [
+"write/P/en"
+],
+"0950ad69e90bddf1": [
+"highlight/P/en"
+],
+"097dc95169238fb1": [
+"gain/P/en",
+"know/P/en"
+],
+"09d246fd034e3064": [
+"be/M/en",
+"consider/P/en"
+],
+"09de5c090004e74f": [
+"future/M/en",
+"research/C/en"
+],
+"0a4be42b6d62f865": [
+"emerge/P/en"
+],
+"0a7c6bacacc9eee0": [
+"lead/P/en",
+"would/M/en"
+],
+"0abc3149757b5d34": [
+"produce/P/en",
+"show/P/en"
+],
+"0acc1e22aa90eb78": [
+"may/M/en",
+"offer/P/en"
+],
+"0b4b139388547f53": [
+"contain/P/en",
+"note/P/en"
+],
+"0b4d8b4c069183a8": [
+"highlight/P/en",
+"indicate/P/en",
+"would/M/en"
+],
+"0b59ea4abb37543b": [
+"be/M/en",
+"give/P/en",
+"have/P/en"
+],
+"0b6539f1adc8fca4": [
+"suggest/P/en"
+],
+"0b714e3b6bfe34a3": [
+"lead/P/en",
+"may/M/en",
+"not/M/en"
+],
+"0ba7da3eeaaeeea4": [
+"would/M/en"
+],
+"0bc936be2e86c355": [
+"be/M/en",
+"write/P/en"
+],
+"0c050da2c0d9e631": [
+"can/M/en",
+"reveal/P/en"
+],
+"0c12a4ec23b13b40": [
+"expect/P/en",
+"would/M/en"
+],
+"0d26c0897d006621": [
+"most/M/en",
+"percent/C/en",
+"use/P/en"
+],
+"0d3e856b29e437a0": [
+"be/M/en",
+"draw/P/en"
+],
+"0e766c757ec9489e": [
+"do/P/en"
+],
+"0ec87316bd726f11": [
+"do/P/en",
+"show/P/en"
+],
+"0ee7258661eec035": [
+"adopt/P/en",
+"can/M/en"
+],
+"0f734fce1e6bb431": [
+"serve/P/en",
+"will/M/en"
+],
+"0fe2571c58faf100": [
+"context/C/en",
+"more/M/en"
+],
+"10e0dba177fe6c01": [
+"analysis/C/en",
+"recent/M/en"
+],
+"117d56b0ee6f2990": [
+"depend/P/en",
+"would/M/en"
+],
+"1185ae9086a9d5c1": [
+"hold/P/en",
+"suggest/P/en"
+],
+"118e8dddb317b421": [
+"be/M/en",
+"run/P/en"
+],
+"11fc30328d364ef3": [
+"be/M/en",
+"need/P/en",
+"will/M/en"
+],
+"1204464087e2e96e": [
+"be/P/en",
+"employ/P/en"
+],
+"1238c461dc285f13": [
+"include/P/en",
+"may/M/en"
+],
+"128013e4dd9a00bd": [
+"be/M/en",
+"know/P/en",
+"not/M/en"
+],
+"129c3521f7361db4": [
+"be/M/en",
+"construct/P/en",
+"use/P/en"
+],
+"12a66729d4e6e079": [
+"obtain/P/en",
+"show/P/en"
+],
+"12bef55d6476afa8": [
+"be/M/en",
+"can/M/en",
+"demonstrate/P/en"
+],
+"12c50ed46719e998": [
+"be/P/en",
+"note/P/en"
+],
+"12effa4d04ca583d": [
+"be/M/en",
+"engage/P/en"
+],
+"135103e985991e83": [
+"can/M/en",
+"highlight/P/en"
+],
+"139cd585ae5221d0": [
+"address/P/en"
+],
+"1466480f5f732459": [
+"be/M/en",
+"comprise/P/en"
+],
+"1492ad1fa9e8ace1": [
+"be/M/en",
+"be/P/en",
+"consider/P/en"
+],
+"14e51f4a6cd18de8": [
+"incorporate/P/en",
+"our/M/en",
+"work/C/en"
+],
+"150cc30a075476e9": [
+"finding/C/en",
+"research/C/en"
+],
+"1518058b3cc4365e": [
+"guide/P/en",
+"use/P/en"
+],
+"1563b387ed7f9b1f": [
+"not/M/en",
+"take/P/en"
+],
+"1618687d30ff02fd": [
+"difference/C/en",
+"our/M/en",
+"result/C/en"
+],
+"166154d999f0b58e": [
+"consist/P/en"
+],
+"166999d39abe4d56": [
+"produce/P/en",
+"will/M/en"
+],
+"167c13b6630636be": [
+"determine/P/en"
+],
+"1689d4f40d288d12": [
+"be/M/en",
+"can/M/en",
+"obtain/P/en"
+],
+"16a3f53b3506f675": [
+"context/C/en",
+"give/P/en"
+],
+"16fe3b1752a914ba": [
+"relate/P/en"
+],
+"171f0e4577d8a678": [
+"use/P/en",
+"will/M/en"
+],
+"17be5b58a242d441": [
+"expect/P/en",
+"make/P/en",
+"would/M/en"
+],
+"17c4dbf62996f846": [
+"not/M/en",
+"surpass/P/en"
+],
+"17d9df0f12a23eca": [
+"have/P/en",
+"include/P/en",
+"would/M/en"
+],
+"17da9516803faa91": [
+"more/M/en",
+"research/C/en"
+],
+"1839824b7388bdd3": [
+"indicate/P/en"
+],
+"1868ffcb49720150": [
+"be/M/en",
+"confirm/P/en",
+"use/P/en"
+],
+"18c369d19a23c3ad": [
+"begin/P/en"
+],
+"199a6d6fb0c3b459": [
+"employ/P/en"
+],
+"19cd3b5c2f224a86": [
+"be/M/en",
+"integrate/P/en"
+],
+"1a04d904ea5289cb": [
+"hold/P/en",
+"not/M/en"
+],
+"1ae90a184355ddb1": [
+"involve/P/en",
+"not/M/en"
+],
+"1b5ce6d649ed8989": [
+"be/P/en",
+"would/M/en"
+],
+"1c0794d0c5fb741f": [
+"be/P/en",
+"do/P/en",
+"not/M/en",
+"will/M/en"
+],
+"1cc75535288473f6": [
+"research/C/en",
+"tool/C/en"
+],
+"1ceceb2e1c095a5b": [
+"can/M/en",
+"confirm/P/en"
+],
+"1d317ca177de6b71": [
+"leverage/P/en",
+"may/M/en"
+],
+"1d784f1f9563ff51": [
+"establish/P/en"
+],
+"1dc02f5ff5ffcd4f": [
+"be/M/en",
+"obtain/P/en"
+],
+"1e0b37fce2f91131": [
+"need/P/en",
+"take/P/en"
+],
+"1e0ebd0f05904ca3": [
+"indicate/P/en",
+"not/M/en"
+],
+"1e27cccfc8e72c76": [
+"add/P/en",
+"offer/P/en"
+],
+"1e49df88b109739f": [
+"emerge/P/en",
+"will/M/en"
+],
+"1e662547262969d0": [
+"will/M/en"
+],
+"1e689d949af115a9": [
+"not/M/en",
+"perform/P/en"
+],
+"1e74d77125e196df": [
+"contain/P/en",
+"not/M/en"
+],
+"1e9f82c77aa914e0": [
+"facilitate/P/en"
+],
+"1ebd5d06a0edd463": [
+"give/P/en"
+],
+"1f1e97df9b9adfe1": [
+"present/M/en"
+],
+"1f22ea21e0a1bd87": [
+"can/M/en",
+"perform/P/en",
+"show/P/en",
+"well/M/en"
+],
+"1f6e3a899cb62f3c": [
+"not/M/en",
+"reach/P/en"
+],
+"1fd85f317ea2fe94": [
+"integrate/P/en",
+"tool/C/en"
+],
+"20d6d34020d7bf3b": [
+"explore/P/en",
+"not/M/en"
+],
+"20e66016127fe570": [
+"approach/C/en",
+"our/M/en"
+],
+"2146cb6d2ec4e105": [
+"our/M/en",
+"way/C/en"
+],
+"214948f3341809e0": [
+"be/M/en",
+"leverage/P/en"
+],
+"21aa9722b5089a57": [
+"be/M/en",
+"highlight/P/en"
+],
+"21aec0372aae2b02": [
+"not/M/en",
+"reflect/P/en"
+],
+"21c9c4c716022001": [
+"run/P/en"
+],
+"21eeb29345ca97f6": [
+"illustrate/P/en",
+"include/P/en"
+],
+"21fa9d7c6639ac68": [
+"involve/P/en"
+],
+"2291826630558b79": [
+"process/P/en",
+"produce/P/en"
+],
+"22deb7ca0f501380": [
+"be/M/en",
+"can/M/en",
+"show/P/en"
+],
+"2355bd7d2045d061": [
+"not/M/en",
+"reflect/P/en",
+"will/M/en"
+],
+"23568f8132a1c2df": [
+"underscore/P/en"
+],
+"23fe31364e79bee4": [
+"be/M/en",
+"find/P/en",
+"may/M/en"
+],
+"2455bffb400f31c9": [
+"difference/C/en",
+"report/P/en"
+],
+"246453a17726c90b": [
+"be/M/en",
+"show/P/en"
+],
+"248586704440a086": [
+"expect/P/en",
+"have/P/en",
+"would/M/en"
+],
+"24a29d5325dfb6bc": [
+"be/M/en",
+"can/M/en",
+"consider/P/en"
+],
+"24aba0562da1227a": [
+"do/P/en",
+"would/M/en"
+],
+"2518794e7440cdc5": [
+"produce/P/en"
+],
+"254da641569d1e06": [
+"not/M/en",
+"result/P/en"
+],
+"25ca3e69322cacd1": [
+"can/M/en",
+"process/P/en",
+"receive/P/en"
+],
+"26340d636313aba6": [
+"be/M/en",
+"can/M/en",
+"not/M/en",
+"process/P/en"
+],
+"269c37c14f066ae4": [
+"be/M/en",
+"include/P/en"
+],
+"26c796a2dc909b53": [
+"research/C/en"
+],
+"27485eb733a67a53": [
+"present/P/en",
+"would/M/en"
+],
+"27695ebbff4ddf5a": [
+"follow/P/en",
+"will/M/en"
+],
+"27922e1b44056e80": [
+"have/P/en",
+"will/M/en"
+],
+"288e94fa2b99e66f": [
+"have/P/en",
+"produce/P/en"
+],
+"28a44e1d7f305cc0": [
+"contain/P/en",
+"show/P/en"
+],
+"28bca96ecb1526dc": [
+"not/M/en",
+"offer/P/en"
+],
+"299a8e6f494eb879": [
+"be/M/en",
+"need/P/en",
+"not/M/en"
+],
+"29d331248aa4cb5a": [
+"not/M/en",
+"write/P/en"
+],
+"29ddb782b70cc5a2": [
+"be/P/en",
+"may/M/en",
+"note/P/en"
+],
+"2a82a4b1553021e7": [
+"way/C/en"
+],
+"2ae13bb20d8eb888": [
+"can/M/en",
+"determine/P/en"
+],
+"2b4f9baf7e82f463": [
+"draw/P/en",
+"may/M/en"
+],
+"2bc50d3a342d873c": [
+"important/C/en"
+],
+"2bcba832e6d23213": [
+"emerge/P/en",
+"may/M/en"
+],
+"2bd947295cd0a821": [
+"be/M/en",
+"reveal/P/en",
+"show/P/en"
+],
+"2bee51c160b79732": [
+"consist/P/en",
+"use/P/en"
+],
+"2c2025f69b063b25": [
+"can/M/en",
+"find/P/en"
+],
+"2c4339e63a09705b": [
+"be/M/en",
+"process/P/en",
+"will/M/en"
+],
+"2c4789f9c9ed22b0": [
+"be/P/en",
+"not/M/en",
+"suggest/P/en"
+],
+"2cfffc673fb59d4a": [
+"section/C/en",
+"suggest/P/en"
+],
+"2d13998492166c6b": [
+"can/M/en",
+"display/P/en",
+"show/P/en"
+],
+"2d29da9fbf92e068": [
+"introduce/P/en",
+"not/M/en"
+],
+"2da17d83534f27a7": [
+"have/M/en"
+],
+"2e3c266bd509e17a": [
+"be/M/en",
+"follow/P/en"
+],
+"2eb88cb6fb166193": [
+"expect/P/en"
+],
+"2edcd27c2d240e06": [
+"integrate/P/en",
+"process/P/en"
+],
+"2f056984e084b0b6": [
+"be/M/en",
+"can/M/en",
+"process/P/en",
+"show/P/en"
+],
+"2f619aa39f495af5": [
+"be/M/en",
+"can/M/en",
+"demonstrate/P/en",
+"use/P/en"
+],
+"2f62206210e6660a": [
+"reveal/P/en"
+],
+"2f8bce545426d892": [
+"make/P/en",
+"serve/P/en"
+],
+"2fb7c45a1e906da6": [
+"address/P/en",
+"can/M/en"
+],
+"300502a16f5c800a": [
+"be/M/en",
+"give/P/en"
+],
+"303a8952c7a08a4c": [
+"become/P/en",
+"integrate/P/en"
+],
+"3045831e455cc414": [
+"regard/P/en"
+],
+"3076ff0a94d7d2a3": [
+"finding/C/en",
+"recent/M/en"
+],
+"30a3be83af77fdd8": [
+"be/M/en",
+"be/P/en",
+"introduce/P/en"
+],
+"3126cef84c026daf": [
+"follow/P/en",
+"not/M/en"
+],
+"320a4baebc186c7c": [
+"be/M/en",
+"can/M/en",
+"construct/P/en"
+],
+"32776e09c94a4337": [
+"not/M/en",
+"refer/P/en"
+],
+"32b0b2bb3e49ed0d": [
+"be/M/en",
+"can/M/en",
+"make/P/en"
+],
+"335ef8d55e6a1166": [
+"be/M/en",
+"can/M/en",
+"consider/P/en",
+"not/M/en"
+],
+"33ade900ffa479a1": [
+"not/M/en",
+"show/P/en",
+"yield/P/en"
+],
+"33fd78417084acc2": [
+"process/P/en"
+],
+"340d9d9d5b19293b": [
+"find/P/en",
+"perform/P/en",
+"well/M/en"
+],
+"34162b9cf772a535": [
+"engage/P/en"
+],
+"344af74fe0c3cac3": [
+"gain/P/en"
+],
+"3469fa1b18727a72": [
+"can/M/en",
+"include/P/en"
+],
+"3488406d8ed236a0": [
+"be/M/en",
+"hold/P/en"
+],
+"34927b0ab10156d9": [
+"approach/C/en",
+"future/M/en"
+],
+"34b3fcb25aaf9ea3": [
+"be/P/en",
+"lead/P/en"
+],
+"34b93de973a99afa": [
+"demonstrate/P/en",
+"exhibit/P/en"
+],
+"3649c0be4a551cc8": [
+"exhibit/P/en",
+"highlight/P/en"
+],
+"3781d53e7474e18f": [
+"adopt/P/en",
+"not/M/en"
+],
+"37fcc3b6ef16684a": [
+"become/P/en"
+],
+"3813aac062613cbb": [
+"can/M/en",
+"indicate/P/en",
+"make/P/en"
+],
+"38584d701aaa60cc": [
+"leverage/P/en",
+"may/M/en",
+"well/M/en"
+],
+"38d342965dd83cef": [
+"can/M/en",
+"remain/P/en"
+],
+"395a6dda80e36c66": [
+"perform/P/en",
+"reveal/P/en"
+],
+"39832c226827a72f": [
+"introduce/P/en",
+"will/M/en"
+],
+"3a07926cb788406e": [
+"construct/P/en"
+],
+"3a132cb7c7fc9923": [
+"analysis/C/en"
+],
+"3a145bb740450ac8": [
+"be/M/en",
+"include/P/en",
+"well/M/en"
+],
+"3a2b912e523ebee4": [
+"obtain/P/en",
+"use/P/en"
+],
+"3a361cf62cb5bbf8": [
+"contain/P/en",
+"may/M/en"
+],
+"3a5174b1cc21064c": [
+"not/M/en",
+"report/P/en"
+],
+"3a69f74eebfb641f": [
+"be/M/en",
+"refer/P/en"
+],
+"3a824fa0f9118154": [
+"be/M/en",
+"explore/P/en"
+],
+"3b6190ed7e5c6a3e": [
+"offer/P/en",
+"would/M/en"
+],
+"3b63b908c4109e40": [
+"be/M/en",
+"produce/P/en"
+],
+"3bc109b7f4ab18b0": [
+"follow/P/en",
+"process/P/en"
+],
+"3c2daba1a0a46a5f": [
+"do/P/en",
+"not/M/en",
+"use/P/en"
+],
+"3c4b3d4527ba6d94": [
+"address/P/en",
+"challenge/C/en"
+],
+"3caa1ab26af9be58": [
+"our/M/en",
+"result/C/en"
+],
+"3cb1bd0e12880a88": [
+"finding/C/en",
+"our/M/en"
+],
+"3cdb372c520d0354": [
+"be/M/en",
+"can/M/en",
+"use/P/en"
+],
+"3e0d30838e49d810": [
+"produce/P/en",
+"would/M/en"
+],
+"3ea091ca2bc69b4b": [
+"be/M/en",
+"present/P/en"
+],
+"3f20817d5e249fdf": [
+"can/M/en",
+"drive/P/en",
+"explore/P/en"
+],
+"3f2351438d840e1c": [
+"be/M/en",
+"not/M/en",
+"reveal/P/en"
+],
+"3f23a96a8ae1319c": [
+"can/M/en",
+"relate/P/en"
+],
+"3f5610adf44bd2ed": [
+"can/M/en",
+"demonstrate/P/en"
+],
+"3f9401fb44c95174": [
+"be/M/en",
+"not/M/en",
+"note/P/en",
+"use/P/en"
+],
+"3ff3cc96d3a3e2c5": [
+"be/M/en",
+"not/M/en",
+"produce/P/en"
+],
+"401280fe9fd787a8": [
+"datum/C/en",
+"our/M/en"
+],
+"401deb4962d7aa2b": [
+"be/M/en",
+"know/P/en"
+],
+"40252ce7239eeec4": [
+"emphasize/P/en"
+],
+"409b3b5f5d03c495": [
+"be/M/en",
+"construct/P/en"
+],
+"40dccfb2fd4f362e": [
+"be/M/en",
+"relate/P/en"
+],
+"411ea662b03e1128": [
+"present/P/en",
+"show/P/en"
+],
+"4153b659960dbed6": [
+"be/M/en",
+"maintain/P/en"
+],
+"41cf7f34085215ea": [
+"become/P/en",
+"can/M/en"
+],
+"41e277c86133c531": [
+"be/M/en",
+"drive/P/en",
+"suggest/P/en"
+],
+"421086951b41ef8d": [
+"display/P/en",
+"may/M/en"
+],
+"4295f8bd89df5caf": [
+"have/P/en",
+"make/P/en"
+],
+"42a2f17055a353f1": [
+"incorporate/P/en",
+"need/P/en",
+"will/M/en"
+],
+"434eb6852339d1b9": [
+"be/P/en",
+"not/M/en",
+"show/P/en"
+],
+"435546b273c385f3": [
+"add/P/en",
+"be/M/en"
+],
+"437f6582ba57b8e6": [
+"find/P/en",
+"may/M/en"
+],
+"438ef04aed10c2c5": [
+"indicate/P/en",
+"would/M/en"
+],
+"439be38047b8e21f": [
+"have/P/en",
+"not/M/en"
+],
+"43f7a4a7c8e12582": [
+"lead/P/en",
+"not/M/en"
+],
+"441b85f88b6265ad": [
+"base/P/en"
+],
+"443dce9962c52f17": [
+"be/P/en",
+"determine/P/en",
+"not/M/en"
+],
+"447047245a650dc4": [
+"remain/P/en"
+],
+"44824153427924d7": [
+"base/P/en",
+"datum/C/en",
+"recent/M/en"
+],
+"44cfb8fcd4af14e9": [
+"reach/P/en"
+],
+"44e1a0ccc19fca4d": [
+"seem/P/en"
+],
+"4502b0d666890166": [
+"future/M/en",
+"work/C/en"
+],
+"451bb58c1d7402c4": [
+"involve/P/en",
+"note/P/en"
+],
+"455c02b5654ba351": [
+"establish/P/en",
+"show/P/en"
+],
+"46c9c368a5a24505": [
+"may/M/en",
+"result/P/en"
+],
+"47d99548e2bc8cf6": [
+"correspond/P/en",
+"may/M/en"
+],
+"47f14aa72493c1c9": [
+"represent/P/en"
+],
+"4824238c24a70adf": [
+"include/P/en",
+"indicate/P/en"
+],
+"4854ec232ae00546": [
+"determine/P/en",
+"exhibit/P/en"
+],
+"485687aeada53749": [
+"datum/C/en"
+],
+"485db48f7fe23ad6": [
+"reflect/P/en",
+"report/P/en"
+],
+"486c5ea8a78d5fee": [
+"show/P/en",
+"will/M/en"
+],
+"48eae292c2a153a0": [
+"result/C/en"
+],
+"49974dbb72c54a3e": [
+"choose/P/en"
+],
+"49fb9ae0aff39dff": [
+"note/P/en"
+],
+"4a2c10de83571a53": [
+"report/P/en",
+"will/M/en"
+],
+"4a485e170ca2d495": [
+"be/P/en",
+"seem/P/en"
+],
+"4ad99af731f7c267": [
+"discuss/P/en",
+"not/M/en"
+],
+"4afdfe0a7512223e": [
+"assign/P/en"
+],
+"4b28ee11b317f6ad": [
+"adapt/P/en",
+"will/M/en"
+],
+"4b54fb41326dd588": [
+"paper/C/en"
+],
+"4bdf2b9466bd2507": [
+"involve/P/en",
+"would/M/en"
+],
+"4c360964008e9c06": [
+"indicate/P/en",
+"perform/P/en"
+],
+"4c99e2e2d1bc4d07": [
+"highlight/P/en",
+"seem/P/en"
+],
+"4ca19eed03a6d904": [
+"can/M/en",
+"work/P/en"
+],
+"4d248523d4332bac": [
+"reach/P/en",
+"use/P/en"
+],
+"4d4cd4f20b40e2c5": [
+"be/P/en",
+"demonstrate/P/en"
+],
+"4d9891d9cd939a02": [
+"adapt/P/en",
+"well/M/en"
+],
+"4db7e0a36c6661ff": [
+"become/P/en",
+"incorporate/P/en"
+],
+"4e993e594347d541": [
+"can/M/en",
+"express/P/en"
+],
+"4ea79e57b65da096": [
+"use/P/en",
+"way/C/en"
+],
+"4f21c98c4e3154c3": [
+"be/P/en",
+"high/C/en"
+],
+"4f56f38e43a50f75": [
+"be/M/en",
+"not/M/en",
+"present/P/en"
+],
+"4f6a5496be994985": [
+"expect/P/en",
+"find/P/en",
+"would/M/en"
+],
+"4ff2e50295527329": [
+"be/M/en",
+"make/P/en",
+"will/M/en"
+],
+"50676f882e07c714": [
+"have/P/en"
+],
+"506e5509fb2966e3": [
+"example/C/en",
+"more/M/en"
+],
+"5082a6ea77364734": [
+"address/P/en",
+"be/M/en",
+"can/M/en"
+],
+"50e952792c908be2": [
+"analysis/C/en",
+"our/M/en"
+],
+"51491d3b5c1c2335": [
+"can/M/en",
+"discuss/P/en"
+],
+"517ae2ce125a547b": [
+"adapt/P/en",
+"need/P/en",
+"would/M/en"
+],
+"51980026aea302a7": [
+"adapt/P/en",
+"leverage/P/en"
+],
+"51a7ef6f7601266c": [
+"assign/P/en",
+"be/M/en"
+],
+"51f428713790f85f": [
+"can/M/en",
+"come/P/en"
+],
+"523affe241b3fe39": [
+"be/P/en",
+"do/P/en",
+"expect/P/en",
+"will/M/en"
+],
+"524ce13a0fc86676": [
+"be/M/en",
+"expect/P/en"
+],
+"5271eed5847253fc": [
+"do/P/en",
+"will/M/en"
+],
+"52869fc01b703778": [
+"illustrate/P/en",
+"show/P/en"
+],
+"52e0fc2ca9b165be": [
+"suggest/P/en",
+"yield/P/en"
+],
+"52e9340fe535d6d9": [
+"address/P/en",
+"need/P/en"
+],
+"53b988a680d1350c": [
+"be/M/en",
+"do/P/en"
+],
+"54037669857be54e": [
+"context/C/en",
+"present/M/en"
+],
+"549543f810af3480": [
+"add/P/en",
+"be/M/en",
+"will/M/en"
+],
+"54aab1a1361c2867": [
+"become/P/en",
+"will/M/en"
+],
+"54c6f12b0034e2b3": [
+"may/M/en",
+"use/P/en"
+],
+"5517d98ada133b81": [
+"present/P/en",
+"will/M/en"
+],
+"55871728bff5828a": [
+"show/P/en",
+"use/P/en"
+],
+"55f2016d713c15bf": [
+"show/P/en",
+"would/M/en"
+],
+"563d015fa38ee62f": [
+"more/M/en"
+],
+"5644b2a95bc63450": [
+"adapt/P/en",
+"context/C/en"
+],
+"56a8a5af9e813304": [
+"confirm/P/en"
+],
+"56b338e533ea325c": [
+"add/P/en",
+"datum/C/en",
+"more/M/en"
+],
+"56b633890322a577": [
+"perform/P/en",
+"would/M/en"
+],
+"56bad53758524171": [
+"more/M/en",
+"work/C/en"
+],
+"57a3f06c8d58fe16": [
+"may/M/en",
+"produce/P/en"
+],
+"57c1b92d42d5f03a": [
+"indicate/P/en",
+"result/P/en"
+],
+"57d7d019ffdc8b43": [
+"have/P/en",
+"would/M/en"
+],
+"58a2a796851cd671": [
+"note/P/en",
+"use/P/en"
+],
+"58a3f1f9ba32645f": [
+"incorporate/P/en",
+"not/M/en"
+],
+"58c7763e6e2704be": [
+"highlight/P/en",
+"may/M/en"
+],
+"58fcaec598061f4f": [
+"assign/P/en",
+"be/M/en",
+"can/M/en",
+"not/M/en"
+],
+"59014621bee6f79d": [
+"be/P/en",
+"not/M/en",
+"surpass/P/en"
+],
+"59096b73d16e804a": [
+"discuss/P/en",
+"exhibit/P/en"
+],
+"5917800d700ac60e": [
+"be/P/en",
+"may/M/en"
+],
+"597c44683017d46d": [
+"not/M/en",
+"yield/P/en"
+],
+"5a76df36a0ec6424": [
+"explore/P/en",
+"show/P/en"
+],
+"5a7970627a652aa6": [
+"have/P/en",
+"not/M/en",
+"will/M/en"
+],
+"5a94bc263c89cabe": [
+"be/M/en",
+"draw/P/en",
+"use/P/en"
+],
+"5b7f3a4c53bb37c2": [
+"be/P/en",
+"important/C/en"
+],
+"5cc556ad5bce3506": [
+"difference/C/en"
+],
+"5d06b1bcdabcfe9c": [
+"can/M/en",
+"draw/P/en"
+],
+"5d1d45cfe69f5f1d": [
+"integrate/P/en"
+],
+"5d3d773e44031d47": [
+"be/P/en",
+"suggest/P/en",
+"would/M/en"
+],
+"5db48afe99f3a73d": [
+"illustrate/P/en"
+],
+"5dd628f1756a20b0": [
+"may/M/en",
+"not/M/en",
+"yield/P/en"
+],
+"5df74029ec34ee3c": [
+"perform/P/en",
+"well/M/en"
+],
+"5e55a650f936a5ad": [
+"can/M/en",
+"have/P/en",
+"not/M/en"
+],
+"5e85c33ed346427f": [
+"be/M/en",
+"employ/P/en"
+],
+"5f0215436205344f": [
+"not/M/en",
+"run/P/en"
+],
+"5f8b8d3d45e7314e": [
+"can/M/en",
+"engage/P/en"
+],
+"5fab231a5f45612e": [
+"correspond/P/en",
+"indicate/P/en"
+],
+"5fe72c7e26403326": [
+"be/P/en",
+"follow/P/en",
+"use/P/en"
+],
+"602ccf2abacb21c8": [
+"be/P/en",
+"discuss/P/en"
+],
+"603086e3d48b0486": [
+"be/M/en",
+"present/P/en",
+"show/P/en"
+],
+"6035f30d615d3118": [
+"follow/P/en",
+"perform/P/en"
+],
+"603b73dc86e983d5": [
+"recent/M/en",
+"work/C/en"
+],
+"60491a18df7fed71": [
+"be/M/en",
+"be/P/en",
+"can/M/en",
+"represent/P/en"
+],
+"609f65246d3f324a": [
+"add/P/en"
+],
+"61d48c7edc09634a": [
+"consider/P/en",
+"use/P/en"
+],
+"6242064488f4c3e7": [
+"include/P/en",
+"will/M/en"
+],
+"624555d05a77504c": [
+"do/P/en",
+"use/P/en"
+],
+"62738bb625a93df6": [
+"be/M/en",
+"explore/P/en",
+"will/M/en"
+],
+"6299603c8c501aea": [
+"know/P/en",
+"use/P/en",
+"well/M/en"
+],
+"62f0bb12412abfd0": [
+"demonstrate/P/en",
+"have/P/en"
+],
+"62f83c1b7533b1c5": [
+"be/M/en",
+"surpass/P/en"
+],
+"635f71eb68d9595e": [
+"recent/M/en"
+],
+"63a8af547ff433a9": [
+"may/M/en",
+"suggest/P/en"
+],
+"63ada8052e83d0e3": [
+"perform/P/en"
+],
+"63b63ccb60e48f3f": [
+"illustrate/P/en",
+"use/P/en"
+],
+"640b4e9ba345de68": [
+"follow/P/en",
+"well/M/en"
+],
+"64256ac93834dde0": [
+"be/M/en",
+"find/P/en",
+"result/P/en"
+],
+"64270c86e128690c": [
+"introduce/P/en"
+],
+"6497a2f859c033f9": [
+"establish/P/en",
+"will/M/en"
+],
+"649d4e385fe8a1c2": [
+"be/M/en",
+"show/P/en",
+"use/P/en"
+],
+"64c199f3bce24749": [
+"display/P/en"
+],
+"64f4568d9eba5453": [
+"can/M/en",
+"establish/P/en",
+"not/M/en"
+],
+"653aca302e4f29c8": [
+"correspond/P/en",
+"not/M/en"
+],
+"65448ed79c835efa": [
+"our/M/en",
+"process/C/en"
+],
+"6566515664583c86": [
+"analysis/C/en",
+"challenge/C/en",
+"our/M/en",
+"present/P/en"
+],
+"65a5871cf8874108": [
+"hold/P/en",
+"will/M/en"
+],
+"6627ae89636ae1ba": [
+"process/P/en",
+"receive/P/en"
+],
+"664e77b956eb0394": [
+"can/M/en",
+"explore/P/en"
+],
+"665940510a15bbf4": [
+"section/C/en"
+],
+"666b8d039305b7d0": [
+"can/M/en",
+"drive/P/en"
+],
+"67696ff2318d8b04": [
+"address/P/en",
+"will/M/en"
+],
+"678867705941bf36": [
+"not/M/en"
+],
+"68383d034769bfc6": [
+"most/M/en"
+],
+"684dd90d0e515a85": [
+"find/P/en",
+"perform/P/en"
+],
+"6878017a46509714": [
+"base/P/en",
+"be/M/en",
+"will/M/en"
+],
+"68ae28f564533aef": [
+"may/M/en",
+"underlie/P/en"
+],
+"68ff9ff60c9c02cd": [
+"express/P/en"
+],
+"6904e33790470e2d": [
+"exhibit/P/en",
+"suggest/P/en"
+],
+"69637ba6e6fa4a48": [
+"construct/P/en",
+"use/P/en"
+],
+"6a4f19f9d198fedf": [
+"example/C/en",
+"follow/P/en"
+],
+"6ad52265bb861294": [
+"leverage/P/en",
+"not/M/en"
+],
+"6c3c48682e8be913": [
+"indicate/P/en",
+"present/P/en"
+],
+"6c8e1f800ff6cb2d": [
+"demonstrate/P/en",
+"result/P/en"
+],
+"6d0656617655ec78": [
+"remain/P/en",
+"suggest/P/en"
+],
+"6d06eb7e292775af": [
+"be/P/en",
+"need/P/en"
+],
+"6d0da58b5332d9d2": [
+"do/P/en",
+"work/C/en"
+],
+"6d1db2486626c0d2": [
+"adopt/P/en",
+"be/M/en"
+],
+"6d537ed12e363760": [
+"can/M/en",
+"produce/P/en"
+],
+"6d59accff62b2420": [
+"address/P/en",
+"would/M/en"
+],
+"6e11937a76d54f94": [
+"be/P/en",
+"determine/P/en"
+],
+"6e9cd12eb88c74d3": [
+"well/M/en",
+"work/P/en"
+],
+"6ef298fc68dd2c86": [
+"find/P/en",
+"would/M/en"
+],
+"6f06fda8b445320f": [
+"correspond/P/en",
+"may/M/en",
+"not/M/en"
+],
+"6ff44c5d22c0a831": [
+"find/P/en",
+"not/M/en"
+],
+"6ffd8f5d5c8d140b": [
+"be/M/en",
+"can/M/en",
+"process/P/en"
+],
+"7056b424d2364f08": [
+"note/P/en",
+"yield/P/en"
+],
+"707d95b8725b8468": [
+"indicate/P/en",
+"make/P/en"
+],
+"70e3e51cd17d321b": [
+"take/P/en"
+],
+"70e7e4c58b431d1a": [
+"display/P/en",
+"seem/P/en"
+],
+"712f61827da61fdf": [
+"be/M/en",
+"can/M/en",
+"take/P/en"
+],
+"71335f15395b254e": [
+"guide/P/en"
+],
+"7193977d12c8e682": [
+"can/M/en",
+"use/P/en"
+],
+"71a80460ae96af7f": [
+"be/M/en",
+"demonstrate/P/en"
+],
+"71b8990782abe65f": [
+"finding/C/en",
+"present/M/en"
+],
+"71bd39855a2fd440": [
+"can/M/en",
+"reflect/P/en"
+],
+"71d56e8bc1f0f644": [
+"can/M/en",
+"offer/P/en"
+],
+"71df111a1012ddec": [
+"be/P/en",
+"display/P/en"
+],
+"71fec98264e6632f": [
+"lead/P/en",
+"not/M/en",
+"show/P/en"
+],
+"720abbcfd2965120": [
+"demonstrate/P/en",
+"do/P/en"
+],
+"7264215a92d5e09c": [
+"be/P/en",
+"present/P/en"
+],
+"729e1a4ba26d5b8b": [
+"be/P/en",
+"emphasize/P/en"
+],
+"72b12a76cf2e72f8": [
+"be/M/en",
+"share/P/en"
+],
+"72d9af7463c4419f": [
+"confirm/P/en",
+"not/M/en"
+],
+"73691cebe26b61cd": [
+"explore/P/en",
+"use/P/en"
+],
+"738c97fc1e143133": [
+"perform/P/en",
+"will/M/en"
+],
+"73b30b3aa69c0ddd": [
+"adapt/P/en",
+"can/M/en"
+],
+"73f6cef8c0b669fb": [
+"know/P/en"
+],
+"7402af8c2edad5e6": [
+"be/P/en",
+"give/P/en"
+],
+"7427e80521a80113": [
+"reflect/P/en",
+"suggest/P/en"
+],
+"744b1a4baace6222": [
+"reveal/P/en",
+"would/M/en"
+],
+"74a08be5bb97521b": [
+"be/M/en",
+"can/M/en",
+"do/P/en"
+],
+"74ea86e6d760bd9a": [
+"make/P/en",
+"produce/P/en"
+],
+"74ed8208294f6ef8": [
+"may/M/en",
+"not/M/en",
+"reflect/P/en"
+],
+"7530ab5ca66c1d0b": [
+"establish/P/en",
+"not/M/en"
+],
+"75be4cd764a201f5": [
+"base/P/en",
+"be/M/en",
+"may/M/en"
+],
+"75e0b7701cd3fd21": [
+"may/M/en",
+"reveal/P/en"
+],
+"75fa841927974135": [
+"need/P/en"
+],
+"7603c461a731fa93": [
+"time/C/en"
+],
+"760be31a7e1bc339": [
+"be/P/en",
+"indicate/P/en"
+],
+"764fe2c19b8867b5": [
+"adapt/P/en",
+"be/M/en",
+"not/M/en"
+],
+"7667f690a759888a": [
+"address/P/en",
+"use/P/en"
+],
+"768f8327f8b48b44": [
+"explore/P/en",
+"need/P/en"
+],
+"76f468dcae592805": [
+"analysis/C/en",
+"section/C/en"
+],
+"771fd6e18a5a8962": [
+"reveal/P/en",
+"will/M/en"
+],
+"77a021724db864fa": [
+"be/P/en",
+"can/M/en",
+"discuss/P/en"
+],
+"77cea8e7ea3fcf77": [
+"depend/P/en",
+"may/M/en"
+],
+"781a1e4f224c81be": [
+"lead/P/en",
+"may/M/en"
+],
+"786942d9d881e9cd": [
+"incorporate/P/en"
+],
+"78a3462f8269180d": [
+"guide/P/en",
+"well/M/en"
+],
+"78b00d3fc0dc8a8a": [
+"engage/P/en",
+"find/P/en"
+],
+"78b1f750a87011d5": [
+"discuss/P/en"
+],
+"7aac7795adf095d7": [
+"be/M/en",
+"reach/P/en",
+"would/M/en"
+],
+"7ad90ec3830958e2": [
+"add/P/en",
+"be/P/en"
+],
+"7b316126b943b5fb": [
+"hold/P/en"
+],
+"7b86cdd66a8c8262": [
+"be/M/en",
+"explore/P/en",
+"would/M/en"
+],
+"7ba8dac04520de19": [
+"appear/P/en"
+],
+"7c4f93c83522de75": [
+"remain/P/en",
+"would/M/en"
+],
+"7d3f9d13d4d0a923": [
+"present/M/en",
+"research/C/en"
+],
+"7d4287610de6a9b4": [
+"our/M/en",
+"research/C/en"
+],
+"7d4a319cd5f77068": [
+"challenge/C/en"
+],
+"7da03f38ff9482e8": [
+"come/P/en",
+"would/M/en"
+],
+"7dd511a867286217": [
+"be/M/en",
+"can/M/en",
+"include/P/en",
+"not/M/en"
+],
+"7ef106190c6943b2": [
+"result/P/en"
+],
+"7ef402e19b8cd40d": [
+"may/M/en",
+"receive/P/en"
+],
+"7f078d0b386486ee": [
+"be/M/en",
+"be/P/en"
+],
+"7f308b1e933ee61f": [
+"be/M/en",
+"find/P/en",
+"show/P/en"
+],
+"7f8840d5d4111e93": [
+"need/P/en",
+"will/M/en"
+],
+"7fa6524bd9d57ac1": [
+"instance/C/en",
+"most/M/en"
+],
+"801c7efea3059cba": [
+"need/P/en",
+"not/M/en"
+],
+"803f00319e879226": [
+"indicate/P/en",
+"may/M/en"
+],
+"8068dfa151b6881f": [
+"be/M/en",
+"can/M/en",
+"draw/P/en"
+],
+"806c3ae210f59ab7": [
+"report/P/en",
+"use/P/en"
+],
+"807b8c92e4b6deca": [
+"report/P/en"
+],
+"80b5d29203bbc1cf": [
+"demonstrate/P/en",
+"show/P/en"
+],
+"80db4550c660c0f1": [
+"be/M/en",
+"not/M/en",
+"relate/P/en"
+],
+"8213353b6e37e3a0": [
+"can/M/en",
+"explore/P/en",
+"find/P/en"
+],
+"822b171517863e14": [
+"indicate/P/en",
+"maintain/P/en"
+],
+"828bc6846d57d3c7": [
+"be/P/en",
+"expect/P/en"
+],
+"82c25b9442d438c6": [
+"be/M/en",
+"consider/P/en",
+"will/M/en"
+],
+"830e4a7cdc116ed0": [
+"be/P/en",
+"confirm/P/en"
+],
+"831872a8d36190ed": [
+"can/M/en",
+"result/P/en"
+],
+"83974bea36f3df4e": [
+"be/M/en",
+"consider/P/en",
+"not/M/en"
+],
+"8409d08887ae3fbc": [
+"consider/P/en",
+"need/P/en"
+],
+"84a999b251745d41": [
+"indicate/P/en",
+"reach/P/en"
+],
+"84f53e20687e425a": [
+"obtain/P/en"
+],
+"84f8c3d6b29a54c5": [
+"be/M/en",
+"find/P/en",
+"not/M/en"
+],
+"8528a87e78617ab3": [
+"follow/P/en"
+],
+"853ae9a1e93b0073": [
+"maintain/P/en"
+],
+"8547da5394718f1f": [
+"not/M/en",
+"reveal/P/en",
+"will/M/en"
+],
+"8593dde1e8edaa38": [
+"be/M/en",
+"find/P/en"
+],
+"85b3ad13882a048c": [
+"find/P/en",
+"reflect/P/en"
+],
+"860bc9bd7d36cc48": [
+"result/C/en",
+"show/P/en"
+],
+"86b391193d9ff361": [
+"become/P/en",
+"well/M/en"
+],
+"86f7e52471ce72b6": [
+"can/M/en",
+"not/M/en",
+"surpass/P/en"
+],
+"87814a34d9dd9b61": [
+"important/C/en",
+"more/M/en"
+],
+"879049d67f1d3e27": [
+"illustrate/P/en",
+"result/P/en"
+],
+"882c7bd648557be4": [
+"consider/P/en",
+"show/P/en"
+],
+"88df4bdf537c5f57": [
+"consider/P/en",
+"not/M/en"
+],
+"89280d43f55524bc": [
+"more/M/en",
+"time/C/en"
+],
+"8950a84ac28c1d10": [
+"be/M/en",
+"involve/P/en"
+],
+"897a8e2ee8ee35ed": [
+"be/M/en",
+"may/M/en",
+"relate/P/en"
+],
+"89cb8663b60bcf5d": [
+"be/M/en",
+"can/M/en",
+"hold/P/en"
+],
+"8a009878b99f0f92": [
+"give/P/en",
+"would/M/en"
+],
+"8a91effc1b5983e1": [
+"be/M/en",
+"regard/P/en"
+],
+"8ac3d0fcf261d338": [
+"do/P/en",
+"not/M/en"
+],
+"8acc036543b99fde": [
+"be/M/en",
+"drive/P/en"
+],
+"8ae6f0285c47ff3e": [
+"can/M/en"
+],
+"8bc2eedb94596207": [
+"adapt/P/en",
+"use/P/en"
+],
+"8c3c1812a14ad8c0": [
+"approach/C/en",
+"most/M/en"
+],
+"8c8d9d7a45a4685e": [
+"be/M/en",
+"serve/P/en"
+],
+"8cce1fe5ed354fd1": [
+"address/P/en",
+"explore/P/en"
+],
+"8cd4383de8c33324": [
+"serve/P/en",
+"would/M/en"
+],
+"8ce046fefdbf9f92": [
+"research/C/en",
+"use/P/en"
+],
+"8cf9d6f60cb457c4": [
+"can/M/en",
+"not/M/en",
+"reach/P/en"
+],
+"8cffd74a78262846": [
+"be/P/en",
+"will/M/en"
+],
+"8d11df8c5f37bdf1": [
+"take/P/en",
+"would/M/en"
+],
+"8d1f2be47b7b1afd": [
+"seem/P/en",
+"use/P/en"
+],
+"8d9087f417763c2d": [
+"be/P/en",
+"indicate/P/en",
+"not/M/en"
+],
+"8da6463b34514419": [
+"be/M/en",
+"can/M/en",
+"introduce/P/en"
+],
+"8da99a07313f5f4c": [
+"facilitate/P/en",
+"will/M/en"
+],
+"8e9ad6240f2ba0ed": [
+"result/P/en",
+"show/P/en"
+],
+"8e9f07dbc5856dc8": [
+"can/M/en",
+"gain/P/en"
+],
+"8f13e6a89eba7da4": [
+"integrate/P/en",
+"will/M/en"
+],
+"8f1db21d3cf96d6f": [
+"not/M/en",
+"show/P/en"
+],
+"8f4184f56c64b3dc": [
+"percent/C/en"
+],
+"8f95bf9fea25b77b": [
+"be/M/en",
+"follow/P/en",
+"use/P/en"
+],
+"8f9afb2906ac6a71": [
+"may/M/en",
+"not/M/en",
+"represent/P/en"
+],
+"8f9c2e796fb6a08f": [
+"take/P/en",
+"will/M/en"
+],
+"8fa19e3e11ec525f": [
+"may/M/en",
+"represent/P/en"
+],
+"8fdc4edc057d9ca9": [
+"draw/P/en"
+],
+"8ff3563742e11ad7": [
+"adapt/P/en",
+"be/M/en",
+"can/M/en"
+],
+"90483fa6c2ce0583": [
+"base/P/en",
+"be/M/en",
+"be/P/en"
+],
+"911e20d412d6fd03": [
+"expect/P/en",
+"may/M/en"
+],
+"914a691a71f335e0": [
+"become/P/en",
+"show/P/en"
+],
+"91681e775fcc8a86": [
+"more/M/en",
+"well/M/en"
+],
+"91a9ae1edffcc030": [
+"not/M/en",
+"perform/P/en",
+"well/M/en"
+],
+"91f13096c02d985a": [
+"context/C/en",
+"drive/P/en"
+],
+"9262070671facf84": [
+"consider/P/en"
+],
+"92a52ed40bf572f8": [
+"share/P/en"
+],
+"935cf1372b358a36": [
+"can/M/en",
+"refer/P/en"
+],
+"9404d7c1edb3bbaf": [
+"need/P/en",
+"use/P/en"
+],
+"9463e04eab16a3b1": [
+"be/M/en",
+"note/P/en",
+"perform/P/en"
+],
+"9476c4586e83eb13": [
+"be/M/en",
+"can/M/en",
+"represent/P/en"
+],
+"94a6ed517f97d26f": [
+"may/M/en",
+"surpass/P/en"
+],
+"94d278e2d2bbbded": [
+"example/C/en",
+"recent/M/en"
+],
+"957bd35ae634a30c": [
+"use/P/en",
+"work/C/en"
+],
+"95890e6670321f49": [
+"hold/P/en",
+"may/M/en"
+],
+"95e828b967e2d827": [
+"suggest/P/en",
+"would/M/en"
+],
+"95f6c0df76567a6f": [
+"be/P/en",
+"explore/P/en"
+],
+"960a6c1e0c66569d": [
+"display/P/en",
+"take/P/en"
+],
+"9635f6615c8e5505": [
+"demonstrate/P/en",
+"not/M/en"
+],
+"963aadd1cb980072": [
+"explore/P/en"
+],
+"963c9c13f0f2dc55": [
+"our/M/en"
+],
+"963f36e65e00e666": [
+"be/P/en",
+"can/M/en"
+],
+"9680fdfc3f037223": [
+"depend/P/en",
+"not/M/en"
+],
+"968d9b217ac2aa92": [
+"paper/C/en",
+"recent/M/en"
+],
+"969cde0d32e3d1c0": [
+"result/P/en",
+"would/M/en"
+],
+"96ad53535fb0def8": [
+"be/M/en",
+"show/P/en",
+"yield/P/en"
+],
+"96e09647608c08f7": [
+"indicate/P/en",
+"lead/P/en"
+],
+"97a34376b8fac882": [
+"involve/P/en",
+"may/M/en"
+],
+"982f40cf65889fa7": [
+"our/M/en",
+"paper/C/en"
+],
+"98a788dc00dd985e": [
+"be/M/en",
+"find/P/en",
+"use/P/en"
+],
+"991fa81129ed2c84": [
+"may/M/en",
+"perform/P/en"
+],
+"995651dfe1ddad86": [
+"be/M/en",
+"can/M/en",
+"not/M/en",
+"take/P/en"
+],
+"999cd7935e853268": [
+"analysis/C/en",
+"present/M/en"
+],
+"99bbad936c49613b": [
+"raise/P/en"
+],
+"9a2496ff3ae1c060": [
+"be/M/en",
+"can/M/en",
+"guide/P/en"
+],
+"9a53830b5c290d94": [
+"be/P/en",
+"not/M/en",
+"note/P/en"
+],
+"9a6c797a70ee58aa": [
+"not/M/en",
+"seem/P/en"
+],
+"9a7bf5c006a20c9d": [
+"be/M/en",
+"need/P/en"
+],
+"9a94d5b52150bc76": [
+"can/M/en",
+"serve/P/en"
+],
+"9a996ab1d5988289": [
+"be/M/en",
+"hold/P/en",
+"not/M/en"
+],
+"9aaad9f3c85a46d0": [
+"literature/C/en",
+"result/C/en"
+],
+"9ad6a621eeb310b5": [
+"offer/P/en"
+],
+"9bfa73ef35f06f17": [
+"appear/P/en",
+"will/M/en"
+],
+"9c5fb856720abb81": [
+"datum/C/en",
+"more/M/en",
+"recent/M/en"
+],
+"9c8df5309a024459": [
+"addition/C/en"
+],
+"9e5f0b3fb2eeae7b": [
+"be/P/en",
+"discuss/P/en",
+"remain/P/en"
+],
+"9ea1037bf77e2db9": [
+"make/P/en"
+],
+"9ead151b1ec73a3e": [
+"be/P/en",
+"can/M/en",
+"incorporate/P/en"
+],
+"9f19691705ff4e91": [
+"be/M/en",
+"be/P/en",
+"represent/P/en"
+],
+"9f8f969df08da33c": [
+"gain/P/en",
+"may/M/en"
+],
+"9fa7bca6f05f6b4d": [
+"drive/P/en",
+"work/P/en"
+],
+"9fc22028f7021bbf": [
+"can/M/en",
+"serve/P/en",
+"suggest/P/en"
+],
+"a01519d922687869": [
+"be/M/en",
+"expect/P/en",
+"not/M/en",
+"would/M/en"
+],
+"a027052514657c2b": [
+"refer/P/en"
+],
+"a08329f10727c695": [
+"note/P/en",
+"reflect/P/en"
+],
+"a0a07e1e55d8f4ab": [
+"may/M/en",
+"show/P/en"
+],
+"a0ba5e0d78245b45": [
+"become/P/en",
+"indicate/P/en"
+],
+"a0d16671e34fce94": [
+"expect/P/en",
+"show/P/en"
+],
+"a10afc6ed1c15eb5": [
+"comprise/P/en"
+],
+"a1296ec0ef03a828": [
+"be/M/en",
+"can/M/en",
+"know/P/en",
+"not/M/en"
+],
+"a19ea8554bb31200": [
+"be/M/en",
+"guide/P/en"
+],
+"a263cf6a432a1fd4": [
+"adapt/P/en",
+"be/M/en",
+"may/M/en"
+],
+"a27a27af1c7069c2": [
+"example/C/en",
+"extent/C/en"
+],
+"a2a368008126f0c6": [
+"be/M/en",
+"do/P/en",
+"use/P/en"
+],
+"a31044334695f53f": [
+"can/M/en",
+"follow/P/en"
+],
+"a3631865636a1f17": [
+"include/P/en",
+"show/P/en"
+],
+"a36ec6dd4e4d33ba": [
+"not/M/en",
+"use/P/en"
+],
+"a4102f7340736689": [
+"determine/P/en",
+"will/M/en"
+],
+"a49b7687d235811a": [
+"be/M/en",
+"represent/P/en",
+"well/M/en"
+],
+"a4c111ace1475d7d": [
+"reveal/P/en",
+"show/P/en"
+],
+"a4f261f6bf0e8233": [
+"be/M/en",
+"can/M/en",
+"find/P/en"
+],
+"a6209a7314ba92e9": [
+"give/P/en",
+"need/P/en"
+],
+"a62283d196e293be": [
+"be/P/en",
+"use/P/en"
+],
+"a64d5db5db664ea0": [
+"show/P/en",
+"well/M/en"
+],
+"a678cdadf9d77ad9": [
+"engage/P/en",
+"may/M/en"
+],
+"a68d25164ec21cba": [
+"percent/C/en",
+"use/P/en"
+],
+"a7a1007d17dc7ecf": [
+"be/M/en",
+"receive/P/en"
+],
+"a8439bedf71b785f": [
+"finding/C/en",
+"our/M/en",
+"research/C/en"
+],
+"a857f728c03ff274": [
+"can/M/en",
+"emerge/P/en"
+],
+"a86b060dc840d8f5": [
+"contain/P/en"
+],
+"a95d4b1d4ecbbf29": [
+"choose/P/en",
+"will/M/en"
+],
+"a9646ca73233d50b": [
+"finding/C/en"
+],
+"a975a601ad3b6781": [
+"be/M/en",
+"can/M/en",
+"consider/P/en",
+"suggest/P/en"
+],
+"a9b2bb11e0534b68": [
+"receive/P/en"
+],
+"a9cdcc79a47262ae": [
+"exhibit/P/en",
+"may/M/en",
+"not/M/en"
+],
+"aa48e5f3eda5d1d0": [
+"can/M/en",
+"maintain/P/en"
+],
+"aa84b8e40e2c04f5": [
+"drive/P/en",
+"may/M/en"
+],
+"aaff499b43585127": [
+"adapt/P/en",
+"be/M/en"
+],
+"aba0b072dfa52fcc": [
+"may/M/en",
+"seem/P/en"
+],
+"aba27773433ac21d": [
+"would/M/en",
+"write/P/en"
+],
+"aba9234fda7daa75": [
+"percent/C/en",
+"result/C/en"
+],
+"abadf8b3865d119c": [
+"be/M/en",
+"report/P/en"
+],
+"abe61437abda41d6": [
+"be/M/en",
+"share/P/en",
+"would/M/en"
+],
+"ac3424c742ffecaf": [
+"drive/P/en"
+],
+"ac7d423547917865": [
+"be/P/en",
+"demonstrate/P/en",
+"would/M/en"
+],
+"acfa1af4a9829713": [
+"not/M/en",
+"result/P/en",
+"would/M/en"
+],
+"ad47e17aab21285f": [
+"can/M/en",
+"guide/P/en"
+],
+"adb3b618309a5772": [
+"be/M/en",
+"discuss/P/en",
+"will/M/en"
+],
+"addd68aad85c80c3": [
+"address/P/en",
+"illustrate/P/en"
+],
+"ae3bc26f8594adc3": [
+"integrate/P/en",
+"not/M/en"
+],
+"ae3f3e0968564cb6": [
+"employ/P/en",
+"not/M/en"
+],
+"aeb3d2e88a3ccf82": [
+"be/M/en",
+"can/M/en",
+"establish/P/en"
+],
+"aef293d75e1b29f7": [
+"confirm/P/en",
+"our/M/en",
+"result/C/en"
+],
+"af10349310c0883a": [
+"can/M/en",
+"share/P/en"
+],
+"af63356838048f9b": [
+"tool/C/en"
+],
+"af77467e1476df56": [
+"find/P/en",
+"yield/P/en"
+],
+"af86a709ea2c15ce": [
+"work/C/en"
+],
+"afb417964fa3dd89": [
+"explore/P/en",
+"may/M/en"
+],
+"afe22c4f438a5718": [
+"come/P/en",
+"not/M/en"
+],
+"b070c27f8a7125a5": [
+"be/M/en",
+"perform/P/en",
+"use/P/en"
+],
+"b0760959b5c0ee58": [
+"explore/P/en",
+"will/M/en"
+],
+"b0a49c10bc348c20": [
+"have/P/en",
+"may/M/en"
+],
+"b119b57bbb46a9c7": [
+"well/M/en"
+],
+"b155ec70d9eb088f": [
+"integrate/P/en",
+"may/M/en"
+],
+"b15b195426424910": [
+"incorporate/P/en",
+"will/M/en"
+],
+"b168290ad402d8c2": [
+"indicate/P/en",
+"take/P/en"
+],
+"b16bc9cdba5ba130": [
+"paper/C/en",
+"research/C/en"
+],
+"b1f7b0f97cf5e0ff": [
+"represent/P/en",
+"take/P/en"
+],
+"b222f9b5f2ad6f8b": [
+"assign/P/en",
+"can/M/en"
+],
+"b242d7bc0d93a199": [
+"be/M/en",
+"perform/P/en"
+],
+"b24aad01b2c9aa7c": [
+"example/C/en"
+],
+"b257d2c181503b89": [
+"not/M/en",
+"produce/P/en"
+],
+"b29e82483de6965c": [
+"appear/P/en",
+"make/P/en"
+],
+"b2faf0d8e67cdbac": [
+"be/M/en",
+"can/M/en",
+"do/P/en",
+"not/M/en"
+],
+"b350d1d1d5f6dc37": [
+"indicate/P/en",
+"use/P/en"
+],
+"b374e0b456e0e080": [
+"have/P/en",
+"may/M/en",
+"not/M/en"
+],
+"b3faba0b0c89d890": [
+"may/M/en",
+"note/P/en",
+"reflect/P/en"
+],
+"b4488425dece8d81": [
+"illustrate/P/en",
+"present/P/en"
+],
+"b45e29086604794c": [
+"perform/P/en",
+"well/M/en",
+"will/M/en"
+],
+"b4c59d6e692e97f9": [
+"be/P/en",
+"perform/P/en"
+],
+"b5e64fcf410c750a": [
+"fact/C/en"
+],
+"b5e975b07ab29a01": [
+"be/M/en",
+"make/P/en",
+"not/M/en"
+],
+"b601bebe86ffde8e": [
+"be/M/en",
+"reflect/P/en",
+"would/M/en"
+],
+"b603209d4261245f": [
+"lead/P/en",
+"show/P/en"
+],
+"b614e4bc664c0c0c": [
+"make/P/en",
+"will/M/en"
+],
+"b6ca4db6ffed32e4": [
+"summary/C/en"
+],
+"b71d19857d49be80": [
+"draw/P/en",
+"not/M/en"
+],
+"b7572f6a187f1c16": [
+"produce/P/en",
+"take/P/en"
+],
+"b7aeca62aa7f5ef0": [
+"be/M/en",
+"employ/P/en",
+"not/M/en"
+],
+"b7c0863f3263c82f": [
+"underlie/P/en"
+],
+"b7e28692d888e05a": [
+"address/P/en",
+"be/M/en",
+"will/M/en"
+],
+"b7f515c8323961b6": [
+"show/P/en",
+"suggest/P/en"
+],
+"b866c499e22c7431": [
+"can/M/en",
+"introduce/P/en"
+],
+"b880f5b9670b9f37": [
+"show/P/en"
+],
+"b8d4e0d180777a32": [
+"can/M/en",
+"involve/P/en"
+],
+"b9461ea966835121": [
+"refer/P/en",
+"will/M/en"
+],
+"b95fd97a2cf565a9": [
+"be/P/en",
+"process/P/en"
+],
+"b9a9002c782f99fb": [
+"consider/P/en",
+"incorporate/P/en"
+],
+"b9c9805225ce12d3": [
+"consist/P/en",
+"show/P/en"
+],
+"b9f81863544ef76b": [
+"use/P/en"
+],
+"ba019828267f8f60": [
+"be/M/en",
+"raise/P/en"
+],
+"ba93ac0ae5d18caa": [
+"make/P/en",
+"suggest/P/en"
+],
+"baad012c0782e971": [
+"may/M/en",
+"yield/P/en"
+],
+"bac748e1aa952c6a": [
+"present/M/en",
+"result/C/en"
+],
+"bb0cc0b4094d4268": [
+"be/M/en",
+"may/M/en",
+"process/P/en"
+],
+"bb331ce890f715ad": [
+"seem/P/en",
+"would/M/en"
+],
+"bb454964e8ecf24c": [
+"present/P/en"
+],
+"bc23c3f47614706a": [
+"engage/P/en",
+"will/M/en"
+],
+"bcebce8010062651": [
+"be/M/en",
+"involve/P/en",
+"may/M/en"
+],
+"bd30ef7af3101014": [
+"work/P/en"
+],
+"bd6045b4b6225a46": [
+"may/M/en",
+"not/M/en",
+"produce/P/en"
+],
+"bdbb5a9631aca6be": [
+"need/P/en",
+"would/M/en"
+],
+"bde463df110d730b": [
+"expect/P/en",
+"run/P/en"
+],
+"bdf6ab9328a48493": [
+"demonstrate/P/en",
+"offer/P/en"
+],
+"be47a81a4df0ab08": [
+"be/M/en",
+"express/P/en"
+],
+"be4833617a54174d": [
+"be/M/en",
+"establish/P/en",
+"not/M/en"
+],
+"bef57e339b9c4704": [
+"adapt/P/en",
+"may/M/en"
+],
+"bef6bc5a386f377e": [
+"be/P/en",
+"write/P/en"
+],
+"befa7054aa571f37": [
+"can/M/en",
+"make/P/en"
+],
+"bf33d1aa3f097041": [
+"be/P/en",
+"can/M/en",
+"show/P/en"
+],
+"bf5536be12381ffd": [
+"exhibit/P/en",
+"indicate/P/en",
+"not/M/en"
+],
+"bf7bb77699aa0624": [
+"be/P/en",
+"may/M/en",
+"suggest/P/en"
+],
+"bf9ce351b7dbc850": [
+"exhibit/P/en",
+"would/M/en"
+],
+"c023cc01463f571c": [
+"be/P/en"
+],
+"c024692a24f99922": [
+"more/M/en",
+"recent/M/en",
+"research/C/en"
+],
+"c02fc65e115862f6": [
+"share/P/en",
+"would/M/en"
+],
+"c047c946fc4b290d": [
+"serve/P/en"
+],
+"c08a16906e427d1c": [
+"finding/C/en",
+"our/M/en",
+"suggest/P/en"
+],
+"c12664d6d8441fc4": [
+"more/M/en",
+"recent/M/en",
+"work/C/en"
+],
+"c1549b160374f8ef": [
+"be/M/en",
+"can/M/en",
+"express/P/en"
+],
+"c1751cf3a682742a": [
+"be/M/en",
+"reflect/P/en"
+],
+"c19333c0db5fffd0": [
+"adapt/P/en",
+"not/M/en"
+],
+"c1a0db78f4aa053a": [
+"base/P/en",
+"be/M/en"
+],
+"c1a846261f9ad449": [
+"gain/P/en",
+"show/P/en"
+],
+"c290b7c187f5abbc": [
+"can/M/en",
+"obtain/P/en"
+],
+"c2bd01c17b40c963": [
+"be/M/en",
+"facilitate/P/en"
+],
+"c2cf78170a68ecc4": [
+"may/M/en",
+"share/P/en"
+],
+"c3321447acf5516e": [
+"include/P/en",
+"may/M/en",
+"not/M/en"
+],
+"c33f3ee4a2b39bf6": [
+"consider/P/en",
+"well/M/en"
+],
+"c3593e99ef45393d": [
+"be/M/en",
+"give/P/en",
+"would/M/en"
+],
+"c36de46ebebfc48f": [
+"be/M/en",
+"highlight/P/en",
+"reveal/P/en"
+],
+"c37aba16ecf9b5ec": [
+"need/P/en",
+"write/P/en"
+],
+"c3abc5155d53306c": [
+"can/M/en",
+"consider/P/en"
+],
+"c3ae9669bc7b06c9": [
+"have/P/en",
+"show/P/en"
+],
+"c3ee32b14ff39a8e": [
+"be/M/en",
+"give/P/en",
+"will/M/en"
+],
+"c41f47f5aa832739": [
+"find/P/en",
+"have/P/en"
+],
+"c44a53e823932129": [
+"begin/P/en",
+"will/M/en"
+],
+"c44cb0750020f6f9": [
+"facilitate/P/en",
+"may/M/en"
+],
+"c478b5463abaf41d": [
+"be/P/en",
+"not/M/en"
+],
+"c47bccdea4379182": [
+"be/M/en",
+"incorporate/P/en"
+],
+"c47e3ad54b42add5": [
+"perform/P/en",
+"show/P/en",
+"well/M/en"
+],
+"c4973fcd23d01627": [
+"be/M/en",
+"construct/P/en",
+"integrate/P/en"
+],
+"c5111205aed52241": [
+"not/M/en",
+"present/P/en"
+],
+"c5572912102c7e72": [
+"discuss/P/en",
+"result/C/en"
+],
+"c56f7dd5da790c78": [
+"explore/P/en",
+"include/P/en"
+],
+"c58cbc52f08beb7c": [
+"approach/C/en"
+],
+"c5a14e937675136c": [
+"can/M/en",
+"not/M/en",
+"use/P/en"
+],
+"c5ac4348611aa0aa": [
+"be/M/en",
+"begin/P/en",
+"process/P/en"
+],
+"c5c9118dd44ccff8": [
+"depend/P/en",
+"show/P/en"
+],
+"c5ea7d8a10a8b23d": [
+"literature/C/en"
+],
+"c65799383b1fb989": [
+"be/P/en",
+"may/M/en",
+"not/M/en"
+],
+"c72536e4163d84b0": [
+"highlight/P/en",
+"note/P/en"
+],
+"c77ccaba316faf09": [
+"be/M/en",
+"note/P/en"
+],
+"c7a1c82429b6f2b7": [
+"become/P/en",
+"may/M/en"
+],
+"c8a8978f086a2ca8": [
+"be/M/en",
+"confirm/P/en"
+],
+"c8ab1f8854b65381": [
+"yield/P/en"
+],
+"c8cd3f7e1d998b8b": [
+"may/M/en",
+"reflect/P/en"
+],
+"c8d3b79e67f7b17e": [
+"make/P/en",
+"write/P/en"
+],
+"c9771a87daf5c0d6": [
+"be/M/en",
+"can/M/en",
+"explore/P/en"
+],
+"c9b3eb18b8554a45": [
+"be/M/en",
+"underscore/P/en"
+],
+"c9e0b1c2aa643025": [
+"have/P/en",
+"indicate/P/en"
+],
+"ca16341cce841479": [
+"be/M/en",
+"indicate/P/en"
+],
+"ca260f6971f3b7b7": [
+"perform/P/en",
+"seem/P/en"
+],
+"ca8ceadfa71813db": [
+"express/P/en",
+"reveal/P/en"
+],
+"cb26ab7b2a6b7fe0": [
+"be/P/en",
+"reveal/P/en"
+],
+"cb7a976fbc73617e": [
+"display/P/en",
+"not/M/en"
+],
+"cb9ea373eb33dafc": [
+"not/M/en",
+"represent/P/en"
+],
+"cbba9e37927dea2e": [
+"adapt/P/en",
+"be/M/en",
+"can/M/en",
+"explore/P/en"
+],
+"cbddb818938165fb": [
+"come/P/en",
+"may/M/en"
+],
+"cc1b573bd227c9fa": [
+"can/M/en",
+"do/P/en"
+],
+"cc44e206f78ca975": [
+"context/C/en",
+"research/C/en"
+],
+"cc6b78cc3754a7b9": [
+"may/M/en",
+"serve/P/en"
+],
+"cc71f27c197f3a43": [
+"be/M/en",
+"expect/P/en",
+"not/M/en"
+],
+"cc73a4acaac7c0e6": [
+"explore/P/en",
+"may/M/en",
+"use/P/en"
+],
+"cc786d42242883b4": [
+"be/M/en",
+"confirm/P/en",
+"indicate/P/en"
+],
+"cc9364a22cd0195a": [
+"be/M/en",
+"explore/P/en",
+"not/M/en"
+],
+"ccaa51ea9bb8eab6": [
+"can/M/en",
+"facilitate/P/en"
+],
+"cd441427a28e3553": [
+"paper/C/en",
+"present/P/en"
+],
+"cd77083feb240956": [
+"add/P/en",
+"can/M/en"
+],
+"cddbbd321d11adf0": [
+"find/P/en",
+"maintain/P/en"
+],
+"ce0fa5278eda457e": [
+"use/P/en",
+"would/M/en"
+],
+"ce29600dd4650235": [
+"exhibit/P/en",
+"may/M/en"
+],
+"ce4b88e759d15f13": [
+"be/M/en",
+"can/M/en",
+"reflect/P/en"
+],
+"cf96c87d96dc40a4": [
+"demonstrate/P/en",
+"produce/P/en"
+],
+"cfb03fbd3843270b": [
+"can/M/en",
+"suggest/P/en"
+],
+"cfb12b25f8804bfd": [
+"be/M/en",
+"find/P/en",
+"perform/P/en",
+"well/M/en"
+],
+"cfb83ec95f4b937c": [
+"particular/C/en"
+],
+"cfc0b678a8f2ab00": [
+"be/M/en",
+"suggest/P/en"
+],
+"d00daa1a03368ddc": [
+"correspond/P/en"
+],
+"d0311d69d8264bed": [
+"expect/P/en",
+"not/M/en"
+],
+"d0eb08a0c47f7adb": [
+"leverage/P/en"
+],
+"d1233c0aa8f04898": [
+"be/M/en",
+"be/P/en",
+"can/M/en",
+"show/P/en"
+],
+"d12b4d7dd87ca503": [
+"have/P/en",
+"not/M/en",
+"would/M/en"
+],
+"d1700cf459c4d7b9": [
+"result/C/en",
+"well/M/en"
+],
+"d1d6bba2db1eb36b": [
+"be/P/en",
+"receive/P/en"
+],
+"d211c7e3a0c4bd52": [
+"find/P/en",
+"may/M/en",
+"suggest/P/en"
+],
+"d23716af2a01825b": [
+"example/C/en",
+"paper/C/en"
+],
+"d2712caed34de18e": [
+"be/M/en",
+"represent/P/en"
+],
+"d2be00c1cb7f50b4": [
+"be/M/en",
+"not/M/en",
+"reflect/P/en"
+],
+"d2c28601edc1c83a": [
+"determine/P/en",
+"perform/P/en"
+],
+"d2fb55a9d3d0d755": [
+"exhibit/P/en"
+],
+"d333593b63c5823b": [
+"demonstrate/P/en"
+],
+"d37adb0a9c2ba907": [
+"consider/P/en",
+"may/M/en"
+],
+"d37da144df612776": [
+"may/M/en",
+"present/P/en"
+],
+"d3d7b559a5a9c3f4": [
+"make/P/en",
+"note/P/en"
+],
+"d3da804208d8a1ce": [
+"be/M/en",
+"can/M/en",
+"employ/P/en"
+],
+"d3f435732bf366f5": [
+"make/P/en",
+"would/M/en"
+],
+"d48766171a5d05e7": [
+"come/P/en"
+],
+"d4c93de8ec0a38c4": [
+"can/M/en",
+"give/P/en"
+],
+"d583b3c817760275": [
+"lead/P/en"
+],
+"d6031db627c17632": [
+"can/M/en",
+"lead/P/en"
+],
+"d64c7ac04a3e0d9e": [
+"be/M/en",
+"determine/P/en"
+],
+"d66595f8f74ffa5b": [
+"be/P/en",
+"have/P/en"
+],
+"d6a2fde0db94aca7": [
+"be/P/en",
+"well/M/en"
+],
+"d71e5bd33a59c8e5": [
+"make/P/en",
+"may/M/en"
+],
+"d726e32d06b926da": [
+"follow/P/en",
+"use/P/en"
+],
+"d79fe5b1a829fc41": [
+"discuss/P/en",
+"will/M/en"
+],
+"d7ac0b3c9a39baa0": [
+"be/M/en",
+"perform/P/en",
+"show/P/en",
+"use/P/en"
+],
+"d8516525be644cba": [
+"refer/P/en",
+"use/P/en"
+],
+"d85625966368e1e0": [
+"exhibit/P/en",
+"find/P/en"
+],
+"d89aab341682fbee": [
+"can/M/en",
+"not/M/en",
+"serve/P/en"
+],
+"d8f611709f48e700": [
+"be/P/en",
+"show/P/en"
+],
+"d943bb9c9cb1b0a8": [
+"appear/P/en",
+"can/M/en"
+],
+"d9c5a18cbc4e5a09": [
+"not/M/en",
+"reveal/P/en"
+],
+"d9d64b0bf8b0889d": [
+"introduce/P/en",
+"may/M/en"
+],
+"da0dd2d22bbed79c": [
+"finding/C/en",
+"our/M/en",
+"present/M/en",
+"research/C/en"
+],
+"da32c42b92f81234": [
+"find/P/en",
+"lead/P/en",
+"may/M/en"
+],
+"da9895b48a8c413c": [
+"exhibit/P/en",
+"not/M/en"
+],
+"daa4932d725a2399": [
+"can/M/en",
+"reach/P/en"
+],
+"daa6e9cb11f28768": [
+"context/C/en",
+"paper/C/en"
+],
+"db0909e44be0a113": [
+"reflect/P/en"
+],
+"db0ba8933405b957": [
+"receive/P/en",
+"will/M/en"
+],
+"db3e3a4d07e05378": [
+"be/M/en",
+"offer/P/en"
+],
+"dba5165c468ff51f": [
+"appear/P/en",
+"not/M/en"
+],
+"dbd02d3f2d534e91": [
+"note/P/en",
+"represent/P/en"
+],
+"dc7554db9158724c": [
+"choose/P/en",
+"may/M/en"
+],
+"dcbe014a28241cb4": [
+"incorporate/P/en",
+"may/M/en"
+],
+"dcd9be403bf287cc": [
+"may/M/en",
+"remain/P/en"
+],
+"dd33cf4f9f9a3b86": [
+"be/P/en",
+"know/P/en"
+],
+"dd8e14cf8ad122cf": [
+"appear/P/en",
+"may/M/en"
+],
+"dda95a301414d08d": [
+"be/P/en",
+"not/M/en",
+"would/M/en"
+],
+"de5448fc5c71ce79": [
+"have/P/en",
+"note/P/en"
+],
+"de63782ad05c10e2": [
+"come/P/en",
+"will/M/en"
+],
+"df1a258d71f0033f": [
+"highlight/P/en",
+"paper/C/en"
+],
+"df29443532750c10": [
+"can/M/en",
+"not/M/en",
+"take/P/en"
+],
+"df7283795470dc30": [
+"be/M/en",
+"make/P/en"
+],
+"dfbfc7e86a373ec0": [
+"be/M/en",
+"choose/P/en"
+],
+"dfc1c02bfe75938c": [
+"follow/P/en",
+"section/C/en"
+],
+"e04ade7830dd60cb": [
+"include/P/en",
+"not/M/en"
+],
+"e0f666a3f861e44c": [
+"be/M/en",
+"refer/P/en",
+"would/M/en"
+],
+"e15282b33c75a15d": [
+"be/M/en",
+"can/M/en",
+"relate/P/en"
+],
+"e16b4ecdeff166e0": [
+"find/P/en",
+"show/P/en"
+],
+"e25d950522dca693": [
+"expect/P/en",
+"show/P/en",
+"would/M/en"
+],
+"e25eb168df2f2e62": [
+"be/M/en",
+"reveal/P/en"
+],
+"e2b355f51f44b705": [
+"be/P/en",
+"suggest/P/en"
+],
+"e39d5aeb4a332447": [
+"offer/P/en",
+"show/P/en"
+],
+"e420ef723c090abd": [
+"be/M/en",
+"be/P/en",
+"expect/P/en",
+"would/M/en"
+],
+"e42c8cfb15c29c07": [
+"result/C/en",
+"section/C/en"
+],
+"e434ffcd38d0b97c": [
+"be/M/en",
+"can/M/en",
+"facilitate/P/en"
+],
+"e45e8834461150b3": [
+"include/P/en",
+"reveal/P/en"
+],
+"e485e793b562fcdb": [
+"be/P/en",
+"indicate/P/en",
+"may/M/en"
+],
+"e4acbee2aa95f5b2": [
+"can/M/en",
+"find/P/en",
+"leverage/P/en"
+],
+"e4bca183409fd146": [
+"be/M/en",
+"drive/P/en",
+"not/M/en"
+],
+"e4c2d4121c15fd5e": [
+"may/M/en",
+"relate/P/en"
+],
+"e5185ed064a3d585": [
+"most/M/en",
+"research/C/en"
+],
+"e5776758e91eb8fd": [
+"finding/C/en",
+"recent/M/en",
+"research/C/en"
+],
+"e62b6fe563484054": [
+"receive/P/en",
+"would/M/en"
+],
+"e660a20b16cd2517": [
+"be/P/en",
+"consider/P/en"
+],
+"e7ca3e3e02a2e4fd": [
+"be/M/en",
+"include/P/en",
+"not/M/en"
+],
+"e7d5850ccfce38b2": [
+"present/M/en",
+"use/P/en",
+"work/C/en"
+],
+"e7f18cbc6884bbb5": [
+"be/M/en",
+"use/P/en",
+"will/M/en"
+],
+"e7f41db3990ac2a2": [
+"be/M/en",
+"consider/P/en",
+"may/M/en"
+],
+"e876ac0e69477b32": [
+"be/M/en",
+"present/P/en",
+"work/P/en"
+],
+"e876c9413bd780ed": [
+"process/C/en"
+],
+"e8ae5b6781af950e": [
+"be/M/en",
+"illustrate/P/en"
+],
+"e936c6980406bc9f": [
+"be/P/en",
+"establish/P/en"
+],
+"e942598b26b43b65": [
+"datum/C/en",
+"more/M/en"
+],
+"e9592f38ec89ec37": [
+"consist/P/en",
+"would/M/en"
+],
+"e9a729cd1dcdf5c2": [
+"context/C/en",
+"our/M/en"
+],
+"e9f9e1b416e8b503": [
+"can/M/en",
+"hold/P/en"
+],
+"ea0d2d5fb5f16e4f": [
+"involve/P/en",
+"use/P/en"
+],
+"ea371c263e764868": [
+"maintain/P/en",
+"not/M/en"
+],
+"ea8286de69a1e2ff": [
+"finding/C/en",
+"paper/C/en"
+],
+"ea928f5f8cc31193": [
+"leverage/P/en",
+"will/M/en"
+],
+"eab3648a428d4697": [
+"note/P/en",
+"obtain/P/en"
+],
+"eb159309271236f2": [
+"find/P/en"
+],
+"eb2c42ee88fbc48c": [
+"be/P/en",
+"not/M/en",
+"will/M/en"
+],
+"ebffedd50078aa60": [
+"be/M/en",
+"not/M/en",
+"use/P/en"
+],
+"ec027fbd9717e44a": [
+"not/M/en",
+"relate/P/en"
+],
+"ec31bc010d7fa30b": [
+"be/M/en",
+"introduce/P/en"
+],
+"ec48bd59ed44b965": [
+"can/M/en",
+"integrate/P/en"
+],
+"ec78aa09720bf8ae": [
+"be/M/en",
+"take/P/en"
+],
+"ec7e256a3737cbce": [
+"can/M/en",
+"leverage/P/en",
+"not/M/en"
+],
+"ecbc1d9777c96050": [
+"be/M/en",
+"consider/P/en",
+"may/M/en",
+"not/M/en"
+],
+"ecccdefee9021d34": [
+"extent/C/en"
+],
+"ece8b132304bd6d0": [
+"context/C/en",
+"our/M/en",
+"work/C/en"
+],
+"ed6b1be5fdeab6f9": [
+"demonstrate/P/en",
+"may/M/en"
+],
+"ed7acb7d3d93d8c5": [
+"paper/C/en",
+"recent/M/en",
+"research/C/en"
+],
+"edb14b50e03cc3b5": [
+"give/P/en",
+"will/M/en"
+],
+"edce7e6a2cfafe1d": [
+"can/M/en",
+"present/P/en"
+],
+"edddbcba1bb9ea73": [
+"percent/C/en",
+"remain/P/en"
+],
+"ee3d70b3e0782d80": [
+"our/M/en",
+"work/C/en"
+],
+"ee45f79011f8fffa": [
+"know/P/en",
+"well/M/en"
+],
+"ef51f65ed2296bbc": [
+"contain/P/en",
+"will/M/en"
+],
+"ef732b7d4e4c366b": [
+"find/P/en",
+"produce/P/en"
+],
+"f002505e1fd6e752": [
+"can/M/en",
+"perform/P/en",
+"well/M/en"
+],
+"f06fea55b24192b4": [
+"find/P/en",
+"result/P/en"
+],
+"f137148b0d5ce4e4": [
+"can/M/en",
+"perform/P/en"
+],
+"f1508832e28a3d6f": [
+"context/C/en"
+],
+"f15b9434e9878a08": [
+"hand/C/en"
+],
+"f1bc4379a1e61b43": [
+"would/M/en",
+"yield/P/en"
+],
+"f236af2157856c2e": [
+"address/P/en",
+"not/M/en"
+],
+"f241c6ef5d0e59eb": [
+"addition/C/en",
+"datum/C/en"
+],
+"f266b935e3cec06b": [
+"indicate/P/en",
+"show/P/en"
+],
+"f26c303befe25e91": [
+"be/M/en",
+"can/M/en",
+"show/P/en",
+"use/P/en"
+],
+"f27bbb29207f4498": [
+"be/M/en",
+"may/M/en",
+"use/P/en"
+],
+"f29ddf9c6d6108b4": [
+"be/M/en",
+"present/P/en",
+"would/M/en"
+],
+"f3696aac7cd388e4": [
+"demonstrate/P/en",
+"highlight/P/en"
+],
+"f44087b780654d43": [
+"remain/P/en",
+"will/M/en"
+],
+"f44218ead567ac72": [
+"analysis/C/en",
+"present/P/en"
+],
+"f4b688e8168f9b42": [
+"most/M/en",
+"tool/C/en",
+"use/P/en"
+],
+"f5646bc86e7830b7": [
+"percent/C/en",
+"time/C/en"
+],
+"f56a03c214ebb990": [
+"surpass/P/en"
+],
+"f5e32ad3b17ef24e": [
+"address/P/en",
+"may/M/en"
+],
+"f62b7403ffd2af85": [
+"address/P/en",
+"need/P/en",
+"will/M/en"
+],
+"f6aa0e6259c960fe": [
+"give/P/en",
+"may/M/en"
+],
+"f71696ba4297e109": [
+"address/P/en",
+"be/M/en",
+"well/M/en"
+],
+"f7349156cd8e18d3": [
+"be/M/en",
+"expect/P/en",
+"would/M/en"
+],
+"f73e80c4dd9768ef": [
+"may/M/en"
+],
+"f74b5559f75dab2d": [
+"process/C/en",
+"research/C/en"
+],
+"f82f72cf5b2a7546": [
+"can/M/en",
+"represent/P/en",
+"well/M/en"
+],
+"f86330132b83ffd8": [
+"base/P/en",
+"be/M/en",
+"can/M/en"
+],
+"f86a202804071a1a": [
+"be/P/en",
+"run/P/en"
+],
+"f8854b32994e9e54": [
+"obtain/P/en",
+"will/M/en"
+],
+"f88af8d023841dae": [
+"analysis/C/en",
+"datum/C/en"
+],
+"f8a16d8b3a081d80": [
+"be/M/en",
+"employ/P/en",
+"will/M/en"
+],
+"f8c1dced48ddf2d8": [
+"highlight/P/en",
+"offer/P/en"
+],
+"f9023a32691a2a8e": [
+"may/M/en",
+"process/P/en"
+],
+"f914963949a4abc5": [
+"instance/C/en"
+],
+"f9a80532a9fa3ba8": [
+"may/M/en",
+"need/P/en"
+],
+"f9b85dc702d5d223": [
+"include/P/en"
+],
+"f9fafab13512010a": [
+"not/M/en",
+"receive/P/en"
+],
+"fa1999a43b15aee8": [
+"discuss/P/en",
+"section/C/en"
+],
+"fa24f029d68a17fa": [
+"can/M/en",
+"take/P/en"
+],
+"faca883f6e968a69": [
+"employ/P/en",
+"will/M/en"
+],
+"fb0b68aeb7f02bb8": [
+"be/M/en",
+"can/M/en",
+"regard/P/en"
+],
+"fbd9caa5bd8ca090": [
+"can/M/en",
+"represent/P/en"
+],
+"fbfb4ac575e5659a": [
+"not/M/en",
+"share/P/en"
+],
+"fc04bdf2f72b1aaf": [
+"adapt/P/en"
+],
+"fc0be183182b5e44": [
+"can/M/en",
+"run/P/en"
+],
+"fc73fb5ff8ed4899": [
+"come/P/en",
+"determine/P/en"
+],
+"fce1b880969deb82": [
+"engage/P/en",
+"not/M/en"
+],
+"fd777c3deec3d569": [
+"be/M/en",
+"may/M/en",
+"need/P/en"
+],
+"fda029838e9f799b": [
+"can/M/en",
+"have/P/en"
+],
+"fdb65e40c4289621": [
+"approach/C/en",
+"use/P/en"
+],
+"fe09cdc26f481fcb": [
+"be/M/en",
+"can/M/en",
+"leverage/P/en"
+],
+"fe0ff0bd96b96cf7": [
+"can/M/en",
+"exhibit/P/en"
+],
+"fe5dd562443cfa51": [
+"can/M/en",
+"yield/P/en"
+],
+"fe86ad916b0f5882": [
+"know/P/en",
+"not/M/en"
+],
+"fe917f5a93c2a67c": [
+"can/M/en",
+"leverage/P/en"
+],
+"fee7d813336a39ef": [
+"involve/P/en",
+"will/M/en"
+],
+"fefb54a40109a19e": [
+"be/M/en",
+"display/P/en"
+],
+"ff87eac7edafdd6e": [
+"can/M/en",
+"show/P/en"
+],
+"ff890d9e34d0ad5e": [
+"be/M/en",
+"discuss/P/en"
+],
+"ff97481e2dcb31aa": [
+"be/M/en",
+"can/M/en",
+"integrate/P/en"
+]
+}
+}

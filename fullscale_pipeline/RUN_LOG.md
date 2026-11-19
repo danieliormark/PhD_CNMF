@@ -4148,3 +4148,17 @@ of 35,983 lose a genre child; recomputing the identity merges 618 study-A parent
 35,539); most merges join 2–4 parents, the largest join parents that differed only by a genre predicate: 88 parents
 "<genre verb> + llm" → one parent "llm", 39 → "chatgpt", 19 → "bert", 18 → "gpt_4". W (child×child): 7,559 of
 156,291 ties (4.8 %) have a genre end; 220 substantive hyperedges have W ties only to genre hyperedges.
+
+### RL-293 — 2026-11-19 — Study B build rules (owner) and build
+Owner: "I approve your proposal" → study B = the same builder and rules with the genre hyperedges left out of its
+input: parent identities recomputed from the surviving children (618 study-A parents merge into 174), W rebuilt on
+study B's hyperedges (idf over them, top-5 reselected, τ 0.4), all weights recomputed by the existing formulas; social
+matrices identical to study A. `chunk12v3.py --exclude-children genre_hyperedges_final.json` (list of the 953 genre
+identities, `fullscale_pipeline/m1/genre_hyperedges_final.json`, RL-289); without the option the builder reproduces
+study A's build exactly (all 13 matrices, both idf vectors, index and missing rows identical; checked by a rebuild).
+Study B build: `/mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v3_nogenre/` (61 s): 2,136 articles, 96,897
+child hyperedges, 35,539 parent hyperedges, 2 units dropped (as in A), W 149,761 ties (A 156,291); P1–P5 identical to
+A. No hold-out drawn yet (next question). Hold-out inheritance measured: A's hidden child×article ties on substantive
+hyperedges = 64,472, exactly study B's eligible ties; 21 row × group cells (1 in group 1) exceed B's row cap by one tie;
+none ineligible. Parent×child: 107,949 of 148,763 A hidden ties map to B; 492 B ties come from merged parents with
+conflicting A groups, 1,261 exceed B's row cap, 9 the column cap, 40 are ineligible under B.

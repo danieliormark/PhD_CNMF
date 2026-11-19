@@ -6,6 +6,8 @@
 #                      non-number atoms (2026-10-23), focal model atoms mapped by model_name_map.canonical (2026-11-01);
 #                      a focal atom that is not a model in its article is removed; a child hyperedge left empty is removed;
 #                      a sentence unit left with no focal atom is removed; an article left with no unit is removed.
+#   Study B (owner 2026-11-19, RL-290/293): --exclude-children leaves the listed child hyperedges (genre, RL-289) out as
+#                      nested children and as cousins; parents, W and all weights are then built by the rules above.
 #   parent hyperedge = the multiset of its children's identities (G3's content key rebuilt from the new child keys).
 #   child×article    = log(1 + tf) · idf_article, idf_article = ln(N_articles / (df + 1)) + 1 (2026-10-30); then each
 #                      article's row / ||row||^½ (partial normalisation, 2026-10-30).
@@ -57,6 +59,7 @@ MASKED = re.compile(r"^(ref\d{6}|url\d{8})$", re.I)  # citation and URL tokens: 
 COUSIN = 2 ** (2 ** -0.5) - 1                        # 0.6325: log(1 + c) = log(2) / √2
 TAU, K_NEAR = 0.4, 5
 EPS = 1e-12
+EXCLUDE = frozenset()   # child hyperedge identities left out of the build (study B: genre hyperedges, owner 2026-11-19); set by --exclude-children
 
 
 def content_key(items):
@@ -102,7 +105,7 @@ def semantic_units(recs, log):
         had_focal = any(a["atom"].endswith("/C/focal") for p in r["parents"] for c in p["children"] for a in c["atoms"])
         pars = []
         for p in r["parents"]:
-            kids = [s for s in (clean_atoms(c["atoms"], pm) for c in p["children"]) if s]
+            kids = [s for s in (clean_atoms(c["atoms"], pm) for c in p["children"]) if s and content_key(s) not in EXCLUDE]
             if kids: pars.append((p["id"], content_key(content_key(s) for s in kids), kids))
         if had_focal and not any(a.endswith("/C/focal") for _, _, kids in pars for s in kids for a in s):
             dropped.append((r["uid"], "no focal atom left")); continue
@@ -113,7 +116,7 @@ def semantic_units(recs, log):
         cous = []
         for c in r["cousins"]:
             s = clean_atoms(c["atoms"], r["pmcid"])
-            if s: cous.append((s, [pid2key[x] for x in (c.get("parents") or []) if x in pid2key]))
+            if s and content_key(s) not in EXCLUDE: cous.append((s, [pid2key[x] for x in (c.get("parents") or []) if x in pid2key]))
         if not pars and not any(pks for _, pks in cous):
             dropped.append((r["uid"], "no parent hyperedge left in its sentence")); continue
         units.append(dict(pmcid=r["pmcid"], uid=r["uid"], parents=[(pk, kids) for _, pk, kids in pars], cousins=cous))
@@ -381,7 +384,11 @@ def main():
     ap.add_argument("--out", required=True, help="output directory (must not exist)")
     ap.add_argument("--articles", type=int, default=0, help="test: only the first N trial articles (sorted)")
     ap.add_argument("--w", choices=("both", "brute", "prefix", "none"), default="both")
+    ap.add_argument("--exclude-children", default=None, help="JSON file: {\"keys\": [child hyperedge identities]} left out "
+                    "as nested children and as cousins, before parents, W and weights are built (study B, 2026-11-19)")
     a = ap.parse_args()
+    global EXCLUDE
+    if a.exclude_children: EXCLUDE = frozenset(json.load(open(a.exclude_children))["keys"])
     if os.path.exists(a.out): sys.exit(f"refusing to overwrite {a.out}")
     t0 = time.time(); log = {}
     trial = sorted(l.strip() for l in open(INPUTS["trial_list"]) if l.strip())
@@ -434,7 +441,7 @@ def main():
                    P4_article_journal_rows=soc["P4_missing_rows"].tolist(), P5_article_article="diagonal")
     json.dump(missing, open(os.path.join(a.out, "missing.json"), "w"))
     manifest = dict(builder="chunk12v3", created=time.strftime("%Y-%m-%d %H:%M:%S"), seconds=round(time.time() - t0, 1),
-                    args=vars(a), inputs={k: sha12(v) for k, v in INPUTS.items()},
+                    args=vars(a), inputs=dict({k: sha12(v) for k, v in INPUTS.items()}, **({"exclude_children": sha12(a.exclude_children)} if a.exclude_children else {})),
                     constants=dict(cousin=COUSIN, tau=TAU, k=K_NEAR, unchecked_similarity=mnm.UNCHECKED_SIMILARITY),
                     counts=dict(articles=len(sem["articles"]), child_hyperedges=len(sem["children"]),
                                 parent_hyperedges=len(sem["parents"]), persons=len(soc["persons"]),
