@@ -30,6 +30,8 @@ from . import measures as M
 
 FRACTIONS = (0.1, 0.2, 0.25, 0.5)
 CELL_KEYS = ("stage", "approach", "arm", "beta", "start", "frac", "dtype", "terms", "lr_mode")
+START_KEYS = ("social_link_start", "random_links", "offdiag_level", "offdiag_semantic")   # start variants (2026-11-17/19):
+# part of the cell when present (found 2026-11-19 in the start-test-2 dry run: without them the arms of one stage collapse)
 # max_epochs is a ceiling, not a model setting (2026-11-14: K = 32 and the K = 13 reruns use 8,000): not part of the cell
 
 
@@ -45,7 +47,9 @@ def latest_fits(fits):
 
 
 def cell_key(job):
-    return json.dumps({k: job.get(k) for k in CELL_KEYS}, sort_keys=True)
+    key = {k: job.get(k) for k in CELL_KEYS}
+    key.update({k: job[k] for k in START_KEYS if job.get(k) is not None})   # only when set: older keys stay identical
+    return json.dumps(key, sort_keys=True)
 
 
 # Aligned reading (decided 2026-11-17, RL-260): with M1_ALIGNED=1 every loader returns the fit under the aligned community

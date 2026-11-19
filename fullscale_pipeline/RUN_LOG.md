@@ -3892,3 +3892,19 @@ fall reflects re-assignment of main communities, not different data.] Whether th
 be told here: the random start (which has off-diagonal links) rebuilds crossing ties poorly (co-membership at chance,
 higher loss), so it is no counterfactual; a start with room for off-diagonal links (proposed S2/S3) is. Limit: crossing
 ties are defined by each fit's own main communities, so the two arms' crossing sets differ.
+
+### RL-278 — 2026-11-19 — Start test 2 prepared (130 fits, not submitted); cell-key defect found and fixed
+Owner: "I agree with S1–S3; test 3 levels, 5% 10 and 20%". Plan and expected outcomes: `plans/ticket107_start_test2.md`.
+Code: `init.offdiagonal_start` (off-diagonal cell (k,l) = level · √(d_k d_l), whole core rescaled so the relation's
+starting reconstruction keeps its Frobenius norm; social cores, and with `semantic` the anchor cores); `run_fit` job
+keys `random_links` (S1: these relations keep the hybrid start's random core), `offdiag_level`, `offdiag_semantic`;
+`plan.start_test2` (KL, K 13, group 1, seeds 1–10: S1 approach 2 = 10; S2 and S3 × 5/10/20 % × both approaches = 120);
+`slurm/start_test2.sh` (17 tasks × 8 fits, 12 h); reading script `start_test2_analysis.py` (start-test readings plus
+closure ratio, off-diagonal share and floor share, blurring readings, stability; paired against the diagonal and the
+random arms). Checks: start shapes and norms as intended (approach 2, level 0.1: off-diagonal ÷ diagonal 0.100 in every
+changed core, starting reconstruction norm unchanged); 3 smoke fits through `run_fit` (25 epochs, RDS scratch, deleted
+afterwards) and `fit.align` ran; dry run of the reading script on them. **Defect found by the dry run:**
+`aggregate.cell_key` did not include the start variants, so `latest_fits` would have kept one fit per (approach, seed)
+across all start-test-2 arms. Fixed: `START_KEYS` (social_link_start, random_links, offdiag_level, offdiag_semantic)
+enter the cell key only when set — keys of all existing fits unchanged (400/400 sampled identical); start-test-2 jobs
+130 distinct cells. Earlier stages unaffected (no stage mixed start variants; the start test had its own stage).

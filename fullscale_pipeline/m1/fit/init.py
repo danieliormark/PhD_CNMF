@@ -125,6 +125,26 @@ def diagonal_social_links(rds, U, Z):
     return Z
 
 
+def offdiagonal_start(rds, U, Z, level, semantic=False, skip=()):
+    """Start test 2 (owner 2026-11-19: model class (ii), links between different communities allowed; "test 3 levels,
+    5% 10 and 20%"). Applied after diagonal_social_links. Every social core matrix (and, if semantic, every anchor core
+    matrix), except those named in skip, gets off-diagonal cells (k, l) = level · √(d_k d_l), d = its current diagonal
+    (social: c; anchors: the NNDSVD singular values + 1e-4), so each off-diagonal cell is `level` times the diagonal
+    cells it joins. The whole matrix is then rescaled so the relation's starting reconstruction over the observed rows
+    keeps its Frobenius norm (same starting size, different shape; as diagonal_social_links)."""
+    Z = dict(Z)
+    for rd in rds:
+        if rd.name in skip or (rd.name in ANCHORS and not semantic):
+            continue
+        A = U[rd.row_facet] * rd.obs_row_mask[:, None]; B = U[rd.col_facet]
+        AtA, BtB = A.T @ A, B.T @ B
+        n2 = lambda z: float(np.sum((z.T @ AtA @ z) * BtB))
+        d = np.diag(Z[rd.name]).copy()
+        z = level * np.sqrt(np.outer(d, d)); np.fill_diagonal(z, d)
+        Z[rd.name] = z * np.sqrt(n2(Z[rd.name]) / n2(z))
+    return Z
+
+
 def random_start(rds, K, seed):
     """Random start per seed (comparison arm, 2026-11-09): uniform (0, 1) factor and core matrices from the seed, each
     core matrix then rescaled so that its relation's reconstruction has Frobenius norm 1 over the observed rows, the

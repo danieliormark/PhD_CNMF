@@ -106,7 +106,14 @@ def run_one(job, out_root):
         assert st.startswith("nndsvd"), "the diagonal arm modifies an NNDSVD-type start"
         sub = float(st[len("nndsvd_sub"):]) if st.startswith("nndsvd_sub") else None
         init_U, init_Z = initialise(rds, job["K"], job["seed"], subsample=sub)
+        hybrid_Z = dict(init_Z)
         init_Z = diagonal_social_links(rds, init_U, init_Z)
+        for r in job.get("random_links", ()):        # start test 2, S1 (2026-11-19): these keep the hybrid start's random core
+            init_Z[r] = hybrid_Z[r]
+        if job.get("offdiag_level"):                  # start test 2, S2/S3: off-diagonal cells at a share of the diagonal
+            from .init import offdiagonal_start
+            init_Z = offdiagonal_start(rds, init_U, init_Z, float(job["offdiag_level"]), semantic=bool(job.get("offdiag_semantic")),
+                                       skip=tuple(job.get("random_links", ())))
     if arm.get("damping_start") == "matched":        # equivalence test (2026-11-18): start of the "weight" arm × q on damped cores
         assert arm.get("log_damping") == "data" and init_Z is not None, "matched start: data arm with an explicit start"
         init_Z = {r: (z * next(rd for rd in rds if rd.name == r).damping["q"]
