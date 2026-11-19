@@ -4212,3 +4212,20 @@ pass 3 fits a fixed grid (no search between grid values); the coarse-to-fine K r
 Owner: "For this stage report only" → in stage 0 (pass 3) mono-domain communities (decided rule: P_k < 0.1 in one
 domain and ≥ 0.5 in the other, in most seeds) are counted and reported at every (K, r) cell, no veto; whether they
 become a veto from stage 2 on is open (to decide later).
+
+### RL-301 — 2026-11-19 — Pass 3 built (study A), ready to submit
+Owner: "I approve the sizing, please proceed with the plan" (5 groups × 10 seeds, 8,000-epoch ceiling). Built:
+`plan.stage0_pass3(study)` → `fit/slurm/jobs_stage0_pass3.jsonl` (1,200 jobs: K 5 / 8 / 13 / 20 × r 0 / 0.3 / 1 ×
+approaches 1, 2 × groups 1–5 × seeds 1–10; KL, S3 10 % start keys, contrast form, fraction 0.03, float32, warm-up 300;
+λ_child = r × the pass-1 basis, e.g. K 13 r 0.3 = 571.1 / 529.7 as in pass 2); `lambda_from_r` jobs are grouped by r in
+`aggregate.cell_key` (6 cells × 200 fits; no older job has the key, older cell keys unchanged). `fit/pass3_choice.py`
+(J1: `pass2_lambda_rule.rule` per K over r, then `aggregate.choose_k` over (K, r*(K)) at fraction 0.2; grid-end flag;
+the full (K, r) table). `fit/pass3_readings.py` (aligned; per cell: T1 and would-be V1, failing communities' tie-weight
+share and genre share, mono-domain count and recurrence, off-diagonal share and floor cells, closure ratio,
+co-membership on crossing ties, diagonal-rule shares and partners, mosaic vs blend (floor diagnostics), flattening,
+study A's held-out existence split genre / substantive; 8 workers). `slurm/stage0_pass3.sh` (150 tasks × 8 fits, 12 h)
+chains `slurm/submit_pass3_post.sh` (align → aggregate as fitted and aligned → readings → choice →
+`fit/results/stage0/pass3_{choice,readings}_A.{json,log}`). Smoke test (20 fits of 40 epochs, scratch, marked converged
+for the code test only): alignment, both aggregations, choice and readings ran in both approaches (no errors); the
+S3 10 % start and λ_child reach the fits (spec). Study B's pass 3 uses the same code (`stage0_pass3("B")`) once B's
+pass-1 basis (`pass3_lambda_basis.py --build` B) exists.

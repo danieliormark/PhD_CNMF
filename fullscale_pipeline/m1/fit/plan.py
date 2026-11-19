@@ -262,6 +262,41 @@ def B_stage0_pass1():
             for a in (1, 2) for K in COARSE_K + (32,) for g in range(5) for s in range(1, 11)]
 
 
+PASS3_K = (5, 8, 13, 20)                        # owner 2026-11-19 (RL-296); K = 32 only if K = 20 comes out best
+PASS3_R = (0.0, 0.3, 1.0)                       # owner 2026-11-19 (RL-298)
+PASS3_BASIS = {"A": "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/results/stage0/pass3_lambda_basis.json",
+               "B": "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/results/stage0/pass3_lambda_basis_B.json"}
+
+
+def stage0_pass3(study="A", Ks=PASS3_K):
+    """Stage 0 pass 3 (owner 2026-11-19): K and λ_child re-chosen under the decided start, one protocol for both studies
+    (A: genre hyperedges in; B: without, RL-290/295). K ∈ {5, 8, 13, 20} (RL-296) × r ∈ {0, 0.3, 1} (RL-298), λ_child =
+    r × basis of that K and approach (data loss ÷ (R ÷ S) on the pass-1 λ = 0 solution, hold-out group 1, mean of 10
+    seeds; pass3_lambda_basis.py, RL-297), contrast form; start S3 at 10 % (hybrid NNDSVD start, social cores diagonal,
+    then social and semantic cores with off-diagonal cells at 10 % of √(d_k d_l); RL-280); KL, both approaches, hold-out
+    groups 1–5 × seeds 1–10, fraction 0.03, float32, warm-up 300, 8,000-epoch ceiling (sizing approved 2026-11-19).
+    Choice by J1 (RL-299): fit/pass3_choice.py. 1,200 fits per study. `lambda_from_r` marks jobs whose λ_child follows
+    from (r, K), so the aggregation groups them by r (aggregate.cell_key). Ks: a top-up passes its own K list (C3,
+    grid-end rule)."""
+    basis = json.load(open(PASS3_BASIS[study]))
+    stage = "stage0_pass3" if study == "A" else "B_stage0_pass3"
+    out = []
+    for a in (1, 2):
+        for K in Ks:
+            e = basis[f"pass1|{a}|{K}"]
+            for r in PASS3_R:
+                terms = {"lambda_child": r * e["basis"], "w_form": "contrast"} if r > 0 else {}
+                for g in range(5):
+                    for s in range(1, 11):
+                        j = dict(job(stage, a, g, K, 1, s, FRACTION[1], dtype="float32", terms=terms, arm={"r": r},
+                                     max_epochs=8000),
+                                 social_link_start="diagonal", offdiag_level=0.1, offdiag_semantic=True, lambda_from_r=True)
+                        if study == "B":
+                            j["build"] = BUILD_B
+                        out.append(j)
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -274,10 +309,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B")}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

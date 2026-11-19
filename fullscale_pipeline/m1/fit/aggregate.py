@@ -48,6 +48,8 @@ def latest_fits(fits):
 
 def cell_key(job):
     key = {k: job.get(k) for k in CELL_KEYS}
+    if job.get("lambda_from_r"):        # pass 3 (2026-11-19): λ_child = r × basis(K), so the cell is the r, not the λ value
+        key["terms"] = {k: v for k, v in (job.get("terms") or {}).items() if k != "lambda_child"}
     key.update({k: job[k] for k in START_KEYS if job.get(k) is not None})   # only when set: older keys stay identical
     return json.dumps(key, sort_keys=True)
 
