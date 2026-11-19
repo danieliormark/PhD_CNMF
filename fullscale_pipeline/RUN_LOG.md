@@ -4185,3 +4185,11 @@ vice versa). Owner submitted study-B pass 1 (job id not given).
 Owner: "I approve your K grid proposal" → pass 3 K ∈ {5, 8, 13, 20} in both approaches (pass-1 KL candidates {5, 8, 13}
 plus K = 20, which pass 1 removed only by the value guard at λ = 0 and which keeps K = 13 off the grid's end); K = 32
 added only if pass 3's best K is 20 (decided grid-end rule); the other study's chosen K added as a top-up (C3, RL-295).
+
+### RL-297 — 2026-11-19 — λ_child basis per K and under the decided start (no fits)
+`fit/pass3_lambda_basis.py` (`results/stage0/pass3_lambda_basis.{json,log}`): the pass-2 quantity (λ_child = r × data
+loss ÷ (R ÷ S) on the fitted λ = 0 solution, hold-out group 1, mean of 10 seeds), KL. Pass 1 (random social start):
+approach 1 K 5 / 8 / 13 / 20 = 2,227 / 2,078 / 1,904 / 1,773; approach 2 = 2,048 / 1,909 / 1,766 / 1,644 (seed CV
+0.3–0.8 %); K = 13 reproduces pass 2's basis exactly. Start S3 10 % (start test 2, K = 13): 1,898 / 1,766, i.e.
+0.997 / 1.000 × the pass-1 value. The basis falls about 20 % from K 5 to K 20 (data loss falls, R ÷ S rises); the start
+moves it by ≤ 0.3 %, so pass-1 fits give the per-K basis for pass 3 without new λ = 0 fits first.
