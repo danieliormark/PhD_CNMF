@@ -3883,8 +3883,12 @@ membership: co-membership on crossing ties author×affiliation 0.05 → 0.34, au
 0.07 → 0.22, article×article 0.14 → 0.24, article×journal 0.08 → 0.14 (random start: at or below chance), and the
 row-end entities of crossing ties are more spread than the facet average (authors at crossing author×article ties 0.95
 bits vs 0.45 for all authors; author×affiliation 0.92 vs 0.48; articles at crossing article×article ties 0.53 vs 0.38).
-Reading: the caveat holds in a local form — under diagonal cores the entities that bridge communities carry mixed
-memberships while the rest sharpen. Whether that mixing is real dual belonging or compensation for missing links cannot
+Reading: the caveat holds in a local form — under diagonal cores the entities at the ends of crossing ties carry mixed
+memberships while the rest of their facet sharpens. [Precision added 2026-11-19: their spread is about the same as
+under the random start (authors at crossing author×article ties 0.95 → 0.95 bits, author×affiliation 0.79 → 0.92,
+articles at crossing article×article ties 0.57 → 0.53); what changes is that their memberships now overlap the other
+end's (co-membership up). "Crossing share" is a share of the OBSERVED tie weight under each fit's own partition, so its
+fall reflects re-assignment of main communities, not different data.] Whether that mixing is real dual belonging or compensation for missing links cannot
 be told here: the random start (which has off-diagonal links) rebuilds crossing ties poorly (co-membership at chance,
 higher loss), so it is no counterfactual; a start with room for off-diagonal links (proposed S2/S3) is. Limit: crossing
 ties are defined by each fit's own main communities, so the two arms' crossing sets differ.
