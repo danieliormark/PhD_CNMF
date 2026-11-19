@@ -1,0 +1,42 @@
+{
+ "genre_hyperedges": 953,
+ "units_A": 33024,
+ "parents": {
+  "A": 35983,
+  "B": 35539,
+  "vanish": 0,
+  "vanish_occurrences": 0,
+  "identity_changed_kept": 16330,
+  "B_parents_from_several_A": 174,
+  "A_parents_in_merges": 618,
+  "largest_merge": 88,
+  "vanish_examples": []
+ },
+ "units": {
+  "dropped": 0,
+  "share": 0.0
+ },
+ "articles": {
+  "A": 2136,
+  "left_with_no_unit": 0
+ },
+ "child_article": {
+  "ties_removed": 22445,
+  "share_of_ties": 0.1281941445918006,
+  "articles_with_no_tie_left": 0,
+  "per_article_share_of_ties_removed": {
+   "p10": 0.0625,
+   "median": 0.14451137884872822,
+   "p90": 0.2727272727272727,
+   "max": 0.6
+  },
+  "per_article_share_of_raw_usage_removed_median": 0.17156362647078827
+ },
+ "W": {
+  "ties": 156291,
+  "ties_with_genre_end": 7559,
+  "share": 0.04836490904786584,
+  "substantive_hyperedges_with_W_ties": 67803,
+  "substantive_losing_all_W_ties": 220
+ }
+}

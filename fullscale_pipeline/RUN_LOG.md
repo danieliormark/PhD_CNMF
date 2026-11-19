@@ -4136,3 +4136,15 @@ done on study A are repeated — pass 1 KL with the K = 32 extension (≈ 600 fi
 swap and its follow-ups (KL), the KL half of the diagonal-start test, the damping test (18) and start test 2 (130);
 ≈ 1,430 fits. The squared-error runs are not repeated (the loss choice is taken as shared). Then pass 3 in both studies.
 Next: study B's build rules.
+
+### RL-292 — 2026-11-19 — What removing genre hyperedges does to the rest of the build (study B, no fits)
+`fit/genre_build_effects.py` (`results/stage0/genre_build_effects.{json,log}`), the builder's own record loading and
+unit rules, then the 953 genre hyperedges removed as nested children and as cousins. Nothing vanishes: no parent
+hyperedge is left without a child (every parent has a focal child, and focal hyperedges are substantive), no sentence
+unit or article is dropped, every article keeps child×article ties. Child×article: 22,445 ties removed (12.8 %); per
+article the share of its ties removed is median 14 % (p10 6 %, p90 27 %, max 60 %); the partial row normalisation
+then raises the weights of its remaining ties. Parents (identity = the multiset of its children's identities): 16,330
+of 35,983 lose a genre child; recomputing the identity merges 618 study-A parents into 174 study-B parents (35,983 →
+35,539); most merges join 2–4 parents, the largest join parents that differed only by a genre predicate: 88 parents
+"<genre verb> + llm" → one parent "llm", 39 → "chatgpt", 19 → "bert", 18 → "gpt_4". W (child×child): 7,559 of
+156,291 ties (4.8 %) have a genre end; 220 substantive hyperedges have W ties only to genre hyperedges.
