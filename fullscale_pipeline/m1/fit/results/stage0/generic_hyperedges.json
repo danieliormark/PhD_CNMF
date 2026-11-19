@@ -15,18 +15,18 @@
    "single_word": 176
   },
   "?": {
-   "hyperedges": 556,
-   "ties": 0.02641842799536055,
-   "raw_usage": 0.030570645687935,
-   "weighted": 0.02066133394124888,
-   "single_word": 29
+   "hyperedges": 0,
+   "ties": 0.0,
+   "raw_usage": 0.0,
+   "weighted": 0.0,
+   "single_word": 0
   },
   "S": {
-   "hyperedges": 94670,
-   "ties": 0.7523482713237459,
-   "raw_usage": 0.6537459065695382,
-   "weighted": 0.8189999430573581,
-   "single_word": 6219
+   "hyperedges": 95226,
+   "ties": 0.7787666993191065,
+   "raw_usage": 0.6843165522574732,
+   "weighted": 0.839661276998607,
+   "single_word": 6248
   }
  },
  "review_list": [
@@ -68,7 +68,7 @@
   {
    "hyperedge": "model/C/en",
    "articles": 390,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "include/P/en",
@@ -83,7 +83,7 @@
   {
    "hyperedge": "generate/P/en",
    "articles": 325,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "be/M/en use/P/en",
@@ -148,7 +148,7 @@
   {
    "hyperedge": "train/P/en",
    "articles": 234,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "remain/P/en",
@@ -298,7 +298,7 @@
   {
    "hyperedge": "fine_tune/P/en",
    "articles": 169,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "propose/P/en",
@@ -308,7 +308,7 @@
   {
    "hyperedge": "be/M/en train/P/en",
    "articles": 169,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "require/P/en",
@@ -408,7 +408,7 @@
   {
    "hyperedge": "predict/P/en",
    "articles": 134,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "instance/C/en",
@@ -508,7 +508,7 @@
   {
    "hyperedge": "extract/P/en",
    "articles": 117,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "our/M/en study/C/en",
@@ -523,7 +523,7 @@
   {
    "hyperedge": "system/C/en",
    "articles": 116,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "select/P/en",
@@ -668,7 +668,7 @@
   {
    "hyperedge": "task/C/en",
    "articles": 92,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "adopt/P/en",
@@ -693,7 +693,7 @@
   {
    "hyperedge": "be/M/en generate/P/en",
    "articles": 89,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "contribute/P/en",
@@ -728,7 +728,7 @@
   {
    "hyperedge": "learn/P/en",
    "articles": 85,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "refer/P/en",
@@ -763,12 +763,12 @@
   {
    "hyperedge": "dataset/C/en",
    "articles": 82,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "ability/C/en",
    "articles": 82,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "raise/P/en",
@@ -853,7 +853,7 @@
   {
    "hyperedge": "performance/C/en",
    "articles": 75,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "important/C/en",
@@ -863,7 +863,7 @@
   {
    "hyperedge": "automate/P/en",
    "articles": 74,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "transformer_model/C/focal",
@@ -898,7 +898,7 @@
   {
    "hyperedge": "perceive/P/en",
    "articles": 71,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "add/P/en",
@@ -918,7 +918,7 @@
   {
    "hyperedge": "simulate/P/en",
    "articles": 70,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "ai/C/en",
@@ -958,7 +958,7 @@
   {
    "hyperedge": "detect/P/en",
    "articles": 68,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "language/C/en",
@@ -983,7 +983,7 @@
   {
    "hyperedge": "respond/P/en",
    "articles": 66,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "possible/C/en",
@@ -1003,7 +1003,7 @@
   {
    "hyperedge": "classify/P/en",
    "articles": 66,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "gpt_3_5/C/focal",
@@ -1013,7 +1013,7 @@
   {
    "hyperedge": "can/M/en generate/P/en",
    "articles": 65,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "be/M/en evaluate/P/en",
@@ -1043,7 +1043,7 @@
   {
    "hyperedge": "prompt/P/en",
    "articles": 63,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "choose/P/en",
@@ -1113,7 +1113,7 @@
   {
    "hyperedge": "feature/C/en",
    "articles": 60,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "be/P/en would/M/en",
@@ -1138,7 +1138,7 @@
   {
    "hyperedge": "interact/P/en",
    "articles": 59,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "regard/P/en",
@@ -1213,7 +1213,7 @@
   {
    "hyperedge": "embed/P/en",
    "articles": 57,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "be/P/en can/M/en",
@@ -1238,7 +1238,7 @@
   {
    "hyperedge": "output/C/en",
    "articles": 55,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "particular/C/en",
@@ -1258,12 +1258,12 @@
   {
    "hyperedge": "input/C/en",
    "articles": 55,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "label/P/en",
    "articles": 55,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "vary/P/en",
@@ -1273,7 +1273,7 @@
   {
    "hyperedge": "rate/P/en",
    "articles": 54,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "reach/P/en",
@@ -1323,7 +1323,7 @@
   {
    "hyperedge": "pretraine/P/en",
    "articles": 52,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "operate/P/en",
@@ -1353,12 +1353,12 @@
   {
    "hyperedge": "be/M/en fine_tune/P/en",
    "articles": 50,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "optimize/P/en",
    "articles": 50,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "patient/C/en",
@@ -1368,7 +1368,7 @@
   {
    "hyperedge": "score/P/en",
    "articles": 50,
-   "draft": "?"
+   "draft": "S"
   },
   {
    "hyperedge": "be/M/en observe/P/en",

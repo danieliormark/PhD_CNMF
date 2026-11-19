@@ -6,8 +6,8 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 |---|---|---|---|---|---|
 | G | 2220 | 216 | 20.4% | 25.8% | 14.2% |
 | F | 404 | 176 | 1.7% | 5.7% | 1.8% |
-| ? | 556 | 29 | 2.6% | 3.1% | 2.1% |
-| S | 94670 | 6219 | 75.2% | 65.4% | 81.9% |
+| ? | 0 | 0 | 0.0% | 0.0% | 0.0% |
+| S | 95226 | 6248 | 77.9% | 68.4% | 84.0% |
 
 | # | Hyperedge (typed atoms) | Articles using it | Draft class | Owner's class |
 |---|---|---|---|---|
@@ -18,10 +18,10 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 5 | `study/C/en` | 457 | G | |
 | 6 | `provide/P/en` | 435 | G | |
 | 7 | `demonstrate/P/en` | 418 | G | |
-| 8 | `model/C/en` | 390 | ? | |
+| 8 | `model/C/en` | 390 | S | |
 | 9 | `include/P/en` | 353 | G | |
 | 10 | `have/P/en` | 327 | G | |
-| 11 | `generate/P/en` | 325 | ? | |
+| 11 | `generate/P/en` | 325 | S | |
 | 12 | `be/M/en use/P/en` | 315 | G | |
 | 13 | `suggest/P/en` | 307 | G | |
 | 14 | `evaluate/P/en` | 295 | G | |
@@ -34,7 +34,7 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 21 | `base/P/en` | 261 | G | |
 | 22 | `result/C/en` | 247 | G | |
 | 23 | `find/P/en` | 240 | G | |
-| 24 | `train/P/en` | 234 | ? | |
+| 24 | `train/P/en` | 234 | S | |
 | 25 | `remain/P/en` | 231 | G | |
 | 26 | `offer/P/en` | 226 | G | |
 | 27 | `leverage/P/en` | 222 | G | |
@@ -64,9 +64,9 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 51 | `be/P/en not/M/en` | 174 | G | |
 | 52 | `focus/P/en` | 174 | G | |
 | 53 | `enhance/P/en` | 170 | G | |
-| 54 | `fine_tune/P/en` | 169 | ? | |
+| 54 | `fine_tune/P/en` | 169 | S | |
 | 55 | `propose/P/en` | 169 | G | |
-| 56 | `be/M/en train/P/en` | 169 | ? | |
+| 56 | `be/M/en train/P/en` | 169 | S | |
 | 57 | `require/P/en` | 168 | G | |
 | 58 | `produce/P/en` | 163 | G | |
 | 59 | `more/M/en` | 159 | G | |
@@ -86,7 +86,7 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 73 | `enable/P/en` | 141 | G | |
 | 74 | `ensure/P/en` | 138 | G | |
 | 75 | `incorporate/P/en` | 136 | G | |
-| 76 | `predict/P/en` | 134 | ? | |
+| 76 | `predict/P/en` | 134 | S | |
 | 77 | `instance/C/en` | 134 | G | |
 | 78 | `exhibit/P/en` | 133 | G | |
 | 79 | `aim/P/en` | 133 | G | |
@@ -106,10 +106,10 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 93 | `reflect/P/en` | 120 | G | |
 | 94 | `obtain/P/en` | 119 | G | |
 | 95 | `observe/P/en` | 117 | G | |
-| 96 | `extract/P/en` | 117 | ? | |
+| 96 | `extract/P/en` | 117 | S | |
 | 97 | `our/M/en study/C/en` | 116 | G | |
 | 98 | `well/M/en` | 116 | G | |
-| 99 | `system/C/en` | 116 | ? | |
+| 99 | `system/C/en` | 116 | S | |
 | 100 | `select/P/en` | 114 | G | |
 | 101 | `take/P/en` | 111 | G | |
 | 102 | `analyze/P/en` | 109 | G | |
@@ -138,27 +138,27 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 125 | `contain/P/en` | 93 | G | |
 | 126 | `word/C/en` | 93 | S | |
 | 127 | `yield/P/en` | 93 | G | |
-| 128 | `task/C/en` | 92 | ? | |
+| 128 | `task/C/en` | 92 | S | |
 | 129 | `adopt/P/en` | 91 | G | |
 | 130 | `question/C/en` | 91 | G | |
 | 131 | `associate/P/en` | 90 | G | |
 | 132 | `method/C/en` | 89 | G | |
-| 133 | `be/M/en generate/P/en` | 89 | ? | |
+| 133 | `be/M/en generate/P/en` | 89 | S | |
 | 134 | `contribute/P/en` | 89 | G | |
 | 135 | `underscore/P/en` | 88 | G | |
 | 136 | `way/C/en` | 88 | G | |
 | 137 | `serve/P/en` | 88 | G | |
 | 138 | `illustrate/P/en` | 87 | G | |
 | 139 | `be/M/en show/P/en` | 86 | G | |
-| 140 | `learn/P/en` | 85 | ? | |
+| 140 | `learn/P/en` | 85 | S | |
 | 141 | `refer/P/en` | 85 | G | |
 | 142 | `recent/M/en study/C/en` | 85 | G | |
 | 143 | `implement/P/en` | 84 | G | |
 | 144 | `allow/P/en` | 84 | G | |
 | 145 | `finding/C/en our/M/en` | 84 | G | |
 | 146 | `be/M/en conduct/P/en` | 84 | G | |
-| 147 | `dataset/C/en` | 82 | ? | |
-| 148 | `ability/C/en` | 82 | ? | |
+| 147 | `dataset/C/en` | 82 | S | |
+| 148 | `ability/C/en` | 82 | S | |
 | 149 | `raise/P/en` | 81 | G | |
 | 150 | `extend/P/en` | 81 | G | |
 | 151 | `gpt_4o/C/focal` | 81 | F | |
@@ -175,20 +175,20 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 162 | `analysis/C/en` | 76 | G | |
 | 163 | `consist/P/en` | 76 | G | |
 | 164 | `paper/C/en` | 76 | G | |
-| 165 | `performance/C/en` | 75 | ? | |
+| 165 | `performance/C/en` | 75 | S | |
 | 166 | `important/C/en` | 75 | G | |
-| 167 | `automate/P/en` | 74 | ? | |
+| 167 | `automate/P/en` | 74 | S | |
 | 168 | `transformer_model/C/focal` | 73 | F | |
 | 169 | `section/C/en` | 72 | G | |
 | 170 | `fact/C/en` | 72 | G | |
 | 171 | `information/C/en` | 71 | G | |
 | 172 | `chatbot/C/en` | 71 | S | |
 | 173 | `power/P/en` | 71 | G | |
-| 174 | `perceive/P/en` | 71 | ? | |
+| 174 | `perceive/P/en` | 71 | S | |
 | 175 | `add/P/en` | 71 | G | |
 | 176 | `author/C/en` | 70 | G | |
 | 177 | `confirm/P/en` | 70 | G | |
-| 178 | `simulate/P/en` | 70 | ? | |
+| 178 | `simulate/P/en` | 70 | S | |
 | 179 | `ai/C/en` | 70 | S | |
 | 180 | `begin/P/en` | 70 | G | |
 | 181 | `present/M/en study/C/en` | 70 | G | |
@@ -196,24 +196,24 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 183 | `underlie/P/en` | 69 | G | |
 | 184 | `apply/P/en be/M/en` | 68 | G | |
 | 185 | `determine/P/en` | 68 | G | |
-| 186 | `detect/P/en` | 68 | ? | |
+| 186 | `detect/P/en` | 68 | S | |
 | 187 | `language/C/en` | 68 | S | |
 | 188 | `ability/C/en llm/C/focal` | 68 | S | |
 | 189 | `maintain/P/en` | 67 | G | |
 | 190 | `be/M/en can/M/en use/P/en` | 67 | G | |
-| 191 | `respond/P/en` | 66 | ? | |
+| 191 | `respond/P/en` | 66 | S | |
 | 192 | `possible/C/en` | 66 | G | |
 | 193 | `receive/P/en` | 66 | G | |
 | 194 | `seek/P/en` | 66 | G | |
-| 195 | `classify/P/en` | 66 | ? | |
+| 195 | `classify/P/en` | 66 | S | |
 | 196 | `gpt_3_5/C/focal` | 65 | F | |
-| 197 | `can/M/en generate/P/en` | 65 | ? | |
+| 197 | `can/M/en generate/P/en` | 65 | S | |
 | 198 | `be/M/en evaluate/P/en` | 65 | G | |
 | 199 | `know/P/en` | 65 | G | |
 | 200 | `facilitate/P/en` | 64 | G | |
 | 201 | `do/P/en` | 64 | G | |
 | 202 | `our/M/en result/C/en` | 64 | G | |
-| 203 | `prompt/P/en` | 63 | ? | |
+| 203 | `prompt/P/en` | 63 | S | |
 | 204 | `choose/P/en` | 62 | G | |
 | 205 | `engage/P/en` | 62 | G | |
 | 206 | `llm/C/focal output/C/en` | 62 | S | |
@@ -227,12 +227,12 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 214 | `limit/P/en` | 60 | G | |
 | 215 | `define/P/en` | 60 | G | |
 | 216 | `calculate/P/en` | 60 | G | |
-| 217 | `feature/C/en` | 60 | ? | |
+| 217 | `feature/C/en` | 60 | S | |
 | 218 | `be/P/en would/M/en` | 60 | G | |
 | 219 | `grow/P/en` | 59 | G | |
 | 220 | `percent/C/en` | 59 | G | |
 | 221 | `evidence/C/en` | 59 | G | |
-| 222 | `interact/P/en` | 59 | ? | |
+| 222 | `interact/P/en` | 59 | S | |
 | 223 | `regard/P/en` | 58 | G | |
 | 224 | `be/M/en select/P/en` | 58 | G | |
 | 225 | `range/P/en` | 58 | G | |
@@ -247,19 +247,19 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 234 | `llm/C/focal performance/C/en` | 57 | S | |
 | 235 | `order/C/en` | 57 | G | |
 | 236 | `draw/P/en` | 57 | G | |
-| 237 | `embed/P/en` | 57 | ? | |
+| 237 | `embed/P/en` | 57 | S | |
 | 238 | `be/P/en can/M/en` | 56 | G | |
 | 239 | `measure/P/en` | 56 | G | |
 | 240 | `be/M/en develop/P/en` | 56 | G | |
 | 241 | `be/M/en provide/P/en` | 56 | G | |
-| 242 | `output/C/en` | 55 | ? | |
+| 242 | `output/C/en` | 55 | S | |
 | 243 | `particular/C/en` | 55 | G | |
 | 244 | `excel/P/en` | 55 | G | |
 | 245 | `collect/P/en` | 55 | G | |
-| 246 | `input/C/en` | 55 | ? | |
-| 247 | `label/P/en` | 55 | ? | |
+| 246 | `input/C/en` | 55 | S | |
+| 247 | `label/P/en` | 55 | S | |
 | 248 | `vary/P/en` | 55 | G | |
-| 249 | `rate/P/en` | 54 | ? | |
+| 249 | `rate/P/en` | 54 | S | |
 | 250 | `reach/P/en` | 54 | G | |
 | 251 | `explain/P/en` | 54 | G | |
 | 252 | `be/M/en compare/P/en` | 53 | G | |
@@ -269,16 +269,16 @@ Hyperedges used by at least 50 articles (trial build, hold-out group 1, visible 
 | 256 | `people/C/en` | 53 | S | |
 | 257 | `mean/P/en` | 52 | G | |
 | 258 | `future/M/en study/C/en` | 52 | G | |
-| 259 | `pretraine/P/en` | 52 | ? | |
+| 259 | `pretraine/P/en` | 52 | S | |
 | 260 | `operate/P/en` | 51 | G | |
 | 261 | `comprise/P/en` | 51 | G | |
 | 262 | `compute/P/en` | 51 | G | |
 | 263 | `interpret/P/en` | 50 | G | |
 | 264 | `challenge/C/en` | 50 | G | |
-| 265 | `be/M/en fine_tune/P/en` | 50 | ? | |
-| 266 | `optimize/P/en` | 50 | ? | |
+| 265 | `be/M/en fine_tune/P/en` | 50 | S | |
+| 266 | `optimize/P/en` | 50 | S | |
 | 267 | `patient/C/en` | 50 | S | |
-| 268 | `score/P/en` | 50 | ? | |
+| 268 | `score/P/en` | 50 | S | |
 | 269 | `be/M/en observe/P/en` | 50 | G | |
 | 270 | `hold/P/en` | 50 | G | |
 | 271 | `gap/C/en` | 50 | G | |

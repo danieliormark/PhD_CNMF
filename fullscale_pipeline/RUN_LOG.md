@@ -4056,3 +4056,14 @@ Reading: genre hyperedges do not form their own community below K = 32, but they
 profile partly the same (they roughly triple the mean cosine between communities), and (ii) supply almost half of the
 hidden child×article ties of the decided held-out score, so the K choice partly measures how well the model predicts
 generic language. They matter by the step-2 criterion; the classification is a draft pending the owner's review.
+
+### RL-286 — 2026-11-19 — Ambiguous class folded into substantive (owner); steps 1–2 re-run
+Owner: "the examples you placed in ambiguous category belong to the substantive because they are endemic to the
+computational or model building/using articles but they denote substantive actions carried by authors or someone they
+cite" → `generic_hyperedges.AMBIGUOUS_IS_SUBSTANTIVE = True`; class ? retired. Classes now: G 2,220 hyperedges / 20.4 %
+of ties / 25.8 % raw usage / 14.2 % weighted; F 404 / 1.7 / 5.7 / 1.8 %; S 95,226 / 77.9 / 68.4 / 84.0 %. Review list:
+G 213, S 49, F 10. Step 2 re-run (`results/stage0/generic_role.{json,log}`), decided setting K 13, approach 1 (approach 2
+alike): S membership entropy 0.68 bits (G 2.92); mean cosine between communities 0.44 all / 0.24 without G / 0.19 S only;
+held-out existence within-class AP / chance: all 0.171 / 0.109, G 0.311 / 0.203 (3,795 hidden ties, 44 %), F 0.415 /
+0.151 (296), S 0.071 / 0.029 (4,596). Across K 8 / 13 / 20 / 32 (pass 1, approach 1): S 0.073 / 0.072 / 0.073 / 0.070
+(flat); G 0.301 / 0.313 / 0.296 / 0.292. Conclusions of RL-285 unchanged.

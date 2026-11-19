@@ -1,32 +1,32 @@
 approach 1 — medians over fits
-  decided_S3_10_K13 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.152 (corpus 0.142); raw: median 0.257, largest 0.274 (corpus 0.258); largest F 0.029, ? 0.034
-     membership entropy (bits, tie-weighted): G 2.919  F 1.899  ? 2.516  S 0.633 | mean cosine between communities: all 0.4355, without G 0.2442, S only 0.1419
-     held-out existence (within-class AP / chance): all 0.1707/0.1092  G 0.3112/0.2025 (n 3795)  F 0.4151/0.1507 (n 296)  ? 0.3269/0.1048 (n 450)  S 0.0524/0.0205 (n 4146)
-  pass1_K8 (10 fits): G share of a community's child-side tie weight — median 0.141, largest 0.148 (corpus 0.142); raw: median 0.257, largest 0.271 (corpus 0.258); largest F 0.026, ? 0.029
-     membership entropy (bits, tie-weighted): G 2.384  F 1.477  ? 2.106  S 0.539 | mean cosine between communities: all 0.5085, without G 0.3093, S only 0.2001
-     held-out existence (within-class AP / chance): all 0.1682/0.1092  G 0.3010/0.2025 (n 3795)  F 0.4518/0.1507 (n 296)  ? 0.3119/0.1048 (n 450)  S 0.0539/0.0205 (n 4146)
-  pass1_K13 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.152 (corpus 0.142); raw: median 0.258, largest 0.274 (corpus 0.258); largest F 0.029, ? 0.035
-     membership entropy (bits, tie-weighted): G 2.897  F 1.797  ? 2.507  S 0.637 | mean cosine between communities: all 0.4316, without G 0.2399, S only 0.1409
-     held-out existence (within-class AP / chance): all 0.1714/0.1092  G 0.3126/0.2025 (n 3795)  F 0.4364/0.1507 (n 296)  ? 0.3383/0.1048 (n 450)  S 0.0524/0.0205 (n 4146)
-  pass1_K20 (10 fits): G share of a community's child-side tie weight — median 0.141, largest 0.169 (corpus 0.142); raw: median 0.258, largest 0.286 (corpus 0.258); largest F 0.030, ? 0.033
-     membership entropy (bits, tie-weighted): G 3.315  F 1.975  ? 2.902  S 0.708 | mean cosine between communities: all 0.3602, without G 0.1798, S only 0.1002
-     held-out existence (within-class AP / chance): all 0.1637/0.1092  G 0.2955/0.2025 (n 3795)  F 0.4579/0.1507 (n 296)  ? 0.3324/0.1048 (n 450)  S 0.0534/0.0205 (n 4146)
-  pass1_K32 (10 fits): G share of a community's child-side tie weight — median 0.139, largest 0.213 (corpus 0.142); raw: median 0.255, largest 0.330 (corpus 0.258); largest F 0.037, ? 0.042
-     membership entropy (bits, tie-weighted): G 3.568  F 2.145  ? 3.130  S 0.757 | mean cosine between communities: all 0.2700, without G 0.1246, S only 0.0665
-     held-out existence (within-class AP / chance): all 0.1633/0.1092  G 0.2920/0.2025 (n 3795)  F 0.4357/0.1507 (n 296)  ? 0.2959/0.1048 (n 450)  S 0.0526/0.0205 (n 4146)
+  decided_S3_10_K13 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.152 (corpus 0.142); raw: median 0.257, largest 0.274 (corpus 0.258); largest F 0.029
+     membership entropy (bits, tie-weighted): G 2.919  F 1.899  S 0.680 | mean cosine between communities: all 0.4355, without G 0.2442, S only 0.1928
+     held-out existence (within-class AP / chance): all 0.1707/0.1092  G 0.3112/0.2025 (n 3795)  F 0.4151/0.1507 (n 296)  S 0.0713/0.0294 (n 4596)
+  pass1_K8 (10 fits): G share of a community's child-side tie weight — median 0.141, largest 0.148 (corpus 0.142); raw: median 0.257, largest 0.271 (corpus 0.258); largest F 0.026
+     membership entropy (bits, tie-weighted): G 2.384  F 1.477  S 0.578 | mean cosine between communities: all 0.5085, without G 0.3093, S only 0.2675
+     held-out existence (within-class AP / chance): all 0.1682/0.1092  G 0.3010/0.2025 (n 3795)  F 0.4518/0.1507 (n 296)  S 0.0725/0.0294 (n 4596)
+  pass1_K13 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.152 (corpus 0.142); raw: median 0.258, largest 0.274 (corpus 0.258); largest F 0.029
+     membership entropy (bits, tie-weighted): G 2.897  F 1.797  S 0.683 | mean cosine between communities: all 0.4316, without G 0.2399, S only 0.1913
+     held-out existence (within-class AP / chance): all 0.1714/0.1092  G 0.3126/0.2025 (n 3795)  F 0.4364/0.1507 (n 296)  S 0.0719/0.0294 (n 4596)
+  pass1_K20 (10 fits): G share of a community's child-side tie weight — median 0.141, largest 0.169 (corpus 0.142); raw: median 0.258, largest 0.286 (corpus 0.258); largest F 0.030
+     membership entropy (bits, tie-weighted): G 3.315  F 1.975  S 0.762 | mean cosine between communities: all 0.3602, without G 0.1798, S only 0.1410
+     held-out existence (within-class AP / chance): all 0.1637/0.1092  G 0.2955/0.2025 (n 3795)  F 0.4579/0.1507 (n 296)  S 0.0729/0.0294 (n 4596)
+  pass1_K32 (10 fits): G share of a community's child-side tie weight — median 0.139, largest 0.213 (corpus 0.142); raw: median 0.255, largest 0.330 (corpus 0.258); largest F 0.037
+     membership entropy (bits, tie-weighted): G 3.568  F 2.145  S 0.815 | mean cosine between communities: all 0.2700, without G 0.1246, S only 0.0948
+     held-out existence (within-class AP / chance): all 0.1633/0.1092  G 0.2920/0.2025 (n 3795)  F 0.4357/0.1507 (n 296)  S 0.0699/0.0294 (n 4596)
 approach 2 — medians over fits
-  decided_S3_10_K13 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.156 (corpus 0.142); raw: median 0.256, largest 0.279 (corpus 0.258); largest F 0.028, ? 0.034
-     membership entropy (bits, tie-weighted): G 2.925  F 1.942  ? 2.520  S 0.624 | mean cosine between communities: all 0.4407, without G 0.2463, S only 0.1408
-     held-out existence (within-class AP / chance): all 0.1725/0.1092  G 0.3079/0.2025 (n 3795)  F 0.4123/0.1507 (n 296)  ? 0.3179/0.1048 (n 450)  S 0.0541/0.0205 (n 4146)
-  pass1_K8 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.156 (corpus 0.142); raw: median 0.259, largest 0.289 (corpus 0.258); largest F 0.027, ? 0.031
-     membership entropy (bits, tie-weighted): G 2.358  F 1.466  ? 2.088  S 0.536 | mean cosine between communities: all 0.4981, without G 0.3077, S only 0.1960
-     held-out existence (within-class AP / chance): all 0.1684/0.1092  G 0.3035/0.2025 (n 3795)  F 0.4338/0.1507 (n 296)  ? 0.2993/0.1048 (n 450)  S 0.0512/0.0205 (n 4146)
-  pass1_K13 (10 fits): G share of a community's child-side tie weight — median 0.141, largest 0.159 (corpus 0.142); raw: median 0.256, largest 0.293 (corpus 0.258); largest F 0.030, ? 0.038
-     membership entropy (bits, tie-weighted): G 2.881  F 1.840  ? 2.489  S 0.629 | mean cosine between communities: all 0.4292, without G 0.2389, S only 0.1387
-     held-out existence (within-class AP / chance): all 0.1699/0.1092  G 0.3081/0.2025 (n 3795)  F 0.4006/0.1507 (n 296)  ? 0.3220/0.1048 (n 450)  S 0.0538/0.0205 (n 4146)
-  pass1_K20 (10 fits): G share of a community's child-side tie weight — median 0.140, largest 0.186 (corpus 0.142); raw: median 0.258, largest 0.308 (corpus 0.258); largest F 0.031, ? 0.034
-     membership entropy (bits, tie-weighted): G 3.285  F 1.976  ? 2.822  S 0.690 | mean cosine between communities: all 0.3505, without G 0.1752, S only 0.0976
-     held-out existence (within-class AP / chance): all 0.1703/0.1092  G 0.3149/0.2025 (n 3795)  F 0.4374/0.1507 (n 296)  ? 0.3201/0.1048 (n 450)  S 0.0518/0.0205 (n 4146)
-  pass1_K32 (10 fits): G share of a community's child-side tie weight — median 0.135, largest 0.323 (corpus 0.142); raw: median 0.254, largest 0.470 (corpus 0.258); largest F 0.034, ? 0.045
-     membership entropy (bits, tie-weighted): G 3.515  F 2.135  ? 3.037  S 0.746 | mean cosine between communities: all 0.2560, without G 0.1208, S only 0.0643
-     held-out existence (within-class AP / chance): all 0.1606/0.1092  G 0.2914/0.2025 (n 3795)  F 0.4234/0.1507 (n 296)  ? 0.2975/0.1048 (n 450)  S 0.0492/0.0205 (n 4146)
+  decided_S3_10_K13 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.156 (corpus 0.142); raw: median 0.256, largest 0.279 (corpus 0.258); largest F 0.028
+     membership entropy (bits, tie-weighted): G 2.925  F 1.942  S 0.671 | mean cosine between communities: all 0.4407, without G 0.2463, S only 0.1930
+     held-out existence (within-class AP / chance): all 0.1725/0.1092  G 0.3079/0.2025 (n 3795)  F 0.4123/0.1507 (n 296)  S 0.0719/0.0294 (n 4596)
+  pass1_K8 (10 fits): G share of a community's child-side tie weight — median 0.142, largest 0.156 (corpus 0.142); raw: median 0.259, largest 0.289 (corpus 0.258); largest F 0.027
+     membership entropy (bits, tie-weighted): G 2.358  F 1.466  S 0.574 | mean cosine between communities: all 0.4981, without G 0.3077, S only 0.2620
+     held-out existence (within-class AP / chance): all 0.1684/0.1092  G 0.3035/0.2025 (n 3795)  F 0.4338/0.1507 (n 296)  S 0.0682/0.0294 (n 4596)
+  pass1_K13 (10 fits): G share of a community's child-side tie weight — median 0.141, largest 0.159 (corpus 0.142); raw: median 0.256, largest 0.293 (corpus 0.258); largest F 0.030
+     membership entropy (bits, tie-weighted): G 2.881  F 1.840  S 0.674 | mean cosine between communities: all 0.4292, without G 0.2389, S only 0.1891
+     held-out existence (within-class AP / chance): all 0.1699/0.1092  G 0.3081/0.2025 (n 3795)  F 0.4006/0.1507 (n 296)  S 0.0717/0.0294 (n 4596)
+  pass1_K20 (10 fits): G share of a community's child-side tie weight — median 0.140, largest 0.186 (corpus 0.142); raw: median 0.258, largest 0.308 (corpus 0.258); largest F 0.031
+     membership entropy (bits, tie-weighted): G 3.285  F 1.976  S 0.742 | mean cosine between communities: all 0.3505, without G 0.1752, S only 0.1369
+     held-out existence (within-class AP / chance): all 0.1703/0.1092  G 0.3149/0.2025 (n 3795)  F 0.4374/0.1507 (n 296)  S 0.0700/0.0294 (n 4596)
+  pass1_K32 (10 fits): G share of a community's child-side tie weight — median 0.135, largest 0.323 (corpus 0.142); raw: median 0.254, largest 0.470 (corpus 0.258); largest F 0.034
+     membership entropy (bits, tie-weighted): G 3.515  F 2.135  S 0.801 | mean cosine between communities: all 0.2560, without G 0.1208, S only 0.0904
+     held-out existence (within-class AP / chance): all 0.1606/0.1092  G 0.2914/0.2025 (n 3795)  F 0.4234/0.1507 (n 296)  S 0.0671/0.0294 (n 4596)

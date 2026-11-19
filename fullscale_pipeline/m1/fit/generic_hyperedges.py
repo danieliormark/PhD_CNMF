@@ -5,8 +5,8 @@
 #   F  focal       — every atom is a focal atom (role "focal": the corpus's canonical topic terms, e.g. llm, bert);
 #   G  genre       — every atom is in GENRE (vocabulary of scientific writing: reporting / argument verbs, generic
 #                    research nouns, auxiliaries, modals, negation, possessives, generic modifiers);
-#   ?  ambiguous   — every atom is in GENRE or AMBIGUOUS, at least one in AMBIGUOUS (generic in form but possibly a
-#                    method or object of this corpus: train, predict, classify, model, performance, ...);
+#   ?  ambiguous   — (retired 2026-11-19, owner: these are substantive) every atom in GENRE or AMBIGUOUS, at least one in
+#                    AMBIGUOUS (train, predict, classify, model, performance, ...); now classed S;
 #   S  substantive — anything else (at least one atom outside these lists, focal atoms combined with others included).
 # Writes the review list (hyperedges used by ≥ 50 articles, all visible ties of the trial build) and the shares of
 # ties / raw usage / weighted values per class over ALL child hyperedges.
@@ -34,6 +34,10 @@ GENRE_M = set("""be have do more well most our recent future present can may wou
 AMBIG_P = set("""generate train fine_tune predict classify detect simulate prompt embed pretraine label rate score respond
 interact perceive automate extract optimize learn""".split())
 AMBIG_C = set("""model system performance ability dataset task feature input output""".split())
+# Owner 2026-11-19: "I think that the examples you placed in ambiguous category belong to the substantive because they
+# are endemic to the computational or model building/using articles but they denote substantive actions carried by
+# authors or someone they cite." → the ambiguous words count as substantive; class ? is no longer used.
+AMBIGUOUS_IS_SUBSTANTIVE = True
 
 
 def classify(atoms):
@@ -50,7 +54,7 @@ def classify(atoms):
     ks = {kind(p) for p in parts}
     if ks == {"G"}:
         return "G"
-    if ks <= {"G", "?"}:
+    if ks <= {"G", "?"} and not AMBIGUOUS_IS_SUBSTANTIVE:
         return "?"
     return "S"
 

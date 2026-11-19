@@ -19,7 +19,7 @@ from .aggregate import load_fit, load_UZ, latest_fits
 from .generic_hyperedges import labels
 
 ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
-CLASSES = ("G", "F", "?", "S")
+CLASSES = ("G", "F", "S")          # "?" retired 2026-11-19 (owner: substantive)
 
 
 def bits(P):
@@ -86,7 +86,7 @@ def run():
             rep[f"approach_{a}"][name] = {"fits": len(rows), "median": med}
             print(f"  {name} ({len(rows)} fits): G share of a community's child-side tie weight — median {med['G_share_median_weighted']:.3f}, "
                   f"largest {med['G_share_max_weighted']:.3f} (corpus {med['G_share_corpus_weighted']:.3f}); raw: median {med['G_share_median_raw']:.3f}, "
-                  f"largest {med['G_share_max_raw']:.3f} (corpus {med['G_share_corpus_raw']:.3f}); largest F {med['F_share_max_weighted']:.3f}, ? {med['?_share_max_weighted']:.3f}")
+                  f"largest {med['G_share_max_raw']:.3f} (corpus {med['G_share_corpus_raw']:.3f}); largest F {med['F_share_max_weighted']:.3f}")
             print(f"     membership entropy (bits, tie-weighted): " + "  ".join(f"{k} {med['entropy_'+k]:.3f}" for k in CLASSES)
                   + f" | mean cosine between communities: all {med['cos_all']:.4f}, without G {med['cos_without_G']:.4f}, S only {med['cos_S_only']:.4f}")
             print(f"     held-out existence (within-class AP / chance): all {med['existence_all']:.4f}/{med['chance_all']:.4f}  "
