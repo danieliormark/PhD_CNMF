@@ -4017,3 +4017,13 @@ co-membership confirms that the ties reaching this community's hyperedges mostly
 lie elsewhere; the hyperedge-averaged overlap does not separate it, because most of its hyperedges by count are used
 by a single article (69 % / 44 %) while the few widely used ones carry the ties — counting hyperedges equally is the
 wrong unit for a question about usage (GLOSSARY: ties → co-membership).
+
+### RL-284 — 2026-11-19 — Inventory: single-word child hyperedges (trial build, hold-out group 1, visible ties; no fits)
+Child hyperedges by number of atoms — share of hyperedges / of child×article ties / of raw usage (term frequencies) /
+of weighted values (log(1+tf)·idf, as fitted); mean number of articles using each: 1 word 6.8 % / 33.8 % / 43.8 % /
+27.0 %, mean 8.5; 2 words 26.6 % / 25.6 % / 22.9 % / 27.1 %, mean 1.6; 3+ words 66.7 % / 40.6 % / 33.3 % / 45.9 %,
+mean 1.0. Single-word hyperedges by atom type: concept 4,672, predicate 1,677, modifier 291. Single-word hyperedges
+used by ≥ 10 / ≥ 50 / ≥ 100 articles: 879 / 238 / 109 hyperedges carrying 27.1 / 18.7 / 13.4 % of ties, 37.4 / 29.0 /
+23.2 % of raw usage, 19.5 / 12.4 / 8.5 % of the weighted values. Multi-word hyperedges used by ≥ 50 articles: 34
+(e.g. "be use", "be not", "be train", "our study", "base be", "be generate"). Context: the generic-vocabulary community
+at K = 32 (RL-282) is built from such hyperedges.
