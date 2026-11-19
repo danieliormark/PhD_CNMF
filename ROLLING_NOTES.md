@@ -7,27 +7,32 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-18, ticket 107 M1 — loss chosen (KL), diagonal start approved)
+## State (2026-11-19, ticket 107 M1 — two studies (A with genre, B without); study-B pass 1 ready to submit)
 
-Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-280; design doc entries of 2026-11-18.
-- **Decided 2026-11-18:** loss = KL (stage-0 rule overridden; child×article > 0.5 per community is one of the most
-  important rules); diagonal start for the core matrices under KL, article×article closure ratio as a standing reading;
-  the 17 unconverged squared-error start-test fits are not continued; child×article requirement counted by the counting
-  rule, no seed picking.
-- **Settled since (2026-11-18):** (0) weighting: idf kept for semantics; stage 1 gets a social log-damping arm
-  (authors' article counts, organisations, journals; × log(1+d)/d, d = visible ties in the fold — owner: "n of ties");
-  mass restored in the data (GPT reviews RL-272/273); wording approved provisionally until the test. (2b) preferred
-  measures on membership distributions recorded in GLOSSARY.
-- **Settled 2026-11-19:** log-damping arm = implementation A (mass restored in the data), stage 1 robustness arm, ordinary
-  start as its undamped reference (RL-279, design doc); model class (ii): core matrices must allow links between
-  communities; passes 1–2 not redone, pass 3 re-chooses K and λ_child under the final start.
-- **Decided 2026-11-19 after start test 2 (RL-280):** diagonal core matrices accepted under KL (off-diagonal links
-  allowed by the method, not imposed; off-diagonal share a standing reading; no off-diagonal penalty → O1 unless the
-  owner decides otherwise); article×article no random start; start = S3 at 10 % for pass 3 and later.
-- **Next:** pass 3 design (K and λ_child under S3 10 %, narrowed grid, off-diagonal share added as a reading); then
-  the remaining points: swap measure, child×article tolerance / veto (rules now met by construction under KL), item
-  (l), stage-1 counting fraction.
-- **Open small item:** owner to confirm the log-damping arm's wording as final.
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-294; design doc entries of 2026-11-18/19.
+- **Decided 2026-11-18/19 (earlier):** loss KL; log-damping arm = implementation A (stage-1 robustness arm); diagonal
+  cores accepted under KL, off-diagonal links allowed not imposed; O1 (no off-diagonal penalty); start = S3 at 10 %;
+  article×article no random start; passes 1–2 not redone in study A, pass 3 re-chooses K and λ_child; child×article
+  requirement T1 (fit fails if a community's own cell ≤ half of its child×article tie weight on either side) + V1 (veto
+  by the counting rule; would-be in stage 0, acting in stage 2) (RL-281–283).
+- **Generic (genre) child hyperedges (RL-284–289):** classification reviewed by the owner — "ambiguous" model-building
+  words and focal terms substantive, 91 + 4 genre rows moved to S; final G = 953 hyperedges, 12.1 % of ties, 8.2 % of
+  weighted values (`plans/ticket107_generic_hyperedges_final.md`, `fullscale_pipeline/m1/genre_hyperedges_final.json`).
+  Genre spreads evenly over communities, raises their similarity (cosine 0.33 → 0.44), supplies 26.5 % of hidden
+  child×article ties; on substantive ties the held-out score is flat over K 8–32. Atom types (P/C/M) stay distinct
+  entities (owner; typed_forms check RL-288).
+- **Two full studies (owner, RL-290):** A = current build, B = build without genre; "whatever is tried on one should be
+  tried and tested on another". B repeats the KL runs of stage 0 (≈ 1,430 fits, RL-291). B build rules decided and
+  built (`psych_trial_v3_nogenre`, RL-293: parents recomputed — 618 merge into 174; W rebuilt; weights recomputed;
+  social identical). B hold-out: fresh draw, seed 107 (owner, RL-294).
+- **Waiting for the owner:** submit study-B pass 1: `bash /mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/slurm/B_stage0_pass1.sh`
+  (600 fits, ≈ 660 CPU-h). Then B pass 2 (needs B's K*), swap, diagonal-start (KL), damping test, start test 2 on B.
+- **Next points (one by one):** pass 3 design in both studies (K and λ_child under S3 10 %, narrowed grid, off-diagonal
+  share reading, mono-domain response, sizing); how A and B are compared and whether their choices may differ (RL-290
+  question 3); the swap measure (below) or close; item (l); stage-1 counting fraction.
+- **Open small items:** owner to confirm the log-damping wording as final; verify the KL-NMF/PLSA reference before
+  recording; the study-B analysis scripts (stage-0 readings) still read study A's build by default — parametrise per
+  study before reading B's fits.
 
 **Points to settle afterwards (owner: "I'll return to them once we settle points 0 and 2"):**
 1. Start details: does article×article keep a random start (closure ratio 0.41 under the diagonal start, RL-270)?
