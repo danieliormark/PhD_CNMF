@@ -9,7 +9,7 @@
 
 ## State (2026-11-18, ticket 107 M1 — loss chosen (KL), diagonal start approved)
 
-Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-279; design doc entries of 2026-11-18.
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-280; design doc entries of 2026-11-18.
 - **Decided 2026-11-18:** loss = KL (stage-0 rule overridden; child×article > 0.5 per community is one of the most
   important rules); diagonal start for the core matrices under KL, article×article closure ratio as a standing reading;
   the 17 unconverged squared-error start-test fits are not continued; child×article requirement counted by the counting
@@ -21,8 +21,12 @@ Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-
 - **Settled 2026-11-19:** log-damping arm = implementation A (mass restored in the data), stage 1 robustness arm, ordinary
   start as its undamped reference (RL-279, design doc); model class (ii): core matrices must allow links between
   communities; passes 1–2 not redone, pass 3 re-chooses K and λ_child under the final start.
-- **Running:** start test 2 (130 fits, submitted 2026-11-19; RL-278; read with `fit.align --stages start_test2` then
-  `fit.start_test2_analysis`). Then: choose the start (plan §5 proposal), pass 3, stage 1.
+- **Decided 2026-11-19 after start test 2 (RL-280):** diagonal core matrices accepted under KL (off-diagonal links
+  allowed by the method, not imposed; off-diagonal share a standing reading; no off-diagonal penalty → O1 unless the
+  owner decides otherwise); article×article no random start; start = S3 at 10 % for pass 3 and later.
+- **Next:** pass 3 design (K and λ_child under S3 10 %, narrowed grid, off-diagonal share added as a reading); then
+  the remaining points: swap measure, child×article tolerance / veto (rules now met by construction under KL), item
+  (l), stage-1 counting fraction.
 - **Open small item:** owner to confirm the log-damping arm's wording as final.
 
 **Points to settle afterwards (owner: "I'll return to them once we settle points 0 and 2"):**
