@@ -4199,3 +4199,11 @@ Owner: "I think its better to fit option b with 3 values and occupy more cores/s
 discovering that we got into an unlikely case where fitting all three whould have been the best option" → pass 3 fits
 r ∈ {0, 0.3, 1} at every K, λ_child = r × the pass-1 basis of that K and approach (RL-297): 2 approaches × 4 K × 3 r ×
 5 groups × 10 seeds = 1,200 fits per study (≈ 900 CPU-hours).
+
+### RL-299 — 2026-11-19 — Pass 3 order of choice: J1 (owner)
+Owner: "I approve J1 option" → in pass 3, the λ rule is applied at each K first (r*(K) among r ∈ {0, 0.3, 1}: existence
+within one SE of the best r, value guard, largest remaining r if stability is not worse than at λ = 0); the K protocol
+then compares the cells (K, r*(K)). All 12 cells per approach are reported beside the choice (existence, value,
+stability, gate, vetoes), so a disagreement with choosing K at λ = 0 or at r = 1 is visible. Owner's question answered:
+pass 3 fits a fixed grid (no search between grid values); the coarse-to-fine K refinement is stage 2's (decided
+2026-11-03: every integer K inside the band(s) of the coarse curve at J*, large intervals first by geometric midpoints).
