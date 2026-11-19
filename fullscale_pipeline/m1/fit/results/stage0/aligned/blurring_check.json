@@ -1,0 +1,2758 @@
+{
+ "approach_1": {
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "random": {
+   "3": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.15415054610312448,
+      "largest_share": 0.9495879497175067
+     },
+     "author": {
+      "entropy_bits": 0.6430309164485644,
+      "largest_share": 0.7689912146265164
+     },
+     "child": {
+      "entropy_bits": 0.2956101768600769,
+      "largest_share": 0.8912171218755089
+     },
+     "journal": {
+      "entropy_bits": 0.9631285298984862,
+      "largest_share": 0.7174873814633808
+     },
+     "organisation": {
+      "entropy_bits": 0.2789693140302947,
+      "largest_share": 0.9190432172366086
+     },
+     "parent": {
+      "entropy_bits": 0.18119973327686067,
+      "largest_share": 0.9465121353766566
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3292557572791751,
+      "co_membership_crossing": 0.17679866253794768,
+      "co_membership_within": 0.8068180162004107,
+      "co_membership_chance": 0.07787392309828498,
+      "row_end_entropy_crossing": 0.2112186613583537,
+      "row_end_entropy_all": 0.18119973327686067
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34780999668484713,
+      "co_membership_crossing": 0.18617899417299236,
+      "co_membership_within": 0.8605545014669433,
+      "co_membership_chance": 0.0721723128064763,
+      "row_end_entropy_crossing": 0.15525974435048848,
+      "row_end_entropy_all": 0.15415054610312448
+     },
+     "author_article": {
+      "crossing_weight_share": 0.4073864378979871,
+      "co_membership_crossing": 0.21390813005533663,
+      "co_membership_within": 0.8106962371641528,
+      "co_membership_chance": 0.089670991125151,
+      "row_end_entropy_crossing": 1.0131697850575705,
+      "row_end_entropy_all": 0.6430309164485644
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.7840638526415488,
+      "co_membership_crossing": 0.04345828515451033,
+      "co_membership_within": 0.6523483666562433,
+      "co_membership_chance": 0.0760941036165621,
+      "row_end_entropy_crossing": 0.6422586005320162,
+      "row_end_entropy_all": 0.6676081388854165
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.7143527204502815,
+      "co_membership_crossing": 0.11490375446482969,
+      "co_membership_within": 0.5695913200715957,
+      "co_membership_chance": 0.08665351451588565,
+      "row_end_entropy_crossing": 0.1711423869970166,
+      "row_end_entropy_all": 0.15403371400151145
+     }
+    }
+   },
+   "4": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1485711901952127,
+      "largest_share": 0.9515772257270197
+     },
+     "author": {
+      "entropy_bits": 0.8199490965836185,
+      "largest_share": 0.6986651098243444
+     },
+     "child": {
+      "entropy_bits": 0.29354377220747346,
+      "largest_share": 0.8921827398776523
+     },
+     "journal": {
+      "entropy_bits": 0.7750854294609498,
+      "largest_share": 0.7643387052661147
+     },
+     "organisation": {
+      "entropy_bits": 0.2919299826947169,
+      "largest_share": 0.9243665320902644
+     },
+     "parent": {
+      "entropy_bits": 0.17944904278915288,
+      "largest_share": 0.9475145060332886
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32666511582721747,
+      "co_membership_crossing": 0.174744557026944,
+      "co_membership_within": 0.8079978250799564,
+      "co_membership_chance": 0.07804734293325383,
+      "row_end_entropy_crossing": 0.20997528259163228,
+      "row_end_entropy_all": 0.17944904278915288
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3498255372971982,
+      "co_membership_crossing": 0.1864524103564916,
+      "co_membership_within": 0.8641643268786996,
+      "co_membership_chance": 0.0702125591281762,
+      "row_end_entropy_crossing": 0.15041355156633973,
+      "row_end_entropy_all": 0.1485711901952127
+     },
+     "author_article": {
+      "crossing_weight_share": 0.5241635691933463,
+      "co_membership_crossing": 0.1341232327749188,
+      "co_membership_within": 0.7369777699123904,
+      "co_membership_chance": 0.08694401116490584,
+      "row_end_entropy_crossing": 1.0152076242700332,
+      "row_end_entropy_all": 0.8199490965836185
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.9137052915146391,
+      "co_membership_crossing": 0.05133823118141197,
+      "co_membership_within": 0.695826665285854,
+      "co_membership_chance": 0.07267622012878774,
+      "row_end_entropy_crossing": 0.8818552305312761,
+      "row_end_entropy_all": 0.8580576699378474
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.7715759849906191,
+      "co_membership_crossing": 0.08763911987434207,
+      "co_membership_within": 0.5480263709242844,
+      "co_membership_chance": 0.09039921903870121,
+      "row_end_entropy_crossing": 0.1504741726763428,
+      "row_end_entropy_all": 0.14884587268309066
+     }
+    }
+   },
+   "2": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1594000545445609,
+      "largest_share": 0.9476039705906244
+     },
+     "author": {
+      "entropy_bits": 0.7244028847062775,
+      "largest_share": 0.7361471369154122
+     },
+     "child": {
+      "entropy_bits": 0.2775409185547751,
+      "largest_share": 0.8979647640014963
+     },
+     "journal": {
+      "entropy_bits": 0.8837138126200658,
+      "largest_share": 0.7385186939743749
+     },
+     "organisation": {
+      "entropy_bits": 0.19880887873031183,
+      "largest_share": 0.9440421083453453
+     },
+     "parent": {
+      "entropy_bits": 0.16164962770472363,
+      "largest_share": 0.952231315345843
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3243390477566364,
+      "co_membership_crossing": 0.17380692872635214,
+      "co_membership_within": 0.8164934459294804,
+      "co_membership_chance": 0.07773036410114686,
+      "row_end_entropy_crossing": 0.18755582631208842,
+      "row_end_entropy_all": 0.16164962770472363
+     },
+     "child_article": {
+      "crossing_weight_share": 0.33935443357651823,
+      "co_membership_crossing": 0.18582527860798417,
+      "co_membership_within": 0.8630634776300176,
+      "co_membership_chance": 0.07258694493314279,
+      "row_end_entropy_crossing": 0.15236591026074514,
+      "row_end_entropy_all": 0.1594000545445609
+     },
+     "author_article": {
+      "crossing_weight_share": 0.4505801514760548,
+      "co_membership_crossing": 0.21416122833756424,
+      "co_membership_within": 0.7800664232349097,
+      "co_membership_chance": 0.09028554705300258,
+      "row_end_entropy_crossing": 1.0118412021379442,
+      "row_end_entropy_all": 0.7244028847062775
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.8254050036645606,
+      "co_membership_crossing": 0.041432950390393436,
+      "co_membership_within": 0.7769925393622603,
+      "co_membership_chance": 0.06696318749856077,
+      "row_end_entropy_crossing": 0.810613008366967,
+      "row_end_entropy_all": 0.7473365725936555
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8372420262664164,
+      "co_membership_crossing": 0.07624006183636062,
+      "co_membership_within": 0.5793754192238267,
+      "co_membership_chance": 0.07889057658642905,
+      "row_end_entropy_crossing": 0.1693038424733173,
+      "row_end_entropy_all": 0.15922998628953303
+     }
+    }
+   },
+   "5": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.16469804896529752,
+      "largest_share": 0.9443254274070427
+     },
+     "author": {
+      "entropy_bits": 0.6652361890875192,
+      "largest_share": 0.7695253663205738
+     },
+     "child": {
+      "entropy_bits": 0.28326931782626974,
+      "largest_share": 0.8960146107895895
+     },
+     "journal": {
+      "entropy_bits": 0.8292965269484264,
+      "largest_share": 0.7492883772025984
+     },
+     "organisation": {
+      "entropy_bits": 0.18911941076174849,
+      "largest_share": 0.9446151328239819
+     },
+     "parent": {
+      "entropy_bits": 0.18275108493009923,
+      "largest_share": 0.9453989996695191
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32698822606213535,
+      "co_membership_crossing": 0.17797473583414572,
+      "co_membership_within": 0.8105731947807617,
+      "co_membership_chance": 0.07834746807371408,
+      "row_end_entropy_crossing": 0.21235201986610083,
+      "row_end_entropy_all": 0.18275108493009923
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3460890279193738,
+      "co_membership_crossing": 0.18722875274255243,
+      "co_membership_within": 0.860125183376885,
+      "co_membership_chance": 0.07413697248967996,
+      "row_end_entropy_crossing": 0.1633154466424974,
+      "row_end_entropy_all": 0.16469804896529752
+     },
+     "author_article": {
+      "crossing_weight_share": 0.40887529794860905,
+      "co_membership_crossing": 0.15513708340382928,
+      "co_membership_within": 0.7837756179027046,
+      "co_membership_chance": 0.08620351220057207,
+      "row_end_entropy_crossing": 0.91285719361873,
+      "row_end_entropy_all": 0.6652361890875192
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.7998053378341067,
+      "co_membership_crossing": 0.04665141262319462,
+      "co_membership_within": 0.7242529439481865,
+      "co_membership_chance": 0.07747417741499235,
+      "row_end_entropy_crossing": 0.6960597641527525,
+      "row_end_entropy_all": 0.6941566588014857
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8133208255159474,
+      "co_membership_crossing": 0.07476500095082601,
+      "co_membership_within": 0.5763173266879581,
+      "co_membership_chance": 0.07198367573713732,
+      "row_end_entropy_crossing": 0.17444768337510191,
+      "row_end_entropy_all": 0.16457791735363733
+     }
+    }
+   },
+   "6": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.14027191964217975,
+      "largest_share": 0.952616610102006
+     },
+     "author": {
+      "entropy_bits": 0.6281595497345712,
+      "largest_share": 0.7735709063522445
+     },
+     "child": {
+      "entropy_bits": 0.2874862695957371,
+      "largest_share": 0.8937961418597038
+     },
+     "journal": {
+      "entropy_bits": 0.9429309886953886,
+      "largest_share": 0.7178597461982146
+     },
+     "organisation": {
+      "entropy_bits": 0.20564457571039782,
+      "largest_share": 0.9397896358752221
+     },
+     "parent": {
+      "entropy_bits": 0.18161324400096107,
+      "largest_share": 0.9463099903071055
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3206234163053865,
+      "co_membership_crossing": 0.17389968107133388,
+      "co_membership_within": 0.8077016633499695,
+      "co_membership_chance": 0.07806329552820779,
+      "row_end_entropy_crossing": 0.21204574196312084,
+      "row_end_entropy_all": 0.18161324400096107
+     },
+     "child_article": {
+      "crossing_weight_share": 0.35086570908668946,
+      "co_membership_crossing": 0.18967647364163906,
+      "co_membership_within": 0.8591900020131908,
+      "co_membership_chance": 0.0740209715237586,
+      "row_end_entropy_crossing": 0.1398244967266559,
+      "row_end_entropy_all": 0.14027191964217975
+     },
+     "author_article": {
+      "crossing_weight_share": 0.4883771599553129,
+      "co_membership_crossing": 0.1307429245011216,
+      "co_membership_within": 0.7991874575134972,
+      "co_membership_chance": 0.08781462335161802,
+      "row_end_entropy_crossing": 0.841691327988109,
+      "row_end_entropy_all": 0.6281595497345712
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.8251300907066104,
+      "co_membership_crossing": 0.05054168162105148,
+      "co_membership_within": 0.7602421624893274,
+      "co_membership_chance": 0.07712835588027803,
+      "row_end_entropy_crossing": 0.6998450510330311,
+      "row_end_entropy_all": 0.654182572847575
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8100375234521574,
+      "co_membership_crossing": 0.07687312261824235,
+      "co_membership_within": 0.5312042274120251,
+      "co_membership_chance": 0.07873687600130769,
+      "row_end_entropy_crossing": 0.15469008015665942,
+      "row_end_entropy_all": 0.1398511276169275
+     }
+    }
+   },
+   "9": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1688512256270018,
+      "largest_share": 0.9436344101069787
+     },
+     "author": {
+      "entropy_bits": 0.7585402777469541,
+      "largest_share": 0.7317198587071707
+     },
+     "child": {
+      "entropy_bits": 0.28254583133607747,
+      "largest_share": 0.8961383094991163
+     },
+     "journal": {
+      "entropy_bits": 0.9479497579259899,
+      "largest_share": 0.7168904449499283
+     },
+     "organisation": {
+      "entropy_bits": 0.23880925818138923,
+      "largest_share": 0.9318104898974054
+     },
+     "parent": {
+      "entropy_bits": 0.17040051152931293,
+      "largest_share": 0.9501362983249001
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3282854529856174,
+      "co_membership_crossing": 0.17561951334073939,
+      "co_membership_within": 0.8155954981833317,
+      "co_membership_chance": 0.07800046788562248,
+      "row_end_entropy_crossing": 0.19790423681619948,
+      "row_end_entropy_all": 0.17040051152931293
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3465351041608941,
+      "co_membership_crossing": 0.1851162657270909,
+      "co_membership_within": 0.861184630931851,
+      "co_membership_chance": 0.07129056897634689,
+      "row_end_entropy_crossing": 0.16942730901474237,
+      "row_end_entropy_all": 0.1688512256270018
+     },
+     "author_article": {
+      "crossing_weight_share": 0.5264032673957018,
+      "co_membership_crossing": 0.19240953086086077,
+      "co_membership_within": 0.7713353518403375,
+      "co_membership_chance": 0.0869003118991935,
+      "row_end_entropy_crossing": 0.9913103133799802,
+      "row_end_entropy_all": 0.7585402777469541
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.8403031507550728,
+      "co_membership_crossing": 0.04545653339886579,
+      "co_membership_within": 0.7739959885825005,
+      "co_membership_chance": 0.07639845206218834,
+      "row_end_entropy_crossing": 0.8557470448812468,
+      "row_end_entropy_all": 0.7808807834453165
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8053470919324578,
+      "co_membership_crossing": 0.08810392477424983,
+      "co_membership_within": 0.562288387931173,
+      "co_membership_chance": 0.08028441569686792,
+      "row_end_entropy_crossing": 0.1837140495621174,
+      "row_end_entropy_all": 0.16916461562435536
+     }
+    }
+   },
+   "7": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1955747650768219,
+      "largest_share": 0.9339211167714523
+     },
+     "author": {
+      "entropy_bits": 0.6920966757467396,
+      "largest_share": 0.7604363542217764
+     },
+     "child": {
+      "entropy_bits": 0.2903115292750486,
+      "largest_share": 0.8926332497705217
+     },
+     "journal": {
+      "entropy_bits": 0.8557284782858258,
+      "largest_share": 0.7530518033802128
+     },
+     "organisation": {
+      "entropy_bits": 0.2284355135641092,
+      "largest_share": 0.9342803544007462
+     },
+     "parent": {
+      "entropy_bits": 0.18249626725724985,
+      "largest_share": 0.9458547026023625
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3243540832024881,
+      "co_membership_crossing": 0.1755459237494214,
+      "co_membership_within": 0.8068714799044462,
+      "co_membership_chance": 0.07804313112912921,
+      "row_end_entropy_crossing": 0.21318033215187596,
+      "row_end_entropy_all": 0.18249626725724985
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3538529906755264,
+      "co_membership_crossing": 0.18971641060687885,
+      "co_membership_within": 0.8505153102976895,
+      "co_membership_chance": 0.07190873563440131,
+      "row_end_entropy_crossing": 0.19530359920646917,
+      "row_end_entropy_all": 0.1955747650768219
+     },
+     "author_article": {
+      "crossing_weight_share": 0.46279530581909645,
+      "co_membership_crossing": 0.2073350015143512,
+      "co_membership_within": 0.7805149542974856,
+      "co_membership_chance": 0.08811584014558872,
+      "row_end_entropy_crossing": 0.9498829349742832,
+      "row_end_entropy_all": 0.6920966757467396
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.7709268012805268,
+      "co_membership_crossing": 0.05801417804513456,
+      "co_membership_within": 0.750962266116011,
+      "co_membership_chance": 0.07371860653216077,
+      "row_end_entropy_crossing": 0.7838664305135822,
+      "row_end_entropy_all": 0.718073875223804
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8287992495309568,
+      "co_membership_crossing": 0.06898234717407709,
+      "co_membership_within": 0.5992612218854406,
+      "co_membership_chance": 0.07974630276888153,
+      "row_end_entropy_crossing": 0.20813919126050617,
+      "row_end_entropy_all": 0.19585552950380003
+     }
+    }
+   },
+   "1": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.2156315245752923,
+      "largest_share": 0.9297725000190372
+     },
+     "author": {
+      "entropy_bits": 0.8403847542536654,
+      "largest_share": 0.6900885235445836
+     },
+     "child": {
+      "entropy_bits": 0.2927517955259282,
+      "largest_share": 0.892919874781888
+     },
+     "journal": {
+      "entropy_bits": 0.7893008191621215,
+      "largest_share": 0.759778818619783
+     },
+     "organisation": {
+      "entropy_bits": 0.14313322038862256,
+      "largest_share": 0.9589913819567811
+     },
+     "parent": {
+      "entropy_bits": 0.1831556505438047,
+      "largest_share": 0.94558994985171
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32251045737033185,
+      "co_membership_crossing": 0.17276837878982576,
+      "co_membership_within": 0.8058610716459143,
+      "co_membership_chance": 0.078114434098875,
+      "row_end_entropy_crossing": 0.21345290274938103,
+      "row_end_entropy_all": 0.1831556505438047
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3603791432113763,
+      "co_membership_crossing": 0.18891720721356137,
+      "co_membership_within": 0.8523309574466225,
+      "co_membership_chance": 0.07193579248241339,
+      "row_end_entropy_crossing": 0.2146212668517518,
+      "row_end_entropy_all": 0.2156315245752923
+     },
+     "author_article": {
+      "crossing_weight_share": 0.528591097787638,
+      "co_membership_crossing": 0.20125945930356584,
+      "co_membership_within": 0.7008154591367338,
+      "co_membership_chance": 0.08756743912864409,
+      "row_end_entropy_crossing": 0.9957642245916614,
+      "row_end_entropy_all": 0.8403847542536654
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.7799276170729691,
+      "co_membership_crossing": 0.08333962518993662,
+      "co_membership_within": 0.6823745957071442,
+      "co_membership_chance": 0.08320507453056937,
+      "row_end_entropy_crossing": 0.9063324572533692,
+      "row_end_entropy_all": 0.8747855816554024
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8907129455909941,
+      "co_membership_crossing": 0.05953010626012269,
+      "co_membership_within": 0.5138131994288362,
+      "co_membership_chance": 0.08472244437206998,
+      "row_end_entropy_crossing": 0.22071031579837772,
+      "row_end_entropy_all": 0.21529162235164107
+     }
+    }
+   },
+   "8": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1927772429433927,
+      "largest_share": 0.9340332912541668
+     },
+     "author": {
+      "entropy_bits": 0.7154728740637712,
+      "largest_share": 0.7424769171073261
+     },
+     "child": {
+      "entropy_bits": 0.2910722159482816,
+      "largest_share": 0.8925451420028658
+     },
+     "journal": {
+      "entropy_bits": 0.8471941903066088,
+      "largest_share": 0.7457330171828312
+     },
+     "organisation": {
+      "entropy_bits": 0.18147418368655005,
+      "largest_share": 0.9474567607939324
+     },
+     "parent": {
+      "entropy_bits": 0.17858548662541462,
+      "largest_share": 0.9472651589930716
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32824535148159917,
+      "co_membership_crossing": 0.17873219628439202,
+      "co_membership_within": 0.8087257432196183,
+      "co_membership_chance": 0.07834791234760875,
+      "row_end_entropy_crossing": 0.20807184469453766,
+      "row_end_entropy_all": 0.17858548662541462
+     },
+     "child_article": {
+      "crossing_weight_share": 0.35097869084170275,
+      "co_membership_crossing": 0.1885076909928192,
+      "co_membership_within": 0.8536003938523075,
+      "co_membership_chance": 0.0718685908948907,
+      "row_end_entropy_crossing": 0.1910939643491917,
+      "row_end_entropy_all": 0.1927772429433927
+     },
+     "author_article": {
+      "crossing_weight_share": 0.5855891906824527,
+      "co_membership_crossing": 0.11088847004855698,
+      "co_membership_within": 0.771406846915415,
+      "co_membership_chance": 0.0844201899034867,
+      "row_end_entropy_crossing": 0.885223456823887,
+      "row_end_entropy_all": 0.7154728740637712
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.7573325650213445,
+      "co_membership_crossing": 0.05142375630292619,
+      "co_membership_within": 0.7673309648528969,
+      "co_membership_chance": 0.08654531439729363,
+      "row_end_entropy_crossing": 0.8275547531285321,
+      "row_end_entropy_all": 0.7473750059260029
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.871482176360225,
+      "co_membership_crossing": 0.06529249567930769,
+      "co_membership_within": 0.48189044894041977,
+      "co_membership_chance": 0.07961806330992663,
+      "row_end_entropy_crossing": 0.19899305920281632,
+      "row_end_entropy_all": 0.19230497170096778
+     }
+    }
+   },
+   "10": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.16727880402869824,
+      "largest_share": 0.9455098960726559
+     },
+     "author": {
+      "entropy_bits": 0.7090738358048524,
+      "largest_share": 0.7493209256726051
+     },
+     "child": {
+      "entropy_bits": 0.2859086132295141,
+      "largest_share": 0.8950310745174807
+     },
+     "journal": {
+      "entropy_bits": 0.8611704857015142,
+      "largest_share": 0.7460403659235987
+     },
+     "organisation": {
+      "entropy_bits": 0.2606278420244435,
+      "largest_share": 0.9218488240343513
+     },
+     "parent": {
+      "entropy_bits": 0.1757936972018448,
+      "largest_share": 0.9484463077496972
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3229546686838835,
+      "co_membership_crossing": 0.17296757017813036,
+      "co_membership_within": 0.8111582859045812,
+      "co_membership_chance": 0.07866875214657594,
+      "row_end_entropy_crossing": 0.20455591489478878,
+      "row_end_entropy_all": 0.1757936972018448
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3470639053279161,
+      "co_membership_crossing": 0.18425800358198816,
+      "co_membership_within": 0.8620661764873818,
+      "co_membership_chance": 0.07370851429785868,
+      "row_end_entropy_crossing": 0.16525799401902178,
+      "row_end_entropy_all": 0.16727880402869824
+     },
+     "author_article": {
+      "crossing_weight_share": 0.6065655180606784,
+      "co_membership_crossing": 0.12877603668953783,
+      "co_membership_within": 0.8003890461778265,
+      "co_membership_chance": 0.08195808134025563,
+      "row_end_entropy_crossing": 0.9068444479259863,
+      "row_end_entropy_all": 0.7090738358048524
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.808887996401979,
+      "co_membership_crossing": 0.04801273339085756,
+      "co_membership_within": 0.7573319131807613,
+      "co_membership_chance": 0.08585326413163473,
+      "row_end_entropy_crossing": 0.7912068014844215,
+      "row_end_entropy_all": 0.7318111960715519
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8606941838649153,
+      "co_membership_crossing": 0.07022836855464755,
+      "co_membership_within": 0.4991546962535738,
+      "co_membership_chance": 0.08903819280437589,
+      "row_end_entropy_crossing": 0.16391700829454517,
+      "row_end_entropy_all": 0.16678586590565472
+     }
+    }
+   }
+  },
+  "diagonal": {
+   "8": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.16328444960841176,
+      "largest_share": 0.948150451550563
+     },
+     "author": {
+      "entropy_bits": 0.4760450375229559,
+      "largest_share": 0.8224841691820679
+     },
+     "child": {
+      "entropy_bits": 0.29446605481323007,
+      "largest_share": 0.8907969238724943
+     },
+     "journal": {
+      "entropy_bits": 0.790039570259839,
+      "largest_share": 0.7510974467274215
+     },
+     "organisation": {
+      "entropy_bits": 0.18976202017615315,
+      "largest_share": 0.9412260721120994
+     },
+     "parent": {
+      "entropy_bits": 0.16441932029096284,
+      "largest_share": 0.9512909438283272
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3291269943138529,
+      "co_membership_crossing": 0.17823715258469247,
+      "co_membership_within": 0.8085509812571455,
+      "co_membership_chance": 0.07849059215406037,
+      "row_end_entropy_crossing": 0.19126804024707378,
+      "row_end_entropy_all": 0.16441932029096284
+     },
+     "child_article": {
+      "crossing_weight_share": 0.338674153736553,
+      "co_membership_crossing": 0.18588999995536698,
+      "co_membership_within": 0.8586557475468105,
+      "co_membership_chance": 0.07285768803988371,
+      "row_end_entropy_crossing": 0.15794673365072745,
+      "row_end_entropy_all": 0.16328444960841176
+     },
+     "author_article": {
+      "crossing_weight_share": 0.2477445369503234,
+      "co_membership_crossing": 0.3441430030821377,
+      "co_membership_within": 0.8382144926261464,
+      "co_membership_chance": 0.0850702928397791,
+      "row_end_entropy_crossing": 0.9631580322844091,
+      "row_end_entropy_all": 0.4760450375229559
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.23479615478204846,
+      "co_membership_crossing": 0.3427881498547747,
+      "co_membership_within": 0.826304393648146,
+      "co_membership_chance": 0.08451604268390844,
+      "row_end_entropy_crossing": 0.9428883725577705,
+      "row_end_entropy_all": 0.4989836969108917
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6641651031894935,
+      "co_membership_crossing": 0.1373922680022743,
+      "co_membership_within": 0.5731089289293374,
+      "co_membership_chance": 0.085035738332048,
+      "row_end_entropy_crossing": 0.1972870031601623,
+      "row_end_entropy_all": 0.16358454233759565
+     }
+    }
+   },
+   "7": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.20590021180297932,
+      "largest_share": 0.9341123591024413
+     },
+     "author": {
+      "entropy_bits": 0.4340844851988597,
+      "largest_share": 0.8379216943544151
+     },
+     "child": {
+      "entropy_bits": 0.29324509703460694,
+      "largest_share": 0.8913636861736095
+     },
+     "journal": {
+      "entropy_bits": 0.7238971920506273,
+      "largest_share": 0.774381940364048
+     },
+     "organisation": {
+      "entropy_bits": 0.1957647212812663,
+      "largest_share": 0.9370178559439966
+     },
+     "parent": {
+      "entropy_bits": 0.1725091261314909,
+      "largest_share": 0.9484776881640239
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3277585722268253,
+      "co_membership_crossing": 0.17719968741107017,
+      "co_membership_within": 0.8063753818322844,
+      "co_membership_chance": 0.07813765717197169,
+      "row_end_entropy_crossing": 0.2007761459515343,
+      "row_end_entropy_all": 0.1725091261314909
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34527358327633223,
+      "co_membership_crossing": 0.18784679504409393,
+      "co_membership_within": 0.8496866741719283,
+      "co_membership_chance": 0.07278305560128943,
+      "row_end_entropy_crossing": 0.2032000211621555,
+      "row_end_entropy_all": 0.20590021180297932
+     },
+     "author_article": {
+      "crossing_weight_share": 0.23586383511022566,
+      "co_membership_crossing": 0.35151281984683913,
+      "co_membership_within": 0.8347030444761403,
+      "co_membership_chance": 0.08485528285839317,
+      "row_end_entropy_crossing": 0.9256935217297236,
+      "row_end_entropy_all": 0.4340844851988597
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.22458930477617017,
+      "co_membership_crossing": 0.3354397151664807,
+      "co_membership_within": 0.8310543570759051,
+      "co_membership_chance": 0.0845860668684032,
+      "row_end_entropy_crossing": 0.8847002259240169,
+      "row_end_entropy_all": 0.45616245962423774
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6529080675422139,
+      "co_membership_crossing": 0.13350666566660244,
+      "co_membership_within": 0.6015348637479028,
+      "co_membership_chance": 0.08503191525386158,
+      "row_end_entropy_crossing": 0.2527243763872294,
+      "row_end_entropy_all": 0.2062796343863328
+     }
+    }
+   },
+   "2": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1644714461328549,
+      "largest_share": 0.9467979927735066
+     },
+     "author": {
+      "entropy_bits": 0.4394142784761518,
+      "largest_share": 0.835043800197225
+     },
+     "child": {
+      "entropy_bits": 0.28236621810192486,
+      "largest_share": 0.8955863414197044
+     },
+     "journal": {
+      "entropy_bits": 0.7781754543673784,
+      "largest_share": 0.7519501937328852
+     },
+     "organisation": {
+      "entropy_bits": 0.18286146891184074,
+      "largest_share": 0.9395691419814479
+     },
+     "parent": {
+      "entropy_bits": 0.15422673823837132,
+      "largest_share": 0.9542067871325252
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32587600563241603,
+      "co_membership_crossing": 0.17366733294722622,
+      "co_membership_within": 0.8147749815782238,
+      "co_membership_chance": 0.07797054672805591,
+      "row_end_entropy_crossing": 0.17887391810398,
+      "row_end_entropy_all": 0.15422673823837132
+     },
+     "child_article": {
+      "crossing_weight_share": 0.33624332122101525,
+      "co_membership_crossing": 0.1864649526765715,
+      "co_membership_within": 0.8622954386640435,
+      "co_membership_chance": 0.0728501883863882,
+      "row_end_entropy_crossing": 0.1584515686727094,
+      "row_end_entropy_all": 0.1644714461328549
+     },
+     "author_article": {
+      "crossing_weight_share": 0.22447848097948644,
+      "co_membership_crossing": 0.34935869265032515,
+      "co_membership_within": 0.8427030728199084,
+      "co_membership_chance": 0.08452004526145089,
+      "row_end_entropy_crossing": 0.9539233401048277,
+      "row_end_entropy_all": 0.4394142784761518
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.22226451363657668,
+      "co_membership_crossing": 0.34730811690807206,
+      "co_membership_within": 0.8387043976755757,
+      "co_membership_chance": 0.08451997839010801,
+      "row_end_entropy_crossing": 0.9316413088926336,
+      "row_end_entropy_all": 0.4611832350485832
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6712007504690432,
+      "co_membership_crossing": 0.13469755519391124,
+      "co_membership_within": 0.5697535367328016,
+      "co_membership_chance": 0.0824250247343849,
+      "row_end_entropy_crossing": 0.19960069310507525,
+      "row_end_entropy_all": 0.16477437777387496
+     }
+    }
+   },
+   "3": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.19650466519701806,
+      "largest_share": 0.9368485722334282
+     },
+     "author": {
+      "entropy_bits": 0.46442650490527665,
+      "largest_share": 0.8277782366570064
+     },
+     "child": {
+      "entropy_bits": 0.2995721745954197,
+      "largest_share": 0.8892589098002225
+     },
+     "journal": {
+      "entropy_bits": 0.7460118844233651,
+      "largest_share": 0.7653197576683222
+     },
+     "organisation": {
+      "entropy_bits": 0.2132077792642134,
+      "largest_share": 0.929587930538795
+     },
+     "parent": {
+      "entropy_bits": 0.1689004818608601,
+      "largest_share": 0.9498573427653412
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3262405485966145,
+      "co_membership_crossing": 0.1756180336586872,
+      "co_membership_within": 0.8059295196369092,
+      "co_membership_chance": 0.07803771470392698,
+      "row_end_entropy_crossing": 0.19702366865582063,
+      "row_end_entropy_all": 0.1689004818608601
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34293789880841663,
+      "co_membership_crossing": 0.18715761769156739,
+      "co_membership_within": 0.8571537461617683,
+      "co_membership_chance": 0.07347830319991212,
+      "row_end_entropy_crossing": 0.19191521140828183,
+      "row_end_entropy_all": 0.19650466519701806
+     },
+     "author_article": {
+      "crossing_weight_share": 0.25509150525439,
+      "co_membership_crossing": 0.34452339580532687,
+      "co_membership_within": 0.8330860276411193,
+      "co_membership_chance": 0.08509289889828177,
+      "row_end_entropy_crossing": 0.9674680863004327,
+      "row_end_entropy_all": 0.46442650490527665
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.21372283876737902,
+      "co_membership_crossing": 0.34155327312932027,
+      "co_membership_within": 0.8219806669937139,
+      "co_membership_chance": 0.08475066044700544,
+      "row_end_entropy_crossing": 0.9442691961502366,
+      "row_end_entropy_all": 0.48663208301538863
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6575984990619138,
+      "co_membership_crossing": 0.1353958853582753,
+      "co_membership_within": 0.5983467052872145,
+      "co_membership_chance": 0.0862570755984703,
+      "row_end_entropy_crossing": 0.24700689615437438,
+      "row_end_entropy_all": 0.19686673267212204
+     }
+    }
+   },
+   "9": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.18702720978868229,
+      "largest_share": 0.9410201029396184
+     },
+     "author": {
+      "entropy_bits": 0.45556920463977874,
+      "largest_share": 0.830205190161229
+     },
+     "child": {
+      "entropy_bits": 0.28642135961562953,
+      "largest_share": 0.8941730400301227
+     },
+     "journal": {
+      "entropy_bits": 0.7956293946734473,
+      "largest_share": 0.7511375247026127
+     },
+     "organisation": {
+      "entropy_bits": 0.20164545253196348,
+      "largest_share": 0.9336039363370869
+     },
+     "parent": {
+      "entropy_bits": 0.15402958469888922,
+      "largest_share": 0.9549674076078325
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32560353735401826,
+      "co_membership_crossing": 0.17373198292218656,
+      "co_membership_within": 0.8141291884576366,
+      "co_membership_chance": 0.0779865846835198,
+      "row_end_entropy_crossing": 0.17891436772027294,
+      "row_end_entropy_all": 0.15402958469888922
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3425630200746005,
+      "co_membership_crossing": 0.185562902055864,
+      "co_membership_within": 0.8608790564386711,
+      "co_membership_chance": 0.0736617028107641,
+      "row_end_entropy_crossing": 0.17923502857164283,
+      "row_end_entropy_all": 0.18702720978868229
+     },
+     "author_article": {
+      "crossing_weight_share": 0.2407823335842953,
+      "co_membership_crossing": 0.345224009349694,
+      "co_membership_within": 0.8333303191194935,
+      "co_membership_chance": 0.08527177821691918,
+      "row_end_entropy_crossing": 0.9304914183419295,
+      "row_end_entropy_all": 0.45556920463977874
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.23293026449846957,
+      "co_membership_crossing": 0.3446962553150116,
+      "co_membership_within": 0.8302447355207669,
+      "co_membership_chance": 0.08524215624691403,
+      "row_end_entropy_crossing": 0.920087888691132,
+      "row_end_entropy_all": 0.4774256049050145
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6655722326454034,
+      "co_membership_crossing": 0.13415583582099072,
+      "co_membership_within": 0.5713994130442963,
+      "co_membership_chance": 0.0837670774332723,
+      "row_end_entropy_crossing": 0.22215451956915488,
+      "row_end_entropy_all": 0.18690344610067655
+     }
+    }
+   },
+   "6": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.21463546618215168,
+      "largest_share": 0.9319377427006784
+     },
+     "author": {
+      "entropy_bits": 0.4601982595059688,
+      "largest_share": 0.8300904086366019
+     },
+     "child": {
+      "entropy_bits": 0.28679544547784713,
+      "largest_share": 0.8941255793618569
+     },
+     "journal": {
+      "entropy_bits": 0.7924868876225734,
+      "largest_share": 0.7540910393217221
+     },
+     "organisation": {
+      "entropy_bits": 0.19743004407961406,
+      "largest_share": 0.9357120123429784
+     },
+     "parent": {
+      "entropy_bits": 0.17033515242985123,
+      "largest_share": 0.9493408161404795
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3213100768470165,
+      "co_membership_crossing": 0.17365417470884495,
+      "co_membership_within": 0.8087773608680398,
+      "co_membership_chance": 0.07812260611952129,
+      "row_end_entropy_crossing": 0.19867746930672572,
+      "row_end_entropy_all": 0.17033515242985123
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34816365335589694,
+      "co_membership_crossing": 0.18858503332866838,
+      "co_membership_within": 0.8549458002622728,
+      "co_membership_chance": 0.07371480171627978,
+      "row_end_entropy_crossing": 0.20787886093092078,
+      "row_end_entropy_all": 0.21463546618215168
+     },
+     "author_article": {
+      "crossing_weight_share": 0.2416997602903997,
+      "co_membership_crossing": 0.3437229263958539,
+      "co_membership_within": 0.8279266001453995,
+      "co_membership_chance": 0.085458561852237,
+      "row_end_entropy_crossing": 0.9638672070558789,
+      "row_end_entropy_all": 0.4601982595059688
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.22674489738238748,
+      "co_membership_crossing": 0.34085926682987766,
+      "co_membership_within": 0.8308667295829656,
+      "co_membership_chance": 0.08398357086674066,
+      "row_end_entropy_crossing": 0.9318603562827813,
+      "row_end_entropy_all": 0.481454823553461
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6585365853658537,
+      "co_membership_crossing": 0.1319578877769086,
+      "co_membership_within": 0.565627499451653,
+      "co_membership_chance": 0.08432752093739393,
+      "row_end_entropy_crossing": 0.25778124988178946,
+      "row_end_entropy_all": 0.21480180147951078
+     }
+    }
+   },
+   "5": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1833714204561145,
+      "largest_share": 0.9420287436351206
+     },
+     "author": {
+      "entropy_bits": 0.44541765243630405,
+      "largest_share": 0.8349909706304459
+     },
+     "child": {
+      "entropy_bits": 0.2829438987237398,
+      "largest_share": 0.8956472966721135
+     },
+     "journal": {
+      "entropy_bits": 0.7852639378449653,
+      "largest_share": 0.7475573103055448
+     },
+     "organisation": {
+      "entropy_bits": 0.20250068204023652,
+      "largest_share": 0.9336279392742947
+     },
+     "parent": {
+      "entropy_bits": 0.16744564186295305,
+      "largest_share": 0.950161425441933
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3235162043714117,
+      "co_membership_crossing": 0.17527163510915225,
+      "co_membership_within": 0.8112618528114497,
+      "co_membership_chance": 0.07848219931213055,
+      "row_end_entropy_crossing": 0.19464046586702236,
+      "row_end_entropy_all": 0.16744564186295305
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3413594762205451,
+      "co_membership_crossing": 0.18711754332855296,
+      "co_membership_within": 0.8590848028625782,
+      "co_membership_chance": 0.07367719140119444,
+      "row_end_entropy_crossing": 0.1716495671507606,
+      "row_end_entropy_all": 0.1833714204561145
+     },
+     "author_article": {
+      "crossing_weight_share": 0.24114673785073754,
+      "co_membership_crossing": 0.347215260111455,
+      "co_membership_within": 0.8406975631247116,
+      "co_membership_chance": 0.0876593498438449,
+      "row_end_entropy_crossing": 0.9501410597694587,
+      "row_end_entropy_all": 0.44541765243630405
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.21404905301597546,
+      "co_membership_crossing": 0.34171971586658184,
+      "co_membership_within": 0.829969996237335,
+      "co_membership_chance": 0.08741481057608304,
+      "row_end_entropy_crossing": 0.9263270456636932,
+      "row_end_entropy_all": 0.46534870508168347
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6641651031894935,
+      "co_membership_crossing": 0.1347784238956427,
+      "co_membership_within": 0.561240464429517,
+      "co_membership_chance": 0.08578820176667183,
+      "row_end_entropy_crossing": 0.21584923018103513,
+      "row_end_entropy_all": 0.18331078339879966
+     }
+    }
+   },
+   "1": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.1931748356487875,
+      "largest_share": 0.9378316115303363
+     },
+     "author": {
+      "entropy_bits": 0.4430805212204048,
+      "largest_share": 0.8348585521328968
+     },
+     "child": {
+      "entropy_bits": 0.2940098400595959,
+      "largest_share": 0.8912508433323796
+     },
+     "journal": {
+      "entropy_bits": 0.8518951253425563,
+      "largest_share": 0.7394410200932756
+     },
+     "organisation": {
+      "entropy_bits": 0.19429946462519124,
+      "largest_share": 0.9369164243476403
+     },
+     "parent": {
+      "entropy_bits": 0.17376046325552774,
+      "largest_share": 0.9480086475812323
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32584906609856235,
+      "co_membership_crossing": 0.17554619884996564,
+      "co_membership_within": 0.8059474715847695,
+      "co_membership_chance": 0.07835165063858524,
+      "row_end_entropy_crossing": 0.20175717230764748,
+      "row_end_entropy_all": 0.17376046325552774
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34418358177540614,
+      "co_membership_crossing": 0.1873886167524359,
+      "co_membership_within": 0.8550403032797604,
+      "co_membership_chance": 0.0743249016577054,
+      "row_end_entropy_crossing": 0.1879144105383661,
+      "row_end_entropy_all": 0.1931748356487875
+     },
+     "author_article": {
+      "crossing_weight_share": 0.23843908707151792,
+      "co_membership_crossing": 0.348446016182372,
+      "co_membership_within": 0.8381616747374038,
+      "co_membership_chance": 0.08606110327343468,
+      "row_end_entropy_crossing": 0.9547539263135914,
+      "row_end_entropy_all": 0.4430805212204048
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.22409315730921134,
+      "co_membership_crossing": 0.335725015534298,
+      "co_membership_within": 0.832975565720862,
+      "co_membership_chance": 0.08550290916328371,
+      "row_end_entropy_crossing": 0.9072405783629409,
+      "row_end_entropy_all": 0.46511777223322776
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6665103189493434,
+      "co_membership_crossing": 0.13193633998457158,
+      "co_membership_within": 0.5677574286873253,
+      "co_membership_chance": 0.08490720794878744,
+      "row_end_entropy_crossing": 0.23545264340155694,
+      "row_end_entropy_all": 0.1935313668019773
+     }
+    }
+   },
+   "4": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.16091316786316534,
+      "largest_share": 0.9490808863596901
+     },
+     "author": {
+      "entropy_bits": 0.4551469537186079,
+      "largest_share": 0.832368984244111
+     },
+     "child": {
+      "entropy_bits": 0.2983596175785494,
+      "largest_share": 0.8896642034100416
+     },
+     "journal": {
+      "entropy_bits": 0.7298741086152738,
+      "largest_share": 0.7695054729453245
+     },
+     "organisation": {
+      "entropy_bits": 0.20694201188059486,
+      "largest_share": 0.9317837236773118
+     },
+     "parent": {
+      "entropy_bits": 0.16766966814105558,
+      "largest_share": 0.9504419844569075
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32882150519749376,
+      "co_membership_crossing": 0.17677263940707438,
+      "co_membership_within": 0.8073160062166667,
+      "co_membership_chance": 0.07814472986288498,
+      "row_end_entropy_crossing": 0.19577109461057193,
+      "row_end_entropy_all": 0.16766966814105558
+     },
+     "child_article": {
+      "crossing_weight_share": 0.33860404341459305,
+      "co_membership_crossing": 0.18579435788602813,
+      "co_membership_within": 0.8611157521127425,
+      "co_membership_chance": 0.07234014484400382,
+      "row_end_entropy_crossing": 0.154321670721516,
+      "row_end_entropy_all": 0.16091316786316534
+     },
+     "author_article": {
+      "crossing_weight_share": 0.23380446698279633,
+      "co_membership_crossing": 0.3482384971449345,
+      "co_membership_within": 0.8450513501005819,
+      "co_membership_chance": 0.08647086976957855,
+      "row_end_entropy_crossing": 0.9689991117109714,
+      "row_end_entropy_all": 0.4551469537186079
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.22196538535892882,
+      "co_membership_crossing": 0.3467408158849596,
+      "co_membership_within": 0.8255169193673968,
+      "co_membership_chance": 0.08628353051456632,
+      "row_end_entropy_crossing": 0.9204720091531488,
+      "row_end_entropy_all": 0.47615504772037087
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6674484052532833,
+      "co_membership_crossing": 0.13333565596099586,
+      "co_membership_within": 0.5908904980280751,
+      "co_membership_chance": 0.08543810372621624,
+      "row_end_entropy_crossing": 0.1952979248328964,
+      "row_end_entropy_all": 0.1612091244643023
+     }
+    }
+   },
+   "10": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.17949350740813466,
+      "largest_share": 0.9427020302507523
+     },
+     "author": {
+      "entropy_bits": 0.45918572939017976,
+      "largest_share": 0.8310778313357728
+     },
+     "child": {
+      "entropy_bits": 0.28474354462759643,
+      "largest_share": 0.8950736936203557
+     },
+     "journal": {
+      "entropy_bits": 0.7839338355705059,
+      "largest_share": 0.7475141263887254
+     },
+     "organisation": {
+      "entropy_bits": 0.19234871862567404,
+      "largest_share": 0.9379826310493073
+     },
+     "parent": {
+      "entropy_bits": 0.1635817420037979,
+      "largest_share": 0.9517862922597629
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3189766718893904,
+      "co_membership_crossing": 0.17194305036086513,
+      "co_membership_within": 0.8101555095682909,
+      "co_membership_chance": 0.07856511680235881,
+      "row_end_entropy_crossing": 0.19096265443809748,
+      "row_end_entropy_all": 0.1635817420037979
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3427228414780665,
+      "co_membership_crossing": 0.18695564981065776,
+      "co_membership_within": 0.8582284542869647,
+      "co_membership_chance": 0.07435485898311422,
+      "row_end_entropy_crossing": 0.173220806458858,
+      "row_end_entropy_all": 0.17949350740813466
+     },
+     "author_article": {
+      "crossing_weight_share": 0.2475158350939099,
+      "co_membership_crossing": 0.3449581826974216,
+      "co_membership_within": 0.841100337605597,
+      "co_membership_chance": 0.08526338803857543,
+      "row_end_entropy_crossing": 0.9644056398584652,
+      "row_end_entropy_all": 0.45918572939017976
+     },
+     "author_affiliation": {
+      "crossing_weight_share": 0.21886153725474972,
+      "co_membership_crossing": 0.3394386324214991,
+      "co_membership_within": 0.8238073455019916,
+      "co_membership_chance": 0.0841094074539398,
+      "row_end_entropy_crossing": 0.9343501064591193,
+      "row_end_entropy_all": 0.48063836037135776
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.674953095684803,
+      "co_membership_crossing": 0.1348999763480158,
+      "co_membership_within": 0.5727386410748511,
+      "co_membership_chance": 0.08505240381559603,
+      "row_end_entropy_crossing": 0.21371473744397415,
+      "row_end_entropy_all": 0.17938053165963458
+     }
+    }
+   }
+  }
+ },
+ "approach_2": {
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "random": {
+   "8": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.37763452207254133,
+      "largest_share": 0.8776622602020626
+     },
+     "child": {
+      "entropy_bits": 0.28768773582716267,
+      "largest_share": 0.8949003856398513
+     },
+     "journal": {
+      "entropy_bits": 0.8947310747637438,
+      "largest_share": 0.7407712279213426
+     },
+     "organisation": {
+      "entropy_bits": 0.5139234533082527,
+      "largest_share": 0.8434037628911372
+     },
+     "parent": {
+      "entropy_bits": 0.18091968449413665,
+      "largest_share": 0.9464322959676886
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32871025558914374,
+      "co_membership_crossing": 0.1760597805707766,
+      "co_membership_within": 0.8110055428815359,
+      "co_membership_chance": 0.07811432159366957,
+      "row_end_entropy_crossing": 0.21099099883801903,
+      "row_end_entropy_all": 0.18091968449413665
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3682585360854547,
+      "co_membership_crossing": 0.18862796887219307,
+      "co_membership_within": 0.8145727781666112,
+      "co_membership_chance": 0.07269503648474099,
+      "row_end_entropy_crossing": 0.37311832356163327,
+      "row_end_entropy_all": 0.37763452207254133
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.8483046364138003,
+      "co_membership_crossing": 0.044293556489780415,
+      "co_membership_within": 0.6502451707765525,
+      "co_membership_chance": 0.07226045422051476,
+      "row_end_entropy_crossing": 0.389541727407742,
+      "row_end_entropy_all": 0.3789647391705913
+     },
+     "article_article": {
+      "crossing_weight_share": 0.7279707955477742,
+      "co_membership_crossing": 0.10126718149932551,
+      "co_membership_within": 0.7442524536611517,
+      "co_membership_chance": 0.09008290168282192,
+      "row_end_entropy_crossing": 0.6026056839841556,
+      "row_end_entropy_all": 0.5671047493786812
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8278611632270169,
+      "co_membership_crossing": 0.06761422102094072,
+      "co_membership_within": 0.5366107399955402,
+      "co_membership_chance": 0.07404540310870678,
+      "row_end_entropy_crossing": 0.39365652836940834,
+      "row_end_entropy_all": 0.37821673940091266
+     }
+    }
+   },
+   "7": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3512739023893001,
+      "largest_share": 0.8857501716016407
+     },
+     "child": {
+      "entropy_bits": 0.28068198395989735,
+      "largest_share": 0.8970993616763061
+     },
+     "journal": {
+      "entropy_bits": 1.057093236354221,
+      "largest_share": 0.6918810111736454
+     },
+     "organisation": {
+      "entropy_bits": 0.646641865784374,
+      "largest_share": 0.8093913938058065
+     },
+     "parent": {
+      "entropy_bits": 0.188092771593387,
+      "largest_share": 0.944037660852067
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.31931838855642697,
+      "co_membership_crossing": 0.17018877195936413,
+      "co_membership_within": 0.8079238669138716,
+      "co_membership_chance": 0.07809386169455496,
+      "row_end_entropy_crossing": 0.2197153782480368,
+      "row_end_entropy_all": 0.188092771593387
+     },
+     "child_article": {
+      "crossing_weight_share": 0.35861567185496784,
+      "co_membership_crossing": 0.18733819754766715,
+      "co_membership_within": 0.8283759040913063,
+      "co_membership_chance": 0.07197579230313847,
+      "row_end_entropy_crossing": 0.3335080496807354,
+      "row_end_entropy_all": 0.3512739023893001
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.764817913853496,
+      "co_membership_crossing": 0.06703543090400434,
+      "co_membership_within": 0.6580809469961404,
+      "co_membership_chance": 0.07860348264558305,
+      "row_end_entropy_crossing": 0.3725961995546106,
+      "row_end_entropy_all": 0.35246353313898726
+     },
+     "article_article": {
+      "crossing_weight_share": 0.5824508491680035,
+      "co_membership_crossing": 0.17738365012889265,
+      "co_membership_within": 0.8008610361682762,
+      "co_membership_chance": 0.09142407072613631,
+      "row_end_entropy_crossing": 0.5717459150859804,
+      "row_end_entropy_all": 0.5216433950326473
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.822232645403377,
+      "co_membership_crossing": 0.07914279778906894,
+      "co_membership_within": 0.5501544440272111,
+      "co_membership_chance": 0.07497428041867601,
+      "row_end_entropy_crossing": 0.36433858383500606,
+      "row_end_entropy_all": 0.35192792148064383
+     }
+    }
+   },
+   "2": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.36046884978568555,
+      "largest_share": 0.8824017941302278
+     },
+     "child": {
+      "entropy_bits": 0.28102856712398216,
+      "largest_share": 0.8979643959364956
+     },
+     "journal": {
+      "entropy_bits": 1.0619259522382933,
+      "largest_share": 0.6969011009776326
+     },
+     "organisation": {
+      "entropy_bits": 0.6429186145450541,
+      "largest_share": 0.8118432628434914
+     },
+     "parent": {
+      "entropy_bits": 0.18194789125898286,
+      "largest_share": 0.9471523416368101
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32739628476397703,
+      "co_membership_crossing": 0.17529202659437346,
+      "co_membership_within": 0.8137736566315156,
+      "co_membership_chance": 0.07783866031217551,
+      "row_end_entropy_crossing": 0.2122232376537847,
+      "row_end_entropy_all": 0.18194789125898286
+     },
+     "child_article": {
+      "crossing_weight_share": 0.36299124663928817,
+      "co_membership_crossing": 0.18369230355171262,
+      "co_membership_within": 0.8135408958470663,
+      "co_membership_chance": 0.06977208381567665,
+      "row_end_entropy_crossing": 0.3505619573979689,
+      "row_end_entropy_all": 0.36046884978568555
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.6216896895842015,
+      "co_membership_crossing": 0.1019761763558505,
+      "co_membership_within": 0.6921144714185792,
+      "co_membership_chance": 0.09276614977861472,
+      "row_end_entropy_crossing": 0.3848441846229163,
+      "row_end_entropy_all": 0.3630101469629188
+     },
+     "article_article": {
+      "crossing_weight_share": 0.5453196496413394,
+      "co_membership_crossing": 0.20697816643806913,
+      "co_membership_within": 0.7996512963494474,
+      "co_membership_chance": 0.10314236456397291,
+      "row_end_entropy_crossing": 0.6123082078616779,
+      "row_end_entropy_all": 0.5074465261973041
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8606941838649153,
+      "co_membership_crossing": 0.07823291025042961,
+      "co_membership_within": 0.5260627131268255,
+      "co_membership_chance": 0.07438822059672406,
+      "row_end_entropy_crossing": 0.3698294739314842,
+      "row_end_entropy_all": 0.36068968739904106
+     }
+    }
+   },
+   "5": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.37269415315791626,
+      "largest_share": 0.8826359052865487
+     },
+     "child": {
+      "entropy_bits": 0.2875766187423753,
+      "largest_share": 0.8954687072067906
+     },
+     "journal": {
+      "entropy_bits": 0.9721670052963679,
+      "largest_share": 0.719424642304496
+     },
+     "organisation": {
+      "entropy_bits": 0.6301715575297681,
+      "largest_share": 0.8133521088865875
+     },
+     "parent": {
+      "entropy_bits": 0.1912113837514591,
+      "largest_share": 0.9434685502606084
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3342183922425147,
+      "co_membership_crossing": 0.17792775944822126,
+      "co_membership_within": 0.812373048405443,
+      "co_membership_chance": 0.0781348139367785,
+      "row_end_entropy_crossing": 0.22172132009849363,
+      "row_end_entropy_all": 0.1912113837514591
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3568396686040921,
+      "co_membership_crossing": 0.18274150673829997,
+      "co_membership_within": 0.8191373480635746,
+      "co_membership_chance": 0.07136255212857766,
+      "row_end_entropy_crossing": 0.3667180569798115,
+      "row_end_entropy_all": 0.37269415315791626
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.7239690635462028,
+      "co_membership_crossing": 0.08047534802154895,
+      "co_membership_within": 0.6658933162427609,
+      "co_membership_chance": 0.08451542872312652,
+      "row_end_entropy_crossing": 0.39680349087257955,
+      "row_end_entropy_all": 0.3755013102617626
+     },
+     "article_article": {
+      "crossing_weight_share": 0.7953784625451675,
+      "co_membership_crossing": 0.05894136351943965,
+      "co_membership_within": 0.7055118128148903,
+      "co_membership_chance": 0.09143917537506978,
+      "row_end_entropy_crossing": 0.5704755914094376,
+      "row_end_entropy_all": 0.5431089002680369
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8447467166979361,
+      "co_membership_crossing": 0.0632907425579661,
+      "co_membership_within": 0.5284621628571877,
+      "co_membership_chance": 0.06402852939856034,
+      "row_end_entropy_crossing": 0.39292773447169943,
+      "row_end_entropy_all": 0.37326964178543254
+     }
+    }
+   },
+   "4": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3801775746160227,
+      "largest_share": 0.878404648128781
+     },
+     "child": {
+      "entropy_bits": 0.2789564012264187,
+      "largest_share": 0.8983795700716822
+     },
+     "journal": {
+      "entropy_bits": 1.1038260041688301,
+      "largest_share": 0.6865850611713465
+     },
+     "organisation": {
+      "entropy_bits": 0.7339797456905236,
+      "largest_share": 0.7865934068986086
+     },
+     "parent": {
+      "entropy_bits": 0.19503892624609057,
+      "largest_share": 0.9423205992704544
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32534378895178795,
+      "co_membership_crossing": 0.1755305712178441,
+      "co_membership_within": 0.8111306694689321,
+      "co_membership_chance": 0.07792257082690499,
+      "row_end_entropy_crossing": 0.2267762937911079,
+      "row_end_entropy_all": 0.19503892624609057
+     },
+     "child_article": {
+      "crossing_weight_share": 0.35824154685917997,
+      "co_membership_crossing": 0.18404696833185444,
+      "co_membership_within": 0.8204143463552295,
+      "co_membership_chance": 0.0751559497584259,
+      "row_end_entropy_crossing": 0.36969709226834235,
+      "row_end_entropy_all": 0.3801775746160227
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.7450850085651334,
+      "co_membership_crossing": 0.07411768357824317,
+      "co_membership_within": 0.6402277444196088,
+      "co_membership_chance": 0.07865913300049676,
+      "row_end_entropy_crossing": 0.4041464199798639,
+      "row_end_entropy_all": 0.37978076341239364
+     },
+     "article_article": {
+      "crossing_weight_share": 0.6499296499415503,
+      "co_membership_crossing": 0.11913190636139498,
+      "co_membership_within": 0.7904131838472399,
+      "co_membership_chance": 0.09391562319378519,
+      "row_end_entropy_crossing": 0.6035147114244067,
+      "row_end_entropy_all": 0.5396750191904409
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.801594746716698,
+      "co_membership_crossing": 0.07961196743509906,
+      "co_membership_within": 0.5491424154690304,
+      "co_membership_chance": 0.0767299209549694,
+      "row_end_entropy_crossing": 0.39029408468285115,
+      "row_end_entropy_all": 0.3808847473281081
+     }
+    }
+   },
+   "3": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3694325392077559,
+      "largest_share": 0.8816463592322349
+     },
+     "child": {
+      "entropy_bits": 0.2872712245620288,
+      "largest_share": 0.8955915094496981
+     },
+     "journal": {
+      "entropy_bits": 0.9861200779290599,
+      "largest_share": 0.7138428662025883
+     },
+     "organisation": {
+      "entropy_bits": 0.5869668754022234,
+      "largest_share": 0.8224364500284715
+     },
+     "parent": {
+      "entropy_bits": 0.19351627630107593,
+      "largest_share": 0.9420192941465868
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3339252612631441,
+      "co_membership_crossing": 0.17787201903262345,
+      "co_membership_within": 0.8077712961966237,
+      "co_membership_chance": 0.07837961329077645,
+      "row_end_entropy_crossing": 0.22421085917196112,
+      "row_end_entropy_all": 0.19351627630107593
+     },
+     "child_article": {
+      "crossing_weight_share": 0.36252277859680676,
+      "co_membership_crossing": 0.1818887711631722,
+      "co_membership_within": 0.8079840550886476,
+      "co_membership_chance": 0.07117955325957054,
+      "row_end_entropy_crossing": 0.3601344024154429,
+      "row_end_entropy_all": 0.3694325392077559
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.8207836825298581,
+      "co_membership_crossing": 0.05785266613194742,
+      "co_membership_within": 0.6577892360240779,
+      "co_membership_chance": 0.07703763128175459,
+      "row_end_entropy_crossing": 0.3854956806126117,
+      "row_end_entropy_all": 0.37102607267162135
+     },
+     "article_article": {
+      "crossing_weight_share": 0.6001930535531673,
+      "co_membership_crossing": 0.15014406559663915,
+      "co_membership_within": 0.8115388351646288,
+      "co_membership_chance": 0.09525165688098632,
+      "row_end_entropy_crossing": 0.574164689100724,
+      "row_end_entropy_all": 0.5056396187123088
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8119136960600375,
+      "co_membership_crossing": 0.07899581260152824,
+      "co_membership_within": 0.5557236327606018,
+      "co_membership_chance": 0.08184165896528775,
+      "row_end_entropy_crossing": 0.38472260348154463,
+      "row_end_entropy_all": 0.3699514704595003
+     }
+    }
+   },
+   "1": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.34193213080045565,
+      "largest_share": 0.8922278929668408
+     },
+     "child": {
+      "entropy_bits": 0.27666232446493155,
+      "largest_share": 0.8989673860734048
+     },
+     "journal": {
+      "entropy_bits": 0.9015547707193123,
+      "largest_share": 0.7385393041520416
+     },
+     "organisation": {
+      "entropy_bits": 0.6423292470246533,
+      "largest_share": 0.8111777317667307
+     },
+     "parent": {
+      "entropy_bits": 0.1824343280682098,
+      "largest_share": 0.945268319013932
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.31795816454415676,
+      "co_membership_crossing": 0.1704073532255616,
+      "co_membership_within": 0.8097821760250722,
+      "co_membership_chance": 0.0779190192738307,
+      "row_end_entropy_crossing": 0.21403518977446456,
+      "row_end_entropy_all": 0.1824343280682098
+     },
+     "child_article": {
+      "crossing_weight_share": 0.36076641452247704,
+      "co_membership_crossing": 0.18542239720537432,
+      "co_membership_within": 0.8313760213556675,
+      "co_membership_chance": 0.07411521918848565,
+      "row_end_entropy_crossing": 0.33243520391531184,
+      "row_end_entropy_all": 0.34193213080045565
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.771232939767751,
+      "co_membership_crossing": 0.07523968029885525,
+      "co_membership_within": 0.6355583038317099,
+      "co_membership_chance": 0.08505273564218213,
+      "row_end_entropy_crossing": 0.3622077454685583,
+      "row_end_entropy_all": 0.3433974778586738
+     },
+     "article_article": {
+      "crossing_weight_share": 0.7589646141891462,
+      "co_membership_crossing": 0.0654811210159688,
+      "co_membership_within": 0.7948025131867512,
+      "co_membership_chance": 0.0918525963100297,
+      "row_end_entropy_crossing": 0.5058180428261769,
+      "row_end_entropy_all": 0.4788652138167946
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.7650093808630392,
+      "co_membership_crossing": 0.07826081340383749,
+      "co_membership_within": 0.5640390718099735,
+      "co_membership_chance": 0.07606039136426322,
+      "row_end_entropy_crossing": 0.35368390765820756,
+      "row_end_entropy_all": 0.34253234143563566
+     }
+    }
+   },
+   "6": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.38289089196872983,
+      "largest_share": 0.8744018493790213
+     },
+     "child": {
+      "entropy_bits": 0.2928043361859905,
+      "largest_share": 0.8935446125083422
+     },
+     "journal": {
+      "entropy_bits": 1.0218477103728207,
+      "largest_share": 0.7036722347474463
+     },
+     "organisation": {
+      "entropy_bits": 0.6919868492121021,
+      "largest_share": 0.8022240105116613
+     },
+     "parent": {
+      "entropy_bits": 0.19539951364780744,
+      "largest_share": 0.9423980885833109
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3337352294000584,
+      "co_membership_crossing": 0.17794135122476643,
+      "co_membership_within": 0.8065841812838546,
+      "co_membership_chance": 0.07828417733924355,
+      "row_end_entropy_crossing": 0.2272661781296815,
+      "row_end_entropy_all": 0.19539951364780744
+     },
+     "child_article": {
+      "crossing_weight_share": 0.36487422325028546,
+      "co_membership_crossing": 0.18350075198197918,
+      "co_membership_within": 0.8022777102453426,
+      "co_membership_chance": 0.06947349122060864,
+      "row_end_entropy_crossing": 0.38345165320026586,
+      "row_end_entropy_all": 0.38289089196872983
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.7946748248496963,
+      "co_membership_crossing": 0.06540551802701938,
+      "co_membership_within": 0.6560966712556234,
+      "co_membership_chance": 0.07148965131797942,
+      "row_end_entropy_crossing": 0.39366276043119175,
+      "row_end_entropy_all": 0.3841451291951285
+     },
+     "article_article": {
+      "crossing_weight_share": 0.6353684554381203,
+      "co_membership_crossing": 0.15963441132222916,
+      "co_membership_within": 0.7320367094157587,
+      "co_membership_chance": 0.09890427117410137,
+      "row_end_entropy_crossing": 0.6335974354631859,
+      "row_end_entropy_all": 0.5881600333237615
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.7617260787992494,
+      "co_membership_crossing": 0.09701681315577217,
+      "co_membership_within": 0.5303538993387422,
+      "co_membership_chance": 0.08340304300131789,
+      "row_end_entropy_crossing": 0.3949478841758304,
+      "row_end_entropy_all": 0.3836020889738799
+     }
+    }
+   },
+   "10": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3372755090506657,
+      "largest_share": 0.8890339221462592
+     },
+     "child": {
+      "entropy_bits": 0.2883676493835934,
+      "largest_share": 0.8947557122968702
+     },
+     "journal": {
+      "entropy_bits": 0.9075692760428827,
+      "largest_share": 0.7384464374791572
+     },
+     "organisation": {
+      "entropy_bits": 0.5201615486689002,
+      "largest_share": 0.8421962325791229
+     },
+     "parent": {
+      "entropy_bits": 0.1886314698326073,
+      "largest_share": 0.9440307014648922
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.33690944220140967,
+      "co_membership_crossing": 0.17994170320846636,
+      "co_membership_within": 0.8117203921190067,
+      "co_membership_chance": 0.07794187479828532,
+      "row_end_entropy_crossing": 0.219439540201391,
+      "row_end_entropy_all": 0.1886314698326073
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3581775616067782,
+      "co_membership_crossing": 0.1845279960074282,
+      "co_membership_within": 0.8153817928017184,
+      "co_membership_chance": 0.06996452408078896,
+      "row_end_entropy_crossing": 0.3260587586334124,
+      "row_end_entropy_all": 0.3372755090506657
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.7584759515618554,
+      "co_membership_crossing": 0.06474576532851835,
+      "co_membership_within": 0.6942445285280139,
+      "co_membership_chance": 0.08101845210387225,
+      "row_end_entropy_crossing": 0.3632660773727104,
+      "row_end_entropy_all": 0.3396868269702004
+     },
+     "article_article": {
+      "crossing_weight_share": 0.5243309953722305,
+      "co_membership_crossing": 0.21822723996796747,
+      "co_membership_within": 0.8156327962327853,
+      "co_membership_chance": 0.09254680899184917,
+      "row_end_entropy_crossing": 0.5597721673213049,
+      "row_end_entropy_all": 0.4766579979239202
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.8893058161350842,
+      "co_membership_crossing": 0.05851187689253016,
+      "co_membership_within": 0.5164719815610892,
+      "co_membership_chance": 0.07145457996862901,
+      "row_end_entropy_crossing": 0.33700773424295105,
+      "row_end_entropy_all": 0.3379026763608921
+     }
+    }
+   },
+   "9": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3579812595083752,
+      "largest_share": 0.885710303314932
+     },
+     "child": {
+      "entropy_bits": 0.2790250077011106,
+      "largest_share": 0.8983545524305435
+     },
+     "journal": {
+      "entropy_bits": 1.08001633868926,
+      "largest_share": 0.6906843827255559
+     },
+     "organisation": {
+      "entropy_bits": 0.7107716183259372,
+      "largest_share": 0.7944305125107858
+     },
+     "parent": {
+      "entropy_bits": 0.1854940522599238,
+      "largest_share": 0.9446694337806493
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3250784756736277,
+      "co_membership_crossing": 0.17500955549328545,
+      "co_membership_within": 0.8109380962229324,
+      "co_membership_chance": 0.07825842968941682,
+      "row_end_entropy_crossing": 0.21651326680781333,
+      "row_end_entropy_all": 0.1854940522599238
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3529589766762524,
+      "co_membership_crossing": 0.18427791985346517,
+      "co_membership_within": 0.8302698544385085,
+      "co_membership_chance": 0.07314938892964554,
+      "row_end_entropy_crossing": 0.34036151520611857,
+      "row_end_entropy_all": 0.3579812595083752
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.7692489513014078,
+      "co_membership_crossing": 0.07424414344534518,
+      "co_membership_within": 0.6470392192380922,
+      "co_membership_chance": 0.07916739338303207,
+      "row_end_entropy_crossing": 0.3771150942409877,
+      "row_end_entropy_all": 0.3599321619997418
+     },
+     "article_article": {
+      "crossing_weight_share": 0.727589268172378,
+      "co_membership_crossing": 0.09243742413659614,
+      "co_membership_within": 0.786766494053861,
+      "co_membership_chance": 0.09137672390340112,
+      "row_end_entropy_crossing": 0.5007359229734649,
+      "row_end_entropy_all": 0.46678889501526794
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.7804878048780487,
+      "co_membership_crossing": 0.08644558238640841,
+      "co_membership_within": 0.5679922181170058,
+      "co_membership_chance": 0.08280001068670355,
+      "row_end_entropy_crossing": 0.3839747508454786,
+      "row_end_entropy_all": 0.35850844550945454
+     }
+    }
+   }
+  },
+  "diagonal": {
+   "5": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.29982205743049395,
+      "largest_share": 0.9057842908556121
+     },
+     "child": {
+      "entropy_bits": 0.28523786235382526,
+      "largest_share": 0.89617749665577
+     },
+     "journal": {
+      "entropy_bits": 0.8039775808591442,
+      "largest_share": 0.7544195324072752
+     },
+     "organisation": {
+      "entropy_bits": 0.44914295203100835,
+      "largest_share": 0.8609721607888319
+     },
+     "parent": {
+      "entropy_bits": 0.16484073454738565,
+      "largest_share": 0.9513561636211288
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3314265520415804,
+      "co_membership_crossing": 0.1737070240158337,
+      "co_membership_within": 0.8162760143490984,
+      "co_membership_chance": 0.07805393739054425,
+      "row_end_entropy_crossing": 0.19092402570860353,
+      "row_end_entropy_all": 0.16484073454738565
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34630967315356403,
+      "co_membership_crossing": 0.18138738070323096,
+      "co_membership_within": 0.8362412349012662,
+      "co_membership_chance": 0.07191640227679719,
+      "row_end_entropy_crossing": 0.2937653314596296,
+      "row_end_entropy_all": 0.29982205743049395
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.3722209012342217,
+      "co_membership_crossing": 0.21752585315825052,
+      "co_membership_within": 0.7413861527260148,
+      "co_membership_chance": 0.09334664234012732,
+      "row_end_entropy_crossing": 0.3702396140900419,
+      "row_end_entropy_all": 0.3011579718182192
+     },
+     "article_article": {
+      "crossing_weight_share": 0.41443536269947745,
+      "co_membership_crossing": 0.24481315401928497,
+      "co_membership_within": 0.8736689092627813,
+      "co_membership_chance": 0.09374591284527521,
+      "row_end_entropy_crossing": 0.5213275496558196,
+      "row_end_entropy_all": 0.38071455687681643
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6674484052532833,
+      "co_membership_crossing": 0.1390102630269089,
+      "co_membership_within": 0.5684597685156901,
+      "co_membership_chance": 0.09144597959491545,
+      "row_end_entropy_crossing": 0.34951260527035816,
+      "row_end_entropy_all": 0.3003728359541511
+     }
+    }
+   },
+   "3": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3165312522434634,
+      "largest_share": 0.9005268440992289
+     },
+     "child": {
+      "entropy_bits": 0.2880328079873841,
+      "largest_share": 0.8946024573878462
+     },
+     "journal": {
+      "entropy_bits": 0.8609273514612218,
+      "largest_share": 0.7427384187956684
+     },
+     "organisation": {
+      "entropy_bits": 0.4615119046675034,
+      "largest_share": 0.8600522916184434
+     },
+     "parent": {
+      "entropy_bits": 0.15787697767143477,
+      "largest_share": 0.9531788144130883
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3303279931484604,
+      "co_membership_crossing": 0.17391024307520925,
+      "co_membership_within": 0.8134375072693708,
+      "co_membership_chance": 0.07860325458663056,
+      "row_end_entropy_crossing": 0.18259112843279027,
+      "row_end_entropy_all": 0.15787697767143477
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34652739914704145,
+      "co_membership_crossing": 0.18243570360014288,
+      "co_membership_within": 0.8347352090748771,
+      "co_membership_chance": 0.07306884910508935,
+      "row_end_entropy_crossing": 0.3060190723900985,
+      "row_end_entropy_all": 0.3165312522434634
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.3710552910760138,
+      "co_membership_crossing": 0.2159870790140157,
+      "co_membership_within": 0.7361800563384073,
+      "co_membership_chance": 0.08702893429337549,
+      "row_end_entropy_crossing": 0.3755137201445373,
+      "row_end_entropy_all": 0.31864834305855216
+     },
+     "article_article": {
+      "crossing_weight_share": 0.4014757848090952,
+      "co_membership_crossing": 0.2517778183143286,
+      "co_membership_within": 0.8718485963603904,
+      "co_membership_chance": 0.08852754980584307,
+      "row_end_entropy_crossing": 0.5347663898600682,
+      "row_end_entropy_all": 0.3812469466785311
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6524390243902439,
+      "co_membership_crossing": 0.13602809559349846,
+      "co_membership_within": 0.5640415430711354,
+      "co_membership_chance": 0.08777121421105726,
+      "row_end_entropy_crossing": 0.3720351168292148,
+      "row_end_entropy_all": 0.31699450075899316
+     }
+    }
+   },
+   "10": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.28977639566286373,
+      "largest_share": 0.9092105518989345
+     },
+     "child": {
+      "entropy_bits": 0.28522127773815525,
+      "largest_share": 0.8959184174017111
+     },
+     "journal": {
+      "entropy_bits": 0.7892884758384268,
+      "largest_share": 0.7603116972363523
+     },
+     "organisation": {
+      "entropy_bits": 0.43910123775020254,
+      "largest_share": 0.865342603279962
+     },
+     "parent": {
+      "entropy_bits": 0.16109590208895577,
+      "largest_share": 0.9524156840702471
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3381976975822509,
+      "co_membership_crossing": 0.17753725242667956,
+      "co_membership_within": 0.8181761422275096,
+      "co_membership_chance": 0.0778995721071169,
+      "row_end_entropy_crossing": 0.18633363521538843,
+      "row_end_entropy_all": 0.16109590208895577
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34023997089557784,
+      "co_membership_crossing": 0.17921055308157652,
+      "co_membership_within": 0.8311154948822551,
+      "co_membership_chance": 0.07178612497359464,
+      "row_end_entropy_crossing": 0.28024074630722795,
+      "row_end_entropy_all": 0.28977639566286373
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.3710091312981382,
+      "co_membership_crossing": 0.21579468350949418,
+      "co_membership_within": 0.747563456970001,
+      "co_membership_chance": 0.08757735401040191,
+      "row_end_entropy_crossing": 0.3511744123185484,
+      "row_end_entropy_all": 0.29143859590983084
+     },
+     "article_article": {
+      "crossing_weight_share": 0.40352802932116133,
+      "co_membership_crossing": 0.2380941961955857,
+      "co_membership_within": 0.8971945961695,
+      "co_membership_chance": 0.08876122266234564,
+      "row_end_entropy_crossing": 0.5147759708400632,
+      "row_end_entropy_all": 0.3521934089761241
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6566604127579738,
+      "co_membership_crossing": 0.13945960717531183,
+      "co_membership_within": 0.5669142938893961,
+      "co_membership_chance": 0.08803796034540952,
+      "row_end_entropy_crossing": 0.3350226079932603,
+      "row_end_entropy_all": 0.29030972382156855
+     }
+    }
+   },
+   "6": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.31248845868637415,
+      "largest_share": 0.9013589842351992
+     },
+     "child": {
+      "entropy_bits": 0.29037454231359566,
+      "largest_share": 0.8935089847546392
+     },
+     "journal": {
+      "entropy_bits": 0.7979281213653383,
+      "largest_share": 0.7527763091839557
+     },
+     "organisation": {
+      "entropy_bits": 0.4756562508909435,
+      "largest_share": 0.8540966705484553
+     },
+     "parent": {
+      "entropy_bits": 0.16973255090086928,
+      "largest_share": 0.9498417765664693
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3302625844441176,
+      "co_membership_crossing": 0.1763514781602835,
+      "co_membership_within": 0.810312619259146,
+      "co_membership_chance": 0.07848105422208242,
+      "row_end_entropy_crossing": 0.19702359921045462,
+      "row_end_entropy_all": 0.16973255090086928
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3520392804007666,
+      "co_membership_crossing": 0.18441826315045112,
+      "co_membership_within": 0.8292834348252396,
+      "co_membership_chance": 0.0724150540929734,
+      "row_end_entropy_crossing": 0.29970264518478384,
+      "row_end_entropy_all": 0.31248845868637415
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.3787512095105041,
+      "co_membership_crossing": 0.21498755034863412,
+      "co_membership_within": 0.7365127913135431,
+      "co_membership_chance": 0.09026670930365613,
+      "row_end_entropy_crossing": 0.37737393467365726,
+      "row_end_entropy_all": 0.31543369314697406
+     },
+     "article_article": {
+      "crossing_weight_share": 0.3885268772709948,
+      "co_membership_crossing": 0.25209778761951884,
+      "co_membership_within": 0.8468701568128318,
+      "co_membership_chance": 0.09156251047699505,
+      "row_end_entropy_crossing": 0.5410732221352861,
+      "row_end_entropy_all": 0.3961343575574714
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6533771106941839,
+      "co_membership_crossing": 0.1391431235127529,
+      "co_membership_within": 0.5730267742318664,
+      "co_membership_chance": 0.0873495546867156,
+      "row_end_entropy_crossing": 0.3634459697570658,
+      "row_end_entropy_all": 0.31262637318520203
+     }
+    }
+   },
+   "8": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3147778470262299,
+      "largest_share": 0.9019400402956028
+     },
+     "child": {
+      "entropy_bits": 0.2881331045761049,
+      "largest_share": 0.8940696883254053
+     },
+     "journal": {
+      "entropy_bits": 0.8012179129668141,
+      "largest_share": 0.7584217077611211
+     },
+     "organisation": {
+      "entropy_bits": 0.46690846112389156,
+      "largest_share": 0.8596340544823143
+     },
+     "parent": {
+      "entropy_bits": 0.15810075492351272,
+      "largest_share": 0.9532061723781452
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3266949704213255,
+      "co_membership_crossing": 0.17289349332937726,
+      "co_membership_within": 0.8126433278051192,
+      "co_membership_chance": 0.0781657707876314,
+      "row_end_entropy_crossing": 0.18399371166079578,
+      "row_end_entropy_all": 0.15810075492351272
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3546664113927405,
+      "co_membership_crossing": 0.18596556596773106,
+      "co_membership_within": 0.8313466576853188,
+      "co_membership_chance": 0.0734622413098594,
+      "row_end_entropy_crossing": 0.30160396191977595,
+      "row_end_entropy_all": 0.3147778470262299
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.3727662490139494,
+      "co_membership_crossing": 0.20846277282776965,
+      "co_membership_within": 0.740895247131369,
+      "co_membership_chance": 0.0846799968853112,
+      "row_end_entropy_crossing": 0.37291484244657,
+      "row_end_entropy_all": 0.3166701425819762
+     },
+     "article_article": {
+      "crossing_weight_share": 0.38488235130259874,
+      "co_membership_crossing": 0.23736694681096493,
+      "co_membership_within": 0.869762095148894,
+      "co_membership_chance": 0.08567115520651085,
+      "row_end_entropy_crossing": 0.5486578292677645,
+      "row_end_entropy_all": 0.3858640060325244
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6693245778611633,
+      "co_membership_crossing": 0.13318020832557556,
+      "co_membership_within": 0.5866455940814002,
+      "co_membership_chance": 0.08471072622549149,
+      "row_end_entropy_crossing": 0.3636412293709912,
+      "row_end_entropy_all": 0.31535709914748056
+     }
+    }
+   },
+   "7": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3023115217371857,
+      "largest_share": 0.9048733412608255
+     },
+     "child": {
+      "entropy_bits": 0.2789057007823863,
+      "largest_share": 0.8981113320540073
+     },
+     "journal": {
+      "entropy_bits": 0.7689184344558425,
+      "largest_share": 0.7692884860551213
+     },
+     "organisation": {
+      "entropy_bits": 0.46099412048425126,
+      "largest_share": 0.8589122493955007
+     },
+     "parent": {
+      "entropy_bits": 0.16262991404762545,
+      "largest_share": 0.9519596586241245
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.3259017198709613,
+      "co_membership_crossing": 0.17198162540321082,
+      "co_membership_within": 0.816814671796445,
+      "co_membership_chance": 0.07815258369954303,
+      "row_end_entropy_crossing": 0.18854642146538683,
+      "row_end_entropy_all": 0.16262991404762545
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3416932618258901,
+      "co_membership_crossing": 0.1798848487113152,
+      "co_membership_within": 0.8425886271759391,
+      "co_membership_chance": 0.07328023462642372,
+      "row_end_entropy_crossing": 0.287119437488905,
+      "row_end_entropy_all": 0.3023115217371857
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.37134749892918817,
+      "co_membership_crossing": 0.21623899460209536,
+      "co_membership_within": 0.7412480880979532,
+      "co_membership_chance": 0.08796064273525404,
+      "row_end_entropy_crossing": 0.36480576905608286,
+      "row_end_entropy_all": 0.304558114414966
+     },
+     "article_article": {
+      "crossing_weight_share": 0.38624219831562573,
+      "co_membership_crossing": 0.2425662149427037,
+      "co_membership_within": 0.8930019454171777,
+      "co_membership_chance": 0.08874834955832718,
+      "row_end_entropy_crossing": 0.49808864742564274,
+      "row_end_entropy_all": 0.352807748514059
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6439962476547842,
+      "co_membership_crossing": 0.13945526749688597,
+      "co_membership_within": 0.5697257384991744,
+      "co_membership_chance": 0.08822790842312955,
+      "row_end_entropy_crossing": 0.34242730420005396,
+      "row_end_entropy_all": 0.3024007332833426
+     }
+    }
+   },
+   "1": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.28940488407128917,
+      "largest_share": 0.908898026390546
+     },
+     "child": {
+      "entropy_bits": 0.278375154113181,
+      "largest_share": 0.8982406334159588
+     },
+     "journal": {
+      "entropy_bits": 0.7846298286215972,
+      "largest_share": 0.7632066446249218
+     },
+     "organisation": {
+      "entropy_bits": 0.44599552609382503,
+      "largest_share": 0.8616209365086414
+     },
+     "parent": {
+      "entropy_bits": 0.16150651320221446,
+      "largest_share": 0.9516374564524971
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.319542375622859,
+      "co_membership_crossing": 0.16829493332396833,
+      "co_membership_within": 0.8122543071667141,
+      "co_membership_chance": 0.07788626097798186,
+      "row_end_entropy_crossing": 0.18836052351667157,
+      "row_end_entropy_all": 0.16150651320221446
+     },
+     "child_article": {
+      "crossing_weight_share": 0.3488022814098818,
+      "co_membership_crossing": 0.18288962153343108,
+      "co_membership_within": 0.8427151959638213,
+      "co_membership_chance": 0.07396818072301868,
+      "row_end_entropy_crossing": 0.2837258352036419,
+      "row_end_entropy_all": 0.28940488407128917
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.37560632627144114,
+      "co_membership_crossing": 0.21551959581577074,
+      "co_membership_within": 0.7494686213692853,
+      "co_membership_chance": 0.08709772092969065,
+      "row_end_entropy_crossing": 0.3468861538806678,
+      "row_end_entropy_all": 0.2901682412371922
+     },
+     "article_article": {
+      "crossing_weight_share": 0.3890626904026327,
+      "co_membership_crossing": 0.24148838795073727,
+      "co_membership_within": 0.8762454735496099,
+      "co_membership_chance": 0.08708557721265059,
+      "row_end_entropy_crossing": 0.5470756499521295,
+      "row_end_entropy_all": 0.37015329140202563
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6622889305816135,
+      "co_membership_crossing": 0.13374284835859737,
+      "co_membership_within": 0.5691624413482702,
+      "co_membership_chance": 0.0864171141444218,
+      "row_end_entropy_crossing": 0.33177562623351275,
+      "row_end_entropy_all": 0.2899368078618316
+     }
+    }
+   },
+   "2": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.2926502422504077,
+      "largest_share": 0.9084272538761704
+     },
+     "child": {
+      "entropy_bits": 0.28110284292630605,
+      "largest_share": 0.8974848363766343
+     },
+     "journal": {
+      "entropy_bits": 0.7390918343680551,
+      "largest_share": 0.7737180195119903
+     },
+     "organisation": {
+      "entropy_bits": 0.45129480859528237,
+      "largest_share": 0.8618146809366446
+     },
+     "parent": {
+      "entropy_bits": 0.15636662838431814,
+      "largest_share": 0.9544347166958959
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.33010210379679783,
+      "co_membership_crossing": 0.1759402449182289,
+      "co_membership_within": 0.8195133496824968,
+      "co_membership_chance": 0.07811363271156466,
+      "row_end_entropy_crossing": 0.18170831070164148,
+      "row_end_entropy_all": 0.15636662838431814
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34051279273476975,
+      "co_membership_crossing": 0.18066023622832195,
+      "co_membership_within": 0.8351100736884455,
+      "co_membership_chance": 0.07209259703802129,
+      "row_end_entropy_crossing": 0.28502238428582155,
+      "row_end_entropy_all": 0.2926502422504077
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.3705106046291093,
+      "co_membership_crossing": 0.2135911353889264,
+      "co_membership_within": 0.7428272670705496,
+      "co_membership_chance": 0.09257941143023729,
+      "row_end_entropy_crossing": 0.35084876805519066,
+      "row_end_entropy_all": 0.2932707268133791
+     },
+     "article_article": {
+      "crossing_weight_share": 0.4052786608349375,
+      "co_membership_crossing": 0.24004909037071834,
+      "co_membership_within": 0.8880314205206351,
+      "co_membership_chance": 0.09143615910309233,
+      "row_end_entropy_crossing": 0.5415021267367547,
+      "row_end_entropy_all": 0.37153345470036414
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6585365853658537,
+      "co_membership_crossing": 0.1379035811925655,
+      "co_membership_within": 0.5860559082947662,
+      "co_membership_chance": 0.08940706177899778,
+      "row_end_entropy_crossing": 0.33232626779745267,
+      "row_end_entropy_all": 0.29318687610835975
+     }
+    }
+   },
+   "4": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3246914305460258,
+      "largest_share": 0.8967434632570572
+     },
+     "child": {
+      "entropy_bits": 0.2801568316828487,
+      "largest_share": 0.897823654354765
+     },
+     "journal": {
+      "entropy_bits": 0.8052029038399805,
+      "largest_share": 0.7578707782459245
+     },
+     "organisation": {
+      "entropy_bits": 0.476165544825476,
+      "largest_share": 0.8556843140606105
+     },
+     "parent": {
+      "entropy_bits": 0.16536755588088797,
+      "largest_share": 0.9513154327819944
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32446358111259654,
+      "co_membership_crossing": 0.17297035435501198,
+      "co_membership_within": 0.8150411749128735,
+      "co_membership_chance": 0.0780295790917321,
+      "row_end_entropy_crossing": 0.19125969605156912,
+      "row_end_entropy_all": 0.16536755588088797
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34949295942382475,
+      "co_membership_crossing": 0.18327773696438537,
+      "co_membership_within": 0.8386173680007346,
+      "co_membership_chance": 0.07469439932061274,
+      "row_end_entropy_crossing": 0.3139824442588731,
+      "row_end_entropy_all": 0.3246914305460258
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.3767752121078359,
+      "co_membership_crossing": 0.2162475925027254,
+      "co_membership_within": 0.7389965759273944,
+      "co_membership_chance": 0.095223947237135,
+      "row_end_entropy_crossing": 0.39680702262141276,
+      "row_end_entropy_all": 0.3263979917756568
+     },
+     "article_article": {
+      "crossing_weight_share": 0.4002038567564402,
+      "co_membership_crossing": 0.23709753201172082,
+      "co_membership_within": 0.8722894782640416,
+      "co_membership_chance": 0.09440883426863705,
+      "row_end_entropy_crossing": 0.518060155650388,
+      "row_end_entropy_all": 0.383835989884355
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6547842401500938,
+      "co_membership_crossing": 0.14161962269762188,
+      "co_membership_within": 0.5660435681138142,
+      "co_membership_chance": 0.08975265287817047,
+      "row_end_entropy_crossing": 0.36127872652884624,
+      "row_end_entropy_all": 0.32507246802278444
+     }
+    }
+   },
+   "9": {
+    "facet": {
+     "article": {
+      "entropy_bits": 0.3285038427249696,
+      "largest_share": 0.8974871772585713
+     },
+     "child": {
+      "entropy_bits": 0.27691346469339745,
+      "largest_share": 0.8992039522815758
+     },
+     "journal": {
+      "entropy_bits": 0.824009319362759,
+      "largest_share": 0.7478910558030055
+     },
+     "organisation": {
+      "entropy_bits": 0.4958025767896358,
+      "largest_share": 0.8496854050564052
+     },
+     "parent": {
+      "entropy_bits": 0.16129901689680343,
+      "largest_share": 0.9520476198164125
+     }
+    },
+    "relation": {
+     "parent_child": {
+      "crossing_weight_share": 0.32498329945537696,
+      "co_membership_crossing": 0.17174832833960146,
+      "co_membership_within": 0.8157531666717679,
+      "co_membership_chance": 0.0783482423284567,
+      "row_end_entropy_crossing": 0.18767353143122031,
+      "row_end_entropy_all": 0.16129901689680343
+     },
+     "child_article": {
+      "crossing_weight_share": 0.34591738625802776,
+      "co_membership_crossing": 0.18101956301168703,
+      "co_membership_within": 0.8353375680444434,
+      "co_membership_chance": 0.07340656418457103,
+      "row_end_entropy_crossing": 0.3139025864538539,
+      "row_end_entropy_all": 0.3285038427249696
+     },
+     "article_affiliation": {
+      "crossing_weight_share": 0.375711077863643,
+      "co_membership_crossing": 0.21432792174155096,
+      "co_membership_within": 0.7315468313832442,
+      "co_membership_chance": 0.08755549996787353,
+      "row_end_entropy_crossing": 0.38910062412463886,
+      "row_end_entropy_all": 0.3301838418510735
+     },
+     "article_article": {
+      "crossing_weight_share": 0.3954732143228494,
+      "co_membership_crossing": 0.23601679172022857,
+      "co_membership_within": 0.8692125493667061,
+      "co_membership_chance": 0.08988810223872623,
+      "row_end_entropy_crossing": 0.5384349809010969,
+      "row_end_entropy_all": 0.39069259650352484
+     },
+     "article_journal": {
+      "crossing_weight_share": 0.6566604127579738,
+      "co_membership_crossing": 0.14248862872834508,
+      "co_membership_within": 0.5708878530379118,
+      "co_membership_chance": 0.08608059364579439,
+      "row_end_entropy_crossing": 0.3854321646665757,
+      "row_end_entropy_all": 0.3288993631633746
+     }
+    }
+   }
+  }
+ }
+}

@@ -3868,3 +3868,23 @@ not worsen article×article (slightly better, ≈ 2 SE); only child×parent wors
 closure ratio is 0.41 (RL-270): the loss over all cells and the share of cross-community tie weight rebuilt disagree
 for this relation. article×article has no hidden cells, so no held-out reading. Limit: compares random vs fully
 diagonal starts only; a start with room for off-diagonal links is not yet fitted.
+
+### RL-277 — 2026-11-19 — Do memberships blur to make up for missing off-diagonal links? (saved fits, no new fits)
+Owner's question on the caveat to 1b1 (a closure ratio near 1 may hold only because memberships blur). `fit/blurring_check.py`
+→ `results/stage0/aligned/blurring_check.{json,log}`. KL, K 13, group 1, 10 paired seeds, random social start (pass 1)
+vs diagonal social start (start test), aligned numbering. Main communities by largest weighted membership; a tie is
+"crossing" if its two ends have different main communities. Co-membership of a tie's ends = Σ_k p_k q_k (chance =
+Σ_k p̄_k q̄_k, ≈ 0.08–0.09). Findings (random → diagonal): (1) memberships overall get sharper, not blurrier — mean
+entropy authors 0.72 → 0.45 bits, journals 0.87 → 0.78 / 1.00 → 0.80, organisations (approach 2) 0.63 → 0.46, articles
+(approach 2) 0.36 → 0.31; (2) the partition follows the social ties more: crossing share of tie weight author×affiliation
+0.81 → 0.22, author×article 0.50 → 0.24, article×affiliation 0.76 → 0.37, article×article 0.66 → 0.40, article×journal
+0.82 → 0.66 / 0.82 → 0.66; semantic relations unchanged; (3) the remaining crossing ties are rebuilt through shared
+membership: co-membership on crossing ties author×affiliation 0.05 → 0.34, author×article 0.17 → 0.35, article×affiliation
+0.07 → 0.22, article×article 0.14 → 0.24, article×journal 0.08 → 0.14 (random start: at or below chance), and the
+row-end entities of crossing ties are more spread than the facet average (authors at crossing author×article ties 0.95
+bits vs 0.45 for all authors; author×affiliation 0.92 vs 0.48; articles at crossing article×article ties 0.53 vs 0.38).
+Reading: the caveat holds in a local form — under diagonal cores the entities that bridge communities carry mixed
+memberships while the rest sharpen. Whether that mixing is real dual belonging or compensation for missing links cannot
+be told here: the random start (which has off-diagonal links) rebuilds crossing ties poorly (co-membership at chance,
+higher loss), so it is no counterfactual; a start with room for off-diagonal links (proposed S2/S3) is. Limit: crossing
+ties are defined by each fit's own main communities, so the two arms' crossing sets differ.
