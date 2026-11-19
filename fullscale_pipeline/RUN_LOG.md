@@ -3855,3 +3855,16 @@ lower, RL-269). Consequences: under KL (i) the child×article requirement and, u
 rule are met by construction (no off-diagonal weight exists), so they cannot fail as tests; (ii) under the diagonal
 start a tie between communities can be rebuilt only through the two entities' mixed memberships, never through a
 community-to-community link — the mechanism behind the article×article closure ratio 0.41 (RL-270).
+
+### RL-276 — 2026-11-19 — Start trade-off per relation (saved start-test fits, KL, K 13, group 1, 10 paired seeds; no fits)
+Owner's check 1b2 ("the way other matrices are initialised does not worsen the article*article reconstruction accuracy
+more than it improves the accuracy of others"). Final training loss per relation, diagonal start − random start, mean
+over seeds (SE), and weighted by w_r (sums to the total change). Approach 1: child×parent +2.03 (0.30; +0.07 %),
+child×article +0.56 (0.42), author×article −9.37 (1.53; −1.6 %), author×affiliation −25.5 (2.7; −4.5 %),
+article×journal −4.75 (0.53; −2.4 %); weighted total −5.96 (0.59). Approach 2: child×parent +2.81 (0.15; +0.09 %),
+child×article −4.33 (0.81; −0.3 %), article×affiliation −14.8 (1.6; −4.4 %), **article×article −2.63 (1.35; −1.3 %)**,
+article×journal −9.66 (0.50; −4.8 %); weighted total −4.89 (0.33). Reading: by training loss the diagonal start does
+not worsen article×article (slightly better, ≈ 2 SE); only child×parent worsens, by < 0.1 %. Yet article×article's
+closure ratio is 0.41 (RL-270): the loss over all cells and the share of cross-community tie weight rebuilt disagree
+for this relation. article×article has no hidden cells, so no held-out reading. Limit: compares random vs fully
+diagonal starts only; a start with room for off-diagonal links is not yet fitted.
