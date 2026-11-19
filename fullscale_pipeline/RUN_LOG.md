@@ -4027,3 +4027,32 @@ used by ≥ 10 / ≥ 50 / ≥ 100 articles: 879 / 238 / 109 hyperedges carrying 
 23.2 % of raw usage, 19.5 / 12.4 / 8.5 % of the weighted values. Multi-word hyperedges used by ≥ 50 articles: 34
 (e.g. "be use", "be not", "be train", "our study", "base be", "be generate"). Context: the generic-vocabulary community
 at K = 32 (RL-282) is built from such hyperedges.
+
+### RL-285 — 2026-11-19 — Generic child hyperedges: draft classification (step 1) and role in the fits (step 2); no fits
+Owner: "I approve all 3 points" (inventory and classification; role in existing fits; robustness arm only if they
+matter). **Step 1** (`fit/generic_hyperedges.py`, DRAFT rule for the owner's review; review list of the 272 hyperedges
+used by ≥ 50 articles: `plans/ticket107_generic_hyperedges_review.md`): G genre (every atom in a list of scientific-
+writing vocabulary), F focal (only focal topic atoms: llm, bert, chatgpt …), ? ambiguous (generic in form, possibly a
+method or object of this corpus: train, predict, model, performance …), S substantive. Over all child hyperedges —
+hyperedges / share of ties / raw usage / weighted values: G 2,220 / 20.4 % / 25.8 % / 14.2 %; F 404 / 1.7 / 5.7 / 1.8 %;
+? 556 / 2.6 / 3.1 / 2.1 %; S 94,670 / 75.2 / 65.4 / 81.9 %. Review list: G 213, ? 33, S 16, F 10. One rule bug fixed
+before reporting (auxiliary be/M missing from the modifier list). **Step 2** (`fit/generic_role.py` →
+`results/stage0/generic_role.{json,log}`; KL, hold-out group 1, 10 seeds; decided setting = start test 2 S3 10 % K 13,
+and pass 1 at K 8 / 13 / 20 / 32; medians over fits; approach 1, approach 2 alike):
+(a) Composition — every community carries about the corpus share of genre: G share of a community's child-side tie
+weight median 0.14 (raw 0.26), largest 0.15–0.19 at K ≤ 20 (raw 0.27–0.31); at K = 32 largest 0.21 / 0.32 (raw 0.33
+/ 0.47) — the catch-all community.
+(b) Mixing — genre hyperedges' memberships are spread nearly evenly: tie-weighted entropy G 2.9 bits at K 13 (even =
+3.70), ? 2.5, F 1.9, S 0.63. Communities look semantically alike mainly through them: mean pairwise cosine between
+communities' child-side usage vectors at K 13 (decided setting) 0.44 with all hyperedges, 0.24 without G, 0.14 with S
+only (approach 2: 0.44 / 0.25 / 0.14); at K 8: 0.51 / 0.31 / 0.20; K 32: 0.27 / 0.12 / 0.07.
+(c) Held-out existence — hidden child×article ties over-represent widely used hyperedges: G 3,795 of 8,687 hidden ties
+(44 %, vs 20 % of visible ties; likely the hold-out eligibility, which needs both ends to keep other ties — to check).
+Within-class AP / chance (decided setting, approach 1): all 0.171 / 0.109; G 0.311 / 0.203; F 0.415 / 0.151; ? 0.327 /
+0.105; S 0.052 / 0.021. Across K (pass 1, approach 1): all 0.168 / 0.171 / 0.164 / 0.163 at K 8 / 13 / 20 / 32; G 0.301
+/ 0.313 / 0.296 / 0.292; S 0.054 / 0.052 / 0.053 / 0.053 — the variation of the decided score across K follows the
+genre ties; the substantive ties' score is flat.
+Reading: genre hyperedges do not form their own community below K = 32, but they (i) make every community's semantic
+profile partly the same (they roughly triple the mean cosine between communities), and (ii) supply almost half of the
+hidden child×article ties of the decided held-out score, so the K choice partly measures how well the model predicts
+generic language. They matter by the step-2 criterion; the classification is a draft pending the owner's review.
