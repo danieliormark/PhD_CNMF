@@ -4120,3 +4120,12 @@ across K 8 / 13 / 20 / 32 (pass 1): 0.127 / 0.128 / 0.125 / 0.126 (approach 1), 
 (approach 2). Readings of RL-285 hold: genre spread evenly over communities, raises their similarity, and the held-out
 score's variation across K comes from genre ties; on substantive ties alone the score is flat over K 8–32 (approach 2
 lower at K 32).
+
+### RL-290 — 2026-11-19 — With and without genre: two full studies (owner)
+Owner (on R2 vs R3): "I think it is better to have with and without genre analysis to be separate full-fledge studies.
+whatever is tried on one should be tried and tested on another." → neither R2 (robustness arm only) nor R3 (replace):
+study A = the current build (genre hyperedges in), study B = a build without the 953 genre hyperedges of the final
+list (RL-289); every run of one is run on the other. Open, to settle one by one: (1) whether the stage-0 runs already
+done on study A (passes 1–2, start test 2, damping test, swap) are repeated on study B, or only some; (2) the build
+rules of study B (parent hyperedges that lose genre children: merged or emptied parents; W; units and articles left
+empty); (3) whether choices made in study A (K, λ_child, start) may differ in study B, and how the two are compared.
