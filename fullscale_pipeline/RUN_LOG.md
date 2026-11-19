@@ -4180,3 +4180,8 @@ Owner: "I approve C3" → each study chooses its own K and λ_child by the same 
 fitted at the other study's choice (comparison at fixed settings). Pass 3 is one protocol for both studies; its K grid
 covers both studies' chosen K (study A runs first; B's K* is added as a top-up to A when B's pass 1 is read, and
 vice versa). Owner submitted study-B pass 1 (job id not given).
+
+### RL-296 — 2026-11-19 — Pass 3 K grid (owner)
+Owner: "I approve your K grid proposal" → pass 3 K ∈ {5, 8, 13, 20} in both approaches (pass-1 KL candidates {5, 8, 13}
+plus K = 20, which pass 1 removed only by the value guard at λ = 0 and which keeps K = 13 off the grid's end); K = 32
+added only if pass 3's best K is 20 (decided grid-end rule); the other study's chosen K added as a top-up (C3, RL-295).

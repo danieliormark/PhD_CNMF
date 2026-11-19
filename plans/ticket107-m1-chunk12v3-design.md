@@ -2694,3 +2694,5 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-19, **A vs B comparison — DECIDED: C3** (owner: "I approve C3"): each study chooses its own K and λ_child by the same rules (main result) and is also fitted at the other study's choice (fixed-setting comparison); communities compared through the shared entities (articles, authors, organisations, journals), e.g. by co-membership. Pass 3 = one protocol for both studies; its K grid covers both studies' chosen K (top-ups when the other study's choice is known). RL-295.]*
 
+*[2026-11-19, **pass 3 K grid — DECIDED** (owner: "I approve your K grid proposal"): K ∈ {5, 8, 13, 20}, both approaches, both studies; K = 32 only if K = 20 comes out best; the other study's chosen K added as a top-up (C3). RL-296.]*
+
