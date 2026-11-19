@@ -200,6 +200,10 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
                   and not os.path.exists(os.path.join(base, d, "measures.json"))
                   and not os.path.exists(os.path.join(base, d, "error.json"))]
     build = D.Build(build_path or D.BUILD)
+    # study A / study B (owner 2026-11-19, RL-290): every fit of the stage must come from the build being read
+    other = {f["job"].get("build", D.BUILD) for f in fits} - {build.path, build.path.rstrip("/")}
+    if other:
+        raise ValueError(f"fits of stage {stage} come from another build than {build.path}: {sorted(other)}")
     W = sp.load_npz(build.path + "W_child_child.npz")
     W_has_tie = (np.diff(W.tocsr().indptr) > 0).astype(int)
     cells = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))     # cell → K → group → fits
@@ -272,8 +276,9 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--root", required=True); ap.add_argument("--stage", required=True)
     ap.add_argument("--fraction", type=float, default=0.2); ap.add_argument("--out", default=None)
+    ap.add_argument("--build", default=None, help="build of the stage's fits (default: study A's build, data.BUILD)")
     a = ap.parse_args()
-    rep = aggregate(a.root, a.stage, a.fraction)
+    rep = aggregate(a.root, a.stage, a.fraction, build_path=a.build)
     out = a.out or os.path.join(a.root, a.stage, "_aggregate_aligned.json" if ALIGNED else "_aggregate.json")
     json.dump(rep, open(out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
     print(f"wrote {out} ({len(rep)} cells)")

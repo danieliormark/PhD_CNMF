@@ -4162,3 +4162,15 @@ A. No hold-out drawn yet (next question). Hold-out inheritance measured: A's hid
 hyperedges = 64,472, exactly study B's eligible ties; 21 row × group cells (1 in group 1) exceed B's row cap by one tie;
 none ineligible. Parent×child: 107,949 of 148,763 A hidden ties map to B; 492 B ties come from merged parents with
 conflicting A groups, 1,261 exceed B's row cap, 9 the column cap, 40 are ineligible under B.
+
+### RL-294 — 2026-11-19 — Study B hold-out: fresh draw (owner); study-B pass 1 prepared
+Owner (H1 vs H2): "I think more rigorous will be to have a fresh sampling" → study B's hold-out groups drawn on its
+own build by the same procedure and seed (107): `psych_trial_v3_nogenre/holdout/` — child×article 64,472 eligible ties
+all placed (6,399–6,494 per group; group 1 6,411), parent×child 108,377 (10,734–11,051), author×affiliation 4,741,
+article×affiliation 4,071; 1,000,000 empty cells per group (article×affiliation 527,458). Comparisons of held-out
+scores between studies A and B therefore include the variation between draws.
+Study-B pass 1 prepared (not submitted): `plan.B_stage0_pass1` → `fit/slurm/jobs_B_stage0_pass1.jsonl`, 600 jobs,
+identical to study A's 600 KL jobs of pass 1 + K = 32 extension except `stage: "B_stage0_pass1"` and `build` (checked);
+submit with `bash fit/slurm/B_stage0_pass1.sh` (≈ 660 CPU-hours from study A's same fits). `aggregate.py` gained
+`--build` (submit_aggregate.sh passes `$BUILD`) and refuses fits from another build than the one it reads (checked
+both ways on a 30-epoch smoke fit of study B).

@@ -2690,3 +2690,5 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-19, **study B build rules — DECIDED** (owner: "I approve your proposal"): the same builder and rules with the 953 genre hyperedges left out of the input (as nested children and as cousins); parent identities recomputed from the surviving children (618 parents merge into 174; e.g. 88 "<genre verb> + llm" parents become "llm"); W rebuilt on study B's hyperedges; all weights recomputed by the existing formulas; social matrices identical to A. Built (`psych_trial_v3_nogenre`, RL-293). Hold-out draw for B: next question.]*
 
+*[2026-11-19, **study B hold-out — DECIDED: fresh draw** (owner: "I think more rigorous will be to have a fresh sampling"): drawn on B's build with the same procedure and seed (107), not inherited from A; held-out comparisons between A and B include draw variation (RL-294).]*
+

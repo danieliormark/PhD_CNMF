@@ -13,4 +13,4 @@ source /mnt/hum01-home01/p91688di/miniconda3/etc/profile.d/conda.sh
 conda activate tensor_env
 export LD_LIBRARY_PATH=/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib:${LD_LIBRARY_PATH:-}
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
-python -u -m fit.aggregate --root "$OUT" --stage "$STAGE"
+python -u -m fit.aggregate --root "$OUT" --stage "$STAGE" ${BUILD:+--build "$BUILD"}   # BUILD set for study B (RL-290)
