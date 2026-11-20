@@ -4268,3 +4268,24 @@ to the child facet (where it could be the genre rows themselves agreeing): artic
 reproducible too; organisations unchanged. Per hold-out group (Track A adjusted), K 5: A 0.41–0.43 in every group;
 B approach 1 0.27–0.43 (three groups ≈ 0.27–0.29), approach 2 0.34–0.45 — some groups of B are much less stable
 (groups are not paired between studies: fresh draws). Owner asked how the "shared anchor" reading can be tested.
+
+### RL-306 — 2026-11-20 — Lower seed stability in study B: tests 1–3 (no fits)
+Owner: "Run tests 1–3". `fit/stability_genre_tests.py` (`results/stage0/stability_genre_tests.{json,log}`): pass-1 KL
+λ = 0 fits, K 5 and 13, both approaches, 5 groups × 10 seeds, studies A and B; seed pairs matched as Track A/B.
+**Test 1 (measurement):** leaving the genre hyperedges out of study A's child facet barely changes A's stability
+(approach 1 K 5 Track A adjusted 0.414 → 0.414, Track B 0.473 → 0.470; child facet Track B raw 0.796 → 0.779; K 13
+0.259 → 0.258); B stays lower (0.328 / 0.389). The A–B gap is not the genre rows agreeing with themselves.
+**Test 2 (per article):** article agreement across seeds (1 − JS distance of matched memberships) A 0.68 → B 0.60
+(approach 1 K 5), 0.51 → 0.46 (K 13); approach 2 0.67 → 0.63, 0.49 → 0.43. Predicting B's agreement from the article's
+remaining ties with study A's curve (agreement by tie count) leaves B lower by 0.074 / 0.049 / 0.030 / 0.049: B's
+articles are less stable than A's articles with the same number of ties. The residual does not grow with the share of
+the article's ties that were genre (slopes −0.05 / +0.05 / −0.08 / +0.02, mixed sign). (A direct regression of the drop
+on genre loss at fixed remaining ties is negative, −0.13 to −0.26 ± 0.04, but this is expected under "less data" too:
+at equal remaining ties, more genre loss means more ties in A.) → not explained by each article's own tie loss, and not
+concentrated where genre was lost: a model-wide loss of determinacy.
+**Test 3 (solution modes):** in every group of both studies the two-cluster split is 1–2 outlying seeds against the
+rest (sizes 1/9, 2/8), not two modes; in B's unstable groups (approach 1 K 5, groups 2, 4, 5: Track A adjusted 0.27–0.29)
+the 8–9 main seeds agree less among themselves (0.55 vs A 0.62) and the outliers sit further away (0.48–0.49 vs A
+0.59–0.60); training losses of the clusters differ by ≤ 1.2 loss SD. → a flatter set of solutions, not several clean ones.
+Open: whether the model-wide effect comes from genre's evenly spread mass (anchor) or from fewer ties in total; only the
+fit-based controls (random thinning B′, shuffled genre A′) separate them.
