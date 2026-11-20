@@ -4289,3 +4289,29 @@ the 8–9 main seeds agree less among themselves (0.55 vs A 0.62) and the outlie
 0.59–0.60); training losses of the clusters differ by ≤ 1.2 loss SD. → a flatter set of solutions, not several clean ones.
 Open: whether the model-wide effect comes from genre's evenly spread mass (anchor) or from fewer ties in total; only the
 fit-based controls (random thinning B′, shuffled genre A′) separate them.
+
+### RL-307 — 2026-11-20 — Pass 3 (study A) finished and read; grid-end extension K = 3 prepared
+Jobs 24948267 / 24948268: 1,200/1,200 fits converged, 0 errors; post-processing wrote `pass3_{choice,readings}_A`.
+**J1 (RL-299):** r*(K): approach 1 K 5 / 8 / 13 / 20 = 0.3 / 0.3 / 1 / 1; approach 2 = 0.3 / 1 / 1 / 1 (at K 5 r = 1
+falls out of the existence band, 0.0878 / 0.0913 vs best 0.0973 / 0.0987; elsewhere the value guard leaves the largest r).
+K protocol over (K, r*): existence at r* approach 1 0.0973 / 0.0969 / 0.0967 / 0.0949 (SE 0.0015–0.0035), approach 2
+0.0987 / 0.0962 / 0.0968 / 0.0950; best K 5 in both; band approach 1 {5, 8, 13, 20}, approach 2 {5, 8, 13}; value
+(0.104 at K 5, SE 0.0018 / 0.0023) removes every larger K (approach 1 0.099 / 0.092 / 0.085; approach 2 0.098 / 0.085)
+→ **candidate K = 5, r = 0.3, both approaches.** Existence is flat over K (range 0.0024 / 0.0037 against SEs 0.0015–
+0.0035); K 5 is best by 0.0004–0.0006 over K 13 at r = 1; the value guard, measured against the best-existence K and
+falling with K in every pass, then decides. No gate, ghost, alignment or convergence failure. Seed stability
+(chance-adjusted Track A) at r*: approach 1 0.626 / 0.513 / 0.409 / 0.316, approach 2 0.662 / 0.553 / 0.427 / 0.335
+(pass 1, random social start, λ = 0: 0.41 / 0.35 / 0.26 / 0.19). **Grid end:** K = 5 is the lowest grid value → by the
+stage-0 decision (2026-11-19, "extended if the new K* falls at the grid's end") K = 3 is to be fitted; `pass3_choice.py`
+flagged only the top end (corrected: both ends, judged on the chosen K) → `plan.stage0_pass3_K3`,
+`slurm/stage0_pass3_K3.sh` (300 fits; λ_child basis at K 3: A 2,501 / 2,299, B 2,347 / 2,145; regenerated pass-3 jobs
+identical to the submitted ones).
+**Readings** (`pass3_readings_A`): T1 fails only at K 20 — approach 1 3–4 / 50 fits, approach 2 10 / 26 / 18 of 50 at
+r 0 / 0.3 / 1, would-be V1 at r 0.3 and 1 (approach 2); failing communities carry 3–4 % of child×article tie weight and
+33–37 % genre in their child-side weight (catch-all, as RL-281–283). Off-diagonal share of child×article 0 up to K 13,
+0.006–0.024 at K 20. Mono-domain: none (one non-recurring instance, approach 2 K 20 r 1). Article×article closure ratio
+(approach 2) rises with r: K 5 0.45 / 0.92 / 1.04, K 13 0.43 / 0.67 / 0.90. Flattening of W-tied child hyperedges: R ÷ S
+0.70 / 0.04–0.07 / 0.01–0.03 (r 0 / 0.3 / 1); mean largest membership of tied hyperedges 0.88–0.91 / 0.59–0.67 /
+0.45–0.48, untied 0.92–0.96 throughout; own spread of hyperedges with ≥ 2 articles rises with r (K 5: 0.99 / 1.56 /
+2.12 bits). Study A's held-out existence on substantive hidden ties 0.126–0.139 (chance 0.072), highest at K 5 r 0.3
+(0.139 both approaches); genre ties 0.33–0.36 (chance 0.215).

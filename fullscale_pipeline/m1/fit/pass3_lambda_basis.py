@@ -56,7 +56,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); ap.add_argument("--build", default=D.BUILD)
     a = ap.parse_args()
     pre = "B_" if "nogenre" in a.build else ""
-    sources = [("pass1", pre + "stage0_pass1", lambda j: j["K"] in (5, 8, 13, 20)),
+    sources = [("pass1", pre + "stage0_pass1", lambda j: j["K"] in (3, 5, 8, 13, 20)),   # K 3: grid-end extension of pass 3 (RL-307)
                ("S3_10", pre + "start_test2", lambda j: j.get("offdiag_level") == 0.1 and j.get("offdiag_semantic")
                 and j.get("social_link_start") == "diagonal")]
     out = run(a.build, sources)

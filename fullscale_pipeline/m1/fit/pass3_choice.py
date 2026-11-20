@@ -54,8 +54,18 @@ def run(agg, readings=None):
         sel = choose_k(cellsK) if len(cellsK) >= 2 else None
         out = {"lambda_rule_per_K": lam, "r_star": chosen, "K_protocol": sel, "table": table}
         if sel:
-            out["grid_end"] = {"best_is_highest_K": sel["best"] == max(Ks),
-                               "action": "fit K = 32 (grid-end rule, RL-296)" if sel["best"] == max(Ks) == 20 else None}
+            # grid-end rule (stage 0, 2026-11-19: "extended if the new K* falls at the grid's end"; RL-296 for the top):
+            # judged on the chosen K (the candidate, or the fallback), at either end of the fitted grid
+            kc = (sel["candidates"] or [sel["fallback"]])[-1] if (sel["candidates"] or sel["fallback"]) else None
+            act = None
+            if kc is not None and kc == max(Ks):
+                act = "fit K = 32 (grid-end rule, RL-296)" if kc == 20 else f"highest grid value K = {kc} chosen: extend upwards"
+            if kc is not None and kc == min(Ks) and (sel["candidates"] or [None])[0] == kc:
+                act = "fit K = 3 (grid-end rule; lowest coarse K)" if kc == 5 else (
+                      "K = 3 chosen: lowest coarse K; K = 2 belongs to stage 2's refinement (2 added if the band reaches 3)" if kc == 3
+                      else f"lowest grid value K = {kc} chosen: extend downwards")
+            out["grid_end"] = {"chosen_K": kc, "best_by_existence": sel["best"], "at_lowest": kc == min(Ks) if kc else None,
+                               "at_highest": kc == max(Ks) if kc else None, "action": act}
             out["chosen"] = [{"K": K, "r": chosen[K]} for K in sel["candidates"]] or (
                 [{"K": sel["fallback"], "r": chosen[sel["fallback"]], "fallback": True}] if sel["fallback"] else [])
         if readings:
