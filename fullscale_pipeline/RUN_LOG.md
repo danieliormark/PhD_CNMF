@@ -4233,3 +4233,22 @@ pass-1 basis (`pass3_lambda_basis.py --build` B) exists.
 ### RL-302 — 2026-11-19 — Pass 3 (study A) submitted (owner, CSF3)
 Fit array job 24948267 (1,200 fits, 150 tasks × 8); post-processing job 24948268 (afterany on 24948267: alignment,
 aggregation as fitted and aligned, readings, J1 choice). Study-B pass 1 submitted earlier the same day (job id not given).
+
+### RL-303 — 2026-11-20 — Study B pass 1 finished and read (no genre hyperedges)
+600/600 fits finished, 0 errors, all converged within the ceilings (epochs median 681 at K 3 to 4,968 at K 32; K 32
+≈ 3–4 h per fit); aggregation job 24944842 (`B_stage0_pass1/_aggregate.json`, copy in `fit/results/stage0/`).
+Held-out existence (within-class AP, combined; mean over 5 groups ± SE) K 3 / 5 / 8 / 13 / 20 / 32: approach 1 0.0649 /
+0.0726 / 0.0732 / 0.0733 / 0.0734 / 0.0726 (SE 0.0009–0.0016); approach 2 0.0659 / 0.0739 / 0.0742 / 0.0752 / 0.0747 /
+0.0729. Value (partial Spearman): approach 1 0.077 / 0.071 / 0.061 / 0.046 / 0.027 / 0.017; approach 2 0.076 / 0.073 /
+0.059 / 0.046 / 0.027 / 0.016. K protocol (rule b, fraction 0.2): approach 1 best 20, band {5, 8, 13, 20, 32}, 32
+removed by value, candidates {5, 8, 13, 20}; approach 2 best 13, band {5, 8, 13, 20}, 20 removed by value, candidates
+{5, 8, 13}. No gate, ghost, alignment or convergence failure anywhere. Study A (same jobs, RL-226/230): best 13 in both
+approaches, band {5 … 32}, candidates {5, 8, 13}. Existence is lower in B (0.073–0.075 vs 0.093–0.095; genre ties were
+the easier ones, RL-289; the hidden cells also differ by the fresh draw) and is flat over K 5–32 in both studies
+(range 0.0008 / 0.0023 in B, 0.0018 / 0.0018 in A, against SEs 0.001–0.002); only K 3 is clearly lower. Value is the
+same in A and B. Seed stability (chance-adjusted Track A, mean over groups ± SE): B below A at every K, most at small K
+and with larger spread between groups — approach 1 K 5 0.328 ± 0.030 (A 0.414 ± 0.005), K 13 0.209 ± 0.007 (A 0.259),
+K 20 0.179 (A 0.190); approach 2 K 5 0.393 ± 0.019 (A 0.418), K 13 0.218 ± 0.011 (A 0.266). Approach 1's best K moves to
+20 by 0.0001 (13: 0.0733, 20: 0.0734, SE 0.0015/0.0009); because the value guard is measured against the best K, K 20
+stays a candidate there. λ_child basis for B (`pass3_lambda_basis.py --build` B → `pass3_lambda_basis_B.json`):
+approach 1 K 5 / 8 / 13 / 20 = 2,251 / 2,065 / 1,875 / 1,730; approach 2 2,066 / 1,893 / 1,728 / 1,598 (within 2 % of A).
