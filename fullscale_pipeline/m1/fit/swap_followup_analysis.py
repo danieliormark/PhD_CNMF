@@ -45,7 +45,7 @@ def collect():
     """{(approach, beta): {arm: [fits]}}; arms: p0_Kstar, banded_Kstar, oneband_Kstar, p0_Kbig, banded_Kbig."""
     out = defaultdict(lambda: defaultdict(list))
     for stage in ("stage0_pass1", "swap_bare"):
-        fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, stage, "*", "measures.json"))]
+        fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, D.stage(stage), "*", "measures.json"))]
         for f in latest_fits(fs):
             j = f["job"]; arm = j.get("arm") or {}
             if j["group"] != 0 or j["seed"] not in range(1, 11) or (j.get("terms") or {}) or not f["result"]["converged"]:
@@ -129,6 +129,8 @@ def run(seed=0):
     for a in (1, 2):
         rds_base = D.fit_data(build, a, group=0); weights = {rd.name: rd.weight for rd in rds_base}
         for b in (2, 1):
+            if not arms.get((a, b)):                       # study B: KL only
+                continue
             rows = {lab: [per_fit(f, rds_base, weights, rng) for f in sorted(fs, key=lambda f: f["job"]["seed"])]
                     for lab, fs in arms[(a, b)].items()}
             keys = list(DIRECTION) + list(REPORTED) + ["anchor_failing"]

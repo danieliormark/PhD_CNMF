@@ -55,7 +55,9 @@ def main():
     rep = {}
     for appr in (1, 2):
         for beta in (2, 1):
-            c1 = next(v for k, v in p1.items() if not k.startswith("_") and v["cell"]["approach"] == appr and v["cell"]["beta"] == beta)
+            c1 = next((v for k, v in p1.items() if not k.startswith("_") and v["cell"]["approach"] == appr and v["cell"]["beta"] == beta), None)
+            if c1 is None:                                  # study B: KL only
+                continue
             cands = {0.0: c1["per_K"][str(KSTAR[beta])]}
             for k, v in p2.items():
                 if k.startswith("_") or v["cell"]["approach"] != appr or v["cell"]["beta"] != beta:

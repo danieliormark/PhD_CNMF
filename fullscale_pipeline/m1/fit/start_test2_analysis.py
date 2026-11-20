@@ -128,7 +128,7 @@ def run(root, stage):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True)
-    ap.add_argument("--root", default=ROOT); ap.add_argument("--stage", default="start_test2")
+    ap.add_argument("--root", default=ROOT); ap.add_argument("--stage", default=D.stage("start_test2"))
     a = ap.parse_args()
     json.dump(run(a.root, a.stage), open(a.out, "w"), indent=1, default=float)
 

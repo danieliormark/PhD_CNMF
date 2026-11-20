@@ -41,7 +41,7 @@ def collect():
     """{(approach, arm): {seed: fit}}, arm also 'undamped' (start-test KL fits, K 13, group 1)."""
     out = defaultdict(dict)
     for stage in ("damping_test", "start_test"):
-        fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, stage, "*", "measures.json"))]
+        fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, D.stage(stage), "*", "measures.json"))]
         for f in latest_fits(fs):
             j = f["job"]
             if j["group"] != 0 or j["beta"] != 1 or j["K"] != 13 or j["seed"] not in (1, 2, 3) or (j.get("terms") or {}):

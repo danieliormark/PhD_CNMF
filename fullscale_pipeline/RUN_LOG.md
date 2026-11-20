@@ -4354,3 +4354,11 @@ chains `slurm/submit_B_repeats_post.sh` (alignment of all study-B stages incl. p
 fitted and aligned). Smoke test: one job of every type (15, 30 epochs, scratch, approach 2 / both) ran without error.
 The stage-0 analysis scripts (pass2_lambda_rule, swap_analysis, start_test_analysis, start_test2_analysis,
 damping_test_analysis) still read study A's stages and build; a study option is to be added before B's results are read.
+
+### RL-312 — 2026-11-20 — Study B repeats submitted (owner); study switch for the analysis scripts
+Owner submitted `B_repeats.sh` (job id not given). `fit/data.py`: `M1_STUDY=B` makes study B's build the default
+(`BUILD_A` / `BUILD_B`) and maps stage names (`data.stage("swap_bare")` → "B_swap_bare"); fit jobs carry their build and
+are unaffected. Used in start_test_analysis (hence closure_check, blurring_check, start_test2_analysis references),
+swap_analysis, swap_followup_analysis, damping_test_analysis, start_test2_analysis (default stage); loops over both
+losses skip a loss with no fits (study B is KL only), pass2_lambda_rule likewise. Checked: without M1_STUDY the
+defaults are study A's and pass2_lambda_rule on A's aggregates gives the recorded choices (squared error r 0.03, KL r 1).

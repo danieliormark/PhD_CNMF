@@ -18,7 +18,18 @@ import json, math, os
 import numpy as np
 import scipy.sparse as sp
 
-BUILD = "/mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v3/"
+BUILD_A = "/mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v3/"            # study A: genre hyperedges in
+BUILD_B = "/mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v3_nogenre/"    # study B: without (RL-293)
+# Study switch for the analysis scripts (owner 2026-11-19: two full studies, RL-290): M1_STUDY=B makes the default build
+# study B's and maps stage names to study B's ("stage0_pass1" → "B_stage0_pass1"). Fit jobs carry their build.
+STUDY = os.environ.get("M1_STUDY", "A")
+BUILD = BUILD_B if STUDY == "B" else BUILD_A
+
+
+def stage(name):
+    """The stage directory of `name` in the current study."""
+    return "B_" + name if STUDY == "B" and not name.startswith("B_") else name
+
 G = 10
 EMPTY_SHARE, EMPTY_CAP = 0.10, 1_000_000
 HOLDOUT_SEED = 107

@@ -38,7 +38,7 @@ REPORTED = ("mixed_0.5", "existence_social", "existence_semantic", "overlap", "b
 def fits_for(approach, beta):
     out = defaultdict(list)
     for stage in ("stage0_pass1", "swap_bare"):
-        fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, stage, "*", "measures.json"))]
+        fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, D.stage(stage), "*", "measures.json"))]
         for f in latest_fits(fs):
             j = f["job"]
             if (j["approach"], j["beta"], j["K"], j["group"]) != (approach, beta, KSTAR[beta], 0) or (j.get("terms") or {}):
@@ -181,6 +181,8 @@ def run(seed=0):
         weights = {rd.name: rd.weight for rd in rds_base}
         for beta in (2, 1):
             fp = fits_for(a, beta)
+            if not any(fp.get(p) for p in PS if p):        # study B: KL only
+                continue
             rows = {p: [per_fit(f, rds_base, weights, rng) for f in sorted(fp.get(p, []), key=lambda f: f["job"]["seed"])] for p in PS}
             keys = list(DIRECTION) + list(REPORTED)
             curves = {k: {p: (float(np.mean([r[k] for r in rows[p] if r[k] is not None])) if rows[p] else None) for p in PS} for k in keys}

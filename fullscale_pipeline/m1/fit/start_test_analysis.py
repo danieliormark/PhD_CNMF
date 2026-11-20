@@ -52,7 +52,7 @@ SINGLE = {"author_affiliation": "organisation", "article_affiliation": "organisa
 
 
 def load(stage, diagonal):
-    fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, stage, "*", "measures.json"))]
+    fs = [load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, D.stage(stage), "*", "measures.json"))]
     out = defaultdict(list)
     for f in latest_fits(fs):
         j = f["job"]
