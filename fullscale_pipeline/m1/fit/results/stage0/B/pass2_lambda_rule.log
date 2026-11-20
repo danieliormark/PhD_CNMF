@@ -1,0 +1,12 @@
+approach_1_KL chosen r = 1.0 | best by existence 0.03 | band [0.0, 0.03, 0.1, 0.3, 1.0] | after value [0.03, 0.1, 0.3, 1.0] | stability ok [0.03, 0.1, 0.3, 1.0]
+   r=0.0    existence 0.0733 ± 0.0015  value 0.0456 ± 0.0036  A 0.209  B 0.277  gate fails False  stability passes True  groups 5
+   r=0.03   existence 0.0741 ± 0.0015  value 0.0563 ± 0.0041  A 0.209  B 0.287  gate fails False  stability passes True  groups 5
+   r=0.1    existence 0.0731 ± 0.0015  value 0.0796 ± 0.0040  A 0.211  B 0.297  gate fails False  stability passes True  groups 5
+   r=0.3    existence 0.0734 ± 0.0016  value 0.0953 ± 0.0039  A 0.219  B 0.305  gate fails False  stability passes True  groups 5
+   r=1.0    existence 0.0737 ± 0.0017  value 0.1071 ± 0.0029  A 0.231  B 0.320  gate fails False  stability passes True  groups 5
+approach_2_KL chosen r = 1.0 | best by existence 0.03 | band [0.0, 0.03, 0.1, 0.3, 1.0] | after value [0.03, 0.1, 0.3, 1.0] | stability ok [0.03, 0.1, 0.3, 1.0]
+   r=0.0    existence 0.0752 ± 0.0018  value 0.0456 ± 0.0033  A 0.218  B 0.289  gate fails False  stability passes True  groups 5
+   r=0.03   existence 0.0757 ± 0.0018  value 0.0541 ± 0.0035  A 0.219  B 0.298  gate fails False  stability passes True  groups 5
+   r=0.1    existence 0.0746 ± 0.0018  value 0.0742 ± 0.0033  A 0.226  B 0.312  gate fails False  stability passes True  groups 5
+   r=0.3    existence 0.0745 ± 0.0019  value 0.0883 ± 0.0036  A 0.236  B 0.325  gate fails False  stability passes True  groups 5
+   r=1.0    existence 0.0748 ± 0.0016  value 0.0991 ± 0.0033  A 0.248  B 0.340  gate fails False  stability passes True  groups 5

@@ -1,0 +1,2 @@
+approach_1_KL {'oneband_vs_p0_Kstar': 'no change', 'banded_vs_p0_Kstar': 'no change', 'oneband_vs_banded_Kstar': 'no change', 'banded_vs_p0_Kbig': 'no change'}
+approach_2_KL {'oneband_vs_p0_Kstar': 'no change', 'banded_vs_p0_Kstar': 'no change', 'oneband_vs_banded_Kstar': 'no change', 'banded_vs_p0_Kbig': 'heterogeneity follows the data'}

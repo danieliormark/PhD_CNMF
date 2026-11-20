@@ -4375,3 +4375,31 @@ No gate, ghost, alignment or convergence failure; T1 holds at K 3 (0 / 50); stab
 r*: approach 1 0.760 / 0.626 / 0.513 / 0.409 / 0.316 for K 3 / 5 / 8 / 13 / 20). K = 32 not added (RL-296: only if the
 best K is 20; stage 2 fits it unconditionally). Approach 1's candidates reach K 20 (top of the grid): the upper edge of
 its band is not located in stage 0.
+
+### RL-314 — 2026-11-20 — Study B repeats read (K 13; same scripts as A with M1_STUDY=B)
+Results in `fit/results/stage0/B/`. All 688 fits converged.
+**Pass 2 (λ rule):** r = 1 chosen in both approaches, as in A (highest grid value). Existence flat over r (approach 1
+0.0733 / 0.0741 / 0.0731 / 0.0734 / 0.0737 for r 0 / 0.03 / 0.1 / 0.3 / 1, SE 0.0015–0.0017); value rises with r (0.046
+→ 0.107; A 0.044 → 0.091); stability rises with r (Track A 0.209 → 0.231). (In B the best-existence r is 0.03, so the
+value guard removes only λ = 0; in A it was r = 1.)
+**Diagonal-start test:** KL fits better with the diagonal social start (paired data loss −8.1 ± 0.7 / −5.4 ± 0.4;
+A −6.0 ± 0.6 / −4.9 ± 0.3), fewer detached entities (−3.4 / −2.7), child×article requirement met; held-out existence
+and value not different beyond 2 SE in B (A: both slightly higher). Same verdict as A ("KL better with the diagonal
+start").
+**Start test 2:** by the start rule used for A (lowest paired training loss; within 2 SE closure ratios nearest 1 and
+higher stability): approach 1 S3 5 % and S3 10 % tied on loss (+0.14 ± 0.15), S3 10 % closer closure (|ratio − 1| 0.108
+vs 0.109) and more stable (0.302 vs 0.294); approach 2 S3 10 % lowest loss, S3 5 % tied (+0.13 ± 0.14), S3 10 % closer
+and more stable (0.300 vs 0.292) → **S3 at 10 %, as in A.** S1 (article×article random) again worse (+2.4 ± 0.3).
+Article×article closure 0.40–0.43 under S2/S3 (A 0.41).
+**Damping test:** (a) implementations A vs B equivalent in practice (ratio to seed spread ≤ 0.022; A ≤ 0.006); (b)
+start scale: approach 2 drift (0.37; A 0.42); approach 1 labelled "not equivalent" (2.05) only on the total-loss
+reading, whose 3-seed spread in B is unusually small (2.3e-4 vs A 1.8e-3); the reconstruction readings are 0.10–0.32 (A
+0.08–0.31) and membership overlap under the start change 0.89–0.98 (between seeds 0.24–0.32). No consequence: the decided
+arm runs from the ordinary start, as its reference.
+**Swap (aligned):** bare swap "no change" in both approaches (as A). Follow-ups: no change except approach 2 at K 20
+(p = 1, banded): weaker-domain presence −0.095 (margin 0.071) and lower/higher presence ratio −0.075 (margin 0.060) →
+"heterogeneity follows the data"; A's same comparison moved the same way below its margins (−0.050 / 0.096, −0.040 /
+0.048).
+**For study B's pass 3:** every repeat reproduces A's stage-0 choices (KL, diagonal social start, S3 10 %, r up to 1);
+B's pass 3 can run the same protocol: K 3 / 5 / 8 / 13 / 20 (K 3 included from the start, as A's extension), r 0 / 0.3 /
+1 with B's basis, S3 10 %, 5 groups × 10 seeds (1,500 fits).
