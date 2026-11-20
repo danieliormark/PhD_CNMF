@@ -4339,3 +4339,18 @@ V1 acting or reported makes no difference here. Grid ends: K 3 extension already
 not added in pass 3 — RL-296 adds it only if the best K is 20 (best by existence is 5), and stage 2 fits K = 32
 unconditionally (decided 2026-11-03). Related decided case for stage 2 (2026-11-03/09): "band too wide to decide → add
 the 5 unused hold-out groups (SE ≈ √2 smaller)".
+
+### RL-310 — 2026-11-20 — Option (b) applies to stage 2 too (owner); study B's repeats to prepare
+Owner: "Yes, it applies to stage 2 too; prepare study B's repeats" → option (b) is the K protocol rule from pass 3 on,
+stage 2 included (RL-309).
+
+### RL-311 — 2026-11-20 — Study B repeats prepared (not submitted)
+`plan.B_repeats` → `fit/slurm/jobs_B_repeats.jsonl`: 688 jobs = every KL job of study A's pass 2 (+ r = 1), bare swap
+and follow-ups, diagonal-start test, damping test and start test 2, at K 13 as in A (follow-up (ii) at K 20 as in A);
+checked identical to A's KL jobs except stage "B_<stage>", build and λ_child (= r × B's basis at K 13: approach 1 56.2 /
+187.5 / 562.4 / 1,874.6, approach 2 51.8 / 172.8 / 518.5 / 1,728.2). Stages: B_stage0_pass2 400, B_start_test2 130,
+B_swap_bare 120, B_start_test 20, B_damping_test 18. `slurm/B_repeats.sh` (86 tasks × 8 fits, 12 h; ≈ 600 CPU-hours)
+chains `slurm/submit_B_repeats_post.sh` (alignment of all study-B stages incl. pass 1; aggregation of B's pass 2 as
+fitted and aligned). Smoke test: one job of every type (15, 30 epochs, scratch, approach 2 / both) ran without error.
+The stage-0 analysis scripts (pass2_lambda_rule, swap_analysis, start_test_analysis, start_test2_analysis,
+damping_test_analysis) still read study A's stages and build; a study option is to be added before B's results are read.
