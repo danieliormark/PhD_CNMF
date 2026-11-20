@@ -4315,3 +4315,12 @@ r 0 / 0.3 / 1, would-be V1 at r 0.3 and 1 (approach 2); failing communities carr
 0.45–0.48, untied 0.92–0.96 throughout; own spread of hyperedges with ≥ 2 articles rises with r (K 5: 0.99 / 1.56 /
 2.12 bits). Study A's held-out existence on substantive hidden ties 0.126–0.139 (chance 0.072), highest at K 5 r 0.3
 (0.139 both approaches); genre ties 0.33–0.36 (chance 0.215).
+
+### RL-308 — 2026-11-20 — Pass 3 K = 3 extension submitted (owner); paired reading of the K choice
+Owner submitted `stage0_pass3_K3.sh` (job id not given). Paired by hold-out group (K 5 at r* minus each other K at its
+r*, mean ± SE over the 5 groups), from `pass3_readings_A`: existence approach 1 +0.0004 ± 0.0021 (K 8), +0.0005 ±
+0.0025 (K 13), +0.0024 ± 0.0026 (K 20); approach 2 +0.0025 ± 0.0013, +0.0020 ± 0.0022, +0.0038 ± 0.0031 — within noise;
+value approach 1 +0.0053 ± 0.0013, +0.0122 ± 0.0024, +0.0186 ± 0.0029; approach 2 +0.0061 ± 0.0019, +0.0188 ± 0.0022,
++0.0261 ± 0.0030 — K 5 better by 3–9 SE; substantive-only existence (study A) approach 1 +0.0015 ± 0.0022, +0.0058 ±
+0.0032, +0.0079 ± 0.0043; approach 2 +0.0044 ± 0.0026, +0.0074 ± 0.0037, +0.0082 ± 0.0040 — K 5 ahead by about 1–2 SE.
+So the K choice is made by held-out value, which clearly favours small K; existence does not separate K.
