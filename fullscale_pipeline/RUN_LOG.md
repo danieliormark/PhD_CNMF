@@ -4362,3 +4362,16 @@ are unaffected. Used in start_test_analysis (hence closure_check, blurring_check
 swap_analysis, swap_followup_analysis, damping_test_analysis, start_test2_analysis (default stage); loops over both
 losses skip a loss with no fits (study B is KL only), pass2_lambda_rule likewise. Checked: without M1_STUDY the
 defaults are study A's and pass2_lambda_rule on A's aggregates gives the recorded choices (squared error r 0.03, KL r 1).
+
+### RL-313 — 2026-11-20 — Pass 3 (study A) with the K = 3 extension: read under option (b)
+K = 3 jobs finished (post-processing 25000862 over all 1,500 pass-3 fits; 1,500 converged, 0 errors). K 3: r* = 0.3 in
+both approaches (r = 1 drops existence: 0.0850 / 0.0865). Existence at r* (approach 1 / 2): K 3 0.0923 / 0.0936, below
+the band's cut-off (0.0938 / 0.0956); paired by hold-out group, K 5 − K 3 = +0.0049 ± 0.0019 / +0.0052 ± 0.0016 (K 5
+higher in 4 of 5 groups); substantive-only existence +0.0062 ± 0.0032 / +0.0082 ± 0.0023; value K 3 higher by
+0.018 ± 0.002 / 0.019 ± 0.001. → K 3 is outside the band in both approaches; the band's lower edge lies between 3 and 5.
+**Study A's stage-0 verdict (option b, V1 reported):** candidates approach 1 K {5, 8, 13, 20} (r* 0.3 / 0.3 / 1 / 1),
+approach 2 K {5, 8, 13} (r* 0.3 / 1 / 1; K 20 outside the band, would-be V1 too). Rule b would have kept K 5 only.
+No gate, ghost, alignment or convergence failure; T1 holds at K 3 (0 / 50); stability falls with K (Track A adjusted at
+r*: approach 1 0.760 / 0.626 / 0.513 / 0.409 / 0.316 for K 3 / 5 / 8 / 13 / 20). K = 32 not added (RL-296: only if the
+best K is 20; stage 2 fits it unconditionally). Approach 1's candidates reach K 20 (top of the grid): the upper edge of
+its band is not located in stage 0.
