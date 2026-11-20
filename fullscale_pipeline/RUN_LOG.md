@@ -4413,3 +4413,7 @@ Owner: "Yes, prepare study B's pass 3". `plan.stage0_pass3("B", Ks=(3, 5, 8, 13,
 B's build (→ `pass3_{choice,readings}_B`). Smoke test (16 fits of 40 epochs, scratch, marked converged for the code
 test): fits, alignment, aggregation with B's build, readings (study B: no genre split) and the J1 / option (b) choice ran
 without errors.
+
+### RL-316 — 2026-11-20 — Study B pass 3 submitted (owner, CSF3)
+Fit array job 25048179 (1,500 fits, 188 tasks × 8); post-processing job 25048180 (afterany on 25048179: alignment,
+aggregation with B's build, readings, J1 choice under option (b) → `pass3_{choice,readings}_B`).
