@@ -7,7 +7,10 @@
 #      not below λ = 0's by more than λ = 0's SE over groups) → r*(K);
 #   2. the K protocol (aggregate.choose_k: band by existence, value guard, gate / ghost / alignment / convergence vetoes
 #      by the counting rule at fraction 0.2, fallback) over the cells (K, r*(K));
-#   3. grid-end rule (RL-296): if the best K is 20, K = 32 is to be fitted (flagged, not fitted here).
+#   3. grid-end rule: flagged when the candidates reach either end of the fitted grid (not fitted here).
+# Option (b) (owner 2026-11-20, "I approve option b"): in step 2 existence defines the band and value removes no K (rule b's
+# value guard is computed beside it for comparison); candidates = band K passing the gate, ghost, alignment and
+# convergence checks (and V1 with --v1 acting); inspection and the text check choose among them.
 # Reported beside the choice: the full (K, r) table per approach (existence, value, SEs, stability A / B, every check);
 # with --readings, the pass-3 readings per cell (T1 / would-be V1, mono-domain, off-diagonal share, ...).
 # Usage: python -m fit.pass3_choice --agg ROOT/stage0_pass3/_aggregate_aligned.json --out OUT.json [--readings R.json]
@@ -17,6 +20,7 @@ from .pass2_lambda_rule import rule, stab
 from .aggregate import choose_k
 
 FRACTION = "0.2"
+V1_ACTS = False      # set by --v1 acting (stage 0: V1 reported only, owner 2026-11-19 "I choose T1 + V1", step-11 decision)
 CHECKS = ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails")
 
 
@@ -51,29 +55,41 @@ def run(agg, readings=None):
         cellsK = {K: {"existence": byr[r][str(K)]["existence"], "se_existence": byr[r][str(K)]["se_existence"],
                       "value": byr[r][str(K)]["value"], "se_value": byr[r][str(K)]["se_value"],
                       **{c: k_fails(byr[r][str(K)], c) for c in CHECKS}} for K, r in chosen.items()}
-        sel = choose_k(cellsK) if len(cellsK) >= 2 else None
-        out = {"lambda_rule_per_K": lam, "r_star": chosen, "K_protocol": sel, "table": table}
+        # K protocol, option (b) (owner 2026-11-20): existence band, value reported only; V1 (T1 by the counting rule)
+        # acting or reported per --v1; rule b (value guard) kept beside it for comparison
+        rc = (readings or {}).get("cells", {}).get(f"approach_{a}", {})
+        v1 = {K: bool((rc.get(f"K{K}_r{chosen[K]:g}", {}).get("V1_would_be") or {}).get("vetoed")) for K in chosen}
+        if V1_ACTS:
+            for K in cellsK:
+                cellsK[K]["v1_fails"] = v1[K]
+        sel = choose_k(cellsK, value_guard=False) if len(cellsK) >= 2 else None
+        sel_rule_b = choose_k({K: {k: v for k, v in c.items() if k != "v1_fails"} for K, c in cellsK.items()}) if len(cellsK) >= 2 else None
+        out = {"lambda_rule_per_K": lam, "r_star": chosen, "K_protocol": sel, "K_protocol_rule_b": sel_rule_b,
+               "V1_would_be": v1, "V1_acts": V1_ACTS, "table": table}
         if sel:
-            # grid-end rule (stage 0, 2026-11-19: "extended if the new K* falls at the grid's end"; RL-296 for the top):
-            # judged on the chosen K (the candidate, or the fallback), at either end of the fitted grid
-            kc = (sel["candidates"] or [sel["fallback"]])[-1] if (sel["candidates"] or sel["fallback"]) else None
-            act = None
-            if kc is not None and kc == max(Ks):
-                act = "fit K = 32 (grid-end rule, RL-296)" if kc == 20 else f"highest grid value K = {kc} chosen: extend upwards"
-            if kc is not None and kc == min(Ks) and (sel["candidates"] or [None])[0] == kc:
-                act = "fit K = 3 (grid-end rule; lowest coarse K)" if kc == 5 else (
-                      "K = 3 chosen: lowest coarse K; K = 2 belongs to stage 2's refinement (2 added if the band reaches 3)" if kc == 3
-                      else f"lowest grid value K = {kc} chosen: extend downwards")
-            out["grid_end"] = {"chosen_K": kc, "best_by_existence": sel["best"], "at_lowest": kc == min(Ks) if kc else None,
-                               "at_highest": kc == max(Ks) if kc else None, "action": act}
+            # grid-end rule (stage 0, 2026-11-19: "extended if the new K* falls at the grid's end"; RL-296 for the top).
+            # Under option (b) the candidates form a set: each end of the fitted grid is checked on it.
+            cand = sel["candidates"] or ([sel["fallback"]] if sel["fallback"] else [])
+            acts = []
+            if cand and min(cand) == min(Ks):
+                acts.append("fit K = 3 (lowest coarse K)" if min(Ks) == 5 else
+                            "K = 3 is a candidate: K = 2 belongs to stage 2's refinement (2 added if the band reaches 3)" if min(Ks) == 3
+                            else f"candidates reach the lowest grid value K = {min(Ks)}: extend downwards")
+            if cand and max(cand) == max(Ks):
+                acts.append("candidates reach K = 20: RL-296 adds K = 32 only if the best K is 20 — owner to confirm under option (b)"
+                            if max(Ks) == 20 else f"candidates reach the highest grid value K = {max(Ks)}")
+            out["grid_end"] = {"candidates": cand, "best_by_existence": sel["best"], "lowest_K_fitted": min(Ks),
+                               "highest_K_fitted": max(Ks), "actions": acts}
             out["chosen"] = [{"K": K, "r": chosen[K]} for K in sel["candidates"]] or (
                 [{"K": sel["fallback"], "r": chosen[sel["fallback"]], "fallback": True}] if sel["fallback"] else [])
         if readings:
-            out["readings"] = {k: v for k, v in readings.get(f"approach_{a}", {}).items()}
+            out["readings"] = rc
         rep[f"approach_{a}"] = out
-        print(f"approach {a}: r*(K) = {chosen}; K protocol — best {sel and sel['best']}, band {sel and sel['band']}, "
-              f"removed by value {sel and sel['removed_by_value']}, candidates {sel and sel['candidates']}, "
-              f"fallback {sel and sel['fallback']}; grid end: {out.get('grid_end')}")
+        print(f"approach {a}: r*(K) = {chosen}; K protocol (option b, V1 {'acting' if V1_ACTS else 'reported'}) — best by existence "
+              f"{sel and sel['best']}, band {sel and sel['band']}, removed by V1 {sel and sel['removed_by_v1']}, "
+              f"candidates {sel and sel['candidates']}, fallback {sel and sel['fallback']}; V1 would-be {v1}; "
+              f"[rule b for comparison: removed by value {sel_rule_b and sel_rule_b['removed_by_value']}, candidates "
+              f"{sel_rule_b and sel_rule_b['candidates']}]; grid end: {out.get('grid_end')}")
         print(f"   {'K':>3} {'r':>4} {'existence':>16} {'value':>16} {'A adj':>7} {'B adj':>7}  gate ghost align conv  r*(K)")
         for t in table:
             print(f"   {t['K']:>3} {t['r']:>4} {t['existence']:.4f} ± {t['se_existence']:.4f} {t['value']:.4f} ± {t['se_value']:.4f}"
@@ -84,8 +100,10 @@ def run(agg, readings=None):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--agg", required=True); ap.add_argument("--out", required=True)
-    ap.add_argument("--readings", default=None)
+    ap.add_argument("--readings", default=None); ap.add_argument("--v1", choices=("reported", "acting"), default="reported")
     a = ap.parse_args()
+    global V1_ACTS
+    V1_ACTS = a.v1 == "acting"
     rep = run(json.load(open(a.agg)), json.load(open(a.readings)) if a.readings else None)
     json.dump(rep, open(a.out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
 

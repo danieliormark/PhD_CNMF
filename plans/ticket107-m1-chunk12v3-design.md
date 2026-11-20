@@ -2700,6 +2700,8 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-20, **study B repeats at K 13 — DECIDED** (owner: "I approve option a, K 13 for both approaches"): B's repeats of A's KL runs run at K 13 in both approaches, as in A (B pass 1: approach 1 best K 20 by 0.0001 over 13, a tie; RL-303/304).]*
 
+*[2026-11-20, **K protocol — DECIDED: option (b)** (owner: "I approve option b"), after pass 3 (study A) showed held-out existence flat over K 5–20 (paired differences within noise) while held-out value falls with K by 3–9 SE, so rule b's value guard alone picked the smallest K: existence defines the band; value is reported but removes no K; every band K passing the gate and vetoes is a candidate; inspection and the text check choose among them (the 2026-11-03/09 protocol). Replaces the value-guard part of rule b (2026-11-13) for K; the λ rule over r is unchanged. Pass 3 study A candidates: approach 1 K {5, 8, 13, 20}, approach 2 K {5, 8, 13} (K 3 extension running). RL-309.]*
+
 *[2026-11-19, **pass 3 order of choice — DECIDED: J1** (owner: "I approve J1 option"): the λ rule at each K first (r*(K)), then the K protocol over the cells (K, r*(K)); all (K, r) cells reported beside the choice. Pass 3 fits a fixed grid; refinement between grid values belongs to stage 2 (2026-11-03). RL-299.]*
 
 *[2026-11-19, **mono-domain response in stage 0 — DECIDED: report only** (owner: "For this stage report only"): counted and reported at every pass-3 (K, r) cell; veto from stage 2 on still open. RL-300.]*

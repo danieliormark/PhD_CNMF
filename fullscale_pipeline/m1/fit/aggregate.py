@@ -102,7 +102,7 @@ def load_entity(d):
 
 
 # ---------------------------------------------------------------------------------------------- K protocol (pure)
-def choose_k(cells):
+def choose_k(cells, value_guard=True):
     """cells: {K: {"existence", "se_existence", "value", "se_value": two-part held-out scores (higher better) and SEs of
     that K's group means, "gate_fails", "ghost_fails", "alignment_fails", "convergence_fails": bool}}.
     Returns the band, the value removals, the candidates, the fallback and flags (§6.8 protocol with the step-11 vetoes
@@ -114,11 +114,16 @@ def choose_k(cells):
     vb, vse = cells[best].get("value"), cells[best].get("se_value")
     value_fails = lambda k: (vb is not None and vse is not None and cells[k].get("value") is not None
                              and vb - cells[k]["value"] > vse)
+    # value_guard=False: option (b), owner 2026-11-20 ("I approve option b"): existence defines the band, value is
+    # reported (removed_by_value lists what rule b would remove) but removes no K; an optional "v1_fails" key acts as a
+    # further veto when present
+    vf = value_fails if value_guard else (lambda k: False)
     fails = lambda k, conv=True: (cells[k]["gate_fails"] or cells[k]["ghost_fails"] or cells[k]["alignment_fails"]
-                                  or value_fails(k) or (conv and cells[k]["convergence_fails"]))
+                                  or cells[k].get("v1_fails", False) or vf(k) or (conv and cells[k]["convergence_fails"]))
     cand = [k for k in band if not fails(k)]
     owner = [k for k in band if fails(k) and not fails(k, conv=False)]       # excluded by non-convergence alone
     out = {"best": best, "cutoff": cut, "band": band, "removed_by_value": [k for k in band if value_fails(k)],
+           "value_guard": value_guard, "removed_by_v1": [k for k in band if cells[k].get("v1_fails", False)],
            "value_reference": vb, "value_se": vse, "candidates": cand, "convergence_only_to_owner": owner,
            "fallback": None, "no_K_qualifies": False, "above_band_status": None}
     if not cand:

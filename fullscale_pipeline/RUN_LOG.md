@@ -4324,3 +4324,18 @@ value approach 1 +0.0053 ± 0.0013, +0.0122 ± 0.0024, +0.0186 ± 0.0029; approa
 +0.0261 ± 0.0030 — K 5 better by 3–9 SE; substantive-only existence (study A) approach 1 +0.0015 ± 0.0022, +0.0058 ±
 0.0032, +0.0079 ± 0.0043; approach 2 +0.0044 ± 0.0026, +0.0074 ± 0.0037, +0.0082 ± 0.0040 — K 5 ahead by about 1–2 SE.
 So the K choice is made by held-out value, which clearly favours small K; existence does not separate K.
+
+### RL-309 — 2026-11-20 — K protocol: option (b) (owner); pass 3 (study A) re-read
+Owner: "I approve option b" → when choosing K, held-out existence defines the band; held-out value is reported but
+removes no K (rule b's value guard, 2026-11-13, no longer removes K); every band K passing the gate, ghost, alignment
+and convergence checks (and V1 where it acts) is a candidate; inspection and the text check choose among them, as the
+original protocol (2026-11-03/09: "choice within the band after the stability gate by inspection and the text check,
+reasons recorded"). The λ rule over r at each K (pass 2 rule, J1 step 1) is unchanged. Code: `aggregate.choose_k(...,
+value_guard=False)` (default unchanged for earlier readings; reports what rule b would remove), `pass3_choice.py` uses
+it, keeps rule b beside it, `--v1 reported|acting` (stage 0: reported), grid-end flags on the candidate set.
+Pass 3 study A under (b) (`pass3_choice_A.{json,log}` rewritten): approach 1 band and candidates {5, 8, 13, 20} (r* 0.3 /
+0.3 / 1 / 1); approach 2 band and candidates {5, 8, 13} (r* 0.3 / 1 / 1; K 20 outside the band, and V1 would veto it).
+V1 acting or reported makes no difference here. Grid ends: K 3 extension already running (lowest coarse K). K = 32:
+not added in pass 3 — RL-296 adds it only if the best K is 20 (best by existence is 5), and stage 2 fits K = 32
+unconditionally (decided 2026-11-03). Related decided case for stage 2 (2026-11-03/09): "band too wide to decide → add
+the 5 unused hold-out groups (SE ≈ √2 smaller)".
