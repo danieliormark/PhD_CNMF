@@ -4403,3 +4403,13 @@ arm runs from the ordinary start, as its reference.
 **For study B's pass 3:** every repeat reproduces A's stage-0 choices (KL, diagonal social start, S3 10 %, r up to 1);
 B's pass 3 can run the same protocol: K 3 / 5 / 8 / 13 / 20 (K 3 included from the start, as A's extension), r 0 / 0.3 /
 1 with B's basis, S3 10 %, 5 groups × 10 seeds (1,500 fits).
+
+### RL-315 — 2026-11-20 — Study B pass 3 prepared (not submitted)
+Owner: "Yes, prepare study B's pass 3". `plan.stage0_pass3("B", Ks=(3, 5, 8, 13, 20))` → `fit/slurm/jobs_B_stage0_pass3.jsonl`:
+1,500 jobs, checked identical to study A's 1,500 pass-3 jobs (pass 3 + K 3 extension) except stage
+"B_stage0_pass3", build and λ_child (B's basis; r = 1: approach 1 K 3 / 5 / 8 / 13 / 20 = 2,347 / 2,251 / 2,065 / 1,875 /
+1,730, approach 2 2,145 / 2,066 / 1,893 / 1,728 / 1,598). Start S3 10 % (B's start test 2 gives the same choice, RL-314).
+`slurm/B_stage0_pass3.sh` (188 tasks × 8 fits, 12 h; ≈ 900–950 CPU-hours) chains `submit_pass3_post.sh` with STUDY=B and
+B's build (→ `pass3_{choice,readings}_B`). Smoke test (16 fits of 40 epochs, scratch, marked converged for the code
+test): fits, alignment, aggregation with B's build, readings (study B: no genre split) and the J1 / option (b) choice ran
+without errors.
