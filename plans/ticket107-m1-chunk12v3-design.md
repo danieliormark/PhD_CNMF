@@ -2698,6 +2698,8 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-19, **pass 3 λ_child — DECIDED** (owner: "I think its better to fit option b with 3 values and occupy more cores/spend a bit more time now than discovering that we got into an unlikely case where fitting all three whould have been the best option"): r ∈ {0, 0.3, 1} at every K; λ_child = r × basis, the basis (data loss ÷ (R ÷ S) on the λ = 0 solution, hold-out group 1, mean of 10 seeds) taken per K and approach from pass 1 (the start moves it by ≤ 0.3 %, RL-297). 1,200 fits per study. RL-298.]*
 
+*[2026-11-20, **study B repeats at K 13 — DECIDED** (owner: "I approve option a, K 13 for both approaches"): B's repeats of A's KL runs run at K 13 in both approaches, as in A (B pass 1: approach 1 best K 20 by 0.0001 over 13, a tie; RL-303/304).]*
+
 *[2026-11-19, **pass 3 order of choice — DECIDED: J1** (owner: "I approve J1 option"): the λ rule at each K first (r*(K)), then the K protocol over the cells (K, r*(K)); all (K, r) cells reported beside the choice. Pass 3 fits a fixed grid; refinement between grid values belongs to stage 2 (2026-11-03). RL-299.]*
 
 *[2026-11-19, **mono-domain response in stage 0 — DECIDED: report only** (owner: "For this stage report only"): counted and reported at every pass-3 (K, r) cell; veto from stage 2 on still open. RL-300.]*

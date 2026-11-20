@@ -4252,3 +4252,9 @@ K 20 0.179 (A 0.190); approach 2 K 5 0.393 ± 0.019 (A 0.418), K 13 0.218 ± 0.0
 20 by 0.0001 (13: 0.0733, 20: 0.0734, SE 0.0015/0.0009); because the value guard is measured against the best K, K 20
 stays a candidate there. λ_child basis for B (`pass3_lambda_basis.py --build` B → `pass3_lambda_basis_B.json`):
 approach 1 K 5 / 8 / 13 / 20 = 2,251 / 2,065 / 1,875 / 1,730; approach 2 2,066 / 1,893 / 1,728 / 1,598 (within 2 % of A).
+
+### RL-304 — 2026-11-20 — Study B repeats at K 13 (owner)
+Owner: "I approve option a, K 13 for both approaches" → study B's repeats of study A's KL runs (pass 2, start test 2,
+swap and follow-ups, diagonal-start test, damping test) run at K 13 in both approaches, exactly as in A, so each is
+paired with A's at the same setting; B's own K choice is made in its pass 3 (C3). B's pass 2 stays in the plan (owner
+told it is mostly redundant with pass 3's r grid; not removed).
