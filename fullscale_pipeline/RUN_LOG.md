@@ -4258,3 +4258,13 @@ Owner: "I approve option a, K 13 for both approaches" → study B's repeats of s
 swap and follow-ups, diagonal-start test, damping test) run at K 13 in both approaches, exactly as in A, so each is
 paired with A's at the same setting; B's own K choice is made in its pass 3 (C3). B's pass 2 stays in the plan (owner
 told it is mostly redundant with pass 3's r grid; not removed).
+
+### RL-305 — 2026-11-20 — Lower seed stability in study B: per facet and per group (no fits)
+From the pass-1 aggregates (per-facet Track B, raw; mean over hold-out groups), study A | B: approach 1 K 13 — article
+0.462 | 0.414, author 0.366 | 0.306, child 0.544 | 0.466, journal 0.457 | 0.419, organisation 0.197 | 0.197, parent
+0.481 | 0.445; approach 2 K 13 — article 0.459 | 0.406, child 0.543 | 0.454, journal 0.446 | 0.417, organisation
+0.292 | 0.269, parent 0.479 | 0.426; at K 5 the same pattern, at K 20 smaller differences. So the drop is not confined
+to the child facet (where it could be the genre rows themselves agreeing): articles, authors and parents are less
+reproducible too; organisations unchanged. Per hold-out group (Track A adjusted), K 5: A 0.41–0.43 in every group;
+B approach 1 0.27–0.43 (three groups ≈ 0.27–0.29), approach 2 0.34–0.45 — some groups of B are much less stable
+(groups are not paired between studies: fresh draws). Owner asked how the "shared anchor" reading can be tested.
