@@ -4437,3 +4437,8 @@ for r 0 / 0.3 / 1). Flattening at r 1 as in A (R ÷ S 0.002–0.03).
 **Grid end:** approach 1's best K by existence is 20, the grid's top → RL-296's condition ("K = 32 only if pass 3's best
 K is 20") is met for study B, approach 1 → to the owner. C3: candidate K of each study lie on the other's grid (no
 top-up from candidates).
+
+### RL-318 — 2026-11-21 — No K = 32 in stage 0 (owner)
+Owner: "I agree with recomendation 3" → K = 32 is not fitted in stage 0, although study B's approach-1 best K by
+existence is 20 (RL-296's condition; the trigger is a tie, K 20 − K 5 = +0.0006 ± 0.0006); stage 2 fits K = 32
+unconditionally in both studies (decided 2026-11-03). Stage 0 hands on the candidate sets (RL-313, RL-317).
