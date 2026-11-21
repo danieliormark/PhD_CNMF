@@ -2708,6 +2708,8 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-21, **band judged at each K's best r — DECIDED: B2** (owner: "I approve B2"): J1 takes each K's largest admissible r (up to one SE below that K's best existence), which could push a K below the band's cut-off and leave gaps (study B: approach 1 {5, 8, 20}, approach 2 {5, 20}). Now a K enters the band if some r gives existence within one SE of the best K's; it is carried forward at r*(K) (λ rule); gate and vetoes on the carried cell. Applies to stage 2 too. Stage-0 candidates: study A approach 1 K {5, 8, 13, 20}, approach 2 {5, 8, 13}; study B {5, 8, 13, 20} in both approaches. RL-319.]*
 
+*[2026-11-21, **affiliation closure — DECIDED (owner: "I agree with your proposals 1-3")**: the author×affiliation closure ratio above 1 (1.2–1.4, rising with K) comes from single-affiliation persons and small organisations, on cells without ties (RL-322); (1) the split closure ratio is a standing reading; (2) re-read in stage 1's social log-damping arm; (3) interpretation caveat: organisation profiles partly follow persons' secondary memberships. Raised by the owner, not insisted on: a larger loss weight for the affiliation relations. RL-323.]*
+
 *[2026-11-19, **pass 3 order of choice — DECIDED: J1** (owner: "I approve J1 option"): the λ rule at each K first (r*(K)), then the K protocol over the cells (K, r*(K)); all (K, r) cells reported beside the choice. Pass 3 fits a fixed grid; refinement between grid values belongs to stage 2 (2026-11-03). RL-299.]*
 
 *[2026-11-19, **mono-domain response in stage 0 — DECIDED: report only** (owner: "For this stage report only"): counted and reported at every pass-3 (K, r) cell; veto from stage 2 on still open. RL-300.]*

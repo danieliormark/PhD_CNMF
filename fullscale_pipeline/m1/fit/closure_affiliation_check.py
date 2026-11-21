@@ -9,7 +9,9 @@
 #   - where the reconstructed crossing weight sits: on the person's observed ties vs on empty cells;
 #   - membership spread (entropy, bits) of persons and of their organisations;
 #   - organisations by size (persons tied): small / medium / large thirds, the same ratio from the organisation side.
-# Usage: python -m fit.closure_affiliation_check --out fit/results/stage0/closure_affiliation_check.json
+# Approach 2 (owner 2026-11-21: "is there any difference in approach 1 vs approach 2 overprediction?"): --approach 2 reads
+# article×affiliation (rows = articles; "persons" in the output = articles).
+# Usage: python -m fit.closure_affiliation_check --out fit/results/stage0/closure_affiliation_check.json [--approach 2]
 import os
 os.environ["M1_ALIGNED"] = "1"
 import argparse, glob, json
@@ -72,21 +74,22 @@ def one(f, rd, n_org, org_size_band):
     return out
 
 
-def run():
+def run(approach=1):
     build = D.Build(D.BUILD)
-    raw = build.load("raw_P2_author_affiliation").tocsr()
+    REL = "author_affiliation" if approach == 1 else "article_affiliation"
+    raw = build.load("raw_P2_author_affiliation" if approach == 1 else "raw_P3_article_affiliation").tocsr()
     n_org = np.diff(raw.indptr)
     persons_per_org = np.asarray((raw > 0).sum(0)).ravel()
     q = np.quantile(persons_per_org[persons_per_org > 0], [1 / 3, 2 / 3])
     band = np.where(persons_per_org <= q[0], "small", np.where(persons_per_org <= q[1], "medium", "large"))
     fs = latest_fits([load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, "stage0_pass3", "*", "measures.json"))])
-    fs = [f for f in fs if f["job"]["approach"] == 1 and (f["job"]["K"], float(f["job"]["arm"]["r"])) in CELLS and f["result"]["converged"]]
+    fs = [f for f in fs if f["job"]["approach"] == approach and (f["job"]["K"], float(f["job"]["arm"]["r"])) in CELLS and f["result"]["converged"]]
     rds = {}
     res = defaultdict(list)
     for f in sorted(fs, key=lambda f: f["job"]["group"]):
         g = f["job"]["group"]
         if g not in rds:
-            rds = {g: next(rd for rd in D.fit_data(build, 1, group=g) if rd.name == "author_affiliation")}
+            rds = {g: next(rd for rd in D.fit_data(build, approach, group=g) if rd.name == REL)}
         res[(f["job"]["K"], float(f["job"]["arm"]["r"]))].append(one(f, rds[g], n_org, band))
     rep = {"org_size_cuts_persons": q.tolist(), "persons_by_n_org": {str(int(k)): int(v) for k, v in zip(*np.unique(np.minimum(n_org, 3), return_counts=True))}}
     for cell, rows in sorted(res.items()):
@@ -101,8 +104,9 @@ def run():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True)
-    json.dump(run(), open(ap.parse_args().out, "w"), indent=1, default=float)
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); ap.add_argument("--approach", type=int, default=1)
+    a = ap.parse_args()
+    json.dump(run(a.approach), open(a.out, "w"), indent=1, default=float)
 
 
 if __name__ == "__main__":

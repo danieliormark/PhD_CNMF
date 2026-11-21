@@ -4495,3 +4495,11 @@ bits (single-affiliation), 0.53–0.75 (3+); organisations 0.07–0.34. Mechanis
 (from their articles and co-authors) spread reconstructed affiliation weight onto organisations of those other
 communities where no tie exists; the effect grows with K. Consistent with author×affiliation held-out existence no
 better than the degree-only rule at K 5 (RL-320).
+
+### RL-323 — 2026-11-21 — Affiliation closure: proposals 1–3 agreed (owner)
+Owner: "I agree with your proposals 1-3" → (1) the closure ratio split by persons' number of organisations and by
+organisation size becomes a standing reading (`fit/closure_affiliation_check.py`); (2) it is read again in stage 1's
+social log-damping arm; (3) interpretation: a community's organisation profile is partly implied by its persons'
+secondary memberships, not only by observed affiliations. Owner raised, not insisting: a larger loss weight for the
+affiliation relations (author×affiliation, article×affiliation). Owner asked whether approach 1 and approach 2 differ
+→ the same check run for approach 2 (article×affiliation).
