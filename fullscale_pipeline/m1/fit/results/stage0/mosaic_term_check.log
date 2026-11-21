@@ -1,0 +1,12 @@
+approach 1 K  5 r 0   (10 fits)  tied: n 8054 own 1.00 excess -0.10 (>0 0.22, >0.5 0.02) AP 0.1713/0.1106 | untied: n 345 own 0.98 excess -0.06 (>0 0.29, >0.5 0.02) AP 0.0399/0.0033
+approach 1 K  5 r 0.3 (10 fits)  tied: n 8054 own 1.58 excess +0.00 (>0 0.51, >0.5 0.23) AP 0.1747/0.1106 | untied: n 345 own 0.94 excess -0.36 (>0 0.11, >0.5 0.00) AP 0.0447/0.0033
+approach 1 K  5 r 1   (10 fits)  tied: n 8054 own 2.13 excess +0.58 (>0 0.84, >0.5 0.55) AP 0.1655/0.1106 | untied: n 345 own 0.92 excess -0.35 (>0 0.10, >0.5 0.00) AP 0.0444/0.0033
+approach 1 K 13 r 0   (10 fits)  tied: n 8054 own 1.43 excess -0.16 (>0 0.18, >0.5 0.02) AP 0.1729/0.1106 | untied: n 345 own 1.00 excess -0.11 (>0 0.24, >0.5 0.03) AP 0.0458/0.0033
+approach 1 K 13 r 0.3 (10 fits)  tied: n 8054 own 2.17 excess +0.04 (>0 0.52, >0.5 0.32) AP 0.1735/0.1106 | untied: n 345 own 1.00 excess -0.40 (>0 0.11, >0.5 0.00) AP 0.0368/0.0033
+approach 1 K 13 r 1   (10 fits)  tied: n 8054 own 2.88 excess +0.71 (>0 0.74, >0.5 0.57) AP 0.1707/0.1106 | untied: n 345 own 1.00 excess -0.51 (>0 0.08, >0.5 0.01) AP 0.0413/0.0033
+approach 2 K  5 r 0   (10 fits)  tied: n 8054 own 0.99 excess -0.19 (>0 0.16, >0.5 0.01) AP 0.1727/0.1106 | untied: n 345 own 0.98 excess -0.16 (>0 0.22, >0.5 0.02) AP 0.0368/0.0033
+approach 2 K  5 r 0.3 (10 fits)  tied: n 8054 own 1.54 excess -0.04 (>0 0.46, >0.5 0.19) AP 0.1767/0.1106 | untied: n 345 own 0.94 excess -0.40 (>0 0.10, >0.5 0.01) AP 0.0259/0.0033
+approach 2 K  5 r 1   (10 fits)  tied: n 8054 own 2.06 excess +0.44 (>0 0.79, >0.5 0.46) AP 0.1685/0.1106 | untied: n 345 own 0.91 excess -0.42 (>0 0.10, >0.5 0.01) AP 0.0358/0.0033
+approach 2 K 13 r 0   (10 fits)  tied: n 8054 own 1.41 excess -0.26 (>0 0.14, >0.5 0.01) AP 0.1747/0.1106 | untied: n 345 own 1.00 excess -0.21 (>0 0.19, >0.5 0.02) AP 0.0462/0.0033
+approach 2 K 13 r 0.3 (10 fits)  tied: n 8054 own 2.15 excess -0.02 (>0 0.49, >0.5 0.29) AP 0.1691/0.1106 | untied: n 345 own 1.00 excess -0.46 (>0 0.09, >0.5 0.00) AP 0.0446/0.0033
+approach 2 K 13 r 1   (10 fits)  tied: n 8054 own 2.83 excess +0.60 (>0 0.71, >0.5 0.54) AP 0.1676/0.1106 | untied: n 345 own 0.99 excess -0.55 (>0 0.06, >0.5 0.00) AP 0.0456/0.0033

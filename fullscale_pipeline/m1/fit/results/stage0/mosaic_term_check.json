@@ -1,0 +1,302 @@
+{
+ "approach_1_K5_r0": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 0.9954056362716196,
+    "excess_median": -0.10273689393203883,
+    "share_excess_positive": 0.21697293270424634,
+    "share_excess_above_0.5bit": 0.015333995530171344,
+    "existence": 0.17126559682075576,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9766778675648555,
+    "excess_median": -0.06475757313717784,
+    "share_excess_positive": 0.2884057971014493,
+    "share_excess_above_0.5bit": 0.021739130434782608,
+    "existence": 0.03988277737921143,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_1_K5_r0.3": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 1.5762557858140345,
+    "excess_median": 0.003264201993520672,
+    "share_excess_positive": 0.5072013906133599,
+    "share_excess_above_0.5bit": 0.22796126148497642,
+    "existence": 0.17467585707894617,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.940329970631305,
+    "excess_median": -0.36484902597842434,
+    "share_excess_positive": 0.1072463768115942,
+    "share_excess_above_0.5bit": 0.004347826086956522,
+    "existence": 0.04474406096045462,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_1_K5_r1": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 2.125325002725856,
+    "excess_median": 0.5752190417593346,
+    "share_excess_positive": 0.8387757635957288,
+    "share_excess_above_0.5bit": 0.5464365532654581,
+    "existence": 0.16553321194331444,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9163385328610321,
+    "excess_median": -0.35186699314760894,
+    "share_excess_positive": 0.09855072463768116,
+    "share_excess_above_0.5bit": 0.002898550724637681,
+    "existence": 0.04443764877740515,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_1_K13_r0": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 1.4332416537084909,
+    "excess_median": -0.16400040411427236,
+    "share_excess_positive": 0.18245592252296994,
+    "share_excess_above_0.5bit": 0.018313881301216785,
+    "existence": 0.17294114992734366,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 1.0007026448513996,
+    "excess_median": -0.1138226359583504,
+    "share_excess_positive": 0.24057971014492754,
+    "share_excess_above_0.5bit": 0.03043478260869565,
+    "existence": 0.04577588456129292,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_1_K13_r0.3": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 2.170705160466034,
+    "excess_median": 0.036669194933836746,
+    "share_excess_positive": 0.5203625527688105,
+    "share_excess_above_0.5bit": 0.3174199155699032,
+    "existence": 0.17354848869043504,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9992360736186139,
+    "excess_median": -0.39511911735233085,
+    "share_excess_positive": 0.1144927536231884,
+    "share_excess_above_0.5bit": 0.004347826086956522,
+    "existence": 0.03682406159011712,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_1_K13_r1": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 2.8768080335148016,
+    "excess_median": 0.7050723332009132,
+    "share_excess_positive": 0.7431710951080208,
+    "share_excess_above_0.5bit": 0.570461882294512,
+    "existence": 0.17070134685592395,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9974418132706502,
+    "excess_median": -0.5084654418259398,
+    "share_excess_positive": 0.0782608695652174,
+    "share_excess_above_0.5bit": 0.005797101449275362,
+    "existence": 0.04126428299552411,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_2_K5_r0": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 0.9938723928277893,
+    "excess_median": -0.18584269880499754,
+    "share_excess_positive": 0.15855475540104297,
+    "share_excess_above_0.5bit": 0.011174571641420413,
+    "existence": 0.17273121666962904,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9752987780938764,
+    "excess_median": -0.1577184085186128,
+    "share_excess_positive": 0.21884057971014492,
+    "share_excess_above_0.5bit": 0.020289855072463767,
+    "existence": 0.036842214274879256,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_2_K5_r0.3": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 1.5353243933947756,
+    "excess_median": -0.044393910802513814,
+    "share_excess_positive": 0.46287558976905885,
+    "share_excess_above_0.5bit": 0.1946237894214055,
+    "existence": 0.17672694534508165,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9364229418725631,
+    "excess_median": -0.396053954840631,
+    "share_excess_positive": 0.10144927536231885,
+    "share_excess_above_0.5bit": 0.005797101449275362,
+    "existence": 0.025883847419960387,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_2_K5_r1": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 2.0596466943839737,
+    "excess_median": 0.44214821640279767,
+    "share_excess_positive": 0.7853240625776012,
+    "share_excess_above_0.5bit": 0.4648000993295257,
+    "existence": 0.16853475386628664,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9055938845768311,
+    "excess_median": -0.4154533283863861,
+    "share_excess_positive": 0.09710144927536232,
+    "share_excess_above_0.5bit": 0.005797101449275362,
+    "existence": 0.03581791380691204,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_2_K13_r0": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 1.412661630295861,
+    "excess_median": -0.25683041139741614,
+    "share_excess_positive": 0.13868885026074002,
+    "share_excess_above_0.5bit": 0.012229947851999007,
+    "existence": 0.17465301344491052,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 1.0001550389907057,
+    "excess_median": -0.2059952881796122,
+    "share_excess_positive": 0.19420289855072465,
+    "share_excess_above_0.5bit": 0.02318840579710145,
+    "existence": 0.046180245700606054,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_2_K13_r0.3": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 2.1450658338466586,
+    "excess_median": -0.01743176411439612,
+    "share_excess_positive": 0.49087409982617336,
+    "share_excess_above_0.5bit": 0.289607648373479,
+    "existence": 0.1690900447726397,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9972929223882053,
+    "excess_median": -0.4556261466599078,
+    "share_excess_positive": 0.08985507246376812,
+    "share_excess_above_0.5bit": 0.002898550724637681,
+    "existence": 0.044556569308346644,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ },
+ "approach_2_K13_r1": {
+  "fits": 10,
+  "median": {
+   "tied": {
+    "n": 8054.0,
+    "own_spread_median": 2.8312656395584685,
+    "excess_median": 0.6014218482558988,
+    "share_excess_positive": 0.7082815992053637,
+    "share_excess_above_0.5bit": 0.5350136578097839,
+    "existence": 0.16756348175702407,
+    "chance": 0.11059580220686313,
+    "hidden_ties": 8584.0
+   },
+   "untied": {
+    "n": 345.0,
+    "own_spread_median": 0.9945982112519574,
+    "excess_median": -0.5488020313221673,
+    "share_excess_positive": 0.06376811594202898,
+    "share_excess_above_0.5bit": 0.0,
+    "existence": 0.045568244548104264,
+    "chance": 0.0032981692686481273,
+    "hidden_ties": 103.0
+   }
+  }
+ }
+}

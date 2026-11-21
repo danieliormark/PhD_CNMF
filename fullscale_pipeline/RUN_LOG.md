@@ -4513,3 +4513,15 @@ inside: articles with 1 / 2 / 3+ organisations (644 / 540 / 919 articles; 22 / 2
 (0.3–2.3 % on ties). The difference between approaches comes mainly from the mix: in approach 2 most tie weight is on
 articles with 3+ organisations (reproduced ≈ 1), in approach 1 on single-affiliation persons (71 %); articles' memberships
 are also less spread (0.30–0.51 bits) than they are mixed in their organisations.
+
+### RL-325 — 2026-11-21 — Mosaic vs blend under the word-similarity term (no fits)
+`fit/mosaic_term_check.py` (study A pass 3, K 5 and 13, r 0 / 0.3 / 1, both approaches, hold-out group 1, 10 seeds;
+`results/stage0/mosaic_term_check`). Shared child hyperedges (≥ 2 articles): 8,054 W-tied, 345 untied. Excess spread =
+own spread − the most mixed of its contexts (its articles' memberships, its parents'; measures.excess_spread, ρ 1).
+W-tied, median excess (share > 0; share > 0.5 bit): r 0: −0.10 to −0.26 (0.14–0.22; 0.01–0.02); r 0.3: −0.04 to +0.04
+(0.46–0.52; 0.19–0.32); r 1: +0.44 to +0.71 (0.71–0.84; 0.46–0.57). Own spread (bits): K 13 r 0 / 0.3 / 1 = 1.43 / 2.17 /
+2.88 (approach 1). Untied (no term acting): −0.06 to −0.55 at every r (≤ 0.29 > 0). Held-out existence of hidden
+child×article ties of W-tied hyperedges (within-class AP; chance 0.111): r 0 0.171–0.175, r 0.3 0.169–0.177, r 1
+0.166–0.171 — no gain from spreading, a small loss at r 1. → At λ = 0 ideas are less mixed than their contexts (mosaic,
+as RL-239); r 0.3 brings the typical W-tied idea to the mix of its most mixed context; r 1 makes most W-tied ideas more
+mixed than any context they are observed in (by > 0.5 bit for about half), without better prediction of where they occur.
