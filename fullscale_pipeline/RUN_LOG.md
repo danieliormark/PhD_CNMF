@@ -4572,3 +4572,8 @@ approaches; pass-3 fits reused as the grid points r 0 / 0.3 / 1 (same settings: 
 approach 2, K 13, K 20), extended (4.5, 6, …) if 3 is chosen (highest-grid-value rule); λ rule R2. 1,500 new fits
 (≈ 1,100–1,300 CPU-hours). Correction recorded: the text check on W-tied hyperedges is optional (decided 2026-11-06), not
 a decided guard as said earlier the same day.
+
+### RL-331 — 2026-11-21 — λ calibration point 2: W-c (owner)
+Owner: "I approve W-c" → first the proposed swap measure ("which people group with which ideas", proposed 2026-11-18)
+on the existing bare-swap fits (no fits); if it detects the swap, the swap with the term on runs at K 13 at the chosen
+r with a λ = 0 reference refitted under S3 10 % (160 fits), read by the decided reading and the new measure.
