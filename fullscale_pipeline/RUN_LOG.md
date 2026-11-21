@@ -4417,3 +4417,23 @@ without errors.
 ### RL-316 — 2026-11-20 — Study B pass 3 submitted (owner, CSF3)
 Fit array job 25048179 (1,500 fits, 188 tasks × 8); post-processing job 25048180 (afterany on 25048179: alignment,
 aggregation with B's build, readings, J1 choice under option (b) → `pass3_{choice,readings}_B`).
+
+### RL-317 — 2026-11-21 — Pass 3 (study B) finished and read
+Jobs 25048179 / 25048180: 1,500/1,500 fits converged, 0 errors; `pass3_{choice,readings}_B`. **r*(K)** (J1 step 1):
+approach 1 K 3 / 5 / 8 / 13 / 20 = 0.3 / 0.3 / 0.3 / 1 / 0; approach 2 = 0.3 / 0.3 / 1 / 1 / 0. At K 20 the term lowers
+existence (paired r 0 − r 1: +0.0021 ± 0.0009 / +0.0029 ± 0.0008), so λ = 0 is chosen there (A: r 1 at K 20).
+**K protocol, option (b):** existence at r*: approach 1 0.0702 / 0.0740 / 0.0745 / 0.0729 / 0.0746 (best K 20, cut-off
+0.0735) → band and candidates {5, 8, 20}; approach 2 0.0712 / 0.0758 / 0.0741 / 0.0741 / 0.0754 (best K 5, cut-off
+0.0749) → {5, 20}. Bands are not contiguous: K 13 (and K 8 in approach 2) fall just below the cut-off at r* = 1, while
+K 13 at r = 0 would be inside (paired r 0 − r 1 at K 13: +0.0008 ± 0.0005 / +0.0015 ± 0.0008). Paired, K 20 (r 0) − K 5
+(r 0.3): +0.0006 ± 0.0006 / −0.0004 ± 0.0009 (a tie); K 5 − K 3: +0.0038 ± 0.0012 / +0.0046 ± 0.0015 (K 3 out). Value at
+the candidates: K 5 0.105 / 0.101, K 20 (r 0) 0.033 / 0.034 (paired K 5 − K 20 +0.071 ± 0.004 / +0.067 ± 0.002). Rule b
+would keep approach 1 {5, 8, 20} (best K 20, so the value guard removes nothing), approach 2 {5}.
+No gate, ghost, alignment or convergence failure. **T1 holds in every cell (0 failing fits at every K, K 20
+included; A: K 20 failed through the genre catch-all community).** Mono-domain: none recurring. Off-diagonal share of
+child×article ≤ 0.0004. Stability below A at every K (Track A adjusted at r*: approach 1 0.614 / 0.506 / 0.439 / 0.333 /
+0.251; A 0.760 / 0.626 / 0.513 / 0.409 / 0.316). Article×article closure (approach 2) as in A (K 5: 0.50 / 0.94 / 1.10
+for r 0 / 0.3 / 1). Flattening at r 1 as in A (R ÷ S 0.002–0.03).
+**Grid end:** approach 1's best K by existence is 20, the grid's top → RL-296's condition ("K = 32 only if pass 3's best
+K is 20") is met for study B, approach 1 → to the owner. C3: candidate K of each study lie on the other's grid (no
+top-up from candidates).

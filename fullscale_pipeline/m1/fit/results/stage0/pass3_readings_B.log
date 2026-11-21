@@ -1,0 +1,33 @@
+approach_1
+  K3_r0      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.197  R/S 0.680
+  K3_r0.3    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.122  R/S 0.027
+  K3_r1      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.051  R/S 0.002
+  K5_r0      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.166  R/S 0.671
+  K5_r0.3    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.131  R/S 0.039
+  K5_r1      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.069  R/S 0.012
+  K8_r0      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.133  R/S 0.690
+  K8_r0.3    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.132  R/S 0.052
+  K8_r1      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.084  R/S 0.018
+  K13_r0     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.103  R/S 0.711
+  K13_r0.3   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.123  R/S 0.068
+  K13_r1     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0001  closure art×art nan  below min ω0 0.096  R/S 0.024
+  K20_r0     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.096  R/S 0.723
+  K20_r0.3   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0002  closure art×art nan  below min ω0 0.116  R/S 0.082
+  K20_r1     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0004  closure art×art nan  below min ω0 0.109  R/S 0.029
+approach_2
+  K3_r0      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.489  below min ω0 0.235  R/S 0.681
+  K3_r0.3    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.065  below min ω0 0.131  R/S 0.028
+  K3_r1      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.020  below min ω0 0.053  R/S 0.003
+  K5_r0      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.499  below min ω0 0.201  R/S 0.673
+  K5_r0.3    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.935  below min ω0 0.132  R/S 0.042
+  K5_r1      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.095  below min ω0 0.072  R/S 0.014
+  K8_r0      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.446  below min ω0 0.154  R/S 0.690
+  K8_r0.3    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.794  below min ω0 0.131  R/S 0.056
+  K8_r1      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.998  below min ω0 0.085  R/S 0.020
+  K13_r0     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.407  below min ω0 0.123  R/S 0.713
+  K13_r0.3   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.625  below min ω0 0.119  R/S 0.073
+  K13_r1     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.819  below min ω0 0.097  R/S 0.025
+  K20_r0     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.437  below min ω0 0.112  R/S 0.724
+  K20_r0.3   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.02 (recurring 0)  offdiag child×article 0.0000  closure art×art 0.587  below min ω0 0.113  R/S 0.087
+  K20_r1     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.06 (recurring 0)  offdiag child×article 0.0002  closure art×art 0.756  below min ω0 0.111  R/S 0.031
+errors: 0
