@@ -4442,3 +4442,12 @@ top-up from candidates).
 Owner: "I agree with recomendation 3" → K = 32 is not fitted in stage 0, although study B's approach-1 best K by
 existence is 20 (RL-296's condition; the trigger is a tie, K 20 − K 5 = +0.0006 ± 0.0006); stage 2 fits K = 32
 unconditionally in both studies (decided 2026-11-03). Stage 0 hands on the candidate sets (RL-313, RL-317).
+
+### RL-319 — 2026-11-21 — Band at the best r (B2, owner); stage-0 candidates re-read
+Owner: "I approve B2" → in the K protocol a K's place in the band is judged on its best existence over r (any r that
+gives existence within one SE of the best K's); the K is then carried forward at r*(K) from the λ rule, and the gate and
+vetoes are read on the carried cell (K, r*(K)) — an implementation choice, stated here (all checks pass in every cell of
+both studies, so it changes nothing now). Applies to stage 2 as option (b) does. Code: `pass3_choice.py --band-at
+best_over_r` (default; `r_star` = the earlier J1 reading). Re-read (`pass3_choice_{A,B}`): **study A** approach 1
+{5, 8, 13, 20}, approach 2 {5, 8, 13} (unchanged); **study B** approach 1 {5, 8, 13, 20} (K 13 admitted at r 0, carried
+at r* 1), approach 2 {5, 8, 13, 20} (K 8, 13 admitted at r 0.3 / 0, carried at r* 1). Bands contiguous in all four.

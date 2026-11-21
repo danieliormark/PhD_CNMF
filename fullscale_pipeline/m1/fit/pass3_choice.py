@@ -20,6 +20,7 @@ from .pass2_lambda_rule import rule, stab
 from .aggregate import choose_k
 
 FRACTION = "0.2"
+BAND_AT = "best_over_r"   # B2 (owner 2026-11-21); "r_star" = B1 (earlier reading), set by --band-at
 V1_ACTS = False      # set by --v1 acting (stage 0: V1 reported only, owner 2026-11-19 "I choose T1 + V1", step-11 decision)
 CHECKS = ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails")
 
@@ -52,7 +53,16 @@ def run(agg, readings=None):
                               "groups_scored": e["n_groups_scored"], "epochs_median": e.get("epochs_median"),
                               **{c: k_fails(e, c) for c in CHECKS}, "chosen_r_at_K": r == lam[K]["chosen_r"]})
         chosen = {K: lam[K]["chosen_r"] for K in Ks if "chosen_r" in lam[K]}
-        cellsK = {K: {"existence": byr[r][str(K)]["existence"], "se_existence": byr[r][str(K)]["se_existence"],
+        # B2 (owner 2026-11-21, "I approve B2"): a K's place in the band is judged on its best existence over r (the r
+        # that admits it); the K is carried forward at r*(K) from the λ rule, and the gate and vetoes are those of the
+        # carried cell (K, r*(K)). BAND_AT = "r_star" reproduces the earlier J1 reading (B1).
+        def band_r(K):
+            if BAND_AT == "r_star":
+                return chosen[K]
+            ok = [r for r in byr if str(K) in byr[r] and byr[r][str(K)].get("existence") is not None]
+            return max(ok, key=lambda r: byr[r][str(K)]["existence"])
+        admit = {K: band_r(K) for K in chosen}
+        cellsK = {K: {"existence": byr[admit[K]][str(K)]["existence"], "se_existence": byr[admit[K]][str(K)]["se_existence"],
                       "value": byr[r][str(K)]["value"], "se_value": byr[r][str(K)]["se_value"],
                       **{c: k_fails(byr[r][str(K)], c) for c in CHECKS}} for K, r in chosen.items()}
         # K protocol, option (b) (owner 2026-11-20): existence band, value reported only; V1 (T1 by the counting rule)
@@ -64,7 +74,7 @@ def run(agg, readings=None):
                 cellsK[K]["v1_fails"] = v1[K]
         sel = choose_k(cellsK, value_guard=False) if len(cellsK) >= 2 else None
         sel_rule_b = choose_k({K: {k: v for k, v in c.items() if k != "v1_fails"} for K, c in cellsK.items()}) if len(cellsK) >= 2 else None
-        out = {"lambda_rule_per_K": lam, "r_star": chosen, "K_protocol": sel, "K_protocol_rule_b": sel_rule_b,
+        out = {"lambda_rule_per_K": lam, "r_star": chosen, "band_r": admit, "band_at": BAND_AT, "K_protocol": sel, "K_protocol_rule_b": sel_rule_b,
                "V1_would_be": v1, "V1_acts": V1_ACTS, "table": table}
         if sel:
             # grid-end rule (stage 0, 2026-11-19: "extended if the new K* falls at the grid's end"; RL-296 for the top).
@@ -85,7 +95,7 @@ def run(agg, readings=None):
         if readings:
             out["readings"] = rc
         rep[f"approach_{a}"] = out
-        print(f"approach {a}: r*(K) = {chosen}; K protocol (option b, V1 {'acting' if V1_ACTS else 'reported'}) — best by existence "
+        print(f"approach {a}: r*(K) = {chosen}; K protocol (option b, band at {BAND_AT}: r {admit}, V1 {'acting' if V1_ACTS else 'reported'}) — best by existence "
               f"{sel and sel['best']}, band {sel and sel['band']}, removed by V1 {sel and sel['removed_by_v1']}, "
               f"candidates {sel and sel['candidates']}, fallback {sel and sel['fallback']}; V1 would-be {v1}; "
               f"[rule b for comparison: removed by value {sel_rule_b and sel_rule_b['removed_by_value']}, candidates "
@@ -101,9 +111,10 @@ def run(agg, readings=None):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--agg", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--readings", default=None); ap.add_argument("--v1", choices=("reported", "acting"), default="reported")
+    ap.add_argument("--band-at", choices=("best_over_r", "r_star"), default="best_over_r")
     a = ap.parse_args()
-    global V1_ACTS
-    V1_ACTS = a.v1 == "acting"
+    global V1_ACTS, BAND_AT
+    V1_ACTS = a.v1 == "acting"; BAND_AT = a.band_at
     rep = run(json.load(open(a.agg)), json.load(open(a.readings)) if a.readings else None)
     json.dump(rep, open(a.out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
 

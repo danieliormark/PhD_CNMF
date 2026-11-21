@@ -523,12 +523,21 @@
    "13": 1.0,
    "20": 0.0
   },
+  "band_r": {
+   "3": 0.3,
+   "5": 0.3,
+   "8": 0.3,
+   "13": 0.0,
+   "20": 0.0
+  },
+  "band_at": "best_over_r",
   "K_protocol": {
    "best": 20,
    "cutoff": 0.0735095924807284,
    "band": [
     5,
     8,
+    13,
     20
    ],
    "removed_by_value": [],
@@ -539,6 +548,7 @@
    "candidates": [
     5,
     8,
+    13,
     20
    ],
    "convergence_only_to_owner": [],
@@ -552,6 +562,7 @@
    "band": [
     5,
     8,
+    13,
     20
    ],
    "removed_by_value": [],
@@ -562,6 +573,7 @@
    "candidates": [
     5,
     8,
+    13,
     20
    ],
    "convergence_only_to_owner": [],
@@ -868,6 +880,7 @@
    "candidates": [
     5,
     8,
+    13,
     20
    ],
    "best_by_existence": 20,
@@ -885,6 +898,10 @@
    {
     "K": 8,
     "r": 0.3
+   },
+   {
+    "K": 13,
+    "r": 1.0
    },
    {
     "K": 20,
@@ -2526,14 +2543,25 @@
    "13": 1.0,
    "20": 0.0
   },
+  "band_r": {
+   "3": 0.3,
+   "5": 0.3,
+   "8": 0.3,
+   "13": 0.0,
+   "20": 0.0
+  },
+  "band_at": "best_over_r",
   "K_protocol": {
    "best": 5,
    "cutoff": 0.07490224564929407,
    "band": [
     5,
+    8,
+    13,
     20
    ],
    "removed_by_value": [
+    13,
     20
    ],
    "value_guard": false,
@@ -2542,6 +2570,8 @@
    "value_se": 0.0024348035316351037,
    "candidates": [
     5,
+    8,
+    13,
     20
    ],
    "convergence_only_to_owner": [],
@@ -2554,9 +2584,12 @@
    "cutoff": 0.07490224564929407,
    "band": [
     5,
+    8,
+    13,
     20
    ],
    "removed_by_value": [
+    13,
     20
    ],
    "value_guard": true,
@@ -2564,7 +2597,8 @@
    "value_reference": 0.10124528097163107,
    "value_se": 0.0024348035316351037,
    "candidates": [
-    5
+    5,
+    8
    ],
    "convergence_only_to_owner": [],
    "fallback": null,
@@ -2869,6 +2903,8 @@
   "grid_end": {
    "candidates": [
     5,
+    8,
+    13,
     20
    ],
    "best_by_existence": 5,
@@ -2882,6 +2918,14 @@
    {
     "K": 5,
     "r": 0.3
+   },
+   {
+    "K": 8,
+    "r": 1.0
+   },
+   {
+    "K": 13,
+    "r": 1.0
    },
    {
     "K": 20,
