@@ -4544,3 +4544,13 @@ as long as own - mist mixed of its W neighbours is ok"; asked why the most mixed
 `fit/mosaic_w_context.py` extended (same fits as RL-326): parents' mix 1.39 / 1.63 / 1.62 bits (r 0 / 0.3 / 1); own spread
 minus the mean of the three contexts (articles, parents, W neighbours) −0.34 / +0.05 / +0.57 (share above 0: 0.19 / 0.54 /
 0.80); minus their median −0.11 / +0.08 / +0.71 (0.26 / 0.56 / 0.76).
+
+### RL-328 — 2026-11-21 — Spread guard: G0 (owner); r tie-break raised by the owner; stability across r
+Owner: "I choose G0" → no spread guard in λ calibration; excess spread (and the W-context reading) stays reported;
+r is judged by held-out prediction and the decided guards. Owner raised (to settle): "Instead of taking the highest by
+defauls if several values are in the same band, I would consider taking the one with better other characteristics like
+stability, etc". Measured on study A pass 3 (aggregates; paired by hold-out group, mean ± SE over 5 groups), in the five
+cells whose existence band holds several r: chance-adjusted Track A is higher at r 1 than at the other band values in
+every one (e.g. approach 1 K 13: r 0.3 − r 1 = −0.022 ± 0.001; approach 2 K 13: r 0 − r 1 = −0.049 ± 0.004); the mean of
+the per-facet Track B over facets other than child hyperedges likewise (−0.009 to −0.079, SE ≤ 0.003); the social facets
+alone (authors, organisations, journals) do not change with r (differences ≤ 0.01; journals slightly lower at r 1).
