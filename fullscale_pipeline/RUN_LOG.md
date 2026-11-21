@@ -4480,3 +4480,18 @@ per group** (decided: reported, flagged if the band differs): approach 1 band {5
 approach 2 {5, 8} (main {5, 8, 13}) → flagged; single seeds are noisier (SE 0.002–0.004). **Stability between hold-out
 groups** (lowest-loss seed of each group, chance-adjusted Track A): below within-group stability by 0.07–0.15 (K 5 0.539 /
 0.575 vs 0.626 / 0.662; K 13 0.316 / 0.330 vs 0.409 / 0.427).
+
+### RL-322 — 2026-11-21 — Author×affiliation closure above 1: where the extra crossing weight comes from (no fits)
+Owner: "Start with the author×affiliation closure check". `fit/closure_affiliation_check.py` (study A pass 3, approach
+1, K 5 r 0.3 / K 13 r 1 / K 20 r 1, 50 fits each, aligned; medians over fits; `results/stage0/closure_affiliation_check`).
+Sanity: all persons 1.198 / 1.333 / 1.402, as RL-321. **By the person's number of organisations** (7,373 / 1,519 / 578
+persons with 1 / 2 / 3+; 71 / 19 / 10 % of tie weight): closure ratio 1.32 / 1.03 / 0.99 (K 5), 1.44 / 1.24 / 1.04
+(K 13), 1.55 / 1.30 / 1.06 (K 20) — the excess is in persons with ONE organisation, not in multi-affiliated persons
+(hypothesis rejected). **Where it sits:** 0.3–2 % of the reconstructed crossing weight lies on observed ties; the rest on
+empty cells (person × organisation pairs with no tie). **Organisation side**, by size (persons tied; thirds): small 6.0
+/ 7.6 / 14.3, medium 2.2 / 2.3 / 2.8, large 1.0 / 1.1 / 1.1 — the data put a small organisation's few persons in its own
+main community (crossing 2–4 %), the reconstruction sends 25–34 % of its weight across. Person membership spread 0.39–0.47
+bits (single-affiliation), 0.53–0.75 (3+); organisations 0.07–0.34. Mechanism (reading): persons' secondary memberships
+(from their articles and co-authors) spread reconstructed affiliation weight onto organisations of those other
+communities where no tie exists; the effect grows with K. Consistent with author×affiliation held-out existence no
+better than the degree-only rule at K 5 (RL-320).
