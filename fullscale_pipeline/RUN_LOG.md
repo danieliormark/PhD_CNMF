@@ -4577,3 +4577,20 @@ a decided guard as said earlier the same day.
 Owner: "I approve W-c" → first the proposed swap measure ("which people group with which ideas", proposed 2026-11-18)
 on the existing bare-swap fits (no fits); if it detects the swap, the swap with the term on runs at K 13 at the chosen
 r with a λ = 0 reference refitted under S3 10 % (160 fits), read by the decided reading and the new measure.
+
+### RL-332 — 2026-11-21 — Swap measure "which people group with which ideas" on the bare-swap fits (no fits)
+`fit/swap_link_measure.py` (KL, K 13, group 1, seeds 1–10, p 0 = pass-1 fits; medians over seeds;
+`results/stage0/swap_link_measure`, study B in `results/stage0/B/`). Article pairs sharing a social entity in the data
+the fit saw; (A) data = Jaccard of their child-hyperedge sets minus the all-pairs mean; (B) model = co-membership minus the
+all-pairs mean; ratio to p 0 in brackets. **Study A:** approach 1, shared author (1,107 pairs): data +0.0087 → +0.0004 at
+p 1 (0.05), model +0.078 → +0.063 (0.81; 0.82 / 0.82 / 0.65 at p 0.25 / 0.5 / 0.75); organisation via authors (18,286):
+data +0.0015 → 0.00, model +0.0064 → +0.0117 (1.82, rises); journal (53,571): data +0.0001 (no link even at p 0), model
++0.0105 → +0.0020 (0.19). Approach 2, co-author tie: data +0.0087 → +0.0020 (0.23), model +0.231 → +0.228 (0.98);
+organisation: data +0.0015 → 0.0007 (0.45), model 0.042 → 0.037 (0.88); journal: data ≈ 0, model +0.0105 → +0.0066 (0.62).
+**Study B:** approach 1 author: data 0.0066 → 0.0002 (0.03), model 0.107 → 0.047 (0.44); organisation model 0.73; journal
+0.32; approach 2 co-author tie model 0.92, organisation 0.94, journal 0.40. Reading: the data link people to ideas through
+authors and co-author ties (A clear), not through journals; the model keeps articles that share a person together at p 1
+(A approach 1: 81 % of the p-0 co-membership excess remains, approach 2: 98 %; B: 44 % / 92 %) — mostly through the
+social ties themselves; the part that follows shared ideas is ≈ 20 % in A approach 1, ≈ 56 % in B approach 1, ≤ 10 % in
+approach 2. The measure detects the swap where the decided reading did not ("no change") → W-c's condition for the
+term-on swap (W-a) is met. Seed SEs of the ratios not yet computed.
