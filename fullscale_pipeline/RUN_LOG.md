@@ -4594,3 +4594,18 @@ authors and co-author ties (A clear), not through journals; the model keeps arti
 social ties themselves; the part that follows shared ideas is ≈ 20 % in A approach 1, ≈ 56 % in B approach 1, ≤ 10 % in
 approach 2. The measure detects the swap where the decided reading did not ("no change") → W-c's condition for the
 term-on swap (W-a) is met. Seed SEs of the ratios not yet computed.
+
+### RL-333 — 2026-11-21 — W-aware semantic similarity in the swap measure; text check allowed; λ calibration (A) prepared
+(1) Owner asked whether the article similarity used W ("better name it as semantic similarity"): it did not (exact
+child-hyperedge sets). Added a W-aware version (`swap_link_measure.py`: each article's hyperedge vector extended by its
+hyperedges' W neighbours, x + x·Wn, cosine): larger excess at p 0 (study A approach 1 author pairs +0.0218 vs +0.0087;
+co-author ties +0.0218) and the same pattern — falls to 0.02 / 0.21 of p 0 at p 1; journals ≈ 0 throughout; study B
+alike. Conclusions of RL-332 unchanged. (2) Owner: "You can also run the optional test" → the optional text check on
+W-tied hyperedges (blind reading of W-tied pairs placed in the same vs different main communities; decided design
+2026-11-06) is permitted; it runs at the chosen r once λ calibration is read (readers: Read/Write only, no code).
+(3) λ calibration, study A, prepared: `plan.lambda_cal("A")` → `fit/slurm/jobs_lambda_cal.jsonl` (1,500 jobs; settings
+checked identical to pass 3 except stage, r, λ; e.g. K 13 approach 1 r 1.5 / 2 / 3 → λ 2,856 / 3,807 / 5,711; K 5 approach
+2 r 0.45 / 0.6 / 0.8 → 921 / 1,229 / 1,638); `slurm/lambda_cal.sh` chains `submit_lambda_cal_post.sh` (alignment,
+aggregation, readings, λ rule R2 + K protocol over pass 3's cells and the new ones; `pass3_choice.py --agg` now takes
+several aggregations, single-aggregation output unchanged). Smoke test: r 3 at K 13 and r 0.8 at K 5 through 320 epochs
+(term on after the 300-epoch warm-up) ran with finite losses.

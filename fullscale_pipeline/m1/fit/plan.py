@@ -317,6 +317,36 @@ def B_repeats():
     return out
 
 
+LAMCAL_NEW_R = {"low": (0.45, 0.6, 0.8), "high": (1.5, 2.0, 3.0)}     # owner 2026-11-21, point 1 (RL-330)
+LAMCAL_SIDE = {"A": {1: {3: "low", 5: "low", 8: "low", 13: "high", 20: "high"},   # from pass 3 r* (R2): 0.3 → low, 1 → high
+                     2: {3: "low", 5: "low", 8: "high", 13: "high", 20: "high"}}}
+
+
+def lambda_cal(study="A", extra=None):
+    """λ calibration (owner 2026-11-21, point 1 "I approve point 1", RL-330): λ_child at every coarse K 3 / 5 / 8 / 13 / 20,
+    both approaches; pass 3's fits are the grid points r 0 / 0.3 / 1; new r 0.45 / 0.6 / 0.8 where pass 3 chose 0.3 and
+    1.5 / 2 / 3 where it chose 1; every other setting as pass 3 (KL, S3 10 %, groups 1–5 × seeds 1–10, fraction 0.03,
+    float32, warm-up 300, 8,000-epoch ceiling); λ_child = r × the pass-1 basis of that K; read with pass 3 by the λ rule
+    R2 (pass3_choice.py --agg <pass 3> <λ calibration>). extra: {(approach, K): (r, ...)} for a later extension
+    (highest-grid-value rule). Stage "lambda_cal" (study B: "B_lambda_cal")."""
+    basis = json.load(open(PASS3_BASIS[study]))
+    stage = "lambda_cal" if study == "A" else "B_lambda_cal"
+    out = []
+    plan_r = extra or {(a, K): LAMCAL_NEW_R[side] for a, byK in LAMCAL_SIDE[study].items() for K, side in byK.items()}
+    for (a, K), rs in sorted(plan_r.items()):
+        e = basis[f"pass1|{a}|{K}"]
+        for r in rs:
+            for g in range(5):
+                for s_ in range(1, 11):
+                    j = dict(job(stage, a, g, K, 1, s_, FRACTION[1], dtype="float32",
+                                 terms={"lambda_child": r * e["basis"], "w_form": "contrast"}, arm={"r": r}, max_epochs=8000),
+                             social_link_start="diagonal", offdiag_level=0.1, offdiag_semantic=True, lambda_from_r=True)
+                    if study == "B":
+                        j["build"] = BUILD_B
+                    out.append(j)
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -329,10 +359,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full", "lambda_cal"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K)}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K), "lambda_cal": lambda: lambda_cal("A")}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

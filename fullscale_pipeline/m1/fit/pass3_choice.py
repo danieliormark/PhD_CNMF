@@ -110,14 +110,29 @@ def run(agg, readings=None):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--agg", required=True); ap.add_argument("--out", required=True)
-    ap.add_argument("--readings", default=None); ap.add_argument("--v1", choices=("reported", "acting"), default="reported")
+    ap = argparse.ArgumentParser(); ap.add_argument("--agg", required=True, nargs="+"); ap.add_argument("--out", required=True)
+    ap.add_argument("--readings", default=None, nargs="+"); ap.add_argument("--v1", choices=("reported", "acting"), default="reported")
     ap.add_argument("--band-at", choices=("best_over_r", "r_star"), default="best_over_r")
     ap.add_argument("--lambda-rule", choices=("R2", "rule_b"), default="R2")
     a = ap.parse_args()
     global V1_ACTS, BAND_AT, LAMBDA_RULE
     V1_ACTS = a.v1 == "acting"; BAND_AT = a.band_at; LAMBDA_RULE = a.lambda_rule
-    rep = run(json.load(open(a.agg)), json.load(open(a.readings)) if a.readings else None)
+    # several aggregations / readings (λ calibration, 2026-11-21: pass 3's r 0 / 0.3 / 1 with the new r of λ calibration):
+    # cells are merged; each r must come from one stage only
+    agg = {"_status": {"fits_finished": 0}}
+    for i, path in enumerate(a.agg):
+        d = json.load(open(path))
+        agg["_status"]["fits_finished"] += (d.get("_status") or {}).get("fits_finished", 0)
+        agg.update({f"{i}|{k}": v for k, v in d.items() if not k.startswith("_")})
+    rs = [(v["cell"]["approach"], float(v["cell"]["arm"]["r"])) for k, v in agg.items() if not k.startswith("_")]
+    assert len(rs) == len(set(rs)), "an (approach, r) cell appears in more than one aggregation"
+    readings = None
+    if a.readings:
+        readings = {"cells": {}}
+        for path in a.readings:
+            for ap_, cells in json.load(open(path))["cells"].items():
+                readings["cells"].setdefault(ap_, {}).update(cells)
+    rep = run(agg, readings)
     json.dump(rep, open(a.out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
 
 

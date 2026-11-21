@@ -21,6 +21,8 @@ from .aggregate import load_fit, load_UZ, latest_fits
 from .align import fit_rds
 
 ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
+_W = sp.load_npz(D.Build(D.BUILD).path + "W_child_child.npz").tocsr()
+_d = np.asarray(_W.sum(1)).ravel(); _WN = (sp.diags(np.where(_d > 0, 1 / np.maximum(_d, 1e-300), 0)) @ _W).tocsr()
 
 
 def incidence(rd, n_art):
@@ -46,9 +48,13 @@ def one(f, cache):
     inter = (X @ X.T).toarray(); size = np.asarray(X.sum(1)).ravel()
     union = size[:, None] + size[None, :] - inter
     J = np.where(union > 0, inter / np.maximum(union, 1), 0.0)
+    # W-aware semantic similarity (owner 2026-11-21: "did you account for the W-based similarity?"): each article's
+    # child-hyperedge vector is extended by its hyperedges' W neighbours (x + x·Wn, Wn = W row-normalised), cosine
+    Xw = X + X @ _WN; nw = np.sqrt(np.asarray(Xw.multiply(Xw).sum(1)).ravel())
+    Jw = (Xw @ Xw.T).toarray() / np.maximum(np.outer(nw, nw), 1e-300)
     U, Z = load_UZ(f["dir"]); P = M.weighted_memberships(U, Z, {k: tuple(v) for k, v in f["result"]["relations"].items()})["article"]["P"]
     C = P @ P.T
-    iu = np.triu_indices(n, 1); Jall, Call = J[iu].mean(), C[iu].mean()
+    iu = np.triu_indices(n, 1); Jall, Call, Jwall = J[iu].mean(), C[iu].mean(), Jw[iu].mean()
     ent = {}
     if j["approach"] == 1:
         Ea = incidence(rds["author_article"], n); ent["author"] = Ea
@@ -63,6 +69,7 @@ def one(f, cache):
     for name, E in ent.items():
         r, c = pair_mask(E)
         out[name] = {"pairs": int(len(r)), "data_excess": float(J[r, c].mean() - Jall), "model_excess": float(C[r, c].mean() - Call),
+                     "data_w_excess": float(Jw[r, c].mean() - Jwall),
                      "data_all": float(Jall), "model_all": float(Call)}
     return out
 
@@ -86,7 +93,8 @@ def run():
         ents = [e for e in next(iter(byp.values())) if e != "fits"]
         for e in ents:
             d0, m0 = byp["0.0"][e]["data_excess"], byp["0.0"][e]["model_excess"]
-            print(f"   {e:28s} " + "  ".join(f"p {p}: data {v[e]['data_excess']:+.4f} ({v[e]['data_excess'] / d0:4.2f}) model {v[e]['model_excess']:+.4f} ({v[e]['model_excess'] / m0:4.2f})"
+            w0 = byp["0.0"][e]["data_w_excess"]
+            print(f"   {e:28s} " + "  ".join(f"p {p}: sem {v[e]['data_excess']:+.4f} ({v[e]['data_excess'] / d0:4.2f}) semW {v[e]['data_w_excess']:+.4f} ({v[e]['data_w_excess'] / w0:4.2f}) model {v[e]['model_excess']:+.4f} ({v[e]['model_excess'] / m0:4.2f})"
                                                for p, v in byp.items()) + f"  [pairs at p 0: {byp['0.0'][e]['pairs']}]", flush=True)
     return rep
 
