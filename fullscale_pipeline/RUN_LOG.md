@@ -4462,3 +4462,21 @@ baseline (rank by the product of the two entities' visible tie counts, within th
 (approach 1). Prevalence of hidden ties among hidden cells: child×article 0.0004, child×parent 0.00004, author×affiliation
 0.0002, article×affiliation 0.0008. AUC 0.95–0.96 on the semantic relations, but the degree-only rule reaches 0.966 on
 child×article (above the model's 0.961), which is why the decided score is within-class AP.
+
+### RL-321 — 2026-11-21 — Study A pass 3: the readings not yet reported (from pass3_readings_A / aggregates)
+At r*(K), both approaches. **Off-diagonal share** of reconstructed tie weight: 0 (≤ 0.0002) in every relation at every
+K, floor share of off-diagonal core cells 0.97–1.00; exception child×article at K 20 (0.006 / 0.016). **Diagonal rule /
+effective partners:** 1.00 everywhere (child×article 1.03 / 1.08 at K 20). **Closure ratio** (reconstructed ÷ observed
+tie weight crossing main communities): child×article 0.91–1.02, parent×child 1.04–1.20, author×article 1.03–1.14,
+article×affiliation 1.07–1.11, article×journal 0.91–0.98 (K 20: 0.78 / 0.85), author×affiliation 1.13–1.40 (rising with
+K: K 5 1.20, K 13 1.33, K 20 1.40). **Co-membership on crossing ties** (Σ_k p_k q_k, tie-weighted) vs within-community
+ties vs random pairs: above chance at K ≥ 5 (e.g. child×article K 5 0.233 / 0.714 / 0.194; K 13 0.133 / 0.616 /
+0.068), **below chance at K 3** (child×article 0.293 vs 0.346, article×journal 0.295 vs 0.351, parent×child 0.317 vs
+0.346). **Mosaic vs blend** (child hyperedges with ≥ 2 articles): share below 0.8 × between-article spread 0.08–0.13
+(ω = 0), 0.13–0.25 (ω = 1); mean shortfall 0.02–0.04 bits; articles nearly pure (membership entropy 0.17–0.52 bits),
+hyperedges' own spread 1.25–3.13 bits, rising with K and r (K 13 r 1: 2.85 of log2 13 = 3.70) — nearly pure articles
+bridged by spread ideas; the spread is largely the word-similarity term's (r 0 at K 13: 1.42 bits). **Lowest-loss seed
+per group** (decided: reported, flagged if the band differs): approach 1 band {5, 13, 20} (main {5, 8, 13, 20}),
+approach 2 {5, 8} (main {5, 8, 13}) → flagged; single seeds are noisier (SE 0.002–0.004). **Stability between hold-out
+groups** (lowest-loss seed of each group, chance-adjusted Track A): below within-group stability by 0.07–0.15 (K 5 0.539 /
+0.575 vs 0.626 / 0.662; K 13 0.316 / 0.330 vs 0.409 / 0.427).
