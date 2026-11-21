@@ -4503,3 +4503,13 @@ social log-damping arm; (3) interpretation: a community's organisation profile i
 secondary memberships, not only by observed affiliations. Owner raised, not insisting: a larger loss weight for the
 affiliation relations (author×affiliation, article×affiliation). Owner asked whether approach 1 and approach 2 differ
 → the same check run for approach 2 (article×affiliation).
+
+### RL-324 — 2026-11-21 — Affiliation closure in approach 2 (article×affiliation)
+`closure_affiliation_check.py --approach 2` (`results/stage0/closure_affiliation_check_a2`; rows = articles). Overall
+closure 1.073 / 1.072 / 1.080 at K 5 / 13 / 20 (approach 1: 1.20 / 1.33 / 1.40) — smaller and flat in K. Same pattern
+inside: articles with 1 / 2 / 3+ organisations (644 / 540 / 919 articles; 22 / 23 / 55 % of tie weight): 1.39 / 1.16 /
+0.96 (K 5), 1.25 / 1.12 / 1.00 (K 13), 1.30 / 1.11 / 0.99 (K 20); organisations by size (1 / 2 / 3+ articles): 2.3 / 1.2 /
+1.0 (K 5), 2.4 / 1.2 / 1.0 (K 13), 3.4 / 1.3 / 1.0 (K 20). Extra crossing weight again almost all on cells without ties
+(0.3–2.3 % on ties). The difference between approaches comes mainly from the mix: in approach 2 most tie weight is on
+articles with 3+ organisations (reproduced ≈ 1), in approach 1 on single-affiliation persons (71 %); articles' memberships
+are also less spread (0.30–0.51 bits) than they are mixed in their organisations.

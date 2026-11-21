@@ -1,0 +1,24 @@
+K 5 r 0.3 (50 fits) — medians over fits
+   1 organisation         persons 644.000  tie_weight_share 0.222  data_crossing_share 0.228  recon_crossing_share 0.315  closure_ratio 1.389  recon_crossing_on_ties_share 0.003  person_entropy 0.289
+   2 organisations        persons 540.000  tie_weight_share 0.233  data_crossing_share 0.278  recon_crossing_share 0.323  closure_ratio 1.155  recon_crossing_on_ties_share 0.005  person_entropy 0.296
+   3+ organisations       persons 919.000  tie_weight_share 0.545  data_crossing_share 0.337  recon_crossing_share 0.323  closure_ratio 0.960  recon_crossing_on_ties_share 0.011  person_entropy 0.304
+   all                    persons 2103.000  tie_weight_share 1.000  data_crossing_share 0.301  recon_crossing_share 0.321  closure_ratio 1.073  recon_crossing_on_ties_share 0.007  person_entropy 0.297
+   organisations small    organisations 1484.000  data_crossing_share 0.075  recon_crossing_share 0.171  closure_ratio 2.289  organisation_entropy 0.201
+   organisations medium   organisations 443.000  data_crossing_share 0.184  recon_crossing_share 0.230  closure_ratio 1.232  organisation_entropy 0.381
+   organisations large    organisations 584.000  data_crossing_share 0.415  recon_crossing_share 0.408  closure_ratio 0.981  organisation_entropy 0.871
+K 13 r 1 (50 fits) — medians over fits
+   1 organisation         persons 644.000  tie_weight_share 0.222  data_crossing_share 0.314  recon_crossing_share 0.395  closure_ratio 1.253  recon_crossing_on_ties_share 0.005  person_entropy 0.502
+   2 organisations        persons 540.000  tie_weight_share 0.233  data_crossing_share 0.351  recon_crossing_share 0.397  closure_ratio 1.121  recon_crossing_on_ties_share 0.009  person_entropy 0.514
+   3+ organisations       persons 919.000  tie_weight_share 0.545  data_crossing_share 0.408  recon_crossing_share 0.402  closure_ratio 0.997  recon_crossing_on_ties_share 0.016  person_entropy 0.520
+   all                    persons 2103.000  tie_weight_share 1.000  data_crossing_share 0.373  recon_crossing_share 0.399  closure_ratio 1.072  recon_crossing_on_ties_share 0.011  person_entropy 0.513
+   organisations small    organisations 1484.000  data_crossing_share 0.097  recon_crossing_share 0.229  closure_ratio 2.387  organisation_entropy 0.243
+   organisations medium   organisations 443.000  data_crossing_share 0.247  recon_crossing_share 0.312  closure_ratio 1.245  organisation_entropy 0.482
+   organisations large    organisations 584.000  data_crossing_share 0.512  recon_crossing_share 0.498  closure_ratio 0.975  organisation_entropy 1.159
+K 20 r 1 (50 fits) — medians over fits
+   1 organisation         persons 644.000  tie_weight_share 0.222  data_crossing_share 0.320  recon_crossing_share 0.413  closure_ratio 1.301  recon_crossing_on_ties_share 0.007  person_entropy 0.508
+   2 organisations        persons 540.000  tie_weight_share 0.233  data_crossing_share 0.365  recon_crossing_share 0.409  closure_ratio 1.111  recon_crossing_on_ties_share 0.011  person_entropy 0.511
+   3+ organisations       persons 919.000  tie_weight_share 0.545  data_crossing_share 0.413  recon_crossing_share 0.412  closure_ratio 0.993  recon_crossing_on_ties_share 0.023  person_entropy 0.507
+   all                    persons 2103.000  tie_weight_share 1.000  data_crossing_share 0.382  recon_crossing_share 0.411  closure_ratio 1.080  recon_crossing_on_ties_share 0.016  person_entropy 0.508
+   organisations small    organisations 1484.000  data_crossing_share 0.075  recon_crossing_share 0.246  closure_ratio 3.418  organisation_entropy 0.118
+   organisations medium   organisations 443.000  data_crossing_share 0.254  recon_crossing_share 0.325  closure_ratio 1.276  organisation_entropy 0.484
+   organisations large    organisations 584.000  data_crossing_share 0.534  recon_crossing_share 0.513  closure_ratio 0.959  organisation_entropy 1.226
