@@ -4451,3 +4451,14 @@ both studies, so it changes nothing now). Applies to stage 2 as option (b) does.
 best_over_r` (default; `r_star` = the earlier J1 reading). Re-read (`pass3_choice_{A,B}`): **study A** approach 1
 {5, 8, 13, 20}, approach 2 {5, 8, 13} (unchanged); **study B** approach 1 {5, 8, 13, 20} (K 13 admitted at r 0, carried
 at r* 1), approach 2 {5, 8, 13, 20} (K 8, 13 admitted at r 0.3 / 0, carried at r* 1). Bands contiguous in all four.
+
+### RL-320 — 2026-11-21 — What the combined existence score is made of (study A pass 3; saved measures only)
+Combined existence = relation-weighted mean of within-class AP over the relations with hidden cells (child×article
+0.375, child×parent 0.375, the approach's affiliation relation 0.25): e.g. approach 1 K 5 r 0.3: 0.375 × 0.181 + 0.375 ×
+0.076 + 0.25 × 0.0037 = 0.097. Per relation (mean over the cell's 50 fits), within-class AP / chance / degree-only
+baseline (rank by the product of the two entities' visible tie counts, within the same classes): child×article 0.181 /
+0.110 / 0.156 (K 13 r 1: 0.175); child×parent 0.076 / 0.020 / 0.046 (0.077); author×affiliation 0.0037 / 0.0013 /
+0.0036 at K 5, 0.0096 at K 13; article×affiliation (approach 2) 0.013 / 0.0056 / 0.0105 (0.016). Combined chance ≈ 0.049
+(approach 1). Prevalence of hidden ties among hidden cells: child×article 0.0004, child×parent 0.00004, author×affiliation
+0.0002, article×affiliation 0.0008. AUC 0.95–0.96 on the semantic relations, but the degree-only rule reaches 0.966 on
+child×article (above the model's 0.961), which is why the decided score is within-class AP.
