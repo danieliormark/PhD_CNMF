@@ -4535,3 +4535,12 @@ own spread 1.43 / 2.17 / 2.88 bits; mix of its articles 1.48 / 1.56 / 1.66; most
 minus the most mixed of all three contexts −1.03 / −0.54 / −0.19 (share above 0: 0.03 / 0.02 / 0.03). A single article's
 spread (median) 0.00 / 0.03 / 0.19. → Excess spread (RL-325) exists only relative to an idea's usage (articles,
 parents); relative to its word neighbours it never exceeds. Memberships at each r are those of that r's fits.
+
+### RL-327 — 2026-11-21 — Owner on words as context; idea spread against the mean / median of its contexts
+Owner (recorded as stated): "the choice of words can convey meanins or local practices/conventions. Therefore, words are
+informative for understanding how ideas are being locally interpreted." and "given the ok numbers of own spread compared to
+its semantic neighbours ... I would focuse on false positive and false negative existence - not the spread of words per se
+as long as own - mist mixed of its W neighbours is ok"; asked why the most mixed context, not the mean / median.
+`fit/mosaic_w_context.py` extended (same fits as RL-326): parents' mix 1.39 / 1.63 / 1.62 bits (r 0 / 0.3 / 1); own spread
+minus the mean of the three contexts (articles, parents, W neighbours) −0.34 / +0.05 / +0.57 (share above 0: 0.19 / 0.54 /
+0.80); minus their median −0.11 / +0.08 / +0.71 (0.26 / 0.56 / 0.76).

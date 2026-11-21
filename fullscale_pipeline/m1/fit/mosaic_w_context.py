@@ -19,7 +19,14 @@ for sp_ in glob.glob("/mnt/hum01-rds/Basov/p91688di/m1_fits/stage0_pass3/*/spec.
     # articles' mix alone
     T=sp.csr_matrix((ca.tie_val,(ca.tie_col,ca.tie_row)),shape=(ca.shape[1],ca.shape[0])); s=np.asarray(T.sum(1)).ravel()
     amix=M.entropy_bits(np.asarray(T@wm["article"]["P"])/np.maximum(s,1e-300)[:,None])
+    pc=next(x for x in rds if x.name=="parent_child")
+    Tp=sp.csr_matrix((pc.tie_val,(pc.tie_col,pc.tie_row)),shape=(pc.shape[1],pc.shape[0])); sp_=np.asarray(Tp.sum(1)).ravel()
+    pmix=M.entropy_bits(np.asarray(Tp@wm["parent"]["P"])/np.maximum(sp_,1e-300)[:,None])
+    mean3=(amix+pmix+wmix)/3; med3=np.median(np.vstack([amix,pmix,wmix]),0)
+    out.setdefault(("mean",j["arm"]["r"]),[]).append([np.median(pmix[m]),np.median((own-mean3)[m]),np.mean((own-mean3)[m]>0),np.median((own-med3)[m]),np.mean((own-med3)[m]>0)])
     r=j["arm"]["r"]; out.setdefault(r,[]).append([np.median(own[m]),np.median(amix[m]),np.median(ctx[m]),np.median(wmix[m]),
         np.median((own-np.maximum(ctx,wmix))[m]), np.mean((own-np.maximum(ctx,wmix))[m]>0), np.median(M.entropy_bits(wm["article"]["P"]))])
-for r,v in sorted(out.items()):
+for k,v in sorted([kv for kv in out.items() if isinstance(kv[0],tuple)], key=lambda kv: kv[0][1]):
+    x=np.median(np.array(v),0); print(f"r {k[1]}: parents' mix {x[0]:.2f} | own − mean of 3 contexts {x[1]:+.2f} (share>0 {x[2]:.2f}) | own − median of 3 {x[3]:+.2f} (share>0 {x[4]:.2f})")
+for r,v in sorted([kv for kv in out.items() if not isinstance(kv[0],tuple)]):
     x=np.median(np.array(v),0); print(f"r {r}: own {x[0]:.2f} | articles' mix {x[1]:.2f} | most mixed of articles/parents {x[2]:.2f} | W-neighbours' mix {x[3]:.2f} | excess incl. W {x[4]:+.2f} (share>0 {x[5]:.2f}) | single article spread {x[6]:.2f}")
