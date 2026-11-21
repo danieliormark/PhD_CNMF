@@ -4525,3 +4525,13 @@ child×article ties of W-tied hyperedges (within-class AP; chance 0.111): r 0 0.
 0.166–0.171 — no gain from spreading, a small loss at r 1. → At λ = 0 ideas are less mixed than their contexts (mosaic,
 as RL-239); r 0.3 brings the typical W-tied idea to the mix of its most mixed context; r 1 makes most W-tied ideas more
 mixed than any context they are observed in (by > 0.5 bit for about half), without better prediction of where they occur.
+
+### RL-326 — 2026-11-21 — Contexts of an idea's spread, W neighbours included (owner's questions on "excess spread")
+Owner questioned the name and the reading (a high-valence idea such as "logit" is used across disciplines), asked
+which entities' mixture is used and under which r it was measured. `fit/mosaic_w_context.py` (study A pass 3, approach
+1, K 13, group 1, seeds 1–10; medians over the 8,054 W-tied ideas with ≥ 2 articles, then over fits), r 0 / 0.3 / 1:
+own spread 1.43 / 2.17 / 2.88 bits; mix of its articles 1.48 / 1.56 / 1.66; most mixed of articles' and parents' mixes
+1.56 / 1.81 / 1.87; mix of its W neighbours (W-weighted average of their memberships) 2.63 / 2.69 / 3.07; own spread
+minus the most mixed of all three contexts −1.03 / −0.54 / −0.19 (share above 0: 0.03 / 0.02 / 0.03). A single article's
+spread (median) 0.00 / 0.03 / 0.19. → Excess spread (RL-325) exists only relative to an idea's usage (articles,
+parents); relative to its word neighbours it never exceeds. Memberships at each r are those of that r's fits.
