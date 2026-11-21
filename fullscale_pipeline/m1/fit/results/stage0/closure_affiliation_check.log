@@ -22,21 +22,3 @@ K 20 r 1 (50 fits) — medians over fits
    organisations small    organisations 936.000  data_crossing_share 0.024  recon_crossing_share 0.340  closure_ratio 14.323  organisation_entropy 0.074
    organisations medium   organisations 830.000  data_crossing_share 0.122  recon_crossing_share 0.341  closure_ratio 2.803  organisation_entropy 0.199
    organisations large    organisations 745.000  data_crossing_share 0.262  recon_crossing_share 0.291  closure_ratio 1.108  organisation_entropy 0.238
-Traceback (most recent call last):
-  File "/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/closure_affiliation_check.py", line 109, in <module>
-    main()
-  File "/mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/closure_affiliation_check.py", line 105, in main
-    json.dump(run(), open(ap.parse_args().out, "w"), indent=1, default=float)
-  File "/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib/python3.10/json/__init__.py", line 179, in dump
-    for chunk in iterable:
-  File "/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib/python3.10/json/encoder.py", line 431, in _iterencode
-    yield from _iterencode_dict(o, _current_indent_level)
-  File "/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
-    yield from chunks
-  File "/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib/python3.10/json/encoder.py", line 376, in _iterencode_dict
-    raise TypeError(f'keys must be str, int, float, bool or None, '
-TypeError: keys must be str, int, float, bool or None, not int32

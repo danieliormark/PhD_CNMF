@@ -1,0 +1,198 @@
+{
+ "org_size_cuts_persons": [
+  1.0,
+  4.0
+ ],
+ "persons_by_n_org": {
+  "0": 582,
+  "1": 7373,
+  "2": 1519,
+  "3": 578
+ },
+ "K5_r0.3": {
+  "fits": 50,
+  "median": {
+   "1 organisation": {
+    "persons": 7373.0,
+    "tie_weight_share": 0.7081168642977446,
+    "data_crossing_share": 0.18567747185677475,
+    "recon_crossing_share": 0.24358191341505936,
+    "closure_ratio": 1.3172933922189571,
+    "recon_crossing_on_ties_share": 0.0029079633175994176,
+    "person_entropy": 0.3924212428576579
+   },
+   "2 organisations": {
+    "persons": 1519.0,
+    "tie_weight_share": 0.19397890005363908,
+    "data_crossing_share": 0.2567580001710664,
+    "recon_crossing_share": 0.2653696641393024,
+    "closure_ratio": 1.0338367395114059,
+    "recon_crossing_on_ties_share": 0.0052199245483071435,
+    "person_entropy": 0.4831194665522075
+   },
+   "3+ organisations": {
+    "persons": 578.0,
+    "tie_weight_share": 0.09808140625827187,
+    "data_crossing_share": 0.2790711290090506,
+    "recon_crossing_share": 0.27672460546345856,
+    "closure_ratio": 0.9904394070998805,
+    "recon_crossing_on_ties_share": 0.008298349907270417,
+    "person_entropy": 0.5286433429839847
+   },
+   "all": {
+    "persons": 9470.0,
+    "tie_weight_share": 1.0,
+    "data_crossing_share": 0.20931075787477266,
+    "recon_crossing_share": 0.250614043934701,
+    "closure_ratio": 1.197604600139011,
+    "recon_crossing_on_ties_share": 0.0038697506856919875,
+    "person_entropy": 0.41598797994615505
+   },
+   "organisations small": {
+    "organisations": 936.0,
+    "data_crossing_share": 0.03931374687858782,
+    "recon_crossing_share": 0.2459128550358323,
+    "closure_ratio": 6.044847650559484,
+    "organisation_entropy": 0.27634203039447924
+   },
+   "organisations medium": {
+    "organisations": 830.0,
+    "data_crossing_share": 0.1104516464947087,
+    "recon_crossing_share": 0.24128781753862621,
+    "closure_ratio": 2.19922193619412,
+    "organisation_entropy": 0.31060956799476214
+   },
+   "organisations large": {
+    "organisations": 745.0,
+    "data_crossing_share": 0.2516639607151919,
+    "recon_crossing_share": 0.2543471664369853,
+    "closure_ratio": 1.0087283718517113,
+    "organisation_entropy": 0.27481026095817607
+   }
+  }
+ },
+ "K13_r1": {
+  "fits": 50,
+  "median": {
+   "1 organisation": {
+    "persons": 7373.0,
+    "tie_weight_share": 0.7081168642977446,
+    "data_crossing_share": 0.1923911569239116,
+    "recon_crossing_share": 0.27655897342171976,
+    "closure_ratio": 1.4383664569715875,
+    "recon_crossing_on_ties_share": 0.006304240477371513,
+    "person_entropy": 0.4171550758811133
+   },
+   "2 organisations": {
+    "persons": 1519.0,
+    "tie_weight_share": 0.19397890005363908,
+    "data_crossing_share": 0.28430770423985013,
+    "recon_crossing_share": 0.35733688724722906,
+    "closure_ratio": 1.2432655351331512,
+    "recon_crossing_on_ties_share": 0.007943912483980737,
+    "person_entropy": 0.5829315021758925
+   },
+   "3+ organisations": {
+    "persons": 578.0,
+    "tie_weight_share": 0.09808140625827187,
+    "data_crossing_share": 0.32033884744907315,
+    "recon_crossing_share": 0.3335551121510888,
+    "closure_ratio": 1.0430147750083203,
+    "recon_crossing_on_ties_share": 0.01375455609145628,
+    "person_entropy": 0.6964460117227703
+   },
+   "all": {
+    "persons": 9470.0,
+    "tie_weight_share": 1.0,
+    "data_crossing_share": 0.22366041355244898,
+    "recon_crossing_share": 0.29723794906282835,
+    "closure_ratio": 1.3333363094513704,
+    "recon_crossing_on_ties_share": 0.007358769763793883,
+    "person_entropy": 0.4617983685237626
+   },
+   "organisations small": {
+    "organisations": 936.0,
+    "data_crossing_share": 0.035054132871090445,
+    "recon_crossing_share": 0.27020588569084775,
+    "closure_ratio": 7.578641669591319,
+    "organisation_entropy": 0.10096220696780553
+   },
+   "organisations medium": {
+    "organisations": 830.0,
+    "data_crossing_share": 0.12536952472779625,
+    "recon_crossing_share": 0.2901070215789886,
+    "closure_ratio": 2.3118027269650203,
+    "organisation_entropy": 0.2677400591513617
+   },
+   "organisations large": {
+    "organisations": 745.0,
+    "data_crossing_share": 0.2675360786329356,
+    "recon_crossing_share": 0.3027899463037703,
+    "closure_ratio": 1.134395896714873,
+    "organisation_entropy": 0.3392375072576075
+   }
+  }
+ },
+ "K20_r1": {
+  "fits": 50,
+  "median": {
+   "1 organisation": {
+    "persons": 7373.0,
+    "tie_weight_share": 0.7081168642977446,
+    "data_crossing_share": 0.1869659568696596,
+    "recon_crossing_share": 0.2921151250844307,
+    "closure_ratio": 1.5460860158209024,
+    "recon_crossing_on_ties_share": 0.008630535302870057,
+    "person_entropy": 0.42372624233989314
+   },
+   "2 organisations": {
+    "persons": 1519.0,
+    "tie_weight_share": 0.19397890005363908,
+    "data_crossing_share": 0.2770103251432442,
+    "recon_crossing_share": 0.3513541427595959,
+    "closure_ratio": 1.2961406439354695,
+    "recon_crossing_on_ties_share": 0.011653990300855692,
+    "person_entropy": 0.6061930471689456
+   },
+   "3+ organisations": {
+    "persons": 578.0,
+    "tie_weight_share": 0.09808140625827187,
+    "data_crossing_share": 0.32348638091666293,
+    "recon_crossing_share": 0.3431793802765233,
+    "closure_ratio": 1.0601450223451758,
+    "recon_crossing_on_ties_share": 0.019717079161252288,
+    "person_entropy": 0.7540668058694937
+   },
+   "all": {
+    "persons": 9470.0,
+    "tie_weight_share": 1.0,
+    "data_crossing_share": 0.21842178187991218,
+    "recon_crossing_share": 0.3112807803014753,
+    "closure_ratio": 1.402195560622555,
+    "recon_crossing_on_ties_share": 0.010380845287643173,
+    "person_entropy": 0.47132751964215036
+   },
+   "organisations small": {
+    "organisations": 936.0,
+    "data_crossing_share": 0.023975198464077363,
+    "recon_crossing_share": 0.34024655898452427,
+    "closure_ratio": 14.322775769989605,
+    "organisation_entropy": 0.07390265373211374
+   },
+   "organisations medium": {
+    "organisations": 830.0,
+    "data_crossing_share": 0.12191344777052965,
+    "recon_crossing_share": 0.3414859457733296,
+    "closure_ratio": 2.802894584603197,
+    "organisation_entropy": 0.19854887950714561
+   },
+   "organisations large": {
+    "organisations": 745.0,
+    "data_crossing_share": 0.2620254506750825,
+    "recon_crossing_share": 0.29090926861519684,
+    "closure_ratio": 1.1079280384934238,
+    "organisation_entropy": 0.23787231165273365
+   }
+  }
+ }
+}
