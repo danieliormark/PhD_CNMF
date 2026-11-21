@@ -47,6 +47,39 @@ def rule(cands):
                        for r in sorted(cands)}}
 
 
+def _nonchild_by_group(entry):
+    """Per hold-out group: mean of the per-facet Track B (seed pairs) over facets other than child hyperedges."""
+    return {g["group"]: float(np.mean([v for f, v in g["stability"]["per_facet_B"].items() if f != "child"]))
+            for g in entry["groups"] if g.get("stability")}
+
+
+def rule_r2(cands):
+    """λ rule R2 (owner 2026-11-21: "I approve R2 with value reported only"): (1) band = r values whose existence is within
+    one SE of the best r's; value is reported, removes nothing; (2) the stability guard as before (gate not failing where
+    λ = 0 passes; Track A / B not below λ = 0's by more than λ = 0's SE); (3) among the band r passing the guard, the most
+    stable on the facets other than child hyperedges (where the term forces agreement) is chosen if its paired difference
+    (by hold-out group) to the largest such r exceeds 2 SE; otherwise the largest r."""
+    base = rule(cands)
+    best = max(cands, key=lambda r: cands[r]["existence"]); b = cands[best]
+    band = sorted(r for r in cands if cands[r]["existence"] >= b["existence"] - b["se_existence"])
+    ok = [r for r in band if base["stability"][r]["passes"]]
+    out = {"rule": "R2", "best_by_existence": best, "band": band, "passing_stability": ok, "scores": base["scores"],
+           "stability": base["stability"], "value_reported": {r: cands[r]["value"] for r in band}}
+    if not ok:
+        out["chosen_r"] = 0.0; return out
+    top = max(ok); nc = {r: _nonchild_by_group(cands[r]) for r in ok}
+    mean = {r: float(np.mean(list(v.values()))) for r, v in nc.items()}
+    cand = max(ok, key=lambda r: mean[r]); out["nonchild_stability"] = mean
+    if cand != top:
+        gs = sorted(set(nc[cand]) & set(nc[top])); d = np.array([nc[cand][g] - nc[top][g] for g in gs])
+        se = float(d.std(ddof=1) / math.sqrt(len(d))) if len(d) > 1 else float("inf")
+        out["paired_vs_largest"] = {"difference": float(d.mean()), "se": se}
+        out["chosen_r"] = cand if d.mean() > 2 * se else top
+    else:
+        out["chosen_r"] = top
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--pass1", required=True); ap.add_argument("--pass2", required=True)
     ap.add_argument("--out", required=True)

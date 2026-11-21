@@ -4554,3 +4554,13 @@ cells whose existence band holds several r: chance-adjusted Track A is higher at
 every one (e.g. approach 1 K 13: r 0.3 − r 1 = −0.022 ± 0.001; approach 2 K 13: r 0 − r 1 = −0.049 ± 0.004); the mean of
 the per-facet Track B over facets other than child hyperedges likewise (−0.009 to −0.079, SE ≤ 0.003); the social facets
 alone (authors, organisations, journals) do not change with r (differences ≤ 0.01; journals slightly lower at r 1).
+
+### RL-329 — 2026-11-21 — λ rule R2 (owner); pass-3 choices re-read
+Owner: "I approve R2 with value reported only" → λ rule at each K: (1) band = r values with existence within one SE of the
+best r's; held-out value reported, removes nothing; (2) the stability guard as before; (3) among band r passing it, the
+most stable on facets other than child hyperedges (mean of per-facet Track B over the other facets, per hold-out group)
+is chosen if its paired difference to the largest passing r exceeds 2 SE; otherwise the largest r. Code
+`pass2_lambda_rule.rule_r2`; `pass3_choice.py --lambda-rule R2` (default; `rule_b` = earlier rule). Applies to λ
+calibration and later stages. Re-read of pass 3: r*(K) unchanged in both studies (A: approach 1 0.3 / 0.3 / 0.3 / 1 / 1,
+approach 2 0.3 / 0.3 / 1 / 1 / 1; B: 0.3 / 0.3 / 0.3 / 1 / 0 and 0.3 / 0.3 / 1 / 1 / 0 for K 3 / 5 / 8 / 13 / 20): in every
+band with several r the most stable on the other facets is already the largest r; candidates unchanged.

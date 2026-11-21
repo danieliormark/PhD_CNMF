@@ -16,10 +16,11 @@
 # Usage: python -m fit.pass3_choice --agg ROOT/stage0_pass3/_aggregate_aligned.json --out OUT.json [--readings R.json]
 import argparse, json
 import numpy as np
-from .pass2_lambda_rule import rule, stab
+from .pass2_lambda_rule import rule, rule_r2, stab
 from .aggregate import choose_k
 
 FRACTION = "0.2"
+LAMBDA_RULE = "R2"        # owner 2026-11-21 ("I approve R2 with value reported only"); "rule_b" = earlier rule, --lambda-rule
 BAND_AT = "best_over_r"   # B2 (owner 2026-11-21); "r_star" = B1 (earlier reading), set by --band-at
 V1_ACTS = False      # set by --v1 acting (stage 0: V1 reported only, owner 2026-11-19 "I choose T1 + V1", step-11 decision)
 CHECKS = ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails")
@@ -42,7 +43,7 @@ def run(agg, readings=None):
                      and pk[str(K)].get("se_existence") is not None}
             if 0.0 not in cands:
                 lam[K] = {"error": "no λ = 0 cell at this K"}; continue
-            lam[K] = rule(cands)
+            lam[K] = rule_r2(cands) if LAMBDA_RULE == "R2" else rule(cands)   # R2: owner 2026-11-21
             for r, e in sorted(cands.items()):
                 s = stab(e)
                 table.append({"K": K, "r": r, "existence": e["existence"], "se_existence": e["se_existence"],
@@ -112,9 +113,10 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--agg", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--readings", default=None); ap.add_argument("--v1", choices=("reported", "acting"), default="reported")
     ap.add_argument("--band-at", choices=("best_over_r", "r_star"), default="best_over_r")
+    ap.add_argument("--lambda-rule", choices=("R2", "rule_b"), default="R2")
     a = ap.parse_args()
-    global V1_ACTS, BAND_AT
-    V1_ACTS = a.v1 == "acting"; BAND_AT = a.band_at
+    global V1_ACTS, BAND_AT, LAMBDA_RULE
+    V1_ACTS = a.v1 == "acting"; BAND_AT = a.band_at; LAMBDA_RULE = a.lambda_rule
     rep = run(json.load(open(a.agg)), json.load(open(a.readings)) if a.readings else None)
     json.dump(rep, open(a.out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
 

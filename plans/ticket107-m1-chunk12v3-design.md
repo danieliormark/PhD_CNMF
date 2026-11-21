@@ -2712,6 +2712,8 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-21, **spread guard — DECIDED: G0** (owner: "I choose G0"), after RL-325–327: no spread guard in λ calibration; excess spread stays a reported reading. Owner's view recorded: word choice conveys meanings and local conventions, so W neighbours are a legitimate context of an idea; the focus is on false-positive / false-negative existence as long as own spread minus the most mixed context including W neighbours stays acceptable (−1.03 / −0.54 / −0.19 at r 0 / 0.3 / 1). **Raised, to settle:** replacing "the largest r in the band" by the r with better other characteristics such as stability (RL-328).]*
 
+*[2026-11-21, **λ rule — DECIDED: R2** (owner: "I approve R2 with value reported only"): within the existence band (one SE of the best r), value is reported only; after the stability guard, the r most stable on facets other than child hyperedges is chosen if it beats the largest admissible r by more than 2 paired SE; otherwise the largest r. Replaces the value guard and the plain "largest λ" step of the pass-2 rule (2026-11-14/16/17). Pass-3 r* unchanged in both studies (RL-329).]*
+
 *[2026-11-19, **pass 3 order of choice — DECIDED: J1** (owner: "I approve J1 option"): the λ rule at each K first (r*(K)), then the K protocol over the cells (K, r*(K)); all (K, r) cells reported beside the choice. Pass 3 fits a fixed grid; refinement between grid values belongs to stage 2 (2026-11-03). RL-299.]*
 
 *[2026-11-19, **mono-domain response in stage 0 — DECIDED: report only** (owner: "For this stage report only"): counted and reported at every pass-3 (K, r) cell; veto from stage 2 on still open. RL-300.]*
