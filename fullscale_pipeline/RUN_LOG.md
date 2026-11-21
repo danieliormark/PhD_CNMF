@@ -4625,3 +4625,13 @@ Interpretation changes: in study A approach 1 the share of a person's grouping t
 marginally distinguishable from seed noise (2 SE), not a clear "20 %"; in approach 2 it is not detectable at all; the clear
 responses are journals (both studies, both approaches: the model's journal grouping follows content) and authors in study
 B (−52 %). The approach-1 organisation rise (+58 %, 2.7 SE, small in absolute terms) stays unexplained.
+
+### RL-335 — 2026-11-21 — Influence of one tie on an article's memberships, by relation (owner's question; no fits)
+Owner: are a single author's and a single hyperedge's influence on an article's membership the same, given damping,
+normalisation and weighting? Under the KL loss a tie's pull on the fit scales with w_r × x (relation weight × its value
+after the relation's Frobenius scaling). Study A, hold-out group 1, visible ties: one child×article tie median w·x 0.00051
+(p10–p90 0.00031–0.00087); one author×article tie 0.00147 (0.00096–0.00208), ≈ 3×; one article×journal tie 0.00361
+(binary), ≈ 7×; approach 2: article×affiliation 0.00163 (0.00040–0.00363), article×article 0.00123 (0.00023–0.00613). Per
+article (median share of its loss mass): child hyperedges 65 % (median 24 ties), authors 23 %, journal 11 % (approach 1);
+child hyperedges 67 %, organisations 15 %, journal 11 %, co-author ties 0 (median; most articles have none) (approach 2).
+Owner's caution recorded (memory): SEs over seeds / hold-out groups are noise yardsticks, not sample-to-population p-values.
