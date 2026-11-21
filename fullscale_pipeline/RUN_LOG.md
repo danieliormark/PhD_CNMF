@@ -4609,3 +4609,19 @@ checked identical to pass 3 except stage, r, λ; e.g. K 13 approach 1 r 1.5 / 2 
 aggregation, readings, λ rule R2 + K protocol over pass 3's cells and the new ones; `pass3_choice.py --agg` now takes
 several aggregations, single-aggregation output unchanged). Smoke test: r 3 at K 13 and r 0.8 at K 5 through 320 epochs
 (term on after the 300-epoch warm-up) ran with finite losses.
+
+### RL-334 — 2026-11-21 — Swap measure: effect sizes and significance (owner: "always consider the significance and effect size")
+Per-seed values saved (`swap_link_measure.json`, "per_seed"); paired by seed (p 1 − p 0, mean ± SE over 10 seeds; t).
+**Semantic link in the data at p 0** (vs random article pairs; SE of a mean over that many random pairs; standardised d =
+excess ÷ SD over all pairs 0.0145): pairs sharing an author / co-author tie +0.0087 (z 20, d 0.60); organisation
+(approach 2) +0.0015 (z 13, d 0.11); journal +0.0001 (z 1.8, d 0.01 — no link). Its fall at p 1 is large and certain
+(−76 to −96 %, t 6–74; journals not interpretable). **Model co-membership**, p 1 − p 0, study A: approach 1 author −0.0126 ±
+0.0060 (−16 %, t −2.1), organisation via authors +0.0040 ± 0.0015 (+58 %, t 2.7), journal −0.0086 ± 0.0009 (−78 %, t −9.8);
+approach 2 co-author tie −0.012 ± 0.022 (−5 %, t −0.5), organisation −0.0001 ± 0.0031 (0 %, t 0.0), journal −0.0038 ±
+0.0017 (−37 %, t −2.3). Study B: approach 1 author −0.0555 ± 0.0061 (−52 %, t −9.1), organisation −23 % (t −1.1), journal
+−76 % (t −4.3); approach 2 co-author −14 % (t −1.4), organisation −1 % (t −0.1), journal −69 % (t −3.3). A vs B, approach 1
+authors (unpaired, different hold-out draws): −0.013 ± 0.006 vs −0.056 ± 0.006, difference ≈ 5 SE.
+Interpretation changes: in study A approach 1 the share of a person's grouping that follows ideas (≈ 16 %) is only
+marginally distinguishable from seed noise (2 SE), not a clear "20 %"; in approach 2 it is not detectable at all; the clear
+responses are journals (both studies, both approaches: the model's journal grouping follows content) and authors in study
+B (−52 %). The approach-1 organisation rise (+58 %, 2.7 SE, small in absolute terms) stays unexplained.

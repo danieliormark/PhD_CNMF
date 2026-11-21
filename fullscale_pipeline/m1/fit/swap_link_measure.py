@@ -84,13 +84,15 @@ def run():
             continue
         if arm.get("swap_single_band") or any(k not in ("swap_p",) for k in arm) or j.get("social_link_start"):
             continue
-        p = float(arm.get("swap_p", 0.0)); rows[(j["approach"], p)].append(one(f, cache))
+        p = float(arm.get("swap_p", 0.0)); x = one(f, cache); x["_seed"] = j["seed"]; rows[(j["approach"], p)].append(x)
     rep = {}
     for (a, p), rs in sorted(rows.items()):
-        rep.setdefault(f"approach_{a}", {})[str(p)] = {"fits": len(rs), **{e: {k: float(np.median([x[e][k] for x in rs])) for k in rs[0][e]} for e in rs[0]}}
+        ents = [e for e in rs[0] if not e.startswith("_")]
+        rep.setdefault(f"approach_{a}", {})[str(p)] = {"fits": len(rs), **{e: {k: float(np.median([x[e][k] for x in rs])) for k in rs[0][e]} for e in ents},
+                                                      "per_seed": {str(x["_seed"]): {e: x[e] for e in ents} for x in rs}}
     for a, byp in rep.items():
         print(a, "— median over seeds; excess over all article pairs (data: Jaccard of child-hyperedge sets; model: co-membership)")
-        ents = [e for e in next(iter(byp.values())) if e != "fits"]
+        ents = [e for e in next(iter(byp.values())) if e not in ("fits", "per_seed")]
         for e in ents:
             d0, m0 = byp["0.0"][e]["data_excess"], byp["0.0"][e]["model_excess"]
             w0 = byp["0.0"][e]["data_w_excess"]
