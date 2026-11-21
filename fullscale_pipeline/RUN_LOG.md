@@ -4564,3 +4564,11 @@ is chosen if its paired difference to the largest passing r exceeds 2 SE; otherw
 calibration and later stages. Re-read of pass 3: r*(K) unchanged in both studies (A: approach 1 0.3 / 0.3 / 0.3 / 1 / 1,
 approach 2 0.3 / 0.3 / 1 / 1 / 1; B: 0.3 / 0.3 / 0.3 / 1 / 0 and 0.3 / 0.3 / 1 / 1 / 0 for K 3 / 5 / 8 / 13 / 20): in every
 band with several r the most stable on the other facets is already the largest r; candidates unchanged.
+
+### RL-330 — 2026-11-21 — λ calibration, study A, point 1: K values and r grid (owner)
+Owner: "I approve point 1" → λ calibration at all coarse K 3 / 5 / 8 / 13 / 20 (stage 1 needs λ at each), both
+approaches; pass-3 fits reused as the grid points r 0 / 0.3 / 1 (same settings: KL, S3 10 %, 5 groups × 10 seeds); new r:
+0.45 / 0.6 / 0.8 where pass 3 chose 0.3 (K 3, 5 both approaches; K 8 approach 1), 1.5 / 2 / 3 where it chose 1 (K 8
+approach 2, K 13, K 20), extended (4.5, 6, …) if 3 is chosen (highest-grid-value rule); λ rule R2. 1,500 new fits
+(≈ 1,100–1,300 CPU-hours). Correction recorded: the text check on W-tied hyperedges is optional (decided 2026-11-06), not
+a decided guard as said earlier the same day.

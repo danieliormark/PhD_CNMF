@@ -2714,6 +2714,8 @@ Wording of the arm's description ("holds each relation's total visible mass fixe
 
 *[2026-11-21, **λ rule — DECIDED: R2** (owner: "I approve R2 with value reported only"): within the existence band (one SE of the best r), value is reported only; after the stability guard, the r most stable on facets other than child hyperedges is chosen if it beats the largest admissible r by more than 2 paired SE; otherwise the largest r. Replaces the value guard and the plain "largest λ" step of the pass-2 rule (2026-11-14/16/17). Pass-3 r* unchanged in both studies (RL-329).]*
 
+*[2026-11-21, **λ calibration (study A), point 1 — DECIDED** (owner: "I approve point 1"): all coarse K 3 / 5 / 8 / 13 / 20, both approaches; pass-3 fits reused for r 0 / 0.3 / 1; new r 0.45 / 0.6 / 0.8 where r* = 0.3, 1.5 / 2 / 3 where r* = 1 (extended if 3 is chosen); rule R2; 1,500 fits. Remaining λ-calibration points: the swap with the term on (W4), the optional text check, sizing. RL-330.]*
+
 *[2026-11-19, **pass 3 order of choice — DECIDED: J1** (owner: "I approve J1 option"): the λ rule at each K first (r*(K)), then the K protocol over the cells (K, r*(K)); all (K, r) cells reported beside the choice. Pass 3 fits a fixed grid; refinement between grid values belongs to stage 2 (2026-11-03). RL-299.]*
 
 *[2026-11-19, **mono-domain response in stage 0 — DECIDED: report only** (owner: "For this stage report only"): counted and reported at every pass-3 (K, r) cell; veto from stage 2 on still open. RL-300.]*
