@@ -4635,3 +4635,5 @@ after the relation's Frobenius scaling). Study A, hold-out group 1, visible ties
 article (median share of its loss mass): child hyperedges 65 % (median 24 ties), authors 23 %, journal 11 % (approach 1);
 child hyperedges 67 %, organisations 15 %, journal 11 %, co-author ties 0 (median; most articles have none) (approach 2).
 Owner's caution recorded (memory): SEs over seeds / hold-out groups are noise yardsticks, not sample-to-population p-values.
+
+### RL-336 — 2026-11-21 — λ calibration (study A) submitted (owner, CSF3; job id not given)
