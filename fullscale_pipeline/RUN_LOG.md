@@ -4637,3 +4637,8 @@ child hyperedges 67 %, organisations 15 %, journal 11 %, co-author ties 0 (media
 Owner's caution recorded (memory): SEs over seeds / hold-out groups are noise yardsticks, not sample-to-population p-values.
 
 ### RL-336 — 2026-11-21 — λ calibration (study A) submitted (owner, CSF3; job id not given)
+
+### RL-337 — 2026-11-21 — λ calibration job ids; owner's note on representation invariance
+Fit array 25112302 (1,500 fits, 188 tasks), post-processing 25112303 (afterany). Owner raised representation invariance
+(author×journal or author×semantic ties, three-way tensors article × author × semantics / article × author × journal) as a
+limitation and direction for future research, not to test now; recorded in the design doc.
