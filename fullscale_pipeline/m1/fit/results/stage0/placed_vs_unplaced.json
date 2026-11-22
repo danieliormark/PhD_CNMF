@@ -1,0 +1,454 @@
+{
+ "approach_1_K5_r0.3": {
+  "parent": {
+   "placed": {
+    "n": 17429,
+    "ties_median": 5.0,
+    "ties_mean": 5.444890699409031,
+    "share_with_1_tie": 0.007630959894428826,
+    "spread_median_bits": 0.06028941289643275,
+    "tie_weight_share": 0.4622961861779707
+   },
+   "unplaced": {
+    "n": 18554,
+    "ties_median": 5.0,
+    "ties_mean": 6.543117387086342,
+    "share_with_1_tie": 0.00016169020157378463,
+    "spread_median_bits": 0.30196095079217056,
+    "tie_weight_share": 0.5377038138220291
+   }
+  },
+  "child": {
+   "placed": {
+    "n": 78578,
+    "ties_median": 2.0,
+    "ties_mean": 3.5547226959199776,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.3964000193886076,
+    "tie_weight_share": 0.758774694537126
+   },
+   "unplaced": {
+    "n": 19272,
+    "ties_median": 2.0,
+    "ties_mean": 5.364051473640515,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 1.3852847917437079,
+    "tie_weight_share": 0.24122530546287402
+   }
+  },
+  "article": {
+   "placed": {
+    "n": 1504,
+    "ties_median": 37.5,
+    "ties_mean": 85.74468085106383,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.10061043851845868,
+    "tie_weight_share": 0.7256030890709924
+   },
+   "unplaced": {
+    "n": 632,
+    "ties_median": 16.0,
+    "ties_mean": 80.2246835443038,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.26330799539719285,
+    "tie_weight_share": 0.2743969109290077
+   }
+  },
+  "author": {
+   "placed": {
+    "n": 8897,
+    "ties_median": 2.0,
+    "ties_mean": 2.31044172192874,
+    "share_with_1_tie": 0.04675733393278633,
+    "spread_median_bits": 0.1994441680521907,
+    "tie_weight_share": 0.8950100839178002
+   },
+   "unplaced": {
+    "n": 1155,
+    "ties_median": 2.0,
+    "ties_mean": 2.2545454545454544,
+    "share_with_1_tie": 0.12554112554112554,
+    "spread_median_bits": 0.8348369407213191,
+    "tie_weight_share": 0.10498991608219962
+   }
+  },
+  "organisation": {
+   "placed": {
+    "n": 2453,
+    "ties_median": 2.0,
+    "ties_mean": 4.802282918874847,
+    "share_with_1_tie": 0.38565022421524664,
+    "spread_median_bits": 0.1001215868002862,
+    "tie_weight_share": 0.9821653453998498
+   },
+   "unplaced": {
+    "n": 58,
+    "ties_median": 3.0,
+    "ties_mean": 4.293103448275862,
+    "share_with_1_tie": 0.27586206896551724,
+    "spread_median_bits": 1.1154541350168135,
+    "tie_weight_share": 0.017834654600150428
+   }
+  },
+  "journal": {
+   "placed": {
+    "n": 352,
+    "ties_median": 1.0,
+    "ties_mean": 4.974431818181818,
+    "share_with_1_tie": 0.6022727272727273,
+    "spread_median_bits": 0.20314511664772977,
+    "tie_weight_share": 0.821294559099437
+   },
+   "unplaced": {
+    "n": 32,
+    "ties_median": 3.0,
+    "ties_mean": 11.90625,
+    "share_with_1_tie": 0.09375,
+    "spread_median_bits": 1.0496151191442638,
+    "tie_weight_share": 0.17870544090056303
+   }
+  },
+  "heldout_child_article_by_article_placement": {
+   "placed": {
+    "existence": 0.17202182500075042,
+    "chance": 0.09984456731694723,
+    "seed_sd": 0.004736382384559558
+   },
+   "unplaced": {
+    "existence": 0.16396238761574167,
+    "chance": 0.09051516775675995,
+    "seed_sd": 0.0063621562322768695
+   }
+  }
+ },
+ "approach_1_K13_r1": {
+  "parent": {
+   "placed": {
+    "n": 22939,
+    "ties_median": 5.0,
+    "ties_mean": 5.686777976372118,
+    "share_with_1_tie": 0.005928767601028816,
+    "spread_median_bits": 0.3120657725993591,
+    "tie_weight_share": 0.6151536447298256
+   },
+   "unplaced": {
+    "n": 13044,
+    "ties_median": 5.0,
+    "ties_mean": 6.581646734130635,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.40103367193263645,
+    "tie_weight_share": 0.38484635527017425
+   }
+  },
+  "child": {
+   "placed": {
+    "n": 85467,
+    "ties_median": 2.0,
+    "ties_mean": 3.2836299390407993,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 1.627356607187939,
+    "tie_weight_share": 0.7854412424758224
+   },
+   "unplaced": {
+    "n": 12383,
+    "ties_median": 2.0,
+    "ties_mean": 8.241702333844787,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 1.9871198838457615,
+    "tie_weight_share": 0.2145587575241777
+   }
+  },
+  "article": {
+   "placed": {
+    "n": 1402,
+    "ties_median": 31.5,
+    "ties_mean": 68.32952924393723,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.2885619666714059,
+    "tie_weight_share": 0.5808402272598677
+   },
+   "unplaced": {
+    "n": 734,
+    "ties_median": 25.0,
+    "ties_mean": 114.25613079019074,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.5590787444912013,
+    "tie_weight_share": 0.41915977274013244
+   }
+  },
+  "author": {
+   "placed": {
+    "n": 9638,
+    "ties_median": 2.0,
+    "ties_mean": 2.3072214152313757,
+    "share_with_1_tie": 0.04980286366466072,
+    "spread_median_bits": 0.3527301280902806,
+    "tie_weight_share": 0.9634926817774281
+   },
+   "unplaced": {
+    "n": 414,
+    "ties_median": 2.0,
+    "ties_mean": 2.2294685990338166,
+    "share_with_1_tie": 0.1956521739130435,
+    "spread_median_bits": 0.5702660088978477,
+    "tie_weight_share": 0.03650731822257174
+   }
+  },
+  "organisation": {
+   "placed": {
+    "n": 2433,
+    "ties_median": 2.0,
+    "ties_mean": 4.845047266748869,
+    "share_with_1_tie": 0.38018906699547883,
+    "spread_median_bits": 0.10267427839392532,
+    "tie_weight_share": 0.980106661916081
+   },
+   "unplaced": {
+    "n": 78,
+    "ties_median": 2.0,
+    "ties_mean": 3.08974358974359,
+    "share_with_1_tie": 0.47435897435897434,
+    "spread_median_bits": 0.24487775103752651,
+    "tie_weight_share": 0.019893338083919198
+   }
+  },
+  "journal": {
+   "placed": {
+    "n": 369,
+    "ties_median": 1.0,
+    "ties_mean": 5.143631436314363,
+    "share_with_1_tie": 0.5528455284552846,
+    "spread_median_bits": 0.5891952157422446,
+    "tie_weight_share": 0.8902439024390244
+   },
+   "unplaced": {
+    "n": 15,
+    "ties_median": 1.0,
+    "ties_mean": 15.6,
+    "share_with_1_tie": 0.7333333333333333,
+    "spread_median_bits": 2.2014916223993515,
+    "tie_weight_share": 0.10975609756097579
+   }
+  },
+  "heldout_child_article_by_article_placement": {
+   "placed": {
+    "existence": 0.15953566372608385,
+    "chance": 0.08480764164789135,
+    "seed_sd": 0.0043835501641308686
+   },
+   "unplaced": {
+    "existence": 0.20094415122156054,
+    "chance": 0.13169844130731528,
+    "seed_sd": 0.003421599694574731
+   }
+  }
+ },
+ "approach_2_K5_r0.3": {
+  "parent": {
+   "placed": {
+    "n": 18191,
+    "ties_median": 5.0,
+    "ties_mean": 5.465394975537354,
+    "share_with_1_tie": 0.00742125226760486,
+    "spread_median_bits": 0.06477044489076843,
+    "tie_weight_share": 0.4817918299800598
+   },
+   "unplaced": {
+    "n": 17792,
+    "ties_median": 5.0,
+    "ties_mean": 6.569188399280575,
+    "share_with_1_tie": 5.6205035971223025e-05,
+    "spread_median_bits": 0.32777038587853846,
+    "tie_weight_share": 0.51820817001994
+   }
+  },
+  "child": {
+   "placed": {
+    "n": 79134,
+    "ties_median": 2.0,
+    "ties_mean": 3.4163065180579775,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.37883284013852714,
+    "tie_weight_share": 0.7445506704170519
+   },
+   "unplaced": {
+    "n": 18716,
+    "ties_median": 2.0,
+    "ties_mean": 6.003045522547553,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 1.36624895203658,
+    "tie_weight_share": 0.25544932958294814
+   }
+  },
+  "article": {
+   "placed": {
+    "n": 1378,
+    "ties_median": 38.5,
+    "ties_mean": 85.91944847605225,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.13135915422914066,
+    "tie_weight_share": 0.681683415658597
+   },
+   "unplaced": {
+    "n": 758,
+    "ties_median": 14.5,
+    "ties_mean": 76.50395778364116,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.3394476312231238,
+    "tie_weight_share": 0.31831658434140303
+   }
+  },
+  "organisation": {
+   "placed": {
+    "n": 1866,
+    "ties_median": 1.0,
+    "ties_mean": 2.232583065380493,
+    "share_with_1_tie": 0.627545551982851,
+    "spread_median_bits": 0.08936366756981717,
+    "tie_weight_share": 0.7692726483848252
+   },
+   "unplaced": {
+    "n": 645,
+    "ties_median": 1.0,
+    "ties_mean": 2.2883720930232556,
+    "share_with_1_tie": 0.6263565891472869,
+    "spread_median_bits": 0.6098237893350228,
+    "tie_weight_share": 0.23072735161517471
+   }
+  },
+  "journal": {
+   "placed": {
+    "n": 321,
+    "ties_median": 1.0,
+    "ties_mean": 5.358255451713395,
+    "share_with_1_tie": 0.5700934579439252,
+    "spread_median_bits": 0.2561490774210057,
+    "tie_weight_share": 0.8067542213883677
+   },
+   "unplaced": {
+    "n": 63,
+    "ties_median": 1.0,
+    "ties_mean": 6.5396825396825395,
+    "share_with_1_tie": 0.5079365079365079,
+    "spread_median_bits": 0.7170286471245023,
+    "tie_weight_share": 0.19324577861163242
+   }
+  },
+  "heldout_child_article_by_article_placement": {
+   "placed": {
+    "existence": 0.17687923477882678,
+    "chance": 0.0990287757232734,
+    "seed_sd": 0.003593168247966027
+   },
+   "unplaced": {
+    "existence": 0.18078300187764412,
+    "chance": 0.11102753709833876,
+    "seed_sd": 0.011102269711356657
+   }
+  }
+ },
+ "approach_2_K13_r1": {
+  "parent": {
+   "placed": {
+    "n": 21744,
+    "ties_median": 5.0,
+    "ties_mean": 5.60182119205298,
+    "share_with_1_tie": 0.006254598969830758,
+    "spread_median_bits": 0.3101341920680647,
+    "tie_weight_share": 0.5780712117037393
+   },
+   "unplaced": {
+    "n": 14239,
+    "ties_median": 6.0,
+    "ties_mean": 6.636280637685231,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.496842447520748,
+    "tie_weight_share": 0.42192878829626046
+   }
+  },
+  "child": {
+   "placed": {
+    "n": 84441,
+    "ties_median": 2.0,
+    "ties_mean": 3.3728283653675346,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 1.497533447354101,
+    "tie_weight_share": 0.7883284767396777
+   },
+   "unplaced": {
+    "n": 13409,
+    "ties_median": 2.0,
+    "ties_mean": 7.300618987247371,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 1.9839965404604427,
+    "tie_weight_share": 0.2116715232603225
+   }
+  },
+  "article": {
+   "placed": {
+    "n": 1301,
+    "ties_median": 31.0,
+    "ties_mean": 70.18908531898539,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.3226938808537151,
+    "tie_weight_share": 0.5592338468738265
+   },
+   "unplaced": {
+    "n": 835,
+    "ties_median": 24.0,
+    "ties_mean": 101.8814371257485,
+    "share_with_1_tie": 0.0,
+    "spread_median_bits": 0.6534524001794473,
+    "tie_weight_share": 0.4407661531261737
+   }
+  },
+  "organisation": {
+   "placed": {
+    "n": 2234,
+    "ties_median": 1.0,
+    "ties_mean": 2.3066248880931064,
+    "share_with_1_tie": 0.6110116383169203,
+    "spread_median_bits": 0.12835898005348978,
+    "tie_weight_share": 0.9251016645912745
+   },
+   "unplaced": {
+    "n": 277,
+    "ties_median": 1.0,
+    "ties_mean": 1.7653429602888087,
+    "share_with_1_tie": 0.7581227436823105,
+    "spread_median_bits": 0.9830556238888329,
+    "tie_weight_share": 0.07489833540872544
+   }
+  },
+  "journal": {
+   "placed": {
+    "n": 358,
+    "ties_median": 1.0,
+    "ties_mean": 5.245810055865922,
+    "share_with_1_tie": 0.5502793296089385,
+    "spread_median_bits": 0.4941887445890848,
+    "tie_weight_share": 0.8808630393996247
+   },
+   "unplaced": {
+    "n": 26,
+    "ties_median": 1.0,
+    "ties_mean": 9.76923076923077,
+    "share_with_1_tie": 0.6923076923076923,
+    "spread_median_bits": 2.0619470664381483,
+    "tie_weight_share": 0.11913696060037542
+   }
+  },
+  "heldout_child_article_by_article_placement": {
+   "placed": {
+    "existence": 0.15506990899850903,
+    "chance": 0.08064033091172498,
+    "seed_sd": 0.003354557900268564
+   },
+   "unplaced": {
+    "existence": 0.1983310205373678,
+    "chance": 0.13009142942862403,
+    "seed_sd": 0.006488556233428268
+   }
+  }
+ }
+}

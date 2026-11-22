@@ -4684,3 +4684,16 @@ through fits, alignment, aggregation and the analysis.
 Owner: "I confirm the wording with your added clause" → final: "The arm holds each relation's total visible mass fixed,
 so its overall scale in the KL loss is unchanged; how the mass is spread across entities, and the relation's realised
 loss, may change — relative to the same relation undamped, under whichever relation scaling the main setting uses."
+
+### RL-343 — 2026-11-22 — Item (l): placed vs unplaced entities (no fits)
+`fit/placed_vs_unplaced.py` (study A pass 3, both approaches, K 5 r 0.3 and K 13 r 1, group 1, 10 seeds; placed rule of
+2026-11-07). Unplaced entities have the SAME number of ties as placed ones for parents (median 5) and child hyperedges
+(2), authors (2); fewer for articles (16 vs 37.5 at K 5, 25 vs 31.5 at K 13; approach 2 alike). They are much more SPREAD:
+child hyperedges 1.39 vs 0.40 bits (K 5), 1.99 vs 1.63 (K 13); articles 0.26 vs 0.10, 0.56 vs 0.29; authors 0.83 vs 0.20;
+journals 1.05 vs 0.20, 2.2 vs 0.59. They carry a large share of tie weight: parents 38–54 %, articles 27–44 %, child
+hyperedges 21–26 %, social facets 2–23 %. Held-out existence of child×article hidden ties by the article (AP / chance,
+mean over seeds): K 5 placed 0.172 / 0.100, unplaced 0.164 / 0.091 (lift 1.72 vs 1.81); K 13 placed 0.160 / 0.085,
+unplaced 0.201 / 0.132 (lift 1.88 vs 1.53); approach 2 alike. No entity has a near-floor factor row (row maximum < 1e-6:
+0 % in every facet, one fit K 13), so the feared case of item (l) (near-floor rows read as confident) does not occur
+under KL. → "Unplaced" marks entities the model spreads across communities so that their reconstruction does not beat the
+degree-only (independence) reference — mixed or average-like positions — not data-poor or dead entities.

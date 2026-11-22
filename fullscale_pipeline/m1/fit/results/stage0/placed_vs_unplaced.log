@@ -1,0 +1,30 @@
+approach 1 K 5 r 0.3
+   parent       placed: n 17429, ties med 5.0, 1-tie 0.01, spread 0.06 bits, weight share 0.46 | unplaced: n 18554, ties med 5.0, 1-tie 0.0, spread 0.3 bits, weight share 0.54
+   child        placed: n 78578, ties med 2.0, 1-tie 0.0, spread 0.4 bits, weight share 0.76 | unplaced: n 19272, ties med 2.0, 1-tie 0.0, spread 1.39 bits, weight share 0.24
+   article      placed: n 1504, ties med 37.5, 1-tie 0.0, spread 0.1 bits, weight share 0.73 | unplaced: n 632, ties med 16.0, 1-tie 0.0, spread 0.26 bits, weight share 0.27
+   author       placed: n 8897, ties med 2.0, 1-tie 0.05, spread 0.2 bits, weight share 0.90 | unplaced: n 1155, ties med 2.0, 1-tie 0.13, spread 0.83 bits, weight share 0.10
+   organisation placed: n 2453, ties med 2.0, 1-tie 0.39, spread 0.1 bits, weight share 0.98 | unplaced: n 58, ties med 3.0, 1-tie 0.28, spread 1.12 bits, weight share 0.02
+   journal      placed: n 352, ties med 1.0, 1-tie 0.6, spread 0.2 bits, weight share 0.82 | unplaced: n 32, ties med 3.0, 1-tie 0.09, spread 1.05 bits, weight share 0.18
+   held-out child×article, by article: {'placed': '0.1720/0.0998 (sd 0.0047)', 'unplaced': '0.1640/0.0905 (sd 0.0064)'}
+approach 1 K 13 r 1
+   parent       placed: n 22939, ties med 5.0, 1-tie 0.01, spread 0.31 bits, weight share 0.62 | unplaced: n 13044, ties med 5.0, 1-tie 0.0, spread 0.4 bits, weight share 0.38
+   child        placed: n 85467, ties med 2.0, 1-tie 0.0, spread 1.63 bits, weight share 0.79 | unplaced: n 12383, ties med 2.0, 1-tie 0.0, spread 1.99 bits, weight share 0.21
+   article      placed: n 1402, ties med 31.5, 1-tie 0.0, spread 0.29 bits, weight share 0.58 | unplaced: n 734, ties med 25.0, 1-tie 0.0, spread 0.56 bits, weight share 0.42
+   author       placed: n 9638, ties med 2.0, 1-tie 0.05, spread 0.35 bits, weight share 0.96 | unplaced: n 414, ties med 2.0, 1-tie 0.2, spread 0.57 bits, weight share 0.04
+   organisation placed: n 2433, ties med 2.0, 1-tie 0.38, spread 0.1 bits, weight share 0.98 | unplaced: n 78, ties med 2.0, 1-tie 0.47, spread 0.24 bits, weight share 0.02
+   journal      placed: n 369, ties med 1.0, 1-tie 0.55, spread 0.59 bits, weight share 0.89 | unplaced: n 15, ties med 1.0, 1-tie 0.73, spread 2.2 bits, weight share 0.11
+   held-out child×article, by article: {'placed': '0.1595/0.0848 (sd 0.0044)', 'unplaced': '0.2009/0.1317 (sd 0.0034)'}
+approach 2 K 5 r 0.3
+   parent       placed: n 18191, ties med 5.0, 1-tie 0.01, spread 0.06 bits, weight share 0.48 | unplaced: n 17792, ties med 5.0, 1-tie 0.0, spread 0.33 bits, weight share 0.52
+   child        placed: n 79134, ties med 2.0, 1-tie 0.0, spread 0.38 bits, weight share 0.74 | unplaced: n 18716, ties med 2.0, 1-tie 0.0, spread 1.37 bits, weight share 0.26
+   article      placed: n 1378, ties med 38.5, 1-tie 0.0, spread 0.13 bits, weight share 0.68 | unplaced: n 758, ties med 14.5, 1-tie 0.0, spread 0.34 bits, weight share 0.32
+   organisation placed: n 1866, ties med 1.0, 1-tie 0.63, spread 0.09 bits, weight share 0.77 | unplaced: n 645, ties med 1.0, 1-tie 0.63, spread 0.61 bits, weight share 0.23
+   journal      placed: n 321, ties med 1.0, 1-tie 0.57, spread 0.26 bits, weight share 0.81 | unplaced: n 63, ties med 1.0, 1-tie 0.51, spread 0.72 bits, weight share 0.19
+   held-out child×article, by article: {'placed': '0.1769/0.0990 (sd 0.0036)', 'unplaced': '0.1808/0.1110 (sd 0.0111)'}
+approach 2 K 13 r 1
+   parent       placed: n 21744, ties med 5.0, 1-tie 0.01, spread 0.31 bits, weight share 0.58 | unplaced: n 14239, ties med 6.0, 1-tie 0.0, spread 0.5 bits, weight share 0.42
+   child        placed: n 84441, ties med 2.0, 1-tie 0.0, spread 1.5 bits, weight share 0.79 | unplaced: n 13409, ties med 2.0, 1-tie 0.0, spread 1.98 bits, weight share 0.21
+   article      placed: n 1301, ties med 31.0, 1-tie 0.0, spread 0.32 bits, weight share 0.56 | unplaced: n 835, ties med 24.0, 1-tie 0.0, spread 0.65 bits, weight share 0.44
+   organisation placed: n 2234, ties med 1.0, 1-tie 0.61, spread 0.13 bits, weight share 0.93 | unplaced: n 277, ties med 1.0, 1-tie 0.76, spread 0.98 bits, weight share 0.07
+   journal      placed: n 358, ties med 1.0, 1-tie 0.55, spread 0.49 bits, weight share 0.88 | unplaced: n 26, ties med 1.0, 1-tie 0.69, spread 2.06 bits, weight share 0.12
+   held-out child×article, by article: {'placed': '0.1551/0.0806 (sd 0.0034)', 'unplaced': '0.1983/0.1301 (sd 0.0065)'}
