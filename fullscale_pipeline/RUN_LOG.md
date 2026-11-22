@@ -4697,3 +4697,13 @@ unplaced 0.201 / 0.132 (lift 1.88 vs 1.53); approach 2 alike. No entity has a ne
 0 % in every facet, one fit K 13), so the feared case of item (l) (near-floor rows read as confident) does not occur
 under KL. → "Unplaced" marks entities the model spreads across communities so that their reconstruction does not beat the
 degree-only (independence) reference — mixed or average-like positions — not data-poor or dead entities.
+
+### RL-344 — 2026-11-22 — Item (l) reopened by the owner; coverage of entities under KL (no fits)
+Owner questioned whether the placed rule fits item (l)'s task (near-floor rows read as confident memberships; RL-343:
+no such rows under KL, unplaced = spread / independence-like entities) and asked for options that target the original
+problem. Correction recorded: l1–l3 were decided on 2026-11-13 (placed rule = item (l)'s criterion; exclusion where an
+entity's membership is an equal vote; members for q / m among placed entities); only q, m values were open — the
+assistant had presented the criterion as open. Coverage per entity = reconstructed ÷ observed tie mass over its fitted
+cells, weighted over relations (w_r; one fit, approach 1, group 1, seed 1): median 0.98–1.00 in every facet; share below
+0.5 at K 13 r 1: authors 0.054, organisations 0.019, journals 0.005, articles 0.003, child 0.0001, parents 0; K 5 r 0.3:
+authors 0.008, organisations 0.025, others ≈ 0; K 13 r 0: authors 0.053, organisations 0.017, journals 0.010.
