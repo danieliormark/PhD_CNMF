@@ -4679,3 +4679,8 @@ relation loss shares, membership spread, stability; swap reading at p 0 / p 1 un
 through fits, alignment, aggregation and the analysis.
 
 ### RL-341 — 2026-11-22 — W3 check submitted (owner, CSF3; job id not given)
+
+### RL-342 — 2026-11-22 — Log-damping arm wording final (owner)
+Owner: "I confirm the wording with your added clause" → final: "The arm holds each relation's total visible mass fixed,
+so its overall scale in the KL loss is unchanged; how the mass is spread across entities, and the relation's realised
+loss, may change — relative to the same relation undamped, under whichever relation scaling the main setting uses."
