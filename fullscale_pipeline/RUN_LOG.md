@@ -4707,3 +4707,11 @@ assistant had presented the criterion as open. Coverage per entity = reconstruct
 cells, weighted over relations (w_r; one fit, approach 1, group 1, seed 1): median 0.98–1.00 in every facet; share below
 0.5 at K 13 r 1: authors 0.054, organisations 0.019, journals 0.005, articles 0.003, child 0.0001, parents 0; K 5 r 0.3:
 authors 0.008, organisations 0.025, others ≈ 0; K 13 r 0: authors 0.053, organisations 0.017, journals 0.010.
+
+### RL-345 — 2026-11-22 — Item (l): coverage rule replaces the placed rule as the entity criterion (owner)
+Owner: "I approve B with c = 0.5" → an entity counts (is "covered") if its coverage — reconstructed ÷ observed tie mass
+over its fitted cells, weighted over its relations — is at least c = 0.5; sensitivity at c = 0.25 and 0.75. Replaces the
+placed rule (l1, 2026-11-13) as item (l)'s criterion in the same uses (l2): Track A, ghost veto, alignment veto,
+sufficient members, membership-mean view (A), excess-spread diagnostic; members for q / m counted among covered entities
+(l3). The placed rule stays a reported reading (share of entities whose reconstruction beats the degree-only reference).
+Remeasurement of the affected readings on saved fits proposed (RL-344 list), not started.
