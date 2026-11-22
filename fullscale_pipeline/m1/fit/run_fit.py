@@ -87,7 +87,8 @@ def run_one(job, out_root):
     arm = job.get("arm") or {}
     rds = D.fit_data(build, job["approach"], group=job["group"], journal_multiplier=arm.get("journal_multiplier", 1.0),
                      semantic_split=arm.get("semantic_split"), drop=tuple(arm.get("drop", ())), use_journal=arm.get("use_journal", True),
-                     binary=bool(arm.get("binary", False)), log_damping=arm.get("log_damping"))
+                     binary=bool(arm.get("binary", False)), log_damping=arm.get("log_damping"),
+                     mass_weights=bool(arm.get("mass_weights", False)))
     swap = None
     if arm.get("swap_p"):            # bare graded cross-domain swap (owner 2026-11-16); swap seed = fit seed, so p values nest
         from .worlds import graded_swap

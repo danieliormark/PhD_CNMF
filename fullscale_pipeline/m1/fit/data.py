@@ -247,7 +247,7 @@ class RelationData:
 
 
 def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True, binary=False,
-             log_damping=None):
+             log_damping=None, mass_weights=False):
     """The relations of one fit. group: hold-out group 0..9 (None = final refit on all cells, 2026-11-03).
     use_journal=False is arm J1 (no article×journal); journal_multiplier gives J3a/J3b; drop removes relations (arm N).
     binary=True (binary test, owner 2026-11-16): every VISIBLE tie value set to 1 before the Frobenius normalisation, so
@@ -294,4 +294,14 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
         rd = RelationData(rel, rf, cf, shape, wr, dom, r[vis], c[vis], vt, obs, diag, r[hid], c[hid], v[hid], er, ec, fro)
         rd.damping = damping
         out.append(rd)
+    if mass_weights:
+        # W3 check (owner 2026-11-22, "I approve W3, prepare the check"; RL-339/340): under KL a relation's pull is
+        # w_r × Σx (KL is of degree 1 in the data's scale), so Frobenius scaling gives the semantic domain 83–90 % of the
+        # pull. Here w_r × T / Σx_r per relation (Σx_r over its visible ties after Frobenius scaling, T = Σ_r w_r Σx_r):
+        # each relation's pull = w_r × T, so the decided split (L2.2) holds under KL and the total pull is unchanged.
+        # Equivalent to dividing each relation by its visible mass (data rescaling ≡ weight under KL, RL-279).
+        T = sum(rd.weight * float(rd.tie_val.sum()) for rd in out)
+        for rd in out:
+            rd.mass_factor = T / float(rd.tie_val.sum())
+            rd.weight = rd.weight * rd.mass_factor
     return out

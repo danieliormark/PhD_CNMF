@@ -97,7 +97,8 @@ def fit_rds(job, cache):
         build = D.Build(job.get("build", D.BUILD))
         cache[key] = D.fit_data(build, job["approach"], group=job["group"], journal_multiplier=arm.get("journal_multiplier", 1.0),
                                 semantic_split=arm.get("semantic_split"), drop=tuple(arm.get("drop", ())),
-                                use_journal=arm.get("use_journal", True), binary=bool(arm.get("binary", False)))
+                                use_journal=arm.get("use_journal", True), binary=bool(arm.get("binary", False)),
+                                log_damping=arm.get("log_damping"), mass_weights=bool(arm.get("mass_weights", False)))
     rds = cache[key]
     if arm.get("swap_p"):
         rds = graded_swap(rds, float(arm["swap_p"]), seed=job["seed"], single_band=bool(arm.get("swap_single_band")))[0]

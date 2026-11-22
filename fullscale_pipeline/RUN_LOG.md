@@ -4663,3 +4663,17 @@ squared error child hyperedges / authors / journal 0.33 / 0.33 / 0.33; KL 0.65 /
 (2026-11-02, L2.2) says: "The weights assume squared error; if the β = 1 vs 2 comparison leads to KL, L2.1 and L2.2 are to be
 rechecked." KL was chosen on 2026-11-18; the recheck was not carried out — an omission, now raised with the owner.** Every
 KL result since (stage 0 passes, start tests, pass 3, both studies) was fitted with the effective 83 / 17 (90 / 10) split.
+
+### RL-340 — 2026-11-22 — W3 check prepared (owner: "I approve W3, prepare the check")
+`data.fit_data(mass_weights=True)` (arm key `mass_weights`): w_r × T / Σx_r per relation (Σx_r visible, after Frobenius
+scaling; T = Σ_r w_r Σx_r), so each relation's KL pull is w_r × T — semantic share 0.500 in both approaches, total pull
+unchanged (A approach 1 244.7, approach 2 226.0); resulting weights approach 1 parent×child 0.141, child×article 0.163,
+author×article 0.407, author×affiliation 0.381, article×journal 0.883; approach 2 0.130 / 0.151 / article×affiliation 0.596
+/ article×article 1.177 / article×journal 0.816. `run_fit` and `align.fit_rds` pass it (align now also passes log_damping;
+earlier alignment of the damping-test fits used undamped values — numbering only, recorded). `plan.weight_check` →
+`jobs_weight_check.jsonl`: 240 jobs (200 twins of pass-3 jobs at K 5 r 0.3 and K 13 r 1, identical except stage and arm;
+40 swap fits at p 1, K 13, r 1, group 1, under both scalings); λ_child = r × study A's pass-1 basis (not recomputed).
+`fit/weight_check_analysis.py`: paired with pass-3 twins — existence, value, T1, mixed share, lower domain presence,
+relation loss shares, membership spread, stability; swap reading at p 0 / p 1 under each scaling. `slurm/weight_check.sh`
+(30 tasks × 8, 12 h; ≈ 150–200 CPU-hours) chains the post-processing. Smoke test (8 fits, 30 epochs, scratch) ran
+through fits, alignment, aggregation and the analysis.
