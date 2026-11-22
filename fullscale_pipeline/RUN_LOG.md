@@ -4677,3 +4677,5 @@ earlier alignment of the damping-test fits used undamped values — numbering on
 relation loss shares, membership spread, stability; swap reading at p 0 / p 1 under each scaling. `slurm/weight_check.sh`
 (30 tasks × 8, 12 h; ≈ 150–200 CPU-hours) chains the post-processing. Smoke test (8 fits, 30 epochs, scratch) ran
 through fits, alignment, aggregation and the analysis.
+
+### RL-341 — 2026-11-22 — W3 check submitted (owner, CSF3; job id not given)
