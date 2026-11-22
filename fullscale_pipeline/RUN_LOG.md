@@ -4642,3 +4642,24 @@ Owner's caution recorded (memory): SEs over seeds / hold-out groups are noise ya
 Fit array 25112302 (1,500 fits, 188 tasks), post-processing 25112303 (afterany). Owner raised representation invariance
 (author×journal or author×semantic ties, three-way tensors article × author × semantics / article × author × journal) as a
 limitation and direction for future research, not to test now; recorded in the design doc.
+
+### RL-338 — 2026-11-21 — Swap reading (owner)
+Owner: "record the swap measure as the swap reading" → the swap's reading is the measure "which people group with which
+ideas" (`fit/swap_link_measure.py`: for article pairs sharing a social entity, the semantic similarity of the articles —
+exact and W-aware — and their co-membership, each in excess of all article pairs, against p, paired by seed); the earlier
+decided reading (mixed share, mono-domain counts) is reported beside it. Closes the open item "run the proposed measure
+or close it". Owner then asked whether all entities had the same weight under squared error and whether KL should.
+
+### RL-339 — 2026-11-22 — Relation and tie weight under squared error vs KL (no fits); L2.1/L2.2 recheck under KL not done
+Each relation is divided by its Frobenius norm over visible ties (L2.1, decided 2026-11-02 under squared error) and
+weighted w_r = 0.5 / n_d (L2.2). Squared error is homogeneous of degree 2 (‖cX − cX̂‖² = c²‖X − X̂‖²), so a relation's
+total pull = w_r × Σx² = w_r exactly; generalised KL is of degree 1 (KL(cX‖cX̂) = c·KL), so its pull = w_r × Σx, which
+grows with the number of ties (≤ √ties). Study A, hold-out group 1: Σx after scaling — parent×child 434, child×article 375,
+author×article 100, author×affiliation 107, article×journal 46 (approach 2: article×affiliation 63, article×article 32).
+Domain shares of the total data pull: **squared error 0.50 / 0.50 (semantic / social) as decided; KL 0.83 / 0.17
+(approach 1), 0.90 / 0.10 (approach 2).** One tie relative to one child×article tie: squared error (w·x²) author×article
+12×, author×affiliation 17×, article×journal 74×; KL (w·x) 2.9×, 3.3×, 7.0×. Per article, share of its pull (median):
+squared error child hyperedges / authors / journal 0.33 / 0.33 / 0.33; KL 0.65 / 0.23 / 0.11 (RL-335). **The record
+(2026-11-02, L2.2) says: "The weights assume squared error; if the β = 1 vs 2 comparison leads to KL, L2.1 and L2.2 are to be
+rechecked." KL was chosen on 2026-11-18; the recheck was not carried out — an omission, now raised with the owner.** Every
+KL result since (stage 0 passes, start tests, pass 3, both studies) was fitted with the effective 83 / 17 (90 / 10) split.
