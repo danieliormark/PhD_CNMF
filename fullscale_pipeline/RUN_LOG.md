@@ -4853,3 +4853,30 @@ gains nothing at W2 beyond one SE; guards: no T1 failures, author / co-author gr
 Submitted (owner): intermediate weighting check, fits 25199610 (35 tasks, 280 fits), post-processing 25199611
 (dependency). Membership readings (item (l) option (a)) job 25190974: finished 19:38, 75 / 75 tasks, no errors
 (`fit/results/stage0/membership_readings.json`, per-entity arrays on RDS `m1_fits/membership_readings/`); not yet read.
+
+### RL-355 — 2026-11-23 — Membership readings (item (l) option (a)) read: 15 pass-3 candidate cells × 5 groups
+Job 25190974 (RL-354). Covered entities with ≥ 1 visible tie; chance-adjusted = (real − chance)/(1 − chance).
+**R4 circularity, all cells** (gap = chance-adjusted Track A of placed − unplaced entities; mean over cells [range]; SE
+over groups of the cross-fitted gap): child placed rule +0.033 [−0.019, +0.093] → cross-fitted −0.010 [−0.052, +0.022]
+(SE ≈ 0.004; < −2 SE in 6/13 cells); parent +0.139 → +0.095 (> 2 SE in 15/15); article +0.161 → +0.131 (15/15);
+author +0.164 → +0.124 (6/6 cells with unplaced authors); organisation +0.165 → +0.129 (7/7); journal +0.124 → +0.004
+(SE ≈ 0.032; noisy, few unplaced). Share of the placed rule's gap due to the selection: child 0.72, parent 0.33, article
+0.18, author / organisation 0.25. "Same seeds, no margin" ≈ cross-fitted (parent +0.094, article +0.136). R2
+(co-membership) gaps: same pattern (parent +0.096 → +0.074, article +0.111 → +0.087). **Correction to RL-351 / the
+report of the one-group test:** "roughly half to all of the old gap came from the selection" held for that cell (A
+approach 1 K 5); over all cells it is a fifth to a third, except child hyperedges (most) — a real link remains: entities
+whose memberships reproduce their own ties are more stable (gap ≈ 0.09–0.13, every cell beyond 2 SE).
+**R1 levels** (chance-adjusted, per facet): fall with K (A approach 1 child 0.68 / 0.54 / 0.42 / 0.30 at K 5 / 8 / 13 /
+20; articles 0.62 / 0.50 / 0.38 / 0.31); study B lower than A at the same K (K 5: child 0.57 vs 0.68, articles 0.47 vs
+0.62); persons / organisations / journals lowest (K 5: 0.41–0.57). Medians of raw agreement 0.35–0.83. Little dependence
+on the entity's tie count within a facet (chance-adjusted R1 across tie bands within ±0.05, except articles with 3–5
+ties, n ≈ 10–36).
+**R5 flags:** share of entities whose R1 is within the chance range (≤ 95th percentile of chance means, same facet and
+tie band): ≤ 5 % in most facets and cells at K 5 / 8 with r 0.3; child hyperedges 10–27 % at r = 1 (A approach 1 K 13
+0.20, K 20 0.27; approach 2 K 8 0.10, K 13 0.17; B similar), against 3 % at K 5 r 0.3 and 8 % at B K 20 r 0 — larger at
+r = 1 than at r 0 / 0.3 (hypothesis: the word-similarity term; untested, the readings cover one r per K). **Correction
+to the R5 design / RL-351:** the R2 chance range is too narrow to discriminate (95th percentile of chance means 0.002–
+0.015; ≥ 99 % of entities pass), so "R1 within, R2 beyond" does not identify matching artefacts: entities with R1 at
+chance also have low R2 (child median 0.08–0.16 vs 0.24–0.58 for the rest) — they are unstable, not mismatched.
+**R3 placement:** share with mean excess > 0: child 0.92–1.00, parent 0.67–0.96, article 0.68–0.98, authors /
+organisations / journals 0.86–1.00 (placed rule 0.49–1.00).
