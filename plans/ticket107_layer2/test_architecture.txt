@@ -83,6 +83,8 @@ STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂; final models
 NOT YET DESIGNED:
   • background component (deferred robustness arm; planted test first)
   • ticket 35 (reformulated): how several outer scores would be combined, only if stage 0 shows one is needed
+  • cross-domain hold-out (deferred, owner 2026-11-23; RL-353): hide ALL social ties of some articles and predict them from their semantic ties, and the reverse; a relation weighting (or any arm) is judged by how well each domain predicts the other — a criterion tied to sociosemantic communities that favours neither domain, and held-out tests for author / journal / organisation ties (today only affiliation has hidden ties). New hold-out design and new fits; candidate place: stage 1, where hold-out groups are drawn anyway
+  • shared + domain-specific memberships (deferred, owner 2026-11-23; RL-353; after JIVE, Lock et al. 2013 AoAS 7:523): each article's membership = a shared part (sociosemantic communities) + a small private part per domain, so the domains compete less for the shared part; the share each entity's fit draws from the shared part measures heterogeneity. A model change: planted test first, like the background component
 
 Fits that always run: build 17, stage 0 2,360, λ calibration 1,580, stage 1 6,000, stage 2 1,000, stage 3 320; total 11,277
 Conditional fits: stage 0: K = 32 if a band reaches 20 200; stage 0: graded swap at each further candidate K if the curve is ambiguous (per K) 160; stage 0: floor pass (grid deferred; option a) 3,000; λ calibration: floor recalibration, S3, O3, interaction test (sized after stage 0) 3,000; λ calibration: graded swap for the floor, if kept 80; stage 3: optional graded swap 80; all conditions 6,520

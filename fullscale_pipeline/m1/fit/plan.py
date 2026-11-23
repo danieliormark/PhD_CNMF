@@ -369,6 +369,31 @@ def weight_check():
     return out
 
 
+WEIGHT_CURVE_SHARES = (0.65, 0.75)
+
+
+def weight_curve():
+    """Intermediate weighting check (owner 2026-11-23: "I approve option (a), prepare the intermediate weighting check";
+    RL-353): points between W2 (semantic share of the KL pull 0.5, weight_check) and W1 (current: 0.827 approach 1,
+    0.896 approach 2, pass 3) — semantic_pull 0.65 and 0.75 (data.fit_data, on top of the mass weights). Study A, both
+    approaches, K 5, r 0.3 (λ_child = r × study A's pass-1 basis, as the W3 check), hold-out groups 1–5 × seeds 1–10,
+    settings as pass 3 → 200 fits. Swap at p = 1, K 5, r 0.3, hold-out group 1, seeds 1–10, at all four points (0.65,
+    0.75, W2, W1; the W3 check's swap was at K 13 only) → 80 fits; p = 0 references are the main fits of each point.
+    280 fits. Read by fit/weight_curve_analysis.py."""
+    basis = json.load(open(PASS3_BASIS["A"]))
+    out = []
+    base = lambda a, g, s_, arm: dict(job("weight_curve", a, g, 5, 1, s_, FRACTION[1], dtype="float32",
+                                           terms={"lambda_child": 0.3 * basis[f"pass1|{a}|5"]["basis"], "w_form": "contrast"},
+                                           arm=dict(arm, r=0.3), max_epochs=8000),
+                                       social_link_start="diagonal", offdiag_level=0.1, offdiag_semantic=True, lambda_from_r=True)
+    for a in (1, 2):
+        for sh in WEIGHT_CURVE_SHARES:
+            out += [base(a, g, s_, {"mass_weights": True, "semantic_pull": sh}) for g in range(5) for s_ in range(1, 11)]
+        for arm in ([{"mass_weights": True, "semantic_pull": sh} for sh in WEIGHT_CURVE_SHARES] + [{"mass_weights": True}, {}]):
+            out += [base(a, 0, s_, dict(arm, swap_p=1.0)) for s_ in range(1, 11)]
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -381,10 +406,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full", "lambda_cal", "weight_check"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full", "lambda_cal", "weight_check", "weight_curve"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K), "lambda_cal": lambda: lambda_cal("A"), "weight_check": weight_check}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K), "lambda_cal": lambda: lambda_cal("A"), "weight_check": weight_check, "weight_curve": weight_curve}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

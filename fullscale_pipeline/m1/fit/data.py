@@ -247,7 +247,7 @@ class RelationData:
 
 
 def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True, binary=False,
-             log_damping=None, mass_weights=False):
+             log_damping=None, mass_weights=False, semantic_pull=None):
     """The relations of one fit. group: hold-out group 0..9 (None = final refit on all cells, 2026-11-03).
     use_journal=False is arm J1 (no article×journal); journal_multiplier gives J3a/J3b; drop removes relations (arm N).
     binary=True (binary test, owner 2026-11-16): every VISIBLE tie value set to 1 before the Frobenius normalisation, so
@@ -304,4 +304,14 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
         for rd in out:
             rd.mass_factor = T / float(rd.tie_val.sum())
             rd.weight = rd.weight * rd.mass_factor
+        # Intermediate weighting check (owner 2026-11-23: "I approve option (a), prepare the intermediate weighting check";
+        # RL-353): semantic_pull = s sets the semantic domain's share of the KL pull to s (social 1 − s); each domain's
+        # weights are multiplied by 2s / 2(1 − s) after the mass weighting (which gives 0.5 / 0.5), so the split between
+        # relations inside a domain stays as decided (L2.2) and the total pull stays T. s = 0.5 is the W2 arm.
+        if semantic_pull is not None:
+            s = float(semantic_pull); assert 0.0 < s < 1.0, s
+            for rd in out:
+                rd.weight = rd.weight * (2 * s if rd.domain == "semantic" else 2 * (1 - s))
+    else:
+        assert semantic_pull is None, "semantic_pull needs mass_weights (it sets the split of the mass-weighted pull)"
     return out

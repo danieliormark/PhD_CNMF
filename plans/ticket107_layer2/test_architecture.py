@@ -139,7 +139,16 @@ stages.append(("STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂; 
                "criteria (A1 never replaces A0 automatically); 3c L2.4 classes × team-shaped communities. (weights shown for J2 binary)"))
 
 LATER = ["background component (deferred robustness arm; planted test first)",
-         "ticket 35 (reformulated): how several outer scores would be combined, only if stage 0 shows one is needed"]
+         "ticket 35 (reformulated): how several outer scores would be combined, only if stage 0 shows one is needed",
+         "cross-domain hold-out (deferred, owner 2026-11-23; RL-353): hide ALL social ties of some articles and predict them "
+         "from their semantic ties, and the reverse; a relation weighting (or any arm) is judged by how well each domain "
+         "predicts the other — a criterion tied to sociosemantic communities that favours neither domain, and held-out "
+         "tests for author / journal / organisation ties (today only affiliation has hidden ties). New hold-out design "
+         "and new fits; candidate place: stage 1, where hold-out groups are drawn anyway",
+         "shared + domain-specific memberships (deferred, owner 2026-11-23; RL-353; after JIVE, Lock et al. 2013 AoAS "
+         "7:523): each article's membership = a shared part (sociosemantic communities) + a small private part per "
+         "domain, so the domains compete less for the shared part; the share each entity's fit draws from the shared part "
+         "measures heterogeneity. A model change: planted test first, like the background component"]
 
 print(f"Fits per cell = {FOLDS} hold-out groups × {SEEDS} seeds = {FITS_PER_CELL} (stage 1: 10 groups)\n")
 for title, arms, decision in stages:

@@ -4823,3 +4823,25 @@ journal 0.046 → 0.030; mass — author 0.157 → 0.143 (−0.014 ± 0.005), jo
 weights articles of one journal are grouped strongly and regardless of shared ideas. Approach 2: co-author 0.446 → 0.425
 (current) vs 0.624 → 0.595 (mass); journal 0.037 → 0.029 vs 0.276 → 0.271. Decision W1 / W2 with the owner. Note for
 later arms that change relation weights: the decision score should use the main setting's weights (to the owner).
+
+### RL-353 — 2026-11-23 — Intermediate weighting check prepared (owner: "I approve option (a), prepare the intermediate weighting check")
+Effect sizes of the W3 differences (paired twins, same weights): every W2 − W1 difference in existence, semantic-equal
+existence and value has the same sign in all 5 hold-out groups; mean difference = 1.9–4.1 seed SDs of the W1 fits, 4–13
+SE over groups; existence loss 0.005–0.009 vs the K band's tolerance ≈ 0.002. Gain over the degree-only reference
+(semantic-equal existence, reference 0.098): W1 0.026–0.031, W2 −22 to −30 % (approach 1), −50 to −53 % (approach 2).
+**Code:** `data.fit_data(semantic_pull=s)` (needs `mass_weights`): after the mass weighting (0.5 / 0.5), semantic
+relations × 2s, social × 2(1 − s) — the semantic share of the KL pull is s, the split between relations inside a domain
+(L2.2) and the total pull T are unchanged (checked: approach 1 T 244.69, approach 2 226.02 at every s; shares exact).
+Arm key `semantic_pull`, passed by `run_fit`, `align.fit_rds`, `aggregate._rds_of`. `plan.weight_curve` →
+`slurm/jobs_weight_curve.jsonl`: stage `weight_curve`, study A, both approaches, K 5, r 0.3 (λ_child = r × pass-1 basis,
+as the W3 check), s 0.65 / 0.75 × 5 groups × 10 seeds (200) + swap p = 1, K 5, r 0.3, group 1, seeds 1–10 at s 0.65,
+0.75, W2, W1 (80; the W3 check's swap was at K 13 only); 280 fits. Points read: W2 0.50 (weight_check), 0.65, 0.75,
+W1 0.827 / 0.896 (pass 3). `fit/weight_curve_analysis.py`: per point paired with W1 twins — per-relation within-class AP,
+its degree-only reference and gain, value; combined existence with the main setting's weights; semantic-equal existence,
+gain and value; semantic gain as a share of W1's, affiliation gain as a share of W2's; Track A / B (aggregations, one
+entity rule); T1, lower domain presence, spreads; swap p 0 → p 1 per point. `slurm/weight_curve.sh` (35 tasks × 8,
+12 h; ≈ 100–150 CPU-h) chains `submit_weight_curve_post.sh` (align, aggregate, analysis → `fit/results/stage0/weight_curve.
+{json,log}`). Smoke test (3 fits, 30 epochs, scratch): fits carry the intended weights; alignment and aggregation run;
+the analysis on the existing points reproduces the W3 values (stability W2 − W1: −0.026 / −0.056). **Deferred (owner):**
+(b) cross-domain hold-out, (c) shared + domain-specific memberships — added to "NOT YET DESIGNED" in
+`plans/ticket107_layer2/test_architecture.{py,txt}`.
