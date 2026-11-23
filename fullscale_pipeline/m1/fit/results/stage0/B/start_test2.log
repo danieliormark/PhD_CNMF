@@ -30,14 +30,14 @@ approach 1 — medians over converged fits (arm: fits/converged)
   offdiag_share_article_journal                   0.1452  1.67e-06 2.527e-06  3.54e-06  5.36e-06 2.475e-06 3.571e-06 5.481e-06
   co_membership_crossing_article_journal           0.128    0.1393    0.1371    0.1359    0.1358    0.1371    0.1358    0.1363
   end_entropy_crossing_article_journal            0.2378    0.2322    0.2468    0.2454    0.2489    0.2459    0.2561    0.2445
-  stability random: Track A adj 0.232  Track B adj 0.294
-  stability diagonal: Track A adj 0.286  Track B adj 0.359
-  stability S2_0.05: Track A adj 0.296  Track B adj 0.373
-  stability S2_0.1: Track A adj 0.303  Track B adj 0.382
-  stability S2_0.2: Track A adj 0.310  Track B adj 0.390
-  stability S3_0.05: Track A adj 0.294  Track B adj 0.369
-  stability S3_0.1: Track A adj 0.302  Track B adj 0.378
-  stability S3_0.2: Track A adj 0.308  Track B adj 0.384
+  stability random: Track A adj 0.222  Track B adj 0.294
+  stability diagonal: Track A adj 0.278  Track B adj 0.359
+  stability S2_0.05: Track A adj 0.288  Track B adj 0.373
+  stability S2_0.1: Track A adj 0.295  Track B adj 0.382
+  stability S2_0.2: Track A adj 0.302  Track B adj 0.390
+  stability S3_0.05: Track A adj 0.286  Track B adj 0.369
+  stability S3_0.1: Track A adj 0.294  Track B adj 0.378
+  stability S3_0.2: Track A adj 0.299  Track B adj 0.384
 approach 2 — medians over converged fits (arm: fits/converged)
                                                   random  diagonal        S1   S2_0.05    S2_0.1    S2_0.2   S3_0.05    S3_0.1    S3_0.2
   fits/converged                                   10/10     10/10     10/10     10/10     10/10     10/10     10/10     10/10     10/10
@@ -70,12 +70,12 @@ approach 2 — medians over converged fits (arm: fits/converged)
   offdiag_share_article_journal                   0.2211 1.548e-06  1.76e-06 2.263e-06 3.335e-06 5.129e-06 2.259e-06 3.308e-06 5.555e-06
   co_membership_crossing_article_journal          0.1201    0.1428     0.149     0.139    0.1397    0.1362    0.1395    0.1371    0.1356
   end_entropy_crossing_article_journal            0.4175    0.3796    0.4859    0.3799     0.397     0.398    0.3721    0.3794    0.3872
-  stability random: Track A adj 0.263  Track B adj 0.322
-  stability diagonal: Track A adj 0.287  Track B adj 0.363
-  stability S1: Track A adj 0.279  Track B adj 0.352
-  stability S2_0.05: Track A adj 0.292  Track B adj 0.370
-  stability S2_0.1: Track A adj 0.299  Track B adj 0.378
-  stability S2_0.2: Track A adj 0.309  Track B adj 0.388
-  stability S3_0.05: Track A adj 0.292  Track B adj 0.369
-  stability S3_0.1: Track A adj 0.300  Track B adj 0.377
-  stability S3_0.2: Track A adj 0.312  Track B adj 0.386
+  stability random: Track A adj 0.245  Track B adj 0.322
+  stability diagonal: Track A adj 0.275  Track B adj 0.363
+  stability S1: Track A adj 0.266  Track B adj 0.352
+  stability S2_0.05: Track A adj 0.280  Track B adj 0.370
+  stability S2_0.1: Track A adj 0.286  Track B adj 0.378
+  stability S2_0.2: Track A adj 0.295  Track B adj 0.388
+  stability S3_0.05: Track A adj 0.280  Track B adj 0.369
+  stability S3_0.1: Track A adj 0.287  Track B adj 0.377
+  stability S3_0.2: Track A adj 0.297  Track B adj 0.386
