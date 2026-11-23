@@ -4722,3 +4722,7 @@ ran); missing: approach 1 K 8 r 0.45 (24 fits), K 5 r 0.8 (16), K 5 r 0.6 (8) �
 approach 1. The post-processing (25112303) ran on the incomplete set (`lambda_cal_choice_A`, provisional). W3 check:
 238 / 240; task 27 of 25115915 logged Slurm errors ("Unable to resolve infra01"); 2 approach-2 swap fits (K 13, r 1,
 p 1) unfinished. Both launchers skip finished fits; resubmission needed before the results are read.
+
+### RL-347 — 2026-11-23 — Resubmission of the missing fits (owner, CSF3)
+λ calibration: fit array 25132000 (1,500 jobs; finished fits are skipped), post-processing 25132001. W3 check: fit array
+25132002 (240 jobs), post-processing 25132003.
