@@ -1,0 +1,33 @@
+approach_1
+  K3_r0.45   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.086  R/S 0.018  existence S 0.1334/0.0719 G 0.3410/0.2147
+  K3_r0.6    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.062  R/S 0.012  existence S 0.1283/0.0719 G 0.3417/0.2147
+  K3_r0.8    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.048  R/S 0.004  existence S 0.1212/0.0719 G 0.3438/0.2147
+  K5_r0.45   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.101  R/S 0.028  existence S 0.1372/0.0719 G 0.3617/0.2147
+  K5_r0.6    n  42  T1 fail fits   0/42 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.083  R/S 0.022  existence S 0.1279/0.0719 G 0.3501/0.2147
+  K5_r0.8    n  34  T1 fail fits   0/34 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.067  R/S 0.016  existence S 0.1355/0.0719 G 0.3623/0.2147
+  K8_r0.45   n  26  T1 fail fits   0/26 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.113  R/S 0.037  existence S 0.1358/0.0719 G 0.3317/0.2014
+  K8_r0.6    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.100  R/S 0.029  existence S 0.1361/0.0719 G 0.3426/0.2147
+  K8_r0.8    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art nan  below min ω0 0.084  R/S 0.022  existence S 0.1340/0.0719 G 0.3426/0.2147
+  K13_r1.5   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0010  closure art×art nan  below min ω0 0.062  R/S 0.013  existence S 0.1258/0.0719 G 0.3332/0.2147
+  K13_r2     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0028  closure art×art nan  below min ω0 0.056  R/S 0.008  existence S 0.1217/0.0719 G 0.3244/0.2147
+  K13_r3     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0059  closure art×art nan  below min ω0 0.052  R/S 0.005  existence S 0.1181/0.0719 G 0.3278/0.2147
+  K20_r1.5   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0022  closure art×art nan  below min ω0 0.072  R/S 0.018  existence S 0.1293/0.0719 G 0.3392/0.2147
+  K20_r2     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0016  closure art×art nan  below min ω0 0.061  R/S 0.011  existence S 0.1256/0.0719 G 0.3325/0.2147
+  K20_r3     n  50  T1 fail fits   5/50 V1 False  mono/fit 0.02 (recurring 0)  offdiag child×article 0.0051  closure art×art nan  below min ω0 0.056  R/S 0.006  existence S 0.1215/0.0719 G 0.3310/0.2147
+approach_2
+  K3_r0.45   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.155  below min ω0 0.091  R/S 0.020  existence S 0.1324/0.0719 G 0.3389/0.2147
+  K3_r0.6    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.171  below min ω0 0.072  R/S 0.014  existence S 0.1300/0.0719 G 0.3327/0.2147
+  K3_r0.8    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.087  below min ω0 0.050  R/S 0.005  existence S 0.1196/0.0719 G 0.3269/0.2147
+  K5_r0.45   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.008  below min ω0 0.105  R/S 0.030  existence S 0.1376/0.0719 G 0.3560/0.2147
+  K5_r0.6    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.045  below min ω0 0.089  R/S 0.024  existence S 0.1363/0.0719 G 0.3578/0.2147
+  K5_r0.8    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0000  closure art×art 1.055  below min ω0 0.072  R/S 0.018  existence S 0.1335/0.0719 G 0.3538/0.2147
+  K8_r1.5    n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0013  closure art×art 1.035  below min ω0 0.060  R/S 0.010  existence S 0.1223/0.0719 G 0.3448/0.2147
+  K8_r2      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0019  closure art×art 0.993  below min ω0 0.056  R/S 0.006  existence S 0.1178/0.0719 G 0.3420/0.2147
+  K8_r3      n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0017  closure art×art 0.943  below min ω0 0.049  R/S 0.003  existence S 0.1152/0.0719 G 0.3404/0.2147
+  K13_r1.5   n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0009  closure art×art 0.966  below min ω0 0.064  R/S 0.014  existence S 0.1262/0.0719 G 0.3363/0.2147
+  K13_r2     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0041  closure art×art 0.984  below min ω0 0.057  R/S 0.009  existence S 0.1219/0.0719 G 0.3304/0.2147
+  K13_r3     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.00 (recurring 0)  offdiag child×article 0.0084  closure art×art 0.981  below min ω0 0.052  R/S 0.005  existence S 0.1180/0.0719 G 0.3268/0.2147
+  K20_r1.5   n  50  T1 fail fits  10/50 V1 True  mono/fit 0.02 (recurring 0)  offdiag child×article 0.0128  closure art×art 0.936  below min ω0 0.075  R/S 0.020  existence S 0.1282/0.0719 G 0.3307/0.2147
+  K20_r2     n  50  T1 fail fits   3/50 V1 False  mono/fit 0.08 (recurring 0)  offdiag child×article 0.0117  closure art×art 0.996  below min ω0 0.062  R/S 0.013  existence S 0.1235/0.0719 G 0.3275/0.2147
+  K20_r3     n  50  T1 fail fits   0/50 V1 False  mono/fit 0.10 (recurring 0)  offdiag child×article 0.0054  closure art×art 1.075  below min ω0 0.056  R/S 0.007  existence S 0.1195/0.0719 G 0.3239/0.2147
+errors: 0

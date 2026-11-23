@@ -4715,3 +4715,10 @@ placed rule (l1, 2026-11-13) as item (l)'s criterion in the same uses (l2): Trac
 sufficient members, membership-mean view (A), excess-spread diagnostic; members for q / m counted among covered entities
 (l3). The placed rule stays a reported reading (share of entities whose reconstruction beats the degree-only reference).
 Remeasurement of the affected readings on saved fits proposed (RL-344 list), not started.
+
+### RL-346 — 2026-11-23 — λ calibration (A) and W3 check finished incomplete
+λ calibration: 1,452 / 1,500 fits finished, 0 errors; array tasks 28, 32, 36, 39, 41, 42 of 25112302 left no log (never
+ran); missing: approach 1 K 8 r 0.45 (24 fits), K 5 r 0.8 (16), K 5 r 0.6 (8) — these cells feed r*(5) and r*(8) of
+approach 1. The post-processing (25112303) ran on the incomplete set (`lambda_cal_choice_A`, provisional). W3 check:
+238 / 240; task 27 of 25115915 logged Slurm errors ("Unable to resolve infra01"); 2 approach-2 swap fits (K 13, r 1,
+p 1) unfinished. Both launchers skip finished fits; resubmission needed before the results are read.
