@@ -1,0 +1,4 @@
+approach_1_KL {"control_changed": true, "fit_worse": false, "fit_better": true, "anchor_guard_met": true}
+approach_1_squared_error {"outcome": 3, "per_relation": {"parent_child": 3, "author_article": 3, "author_affiliation": 3, "article_journal": 3}, "fit_worse": true, "fit_better": true, "anchor_guard_met": false, "seeds_paired": 2}
+approach_2_KL {"control_changed": true, "fit_worse": false, "fit_better": true, "anchor_guard_met": true}
+approach_2_squared_error {"outcome": null, "note": "not readable by the decided rule: 0 seed(s) converged in both arms", "anchor_guard_met": null}

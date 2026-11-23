@@ -1,0 +1,4 @@
+approach_1_KL {"control_changed": true, "fit_worse": false, "fit_better": true, "anchor_guard_met": true}
+approach_1_squared_error {"outcome": 4, "per_relation": {"parent_child": 2, "author_article": 3, "author_affiliation": 3, "article_journal": 3}, "fit_worse": true, "fit_better": true, "anchor_guard_met": false, "seeds_paired": 10}
+approach_2_KL {"control_changed": true, "fit_worse": false, "fit_better": true, "anchor_guard_met": true}
+approach_2_squared_error {"outcome": 4, "per_relation": {"parent_child": 2, "article_affiliation": 3, "article_article": 3, "article_journal": 3}, "fit_worse": true, "fit_better": true, "anchor_guard_met": false, "seeds_paired": 10}
