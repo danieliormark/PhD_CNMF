@@ -16,7 +16,7 @@ export M1_ENTITY_RULE=coverage
 OUT=/mnt/hum01-rds/Basov/p91688di/m1_fits
 BUILD_B=/mnt/hum01-rds/Basov/p91688di/m1_chunk12v3/psych_trial_v3_nogenre/
 R=fit/results/stage0
-keep() { for f in "$@"; do [ -f "$f" ] || continue; b="${f%.*}_placed.${f##*.}"; [ -f "$b" ] || cp -p "$f" "$b"; done; }
+keep() { local f bk; for f in "$@"; do [ -f "$f" ] || continue; bk="${f%.*}_placed.${f##*.}"; [ -f "$bk" ] || cp -p "$f" "$bk"; done; }
 case "$SLURM_ARRAY_TASK_ID" in
 0|1)
   if [ "$SLURM_ARRAY_TASK_ID" = 0 ]; then S=A; STAGE=stage0_pass3; BA=""; else S=B; STAGE=B_stage0_pass3; BA="--build $BUILD_B"; fi

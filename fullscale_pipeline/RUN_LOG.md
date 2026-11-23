@@ -4748,3 +4748,11 @@ comparison's placed-share flag (`stage0_compare`; generalised KL satisfies cover
 compare the losses fairly under it), pass 2 (superseded by pass 3), the membership-mean view and sufficient members (no
 reading has used them yet; sufficient members waits for q / m). The queued λ-calibration and W3 post-processing jobs
 (25132001, 25132003) read the code at run time and will aggregate under the coverage rule.
+
+### RL-349 — 2026-11-23 — Remeasurement (25134381), λ calibration (25132000/1) and W3 check (25132002/3) finished
+Completeness: λ calibration 1,500 / 1,500 fits, 0 errors; W3 check 240 / 240, 0 errors. Both post-processing jobs ran
+after the pass-3 remeasurement, so all aggregations they read use the coverage rule (c = 0.5); no rule mix. Remeasurement
+array 25134381: tasks 0–3 done (pass-3 aggregation + J1 choice A and B; start tests 1–2 A and B; stability tests 1–3).
+Task 4 (S3 gate 1) did not run: the backup helper in `submit_remeasure_coverage.sh` overwrote the loop variable `b`
+(the loss), so the four commands got an invalid path; the original outputs are intact (copies `*_placed.*` identical).
+Fixed (local variables); task 4 alone to be resubmitted. Results not yet reported.
