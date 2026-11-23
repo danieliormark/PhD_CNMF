@@ -4756,3 +4756,22 @@ array 25134381: tasks 0–3 done (pass-3 aggregation + J1 choice A and B; start 
 Task 4 (S3 gate 1) did not run: the backup helper in `submit_remeasure_coverage.sh` overwrote the loop variable `b`
 (the loss), so the four commands got an invalid path; the original outputs are intact (copies `*_placed.*` identical).
 Fixed (local variables); task 4 alone to be resubmitted. Results not yet reported.
+
+### RL-350 — 2026-11-23 — Remeasurement under the coverage rule: results (tasks 0–3; S3 gate 1 rerunning)
+Entity set (group-level, mean coverage over seeds ≥ 0.5), pass 3, mean over cells: ≥ 99.7 % of every facet in both
+studies (placed rule: parents 0.55–0.69, articles 0.60–0.71, child 0.86–0.87, journals 0.85–0.90, organisations
+0.77–0.98, authors 0.91); at c 0.75: authors 0.94–0.95, organisations 0.96–0.98, others ≥ 0.996. **Pass 3, A and B:
+r*(K), K band, candidates, V1 would-be, gate / ghost / alignment outcomes identical to the placed-rule reading.** Track A
+chance-adjusted lower in every cell by 0.007–0.066 (A) / 0.005–0.072 (B), larger at small K (K 3: 0.04–0.07; K 20:
+0.005–0.02) and at larger r; the shift is systematic (same fits; paired SE over groups ≈ 0.001) and 2–15 × Track A's SE
+over groups in study A (≈ 0.005). λ-rule stability guard passes everywhere under both rules; lowest margin (Track A at r
+minus at λ = 0, in λ = 0's SE; guard fails below −1): A +1.4 → +0.7 (approach 2 K 8 r 0.3), B +0.5 → +0.5. Per-fit
+coverage reading: Track A within 0.006 of the group-level reading, no seed-level check result differs. Start tests 1–2
+(A, B): only Track A levels change, by 0.008–0.031 per arm and nearly uniformly within a test, so every ordering of arms
+and every verdict stands (diagonal > reference; S2 / S3 levels as before). Stability tests 1–3: test 1 A–B gaps
+0.086 / 0.050 / 0.025 / 0.048 → 0.082 / 0.046 / 0.026 / 0.044 (genre-free child facet changes A by ≤ 0.001 as before);
+test 2 does not use the entity set (unchanged); test 3: splits remain outlying seeds or flat cuts (study B approach 1 K 5
+group 2 now 5/5, within 0.553 vs between 0.488, loss gap 0.43 SD; before 2/8, 0.545 / 0.485, 1.01 SD) → "a flatter set
+of solutions, not several clean ones" stands. **Correction to RL-306:** the placed-rule output already had 3/7 and 4/6
+splits (study A approach 2, K 5 groups 3–5, K 13 group 5), not only 1/9 and 2/8. λ-calibration choice is under the
+coverage rule only (the provisional placed-rule aggregation was overwritten when the complete set was processed).
