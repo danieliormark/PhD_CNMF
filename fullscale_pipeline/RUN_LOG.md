@@ -4845,3 +4845,11 @@ entity rule); T1, lower domain presence, spreads; swap p 0 → p 1 per point. `s
 the analysis on the existing points reproduces the W3 values (stability W2 − W1: −0.026 / −0.056). **Deferred (owner):**
 (b) cross-domain hold-out, (c) shared + domain-specific memberships — added to "NOT YET DESIGNED" in
 `plans/ticket107_layer2/test_architecture.{py,txt}`.
+
+### RL-354 — 2026-11-23 — Weighting rule R-b decided; weight curve and membership readings submitted
+Owner: "I approve R-b with the guards" — rule fixed before the results (design doc 2026-11-23): per approach, the point
+maximising min(semantic gain share of W1's, affiliation gain share of W2's); fallback R-a if the affiliation relation
+gains nothing at W2 beyond one SE; guards: no T1 failures, author / co-author grouping still falls in the swap.
+Submitted (owner): intermediate weighting check, fits 25199610 (35 tasks, 280 fits), post-processing 25199611
+(dependency). Membership readings (item (l) option (a)) job 25190974: finished 19:38, 75 / 75 tasks, no errors
+(`fit/results/stage0/membership_readings.json`, per-entity arrays on RDS `m1_fits/membership_readings/`); not yet read.
