@@ -4880,3 +4880,17 @@ to the R5 design / RL-351:** the R2 chance range is too narrow to discriminate (
 chance also have low R2 (child median 0.08–0.16 vs 0.24–0.58 for the rest) — they are unstable, not mismatched.
 **R3 placement:** share with mean excess > 0: child 0.92–1.00, parent 0.67–0.96, article 0.68–0.98, authors /
 organisations / journals 0.86–1.00 (placed rule 0.49–1.00).
+
+### RL-356 — 2026-11-23 — Membership readings: effect sizes and SEs added (owner asked); one correction
+SE = over the 5 hold-out groups (hold-out-draw noise; 4 degrees of freedom; seed noise already averaged inside each group);
+a yardstick, not a test. R1 chance-adjusted per cell: SE 0.003–0.019 (study A), 0.003–0.036 (study B; B varies more
+between groups). K steps (paired by group): −0.06 to −0.18 per step, 2.4–24 SE (smallest: B K 5 → 8, −0.085 ± 0.035
+child, −0.057 ± 0.038 article). B − A (unpaired, different hold-out draws): −0.04 to −0.14; approach 1 K 5 −0.10 to −0.14
+(≈ 3–4 SE), K 13 −0.045 to −0.073 (3–4 SE), approach 2 K 5 / 8 −0.04 to −0.06 (1.5–2 SE). Child share at chance level:
+r = 1 cells 0.10–0.27 (SE ≤ 0.015) vs r 0 / 0.3 cells 0.02–0.08 (SE ≤ 0.007); at equal K 8: approach 1 r 0.3 0.030 ±
+0.002 vs approach 2 r 1 0.101 ± 0.009; B K 20 r 0 0.076 ± 0.005 < B K 13 r 1 0.21 ± 0.01 (higher K, lower share) — points to
+r, not K; confounded with approach / K, to be tested on the λ-calibration fits. **Correction to RL-355 ("little
+dependence on tie count, within ±0.05"):** tie-band differences are small but real and not all within 0.05: child 6+ vs
+2 ties +0.04 to +0.08 (SE ≤ 0.004); authors with 1 tie more stable than with 3–5 / 6+ by +0.04 to +0.08; journals 6+
+vs 2 +0.14 ± 0.007 (B approach 1 K 5); parents and organisations ≤ +0.04. Direction differs by facet; size below one K
+step.
