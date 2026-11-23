@@ -4803,3 +4803,23 @@ entities shrinks when the selection is independent of the seeds' agreement — p
 0.083, articles 0.157 → 0.123, child +0.037 → −0.011; "same seeds, no margin" gives the cross-fitted values within
 0.01 except authors' unplaced (106 entities), so the circularity sat in the seed-SD margin. One group only; full run
 (15 cells × 5 groups, `fit/slurm/membership_readings.sh`) awaits the owner's permission.
+
+### RL-352 — 2026-11-23 — W3 check read (report 2 to the owner); scoring-weight confound found and corrected
+240 / 240 fits (RL-349). **Confound:** a fit's combined held-out score (`run_fit` → `measures.combined_two_part`) weights
+relations by the fit's own w_r, so mass-weight fits were scored with the affiliation relation at about twice its usual
+weight; its within-class AP is tiny, so the logged existence drop (−0.038 to −0.047, about −40 %) is mostly the change of
+scoring weights. Rescored with the same (current) weights (`fit/weight_check_rescore.py`, saved measures only; mass −
+current, mean ± SE over 5 groups): existence −0.0050 ± 0.0009 / −0.0065 ± 0.0009 (approach 1 K 5 r 0.3 / K 13 r 1),
+−0.0090 ± 0.0011 / −0.0084 ± 0.0012 (approach 2), i.e. −5 to −9 %; semantic-equal existence −5 / −7 / −12 / −11 %;
+semantic-equal value −7 / −15 / −16 / −22 %. Per relation against the degree-only reference (within-class AP, same
+groups): child×article 0.146 reference — current 0.175–0.181, mass 0.150–0.170: the fit's gain over the reference falls
+by 32 / 43 % (approach 1) and 81 / 85 % (approach 2); parent×child gain −5 to −21 %; article×affiliation (approach 2,
+reference 0.0098) gain ×3.4 / ×2.4 (0.013 → 0.021, 0.016 → 0.024); author×affiliation (approach 1) unchanged. Not
+affected by the confound: Track A chance-adjusted −0.026 / −0.032 / −0.056 / −0.027 (SE ≈ 0.002); T1 no failures in
+either; every community present in both domains in both; organisations' membership spread −0.05 to −0.14 bits, authors'
+−0.02 to −0.06, articles' +0.06 to +0.11 except approach 2 K 13 (−0.04). Swap (K 13, r 1, group 1; model co-membership of
+articles sharing a social entity above the all-pair mean, p 0 → 1): current — author 0.148 → 0.118 (−0.030 ± 0.005),
+journal 0.046 → 0.030; mass — author 0.157 → 0.143 (−0.014 ± 0.005), journal 0.336 → 0.342 (+0.006 ± 0.007): under mass
+weights articles of one journal are grouped strongly and regardless of shared ideas. Approach 2: co-author 0.446 → 0.425
+(current) vs 0.624 → 0.595 (mass); journal 0.037 → 0.029 vs 0.276 → 0.271. Decision W1 / W2 with the owner. Note for
+later arms that change relation weights: the decision score should use the main setting's weights (to the owner).
