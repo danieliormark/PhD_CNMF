@@ -13,4 +13,8 @@ conda activate tensor_env
 export LD_LIBRARY_PATH=/mnt/hum01-home01/p91688di/miniconda3/envs/tensor_env/lib:${LD_LIBRARY_PATH:-}
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
 export M1_ENTITY_RULE=coverage
-python -u -m fit.membership_readings --out fit/results/stage0/membership_readings.json --workers 8
+if [ "${MR_SET:-candidates}" = r_sweep ]; then
+  python -u -m fit.membership_readings --set r_sweep --out fit/results/stage0/membership_readings_r_sweep.json --workers 8
+else
+  python -u -m fit.membership_readings --out fit/results/stage0/membership_readings.json --workers 8
+fi

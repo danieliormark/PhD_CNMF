@@ -4894,3 +4894,13 @@ dependence on tie count, within ±0.05"):** tie-band differences are small but r
 2 ties +0.04 to +0.08 (SE ≤ 0.004); authors with 1 tie more stable than with 3–5 / 6+ by +0.04 to +0.08; journals 6+
 vs 2 +0.14 ± 0.007 (B approach 1 K 5); parents and organisations ≤ +0.04. Direction differs by facet; size below one K
 step.
+
+### RL-357 — 2026-11-23 — Membership readings r sweep prepared (owner: "I approve makiong this short test")
+Purpose: the child hyperedges' share at chance-level agreement is 0.10–0.27 in the r = 1 candidate cells and 0.02–0.08
+at r 0 / 0.3, but r is confounded with K and approach there (RL-356); the sweep separates them. `fit/membership_readings.py
+--set r_sweep`: every (approach, K, r) of study A — pass 3 (r 0 / 0.3 / 1) and the λ calibration (r 0.45 / 0.6 / 0.8 at
+K 3 / 5 / 8 and approach 2 K ≤ 5, r 1.5 / 2 / 3 above) — 60 cells × 5 groups = 300 tasks, 10 seeds each, saved fits only;
+same readings R1–R5 plus membership spread (bits, mean over seeds) per entity and per tie band (to check whether the
+tie-count differences in agreement follow from how concentrated memberships are). `slurm/membership_readings_r_sweep.sh`
+(1 job × 8 cores, 6 h limit, ≈ 1 h) → `fit/results/stage0/membership_readings_r_sweep.json`; per-entity arrays on RDS
+(the 7 study-A candidate cells are rewritten with the spread added; other values identical).

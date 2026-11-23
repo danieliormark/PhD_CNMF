@@ -24,7 +24,12 @@
 #      entity.
 # Entities: covered (group-level, RL-345) and with ≥ 1 visible tie. Saved fits only. Cells: the pass-3 candidates of
 # pass3_choice_{A,B}.json ("chosen"). Per-entity arrays go to RDS (m1_fits/membership_readings/); summaries to --out.
+# r sweep (owner 2026-11-23: "I approve making this short test"; RL-357): --set r_sweep reads every (approach, K, r) of
+# study A — pass 3 (r 0 / 0.3 / 1) and the λ calibration (three more r per K) — to separate the word-similarity term's
+# strength r from K in the child hyperedges' instability; membership spread (bits, mean over seeds) is added per entity and
+# per tie band, to check whether the tie-count differences in agreement follow from how concentrated memberships are.
 # Usage: python -m fit.membership_readings --out fit/results/stage0/membership_readings.json [--workers 8]
+#        python -m fit.membership_readings --set r_sweep --out fit/results/stage0/membership_readings_r_sweep.json --workers 8
 #        [--only A:1:5:0.3:0] (one study:approach:K:r:group, for a test)
 import os
 os.environ["M1_ALIGNED"] = "1"
@@ -86,6 +91,7 @@ def task(args):
     rel = {k: tuple(v) for k, v in fits[0]["result"]["relations"].items()}
     UZ = [load_UZ(f["dir"]) for f in fits]
     wms = [M.weighted_memberships(U, Z, rel) for U, Z in UZ]
+    spread = {fa: np.mean([M.entropy_bits(w[fa]["P"]) for w in wms], 0) for fa in facets}
     covs = [M.entity_coverage(U, Z, _rds_of(f["job"])) for (U, Z), f in zip(UZ, fits)]
     del UZ
     covered = M.covered_entities(covs, COVERAGE_C)
@@ -164,25 +170,35 @@ def task(args):
                           for pl in (True, False) for bc in (True, False)},
             "R1_within_R2_beyond_share": float((m & ~beyond1 & beyond2).sum() / max(m.sum(), 1)),
             "by_band_R1": {b: {"n": int((m & bm).sum()), "mean": float(r1[m & bm].mean()), "chance": float(r1c[m & bm].mean()),
-                               "beyond_chance_share": float(beyond1[m & bm].mean()), "placed_share": float(placed_now[m & bm].mean())}
+                               "beyond_chance_share": float(beyond1[m & bm].mean()), "placed_share": float(placed_now[m & bm].mean()),
+                               "R2_mean": float(np.nanmean(r2[m & bm])), "spread_bits": float(spread[fa][m & bm].mean())}
                            for b, bm in bands.items() if (m & bm).sum() > 0},
             "split": split}
         arrays.update({f"{fa}__{k}": v for k, v in (("R1", r1), ("R1_chance", r1c), ("R2", r2), ("R2_chance", r2c),
                                                     ("excess_mean", e_mean), ("excess_pos_share", pos_share),
                                                     ("coverage_mean", np.nanmean(np.vstack([cv[fa] for cv in covs]), 0) if live[fa].any() else np.full(len(m), np.nan)),
                                                     ("ties", ties[fa]), ("kept", m), ("beyond_R1", beyond1), ("beyond_R2", beyond2),
-                                                    ("placed_rule", placed_rule[fa]))})
+                                                    ("placed_rule", placed_rule[fa]), ("spread_bits", spread[fa]))})
     os.makedirs(OUTDIR, exist_ok=True)
     np.savez_compressed(os.path.join(OUTDIR, f"{study}_a{a}_K{K}_r{r:g}_g{g}.npz"), **arrays)
     return rep
 
 
-def tasks_for(only=None):
+def tasks_for(only=None, which="candidates"):
     out = []
     for study, st in STAGES.items():
-        ch = json.load(open(CHOICE.format(study)))
-        want = {(int(ap.split("_")[1]), c["K"], float(c["r"])) for ap in ("approach_1", "approach_2") for c in ch[ap]["chosen"]}
-        fs = latest_fits([load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, st, "*", "measures.json"))])
+        if which == "r_sweep":
+            if study != "A":
+                continue
+            want = None
+            fs = latest_fits([load_fit(os.path.dirname(p)) for stg in (st, "lambda_cal")
+                              for p in glob.glob(os.path.join(ROOT, stg, "*", "measures.json"))])
+            fs = [f for f in fs if not (f["job"].get("arm") or {}).get("swap_p")]
+            want = {(f["job"]["approach"], f["job"]["K"], float(f["job"]["arm"]["r"])) for f in fs}
+        else:
+            ch = json.load(open(CHOICE.format(study)))
+            want = {(int(ap.split("_")[1]), c["K"], float(c["r"])) for ap in ("approach_1", "approach_2") for c in ch[ap]["chosen"]}
+            fs = latest_fits([load_fit(os.path.dirname(p)) for p in glob.glob(os.path.join(ROOT, st, "*", "measures.json"))])
         by = defaultdict(list)
         for f in fs:
             j = f["job"]; r = float((j.get("arm") or {}).get("r", np.nan))
@@ -219,8 +235,9 @@ def summarise(res):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True); ap.add_argument("--workers", type=int, default=1); ap.add_argument("--only")
+    ap.add_argument("--set", default="candidates", choices=("candidates", "r_sweep"))
     a = ap.parse_args()
-    ts = tasks_for(a.only)
+    ts = tasks_for(a.only, getattr(a, "set"))
     print(len(ts), "tasks", flush=True)
     if a.workers > 1:
         with Pool(a.workers) as pool:
