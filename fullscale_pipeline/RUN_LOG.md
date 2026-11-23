@@ -4775,3 +4775,31 @@ group 2 now 5/5, within 0.553 vs between 0.488, loss gap 0.43 SD; before 2/8, 0.
 of solutions, not several clean ones" stands. **Correction to RL-306:** the placed-rule output already had 3/7 and 4/6
 splits (study A approach 2, K 5 groups 3–5, K 13 group 5), not only 1/9 and 2/8. λ-calibration choice is under the
 coverage rule only (the provisional placed-rule aggregation was overwritten when the complete set was processed).
+
+### RL-351 — 2026-11-23 — S3 gate 1 under the coverage rule; item (l) option (a) decided, membership readings prepared
+**S3 gate 1 rerun** (remeasurement task 4, `--array=4`): every gate verdict is the same under both rules (passes only in
+approach 1 β 1 author, as before). Parts that changed without changing a verdict: approach 2 β 1 organisation and
+journal prevalence now pass (journal difference −0.016 ± 0.003 → +0.055 ± 0.004), harm fails, so the gate fails;
+approach 2 β 2 article and organisation harm now pass, prevalence fails, so the gate fails. The coverage set is larger
+where the placed rule had excluded many (β 2 approach 1 authors 737 → 4,209; organisations 166 → 1,254).
+**Item (l), option (a) DECIDED** (owner: "I approve option a, prepare the readings to avoid this self-circularity
+problem you raised"; design doc 2026-11-23). Coverage stays the only filter; membership stability and placement are
+reported per entity, for interpretation. Literature checked (web, 2026-11-23): consensus matrix (Monti et al. 2003,
+Mach. Learn. 52:91–118; Lancichinetti & Fortunato 2012, Sci. Rep. 2:336), node-level support from resampled networks
+(Rosvall & Bergstrom 2010, PLoS ONE 5:e8694), distributions over partitions and per-node marginals (Peixoto 2021, PRX
+11:021003; Riolo & Newman 2020, PRE 101:052306; Calatayud et al. 2019, PRE 100:052308), matching runs of mixed-membership
+models (CLUMPP, Jakobsson & Rosenberg 2007, Bioinformatics 23:1801; pong, Behr et al. 2016), NMF stability over runs
+(Wu et al. 2016 PNAS 113:4290; Kotliar et al. 2019 eLife), circular analysis (Kriegeskorte et al. 2009, Nat. Neurosci.
+12:535) and data splitting (Cox 1975, Biometrika 62:441). **Readings** (`fit/membership_readings.py`): R1 membership
+agreement per entity (1 − JS distance after Track A/B matching, mean over the group's seed pairs; chance by shuffled
+rows); R2 co-membership agreement per entity, alignment-free (Pearson correlation of its co-memberships Σ_k P_ik P_jk
+with every live entity, each facet one equal vote, self excluded; exact through K × K sums, checked against brute force:
+max difference 6e-15); R3 placement without a seed-variability term (mean over seeds of reproduced share − degree-only
+reference; "placed" = mean > 0; share of seeds > 0); R4 circularity check: seeds split in halves, placement from one
+half, agreement from pairs in the other, both directions — beside "same seeds, no margin" and "placed rule"; R5 flags
+(R1 / R2 within the 95th percentile of the chance means of the same facet and tie band). **Test** (study A approach 1
+K 5 r 0.3, group 0; 3 min, 1.1 GB): the placed rule's gap in chance-adjusted Track A between placed and unplaced
+entities shrinks when the selection is independent of the seeds' agreement — parents 0.169 → 0.070, authors 0.179 →
+0.083, articles 0.157 → 0.123, child +0.037 → −0.011; "same seeds, no margin" gives the cross-fitted values within
+0.01 except authors' unplaced (106 entities), so the circularity sat in the seed-SD margin. One group only; full run
+(15 cells × 5 groups, `fit/slurm/membership_readings.sh`) awaits the owner's permission.

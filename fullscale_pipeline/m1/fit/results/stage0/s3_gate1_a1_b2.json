@@ -2,308 +2,308 @@
  "child": {
   "bands": {
    "all": {
-    "share_with_excess": 0.0032287671479003313,
-    "halves_reference": 0.07986750806298587,
-    "difference": -0.07663874091508553,
-    "se": 0.005760850484688532,
+    "share_with_excess": 0.0035299796802914273,
+    "halves_reference": 0.08000573991434164,
+    "difference": -0.0764757602340502,
+    "se": 0.0060578719265696425,
     "prevalence_passes": false,
-    "placed_entities_per_group": 78280.6
+    "placed_entities_per_group": 94128.0
    },
    "2": {
-    "share_with_excess": 0.0037822909773524344,
-    "halves_reference": 0.07986777670918752,
-    "difference": -0.07608548573183507,
-    "se": 0.004926046073493893,
+    "share_with_excess": 0.004122448046496524,
+    "halves_reference": 0.07902676598041702,
+    "difference": -0.07490431793392051,
+    "se": 0.0045592328513721315,
     "prevalence_passes": false,
-    "placed_entities_per_group": 66511.4
+    "placed_entities_per_group": 79964.6
    },
    "3-5": {
-    "share_with_excess": 0.00015192351588570459,
-    "halves_reference": 0.0807315898041367,
-    "difference": -0.080579666288251,
-    "se": 0.006056617896458512,
+    "share_with_excess": 0.0002797831458156559,
+    "halves_reference": 0.08073529305967231,
+    "difference": -0.08045550991385665,
+    "se": 0.005949383589039451,
     "prevalence_passes": false,
-    "placed_entities_per_group": 7786.6
+    "placed_entities_per_group": 9285.4
    },
    "6+": {
     "share_with_excess": 0.0,
-    "halves_reference": 0.0779288519850754,
-    "difference": -0.0779288519850754,
-    "se": 0.005016302070194949,
+    "halves_reference": 0.07780938871061241,
+    "difference": -0.07780938871061241,
+    "se": 0.0050912916616899975,
     "prevalence_passes": false,
-    "placed_entities_per_group": 3982.6
+    "placed_entities_per_group": 4878.0
    }
   },
   "harm": {
-   "auc_excess_minus_none": 0.03198470418682443,
+   "auc_excess_minus_none": 0.07970252579869705,
    "per_group": [
-    0.0024917145533473223,
+    0.030928624844320768,
     NaN,
-    -0.045971342284055305,
-    0.049286506778418504,
-    0.12213193769958719
+    0.11331103878211501,
+    0.03958170024022527,
+    0.13498873932812716
    ],
-   "delta": 0.08294217850292908,
+   "delta": 0.06395095987215302,
    "harm_passes": false
   },
   "gate_passes": false,
-  "mean_excess_bits_placed": -0.8443119422885019
+  "mean_excess_bits_placed": -0.8163128130644359
  },
  "article": {
   "bands": {
    "all": {
-    "share_with_excess": 0.00022727272727272727,
-    "halves_reference": 0.07609620449399371,
-    "difference": -0.07586893176672099,
-    "se": 0.005571920182952878,
+    "share_with_excess": 0.0005341320300391759,
+    "halves_reference": 0.07703986428037453,
+    "difference": -0.07650573225033537,
+    "se": 0.005436819970785948,
     "prevalence_passes": false,
-    "placed_entities_per_group": 909.4
+    "placed_entities_per_group": 1867.0
    },
    "3-5": {
     "share_with_excess": 0.0,
-    "halves_reference": 0.0625,
-    "difference": -0.0625,
-    "se": 0.013149778198382919,
+    "halves_reference": 0.08746248196248195,
+    "difference": -0.08746248196248195,
+    "se": 0.011708088216317008,
     "prevalence_passes": false,
-    "placed_entities_per_group": 1.0
+    "placed_entities_per_group": 8.6
    },
    "6+": {
-    "share_with_excess": 0.00022753128555176336,
-    "halves_reference": 0.07656218226979128,
-    "difference": -0.07633465098423951,
-    "se": 0.008089141443298899,
+    "share_with_excess": 0.0005366549497944588,
+    "halves_reference": 0.07834345191653809,
+    "difference": -0.07780679696674363,
+    "se": 0.007149460339153913,
     "prevalence_passes": false,
-    "placed_entities_per_group": 908.4
+    "placed_entities_per_group": 1858.4
    }
   },
   "harm": {
-   "auc_excess_minus_none": -0.013891367643045771,
+   "auc_excess_minus_none": 0.03200403351640563,
    "per_group": [
     NaN,
-    -0.013891367643045771,
-    NaN,
+    -0.008605421418563464,
+    0.07261348845137472,
     NaN,
     NaN
    ],
-   "delta": 0.025044986471828762,
+   "delta": 0.06924376997075282,
    "harm_passes": false
   },
   "gate_passes": false,
-  "mean_excess_bits_placed": -1.0955865959127111
+  "mean_excess_bits_placed": -0.8975774520125052
  },
  "parent": {
   "bands": {
    "all": {
-    "share_with_excess": 0.005809862095433646,
-    "halves_reference": 0.07881420330686298,
-    "difference": -0.07300434121142933,
-    "se": 0.005204833048333161,
+    "share_with_excess": 0.006973638129820043,
+    "halves_reference": 0.07895772119354687,
+    "difference": -0.07198408306372683,
+    "se": 0.005311507876986258,
     "prevalence_passes": false,
-    "placed_entities_per_group": 28034.8
+    "placed_entities_per_group": 32379.8
    },
    "1": {
     "share_with_excess": 0.0,
-    "halves_reference": 0.08308831168831168,
-    "difference": -0.08308831168831168,
-    "se": 0.004778461104062811,
+    "halves_reference": 0.07696209672941308,
+    "difference": -0.07696209672941308,
+    "se": 0.003776442029502708,
     "prevalence_passes": false,
-    "placed_entities_per_group": 46.4
+    "placed_entities_per_group": 49.8
    },
    "2": {
-    "share_with_excess": 0.0020387484400439583,
-    "halves_reference": 0.07809863545493648,
-    "difference": -0.0760598870148925,
-    "se": 0.0056113660348398,
+    "share_with_excess": 0.0017116013556242153,
+    "halves_reference": 0.07992709196779768,
+    "difference": -0.07821549061217345,
+    "se": 0.005567965395796955,
     "prevalence_passes": false,
-    "placed_entities_per_group": 1277.2
+    "placed_entities_per_group": 1517.8
    },
    "3-5": {
-    "share_with_excess": 0.0072283199653517954,
-    "halves_reference": 0.08248919360603431,
-    "difference": -0.07526087364068251,
-    "se": 0.006277851717978314,
+    "share_with_excess": 0.008486749180979032,
+    "halves_reference": 0.07827666323542765,
+    "difference": -0.0697899140544486,
+    "se": 0.0055766004289289845,
     "prevalence_passes": false,
-    "placed_entities_per_group": 13503.4
+    "placed_entities_per_group": 15740.8
    },
    "6+": {
-    "share_with_excess": 0.004743177291041008,
-    "halves_reference": 0.07944314338396657,
-    "difference": -0.07469996609292556,
-    "se": 0.004839553195247708,
+    "share_with_excess": 0.005945660996026162,
+    "halves_reference": 0.08086831660035933,
+    "difference": -0.07492265560433317,
+    "se": 0.0054861279535470785,
     "prevalence_passes": false,
-    "placed_entities_per_group": 13207.8
+    "placed_entities_per_group": 15071.4
    }
   },
   "harm": {
-   "auc_excess_minus_none": 0.03486263022229342,
+   "auc_excess_minus_none": 0.036070468049898885,
    "per_group": [
-    0.028005374052658974,
-    0.0350071096146664,
-    0.05158846584367177,
-    0.031238008263569917,
-    0.028474193336900027
+    0.02533023725781813,
+    0.04166712750025489,
+    0.04710423643370598,
+    0.037924635460441954,
+    0.028326103597273458
    ],
-   "delta": 0.008457565028657322,
+   "delta": 0.007540571689103432,
    "harm_passes": false
   },
   "gate_passes": false,
-  "mean_excess_bits_placed": -1.050876738970771
+  "mean_excess_bits_placed": -0.9809327326985487
  },
  "author": {
   "bands": {
    "all": {
-    "share_with_excess": 0.007548622687941572,
-    "halves_reference": 0.08120985871887326,
-    "difference": -0.07366123603093169,
-    "se": 0.009709570859380392,
+    "share_with_excess": 0.0017548387545207925,
+    "halves_reference": 0.08021078831420078,
+    "difference": -0.07845594955967998,
+    "se": 0.005965767047471628,
     "prevalence_passes": false,
-    "placed_entities_per_group": 737.2
+    "placed_entities_per_group": 4209.0
    },
    "1": {
-    "share_with_excess": 0.0,
-    "halves_reference": 0.07745230917915757,
-    "difference": -0.07745230917915757,
-    "se": 0.009267427631255593,
+    "share_with_excess": 0.0028932984578145873,
+    "halves_reference": 0.07702608385398109,
+    "difference": -0.0741327853961665,
+    "se": 0.003357947500685455,
     "prevalence_passes": false,
-    "placed_entities_per_group": 44.6
+    "placed_entities_per_group": 205.6
    },
    "2": {
-    "share_with_excess": 0.003913204257904329,
-    "halves_reference": 0.08442607237450159,
-    "difference": -0.08051286811659726,
-    "se": 0.010934135439882104,
+    "share_with_excess": 0.001064923248976013,
+    "halves_reference": 0.08045729911539072,
+    "difference": -0.0793923758664147,
+    "se": 0.007262126188001588,
     "prevalence_passes": false,
-    "placed_entities_per_group": 560.2
+    "placed_entities_per_group": 3176.0
    },
    "3-5": {
-    "share_with_excess": 0.024558139886607037,
-    "halves_reference": 0.07675882503612608,
-    "difference": -0.05220068514951905,
-    "se": 0.012082802470112688,
+    "share_with_excess": 0.004128690303137191,
+    "halves_reference": 0.07946522917924102,
+    "difference": -0.07533653887610384,
+    "se": 0.005635617052040446,
     "prevalence_passes": false,
-    "placed_entities_per_group": 131.0
+    "placed_entities_per_group": 821.0
    },
    "6+": {
     "share_with_excess": 0.0,
-    "halves_reference": 0.076,
-    "difference": -0.076,
-    "se": 0.02315167380558045,
+    "halves_reference": 0.06433333333333333,
+    "difference": -0.06433333333333333,
+    "se": 0.010268614533832909,
     "prevalence_passes": false,
-    "placed_entities_per_group": 1.4
+    "placed_entities_per_group": 6.4
    }
   },
   "harm": {
-   "auc_excess_minus_none": 0.18048785414171253,
+   "auc_excess_minus_none": 0.26999609234227856,
    "per_group": [
     NaN,
     NaN,
-    0.14337287154160072,
-    0.2374592037132427,
-    0.16063148717029418
+    0.2428192457119943,
+    0.2924685180168032,
+    0.27470051329803824
    ],
-   "delta": 0.04186724351024261,
+   "delta": 0.34747879196819315,
    "harm_passes": false
   },
   "gate_passes": false,
-  "mean_excess_bits_placed": -0.48349853324101283
+  "mean_excess_bits_placed": -0.8053793246483879
  },
  "organisation": {
   "bands": {
    "all": {
-    "share_with_excess": 0.004785788923719958,
-    "halves_reference": 0.07594896039853723,
-    "difference": -0.07116317147481727,
-    "se": 0.004196796163983018,
+    "share_with_excess": 0.002380754068601364,
+    "halves_reference": 0.08170515942212184,
+    "difference": -0.07932440535352048,
+    "se": 0.006015352785489888,
     "prevalence_passes": false,
-    "placed_entities_per_group": 165.6
+    "placed_entities_per_group": 1253.8
    },
    "1": {
-    "share_with_excess": 0.002531645569620253,
-    "halves_reference": 0.08266381039400963,
-    "difference": -0.08013216482438938,
-    "se": 0.007853983850199092,
+    "share_with_excess": 0.0021909914276482105,
+    "halves_reference": 0.07609388798608155,
+    "difference": -0.07390289655843334,
+    "se": 0.0070767798860436664,
     "prevalence_passes": false,
-    "placed_entities_per_group": 71.4
+    "placed_entities_per_group": 629.6
    },
    "2": {
-    "share_with_excess": 0.00625,
-    "halves_reference": 0.0803799019607843,
-    "difference": -0.07412990196078431,
-    "se": 0.007331357209891179,
+    "share_with_excess": 0.000819672131147541,
+    "halves_reference": 0.08215699112553507,
+    "difference": -0.08133731899438752,
+    "se": 0.006879584056963488,
     "prevalence_passes": false,
-    "placed_entities_per_group": 32.4
+    "placed_entities_per_group": 235.0
    },
    "3-5": {
-    "share_with_excess": 0.008,
-    "halves_reference": 0.07236093514328809,
-    "difference": -0.06436093514328808,
-    "se": 0.007750810961296298,
+    "share_with_excess": 0.004239338112087462,
+    "halves_reference": 0.07573194137816867,
+    "difference": -0.0714926032660812,
+    "se": 0.004892182911674863,
     "prevalence_passes": false,
-    "placed_entities_per_group": 40.6
+    "placed_entities_per_group": 283.4
    },
    "6+": {
-    "share_with_excess": 0.0,
-    "halves_reference": 0.08329045340624289,
-    "difference": -0.08329045340624289,
-    "se": 0.006994514499464984,
+    "share_with_excess": 0.001941747572815534,
+    "halves_reference": 0.08096996529879692,
+    "difference": -0.07902821772598138,
+    "se": 0.007963810715415269,
     "prevalence_passes": false,
-    "placed_entities_per_group": 21.2
+    "placed_entities_per_group": 105.8
    }
   },
   "harm": {
-   "auc_excess_minus_none": 0.1217140756478815,
+   "auc_excess_minus_none": 0.1751376587535608,
    "per_group": [
     NaN,
     NaN,
-    NaN,
-    0.1217140756478815,
-    NaN
+    0.13536946961435825,
+    0.22161116760091015,
+    0.168432339045414
    ],
-   "delta": 0.2543118569492813,
+   "delta": 0.11475039018304126,
    "harm_passes": false
   },
   "gate_passes": false,
-  "mean_excess_bits_placed": -0.3505586273697138
+  "mean_excess_bits_placed": -0.38909942845283113
  },
  "journal": {
   "bands": {
    "all": {
-    "share_with_excess": 0.0036363636363636364,
-    "halves_reference": 0.08199681920046267,
-    "difference": -0.07836045556409903,
-    "se": 0.010132704036306932,
+    "share_with_excess": 0.004082318618958145,
+    "halves_reference": 0.07852660333005262,
+    "difference": -0.07444428471109447,
+    "se": 0.0062933623767957945,
     "prevalence_passes": false,
-    "placed_entities_per_group": 54.6
+    "placed_entities_per_group": 196.0
    },
    "1": {
-    "share_with_excess": 0.005128205128205128,
-    "halves_reference": 0.08285658845658846,
-    "difference": -0.07772838332838333,
-    "se": 0.010648892347320933,
+    "share_with_excess": 0.005407588322685395,
+    "halves_reference": 0.07779755978191215,
+    "difference": -0.07238997145922674,
+    "se": 0.006587514994335956,
     "prevalence_passes": false,
-    "placed_entities_per_group": 38.0
+    "placed_entities_per_group": 148.0
    },
    "2": {
     "share_with_excess": 0.0,
-    "halves_reference": 0.060452380952380945,
-    "difference": -0.060452380952380945,
-    "se": 0.009054852997801309,
+    "halves_reference": 0.0790997150997151,
+    "difference": -0.0790997150997151,
+    "se": 0.0037209940481268662,
     "prevalence_passes": false,
-    "placed_entities_per_group": 6.8
+    "placed_entities_per_group": 26.2
    },
    "3-5": {
     "share_with_excess": 0.0,
-    "halves_reference": 0.07921428571428571,
-    "difference": -0.07921428571428571,
-    "se": 0.00811461266946921,
+    "halves_reference": 0.07945263157894736,
+    "difference": -0.07945263157894736,
+    "se": 0.006341146466070243,
     "prevalence_passes": false,
-    "placed_entities_per_group": 7.8
+    "placed_entities_per_group": 19.8
    },
    "6+": {
     "share_with_excess": 0.0,
-    "halves_reference": 0.086,
-    "difference": -0.086,
-    "se": 0.009273618495495703,
+    "halves_reference": 0.10200000000000001,
+    "difference": -0.10200000000000001,
+    "se": 0.011135528725660046,
     "prevalence_passes": false,
     "placed_entities_per_group": 2.0
    }
@@ -321,6 +321,6 @@
    "harm_passes": false
   },
   "gate_passes": false,
-  "mean_excess_bits_placed": -0.4505959054956733
+  "mean_excess_bits_placed": -0.5767642668440371
  }
 }
