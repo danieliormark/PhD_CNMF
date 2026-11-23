@@ -4726,3 +4726,25 @@ p 1) unfinished. Both launchers skip finished fits; resubmission needed before t
 ### RL-347 — 2026-11-23 — Resubmission of the missing fits (owner, CSF3)
 λ calibration: fit array 25132000 (1,500 jobs; finished fits are skipped), post-processing 25132001. W3 check: fit array
 25132002 (240 jobs), post-processing 25132003.
+
+### RL-348 — 2026-11-23 — Item (l): remeasurement under the coverage rule prepared (owner: go-ahead)
+Owner: "I propose you start with the task of remeasuring the readings that used the placed rule, now under the coverage
+rule." Code (no fits): `measures.entity_coverage` (RL-344's computation: reconstructed ÷ observed tie mass over the
+entity's fitted cells, relations weighted by the fit's w_r) and `measures.covered_entities` (group-level, as the placed
+rule: mean coverage over the group's seeds ≥ c). `aggregate.py`: entity set for Track A, the ghost veto and the alignment
+veto = coverage rule c = 0.5 by default (`M1_ENTITY_RULE=placed` reproduces the earlier aggregation); reported beside it:
+placed share, covered shares at c 0.25 / 0.5 / 0.75, median coverage, and a per-fit reading (each fit's own covered set:
+per seed for the vetoes, both fits' sets for a Track A pair; reported only) — added because on one cell (study A,
+approach 1, K 13, r 1, group 1) low coverage is seed-specific: authors below 0.5 are ≈ 5 % in each seed, 23 % in some
+seed, 0 % in all ten, 0.9 % by the seed mean; organisations 1.4–4.1 % / 15 % / 0 % / 0 %. Aggregation parallel over
+(cell, K, group) (`--workers`); `_status.entity_rule` records the rule; `pass3_choice` refuses to merge aggregations
+made under different rules; `weight_check_analysis` compares stability only under one rule. `stability_genre_tests`,
+`s3_gate1` use the same entity set; start tests use it through `aggregate.group_checks`. Same cell, both rules:
+entity set share placed → covered: parents 0.64 → 1.00, articles 0.66 → 1.00, child 0.87 → 1.00, authors 0.96 → 0.99;
+Track A chance-adjusted 0.42 → 0.39 (Track B unchanged 0.52, it uses all entities); gate, ghost, alignment: 0 failures
+under both. Job `fit/slurm/remeasure_coverage.sh` (5 tasks × 8 cores: pass-3 aggregation + J1 choice A and B; start tests
+1–2 A and B; stability tests 1–3; S3 gate 1); earlier outputs kept as `*_placed.*`. Not remeasured: the stage-0 loss
+comparison's placed-share flag (`stage0_compare`; generalised KL satisfies coverage by construction, so the flag cannot
+compare the losses fairly under it), pass 2 (superseded by pass 3), the membership-mean view and sufficient members (no
+reading has used them yet; sufficient members waits for q / m). The queued λ-calibration and W3 post-processing jobs
+(25132001, 25132003) read the code at run time and will aggregate under the coverage rule.

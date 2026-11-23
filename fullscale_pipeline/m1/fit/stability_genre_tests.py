@@ -15,6 +15,7 @@
 #   Test 3 (solution modes, H3): per group, the 10 × 10 matrix of seed-pair agreement (model-level Track A, raw); two
 #     clusters by average linkage; sizes, mean agreement within clusters and between them; final data loss per seed and
 #     the loss difference between the clusters (in units of the group's loss SD).
+# Entity set for Track A (2026-11-23): coverage rule c = 0.5 (RL-345) by default; M1_ENTITY_RULE=placed = earlier reading.
 # Usage: python -m fit.stability_genre_tests --out fit/results/stage0/stability_genre_tests.json [--workers 8]
 import argparse, glob, json, os
 from collections import defaultdict
@@ -24,7 +25,7 @@ import numpy as np
 from scipy.cluster.hierarchy import linkage, fcluster
 from scipy.spatial.distance import squareform
 from . import data as D, measures as M
-from .aggregate import load_fit, load_UZ, latest_fits, load_entity
+from .aggregate import load_fit, load_UZ, latest_fits, load_entity, ENTITY_RULE, COVERAGE_C, _rds_of
 
 ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
 STAGES = {"A": "stage0_pass1", "B": "B_stage0_pass1"}
@@ -59,6 +60,8 @@ def task(args):
     ents = [load_entity(f["dir"]) for f in fits]
     placed = {fa: M.placed_entities([e[fa]["reproduced_share"] for e in ents], ents[0][fa]["reproduced_share_degree_only"])
               for fa in ents[0]}
+    if ENTITY_RULE == "coverage":     # item (l) entity set: coverage rule c = 0.5 (RL-345), group-level as in aggregate
+        placed = M.covered_entities([M.entity_coverage(*load_UZ(f["dir"]), _rds_of(f["job"])) for f in fits], COVERAGE_C)
     rel = {r: tuple(v) for r, v in fits[0]["result"]["relations"].items()}
     wms = [M.weighted_memberships(*load_UZ(f["dir"]), rel) for f in fits]
     facets = sorted(wms[0]); n = len(wms)
@@ -181,6 +184,7 @@ def main():
     a = ap.parse_args()
     res = run(a.workers); rep = analyse(res)
     rep["_raw"] = [{k: v for k, v in r.items() if k != "article_agreement"} for r in res]
+    rep["_entity_rule"] = {"rule": ENTITY_RULE, "c": COVERAGE_C if ENTITY_RULE == "coverage" else None}
     json.dump(rep, open(a.out, "w"), default=lambda x: x.tolist() if isinstance(x, np.ndarray) else (int(x) if isinstance(x, np.integer) else float(x)))
     for t in ("test1", "test2"):
         for k, v in rep[t].items():

@@ -243,6 +243,41 @@ def entity_measures(U, Z, rds):
     return out
 
 
+def entity_coverage(U, Z, rds):
+    """Item (l) entity criterion, coverage rule (owner 2026-11-22, "I approve B with c = 0.5", RL-345): per facet and
+    entity, reconstructed ÷ observed tie mass over the entity's fitted cells (observed rows × all columns, minus hidden
+    cells and a masked diagonal), each relation weighted by its fit weight w_r (both summed over the relations touching
+    the facet). Entities with no visible tie get NaN. Same computation as RL-344."""
+    tot_x = {f: np.zeros(len(u)) for f, u in U.items()}; tot_h = {f: np.zeros(len(u)) for f, u in U.items()}
+    for rd in rds:
+        A, B, z = U[rd.row_facet], U[rd.col_facet], Z[rd.name]
+        rows = np.nonzero(rd.obs_row_mask)[0]
+        rr = np.zeros(A.shape[0]); rr[rows] = (A[rows] @ z) @ B.sum(0)
+        cc = (A[rows].sum(0) @ z) @ B.T
+        hr, hc = rd.hid_row, rd.hid_col
+        if len(hr):
+            xh = ((A[hr] @ z) * B[hc]).sum(1); np.subtract.at(rr, hr, xh); np.subtract.at(cc, hc, xh)
+        if rd.diag_masked:
+            dg = ((A[rows] @ z) * B[rows]).sum(1); np.subtract.at(rr, rows, dg); np.subtract.at(cc, rows, dg)
+        w = rd.weight
+        tot_h[rd.row_facet] += w * rr; tot_h[rd.col_facet] += w * cc
+        tot_x[rd.row_facet] += w * np.bincount(rd.tie_row, weights=rd.tie_val, minlength=A.shape[0])
+        tot_x[rd.col_facet] += w * np.bincount(rd.tie_col, weights=rd.tie_val, minlength=B.shape[0])
+    return {f: np.where(tot_x[f] > 0, tot_h[f] / np.maximum(tot_x[f], 1e-300), np.nan) for f in U}
+
+
+def covered_entities(coverages, c=0.5):
+    """Across the seeds of one group (as the placed rule was): covered if the mean over seeds of the entity's coverage
+    is ≥ c (RL-345; sensitivity c 0.25 / 0.75). coverages: list (one per seed) of entity_coverage outputs."""
+    out = {}
+    for f in coverages[0]:
+        Cv = np.vstack([cv[f] for cv in coverages])
+        ok = np.isfinite(Cv).all(0)
+        m = np.zeros(Cv.shape[1], bool); m[ok] = Cv[:, ok].mean(0) >= c
+        out[f] = m
+    return out
+
+
 def placed_entities(reproduced, reproduced0):
     """Across the seeds of one group (2026-11-07): placed if mean reproduced share − degree-only share exceeds the
     entity's own seed-to-seed SD (lenient, in-sample). reproduced: list of arrays (one per seed); reproduced0: array."""
@@ -530,8 +565,11 @@ def stability(wms, placed=None, seed=0):
     pairs = {}
     for i in range(n):
         for j in range(i + 1, n):
-            real = track_pair(wms[i], wms[j], placed)
-            ch = track_pair(wms[i], _shuffled(wms[j], rng), placed)
+            # placed: one entity set for the group (dict), or one set per fit (list, item (l) per-fit coverage reading,
+            # 2026-11-23): a pair then uses the entities in both fits' sets
+            pl = placed if not isinstance(placed, list) else {f: placed[i][f] & placed[j][f] for f in placed[i]}
+            real = track_pair(wms[i], wms[j], pl)
+            ch = track_pair(wms[i], _shuffled(wms[j], rng), pl)
             pairs[(i, j)] = (real, ch)
     per_seed = []
     for s_ in range(n):

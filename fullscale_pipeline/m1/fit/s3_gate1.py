@@ -1,5 +1,6 @@
 # S3 gate 1 on the stage-0 pass-1 fits (decided 2026-11-07, step 5; run 2026-11-16, owner: "Please run S3 gate 1").
 # Per approach, loss (at its K*: squared error 20, KL 13), facet and visible-tie band; placed entities only (item (l)).
+# [2026-11-23: item (l) entity set = coverage rule c = 0.5 (RL-345) by default; M1_ENTITY_RULE=placed = earlier reading]
 # Excess spread e_i (ρ = 1) = H(p_i) − the largest relation-mix spread over i's relations (measures.excess_spread), in bits.
 # (1) Prevalence beyond noise: per hold-out group, share of entities whose mean e over the 10 seeds exceeds their own
 #     seed SD, minus the same count between two halves of the seeds (mean_half1 − mean_half2 > SD; mean over 50 random
@@ -15,7 +16,7 @@ import argparse, glob, json, math, os
 from collections import defaultdict
 import numpy as np
 from . import data as D, measures as M
-from .aggregate import load_fit, load_UZ, load_entity, latest_fits
+from .aggregate import load_fit, load_UZ, load_entity, latest_fits, ENTITY_RULE, COVERAGE_C, _rds_of
 
 ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
 KSTAR = {2: 20, 1: 13}
@@ -77,8 +78,11 @@ def run(approach, beta, seed=0):
         rds = D.fit_data(build, approach, group=g)
         ents = [load_entity(f["dir"]) for f in fs]
         E, A = defaultdict(list), defaultdict(list)
+        covs = []
         for f in fs:
             U, Z = load_UZ(f["dir"])
+            if ENTITY_RULE == "coverage":    # item (l): coverage rule c = 0.5 (RL-345)
+                covs.append(M.entity_coverage(U, Z, _rds_of(f["job"])))
             wm = M.weighted_memberships(U, Z, {r: tuple(v) for r, v in f["result"]["relations"].items()})
             for fa in FACETS:
                 if fa in wm:
@@ -86,7 +90,8 @@ def run(approach, beta, seed=0):
         per[g] = {}
         for fa in E:
             Ex = np.vstack(E[fa]); Au = np.vstack(A[fa])
-            placed = M.placed_entities([e[fa]["reproduced_share"] for e in ents], ents[0][fa]["reproduced_share_degree_only"])
+            placed = (M.covered_entities(covs, COVERAGE_C)[fa] if ENTITY_RULE == "coverage" else
+                      M.placed_entities([e[fa]["reproduced_share"] for e in ents], ents[0][fa]["reproduced_share_degree_only"]))
             placed &= np.isfinite(Ex).all(0)
             per[g][fa] = {"Ex": Ex, "Au": Au, "placed": placed, "bands": band_names(ents[0][fa]["ties"])}
         print("group", g, "done", flush=True)

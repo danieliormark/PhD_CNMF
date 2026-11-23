@@ -81,11 +81,13 @@ def run(root):
                        "se": float(d.std(ddof=1) / math.sqrt(len(d))) if len(d) > 1 else None}
         rep[f"approach_{cell[0]}_K{cell[1]}_r{cell[2]:g}"] = res
     # stability from the aggregations (chance-adjusted Track A, per group)
+    rules = {}
     for nm, path in (("mass", os.path.join(root, "weight_check", "_aggregate_aligned.json")),
                      ("current", os.path.join(ROOT, "stage0_pass3", "_aggregate_aligned.json"))):
         if not os.path.exists(path):
             continue
         agg = json.load(open(path))
+        rules[nm] = (agg.get("_status") or {}).get("entity_rule") or {"rule": "placed", "c": None}   # item (l), RL-345
         for k, v in agg.items():
             if k.startswith("_") or v["cell"]["arm"].get("swap_p"):
                 continue
@@ -97,12 +99,14 @@ def run(root):
                 if name in rep:
                     gs = {g["group"]: g["stability"]["A_adjusted"] for g in e["groups"] if g.get("stability")}
                     rep[name].setdefault("_stab", {})[nm] = gs
+    same_rule = len({json.dumps(v, sort_keys=True) for v in rules.values()}) == 1
     for name, res in rep.items():
         st = res.pop("_stab", {})
-        if "mass" in st and "current" in st:
+        if "mass" in st and "current" in st and same_rule:   # stability compared only under one entity rule
             gs = sorted(set(st["mass"]) & set(st["current"])); d = np.array([st["mass"][g] - st["current"][g] for g in gs])
             res["stability_A_adjusted"] = {"mass": float(np.mean([st["mass"][g] for g in gs])), "current": float(np.mean([st["current"][g] for g in gs])),
                                            "difference": float(d.mean()), "se": float(d.std(ddof=1) / math.sqrt(len(d))) if len(d) > 1 else None}
+    rep["_entity_rule"] = rules
     # swap (K 13, r 1, group 1)
     sw = defaultdict(dict); cache = {}
     for f in chk:
@@ -132,7 +136,7 @@ def run(root):
                           "relative": float(d.mean() / x0.mean()) if x0.mean() else None, "seeds": len(seeds)}
             rep["swap"][f"approach_{a}_{sc}"] = out
     for name, res in rep.items():
-        if name == "swap":
+        if name in ("swap", "_entity_rule"):
             continue
         print(name, f"({res['pairs']} pairs) — mass − current, mean ± SE over hold-out groups")
         for kk, v in res.items():

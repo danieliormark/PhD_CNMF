@@ -1,5 +1,7 @@
 # F8 (3/3) — aggregation of finished M1 fits (ticket 107). Implements the decided selection rules:
 #   cell        = one setting at one K (stage, approach, arm, loss, start, fraction, dtype, terms) over hold-out groups × seeds
+#   [2026-11-23: "placed entities" below now means the item (l) entity set — the coverage rule c = 0.5 (RL-345) by
+#    default, the placed rule with M1_ENTITY_RULE=placed; _status.entity_rule records which]
 #   per group   : placed entities (seed variation, 2026-11-07); per seed: stability gate (Track A/B on weighted memberships,
 #                 Track A over placed entities, per seed vs the maximum of its pairs' shuffled chance, 2026-11-09 (C1, E));
 #                 ghost veto (no placed entity has k as largest membership); alignment veto (child×article alignment over
@@ -146,6 +148,33 @@ def two_part_guard(ref, cand):
 
 
 # ------------------------------------------------------------------------------------------- one cell, one group
+# Item (l) entity set for Track A, the ghost veto and the alignment veto: coverage rule (owner 2026-11-22, RL-345), c = 0.5;
+# covered shares at the sensitivity levels 0.25 / 0.75 and the placed rule's share are reported beside it.
+ENTITY_RULE = os.environ.get("M1_ENTITY_RULE", "coverage")
+assert ENTITY_RULE in ("coverage", "placed"), ENTITY_RULE
+COVERAGE_C = 0.5
+COVERAGE_LEVELS = (0.25, 0.5, 0.75)
+_RDS = {}
+
+
+def _rds_of(job):
+    """The fit's relation data with its own weights (and its swap, if any): align.fit_rds, cached per data setting."""
+    from .align import fit_rds
+    arm = job.get("arm") or {}
+    key = (job.get("build"), job["approach"], job["group"],
+           json.dumps({k: arm.get(k) for k in ("journal_multiplier", "semantic_split", "drop", "use_journal", "binary",
+                                               "log_damping", "mass_weights")}, sort_keys=True))
+    if key not in _RDS:
+        if len(_RDS) > 24:
+            _RDS.clear()
+        _RDS[key] = fit_rds({**job, "arm": {k: v for k, v in arm.items() if not k.startswith("swap")}}, {})
+    rds = _RDS[key]
+    if arm.get("swap_p"):
+        from .worlds import graded_swap
+        rds = graded_swap(rds, float(arm["swap_p"]), seed=job["seed"], single_band=bool(arm.get("swap_single_band")))[0]
+    return rds
+
+
 def group_checks(fits, rds_child_article=None, W_has_tie=None, seed=0):
     """fits: the seeds of one cell and one hold-out group (loaded with load_fit). Returns per-seed check results."""
     conv = [bool(f["result"]["converged"]) for f in fits]
@@ -155,11 +184,16 @@ def group_checks(fits, rds_child_article=None, W_has_tie=None, seed=0):
     if len(ok) < 2:
         return out, None
     ents = [load_entity(fits[i]["dir"]) for i in ok]
-    placed = {f: M.placed_entities([e[f]["reproduced_share"] for e in ents], ents[0][f]["reproduced_share_degree_only"])
-              for f in ents[0]}
+    placed_rule = {f: M.placed_entities([e[f]["reproduced_share"] for e in ents], ents[0][f]["reproduced_share_degree_only"])
+                   for f in ents[0]}
     UZ = [load_UZ(fits[i]["dir"]) for i in ok]
     rel = {r: tuple(v) for r, v in fits[ok[0]]["result"]["relations"].items()}
     wms = [M.weighted_memberships(U, Z, rel) for U, Z in UZ]
+    # item (l) entity set (RL-345, owner 2026-11-22): coverage rule c = 0.5 replaces the placed rule; the placed rule is
+    # kept as a reported reading (M1_ENTITY_RULE=placed reproduces the earlier aggregation)
+    covs = [M.entity_coverage(U, Z, _rds_of(fits[i]["job"])) for (U, Z), i in zip(UZ, ok)]
+    covered = {c: M.covered_entities(covs, c) for c in COVERAGE_LEVELS}
+    placed = covered[COVERAGE_C] if ENTITY_RULE == "coverage" else placed_rule
     st = M.stability(wms, placed, seed=seed)
     for j, i in enumerate(ok):
         out["gate_fails"][i] = not st["per_seed"][j]["passes"]
@@ -175,7 +209,31 @@ def group_checks(fits, rds_child_article=None, W_has_tie=None, seed=0):
         out["alignment"] = [{"observed": a["observed"], "shuffled_mean": a["shuffled_mean"], "shuffled_95": a["shuffled_95"],
                              "adjusted": a["adjusted"], "seed_sd": float(sd)} for a in al]
     out["stability"] = {k: v for k, v in st.items() if k != "per_seed"}; out["stability_per_seed"] = st["per_seed"]
-    out["placed_share"] = {f: float(m.mean()) for f, m in placed.items()}
+    if ENTITY_RULE == "coverage":
+        # per-fit reading (2026-11-23, reported beside the acting group-level set): low coverage is mostly seed-specific
+        # (one K 13 cell: ~5 % of authors below 0.5 in each seed, 23 % in some seed, none in all), so each fit's own
+        # covered entities are used — per seed for the ghost and alignment vetoes, both fits' sets for a Track A pair
+        pf = [{f: np.nan_to_num(cv[f], nan=-1.0) >= COVERAGE_C for f in cv} for cv in covs]
+        st2 = M.stability(wms, pf, seed=seed)
+        r2 = {"gate_fails": [None] * len(fits), "ghost_fails": [None] * len(fits), "alignment_fails": [None] * len(fits)}
+        for j, i in enumerate(ok):
+            r2["gate_fails"][i] = not st2["per_seed"][j]["passes"]
+            r2["ghost_fails"][i] = len(M.ghosts(wms[j], pf[j])) > 0
+        if rds_child_article is not None:
+            al2 = [M.tie_alignment(rds_child_article, wm["article"]["P"], wm["child"]["P"], pf[j]["article"], pf[j]["child"],
+                                   strata_extra=W_has_tie, n_shuffles=99, seed=seed) for j, wm in enumerate(wms)]
+            sd2 = np.array([a["observed"] for a in al2]).std(ddof=1)
+            for j, i in enumerate(ok):
+                r2["alignment_fails"][i] = not (al2[j]["observed"] > al2[j]["shuffled_95"]
+                                                and al2[j]["observed"] - al2[j]["shuffled_mean"] > sd2)
+        r2["stability"] = {k: v for k, v in st2.items() if k != "per_seed"}
+        r2["set_share_per_fit"] = {f: float(np.mean([p[f].mean() for p in pf])) for f in pf[0]}
+        out["per_fit_reading"] = r2
+    out["placed_share"] = {f: float(m.mean()) for f, m in placed_rule.items()}
+    out["entity_rule"] = {"rule": ENTITY_RULE, "c": COVERAGE_C if ENTITY_RULE == "coverage" else None}
+    out["covered_share"] = {str(c): {f: float(m.mean()) for f, m in cv.items()} for c, cv in covered.items()}
+    out["entity_set_share"] = {f: float(m.mean()) for f, m in placed.items()}
+    out["coverage_median"] = {f: float(np.nanmedian(np.nanmean(np.vstack([cv[f] for cv in covs]), 0))) for f in covs[0]}
     return out, (wms, placed, ok)
 
 
@@ -195,7 +253,16 @@ def count(cell_groups, key, fraction):
             "groups_with_any_failure": [i for i, p in enumerate(per) if any(p)]}
 
 
-def aggregate(root, stage, fraction=0.2, build_path=None):
+_WORK = {}
+
+
+def _gc_task(key):
+    """Pool worker (2026-11-23): group checks of one (cell, K, group); data shared through fork (_WORK)."""
+    fs, rd_ca, W_has_tie = _WORK["tasks"][key], _WORK["ca"][(json.loads(key[0])["approach"], key[2])], _WORK["W_has_tie"]
+    return key, group_checks(fs, rd_ca, W_has_tie)[0]
+
+
+def aggregate(root, stage, fraction=0.2, build_path=None, workers=1):
     from . import data as D
     import scipy.sparse as sp
     base = os.path.join(root, stage)
@@ -219,6 +286,23 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
     report = {}
     ca_cache = {}
     for ck, byK in cells.items():
+        for K, byG in byK.items():
+            for g in byG:
+                if (json.loads(ck)["approach"], g) not in ca_cache:
+                    ca_cache[(json.loads(ck)["approach"], g)] = next(rd for rd in D.fit_data(build, json.loads(ck)["approach"], group=g)
+                                                                     if rd.name == "child_article")
+    # group checks of every (cell, K, group), in parallel when workers > 1 (2026-11-23; results identical: each task
+    # uses its own seed-0 generator as before)
+    _WORK.update(tasks={(ck, K, g): sorted(fs, key=lambda f: f["job"]["seed"]) for ck, byK in cells.items()
+                        for K, byG in byK.items() for g, fs in byG.items()}, ca=ca_cache, W_has_tie=W_has_tie)
+    keys = list(_WORK["tasks"])
+    if workers > 1:
+        import multiprocessing as mp
+        with mp.get_context("fork").Pool(workers) as pool:
+            gcs = dict(pool.imap_unordered(_gc_task, keys))
+    else:
+        gcs = dict(map(_gc_task, keys))
+    for ck, byK in cells.items():
         cinfo = json.loads(ck); beta = cinfo["beta"]
         score_key = "squared_error" if beta == 2 else "kl_error"
         tp = lambda f, k: f["measures"].get("heldout_two_part_combined", {}).get(k)
@@ -228,10 +312,7 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
             ex, va, ex_best, va_best = [], [], [], []
             for g, fs in sorted(byG.items(), key=lambda x: (x[0] is None, x[0])):
                 fs = sorted(fs, key=lambda f: f["job"]["seed"])
-                if (cinfo["approach"], g) not in ca_cache:
-                    ca_cache[(cinfo["approach"], g)] = next(rd for rd in D.fit_data(build, cinfo["approach"], group=g)
-                                                            if rd.name == "child_article")
-                gc, extra = group_checks(fs, ca_cache[(cinfo["approach"], g)], W_has_tie)
+                gc = gcs[(ck, K, g)]
                 gc["group"] = g; groups.append(gc)
                 conv = [f for f in fs if f["result"]["converged"]]
                 if conv:
@@ -258,6 +339,11 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
                      "seconds_median": float(np.median([f["result"]["seconds"] for g in byG.values() for f in g]))}
             for chk in ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails"):
                 entry[chk] = {str(fr): count(groups, chk, fr) for fr in FRACTIONS}
+            pfr = [g["per_fit_reading"] for g in groups if g.get("per_fit_reading")]
+            if pfr:     # item (l) per-fit coverage reading, reported only (2026-11-23)
+                entry["per_fit_reading"] = {chk: {str(fr): count(pfr, chk, fr) for fr in FRACTIONS}
+                                            for chk in ("gate_fails", "ghost_fails", "alignment_fails")}
+                entry["per_fit_reading"]["A_adjusted_per_group"] = [g["stability"]["A_adjusted"] for g in pfr]
             if len(between_fits) > 1:
                 wmsb = []
                 for f in between_fits:
@@ -275,7 +361,8 @@ def aggregate(root, stage, fraction=0.2, build_path=None):
                                    for c in ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails")}}
                             for K, e in scored.items()})
         report[ck] = {"cell": cinfo, "per_K": perK, "selection": sel}
-    report["_status"] = {"fits_finished": len(fits), "fits_failed": [{"job": e["job"], "error": e["error"], "host": e.get("host")} for e in errors],
+    report["_status"] = {"entity_rule": {"rule": ENTITY_RULE, "c": COVERAGE_C if ENTITY_RULE == "coverage" else None},
+                         "fits_finished": len(fits), "fits_failed": [{"job": e["job"], "error": e["error"], "host": e.get("host")} for e in errors],
                          "fits_unfinished": unfinished}
     return report
 
@@ -284,8 +371,9 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--root", required=True); ap.add_argument("--stage", required=True)
     ap.add_argument("--fraction", type=float, default=0.2); ap.add_argument("--out", default=None)
     ap.add_argument("--build", default=None, help="build of the stage's fits (default: study A's build, data.BUILD)")
+    ap.add_argument("--workers", type=int, default=1)
     a = ap.parse_args()
-    rep = aggregate(a.root, a.stage, a.fraction, build_path=a.build)
+    rep = aggregate(a.root, a.stage, a.fraction, build_path=a.build, workers=a.workers)
     out = a.out or os.path.join(a.root, a.stage, "_aggregate_aligned.json" if ALIGNED else "_aggregate.json")
     json.dump(rep, open(out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
     print(f"wrote {out} ({len(rep)} cells)")

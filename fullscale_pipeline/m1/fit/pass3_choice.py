@@ -32,7 +32,7 @@ def k_fails(e, c):
 
 
 def run(agg, readings=None):
-    rep = {"status": agg.get("_status", {}).get("fits_finished")}
+    rep = {"status": agg.get("_status", {}).get("fits_finished"), "entity_rule": agg.get("_status", {}).get("entity_rule")}
     cells = [v for k, v in agg.items() if not k.startswith("_")]
     for a in sorted({c["cell"]["approach"] for c in cells}):
         byr = {float(c["cell"]["arm"]["r"]): c["per_K"] for c in cells if c["cell"]["approach"] == a}
@@ -120,10 +120,15 @@ def main():
     # several aggregations / readings (λ calibration, 2026-11-21: pass 3's r 0 / 0.3 / 1 with the new r of λ calibration):
     # cells are merged; each r must come from one stage only
     agg = {"_status": {"fits_finished": 0}}
+    rules = set()
     for i, path in enumerate(a.agg):
         d = json.load(open(path))
+        # item (l) entity set (RL-345): aggregations made under different rules are not merged; older files = placed rule
+        rules.add(json.dumps((d.get("_status") or {}).get("entity_rule") or {"rule": "placed", "c": None}, sort_keys=True))
         agg["_status"]["fits_finished"] += (d.get("_status") or {}).get("fits_finished", 0)
         agg.update({f"{i}|{k}": v for k, v in d.items() if not k.startswith("_")})
+    assert len(rules) == 1, f"aggregations use different entity rules: {sorted(rules)}"
+    agg["_status"]["entity_rule"] = json.loads(rules.pop())
     rs = [(v["cell"]["approach"], float(v["cell"]["arm"]["r"])) for k, v in agg.items() if not k.startswith("_")]
     assert len(rs) == len(set(rs)), "an (approach, r) cell appears in more than one aggregation"
     readings = None
