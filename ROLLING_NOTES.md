@@ -7,59 +7,42 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-19, ticket 107 M1 — two studies (A with genre, B without); study-B pass 1 ready to submit)
+## State (2026-11-23, ticket 107 M1 — stage 0 done in both studies; λ calibration (A) and W3 check re-running)
 
-Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-252–RL-294; design doc entries of 2026-11-18/19.
-- **Decided 2026-11-18/19 (earlier):** loss KL; log-damping arm = implementation A (stage-1 robustness arm); diagonal
-  cores accepted under KL, off-diagonal links allowed not imposed; O1 (no off-diagonal penalty); start = S3 at 10 %;
-  article×article no random start; passes 1–2 not redone in study A, pass 3 re-chooses K and λ_child; child×article
-  requirement T1 (fit fails if a community's own cell ≤ half of its child×article tie weight on either side) + V1 (veto
-  by the counting rule; would-be in stage 0, acting in stage 2) (RL-281–283).
-- **Generic (genre) child hyperedges (RL-284–289):** classification reviewed by the owner — "ambiguous" model-building
-  words and focal terms substantive, 91 + 4 genre rows moved to S; final G = 953 hyperedges, 12.1 % of ties, 8.2 % of
-  weighted values (`plans/ticket107_generic_hyperedges_final.md`, `fullscale_pipeline/m1/genre_hyperedges_final.json`).
-  Genre spreads evenly over communities, raises their similarity (cosine 0.33 → 0.44), supplies 26.5 % of hidden
-  child×article ties; on substantive ties the held-out score is flat over K 8–32. Atom types (P/C/M) stay distinct
-  entities (owner; typed_forms check RL-288).
-- **Two full studies (owner, RL-290):** A = current build, B = build without genre; "whatever is tried on one should be
-  tried and tested on another". B repeats the KL runs of stage 0 (≈ 1,430 fits, RL-291). B build rules decided and
-  built (`psych_trial_v3_nogenre`, RL-293: parents recomputed — 618 merge into 174; W rebuilt; weights recomputed;
-  social identical). B hold-out: fresh draw, seed 107 (owner, RL-294).
-- **Waiting for the owner:** submit study-B pass 1: `bash /mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/slurm/B_stage0_pass1.sh`
-  (600 fits, ≈ 660 CPU-h). Then B pass 2 (needs B's K*), swap, diagonal-start (KL), damping test, start test 2 on B.
-- **Next points (one by one):** pass 3 design in both studies (K and λ_child under S3 10 %, narrowed grid, off-diagonal
-  share reading, mono-domain response, sizing); how A and B are compared and whether their choices may differ (RL-290
-  question 3); the swap measure (below) or close; item (l); stage-1 counting fraction.
-- **Open small items:** owner to confirm the log-damping wording as final; verify the KL-NMF/PLSA reference before
-  recording; the study-B analysis scripts (stage-0 readings) still read study A's build by default — parametrise per
-  study before reading B's fits.
+Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-295–RL-347; design doc entries 2026-11-19…22.
+Study A = build with genre hyperedges (`psych_trial_v3`); study B = without the 953 genre hyperedges
+(`psych_trial_v3_nogenre`, stages prefixed `B_`; scripts read B with `M1_STUDY=B`).
 
-**Points to settle afterwards (owner: "I'll return to them once we settle points 0 and 2"):**
-1. Start details: does article×article keep a random start (closure ratio 0.41 under the diagonal start, RL-270)?
-   Are the stage-0 KL fits (passes 1–2) redone under the diagonal start before K / λ_child are fixed?
-2. The swap: run the measure below, or close the swap with RL-268 (GLOSSARY E6).
-3. O1 / O3 (with the diagonal start KL meets the diagonal rule without a penalty → O1 proposed).
-4. child×article requirement: tolerance inside a fit; veto in K choice.
-5. Pass 3's new role (K and λ_child under KL); then the mono-domain response (A: report only, proposed), pass-3 sizing.
-6. Older: item (l); the stage-1 counting fraction.
-
-**Swap proposal — which people group with which ideas** (proposed 2026-11-18, not decided):
-- *Purpose.* The swap showed that presence in both domains cannot tell whether heterogeneity follows the data (E6). The
-  link between people and ideas lives across articles: the same author, organisation or journal returns to similar
-  ideas. The swap breaks exactly that (at p = 1 one author's articles get unrelated contents). The measure asks whether
-  the model's communities carry that link.
-- *Method* (saved swap fits, p = 0 … 1, no fits, minutes). For pairs of articles sharing a social entity (author,
-  organisation, journal; approach 2: a co-author tie): (A) data — similarity of the two articles' child-hyperedge sets,
-  excess over random article pairs (does the link exist; at p = 1 it must fall to chance, which also checks the swap);
-  (B) model — the two articles' co-membership (Σ_k of the products of their weighted memberships), excess over random
-  pairs.
-- *Outcomes.* (A) clear, (B) falls with (A) → the model groups people's articles together as far as they share ideas:
-  heterogeneity follows the data. (A) clear, (B) stays high at p = 1 → the model keeps an entity's articles together
-  whatever their content: communities follow people; mixing comes partly from how articles are coupled. (A) clear, (B)
-  ≈ 0 even at p = 0 → articles grouped by ideas alone; people attach to their articles. (A) weak → the data hold little
-  cross-article link; the swap cannot test anything here.
-- *Limits.* Article pairs only, one shared entity type at a time; shows whether the link is carried, not whether it is
-  correct. (Whether to use co-membership or another distribution measure: see point 2b.)
+**Decided 2026-11-19…22 (owner's words in the design doc):** C3 (each study its own K / λ, also fitted at the other's);
+pass 3 grid K 3 / 5 / 8 / 13 / 20 × r 0 / 0.3 / 1; J1 (λ per K, then K); mono-domain report only in stage 0; option (b)
+(existence band; value reported only; candidates chosen by inspection / text check; applies to stage 2); B2 (a K enters the
+band at its best r, carried at r*); no K = 32 in stage 0 (stage 2 fits it); study-B repeats at K 13; G0 (no spread guard;
+words / W neighbours are legitimate context); λ rule R2 (value reported only; tie-break by stability on facets other than
+child hyperedges, > 2 paired SE, else largest r); λ calibration point 1 (all coarse K, new r 0.45 / 0.6 / 0.8 or 1.5 / 2 / 3);
+W-c (swap measure first) → swap measure is the swap's reading; affiliation-closure proposals 1–3; log-damping wording
+final (with the clause "relative to the same relation undamped, under whichever relation scaling the main setting uses");
+W3 check approved; item (l) entity criterion = coverage rule, c = 0.5 (replaces the placed rule; placed kept as a reading);
+text check (optional) permitted, runs at the chosen r.
+**Stage-0 candidates:** study A approach 1 K {5, 8, 13, 20}, approach 2 {5, 8, 13}; study B {5, 8, 13, 20} in both.
+**Key findings:** existence flat over K, value falls with K (option b); genre causes the K 20 T1 failure; without genre
+stability lower (model-wide, RL-306) and people's grouping follows ideas more (swap measure RL-332–334, effect sizes);
+author×affiliation closure > 1 from single-affiliation persons / small organisations (approach 2 smaller, RL-322/324);
+W term spreads ideas towards their word neighbours (RL-325–327); **under KL with Frobenius scaling the semantic domain has
+83–90 % of the data pull (not 50 %); the L2.1/L2.2 recheck pre-registered for KL was missed (RL-339) → W3 check.**
+**Running (CSF3):** λ calibration A resubmitted (fits 25132000, post 25132001; 48 missing fits); W3 check resubmitted
+(25132002 / 25132003; 2 missing). First check completeness (1,500 / 240), then report: W3 first (decides W1 keep vs
+W2 mass weights; W2 would redo λ calibration), then λ calibration (report outline in the last reply before compaction:
+completeness; r* by R2 with paired effect sizes — K 3 picks the smaller r; highest-grid-value rule not triggered
+provisionally; K protocol; pass-3 readings at new r incl. a would-be V1 at approach 2 K 20 r 1.5; what follows: λ per K for
+stage 1, W-a design p 0 / p 1 × 5 groups ≈ 400 fits, text check sample).
+**Next, one by one (owner 2026-11-23):** (1) go-ahead to remeasure readings that used the placed rule under the coverage
+rule (list RL-344 / reply: stability gate, ghost, alignment vetoes; λ-rule stability guard; Track A levels incl. start
+tie-break and stability tests 1–3; placed-share flag; membership-mean view; S3 gate 1; sufficient members); (2) approve
+q = 0.5, m = 1 (members among covered entities; sensitivity q 0.3 / 0.7, m 3); (3) study B's λ calibration grid (B's r*
+at K 20 is 0 → steps between 0 and 0.3). Later: stage 1 design points; stage-1 counting fraction; KL-NMF/PLSA reference to
+verify; later-stages summary section in the design doc (offered); representation invariance noted as a limitation.
+**Standing rules added:** effect size and significance always weighed (SEs over seeds / hold-out groups are noise
+yardsticks, not p-values).
 
 ## Older state (2026-11-13, ticket 107 M1 — held-out criterion and fractions decided; wiring next)
 
