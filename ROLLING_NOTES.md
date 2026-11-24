@@ -7,7 +7,25 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-23, ticket 107 M1 — stage 0 done in both studies; λ calibration (A) and W3 check re-running)
+## State (2026-11-24, ticket 107 M1 — stage 0 nearly closed; W1 kept; report 3 (λ calibration) next)
+
+Records: RUN_LOG RL-348–RL-370; design doc entries 2026-11-23/24; FINDINGS §33; M1_PROGRESS.
+**Decided 2026-11-23/24 (owner's words in the design doc):** item (l) option (a) (coverage only filter; membership
+readings reported: per-entity agreement R1, co-membership agreement R2, placement R3, circularity check R4, flags R5 —
+R5 corrected to each entity's own chance, RL-363); coverage acts at group level, per-fit reported; held-out decision
+score uses the approach's main-setting weights (fallback: gain over degree-only reference); weighting: W1 kept in both
+approaches (R-b's 0.65 for approach 2 not adopted after community readings, FINDINGS §33: social pull trades idea
+coherence for social coherence); arm at semantic share 0.65 in both approaches for stage 1 / 3; R2 tie-break no longer
+"largest r" (variant chosen with report 3: smallest r in band, or child×article-gain guard); child×child as a relation
+deferred; idea- vs people-led text check deferred until after stages 1–2. Guidelines: numbered captioned tables; effect
+size + yardstick for every difference (SESSION_PROTOCOL C.12).
+**Key findings:** placed rule's Track A gap partly circular (a fifth to a third; child most); unstable entities ≤ 1–3 %;
+more ties → more stable at equal spread; word term flattens W-tied child hyperedges (70 % of facet) and beyond moderate r
+reverses held-out gains (RL-364); Track A rewards flattened memberships (open problem).
+**Next:** see the reply listing open items (q / m; report 3 with R2 variant and flattening; Track A vs flatness; study B
+λ grid; stage-1 design; housekeeping).
+
+## Older state (2026-11-23, ticket 107 M1 — stage 0 done in both studies; λ calibration (A) and W3 check re-running)
 
 Where things stand: `fullscale_pipeline/m1/M1_PROGRESS.md`; RUN_LOG RL-295–RL-347; design doc entries 2026-11-19…22.
 Study A = build with genre hyperedges (`psych_trial_v3`); study B = without the 953 genre hyperedges
