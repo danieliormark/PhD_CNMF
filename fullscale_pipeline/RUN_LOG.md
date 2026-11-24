@@ -4924,3 +4924,9 @@ aggregations (A and B, 300 groups × 10 seeds): group-level entity set ≥ 0.988
 0.93–0.97, organisations 0.96–0.98, others ≥ 0.98; per-fit chance-adjusted Track A − group-level +0.0018 on average
 (range −0.0001 to +0.006); gate / ghost / alignment results identical in all 3,000 fits. Code already acts at the group
 level and reports the per-fit reading (`aggregate.group_checks`, RL-348).
+
+### RL-360 — 2026-11-24 — Weight curve and membership-readings r sweep finished
+Weight curve: fits 25199610 280 / 280, all converged, no error files; post-processing 25199611 done (alignment,
+aggregation 13 cells, `fit/results/stage0/weight_curve.{json,log}`; its held-out readings already used the main-setting
+weights, RL-358). Membership readings r sweep: job 25206589, 300 / 300 tasks (`fit/results/stage0/
+membership_readings_r_sweep.json`). Neither yet read.
