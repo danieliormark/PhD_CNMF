@@ -5005,3 +5005,9 @@ back to r 0 at high r (approach 1 K 5 r 1 +0.003; approach 2 K 8 r 3 −0.015 ±
 +0.16, through their flattened child hyperedges); persons, organisations, journals within ±0.01, journals −0.009 to
 −0.014 at K 20 r 2–3. **Rule R2:** combined existence is flat across r 1–2 at K 13 / 20 (within ±0.001), so the
 tie-break "else the largest r" moves r* to the flattening range (provisional r* 2 at K 20) — to report 3.
+
+### RL-365 — 2026-11-24 — R2 tie-break change approved (variant with report 3); child×child relation deferred
+Owner: "I approve option 1 and recording option 2 as deferred" (design doc 2026-11-24). Option 1: R2's tie-break stops
+defaulting to the largest r; variant ("smallest r in the band" or a child×article-gain guard) chosen with the
+λ-calibration report, on saved fits. Option 2 (child×child similarity as a relation) added to the staged plan's "NOT YET
+DESIGNED".

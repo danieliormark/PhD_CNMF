@@ -151,7 +151,12 @@ LATER = ["background component (deferred robustness arm; planted test first)",
          "measures heterogeneity. A model change: planted test first, like the background component",
          "fallback held-out score (owner 2026-11-24; RL-358): combine each relation's gain over its degree-only reference "
          "instead of its raw AP, so the scoring weights express priorities only, not base rates; used if an arm's verdict "
-         "(e.g. a stage-1 journal arm) turns out to depend on the affiliation relation; re-reads K bands and λ choices"]
+         "(e.g. a stage-1 journal arm) turns out to depend on the affiliation relation; re-reads K bands and λ choices",
+         "child×child similarity as a relation instead of the word-similarity regulariser (deferred, owner 2026-11-24; "
+         "RL-364/365): its empty cells would resist the flattening of W-tied child hyperedges that the regulariser shows "
+         "at high r; costs: no shared word read as dissimilarity (synonyms), added semantic pull, own weight and "
+         "calibration; an arm against the regulariser at a moderate r, judged on held-out prediction and community "
+         "readings (crossing child×article weight, article–idea co-membership)"]
 
 print(f"Fits per cell = {FOLDS} hold-out groups × {SEEDS} seeds = {FITS_PER_CELL} (stage 1: 10 groups)\n")
 for title, arms, decision in stages:
