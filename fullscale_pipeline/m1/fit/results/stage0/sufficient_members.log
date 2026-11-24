@@ -1,0 +1,17 @@
+750 fits
+A_approach_1_K5_r0.3 {'semantic': 0.0, 'social': 0.0, 'child': 0.0, 'article': 0.0, 'any_required': 0.0} thr {'semantic': 18633.8, 'social': 1172.2, 'child': 10576.6, 'article': 322.3}
+A_approach_1_K8_r0.3 {'semantic': 0.125, 'social': 0.0, 'child': 0.125, 'article': 0.025, 'any_required': 0.15} thr {'semantic': 12949.5, 'social': 842.9, 'child': 7632.9, 'article': 143.7}
+A_approach_1_K13_r1 {'semantic': 0.0, 'social': 0.0, 'child': 0.077, 'article': 0.0, 'any_required': 0.077} thr {'semantic': 5742.7, 'social': 336.0, 'child': 3143.5, 'article': 42.2}
+A_approach_1_K20_r1 {'semantic': 0.0, 'social': 0.0, 'child': 0.11, 'article': 0.0, 'any_required': 0.11} thr {'semantic': 3273.9, 'social': 262.3, 'child': 2007.9, 'article': 20.2}
+A_approach_2_K5_r0.3 {'semantic': 0.0, 'social': 0.0, 'child': 0.0, 'article': 0.0, 'any_required': 0.0} thr {'semantic': 18109.3, 'social': 419.0, 'child': 10394.3, 'article': 249.3}
+A_approach_2_K8_r1 {'semantic': 0.0, 'social': 0.0, 'child': 0.125, 'article': 0.0, 'any_required': 0.125} thr {'semantic': 9125.2, 'social': 206.2, 'child': 5035.9, 'article': 88.2}
+A_approach_2_K13_r1 {'semantic': 0.0, 'social': 0.0, 'child': 0.077, 'article': 0.0, 'any_required': 0.077} thr {'semantic': 6016.2, 'social': 64.1, 'child': 3316.9, 'article': 34.9}
+B_approach_1_K5_r0.3 {'semantic': 0.04, 'social': 0.0, 'child': 0.04, 'article': 0.2, 'any_required': 0.24} thr {'semantic': 21237.2, 'social': 1626.4, 'child': 14492.2, 'article': 359.5}
+B_approach_1_K8_r0.3 {'semantic': 0.0, 'social': 0.0, 'child': 0.0, 'article': 0.125, 'any_required': 0.125} thr {'semantic': 10101.6, 'social': 770.8, 'child': 6982.9, 'article': 142.3}
+B_approach_1_K13_r1 {'semantic': 0.0, 'social': 0.0, 'child': 0.046, 'article': 0.0, 'any_required': 0.046} thr {'semantic': 6206.2, 'social': 413.5, 'child': 3380.7, 'article': 40.7}
+B_approach_1_K20_r0 {'semantic': 0.0, 'social': 0.0, 'child': 0.01, 'article': 0.0, 'any_required': 0.01} thr {'semantic': 5350.0, 'social': 218.1, 'child': 3935.0, 'article': 25.0}
+B_approach_2_K5_r0.3 {'semantic': 0.0, 'social': 0.0, 'child': 0.0, 'article': 0.2, 'any_required': 0.2} thr {'semantic': 20942.8, 'social': 377.5, 'child': 14501.3, 'article': 257.5}
+B_approach_2_K8_r1 {'semantic': 0.0, 'social': 0.0, 'child': 0.0, 'article': 0.0, 'any_required': 0.0} thr {'semantic': 8882.7, 'social': 183.3, 'child': 5367.2, 'article': 101.9}
+B_approach_2_K13_r1 {'semantic': 0.0, 'social': 0.0, 'child': 0.015, 'article': 0.0, 'any_required': 0.015} thr {'semantic': 6418.4, 'social': 68.4, 'child': 3395.2, 'article': 34.9}
+B_approach_2_K20_r0 {'semantic': 0.0, 'social': 0.0, 'child': 0.0, 'article': 0.0, 'any_required': 0.0} thr {'semantic': 5294.7, 'social': 31.9, 'child': 3923.8, 'article': 24.6}
+done

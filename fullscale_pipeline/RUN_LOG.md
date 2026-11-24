@@ -5106,3 +5106,11 @@ decision rule fixed before results (RL-377), against the regulariser at r* 0.3 (
 (centred agreement; information-weighted Track A), chance-adjusted. Smoke test (3 fits, 30 epochs): weights as intended,
 alignment and aggregation run, all readings run on relation fits; reference task (regulariser r 0.3, K 5, group 1): 61 s,
 centred agreement 0.648 vs Track A 0.584. `slurm/cc_test.sh` (63 tasks × 8, ≈ 400 CPU-h) + chained post-processing.
+
+### RL-379 — 2026-11-24 — Sufficient members read (job finished); rule kept as decided (owner); item (l) closed
+`fit/results/stage0/sufficient_members.{json,log}` (750 fits). Main setting (articles not counted, q 0.3, k 2.5):
+communities lacking sufficient members per cell (mean ± SE over groups) 0 to 0.24 (study B approach 1 K 5: articles 0.200
+± 0, semantic / child 0.04); study A: child 0.077–0.125 at K 8–20, approach 1 K 8 also semantic 0.125 (diffuse);
+social never. No community-fit has zero members (0 of 7,600); flagged ones have hundreds to thousands of members (~40 % of
+the cell median). Sensitivity: k 2 raises shares by ≤ 0.1; q 0.2 / 0.4 / 0.5 by ≤ 0.1; articles counted as social: no
+change. Owner: "I approve option (a), keep the rule as decided".
