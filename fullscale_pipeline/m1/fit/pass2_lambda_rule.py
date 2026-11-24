@@ -80,6 +80,31 @@ def rule_r2(cands):
     return out
 
 
+def rule_r2c(cands, ca_gain):
+    """λ rule R2, tie-break variant C (owner 2026-11-24: "I agree with option C"; RL-373): band and stability guard as R2;
+    among the band r passing the guard, the r with the highest held-out child×article gain (within-class AP minus the
+    degree-only reference, mean over hold-out groups); every r whose gain is not below that peak by more than 1 paired SE
+    (by hold-out group) is tied with it; the smallest tied r is chosen (least flattening of word-tied child hyperedges,
+    RL-364). ca_gain: {r: {group: gain}}. Reported beside it: the amended choice (recommendation, not decided) — never r 0
+    when r 0 is tied with an r > 0 (then the smallest tied r > 0), and R2's own choice."""
+    out = rule_r2(cands); out["rule"] = "R2C"; out["chosen_r_R2"] = out["chosen_r"]
+    ok = out["passing_stability"]
+    if not ok:
+        return out
+    mean = {r: float(np.mean(list(ca_gain[r].values()))) for r in ok}
+    peak = max(ok, key=lambda r: mean[r])
+
+    def below(r):
+        gs = sorted(set(ca_gain[peak]) & set(ca_gain[r])); d = np.array([ca_gain[peak][g] - ca_gain[r][g] for g in gs])
+        se = float(d.std(ddof=1) / math.sqrt(len(d))) if len(d) > 1 else float("inf")
+        return float(d.mean()) > se
+    tied = sorted(r for r in ok if r == peak or not below(r))
+    out.update({"child_article_gain": mean, "peak_child_article_gain": peak, "tied_with_peak": tied, "chosen_r": tied[0]})
+    pos = [r for r in tied if r > 0]
+    out["chosen_r_amended"] = pos[0] if tied[0] == 0.0 and pos else tied[0]
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--pass1", required=True); ap.add_argument("--pass2", required=True)
     ap.add_argument("--out", required=True)

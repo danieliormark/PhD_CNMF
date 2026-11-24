@@ -5059,3 +5059,11 @@ diffuse (presence ≥ 0.5, insufficient members) and narrow (sufficient members,
 as social and not counted. Test (3 fits): 3 s per fit. At K 5 every community has hundreds to thousands of members per
 domain (approach 1 group 1 seed 1: articles 397–673, child 13,073–34,606 at q 0.3). `slurm/sufficient_members.sh`
 (1 job × 8 cores, ≈ 10–20 min).
+
+### RL-373 — 2026-11-24 — λ rule variant C implemented; λ-calibration choice re-read
+Owner: "I agree with option C" (design doc 2026-11-24). `pass2_lambda_rule.rule_r2c`; `pass3_choice` default rule R2C,
+child×article gains per (approach, K, r, group) read from the fits' measures; R2's choice and the amended choice reported
+beside. Re-run on the saved aggregations (pass 3 + λ calibration, study A): approach 1 r* {3: 0.3, 5: 0.3, 8: 0.45, 13:
+0.3, 20: 1.0} (tied with the peak: K 8 {0.45, 0.6}, K 13 {0.3, 1.0}), approach 2 {3: 0.3, 5: 0.3, 8: 0.3, 13: 0, 20: 1.0}
+(K 13 tied {0, 1.0}; amended choice 1.0 — correcting the report's "0.3"). K protocol unchanged. Earlier R2 output kept
+as `lambda_cal_choice_A_R2.{json,log}`.

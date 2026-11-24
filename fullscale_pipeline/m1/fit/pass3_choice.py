@@ -14,16 +14,34 @@
 # Reported beside the choice: the full (K, r) table per approach (existence, value, SEs, stability A / B, every check);
 # with --readings, the pass-3 readings per cell (T1 / would-be V1, mono-domain, off-diagonal share, ...).
 # Usage: python -m fit.pass3_choice --agg ROOT/stage0_pass3/_aggregate_aligned.json --out OUT.json [--readings R.json]
-import argparse, json
+import argparse, json, os
 import numpy as np
-from .pass2_lambda_rule import rule, rule_r2, stab
+from .pass2_lambda_rule import rule, rule_r2, rule_r2c, stab
 from .aggregate import choose_k
 
 FRACTION = "0.2"
-LAMBDA_RULE = "R2"        # owner 2026-11-21 ("I approve R2 with value reported only"); "rule_b" = earlier rule, --lambda-rule
+LAMBDA_RULE = "R2C"       # owner 2026-11-24 ("I agree with option C", RL-373); "R2" (2026-11-21) / "rule_b" = earlier rules
+CA_GAIN = {}              # {(approach, K, r): {group: child×article gain}} for R2C, read from the fits' measures
 BAND_AT = "best_over_r"   # B2 (owner 2026-11-21); "r_star" = B1 (earlier reading), set by --band-at
 V1_ACTS = False      # set by --v1 acting (stage 0: V1 reported only, owner 2026-11-19 "I choose T1 + V1", step-11 decision)
 CHECKS = ("gate_fails", "ghost_fails", "alignment_fails", "convergence_fails")
+
+
+def ca_gains(stage_dirs):
+    """Held-out child×article gain (within-class AP − degree-only reference) per (approach, K, r) and hold-out group, mean
+    over converged seeds, from the fits' saved measures (R2C, RL-373)."""
+    import glob, os
+    from collections import defaultdict
+    acc = defaultdict(lambda: defaultdict(list))
+    for sd in stage_dirs:
+        for p in glob.glob(os.path.join(sd, "*", "measures.json")):
+            d = os.path.dirname(p); j = json.load(open(os.path.join(d, "spec.json")))["job"]
+            if (j.get("arm") or {}).get("swap_p") or not json.load(open(os.path.join(d, "result.json")))["converged"]:
+                continue
+            tp = (json.load(open(p)).get("heldout_two_part") or {}).get("child_article")
+            if tp:
+                acc[(j["approach"], j["K"], float(j["arm"]["r"]))][j["group"]].append(tp["ap_within_class"] - tp["baseline_weights_ap_within_class"])
+    return {k: {g: float(np.mean(v)) for g, v in byg.items()} for k, byg in acc.items()}
 
 
 def k_fails(e, c):
@@ -43,7 +61,10 @@ def run(agg, readings=None):
                      and pk[str(K)].get("se_existence") is not None}
             if 0.0 not in cands:
                 lam[K] = {"error": "no λ = 0 cell at this K"}; continue
-            lam[K] = rule_r2(cands) if LAMBDA_RULE == "R2" else rule(cands)   # R2: owner 2026-11-21
+            if LAMBDA_RULE == "R2C":
+                lam[K] = rule_r2c(cands, {r: CA_GAIN.get((a, K, r), {}) for r in cands})
+            else:
+                lam[K] = rule_r2(cands) if LAMBDA_RULE == "R2" else rule(cands)   # R2: owner 2026-11-21
             for r, e in sorted(cands.items()):
                 s = stab(e)
                 table.append({"K": K, "r": r, "existence": e["existence"], "se_existence": e["se_existence"],
@@ -113,7 +134,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--agg", required=True, nargs="+"); ap.add_argument("--out", required=True)
     ap.add_argument("--readings", default=None, nargs="+"); ap.add_argument("--v1", choices=("reported", "acting"), default="reported")
     ap.add_argument("--band-at", choices=("best_over_r", "r_star"), default="best_over_r")
-    ap.add_argument("--lambda-rule", choices=("R2", "rule_b"), default="R2")
+    ap.add_argument("--lambda-rule", choices=("R2C", "R2", "rule_b"), default="R2C")
     a = ap.parse_args()
     global V1_ACTS, BAND_AT, LAMBDA_RULE
     V1_ACTS = a.v1 == "acting"; BAND_AT = a.band_at; LAMBDA_RULE = a.lambda_rule
@@ -137,6 +158,8 @@ def main():
         for path in a.readings:
             for ap_, cells in json.load(open(path))["cells"].items():
                 readings["cells"].setdefault(ap_, {}).update(cells)
+    if LAMBDA_RULE == "R2C":
+        CA_GAIN.update(ca_gains([os.path.dirname(p) for p in a.agg]))
     rep = run(agg, readings)
     json.dump(rep, open(a.out, "w"), indent=1, default=lambda x: x.tolist() if isinstance(x, np.ndarray) else str(x))
 

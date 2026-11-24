@@ -7,7 +7,7 @@
  "approach_1": {
   "lambda_rule_per_K": {
    "3": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 0.3,
     "band": [
      0.3,
@@ -201,10 +201,20 @@
      "difference": 0.004037524794719816,
      "se": 0.00021996325761264435
     },
-    "chosen_r": 0.3
+    "chosen_r": 0.3,
+    "chosen_r_R2": 0.3,
+    "child_article_gain": {
+     "0.3": 0.029937530664048733,
+     "0.45": 0.02806686007912073
+    },
+    "peak_child_article_gain": 0.3,
+    "tied_with_peak": [
+     0.3
+    ],
+    "chosen_r_amended": 0.3
    },
    "5": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 0.3,
     "band": [
      0.3,
@@ -398,10 +408,21 @@
      "0.45": 0.7739487727561725,
      "0.6": 0.7746952217892089
     },
-    "chosen_r": 0.6
+    "chosen_r": 0.3,
+    "chosen_r_R2": 0.6,
+    "child_article_gain": {
+     "0.3": 0.03477677817783895,
+     "0.45": 0.033733250546250954,
+     "0.6": 0.031819992284142784
+    },
+    "peak_child_article_gain": 0.3,
+    "tied_with_peak": [
+     0.3
+    ],
+    "chosen_r_amended": 0.3
    },
    "8": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 0.45,
     "band": [
      0.3,
@@ -599,10 +620,23 @@
      "0.6": 0.6675849300167034,
      "0.8": 0.6697978789660638
     },
-    "chosen_r": 0.8
+    "chosen_r": 0.45,
+    "chosen_r_R2": 0.8,
+    "child_article_gain": {
+     "0.3": 0.031686070866474556,
+     "0.45": 0.03212985268347804,
+     "0.6": 0.03196961919247464,
+     "0.8": 0.03114789014504778
+    },
+    "peak_child_article_gain": 0.45,
+    "tied_with_peak": [
+     0.45,
+     0.6
+    ],
+    "chosen_r_amended": 0.45
    },
    "13": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 1.0,
     "band": [
      0.3,
@@ -792,10 +826,21 @@
      "0.3": 0.5520641434276156,
      "1.0": 0.5674314194748448
     },
-    "chosen_r": 1.0
+    "chosen_r": 0.3,
+    "chosen_r_R2": 1.0,
+    "child_article_gain": {
+     "0.3": 0.02743905525238602,
+     "1.0": 0.02858661206980524
+    },
+    "peak_child_article_gain": 1.0,
+    "tied_with_peak": [
+     0.3,
+     1.0
+    ],
+    "chosen_r_amended": 0.3
    },
    "20": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 1.5,
     "band": [
      0.0,
@@ -993,15 +1038,27 @@
      "1.5": 0.47578798656367177,
      "2.0": 0.48583886339525756
     },
-    "chosen_r": 2.0
+    "chosen_r": 1.0,
+    "chosen_r_R2": 2.0,
+    "child_article_gain": {
+     "0.0": 0.02073848483023933,
+     "1.0": 0.02528851170029021,
+     "1.5": 0.02427053629644284,
+     "2.0": 0.020285226579953786
+    },
+    "peak_child_article_gain": 1.0,
+    "tied_with_peak": [
+     1.0
+    ],
+    "chosen_r_amended": 1.0
    }
   },
   "r_star": {
    "3": 0.3,
-   "5": 0.6,
-   "8": 0.8,
-   "13": 1.0,
-   "20": 2.0
+   "5": 0.3,
+   "8": 0.45,
+   "13": 0.3,
+   "20": 1.0
   },
   "band_r": {
    "3": 0.3,
@@ -1027,8 +1084,8 @@
    ],
    "value_guard": false,
    "removed_by_v1": [],
-   "value_reference": 0.10846943321157598,
-   "value_se": 0.0017382436929132617,
+   "value_reference": 0.10400027358311721,
+   "value_se": 0.0017716041414645722,
    "candidates": [
     5,
     8,
@@ -1056,8 +1113,8 @@
    ],
    "value_guard": true,
    "removed_by_v1": [],
-   "value_reference": 0.10846943321157598,
-   "value_se": 0.0017382436929132617,
+   "value_reference": 0.10400027358311721,
+   "value_se": 0.0017716041414645722,
    "candidates": [
     5
    ],
@@ -1225,7 +1282,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 5,
@@ -1263,7 +1320,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 5,
@@ -1358,7 +1415,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 8,
@@ -1396,7 +1453,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 8,
@@ -1453,7 +1510,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 13,
@@ -1472,7 +1529,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 13,
@@ -1586,7 +1643,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 20,
@@ -1624,7 +1681,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 20,
@@ -1663,19 +1720,19 @@
   "chosen": [
    {
     "K": 5,
-    "r": 0.6
+    "r": 0.3
    },
    {
     "K": 8,
-    "r": 0.8
+    "r": 0.45
    },
    {
     "K": 13,
-    "r": 1.0
+    "r": 0.3
    },
    {
     "K": 20,
-    "r": 2.0
+    "r": 1.0
    }
   ],
   "readings": {
@@ -4084,7 +4141,7 @@
  "approach_2": {
   "lambda_rule_per_K": {
    "3": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 0.3,
     "band": [
      0.3,
@@ -4282,10 +4339,21 @@
      "difference": 0.009230593002810327,
      "se": 0.0002957813754722922
     },
-    "chosen_r": 0.3
+    "chosen_r": 0.3,
+    "chosen_r_R2": 0.3,
+    "child_article_gain": {
+     "0.3": 0.026636348682525773,
+     "0.45": 0.025448482381732074,
+     "0.6": 0.023230152238957337
+    },
+    "peak_child_article_gain": 0.3,
+    "tied_with_peak": [
+     0.3
+    ],
+    "chosen_r_amended": 0.3
    },
    "5": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 0.3,
     "band": [
      0.3,
@@ -4479,10 +4547,21 @@
      "0.45": 0.806568244157712,
      "0.6": 0.8079371327521967
     },
-    "chosen_r": 0.6
+    "chosen_r": 0.3,
+    "chosen_r_R2": 0.6,
+    "child_article_gain": {
+     "0.3": 0.03449909840236244,
+     "0.45": 0.03360834112624319,
+     "0.6": 0.03199233606452988
+    },
+    "peak_child_article_gain": 0.3,
+    "tied_with_peak": [
+     0.3
+    ],
+    "chosen_r_amended": 0.3
    },
    "8": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 0.3,
     "band": [
      0.3,
@@ -4672,10 +4751,20 @@
      "0.3": 0.691391471184229,
      "1.0": 0.705751578432284
     },
-    "chosen_r": 1.0
+    "chosen_r": 0.3,
+    "chosen_r_R2": 1.0,
+    "child_article_gain": {
+     "0.3": 0.031099703938803853,
+     "1.0": 0.029654876448252532
+    },
+    "peak_child_article_gain": 0.3,
+    "tied_with_peak": [
+     0.3
+    ],
+    "chosen_r_amended": 0.3
    },
    "13": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 1.0,
     "band": [
      0.0,
@@ -4869,10 +4958,22 @@
      "0.3": 0.580036681204392,
      "1.0": 0.5971276484247585
     },
-    "chosen_r": 1.0
+    "chosen_r": 0.0,
+    "chosen_r_R2": 1.0,
+    "child_article_gain": {
+     "0.0": 0.02433869470183103,
+     "0.3": 0.02494698655033107,
+     "1.0": 0.026335380118614193
+    },
+    "peak_child_article_gain": 1.0,
+    "tied_with_peak": [
+     0.0,
+     1.0
+    ],
+    "chosen_r_amended": 1.0
    },
    "20": {
-    "rule": "R2",
+    "rule": "R2C",
     "best_by_existence": 1.0,
     "band": [
      0.0,
@@ -5074,15 +5175,28 @@
      "1.5": 0.507242206813192,
      "2.0": 0.5127473470825976
     },
-    "chosen_r": 2.0
+    "chosen_r": 1.0,
+    "chosen_r_R2": 2.0,
+    "child_article_gain": {
+     "0.0": 0.020989931533029603,
+     "0.3": 0.022188171020402426,
+     "1.0": 0.023388049366378023,
+     "1.5": 0.022156758267227947,
+     "2.0": 0.018245905321964757
+    },
+    "peak_child_article_gain": 1.0,
+    "tied_with_peak": [
+     1.0
+    ],
+    "chosen_r_amended": 1.0
    }
   },
   "r_star": {
    "3": 0.3,
-   "5": 0.6,
-   "8": 1.0,
-   "13": 1.0,
-   "20": 2.0
+   "5": 0.3,
+   "8": 0.3,
+   "13": 0.0,
+   "20": 1.0
   },
   "band_r": {
    "3": 0.3,
@@ -5106,8 +5220,8 @@
    ],
    "value_guard": false,
    "removed_by_v1": [],
-   "value_reference": 0.10906343275681933,
-   "value_se": 0.0022988102820015533,
+   "value_reference": 0.10428314245142671,
+   "value_se": 0.002268463685709378,
    "candidates": [
     5,
     8,
@@ -5132,8 +5246,8 @@
    ],
    "value_guard": true,
    "removed_by_v1": [],
-   "value_reference": 0.10906343275681933,
-   "value_se": 0.0022988102820015533,
+   "value_reference": 0.10428314245142671,
+   "value_se": 0.002268463685709378,
    "candidates": [
     5
    ],
@@ -5147,7 +5261,7 @@
    "5": false,
    "8": false,
    "13": false,
-   "20": false
+   "20": true
   },
   "V1_acts": false,
   "table": [
@@ -5301,7 +5415,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 5,
@@ -5339,7 +5453,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 5,
@@ -5415,7 +5529,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 8,
@@ -5434,7 +5548,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 8,
@@ -5510,7 +5624,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 13,
@@ -5548,7 +5662,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 13,
@@ -5662,7 +5776,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 20,
@@ -5700,7 +5814,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 20,
@@ -5736,15 +5850,15 @@
   "chosen": [
    {
     "K": 5,
-    "r": 0.6
+    "r": 0.3
    },
    {
     "K": 8,
-    "r": 1.0
+    "r": 0.3
    },
    {
     "K": 13,
-    "r": 1.0
+    "r": 0.0
    }
   ],
   "readings": {
