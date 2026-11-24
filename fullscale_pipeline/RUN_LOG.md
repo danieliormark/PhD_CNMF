@@ -5049,3 +5049,13 @@ and 2 are done. Both listed in the staged plan's "NOT YET DESIGNED".
 ### RL-371 — 2026-11-24 — Sufficient members: tiers (core ≥ 0.5, member ≥ 0.3) and facet requirement decided
 Owner: "I approve option B. I also think that we should specify that some domains must be represented (at least children
 and articles)" (design doc 2026-11-24). m rule under discussion (robust median − k × scaled-MAD on log counts).
+
+### RL-372 — 2026-11-24 — Sufficient members: m rule decided (k 2.5 main); measurement job prepared
+Owner: "Yes, your reading is correct; use 2.5 as main" (design doc 2026-11-24). `fit/sufficient_members.py`: per fit
+(pass-3 candidate cells, W1, studies A and B, 750 saved fits) member counts per community, facet and q (0.2 / 0.3 / 0.4 /
+0.5) among covered entities, presence; analysis per cell: robust threshold (log counts, median − k × scaled MAD, k 2.5 /
+2), share of communities lacking sufficient members per domain / required facet and in any (majority of seeds),
+diffuse (presence ≥ 0.5, insufficient members) and narrow (sufficient members, presence < 0.1) shares, articles counted
+as social and not counted. Test (3 fits): 3 s per fit. At K 5 every community has hundreds to thousands of members per
+domain (approach 1 group 1 seed 1: articles 397–673, child 13,073–34,606 at q 0.3). `slurm/sufficient_members.sh`
+(1 job × 8 cores, ≈ 10–20 min).
