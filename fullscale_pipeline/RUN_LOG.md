@@ -4950,3 +4950,16 @@ article gain 0.0345 → 0.0175), value −9 % (−0.0089 ± 0.0017), Track A −
 affiliation gain ×2.9 (0.0034 → 0.0099); lower domain presence (median over communities) +0.076 ± 0.015 (approach 2: more
 balanced communities), approach 1 −0.006 ± 0.006. Journal grouping in the swap at K 5 falls at every point (it did not
 under W2 at K 13, RL-352).
+
+### RL-362 — 2026-11-24 — Community-quality readings across the weighting points prepared (owner: "Yes, please prepare the job")
+Owner's concern: the child×article prediction loss at 0.65 (approach 2: gain over the degree-only reference −49 %) may
+make communities more biased. Training reconstruction (final relation loss, 0.65 vs W1, paired by group): child×article
++2.8 % (approach 1) / +5.1 % (approach 2), parent×child +0.6 / +0.9 %, social relations −1.0 to −15.9 % — far beyond
+hold-out-draw noise (≥ 79 SE) but modest in size. `fit/weight_curve_community.py`: on W1 / 0.75 / 0.65 / W2 (K 5, r 0.3,
+study A, both approaches, 400 saved fits, relation data with each fit's own weights): pass-3 readings (within-community
+share of child×article tie weight, crossing ties, article coherence "mosaic vs blend", closure ratio, flattening,
+off-diagonal shares, domain presence); new idea coherence (Pearson correlation over article pairs between co-membership
+and W-aware cosine of child-hyperedge sets; co-membership excess of pairs sharing ≥ 1 child hyperedge); people coherence
+(swap measure at p 0 — co-membership excess of pairs sharing a social entity; correlation with shared authors / co-author
+tie). Summary: point − W1 paired by (group, seed), mean ± SE over groups, relative, in W1 seed SDs. Test (2 fits, approach 2
+group 1 seed 1): 6–9 s per fit; runs. `slurm/weight_curve_community.sh` (1 job × 8 cores, ≈ 15–30 min).
