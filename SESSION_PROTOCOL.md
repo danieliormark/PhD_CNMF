@@ -119,6 +119,18 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
     plain one; do not introduce a new label for something a sentence can
     already say directly.
 
+12. **Effect size and noise yardstick for every reported difference; numbered,
+    captioned tables (owner, 2026-11-24).** Every difference shown to the owner
+    carries its effect size (absolute, and relative or in seed SDs) and a noise
+    yardstick (n × SE, naming which noise — hold-out draws, seeds), or states
+    explicitly "not applicable, because …". SEs over seeds or hold-out groups are
+    signal-to-noise yardsticks, not p-values. Each report says whether effect
+    size and noise change the interpretation or the decision (e.g. a tie within
+    noise; a cost beyond noise against a benefit within noise). Tables are
+    numbered (Table 1, 2, … across the report) and captioned: what a row is and
+    what every column reports (quantity, unit, whose share of which total, how
+    summarised), so that short column names are never left to inference.
+
 ---
 
 ## D. Persistence
