@@ -4417,3 +4417,89 @@ non-dominated subset of about 200 log-uniform draws; with one parameter this cov
 **Owner decision 2026-10-02: keep the sampler** (it worked; tuning further penalty weights later would
 make NSGA-II's crossover and selection effective, since with two parameters each child keeps an
 inherited value with probability ½).
+
+## 33. Relation weighting under KL trades idea coherence for social coherence of communities (2026-11-24, ticket 107 M1)
+
+**Record only; interpretation pending (the owner will compare readings before one is written).** Records: RUN_LOG
+RL-339/340 (W3 check), RL-352 (W1 vs W2), RL-353/361 (weight curve), RL-362/366/367 (community readings); design doc
+2026-11-22 … 2026-11-24.
+
+**Setting.** Psychology trial, study A (build with genre hyperedges), KL loss, K 5, word-similarity term r 0.3, both
+social approaches (approach 1: author facet; approach 2: articles linked to affiliations and to each other by
+citations / co-authorship). Under KL a relation's pull on the factors is w_r × Σx (Σx = its visible tie mass after
+Frobenius scaling), so the decided weights w_r = 0.5 / n_domain give the semantic relations 82.7 % (approach 1) / 89.6 %
+(approach 2) of the pull (point W1). Four points were fitted, the semantic share of the KL pull set to 0.50 (W2, mass
+weights), 0.65, 0.75 (mass weights × 2s / 2(1 − s) per domain; split inside a domain and total pull unchanged) and W1;
+5 hold-out groups × 10 seeds each, every fit paired with its W1 counterpart (same group and seed). Differences: point −
+W1, mean per group, mean ± SE over the 5 groups (hold-out-draw noise); relative change; n SE.
+
+**Measurements.**
+
+Table 33.1 — Grouping of articles by shared ideas and by shared social entities. Idea correlation: Pearson correlation
+over all article pairs between co-membership Σ_k p_k q_k (weighted memberships) and the cosine of the two articles'
+child-hyperedge sets extended by W word neighbours. Excess: mean co-membership of article pairs sharing ≥ 1 child
+hyperedge (idea) / a co-author tie / an organisation / a journal / an author, minus the mean over all pairs.
+
+| Approach | Reading | W1 | 0.75 | 0.65 | 0.50 (W2) |
+|---|---|---|---|---|---|
+| 2 | idea correlation | 0.136 | −27 % (54 SE) | −41 % (109 SE) | −54 % (64 SE) |
+| 2 | idea excess | 0.022 | −44 % (41 SE) | −64 % (97 SE) | −78 % (61 SE) |
+| 2 | co-author-tie excess | 0.415 | +32 % (16 SE) | +42 % (20 SE) | +51 % (24 SE) |
+| 2 | organisation excess | 0.066 | +24 % (17 SE) | +39 % (25 SE) | +52 % (26 SE) |
+| 2 | journal excess | 0.058 | +108 % (10 SE) | +199 % (25 SE) | +317 % (41 SE) |
+| 1 | idea correlation | 0.171 | −30 % (77 SE) | −40 % (92 SE) | −51 % (110 SE) |
+| 1 | idea excess | 0.033 | −46 % (93 SE) | −56 % (96 SE) | −64 % (83 SE) |
+| 1 | author excess | 0.197 | −3 % (5.8 SE) | +2 % (1.5 SE) | +7 % (5.2 SE) |
+| 1 | journal excess | 0.056 | +275 % (19 SE) | +386 % (62 SE) | +521 % (129 SE) |
+
+Table 33.2 — Articles and their own child hyperedges; held-out prediction; stability. Crossing: share of child×article
+tie weight between an article and a child hyperedge with different main communities. Co-membership on within ties:
+Σ_k p_k q_k of an article and its child hyperedge on ties inside one main community. Gain: held-out within-class AP over
+the degree-only reference (semantic = mean of child×article and parent×child). Track A: chance-adjusted seed stability.
+
+| Approach | Reading | W1 | 0.75 | 0.65 | 0.50 (W2) |
+|---|---|---|---|---|---|
+| 2 | crossing child×article weight | 0.427 | +4 % (17 SE) | +8 % (24 SE) | +12 % (25 SE) |
+| 2 | co-membership on within ties | 0.711 | −2 % (26 SE) | −4 % (71 SE) | −7 % (92 SE) |
+| 2 | article membership spread (bits) | 0.300 | +23 % (51 SE) | +25 % (37 SE) | +19 % (32 SE) |
+| 2 | child×article gain | 0.0345 | −27 % (12 SE) | −49 % (8.5 SE) | −81 % (8.1 SE) |
+| 2 | article×affiliation gain | 0.0034 | +139 % (3.9 SE) | +192 % (4.2 SE) | +238 % (4.7 SE) |
+| 2 | Track A (chance-adjusted) | 0.616 | −0.038 (21 SE) | −0.050 (20 SE) | −0.056 (27 SE) |
+| 1 | crossing child×article weight | 0.422 | +2 % (11 SE) | +6 % (14 SE) | +10 % (21 SE) |
+| 1 | co-membership on within ties | 0.714 | −3 % (36 SE) | −6 % (79 SE) | −11 % (107 SE) |
+| 1 | child×article gain | 0.0348 | −5 % (1.8 SE) | −14 % (3.8 SE) | −32 % (5.7 SE) |
+| 1 | author×affiliation gain | 0.0021 | +5 % (0.8 SE) | +11 % (1.1 SE) | +17 % (1.8 SE) |
+| 1 | Track A (chance-adjusted) | 0.595 | −0.010 (4.7 SE) | −0.018 (8.0 SE) | −0.026 (10.8 SE) |
+
+Table 33.3 — Social ties. Crossing: share of the relation's tie weight between entities with different main
+communities; closure ratio: tie weight inside communities relative to what community sizes give; lower domain presence:
+per community the smaller of its social and semantic presence, median over communities.
+
+| Approach | Reading | W1 | 0.75 | 0.65 | 0.50 (W2) |
+|---|---|---|---|---|---|
+| 2 | article×article crossing weight | 0.200 | −52 % (36 SE) | −65 % (26 SE) | −74 % (37 SE) |
+| 2 | article×article closure ratio | 0.93 | 2.00 (60 SE) | 2.68 (27 SE) | 3.50 (49 SE) |
+| 2 | article×journal crossing weight | 0.486 | −10 % (18 SE) | −17 % (28 SE) | −27 % (36 SE) |
+| 2 | lower domain presence | 0.799 | +0.056 (5.6 SE) | +0.076 (5.0 SE) | +0.053 (4.6 SE) |
+| 1 | article×journal crossing weight | 0.503 | −28 % (27 SE) | −37 % (62 SE) | −47 % (122 SE) |
+| 1 | lower domain presence | 0.929 | −0.006 (0.8 SE) | −0.006 (0.9 SE) | −0.027 (3.5 SE) |
+
+At every point and in both approaches: T1 (every community's own cell holds > half of its child×article tie weight on
+both sides) holds, and no community is mono-domain.
+
+**What is established.** (1) Over the semantic share of the pull from 0.83–0.90 to 0.50, the grouping of articles moves
+monotonically from shared ideas to shared social entities, with no point at which idea grouping holds while social
+grouping rises; the effects are large (idea excess −44 to −78 % at 0.75 … 0.50 in approach 2) and far beyond hold-out-draw
+noise (≥ 10 SE). (2) Articles keep their own child hyperedges (crossing and co-membership change by a few per cent;
+T1 holds); what changes is which other articles they are grouped with. (3) In approach 1 the social gain is almost
+entirely journals (author grouping changes ≤ 7 %); in approach 2 co-author ties, organisations and journals all gain.
+(4) Prediction of hidden child×article ties and seed stability fall along the same path; prediction of hidden affiliation
+ties rises in approach 2 only. (5) At W1, co-authored articles are already strongly grouped (excess 0.415), journals
+weakly (0.058).
+
+**Scope and limits.** One K (5) and one r (0.3); study A only; held-out ties exist for child×article, parent×child and one
+affiliation relation only (no held-out author×article, article×journal or article×article ties); the idea measure uses
+child-hyperedge overlap extended by W, so it shares inputs with the model's semantic side. Decision taken on this basis:
+design doc 2026-11-24 (W1 kept in both approaches).
+
+**Interpretation:** pending.

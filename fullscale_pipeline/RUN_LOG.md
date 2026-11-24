@@ -5030,3 +5030,8 @@ their articles' mix (ω 0) −12 to −36 %; T1 holds and no mono-domain communi
 article×article crossing weight −52 / −65 / −74 %, closure ratio 0.93 → 2.0 / 2.7 / 3.5; article×journal crossing −10 to
 −47 %. Lower domain presence approach 2 +0.056 / +0.076 / +0.053 (≥ 4.6 SE), approach 1 within noise except W2 (−0.027,
 3.5 SE).
+
+### RL-368 — 2026-11-24 — Weighting decided: W1 in both approaches; finding recorded (FINDINGS §33)
+Owner: "I approve option (c), keeping W1 for both approaches" (design doc 2026-11-24): no stage-0 refits; an arm at
+0.65 (approach 2) to be carried into stage 1 / 3. Owner: the finding "is worth being documented" — FINDINGS §33
+(measurements, method, scope; interpretation pending, owner to compare with the assistant's before it is written).
