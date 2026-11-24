@@ -124,9 +124,9 @@ decoders  .../Star_epistemic_decoders_global.pkl   (contains idf_global; nothing
     carries its effect size (absolute, and relative or in seed SDs) and a noise
     yardstick (n × SE, naming which noise — hold-out draws, seeds), or states
     explicitly "not applicable, because …". SEs over seeds or hold-out groups are
-    signal-to-noise yardsticks, not p-values. Each report says whether effect
-    size and noise change the interpretation or the decision (e.g. a tie within
-    noise; a cost beyond noise against a benefit within noise). Tables are
+    signal-to-noise yardsticks, not p-values. They are built into the reported
+    numbers and the reading, not set out in a separate section on whether they
+    change the conclusions (owner refinement, same day). Tables are
     numbered (Table 1, 2, … across the report) and captioned: what a row is and
     what every column reports (quantity, unit, whose share of which total, how
     summarised), so that short column names are never left to inference.
