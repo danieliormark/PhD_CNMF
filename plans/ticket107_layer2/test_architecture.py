@@ -148,7 +148,10 @@ LATER = ["background component (deferred robustness arm; planted test first)",
          "shared + domain-specific memberships (deferred, owner 2026-11-23; RL-353; after JIVE, Lock et al. 2013 AoAS "
          "7:523): each article's membership = a shared part (sociosemantic communities) + a small private part per "
          "domain, so the domains compete less for the shared part; the share each entity's fit draws from the shared part "
-         "measures heterogeneity. A model change: planted test first, like the background component"]
+         "measures heterogeneity. A model change: planted test first, like the background component",
+         "fallback held-out score (owner 2026-11-24; RL-358): combine each relation's gain over its degree-only reference "
+         "instead of its raw AP, so the scoring weights express priorities only, not base rates; used if an arm's verdict "
+         "(e.g. a stage-1 journal arm) turns out to depend on the affiliation relation; re-reads K bands and λ choices"]
 
 print(f"Fits per cell = {FOLDS} hold-out groups × {SEEDS} seeds = {FITS_PER_CELL} (stage 1: 10 groups)\n")
 for title, arms, decision in stages:

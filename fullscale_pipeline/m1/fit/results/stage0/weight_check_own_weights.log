@@ -1,0 +1,62 @@
+approach_1_K5_r0.3 (50 pairs) — mass − current, mean ± SE over hold-out groups
+   existence                        mass 0.0578  current 0.0973  diff -0.0395 ± 0.0018
+   value                            mass 0.0978  current 0.1040  diff -0.0062 ± 0.0008
+   T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
+   mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
+   lower_presence_median            mass 0.9018  current 0.9292  diff -0.0274 ± 0.0079
+   article_spread                   mass 0.3229  current 0.2556  diff +0.0673 ± 0.0019
+   loss_share_parent_child          mass 0.4978  current 0.4976  diff +0.0002 ± 0.0000
+   loss_share_child_article         mass 0.2996  current 0.2865  diff +0.0130 ± 0.0000
+   loss_share_author_article        mass 0.0920  current 0.0963  diff -0.0043 ± 0.0000
+   loss_share_author_affiliation    mass 0.0872  current 0.0898  diff -0.0026 ± 0.0000
+   loss_share_article_journal       mass 0.0234  current 0.0298  diff -0.0063 ± 0.0000
+   author_spread                    mass 0.3420  current 0.3974  diff -0.0553 ± 0.0021
+   organisation_spread              mass 0.1878  current 0.2860  diff -0.0982 ± 0.0039
+   stability_A_adjusted             mass 0.5686  current 0.5947  diff -0.0262 ± 0.0024
+approach_1_K13_r1 (50 pairs) — mass − current, mean ± SE over hold-out groups
+   existence                        mass 0.0587  current 0.0967  diff -0.0380 ± 0.0015
+   value                            mass 0.0798  current 0.0918  diff -0.0120 ± 0.0019
+   T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
+   mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
+   lower_presence_median            mass 0.8145  current 0.7863  diff +0.0282 ± 0.0077
+   article_spread                   mass 0.5432  current 0.4317  diff +0.1115 ± 0.0017
+   loss_share_parent_child          mass 0.5092  current 0.5071  diff +0.0021 ± 0.0001
+   loss_share_child_article         mass 0.3030  current 0.2877  diff +0.0153 ± 0.0001
+   loss_share_author_article        mass 0.0871  current 0.0919  diff -0.0048 ± 0.0000
+   loss_share_author_affiliation    mass 0.0805  current 0.0843  diff -0.0038 ± 0.0001
+   loss_share_article_journal       mass 0.0202  current 0.0291  diff -0.0089 ± 0.0001
+   author_spread                    mass 0.4197  current 0.4435  diff -0.0238 ± 0.0014
+   organisation_spread              mass 0.1792  current 0.2261  diff -0.0469 ± 0.0025
+   stability_A_adjusted             mass 0.3492  current 0.3812  diff -0.0320 ± 0.0025
+approach_2_K5_r0.3 (50 pairs) — mass − current, mean ± SE over hold-out groups
+   existence                        mass 0.0514  current 0.0987  diff -0.0473 ± 0.0016
+   value                            mass 0.0880  current 0.1043  diff -0.0163 ± 0.0014
+   T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
+   mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
+   lower_presence_median            mass 0.8519  current 0.7991  diff +0.0527 ± 0.0115
+   article_spread                   mass 0.3564  current 0.2996  diff +0.0567 ± 0.0018
+   loss_share_parent_child          mass 0.5502  current 0.5542  diff -0.0040 ± 0.0001
+   loss_share_child_article         mass 0.3388  current 0.3198  diff +0.0190 ± 0.0001
+   loss_share_article_affiliation   mass 0.0549  current 0.0584  diff -0.0035 ± 0.0000
+   loss_share_article_article       mass 0.0273  current 0.0344  diff -0.0071 ± 0.0000
+   loss_share_article_journal       mass 0.0289  current 0.0331  diff -0.0043 ± 0.0000
+   organisation_spread              mass 0.3097  current 0.3884  diff -0.0787 ± 0.0027
+   stability_A_adjusted             mass 0.5607  current 0.6163  diff -0.0556 ± 0.0020
+approach_2_K13_r1 (50 pairs) — mass − current, mean ± SE over hold-out groups
+   existence                        mass 0.0522  current 0.0968  diff -0.0445 ± 0.0011
+   value                            mass 0.0669  current 0.0854  diff -0.0186 ± 0.0020
+   T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
+   mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
+   lower_presence_median            mass 0.8014  current 0.7335  diff +0.0679 ± 0.0071
+   article_spread                   mass 0.4707  current 0.5118  diff -0.0410 ± 0.0059
+   loss_share_parent_child          mass 0.5594  current 0.5599  diff -0.0005 ± 0.0001
+   loss_share_child_article         mass 0.3391  current 0.3192  diff +0.0199 ± 0.0000
+   loss_share_article_affiliation   mass 0.0511  current 0.0557  diff -0.0046 ± 0.0000
+   loss_share_article_article       mass 0.0247  current 0.0327  diff -0.0079 ± 0.0000
+   loss_share_article_journal       mass 0.0257  current 0.0326  diff -0.0069 ± 0.0001
+   organisation_spread              mass 0.3658  current 0.5015  diff -0.1357 ± 0.0032
+   stability_A_adjusted             mass 0.3630  current 0.3899  diff -0.0269 ± 0.0022
+swap approach_1_mass {'author': '0.1574→0.1433 (-0.09, -0.0141±0.0051)', 'organisation (via authors)': '0.0185→0.0208 (+0.12, +0.0023±0.0014)', 'journal': '0.3361→0.3420 (+0.02, +0.0059±0.0071)'}
+swap approach_1_current {'author': '0.1483→0.1179 (-0.21, -0.0304±0.0052)', 'organisation (via authors)': '0.0184→0.0211 (+0.15, +0.0027±0.0011)', 'journal': '0.0463→0.0304 (-0.34, -0.0159±0.0079)'}
+swap approach_2_mass {'co-author tie': '0.6240→0.5953 (-0.05, -0.0287±0.0090)', 'organisation': '0.0861→0.0833 (-0.03, -0.0028±0.0044)', 'journal': '0.2763→0.2706 (-0.02, -0.0057±0.0201)'}
+swap approach_2_current {'co-author tie': '0.4462→0.4249 (-0.05, -0.0213±0.0119)', 'organisation': '0.0724→0.0704 (-0.03, -0.0021±0.0026)', 'journal': '0.0371→0.0289 (-0.22, -0.0082±0.0018)'}

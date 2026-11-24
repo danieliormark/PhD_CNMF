@@ -150,7 +150,10 @@ def run_one(job, out_root):
             "empty_columns": M.empty_columns(pres, rds, wm),
             "heldout": hos,
             "heldout_two_part": two,
-            "heldout_two_part_combined": M.combined_two_part(two, w),     # decision score (2026-11-13)
+            # decision score (2026-11-13) with the approach's main-setting weights for every fit (owner 2026-11-24, RL-358);
+            # the fit's own weights kept beside it
+            "heldout_two_part_combined": M.combined_two_part(two, D.relation_weights(D.APPROACH[job["approach"]])),
+            "heldout_two_part_combined_own_weights": M.combined_two_part(two, w),
             "heldout_combined": {"squared_error": M.combined_heldout(hos, w, "squared_error"),
                                  "kl_error": M.combined_heldout(hos, w, "kl_error"),
                                  "semantic_only_squared_error": M.combined_heldout({k: v for k, v in hos.items() if k in ("child_article", "parent_child")}, w, "squared_error"),

@@ -70,9 +70,23 @@ def _aligned(d):
     return json.load(open(p))
 
 
+def main_weights(approach):
+    """The approach's main-setting relation weights (L2.2, no arm): the fixed scoring weights of the held-out decision
+    score (owner 2026-11-24, "I agree with your proposal for main-setting weights"; RL-358)."""
+    from .data import APPROACH, relation_weights
+    return relation_weights(APPROACH[approach])
+
+
 def load_fit(d):
     spec = json.load(open(os.path.join(d, "spec.json"))); res = json.load(open(os.path.join(d, "result.json")))
     meas = json.load(open(os.path.join(d, "measures.json")))
+    # Held-out decision score with the approach's main-setting weights for every fit (RL-358): identical for fits that
+    # keep those weights; for arms that change relation weights the score saved at fit time used the fit's own weights,
+    # kept as heldout_two_part_combined_own_weights.
+    if meas.get("heldout_two_part"):
+        if "heldout_two_part_combined_own_weights" not in meas:
+            meas["heldout_two_part_combined_own_weights"] = meas.get("heldout_two_part_combined")
+        meas["heldout_two_part_combined"] = M.combined_two_part(meas["heldout_two_part"], main_weights(spec["job"]["approach"]))
     if ALIGNED:
         al = _aligned(d)
         for r, v in al["presence"].items():

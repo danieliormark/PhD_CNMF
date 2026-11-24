@@ -1,6 +1,6 @@
 approach_1_K5_r0.3 (50 pairs) — mass − current, mean ± SE over hold-out groups
-   existence                        mass 0.0578  current 0.0973  diff -0.0395 ± 0.0018
-   value                            mass 0.0978  current 0.1040  diff -0.0062 ± 0.0008
+   existence                        mass 0.0923  current 0.0973  diff -0.0050 ± 0.0009
+   value                            mass 0.0964  current 0.1040  diff -0.0076 ± 0.0009
    T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
    mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
    lower_presence_median            mass 0.9018  current 0.9292  diff -0.0274 ± 0.0079
@@ -14,8 +14,8 @@ approach_1_K5_r0.3 (50 pairs) — mass − current, mean ± SE over hold-out gro
    organisation_spread              mass 0.1878  current 0.2860  diff -0.0982 ± 0.0039
    stability_A_adjusted             mass 0.5686  current 0.5947  diff -0.0262 ± 0.0024
 approach_1_K13_r1 (50 pairs) — mass − current, mean ± SE over hold-out groups
-   existence                        mass 0.0587  current 0.0967  diff -0.0380 ± 0.0015
-   value                            mass 0.0798  current 0.0918  diff -0.0120 ± 0.0019
+   existence                        mass 0.0903  current 0.0967  diff -0.0065 ± 0.0009
+   value                            mass 0.0782  current 0.0918  diff -0.0136 ± 0.0018
    T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
    mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
    lower_presence_median            mass 0.8145  current 0.7863  diff +0.0282 ± 0.0077
@@ -29,8 +29,8 @@ approach_1_K13_r1 (50 pairs) — mass − current, mean ± SE over hold-out grou
    organisation_spread              mass 0.1792  current 0.2261  diff -0.0469 ± 0.0025
    stability_A_adjusted             mass 0.3492  current 0.3812  diff -0.0320 ± 0.0025
 approach_2_K5_r0.3 (50 pairs) — mass − current, mean ± SE over hold-out groups
-   existence                        mass 0.0514  current 0.0987  diff -0.0473 ± 0.0016
-   value                            mass 0.0880  current 0.1043  diff -0.0163 ± 0.0014
+   existence                        mass 0.0898  current 0.0987  diff -0.0090 ± 0.0011
+   value                            mass 0.0878  current 0.1043  diff -0.0165 ± 0.0015
    T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
    mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
    lower_presence_median            mass 0.8519  current 0.7991  diff +0.0527 ± 0.0115
@@ -43,8 +43,8 @@ approach_2_K5_r0.3 (50 pairs) — mass − current, mean ± SE over hold-out gro
    organisation_spread              mass 0.3097  current 0.3884  diff -0.0787 ± 0.0027
    stability_A_adjusted             mass 0.5607  current 0.6163  diff -0.0556 ± 0.0020
 approach_2_K13_r1 (50 pairs) — mass − current, mean ± SE over hold-out groups
-   existence                        mass 0.0522  current 0.0968  diff -0.0445 ± 0.0011
-   value                            mass 0.0669  current 0.0854  diff -0.0186 ± 0.0020
+   existence                        mass 0.0884  current 0.0968  diff -0.0084 ± 0.0012
+   value                            mass 0.0665  current 0.0854  diff -0.0190 ± 0.0019
    T1_fails                         mass 0.0000  current 0.0000  diff +0.0000 ± 0.0000
    mixed_share                      mass 1.0000  current 1.0000  diff +0.0000 ± 0.0000
    lower_presence_median            mass 0.8014  current 0.7335  diff +0.0679 ± 0.0071

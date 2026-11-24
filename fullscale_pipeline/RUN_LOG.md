@@ -4904,3 +4904,16 @@ same readings R1–R5 plus membership spread (bits, mean over seeds) per entity 
 tie-count differences in agreement follow from how concentrated memberships are). `slurm/membership_readings_r_sweep.sh`
 (1 job × 8 cores, 6 h limit, ≈ 1 h) → `fit/results/stage0/membership_readings_r_sweep.json`; per-entity arrays on RDS
 (the 7 study-A candidate cells are rewritten with the spread added; other values identical).
+
+### RL-358 — 2026-11-24 — Held-out decision score with the main-setting weights (owner decision); fallback recorded
+Owner: "I agree with your proposal for main-setting weights + keeping the altenrative option … as a fall back option"
+(design doc 2026-11-24). Code: `aggregate.main_weights(approach)` (L2.2 weights, no arm); `aggregate.load_fit` replaces
+`heldout_two_part_combined` by the score with the main weights at read time and keeps the saved one as
+`heldout_two_part_combined_own_weights`, so every reader (aggregation, K band, λ rule, start / swap / weight analyses)
+uses it; `run_fit` saves both for new fits. Check: pass-3 and λ-calibration fits identical (max difference 0 over the
+fits checked; they train with the main weights); W3-check W2 fits change by up to 0.040 (existence). Nothing previously
+decided changes (no decision used an arm with other weights). `fit/results/stage0/weight_check.{json,log}` rerun under
+the rule (own-weight version kept as `weight_check_own_weights.*`); the weight curve's analysis already scored this way.
+Not changed: `w_form_diagnostics` reads measures directly (W-form test fits train with the main weights, so unaffected).
+Fallback (owner): gain over the degree-only reference per relation, combined with the same weights — listed in the staged
+plan's "NOT YET DESIGNED".
