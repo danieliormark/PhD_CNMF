@@ -5045,3 +5045,7 @@ the data representation). References web-checked (Breiger 1974; Basov, Breiger &
 Owner decisions (design doc 2026-11-24): arm at semantic share 0.65 in both approaches for stage 1 / 3 (dropped for an
 approach disqualified before it is planned); text check of idea-led vs people-led communities deferred until stages 1
 and 2 are done. Both listed in the staged plan's "NOT YET DESIGNED".
+
+### RL-371 — 2026-11-24 — Sufficient members: tiers (core ≥ 0.5, member ≥ 0.3) and facet requirement decided
+Owner: "I approve option B. I also think that we should specify that some domains must be represented (at least children
+and articles)" (design doc 2026-11-24). m rule under discussion (robust median − k × scaled-MAD on log counts).
