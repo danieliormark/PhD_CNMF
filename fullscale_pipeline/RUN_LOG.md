@@ -5040,3 +5040,8 @@ Owner: "I approve option (c), keeping W1 for both approaches" (design doc 2026-1
 Owner: "I think you can record your interpretation as mine was less elaborate"; owner's ideas recorded as theirs
 (sociosemantic vs social / semantic communities; different logics of social and semantic interactions; contingency on
 the data representation). References web-checked (Breiger 1974; Basov, Breiger & Hellsten 2020; Roth & Cointet 2010).
+
+### RL-370 — 2026-11-24 — Weighting arm in both approaches; idea- vs people-led text check deferred
+Owner decisions (design doc 2026-11-24): arm at semantic share 0.65 in both approaches for stage 1 / 3 (dropped for an
+approach disqualified before it is planned); text check of idea-led vs people-led communities deferred until stages 1
+and 2 are done. Both listed in the staged plan's "NOT YET DESIGNED".

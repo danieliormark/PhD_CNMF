@@ -156,7 +156,12 @@ LATER = ["background component (deferred robustness arm; planted test first)",
          "RL-364/365): its empty cells would resist the flattening of W-tied child hyperedges that the regulariser shows "
          "at high r; costs: no shared word read as dissimilarity (synonyms), added semantic pull, own weight and "
          "calibration; an arm against the regulariser at a moderate r, judged on held-out prediction and community "
-         "readings (crossing child×article weight, article–idea co-membership)"]
+         "readings (crossing child×article weight, article–idea co-membership)",
+         "weighting arm at semantic share 0.65 in both approaches (owner 2026-11-24; RL-368/370): robustness of stage-1 / 3 "
+         "conclusions to the relation weighting (FINDINGS §33) and a matched point for the approach comparison; dropped for "
+         "an approach disqualified before it is planned; placement and size to design",
+         "text check of idea-led (W1) vs people-led (0.65) communities (deferred until stages 1 and 2 are done, owner "
+         "2026-11-24; RL-370): blind readers, topical / social coherence, classification, intrusion tests"]
 
 print(f"Fits per cell = {FOLDS} hold-out groups × {SEEDS} seeds = {FITS_PER_CELL} (stage 1: 10 groups)\n")
 for title, arms, decision in stages:
