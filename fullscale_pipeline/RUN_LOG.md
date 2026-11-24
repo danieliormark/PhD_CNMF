@@ -5080,3 +5080,7 @@ number of communities of a child hyperedge (2^spread), quantiles 10 / 25 / 50 / 
 1.45 / 2.33 / 3.26 / 3.9; K 13 r 0.3: 1.07 / 1.64 / 2.91 / 4.76 / 6.33; K 13 r 1: 1.18 / 2.8 / 5.84 / 8.23 / 9.58; K 20
 r 1: 1.18 / 2.49 / 6.57 / 10.26 / 12.64; untied stay at median 1.0–1.07; share of tied hyperedges near even (> 90 % of
 maximum spread) ≤ 0.058; articles' median effective number 1.0–1.22 (r 0) → 1.11–1.42 (r*). Approach 2 alike.
+
+### RL-376 — 2026-11-24 — child×child relation: focused test before stage 1 approved
+Owner: "I approve the focused test before stage 1". W (psych_trial_v3): 97,850 × 97,850, 312,582 symmetric ties, values
+0.40–1.00 (median 0.49; idf-weighted Jaccard, τ 0.4, ≥ 5 neighbours). Design round next.
