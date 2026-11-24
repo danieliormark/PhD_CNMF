@@ -5072,3 +5072,11 @@ as `lambda_cal_choice_A_R2.{json,log}`.
 Owner: "I approve option (ii), C with the amendment". `rule_r2c` now applies the amendment (C without it reported as
 `chosen_r_C_without_amendment`). Re-run: approach 1 r* {3: 0.3, 5: 0.3, 8: 0.45, 13: 0.3, 20: 1.0}; approach 2 {3: 0.3,
 5: 0.3, 8: 0.3, 13: 1.0, 20: 1.0}; K candidates unchanged.
+
+### RL-375 — 2026-11-24 — Stability compared only at equal r (owner decision A); flatness distributions
+Owner: "I agree with your proposal A" (design doc 2026-11-24). Measured for the owner (saved r-sweep arrays): effective
+number of communities of a child hyperedge (2^spread), quantiles 10 / 25 / 50 / 75 / 90 %, approach 1 — r 0: W-tied
+1.0 / 1.0 / 1.0–1.07 / 1.23–1.32 / 1.8–1.9 at K 5–20 (near hard assignment), untied similar; K 5 r 0.3: tied 1.0 /
+1.45 / 2.33 / 3.26 / 3.9; K 13 r 0.3: 1.07 / 1.64 / 2.91 / 4.76 / 6.33; K 13 r 1: 1.18 / 2.8 / 5.84 / 8.23 / 9.58; K 20
+r 1: 1.18 / 2.49 / 6.57 / 10.26 / 12.64; untied stay at median 1.0–1.07; share of tied hyperedges near even (> 90 % of
+maximum spread) ≤ 0.058; articles' median effective number 1.0–1.22 (r 0) → 1.11–1.42 (r*). Approach 2 alike.
