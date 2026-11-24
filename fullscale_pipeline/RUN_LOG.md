@@ -5114,3 +5114,12 @@ communities lacking sufficient members per cell (mean ± SE over groups) 0 to 0.
 social never. No community-fit has zero members (0 of 7,600); flagged ones have hundreds to thousands of members (~40 % of
 the cell median). Sensitivity: k 2 raises shares by ≤ 0.1; q 0.2 / 0.4 / 0.5 by ≤ 0.1; articles counted as social: no
 change. Owner: "I approve option (a), keep the rule as decided".
+
+### RL-380 — 2026-11-24 — Membership-weighted tie mass added as a reported reading (owner)
+Owner: "Yes, please add it as a reported reading". `fit/sufficient_members.py`: per community and domain / facet, the share
+of the observed tie weight carried by its members, Σ_i p_ik w_i ÷ Σ_i w_i (w_i = the covered entity's visible tie weight,
+Σ_r w_r × tie value after Frobenius scaling), × K (1 = fair share); per cell: quantiles, shares below 0.5 and 0.1,
+Spearman correlation with relative presence and mean absolute gap (mean ± SE over groups). No threshold, no role in any
+check. Test (study A approach 1 K 8 r 0.3, group 1, 3 seeds): relative member mass 0.71–1.30 (semantic), 0.52–1.35
+(social); Spearman with presence 0.94 / 0.87, articles 0.63. Full re-read: rerun `slurm/sufficient_members.sh` (earlier
+log kept as `sufficient_members_v1.log`).
