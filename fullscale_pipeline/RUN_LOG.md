@@ -4984,3 +4984,24 @@ chance-adjusted agreement, highest − lowest tie band within spread quintiles; 
 +0.15, authors +0.09 / +0.13, organisations −0.02 / +0.07 (approach 1) and +0.18 (approach 2), journals +0.10 to +0.29,
 child +0.03 (K 5) / −0.004 (K 13 r 1); raw (uncontrolled) differences were small or negative (authors −0.06 / −0.07)
 because entities with more ties have more spread memberships (gap +0.3 to +1.7 bits).
+
+### RL-364 — 2026-11-24 — Does flattening by the word-similarity term cost anything? Readings across r (saved fits only)
+Owner asked whether the flattening of W-tied child hyperedges at higher r brings instability, lower community quality or
+worse held-out prediction. Study A, both approaches, K 5 / 8 / 13 / 20, every r of pass 3 and the λ calibration; each
+reading as r − r 0, paired by hold-out group, mean ± SE over 5 groups (pass-3 / λ-calibration readings, held-out per
+relation from measures, stability from the r sweep). **Held-out per relation (gain of within-class AP over the
+degree-only reference):** child×article rises at moderate r and falls back beyond — approach 1 K 5: r 0.3 +0.012 ± 0.003
+(+52 %), r 1 +0.001 ± 0.003; K 13: r 1 +0.004 ± 0.002, r 2 −0.006 ± 0.003, r 3 −0.009 ± 0.002 (−38 %); K 20: r 1
++0.005 ± 0.002, r 2 −0.000 ± 0.001, r 3 −0.004 ± 0.002; approach 2 alike (K 8: r 0.3 +0.007 ± 0.001, r 2 −0.005 ±
+0.001). parent×child falls at high r (approach 1 K 5 r 1 −0.014 ± 0.003, −54 %; approach 2 K 8 r 2 −0.010 ± 0.004).
+Value (partial Spearman): parent×child gains +0.04 to +0.09 at every r > 0 (the term's main benefit); child×article value
++0.01 to +0.02 at moderate r, back to 0 or below at high r (approach 2 K 20 r 3 −0.021 ± 0.002). **Community readings:**
+child×article tie weight between different main communities 0.27–0.38 (r 0) → 0.42–0.54 (r 0.3) → 0.58–0.59 (r 2–3);
+co-membership of an article with its child hyperedges on within ties 0.82–0.86 → 0.48–0.53 (r 2–3; chance 0.07–0.21);
+article membership spread +0.10 to +0.34 bits; largest membership of W-tied hyperedges 0.88–0.91 → 0.23–0.29 (r 2–3),
+untied unchanged (+0.01); T1 holds, no mono-domain community at any r; lower domain presence +0.06 to +0.12 (approach 1
+K 5) / −0.01 to −0.03 (K 13 / 20). **Stability** (facet chance-adjusted Track A): articles +0.02 to +0.05 at moderate r,
+back to r 0 at high r (approach 1 K 5 r 1 +0.003; approach 2 K 8 r 3 −0.015 ± 0.002); parents rise with r (+0.05 to
++0.16, through their flattened child hyperedges); persons, organisations, journals within ±0.01, journals −0.009 to
+−0.014 at K 20 r 2–3. **Rule R2:** combined existence is flat across r 1–2 at K 13 / 20 (within ±0.001), so the
+tie-break "else the largest r" moves r* to the flattening range (provisional r* 2 at K 20) — to report 3.
