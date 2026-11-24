@@ -5084,3 +5084,8 @@ maximum spread) ≤ 0.058; articles' median effective number 1.0–1.22 (r 0) �
 ### RL-376 — 2026-11-24 — child×child relation: focused test before stage 1 approved
 Owner: "I approve the focused test before stage 1". W (psych_trial_v3): 97,850 × 97,850, 312,582 symmetric ties, values
 0.40–1.00 (median 0.49; idf-weighted Jaccard, τ 0.4, ≥ 5 neighbours). Design round next.
+
+### RL-377 — 2026-11-24 — child×child focused test: design decided (owner); implementation starts
+Owner: "For the rest I agree"; "Include the combined arm; your strength matching is fine" (design doc 2026-11-24):
+full / ties-only relation × strengths matched to r 0.3 / 1, plus full (r 0.3) + regulariser r 0.3; approach 1, K 5 and
+13, 5 groups × 10 seeds — 500 fits; decision rule fixed before results.
