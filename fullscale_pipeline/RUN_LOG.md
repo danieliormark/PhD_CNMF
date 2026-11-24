@@ -4930,3 +4930,23 @@ Weight curve: fits 25199610 280 / 280, all converged, no error files; post-proce
 aggregation 13 cells, `fit/results/stage0/weight_curve.{json,log}`; its held-out readings already used the main-setting
 weights, RL-358). Membership readings r sweep: job 25206589, 300 / 300 tasks (`fit/results/stage0/
 membership_readings_r_sweep.json`). Neither yet read.
+
+### RL-361 — 2026-11-24 — Weight curve read under rule R-b; share definition corrected in the analysis
+**Correction:** `weight_curve_analysis` first computed the affiliation share as (point − W1) ÷ (W2 − W1) of the
+affiliation gain; the decided rule (RL-354) divides the point's gain over the degree-only reference by W2's. Fixed
+(per hold-out group, with SE and paired differences of the criterion); output regenerated.
+**R-b** (criterion = min(semantic gain ÷ W1's, affiliation gain ÷ W2's), mean ± SE over 5 groups; K 5, r 0.3):
+approach 1 — fallback not triggered (W2 − W1 affiliation gain +0.0004 ± 0.0002, beyond one SE but tiny: gain 0.0021 →
+0.0025 over a reference of 0.0015); criterion W2 0.783 ± 0.021, 0.65 0.857 ± 0.027, 0.75 0.866 ± 0.053, W1 0.814 ± 0.062;
+paired: 0.75 − W1 +0.053 ± 0.051, 0.65 − W1 +0.043 ± 0.046, 0.65 − 0.75 −0.009 ± 0.034 → 0.65 / 0.75 / W1 not separable;
+highest mean 0.75. Approach 2 — W2 0.492 ± 0.036, 0.65 0.701 ± 0.014, 0.75 0.711 ± 0.035, W1 0.331 ± 0.080; 0.65 − W1
++0.370 ± 0.081, 0.65 − 0.75 −0.010 ± 0.047. **Guards:** T1 no failures anywhere; swap at K 5 (p 0 → 1, group 1): author
+grouping falls at every approach-1 point (W1 −0.064 ± 0.007, 0.75 −0.057 ± 0.008, 0.65 −0.048 ± 0.009, W2 −0.032 ±
+0.007); approach 2 co-author grouping: W1 −0.020 ± 0.011, 0.65 −0.027 ± 0.010, W2 −0.041 ± 0.011, **0.75 −0.009 ± 0.012
+(fails: not beyond its SE)**. → By the rule: approach 2 = 0.65; approach 1 = 0.75 by the mean, statistically tied with
+0.65 and W1 (rule has no tie handling — to the owner). Costs at 0.65 vs W1: approach 1 semantic-equal existence gain −9 %
+(−0.0028 ± 0.0008), value −2 %, Track A −0.018 ± 0.002, Track B −0.035 ± 0.003; approach 2 semantic gain −29 % (child×
+article gain 0.0345 → 0.0175), value −9 % (−0.0089 ± 0.0017), Track A −0.050 ± 0.003, Track B −0.062 ± 0.003; article×
+affiliation gain ×2.9 (0.0034 → 0.0099); lower domain presence (median over communities) +0.076 ± 0.015 (approach 2: more
+balanced communities), approach 1 −0.006 ± 0.006. Journal grouping in the swap at K 5 falls at every point (it did not
+under W2 at K 13, RL-352).

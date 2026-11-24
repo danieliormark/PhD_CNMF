@@ -21,7 +21,7 @@ approach 1  point W2_0.50  semantic share of pull 0.500  pairs 50  (point, W1, d
    article_spread                       0.3229 0.2556 +0.0673 ± 0.0019  sd 0.0084
    author_spread                        0.3420 0.3974 -0.0553 ± 0.0021  sd 0.0135
    organisation_spread                  0.1878 0.2860 -0.0982 ± 0.0039  sd 0.0200
-   shares {'semantic_gain_share_of_W1': 0.78, 'affiliation_gain_share_of_W2': 1.0}
+   R-b {'semantic_share': 0.783, 'semantic_share_se': 0.021, 'affiliation_share': 1.0, 'affiliation_share_se': 0.0, 'criterion': 0.783, 'criterion_se': 0.021}
    stability_A_adjusted                 0.5686 0.5947 -0.0262 ± 0.0024
    stability_B_adjusted                 0.6448 0.6996 -0.0548 ± 0.0026
 
@@ -47,7 +47,7 @@ approach 1  point 0.65  semantic share of pull 0.650  pairs 50  (point, W1, diff
    article_spread                       0.3353 0.2556 +0.0797 ± 0.0033  sd 0.0084
    author_spread                        0.3731 0.3974 -0.0242 ± 0.0019  sd 0.0135
    organisation_spread                  0.2352 0.2860 -0.0508 ± 0.0023  sd 0.0200
-   shares {'semantic_gain_share_of_W1': 0.908, 'affiliation_gain_share_of_W2': 0.614}
+   R-b {'semantic_share': 0.911, 'semantic_share_se': 0.023, 'affiliation_share': 0.92, 'affiliation_share_se': 0.047, 'criterion': 0.857, 'criterion_se': 0.027}
    stability_A_adjusted                 0.5772 0.5947 -0.0175 ± 0.0022
    stability_B_adjusted                 0.6647 0.6996 -0.0349 ± 0.0026
 
@@ -73,7 +73,7 @@ approach 1  point 0.75  semantic share of pull 0.750  pairs 50  (point, W1, diff
    article_spread                       0.3301 0.2556 +0.0745 ± 0.0036  sd 0.0084
    author_spread                        0.3966 0.3974 -0.0008 ± 0.0015  sd 0.0135
    organisation_spread                  0.2715 0.2860 -0.0145 ± 0.0011  sd 0.0200
-   shares {'semantic_gain_share_of_W1': 0.962, 'affiliation_gain_share_of_W2': 0.3}
+   R-b {'semantic_share': 0.966, 'semantic_share_se': 0.013, 'affiliation_share': 0.875, 'affiliation_share_se': 0.057, 'criterion': 0.866, 'criterion_se': 0.053}
    stability_A_adjusted                 0.5847 0.5947 -0.0100 ± 0.0022
    stability_B_adjusted                 0.6825 0.6996 -0.0171 ± 0.0023
 
@@ -99,7 +99,7 @@ approach 1  point W1  semantic share of pull 0.827  pairs 50  (point, W1, diff �
    article_spread                       0.2556 0.2556 +0.0000 ± 0.0000  sd 0.0084
    author_spread                        0.3974 0.3974 +0.0000 ± 0.0000  sd 0.0135
    organisation_spread                  0.2860 0.2860 +0.0000 ± 0.0000  sd 0.0200
-   shares {'semantic_gain_share_of_W1': 1.0, 'affiliation_gain_share_of_W2': 0.0}
+   R-b {'semantic_share': 1.0, 'semantic_share_se': 0.0, 'affiliation_share': 0.824, 'affiliation_share_se': 0.07, 'criterion': 0.814, 'criterion_se': 0.062}
 
 approach 2  point W2_0.50  semantic share of pull 0.500  pairs 50  (point, W1, diff ± SE over groups, W1 seed SD)
    AP_parent_child                      0.0725 0.0737 -0.0012 ± 0.0024  sd 0.0060
@@ -122,7 +122,7 @@ approach 2  point W2_0.50  semantic share of pull 0.500  pairs 50  (point, W1, d
    lower_presence_median                0.8519 0.7991 +0.0527 ± 0.0115  sd 0.0542
    article_spread                       0.3564 0.2996 +0.0567 ± 0.0018  sd 0.0130
    organisation_spread                  0.3097 0.3884 -0.0787 ± 0.0027  sd 0.0167
-   shares {'semantic_gain_share_of_W1': 0.504, 'affiliation_gain_share_of_W2': 1.0}
+   R-b {'semantic_share': 0.492, 'semantic_share_se': 0.036, 'affiliation_share': 1.0, 'affiliation_share_se': 0.0, 'criterion': 0.492, 'criterion_se': 0.036}
    stability_A_adjusted                 0.5607 0.6163 -0.0556 ± 0.0020
    stability_B_adjusted                 0.6594 0.7345 -0.0750 ± 0.0034
 
@@ -147,7 +147,7 @@ approach 2  point 0.65  semantic share of pull 0.650  pairs 50  (point, W1, diff
    lower_presence_median                0.8751 0.7991 +0.0760 ± 0.0153  sd 0.0542
    article_spread                       0.3734 0.2996 +0.0738 ± 0.0020  sd 0.0130
    organisation_spread                  0.3417 0.3884 -0.0467 ± 0.0024  sd 0.0167
-   shares {'semantic_gain_share_of_W1': 0.706, 'affiliation_gain_share_of_W2': 0.807}
+   R-b {'semantic_share': 0.701, 'semantic_share_se': 0.014, 'affiliation_share': 0.86, 'affiliation_share_se': 0.018, 'criterion': 0.701, 'criterion_se': 0.014}
    stability_A_adjusted                 0.5661 0.6163 -0.0502 ± 0.0026
    stability_B_adjusted                 0.6727 0.7345 -0.0618 ± 0.0034
 
@@ -172,7 +172,7 @@ approach 2  point 0.75  semantic share of pull 0.750  pairs 50  (point, W1, diff
    lower_presence_median                0.8550 0.7991 +0.0559 ± 0.0099  sd 0.0542
    article_spread                       0.3679 0.2996 +0.0683 ± 0.0013  sd 0.0130
    organisation_spread                  0.3663 0.3884 -0.0220 ± 0.0038  sd 0.0167
-   shares {'semantic_gain_share_of_W1': 0.841, 'affiliation_gain_share_of_W2': 0.584}
+   R-b {'semantic_share': 0.835, 'semantic_share_se': 0.016, 'affiliation_share': 0.712, 'affiliation_share_se': 0.036, 'criterion': 0.711, 'criterion_se': 0.035}
    stability_A_adjusted                 0.5781 0.6163 -0.0381 ± 0.0018
    stability_B_adjusted                 0.6884 0.7345 -0.0460 ± 0.0020
 
@@ -197,7 +197,9 @@ approach 2  point W1  semantic share of pull 0.896  pairs 50  (point, W1, diff �
    lower_presence_median                0.7991 0.7991 +0.0000 ± 0.0000  sd 0.0542
    article_spread                       0.2996 0.2996 +0.0000 ± 0.0000  sd 0.0130
    organisation_spread                  0.3884 0.3884 +0.0000 ± 0.0000  sd 0.0167
-   shares {'semantic_gain_share_of_W1': 1.0, 'affiliation_gain_share_of_W2': 0.0}
+   R-b {'semantic_share': 1.0, 'semantic_share_se': 0.0, 'affiliation_share': 0.331, 'affiliation_share_se': 0.08, 'criterion': 0.331, 'criterion_se': 0.08}
+_R_b_pairs_approach_1 {'W1-W2_0.50': '+0.030±0.062', '0.65-W1': '+0.043±0.046', '0.65-W2_0.50': '+0.073±0.035', '0.65-0.75': '-0.009±0.034', '0.75-W1': '+0.053±0.051', '0.75-W2_0.50': '+0.083±0.066'}
+_R_b_pairs_approach_2 {'W1-W2_0.50': '-0.161±0.088', '0.75-W1': '+0.380±0.072', '0.75-W2_0.50': '+0.219±0.068', '0.65-W1': '+0.370±0.081', '0.65-W2_0.50': '+0.209±0.023', '0.65-0.75': '-0.010±0.047'}
 swap approach_1_0.65 {'author': '0.2042→0.1558 (-0.0484±0.0088)', 'organisation (via authors)': '0.0213→0.0290 (+0.0077±0.0027)', 'journal': '0.2671→0.1086 (-0.1585±0.0091)'}
 swap approach_1_0.75 {'author': '0.1910→0.1343 (-0.0567±0.0078)', 'organisation (via authors)': '0.0154→0.0248 (+0.0094±0.0020)', 'journal': '0.1965→0.0561 (-0.1404±0.0091)'}
 swap approach_1_W1 {'author': '0.1951→0.1313 (-0.0638±0.0067)', 'organisation (via authors)': '0.0186→0.0229 (+0.0043±0.0018)', 'journal': '0.0588→0.0082 (-0.0506±0.0020)'}

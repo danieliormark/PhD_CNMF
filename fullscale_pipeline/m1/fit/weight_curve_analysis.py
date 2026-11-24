@@ -117,18 +117,33 @@ def run(root):
                 res[kk] = {"point": float(gm.mean()), "W1": float(gc.mean()), "difference": float(d.mean()),
                            "se": float(d.std(ddof=1) / math.sqrt(len(d))), "W1_seed_sd": sd, "groups": len(d)}
             rep[f"approach_{a}_{pt}"] = res
-    # gains as shares (semantic: of W1's gain; affiliation: of W2's gain)
+    # R-b (owner 2026-11-23, decided before the results; RL-354): per hold-out group, semantic share = point's
+    # semantic-equal existence gain over the degree-only reference ÷ W1's; affiliation share = point's affiliation gain over
+    # its reference ÷ W2's (the decided wording; corrected 2026-11-24, RL-361 — the first version divided the increments
+    # over W1); criterion = min of the two; mean ± SE over groups, and paired differences between points.
     for a in (1, 2):
         aff = "author_affiliation" if a == 1 else "article_affiliation"
-        for pt in ("W2_0.50", "0.65", "0.75", "W1"):
-            res = rep.get(f"approach_{a}_{pt}")
-            if not res:
+        per = defaultdict(lambda: defaultdict(list))
+        for (aa, p, g, s), f in by.items():
+            if aa != a:
                 continue
-            g_sem = res["gain_semantic_equal"]
-            w2 = rep.get(f"approach_{a}_W2_0.50", {}).get(f"gain_{aff}")
-            res["_shares"] = {"semantic_gain_share_of_W1": g_sem["point"] / g_sem["W1"],
-                              "affiliation_gain_share_of_W2": (res[f"gain_{aff}"]["point"] - res[f"gain_{aff}"]["W1"]) /
-                                                             (w2["point"] - w2["W1"]) if w2 and w2["point"] != w2["W1"] else None}
+            tp = f["measures"]["heldout_two_part"]
+            gs = float(np.mean([tp[r]["ap_within_class"] - tp[r]["baseline_weights_ap_within_class"] for r in SEM]))
+            ga = tp[aff]["ap_within_class"] - tp[aff]["baseline_weights_ap_within_class"]
+            per[p][g].append((gs, ga))
+        if "W1" not in per or "W2_0.50" not in per:
+            continue
+        m = {p: {g: np.mean(v, 0) for g, v in d.items()} for p, d in per.items()}
+        groups = sorted(m["W1"]); crit = {}
+        se = lambda x: float(np.std(x, ddof=1) / math.sqrt(len(x)))
+        for p in m:
+            sem = np.array([m[p][g][0] / m["W1"][g][0] for g in groups]); af = np.array([m[p][g][1] / m["W2_0.50"][g][1] for g in groups])
+            crit[p] = np.minimum(sem, af)
+            rep[f"approach_{a}_{p}"]["_R_b"] = {"semantic_share": float(sem.mean()), "semantic_share_se": se(sem),
+                                               "affiliation_share": float(af.mean()), "affiliation_share_se": se(af),
+                                               "criterion": float(crit[p].mean()), "criterion_se": se(crit[p])}
+        rep[f"_R_b_pairs_approach_{a}"] = {f"{p}-{q}": {"difference": float((crit[p] - crit[q]).mean()), "se": se(crit[p] - crit[q])}
+                                          for p in crit for q in crit if p < q}
     # stability
     S, rules = {}, {}
     for st, want in (("stage0_pass3", {"W1"}), ("weight_check", {"W2_0.50"}), ("weight_curve", {"0.65", "0.75"})):
@@ -175,10 +190,12 @@ def run(root):
             print(f"\napproach {a}  point {pt}  semantic share of pull {rep['_points'][f'approach_{a}_{pt}']:.3f}  "
                   f"pairs {rep['_converged'].get(f'approach_{a}_{pt}')}  (point, W1, diff ± SE over groups, W1 seed SD)")
             for kk, v in res.items():
-                if kk == "_shares":
-                    print("   shares", {k: (None if x is None else round(x, 3)) for k, x in v.items()})
+                if kk == "_R_b":
+                    print("   R-b", {k: round(x, 3) for k, x in v.items()})
                 else:
                     print(f"   {kk:36s} {v['point']:.4f} {v['W1']:.4f} {v['difference']:+.4f} ± {v['se']:.4f}" + (f"  sd {v['W1_seed_sd']:.4f}" if "W1_seed_sd" in v else ""))
+    for k in sorted(k for k in rep if k.startswith("_R_b_pairs")):
+        print(k, {p: f"{v['difference']:+.3f}±{v['se']:.3f}" for p, v in rep[k].items()})
     for name, out in sorted(rep["swap"].items()):
         print("swap", name, {e: f"{v['p0']:.4f}→{v['p1']:.4f} ({v['change']:+.4f}±{v['se']:.4f})" for e, v in out.items()})
     return rep
