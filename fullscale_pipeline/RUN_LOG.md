@@ -5011,3 +5011,7 @@ Owner: "I approve option 1 and recording option 2 as deferred" (design doc 2026-
 defaulting to the largest r; variant ("smallest r in the band" or a child×article-gain guard) chosen with the
 λ-calibration report, on saved fits. Option 2 (child×child similarity as a relation) added to the staged plan's "NOT YET
 DESIGNED".
+
+### RL-366 — 2026-11-24 — Community-quality readings across weighting points finished
+`weight_curve_community` (RL-362): 400 / 400 fits, 0 errors → `fit/results/stage0/weight_curve_community.{json,log}`.
+Not yet read.
