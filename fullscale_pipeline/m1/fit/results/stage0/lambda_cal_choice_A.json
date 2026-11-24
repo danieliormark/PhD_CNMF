@@ -211,7 +211,7 @@
     "tied_with_peak": [
      0.3
     ],
-    "chosen_r_amended": 0.3
+    "chosen_r_C_without_amendment": 0.3
    },
    "5": {
     "rule": "R2C",
@@ -419,7 +419,7 @@
     "tied_with_peak": [
      0.3
     ],
-    "chosen_r_amended": 0.3
+    "chosen_r_C_without_amendment": 0.3
    },
    "8": {
     "rule": "R2C",
@@ -633,7 +633,7 @@
      0.45,
      0.6
     ],
-    "chosen_r_amended": 0.45
+    "chosen_r_C_without_amendment": 0.45
    },
    "13": {
     "rule": "R2C",
@@ -837,7 +837,7 @@
      0.3,
      1.0
     ],
-    "chosen_r_amended": 0.3
+    "chosen_r_C_without_amendment": 0.3
    },
    "20": {
     "rule": "R2C",
@@ -1050,7 +1050,7 @@
     "tied_with_peak": [
      1.0
     ],
-    "chosen_r_amended": 1.0
+    "chosen_r_C_without_amendment": 1.0
    }
   },
   "r_star": {
@@ -4350,7 +4350,7 @@
     "tied_with_peak": [
      0.3
     ],
-    "chosen_r_amended": 0.3
+    "chosen_r_C_without_amendment": 0.3
    },
    "5": {
     "rule": "R2C",
@@ -4558,7 +4558,7 @@
     "tied_with_peak": [
      0.3
     ],
-    "chosen_r_amended": 0.3
+    "chosen_r_C_without_amendment": 0.3
    },
    "8": {
     "rule": "R2C",
@@ -4761,7 +4761,7 @@
     "tied_with_peak": [
      0.3
     ],
-    "chosen_r_amended": 0.3
+    "chosen_r_C_without_amendment": 0.3
    },
    "13": {
     "rule": "R2C",
@@ -4958,7 +4958,7 @@
      "0.3": 0.580036681204392,
      "1.0": 0.5971276484247585
     },
-    "chosen_r": 0.0,
+    "chosen_r": 1.0,
     "chosen_r_R2": 1.0,
     "child_article_gain": {
      "0.0": 0.02433869470183103,
@@ -4970,7 +4970,7 @@
      0.0,
      1.0
     ],
-    "chosen_r_amended": 1.0
+    "chosen_r_C_without_amendment": 0.0
    },
    "20": {
     "rule": "R2C",
@@ -5188,14 +5188,14 @@
     "tied_with_peak": [
      1.0
     ],
-    "chosen_r_amended": 1.0
+    "chosen_r_C_without_amendment": 1.0
    }
   },
   "r_star": {
    "3": 0.3,
    "5": 0.3,
    "8": 0.3,
-   "13": 0.0,
+   "13": 1.0,
    "20": 1.0
   },
   "band_r": {
@@ -5624,7 +5624,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": true
+    "chosen_r_at_K": false
    },
    {
     "K": 13,
@@ -5662,7 +5662,7 @@
     "ghost_fails": false,
     "alignment_fails": false,
     "convergence_fails": false,
-    "chosen_r_at_K": false
+    "chosen_r_at_K": true
    },
    {
     "K": 13,
@@ -5858,7 +5858,7 @@
    },
    {
     "K": 13,
-    "r": 0.0
+    "r": 1.0
    }
   ],
   "readings": {

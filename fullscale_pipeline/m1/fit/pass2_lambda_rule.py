@@ -85,8 +85,8 @@ def rule_r2c(cands, ca_gain):
     among the band r passing the guard, the r with the highest held-out child×article gain (within-class AP minus the
     degree-only reference, mean over hold-out groups); every r whose gain is not below that peak by more than 1 paired SE
     (by hold-out group) is tied with it; the smallest tied r is chosen (least flattening of word-tied child hyperedges,
-    RL-364). ca_gain: {r: {group: gain}}. Reported beside it: the amended choice (recommendation, not decided) — never r 0
-    when r 0 is tied with an r > 0 (then the smallest tied r > 0), and R2's own choice."""
+    RL-364), with the amendment (owner 2026-11-24, RL-374): never r 0 when r 0 is tied with an r > 0 — then the smallest
+    tied r > 0. ca_gain: {r: {group: gain}}. Reported beside it: C without the amendment, and R2's own choice."""
     out = rule_r2(cands); out["rule"] = "R2C"; out["chosen_r_R2"] = out["chosen_r"]
     ok = out["passing_stability"]
     if not ok:
@@ -99,9 +99,12 @@ def rule_r2c(cands, ca_gain):
         se = float(d.std(ddof=1) / math.sqrt(len(d))) if len(d) > 1 else float("inf")
         return float(d.mean()) > se
     tied = sorted(r for r in ok if r == peak or not below(r))
-    out.update({"child_article_gain": mean, "peak_child_article_gain": peak, "tied_with_peak": tied, "chosen_r": tied[0]})
     pos = [r for r in tied if r > 0]
-    out["chosen_r_amended"] = pos[0] if tied[0] == 0.0 and pos else tied[0]
+    # amendment (owner 2026-11-24: "I approve option (ii), C with the amendment"; RL-374): never r 0 when r 0 is tied with
+    # an r > 0 — then the smallest tied r > 0 (the parent×child value gain then decides for the term)
+    chosen = pos[0] if tied[0] == 0.0 and pos else tied[0]
+    out.update({"child_article_gain": mean, "peak_child_article_gain": peak, "tied_with_peak": tied, "chosen_r": chosen,
+                "chosen_r_C_without_amendment": tied[0]})
     return out
 
 

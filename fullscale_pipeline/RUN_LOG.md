@@ -5067,3 +5067,8 @@ beside. Re-run on the saved aggregations (pass 3 + λ calibration, study A): app
 0.3, 20: 1.0} (tied with the peak: K 8 {0.45, 0.6}, K 13 {0.3, 1.0}), approach 2 {3: 0.3, 5: 0.3, 8: 0.3, 13: 0, 20: 1.0}
 (K 13 tied {0, 1.0}; amended choice 1.0 — correcting the report's "0.3"). K protocol unchanged. Earlier R2 output kept
 as `lambda_cal_choice_A_R2.{json,log}`.
+
+### RL-374 — 2026-11-24 — λ rule C with amendment decided; r* per K for stage 1 (study A)
+Owner: "I approve option (ii), C with the amendment". `rule_r2c` now applies the amendment (C without it reported as
+`chosen_r_C_without_amendment`). Re-run: approach 1 r* {3: 0.3, 5: 0.3, 8: 0.45, 13: 0.3, 20: 1.0}; approach 2 {3: 0.3,
+5: 0.3, 8: 0.3, 13: 1.0, 20: 1.0}; K candidates unchanged.
