@@ -104,7 +104,7 @@ designs (with an author facet / articles linked to affiliations and to each othe
 
 ### 2.5 Decisions taken after stage 0 (owner)
 
-Loss (β); O1/O3; response to mono-domain communities; item (l) (weakly engaged entities); stage-1 counting fraction;
+Loss (β); O1/O3; response to mono-domain communities; item (l) (weakly engaged entities, closed 2026-11-24); stage-1 counting fraction (0.2, decided 2026-11-24, RL-381);
 empty-column reference.
 
 ## 3. Later stages — not started

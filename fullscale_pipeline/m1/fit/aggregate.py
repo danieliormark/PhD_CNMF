@@ -30,7 +30,7 @@ import numpy as np
 
 from . import measures as M
 
-FRACTIONS = (0.1, 0.2, 0.25, 0.5)
+FRACTIONS = (0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.5)   # stage-1 fraction 0.2 (owner 2026-11-24, RL-381); stricter ones for discriminating options equivalent at 0.2
 CELL_KEYS = ("stage", "approach", "arm", "beta", "start", "frac", "dtype", "terms", "lr_mode")
 START_KEYS = ("social_link_start", "random_links", "offdiag_level", "offdiag_semantic")   # start variants (2026-11-17/19):
 # part of the cell when present (found 2026-11-19 in the start-test-2 dry run: without them the arms of one stage collapse)

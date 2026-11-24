@@ -5123,3 +5123,7 @@ Spearman correlation with relative presence and mean absolute gap (mean ± SE ov
 check. Test (study A approach 1 K 8 r 0.3, group 1, 3 seeds): relative member mass 0.71–1.30 (semantic), 0.52–1.35
 (social); Spearman with presence 0.94 / 0.87, articles 0.63. Full re-read: rerun `slurm/sufficient_members.sh` (earlier
 log kept as `sufficient_members_v1.log`).
+
+### RL-381 — 2026-11-24 — Stage-1 counting fraction 0.2 decided; stricter fractions for discrimination
+Owner (design doc 2026-11-24). Stage-0 distribution as in the report (T1 the only failing check; scattered vs systematic
+clusters). `aggregate.FRACTIONS` now (0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.5); the acting fraction stays 0.2.
