@@ -5127,3 +5127,8 @@ log kept as `sufficient_members_v1.log`).
 ### RL-381 — 2026-11-24 — Stage-1 counting fraction 0.2 decided; stricter fractions for discrimination
 Owner (design doc 2026-11-24). Stage-0 distribution as in the report (T1 the only failing check; scattered vs systematic
 clusters). `aggregate.FRACTIONS` now (0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.5); the acting fraction stays 0.2.
+
+### RL-382 — 2026-11-24 — Stage 1 in both studies, B after A (owner)
+Owner: "I agree with your recomendation" (option b; design doc 2026-11-24). Cost estimate from measured pass-3 fit times
+(median hours per fit, approach 1 / 2: K 3 0.10 / 0.08, K 5 0.15 / 0.12, K 8 0.29 / 0.21, K 13 0.78 / 0.52, K 20 1.53 /
+1.08 in A; B slightly higher): 6 journal arms × 2 approaches × 5 K at 10 groups × 10 seeds ≈ 2,900 CPU-h (A), 3,200 (B).
