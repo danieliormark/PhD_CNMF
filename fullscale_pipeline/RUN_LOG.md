@@ -4917,3 +4917,10 @@ the rule (own-weight version kept as `weight_check_own_weights.*`); the weight c
 Not changed: `w_form_diagnostics` reads measures directly (W-form test fits train with the main weights, so unaffected).
 Fallback (owner): gain over the degree-only reference per relation, combined with the same weights — listed in the staged
 plan's "NOT YET DESIGNED".
+
+### RL-359 — 2026-11-24 — Item (l): coverage at the group level confirmed (owner decision); no code change
+Owner: "I approve keeping the group level, with per-fit reported" (design doc 2026-11-24). Measured on the pass-3
+aggregations (A and B, 300 groups × 10 seeds): group-level entity set ≥ 0.988 of every facet; per-fit set authors
+0.93–0.97, organisations 0.96–0.98, others ≥ 0.98; per-fit chance-adjusted Track A − group-level +0.0018 on average
+(range −0.0001 to +0.006); gate / ghost / alignment results identical in all 3,000 fits. Code already acts at the group
+level and reports the per-fit reading (`aggregate.group_checks`, RL-348).
