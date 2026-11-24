@@ -48,6 +48,9 @@ RELATIONS = {
     "article_affiliation": ("P3_article_affiliation", "article", "organisation", "social",   True,  "P3_article_affiliation_rows", False),
     "article_journal":     ("P4_article_journal",     "article", "journal",      "social",   False, "P4_article_journal_rows", False),
     "article_article":     ("P5_article_article",     "article", "article",      "social",   False, None, True),
+    # child×child focused test (owner 2026-11-24, RL-377): W as a relation (idf-weighted Jaccard ties), not in APPROACH;
+    # added by fit_data(child_child=...) with its own weight on top of the decided weights
+    "child_child":         ("W_child_child",          "child",   "child",        "semantic", False, None, True),
 }
 APPROACH = {1: ["parent_child", "child_article", "author_article", "author_affiliation", "article_journal"],
             2: ["parent_child", "child_article", "article_affiliation", "article_article", "article_journal"]}
@@ -239,6 +242,7 @@ class RelationData:
         self.hid_tie_row, self.hid_tie_col, self.hid_tie_val = hid_tie_row, hid_tie_col, hid_tie_val
         self.hid_empty_row, self.hid_empty_col = hid_empty_row, hid_empty_col
         self.damping = None                                       # set by fit_data in the log-damping arm
+        self.ties_only = False                                    # child×child test: only the tie cells are fitted
 
     @property
     def hid_row(self): return np.concatenate([self.hid_tie_row, self.hid_empty_row])
@@ -247,7 +251,7 @@ class RelationData:
 
 
 def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True, binary=False,
-             log_damping=None, mass_weights=False, semantic_pull=None):
+             log_damping=None, mass_weights=False, semantic_pull=None, child_child=None):
     """The relations of one fit. group: hold-out group 0..9 (None = final refit on all cells, 2026-11-03).
     use_journal=False is arm J1 (no article×journal); journal_multiplier gives J3a/J3b; drop removes relations (arm N).
     binary=True (binary test, owner 2026-11-16): every VISIBLE tie value set to 1 before the Frobenius normalisation, so
@@ -314,4 +318,19 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
                 rd.weight = rd.weight * (2 * s if rd.domain == "semantic" else 2 * (1 - s))
     else:
         assert semantic_pull is None, "semantic_pull needs mass_weights (it sets the split of the mass-weighted pull)"
+    if child_child:
+        # child×child focused test (owner 2026-11-24, RL-377): W as a relation with its own weight (child_child["weight"])
+        # on top of the decided weights (unchanged); mode "full" = every off-diagonal cell fitted (non-neighbours as
+        # zeros), "ties" = only the neighbour cells fitted; Frobenius-scaled like every relation; no hidden cells
+        assert not mass_weights, "child×child relation and mass weights are not combined"
+        assert child_child["mode"] in ("full", "ties"), child_child
+        r, c, v = build.ties("child_child")
+        m = r != c; r, c, v = r[m], c[m], v[m].astype(float)
+        n = build.load("W_child_child").shape
+        fro = float(np.sqrt(np.sum(v ** 2)))
+        e = np.zeros(0, dtype=np.int64)
+        rd = RelationData("child_child", "child", "child", n, float(child_child["weight"]), "semantic", r, c, v / fro,
+                          np.ones(n[0], dtype=bool), True, e, e, np.zeros(0), e, e, fro)
+        rd.ties_only = child_child["mode"] == "ties"
+        out.append(rd)
     return out

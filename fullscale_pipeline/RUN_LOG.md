@@ -5089,3 +5089,20 @@ Owner: "I approve the focused test before stage 1". W (psych_trial_v3): 97,850 �
 Owner: "For the rest I agree"; "Include the combined arm; your strength matching is fine" (design doc 2026-11-24):
 full / ties-only relation × strengths matched to r 0.3 / 1, plus full (r 0.3) + regulariser r 0.3; approach 1, K 5 and
 13, 5 groups × 10 seeds — 500 fits; decision rule fixed before results.
+
+### RL-378 — 2026-11-24 — child×child focused test implemented; job prepared
+Code: `data.RELATIONS["child_child"]` (W_child_child, semantic, diagonal masked) and `fit_data(child_child={"mode":
+"full"|"ties", "weight": w})` — Frobenius-scaled, no hidden cells, own weight on top of the decided weights, not combined
+with mass weights; `loss.relation_loss` ties-only form (only tie cells: KL Σ_ties [x log x − x − x log x̂ + x̂], squared
+error Σ_ties (x − x̂)²) — both forms checked against a dense brute force (difference ≤ 1e-12); `init.initialise` draws the
+new core from its own generator so the other relations' starts equal those of runs without it; `measures.domain_presence`
+keeps the decided semantic summary (child×article, child×parent); coverage and per-entity sums use tie cells only for
+the ties-only relation; `run_fit`, `align.fit_rds`, `aggregate._rds_of` pass the arm key `child_child`. **Strength
+matching** (`fit/cc_strength.py`, pass-1 λ = 0 fits, approach 1, group 1, seeds 1–3, core fitted with memberships held
+fixed): data loss K 5 1,552.8 / K 13 1,382.8; relation loss full 5,648.8 / 5,621.5, ties-only 1,065.6 / 1,047.5 (seed spread
+≤ 0.2 % / 0.9 %); weights full 0.082 (r 0.3) / 0.275 (r 1) at K 5, 0.074 / 0.246 at K 13; ties-only 0.437 / 1.457 and 0.396
+/ 1.320. `plan.cc_test` → `slurm/jobs_cc_test.jsonl` (500 jobs, stage cc_test). `fit/cc_test_analysis.py`: readings and the
+decision rule fixed before results (RL-377), against the regulariser at r* 0.3 (pass 3); companion stability readings
+(centred agreement; information-weighted Track A), chance-adjusted. Smoke test (3 fits, 30 epochs): weights as intended,
+alignment and aggregation run, all readings run on relation fits; reference task (regulariser r 0.3, K 5, group 1): 61 s,
+centred agreement 0.648 vs Track A 0.584. `slurm/cc_test.sh` (63 tasks × 8, ≈ 400 CPU-h) + chained post-processing.

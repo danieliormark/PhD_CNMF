@@ -20,6 +20,7 @@ class RelationTensors:
         F = lambda a: torch.as_tensor(np.asarray(a), dtype=dtype)
         self.name, self.row_facet, self.col_facet, self.weight = rd.name, rd.row_facet, rd.col_facet, rd.weight
         self.same_facet = rd.row_facet == rd.col_facet
+        self.ties_only = bool(getattr(rd, "ties_only", False))       # child×child test (RL-377): only tie cells fitted
         self.diag_masked = rd.diag_masked
         self.tie_r, self.tie_c, self.tie_x = L(rd.tie_row), L(rd.tie_col), F(rd.tie_val)
         self.row_mask = F(rd.obs_row_mask.astype(np.float64))
@@ -44,6 +45,12 @@ def cell_values(A, Z, B, r, c):
 def relation_loss(A, Z, B, rt, beta):
     """Masked loss of one relation; A = row facet factor (n×K), B = column facet factor (m×K), Z (K×K)."""
     xh_t = cell_values(A, Z, B, rt.tie_r, rt.tie_c)
+    if rt.ties_only:                 # only the tie cells are fitted (no empty cells, no hidden cells, no diagonal)
+        if beta == 2:
+            return ((rt.tie_x - xh_t) ** 2).sum()
+        if beta == 1:
+            return rt.sum_xlogx_minus_x - (rt.tie_x * torch.log(xh_t)).sum() + xh_t.sum()
+        raise ValueError("beta must be 1 or 2")
     xh_h = cell_values(A, Z, B, rt.hid_r, rt.hid_c)
     Am = A * rt.row_mask[:, None]
     if beta == 2:

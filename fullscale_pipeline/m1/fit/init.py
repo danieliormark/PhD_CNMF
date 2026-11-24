@@ -52,7 +52,9 @@ def initialise(rds, K, seed, subsample=None):
         sizes[rd.row_facet] = rd.shape[0]; sizes[rd.col_facet] = rd.shape[1]
     facets = sorted(sizes)
     U = {f: rng.random((sizes[f], K)) + 1e-4 for f in facets}
-    Z = {rd.name: rng.random((K, K)) + 1e-4 for rd in sorted(rds, key=lambda r: r.name)}
+    Z = {rd.name: rng.random((K, K)) + 1e-4 for rd in sorted(rds, key=lambda r: r.name) if rd.name != "child_child"}
+    if any(rd.name == "child_child" for rd in rds):   # own generator: the other draws stay those of runs without it
+        Z["child_child"] = np.random.default_rng(seed + 7919).random((K, K)) + 1e-4
     by = {rd.name: rd for rd in rds}
     done = set()
     anchors = [a for a in ANCHORS if a in by]

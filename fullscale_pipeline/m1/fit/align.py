@@ -99,7 +99,7 @@ def fit_rds(job, cache):
                                 semantic_split=arm.get("semantic_split"), drop=tuple(arm.get("drop", ())),
                                 use_journal=arm.get("use_journal", True), binary=bool(arm.get("binary", False)),
                                 log_damping=arm.get("log_damping"), mass_weights=bool(arm.get("mass_weights", False)),
-                                semantic_pull=arm.get("semantic_pull"))
+                                semantic_pull=arm.get("semantic_pull"), child_child=arm.get("child_child"))
     rds = cache[key]
     if arm.get("swap_p"):
         rds = graded_swap(rds, float(arm["swap_p"]), seed=job["seed"], single_band=bool(arm.get("swap_single_band")))[0]

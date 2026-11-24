@@ -177,7 +177,7 @@ def _rds_of(job):
     arm = job.get("arm") or {}
     key = (job.get("build"), job["approach"], job["group"],
            json.dumps({k: arm.get(k) for k in ("journal_multiplier", "semantic_split", "drop", "use_journal", "binary",
-                                               "log_damping", "mass_weights", "semantic_pull")}, sort_keys=True))
+                                               "log_damping", "mass_weights", "semantic_pull", "child_child")}, sort_keys=True))
     if key not in _RDS:
         if len(_RDS) > 24:
             _RDS.clear()

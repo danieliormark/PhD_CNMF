@@ -112,7 +112,7 @@ def domain_presence(pres):
     semantic relations and the rank correlation of child×article vs child×parent presence (2026-11-07)."""
     out = {}
     for D in ("semantic", "social"):
-        rs = [r for r, v in pres.items() if v["domain"] == D]
+        rs = [r for r, v in pres.items() if v["domain"] == D and r != "child_child"]   # decided summary (RL-377)
         if rs:
             M = np.vstack([pres[r]["presence"] for r in rs])
             out[D] = {"mean": M.mean(0), "min": M.min(0), "relations": rs}
@@ -199,13 +199,17 @@ def _row_side(A, Z, B, rd, transpose):
     sum_x = np.bincount(r, weights=x, minlength=n)
     sum_min = np.bincount(r, weights=np.minimum(xh, x), minlength=n)
     full = Am @ Zr @ Bf.sum(0)                                  # Σ_j x̂_ij over all cells of the entity's line
+    if getattr(rd, "ties_only", False):                         # child×child test: fitted cells = the ties only
+        full = np.bincount(r, weights=xh, minlength=n)
     hxh = ((Am[hr] @ Zr) * Bf[hc]).sum(1) if len(hr) else np.zeros(0)
     sum_hat = full - np.bincount(hr, weights=hxh, minlength=n)
     G = Bf.T @ Bf
     sq_full = np.einsum("ik,kl,il->i", Am @ Zr, G, Am @ Zr)
+    if getattr(rd, "ties_only", False):
+        sq_full = np.bincount(r, weights=xh ** 2, minlength=n)
     sq = (np.bincount(r, weights=x ** 2, minlength=n) - 2 * np.bincount(r, weights=x * xh, minlength=n)
           + sq_full - np.bincount(hr, weights=hxh ** 2, minlength=n))
-    if rd.diag_masked:
+    if rd.diag_masked and not getattr(rd, "ties_only", False):
         dg = np.nonzero(rd.obs_row_mask)[0]
         dv = ((Am[dg] @ Zr) * Bf[dg]).sum(1)
         sum_hat[dg] -= dv; sq[dg] -= dv ** 2
@@ -252,6 +256,14 @@ def entity_coverage(U, Z, rds):
     for rd in rds:
         A, B, z = U[rd.row_facet], U[rd.col_facet], Z[rd.name]
         rows = np.nonzero(rd.obs_row_mask)[0]
+        w = rd.weight
+        if getattr(rd, "ties_only", False):     # child×child test: fitted cells = the ties only
+            xt = ((A[rd.tie_row] @ z) * B[rd.tie_col]).sum(1)
+            tot_h[rd.row_facet] += w * np.bincount(rd.tie_row, weights=xt, minlength=A.shape[0])
+            tot_h[rd.col_facet] += w * np.bincount(rd.tie_col, weights=xt, minlength=B.shape[0])
+            tot_x[rd.row_facet] += w * np.bincount(rd.tie_row, weights=rd.tie_val, minlength=A.shape[0])
+            tot_x[rd.col_facet] += w * np.bincount(rd.tie_col, weights=rd.tie_val, minlength=B.shape[0])
+            continue
         rr = np.zeros(A.shape[0]); rr[rows] = (A[rows] @ z) @ B.sum(0)
         cc = (A[rows].sum(0) @ z) @ B.T
         hr, hc = rd.hid_row, rd.hid_col
