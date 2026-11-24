@@ -126,12 +126,11 @@ def task(args):
         r1, r1c, r2, r2c = R1[fa].mean(0), R1c[fa].mean(0), R2[fa].mean(0), R2c[fa].mean(0)
         e_mean = exc[fa].mean(0); pos_share = (exc[fa] > 0).mean(0)
         placed_now = e_mean > 0
-        # R5: chance range per facet and tie band (95th percentile of the chance means)
-        beyond1 = np.zeros(len(m), bool); beyond2 = np.zeros(len(m), bool)
-        for b, bm in bands.items():
-            s = m & bm
-            if s.sum() >= 20:
-                beyond1[s] = r1[s] > np.quantile(r1c[s], 0.95); beyond2[s] = r2[s] > np.quantile(r2c[s], 0.95)
+        # R5 (corrected 2026-11-24, RL-363): an entity is beyond chance if its mean agreement over the seed pairs exceeds
+        # its OWN chance mean (the same pairs against shuffled rows). The first version pooled the chance means of a facet
+        # and tie band and used their 95th percentile; entities' chance levels differ with how spread their memberships
+        # are (a flat membership agrees with anything), so pooling flagged concentrated entities next to flattened ones.
+        beyond1 = r1 > r1c; beyond2 = r2 > r2c
         # R4: Track A of placed vs unplaced, three ways
         def split_A(placed, Rr, Rc, mask):
             out = {}

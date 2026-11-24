@@ -4963,3 +4963,24 @@ and W-aware cosine of child-hyperedge sets; co-membership excess of pairs sharin
 (swap measure at p 0 — co-membership excess of pairs sharing a social entity; correlation with shared authors / co-author
 tie). Summary: point − W1 paired by (group, seed), mean ± SE over groups, relative, in W1 seed SDs. Test (2 fits, approach 2
 group 1 seed 1): 6–9 s per fit; runs. `slurm/weight_curve_community.sh` (1 job × 8 cores, ≈ 15–30 min).
+
+### RL-363 — 2026-11-24 — Membership-readings r sweep read; R5 flag corrected; two findings of RL-355/356 withdrawn
+r sweep (RL-357/360), study A, all (approach, K, r). **R5 flag was an artefact:** it compared each entity's agreement with
+the 95th percentile of the chance means of its facet and tie band; an entity's chance level depends on how spread its
+membership is (W-tied child hyperedges flattened by the word-similarity term have chance means 0.47–0.55 vs 0.25–0.35 for
+concentrated ones), so the pooled threshold flagged concentrated entities that agree far above their own chance (e.g. A
+approach 1 K 13 r 2, untied child hyperedges: agreement 0.52 vs own chance 0.25, 69 % flagged). Per entity (agreement ≤
+own chance), shares are ≤ 1 % at K ≤ 13 and 1–3 % at K 20 in every facet (child at A approach 1 K 13 r 1: 0.003 vs 0.196
+flagged before). Code corrected (`membership_readings.py`, R5 per entity). **Withdrawn:** RL-355/356 "child hyperedges
+at chance level 10–27 % at r = 1" and the hypothesis that the word-similarity term destabilises child hyperedges; and the
+RL-355 flag shares for all facets (≤ 5 % → ≤ 1–3 %). **What r does** (per-entity chance-adjusted agreement (real − own
+chance)/(1 − own chance), median; spread = membership entropy in bits, mean; mean ± SE over 5 groups): W-tied child
+hyperedges (70.3 % of the facet) flatten — spread at K 13 0.33 (r 0) → 2.17 (r 1) → 2.87 (r 2) → 3.02 (r 3) of a maximum
+3.70; at K 20 0.34 → 3.19 (r 2) of 4.32; at K 5 0.24 → 1.78 (r 1) of 2.32 — and their agreement rises (K 13: 0.30 → 0.48 →
+0.69 → 0.75); untied hyperedges keep spread 0.16–0.19 and agreement 0.28–0.30 (K 13), and lose some at K 5 (0.66 at r 0.3
+→ 0.58 at r 1) and K 20 (0.20 → 0.16). Facet-level Track A for child hyperedges therefore rises with r mostly through
+flattened memberships (relevant to the λ rule's stability guard; report 3). **Tie count, spread controlled** (per-entity
+chance-adjusted agreement, highest − lowest tie band within spread quintiles; mean ± SE over groups): parents +0.14 to
++0.15, authors +0.09 / +0.13, organisations −0.02 / +0.07 (approach 1) and +0.18 (approach 2), journals +0.10 to +0.29,
+child +0.03 (K 5) / −0.004 (K 13 r 1); raw (uncontrolled) differences were small or negative (authors −0.06 / −0.07)
+because entities with more ties have more spread memberships (gap +0.3 to +1.7 bits).
