@@ -5015,3 +5015,18 @@ DESIGNED".
 ### RL-366 — 2026-11-24 — Community-quality readings across weighting points finished
 `weight_curve_community` (RL-362): 400 / 400 fits, 0 errors → `fit/results/stage0/weight_curve_community.{json,log}`.
 Not yet read.
+
+### RL-367 — 2026-11-24 — Community-quality readings across weighting points read (report to the owner)
+Point − W1, paired by (group, seed), mean ± SE over 5 groups; K 5, r 0.3, study A. **Idea vs people coherence of article
+groupings:** correlation over article pairs between co-membership and W-aware idea overlap — approach 1 W1 0.171: 0.75
+−0.051 ± 0.001 (−30 %), 0.65 −0.069 ± 0.001 (−40 %), W2 −0.088 (−51 %); approach 2 W1 0.136: 0.75 −0.037 ± 0.001 (−27 %),
+0.65 −0.055 ± 0.001 (−41 %), W2 −0.073 (−54 %). Co-membership excess of article pairs sharing ≥ 1 child hyperedge:
+approach 1 −46 / −56 / −64 %, approach 2 −44 / −64 / −78 % (all > 40 SE). People: approach 2 co-author-tie excess W1 0.415:
++0.135 / +0.173 / +0.210 (+32 / +42 / +51 %, ≥ 16 SE); organisation +24 / +39 / +52 %; journal +108 / +199 / +317 %;
+correlation with shared co-author ties +40 / +52 / +61 %. Approach 1: author excess −3 % / +2 % / +7 %, journal +275 /
++386 / +521 %. **Article–idea ties:** child×article weight crossing main communities W1 0.42–0.43: +2 to +12 %;
+co-membership on within ties −2 to −11 %; article membership spread +19 to +31 %; share of shared child hyperedges below
+their articles' mix (ω 0) −12 to −36 %; T1 holds and no mono-domain community at every point. **Social ties:**
+article×article crossing weight −52 / −65 / −74 %, closure ratio 0.93 → 2.0 / 2.7 / 3.5; article×journal crossing −10 to
+−47 %. Lower domain presence approach 2 +0.056 / +0.076 / +0.053 (≥ 4.6 SE), approach 1 within noise except W2 (−0.027,
+3.5 SE).
