@@ -4502,4 +4502,57 @@ affiliation relation only (no held-out author×article, article×journal or arti
 child-hyperedge overlap extended by W, so it shares inputs with the model's semantic side. Decision taken on this basis:
 design doc 2026-11-24 (W1 kept in both approaches).
 
-**Interpretation:** pending.
+**Interpretation (2026-11-24; the owner's ideas marked, the rest the assistant's, recorded at the owner's request: "I
+think you can record your interpretation as mine was less elaborate").**
+
+*What the curve shows in itself.* The model must place articles, people and ideas in one shared set of communities; the
+weighting decides which structure that set follows. If the corpus's social and idea structures coincided, shifting
+weight would barely change the communities; they change steadily (idea grouping −41 to −64 % against social grouping +40
+to +200 % between W1 and 0.65 / 0.50), so the communities' sensitivity to the weighting is itself a measure of how
+loosely people and ideas are coupled in this corpus. At W1 communities are idea clusters with people attached; towards
+W2, social clusters with ideas attached. Both are heterogeneous in the technical sense (every community spans both
+domains, T1 holds), so domain presence does not detect the difference; coherence readings do.
+
+*Owner's ideas.* (1) **Sociosemantic (heterogeneous) communities versus social and semantic communities**: a community
+defined on both domains at once is a different object from a social community (people grouped by their interactions) or
+a semantic community (ideas grouped by co-use); the curve spans the range between near-semantic and near-social
+groupings, so a sociosemantic community is a region of that range rather than one solution. (2) **The logic of social
+interactions and the logic of semantic interactions can differ**: social ties arise from collaboration, institutional
+proximity and publication strategy, semantic ties from how ideas are combined in text; different generative logics
+give different structures (e.g. co-author ties close inside communities when allowed — closure ratio 0.93 → 2.7 at
+0.65 — while journals span several idea clusters), so one partition cannot be optimal for both, and the mismatch is not
+only noise. (3) **Contingency on the representation**: the observed links and their density depend on how the data are
+represented — authors are connected to articles but not to words or journals, journals only to articles, the article is
+the only bridge between the domains, and the semantic side has several levels with many ties per article — so the
+coupling the curve measures is partly a property of the data model; another representation (e.g. author×child or
+journal×child ties) would change the observed density and possibly the slope.
+
+*Substantive reading (assistant).* (a) Co-authorship and ideas are already well aligned (co-authored articles strongly
+grouped at W1, excess 0.415): teams work on shared ideas; social pull raises the grouping further, so collaboration
+clusters also span idea differences the idea-led solution keeps apart. (b) Journals cut across ideas: barely grouping at
+W1 (0.056), strong organisers under social pull (×3 to ×6) — venues spanning several idea clusters rather than carriers of
+distinct ideas (consistent with the owner's view of journal weight as popularity rather than topic). (c) In approach 1
+authors barely move: most authors have one or two articles and cannot group articles beyond their own, so the social pull
+flows to journals; the two approaches express "social structure" through different channels. (d) Articles keep their own
+ideas; what changes is their neighbourhood: an article sits at the intersection of an idea neighbourhood and a social
+neighbourhood that only partly overlap (Breiger's intersection of persons and groups); a heterogeneous community is where
+they overlap, and the weighting decides which neighbourhood forms the core. (e) The idea structure is the more
+reproducible backbone: stability falls with social pull; social ties are sparse, so communities organised by them are
+less determined by the data.
+
+*Theoretical reading (assistant).* (i) **Duality and primacy**: socio-semantic analysis holds that social and cultural
+orders are dual and constitute each other (Breiger 1974, Social Forces 53(2):181–190; Basov, Breiger & Hellsten 2020,
+Poetics 78:101433); a joint factorisation turns the duality into one partition, and the finding shows that this partition
+is not fixed by the data alone — it embeds a stance on whether culture or social structure leads, so a sociosemantic
+community needs a declared primacy or is reported as a family along the curve. (ii) **Coupling as a measurable quantity**:
+idea coherence lost per unit of social coherence gained could serve as a corpus-level measure of socio-semantic coupling;
+tracked across time slices it could show coupling changing as a field institutionalises (the coevolution theme of Roth &
+Cointet 2010, Social Networks 32(1):16–29). (iii) **The instrument**: W1 lets the denser evidence lead, and the semantic
+side is denser because extraction yields many semantic ties per article and few social ones; part of W1's idea primacy may
+reflect what the measurement records (cf. owner's idea 3 and the reading of the 22k corpus as an LLM-mediated
+perception). (iv) **Two failure modes**: W1 risks semantic determinism (topics with people as passengers), W2 social
+determinism (teams and venues with ideas as passengers); the curve makes the choice explicit.
+
+*Evidence that would discriminate between readings:* the slope across K, studies A / B and time slices; planted worlds
+with known coupling to calibrate the slope; a text check of idea-led versus people-led communities (design discussed
+2026-11-24, not decided).

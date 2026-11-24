@@ -5035,3 +5035,8 @@ article×article crossing weight −52 / −65 / −74 %, closure ratio 0.93 →
 Owner: "I approve option (c), keeping W1 for both approaches" (design doc 2026-11-24): no stage-0 refits; an arm at
 0.65 (approach 2) to be carried into stage 1 / 3. Owner: the finding "is worth being documented" — FINDINGS §33
 (measurements, method, scope; interpretation pending, owner to compare with the assistant's before it is written).
+
+### RL-369 — 2026-11-24 — FINDINGS §33 interpretation recorded (owner's ideas and the assistant's reading)
+Owner: "I think you can record your interpretation as mine was less elaborate"; owner's ideas recorded as theirs
+(sociosemantic vs social / semantic communities; different logics of social and semantic interactions; contingency on
+the data representation). References web-checked (Breiger 1974; Basov, Breiger & Hellsten 2020; Roth & Cointet 2010).
