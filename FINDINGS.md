@@ -4437,7 +4437,7 @@ W1, mean per group, mean ± SE over the 5 groups (hold-out-draw noise); relative
 
 Table 33.1 — Grouping of articles by shared ideas and by shared social entities. Idea correlation: Pearson correlation
 over all article pairs between co-membership Σ_k p_k q_k (weighted memberships) and the cosine of the two articles'
-child-hyperedge sets extended by W word neighbours. Excess: mean co-membership of article pairs sharing ≥ 1 child
+child-hyperedge sets extended by hyperedges with a non-zero similarity in W. Excess: mean co-membership of article pairs sharing ≥ 1 child
 hyperedge (idea) / a co-author tie / an organisation / a journal / an author, minus the mean over all pairs.
 
 | Approach | Reading | W1 | 0.75 | 0.65 | 0.50 (W2) |
@@ -4534,9 +4534,9 @@ W1 (0.056), strong organisers under social pull (×3 to ×6) — venues spanning
 distinct ideas (consistent with the owner's view of journal weight as popularity rather than topic). (c) In approach 1
 authors barely move: most authors have one or two articles and cannot group articles beyond their own, so the social pull
 flows to journals; the two approaches express "social structure" through different channels. (d) Articles keep their own
-ideas; what changes is their neighbourhood: an article sits at the intersection of an idea neighbourhood and a social
-neighbourhood that only partly overlap (Breiger's intersection of persons and groups); a heterogeneous community is where
-they overlap, and the weighting decides which neighbourhood forms the core. (e) The idea structure is the more
+ideas; what changes is which other articles they are grouped with: an article sits at the intersection of the set of
+articles sharing its ideas and the set sharing its people, which only partly overlap (Breiger's intersection of persons and
+groups); a heterogeneous community is where the two sets overlap, and the weighting decides which set forms the core. (e) The idea structure is the more
 reproducible backbone: stability falls with social pull; social ties are sparse, so communities organised by them are
 less determined by the data.
 

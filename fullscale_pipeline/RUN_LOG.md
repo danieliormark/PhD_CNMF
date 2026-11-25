@@ -4526,23 +4526,23 @@ child×article ties of W-tied hyperedges (within-class AP; chance 0.111): r 0 0.
 as RL-239); r 0.3 brings the typical W-tied idea to the mix of its most mixed context; r 1 makes most W-tied ideas more
 mixed than any context they are observed in (by > 0.5 bit for about half), without better prediction of where they occur.
 
-### RL-326 — 2026-11-21 — Contexts of an idea's spread, W neighbours included (owner's questions on "excess spread")
+### RL-326 — 2026-11-21 — Contexts of an idea's spread, hyperedges with a non-zero similarity in W included (owner's questions on "excess spread")
 Owner questioned the name and the reading (a high-valence idea such as "logit" is used across disciplines), asked
 which entities' mixture is used and under which r it was measured. `fit/mosaic_w_context.py` (study A pass 3, approach
 1, K 13, group 1, seeds 1–10; medians over the 8,054 W-tied ideas with ≥ 2 articles, then over fits), r 0 / 0.3 / 1:
 own spread 1.43 / 2.17 / 2.88 bits; mix of its articles 1.48 / 1.56 / 1.66; most mixed of articles' and parents' mixes
-1.56 / 1.81 / 1.87; mix of its W neighbours (W-weighted average of their memberships) 2.63 / 2.69 / 3.07; own spread
+1.56 / 1.81 / 1.87; mix of its hyperedges with a non-zero similarity in W (W-weighted average of their memberships) 2.63 / 2.69 / 3.07; own spread
 minus the most mixed of all three contexts −1.03 / −0.54 / −0.19 (share above 0: 0.03 / 0.02 / 0.03). A single article's
 spread (median) 0.00 / 0.03 / 0.19. → Excess spread (RL-325) exists only relative to an idea's usage (articles,
-parents); relative to its word neighbours it never exceeds. Memberships at each r are those of that r's fits.
+parents); relative to its hyperedges with a non-zero similarity in W it never exceeds. Memberships at each r are those of that r's fits.
 
 ### RL-327 — 2026-11-21 — Owner on words as context; idea spread against the mean / median of its contexts
 Owner (recorded as stated): "the choice of words can convey meanins or local practices/conventions. Therefore, words are
 informative for understanding how ideas are being locally interpreted." and "given the ok numbers of own spread compared to
 its semantic neighbours ... I would focuse on false positive and false negative existence - not the spread of words per se
-as long as own - mist mixed of its W neighbours is ok"; asked why the most mixed context, not the mean / median.
+as long as own - mist mixed of its hyperedges with a non-zero similarity in W is ok"; asked why the most mixed context, not the mean / median.
 `fit/mosaic_w_context.py` extended (same fits as RL-326): parents' mix 1.39 / 1.63 / 1.62 bits (r 0 / 0.3 / 1); own spread
-minus the mean of the three contexts (articles, parents, W neighbours) −0.34 / +0.05 / +0.57 (share above 0: 0.19 / 0.54 /
+minus the mean of the three contexts (articles, parents, hyperedges with a non-zero similarity in W) −0.34 / +0.05 / +0.57 (share above 0: 0.19 / 0.54 /
 0.80); minus their median −0.11 / +0.08 / +0.71 (0.26 / 0.56 / 0.76).
 
 ### RL-328 — 2026-11-21 — Spread guard: G0 (owner); r tie-break raised by the owner; stability across r
@@ -4598,7 +4598,7 @@ term-on swap (W-a) is met. Seed SEs of the ratios not yet computed.
 ### RL-333 — 2026-11-21 — W-aware semantic similarity in the swap measure; text check allowed; λ calibration (A) prepared
 (1) Owner asked whether the article similarity used W ("better name it as semantic similarity"): it did not (exact
 child-hyperedge sets). Added a W-aware version (`swap_link_measure.py`: each article's hyperedge vector extended by its
-hyperedges' W neighbours, x + x·Wn, cosine): larger excess at p 0 (study A approach 1 author pairs +0.0218 vs +0.0087;
+hyperedges' hyperedges with a non-zero similarity in W, x + x·Wn, cosine): larger excess at p 0 (study A approach 1 author pairs +0.0218 vs +0.0087;
 co-author ties +0.0218) and the same pattern — falls to 0.02 / 0.21 of p 0 at p 1; journals ≈ 0 throughout; study B
 alike. Conclusions of RL-332 unchanged. (2) Owner: "You can also run the optional test" → the optional text check on
 W-tied hyperedges (blind reading of W-tied pairs placed in the same vs different main communities; decided design
@@ -5083,7 +5083,7 @@ maximum spread) ≤ 0.058; articles' median effective number 1.0–1.22 (r 0) �
 
 ### RL-376 — 2026-11-24 — child×child relation: focused test before stage 1 approved
 Owner: "I approve the focused test before stage 1". W (psych_trial_v3): 97,850 × 97,850, 312,582 symmetric ties, values
-0.40–1.00 (median 0.49; idf-weighted Jaccard, τ 0.4, ≥ 5 neighbours). Design round next.
+0.40–1.00 (median 0.49; idf-weighted Jaccard, τ 0.4, ≥ 5 similar hyperedges each). Design round next.
 
 ### RL-377 — 2026-11-24 — child×child focused test: design decided (owner); implementation starts
 Owner: "For the rest I agree"; "Include the combined arm; your strength matching is fine" (design doc 2026-11-24):
@@ -5163,3 +5163,8 @@ combined 1.67 / 1.89. Centred stability (regulariser 0.658 / 0.416): full −0.0
 +0.012 ± 0.003 (K 5) / −0.045 ± 0.005 (K 13); ties-only −0.07 to −0.11. **child×article requirement T1 at K 13: fails in
 72–92 % of relation-arm fits** (0 % for the regulariser); ties-only at K 13 also 0.6–0.7 mono-domain communities per fit.
 Idea coherence of article groupings at K 13 −0.04 to −0.06 (≈ −30 %). Semantic pull share +0.025 to +0.13.
+
+### RL-392 — 2026-11-25 — Terminology fix: "neighbour" (banned in GLOSSARY) replaced in records since RL-339 (owner)
+Owner: "neighbour may be misleading, given this matrix represents the similarity of child hyperedges rather than their
+coexistence/neighbourhood under the same parental hyperedge". Replaced by "hyperedges with a non-zero similarity in W" /
+"W-tie cells" (design doc, RUN_LOG, FINDINGS §33, data.py comment); FINDINGS §33 article "neighbourhood" rephrased.

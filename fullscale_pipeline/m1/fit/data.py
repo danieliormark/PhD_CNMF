@@ -320,8 +320,8 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
         assert semantic_pull is None, "semantic_pull needs mass_weights (it sets the split of the mass-weighted pull)"
     if child_child:
         # child×child focused test (owner 2026-11-24, RL-377): W as a relation with its own weight (child_child["weight"])
-        # on top of the decided weights (unchanged); mode "full" = every off-diagonal cell fitted (non-neighbours as
-        # zeros), "ties" = only the neighbour cells fitted; Frobenius-scaled like every relation; no hidden cells
+        # on top of the decided weights (unchanged); mode "full" = every off-diagonal cell fitted (zero-similarity cells as
+        # zeros), "ties" = only the W-tie cells fitted (pairs with a non-zero similarity in W); Frobenius-scaled like every relation; no hidden cells
         assert not mass_weights, "child×child relation and mass weights are not combined"
         assert child_child["mode"] in ("full", "ties"), child_child
         r, c, v = build.ties("child_child")
