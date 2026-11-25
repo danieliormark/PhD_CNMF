@@ -5132,3 +5132,7 @@ clusters). `aggregate.FRACTIONS` now (0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.5); the
 Owner: "I agree with your recomendation" (option b; design doc 2026-11-24). Cost estimate from measured pass-3 fit times
 (median hours per fit, approach 1 / 2: K 3 0.10 / 0.08, K 5 0.15 / 0.12, K 8 0.29 / 0.21, K 13 0.78 / 0.52, K 20 1.53 /
 1.08 in A; B slightly higher): 6 journal arms × 2 approaches × 5 K at 10 groups × 10 seeds ≈ 2,900 CPU-h (A), 3,200 (B).
+
+### RL-383 — 2026-11-24 — Stage 1: 10 hold-out groups × 5 seeds (owner)
+Owner: "I approve 10 groups * 5 seeds as you proposed" (design doc 2026-11-24). ≈ 1,450 CPU-h (A) + 1,600 (B) for the
+journal arms at 5 coarse K. δ to be redefined with the restated D1-M1 (stage-1 point 4).
