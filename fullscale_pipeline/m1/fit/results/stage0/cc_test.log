@@ -1,0 +1,21 @@
+80 tasks
+
+K5: best relation arm by rule C: cc_full_m0.3
+  cc_full_m0.3             ca-gain 0.0242 eff-tied 1.38 centred 0.629 A 0.577 B 0.678 idea 0.168  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  cc_full_m0.3+reg_r0.3    ca-gain 0.0264 eff-tied 1.67 centred 0.671 A 0.605 B 0.720 idea 0.161  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': True, 'replaces_regulariser': False}
+  cc_full_m1               ca-gain 0.0126 eff-tied 1.24 centred 0.629 A 0.565 B 0.680 idea 0.168  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  cc_ties_m0.3             ca-gain -0.0042 eff-tied 1.00 centred 0.576 A 0.533 B 0.615 idea 0.129  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  cc_ties_m1               ca-gain -0.0045 eff-tied 1.00 centred 0.588 A 0.549 B 0.624 idea 0.127  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  reg_r0                   ca-gain 0.0228 eff-tied 1.00 centred 0.606 A 0.566 B 0.654 idea 0.164
+  reg_r0.3                 ca-gain 0.0348 eff-tied 2.35 centred 0.658 A 0.595 B 0.700 idea 0.171
+  reg_r1                   ca-gain 0.0237 eff-tied 4.17 centred 0.651 A 0.586 B 0.696 idea 0.171
+
+K13: best relation arm by rule C: cc_full_m0.3
+  cc_full_m0.3             ca-gain 0.0253 eff-tied 1.76 centred 0.348 A 0.303 B 0.366 idea 0.110  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  cc_full_m0.3+reg_r0.3    ca-gain 0.0249 eff-tied 1.89 centred 0.371 A 0.314 B 0.399 idea 0.124  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  cc_full_m1               ca-gain 0.0144 eff-tied 1.74 centred 0.354 A 0.298 B 0.372 idea 0.123  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  cc_ties_m0.3             ca-gain 0.0225 eff-tied 1.08 centred 0.325 A 0.287 B 0.345 idea 0.135  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  cc_ties_m1               ca-gain 0.0210 eff-tied 1.06 centred 0.310 A 0.279 B 0.335 idea 0.132  rule {'i_child_article_not_worse': False, 'ii_less_flat': True, 'iii_stability_not_worse': False, 'replaces_regulariser': False}
+  reg_r0                   ca-gain 0.0243 eff-tied 1.00 centred 0.387 A 0.353 B 0.440 idea 0.161
+  reg_r0.3                 ca-gain 0.0274 eff-tied 2.94 centred 0.416 A 0.363 B 0.485 idea 0.172
+  reg_r1                   ca-gain 0.0286 eff-tied 5.90 centred 0.441 A 0.381 B 0.507 idea 0.176
