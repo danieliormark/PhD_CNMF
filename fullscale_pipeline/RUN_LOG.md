@@ -5170,3 +5170,5 @@ coexistence/neighbourhood under the same parental hyperedge". Replaced by "hyper
 "W-tie cells" (design doc, RUN_LOG, FINDINGS §33, data.py comment); FINDINGS §33 article "neighbourhood" rephrased.
 
 ### RL-393 — 2026-11-25 — Regulariser kept over the child×child relation (owner); FINDINGS §34 written
+
+### RL-394 — 2026-11-25 — D1-M2 restated (articles primary; co-membership reported; permutation test) — owner
