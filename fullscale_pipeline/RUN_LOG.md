@@ -5136,3 +5136,5 @@ Owner: "I agree with your recomendation" (option b; design doc 2026-11-24). Cost
 ### RL-383 — 2026-11-24 — Stage 1: 10 hold-out groups × 5 seeds (owner)
 Owner: "I approve 10 groups * 5 seeds as you proposed" (design doc 2026-11-24). ≈ 1,450 CPU-h (A) + 1,600 (B) for the
 journal arms at 5 coarse K. δ to be redefined with the restated D1-M1 (stage-1 point 4).
+
+### RL-384 — 2026-11-25 — δ of D1-M1 to come from between-group variation (owner agreed); exact form at point 4
