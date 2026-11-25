@@ -4556,3 +4556,70 @@ determinism (teams and venues with ideas as passengers); the curve makes the cho
 *Evidence that would discriminate between readings:* the slope across K, studies A / B and time slices; planted worlds
 with known coupling to calibrate the slope; a text check of idea-led versus people-led communities (design discussed
 2026-11-24, not decided).
+
+## 34. The word-similarity information works as a regulariser, not as a child×child relation (2026-11-25, ticket 107 M1)
+
+Records: RUN_LOG RL-364 (flattening across r), RL-375 (flatness distributions), RL-376–378 (design, code, strength
+matching), RL-390–391 (results); design doc 2026-11-24/25.
+
+**Question.** At its chosen strength (r 0.3, rule C), the word-similarity regulariser — which pulls each child
+hyperedge's membership towards the average of the memberships of the hyperedges it has a non-zero similarity with in W —
+improves held-out prediction of child×article ties but spreads the memberships of W-tied child hyperedges (70 % of the
+facet) over several communities (median effective number 2.35 at K 5, 2.94 at K 13, against 1.00 without the term).
+Does the same information, fitted instead as a **child×child relation** (reconstructed through memberships and its own
+core matrix), keep the gain with less spreading?
+
+**Setting.** Psychology trial, study A, approach 1, KL, W1 weighting, K 5 and K 13, 5 hold-out groups × 10 seeds per arm
+(500 new fits, all converged). Relation from W (idf-weighted Jaccard similarity of the hyperedges' words, τ 0.4, ≥ 5 most
+similar per hyperedge, 312,582 pairs; Frobenius-scaled; diagonal masked; no hidden cells), with its own weight on top of
+the decided weights; regulariser off. Arms: **full** relation (every pair fitted; pairs with zero similarity count as 0)
+and **ties-only** relation (only the W-tie cells fitted), each at weights matched to the regulariser's r 0.3 and r 1
+(weight = r × data loss of the λ = 0 solution ÷ the relation's loss on it, its core fitted with memberships held fixed;
+full 0.082 / 0.275 at K 5, 0.074 / 0.246 at K 13; ties-only 0.44 / 1.46, 0.40 / 1.32); and a **combined** arm (full at
+r-0.3 weight + regulariser r 0.3). References: the regulariser at r 0 / 0.3 / 1 (pass 3). Decision rule fixed before the
+results: an arm replaces the regulariser if (i) its child×article gain is not below the regulariser's (r 0.3) by more than
+1 paired SE, (ii) W-tied hyperedges are less spread beyond 1 SE, (iii) centred stability (chance-adjusted agreement that
+does not credit flat profiles) is not below by more than 1 SE. Differences paired by hold-out group, SE over 5 groups.
+
+Table 34.1 — Readings at K 5 / K 13 (means over groups). Gain: held-out within-class AP of child×article minus its
+degree-only reference. Spread: median effective number of communities (2^entropy) of W-tied child hyperedges. Centred
+stability: as above. T1 failing: share of fits failing the child×article requirement.
+
+| Arm | child×article gain | Spread | Centred stability | T1 failing |
+|---|---|---|---|---|
+| no term (r 0) | 0.0228 / 0.0243 | 1.00 / 1.00 | 0.606 / 0.387 | 0 / 0 |
+| regulariser r 0.3 (r*) | 0.0348 / 0.0274 | 2.35 / 2.94 | 0.658 / 0.416 | 0 / 0 |
+| regulariser r 1 | 0.0237 / 0.0286 | 4.17 / 5.90 | 0.651 / 0.441 | 0 / 0 |
+| full relation, r-0.3 weight | 0.0242 / 0.0253 | 1.38 / 1.76 | 0.629 / 0.348 | 0 / 0.90 |
+| full relation, r-1 weight | 0.0126 / 0.0144 | 1.24 / 1.74 | 0.629 / 0.354 | 0 / 0.92 |
+| ties-only, r-0.3 weight | −0.0042 / 0.0225 | 1.00 / 1.08 | 0.576 / 0.325 | 0 / 0.74 |
+| ties-only, r-1 weight | −0.0045 / 0.0210 | 1.00 / 1.06 | 0.588 / 0.310 | 0 / 0.72 |
+| combined | 0.0264 / 0.0249 | 1.67 / 1.89 | 0.671 / 0.371 | 0 / 0.88 |
+
+Paired differences against the regulariser at r 0.3 (± SE over groups): full relation r-0.3 weight — gain −0.0106 ± 0.0034
+(K 5) / −0.0021 ± 0.0015 (K 13), spread −0.97 ± 0.01 / −1.18 ± 0.01, centred stability −0.029 ± 0.003 / −0.069 ± 0.004;
+combined — gain −0.0084 ± 0.0032 / −0.0025 ± 0.0018, spread −0.68 / −1.05, centred stability +0.012 ± 0.003 / −0.045 ±
+0.005; ties-only r-0.3 weight — gain −0.039 ± 0.007 / −0.0050 ± 0.0013, centred stability −0.082 / −0.091. At K 13 the
+ties-only arms also show 0.6–0.7 mono-domain communities per fit, and every relation arm lowers the idea coherence of
+article groupings by about 30 % (−0.04 to −0.06).
+
+**What is established.** (1) By the rule fixed beforehand, no arm replaces the regulariser at either K: all are less
+spread (ii), all fail (i), and all but the combined arm at K 5 fail (iii). (2) Fitted as a relation, the information adds
+little or nothing to child×article prediction: the full relation at the r-0.3 weight is at the no-term level (0.0242 vs
+0.0228 at K 5) while the regulariser adds +52 % (0.0348); a stronger relation is worse than no term; the ties-only
+relation falls below the degree-only reference at K 5. (3) At K 13 every relation arm breaks the child×article
+requirement in 72–92 % of fits (never for the regulariser): communities organised around the similarity matrix compete with
+the article–idea structure. (4) Less spreading comes with lower stability and weaker idea grouping.
+
+**Interpretation (assistant; the owner agreed with the conclusion: "we better keep the regulariser and we have a good
+justification for why we should use it over the child*child matrix").** Using the same information without the
+regulariser's form removes most of the spreading and, with it, the held-out gain. The moderate spreading at r* therefore
+appears to be the mechanism of the regulariser's gain: soft memberships over the communities of the hyperedges a
+hyperedge shares words with help predict which articles use it. This supports reading the spreading at r* as a partly
+true positive (RL-375); rule C keeps r below the range where it stops paying off (RL-364). The relation, by contrast,
+treats similarity as data to be reconstructed: it spends reconstruction capacity on the similarity matrix itself and, at
+larger K, shapes communities around it.
+
+**Scope and limits.** Approach 1 only; K 5 and 13; study A; two strengths per relation form, matched by loss share at the
+λ = 0 solution (the trend from the r-0.3 to the r-1 weight suggests that weaker weights approach the no-term level, not
+the regulariser's); one similarity measure (W as built).

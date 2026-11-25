@@ -5168,3 +5168,5 @@ Idea coherence of article groupings at K 13 −0.04 to −0.06 (≈ −30 %). Se
 Owner: "neighbour may be misleading, given this matrix represents the similarity of child hyperedges rather than their
 coexistence/neighbourhood under the same parental hyperedge". Replaced by "hyperedges with a non-zero similarity in W" /
 "W-tie cells" (design doc, RUN_LOG, FINDINGS §33, data.py comment); FINDINGS §33 article "neighbourhood" rephrased.
+
+### RL-393 — 2026-11-25 — Regulariser kept over the child×child relation (owner); FINDINGS §34 written
