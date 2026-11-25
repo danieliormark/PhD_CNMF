@@ -21,7 +21,7 @@ fractions to discriminate ties); stage 1: both studies, B after A; 10 hold-out g
 D1-M1 restated (semantic-equal existence; value reported; Δ = Jx − J1; δ = 10 % of J1's semantic gain, hold-out
 half-split margin reported); D1-M2 restated (articles primary; Track A / B + co-membership agreement; permutation test of
 cross- vs within-arm agreement, 999 label shuffles within groups). Banned term recorded: "neighbour" (memory).
-**Open, in order:** (1) D1-M2: minimum size for "changed" (proposed 5 % of within-arm agreement) — being explained;
+**Open, in order:** (1) [done: D1-M2 minimum 5 %, 10 % reported, Track A articles decides, RL-395];
 (2) D1-M3: c_r under KL (proposed: 1 − L_r(fit) ÷ L_r(degree-only), deviance explained; flag unchanged) — owner answers
 after compaction; (3) D1-M4: "more than J1" without the old δ; (4) D1 decision rule (small updates); (5) stage-1 point 6:
 log-damping and 0.65 arms (placement, size); then remaining λ-calibration steps (swap with the term on; optional λ text

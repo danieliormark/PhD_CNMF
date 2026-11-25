@@ -5172,3 +5172,5 @@ coexistence/neighbourhood under the same parental hyperedge". Replaced by "hyper
 ### RL-393 — 2026-11-25 — Regulariser kept over the child×child relation (owner); FINDINGS §34 written
 
 ### RL-394 — 2026-11-25 — D1-M2 restated (articles primary; co-membership reported; permutation test) — owner
+
+### RL-395 — 2026-11-25 — D1-M2: minimum size 5 % (10 % reported), Track A on articles decides (owner)
