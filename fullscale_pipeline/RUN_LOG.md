@@ -5144,3 +5144,5 @@ journal arms at 5 coarse K. δ to be redefined with the restated D1-M1 (stage-1 
 ### RL-386 — 2026-11-25 — D1-M1: score (semantic-equal existence) and value (reported) decided (owner); Δ and δ under discussion
 
 ### RL-387 — 2026-11-25 — D1-M1: Δ convention decided; δ definition left open for the owner
+
+### RL-388 — 2026-11-25 — Sufficient-members rerun with member-mass reading finished (job 25292163); earlier readings reproduced identically; child×child test 390 / 500 fits done
