@@ -5,7 +5,7 @@ submitted, finishes, or a decision changes what will run. Details live in the re
 `fullscale_pipeline/RUN_LOG.md` (RL-…, what was run and what came out) and `plans/ticket107-m1-chunk12v3-design.md`
 (design doc, what was decided and why). The staged plan with fit budgets: `plans/ticket107_layer2/test_architecture.txt`.
 
-**Last updated:** 2026-11-23.
+**Last updated:** 2026-11-25 (D1 measures restated for stage 1: D1-M1 RL-386–389, D1-M2 RL-394/395, D1-M3 RL-396).
 
 **Status words:** *Done* = finished and read; *Running* = on CSF3 now; *Submitted* = in the CSF3 queue; *Ready* =
 code and job written, waiting for submission; *Waiting for decision* = needs the owner's choice before it can be

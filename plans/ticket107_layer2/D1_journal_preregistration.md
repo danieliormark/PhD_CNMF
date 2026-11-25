@@ -324,6 +324,13 @@ Replaces the definition in §4.1 where they differ (design doc 2026-11-24/25, RU
   fixed before results; the noise is carried by the interval. Reported beside: the hold-out half-split margin (95th
   percentile of the absolute difference of J1's mean score between halves of the 10 groups, all 126 splits, ÷ √2) and the
   classes at 5 % and 20 %.
-- Still to restate (stage-1 point 5): class definitions in detail, D1-M2 (membership change; its seed-pair reference needs
-  adapting to 5 seeds), D1-M4, the decision rule.
+- **D1-M3 (realised share of article×journal) — DECIDED 2026-11-25 (owner: "I approve i, ii and iii"; RL-396).**
+  Replaces §4.3's definition: c_r = 1 − L_r(fit) ÷ L_r(ref), L = generalised KL on the fitted cells, ref = the degree-only
+  reference (tie weights: row total × column total ÷ grand total of visible tie values); realised share s_r = w_r ΔL_r ÷
+  Σ_q w_q ΔL_q, ΔL = L(ref) − L(fit) (identical to the pre-registered w_r c_r ÷ Σ w c under squared error with ‖X‖² = 1 and
+  a zero reference). Flag unchanged (journal s ≥ semantic-domain s), never acting alone. Reported beside: c_r per matrix,
+  pull share p_r = w_r L_r(ref) ÷ Σ w L(ref), journal s/p. Stage-0 reading (J2 setting): journal s 0.9–1.7 %, semantic
+  81–98 %, journal p ≈ 2 % — the §1 concern (journals 64–70 % of the pull) was a squared-error property.
+- D1-M2 restated 2026-11-25 (design doc; RL-394/395).
+- Still to restate (stage-1 point 5): D1-M4, the decision rule.
 

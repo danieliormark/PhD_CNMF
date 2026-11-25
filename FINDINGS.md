@@ -4623,3 +4623,26 @@ larger K, shapes communities around it.
 **Scope and limits.** Approach 1 only; K 5 and 13; study A; two strengths per relation form, matched by loss share at the
 λ = 0 solution (the trend from the r-0.3 to the r-1 weight suggests that weaker weights approach the no-term level, not
 the regulariser's); one similarity measure (W as built).
+
+## 35. In approach 2 the shared communities reproduce article×article worse than its degree-only reference (2026-11-25, ticket 107 M1)
+
+**Observation (measured; owner: "record the finding too").** Per relation, c_r = 1 − L_r(fit) ÷ L_r(ref) (generalised KL
+on the fitted cells; ref = degree-only reference, tie weights). Stage-0 pass-3 fits, study A, main setting, hold-out
+groups 1–5 × seeds 1–3, SE over groups ≤ 0.002 (RL-396, `fit/d1m3_kl_check.py`). In approach 2, article×article
+(articles linked by shared authors; diagonal masked) has c = −0.150 at K 5 (r 0.3) and −0.027 at K 13 (r 1.0): the
+fitted communities reproduce these ties **worse** than a model that knows only each article's total tie weight. Every
+other relation in both approaches is above its reference (0.04–0.27), including article×affiliation (0.091 / 0.186).
+Its weight in the loss is small: it carries 1.9 % of the weighted reference loss (pull) and gives back −3.1 % (K 5) /
+−0.3 % (K 13) of the achieved weighted loss reduction.
+
+**Possible reading (assistant; not tested).** Article×article ties are few per article and tightly local (co-author
+cliques). Under KL a tie the model gives near-zero value costs x·log(x/x̂), so ties between articles that the shared
+communities place apart are expensive; the degree-only reference spreads value over all pairs and avoids such misses.
+The shared communities are set mostly by the semantic matrices (84–92 % of the pull), so they need not follow co-author
+lines; with more communities (K 13) the deficit nearly closes. This would make article×article the relation whose own
+structure the shared communities represent least in approach 2 — relevant for reading approach 2's social side and for
+the approach comparison (stage 3a).
+
+**Scope and limits.** One study, two K, the main weighting; no held-out check (article×article has no hidden cells);
+the degree-only reference is a rank-1 model with its own row and column scales, which the shared tri-factor model can
+match only through the shared memberships and core.

@@ -5174,3 +5174,23 @@ coexistence/neighbourhood under the same parental hyperedge". Replaced by "hyper
 ### RL-394 — 2026-11-25 — D1-M2 restated (articles primary; co-membership reported; permutation test) — owner
 
 ### RL-395 — 2026-11-25 — D1-M2: minimum size 5 % (10 % reported), Track A on articles decides (owner)
+
+### RL-396 — 2026-11-25 — D1-M3 restated for KL: c_r = deviance explained vs degree-only; realised share = share of weighted loss reduction; flag unchanged (owner)
+Owner: "I approve i, ii and iii; record the finding too". (i) c_r = 1 − L_r(fit) ÷ L_r(ref), L = generalised KL on the
+fitted cells (unweighted), ref = degree-only reference (tie weights, row total × column total ÷ grand total of visible tie
+values); form of the KL-based R² (Cameron & Windmeijer 1997, J. Econometrics 77:329–342; they use an intercept-only null,
+the degree-only reference is our substitution). (ii) realised share s_r = w_r ΔL_r ÷ Σ_q w_q ΔL_q, ΔL = L(ref) − L(fit) —
+the direct translation of the pre-registered w_r c_r ÷ Σ w c (identical under squared error with ‖X‖² = 1 and a zero
+reference); the mass-free w_r c_r form rejected (ignores each matrix's loss size; breaks with negative c). (iii) flag
+"journal-dominated" unchanged (journal s ≥ semantic-domain s); reported beside: c_r per matrix, pull share p_r = w_r
+L_r(ref) ÷ Σ w L(ref), journal ratio s/p (= c_journal ÷ pull-weighted mean c). Illustration on saved stage-0 pass-3
+fits (main setting = arm J2), study A, groups 1–5 × seeds 1–3 (`fit/d1m3_kl_check.py` →
+`fit/results/stage0/d1m3_kl_check.json`; reference converged; closed form within 0.1 % of the exact masked rank-1 KL
+optimum); SE over groups ≤ 0.002. c (child×parent / child×article / social 1 / social 2 / journal): approach 1 K 5
+0.091 / 0.110 / 0.111 / 0.158 / 0.044, K 13 0.160 / 0.210 / 0.216 / 0.269 / 0.121; approach 2 K 5 0.092 / 0.109 / 0.091
+/ −0.150 / 0.044, K 13 (r 1) 0.138 / 0.164 / 0.186 / −0.027 / 0.115 (social = author×article, author×affiliation |
+article×affiliation, article×article). Journal s 0.9 / 1.3 % (approach 1 K 5 / 13), 1.0 / 1.7 % (approach 2) vs semantic
+s 80.8 / 80.6 % and 98.0 / 93.4 %; journal p 2.0 / 2.2 %, semantic p 84.1 / 91.9 %; journal s/p 0.45–0.77 (harder than
+average to fit). The pre-registered concern (journals 64–70 % of the pull under squared error) does not hold under KL;
+the flag is ≈ 50–100× from firing in J2 and the other arms weaken the journal matrix further. Finding (FINDINGS §35): in
+approach 2 the shared communities reproduce article×article worse than its degree-only reference.
