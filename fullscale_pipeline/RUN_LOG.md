@@ -5150,3 +5150,16 @@ journal arms at 5 coarse K. δ to be redefined with the restated D1-M1 (stage-1 
 ### RL-389 — 2026-11-25 — D1-M1 δ decided: 10 % of J1's semantic gain, hold-out half-split margin reported (owner); D1 pre-registration §8 added
 
 ### RL-390 — 2026-11-25 — child×child focused test finished: 500 / 500 fits converged, 0 errors; post-processing done (cc_test.{json,log}); not yet read
+
+### RL-391 — 2026-11-25 — child×child focused test read: the regulariser stays (decision rule fixed before results)
+Approach 1, K 5 and 13, 5 groups × 10 seeds; differences = arm − regulariser at r* 0.3, paired by group, mean ± SE over
+groups. **Decision rule (RL-377): no arm replaces the regulariser at either K** — every arm is less flat (criterion ii
+met) but fails (i) child×article gain and, except the combined arm at K 5, (iii) centred stability. child×article gain
+over the degree-only reference (regulariser r 0.3: 0.0348 K 5, 0.0274 K 13; r 0: 0.0228 / 0.0243): full relation m0.3
+0.0242 / 0.0253 (−0.0106 ± 0.0034 / −0.0021 ± 0.0015), m1 0.0126 / 0.0144; ties-only −0.004 (below the degree-only
+reference) / 0.0210–0.0225; combined 0.0264 / 0.0249 (−0.0084 ± 0.0032 / −0.0025 ± 0.0018). Flatness (median effective
+communities of W-tied child hyperedges; regulariser 2.35 / 2.94): full 1.24–1.38 / 1.74–1.76, ties-only 1.00 / 1.06–1.08,
+combined 1.67 / 1.89. Centred stability (regulariser 0.658 / 0.416): full −0.029 ± 0.003 / −0.069 ± 0.004; combined
++0.012 ± 0.003 (K 5) / −0.045 ± 0.005 (K 13); ties-only −0.07 to −0.11. **child×article requirement T1 at K 13: fails in
+72–92 % of relation-arm fits** (0 % for the regulariser); ties-only at K 13 also 0.6–0.7 mono-domain communities per fit.
+Idea coherence of article groupings at K 13 −0.04 to −0.06 (≈ −30 %). Semantic pull share +0.025 to +0.13.
