@@ -7,7 +7,29 @@
 > CORPUS_STATISTICS.
 
 
-## State (2026-11-24, ticket 107 M1 — stage 0 nearly closed; W1 kept; report 3 (λ calibration) next)
+## State (2026-11-25, ticket 107 M1 — stage 0 closed except λ-calibration extras; designing stage 1 (D1))
+
+Records: RUN_LOG RL-371–RL-394; design doc entries 2026-11-24/25; FINDINGS §33 (weighting trades idea for social
+coherence), §34 (regulariser beats child×child relation); D1_journal_preregistration.md §8 (update 2026-11-25).
+**Decided 2026-11-24/25 (owner's words in the design doc):** held-out score uses main-setting weights; coverage group
+level; item (l) closed (sufficient members: tiers core ≥ 0.5 / member ≥ 0.3, child + article facets required, robust
+minimum median − 2.5 × scaled MAD on log counts, zero always fails; member-mass reading reported); W1 in both approaches,
+0.65 weighting arms in both approaches for stage 1 / 3; λ rule C with amendment → r* approach 1 {3: 0.3, 5: 0.3, 8: 0.45,
+13: 0.3, 20: 1.0}, approach 2 {3: 0.3, 5: 0.3, 8: 0.3, 13: 1.0, 20: 1.0}; stability compared only at equal r (decision A);
+regulariser kept over the child×child relation (decision rule; FINDINGS §34); stage-1 counting fraction 0.2 (stricter
+fractions to discriminate ties); stage 1: both studies, B after A; 10 hold-out groups × 5 seeds; all five coarse K;
+D1-M1 restated (semantic-equal existence; value reported; Δ = Jx − J1; δ = 10 % of J1's semantic gain, hold-out
+half-split margin reported); D1-M2 restated (articles primary; Track A / B + co-membership agreement; permutation test of
+cross- vs within-arm agreement, 999 label shuffles within groups). Banned term recorded: "neighbour" (memory).
+**Open, in order:** (1) D1-M2: minimum size for "changed" (proposed 5 % of within-arm agreement) — being explained;
+(2) D1-M3: c_r under KL (proposed: 1 − L_r(fit) ÷ L_r(degree-only), deviance explained; flag unchanged) — owner answers
+after compaction; (3) D1-M4: "more than J1" without the old δ; (4) D1 decision rule (small updates); (5) stage-1 point 6:
+log-damping and 0.65 arms (placement, size); then remaining λ-calibration steps (swap with the term on; optional λ text
+check), study B λ-calibration grid + run, stage-1 job build. Reports pending: member-mass reading
+(sufficient_members.json "member_mass"). Housekeeping: membership-readings summaries with corrected R5 flag;
+KL-NMF/PLSA reference check; later-stages summary; representation-invariance limitation.
+
+## Older state (2026-11-24, ticket 107 M1 — stage 0 nearly closed; W1 kept; report 3 (λ calibration) next)
 
 Records: RUN_LOG RL-348–RL-370; design doc entries 2026-11-23/24; FINDINGS §33; M1_PROGRESS.
 **Decided 2026-11-23/24 (owner's words in the design doc):** item (l) option (a) (coverage only filter; membership
