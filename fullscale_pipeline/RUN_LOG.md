@@ -5140,3 +5140,5 @@ journal arms at 5 coarse K. δ to be redefined with the restated D1-M1 (stage-1 
 ### RL-384 — 2026-11-25 — δ of D1-M1 to come from between-group variation (owner agreed); exact form at point 4
 
 ### RL-385 — 2026-11-25 — Stage 1 K grid: all five coarse K, both approaches and studies (owner)
+
+### RL-386 — 2026-11-25 — D1-M1: score (semantic-equal existence) and value (reported) decided (owner); Δ and δ under discussion
