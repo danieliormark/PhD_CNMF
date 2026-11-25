@@ -5146,3 +5146,5 @@ journal arms at 5 coarse K. δ to be redefined with the restated D1-M1 (stage-1 
 ### RL-387 — 2026-11-25 — D1-M1: Δ convention decided; δ definition left open for the owner
 
 ### RL-388 — 2026-11-25 — Sufficient-members rerun with member-mass reading finished (job 25292163); earlier readings reproduced identically; child×child test 390 / 500 fits done
+
+### RL-389 — 2026-11-25 — D1-M1 δ decided: 10 % of J1's semantic gain, hold-out half-split margin reported (owner); D1 pre-registration §8 added

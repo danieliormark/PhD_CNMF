@@ -308,3 +308,22 @@ reported beside the Dunnett ones. Proposed, open: all 10 drawn hold-out groups i
 | K at which classes are read: candidate K = coarse K inside the one-SE band of any arm of that approach; verdict = class at the majority of candidates (no majority → inconclusive); required re-check of J1, J* and the runner-up at the final K₁, K₂ (covers K above 20) | DECIDED (owner, 2026-11-05) |
 | Dunnett with each comparison's own error (estimated-correlation version with robust covariance: Hothorn, Bretz & Westfall 2008; Herberich, Sikorski & Hothorn 2010); the pooled block error is not used (owner: "I wouldn't assume equal noise") | DECIDED (owner, 2026-11-05) |
 | 10 hold-out groups in stage 1 (all 10 of the drawn groups) instead of 5; S chosen after one fit is timed | OPEN |
+
+## 8. Update 2026-11-25 — D1-M1 restated for KL and the two-part held-out criterion (owner decisions)
+
+Replaces the definition in §4.1 where they differ (design doc 2026-11-24/25, RUN_LOG RL-383–389):
+- **Design:** stage 1 in study A and then study B (same design); 10 hold-out groups × 5 seeds; coarse K 3, 5, 8, 13, 20.
+- **Score:** semantic-equal held-out existence — within-class AP averaged over child×article and child×parent (decided
+  held-out criterion of 2026-11-13; semantic-only as decided 2026-11-03; arm weights do not enter). Semantic-equal value
+  (partial Spearman) is classified the same way and reported only.
+- **Difference:** Δ_g = score(Jx) − score(J1) per hold-out group, mean over its 5 seeds (positive = Jx predicts hidden
+  semantic ties better).
+- **Intervals and classes:** unchanged — Dunnett with each comparison's own error (9 degrees of freedom), uncorrected
+  intervals beside; adds information / misleads / redundant (two one-sided tests) / inconclusive.
+- **δ:** 10 % of J1's semantic-equal existence gain over the degree-only reference (mean over groups), per K and approach,
+  fixed before results; the noise is carried by the interval. Reported beside: the hold-out half-split margin (95th
+  percentile of the absolute difference of J1's mean score between halves of the 10 groups, all 126 splits, ÷ √2) and the
+  classes at 5 % and 20 %.
+- Still to restate (stage-1 point 5): class definitions in detail, D1-M2 (membership change; its seed-pair reference needs
+  adapting to 5 seeds), D1-M4, the decision rule.
+
