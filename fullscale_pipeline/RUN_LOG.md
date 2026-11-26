@@ -5240,3 +5240,9 @@ members of the community (m ≥ 0.3), 34 % core (≥ 0.5), 17 % below 0.1; 87 % 
 member articles. **Accepted as free reporting (standing rule)** for D1-M4: community size as quantiles (not a median);
 per journal-shaped community the distribution of its journal's articles' memberships in it (shares ≥ 0.3 / ≥ 0.5 / < 0.1;
 share of the contribution from member articles — mosaic vs blend).
+*[2026-11-26, correction to RL-400 after plotting the distributions (provisional figures, not in git): the 21 communities
+are not clean "mosaics". In the large ones (Frontiers in Psychology 184 articles, Scientific Reports 146) the journal's
+articles spread over the whole range of membership (medians 0.24–0.51, from ≈ 0 to 1): a graded concentration, not a block
+plus the rest. Two small Scientific Reports communities (s_k 0.019 / 0.039, approach 1) are mosaics (most articles ≈ 0, a
+few ≈ 1). Other journals involved (approach 2): Frontiers in Robotics and AI (58), PLoS One (77). The summary shares
+(60 % members, 87 % contribution from members) stand; "mosaic vs blend" is a continuum, read from the distribution.]*
