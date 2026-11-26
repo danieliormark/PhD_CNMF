@@ -5226,3 +5226,17 @@ journal-shaped communities per fit, mean over 10 groups × 5 seeds). Reported be
 (share of article membership in journal-shaped communities, Jx − J1); per K and arm, the detection limit of Δ̄ computed
 from the stage-1 noise observed in J1 and Jx (so a "not more" at K 20 reads as "nothing large enough to detect"). Basis:
 RL-398 (detection limit ≈ 0.2 if J1 has none; 0.45–0.8 if J1 has 0.5–1 per fit).
+
+### RL-400 — 2026-11-26 — Why journal-shaped communities appear only at K 20 (J2, saved fits); journal-membership readings added (free reporting)
+Owner questioned the median community size (skew; a journal's membership is itself a distribution of article
+distributions). Stage-0 pass-3, main setting (J2), study A, both approaches, groups 1–5 × seeds 1–3, K 5 / 13 / 20
+(r* 0.3 / 0.3|1.0 / 1.0). Community size s_k = Σ_i m_ik ÷ N (covered articles with a journal): quantiles 0/10/50/90/100 %
+K 5 0.11 / 0.14 / 0.19 / 0.30 / 0.32; K 13 0.02 / 0.04 / 0.06 / 0.14 / 0.19; K 20 0.01 / 0.02 / 0.035 / 0.11 / 0.16
+(right-skewed; effective number of articles (Σ m)² ÷ Σ m² and member counts (m ≥ 0.3) ≈ s_k × N). Feasibility (a journal
+with n_j ≥ 0.25 × the community's mass exists): every community at every K; feasible journals per community median 2 /
+12 / 25. The 21 communities with j_k ≥ 0.25 (all K 20; Frontiers in Psychology 184, Scientific Reports 146, one 58-article
+journal) are in the large tail (s_k median 0.12) and are mosaic, not blend: of the journal's articles, median 60 % are
+members of the community (m ≥ 0.3), 34 % core (≥ 0.5), 17 % below 0.1; 87 % of the journal's contribution comes from its
+member articles. **Accepted as free reporting (standing rule)** for D1-M4: community size as quantiles (not a median);
+per journal-shaped community the distribution of its journal's articles' memberships in it (shares ≥ 0.3 / ≥ 0.5 / < 0.1;
+share of the contribution from member articles — mosaic vs blend).

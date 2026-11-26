@@ -2807,3 +2807,11 @@ when J1 has none (RL-398); where J1 has its own (likely K 20) the test binds and
 Reported: verdict at 0.5; mass reading (share of article membership in journal-shaped communities, Jx − J1); per K and arm
 the detection limit from the observed stage-1 noise. Stage-0 (J2): none at K 5 / 13; at K 20 1.02 (approach 1) / 0.50
 (approach 2) per fit. RL-399.]*
+
+*[2026-11-26, **D1-M4 — journal-membership readings accepted as free reporting** (standing rule; prompted by the owner's
+point that a journal's membership is a distribution of article distributions and a median community size can mislead).
+Reported per journal-shaped community: the distribution of its journal's articles' memberships in it (shares of the
+journal's articles with m ≥ 0.3 / ≥ 0.5 / < 0.1, and the share of the journal's contribution coming from member
+articles — a "mosaic" community holds a block of the journal's articles, a "blend" holds all of them weakly; j_k does not
+distinguish the two); community sizes as quantiles. Stage-0 (J2, K 20): the 21 communities with j_k ≥ 0.25 are mosaic
+(60 % of the journal's articles members; 87 % of the contribution from members). RL-400.]*
