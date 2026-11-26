@@ -5309,3 +5309,21 @@ fits, which caught and fixed a sign error in the flatness (unit-checked on four 
 
 ### RL-406 — 2026-11-26 — Check W4 swap submitted (owner; job id not given)
 Owner: "I have submitted w4". 70 fits in 9 tasks; expected ≈ 2 h wall once tasks start (K 20 fits ≈ 1.5–1.8 h, swap fits ≈ 10 % slower than their twins), then the analysis (≈ 0.5 h).
+
+### RL-407 — 2026-11-26 — λ text check deferred (owner); stage-1 jobs (study A) built and smoke-tested; J4 / J5 under KL open
+Owner: "I agree to defer the text check; start building stage-1 jobs". (1) The optional text check on W-tied hyperedges
+is deferred to after stage 2, together with the idea- vs people-led text check (RL-370); exception: if W4 flags a K, it
+runs at that K. (2) `plan.stage1("A")` → `fit/slurm/jobs_stage1.jsonl`: 9 arms (J1, J2, J3a, J3b, J4, J5, J2 + log-damping,
+J1 / J2 at semantic share 0.65) × 2 approaches × K 3, 5, 8, 13, 20 × hold-out groups 1–10 × seeds 1–5 = 4,500 fits;
+λ_child = r*(approach, K) × study A's pass-1 basis (approach 1 r* 0.3 / 0.3 / 0.45 / 0.3 / 1.0, approach 2 0.3 / 0.3 /
+0.3 / 1.0 / 1.0), shared by every arm at a K; settings as pass 3 (J2 jobs identical to their pass-3 twins except stage and
+the arm label "j"). `slurm/stage1.sh` (563 tasks × 8 fits, 12 h) + `submit_stage1_post.sh` (alignment, aggregation);
+≈ 2,200 CPU-h of fitting. (3) J4 / J5 were not implemented: `data.journal_values` (fit_data journal_form "idf" /
+"sqrt_n" / "inv_n", journal_mass "restore" / "frobenius"; plumbed through run_fit, align, aggregate; test
+`fit/tests/test_journal_forms.py` passes, damping test passes). Under KL a journal's pull is the sum of its tie values:
+J2 binary 46.17 (visible mass after Frobenius scaling); Frobenius only: J4 idf 44.66 (−3 %), J5 1/√n_j 35.00 (−24 %),
+1/n_j 24.51 (−47 %); per-journal totals (largest journal, 184 articles, vs a 2-article journal) J2 3.99 vs 0.043, J5
+1/√n_j 1.38 vs 0.14 (restored), 1/n_j equal (0.273 each, restored). Job list currently uses mass "restore" and J5 =
+1/n_j — **owner's choice pending**; regenerated if chosen otherwise. Smoke test (K 3, 330 epochs, hold-out group 8):
+J1, J3b, J4, J5, J2 + log-damping, J1 at 0.65 — correct relations and weights, finite losses, held-out scores computed.
+Not submitted; D1 analysis code to be written before results are read.

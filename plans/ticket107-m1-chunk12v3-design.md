@@ -2845,3 +2845,7 @@ group 1, seeds 1–10); the W4 effect is the paired difference-in-differences of
 response is flatter beyond 2 SE over seeds on the people entity; "not testable" where the term-off response is within
 2 SE of 0. A flag limits r at that K (next smaller passing r, or the owner under C2). The bare swap of 17 November is not
 used (older start and code). 70 fits. RL-405.]*
+
+*[2026-11-26, **λ text check DEFERRED** (owner: "I agree to defer the text check") to after stage 2, run together with the
+idea- vs people-led text check; exception: a W4 flag at a K → run at that K. Stage-1 jobs (study A, 4,500 fits) built;
+open for the owner: J4 / J5 under KL (mass restoration; J5 as 1/√n_j or 1/n_j). RL-407.]*

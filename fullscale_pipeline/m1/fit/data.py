@@ -229,6 +229,36 @@ def damp_values(rel, rows, cols, v, vis, shape, fro):
                            "entities_all_hidden": int(((d == 0) & (np.bincount(ent, minlength=n) > 0)).sum())}
 
 
+# ------------------------------------------------------------------------------- stage-1 journal arms J4 / J5 (D1, 2026-11-05)
+# Pre-registered (D1 §2): J4 = journal column × idf (journals with many articles count less per article); J5 = columns ×
+# 1/√n_j with singleton-journal ties missing (every journal of ≥ 2 articles carries equal total weight). Under KL a
+# journal's pull is Σ of its tie values, so "equal total weight" per journal is 1/n_j, not 1/√n_j (owner's choice pending,
+# 2026-11-26); both forms are available. mass "restore": the transformed relation is rescaled to the binary relation's
+# visible mass after Frobenius scaling (as the log-damping arm), so the arm changes only how the journal mass is spread;
+# "frobenius": Frobenius scaling only (the relation's KL pull changes with the form).
+JOURNAL_FORMS = ("idf", "sqrt_n", "inv_n")
+
+
+def journal_values(r, c, v, vis, obs, shape, form, mass):
+    """Returns (rows, cols, values, visible mask, observed-row mask, divisor, info) for article×journal under a J4/J5 form."""
+    assert form in JOURNAL_FORMS and mass in ("restore", "frobenius"), (form, mass)
+    n_j = np.bincount(c[vis], minlength=shape[1]).astype(np.float64)       # trial articles per journal (visible ties)
+    fro0 = float(np.sqrt(np.sum(v[vis] ** 2))); m_ref = float(v[vis].sum() / fro0)
+    obs = obs.copy(); dropped = 0
+    if form == "idf":
+        v = v * (np.log(shape[0] / (n_j + 1.0)) + 1.0)[c]                    # as the child×article idf, N = all trial articles
+    else:
+        keep = n_j[c] >= 2
+        dropped = int((~keep).sum())
+        obs[r[~keep]] = False                                                # singleton-journal ties missing: the article's row
+        r, c, v, vis = r[keep], c[keep], v[keep], vis[keep]
+        v = v / (np.sqrt(n_j[c]) if form == "sqrt_n" else n_j[c])
+    fro = float(np.sqrt(np.sum(v[vis] ** 2))); m_new = float(v[vis].sum() / fro)
+    q = m_ref / m_new if mass == "restore" else 1.0
+    return r, c, v, vis, obs, fro / q, {"form": form, "mass": mass, "q": q, "mass_binary": m_ref, "mass_form_frobenius": m_new,
+                                        "singleton_ties_missing": dropped}
+
+
 # ------------------------------------------------------------------------------------------------- one fit's relations
 class RelationData:
     """One relation matrix as the loss sees it (numpy; the loss converts to tensors).
@@ -251,7 +281,7 @@ class RelationData:
 
 
 def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split=None, drop=(), use_journal=True, binary=False,
-             log_damping=None, mass_weights=False, semantic_pull=None, child_child=None):
+             log_damping=None, mass_weights=False, semantic_pull=None, child_child=None, journal_form=None, journal_mass="restore"):
     """The relations of one fit. group: hold-out group 0..9 (None = final refit on all cells, 2026-11-03).
     use_journal=False is arm J1 (no article×journal); journal_multiplier gives J3a/J3b; drop removes relations (arm N).
     binary=True (binary test, owner 2026-11-16): every VISIBLE tie value set to 1 before the Frobenius normalisation, so
@@ -260,7 +290,9 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
     different scale and not comparable with weighted fits).
     log_damping (social log-damping arm, decided 2026-11-18; see damp_values): None = off; "data" = damped values
     rescaled to the undamped relation's visible mass (the arm); "weight" = damped values at Frobenius norm 1 and w_r × q
-    (comparison implementation for the equivalence test). Each RelationData gets .damping (None or a dict with q)."""
+    (comparison implementation for the equivalence test). Each RelationData gets .damping (None or a dict with q).
+    journal_form (stage-1 arms J4 / J5; journal_values): None = binary (J2); "idf" (J4), "sqrt_n" / "inv_n" (J5);
+    journal_mass "restore" / "frobenius". The article×journal RelationData gets .journal (None or the form's info)."""
     rels = [r for r in APPROACH[approach] if r not in drop and (use_journal or r != "article_journal")]
     w = relation_weights(rels, journal_multiplier, semantic_split)
     out = []
@@ -282,7 +314,15 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
         assert obs[r].all(), "a tie in a missing row"
         if diag:
             assert not np.any(r == c), "a tie on the masked diagonal"
+        jinfo = None
+        if rel == "article_journal" and journal_form is not None:
+            assert log_damping is None and not binary, "journal forms are not combined with damping or the binary test"
+            assert not hid.any(), "article×journal has no hidden cells"
+            r, c, v, vis, obs, fro_j, jinfo = journal_values(r, c, v, vis, obs, shape, journal_form, journal_mass)
+            hid = ~vis
         fro = float(np.sqrt(np.sum(v[vis] ** 2)))                 # visible observed cells (zeros add nothing)
+        if jinfo is not None:
+            fro = fro_j                                           # divisor: Frobenius scaling, × q when mass is restored
         damping, wr = None, w[rel]
         if log_damping is not None and rel in DAMPED_SIDE:
             assert not binary, "the binary test and the log-damping arm are not combined"
@@ -297,6 +337,7 @@ def fit_data(build, approach, group=None, journal_multiplier=1.0, semantic_split
             vt = np.full(int(vis.sum()), 1.0 / np.sqrt(vis.sum()))   # 1 per visible tie, Frobenius-normalised
         rd = RelationData(rel, rf, cf, shape, wr, dom, r[vis], c[vis], vt, obs, diag, r[hid], c[hid], v[hid], er, ec, fro)
         rd.damping = damping
+        rd.journal = jinfo
         out.append(rd)
     if mass_weights:
         # W3 check (owner 2026-11-22, "I approve W3, prepare the check"; RL-339/340): under KL a relation's pull is

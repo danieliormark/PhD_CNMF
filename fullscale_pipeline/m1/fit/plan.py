@@ -441,6 +441,45 @@ def w4_swap():
     return out
 
 
+# Stage 1 (study A first; owner decisions 2026-11-24..26, RL-383/385/389/402/403): λ rule C with the amendment (RL-373/374)
+R_STAR = {1: {3: 0.3, 5: 0.3, 8: 0.45, 13: 0.3, 20: 1.0}, 2: {3: 0.3, 5: 0.3, 8: 0.3, 13: 1.0, 20: 1.0}}
+# J4 / J5 under KL (owner's choice pending 2026-11-26): journal_mass "restore" keeps J2's visible journal mass; J5's form
+# "inv_n" (1/n_j: equal total per journal under KL) or "sqrt_n" (1/√n_j, the squared-error wording)
+J45 = {"J4": {"journal_form": "idf", "journal_mass": "restore"}, "J5": {"journal_form": "inv_n", "journal_mass": "restore"}}
+STAGE1_ARMS = {"J1": {"use_journal": False}, "J2": {}, "J3a": {"journal_multiplier": 0.25},
+               "J3b": {"journal_multiplier": 0.125}, "J4": J45["J4"], "J5": J45["J5"],
+               "J2_logdamp": {"log_damping": "data"},                                    # robustness (RL-272–279, RL-403)
+               "J1_s065": {"use_journal": False, "mass_weights": True, "semantic_pull": 0.65},  # robustness (RL-403)
+               "J2_s065": {"mass_weights": True, "semantic_pull": 0.65}}
+
+
+def stage1(study="A", arms=None):
+    """Stage 1 (D1 journal ablation + robustness arms): both approaches × arms × coarse K 3, 5, 8, 13, 20 × hold-out groups
+    1–10 × seeds 1–5 (RL-383/385). λ_child = r*(approach, K) × that study's pass-1 basis (absolute λ shared by every arm at
+    a K: "stage-1 arms share r* per K", RL-375; the 0.65 arm keeps W1's λ, RL-403 P6). Settings as pass 3 (start S3 at
+    10 %, KL, fraction 0.03, float32, warm-up 300, 8,000-epoch ceiling). arm["j"] names the arm (ignored by the fit).
+    Study A: 9 arms × 2 approaches × 5 K × 50 = 4,500 fits; study B: journal arms only unless A's robustness arms change a
+    conclusion (RL-403 P1)."""
+    basis = json.load(open(PASS3_BASIS[study]))
+    names = arms or (list(STAGE1_ARMS) if study == "A" else ["J1", "J2", "J3a", "J3b", "J4", "J5"])
+    stage = "stage1" if study == "A" else "B_stage1"
+    out = []
+    for a in (1, 2):
+        for K in COARSE_K:
+            r = R_STAR[a][K]
+            terms = {"lambda_child": r * basis[f"pass1|{a}|{K}"]["basis"], "w_form": "contrast"}
+            for name in names:
+                arm = dict(STAGE1_ARMS[name], r=r, j=name)
+                for g in range(10):
+                    for s in range(1, 6):
+                        j = dict(job(stage, a, g, K, 1, s, FRACTION[1], dtype="float32", terms=terms, arm=arm, max_epochs=8000),
+                                 social_link_start="diagonal", offdiag_level=0.1, offdiag_semantic=True, lambda_from_r=True)
+                        if study == "B":
+                            j["build"] = BUILD_B
+                        out.append(j)
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -453,10 +492,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full", "lambda_cal", "weight_check", "weight_curve", "cc_test", "w4_swap"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full", "lambda_cal", "weight_check", "weight_curve", "cc_test", "w4_swap", "stage1"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K), "lambda_cal": lambda: lambda_cal("A"), "weight_check": weight_check, "weight_curve": weight_curve, "cc_test": cc_test, "w4_swap": w4_swap}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K), "lambda_cal": lambda: lambda_cal("A"), "weight_check": weight_check, "weight_curve": weight_curve, "cc_test": cc_test, "w4_swap": w4_swap, "stage1": lambda: stage1("A")}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)
