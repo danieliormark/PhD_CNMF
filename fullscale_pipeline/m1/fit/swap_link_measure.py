@@ -41,8 +41,9 @@ def pair_mask(E):
     return S.row[m], S.col[m]
 
 
-def one(f, cache):
-    j = f["job"]; rds = {rd.name: rd for rd in fit_rds(j, cache)}
+def one(f, cache, rds=None):
+    # rds: the fit's relation data, if the caller already has them (d1_analysis, 2026-11-26); J1 has no article×journal
+    j = f["job"]; rds = {rd.name: rd for rd in (rds if rds is not None else fit_rds(j, cache))}
     ca = rds["child_article"]; n = ca.shape[0]
     X = sp.csr_matrix((np.ones(len(ca.tie_row)), (ca.tie_row, ca.tie_col)), shape=ca.shape)
     inter = (X @ X.T).toarray(); size = np.asarray(X.sum(1)).ravel()
@@ -64,7 +65,8 @@ def one(f, cache):
     else:
         ent["co-author tie"] = incidence(rds["article_article"], n)
         ent["organisation"] = incidence(rds["article_affiliation"], n)
-    ent["journal"] = incidence(rds["article_journal"], n)
+    if "article_journal" in rds:
+        ent["journal"] = incidence(rds["article_journal"], n)
     out = {}
     for name, E in ent.items():
         r, c = pair_mask(E)

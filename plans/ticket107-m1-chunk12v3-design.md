@@ -2857,3 +2857,11 @@ weight is spread across journals, not in the journal matrix's total; (ii) J5's p
 journal's number of articles; one-article journals' ties missing), so every journal of ≥ 2 articles carries equal total
 weight (0.273 each) — the pre-registered intent, which 1/√n_j achieves only under squared error. J4 = idf
 ln(N/(n_j+1))+1, mass restored. The stage-1 job list already used these forms; no regeneration. RL-408.]*
+
+*[2026-11-26, **D1 analysis code written** (owner: "Yes, please start writing the D1 analysis code"), before any stage-1
+result: `fullscale_pipeline/m1/fit/d1_analysis.py` (D1-M1..M4, decision rule, robustness readings as decided; 12 known-answer
+tests pass; code path checked on stand-in stage-0 fits). Implementation choices proposed to the owner, not decided: one
+article set per (approach, K, group) pooled over all arms; matching on shared facets (journal excluded); step 3's "best" =
+mean Δ over the candidate K, ties within the mean δ; robustness readings as single comparisons with δ = 10 % of the
+reference arm's gain. RL-409.]*
+

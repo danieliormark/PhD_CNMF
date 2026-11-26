@@ -5337,3 +5337,32 @@ journals' ties missing: each journal of ≥ 2 articles carries total 0.273 (larg
 journal: J2 3.99 vs 0.043; J4 2.49 vs 0.060; J5 0.273 vs 0.273). `plan.J45` already used these forms, so
 `fit/slurm/jobs_stage1.jsonl` (4,500 fits, study A) stands unchanged. Submission still waits for the W4 result (a W4 flag
 would change λ at the flagged K). Design doc 2026-11-26 entry; M1_PROGRESS; ROLLING_NOTES.
+
+### RL-409 — 2026-11-26 — D1 analysis code written and tested (owner: "Yes, please start writing the D1 analysis code"); no stage-1 result read
+
+`fit/d1_analysis.py` implements the decided D1 analysis of stage 1 (pre-registration §8; RL-394–404): candidate K (union
+of the six journal arms' one-SE bands of the decided held-out score); D1-M1 (semantic-equal existence, Δ_g = Jx − J1, δ =
+10 % of J1's gain over the degree-only reference; Dunnett-type simultaneous intervals with each comparison's own SE and the
+estimated correlation of the arms' Δ_g, multivariate t, 200,000 draws; uncorrected intervals, classes at 5 % / 20 %,
+half-split margin and value classes reported; majority over candidate K); D1-M2 (Track A on covered articles, chance-
+adjusted, within-group label permutation enumerated per group, 9,999 combinations, Holm over the five arms, drop ≥ 5 %,
+10 % reported; Track B, model-level tracks and co-membership R2 reported); D1-M3 (c_r, s_r, p_r against the tie-weight
+reference, flag); D1-M4 (999 journal-label shuffles per fit; Δ̄ permutation test, Holm, Δ̄ ≥ 0.2, 0.5 reported; mass
+reading, detection limit, community size quantiles, journal-membership readings of journal-shaped communities); decision
+rule (RL-402); robustness readings (RL-403/404: log-damping vs J2, 0.65 vs W1 at J1 / J2, the J2-vs-J1 contrast at 0.65,
+social readings, dominance of 0.65, flags to the owner). Tests: `fit/tests/test_d1_analysis.py` (12 known-answer tests:
+Holm, Dunnett critical value 3.06 at 9 df and correlation 0.5 as in pre-registration §6, classes, majority, half-splits,
+both permutation tests, band, loss shares, journal-shaped test, decision rule incl. "at least half") — all pass. Code-path
+test on saved stage-0 pass-3 fits with stand-in labels (r 0 / 0.3 / 1.0 as J1 / J2 / J3a; approach 1, K 5, groups 1–3 ×
+seeds 1–5): runs end to end in 254 s; journal realised share 0.9–1.1 % (as RL-396). Profiling a K 20 unit: co-membership
+was 54 % of the time → computed for articles only (identical values, max difference 0). `swap_link_measure.one` takes the
+caller's relation data and skips the journal reading when the arm has no journal matrix (W4 analysis unchanged).
+Job: `bash fit/slurm/d1_analysis.sh` (STUDY=B for study B) after stage 1, 16 workers, est. ≈ 8–10 CPU-h.
+**Implementation choices put to the owner (not decided):** (a) one article set per (approach, K, group) for D1-M2 and
+D1-M4 — covered (≥ 0.5) on average over every arm's fits of that unit, so all arms are compared on the same articles;
+(b) Track matching on the facets both arms share (the journal facet excluded throughout, since J1 lacks it); (c) step 3
+"best held-out score" = mean Δ over the candidate K, "tied" = within the mean δ over the candidate K; (d) robustness
+readings use single comparisons (no Dunnett / Holm), δ = 10 % of the reference arm's gain. Not yet in the script: idea
+coherence and the entity-total diagnostic of the damping arm (RL-403 community readings), the stage-2 re-check, the
+text-check material.
+
