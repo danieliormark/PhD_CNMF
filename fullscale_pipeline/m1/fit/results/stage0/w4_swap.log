@@ -1,0 +1,25 @@
+
+approach_1_K5_r0.3 (10 paired seeds)
+  author                       R_off -0.0223±0.0083  R_on -0.0638±0.0067  flatness -0.0414±0.0048  testable True  W4 flag False  <- decides  data p1 +0.0004
+  organisation (via authors)   R_off +0.0039±0.0015  R_on +0.0043±0.0018  flatness -0.0003±0.0014  testable True  W4 flag False  data p1 +0.0001
+  journal                      R_off -0.0214±0.0020  R_on -0.0506±0.0020  flatness -0.0291±0.0020  testable True  W4 flag False  data p1 -0.0000
+
+approach_2_K5_r0.3 (10 paired seeds)
+  co-author tie                R_off -0.0179±0.0078  R_on -0.0201±0.0114  flatness -0.0022±0.0068  testable True  W4 flag False  <- decides  data p1 +0.0021
+  organisation                 R_off +0.0041±0.0028  R_on +0.0041±0.0040  flatness +0.0001±0.0018  testable False  W4 flag False  data p1 +0.0007
+  journal                      R_off -0.0194±0.0019  R_on -0.0464±0.0028  flatness -0.0270±0.0020  testable True  W4 flag False  data p1 -0.0001
+
+approach_1_K13_r0.3 (10 paired seeds)
+  author                       R_off -0.0155±0.0059  R_on -0.0281±0.0057  flatness -0.0126±0.0064  testable True  W4 flag False  <- decides  data p1 +0.0004
+  organisation (via authors)   R_off +0.0006±0.0011  R_on +0.0015±0.0012  flatness -0.0009±0.0005  testable False  W4 flag False  data p1 +0.0001
+  journal                      R_off -0.0077±0.0010  R_on -0.0130±0.0057  flatness -0.0053±0.0056  testable True  W4 flag False  data p1 -0.0000
+
+approach_2_K13_r1 (10 paired seeds)
+  co-author tie                R_off -0.0177±0.0106  R_on -0.0213±0.0119  flatness -0.0036±0.0079  testable False  W4 flag False  <- decides  data p1 +0.0021
+  organisation                 R_off -0.0008±0.0020  R_on -0.0021±0.0026  flatness -0.0013±0.0017  testable False  W4 flag False  data p1 +0.0007
+  journal                      R_off -0.0048±0.0017  R_on -0.0082±0.0018  flatness -0.0034±0.0009  testable True  W4 flag False  data p1 -0.0001
+
+approach_1_K20_r1 (10 paired seeds)
+  author                       R_off -0.0016±0.0071  R_on -0.0242±0.0089  flatness -0.0226±0.0074  testable False  W4 flag False  <- decides  data p1 +0.0004
+  organisation (via authors)   R_off +0.0004±0.0021  R_on +0.0019±0.0017  flatness -0.0015±0.0013  testable False  W4 flag False  data p1 +0.0001
+  journal                      R_off +0.0340±0.0174  R_on +0.0217±0.0140  flatness +0.0123±0.0120  testable False  W4 flag False  data p1 -0.0000

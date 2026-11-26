@@ -5411,3 +5411,15 @@ bias); C4 0.045 / 0.045. Price: with one arm truly better by 4 SE, P(only it lef
 alternative, not used (assumes a common variance). Code: `fit/d1_analysis.py` (`clearly_worse_all_pairs`; summarise
 stores per-group Δ_g as `M1_groups`; `decide` reports `step3_C4`). Tests: 13 known-answer tests pass (new: C4 cases;
 decide picks the clearly better arm over a higher-s_journal one). Stand-in run (as RL-409/410) 290 s, readings unchanged.
+
+### RL-413 — 2026-11-26 — Check W4 finished: no flag in any cell; stage-1 λ unchanged
+All 70 fits converged and were analysed (`fit/results/stage0/w4_swap.{json,log}`). Deciding entity (approach 1 author,
+approach 2 co-author tie), flatness f = −sign(R̄_off)(R_on − R_off), mean ± SE over 10 paired seeds:
+A1 K5 r 0.3 −0.041 ± 0.005 (testable; term-on response stronger, relative fall 33 % vs 16 %); A2 K5 r 0.3 −0.002 ± 0.007
+(testable; no difference); A1 K13 r 0.3 −0.013 ± 0.006 (testable); A2 K13 r 1 −0.004 ± 0.008 (not testable: |R̄_off|
+≤ 2 SE); A1 K20 r 1 −0.023 ± 0.007 (not testable; term-on response −0.024 ± 0.009, relative fall 17 % vs 2 % off).
+W4 flag (f > 2 SE) in no cell: the term does not flatten the response to the swap anywhere it can be tested; where
+negative, the term-on model responds more. Swap check: data excess author / co-author pairs 0.0087 at p 0 → 0.0004 /
+0.0021 at p 1. Observation, reported: in approach 2 the model's co-author excess falls only 5 % after the swap with and
+without the term. Journals: flatness negative (−13 to −15 SE at K5), not deciding. Consequence (RL-405): no r limit,
+stage-1 job list stands; next: owner submits `bash fit/slurm/stage1.sh`.
