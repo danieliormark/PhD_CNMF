@@ -5206,3 +5206,15 @@ shuffles for these arm tests (p near 0.01 needs it; no refitting); uncorrected v
 M2 and M4 (the journal problem needs both; intersection-union, Berger 1982 — reference to verify). Minimum size of Δ̄:
 open (owner questioned 0.5 as lenient). Stage-0 reading (J2 setting, study A, groups 1–5 × seeds 1–5): journal-shaped C
 = 0 in every fit at K 5 and 13 (largest j_k 0.185–0.249); journal-associated 1.68–4.44 per fit (seed SD 0.4–1.4).
+
+### RL-398 — 2026-11-26 — D1-M4 noise check at K 20 on saved stage-0 fits (owner: "Yes, please run the K 20 check first")
+Journal-shaped communities per fit (community test as decided: covered articles with a journal, journals ≥ 2 articles,
+999 shuffles, p_k < 0.05 and j_k ≥ 0.25), stage-0 pass-3 fits, main setting (= J2), study A, K 20, r 1.0, groups 1–5 ×
+seeds 1–10 (`fit/d1m4_check.py --k20` → `fit/results/stage0/d1m4_check_K20.json`; K 5/13 run of RL-397 →
+`d1m4_check_K5_K13.json`). Approach 1: counts 0/1/2/3 in 10/30/9/1 of 50 fits, mean 1.02 (80 % of fits ≥ 1), seed SD
+0.69, group means 0.8–1.2, between-group variance ≈ 0 (estimate −0.016); largest j_k 0.533. Approach 2: 0/1/2 in 29/17/4,
+mean 0.50 (42 % ≥ 1), seed SD 0.64, group means 0.2–0.8, between-group variance ≈ 0.009; largest j_k 0.352. No singleton-
+journal communities. Journal-associated 3.9 / 6.1 per fit. Reading: the count's noise is seed noise (the hold-out draw adds
+little), variance ≈ 0.5–0.8 × mean. Detection limit of Δ̄ (90 % power, one-sided, 10 groups × 5 seeds) with this noise:
+≈ 0.2 (Holm 0.01) / 0.14 (0.05) if J1 has no journal-shaped communities; ≈ 0.6 / 0.45 if J1 has 0.5 per fit; ≈ 0.75 /
+0.6 if J1 has 1 per fit (J1's own count unknown).
