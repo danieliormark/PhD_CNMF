@@ -5218,3 +5218,11 @@ journal communities. Journal-associated 3.9 / 6.1 per fit. Reading: the count's 
 little), variance ≈ 0.5–0.8 × mean. Detection limit of Δ̄ (90 % power, one-sided, 10 groups × 5 seeds) with this noise:
 ≈ 0.2 (Holm 0.01) / 0.14 (0.05) if J1 has no journal-shaped communities; ≈ 0.6 / 0.45 if J1 has 0.5 per fit; ≈ 0.75 /
 0.6 if J1 has 1 per fit (J1's own count unknown).
+
+### RL-399 — 2026-11-26 — D1-M4 minimum size DECIDED: 0.2 extra journal-shaped communities per fit (owner)
+Owner: "I approve A at 0.2 with the readings you proposed". "Jx has more journal-shaped communities than J1" = the
+within-group permutation test (Holm across the five arms, 9,999 label shuffles; RL-397) **and** observed Δ̄ ≥ 0.2 (extra
+journal-shaped communities per fit, mean over 10 groups × 5 seeds). Reported beside: the verdict at 0.5; the mass reading
+(share of article membership in journal-shaped communities, Jx − J1); per K and arm, the detection limit of Δ̄ computed
+from the stage-1 noise observed in J1 and Jx (so a "not more" at K 20 reads as "nothing large enough to detect"). Basis:
+RL-398 (detection limit ≈ 0.2 if J1 has none; 0.45–0.8 if J1 has 0.5–1 per fit).

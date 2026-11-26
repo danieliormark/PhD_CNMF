@@ -2799,3 +2799,11 @@ as proposed in the same question, for D1-M2, with 9,999 label shuffles for these
 no correction across M2 and M4 (both required; intersection-union). 10 hold-out groups × 5 seeds re-confirmed. Open: the
 minimum size of Δ̄ (0.5 proposed; owner: possibly too lenient, e.g. 40 % of fits with an extra journal-shaped community
 would not count). Stage-0 reading: no journal-shaped community in any J2 fit at K 5 / 13. RL-397.]*
+
+*[2026-11-26, **D1-M4 minimum size DECIDED: 0.2** (owner: "I approve A at 0.2 with the readings you proposed"). "More
+journal-shaped communities than J1" = permutation test with Holm (RL-397) **and** observed Δ̄ ≥ 0.2 extra journal-shaped
+communities per fit (≈ one extra in every fifth fit). Constant across K: the strictest value the design detects reliably
+when J1 has none (RL-398); where J1 has its own (likely K 20) the test binds and the detection limit rises to ≈ 0.45–0.8.
+Reported: verdict at 0.5; mass reading (share of article membership in journal-shaped communities, Jx − J1); per K and arm
+the detection limit from the observed stage-1 noise. Stage-0 (J2): none at K 5 / 13; at K 20 1.02 (approach 1) / 0.50
+(approach 2) per fit. RL-399.]*

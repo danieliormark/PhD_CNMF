@@ -23,7 +23,7 @@ half-split margin reported); D1-M2 restated (articles primary; Track A / B + co-
 cross- vs within-arm agreement, 999 label shuffles within groups). Banned term recorded: "neighbour" (memory).
 **Open, in order:** (1) [done: D1-M2 minimum 5 %, 10 % reported, Track A articles decides, RL-395];
 (2) [done: D1-M3 restated — c_r = KL deviance explained vs degree-only, realised share = share of weighted loss
-reduction, flag unchanged, RL-396; FINDINGS §35 approach-2 article×article below degree-only]; (3) D1-M4: permutation test + Holm (also D1-M2), 9,999 arm shuffles, 10 × 5 confirmed (RL-397); OPEN: minimum size of Δ̄ (owner finds 0.5 lenient); (4) D1 decision rule (small updates); (5) stage-1 point 6:
+reduction, flag unchanged, RL-396; FINDINGS §35 approach-2 article×article below degree-only]; (3) D1-M4: permutation test + Holm (also D1-M2), 9,999 arm shuffles, 10 × 5 confirmed (RL-397); minimum Δ̄ ≥ 0.2 DECIDED (RL-399; K 20 noise check RL-398); (4) D1 decision rule (small updates); (5) stage-1 point 6:
 log-damping and 0.65 arms (placement, size); then remaining λ-calibration steps (swap with the term on; optional λ text
 check), study B λ-calibration grid + run, stage-1 job build. Reports pending: member-mass reading
 (sufficient_members.json "member_mass"). Housekeeping: membership-readings summaries with corrected R5 flag;

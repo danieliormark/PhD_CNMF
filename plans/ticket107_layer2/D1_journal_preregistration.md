@@ -335,6 +335,7 @@ Replaces the definition in §4.1 where they differ (design doc 2026-11-24/25, RU
 - **D1-M4 — comparison with J1 DECIDED 2026-11-26 (owner; RL-397).** Replaces "difference exceeds the seed-half noise
   margin": within-group permutation test of Δ̄ (mean over the 10 groups of Jx's minus J1's mean count of journal-shaped
   communities per fit), one-sided; Holm across the five arms (also for D1-M2), 9,999 label shuffles for these arm tests;
-  uncorrected verdicts reported. Community-level test unchanged. Minimum size of Δ̄: open.
-- Still to restate (stage-1 point 5): the D1-M4 minimum size, the decision rule.
+  uncorrected verdicts reported. Community-level test unchanged. **Minimum: observed Δ̄ ≥ 0.2** (owner 2026-11-26,
+  RL-399); reported: verdict at 0.5, mass reading (Jx − J1), detection limit per K and arm from the observed noise.
+- Still to restate (stage-1 point 5): the decision rule.
 
