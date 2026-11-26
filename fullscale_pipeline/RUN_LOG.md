@@ -5327,3 +5327,13 @@ J2 binary 46.17 (visible mass after Frobenius scaling); Frobenius only: J4 idf 4
 1/n_j — **owner's choice pending**; regenerated if chosen otherwise. Smoke test (K 3, 330 epochs, hold-out group 8):
 J1, J3b, J4, J5, J2 + log-damping, J1 at 0.65 — correct relations and weights, finite losses, held-out scores computed.
 Not submitted; D1 analysis code to be written before results are read.
+
+### RL-408 — 2026-11-26 — J4 / J5 under KL decided (owner): journal mass restored, J5 = 1/n_j
+
+Owner: "I approve mass restoration and J5 as 1/n_j". (i) J4 (idf ln(N/(n_j+1))+1) and J5 rescale the article×journal
+matrix so its total visible tie value equals J2's (46.17), as decided for the log-damping arm: the arms vary only the
+spread of journal weight across journals, not its total (J3a/J3b vary the total). (ii) J5 per-tie value 1/n_j, one-article
+journals' ties missing: each journal of ≥ 2 articles carries total 0.273 (largest journal, 184 articles, vs a 2-article
+journal: J2 3.99 vs 0.043; J4 2.49 vs 0.060; J5 0.273 vs 0.273). `plan.J45` already used these forms, so
+`fit/slurm/jobs_stage1.jsonl` (4,500 fits, study A) stands unchanged. Submission still waits for the W4 result (a W4 flag
+would change λ at the flagged K). Design doc 2026-11-26 entry; M1_PROGRESS; ROLLING_NOTES.

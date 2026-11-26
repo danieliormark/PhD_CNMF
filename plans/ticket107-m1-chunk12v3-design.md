@@ -2849,3 +2849,11 @@ used (older start and code). 70 fits. RL-405.]*
 *[2026-11-26, **λ text check DEFERRED** (owner: "I agree to defer the text check") to after stage 2, run together with the
 idea- vs people-led text check; exception: a W4 flag at a K → run at that K. Stage-1 jobs (study A, 4,500 fits) built;
 open for the owner: J4 / J5 under KL (mass restoration; J5 as 1/√n_j or 1/n_j). RL-407.]*
+
+*[2026-11-26, **J4 / J5 under KL DECIDED** (owner: "I approve mass restoration and J5 as 1/n_j"). Under KL a relation's
+pull is the sum of its tie values, so: (i) J4 and J5 rescale the article×journal matrix after their per-tie reweighting so
+its total visible tie value equals J2's (46.17; as for the log-damping arm), so they differ from J2 only in how journal
+weight is spread across journals, not in the journal matrix's total; (ii) J5's per-tie value is 1/n_j (n_j = the
+journal's number of articles; one-article journals' ties missing), so every journal of ≥ 2 articles carries equal total
+weight (0.273 each) — the pre-registered intent, which 1/√n_j achieves only under squared error. J4 = idf
+ln(N/(n_j+1))+1, mass restored. The stage-1 job list already used these forms; no regeneration. RL-408.]*

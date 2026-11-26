@@ -443,8 +443,8 @@ def w4_swap():
 
 # Stage 1 (study A first; owner decisions 2026-11-24..26, RL-383/385/389/402/403): λ rule C with the amendment (RL-373/374)
 R_STAR = {1: {3: 0.3, 5: 0.3, 8: 0.45, 13: 0.3, 20: 1.0}, 2: {3: 0.3, 5: 0.3, 8: 0.3, 13: 1.0, 20: 1.0}}
-# J4 / J5 under KL (owner's choice pending 2026-11-26): journal_mass "restore" keeps J2's visible journal mass; J5's form
-# "inv_n" (1/n_j: equal total per journal under KL) or "sqrt_n" (1/√n_j, the squared-error wording)
+# J4 / J5 under KL (owner DECIDED 2026-11-26, RL-408: "I approve mass restoration and J5 as 1/n_j"): journal_mass "restore"
+# keeps J2's visible journal mass; J5 = "inv_n" (1/n_j: equal total per journal of >= 2 articles under KL)
 J45 = {"J4": {"journal_form": "idf", "journal_mass": "restore"}, "J5": {"journal_form": "inv_n", "journal_mass": "restore"}}
 STAGE1_ARMS = {"J1": {"use_journal": False}, "J2": {}, "J3a": {"journal_multiplier": 0.25},
                "J3b": {"journal_multiplier": 0.125}, "J4": J45["J4"], "J5": J45["J5"],
