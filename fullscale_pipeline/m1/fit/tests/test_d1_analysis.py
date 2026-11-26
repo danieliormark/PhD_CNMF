@@ -108,9 +108,29 @@ def test_journal_shaped():
     assert r2["journal_shaped"] == 0
 
 
-def _rep(per):
-    """per: {K: {arm: (class, mean, problem, s_journal)}}"""
+def test_clearly_worse_all_pairs():
+    rng = np.random.default_rng(2)
+    z = lambda: rng.standard_normal(10)
+    # clear gap ≫ noise and ≥ δ → the lower arm is out
+    r = D.clearly_worse_all_pairs({"a": dict(enumerate(0.02 + 0.001 * z())), "b": dict(enumerate(0.001 * z()))}, 0.002)
+    assert r["out"] == ["b"] and r["sign_patterns"] == 1024, r
+    # gap clear but below δ → none out
+    r = D.clearly_worse_all_pairs({"a": dict(enumerate(0.001 + 0.0001 * z())), "b": dict(enumerate(0.0001 * z()))}, 0.002)
+    assert r["out"] == [], r
+    # two arms: the sign-flip critical value is close to the t quantile (df 9, 2.26)
+    r = D.clearly_worse_all_pairs({"a": dict(enumerate(z())), "b": dict(enumerate(z()))}, 0.0)
+    assert 1.9 < r["crit"] < 2.6, r["crit"]
+    # equal arms: false 'out' rate near 5 % over many draws (all pairs, 3 arms)
+    hits = sum(bool(D.clearly_worse_all_pairs({k: dict(enumerate(z())) for k in "abc"}, 0.0)["out"]) for _ in range(400))
+    assert hits / 400 < 0.09, hits
+
+
+def _rep(per, sd=0.002):
+    """per: {K: {arm: (class, mean, problem, s_journal)}}; per-group Δ_g = mean + noise (sd) over 10 groups"""
+    rng = np.random.default_rng(4)
     return {"per_K": {str(K): {"delta": 0.002,
+                               "M1_groups": {x: {str(g): m + sd * z for g, z in enumerate(rng.standard_normal(10))}
+                                             for x, (_, m, _, _) in a.items()},
                                "M1": {x: {"class": c, "mean": m, "class_uncorrected": c} for x, (c, m, _, _) in a.items()},
                                "problem": {x: {"problem": p} for x, (_, _, p, _) in a.items()},
                                "M3": {x: {"s_journal": s, "flag": False} for x, (_, _, _, s) in a.items()}}
@@ -123,6 +143,10 @@ def test_decide():
                "J4": ("adds information", 0.0095, False, 0.015), "J5": ("redundant", 0.0, False, 0.01)}}
     arms, d = D.decide(_rep(per), [5])
     assert d["J_star"] == "J4", d
+    # C4: J3a clearly better than J4 (gap 0.010 ≫ δ, small noise) → J3a alone, although J4 has the higher s_journal
+    per = {5: {"J3a": ("adds information", 0.020, False, 0.005), "J4": ("adds information", 0.010, False, 0.015)}}
+    arms, d = D.decide(_rep(per, sd=0.0005), [5])
+    assert d["J_star"] == "J3a" and d["step3_C4"]["tied"] == ["J3a"], d
     # none adds information, J2 remains → J2
     per = {5: {"J2": ("redundant", 0.0, False, 0.02), "J3a": ("redundant", 0.0, False, 0.005)}}
     assert D.decide(_rep(per), [5])[1]["J_star"] == "J2"

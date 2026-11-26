@@ -45,8 +45,10 @@
 # Decision rule (RL-402), per approach: (1) exclude arms classed misleads; (2) journal problem at a candidate K = M4
 #   "more" and M2 "changed"; excluded at ≥ half of the candidate K; reported: share and exact K, per K the share of Jx fits
 #   above J1's group mean and the number of groups with Δ_g ≥ 0.2 and drop_g ≥ 5 %; M3 flag beside; (3) among the rest:
-#   any adds information → best mean Δ over the candidate K (arms within the mean δ of the best tie → J2 if among them,
-#   else highest s_journal averaged over the candidate K); none → J2 if remaining, else highest s_journal; (4) only J1 left
+#   any adds information → C4 (owner, RL-412): per candidate K every pair of those arms compared, paired by group, with
+#   intervals simultaneous over all pairs (sign-flip max-|t|, Westfall & Young 1993); an arm is out if some arm is clearly
+#   better (interval > 0 and mean ≥ δ_K) at the majority of candidate K; one left → it; several → J2 if among them, else
+#   highest s_journal averaged over the candidate K (all out → all tied); none → J2 if remaining, else highest s_journal; (4) only J1 left
 #   → J1 with a post-hoc journal profile; (5) the owner decides after the text check.
 # Robustness readings (RL-403/404), per approach and K: J2_logdamp vs J2, J1_s065 vs J1, J2_s065 vs J2 — D1-M1 class
 #   (single comparison: uncorrected interval, δ = 10 % of the reference arm's gain), D1-M2 test (5 % / 10 %; Holm across the three
@@ -150,6 +152,45 @@ def compare_family(D, names, delta, deltas_reported=()):
                          for f, d in deltas_reported}
         out[n] = e
     return out
+
+
+def clearly_worse_all_pairs(dg, delta, q=0.95, n_random=N_ARM_SHUFFLES, seed=0):
+    """Step 3, C4 (owner, RL-412): dg = {arm: {group: Δ_g}} at one K. Every pair of arms is compared, paired by hold-out
+    group (Δ_g(j) − Δ_g(i) = score_g(j) − score_g(i)); intervals simultaneous over all pairs, critical value = q-quantile
+    of max |t| over pairs under sign flips of the centred per-group differences (all 2^G patterns if G ≤ 12, else
+    n_random random ones; Westfall & Young 1993 max-T). Arm i is out if some arm j is clearly better: lower bound of
+    j − i > 0 and mean ≥ δ. No arm is picked as best first, so the result holds whichever arm is best."""
+    arms = sorted(dg)
+    groups = sorted(set.intersection(*[set(dg[a]) for a in arms])) if arms else []
+    res = {"arms": arms, "groups": len(groups), "delta": delta, "out": [], "pairs": {}}
+    if len(arms) < 2 or len(groups) < 3:
+        res["reason"] = "fewer than 2 arms or 3 groups: none out"
+        return res
+    X = np.array([[dg[a][g] for a in arms] for g in groups], float); G = len(groups)
+    pairs = list(itertools.combinations(range(len(arms)), 2))
+    Dm = np.stack([X[:, j] - X[:, i] for i, j in pairs], 1)
+    C = Dm - Dm.mean(0)
+    if G <= 12:
+        F = np.array(list(itertools.product([-1.0, 1.0], repeat=G)))
+    else:
+        F = np.vstack([np.ones(G), np.random.default_rng(seed).choice([-1.0, 1.0], size=(n_random, G))])
+    T = F[:, :, None] * C[None]
+    sd = T.std(1, ddof=1)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        t = np.where(sd > 0, np.abs(T.mean(1)) / (sd / math.sqrt(G)), 0.0)
+    crit = float(np.quantile(t.max(1), q))
+    res["crit"] = crit; res["sign_patterns"] = int(len(F))
+    out = set()
+    m = Dm.mean(0); se = Dm.std(0, ddof=1) / math.sqrt(G)
+    for p, (i, j) in enumerate(pairs):
+        lo, hi = m[p] - crit * se[p], m[p] + crit * se[p]
+        if lo > 0 and m[p] >= delta:
+            out.add(arms[i])
+        if hi < 0 and -m[p] >= delta:
+            out.add(arms[j])
+        res["pairs"][f"{arms[j]} - {arms[i]}"] = {"mean": float(m[p]), "se": float(se[p]), "ci": [float(lo), float(hi)]}
+    res["out"] = sorted(out)
+    return res
 
 
 def majority(classes):
@@ -453,6 +494,7 @@ def summarise(units, approach):
             G = sorted(set(j1).intersection(*[set(per[x]) for x in fam]))
             D = np.array([[per[x][g] - j1[g] for x in fam] for g in G])
             e["M1"] = compare_family(D, fam, delta, [(f, f / DELTA_SHARE * delta) for f in DELTA_REPORTED]) if len(G) else None
+            e["M1_groups"] = {x: {str(g): float(per[x][g] - j1[g]) for g in G} for x in fam}
             vj1 = gmeans(K, "J1", lambda v: v["heldout"]["value_sem"])
             pv = {x: gmeans(K, x, lambda v: v["heldout"]["value_sem"]) for x in fam}
             Gv = sorted(set(vj1).intersection(*[set(pv[x]) for x in fam]))
@@ -711,18 +753,33 @@ def decide(rep, cand):
             remaining.append(x)
     sj = lambda x: arms[x]["s_journal_mean_over_candidate_K"] or 0.0
     adds = [x for x in remaining if arms[x]["class"] == "adds information"]
-    d_avg = _gm([rep["per_K"][str(K)]["delta"] for K in cand if rep["per_K"][str(K)]["delta"] is not None])
-    if adds:
-        sc = {x: arms[x]["delta_mean_over_candidate_K"] for x in adds}
-        best = max(sc, key=sc.get)
-        tied = [x for x in adds if sc[best] - sc[x] <= d_avg]
-        if len(tied) > 1:
-            pick = "J2" if "J2" in tied else max(tied, key=sj)
-            reasons.append(f"adds information: {adds}; within δ̄ {d_avg:.4g} of the best ({best}): {tied} → {pick}"
-                           + (" (J2 among them)" if pick == "J2" else " (highest s_journal)"))
+    rep_c4 = None
+    if len(adds) == 1:
+        pick = adds[0]
+        reasons.append(f"adds information: {adds} → {pick}")
+    elif adds:
+        # C4 (owner, RL-412): per candidate K, all pairs of these arms with simultaneous sign-flip intervals; an arm is
+        # out if clearly worse than some arm (> 0 and ≥ δ_K) at the majority (> half) of the candidate K
+        c4 = {}
+        for K in cand:
+            e = rep["per_K"][str(K)]
+            dg = {x: (e.get("M1_groups") or {}).get(x) for x in adds}
+            dg = {x: v for x, v in dg.items() if v}
+            if len(dg) >= 2 and e.get("delta") is not None:
+                c4[str(K)] = clearly_worse_all_pairs(dg, e["delta"], seed=_seed("c4", K))
+        n_out = {x: sum(x in r["out"] for r in c4.values()) for x in adds}
+        tied = [x for x in adds if not n_out[x] > len(cand) / 2]
+        if not tied:
+            tied = list(adds)
+            reasons.append("C4: every arm clearly worse than another at the majority of candidate K → all tied")
+        rep_c4 = {"per_K": c4, "out_count": n_out, "tied": tied}
+        if len(tied) == 1:
+            pick = tied[0]
+            reasons.append(f"adds information: {adds}; C4 leaves only {pick} (others clearly worse at the majority of candidate K)")
         else:
-            pick = best
-            reasons.append(f"adds information: {adds}; best mean Δ over candidate K: {best}")
+            pick = "J2" if "J2" in tied else max(tied, key=sj)
+            reasons.append(f"adds information: {adds}; C4 tie set {tied} → {pick}"
+                           + (" (J2 among them)" if pick == "J2" else " (highest s_journal)"))
     elif remaining:
         pick = "J2" if "J2" in remaining else max(remaining, key=sj)
         reasons.append(f"no arm adds information; remaining {remaining} → {pick}"
@@ -731,6 +788,7 @@ def decide(rep, cand):
         pick = "J1"
         reasons.append("only J1 remains → J* = J1; journals profiled after the fit (mean of their articles' memberships)")
     return arms, {"J_star": pick, "remaining": remaining, "reasons": reasons, "candidate_K": cand,
+                  "step3_C4": rep_c4,
                   "note": "default of the rule; the owner decides after the text check (step 5)"}
 
 

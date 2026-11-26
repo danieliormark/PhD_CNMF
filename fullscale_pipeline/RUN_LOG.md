@@ -5394,3 +5394,20 @@ the contrast pair, "band moved" (not a test). Code: `fit/d1_analysis.py` (`summa
 `robustness_summary` reports corrected and uncorrected per K). 12 known-answer tests pass.
 Step 3 (c) still open: owner asked whether C3 is strictly better than C2 and whether the selection bias of C3 can be removed;
 simulation (scratch, not committed) compares C2 / C3 / C4 (all-pairs, sign-flip max-|t|).
+
+### RL-412 — 2026-11-26 — D1 decision rule step 3: C4 (owner: "I approve C4")
+Step 3 when two or more remaining arms add information: no "best" arm is picked first. Per candidate K, every pair of
+those arms is compared, paired by hold-out group (difference of the per-group semantic held-out scores, each the mean over
+5 seeds); intervals are simultaneous over all pairs, critical value = 95th percentile of the largest |t| over pairs under
+sign flips of the centred per-group differences (all 1,024 patterns at 10 groups; Westfall & Young 1993 max-T). An arm is
+out at that K if some arm is clearly better (interval > 0 and mean gap ≥ δ_K, δ_K = 10 % of J1's gain at that K); out
+overall if out at the majority (> half) of the candidate K. One arm left → J*; several → J2 if among them, else the
+highest s_journal averaged over the candidate K; all out → all tied. One arm adds information → that arm. Replaces the
+implemented C1 (mean Δ over candidate K, ties within the mean δ). Reasons (simulation, one K, 10 groups, δ = 1 SE,
+2,000 runs per row; `plans/ticket107_layer2/d1_step3_rules_sim.{py,txt}`): with all arms equal, P(some arm wrongly
+dropped) — point-estimate rule C2 0.57 (3 arms) / 0.86 (5 arms); pick-the-best-then-Dunnett C3 0.07 / 0.11 (selection
+bias); C4 0.045 / 0.045. Price: with one arm truly better by 4 SE, P(only it left) C4 0.73 / 0.30 vs C3 0.81 / 0.57;
+2 arms: C3 = C4. Hsu's multiple comparisons with the best (Hsu 1981, Ann. Statist. 9:1026–1034) noted as the sharper
+alternative, not used (assumes a common variance). Code: `fit/d1_analysis.py` (`clearly_worse_all_pairs`; summarise
+stores per-group Δ_g as `M1_groups`; `decide` reports `step3_C4`). Tests: 13 known-answer tests pass (new: C4 cases;
+decide picks the clearly better arm over a higher-s_journal one). Stand-in run (as RL-409/410) 290 s, readings unchanged.

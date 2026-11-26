@@ -1,0 +1,6 @@
+k=3 P(some arm wrongly out): C2 0.571  C3 0.072  C4 0.045
+k=3 arm 0 better by 2 SE: P(only arm 0 left): C2 0.751  C3 0.157  C4 0.110
+k=3 arm 0 better by 4 SE: P(only arm 0 left): C2 0.999  C3 0.812  C4 0.734
+k=5 P(some arm wrongly out): C2 0.857  C3 0.105  C4 0.045
+k=5 arm 0 better by 2 SE: P(only arm 0 left): C2 0.660  C3 0.038  C4 0.009
+k=5 arm 0 better by 4 SE: P(only arm 0 left): C2 0.996  C3 0.566  C4 0.296

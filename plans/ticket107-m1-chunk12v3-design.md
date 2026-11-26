@@ -2873,3 +2873,9 @@ comparison. (c) step-3 averaging and (d) correction in the robustness readings s
 
 *[2026-11-26, **D1 robustness readings: Holm across the three robustness pairs' D1-M2 tests — owner DECIDED** ("I approve
 your proposal for the robustness section"); uncorrected beside; dominance, contrast and D1-M1 classes uncorrected. RL-411.]*
+
+*[2026-11-26, **D1 decision rule step 3 = C4 — owner DECIDED** ("I approve C4"): among ≥ 2 arms that add information, all
+pairs compared per candidate K with simultaneous sign-flip (max-|t|) intervals, paired by hold-out group; an arm is out if
+another is clearly better (> 0 and ≥ δ_K) at the majority of candidate K; tie set → J2 if among them, else highest
+s_journal. No best arm picked first, so no selection bias (simulated false-drop rate 0.045 vs 0.07–0.11 for
+pick-the-best). RL-412.]*
