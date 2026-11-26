@@ -337,5 +337,10 @@ Replaces the definition in §4.1 where they differ (design doc 2026-11-24/25, RU
   communities per fit), one-sided; Holm across the five arms (also for D1-M2), 9,999 label shuffles for these arm tests;
   uncorrected verdicts reported. Community-level test unchanged. **Minimum: observed Δ̄ ≥ 0.2** (owner 2026-11-26,
   RL-399); reported: verdict at 0.5, mass reading (Jx − J1), detection limit per K and arm from the observed noise.
-- Still to restate (stage-1 point 5): the decision rule.
+- **Decision rule — DECIDED 2026-11-26 (owner; RL-401/402).** §5's steps with the restated measures. Step 2: a journal
+  problem at a candidate K = D1-M4 "more" and D1-M2 "changed"; an arm is excluded if it has one at **at least half** of
+  its candidate K. Reported: share of candidate K with a problem and the exact K; within each K the share of Jx fits with
+  more journal-shaped communities than J1's group mean, and the number of hold-out groups showing the problem. Tie-breaks
+  by s_journal averaged over the candidate K. Holm per approach and candidate K across the five arms. Stage-2 re-check
+  unchanged.
 

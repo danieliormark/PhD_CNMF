@@ -2816,3 +2816,11 @@ articles — a "mosaic" community holds a block of the journal's articles, a "bl
 distinguish the two); community sizes as quantiles. Stage-0 (J2, K 20): the 21 communities with j_k ≥ 0.25 are mosaic
 (60 % of the journal's articles members; 87 % of the contribution from members). RL-400.]*
 *[2026-11-26, **D1 decision rule — U4 DECIDED** (owner: "U4 approve"): Holm per approach and candidate K across the five arms, no further correction across K. U1–U3 in discussion; the rule is decided once they are settled. RL-401.]*
+
+*[2026-11-26, **D1 decision rule DECIDED** (owner: "U1 confirmed; U2 report both readings, at least half; U3 clear"; U4
+RL-401). Steps as pre-registered (§5 of the D1 document) with the restated measures (U1); journal problem = M4 "more" and
+M2 "changed" at a candidate K, and an arm is excluded if it has one at **at least half** of its candidate K (U2); reported:
+share of candidate K with a problem and the exact K; within each K, the share of Jx fits with more journal-shaped
+communities than J1's group mean and the number of hold-out groups showing the problem (reported only); tie-break by
+s_journal averaged over the candidate K (U3: s_journal says where the fit is achieved, not which matrix shaped the
+communities — that is D1-M2). Stage-1 point 5 (D1 restated) complete. RL-402.]*

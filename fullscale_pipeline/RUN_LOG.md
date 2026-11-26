@@ -5253,3 +5253,17 @@ pooled by the across-K rule). U1 (references to restated M1–M4) explanation as
 prefers to measure separately the share of candidate K with a problem and the exact K, and to specify what makes a single
 K problematic; U3 (attribution of the realised share to article×journal) explanation asked. Rule to be decided after
 these (U5).
+
+### RL-402 — 2026-11-26 — D1 decision rule DECIDED (owner: "U1 confirmed; U2 report both readings, at least half; U3 clear")
+Per approach: (1) exclude arms classified misleads (restated D1-M1); (2) journal problem = at a candidate K, D1-M4 "more"
+(permutation test + Holm + Δ̄ ≥ 0.2) and D1-M2 "changed" (permutation test + Holm + drop ≥ 5 %, Track A articles); an
+arm is excluded if it has a journal problem at **at least half** of its candidate K; reported: the share of candidate K
+with a problem and the exact K, and within each K the share of Jx fits with more journal-shaped communities than J1's
+mean in the same group and the number of the 10 hold-out groups showing the problem (Δ_g ≥ 0.2 and drop ≥ 5 %), reported
+only; D1-M3 flag reported beside, never acting alone; (3) among the remaining arms: if any adds information, the best
+held-out score (arms within δ of the best tied → J2 if among them, else the highest s_journal averaged over the
+candidate K); if none, J2 if it remains, else the remaining arm with the highest s_journal; (4) only J1 left → J* = J1,
+journals profiled after the fit; (5) owner decides after the text check. U1: references point to the restated M1–M4.
+U3: realised share = where the fit is achieved (exact additive split of the weighted loss reduction by matrix), not
+which matrix shaped the communities (that is D1-M2). U4 (RL-401): Holm per approach and candidate K. Re-check after
+stage 2 (J1, J*, runner-up at the final K₁, K₂) unchanged.
