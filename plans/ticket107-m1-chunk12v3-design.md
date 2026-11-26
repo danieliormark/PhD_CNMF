@@ -2790,3 +2790,12 @@ domain's s; reported beside: c_r per matrix, pull share p_r = w_r L_r(ref) ÷ Σ
 illustration (J2 = main setting; RL-396): journal s 0.9–1.7 % vs semantic 81–98 %, journal p ≈ 2 %, s/p 0.45–0.77 — the
 journal matrix is harder than average to fit under KL; the flag is not expected to fire in stage 1. Finding recorded:
 FINDINGS §35 (approach 2 article×article below its degree-only reference). RL-396.]*
+
+*[2026-11-26, **D1-M4 restated — comparison with J1 DECIDED; minimum size open** (owner: "I approve the within group
+permitation test"; "I approve using the holm's method"; "I approve having 5 seeds 10 hold out groups as you proposed").
+"Jx has more journal-shaped communities than J1": within-group permutation test of Δ̄ (extra journal-shaped communities per
+fit, mean over 10 groups), one-sided, arm labels reshuffled within each group. **Holm across the five arms** for D1-M4 and,
+as proposed in the same question, for D1-M2, with 9,999 label shuffles for these arm tests; uncorrected verdicts reported;
+no correction across M2 and M4 (both required; intersection-union). 10 hold-out groups × 5 seeds re-confirmed. Open: the
+minimum size of Δ̄ (0.5 proposed; owner: possibly too lenient, e.g. 40 % of fits with an extra journal-shaped community
+would not count). Stage-0 reading: no journal-shaped community in any J2 fit at K 5 / 13. RL-397.]*

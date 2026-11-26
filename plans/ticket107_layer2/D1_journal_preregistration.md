@@ -332,5 +332,9 @@ Replaces the definition in §4.1 where they differ (design doc 2026-11-24/25, RU
   pull share p_r = w_r L_r(ref) ÷ Σ w L(ref), journal s/p. Stage-0 reading (J2 setting): journal s 0.9–1.7 %, semantic
   81–98 %, journal p ≈ 2 % — the §1 concern (journals 64–70 % of the pull) was a squared-error property.
 - D1-M2 restated 2026-11-25 (design doc; RL-394/395).
-- Still to restate (stage-1 point 5): D1-M4, the decision rule.
+- **D1-M4 — comparison with J1 DECIDED 2026-11-26 (owner; RL-397).** Replaces "difference exceeds the seed-half noise
+  margin": within-group permutation test of Δ̄ (mean over the 10 groups of Jx's minus J1's mean count of journal-shaped
+  communities per fit), one-sided; Holm across the five arms (also for D1-M2), 9,999 label shuffles for these arm tests;
+  uncorrected verdicts reported. Community-level test unchanged. Minimum size of Δ̄: open.
+- Still to restate (stage-1 point 5): the D1-M4 minimum size, the decision rule.
 

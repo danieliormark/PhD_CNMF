@@ -5194,3 +5194,15 @@ s 80.8 / 80.6 % and 98.0 / 93.4 %; journal p 2.0 / 2.2 %, semantic p 84.1 / 91.9
 average to fit). The pre-registered concern (journals 64–70 % of the pull under squared error) does not hold under KL;
 the flag is ≈ 50–100× from firing in J2 and the other arms weaken the journal matrix further. Finding (FINDINGS §35): in
 approach 2 the shared communities reproduce article×article worse than its degree-only reference.
+
+### RL-397 — 2026-11-26 — D1-M4 arm comparison: within-group permutation test; Holm across the five arms (also D1-M2); 10 groups × 5 seeds confirmed (owner)
+Owner: "I approve the within group permitation test" (2026-11-25); "I approve using the holm's method"; "I approve having
+5 seeds 10 hold out groups as you proposed". D1-M4 "Jx has more journal-shaped communities than J1": per hold-out group
+the 10 fits (5 J1, 5 Jx); Δ̄ = mean over the 10 groups of (mean C over Jx's fits − mean C over J1's fits), C = journal-
+shaped communities per fit (community-level test unchanged: 999 shuffles, p_k < 0.05 and j_k ≥ 0.25); null by
+reshuffling arm labels within groups, one-sided. Multiplicity across the five arms (J2, J3a, J3b, J4, J5 vs J1, per
+approach and K): Holm on the pairwise permutation p-values, as proposed for both D1-M4 and D1-M2, with 9,999 label
+shuffles for these arm tests (p near 0.01 needs it; no refitting); uncorrected verdicts reported. No correction across
+M2 and M4 (the journal problem needs both; intersection-union, Berger 1982 — reference to verify). Minimum size of Δ̄:
+open (owner questioned 0.5 as lenient). Stage-0 reading (J2 setting, study A, groups 1–5 × seeds 1–5): journal-shaped C
+= 0 in every fit at K 5 and 13 (largest j_k 0.185–0.249); journal-associated 1.68–4.44 per fit (seed SD 0.4–1.4).
