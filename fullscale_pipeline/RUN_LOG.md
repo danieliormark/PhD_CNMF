@@ -5423,3 +5423,23 @@ negative, the term-on model responds more. Swap check: data excess author / co-a
 0.0021 at p 1. Observation, reported: in approach 2 the model's co-author excess falls only 5 % after the swap with and
 without the term. Journals: flatness negative (−13 to −15 SE at K5), not deciding. Consequence (RL-405): no r limit,
 stage-1 job list stands; next: owner submits `bash fit/slurm/stage1.sh`.
+
+### RL-414 — 2026-11-26 — Stage 1 (study A) submitted (owner: "I submitted stage 1"; job id not given)
+`bash fit/slurm/stage1.sh`: 4,500 fits (journal arms 3,000, log-damping 500, semantic share 0.65 at J1 / J2 1,000; 10
+hold-out groups × 5 seeds; coarse K 3 / 5 / 8 / 13 / 20; λ as RL-330, unchanged after W4, RL-413). Next: when finished,
+`bash fit/slurm/d1_analysis.sh`.
+
+### RL-415 — 2026-11-26 — W4 corner levels (reporting extra; saved fits only, no new fits)
+Owner asked for a fuller reading of W4 and of the two not-testable cells. `fit/w4_corner_levels.py` →
+`fit/results/stage0/w4_corner_levels.json`: per cell and entity the mean ± SE over the 10 paired seeds of the model's
+co-membership excess (pairs sharing the entity minus all pairs) at term off / on × p 0 / 1, on − off at p 0 and p 1, the
+share surviving the swap, the excess ÷ all-pairs mean co-membership, and the W-aware data link. Deciding entity:
+share of the model excess surviving the swap, term off / on — A1 K5 0.84 / 0.67, A1 K13 0.86 / 0.80, A1 K20 0.98 / 0.83,
+A2 K5 0.95 / 0.95, A2 K13 0.95 / 0.95, while the data link (Jaccard of child-hyperedge sets, excess over all pairs
+0.0087 = 1.9× the all-pairs mean 0.0097; W-aware 0.0218) falls 96 % (authors) / 76 % (co-author ties). Term on − off
+at p 1 (after the swap): A1 +0.018 ± 0.005 / +0.021 ± 0.005 / +0.021 ± 0.007 (K 5 / 13 / 20), A2 +0.045 ± 0.007 /
++0.050 ± 0.006; scale-free (÷ all-pairs mean) A1 +0.062 ± 0.024 / +0.094 ± 0.055 / +0.143 ± 0.082, A2 +0.112 ± 0.033 /
+−0.115 ± 0.049. Reading given to the owner: the model's grouping of a person's articles is mostly reproduction of the
+social ties, a minority content-led; the term increases the content-led part in approach 1 (opposite of the W4 concern)
+and adds a content-independent amount in both approaches (approach 2 entirely), not caught by the flatness criterion.
+Not a decision; options put to the owner.
