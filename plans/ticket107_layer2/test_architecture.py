@@ -103,7 +103,13 @@ s1 = []
 for a in (1, 2):
     for name, j in JOURNAL_ARMS.items():
         s1.append((f"approach {a} · {name}", weights(a, j), K_PROBE))
-count["stage 1"] = sum(len(k) for _, _, k in s1) * FITS_PER_CELL * 2   # all 10 hold-out groups (owner 2026-11-05)
+# Robustness arms (owner 2026-11-26, RL-403): study A always; study B only if A's arm changes a conclusion (P1b)
+for a in (1, 2):
+    s1.append((f"approach {a} · J2 + social log-damping (robustness; mass restored; vs J2 undamped)", weights(a), K_PROBE))
+    for name in ("J1 no journal matrix", "J2 binary (current, P4)"):
+        s1.append((f"approach {a} · {name} at semantic share 0.65 (robustness; λ_child as W1; vs the same arm at W1)", None, K_PROBE))
+# stage 1 runs 10 hold-out groups × 5 seeds = 50 fits per cell (owner 2026-11-24, RL-383); count = study A
+count["stage 1"] = sum(len(k) for _, _, k in s1) * 10 * 5
 stages.append(("STAGE 1 — journal ablation (chosen loss and λ's; A0; all 10 hold-out groups)", s1,
                "DECISION D1 (pre-registered, D1_journal_preregistration.md): J* per approach; read at all candidate K, also reported "
                "with vetoed K dropped and the veto outcome per journal arm (auto-accepted). BINDING on the coarse band: stability gate "
@@ -132,7 +138,9 @@ s3 = [("3a approach 1 vs approach 2 — reuses stage-2 fits at K₁ and K₂", N
        "the lowest training loss that passes both vetoes (else flagged, next seed); its Track A/B agreement with the other seeds and "
        "the medoid seed reported (owner 2026-11-09)", None, ["K₁", "K₂"]),
       ("OPTIONAL graded swap at the final settings (confirmation only)", None, ["K₁", "K₂"])]
-count["stage 3"] = 3 * 2 * FITS_PER_CELL + 2 * SEEDS
+s3.insert(-2, ("3d semantic share 0.65 at J*, both approaches (matched approach comparison; owner 2026-11-26, RL-403: runs unless "
+               "stage 1 shows 0.65 strictly inferior or superior to W1; reuses stage-1 cells where possible)", None, ["K₁", "K₂"]))
+count["stage 3"] = 3 * 2 * FITS_PER_CELL + 2 * SEEDS + 2 * 2 * FITS_PER_CELL
 cond["stage 3: optional graded swap"] = 4 * 2 * ONE_GROUP
 stages.append(("STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂; final models", s3,
                "DECISIONS: 3a L2.5 classes × membership agreement (an approach failing the stability gate is not ranked); 3b A1 "
@@ -159,7 +167,7 @@ LATER = ["background component (deferred robustness arm; planted test first)",
          "readings (crossing child×article weight, article–idea co-membership)",
          "weighting arm at semantic share 0.65 in both approaches (owner 2026-11-24; RL-368/370): robustness of stage-1 / 3 "
          "conclusions to the relation weighting (FINDINGS §33) and a matched point for the approach comparison; dropped for "
-         "an approach disqualified before it is planned; placement and size to design",
+         "an approach disqualified before it is planned; DESIGNED 2026-11-26 (RL-403): stage 1 at J1 + J2, 5 K, study A (B conditional); stage 3 at J*, K₁, K₂",
          "text check of idea-led (W1) vs people-led (0.65) communities (deferred until stages 1 and 2 are done, owner "
          "2026-11-24; RL-370): blind readers, topical / social coherence, classification, intrusion tests"]
 

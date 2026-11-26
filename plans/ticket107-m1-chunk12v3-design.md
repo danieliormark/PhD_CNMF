@@ -2824,3 +2824,11 @@ share of candidate K with a problem and the exact K; within each K, the share of
 communities than J1's group mean and the number of hold-out groups showing the problem (reported only); tie-break by
 s_journal averaged over the candidate K (U3: s_journal says where the fit is achieved, not which matrix shaped the
 communities — that is D1-M2). Stage-1 point 5 (D1 restated) complete. RL-402.]*
+
+*[2026-11-26, **stage-1 point 6 — robustness arms DECIDED** (owner: "P1, P2, P3, P4, P6 approve; p5 approve unless prior
+studies to not compell us that 0.65 is strictly inferior/superior"). Study A always, study B only if A's arm changes a
+conclusion; log-damping at J2; 0.65 at J1 + J2; all five coarse K; λ_child in the 0.65 arm = W1's absolute value (term's
+loss share reported); stage-3 0.65 arm at J*, K₁, K₂ unless stage 1 shows 0.65 strictly inferior or superior to W1 (the
+operational meaning of "strictly" to be confirmed). Read against the same cells at W1 / undamped with the D1 measures
+(held-out class, membership change, K band, D1 contrast at 0.65, community readings); reported, never automatic. Size,
+study A: +1,500 stage-1 fits (≈ 720 CPU-h) and ≤ 200 stage-3 fits. RL-403.]*

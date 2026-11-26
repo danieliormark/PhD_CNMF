@@ -5,7 +5,7 @@ submitted, finishes, or a decision changes what will run. Details live in the re
 `fullscale_pipeline/RUN_LOG.md` (RL-…, what was run and what came out) and `plans/ticket107-m1-chunk12v3-design.md`
 (design doc, what was decided and why). The staged plan with fit budgets: `plans/ticket107_layer2/test_architecture.txt`.
 
-**Last updated:** 2026-11-25 (D1 measures restated for stage 1: D1-M1 RL-386–389, D1-M2 RL-394/395, D1-M3 RL-396).
+**Last updated:** 2026-11-26 (D1 restated for stage 1: RL-386–402; stage-1 robustness arms placed and sized, RL-403).
 
 **Status words:** *Done* = finished and read; *Running* = on CSF3 now; *Submitted* = in the CSF3 queue; *Ready* =
 code and job written, waiting for submission; *Waiting for decision* = needs the owner's choice before it can be
@@ -112,6 +112,6 @@ empty-column reference.
 | Stage | Fits (staged plan, S = 10 seeds) | Purpose |
 |---|---|---|
 | λ calibration | ≈ 1,580 (+ conditional) | Strength of each kept term per K under the chosen loss; graded swap per kept term |
-| Stage 1 | ≈ 6,000 (+ social log-damping arm, decided 2026-11-18) | Journal weighting (J arms) per approach; social log-damping robustness arm (journals, organisations, authors' article counts; not crossed with J arms; implementation A = mass restored in the data, ordinary start as its undamped reference, under the start chosen by start test 2 — decided 2026-11-19, design doc); binding gate, vetoes and convergence |
+| Stage 1 | Study A 4,500 (journal arms 3,000 + log-damping 500 + semantic-share-0.65 arm at J1/J2 1,000; 10 groups × 5 seeds; RL-383/403); study B 3,000 journal arms (+ robustness arms only if A's change a conclusion) | Journal weighting (J arms) per approach; social log-damping robustness arm (journals, organisations, authors' article counts; not crossed with J arms; implementation A = mass restored in the data, ordinary start as its undamped reference, under the start chosen by start test 2 — decided 2026-11-19, design doc); binding gate, vetoes and convergence |
 | Stage 2 | ≈ 1,000 | K protocol with vetoes and fallback; re-checks |
 | Stage 3 | ≈ 320 (+ optional swap 80) | Approach comparisons, final refit on all data |

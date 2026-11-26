@@ -5267,3 +5267,18 @@ journals profiled after the fit; (5) owner decides after the text check. U1: ref
 U3: realised share = where the fit is achieved (exact additive split of the weighted loss reduction by matrix), not
 which matrix shaped the communities (that is D1-M2). U4 (RL-401): Holm per approach and candidate K. Re-check after
 stage 2 (J1, J*, runner-up at the final K₁, K₂) unchanged.
+
+### RL-403 — 2026-11-26 — Stage-1 point 6: robustness arms placed and sized (owner)
+Owner: "P1, P2, P3, P4, P6 approve; p5 approve unless prior studies to not compell us that 0.65 is strictly
+inferior/superior". P1: both arms in study A; study B only if A's arm changes a conclusion. P2: social log-damping arm at
+J2 only (not at J*: J4/J5 already down-weight large journals). P3: 0.65 arm (semantic share of the KL pull, mass weights
++ semantic_pull 0.65) at J1 and J2. P4: all five coarse K. P6: λ_child in the 0.65 arm = W1's absolute value (r* × W1
+basis, as the weight-curve fits behind FINDINGS §33); the term's share of the total loss reported. P5 (conditional): the
+0.65 arm in stage 3 at J*, K₁, K₂, both approaches (matched approach comparison), reusing stage-1 cells where possible —
+runs unless stage 1 shows 0.65 strictly inferior or superior to W1 (operational definition to confirm). Readings (as
+proposed): vs the same approach / journal arm / K at W1 undamped — held-out semantic existence class (D1-M1 machinery),
+memberships changed (D1-M2 test, 5 % / 10 %), one-SE K band, D1 contrast J2 vs J1 at 0.65, community readings (idea /
+people coherence, journal-shaped communities, entity-total diagnostic for damping); reported, never automatic; an arm
+moving the K band or memberships (≥ 5 %) at a candidate K goes to the owner before stage 2 and triggers study B. Size,
+study A: damping 500 fits (≈ 240 CPU-h), 0.65 1,000 (≈ 480), stage 3 ≤ 200 (≤ ≈ 100); stage 1 study A 4,500 fits.
+`plans/ticket107_layer2/test_architecture.py/.txt` updated (stage 1 now counted at 10 groups × 5 seeds, study A).
