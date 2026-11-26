@@ -416,6 +416,31 @@ def cc_test():
     return out
 
 
+W4_CELLS = ((1, 5, 0.3), (2, 5, 0.3), (1, 13, 0.3), (2, 13, 1.0), (1, 20, 1.0))     # (approach, K, chosen r), rule C
+
+
+def w4_swap():
+    """Swap with the word-similarity term on — check W4 (owner 2026-11-26: "I approve the 70 fits and the paired criterion";
+    RL-405). Difference-in-differences per cell (approach, K, chosen r): [excess p 1 − p 0] term on − [same] term off,
+    paired by seed (same seed = same swap permutation and same start; the term switches on after the 300-epoch warm-up).
+    Study A, W1, settings as pass 3, hold-out group 1, seeds 1–10, p = 1 only (p = 0 = pass-3 fits at r 0 / r*). New fits:
+    term off (r 0) at every cell (K 5 and 13 both approaches, K 20 approach 1) and term on where no swap exists yet
+    (approach 1 K 13 r 0.3, approach 1 K 20 r 1.0); existing term-on swaps reused: weight curve (K 5 r 0.3), weight check
+    (approach 2 K 13 r 1.0). 70 fits. Read by fit/w4_swap_analysis.py."""
+    basis = json.load(open(PASS3_BASIS["A"]))
+    def base(a, K, s_, r):
+        terms = {"lambda_child": r * basis[f"pass1|{a}|{K}"]["basis"], "w_form": "contrast"} if r > 0 else {}
+        return dict(job("w4_swap", a, 0, K, 1, s_, FRACTION[1], dtype="float32", terms=terms, arm={"r": r, "swap_p": 1.0},
+                        max_epochs=8000),
+                    social_link_start="diagonal", offdiag_level=0.1, offdiag_semantic=True, lambda_from_r=True)
+    out = []
+    for a, K, r in W4_CELLS:
+        out += [base(a, K, s_, 0.0) for s_ in range(1, 11)]
+    for a, K, r in ((1, 13, 0.3), (1, 20, 1.0)):
+        out += [base(a, K, s_, r) for s_ in range(1, 11)]
+    return out
+
+
 def rehearsal():
     """CSF3 rehearsal (owner 2026-11-10): 16 tiny real-data fits (K = 3; stopping tolerance 1.0 so every fit stops at
     epoch 21 and counts as converged, letting the aggregation run every check) — approach 1, hold-out groups 0 and 1,
@@ -428,10 +453,10 @@ def rehearsal():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full", "lambda_cal", "weight_check", "weight_curve", "cc_test"))
+    ap = argparse.ArgumentParser(); ap.add_argument("which", choices=("checkpoint3", "stage0_pass1", "rehearsal", "kl_fraction_extension", "timing_terms", "stage0_extension", "stage0_pass2", "w_form_test", "binary_test", "swap_bare", "stage0_pass2_kl_r1", "stage0_pass2_se_r01", "swap_followup", "start_test", "damping_test", "start_test2", "B_stage0_pass1", "stage0_pass3", "B_stage0_pass3", "stage0_pass3_K3", "B_repeats", "B_stage0_pass3_full", "lambda_cal", "weight_check", "weight_curve", "cc_test", "w4_swap"))
     ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
-    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K), "lambda_cal": lambda: lambda_cal("A"), "weight_check": weight_check, "weight_curve": weight_curve, "cc_test": cc_test}.get(a.which, lambda: stage0_pass1(a.seeds))()
+    jobs = {"checkpoint3": checkpoint3, "rehearsal": rehearsal, "kl_fraction_extension": kl_fraction_extension, "timing_terms": timing_terms, "stage0_extension": stage0_extension, "stage0_pass2": stage0_pass2, "w_form_test": w_form_test, "binary_test": binary_test, "swap_bare": swap_bare, "stage0_pass2_kl_r1": stage0_pass2_kl_r1, "stage0_pass2_se_r01": stage0_pass2_se_r01, "swap_followup": swap_followup, "start_test": start_test, "damping_test": damping_test, "start_test2": start_test2, "B_stage0_pass1": B_stage0_pass1, "stage0_pass3": lambda: stage0_pass3("A"), "B_stage0_pass3": lambda: stage0_pass3("B"), "stage0_pass3_K3": lambda: stage0_pass3("A", Ks=(3,)), "B_repeats": B_repeats, "B_stage0_pass3_full": lambda: stage0_pass3("B", Ks=(3,) + PASS3_K), "lambda_cal": lambda: lambda_cal("A"), "weight_check": weight_check, "weight_curve": weight_curve, "cc_test": cc_test, "w4_swap": w4_swap}.get(a.which, lambda: stage0_pass1(a.seeds))()
     for j in jobs:
         print(json.dumps(j, sort_keys=True))
     print(f"{len(jobs)} jobs", file=sys.stderr)

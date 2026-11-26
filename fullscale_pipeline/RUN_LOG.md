@@ -5289,3 +5289,20 @@ classed "misleads" (D1-M1 machinery, semantic held-out existence) at the majorit
 reading improves beyond 1 SE over hold-out groups (the approach's affiliation relation: within-class AP minus the
 degree-only reference; people coherence, FINDINGS §33); strictly superior is the mirror (adds information and no social
 reading worse beyond 1 SE). Otherwise the stage-3 0.65 arm runs (expected from stage 0: semantic worse, social better).
+
+### RL-405 — 2026-11-26 — Check W4 (swap with the word-similarity term on): design approved, job ready (owner)
+Owner: "I approve the 70 fits and the paired criterion". Difference-in-differences per cell (approach, K, chosen r):
+[excess p 1 − p 0] term on − [same] term off, paired by seed (same seed = same swap permutation and same start; the term
+switches on after the 300-epoch warm-up, so twins are identical for 300 epochs). Swap reading = model co-membership
+excess of article pairs sharing a social entity (RL-338). Cells: (1, 5, 0.3), (2, 5, 0.3), (1, 13, 0.3), (2, 13, 1.0),
+(1, 20, 1.0); study A, W1, settings as pass 3, hold-out group 1, seeds 1–10. Existing corners reused: p 0 = pass 3 (r 0,
+r*); term-on p 1 from the weight curve (K 5 r 0.3) and the weight check (approach 2 K 13 r 1.0). The bare swap of RL-248
+(older start, older code) is not used for W4 (settings compared: start without diagonal social cores / off-diagonal 0.1;
+data, init and swap code older; swap permutation identical). Criterion: flatness f_s = −sign(R̄_off)(R_on,s − R_off,s);
+W4 flag if mean f > 2 SE over seeds on the people entity (approach 1 author, approach 2 co-author tie); "not testable" if
+|R̄_off| ≤ 2 SE; journals, organisations and the data excess at p 1 (swap check) reported. Job: `plan.w4_swap` →
+`fit/slurm/jobs_w4_swap.jsonl` (70 fits; settings identical to the pass-3 twins except stage and swap), `slurm/w4_swap.sh`
+(9 tasks × 8 fits, 12 h) + `submit_w4_swap_post.sh` → `fit/w4_swap_analysis.py` → `fit/results/stage0/w4_swap.{json,log}`.
+Checks: inventory of existing corners matches the design (missing exactly the 70); smoke fit (approach 1 K 13 r 0.3,
+330 epochs) ran with the swap applied (99.86 % moved) and the term on; analysis code path run on one cell with stand-in
+fits, which caught and fixed a sign error in the flatness (unit-checked on four cases). ≈ 55 CPU-h. Not yet submitted.

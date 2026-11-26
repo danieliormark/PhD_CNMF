@@ -2837,3 +2837,11 @@ study A: +1,500 stage-1 fits (≈ 720 CPU-h) and ≤ 200 stage-3 fits. RL-403.]*
 strictly"). The arm is skipped only if 0.65 is strictly inferior (semantic class "misleads" at the majority of candidate
 K and no social reading — affiliation held-out gain over the degree-only reference, people coherence — better beyond 1 SE)
 or strictly superior (the mirror). RL-404.]*
+
+*[2026-11-26, **check W4 — swap with the word-similarity term on: design DECIDED** (owner: "I approve the 70 fits and the
+paired criterion"). Like-for-like term-off swaps under the current settings complete, per cell (approach, K, chosen r) =
+(1, 5, 0.3), (2, 5, 0.3), (1, 13, 0.3), (2, 13, 1.0), (1, 20, 1.0), the four corners term off / on × p 0 / 1 (hold-out
+group 1, seeds 1–10); the W4 effect is the paired difference-in-differences of the swap reading. W4 flag if the term-on
+response is flatter beyond 2 SE over seeds on the people entity; "not testable" where the term-off response is within
+2 SE of 0. A flag limits r at that K (next smaller passing r, or the owner under C2). The bare swap of 17 November is not
+used (older start and code). 70 fits. RL-405.]*
