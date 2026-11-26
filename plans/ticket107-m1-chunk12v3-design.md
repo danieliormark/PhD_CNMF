@@ -2865,3 +2865,8 @@ article set per (approach, K, group) pooled over all arms; matching on shared fa
 mean Δ over the candidate K, ties within the mean δ; robustness readings as single comparisons with δ = 10 % of the
 reference arm's gain. RL-409.]*
 
+
+*[2026-11-26, **D1 analysis: (a) article set per comparison, (b) journal excluded from matching — owner DECIDED** ("a) i
+think per cpmparision is a more principled approach b) ok"). D1-M2 / D1-M4 articles = covered on average over the fits of
+the two arms compared (not pooled over all arms); matching on the facets all arms share, journal excluded in every
+comparison. (c) step-3 averaging and (d) correction in the robustness readings still open. RL-410.]*

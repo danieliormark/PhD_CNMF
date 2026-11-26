@@ -38,9 +38,10 @@
 #   journal-shaped communities, Jx − J1), detection limit of Δ̄ (90 % power, one-sided α 0.01 / 0.05) from the observed
 #   noise, community size quantiles, per journal-shaped community its journal's articles' memberships (shares ≥ 0.3 /
 #   ≥ 0.5 / < 0.1; contribution from member articles).
-# Article set for M2 and M4: one set per (approach, K, group) — articles covered (coverage ≥ 0.5, RL-345) on average
-#   over every fit of that unit (all arms), so all arms are compared on the same articles (as the stage-0 pooled set,
-#   owner-approved 2026-11-13); M4 further restricts it to articles with a journal.
+# Article set for M2 and M4 (owner, RL-410 (a)): per comparison (A, B) and (approach, K, group) — articles covered
+#   (coverage ≥ 0.5, RL-345) on average over the fits of A and B only; M4 further restricts it to articles with a journal.
+#   Communities of two fits are matched on the facets all arms share, the journal facet excluded in every comparison
+#   (RL-410 (b)).
 # Decision rule (RL-402), per approach: (1) exclude arms classed misleads; (2) journal problem at a candidate K = M4
 #   "more" and M2 "changed"; excluded at ≥ half of the candidate K; reported: share and exact K, per K the share of Jx fits
 #   above J1's group mean and the number of groups with Δ_g ≥ 0.2 and drop_g ≥ 5 %; M3 flag beside; (3) among the rest:
@@ -69,6 +70,7 @@ ROOT = "/mnt/hum01-rds/Basov/p91688di/m1_fits"
 JOURNAL_ARMS = ("J1", "J2", "J3a", "J3b", "J4", "J5")
 COMPARED = ("J2", "J3a", "J3b", "J4", "J5")                 # each vs J1 (Dunnett / Holm family per approach and K)
 ROBUST = (("J2_logdamp", "J2"), ("J1_s065", "J1"), ("J2_s065", "J2"))
+FAMILIES = tuple(("J1", x) for x in COMPARED) + tuple((a, r) for r, a in ROBUST) + (("J1_s065", "J2_s065"),)
 SEM = ("child_article", "parent_child")
 AFFIL = {1: "author_affiliation", 2: "article_affiliation"}
 PEOPLE = {1: "author", 2: "co-author tie"}
@@ -321,12 +323,9 @@ def unit(key):
     rdss = [_rds_of(f["job"]) for _, f in fits]
     wms = [M.weighted_memberships(U, Z, rel) for (U, Z), rel in zip(UZ, rels)]
     covs = [M.entity_coverage(U, Z, rds) for (U, Z), rds in zip(UZ, rdss)]
-    common = sorted(set.intersection(*[set(w) for w in wms]))            # the journal facet is absent in J1
-    covered = M.covered_entities([{f: cv[f] for f in common} for cv in covs], COVERAGE_C)
-    keep = covered["article"]
+    # facets matched on: those every arm has, journal excluded in every comparison (owner, RL-410 (b))
+    common = sorted(set.intersection(*[set(w) for w in wms]) - {"journal"})
     jour = _G["journal_of_article"]
-    kj = keep & (jour >= 0)
-    _, lab = np.unique(jour[kj], return_inverse=True); J = int(lab.max()) + 1 if kj.any() else 0
     # live entities for co-membership (≥ 1 visible tie in a shared relation), from the first fit's data
     live = {f: np.zeros(len(wms[0][f]["P"]), bool) for f in common}
     for rd in rdss[0]:
@@ -340,38 +339,48 @@ def unit(key):
         if dkey not in ref_cache:
             ref_cache[dkey] = {r: degree_only_loss(rd) for r, rd in rd_by.items()}
         m3 = loss_shares(f["result"]["final_relation_loss"], ref_cache[dkey], {r: rd.weight for r, rd in rd_by.items()})
-        m4 = journal_shaped(wms[i]["article"]["P"][kj], lab, J, rng) if J else None
         coh = None
         if _G["coherence"]:
             c = swap_one(f, {}, rds=rdss[i])
             coh = {e: v["model_excess"] for e, v in c.items()}
         per_fit[ids[i]] = {"arm": a, "seed": f["job"]["seed"], "epochs": f["result"]["epochs"],
-                           "heldout": heldout_readings(f["measures"]), "m3": m3, "m4": m4, "coherence": coh}
-    # fit pairs needed for M2: every pair inside the fits of J1 + Jx, and of each robustness pair
-    fams = [("J1", x) for x in COMPARED] + list((b, a) for a, b in ROBUST) + [("J1_s065", "J2_s065")]
-    need = set()
-    for A, B in fams:
-        if A in byarm and B in byarm:
-            idx = [i for i, (a, _) in enumerate(fits) if a in (A, B)]
-            need |= {(i, j) for i, j in itertools.combinations(idx, 2)}
-    placed = {f: (covered[f] if f in covered else np.ones(len(wms[0][f]["P"]), bool)) for f in common}
-    pairs = {}
-    for i, j in sorted(need):
-        w1 = {f: wms[i][f] for f in common}; w2 = {f: wms[j][f] for f in common}
-        w2s = M._shuffled(w2, rng)
-        real = M.track_pair(w1, w2, placed, common); ch = M.track_pair(w1, w2s, placed, common)
-        adj = lambda r, c: (r - c) / (1 - c) if c < 1 else float("nan")
-        Ps = {f: w1[f]["P"] for f in common}
-        cr = _comem(Ps, {f: w2[f]["P"] for f in common}, live)
-        cc = _comem(Ps, {f: w2s[f]["P"] for f in common}, live)
-        r2 = float(np.nanmean(cr[keep])); r2c = float(np.nanmean(cc[keep]))
-        pairs[f"{ids[i]}|{ids[j]}"] = {
-            "A_article": adj(real["A"]["article"], ch["A"]["article"]), "B_article": adj(real["B"]["article"], ch["B"]["article"]),
-            "A_model": adj(real["A_model"], ch["A_model"]), "B_model": adj(real["B_model"], ch["B_model"]),
-            "R2_article": adj(r2, r2c), "A_article_raw": real["A"]["article"], "A_article_chance": ch["A"]["article"]}
-    return key, {"fits": per_fit, "pairs": pairs, "order": ids, "covered_articles": int(keep.sum()),
-                 "covered_with_journal": int(kj.sum()), "journals_ge2": int((np.bincount(lab, minlength=J) >= 2).sum()) if J else 0,
-                 "common_facets": common}
+                           "heldout": heldout_readings(f["measures"]), "m3": m3, "coherence": coh}
+    # D1-M2 and D1-M4 per comparison (owner, RL-410 (a)): the article set of comparison (A, B) = articles covered on
+    # average over the fits of A and B only; M4 counts and M2 fit pairs are computed on that set
+    fam_out = {}
+    for A, B in FAMILIES:
+        if A not in byarm or B not in byarm:
+            continue
+        idx = [i for i, (a, _) in enumerate(fits) if a in (A, B)]
+        rng = np.random.default_rng([approach, K, group, 107, _seed(A, B)])
+        covered = M.covered_entities([{f: covs[i][f] for f in common} for i in idx], COVERAGE_C)
+        keep = covered["article"]
+        kj = keep & (jour >= 0)
+        _, lab = np.unique(jour[kj], return_inverse=True); J = int(lab.max()) + 1 if kj.any() else 0
+        m4 = {ids[i]: (journal_shaped(wms[i]["article"]["P"][kj], lab, J, rng) if J else None) for i in idx}
+        placed = {f: covered[f] for f in common}
+        pairs = {}
+        for i, j in itertools.combinations(idx, 2):
+            w1 = {f: wms[i][f] for f in common}; w2 = {f: wms[j][f] for f in common}
+            w2s = M._shuffled(w2, rng)
+            real = M.track_pair(w1, w2, placed, common); ch = M.track_pair(w1, w2s, placed, common)
+            adj = lambda r, c: (r - c) / (1 - c) if c < 1 else float("nan")
+            Ps = {f: w1[f]["P"] for f in common}
+            cr = _comem(Ps, {f: w2[f]["P"] for f in common}, live)
+            cc = _comem(Ps, {f: w2s[f]["P"] for f in common}, live)
+            r2 = float(np.nanmean(cr[keep])); r2c = float(np.nanmean(cc[keep]))
+            pairs[f"{ids[i]}|{ids[j]}"] = {
+                "A_article": adj(real["A"]["article"], ch["A"]["article"]), "B_article": adj(real["B"]["article"], ch["B"]["article"]),
+                "A_model": adj(real["A_model"], ch["A_model"]), "B_model": adj(real["B_model"], ch["B_model"]),
+                "R2_article": adj(r2, r2c), "A_article_raw": real["A"]["article"], "A_article_chance": ch["A"]["article"]}
+        fam_out[_fam(A, B)] = {"m4": m4, "pairs": pairs, "covered_articles": int(keep.sum()),
+                               "covered_with_journal": int(kj.sum()),
+                               "journals_ge2": int((np.bincount(lab, minlength=J) >= 2).sum()) if J else 0}
+    return key, {"fits": per_fit, "fam": fam_out, "order": ids, "common_facets": common}
+
+
+def _fam(A, B):
+    return "|".join(sorted((A, B)))
 
 
 def _comem(Ps, Pt, live, f="article"):
@@ -470,7 +479,6 @@ def summarise(units, approach):
                     m4[f"more_at_{mn:g}"] = bool(m4["p_holm"] < ALPHA and m4["delta_bar"] >= mn)
                     m4[f"more_uncorrected_at_{mn:g}"] = bool(m4["p"] < ALPHA and m4["delta_bar"] >= mn)
                 m4["more"] = m4[f"more_at_{M4_MIN:g}"]
-        e["M4"]["J1"] = m4_arm_summary(units, approach, K, "J1")
         # ---- D1-M3
         e["M3"] = {arm: m3_summary(units, approach, K, arm) for arm in arms_present}
         # ---- journal problem per arm (RL-402), with the reported readings
@@ -526,7 +534,7 @@ def m2_test(units, approach, K, A, B, measures=("A_article", "B_article", "A_mod
     for meas in measures:
         stats_g, obs_g, within_g, cross_g = [], {}, {}, {}
         for g, (ia, ib) in sorted(gf.items()):
-            ids = ia + ib; n = len(ids); P = units[(approach, K, g)]["pairs"]
+            ids = ia + ib; n = len(ids); P = units[(approach, K, g)]["fam"][_fam(A, B)]["pairs"]
             S = np.full((n, n), np.nan)
             for i, j in itertools.combinations(range(n), 2):
                 v = P.get(f"{ids[i]}|{ids[j]}", P.get(f"{ids[j]}|{ids[i]}"))
@@ -554,9 +562,10 @@ def m2_test(units, approach, K, A, B, measures=("A_article", "B_article", "A_mod
     return out
 
 
-def m4_arm_summary(units, approach, K, arm):
-    v = [x["m4"] for (a, k, _), u in units.items() if a == approach and k == K for x in u["fits"].values()
-         if x["arm"] == arm and x["m4"]]
+def m4_arm_summary(units, approach, K, arm, fam):
+    """D1-M4 readings of one arm's fits, on the article set of comparison fam."""
+    v = [u["fam"][fam]["m4"][i] for (a, k, _), u in units.items() if a == approach and k == K and fam in u["fam"]
+         for i, x in u["fits"].items() if x["arm"] == arm and u["fam"][fam]["m4"].get(i)]
     if not v:
         return None
     sh = [d for x in v for d in x["shaped_detail"]]
@@ -579,15 +588,15 @@ def m4_test(units, approach, K, A, B):
     stats_g, d_g, var_g, above, n_fits = [], {}, [], 0, 0
     mass_d = []
     for g, (ia, ib) in sorted(gf.items()):
-        F = units[(approach, K, g)]["fits"]
-        if any(F[i]["m4"] is None for i in ia + ib):
+        F = units[(approach, K, g)]["fam"].get(_fam(A, B), {}).get("m4", {})
+        if any(F.get(i) is None for i in ia + ib):
             continue
-        ca = [F[i]["m4"]["journal_shaped"] for i in ia]; cb = [F[i]["m4"]["journal_shaped"] for i in ib]
+        ca = [F[i]["journal_shaped"] for i in ia]; cb = [F[i]["journal_shaped"] for i in ib]
         d_g[g] = float(np.mean(cb) - np.mean(ca))
         var_g.append(np.var(cb, ddof=1) / len(cb) + np.var(ca, ddof=1) / len(ca))
         stats_g.append(label_stats_diff(ca, cb))
         above += sum(c > np.mean(ca) for c in cb); n_fits += len(cb)
-        mass_d.append(np.mean([F[i]["m4"]["mass_in_shaped"] for i in ib]) - np.mean([F[i]["m4"]["mass_in_shaped"] for i in ia]))
+        mass_d.append(np.mean([F[i]["mass_in_shaped"] for i in ib]) - np.mean([F[i]["mass_in_shaped"] for i in ia]))
     if len(d_g) < 2:
         return None
     obs = float(np.mean(list(d_g.values())))
@@ -597,7 +606,8 @@ def m4_test(units, approach, K, A, B):
             "detection_limit": detection_limit(float(np.sum(var_g)) / len(var_g) ** 2),
             "share_fits_above_ref_group_mean": above / n_fits if n_fits else None,
             "mass_reading": float(np.mean(mass_d)), "mass_reading_se": float(np.std(mass_d, ddof=1) / math.sqrt(len(mass_d))),
-            B: m4_arm_summary(units, approach, K, B)}
+            "covered_articles_per_group": {g: units[(approach, K, g)]["fam"][_fam(A, B)]["covered_articles"] for g in d_g},
+            A: m4_arm_summary(units, approach, K, A, _fam(A, B)), B: m4_arm_summary(units, approach, K, B, _fam(A, B))}
 
 
 def m3_summary(units, approach, K, arm):

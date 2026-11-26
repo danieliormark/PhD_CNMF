@@ -5366,3 +5366,18 @@ readings use single comparisons (no Dunnett / Holm), δ = 10 % of the reference 
 coherence and the entity-total diagnostic of the damping arm (RL-403 community readings), the stage-2 re-check, the
 text-check material.
 
+
+### RL-410 — 2026-11-26 — D1 analysis: article set per comparison; journal excluded from matching (owner: "a) i think per cpmparision is a more principled approach b) ok")
+(a) D1-M2 and D1-M4 use one article set **per comparison** (A, B) and (approach, K, hold-out group): articles covered
+(coverage ≥ 0.5, RL-345) on average over the 10 fits of A and B only (5 seeds each). Consequence: J1's journal-shaped count
+is computed afresh on each comparison's set, so J1's count can differ between J1-vs-J2 and J1-vs-J4; each M4 result now
+reports both arms' readings on its own set and the covered-article count per group. Applies to the robustness pairs too
+(reference arm + robustness arm). (b) Communities of two fits are matched on the facets all arms share, with the journal
+facet excluded in every comparison, including those where both arms have it (J2 vs J2 log-damping, the 0.65 pairs) — now
+explicit in the code (`common` minus "journal"), not a by-product of J1 lacking the facet. Code: `fit/d1_analysis.py`
+(`FAMILIES`, per-comparison block in `unit`, `m2_test` / `m4_test` / `m4_arm_summary` read `units[..]["fam"][A|B]`).
+Checks: 12 known-answer tests pass; stand-in run (as RL-409) 153 s, readings unchanged (J2: M1 Δ +0.0040 ± 0.0047
+inconclusive; M2 drop 9.5 %, changed; M4 0 vs 0; all 2,136 articles covered in both comparisons at K 5). Cost: per unit
+≈ 405 fit pairs (was ≈ 315) and 90 per-fit journal tests (was 45); job estimate ≈ 11–14 CPU-h, still < 1 h on 16 workers.
+(c) and (d) still open: owner asked for an explanation of Δ / δ and of averaging over candidate K (c), and whether the
+robustness readings need a multiple-comparison correction and how robustness and reference arms are defined (d).
