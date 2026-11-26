@@ -2832,3 +2832,8 @@ loss share reported); stage-3 0.65 arm at J*, K₁, K₂ unless stage 1 shows 0.
 operational meaning of "strictly" to be confirmed). Read against the same cells at W1 / undamped with the D1 measures
 (held-out class, membership change, K band, D1 contrast at 0.65, community readings); reported, never automatic. Size,
 study A: +1,500 stage-1 fits (≈ 720 CPU-h) and ≤ 200 stage-3 fits. RL-403.]*
+
+*[2026-11-26, **stage-3 0.65 arm condition DECIDED: dominance** (owner: "I agree with the dominance definition of
+strictly"). The arm is skipped only if 0.65 is strictly inferior (semantic class "misleads" at the majority of candidate
+K and no social reading — affiliation held-out gain over the degree-only reference, people coherence — better beyond 1 SE)
+or strictly superior (the mirror). RL-404.]*

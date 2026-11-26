@@ -5282,3 +5282,10 @@ people coherence, journal-shaped communities, entity-total diagnostic for dampin
 moving the K band or memberships (≥ 5 %) at a candidate K goes to the owner before stage 2 and triggers study B. Size,
 study A: damping 500 fits (≈ 240 CPU-h), 0.65 1,000 (≈ 480), stage 3 ≤ 200 (≤ ≈ 100); stage 1 study A 4,500 fits.
 `plans/ticket107_layer2/test_architecture.py/.txt` updated (stage 1 now counted at 10 groups × 5 seeds, study A).
+
+### RL-404 — 2026-11-26 — Stage-3 0.65 arm: "strictly inferior / superior" = dominance (owner)
+Owner: "I agree with the dominance definition of strictly". 0.65 is strictly inferior if J2 at 0.65 vs J2 at W1 is
+classed "misleads" (D1-M1 machinery, semantic held-out existence) at the majority of candidate K **and** no social
+reading improves beyond 1 SE over hold-out groups (the approach's affiliation relation: within-class AP minus the
+degree-only reference; people coherence, FINDINGS §33); strictly superior is the mirror (adds information and no social
+reading worse beyond 1 SE). Otherwise the stage-3 0.65 arm runs (expected from stage 0: semantic worse, social better).

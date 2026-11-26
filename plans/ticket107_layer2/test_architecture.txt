@@ -84,7 +84,7 @@ STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂; final models
 │       weights: child×parent 0.350, child×article 0.150, article×affiliation 0.167, article×article 0.167, article×journal 0.167
 ├── 3c approach 2 without article×article (arm N)   K = ['K₁', 'K₂']
 │       weights: child×parent 0.250, child×article 0.250, article×affiliation 0.250, article×journal 0.250
-├── 3d semantic share 0.65 at J*, both approaches (matched approach comparison; owner 2026-11-26, RL-403: runs unless stage 1 shows 0.65 strictly inferior or superior to W1; reuses stage-1 cells where possible)   K = ['K₁', 'K₂']
+├── 3d semantic share 0.65 at J*, both approaches (matched approach comparison; owner 2026-11-26, RL-403: runs unless stage 1 shows 0.65 strictly inferior or superior to W1 (dominance, RL-404); reuses stage-1 cells where possible)   K = ['K₁', 'K₂']
 ├── final refit on all data (no hidden cells) at the chosen settings, S seeds per approach; reported model = converged seed with the lowest training loss that passes both vetoes (else flagged, next seed); its Track A/B agreement with the other seeds and the medoid seed reported (owner 2026-11-09)   K = ['K₁', 'K₂']
 └── OPTIONAL graded swap at the final settings (confirmation only)   K = ['K₁', 'K₂']
     ▼ DECISIONS: 3a L2.5 classes × membership agreement (an approach failing the stability gate is not ranked); 3b A1 criteria (A1 never replaces A0 automatically); 3c L2.4 classes × team-shaped communities. (weights shown for J2 binary)

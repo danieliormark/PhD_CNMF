@@ -139,7 +139,7 @@ s3 = [("3a approach 1 vs approach 2 — reuses stage-2 fits at K₁ and K₂", N
        "the medoid seed reported (owner 2026-11-09)", None, ["K₁", "K₂"]),
       ("OPTIONAL graded swap at the final settings (confirmation only)", None, ["K₁", "K₂"])]
 s3.insert(-2, ("3d semantic share 0.65 at J*, both approaches (matched approach comparison; owner 2026-11-26, RL-403: runs unless "
-               "stage 1 shows 0.65 strictly inferior or superior to W1; reuses stage-1 cells where possible)", None, ["K₁", "K₂"]))
+               "stage 1 shows 0.65 strictly inferior or superior to W1 (dominance, RL-404); reuses stage-1 cells where possible)", None, ["K₁", "K₂"]))
 count["stage 3"] = 3 * 2 * FITS_PER_CELL + 2 * SEEDS + 2 * 2 * FITS_PER_CELL
 cond["stage 3: optional graded swap"] = 4 * 2 * ONE_GROUP
 stages.append(("STAGE 3 — pre-registered comparisons at J*, at K₁ and K₂; final models", s3,
