@@ -5306,3 +5306,6 @@ W4 flag if mean f > 2 SE over seeds on the people entity (approach 1 author, app
 Checks: inventory of existing corners matches the design (missing exactly the 70); smoke fit (approach 1 K 13 r 0.3,
 330 epochs) ran with the swap applied (99.86 % moved) and the term on; analysis code path run on one cell with stand-in
 fits, which caught and fixed a sign error in the flatness (unit-checked on four cases). ≈ 55 CPU-h. Not yet submitted.
+
+### RL-406 — 2026-11-26 — Check W4 swap submitted (owner; job id not given)
+Owner: "I have submitted w4". 70 fits in 9 tasks; expected ≈ 2 h wall once tasks start (K 20 fits ≈ 1.5–1.8 h, swap fits ≈ 10 % slower than their twins), then the analysis (≈ 0.5 h).
