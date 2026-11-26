@@ -2815,3 +2815,4 @@ journal's articles with m ≥ 0.3 / ≥ 0.5 / < 0.1, and the share of the journa
 articles — a "mosaic" community holds a block of the journal's articles, a "blend" holds all of them weakly; j_k does not
 distinguish the two); community sizes as quantiles. Stage-0 (J2, K 20): the 21 communities with j_k ≥ 0.25 are mosaic
 (60 % of the journal's articles members; 87 % of the contribution from members). RL-400.]*
+*[2026-11-26, **D1 decision rule — U4 DECIDED** (owner: "U4 approve"): Holm per approach and candidate K across the five arms, no further correction across K. U1–U3 in discussion; the rule is decided once they are settled. RL-401.]*

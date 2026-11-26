@@ -5246,3 +5246,10 @@ articles spread over the whole range of membership (medians 0.24–0.51, from �
 plus the rest. Two small Scientific Reports communities (s_k 0.019 / 0.039, approach 1) are mosaics (most articles ≈ 0, a
 few ≈ 1). Other journals involved (approach 2): Frontiers in Robotics and AI (58), PLoS One (77). The summary shares
 (60 % members, 87 % contribution from members) stand; "mosaic vs blend" is a continuum, read from the distribution.]*
+
+### RL-401 — 2026-11-26 — D1 decision rule: update U4 approved (owner); U1–U3 under discussion
+Owner: "U4 approve" — Holm per approach and candidate K across the five arms; no further correction across K (the K are
+pooled by the across-K rule). U1 (references to restated M1–M4) explanation asked; U2 (journal problem across K) owner
+prefers to measure separately the share of candidate K with a problem and the exact K, and to specify what makes a single
+K problematic; U3 (attribution of the realised share to article×journal) explanation asked. Rule to be decided after
+these (U5).
