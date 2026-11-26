@@ -49,7 +49,8 @@
 #   else highest s_journal averaged over the candidate K); none → J2 if remaining, else highest s_journal; (4) only J1 left
 #   → J1 with a post-hoc journal profile; (5) the owner decides after the text check.
 # Robustness readings (RL-403/404), per approach and K: J2_logdamp vs J2, J1_s065 vs J1, J2_s065 vs J2 — D1-M1 class
-#   (single comparison: uncorrected interval, δ = 10 % of the reference arm's gain), D1-M2 test (5 % / 10 %), D1-M4 test,
+#   (single comparison: uncorrected interval, δ = 10 % of the reference arm's gain), D1-M2 test (5 % / 10 %; Holm across the three
+#   pairs per approach and K, uncorrected beside — owner, RL-411), D1-M4 test,
 #   one-SE band of each arm, social readings (the approach's affiliation relation held-out gain; people coherence =
 #   co-membership excess of article pairs sharing an author / a co-author tie, swap_link_measure.one at p = 0), each as
 #   R − A ± SE over groups; D1 contrast J2 vs J1 at 0.65 beside the same at W1. Dominance of 0.65 (RL-404): strictly
@@ -498,6 +499,18 @@ def summarise(units, approach):
             if not (gmeans(K, R, ex) and gmeans(K, A, ex)):
                 continue
             e["robustness"][f"{R} vs {A}"] = robust_pair(units, approach, K, R, A, gmeans)
+        # Holm across the D1-M2 tests of the three robustness pairs (owner, RL-411); the contrast pair is reported only
+        rnames = [f"{R} vs {A}" for R, A in ROBUST if (e["robustness"].get(f"{R} vs {A}") or {}).get("M2")]
+        adj = holm([e["robustness"][n]["M2"]["p"] for n in rnames])
+        for n, pa in zip(rnames, adj):
+            m2 = e["robustness"][n]["M2"]; m2["p_holm"] = pa
+            for mn in (M2_MIN, M2_REPORTED):
+                m2[f"changed_at_{mn:g}"] = bool(pa < ALPHA and m2["drop"] >= mn)
+        cn = "J2_s065 vs J1_s065"
+        if (e["robustness"].get(cn) or {}).get("M2"):
+            m2 = e["robustness"][cn]["M2"]
+            for mn in (M2_MIN, M2_REPORTED):
+                m2[f"changed_at_{mn:g}"] = m2[f"changed_uncorrected_at_{mn:g}"]
         rep["per_K"][str(K)] = e
     rep["arms"], rep["decision"] = decide(rep, cand)
     rep["robustness_summary"] = robustness_summary(rep, cand, approach)
@@ -643,7 +656,7 @@ def robust_pair(units, approach, K, R, A, gmeans):
     m2 = m2_test(units, approach, K, A, R)
     if m2:
         for mn in (M2_MIN, M2_REPORTED):
-            m2[f"changed_at_{mn:g}"] = bool(m2["p"] < ALPHA and m2["drop"] >= mn)
+            m2[f"changed_uncorrected_at_{mn:g}"] = bool(m2["p"] < ALPHA and m2["drop"] >= mn)
     out["M2"] = m2
     m4 = m4_test(units, approach, K, A, R)
     if m4:
@@ -731,6 +744,7 @@ def robustness_summary(rep, cand, approach):
         R, A = name.split(" vs ")
         s = {"class_per_K": {str(K): (v["M1"] or {}).get("class") for K, v in per.items()},
              "memberships_changed_per_K": {str(K): (v["M2"] or {}).get(f"changed_at_{M2_MIN:g}") for K, v in per.items()},
+             "memberships_changed_uncorrected_per_K": {str(K): (v["M2"] or {}).get(f"changed_uncorrected_at_{M2_MIN:g}") for K, v in per.items()},
              "band": rep["bands"].get(R, {}).get("band"), "reference_band": rep["bands"].get(A, {}).get("band")}
         s["class"] = majority(list(s["class_per_K"].values()))
         s["band_moved"] = s["band"] != s["reference_band"]

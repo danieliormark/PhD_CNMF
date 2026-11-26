@@ -5381,3 +5381,16 @@ inconclusive; M2 drop 9.5 %, changed; M4 0 vs 0; all 2,136 articles covered in b
 ≈ 405 fit pairs (was ≈ 315) and 90 per-fit journal tests (was 45); job estimate ≈ 11–14 CPU-h, still < 1 h on 16 workers.
 (c) and (d) still open: owner asked for an explanation of Δ / δ and of averaging over candidate K (c), and whether the
 robustness readings need a multiple-comparison correction and how robustness and reference arms are defined (d).
+
+### RL-411 — 2026-11-26 — D1 robustness readings: Holm across the three pairs' D1-M2 tests (owner: "I approve your proposal for the robustness section")
+Robustness pair = robustness arm vs its reference arm (same approach, K, hold-out groups, seeds; one setting changed):
+J2_logdamp vs J2, J1_s065 vs J1, J2_s065 vs J2; the contrast J2_s065 vs J1_s065 is reported only. "Memberships changed"
+in the flag to the owner (which triggers study B) = Holm-adjusted p < 0.05 across the three pairs per approach and
+candidate K, and drop ≥ 5 % (10 % reported); the uncorrected flag reported beside. Reason: the flag fires if any of
+≈ 3 pairs × candidate K tests fires; uncorrected, independent and with no real change, P(≥ 1 false flag) at 9 tests =
+1 − 0.95⁹ = 37 %. Unchanged and uncorrected: D1-M1 class per pair (single comparison, t interval, δ = 10 % of the
+reference arm's gain), dominance (RL-404; one comparison per K, the 1-SE social readings err towards running the 0.65 arm),
+the contrast pair, "band moved" (not a test). Code: `fit/d1_analysis.py` (`summarise`: Holm over the pairs' M2 p;
+`robustness_summary` reports corrected and uncorrected per K). 12 known-answer tests pass.
+Step 3 (c) still open: owner asked whether C3 is strictly better than C2 and whether the selection bias of C3 can be removed;
+simulation (scratch, not committed) compares C2 / C3 / C4 (all-pairs, sign-flip max-|t|).

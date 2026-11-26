@@ -2870,3 +2870,6 @@ reference arm's gain. RL-409.]*
 think per cpmparision is a more principled approach b) ok"). D1-M2 / D1-M4 articles = covered on average over the fits of
 the two arms compared (not pooled over all arms); matching on the facets all arms share, journal excluded in every
 comparison. (c) step-3 averaging and (d) correction in the robustness readings still open. RL-410.]*
+
+*[2026-11-26, **D1 robustness readings: Holm across the three robustness pairs' D1-M2 tests — owner DECIDED** ("I approve
+your proposal for the robustness section"); uncorrected beside; dominance, contrast and D1-M1 classes uncorrected. RL-411.]*
