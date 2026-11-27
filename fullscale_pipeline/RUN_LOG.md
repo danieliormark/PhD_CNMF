@@ -5481,3 +5481,14 @@ to the owner; not a decision.
 or average article membership for community k"): m_k = Σ_i p_ik ÷ n, inequality Σ_k m_k²; GLOSSARY entry added. The
 "size" counterfactual = the mean-article-membership counterfactual. (3) Owner agreed to a tie-weighted reading
 (weights = co-author tie values), with doubts about article pairs as the unit; unit to be settled before running.
+
+### RL-419 — 2026-11-27 — Representation question (owner's point 2): data readings, no fits
+Owner: a direct author×semantics tie is "a huge assumption" (co-authored wording is negotiated; editors and reviewers
+are latent); parent hyperedges are almost unique, and W exists to reduce child granularity. Data the W4 fits saw
+(hold-out group 1, visible ties): 5.5 % of articles single-author, 19.4 % with ≤ 2 authors; of the 1,107 same-person
+article pairs only 2 are both single-author (34 with both teams ≤ 2). 91.4 % of child hyperedges occur in one article;
+median 24 child hyperedges per article. Same-person pairs share on average 4.3 child hyperedges vs 1.8 for all pairs
+(68 % vs 51 % share at least one); exact Jaccard 0.0184 vs 0.0097 (1.89×); W-aware cosine 0.0458 vs 0.0240 (1.91×) —
+W raises levels but not the relative same-person link. Reading given: the article-mediated representation is a
+defensible choice (ideas as properties of collectively produced articles), an individual person–idea link is hardly
+identifiable in this corpus; the author×child counterfactual fits are not recommended; parent-level check dropped.
