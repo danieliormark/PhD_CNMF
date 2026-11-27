@@ -7,6 +7,24 @@
 > CORPUS_STATISTICS.
 
 
+## Owner questions in progress (2026-11-27, W4 follow-up; RL-413–418) — address one at a time
+
+Owner: "Each of these points may require large cognitive efforts from you. Therefore, you can register them to rolling
+notes and address one by one."
+1. **Three units for the tie-weighted W4 reading** (owner: "I'd actually consider making analysis with all 3 units"):
+   (a) article pairs weighted by co-author tie value; (b) article level — each article's tie-weighted mean
+   co-membership with its tied articles, mean over articles; (c) person level — mean co-membership among a person's
+   articles, mean over persons. Same weights in both approaches. — IN PROGRESS
+2. **Representation artefact?** My statement "ideas enter through which articles people write, not through a separate
+   association between people and ideas" may be an artefact of linking authors to semantics only through articles.
+   Owner's counterfactual: an author×semantics relation, or an author×article×semantics tensor (MetaFac allows it).
+   Give a view on the artefact explanation. — OPEN
+3. **Is the inequality of mean article memberships (m_k, Σ_k m_k²) explanation theory or observation?** Has it been
+   manipulated to test whether λ_child then still adds grouping the data do not support? (Answer so far: observed
+   co-variation plus a counterfactual on fitted memberships, not an intervention on the fit.) — OPEN
+Pending before these: owner's choice on documenting W4 (purpose first; bullets in the 2026-11-27 reply); the
+within-fit content-dependence check (proposed, not approved); extra-seed fits for A2 K13 (recommended to drop).
+
 ## State (2026-11-25, ticket 107 M1 — stage 0 closed except λ-calibration extras; designing stage 1 (D1))
 
 Records: RUN_LOG RL-371–RL-394; design doc entries 2026-11-24/25; FINDINGS §33 (weighting trades idea for social
