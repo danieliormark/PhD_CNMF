@@ -2879,3 +2879,58 @@ pairs compared per candidate K with simultaneous sign-flip (max-|t|) intervals, 
 another is clearly better (> 0 and ≥ δ_K) at the majority of candidate K; tie set → J2 if among them, else highest
 s_journal. No best arm picked first, so no selection bias (simulated false-drop rate 0.045 vs 0.07–0.11 for
 pick-the-best). RL-412.]*
+
+*[2026-11-27, **check W4 — documentation** (owner: "go ahead and write the W4 documentation"; readings discussed with the
+owner 2026-11-26/27; RL-413, RL-415–RL-423; explanation: GLOSSARY E7).
+**Purpose.** W4 ("affordable", 2026-11-06) limits a term's λ range by its side effects. The swap check is the W4 side-effect
+check for heterogeneity: does the word-similarity regulariser (λ_child = r × the pass-1 basis; penalty on different
+memberships of child hyperedges with a non-zero similarity in W) *manufacture* it, i.e. make the model group a person's
+articles beyond what the link between people and content in the data supports? The swap builds a world in which an
+article's social ties (authors, organisations, journal, co-author ties, moved together) say nothing about its content. If
+λ_child's effect on the grouping of article pairs sharing a person is the same with and without that link — a flatter
+response to the swap with λ_child on than off — λ_child creates the grouping rather than reading it, and its λ is limited.
+**Decided reading and result (RL-405, RL-413).** R = co-membership excess of pairs sharing a person (approach 1: an author;
+approach 2: a co-author tie) after minus before the swap; flatness f = −sign(R̄_off)(R_on − R_off), paired by seed; flag
+f > 2 SE; not testable |R̄_off| ≤ 2 SE. No flag. Testable: A1 K5, A2 K5, A1 K13. Not testable: the two r = 1 cells A2 K13
+and A1 K20 (the λ_child-off model did not respond to the swap there: no power, not a pass). Stage-1 λ unchanged.
+**Limit of the criterion.** A constant amount that λ_child adds before and after the swap cancels in R_on − R_off, so
+grouping that does not depend on content is invisible to it; the readings below cover it.
+**Reported readings (none is a decision).**
+(1) *Corner levels* (RL-415): 84–98 % of the λ_child-off excess survives the swap while the data's people–content link
+(Jaccard excess) falls 96 % / 76 %; λ_child raises the content-led part in approach 1.
+(2) *Units* (RL-420; owner asked for all three): (a) pairs weighted by co-author tie value, (b) article level — each
+article's tie-weighted mean co-membership with its co-author-tied articles, mean over 739 articles, (c) person level —
+mean co-membership among a person's articles, mean over 793 persons; same weights in both approaches. No flag in any
+unit. Under (a) and (b) every cell is testable (A1 K20 response −15 % / −16 %; A2 K13 −1.7 % / −2 %, > 3 SE). λ_child's
+content-independent addition after the swap, as % of the λ_child-off level, unit (b): A1 K5 / K13 / K20 6 / 7 / 21 %,
+A2 K5 / K13 3 / 2 % (unweighted pairs 13–22 %): it sits mostly in weakly tied pairs; A1 K20 is the exception.
+(3) *What the addition consists of* (RL-417, RL-418, RL-423): λ_child makes each article's membership more mixed (+0.10 to
++0.22 bits) and the mean article memberships m_k more unequal (1/Σ_k m_k² lower by 0.2–1.5). An arithmetic counterfactual
+(λ_child-off arrangement with the λ_child-on m_k, rank-matched) reproduces 0.61–1.73 of the unweighted addition in four
+cells (with the per-article mixing too: 0.43–1.22), not at A1 K5; unstable under tie weights; no co-variation across
+seeds (pooled Spearman −0.05 to +0.10): a descriptive decomposition, not a mechanism; not manipulated inside a fit. The
+rest moves articles towards all social sides in approach 2 and towards the journal in approach 1 (pairs also sharing a
+journal gain 2–3 times as much per pair).
+(4) *Content dependence* (RL-421): among pairs sharing a person, membership cosine follows W-aware content overlap more
+than among random pairs (gap +0.035 to +0.166 with λ_child off; vanishes after the swap, the validity check); λ_child
+raises the gap in approach 1 (+0.043 to +0.060, ≥ 6 SE), not in approach 2 (+0.005, −0.023).
+(5) *Cue competition* (RL-422): after the swap, the strongest content links group articles 2.5–3.5 times more than
+sharing a person in approach 1; in approach 2 sharing a person (a direct article×article tie) groups 1.5 times more than
+content; sharing only an organisation or only a journal groups little, except journals at A1 K20; λ_child raises the
+grouping by a shared person in every cell (+0.03 to +0.08).
+**Interpretation.** The W4 concern is not supported: no flag in any unit (with tie weights, at every cell); λ_child's
+content-independent addition is small at the article level (2–7 %) except at A1 K20 (r 1, about 21 %), where approach 1
+also groups journal-sharing pairs strongly; λ_child makes grouping follow content more, not less, in approach 1. No λ limit.
+**Wording (owner agreed, RL-422).** "In this representation, where people reach content only through the articles they
+co-produce, 84–98 % of the model's extra co-membership for article pairs that share a person remains when the swap
+breaks the link between the articles' social ties and their content; it is reproduced from the articles' social ties
+(authors, organisations, journal, co-author ties — moved together by the swap and entangled in the data), not from
+shared content. Among these pairs, those sharing more content are placed more alike than random pairs are." Persons:
+10,052, 99.0 % on at least one co-authored article, 793 (7.9 %) on ≥ 2 articles.
+**Limits.** People reach ideas only through articles (a direct author×semantics tie was judged by the owner a strong
+assumption — co-authored wording is negotiated, editors and reviewers are latent; RL-419); the swap world is artificial;
+one hold-out group, 10 seeds, the pass-3 journal setting; counterfactual choices (rank matching, order of steps); pairs
+as the unit in readings (4)–(5); which cue groups more depends on the representation and the W1 weighting.
+**Proposals put to the owner, not decided:** unit (b) as the main W4 unit with (a) and (c) beside; the extra-seed fits for
+A2 K13 not needed (A2 K13 is testable under tie weights); for the text check after stage 2, ask whether communities at the
+final K₁, K₂ are led by journals (A1 K20); report the inequality of mean article memberships in the member-mass report.]*

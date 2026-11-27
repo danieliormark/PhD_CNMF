@@ -5547,3 +5547,7 @@ addition is −0.49 … +0.56 per cell (all p ≥ 0.09), pooled (standardised wi
 manipulation of the inequality inside a fit has been run. Reading given: the inequality is a descriptive decomposition,
 not an established mechanism; an intervention (a term holding m_k at the λ_child-off values) proposed only as an
 option, not recommended now.
+
+### RL-424 — 2026-11-27 — Check W4 documented (owner: "go ahead and write the W4 documentation")
+Design doc entry 2026-11-27 (purpose; decided reading and result; limit of the criterion; readings RL-415–RL-423;
+interpretation; agreed wording; limits; proposals not decided), GLOSSARY E7, M1_PROGRESS W4 row. No new results.

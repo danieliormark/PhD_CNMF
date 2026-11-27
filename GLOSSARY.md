@@ -506,6 +506,28 @@ the data (under KL the article-side overlap stays 0.92 even with one band). Pres
 show that heterogeneity follows the data; what the link should change is *which* people group with which ideas.
 **Limit.** Hold-out group 1, 10 seeds, K* and one larger K; the decided presence measures only.
 
+### E7. What does check W4 show beyond its decided criterion?
+
+*Written 2026-11-27 at the owner's request ("go ahead and write the W4 documentation"). Record: RUN_LOG RL-413, RL-415–RL-423;
+design doc 2026-11-27.*
+**Question.** Does the word-similarity regulariser (λ_child, child×child W) manufacture heterogeneity — group a person's
+articles beyond what the link between people and content in the data supports?
+**Mechanism.** The swap (E6) removes that link. Compare, paired by seed, the co-membership excess of article pairs sharing
+a person (C_ij = Σ_k p_ik p_jk, pairs minus all pairs) before and after the swap, with λ_child off and on. Decided
+criterion: a flag if the response with λ_child on is flatter beyond 2 SE; "not testable" if the λ_child-off model does
+not respond (no power). It cannot see a constant amount added before and after the swap.
+**Worked example (A1 K13, unweighted pairs).** λ_child off: excess 0.110 before, 0.095 after the swap (response −0.016);
+on: 0.143 → 0.115 (−0.028, steeper: no flag). After the swap λ_child still adds 0.021 that content cannot explain
+(0.115 − 0.095). Weighted by co-author tie value, or read per article, that addition is 7–8 % of the λ_child-off level
+instead of 22 %: it sits in weakly tied pairs (large teams sharing one person).
+**Reading.** No flag in any cell or unit; with tie weights every cell is testable. The content-independent addition is
+small except at A1 K20 (r 1). Part of it is arithmetic: λ_child makes mean article memberships m_k more unequal, which
+raises all co-memberships (not shown to be the mechanism). Among a person's articles, placement follows content more than
+for random pairs, and λ_child strengthens this in approach 1. Which cue groups more — a shared person or strong shared
+content — depends on the representation (approach 2 makes co-authorship a direct article×article tie).
+**Limit.** People reach ideas only through articles; one hold-out group; 10 seeds; descriptive counterfactuals; the swap
+world is artificial.
+
 ## Measures on membership distributions — preferred uses
 
 *Convention recorded 2026-11-18 at the owner's request ("record the preferred measures for how entities' community

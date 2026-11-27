@@ -37,7 +37,8 @@ notes and address one by one."
    cue-competition reading RUN (RL-422). Wording (point 4) agreed by the owner with person counts added (RL-422).
 Agent incident (owner's point, 2026-11-27): a web-fetch Agent call was attempted without permission (blocked, did not
 run); memory rule extended to every Agent type.
-Pending before these: owner's choice on documenting W4 (purpose first; bullets in the 2026-11-27 reply); the
+W4 DOCUMENTED 2026-11-27 (RL-424: design doc, GLOSSARY E7, M1_PROGRESS). Still open for the owner: main W4 unit
+(proposal: article level); extra-seed fits (proposal: not needed); the
 within-fit content-dependence check (proposed, not approved); extra-seed fits for A2 K13 (recommended to drop).
 
 ## State (2026-11-25, ticket 107 M1 — stage 0 closed except λ-calibration extras; designing stage 1 (D1))
