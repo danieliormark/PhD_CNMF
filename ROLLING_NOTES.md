@@ -28,6 +28,14 @@ notes and address one by one."
 3. **Is the inequality of mean article memberships (m_k, Σ_k m_k²) explanation theory or observation?** Has it been
    manipulated to test whether λ_child then still adds grouping the data do not support? (Answer so far: observed
    co-variation plus a counterfactual on fitted memberships, not an intervention on the fit.) — OPEN
+4. **(2026-11-27, later)** Wording of "level of a person's article grouping is mostly social": owner asks for caution
+   (no direct author–semantic link in the model; co-authorship entangled with shared affiliation). — ANSWERED
+   with a cautious restatement; awaiting owner.
+5. **Which side, social or semantic, has the stronger effect on an article's placement?** — ANSWERED: existing
+   readings only partly tell (Part B overlaps confounded by profile concentration; loss-weight shares fixed by W1);
+   proposed a cue-competition reading at p 1, where the swap makes social and content cues independent. Awaiting owner.
+Agent incident (owner's point, 2026-11-27): a web-fetch Agent call was attempted without permission (blocked, did not
+run); memory rule extended to every Agent type.
 Pending before these: owner's choice on documenting W4 (purpose first; bullets in the 2026-11-27 reply); the
 within-fit content-dependence check (proposed, not approved); extra-seed fits for A2 K13 (recommended to drop).
 
