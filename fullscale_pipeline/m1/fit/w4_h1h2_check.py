@@ -181,7 +181,7 @@ def one(task):
                        "ov_off": ov(Xoff, do), "ov_on": ov(Xon, dn), "ov_conc1": ov(Xc1, do)}
         B["_membership"] = {"tv_off": float(0.5 * np.abs(Xoff - Xoff.mean(0)).sum(1).mean()),
                             "tv_on": float(0.5 * np.abs(Xon - Xon.mean(0)).sum(1).mean()),
-                            "entropy_off": float(entropy(Xoff).mean()), "entropy_on": float(entropy(Xon).mean()),
+                            "entropy_off": float(entropy(Xoff).mean() / math.log(2)), "entropy_on": float(entropy(Xon).mean() / math.log(2)),  # bits (project convention; RL-417 log in nats)
                             "size_sumsq_off": float((Xoff.mean(0) ** 2).sum()), "size_sumsq_on": float((Xon.mean(0) ** 2).sum()),
                             "size_match_residual": float(np.abs(np.sort(V["size1"].mean(0)) - np.sort(Xon.mean(0))).sum()),
                             "both_entropy_residual": float(np.abs(entropy(V["both1"]) - entropy(Xon)).mean())}

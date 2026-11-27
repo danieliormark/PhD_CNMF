@@ -5473,3 +5473,11 @@ counterfactual; author side (A1) −0.005 to −0.037, journal side +0.025 to +0
 journal hold 27 % [16, 59] / 31 % [21, 41] / 37 % [13, 54] of the addition (K 5/13/20; per pair 0.032–0.051 vs
 0.015–0.017); A2: 7–18 %, per-pair addition similar in all subgroups (0.026–0.067). Same pattern at p 0. Reading given
 to the owner; not a decision.
+
+### RL-418 — 2026-11-27 — W4 follow-up: corrections to RL-417's reporting (no new results)
+(1) RL-417's entropies are in nats (natural log); the project convention is bits: per-article entropy λ_child off
+0.095–0.374 bits, on − off +0.10 to +0.22 bits. Shares in Part A are unit-free (entropies matched in either unit).
+`fit/w4_h1h2_check.py` now reports bits. (2) "Community size" in RL-417 is renamed, owner 2026-11-27 ("I'd name it mean
+or average article membership for community k"): m_k = Σ_i p_ik ÷ n, inequality Σ_k m_k²; GLOSSARY entry added. The
+"size" counterfactual = the mean-article-membership counterfactual. (3) Owner agreed to a tie-weighted reading
+(weights = co-author tie values), with doubts about article pairs as the unit; unit to be settled before running.
