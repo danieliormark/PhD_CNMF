@@ -36,6 +36,7 @@ Words not to use (owner, 2026-09-30 to 2026-10-29): "hub" (say "an entity with N
 | Z̃^(f,g) | scaled core matrix | Core matrix |
 | w^(f)_k | community weight of column k in facet f | Community weight |
 | p_i | membership shares of entity i (length K) | Membership shares |
+| m_k | mean article membership in community k (Σ_i p_ik ÷ n over all n articles) | Mean article membership |
 | W | similarity matrix of a regulariser (one facet, N × N) | Similarity matrix |
 | W_ij | similarity of entities i and j | Similarity matrix |
 | D_i | total similarity of entity i, Σ_j W_ij | Row normalisation of W |
@@ -118,6 +119,17 @@ sum so that the K shares sum to 1: p_ik = Ũ_ik w_k / Σ_l Ũ_il w_l. Also calle
 
 Example (A above): with weights (1, 1), p_A = (0.808, 0.248) / 1.056 = (**0.765**, 0.235); with weights (1, 0.5),
 p_A = (0.808, 0.124) / 0.932 = (**0.867**, 0.133).
+
+**Mean article membership in community k, m_k** (owner's name, 2026-11-27) — the mean over all n articles of their
+membership shares in k: m_k = Σ_i p_ik ÷ n. The m_k sum to 1 over k. Read: the expected proportion of articles that
+fall in k if each article draws one community from its own shares. Not a sum of factor-matrix cells (column sums of U
+are not determined, CLAUDE.md §4.3), not the community weight w_k, and not k's share of reconstructed tie weight.
+Article side only. Inequality across communities: Σ_k m_k² (1/K when all m_k are equal, 1 when one community holds
+every article). Link to co-membership: the sum over all ordered pairs i ≠ j of C_ij = n² Σ_k m_k² − Σ_i Σ_k p_ik², so
+the all-pairs mean co-membership rises when the m_k become more unequal (W4 follow-up, RL-417, where it was first
+called "community size").
+
+Example: three articles, K 2, p = (0.9, 0.1), (0.8, 0.2), (0.1, 0.9) → m = (0.6, 0.4), Σ_k m_k² = 0.52.
 
 ## Training
 
