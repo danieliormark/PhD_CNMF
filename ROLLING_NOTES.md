@@ -18,7 +18,10 @@ notes and address one by one."
 2. **Representation artefact?** My statement "ideas enter through which articles people write, not through a separate
    association between people and ideas" may be an artefact of linking authors to semantics only through articles.
    Owner's counterfactual: an author×semantics relation, or an author×article×semantics tensor (MetaFac allows it).
-   Give a view on the artefact explanation. — OPEN
+   Give a view on the artefact explanation. — ANSWERED 2026-11-27 (view: partly a representation artefact; the
+   statement is withdrawn as a claim about the world and restated for this model; a second candidate artefact is
+   the granularity of child hyperedges; staged test proposed: data check at child and parent level, within-fit
+   content-dependence check, then optional author×child counterfactual fits; tensor only long-term). Awaiting owner.
 3. **Is the inequality of mean article memberships (m_k, Σ_k m_k²) explanation theory or observation?** Has it been
    manipulated to test whether λ_child then still adds grouping the data do not support? (Answer so far: observed
    co-variation plus a counterfactual on fitted memberships, not an intervention on the fit.) — OPEN
