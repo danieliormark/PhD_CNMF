@@ -27,7 +27,8 @@ notes and address one by one."
    within-fit content-dependence check (exact count, Jaccard, W-aware; λ_child off vs on). Awaiting owner.
 3. **Is the inequality of mean article memberships (m_k, Σ_k m_k²) explanation theory or observation?** Has it been
    manipulated to test whether λ_child then still adds grouping the data do not support? (Answer so far: observed
-   co-variation plus a counterfactual on fitted memberships, not an intervention on the fit.) — OPEN
+   co-variation plus a counterfactual on fitted memberships, not an intervention on the fit.) — ANSWERED (RL-423:
+   no seed-level co-variation; descriptive, not a mechanism; in-fit intervention offered, not recommended now).
 4. **(2026-11-27, later)** Wording of "level of a person's article grouping is mostly social": owner asks for caution
    (no direct author–semantic link in the model; co-authorship entangled with shared affiliation). — ANSWERED
    with a cautious restatement; awaiting owner.

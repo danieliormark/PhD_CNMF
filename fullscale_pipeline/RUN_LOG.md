@@ -5535,3 +5535,15 @@ K13 0.411 / 0.467 vs 0.272 / 0.310 (1.51 / 1.51); organisation A1 ≤ 0.014 vs 0
 vs 0.15–0.25 except A1 K20 0.247 ± 0.031 vs 0.153. λ_child on − off: person cue +0.026 to +0.078 (≥ 4 SE) in every
 cell, content cue −0.039 to +0.065; social ÷ content rises at every cell. Co-membership gives the same ratios. Reading
 given to the owner; not a decision.
+
+### RL-423 — 2026-11-27 — W4 follow-up, owner's point 3: is the mean-article-membership explanation observed or theory?
+Status of the RL-417 "size" share: an arithmetic counterfactual on fitted memberships (λ_child-off arrangement with the
+λ_child-on mean article memberships, rank-matched, columns rescaled), not an intervention on the fit; observed part:
+Σ_k m_k² rises with λ_child in every cell (1/Σ m_k² A1 K5 4.77 → 4.60, K13 11.6 → 10.4, K20 13.2 → 12.1; A2 K5 4.76 →
+4.50, K13 10.8 → 9.3). New natural-variation reading `m1/fit/w4_inequality_seeds.py` → `fit/results/stage0/
+w4_inequality_seeds.json`: across the 10 seeds per cell, Spearman between Δ Σ m_k² (on − off, p 1) and λ_child's
+addition is −0.49 … +0.56 per cell (all p ≥ 0.09), pooled (standardised within cell, n 50) +0.10 / +0.05 / −0.05
+(pairs / article / tie-weighted; p ≥ 0.47); low power (Δ Σ m_k² CV across seeds 0.16–0.28, A1 K20 0.90). No
+manipulation of the inequality inside a fit has been run. Reading given: the inequality is a descriptive decomposition,
+not an established mechanism; an intervention (a term holding m_k at the λ_child-off values) proposed only as an
+option, not recommended now.
