@@ -5551,3 +5551,8 @@ option, not recommended now.
 ### RL-424 — 2026-11-27 — Check W4 documented (owner: "go ahead and write the W4 documentation")
 Design doc entry 2026-11-27 (purpose; decided reading and result; limit of the criterion; readings RL-415–RL-423;
 interpretation; agreed wording; limits; proposals not decided), GLOSSARY E7, M1_PROGRESS W4 row. No new results.
+
+### RL-425 — 2026-11-27 — W4 main unit = article level (owner: "I approve the article level as the main W4 unit")
+Recorded in the design doc. GLOSSARY E6 and E7 rewritten as definitions and concepts only (owner: "glossary should
+contain definitions and concepts. results should be reported in other sections"); E6's results are in RL-248 / RL-261 /
+RL-268, E7's in RL-413, RL-415–RL-423 and the design doc entry of 2026-11-27.

@@ -2934,3 +2934,10 @@ as the unit in readings (4)–(5); which cue groups more depends on the represen
 **Proposals put to the owner, not decided:** unit (b) as the main W4 unit with (a) and (c) beside; the extra-seed fits for
 A2 K13 not needed (A2 K13 is testable under tie weights); for the text check after stage 2, ask whether communities at the
 final K₁, K₂ are led by journals (A1 K20); report the inequality of mean article memberships in the member-mass report.]*
+
+*[2026-11-27, **check W4 — main unit DECIDED: article level** (owner: "I approve the article level as the main W4 unit").
+Each article's tie-weighted mean co-membership with its co-author-tied articles (weights = co-author tie values, the
+same in both approaches), minus the all-pairs mean, averaged over articles with a co-author tie; tie-weighted pairs and
+person level reported beside, unweighted pairs kept as the original reading. Under it all five cells are testable and
+none is flagged (RL-420). GLOSSARY E6/E7 reduced to definitions and concepts (owner: "glossary should contain
+definitions and concepts. results should be reported in other sections"); results stay in this entry and the RUN_LOG.]*

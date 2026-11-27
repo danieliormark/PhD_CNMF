@@ -485,48 +485,66 @@ about two communities (the number is reported beside the verdict). **Alternative
 where KL sits) — stricter, but chosen by eye; a paired 2-SE test on the number of partners — says whether the arms
 differ, not whether the arm is near one.
 
-### E6. What does the cross-domain swap test, and what did its follow-ups show?
+### E6. What does the cross-domain swap test? (the swap, its variants, and what presence can show)
 
-*Asked 2026-11-18 (owner: "Great explanation!"). Record: RUN_LOG RL-248, RL-261, RL-268.*
+*Asked 2026-11-18 (owner: "Great explanation!"). Concepts only (owner, 2026-11-27: "glossary should contain definitions
+and concepts. results should be reported in other sections"). Results: RUN_LOG RL-248, RL-261, RL-268; design doc
+2026-11-16 to 2026-11-18.*
 **Question.** Do communities that span both domains (people and ideas) reflect a real link in the data between who
 writes and what they write about, or does the model produce them regardless?
 **Mechanism.** With probability p, an article's social ties (its authors, organisations and journal; in approach 2
 also its co-author links) are exchanged with those of another article in the same social-degree band; semantic ties
-are left untouched. At p = 1 who wrote an article says nothing about what it says. If mixed-domain communities come
-from that link, they should break up as p rises: more mono-domain communities, a smaller share of tie weight in
-communities present in both domains (decided measures and margins, design doc 2026-11-16).
-**Bare swap:** mostly "no change". Two explanations were tested by follow-ups at p = 1: (1) the degree bands keep a link
-(articles only swap within their band, and the band is related to the semantic community) → swap with one band for
-all articles; (2) fixed K leaves no spare communities to separate the domains → swap at a larger K.
-**Follow-ups:** "no change" in every comparison (aligned numbering). One band removes the band link (0.02–0.04 → 0.006–0.011
-above chance) but adds nothing to the effect; a larger K does not let the swap separate the domains.
-**Reading.** Neither explanation holds. Each article's social ties are rebuilt through the article's own communities,
-whichever people it received, so a community is present in both domains whether or not people and ideas are linked in
-the data (under KL the article-side overlap stays 0.92 even with one band). Presence in both domains therefore cannot
-show that heterogeneity follows the data; what the link should change is *which* people group with which ideas.
-**Limit.** Hold-out group 1, 10 seeds, K* and one larger K; the decided presence measures only.
+are left untouched, and an article's social ties move together. At p = 1 who wrote an article says nothing about what
+it says. If mixed-domain communities come from that link, they should break up as p rises: more mono-domain
+communities, a smaller share of tie weight in communities present in both domains (decided measures and margins,
+design doc 2026-11-16).
+**Variants.** Banded swap (the default): articles swap only within their social-degree band, which can keep a link
+between band and semantic community. One-band swap: all articles in one band, which removes that link. Swap at a
+larger K: tests whether a fixed K leaves no spare communities to separate the domains.
+**What presence can and cannot show.** A community is present in both domains when its reconstructed tie weight lies in
+both (E4). If each article's social ties are rebuilt through the article's own communities, whichever people it
+received, a community is present in both domains whether or not people and ideas are linked, so an unchanged presence
+reading does not show that heterogeneity is manufactured. What the link should change is *which* people's articles are
+grouped with which ideas: the readings of E7.
+**Limit.** Presence readings answer whether a community spans both domains, not why.
 
-### E7. What does check W4 show beyond its decided criterion?
+### E7. How is check W4 read? (swap response, flatness, units, and the follow-up readings)
 
-*Written 2026-11-27 at the owner's request ("go ahead and write the W4 documentation"). Record: RUN_LOG RL-413, RL-415–RL-423;
-design doc 2026-11-27.*
-**Question.** Does the word-similarity regulariser (λ_child, child×child W) manufacture heterogeneity — group a person's
+*Written 2026-11-27 (owner: "go ahead and write the W4 documentation"; concepts only — results: design doc 2026-11-27,
+RUN_LOG RL-413, RL-415–RL-423).*
+**Question.** Does the word-similarity regulariser (λ_child, child×child W) manufacture heterogeneity: group a person's
 articles beyond what the link between people and content in the data supports?
-**Mechanism.** The swap (E6) removes that link. Compare, paired by seed, the co-membership excess of article pairs sharing
-a person (C_ij = Σ_k p_ik p_jk, pairs minus all pairs) before and after the swap, with λ_child off and on. Decided
-criterion: a flag if the response with λ_child on is flatter beyond 2 SE; "not testable" if the λ_child-off model does
-not respond (no power). It cannot see a constant amount added before and after the swap.
-**Worked example (A1 K13, unweighted pairs).** λ_child off: excess 0.110 before, 0.095 after the swap (response −0.016);
-on: 0.143 → 0.115 (−0.028, steeper: no flag). After the swap λ_child still adds 0.021 that content cannot explain
-(0.115 − 0.095). Weighted by co-author tie value, or read per article, that addition is 7–8 % of the λ_child-off level
-instead of 22 %: it sits in weakly tied pairs (large teams sharing one person).
-**Reading.** No flag in any cell or unit; with tie weights every cell is testable. The content-independent addition is
-small except at A1 K20 (r 1). Part of it is arithmetic: λ_child makes mean article memberships m_k more unequal, which
-raises all co-memberships (not shown to be the mechanism). Among a person's articles, placement follows content more than
-for random pairs, and λ_child strengthens this in approach 1. Which cue groups more — a shared person or strong shared
-content — depends on the representation (approach 2 makes co-authorship a direct article×article tie).
-**Limit.** People reach ideas only through articles; one hold-out group; 10 seeds; descriptive counterfactuals; the swap
-world is artificial.
+**Excess and response.** For a set of article pairs sharing a person (approach 1: an author; approach 2: a co-author
+tie), the excess is their mean co-membership C_ij = Σ_k p_ik p_jk minus the mean over all article pairs. The response
+to the swap is R = excess after the swap − excess before (p 1 − p 0). Everything is paired by seed (same seed = same
+swap permutation and same start), with λ_child off (r 0) and on (the cell's r).
+**Flatness (decided criterion).** f = −sign(R̄_off) · (R_on − R_off). Flag if f > 2 SE: with λ_child on, the grouping
+responds less to the removal of the link. **Not testable** if |R̄_off| ≤ 2 SE: the λ_child-off model does not respond,
+so "flatter" cannot be detected — no power, not a pass.
+**Content-independent addition.** excess (λ_child on) − excess (off) after the swap: grouping that λ_child adds where
+the people–content link is absent. Flatness cannot see it: an amount added both before and after the swap cancels in
+R_on − R_off.
+**Units.** Unweighted pairs. (a) Tie-weighted pairs: each pair weighted by its co-author tie value, which reflects the
+shared persons relative to the union of the two teams. (b) **Article level — the main W4 unit (owner, 2026-11-27)**:
+c_i = Σ_j w_ij C_ij ÷ Σ_j w_ij − the all-pairs mean, over the articles j tied to article i, averaged over articles with a
+co-author tie; each article counts once, strong team overlaps count more within it. (c) Person level: mean C over pairs
+of a person's articles, averaged over persons with ≥ 2 articles.
+**Counterfactual decomposition.** Replace one property of one fit's article memberships by the other fit's, keeping the
+arrangement: per-article concentration (each article's entropy matched by a power transform), mean article memberships
+(m_k matched by rank, columns rescaled), or both; in both orders. Arithmetic and descriptive: how much of an addition
+that change alone would produce if nothing else changed, not the mechanism.
+**Content dependence within a fit.** Spearman correlation between two articles' membership cosine and their content
+overlap (shared child hyperedges, Jaccard, W-aware cosine), with both articles' sizes partialled out; gap = the value for
+pairs sharing a person − the value for random pairs. Cosine is used because co-membership = ‖p_i‖ ‖p_j‖ × cosine mixes
+how concentrated each membership is with how similar the two are.
+**Cue competition.** After the swap, social and content cues are independent across pairs. Compare the excess of
+membership cosine for a social-cue group (shared person; shared organisation without a person; shared journal without
+either) with the same number of untied pairs most strongly linked by content (rank-matched).
+**Worked example (made-up numbers).** λ_child off: excess 0.10 before, 0.09 after the swap (R_off = −0.01); on: 0.14
+→ 0.12 (R_on = −0.02). f = −(−1) · (−0.02 − (−0.01)) = −0.01: the λ_child-on response is steeper, no flag. The
+content-independent addition is 0.12 − 0.09 = 0.03.
+**Limits.** People reach ideas only through articles; the swapped world is artificial; counterfactuals are descriptive;
+a rank correlation describes how consistently similarity follows overlap, not by how much.
 
 ## Measures on membership distributions — preferred uses
 
