@@ -5503,3 +5503,16 @@ tie-weighted and article level in all 5 cells (A1 K20 R_off −0.025 ± 0.006 / 
 −0.011 ± 0.004); person level all but A1 K5 (−0.022 ± 0.013). λ_child's addition after the swap, as % of the λ_child-off
 level: unweighted 13–22 %; tie-weighted A1 6 / 8 / 18 %, A2 3 / 3 %; article 6 / 7 / 21 %, 3 / 2 %; person 2 / 4 / 21 %,
 2 / 2 % (K 5 / 13 / 20; K 5 / 13). Counterfactual shares (RL-417) unstable under weighting (wide intervals).
+
+### RL-421 — 2026-11-27 — W4 follow-up: within-fit content dependence (owner: "then run the check")
+`m1/fit/w4_content_dependence.py` → `fit/results/stage0/w4_content_dependence.{json,log}` (saved fits). Changed after a
+one-seed test: raw co-membership falls with content overlap even for random pairs (Spearman ≈ −0.4) because articles
+with more child hyperedges have more concentrated memberships (Spearman(size, entropy) −0.46 to −0.60 at λ_child off);
+main similarity = cosine of membership vectors, every ρ partials out log size_i + log size_j (same-person ρ also the tie
+value). W-aware cosine overlap, before the swap, λ_child off: ρ_same (sizes + tie partialled) A1 K5 / K13 / K20
+0.181 / 0.148 / 0.129, A2 K5 / K13 0.227 / 0.190; ρ_random (50,000 untied pairs) 0.109 / 0.116 / 0.111 / 0.097 / 0.066;
+gap same − random +0.091 / +0.049 / +0.035 / +0.166 / +0.162 (SE ≤ 0.010). After the swap the gap falls to −0.030…+0.013
+(validity check). λ_child on − off before the swap: ρ_random +0.018…+0.038; gap A1 +0.043 ± 0.007 / +0.050 ± 0.006 /
++0.060 ± 0.009, A2 +0.005 ± 0.008 / −0.023 ± 0.008. Count and Jaccard overlaps agree. Reading given: the level of
+same-person grouping is mostly social (RL-415/420), but its variation follows content more than for random pairs, and
+λ_child strengthens this in approach 1; restates RL-419's wording.

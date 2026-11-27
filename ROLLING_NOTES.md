@@ -14,7 +14,7 @@ notes and address one by one."
 1. **Three units for the tie-weighted W4 reading** (owner: "I'd actually consider making analysis with all 3 units"):
    (a) article pairs weighted by co-author tie value; (b) article level — each article's tie-weighted mean
    co-membership with its tied articles, mean over articles; (c) person level — mean co-membership among a person's
-   articles, mean over persons. Same weights in both approaches. — IN PROGRESS
+   articles, mean over persons. Same weights in both approaches. — DONE (RL-420), content-dependence check DONE (RL-421)
 2. **Representation artefact?** My statement "ideas enter through which articles people write, not through a separate
    association between people and ideas" may be an artefact of linking authors to semantics only through articles.
    Owner's counterfactual: an author×semantics relation, or an author×article×semantics tensor (MetaFac allows it).
