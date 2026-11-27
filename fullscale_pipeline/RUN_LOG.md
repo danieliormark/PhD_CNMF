@@ -5492,3 +5492,14 @@ median 24 child hyperedges per article. Same-person pairs share on average 4.3 c
 W raises levels but not the relative same-person link. Reading given: the article-mediated representation is a
 defensible choice (ideas as properties of collectively produced articles), an individual person–idea link is hardly
 identifiable in this corpus; the author×child counterfactual fits are not recommended; parent-level check dropped.
+
+### RL-420 — 2026-11-27 — W4 in three units, tie-weighted (owner: "making analysis with all 3 units")
+`m1/fit/w4_units.py` → `fit/results/stage0/w4_units.{json,log}` (saved fits; rebuilt ties and person sets checked equal
+to each fit's own data). Weights = co-author tie values, same in both approaches. Units: unweighted pairs (RL-415),
+(a) tie-weighted pairs, (b) article level (each article's tie-weighted mean co-membership with its tied articles; 739
+articles), (c) person level (mean co-membership among a person's articles; 793 persons with ≥ 2 articles). Decided W4
+criterion: no flag in any cell or unit (flatness negative everywhere: λ_child on responds more to the swap). Testable:
+tie-weighted and article level in all 5 cells (A1 K20 R_off −0.025 ± 0.006 / −0.024 ± 0.005; A2 K13 −0.009 ± 0.003 /
+−0.011 ± 0.004); person level all but A1 K5 (−0.022 ± 0.013). λ_child's addition after the swap, as % of the λ_child-off
+level: unweighted 13–22 %; tie-weighted A1 6 / 8 / 18 %, A2 3 / 3 %; article 6 / 7 / 21 %, 3 / 2 %; person 2 / 4 / 21 %,
+2 / 2 % (K 5 / 13 / 20; K 5 / 13). Counterfactual shares (RL-417) unstable under weighting (wide intervals).
