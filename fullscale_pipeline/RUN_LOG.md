@@ -5443,3 +5443,14 @@ at p 1 (after the swap): A1 +0.018 ± 0.005 / +0.021 ± 0.005 / +0.021 ± 0.007 
 social ties, a minority content-led; the term increases the content-led part in approach 1 (opposite of the W4 concern)
 and adds a content-independent amount in both approaches (approach 2 entirely), not caught by the flatness criterion.
 Not a decision; options put to the owner.
+
+### RL-416 — 2026-11-27 — W4 follow-up: same-author pairs also share journals and organisations (data only)
+Owner asked whether journals or organisations could contribute to the term's content-independent addition (RL-415).
+`m1/fit/w4_cochannel.py` (K 13, seed 1; the swap permutes each article's whole social bundle, so p 0 and p 1 give the
+same shares): of the 1,107 same-author pairs, 15.4 % also share a journal (all article pairs 2.35 %) and 98.6 % share an
+organisation through their authors in approach 1 (all pairs 0.80 %), 87.3 % share an article×organisation tie in
+approach 2 (all pairs 0.63 %). So after the swap a same-author pair still shares, beyond chance, its journal and
+organisations; the excess at p 1 includes reproducing those ties. From RL-415's file, term on − off at p 1, scale-free,
+for pairs sharing a journal: A1 K13 +0.128 ± 0.036, A2 K13 +0.124 ± 0.012, A2 K5 +0.020 ± 0.005; sharing an
+organisation: +0.025 to +0.093, all ≥ 4 SE; A1 K20 journal −0.33 ± 0.09. Reading given to the owner: valid channel; a
+check separating concentration (H1) from rearrangement (H2, by channel) proposed, not run.
