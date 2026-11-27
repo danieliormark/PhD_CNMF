@@ -5454,3 +5454,22 @@ organisations; the excess at p 1 includes reproducing those ties. From RL-415's 
 for pairs sharing a journal: A1 K13 +0.128 ± 0.036, A2 K13 +0.124 ± 0.012, A2 K5 +0.020 ± 0.005; sharing an
 organisation: +0.025 to +0.093, all ≥ 4 SE; A1 K20 journal −0.33 ± 0.09. Reading given to the owner: valid channel; a
 check separating concentration (H1) from rearrangement (H2, by channel) proposed, not run.
+
+### RL-417 — 2026-11-27 — W4 follow-up: H1/H2 check, parts A–C (owner: "yes, build and run parts A–C"; saved fits only)
+`m1/fit/w4_h1h2_check.py` → `m1/fit/results/stage0/w4_h1h2_check.{json,log}`; 5 W4 cells × 10 paired seeds × 4 fits,
+12 processes, about 8 min. λ_child = word-similarity regulariser weight (child×child W), off = r 0. Deviation from the
+proposal, reported to the owner: the first test showed λ_child RAISES per-article membership entropy (all cells, +0.07
+to +0.15 nats; off 0.07–0.26) while the all-pairs mean co-membership rises, so a community-size counterfactual
+("size": each community's mean membership set to the other fit's, matched by size rank) and both together ("both") were
+added beside the decided entropy one ("conc"); the common-γ robustness reading found no γ in any fit (all-pairs mean not
+reachable by a power transform). Results after the swap (p 1), deciding entity, share of λ_child's addition, mean of
+the two orders [95 % seed bootstrap]: conc A1 K5 −0.21, A1 K13 −0.12, A1 K20 −0.19, A2 K5 +0.12, A2 K13 −0.01; size
+−0.13 [−0.66, 0.19] / 0.69 [0.44, 0.96] / 0.61 [0.40, 0.86] / 0.77 [0.43, 1.27] / 1.73 [1.38, 2.15]; both −0.29 /
+0.51 [0.31, 0.71] / 0.43 [0.15, 0.57] / 0.45 [0.19, 0.79] / 1.22 [0.97, 1.49]; Σ_k (mean membership)² on − off
++0.006 to +0.015. Part B: content-side profiles' distinctiveness (mean total variation from the mean profile) falls
+0.16–0.23 (−27 to −38 %, SE ≤ 0.0013) in every cell; article–content-side overlap falls 0.15–0.24 beyond the conc
+counterfactual; author side (A1) −0.005 to −0.037, journal side +0.025 to +0.036 (A1), A2 co-author side +0.033 to
++0.042, organisation +0.008 to +0.012, journal +0.029 to +0.051. Part C (A1): the 15 % of author pairs also sharing a
+journal hold 27 % [16, 59] / 31 % [21, 41] / 37 % [13, 54] of the addition (K 5/13/20; per pair 0.032–0.051 vs
+0.015–0.017); A2: 7–18 %, per-pair addition similar in all subgroups (0.026–0.067). Same pattern at p 0. Reading given
+to the owner; not a decision.

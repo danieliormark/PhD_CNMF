@@ -1,0 +1,144 @@
+== A1 K5 r0.3 p1 (seeds 10, max clipped share 0.009)
+  A author         addition +0.0176±0.0051  conc: main -0.21 [-0.67, -0.07] o1 -0.44 [-1.20, -0.21] o2 0.02 [-0.18, 0.19]  size: main -0.13 [-0.66, 0.19] o1 -0.67 [-1.87, -0.03] o2 0.42 [-0.28, 1.10]  both: main -0.29 [-1.28, 0.04] o1 -1.06 [-2.88, -0.39] o2 0.47 [-0.19, 0.95]
+  A organisation   addition +0.0061±0.0010  conc: main -0.13 [-0.25, -0.05] o1 -0.14 [-0.30, -0.04] o2 -0.11 [-0.24, -0.03]  size: main 0.27 [-0.07, 0.64] o1 -0.22 [-0.84, 0.39] o2 0.75 [0.37, 1.21]  both: main 0.15 [-0.24, 0.44] o1 -0.38 [-1.02, 0.10] o2 0.68 [0.28, 1.10]
+  A journal        addition +0.0012±0.0007  conc: main 0.27 [-0.22, 1.14] o1 -0.41 [-3.84, 1.90] o2 0.95 [-2.56, 5.53]  size: main -1.22 [-8.04, 3.51] o1 -0.32 [-2.33, 1.01] o2 -2.11 [-14.90, 6.47]  both: main -0.82 [-6.72, 2.96] o1 0.13 [-2.37, 2.12] o2 -1.78 [-13.02, 5.58]
+  C journal+org   pairs 167 share 0.151 addition +0.0318±0.0064 contribution 0.27 [0.16, 0.59] conc within -0.10 [-0.32, 0.06] size within -0.04 [-0.47, 0.62] both within -0.20 [-0.55, 0.33]
+  C journal only  pairs 3 share 0.003 addition +0.0696±0.0336 contribution 0.01 [0.00, 0.02] conc within 0.08 [-0.89, 0.75] size within 0.60 [0.12, 3.26] both within 0.72 [-0.04, 4.39]
+  C org only      pairs 925 share 0.836 addition +0.0149±0.0057 contribution 0.71 [0.41, 0.81] conc within -0.26 [-1.42, -0.07] size within -0.17 [-1.13, 0.15] both within -0.34 [-2.46, 0.05]
+  C neither       pairs 12 share 0.011 addition +0.0120±0.0200 contribution 0.01 [-0.02, 0.03] conc within 0.29 [-3.03, 3.82] size within -0.01 [-8.56, 9.32] both within -0.84 [-8.83, 9.79]
+  C journal       pairs 170 share 0.154 addition +0.0324±0.0062 contribution 0.28 [0.17, 0.60] conc within -0.09 [-0.30, 0.06] size within -0.01 [-0.44, 0.61] both within -0.17 [-0.52, 0.34]
+  C no journal    pairs 937 share 0.846 addition +0.0149±0.0057 contribution 0.72 [0.40, 0.83] conc within -0.26 [-1.40, -0.07] size within -0.17 [-1.13, 0.16] both within -0.34 [-2.57, 0.04]
+  B child_article        n 2136 tv off 0.5363 on−off -0.1678±0.0009 | overlap off 0.7431 conc−off +0.0186±0.0006 on−conc -0.1732±0.0022 on−off -0.1546±0.0026
+  B author_article       n 2136 tv off 0.6464 on−off +0.0002±0.0005 | overlap off 0.8123 conc−off -0.0089±0.0006 on−conc -0.0280±0.0016 on−off -0.0369±0.0017
+  B article_journal      n 2132 tv off 0.2967 on−off +0.0322±0.0017 | overlap off 0.3825 conc−off +0.0128±0.0008 on−conc +0.0198±0.0012 on−off +0.0326±0.0013
+  B membership tv off 0.7680 on−off -0.0395±0.0010  entropy off 0.066 on−off +0.0970±0.0025  Σm² off 0.2097 on−off +0.0075±0.0007  residuals size 0.0000 entropy 0.0000
+== A1 K5 r0.3 p0 (seeds 10, max clipped share 0.009)
+  A author         addition +0.0590±0.0042  conc: main -0.05 [-0.08, -0.01] o1 -0.17 [-0.22, -0.14] o2 0.08 [0.04, 0.12]  size: main -0.09 [-0.18, 0.01] o1 -0.23 [-0.38, -0.07] o2 0.05 [-0.01, 0.13]  both: main -0.13 [-0.23, -0.04] o1 -0.30 [-0.43, -0.18] o2 0.05 [-0.08, 0.15]
+  A organisation   addition +0.0058±0.0011  conc: main -0.19 [-0.34, -0.10] o1 -0.21 [-0.37, -0.11] o2 -0.17 [-0.38, -0.05]  size: main -0.26 [-0.43, -0.09] o1 -0.48 [-0.79, -0.21] o2 -0.04 [-0.18, 0.14]  both: main -0.29 [-0.55, -0.07] o1 -0.50 [-0.83, -0.26] o2 -0.07 [-0.32, 0.22]
+  A journal        addition +0.0304±0.0017  conc: main 0.22 [0.20, 0.24] o1 0.03 [0.02, 0.03] o2 0.41 [0.37, 0.45]  size: main -0.30 [-0.38, -0.22] o1 0.05 [-0.01, 0.10] o2 -0.64 [-0.79, -0.49]  both: main -0.27 [-0.36, -0.17] o1 0.10 [0.04, 0.15] o2 -0.64 [-0.84, -0.41]
+  C journal+org   pairs 167 share 0.151 addition +0.0718±0.0082 contribution 0.18 [0.15, 0.22] conc within -0.08 [-0.15, -0.02] size within -0.20 [-0.34, -0.07] both within -0.24 [-0.34, -0.15]
+  C journal only  pairs 3 share 0.003 addition -0.1536±0.0704 contribution -0.01 [-0.01, -0.00] conc within 0.18 [-0.05, 1.17] size within 0.13 [-0.13, 0.46] both within -0.00 [-1.01, 0.45]
+  C org only      pairs 925 share 0.836 addition +0.0589±0.0041 contribution 0.83 [0.80, 0.87] conc within -0.03 [-0.07, 0.01] size within -0.06 [-0.14, 0.04] both within -0.09 [-0.20, 0.01]
+  C neither       pairs 12 share 0.011 addition -0.0611±0.0121 contribution -0.01 [-0.02, -0.01] conc within 0.45 [0.22, 0.77] size within 0.27 [-0.04, 0.72] both within 0.81 [0.23, 1.73]
+  C journal       pairs 170 share 0.154 addition +0.0678±0.0083 contribution 0.18 [0.15, 0.21] conc within -0.09 [-0.15, -0.04] size within -0.21 [-0.36, -0.07] both within -0.25 [-0.37, -0.15]
+  C no journal    pairs 937 share 0.846 addition +0.0574±0.0041 contribution 0.82 [0.79, 0.85] conc within -0.04 [-0.08, 0.00] size within -0.06 [-0.15, 0.03] both within -0.10 [-0.21, -0.01]
+  B child_article        n 2136 tv off 0.5374 on−off -0.1654±0.0009 | overlap off 0.7456 conc−off +0.0215±0.0005 on−conc -0.1680±0.0024 on−off -0.1465±0.0025
+  B author_article       n 2136 tv off 0.6529 on−off +0.0024±0.0004 | overlap off 0.8196 conc−off -0.0114±0.0006 on−conc -0.0321±0.0013 on−off -0.0435±0.0015
+  B article_journal      n 2132 tv off 0.3366 on−off +0.0921±0.0021 | overlap off 0.4002 conc−off +0.0163±0.0005 on−conc +0.0537±0.0016 on−off +0.0700±0.0018
+  B membership tv off 0.7696 on−off -0.0417±0.0010  entropy off 0.065 on−off +0.1100±0.0023  Σm² off 0.2086 on−off +0.0058±0.0004  residuals size 0.0000 entropy 0.0000
+== A2 K5 r0.3 p1 (seeds 10, max clipped share 0.008)
+  A co-author tie  addition +0.0453±0.0070  conc: main 0.12 [0.05, 0.20] o1 -0.13 [-0.27, 0.00] o2 0.36 [0.26, 0.57]  size: main 0.77 [0.43, 1.27] o1 0.98 [0.49, 1.58] o2 0.56 [0.30, 1.03]  both: main 0.45 [0.19, 0.79] o1 0.29 [-0.13, 0.72] o2 0.61 [0.37, 1.08]
+  A organisation   addition +0.0132±0.0013  conc: main 0.10 [0.05, 0.15] o1 -0.13 [-0.19, -0.07] o2 0.32 [0.24, 0.41]  size: main 0.92 [0.62, 1.28] o1 1.15 [0.64, 1.72] o2 0.69 [0.52, 0.93]  both: main 0.73 [0.46, 1.05] o1 0.77 [0.29, 1.28] o2 0.70 [0.49, 0.98]
+  A journal        addition +0.0048±0.0011  conc: main 0.11 [0.04, 0.18] o1 -0.14 [-0.29, -0.05] o2 0.36 [0.24, 0.52]  size: main 0.10 [-0.13, 0.22] o1 0.12 [-0.03, 0.30] o2 0.08 [-0.41, 0.31]  both: main 0.10 [-0.10, 0.20] o1 -0.07 [-0.26, 0.12] o2 0.27 [-0.11, 0.43]
+  C journal+org   pairs 154 share 0.139 addition +0.0523±0.0183 contribution 0.16 [0.06, 0.26] conc within 0.13 [-0.09, 0.34] size within 0.56 [0.08, 1.85] both within 0.34 [-0.11, 1.07]
+  C journal only  pairs 16 share 0.014 addition +0.0567±0.0193 contribution 0.02 [0.01, 0.04] conc within -0.09 [-0.57, 0.17] size within 0.59 [0.15, 1.73] both within 0.66 [0.19, 1.72]
+  C org only      pairs 812 share 0.734 addition +0.0438±0.0082 contribution 0.71 [0.62, 0.79] conc within 0.12 [0.06, 0.23] size within 0.78 [0.46, 1.34] both within 0.44 [0.21, 0.82]
+  C neither       pairs 125 share 0.113 addition +0.0446±0.0099 contribution 0.11 [0.07, 0.16] conc within 0.08 [-0.06, 0.21] size within 1.05 [0.44, 2.37] both within 0.64 [0.14, 1.55]
+  C journal       pairs 170 share 0.154 addition +0.0527±0.0174 contribution 0.18 [0.07, 0.29] conc within 0.11 [-0.10, 0.26] size within 0.56 [0.14, 1.65] both within 0.37 [-0.05, 1.03]
+  C no journal    pairs 937 share 0.846 addition +0.0439±0.0080 contribution 0.82 [0.71, 0.93] conc within 0.12 [0.06, 0.21] size within 0.82 [0.46, 1.40] both within 0.47 [0.21, 0.87]
+  B child_article        n 2136 tv off 0.5343 on−off -0.1647±0.0005 | overlap off 0.7366 conc−off +0.0103±0.0005 on−conc -0.1622±0.0015 on−off -0.1519±0.0012
+  B article_affiliation  n 2103 tv off 0.5274 on−off +0.0136±0.0012 | overlap off 0.6721 conc−off +0.0008±0.0004 on−conc +0.0110±0.0011 on−off +0.0118±0.0012
+  B article_article      n 739 tv off 0.6551 on−off -0.0191±0.0020 | overlap off 0.7199 conc−off -0.0079±0.0021 on−conc +0.0407±0.0024 on−off +0.0328±0.0022
+  B article_journal      n 2132 tv off 0.3109 on−off +0.0298±0.0026 | overlap off 0.4045 conc−off +0.0062±0.0006 on−conc +0.0232±0.0023 on−off +0.0294±0.0021
+  B membership tv off 0.7413 on−off -0.0353±0.0010  entropy off 0.141 on−off +0.0716±0.0018  Σm² off 0.2101 on−off +0.0123±0.0011  residuals size 0.0000 entropy 0.0000
+== A2 K5 r0.3 p0 (seeds 10, max clipped share 0.007)
+  A co-author tie  addition +0.0475±0.0033  conc: main 0.03 [0.01, 0.06] o1 -0.19 [-0.26, -0.13] o2 0.25 [0.21, 0.30]  size: main 0.76 [0.61, 0.91] o1 1.16 [0.78, 1.55] o2 0.35 [0.17, 0.54]  both: main 0.57 [0.43, 0.70] o1 0.66 [0.32, 0.95] o2 0.48 [0.29, 0.68]
+  A organisation   addition +0.0133±0.0008  conc: main 0.07 [0.04, 0.09] o1 -0.12 [-0.18, -0.07] o2 0.26 [0.20, 0.30]  size: main 0.57 [0.43, 0.71] o1 0.93 [0.65, 1.28] o2 0.20 [0.05, 0.33]  both: main 0.51 [0.39, 0.63] o1 0.59 [0.35, 0.85] o2 0.43 [0.29, 0.55]
+  A journal        addition +0.0318±0.0017  conc: main 0.14 [0.12, 0.16] o1 -0.02 [-0.04, 0.00] o2 0.29 [0.26, 0.33]  size: main -0.03 [-0.06, 0.00] o1 -0.08 [-0.13, -0.04] o2 0.03 [-0.03, 0.09]  both: main 0.09 [0.05, 0.13] o1 -0.06 [-0.12, -0.02] o2 0.24 [0.16, 0.32]
+  C journal+org   pairs 154 share 0.139 addition +0.0407±0.0092 contribution 0.12 [0.08, 0.17] conc within 0.05 [-0.20, 0.21] size within 0.98 [0.44, 2.00] both within 0.80 [0.37, 1.53]
+  C journal only  pairs 16 share 0.014 addition +0.0075±0.0237 contribution 0.00 [-0.01, 0.01] conc within -3.14 [-14.62, 18.71] size within 4.68 [-24.62, 20.37] both within 4.40 [-20.26, 18.91]
+  C org only      pairs 812 share 0.734 addition +0.0476±0.0039 contribution 0.74 [0.69, 0.78] conc within 0.03 [-0.02, 0.06] size within 0.71 [0.62, 0.81] both within 0.50 [0.39, 0.61]
+  C neither       pairs 125 share 0.113 addition +0.0599±0.0038 contribution 0.14 [0.13, 0.16] conc within 0.08 [-0.02, 0.20] size within 0.74 [0.57, 0.92] both within 0.68 [0.45, 0.90]
+  C journal       pairs 170 share 0.154 addition +0.0376±0.0089 contribution 0.12 [0.08, 0.18] conc within -0.01 [-0.30, 0.16] size within 1.05 [0.49, 2.27] both within 0.86 [0.43, 1.67]
+  C no journal    pairs 937 share 0.846 addition +0.0493±0.0036 contribution 0.88 [0.82, 0.92] conc within 0.04 [0.01, 0.06] size within 0.72 [0.62, 0.81] both within 0.53 [0.41, 0.64]
+  B child_article        n 2136 tv off 0.5383 on−off -0.1629±0.0004 | overlap off 0.7424 conc−off +0.0114±0.0004 on−conc -0.1544±0.0012 on−off -0.1430±0.0010
+  B article_affiliation  n 2103 tv off 0.5301 on−off +0.0162±0.0008 | overlap off 0.6712 conc−off -0.0015±0.0007 on−conc +0.0162±0.0010 on−off +0.0146±0.0011
+  B article_article      n 739 tv off 0.6725 on−off -0.0107±0.0014 | overlap off 0.7431 conc−off -0.0111±0.0014 on−conc +0.0672±0.0017 on−off +0.0560±0.0013
+  B article_journal      n 2132 tv off 0.3617 on−off +0.0827±0.0040 | overlap off 0.4274 conc−off +0.0062±0.0005 on−conc +0.0553±0.0018 on−off +0.0615±0.0019
+  B membership tv off 0.7469 on−off -0.0348±0.0010  entropy off 0.135 on−off +0.0725±0.0016  Σm² off 0.2073 on−off +0.0114±0.0006  residuals size 0.0000 entropy 0.0000
+== A1 K13 r0.3 p1 (seeds 10, max clipped share 0.006)
+  A author         addition +0.0205±0.0047  conc: main -0.12 [-0.23, -0.04] o1 -0.15 [-0.32, -0.06] o2 -0.08 [-0.20, 0.04]  size: main 0.69 [0.44, 0.96] o1 0.63 [0.37, 0.93] o2 0.74 [0.44, 1.06]  both: main 0.51 [0.31, 0.71] o1 0.30 [0.01, 0.53] o2 0.72 [0.42, 1.02]
+  A organisation   addition +0.0044±0.0006  conc: main -0.13 [-0.18, -0.09] o1 -0.12 [-0.27, -0.00] o2 -0.14 [-0.27, 0.02]  size: main 0.69 [0.50, 0.95] o1 0.61 [0.39, 0.86] o2 0.77 [0.52, 1.07]  both: main 0.52 [0.33, 0.75] o1 0.29 [0.05, 0.52] o2 0.75 [0.47, 1.08]
+  A journal        addition +0.0135±0.0037  conc: main 0.18 [0.13, 0.24] o1 0.03 [0.01, 0.05] o2 0.33 [0.26, 0.43]  size: main 0.75 [0.66, 0.92] o1 0.75 [0.60, 1.08] o2 0.75 [0.64, 0.84]  both: main 0.80 [0.74, 0.94] o1 0.78 [0.66, 1.04] o2 0.83 [0.73, 0.91]
+  C journal+org   pairs 167 share 0.151 addition +0.0418±0.0125 contribution 0.31 [0.21, 0.41] conc within 0.01 [-0.13, 0.20] size within 0.69 [0.20, 1.26] both within 0.56 [0.10, 1.01]
+  C journal only  pairs 3 share 0.003 addition +0.0304±0.0376 contribution 0.00 [-0.00, 0.02] conc within -0.55 [-6.91, 6.84] size within 1.08 [-9.62, 11.32] both within 0.67 [-8.74, 11.30]
+  C org only      pairs 925 share 0.836 addition +0.0172±0.0040 contribution 0.70 [0.59, 0.80] conc within -0.17 [-0.36, -0.04] size within 0.68 [0.40, 1.00] both within 0.48 [0.28, 0.70]
+  C neither       pairs 12 share 0.011 addition -0.0186±0.0059 contribution -0.01 [-0.02, -0.00] conc within 0.04 [-0.43, 0.91] size within 0.32 [-1.49, 1.24] both within 0.18 [-1.52, 0.85]
+  C journal       pairs 170 share 0.154 addition +0.0416±0.0122 contribution 0.31 [0.22, 0.42] conc within 0.01 [-0.13, 0.19] size within 0.69 [0.22, 1.25] both within 0.56 [0.13, 1.01]
+  C no journal    pairs 937 share 0.846 addition +0.0167±0.0040 contribution 0.69 [0.58, 0.78] conc within -0.17 [-0.36, -0.04] size within 0.69 [0.40, 1.01] both within 0.49 [0.28, 0.69]
+  B child_article        n 2136 tv off 0.6176 on−off -0.1663±0.0011 | overlap off 0.6816 conc−off +0.0056±0.0006 on−conc -0.2121±0.0023 on−off -0.2065±0.0024
+  B author_article       n 2136 tv off 0.8057 on−off -0.0013±0.0004 | overlap off 0.7548 conc−off -0.0073±0.0007 on−conc -0.0071±0.0015 on−off -0.0145±0.0019
+  B article_journal      n 2132 tv off 0.4547 on−off +0.0301±0.0046 | overlap off 0.2856 conc−off +0.0118±0.0009 on−conc +0.0237±0.0036 on−off +0.0356±0.0043
+  B membership tv off 0.8948 on−off -0.0356±0.0014  entropy off 0.113 on−off +0.1119±0.0043  Σm² off 0.0859 on−off +0.0106±0.0007  residuals size 0.0000 entropy 0.0000
+== A1 K13 r0.3 p0 (seeds 10, max clipped share 0.007)
+  A author         addition +0.0331±0.0032  conc: main -0.09 [-0.15, -0.03] o1 -0.18 [-0.27, -0.11] o2 -0.00 [-0.07, 0.08]  size: main 0.27 [0.13, 0.44] o1 0.18 [-0.00, 0.40] o2 0.37 [0.24, 0.50]  both: main 0.18 [0.06, 0.32] o1 -0.02 [-0.18, 0.19] o2 0.38 [0.26, 0.50]
+  A organisation   addition +0.0035±0.0005  conc: main -0.15 [-0.29, -0.05] o1 -0.17 [-0.27, -0.10] o2 -0.12 [-0.34, 0.02]  size: main 0.21 [-0.03, 0.45] o1 0.08 [-0.17, 0.33] o2 0.33 [0.10, 0.58]  both: main 0.07 [-0.15, 0.27] o1 -0.20 [-0.47, 0.03] o2 0.34 [0.12, 0.59]
+  A journal        addition +0.0189±0.0028  conc: main 0.13 [0.10, 0.16] o1 0.00 [-0.01, 0.02] o2 0.25 [0.20, 0.32]  size: main 0.57 [0.47, 0.70] o1 0.54 [0.36, 0.80] o2 0.60 [0.50, 0.68]  both: main 0.64 [0.58, 0.74] o1 0.57 [0.43, 0.79] o2 0.72 [0.62, 0.78]
+  C journal+org   pairs 167 share 0.151 addition +0.0633±0.0081 contribution 0.29 [0.24, 0.34] conc within -0.04 [-0.11, 0.01] size within 0.56 [0.37, 0.80] both within 0.48 [0.32, 0.68]
+  C journal only  pairs 3 share 0.003 addition -0.0140±0.0504 contribution -0.00 [-0.01, 0.01] conc within 0.71 [-1.24, 1.43] size within -2.76 [-11.17, 4.42] both within -0.36 [-4.13, 1.03]
+  C org only      pairs 925 share 0.836 addition +0.0278±0.0030 contribution 0.70 [0.66, 0.75] conc within -0.11 [-0.19, -0.03] size within 0.16 [-0.01, 0.33] both within 0.07 [-0.08, 0.21]
+  C neither       pairs 12 share 0.011 addition +0.0311±0.0267 contribution 0.01 [-0.01, 0.03] conc within -0.14 [-2.07, 1.89] size within -0.12 [-3.49, 3.96] both within -0.38 [-7.66, 7.92]
+  C journal       pairs 170 share 0.154 addition +0.0619±0.0075 contribution 0.29 [0.24, 0.34] conc within -0.04 [-0.11, 0.01] size within 0.57 [0.39, 0.81] both within 0.48 [0.33, 0.68]
+  C no journal    pairs 937 share 0.846 addition +0.0279±0.0031 contribution 0.71 [0.66, 0.76] conc within -0.11 [-0.19, -0.03] size within 0.16 [-0.01, 0.32] both within 0.06 [-0.09, 0.21]
+  B child_article        n 2136 tv off 0.6185 on−off -0.1655±0.0009 | overlap off 0.6837 conc−off +0.0056±0.0005 on−conc -0.2075±0.0019 on−off -0.2019±0.0022
+  B author_article       n 2136 tv off 0.8101 on−off -0.0002±0.0005 | overlap off 0.7532 conc−off -0.0085±0.0005 on−conc -0.0061±0.0016 on−off -0.0146±0.0017
+  B article_journal      n 2132 tv off 0.4895 on−off +0.0447±0.0034 | overlap off 0.2997 conc−off +0.0104±0.0006 on−conc +0.0249±0.0019 on−off +0.0352±0.0023
+  B membership tv off 0.8951 on−off -0.0345±0.0015  entropy off 0.119 on−off +0.1104±0.0042  Σm² off 0.0847 on−off +0.0100±0.0007  residuals size 0.0000 entropy 0.0000
+== A2 K13 r1 p1 (seeds 10, max clipped share 0.006)
+  A co-author tie  addition +0.0502±0.0056  conc: main -0.01 [-0.12, 0.07] o1 0.00 [-0.13, 0.09] o2 -0.02 [-0.13, 0.06]  size: main 1.73 [1.38, 2.15] o1 2.39 [1.89, 3.01] o2 1.07 [0.86, 1.33]  both: main 1.22 [0.97, 1.49] o1 1.43 [1.08, 1.79] o2 1.01 [0.83, 1.22]
+  A organisation   addition +0.0148±0.0013  conc: main 0.06 [-0.02, 0.12] o1 0.01 [-0.06, 0.06] o2 0.11 [0.01, 0.19]  size: main 1.29 [1.17, 1.42] o1 1.69 [1.55, 1.89] o2 0.88 [0.77, 0.97]  both: main 1.00 [0.88, 1.09] o1 1.13 [0.99, 1.28] o2 0.87 [0.73, 0.98]
+  A journal        addition +0.0156±0.0012  conc: main 0.17 [0.13, 0.20] o1 0.03 [-0.01, 0.07] o2 0.30 [0.25, 0.36]  size: main 0.67 [0.56, 0.82] o1 0.68 [0.51, 0.89] o2 0.67 [0.60, 0.77]  both: main 0.73 [0.63, 0.85] o1 0.63 [0.48, 0.82] o2 0.83 [0.76, 0.90]
+  C journal+org   pairs 154 share 0.139 addition +0.0263±0.0163 contribution 0.07 [-0.02, 0.13] conc within -0.16 [-3.00, 2.35] size within 3.25 [-14.13, 25.03] both within 1.81 [-6.43, 11.35]
+  C journal only  pairs 16 share 0.014 addition +0.0521±0.0178 contribution 0.02 [0.01, 0.02] conc within -0.19 [-0.55, 0.04] size within 1.92 [1.30, 4.56] both within 1.50 [0.95, 3.26]
+  C org only      pairs 812 share 0.734 addition +0.0521±0.0040 contribution 0.76 [0.71, 0.84] conc within -0.03 [-0.14, 0.06] size within 1.65 [1.30, 1.99] both within 1.18 [0.92, 1.42]
+  C neither       pairs 125 share 0.113 addition +0.0669±0.0120 contribution 0.15 [0.11, 0.19] conc within 0.18 [0.06, 0.26] size within 1.41 [1.15, 1.87] both within 1.10 [0.95, 1.38]
+  C journal       pairs 170 share 0.154 addition +0.0288±0.0155 contribution 0.09 [-0.00, 0.15] conc within -0.17 [-2.96, 1.36] size within 3.02 [-7.08, 18.13] both within 1.76 [-2.19, 8.50]
+  C no journal    pairs 937 share 0.846 addition +0.0541±0.0047 contribution 0.91 [0.85, 1.00] conc within 0.01 [-0.10, 0.08] size within 1.61 [1.29, 1.91] both within 1.17 [0.94, 1.38]
+  B child_article        n 2136 tv off 0.6138 on−off -0.2310±0.0013 | overlap off 0.6634 conc−off +0.0102±0.0008 on−conc -0.2489±0.0021 on−off -0.2387±0.0025
+  B article_affiliation  n 2103 tv off 0.6786 on−off +0.0063±0.0009 | overlap off 0.6033 conc−off +0.0006±0.0010 on−conc +0.0076±0.0010 on−off +0.0082±0.0016
+  B article_article      n 739 tv off 0.7955 on−off -0.0412±0.0034 | overlap off 0.6372 conc−off -0.0049±0.0015 on−conc +0.0464±0.0045 on−off +0.0415±0.0046
+  B article_journal      n 2132 tv off 0.4678 on−off +0.0421±0.0030 | overlap off 0.3052 conc−off +0.0154±0.0006 on−conc +0.0354±0.0014 on−off +0.0508±0.0018
+  B membership tv off 0.8690 on−off -0.0504±0.0016  entropy off 0.213 on−off +0.1497±0.0041  Σm² off 0.0923 on−off +0.0153±0.0008  residuals size 0.0000 entropy 0.0000
+== A2 K13 r1 p0 (seeds 10, max clipped share 0.008)
+  A co-author tie  addition +0.0538±0.0055  conc: main -0.05 [-0.15, 0.03] o1 -0.07 [-0.20, 0.07] o2 -0.03 [-0.15, 0.06]  size: main 1.18 [1.04, 1.35] o1 1.72 [1.48, 2.03] o2 0.65 [0.49, 0.77]  both: main 0.79 [0.70, 0.88] o1 1.03 [0.90, 1.19] o2 0.55 [0.37, 0.69]
+  A organisation   addition +0.0161±0.0016  conc: main 0.03 [-0.01, 0.08] o1 -0.02 [-0.08, 0.04] o2 0.09 [0.00, 0.17]  size: main 0.87 [0.76, 1.03] o1 1.17 [0.96, 1.46] o2 0.57 [0.49, 0.66]  both: main 0.69 [0.62, 0.77] o1 0.77 [0.64, 0.93] o2 0.61 [0.48, 0.72]
+  A journal        addition +0.0190±0.0017  conc: main 0.14 [0.12, 0.17] o1 -0.01 [-0.02, 0.01] o2 0.30 [0.27, 0.33]  size: main 0.43 [0.34, 0.52] o1 0.43 [0.31, 0.57] o2 0.42 [0.36, 0.47]  both: main 0.53 [0.46, 0.61] o1 0.38 [0.27, 0.51] o2 0.67 [0.63, 0.72]
+  C journal+org   pairs 154 share 0.139 addition +0.0593±0.0097 contribution 0.15 [0.12, 0.18] conc within -0.00 [-0.21, 0.15] size within 1.19 [0.95, 1.59] both within 0.80 [0.65, 0.95]
+  C journal only  pairs 16 share 0.014 addition +0.0636±0.0190 contribution 0.02 [0.01, 0.03] conc within 0.42 [0.28, 0.91] size within 1.74 [1.19, 3.80] both within 1.55 [1.06, 3.40]
+  C org only      pairs 812 share 0.734 addition +0.0495±0.0055 contribution 0.68 [0.64, 0.71] conc within -0.09 [-0.20, -0.01] size within 1.23 [1.08, 1.42] both within 0.78 [0.70, 0.87]
+  C neither       pairs 125 share 0.113 addition +0.0736±0.0091 contribution 0.15 [0.12, 0.19] conc within 0.05 [-0.01, 0.12] size within 0.90 [0.70, 1.12] both within 0.74 [0.58, 0.91]
+  C journal       pairs 170 share 0.154 addition +0.0597±0.0084 contribution 0.17 [0.14, 0.19] conc within 0.04 [-0.12, 0.17] size within 1.25 [1.02, 1.58] both within 0.87 [0.74, 1.02]
+  C no journal    pairs 937 share 0.846 addition +0.0527±0.0054 contribution 0.83 [0.81, 0.86] conc within -0.07 [-0.16, 0.01] size within 1.17 [1.02, 1.33] both within 0.78 [0.68, 0.88]
+  B child_article        n 2136 tv off 0.6162 on−off -0.2290±0.0012 | overlap off 0.6724 conc−off +0.0078±0.0010 on−conc -0.2421±0.0021 on−off -0.2342±0.0029
+  B article_affiliation  n 2103 tv off 0.6835 on−off +0.0094±0.0013 | overlap off 0.6013 conc−off -0.0016±0.0005 on−conc +0.0097±0.0011 on−off +0.0081±0.0011
+  B article_article      n 739 tv off 0.8066 on−off -0.0254±0.0021 | overlap off 0.6429 conc−off -0.0056±0.0013 on−conc +0.0697±0.0027 on−off +0.0641±0.0027
+  B article_journal      n 2132 tv off 0.5050 on−off +0.0528±0.0039 | overlap off 0.3191 conc−off +0.0132±0.0006 on−conc +0.0373±0.0025 on−off +0.0504±0.0027
+  B membership tv off 0.8734 on−off -0.0435±0.0019  entropy off 0.217 on−off +0.1405±0.0041  Σm² off 0.0884 on−off +0.0121±0.0008  residuals size 0.0000 entropy 0.0000
+== A1 K20 r1 p1 (seeds 10, max clipped share 0.007)
+  A author         addition +0.0211±0.0069  conc: main -0.19 [-0.54, -0.10] o1 -0.27 [-0.94, -0.10] o2 -0.11 [-0.19, -0.06]  size: main 0.61 [0.40, 0.86] o1 0.54 [0.17, 0.80] o2 0.67 [0.45, 1.16]  both: main 0.43 [0.15, 0.57] o1 0.16 [-0.67, 0.40] o2 0.70 [0.48, 1.16]
+  A organisation   addition +0.0089±0.0011  conc: main -0.06 [-0.09, -0.04] o1 -0.07 [-0.11, -0.03] o2 -0.05 [-0.10, -0.02]  size: main 0.61 [0.52, 0.71] o1 0.59 [0.47, 0.74] o2 0.63 [0.56, 0.69]  both: main 0.53 [0.45, 0.62] o1 0.44 [0.33, 0.56] o2 0.62 [0.53, 0.70]
+  A journal        addition -0.0173±0.0084  conc: main -0.05 [-0.78, 0.07] o1 -0.09 [-0.56, 0.07] o2 -0.01 [-1.06, 0.13]  size: main 0.99 [-0.65, 1.65] o1 0.76 [-1.53, 1.37] o2 1.22 [0.03, 2.01]  both: main 1.15 [0.09, 1.74] o1 0.95 [-0.66, 1.48] o2 1.35 [0.51, 2.15]
+  C journal+org   pairs 167 share 0.151 addition +0.0510±0.0208 contribution 0.37 [0.13, 0.54] conc within -0.12 [-0.62, 0.01] size within 0.69 [0.20, 1.46] both within 0.63 [0.15, 1.23]
+  C journal only  pairs 3 share 0.003 addition -0.0020±0.0339 contribution -0.00 [-0.01, 0.01] conc within -5.62 [-5.14, 6.01] size within -7.29 [-9.28, 9.98] both within -3.66 [-6.66, 11.01]
+  C org only      pairs 925 share 0.836 addition +0.0158±0.0057 contribution 0.63 [0.44, 0.86] conc within -0.24 [-0.74, -0.11] size within 0.55 [0.30, 0.89] both within 0.31 [-0.07, 0.48]
+  C neither       pairs 12 share 0.011 addition +0.0138±0.0196 contribution 0.01 [-0.01, 0.05] conc within -0.05 [-2.24, 2.41] size within 1.35 [-12.52, 12.06] both within 0.71 [-7.09, 6.95]
+  C journal       pairs 170 share 0.154 addition +0.0501±0.0206 contribution 0.36 [0.12, 0.53] conc within -0.11 [-0.59, 0.02] size within 0.70 [0.18, 1.48] both within 0.63 [0.13, 1.23]
+  C no journal    pairs 937 share 0.846 addition +0.0158±0.0055 contribution 0.64 [0.47, 0.88] conc within -0.24 [-0.72, -0.12] size within 0.56 [0.31, 0.89] both within 0.32 [-0.05, 0.48]
+  B child_article        n 2136 tv off 0.6372 on−off -0.2278±0.0012 | overlap off 0.6083 conc−off +0.0061±0.0019 on−conc -0.2371±0.0078 on−off -0.2310±0.0061
+  B author_article       n 2136 tv off 0.8536 on−off +0.0009±0.0004 | overlap off 0.6753 conc−off -0.0115±0.0008 on−conc +0.0061±0.0061 on−off -0.0054±0.0061
+  B article_journal      n 2132 tv off 0.6803 on−off +0.0348±0.0073 | overlap off 0.3949 conc−off +0.0066±0.0015 on−conc +0.0184±0.0068 on−off +0.0250±0.0081
+  B membership tv off 0.8815 on−off -0.0280±0.0045  entropy off 0.259 on−off +0.1149±0.0123  Σm² off 0.0759 on−off +0.0067±0.0019  residuals size 0.0000 entropy 0.0000
+== A1 K20 r1 p0 (seeds 10, max clipped share 0.008)
+  A author         addition +0.0437±0.0023  conc: main 0.00 [-0.05, 0.04] o1 -0.05 [-0.10, -0.01] o2 0.05 [-0.03, 0.13]  size: main 0.38 [0.24, 0.50] o1 0.37 [0.23, 0.53] o2 0.38 [0.20, 0.53]  both: main 0.31 [0.16, 0.45] o1 0.19 [0.04, 0.34] o2 0.43 [0.27, 0.59]
+  A organisation   addition +0.0074±0.0013  conc: main -0.03 [-0.10, 0.02] o1 -0.02 [-0.11, 0.05] o2 -0.04 [-0.13, 0.03]  size: main 0.41 [0.17, 0.57] o1 0.39 [0.16, 0.53] o2 0.44 [0.17, 0.62]  both: main 0.36 [0.03, 0.54] o1 0.24 [-0.09, 0.43] o2 0.48 [0.15, 0.66]
+  A journal        addition -0.0050±0.0160  conc: main 0.09 [-0.27, 0.53] o1 0.93 [-3.89, 5.24] o2 -0.74 [-5.20, 4.22]  size: main 0.91 [-5.62, 5.90] o1 0.20 [-7.41, 6.24] o2 1.63 [-5.31, 7.23]  both: main 1.27 [-4.42, 5.48] o1 0.69 [-5.77, 6.54] o2 1.86 [-4.41, 7.03]
+  C journal+org   pairs 167 share 0.151 addition +0.0712±0.0078 contribution 0.25 [0.20, 0.28] conc within -0.04 [-0.12, 0.03] size within 0.59 [0.43, 0.78] both within 0.49 [0.30, 0.69]
+  C journal only  pairs 3 share 0.003 addition +0.0847±0.0350 contribution 0.01 [0.00, 0.01] conc within 0.71 [0.46, 1.50] size within 0.78 [0.39, 2.14] both within 1.03 [0.51, 2.41]
+  C org only      pairs 925 share 0.836 addition +0.0393±0.0022 contribution 0.75 [0.71, 0.79] conc within 0.01 [-0.04, 0.06] size within 0.31 [0.16, 0.43] both within 0.25 [0.11, 0.39]
+  C neither       pairs 12 share 0.011 addition -0.0113±0.0122 contribution -0.00 [-0.01, 0.00] conc within 1.26 [-15.42, 11.96] size within 1.78 [-13.02, 12.49] both within 2.69 [-22.42, 21.20]
+  C journal       pairs 170 share 0.154 addition +0.0715±0.0076 contribution 0.25 [0.21, 0.29] conc within -0.02 [-0.10, 0.04] size within 0.60 [0.43, 0.78] both within 0.50 [0.32, 0.69]
+  C no journal    pairs 937 share 0.846 addition +0.0387±0.0022 contribution 0.75 [0.71, 0.79] conc within 0.01 [-0.04, 0.06] size within 0.30 [0.15, 0.42] both within 0.25 [0.09, 0.38]
+  B child_article        n 2136 tv off 0.6390 on−off -0.2266±0.0011 | overlap off 0.6276 conc−off +0.0076±0.0025 on−conc -0.2402±0.0096 on−off -0.2326±0.0074
+  B author_article       n 2136 tv off 0.8574 on−off +0.0024±0.0004 | overlap off 0.6848 conc−off -0.0100±0.0007 on−conc +0.0075±0.0076 on−off -0.0026±0.0077
+  B article_journal      n 2132 tv off 0.6834 on−off +0.0420±0.0099 | overlap off 0.3789 conc−off -0.0005±0.0027 on−conc +0.0235±0.0099 on−off +0.0230±0.0124
+  B membership tv off 0.8941 on−off -0.0264±0.0058  entropy off 0.251 on−off +0.1107±0.0152  Σm² off 0.0684 on−off +0.0061±0.0023  residuals size 0.0000 entropy 0.0000
