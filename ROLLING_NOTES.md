@@ -33,7 +33,7 @@ notes and address one by one."
    with a cautious restatement; awaiting owner.
 5. **Which side, social or semantic, has the stronger effect on an article's placement?** — ANSWERED: existing
    readings only partly tell (Part B overlaps confounded by profile concentration; loss-weight shares fixed by W1);
-   proposed a cue-competition reading at p 1, where the swap makes social and content cues independent. Awaiting owner.
+   cue-competition reading RUN (RL-422). Wording (point 4) agreed by the owner with person counts added (RL-422).
 Agent incident (owner's point, 2026-11-27): a web-fetch Agent call was attempted without permission (blocked, did not
 run); memory rule extended to every Agent type.
 Pending before these: owner's choice on documenting W4 (purpose first; bullets in the 2026-11-27 reply); the

@@ -1,0 +1,100 @@
+== A1 K5 r0.3 p1 pairs {'person': 1107, 'organisation': 17194, 'journal': 52930} overlap social_person 0.0249 social_organisation 0.0242 social_journal 0.0238 content_person 0.3009 content_organisation 0.1763 content_journal 0.1329 all 0.0240
+  person       off cos social +0.1279±0.0073 content +0.3633±0.0170 s−c -0.2353±0.0163 s/c 0.35 | com social +0.1137±0.0076 content +0.3603±0.0164 s/c 0.32
+  person       on  cos social +0.1540±0.0061 content +0.3311±0.0175 s−c -0.1771±0.0199 s/c 0.47 | com social +0.1313±0.0057 content +0.3352±0.0174 s/c 0.39
+  person       on−off cos social +0.0261±0.0054 content -0.0322±0.0049
+  organisation off cos social +0.0137±0.0010 content +0.3026±0.0054 s−c -0.2889±0.0053 s/c 0.05 | com social +0.0105±0.0011 content +0.3030±0.0050 s/c 0.03
+  organisation on  cos social +0.0194±0.0014 content +0.2816±0.0070 s−c -0.2622±0.0071 s/c 0.07 | com social +0.0160±0.0016 content +0.2843±0.0066 s/c 0.06
+  organisation on−off cos social +0.0057±0.0012 content -0.0210±0.0044
+  journal      off cos social +0.0050±0.0009 content +0.2457±0.0030 s−c -0.2407±0.0031 s/c 0.02 | com social +0.0062±0.0011 content +0.2473±0.0031 s/c 0.02
+  journal      on  cos social +0.0073±0.0008 content +0.2421±0.0039 s−c -0.2348±0.0044 s/c 0.03 | com social +0.0072±0.0008 content +0.2403±0.0037 s/c 0.03
+  journal      on−off cos social +0.0023±0.0006 content -0.0036±0.0035
+== A1 K5 r0.3 p0 pairs {'person': 1107, 'organisation': 17194, 'journal': 52930} overlap social_person 0.0458 social_organisation 0.0268 social_journal 0.0239 content_person 0.3001 content_organisation 0.1763 content_journal 0.1329 all 0.0240
+  person       off cos social +0.1446±0.0037 content +0.3673±0.0174 s−c -0.2227±0.0175 s/c 0.39 | com social +0.1361±0.0033 content +0.3652±0.0174 s/c 0.37
+  person       on  cos social +0.2166±0.0057 content +0.3293±0.0157 s−c -0.1127±0.0185 s/c 0.66 | com social +0.1951±0.0055 content +0.3278±0.0151 s/c 0.60
+  person       on−off cos social +0.0720±0.0035 content -0.0380±0.0052
+  organisation off cos social +0.0050±0.0012 content +0.3089±0.0060 s−c -0.3040±0.0064 s/c 0.02 | com social +0.0050±0.0011 content +0.3091±0.0063 s/c 0.02
+  organisation on  cos social +0.0062±0.0012 content +0.2856±0.0051 s−c -0.2794±0.0054 s/c 0.02 | com social +0.0073±0.0011 content +0.2810±0.0049 s/c 0.03
+  organisation on−off cos social +0.0012±0.0008 content -0.0233±0.0032
+  journal      off cos social +0.0278±0.0016 content +0.2489±0.0042 s−c -0.2210±0.0042 s/c 0.11 | com social +0.0277±0.0015 content +0.2501±0.0044 s/c 0.11
+  journal      on  cos social +0.0657±0.0023 content +0.2431±0.0033 s−c -0.1775±0.0035 s/c 0.27 | com social +0.0579±0.0021 content +0.2353±0.0031 s/c 0.25
+  journal      on−off cos social +0.0378±0.0020 content -0.0057±0.0021
+== A2 K5 r0.3 p1 pairs {'person': 1107, 'organisation': 13368, 'journal': 53036} overlap social_person 0.0288 social_organisation 0.0255 social_journal 0.0237 content_person 0.3010 content_organisation 0.1868 content_journal 0.1328 all 0.0240
+  person       off cos social +0.4112±0.0051 content +0.2722±0.0156 s−c +0.1390±0.0191 s/c 1.51 | com social +0.3488±0.0056 content +0.2569±0.0155 s/c 1.36
+  person       on  cos social +0.4686±0.0085 content +0.2338±0.0134 s−c +0.2348±0.0189 s/c 2.00 | com social +0.3940±0.0093 content +0.2320±0.0126 s/c 1.70
+  person       on−off cos social +0.0573±0.0065 content -0.0385±0.0054
+  organisation off cos social +0.0522±0.0021 content +0.2432±0.0076 s−c -0.1910±0.0083 s/c 0.21 | com social +0.0381±0.0024 content +0.2362±0.0071 s/c 0.16
+  organisation on  cos social +0.0673±0.0027 content +0.2055±0.0062 s−c -0.1382±0.0077 s/c 0.33 | com social +0.0491±0.0028 content +0.2039±0.0049 s/c 0.24
+  organisation on−off cos social +0.0151±0.0018 content -0.0377±0.0031
+  journal      off cos social +0.0048±0.0015 content +0.2017±0.0044 s−c -0.1969±0.0044 s/c 0.02 | com social +0.0061±0.0013 content +0.1980±0.0039 s/c 0.03
+  journal      on  cos social +0.0110±0.0023 content +0.1788±0.0032 s−c -0.1678±0.0038 s/c 0.06 | com social +0.0106±0.0021 content +0.1748±0.0023 s/c 0.06
+  journal      on−off cos social +0.0062±0.0013 content -0.0229±0.0021
+== A2 K5 r0.3 p0 pairs {'person': 1107, 'organisation': 13368, 'journal': 53036} overlap social_person 0.0458 social_organisation 0.0265 social_journal 0.0239 content_person 0.3001 content_organisation 0.1868 content_journal 0.1328 all 0.0240
+  person       off cos social +0.4281±0.0030 content +0.3118±0.0061 s−c +0.1162±0.0068 s/c 1.37 | com social +0.3667±0.0036 content +0.2958±0.0070 s/c 1.24
+  person       on  cos social +0.4838±0.0034 content +0.2492±0.0055 s−c +0.2346±0.0056 s/c 1.94 | com social +0.4141±0.0042 content +0.2370±0.0048 s/c 1.75
+  person       on−off cos social +0.0557±0.0025 content -0.0627±0.0049
+  organisation off cos social +0.0441±0.0011 content +0.2690±0.0035 s−c -0.2249±0.0037 s/c 0.16 | com social +0.0318±0.0008 content +0.2614±0.0037 s/c 0.12
+  organisation on  cos social +0.0556±0.0013 content +0.2148±0.0034 s−c -0.1592±0.0042 s/c 0.26 | com social +0.0427±0.0012 content +0.2076±0.0032 s/c 0.21
+  organisation on−off cos social +0.0115±0.0011 content -0.0542±0.0031
+  journal      off cos social +0.0270±0.0016 content +0.2217±0.0028 s−c -0.1947±0.0031 s/c 0.12 | com social +0.0256±0.0013 content +0.2172±0.0027 s/c 0.12
+  journal      on  cos social +0.0653±0.0013 content +0.1900±0.0024 s−c -0.1247±0.0019 s/c 0.34 | com social +0.0571±0.0010 content +0.1814±0.0025 s/c 0.31
+  journal      on−off cos social +0.0383±0.0017 content -0.0317±0.0027
+== A1 K13 r0.3 p1 pairs {'person': 1107, 'organisation': 17194, 'journal': 52930} overlap social_person 0.0249 social_organisation 0.0242 social_journal 0.0238 content_person 0.3009 content_organisation 0.1763 content_journal 0.1329 all 0.0240
+  person       off cos social +0.1145±0.0052 content +0.4131±0.0088 s−c -0.2986±0.0085 s/c 0.28 | com social +0.0948±0.0041 content +0.3969±0.0090 s/c 0.24
+  person       on  cos social +0.1467±0.0084 content +0.4269±0.0105 s−c -0.2802±0.0141 s/c 0.34 | com social +0.1154±0.0057 content +0.4053±0.0110 s/c 0.28
+  person       on−off cos social +0.0321±0.0068 content +0.0138±0.0046
+  organisation off cos social +0.0126±0.0010 content +0.2840±0.0042 s−c -0.2715±0.0043 s/c 0.04 | com social +0.0105±0.0009 content +0.2743±0.0044 s/c 0.04
+  organisation on  cos social +0.0169±0.0013 content +0.2962±0.0052 s−c -0.2793±0.0053 s/c 0.06 | com social +0.0139±0.0013 content +0.2830±0.0053 s/c 0.05
+  organisation on−off cos social +0.0044±0.0008 content +0.0121±0.0016
+  journal      off cos social +0.0081±0.0007 content +0.2112±0.0027 s−c -0.2030±0.0033 s/c 0.04 | com social +0.0078±0.0006 content +0.2046±0.0026 s/c 0.04
+  journal      on  cos social +0.0297±0.0063 content +0.2266±0.0031 s−c -0.1970±0.0081 s/c 0.13 | com social +0.0211±0.0039 content +0.2174±0.0030 s/c 0.10
+  journal      on−off cos social +0.0215±0.0061 content +0.0155±0.0010
+== A1 K13 r0.3 p0 pairs {'person': 1107, 'organisation': 17194, 'journal': 52930} overlap social_person 0.0458 social_organisation 0.0268 social_journal 0.0239 content_person 0.3001 content_organisation 0.1763 content_journal 0.1329 all 0.0240
+  person       off cos social +0.1265±0.0042 content +0.4017±0.0138 s−c -0.2752±0.0143 s/c 0.31 | com social +0.1104±0.0037 content +0.3850±0.0135 s/c 0.29
+  person       on  cos social +0.1722±0.0041 content +0.4040±0.0113 s−c -0.2318±0.0108 s/c 0.43 | com social +0.1435±0.0027 content +0.3812±0.0115 s/c 0.38
+  person       on−off cos social +0.0457±0.0035 content +0.0023±0.0058
+  organisation off cos social +0.0104±0.0007 content +0.2774±0.0057 s−c -0.2670±0.0054 s/c 0.04 | com social +0.0089±0.0005 content +0.2665±0.0053 s/c 0.03
+  organisation on  cos social +0.0111±0.0008 content +0.2858±0.0051 s−c -0.2746±0.0046 s/c 0.04 | com social +0.0105±0.0007 content +0.2727±0.0049 s/c 0.04
+  organisation on−off cos social +0.0007±0.0006 content +0.0084±0.0015
+  journal      off cos social +0.0171±0.0011 content +0.2087±0.0036 s−c -0.1916±0.0036 s/c 0.08 | com social +0.0153±0.0007 content +0.2009±0.0031 s/c 0.08
+  journal      on  cos social +0.0460±0.0050 content +0.2210±0.0035 s−c -0.1750±0.0060 s/c 0.21 | com social +0.0340±0.0029 content +0.2112±0.0031 s/c 0.16
+  journal      on−off cos social +0.0289±0.0049 content +0.0123±0.0009
+== A2 K13 r1 p1 pairs {'person': 1107, 'organisation': 13368, 'journal': 53036} overlap social_person 0.0288 social_organisation 0.0255 social_journal 0.0237 content_person 0.3010 content_organisation 0.1868 content_journal 0.1328 all 0.0240
+  person       off cos social +0.4672±0.0086 content +0.3100±0.0130 s−c +0.1572±0.0179 s/c 1.51 | com social +0.3747±0.0085 content +0.2795±0.0124 s/c 1.34
+  person       on  cos social +0.5454±0.0100 content +0.2960±0.0109 s−c +0.2494±0.0177 s/c 1.84 | com social +0.4249±0.0115 content +0.2717±0.0099 s/c 1.56
+  person       on−off cos social +0.0782±0.0047 content -0.0140±0.0057
+  organisation off cos social +0.0472±0.0018 content +0.2451±0.0061 s−c -0.1979±0.0054 s/c 0.19 | com social +0.0321±0.0017 content +0.2254±0.0052 s/c 0.14
+  organisation on  cos social +0.0676±0.0039 content +0.2337±0.0072 s−c -0.1661±0.0062 s/c 0.29 | com social +0.0445±0.0027 content +0.2175±0.0056 s/c 0.20
+  organisation on−off cos social +0.0204±0.0025 content -0.0114±0.0033
+  journal      off cos social +0.0127±0.0015 content +0.1784±0.0033 s−c -0.1657±0.0034 s/c 0.07 | com social +0.0114±0.0014 content +0.1668±0.0029 s/c 0.07
+  journal      on  cos social +0.0381±0.0022 content +0.1759±0.0043 s−c -0.1378±0.0053 s/c 0.22 | com social +0.0268±0.0015 content +0.1651±0.0037 s/c 0.16
+  journal      on−off cos social +0.0254±0.0017 content -0.0025±0.0017
+== A2 K13 r1 p0 pairs {'person': 1107, 'organisation': 13368, 'journal': 53036} overlap social_person 0.0458 social_organisation 0.0265 social_journal 0.0239 content_person 0.3001 content_organisation 0.1868 content_journal 0.1328 all 0.0240
+  person       off cos social +0.4796±0.0075 content +0.3114±0.0157 s−c +0.1682±0.0211 s/c 1.54 | com social +0.3924±0.0079 content +0.2755±0.0142 s/c 1.42
+  person       on  cos social +0.5607±0.0084 content +0.3079±0.0159 s−c +0.2528±0.0184 s/c 1.82 | com social +0.4462±0.0088 content +0.2720±0.0140 s/c 1.64
+  person       on−off cos social +0.0812±0.0055 content -0.0034±0.0065
+  organisation off cos social +0.0454±0.0018 content +0.2518±0.0063 s−c -0.2064±0.0058 s/c 0.18 | com social +0.0314±0.0014 content +0.2295±0.0055 s/c 0.14
+  organisation on  cos social +0.0657±0.0029 content +0.2458±0.0078 s−c -0.1801±0.0085 s/c 0.27 | com social +0.0450±0.0021 content +0.2242±0.0068 s/c 0.20
+  organisation on−off cos social +0.0203±0.0021 content -0.0060±0.0028
+  journal      off cos social +0.0186±0.0015 content +0.1846±0.0035 s−c -0.1660±0.0042 s/c 0.10 | com social +0.0164±0.0012 content +0.1712±0.0031 s/c 0.10
+  journal      on  cos social +0.0485±0.0029 content +0.1851±0.0037 s−c -0.1366±0.0060 s/c 0.26 | com social +0.0351±0.0018 content +0.1711±0.0035 s/c 0.21
+  journal      on−off cos social +0.0299±0.0027 content +0.0005±0.0014
+== A1 K20 r1 p1 pairs {'person': 1107, 'organisation': 17194, 'journal': 52930} overlap social_person 0.0249 social_organisation 0.0242 social_journal 0.0238 content_person 0.3009 content_organisation 0.1763 content_journal 0.1329 all 0.0240
+  person       off cos social +0.1183±0.0077 content +0.2872±0.0137 s−c -0.1689±0.0170 s/c 0.41 | com social +0.0956±0.0042 content +0.2522±0.0144 s/c 0.38
+  person       on  cos social +0.1555±0.0088 content +0.3519±0.0127 s−c -0.1965±0.0160 s/c 0.44 | com social +0.1167±0.0058 content +0.3023±0.0102 s/c 0.39
+  person       on−off cos social +0.0372±0.0095 content +0.0647±0.0136
+  organisation off cos social -0.0025±0.0030 content +0.2080±0.0074 s−c -0.2104±0.0058 s/c -0.01 | com social +0.0032±0.0020 content +0.1815±0.0082 s/c 0.02
+  organisation on  cos social +0.0098±0.0021 content +0.2482±0.0058 s−c -0.2384±0.0061 s/c 0.04 | com social +0.0113±0.0013 content +0.2142±0.0052 s/c 0.05
+  organisation on−off cos social +0.0123±0.0014 content +0.0402±0.0073
+  journal      off cos social +0.2465±0.0312 content +0.1527±0.0046 s−c +0.0938±0.0351 s/c 1.61 | com social +0.1414±0.0175 content +0.1328±0.0054 s/c 1.06
+  journal      on  cos social +0.2133±0.0191 content +0.1848±0.0037 s−c +0.0285±0.0206 s/c 1.15 | com social +0.1236±0.0109 content +0.1597±0.0035 s/c 0.77
+  journal      on−off cos social -0.0332±0.0150 content +0.0322±0.0048
+== A1 K20 r1 p0 pairs {'person': 1107, 'organisation': 17194, 'journal': 52930} overlap social_person 0.0458 social_organisation 0.0268 social_journal 0.0239 content_person 0.3001 content_organisation 0.1763 content_journal 0.1329 all 0.0240
+  person       off cos social +0.1194±0.0067 content +0.3283±0.0229 s−c -0.2089±0.0258 s/c 0.36 | com social +0.0971±0.0047 content +0.2801±0.0203 s/c 0.35
+  person       on  cos social +0.1855±0.0091 content +0.3673±0.0145 s−c -0.1817±0.0187 s/c 0.51 | com social +0.1409±0.0061 content +0.3224±0.0131 s/c 0.44
+  person       on−off cos social +0.0661±0.0030 content +0.0389±0.0142
+  organisation off cos social -0.0015±0.0027 content +0.2249±0.0121 s−c -0.2264±0.0098 s/c -0.01 | com social +0.0027±0.0017 content +0.1953±0.0110 s/c 0.01
+  organisation on  cos social +0.0065±0.0019 content +0.2604±0.0057 s−c -0.2540±0.0053 s/c 0.02 | com social +0.0077±0.0013 content +0.2304±0.0057 s/c 0.03
+  organisation on−off cos social +0.0080±0.0021 content +0.0356±0.0085
+  journal      off cos social +0.1829±0.0347 content +0.1626±0.0072 s−c +0.0203±0.0413 s/c 1.12 | com social +0.1071±0.0192 content +0.1416±0.0069 s/c 0.76
+  journal      on  cos social +0.1690±0.0147 content +0.1956±0.0031 s−c -0.0266±0.0159 s/c 0.86 | com social +0.1017±0.0087 content +0.1723±0.0032 s/c 0.59
+  journal      on−off cos social -0.0139±0.0285 content +0.0329±0.0057

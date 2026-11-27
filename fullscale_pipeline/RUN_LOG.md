@@ -5516,3 +5516,22 @@ gap same − random +0.091 / +0.049 / +0.035 / +0.166 / +0.162 (SE ≤ 0.010). A
 +0.060 ± 0.009, A2 +0.005 ± 0.008 / −0.023 ± 0.008. Count and Jaccard overlaps agree. Reading given: the level of
 same-person grouping is mostly social (RL-415/420), but its variation follows content more than for random pairs, and
 λ_child strengthens this in approach 1; restates RL-419's wording.
+
+### RL-422 — 2026-11-27 — W4 follow-up: cue competition after the swap; restated wording (owner: "ok", "you can run c")
+**Wording agreed (owner: "ok but I'd also add information on how many people in the corpus have a coauthored
+article"):** "In this representation, where people reach content only through the articles they co-produce, 84–98 %
+of the model's extra co-membership for article pairs that share a person remains when the swap breaks the link between
+the articles' social ties and their content; it is reproduced from the articles' social ties (authors, organisations,
+journal, co-author ties — moved together by the swap and entangled in the data), not from shared content. Among these
+pairs, those sharing more content are placed more alike than random pairs are." Persons in the data the W4 fits saw
+(2,136 articles; persons from bylines kept after author linking, AUTHOR_IDENTITY.md §10): 10,052; 9,947 (99.0 %) on at
+least one article with ≥ 2 authors, 105 only on single-author articles; 793 (7.9 %) on ≥ 2 articles, 158 on ≥ 3.
+**Cue competition** `m1/fit/w4_cue_competition.py` → `fit/results/stage0/w4_cue_competition.{json,log}` (saved fits).
+Excess of membership cosine (group mean − all-pairs mean) for exclusive social groups (person; organisation without a
+person; journal without person or organisation) vs the same number of untied pairs with the highest W-aware content
+overlap. After the swap (p 1; social groups' content overlap 0.024–0.029 = all-pairs 0.024), λ_child off, social vs
+content: person A1 K5 / K13 / K20 0.128 / 0.115 / 0.118 vs 0.363 / 0.413 / 0.287 (ratio 0.35 / 0.28 / 0.41), A2 K5 /
+K13 0.411 / 0.467 vs 0.272 / 0.310 (1.51 / 1.51); organisation A1 ≤ 0.014 vs 0.21–0.30, A2 0.05 vs 0.24; journal ≤ 0.013
+vs 0.15–0.25 except A1 K20 0.247 ± 0.031 vs 0.153. λ_child on − off: person cue +0.026 to +0.078 (≥ 4 SE) in every
+cell, content cue −0.039 to +0.065; social ÷ content rises at every cell. Co-membership gives the same ratios. Reading
+given to the owner; not a decision.
