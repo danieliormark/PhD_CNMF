@@ -5564,3 +5564,7 @@ RL-425). Check W4 closed.
 ### RL-427 — 2026-11-28 — Stage 1 (study A) finished
 `m1_fits/stage1`: 4,500 result files, all converged; last fit written 2026-11-27 09:06. Next: the owner runs
 `bash fit/slurm/d1_analysis.sh` (≈ 8–10 CPU-hours, ≈ 40 min wall on 16 workers); then D1 is read.
+
+### RL-428 — 2026-11-28 — D1 analysis (study A) submitted (owner: "I submitted the D1 analysis"; job id not given)
+`bash fit/slurm/d1_analysis.sh` → `fit/results/stage1/d1_analysis.json`. Runs alongside the stage-1 post-processing job
+25400363 (alignment done; as-fitted aggregate written, 46 cells; aligned aggregate running), which D1 does not read.
