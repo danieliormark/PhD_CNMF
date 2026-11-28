@@ -5610,3 +5610,14 @@ redundant at every K except approach 2 K 13 J5 (inconclusive); with the existenc
 −0.00050 (−11 to −21 % of J1's 0.00241; 2.2–2.4 SE) for every journal arm; K 8 / 13 within 1 SE; approach 2 candidate K
 within 1.3 SE; approach 2 K 20 J2 −0.00093 ± 0.00041, J4 −0.00076 ± 0.00038, J5 −0.00115 ± 0.00044 (−9 to −14 %,
 2.0–2.6 SE). Reported readings, no correction for multiple comparisons.
+
+### RL-433 — 2026-11-28 — D1-M3 follow-up: article×article below its degree-only reference (stage 1, approach 2)
+From the saved `d1_analysis.json` (per-fit M3), mean over 10 hold-out groups ± SE over groups. c_article_article
+(= 1 − L_fit ÷ L_ref): J1 K 3 / 5 / 8 / 13 / 20 −0.178 / −0.103 / −0.033 / +0.031 / +0.096; J2 −0.224 / −0.150 / −0.086 /
+−0.026 / +0.040; SE ≤ 0.001, seed SD 0.002–0.007; negative in all 50 fits wherever the mean is negative. Realised share
+s_article_article (J2) −0.085 / −0.031 / −0.013 / −0.003 / +0.004 against a pull share of 0.019; s_semantic > 1 exactly
+when s_article_article + s_article_affiliation + s_article_journal < 0 (K 3 only). The journal matrix (J2 vs J1) lowers
+c_article_article by 0.05–0.06 at every K. Approach 1 relations all positive (0.04–0.33). c computed with the training
+loss's own masked generalised KL for fit and reference (same cells: visible ties and empty cells of observed rows,
+hidden cells and the masked diagonal excluded); product-formula reference within 0.1 % of the exact masked rank-1 KL
+optimum (RL-396).
