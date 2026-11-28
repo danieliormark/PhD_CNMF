@@ -5596,3 +5596,17 @@ approve your proposal on the edge case". Recorded in the design doc and the D1 p
 ### RL-431 — 2026-11-28 — D1 analysis (study A) finished; idea-coherence job not yet submitted
 Job 25474034 (started 00:19, log ends 00:53, empty error log) wrote `fit/results/stage1/d1_analysis.json`; not yet read.
 No log or output of the idea-coherence job (`fit/slurm/d1_extra_idea.sh`) exists, so it has not been submitted.
+
+### RL-432 — 2026-11-28 — D1 re-reads: gain vs J1's gain, value classes with δ_value, social held-out gain with SE
+Owner: "I agree with using δ_value = 10 % of J1's value score"; "Please compute the se results". **Code fix**
+(`fit/d1_analysis.py`): the reported value reading had used the existence δ (average-precision units) for the partial
+Spearman; now δ_value = 10 % of J1's value score (the saved study-A JSON keeps the old classes; study B will use the fix).
+`fit/d1_reread.py` → `fit/results/stage1/d1_reread.json` (from the saved JSON, no fits). (1) Δ vs J1's gain: across K
+r 0.18–0.40 per arm (5 points each); across hold-out groups r −0.12 (approach 1) / −0.37 (approach 2), expected negative
+from J1's noise entering both; Bland–Altman form (difference vs mean of the two gains) pooled r +0.09 / −0.20 (250
+group-arm pairs, not independent). (2) Value with δ_value (J1 value 0.077–0.122, δ_value 0.008–0.012): every arm
+redundant at every K except approach 2 K 13 J5 (inconclusive); with the existence δ several were "adds information".
+(3) Affiliation-relation held-out gain, arm − J1 per group, mean ± SE over 10 groups: approach 1 K 5 −0.00026 to
+−0.00050 (−11 to −21 % of J1's 0.00241; 2.2–2.4 SE) for every journal arm; K 8 / 13 within 1 SE; approach 2 candidate K
+within 1.3 SE; approach 2 K 20 J2 −0.00093 ± 0.00041, J4 −0.00076 ± 0.00038, J5 −0.00115 ± 0.00044 (−9 to −14 %,
+2.0–2.6 SE). Reported readings, no correction for multiple comparisons.

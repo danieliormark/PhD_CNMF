@@ -498,8 +498,13 @@ def summarise(units, approach):
             vj1 = gmeans(K, "J1", lambda v: v["heldout"]["value_sem"])
             pv = {x: gmeans(K, x, lambda v: v["heldout"]["value_sem"]) for x in fam}
             Gv = sorted(set(vj1).intersection(*[set(pv[x]) for x in fam]))
+            # value δ = 10 % of J1's value score (owner 2026-11-28, RL-432; the degree-only reference of the partial
+            # Spearman is 0, degrees being partialled out); before RL-432 the existence δ was used here by mistake
+            delta_v = DELTA_SHARE * float(np.mean([vj1[g] for g in Gv])) if len(Gv) else None
             e["M1_value_reported"] = compare_family(np.array([[pv[x][g] - vj1[g] for x in fam] for g in Gv]), fam,
-                                                    delta) if len(Gv) else None
+                                                    delta_v) if len(Gv) else None
+            if e["M1_value_reported"] is not None:
+                e["M1_value_reported"]["delta_value"] = delta_v
             e["social_gain"] = {arm: {r: _gm(list(gmeans(K, arm, lambda v, r=r: v["heldout"]["social_gain"].get(r)).values()))
                                       for r in _social_rels(units, approach, K)} for arm in arms_present}
         # ---- D1-M2, D1-M4 (Holm families over the arms vs J1)
