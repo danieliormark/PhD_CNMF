@@ -2944,3 +2944,12 @@ definitions and concepts. results should be reported in other sections"); result
 
 *[2026-11-28, **check W4 closed — no extra-seed fits** (owner: "I agree, no extra-seed fits needed"); A2 K13 is testable
 under the article unit. RL-426.]*
+
+*[2026-11-28, **D1 stage-2 re-check — DECIDED** (owner: "I think instead of runner up we name it as second best J*",
+"I approve the definition of contradiction", "I approve your proposal on the edge case"). At each final K₁, K₂ the D1
+rule is applied again to three arms only — J1, J* (stage 1's choice) and the **second-best J\*** (the arm the rule picks
+when J* is left out) — with the final K as the only candidate K. **Contradiction** at a final K: (1) J* is classed
+misleads (D1-M1), or (2) J* has a journal problem (D1-M4 "more" and D1-M2 "changed"), or (3) the rule on the three arms
+chooses another arm. A contradiction goes to the owner with both results; no automatic switch. **Edge case:** if J* = J1,
+the second-best J* is J2 (the decided default), and a contradiction means the rule would now choose J2 at the final K.
+Code: `fit/d1_extra.py recheck`. RL-430.]*

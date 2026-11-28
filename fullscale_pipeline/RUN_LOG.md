@@ -5587,3 +5587,8 @@ problem there) — for the owner; `recheck-jobs` builds fits for a non-coarse K 
 tested; the full path runs once K₁, K₂ are known. (4) **text** — text-check material: journal-shaped communities (D1-M4
 test) of J* and J1 at the candidate K, hold-out group 1, seeds 1–5: top articles (title, journal, share), the journal's
 own top articles, top child hyperedges → Markdown + JSON; tested on one fit (A1 K20 J2: 2 journal-shaped communities).
+
+### RL-430 — 2026-11-28 — D1 stage-2 re-check decided: "second-best J*", contradiction definition, J* = J1 edge case
+Owner: "I think instead of runner up we name it as second best J*"; "I approve the definition of contradiction"; "I
+approve your proposal on the edge case". Recorded in the design doc and the D1 pre-registration (§9). `fit/d1_extra.py`:
+`second_best()` (J* = J1 → J2), output keys `second_best_J_star` and `contradiction`; tests pass (3).

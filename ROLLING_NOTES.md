@@ -40,7 +40,8 @@ run); memory rule extended to every Agent type.
 W4 DOCUMENTED 2026-11-27 (RL-424: design doc, GLOSSARY E7, M1_PROGRESS). Main W4 unit DECIDED: article level (RL-425).
 Extra-seed fits NOT run (owner, RL-426); check W4 CLOSED. Stage 1 FINISHED (RL-427); D1 analysis SUBMITTED by the owner
 (RL-428); the four extra D1 readings written (RL-429: idea-coherence job `fit/slurm/d1_extra_idea.sh` awaits the owner;
-entity totals done; re-check and text material run after D1 / stage 2). Content-dependence check run (RL-421).
+entity totals done; re-check and text material run after D1 / stage 2). Re-check DECIDED (RL-430): "second-best J*",
+contradiction definition, J* = J1 → J2. Content-dependence check run (RL-421).
 
 ## State (2026-11-25, ticket 107 M1 — stage 0 closed except λ-calibration extras; designing stage 1 (D1))
 

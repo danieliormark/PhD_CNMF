@@ -1,4 +1,4 @@
-# Tests of fit/d1_extra.py (RL-429): pair summaries, runner-up, re-check job list. Run: PYTHONPATH=. python -m fit.tests.test_d1_extra
+# Tests of fit/d1_extra.py (RL-429): pair summaries, second-best J*, re-check job list. Run: PYTHONPATH=. python -m fit.tests.test_d1_extra
 import numpy as np
 from fit import d1_extra as X, d1_analysis as D
 from fit.tests.test_d1_analysis import _rep
@@ -17,15 +17,15 @@ def test_summarise_pairs():
     assert "J3a vs J1" not in out["pairs"]                       # absent arm: no pair
 
 
-def test_runner_up():
+def test_second_best():
     per = {5: {"J2": ("redundant", 0.0, False, 0.02), "J3a": ("redundant", 0.0, False, 0.005), "J5": ("redundant", 0.0, False, 0.01)}}
     rep = _rep(per); rep["candidate_K"] = [5]
     rep["arms"], rep["decision"] = D.decide(rep, [5])
     assert rep["decision"]["J_star"] == "J2"
-    assert X.runner_up(rep) == "J5"                             # without J2: highest s_journal among the rest
+    assert X.second_best(rep) == "J5"                           # without J2: highest s_journal among the rest
     assert D.COMPARED == ("J2", "J3a", "J3b", "J4", "J5")       # the module constant is restored
     rep["decision"]["J_star"] = "J1"
-    assert X.runner_up(rep) is None
+    assert X.second_best(rep) == "J2"                           # edge case (owner 2026-11-28): J* = J1 → J2
 
 
 def test_recheck_jobs():

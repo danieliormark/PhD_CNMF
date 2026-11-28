@@ -344,3 +344,11 @@ Replaces the definition in §4.1 where they differ (design doc 2026-11-24/25, RU
   by s_journal averaged over the candidate K. Holm per approach and candidate K across the five arms. Stage-2 re-check
   unchanged.
 
+
+## 9. Update 2026-11-28 — stage-2 re-check operationalised (owner decisions)
+
+"Runner-up" in §5 is renamed **second-best J\*** (owner: "I think instead of runner up we name it as second best J*"):
+the arm the decision rule picks when J* is left out; if J* = J1, it is J2 (owner: "I approve your proposal on the edge
+case"). **Contradiction** (owner: "I approve the definition of contradiction"): at a final K, J* is classed misleads, or
+has a journal problem, or the rule applied to {J1, J*, second-best J*} with that K as the only candidate K chooses
+another arm; both results go to the owner. Design doc 2026-11-28; RUN_LOG RL-430; code `fit/d1_extra.py recheck`.

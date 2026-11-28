@@ -21,12 +21,14 @@
 #             of visible ties d (bands 1, 2–3, 4–7, 8–15, 16–31, 32+): entities, mean entity total and the band's share of
 #             the relation's visible mass, undamped vs damped (× log(1+d)/d, mass restored); author×article also by team
 #             size. Mean, min and max over groups. Data only, no fits (minutes).
-# 3. recheck — the required stage-2 re-check (pre-registration §5, decided 2026-11-05): J1, J* and the runner-up at the
-#             final K₁, K₂ on D1-M1, M2, M4, with d1_analysis's own code (unit, summarise, decide) restricted to those arms
-#             and K (candidate K = the final K). Runner-up = the arm the decision rule picks when J* is left out (none if
-#             J* = J1). Proposed operational "contradiction" (for the owner): at a final K the rule, applied to
-#             {J1, J*, runner-up}, does not return J*, or J* is classed misleads or has a journal problem there; both
-#             results are then put to the owner. Fits: stage-1 fits when the final K is coarse (3, 5, 8, 13, 20); otherwise
+# 3. recheck — the required stage-2 re-check (pre-registration §5, decided 2026-11-05): J1, J* and the second-best J*
+#             (owner's name, 2026-11-28; the pre-registration's "runner-up") at the final K₁, K₂ on D1-M1, M2, M4, with
+#             d1_analysis's own code (unit, summarise, decide) restricted to those arms and K (candidate K = the final K).
+#             Second-best J* = the arm the decision rule picks when J* is left out; if J* = J1, the second-best J* is J2,
+#             the decided default (owner, 2026-11-28). Contradiction (DECIDED, owner 2026-11-28: "I approve the definition
+#             of contradiction") at a final K: (1) J* is classed misleads, or (2) J* has a journal problem, or (3) the rule
+#             applied to {J1, J*, second-best J*} chooses another arm; both results are then put to the owner, no
+#             automatic switch. Fits: stage-1 fits when the final K is coarse (3, 5, 8, 13, 20); otherwise
 #             `recheck-jobs` writes the job list (10 groups × 5 seeds per arm and K, settings of stage 1; λ_child given
 #             explicitly, since the pass-1 basis exists only at coarse K) — not submitted.
 # 4. text   — text-check material (pre-registration §5 step 5: "top articles and child hyperedges of journal-shaped
@@ -256,11 +258,14 @@ def _compared(arms):
         A.COMPARED = old
 
 
-def runner_up(rep_approach):
-    """The arm the decision rule picks when J* is left out (None if J* = J1 or nothing else remains)."""
+def second_best(rep_approach):
+    """Second-best J* (owner's name, 2026-11-28): the arm the decision rule picks when J* is left out; J2 (the decided
+    default) if J* = J1 (owner, 2026-11-28); None if nothing but J1 remains without J*."""
     js = rep_approach["decision"]["J_star"]
-    if js in (None, "J1"):
+    if js is None:
         return None
+    if js == "J1":
+        return "J2"
     others = [x for x in A.COMPARED if x != js]
     with _compared(others):
         _, dec = A.decide(rep_approach, rep_approach["candidate_K"])
@@ -270,9 +275,9 @@ def runner_up(rep_approach):
 def run_recheck(d1_path, final_K, stage_for, root, workers):
     d1 = json.load(open(d1_path)); out = {"_source": d1_path, "approaches": {}}
     for a, Ks in final_K.items():
-        r1 = d1[f"approach_{a}"]; js = r1["decision"]["J_star"]; ru = runner_up(r1)
-        arms = [x for x in ("J1", js, ru) if x]
-        e = {"J_star_stage1": js, "runner_up": ru, "arms": arms, "per_K": {}}
+        r1 = d1[f"approach_{a}"]; js = r1["decision"]["J_star"]; sb = second_best(r1)
+        arms = list(dict.fromkeys(x for x in ("J1", js, sb) if x))
+        e = {"J_star_stage1": js, "second_best_J_star": sb, "arms": arms, "per_K": {}}
         for K in Ks:
             stage = stage_for.get(K, "stage1")
             label = lambda f, arms=arms: (A._arm_of(f) if A._arm_of(f) in arms else None)
@@ -286,7 +291,7 @@ def run_recheck(d1_path, final_K, stage_for, root, workers):
             contradiction = (dec["J_star"] != js) or (js != "J1" and ((m1.get(js) or {}).get("class") == "misleads"
                                                                        or bool((prob.get(js) or {}).get("problem"))))
             e["per_K"][str(K)] = {"stage": stage, "decision_at_K": dec, "arms": arms_K, "M1": m1, "problem": prob,
-                                  "contradiction_proposed_definition": bool(contradiction)}
+                                  "contradiction": bool(contradiction)}
         out["approaches"][str(a)] = e
     return out
 
@@ -437,9 +442,9 @@ def main():
         rep = run_recheck(a.d1, _parse_final_K(a.final_K), sf, a.root, a.workers)
         json.dump(rep, open(a.out, "w"), indent=1, default=_json_default)
         for ap_, e in rep["approaches"].items():
-            print(f"approach {ap_}: J* {e['J_star_stage1']}, runner-up {e['runner_up']}")
+            print(f"approach {ap_}: J* {e['J_star_stage1']}, second-best J* {e['second_best_J_star']}")
             for K, x in e["per_K"].items():
-                print(f"  K {K}: rule → {x['decision_at_K']['J_star']}; contradiction {x['contradiction_proposed_definition']}")
+                print(f"  K {K}: rule → {x['decision_at_K']['J_star']}; contradiction {x['contradiction']}")
     elif a.cmd == "recheck-jobs":
         jobs = recheck_jobs(a.approach, a.K, a.arms.split(","), a.lambda_child, a.study)
         with open(a.out, "w") as fh:
