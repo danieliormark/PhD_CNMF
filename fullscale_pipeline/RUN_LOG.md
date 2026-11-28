@@ -5568,3 +5568,22 @@ RL-425). Check W4 closed.
 ### RL-428 — 2026-11-28 — D1 analysis (study A) submitted (owner: "I submitted the D1 analysis"; job id not given)
 `bash fit/slurm/d1_analysis.sh` → `fit/results/stage1/d1_analysis.json`. Runs alongside the stage-1 post-processing job
 25400363 (alignment done; as-fitted aggregate written, 46 cells; aligned aggregate running), which D1 does not read.
+
+### RL-429 — 2026-11-28 — The four D1 readings not in d1_analysis written (owner: "yes, write the four missing D1 readings")
+`m1/fit/d1_extra.py` (written before any D1 result is read; readings only), tests `fit/tests/test_d1_extra.py` (3 pass;
+test_d1_analysis still passes). (1) **idea** — idea coherence per stage-1 fit (FINDINGS §33 definition: Pearson of
+co-membership with the W-aware cosine of child-hyperedge sets, and the excess of pairs sharing a child hyperedge), with
+cosine-based and size-partialled versions beside (RL-421 confound); summary per approach and K as group-mean differences
+(J arms − J1, robustness pairs, J2_s065 − J1_s065) ± SE over groups, relative and in seed SDs. People coherence is
+already in d1_analysis. One fit tested (≈ 1.5 s per fit). Job: `bash fit/slurm/d1_extra_idea.sh` (≈ 2–3 CPU-h, 16
+workers) — not submitted. (2) **entity-totals** — damping arm's entity-total diagnostic over the 10 hold-out groups (data
+only) → `fit/results/stage1/d1_entity_totals.{json,log}`: band shares of visible mass undamped → damped, mean over groups:
+journals with ≥ 32 articles 0.468 → 0.119 (1 article 0.101 → 0.320); organisations (author×affiliation) ≥ 32 ties 0.167
+→ 0.048, (article×affiliation) 16–31 0.096 → 0.032; author×article little changed (single-article authors 0.831 → 0.872;
+team-size shares unchanged); q 1.007–1.404; ranges over groups ≤ 0.02. (3) **recheck** — stage-2 re-check (pre-registration
+§5) with d1_analysis's own code restricted to J1, J* and the runner-up at the final K (runner-up = the rule's pick
+without J*); proposed "contradiction" definition (rule at the final K does not return J*, or J* misleads / has a journal
+problem there) — for the owner; `recheck-jobs` builds fits for a non-coarse K (stage-1 settings, explicit λ_child). Unit
+tested; the full path runs once K₁, K₂ are known. (4) **text** — text-check material: journal-shaped communities (D1-M4
+test) of J* and J1 at the candidate K, hold-out group 1, seeds 1–5: top articles (title, journal, share), the journal's
+own top articles, top child hyperedges → Markdown + JSON; tested on one fit (A1 K20 J2: 2 journal-shaped communities).

@@ -1,0 +1,640 @@
+{
+ "author_article|approach_1": {
+  "approach": 1,
+  "groups": 10,
+  "q": [
+   1.0074716015352274,
+   1.0074716015352274
+  ],
+  "bands": {
+   "by_degree": {
+    "1": {
+     "undamped": {
+      "entities_mean": 9259.0,
+      "mass_share_mean": 0.8306287793181474,
+      "mass_share_min": 0.8306287793181474,
+      "mass_share_max": 0.8306287793181474,
+      "mean_total_mean": 0.008990913185458641
+     },
+     "damped": {
+      "entities_mean": 9259.0,
+      "mass_share_mean": 0.8720776544930817,
+      "mass_share_min": 0.8720776544930817,
+      "mass_share_max": 0.8720776544930817,
+      "mean_total_mean": 0.009439565155642798
+     }
+    },
+    "2-3": {
+     "undamped": {
+      "entities_mean": 747.0,
+      "mass_share_mean": 0.14431767677397975,
+      "mass_share_min": 0.14431767677397975,
+      "mass_share_max": 0.14431767677397975,
+      "mean_total_mean": 0.019362429130079014
+     },
+     "damped": {
+      "entities_mean": 747.0,
+      "mass_share_mean": 0.11599250753446659,
+      "mass_share_min": 0.1159925075344666,
+      "mass_share_max": 0.1159925075344666,
+      "mean_total_mean": 0.015562173373076341
+     }
+    },
+    "4-7": {
+     "undamped": {
+      "entities_mean": 38.0,
+      "mass_share_mean": 0.015924324310012495,
+      "mass_share_min": 0.01592432431001249,
+      "mass_share_max": 0.01592432431001249,
+      "mean_total_mean": 0.041998940155872536
+     },
+     "damped": {
+      "entities_mean": 38.0,
+      "mass_share_mean": 0.008831046358515867,
+      "mass_share_min": 0.008831046358515867,
+      "mass_share_max": 0.008831046358515867,
+      "mean_total_mean": 0.023291072217854945
+     }
+    },
+    "8-15": {
+     "undamped": {
+      "entities_mean": 7.0,
+      "mass_share_mean": 0.007379085390857186,
+      "mass_share_min": 0.007379085390857186,
+      "mass_share_max": 0.007379085390857186,
+      "mean_total_mean": 0.10564900470759095
+     },
+     "damped": {
+      "entities_mean": 7.0,
+      "mass_share_mean": 0.002648079884694743,
+      "mass_share_min": 0.002648079884694743,
+      "mass_share_max": 0.002648079884694743,
+      "mean_total_mean": 0.03791350680815104
+     }
+    },
+    "16-31": {
+     "undamped": {
+      "entities_mean": 1.0,
+      "mass_share_mean": 0.001750134207003036,
+      "mass_share_min": 0.001750134207003036,
+      "mass_share_max": 0.001750134207003036,
+      "mean_total_mean": 0.1754010817012251
+     },
+     "damped": {
+      "entities_mean": 1.0,
+      "mass_share_mean": 0.0004507117292410751,
+      "mass_share_min": 0.00045071172924107504,
+      "mass_share_max": 0.00045071172924107504,
+      "mean_total_mean": 0.04517100718789453
+     }
+    },
+    "32+": {
+     "undamped": {
+      "entities_mean": 0.0,
+      "mass_share_mean": 0.0,
+      "mass_share_min": 0.0,
+      "mass_share_max": 0.0,
+      "mean_total_mean": null
+     },
+     "damped": {
+      "entities_mean": 0.0,
+      "mass_share_mean": 0.0,
+      "mass_share_min": 0.0,
+      "mass_share_max": 0.0,
+      "mean_total_mean": null
+     }
+    }
+   },
+   "by_team_size": {
+    "1": {
+     "undamped": {
+      "entities_mean": 118.0,
+      "mass_share_mean": 0.025475368168305656,
+      "mass_share_min": 0.025475368168305656,
+      "mass_share_max": 0.025475368168305656,
+      "mean_total_mean": 0.021637116120395757
+     },
+     "damped": {
+      "entities_mean": 118.0,
+      "mass_share_mean": 0.025892794365101106,
+      "mass_share_min": 0.02589279436510111,
+      "mass_share_max": 0.02589279436510111,
+      "mean_total_mean": 0.021991650705807365
+     }
+    },
+    "2-3": {
+     "undamped": {
+      "entities_mean": 670.0,
+      "mass_share_mean": 0.2302269938789495,
+      "mass_share_min": 0.2302269938789495,
+      "mass_share_max": 0.2302269938789495,
+      "mean_total_mean": 0.0344383514811668
+     },
+     "damped": {
+      "entities_mean": 670.0,
+      "mass_share_mean": 0.22959868648014575,
+      "mass_share_min": 0.22959868648014578,
+      "mass_share_max": 0.22959868648014578,
+      "mean_total_mean": 0.03434436653755242
+     }
+    },
+    "4-7": {
+     "undamped": {
+      "entities_mean": 956.0,
+      "mass_share_mean": 0.46705675773085265,
+      "mass_share_min": 0.46705675773085265,
+      "mass_share_max": 0.46705675773085265,
+      "mean_total_mean": 0.04896352564778056
+     },
+     "damped": {
+      "entities_mean": 956.0,
+      "mass_share_mean": 0.466239247029461,
+      "mass_share_min": 0.46623924702946107,
+      "mass_share_max": 0.46623924702946107,
+      "mean_total_mean": 0.04887782256023849
+     }
+    },
+    "8-15": {
+     "undamped": {
+      "entities_mean": 353.0,
+      "mass_share_mean": 0.23793389078197363,
+      "mass_share_min": 0.23793389078197366,
+      "mass_share_max": 0.23793389078197366,
+      "mean_total_mean": 0.06755266937103885
+     },
+     "damped": {
+      "entities_mean": 353.0,
+      "mass_share_mean": 0.2383654571143281,
+      "mass_share_min": 0.2383654571143281,
+      "mass_share_max": 0.2383654571143281,
+      "mean_total_mean": 0.06767519692550114
+     }
+    },
+    "16-31": {
+     "undamped": {
+      "entities_mean": 34.0,
+      "mass_share_mean": 0.03212587332929799,
+      "mass_share_min": 0.03212587332929799,
+      "mass_share_max": 0.03212587332929799,
+      "mean_total_mean": 0.09469715673648657
+     },
+     "damped": {
+      "entities_mean": 34.0,
+      "mass_share_mean": 0.03273425831025613,
+      "mass_share_min": 0.032734258310256135,
+      "mass_share_max": 0.032734258310256135,
+      "mean_total_mean": 0.09649048784090129
+     }
+    },
+    "32+": {
+     "undamped": {
+      "entities_mean": 5.0,
+      "mass_share_mean": 0.007181116110620496,
+      "mass_share_min": 0.007181116110620496,
+      "mass_share_max": 0.007181116110620496,
+      "mean_total_mean": 0.1439404508048387
+     },
+     "damped": {
+      "entities_mean": 5.0,
+      "mass_share_mean": 0.007169556700707682,
+      "mass_share_min": 0.007169556700707681,
+      "mass_share_max": 0.007169556700707681,
+      "mean_total_mean": 0.14370875051643536
+     }
+    }
+   }
+  }
+ },
+ "author_affiliation|approach_1": {
+  "approach": 1,
+  "groups": 10,
+  "q": [
+   1.176788979475341,
+   1.178869241918096
+  ],
+  "bands": {
+   "by_degree": {
+    "1": {
+     "undamped": {
+      "entities_mean": 966.7,
+      "mass_share_mean": 0.07847800998662255,
+      "mass_share_min": 0.0775374786815331,
+      "mass_share_max": 0.07939939898391433,
+      "mean_total_mean": 0.008690411033882916
+     },
+     "damped": {
+      "entities_mean": 966.7,
+      "mass_share_mean": 0.18950031862705366,
+      "mass_share_min": 0.1871396326648363,
+      "mass_share_max": 0.19161433461998784,
+      "mean_total_mean": 0.020984640702396695
+     }
+    },
+    "2-3": {
+     "undamped": {
+      "entities_mean": 653.6,
+      "mass_share_mean": 0.13048595048785247,
+      "mass_share_min": 0.12874639800280083,
+      "mass_share_max": 0.13329434461138553,
+      "mean_total_mean": 0.021372752924824406
+     },
+     "damped": {
+      "entities_mean": 653.6,
+      "mass_share_mean": 0.22928940125315922,
+      "mass_share_min": 0.22637775557444234,
+      "mass_share_max": 0.23358457505685565,
+      "mean_total_mean": 0.037556180536921405
+     }
+    },
+    "4-7": {
+     "undamped": {
+      "entities_mean": 481.7,
+      "mass_share_mean": 0.21019875273012248,
+      "mass_share_min": 0.20682057779155544,
+      "mass_share_max": 0.214094384473375,
+      "mean_total_mean": 0.04671428720028058
+     },
+     "damped": {
+      "entities_mean": 481.7,
+      "mass_share_mean": 0.2572259664264739,
+      "mass_share_min": 0.25274537858552404,
+      "mass_share_max": 0.26224985181243415,
+      "mean_total_mean": 0.057165403680379256
+     }
+    },
+    "8-15": {
+     "undamped": {
+      "entities_mean": 249.2,
+      "mass_share_mean": 0.21405770204714014,
+      "mass_share_min": 0.20996291891456276,
+      "mass_share_max": 0.2198948543976123,
+      "mean_total_mean": 0.09195462290677217
+     },
+     "damped": {
+      "entities_mean": 249.2,
+      "mass_share_mean": 0.17337381989383716,
+      "mass_share_min": 0.1702118775863943,
+      "mass_share_max": 0.1781158284872894,
+      "mean_total_mean": 0.07447763021836826
+     }
+    },
+    "16-31": {
+     "undamped": {
+      "entities_mean": 115.8,
+      "mass_share_mean": 0.19979801911854572,
+      "mass_share_min": 0.1922941966517571,
+      "mass_share_max": 0.2095692945481283,
+      "mean_total_mean": 0.18469968868494993
+     },
+     "damped": {
+      "entities_mean": 115.8,
+      "mass_share_mean": 0.10248996737156327,
+      "mass_share_min": 0.09908077490148966,
+      "mass_share_max": 0.10730631661157408,
+      "mean_total_mean": 0.09474583861228428
+     }
+    },
+    "32+": {
+     "undamped": {
+      "entities_mean": 44.0,
+      "mass_share_mean": 0.1669815656297165,
+      "mass_share_min": 0.16206815358146756,
+      "mass_share_max": 0.17169154944704237,
+      "mean_total_mean": 0.4063525121148134
+     },
+     "damped": {
+      "entities_mean": 44.0,
+      "mass_share_mean": 0.0481205264279128,
+      "mass_share_min": 0.04622618564482571,
+      "mass_share_max": 0.049906506024541934,
+      "mean_total_mean": 0.1170863075219201
+     }
+    }
+   }
+  }
+ },
+ "article_journal|approach_1": {
+  "approach": 1,
+  "groups": 10,
+  "q": [
+   1.4042017201112666,
+   1.4042017201112666
+  ],
+  "bands": {
+   "by_degree": {
+    "1": {
+     "undamped": {
+      "entities_mean": 215.0,
+      "mass_share_mean": 0.10084427767354595,
+      "mass_share_min": 0.10084427767354597,
+      "mass_share_max": 0.10084427767354597,
+      "mean_total_mean": 0.021657404091210496
+     },
+     "damped": {
+      "entities_mean": 215.0,
+      "mass_share_mean": 0.32006986545692506,
+      "mass_share_min": 0.3200698654569251,
+      "mass_share_max": 0.3200698654569251,
+      "mean_total_mean": 0.06873848049226905
+     }
+    },
+    "2-3": {
+     "undamped": {
+      "entities_mean": 84.0,
+      "mass_share_mean": 0.09427767354596625,
+      "mass_share_min": 0.09427767354596624,
+      "mass_share_max": 0.09427767354596624,
+      "mean_total_mean": 0.05182307407539656
+     },
+     "damped": {
+      "entities_mean": 84.0,
+      "mass_share_mean": 0.21858998405824076,
+      "mass_share_min": 0.21858998405824076,
+      "mass_share_max": 0.21858998405824076,
+      "mean_total_mean": 0.1201557538484109
+     }
+    },
+    "4-7": {
+     "undamped": {
+      "entities_mean": 37.0,
+      "mass_share_mean": 0.08114446529080678,
+      "mass_share_min": 0.08114446529080678,
+      "mass_share_max": 0.08114446529080678,
+      "mean_total_mean": 0.10126299750755181
+     },
+     "damped": {
+      "entities_mean": 37.0,
+      "mass_share_mean": 0.13700803439728954,
+      "mass_share_min": 0.13700803439728956,
+      "mass_share_max": 0.13700803439728956,
+      "mean_total_mean": 0.17097708631101344
+     }
+    },
+    "8-15": {
+     "undamped": {
+      "entities_mean": 19.0,
+      "mass_share_mean": 0.09427767354596625,
+      "mass_share_min": 0.09427767354596624,
+      "mass_share_max": 0.09427767354596624,
+      "mean_total_mean": 0.22911253801754264
+     },
+     "damped": {
+      "entities_mean": 19.0,
+      "mass_share_mean": 0.0991898321107478,
+      "mass_share_min": 0.09918983211074779,
+      "mass_share_max": 0.09918983211074779,
+      "mean_total_mean": 0.24105001031179682
+     }
+    },
+    "16-31": {
+     "undamped": {
+      "entities_mean": 16.0,
+      "mass_share_mean": 0.16181988742964348,
+      "mass_share_min": 0.16181988742964348,
+      "mass_share_max": 0.16181988742964348,
+      "mean_total_mean": 0.4669877757167262
+     },
+     "damped": {
+      "entities_mean": 16.0,
+      "mass_share_mean": 0.10658531324372193,
+      "mass_share_min": 0.10658531324372193,
+      "mass_share_max": 0.10658531324372193,
+      "mean_total_mean": 0.30758912978107916
+     }
+    },
+    "32+": {
+     "undamped": {
+      "entities_mean": 13.0,
+      "mass_share_mean": 0.4676360225140715,
+      "mass_share_min": 0.46763602251407155,
+      "mass_share_max": 0.46763602251407155,
+      "mean_total_mean": 1.6609562983797599
+     },
+     "damped": {
+      "entities_mean": 13.0,
+      "mass_share_mean": 0.11855697073307461,
+      "mass_share_min": 0.1185569707330746,
+      "mass_share_max": 0.1185569707330746,
+      "mean_total_mean": 0.42109234057134615
+     }
+    }
+   }
+  }
+ },
+ "article_affiliation|approach_2": {
+  "approach": 2,
+  "groups": 10,
+  "q": [
+   1.0823896666828356,
+   1.0857203050372237
+  ],
+  "bands": {
+   "by_degree": {
+    "1": {
+     "undamped": {
+      "entities_mean": 1563.7,
+      "mass_share_mean": 0.25801783207001033,
+      "mass_share_min": 0.2541653703363567,
+      "mass_share_max": 0.2622192356852248,
+      "mean_total_mean": 0.01043672977468482
+     },
+     "damped": {
+      "entities_mean": 1563.7,
+      "mass_share_mean": 0.4106930190411318,
+      "mass_share_min": 0.4043194602567492,
+      "mass_share_max": 0.4158806541533149,
+      "mean_total_mean": 0.016612471776014204
+     }
+    },
+    "2-3": {
+     "undamped": {
+      "entities_mean": 607.5,
+      "mass_share_mean": 0.24898434779895054,
+      "mass_share_min": 0.243962933700839,
+      "mass_share_max": 0.26087168953847,
+      "mean_total_mean": 0.025924076744910596
+     },
+     "damped": {
+      "entities_mean": 607.5,
+      "mass_share_mean": 0.2933208987940521,
+      "mass_share_min": 0.2870475193763319,
+      "mass_share_max": 0.3061465678408675,
+      "mean_total_mean": 0.03054089630011738
+     }
+    },
+    "4-7": {
+     "undamped": {
+      "entities_mean": 220.9,
+      "mass_share_mean": 0.19938733723127827,
+      "mass_share_min": 0.19300218489714752,
+      "mass_share_max": 0.20757101996387506,
+      "mean_total_mean": 0.05710222872080155
+     },
+     "damped": {
+      "entities_mean": 220.9,
+      "mass_share_mean": 0.163829928818384,
+      "mass_share_min": 0.1578902544397326,
+      "mass_share_max": 0.1702619077921631,
+      "mean_total_mean": 0.04691640636854734
+     }
+    },
+    "8-15": {
+     "undamped": {
+      "entities_mean": 91.8,
+      "mass_share_mean": 0.18342065755260067,
+      "mass_share_min": 0.1747264796852383,
+      "mass_share_max": 0.19124006879498257,
+      "mean_total_mean": 0.12640010174868335
+     },
+     "damped": {
+      "entities_mean": 91.8,
+      "mass_share_mean": 0.09727464372387637,
+      "mass_share_min": 0.0925285830443357,
+      "mass_share_max": 0.10103944480348892,
+      "mean_total_mean": 0.06703214528152676
+     }
+    },
+    "16-31": {
+     "undamped": {
+      "entities_mean": 24.9,
+      "mass_share_mean": 0.09567889486813948,
+      "mass_share_min": 0.0786227880145256,
+      "mass_share_max": 0.10504768193731426,
+      "mean_total_mean": 0.2431387701550153
+     },
+     "damped": {
+      "entities_mean": 24.9,
+      "mass_share_mean": 0.03179596596085301,
+      "mass_share_min": 0.02618654790609587,
+      "mass_share_max": 0.03496393017390438,
+      "mean_total_mean": 0.08075992470660368
+     }
+    },
+    "32+": {
+     "undamped": {
+      "entities_mean": 2.2,
+      "mass_share_mean": 0.01451093047902067,
+      "mass_share_min": 0.007041653334303441,
+      "mass_share_max": 0.020122431628425606,
+      "mean_total_mean": 0.42380034948951817
+     },
+     "damped": {
+      "entities_mean": 2.2,
+      "mass_share_mean": 0.0030855436617027244,
+      "mass_share_min": 0.0013132898610918099,
+      "mass_share_max": 0.004456465780609465,
+      "mean_total_mean": 0.08785600919726415
+     }
+    }
+   }
+  }
+ },
+ "article_journal|approach_2": {
+  "approach": 2,
+  "groups": 10,
+  "q": [
+   1.4042017201112666,
+   1.4042017201112666
+  ],
+  "bands": {
+   "by_degree": {
+    "1": {
+     "undamped": {
+      "entities_mean": 215.0,
+      "mass_share_mean": 0.10084427767354595,
+      "mass_share_min": 0.10084427767354597,
+      "mass_share_max": 0.10084427767354597,
+      "mean_total_mean": 0.021657404091210496
+     },
+     "damped": {
+      "entities_mean": 215.0,
+      "mass_share_mean": 0.32006986545692506,
+      "mass_share_min": 0.3200698654569251,
+      "mass_share_max": 0.3200698654569251,
+      "mean_total_mean": 0.06873848049226905
+     }
+    },
+    "2-3": {
+     "undamped": {
+      "entities_mean": 84.0,
+      "mass_share_mean": 0.09427767354596625,
+      "mass_share_min": 0.09427767354596624,
+      "mass_share_max": 0.09427767354596624,
+      "mean_total_mean": 0.05182307407539656
+     },
+     "damped": {
+      "entities_mean": 84.0,
+      "mass_share_mean": 0.21858998405824076,
+      "mass_share_min": 0.21858998405824076,
+      "mass_share_max": 0.21858998405824076,
+      "mean_total_mean": 0.1201557538484109
+     }
+    },
+    "4-7": {
+     "undamped": {
+      "entities_mean": 37.0,
+      "mass_share_mean": 0.08114446529080678,
+      "mass_share_min": 0.08114446529080678,
+      "mass_share_max": 0.08114446529080678,
+      "mean_total_mean": 0.10126299750755181
+     },
+     "damped": {
+      "entities_mean": 37.0,
+      "mass_share_mean": 0.13700803439728954,
+      "mass_share_min": 0.13700803439728956,
+      "mass_share_max": 0.13700803439728956,
+      "mean_total_mean": 0.17097708631101344
+     }
+    },
+    "8-15": {
+     "undamped": {
+      "entities_mean": 19.0,
+      "mass_share_mean": 0.09427767354596625,
+      "mass_share_min": 0.09427767354596624,
+      "mass_share_max": 0.09427767354596624,
+      "mean_total_mean": 0.22911253801754264
+     },
+     "damped": {
+      "entities_mean": 19.0,
+      "mass_share_mean": 0.0991898321107478,
+      "mass_share_min": 0.09918983211074779,
+      "mass_share_max": 0.09918983211074779,
+      "mean_total_mean": 0.24105001031179682
+     }
+    },
+    "16-31": {
+     "undamped": {
+      "entities_mean": 16.0,
+      "mass_share_mean": 0.16181988742964348,
+      "mass_share_min": 0.16181988742964348,
+      "mass_share_max": 0.16181988742964348,
+      "mean_total_mean": 0.4669877757167262
+     },
+     "damped": {
+      "entities_mean": 16.0,
+      "mass_share_mean": 0.10658531324372193,
+      "mass_share_min": 0.10658531324372193,
+      "mass_share_max": 0.10658531324372193,
+      "mean_total_mean": 0.30758912978107916
+     }
+    },
+    "32+": {
+     "undamped": {
+      "entities_mean": 13.0,
+      "mass_share_mean": 0.4676360225140715,
+      "mass_share_min": 0.46763602251407155,
+      "mass_share_max": 0.46763602251407155,
+      "mean_total_mean": 1.6609562983797599
+     },
+     "damped": {
+      "entities_mean": 13.0,
+      "mass_share_mean": 0.11855697073307461,
+      "mass_share_min": 0.1185569707330746,
+      "mass_share_max": 0.1185569707330746,
+      "mean_total_mean": 0.42109234057134615
+     }
+    }
+   }
+  }
+ }
+}

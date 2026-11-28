@@ -1,0 +1,66 @@
+approach 1 group 1 done
+approach 1 group 2 done
+approach 1 group 3 done
+approach 1 group 4 done
+approach 1 group 5 done
+approach 1 group 6 done
+approach 1 group 7 done
+approach 1 group 8 done
+approach 1 group 9 done
+approach 1 group 10 done
+approach 2 group 1 done
+approach 2 group 2 done
+approach 2 group 3 done
+approach 2 group 4 done
+approach 2 group 5 done
+approach 2 group 6 done
+approach 2 group 7 done
+approach 2 group 8 done
+approach 2 group 9 done
+approach 2 group 10 done
+== author_article|approach_1 (approach 1, 10 groups, q 1.007–1.007)
+  by_degree:
+    1      n   9259.0  mass share 0.831 [0.831, 0.831] → 0.872 [0.872, 0.872]
+    2-3    n    747.0  mass share 0.144 [0.144, 0.144] → 0.116 [0.116, 0.116]
+    4-7    n     38.0  mass share 0.016 [0.016, 0.016] → 0.009 [0.009, 0.009]
+    8-15   n      7.0  mass share 0.007 [0.007, 0.007] → 0.003 [0.003, 0.003]
+    16-31  n      1.0  mass share 0.002 [0.002, 0.002] → 0.000 [0.000, 0.000]
+  by_team_size:
+    1      n    118.0  mass share 0.025 [0.025, 0.025] → 0.026 [0.026, 0.026]
+    2-3    n    670.0  mass share 0.230 [0.230, 0.230] → 0.230 [0.230, 0.230]
+    4-7    n    956.0  mass share 0.467 [0.467, 0.467] → 0.466 [0.466, 0.466]
+    8-15   n    353.0  mass share 0.238 [0.238, 0.238] → 0.238 [0.238, 0.238]
+    16-31  n     34.0  mass share 0.032 [0.032, 0.032] → 0.033 [0.033, 0.033]
+    32+    n      5.0  mass share 0.007 [0.007, 0.007] → 0.007 [0.007, 0.007]
+== author_affiliation|approach_1 (approach 1, 10 groups, q 1.177–1.179)
+  by_degree:
+    1      n    966.7  mass share 0.078 [0.078, 0.079] → 0.190 [0.187, 0.192]
+    2-3    n    653.6  mass share 0.130 [0.129, 0.133] → 0.229 [0.226, 0.234]
+    4-7    n    481.7  mass share 0.210 [0.207, 0.214] → 0.257 [0.253, 0.262]
+    8-15   n    249.2  mass share 0.214 [0.210, 0.220] → 0.173 [0.170, 0.178]
+    16-31  n    115.8  mass share 0.200 [0.192, 0.210] → 0.102 [0.099, 0.107]
+    32+    n     44.0  mass share 0.167 [0.162, 0.172] → 0.048 [0.046, 0.050]
+== article_journal|approach_1 (approach 1, 10 groups, q 1.404–1.404)
+  by_degree:
+    1      n    215.0  mass share 0.101 [0.101, 0.101] → 0.320 [0.320, 0.320]
+    2-3    n     84.0  mass share 0.094 [0.094, 0.094] → 0.219 [0.219, 0.219]
+    4-7    n     37.0  mass share 0.081 [0.081, 0.081] → 0.137 [0.137, 0.137]
+    8-15   n     19.0  mass share 0.094 [0.094, 0.094] → 0.099 [0.099, 0.099]
+    16-31  n     16.0  mass share 0.162 [0.162, 0.162] → 0.107 [0.107, 0.107]
+    32+    n     13.0  mass share 0.468 [0.468, 0.468] → 0.119 [0.119, 0.119]
+== article_affiliation|approach_2 (approach 2, 10 groups, q 1.082–1.086)
+  by_degree:
+    1      n   1563.7  mass share 0.258 [0.254, 0.262] → 0.411 [0.404, 0.416]
+    2-3    n    607.5  mass share 0.249 [0.244, 0.261] → 0.293 [0.287, 0.306]
+    4-7    n    220.9  mass share 0.199 [0.193, 0.208] → 0.164 [0.158, 0.170]
+    8-15   n     91.8  mass share 0.183 [0.175, 0.191] → 0.097 [0.093, 0.101]
+    16-31  n     24.9  mass share 0.096 [0.079, 0.105] → 0.032 [0.026, 0.035]
+    32+    n      2.2  mass share 0.015 [0.007, 0.020] → 0.003 [0.001, 0.004]
+== article_journal|approach_2 (approach 2, 10 groups, q 1.404–1.404)
+  by_degree:
+    1      n    215.0  mass share 0.101 [0.101, 0.101] → 0.320 [0.320, 0.320]
+    2-3    n     84.0  mass share 0.094 [0.094, 0.094] → 0.219 [0.219, 0.219]
+    4-7    n     37.0  mass share 0.081 [0.081, 0.081] → 0.137 [0.137, 0.137]
+    8-15   n     19.0  mass share 0.094 [0.094, 0.094] → 0.099 [0.099, 0.099]
+    16-31  n     16.0  mass share 0.162 [0.162, 0.162] → 0.107 [0.107, 0.107]
+    32+    n     13.0  mass share 0.468 [0.468, 0.468] → 0.119 [0.119, 0.119]
