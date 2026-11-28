@@ -5556,3 +5556,7 @@ interpretation; agreed wording; limits; proposals not decided), GLOSSARY E7, M1_
 Recorded in the design doc. GLOSSARY E6 and E7 rewritten as definitions and concepts only (owner: "glossary should
 contain definitions and concepts. results should be reported in other sections"); E6's results are in RL-248 / RL-261 /
 RL-268, E7's in RL-413, RL-415–RL-423 and the design doc entry of 2026-11-27.
+
+### RL-426 — 2026-11-28 — W4: no extra-seed fits (owner: "I agree, no extra-seed fits needed")
+The 20 extra-seed fits proposed to make A2 K13 testable are not run: A2 K13 is testable under the article unit (RL-420,
+RL-425). Check W4 closed.

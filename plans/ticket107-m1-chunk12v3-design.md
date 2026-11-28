@@ -2941,3 +2941,6 @@ same in both approaches), minus the all-pairs mean, averaged over articles with 
 person level reported beside, unweighted pairs kept as the original reading. Under it all five cells are testable and
 none is flagged (RL-420). GLOSSARY E6/E7 reduced to definitions and concepts (owner: "glossary should contain
 definitions and concepts. results should be reported in other sections"); results stay in this entry and the RUN_LOG.]*
+
+*[2026-11-28, **check W4 closed — no extra-seed fits** (owner: "I agree, no extra-seed fits needed"); A2 K13 is testable
+under the article unit. RL-426.]*
