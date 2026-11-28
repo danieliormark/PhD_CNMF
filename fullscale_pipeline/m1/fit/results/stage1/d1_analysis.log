@@ -1,0 +1,72 @@
+
+=== approach_1: candidate K [5, 8, 13]  (bands: J1 [5, 8], J1_s065 [5, 8, 13, 20], J2 [5, 8], J2_logdamp [5, 8, 13], J2_s065 [5, 8, 13], J3a [5, 8, 13], J3b [5, 8, 13], J4 [5, 8, 13], J5 [5, 8, 13])
+  K 3: δ 0.00223  half-split margin 0.00713
+    J2   M1 Δ +0.00088±0.00055 redundant        (uncorr. redundant) | M2 drop +0.066 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0003 s_sem 0.804 | problem False
+    J3a  M1 Δ +0.00055±0.00056 redundant        (uncorr. redundant) | M2 drop +0.006 p_holm 0.0010 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j -0.0018 s_sem 0.750 | problem False
+    J3b  M1 Δ +0.00042±0.00057 redundant        (uncorr. redundant) | M2 drop +0.001 p_holm 0.3138 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j -0.0011 s_sem 0.737 | problem False
+    J4   M1 Δ +0.00060±0.00057 redundant        (uncorr. redundant) | M2 drop +0.066 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0035 s_sem 0.801 | problem False
+    J5   M1 Δ +0.00018±0.00081 redundant        (uncorr. redundant) | M2 drop +0.087 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j -0.0168 s_sem 0.816 | problem False
+  K 5: δ 0.00297  half-split margin 0.00686
+    J2   M1 Δ +0.00082±0.00064 redundant        (uncorr. redundant) | M2 drop +0.056 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0083 s_sem 0.807 | problem False
+    J3a  M1 Δ +0.00065±0.00061 redundant        (uncorr. redundant) | M2 drop +0.005 p_holm 0.1764 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0010 s_sem 0.758 | problem False
+    J3b  M1 Δ +0.00057±0.00066 redundant        (uncorr. redundant) | M2 drop +0.003 p_holm 0.1764 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0004 s_sem 0.747 | problem False
+    J4   M1 Δ +0.00080±0.00067 redundant        (uncorr. redundant) | M2 drop +0.053 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0115 s_sem 0.804 | problem False
+    J5   M1 Δ +0.00034±0.00068 redundant        (uncorr. redundant) | M2 drop +0.075 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0062 s_sem 0.809 | problem False
+  K 8: δ 0.00277  half-split margin 0.00649
+    J2   M1 Δ +0.00197±0.00072 inconclusive     (uncorr. inconclusive) | M2 drop +0.060 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0117 s_sem 0.796 | problem False
+    J3a  M1 Δ +0.00157±0.00068 inconclusive     (uncorr. inconclusive) | M2 drop +0.020 p_holm 0.0348 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0023 s_sem 0.748 | problem False
+    J3b  M1 Δ +0.00155±0.00060 inconclusive     (uncorr. redundant) | M2 drop +0.017 p_holm 0.0351 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0011 s_sem 0.737 | problem False
+    J4   M1 Δ +0.00188±0.00071 inconclusive     (uncorr. inconclusive) | M2 drop +0.059 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0152 s_sem 0.794 | problem False
+    J5   M1 Δ +0.00143±0.00070 inconclusive     (uncorr. redundant) | M2 drop +0.084 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0156 s_sem 0.795 | problem False
+  K 13: δ 0.00248  half-split margin 0.00467
+    J2   M1 Δ +0.00188±0.00092 inconclusive     (uncorr. inconclusive) | M2 drop +0.050 p_holm 0.0005 changed False | M4 Δ̄ +0.04 p_holm 1.0000 more False | M3 s_j 0.0129 s_sem 0.807 | problem False
+    J3a  M1 Δ +0.00198±0.00079 inconclusive     (uncorr. inconclusive) | M2 drop +0.009 p_holm 0.2210 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0029 s_sem 0.763 | problem False
+    J3b  M1 Δ +0.00191±0.00085 inconclusive     (uncorr. inconclusive) | M2 drop +0.009 p_holm 0.2210 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0014 s_sem 0.753 | problem False
+    J4   M1 Δ +0.00188±0.00091 inconclusive     (uncorr. inconclusive) | M2 drop +0.043 p_holm 0.0005 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0159 s_sem 0.804 | problem False
+    J5   M1 Δ +0.00180±0.00105 inconclusive     (uncorr. inconclusive) | M2 drop +0.063 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0181 s_sem 0.803 | problem False
+  K 20: δ 0.00234  half-split margin 0.00599
+    J2   M1 Δ -0.00072±0.00088 inconclusive     (uncorr. inconclusive) | M2 drop +0.137 p_holm 0.0005 changed True | M4 Δ̄ +1.00 p_holm 0.0005 more True | M3 s_j 0.0205 s_sem 0.782 | problem True
+    J3a  M1 Δ -0.00048±0.00077 redundant        (uncorr. redundant) | M2 drop +0.002 p_holm 0.7406 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0038 s_sem 0.739 | problem False
+    J3b  M1 Δ -0.00050±0.00074 redundant        (uncorr. redundant) | M2 drop -0.001 p_holm 0.7406 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0019 s_sem 0.728 | problem False
+    J4   M1 Δ -0.00060±0.00090 inconclusive     (uncorr. redundant) | M2 drop +0.091 p_holm 0.0005 changed True | M4 Δ̄ +0.14 p_holm 0.0480 more False | M3 s_j 0.0219 s_sem 0.780 | problem False
+    J5   M1 Δ -0.00025±0.00073 redundant        (uncorr. redundant) | M2 drop +0.069 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0232 s_sem 0.779 | problem False
+  arms: {'J2': ('inconclusive', []), 'J3a': ('inconclusive', []), 'J3b': ('inconclusive', []), 'J4': ('inconclusive', []), 'J5': ('inconclusive', [])}
+  decision: J2 — no arm adds information; remaining ['J2', 'J3a', 'J3b', 'J4', 'J5'] → J2 (J2, the decided default P4)
+  robustness: {"J2_logdamp vs J2": {"class": "redundant", "band_moved": true, "to_owner": true}, "J1_s065 vs J1": {"class": "misleads", "band_moved": true, "to_owner": true}, "J2_s065 vs J2": {"class": "inconclusive", "band_moved": true, "to_owner": true}, "J2_s065 vs J1_s065": {"class": "inconclusive", "band_moved": true, "to_owner": true}, "dominance_065": {"strictly_inferior": false, "strictly_superior": false, "class": "inconclusive", "stage3_065_arm_runs": true}, "D1_contrast_J2_vs_J1": {"changes": false}}
+
+=== approach_2: candidate K [5, 8, 13]  (bands: J1 [5, 8, 13], J1_s065 [8, 20], J2 [5, 8, 13], J2_logdamp [5, 8, 13], J2_s065 [5, 8], J3a [5, 8, 13], J3b [5, 8, 13], J4 [5, 8, 13], J5 [5, 8, 13])
+  K 3: δ 0.00205  half-split margin 0.00691
+    J2   M1 Δ +0.00133±0.00045 inconclusive     (uncorr. inconclusive) | M2 drop +0.093 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0012 s_sem 1.051 | problem False
+    J3a  M1 Δ +0.00005±0.00045 redundant        (uncorr. redundant) | M2 drop +0.012 p_holm 0.0005 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j -0.0030 s_sem 1.054 | problem False
+    J3b  M1 Δ -0.00006±0.00042 redundant        (uncorr. redundant) | M2 drop +0.005 p_holm 0.0013 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j -0.0019 s_sem 1.052 | problem False
+    J4   M1 Δ +0.00121±0.00040 inconclusive     (uncorr. redundant) | M2 drop +0.095 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0055 s_sem 1.047 | problem False
+    J5   M1 Δ +0.00057±0.00046 redundant        (uncorr. redundant) | M2 drop +0.108 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j -0.0231 s_sem 1.081 | problem False
+  K 5: δ 0.00274  half-split margin 0.00714
+    J2   M1 Δ +0.00194±0.00023 redundant        (uncorr. redundant) | M2 drop +0.072 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0104 s_sem 0.979 | problem False
+    J3a  M1 Δ +0.00075±0.00035 redundant        (uncorr. redundant) | M2 drop +0.008 p_holm 0.2592 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0010 s_sem 0.973 | problem False
+    J3b  M1 Δ +0.00063±0.00029 redundant        (uncorr. redundant) | M2 drop +0.002 p_holm 0.2632 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0004 s_sem 0.969 | problem False
+    J4   M1 Δ +0.00168±0.00020 redundant        (uncorr. redundant) | M2 drop +0.074 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0142 s_sem 0.976 | problem False
+    J5   M1 Δ +0.00095±0.00037 redundant        (uncorr. redundant) | M2 drop +0.088 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0067 s_sem 0.985 | problem False
+  K 8: δ 0.00265  half-split margin 0.00691
+    J2   M1 Δ +0.00023±0.00065 redundant        (uncorr. redundant) | M2 drop +0.061 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0124 s_sem 0.957 | problem False
+    J3a  M1 Δ -0.00056±0.00067 redundant        (uncorr. redundant) | M2 drop +0.010 p_holm 0.1316 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0023 s_sem 0.947 | problem False
+    J3b  M1 Δ -0.00087±0.00073 redundant        (uncorr. redundant) | M2 drop +0.005 p_holm 0.2131 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0011 s_sem 0.943 | problem False
+    J4   M1 Δ +0.00010±0.00062 redundant        (uncorr. redundant) | M2 drop +0.063 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0164 s_sem 0.953 | problem False
+    J5   M1 Δ -0.00062±0.00076 redundant        (uncorr. redundant) | M2 drop +0.086 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0165 s_sem 0.954 | problem False
+  K 13: δ 0.00243  half-split margin 0.00624
+    J2   M1 Δ +0.00173±0.00064 inconclusive     (uncorr. inconclusive) | M2 drop +0.077 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0174 s_sem 0.934 | problem False
+    J3a  M1 Δ +0.00061±0.00065 redundant        (uncorr. redundant) | M2 drop +0.011 p_holm 0.0878 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0036 s_sem 0.921 | problem False
+    J3b  M1 Δ +0.00036±0.00063 redundant        (uncorr. redundant) | M2 drop +0.006 p_holm 0.1833 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0017 s_sem 0.917 | problem False
+    J4   M1 Δ +0.00134±0.00059 inconclusive     (uncorr. inconclusive) | M2 drop +0.072 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0213 s_sem 0.930 | problem False
+    J5   M1 Δ +0.00102±0.00055 redundant        (uncorr. redundant) | M2 drop +0.089 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0247 s_sem 0.927 | problem False
+  K 20: δ 0.00207  half-split margin 0.00579
+    J2   M1 Δ +0.00043±0.00083 inconclusive     (uncorr. redundant) | M2 drop +0.090 p_holm 0.0005 changed True | M4 Δ̄ +0.52 p_holm 0.0005 more True | M3 s_j 0.0215 s_sem 0.923 | problem True
+    J3a  M1 Δ -0.00050±0.00086 inconclusive     (uncorr. inconclusive) | M2 drop +0.009 p_holm 0.1562 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0044 s_sem 0.913 | problem False
+    J3b  M1 Δ -0.00078±0.00094 inconclusive     (uncorr. inconclusive) | M2 drop +0.005 p_holm 0.2346 changed False | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0021 s_sem 0.909 | problem False
+    J4   M1 Δ -0.00012±0.00081 redundant        (uncorr. redundant) | M2 drop +0.077 p_holm 0.0005 changed True | M4 Δ̄ +0.06 p_holm 0.5012 more False | M3 s_j 0.0241 s_sem 0.920 | problem False
+    J5   M1 Δ -0.00048±0.00087 inconclusive     (uncorr. inconclusive) | M2 drop +0.091 p_holm 0.0005 changed True | M4 Δ̄ +0.00 p_holm 1.0000 more False | M3 s_j 0.0258 s_sem 0.918 | problem False
+  arms: {'J2': ('redundant', []), 'J3a': ('redundant', []), 'J3b': ('redundant', []), 'J4': ('redundant', []), 'J5': ('redundant', [])}
+  decision: J2 — no arm adds information; remaining ['J2', 'J3a', 'J3b', 'J4', 'J5'] → J2 (J2, the decided default P4)
+  robustness: {"J2_logdamp vs J2": {"class": "redundant", "band_moved": false, "to_owner": false}, "J1_s065 vs J1": {"class": "misleads", "band_moved": true, "to_owner": true}, "J2_s065 vs J2": {"class": "misleads", "band_moved": true, "to_owner": true}, "J2_s065 vs J1_s065": {"class": "adds information", "band_moved": true, "to_owner": true}, "dominance_065": {"strictly_inferior": false, "strictly_superior": false, "class": "misleads", "stage3_065_arm_runs": true}, "D1_contrast_J2_vs_J1": {"changes": true}}
+
+wrote /mnt/hum01-home01/p91688di/PhD_CNMF/fullscale_pipeline/m1/fit/results/stage1/d1_analysis.json
