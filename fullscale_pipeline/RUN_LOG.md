@@ -5560,3 +5560,7 @@ RL-268, E7's in RL-413, RL-415–RL-423 and the design doc entry of 2026-11-27.
 ### RL-426 — 2026-11-28 — W4: no extra-seed fits (owner: "I agree, no extra-seed fits needed")
 The 20 extra-seed fits proposed to make A2 K13 testable are not run: A2 K13 is testable under the article unit (RL-420,
 RL-425). Check W4 closed.
+
+### RL-427 — 2026-11-28 — Stage 1 (study A) finished
+`m1_fits/stage1`: 4,500 result files, all converged; last fit written 2026-11-27 09:06. Next: the owner runs
+`bash fit/slurm/d1_analysis.sh` (≈ 8–10 CPU-hours, ≈ 40 min wall on 16 workers); then D1 is read.

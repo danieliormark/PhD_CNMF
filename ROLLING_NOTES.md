@@ -38,8 +38,7 @@ notes and address one by one."
 Agent incident (owner's point, 2026-11-27): a web-fetch Agent call was attempted without permission (blocked, did not
 run); memory rule extended to every Agent type.
 W4 DOCUMENTED 2026-11-27 (RL-424: design doc, GLOSSARY E7, M1_PROGRESS). Main W4 unit DECIDED: article level (RL-425).
-Extra-seed fits NOT run (owner, RL-426); check W4 CLOSED. the
-within-fit content-dependence check (proposed, not approved); extra-seed fits for A2 K13 (recommended to drop).
+Extra-seed fits NOT run (owner, RL-426); check W4 CLOSED. Content-dependence check run (RL-421).
 
 ## State (2026-11-25, ticket 107 M1 — stage 0 closed except λ-calibration extras; designing stage 1 (D1))
 
