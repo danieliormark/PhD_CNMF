@@ -5592,3 +5592,7 @@ own top articles, top child hyperedges → Markdown + JSON; tested on one fit (A
 Owner: "I think instead of runner up we name it as second best J*"; "I approve the definition of contradiction"; "I
 approve your proposal on the edge case". Recorded in the design doc and the D1 pre-registration (§9). `fit/d1_extra.py`:
 `second_best()` (J* = J1 → J2), output keys `second_best_J_star` and `contradiction`; tests pass (3).
+
+### RL-431 — 2026-11-28 — D1 analysis (study A) finished; idea-coherence job not yet submitted
+Job 25474034 (started 00:19, log ends 00:53, empty error log) wrote `fit/results/stage1/d1_analysis.json`; not yet read.
+No log or output of the idea-coherence job (`fit/slurm/d1_extra_idea.sh`) exists, so it has not been submitted.
