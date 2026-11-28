@@ -5621,3 +5621,15 @@ c_article_article by 0.05–0.06 at every K. Approach 1 relations all positive (
 loss's own masked generalised KL for fit and reference (same cells: visible ties and empty cells of observed rows,
 hidden cells and the masked diagonal excluded); product-formula reference within 0.1 % of the exact masked rank-1 KL
 optimum (RL-396).
+
+### RL-434 — 2026-11-28 — D1 robustness readings: D1-M2 inflated for arm pairs that share a start (found while reading)
+In `d1_analysis.json`, the two fits of a robustness pair with the same seed start from (nearly) the same point: Track A
+(chance-adjusted, articles) of same-seed cross-arm pairs 0.80–0.86 (J2_logdamp vs J2; J1_s065 vs J1 in approach 1;
+0.64–0.65 in approach 2) against 0.30–0.60 for different-seed pairs and within-arm pairs. The decided M2 statistic pools
+all cross-arm pairs (50 of 250 same-seed), so for these pairs it is inflated and the "drop" turns negative (−0.03 to
+−0.30); the permutation null does not remove it. J arms vs J1 are not affected (same-seed ≈ different-seed cross
+agreement, e.g. 0.559 vs 0.563), so the D1 decision is unaffected. Different-seed pairs only (descriptive, no test):
+drop J2_logdamp vs J2 3.0–5.0 %, J1_s065 vs J1 2.5–5.2 % (approach 1) and 13–18 % (approach 2) at K 5 / 13. One-SE band
+flags are fragile: approach 1 J2's K 13 misses its cutoff by 0.0001 (0.0961 vs 0.0962), J2_logdamp's K 13 is inside by
+0.0005. Proposed (owner to decide): for pairs sharing starts, M2 uses only pairs of fits with different seeds, in the
+observed statistic and in every relabelling.
